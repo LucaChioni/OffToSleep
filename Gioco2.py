@@ -49,23 +49,42 @@ verde = (0, 255, 0)
 verdescu = (0, 120, 0)
 blu = (0, 0, 255)
 
-# suono apertura porte e cofanetti
-suonoaperturacopo = pygame.mixer.Sound("Audio\Rumoriambiente\Aperturaportacofanetti.wav")
-suonoaperturacopo.set_volume(0.5)
+# valore volume 0-1
+volumeCanzoni = 1
+volumePuntatore = 1
+volumeEffetti = 1
 
-# puntatore
+# puntatore (img + suoni)
 puntatoreorigi = pygame.image.load("Immagini\Puntatori\Puntatore.png")
 puntatore = pygame.transform.scale(puntatoreorigi, (gpx, gpy))
 puntatoreorigivecchio = pygame.image.load("Immagini\Puntatori\Puntatorevecchio.png")
 puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx, gpy))
 selsta = pygame.mixer.Sound("Audio\Rumoripuntatore\SelSta.wav")
+selsta.set_volume(volumePuntatore)
 selind = pygame.mixer.Sound("Audio\Rumoripuntatore\SelInd.wav")
+selind.set_volume(volumePuntatore)
 spostapun = pygame.mixer.Sound("Audio\Rumoripuntatore\SpostaPun.wav")
+spostapun.set_volume(volumePuntatore)
 selimp = pygame.mixer.Sound("Audio\Rumoripuntatore\SelImp.wav")
+selimp.set_volume(volumePuntatore)
 selezione = pygame.mixer.Sound("Audio\Rumoripuntatore\Selezione.wav")
+selezione.set_volume(volumePuntatore)
+
+# suoni effetti
 rumoreattacco = pygame.mixer.Sound("Audio\Rumoripersonaggio\Attacco.wav")
+rumoreattacco.set_volume(volumeEffetti)
 rumorecamminata = pygame.mixer.Sound("Audio\Rumoripersonaggio\Camminata.wav")
+rumorecamminata.set_volume(volumeEffetti)
 rumorelevelup = pygame.mixer.Sound("Audio\Rumoripersonaggio\Levelup.wav")
+rumorelevelup.set_volume(volumeEffetti)
+suonoaperturacopo = pygame.mixer.Sound("Audio\Rumoriambiente\Aperturaportacofanetti.wav")
+suonoaperturacopo.set_volume(volumeEffetti)
+
+# suono canzoni
+c11 = pygame.mixer.Sound("Audio\Canzoni\Canzone11.wav")
+c11.set_volume(volumeCanzoni)
+c16 = pygame.mixer.Sound("Audio\Canzoni\Canzone16.wav")
+c16.set_volume(volumeCanzoni)
 
 # immagini personaggio
 persw = pygame.image.load('Immagini\Personaggi\Personaggio4.png')
@@ -160,6 +179,14 @@ occhioape = pygame.image.load('Immagini\Status\OcchioAperto.png')
 occhioape = pygame.transform.scale(occhioape, (gpx, gpy))
 occhiochiu = pygame.image.load('Immagini\Status\OcchioChiuso.png')
 occhiochiu = pygame.transform.scale(occhiochiu, (gpx, gpy))
+
+# chiave robo
+chiaveroboacc = pygame.image.load('Immagini\Oggetti\ChiaveColcoAcc.png')
+chiaveroboacc = pygame.transform.scale(chiaveroboacc, (gpx * 2, gpy * 2))
+chiaverobospe = pygame.image.load('Immagini\Oggetti\ChiaveColcoSpe.png')
+chiaverobospe = pygame.transform.scale(chiaverobospe, (gpx * 2, gpy * 2))
+sfochiaveocchio = pygame.image.load("Immagini\Oggetti\SfondoOcchioChiave.png")
+sfochiaveocchio = pygame.transform.scale(sfochiaveocchio, (gpx * 5, gpy * 2))
 
 # esche
 esche = pygame.image.load("Immagini\Oggetti\Esca.png")
@@ -555,8 +582,6 @@ def scegli_sal(cosa, lunghezzadati):
 
 
 def menu():
-    # canzone
-    c11 = pygame.mixer.Sound("Audio\Canzoni\Canzone11.wav")
     c11.play(-1)
 
     # video
@@ -5689,9 +5714,8 @@ def chiediconferma(conferma):
 
 
 def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, apriocchio):
-    # canzone
-    c16 = pygame.mixer.Sound("Audio\Canzoni\Canzone16.wav")
     c16.play(-1)
+
     sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
     perssta = pygame.transform.scale(persgra, (gpx * 10, gpy * 10))
     robosta = pygame.transform.scale(robograf, (gpx * 10, gpy * 10))
@@ -5719,14 +5743,14 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
         messaggio("Menu' start", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 150)
         messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
-        if not apriocchio:
+        """if not apriocchio:
             messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
         else:
-            messaggio("Tecniche", grigioscu, gsx // 32 * 2, gsy // 18 * 6, 50)
-        messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 50)
-        messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 50)
-        messaggio("Mappa", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 50)
-        messaggio("Diario", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 50)
+            messaggio("Tecniche", grigioscu, gsx // 32 * 2, gsy // 18 * 6, 50)"""
+        messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
+        messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 50)
+        messaggio("Mappa", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 50)
+        messaggio("Diario", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 50)
         if nmost == -1:
             messaggio("Salva", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 50)
         else:
@@ -6098,7 +6122,7 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
                        stanzaa, sfondinoa, sfondinob, sfondinoc, arma, armatura, scudo, robot, armrob, nemicoa, mxa, mya, mxav, myav, nemicob, mxb, myb, mxbv, mybv,
                        nemicoc, mxc, myc, mxcv, mycv, nemicod, mxd, myd, mxdv, mydv, nemicoe, mxe, mye, mxev, myev, nemicof, mxf, myf, mxfv, myfv,
                        nemicog, mxg, myg, mxgv, mygv, nemicoh, mxh, myh, mxhv, myhv, nemicoi, mxi, myi, mxiv, myiv, nemicol, mxl, myl, mxlv, mylv,
-                       mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio):
+                       mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob):
     # sfondo
     if caricaini:
         schermo.blit(stanzaa, (0, 0))
@@ -6294,10 +6318,20 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
                 n = n + 1
         j = j + 3
 
+    # backbround occhio/chiave
+    schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
+
+    # vista nemici
     if apriocchio:
         schermo.blit(occhioape, (gsx - (gpx * 4 // 3), gpy // 3))
     else:
         schermo.blit(occhiochiu, (gsx - (gpx * 4 // 3), gpy // 3))
+
+    # chiave robo
+    if chiamarob:
+        schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
+    else:
+        schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
 
     # esche: id, vita, xesca, yesca
     i = 0
@@ -6678,7 +6712,7 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
     return mx, my, muovimost, nmos, visto, dati, vitaesca, vistam
 
 
-def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, vistorob, dati, porte, cofanetti):
+def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti):
     robo = True
     nrx = 0
     nry = 0
@@ -6690,7 +6724,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, vistorob, dati, porte, cofan
     sposta = False
     # movimento robot
     # no mostri
-    if not vistorob:
+    if chiamarob:
         if abs(x - rx) > abs(y - ry):
             if rx < x:
                 nrob = 1
@@ -6725,7 +6759,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, vistorob, dati, porte, cofan
                     nrob = 4
             sposta = True
     # mostri si (gambit)
-    elif vistorob and muovirob >= -1:
+    elif muovirob >= -1:
         # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)-condizioni(20)-gambit(20) // dimensione: 0-120
         esecuzione = False
         condizione = False
@@ -6769,7 +6803,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, vistorob, dati, porte, cofan
 
     # alcuni sono inutili!!!
     rx, ry, stanza, carim, muovirob, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, muovirob, False, robo, porte, cofanetti)
-    return rx, ry, muovirob, nrob, vistorob, dati
+    return rx, ry, muovirob, nrob, dati
 
 
 def trovacasattaccabili(x, y, stanza, porte, cofanetti):
@@ -9588,7 +9622,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, statoma, statomb, statomc, statomd,
             statome, statomf, statomg, statomh, statomi, statoml, raggiovistaa, raggiovistab, raggiovistac,
             raggiovistad, raggiovistae, raggiovistaf, raggiovistag, raggiovistah, raggiovistai, raggiovistal,
-            att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio):
+            att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob):
     if attacco <= 6:
         xp = x
         yp = y
@@ -9652,11 +9686,20 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     caselleattaccabili = pygame.image.load('Immagini\Campiattaccabili\Caselleattaccabili.png')
     caselleattaccabili = pygame.transform.scale(caselleattaccabili, (gpx, gpy))
 
-    schermo.blit(stanzaa, (0, 0))
+    # backbround occhio/chiave
+    schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
+
+    # vista nemici
     if apriocchio:
         schermo.blit(occhioape, (gsx - (gpx * 4 // 3), gpy // 3))
     else:
         schermo.blit(occhiochiu, (gsx - (gpx * 4 // 3), gpy // 3))
+
+    # chiave robo
+    if chiamarob:
+        schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
+    else:
+        schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
     # cofanetti
     i = 0
     while i < len(cofanetti):
@@ -9811,6 +9854,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             n = n + 1
 
         for event in pygame.event.get():
+            ricaricaschermo1 = False
             if event.type == pygame.KEYDOWN:
                 # esci
                 if event.key == pygame.K_q:
@@ -10225,6 +10269,23 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             while i < len(cofanetti):
                 j = 0
                 while j < len(caseviste):
+                    if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
+                            caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
+                                caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (
+                                caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and \
+                            caseviste[j + 2]:
+                        schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
+                        if cofanetti[i + 3]:
+                            schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
+                        else:
+                            schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+                    j = j + 3
+                i = i + 4
+            # cofanetti
+            i = 0
+            while i < len(cofanetti):
+                j = 0
+                while j < len(caseviste):
                     if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and caseviste[j + 2]:
                         if cofanetti[i + 3]:
                             schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
@@ -10232,10 +10293,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
                     j = j + 3
                 i = i + 4
+            # backbround occhio/chiave
+            schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
+            # vista nemici
             if apriocchio:
                 schermo.blit(occhioape, (gsx - (gpx * 4 // 3), gpy // 3))
             else:
                 schermo.blit(occhiochiu, (gsx - (gpx * 4 // 3), gpy // 3))
+            # chiave robo
+            if chiamarob:
+                schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
+            else:
+                schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
             # fai vedere stanze visitate
             # caseviste[x, y, flag, ... ] -> riempito come se non vedessi niente
             i = 0
@@ -10732,6 +10801,19 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if not ((xp == mxa and yp == mya and nemicoa != 0) or (xp == mxb and yp == myb and nemicob != 0) or (xp == mxc and yp == myc and nemicoc != 0) or (xp == mxd and yp == myd and nemicod != 0) or (xp == mxe and yp == mye and nemicoe != 0) or (xp == mxf and yp == myf and nemicof != 0) or (xp == mxg and yp == myg and nemicog != 0) or (xp == mxh and yp == myh and nemicoh != 0) or (xp == mxi and yp == myi and nemicoi != 0) or (xp == mxl and yp == myl and nemicol != 0)):
             ricaricaschermo1 = False
 
+        # backbround occhio/chiave
+        schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
+        # vista nemici
+        if apriocchio:
+            schermo.blit(occhioape, (gsx - (gpx * 4 // 3), gpy // 3))
+        else:
+            schermo.blit(occhiochiu, (gsx - (gpx * 4 // 3), gpy // 3))
+        # chiave robo
+        if chiamarob:
+            schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
+        else:
+            schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
+
         # disegna vita esche
         i = 0
         while i < len(vitaesca):
@@ -10880,6 +10962,7 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            chiamarob = True
             tesoro = -1
             apriocchio = False
             mostristanze = []
@@ -12294,6 +12377,13 @@ def gameloop():
                         nx = 0
                         ny = 0
                         primadifesa = True
+                    if event.key == pygame.K_x:
+                        nx = 0
+                        ny = 0
+                        if chiamarob:
+                            chiamarob = False
+                        else:
+                            chiamarob = True
                     if event.key == pygame.K_SPACE:
                         # apertura porte
                         k = 0
@@ -12563,7 +12653,7 @@ def gameloop():
                                                                                                                                                                                                                   pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, statoma, statomb, statomc, statomd,
                                                                                                                                                                                                                   statome, statomf, statomg, statomh, statomi, statoml, raggiovistaa, raggiovistab, raggiovistac,
                                                                                                                                                                                                                   raggiovistad, raggiovistae, raggiovistaf, raggiovistag, raggiovistah, raggiovistai, raggiovistal,
-                                                                                                                                                                                                                  att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio)
+                                                                                                                                                                                                                  att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob)
             caricaini = True
             # cambiare posizione dopo l'attacco
             if npers == 3:
@@ -12677,16 +12767,13 @@ def gameloop():
 
         # movimento-azioni robo
         if dati[122] > 0:
+            # se surriscaldato toglie vel+ e efficienza
             dati[125] = 0
             dati[126] = 0
         if rx == x and ry == y:
             x = vx
             y = vy
         if ((sposta and muovirob <= 0) or muovirob > 0) and not morterob:
-            if vistoa or vistob or vistoc or vistod or vistoe or vistof or vistog or vistoh or vistoi or vistol:
-                vistorob = True
-            else:
-                vistorob = False
             vrx = rx
             vry = ry
 
@@ -12712,7 +12799,7 @@ def gameloop():
                     muovirob = 2
 
             # movimento - gambit
-            rx, ry, muovirob, nrob, vistorob, dati = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, vistorob, dati, porte, cofanetti)
+            rx, ry, muovirob, nrob, dati = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti)
 
             if muovirob < 0:
                 rx = vrx
@@ -13686,7 +13773,7 @@ def gameloop():
                                stanzaa, sfondinoa, sfondinob, sfondinoc, arma, armatura, scudo, robot, armrob, nemicoa, mxa, mya, mxav, myav, nemicob, mxb, myb, mxbv, mybv,
                                nemicoc, mxc, myc, mxcv, mycv, nemicod, mxd, myd, mxdv, mydv, nemicoe, mxe, mye, mxev, myev, nemicof, mxf, myf, mxfv, myfv,
                                nemicog, mxg, myg, mxgv, mygv, nemicoh, mxh, myh, mxhv, myhv, nemicoi, mxi, myi, mxiv, myiv, nemicol, mxl, myl, mxlv, mylv,
-                               mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio)
+                               mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob)
 
         # animazione aumento di livello
         if aumentoliv and not carim and not inizio:
