@@ -1,6 +1,7 @@
 import pygame
 import random
 import ctypes
+import os
 pygame.init()
 
 # adattamento schermo
@@ -581,12 +582,31 @@ def scegli_sal(cosa, lunghezzadati):
             pygame.display.update()
 
 
+def guardaVideo(path, fps):
+    listaImg = []
+    # load all the image
+    for i in os.listdir(path):
+        img = pygame.image.load(path + '/' + i).convert()
+        img = pygame.transform.scale(img, (gsx, gsy))
+        listaImg.append(img)
+    # play video
+    for i in listaImg:
+        schermo.blit(i, (0, 0))
+        pygame.display.update()
+        clock.tick(fps)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                selezione.play()
+                return True
+    return False
+
+
 def menu():
     c11.play(-1)
 
     # video
-    fermavideo = False
-    clock = pygame.time.Clock()
+    fermavideo = guardaVideo('Video/videoinizio', 5)
+    """clock = pygame.time.Clock()
     movie = pygame.movie.Movie(r'Video\videoinizio.mpg')
     movie_screen = pygame.Surface(schermo.get_size())
     movie.set_display(movie_screen, pygame.draw.rect(schermo, nero, (0, 0, gsx, gsy), 1))
@@ -598,12 +618,12 @@ def menu():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 selezione.play()
-                fermavideo = True
+                fermavideo = True"""
 
     # attesa dopo video
     if not fermavideo:
         schermo.fill(grigioscu)
-        messaggio("Premi un tasto per continuare", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 100)
+        messaggio("Premi un tasto per continuare...", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 100)
         pygame.display.update()
         finevideo = True
         while finevideo:
@@ -5835,7 +5855,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                                 spostapun.play()
                                 yp = gsy // 18 * 15
                 if event.key == pygame.K_SPACE:
-                    if (yp == gsy // 18 * 13 and nmost > -1) or (yp == gsy // 18 * 6 and apriocchio):
+                    if yp == gsy // 18 * 13 and nmost > -1:
                         selimp.play()
                     else:
                         selezione.play()
