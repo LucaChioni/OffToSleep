@@ -154,7 +154,18 @@ robografff = pygame.image.load('Immagini\Disegnigraf\RobotGraf4.png')
 
 # indicatori vita
 indvita = pygame.image.load('Immagini\Barrevita\Indvita.png')
-vitanemico = pygame.image.load('Immagini\Barrevita\Vitanemico.png')
+fineindvita = pygame.image.load('Immagini\Barrevita\FineIndVita.png')
+vitanemico00 = pygame.image.load('Immagini\Barrevita\Vitanemico00.png')
+vitanemico0 = pygame.image.load('Immagini\Barrevita\Vitanemico0.png')
+vitanemico1 = pygame.image.load('Immagini\Barrevita\Vitanemico1.png')
+vitanemico2 = pygame.image.load('Immagini\Barrevita\Vitanemico2.png')
+vitanemico3 = pygame.image.load('Immagini\Barrevita\Vitanemico3.png')
+vitanemico4 = pygame.image.load('Immagini\Barrevita\Vitanemico4.png')
+vitanemico5 = pygame.image.load('Immagini\Barrevita\Vitanemico5.png')
+vitanemico6 = pygame.image.load('Immagini\Barrevita\Vitanemico6.png')
+vitanemico7 = pygame.image.load('Immagini\Barrevita\Vitanemico7.png')
+vitanemico8 = pygame.image.load('Immagini\Barrevita\Vitanemico8.png')
+vitanemico9 = pygame.image.load('Immagini\Barrevita\Vitanemico9.png')
 vitapersonaggio = pygame.image.load('Immagini\Barrevita\Vitapersonaggio.png')
 vitarobo = pygame.image.load('Immagini\Barrevita\Vitarobo.png')
 vitaesche = pygame.image.load('Immagini\Barrevita\Vitaesca.png')
@@ -408,6 +419,9 @@ def scegli_sal(cosa, lunghezzadati):
 
     while not risposta:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     if conferma:
@@ -598,6 +612,9 @@ def guardaVideo(path):
         pygame.display.update()
         clock.tick(fpsvideo)
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 selezione.play()
                 return True
@@ -619,6 +636,9 @@ def menu():
         pygame.display.update()
         clock.tick(fps)
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 selezione.play()
                 fermavideo = True"""
@@ -631,6 +651,9 @@ def menu():
         finevideo = True
         while finevideo:
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
                 if event.type == pygame.KEYDOWN:
                     selezione.play()
                     finevideo = False
@@ -671,6 +694,9 @@ def menu():
         cofanifin = 179
         lunghezzadati = cofanifin + 1
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_s:
                     if yp != gsy // 18 * 13:
@@ -751,6 +777,9 @@ def menu():
                                 pygame.display.update()
                                 while not indietro:
                                     for event in pygame.event.get():
+                                        if event.type == pygame.QUIT:
+                                            pygame.quit()
+                                            quit()
                                         if event.type == pygame.KEYDOWN:
                                             if event.key == pygame.K_q:
                                                 selind.play()
@@ -794,6 +823,9 @@ def menu():
                                     pygame.display.update()
                                     while not indietro:
                                         for event in pygame.event.get():
+                                            if event.type == pygame.QUIT:
+                                                pygame.quit()
+                                                quit()
                                             if event.type == pygame.KEYDOWN:
                                                 if event.key == pygame.K_q:
                                                     selind.play()
@@ -1399,6 +1431,9 @@ def equip(dati):
 
     while not risposta:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     selind.play()
@@ -2430,6 +2465,9 @@ def sceglicondiz(dati, condizione):
 
     while not risposta:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     selind.play()
@@ -2983,6 +3021,9 @@ def sceglitecn(dati, tecnica):
 
     while not risposta:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     selind.play()
@@ -3655,6 +3696,9 @@ def equiprobo(dati):
 
     while not risposta:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     selind.play()
@@ -3695,60 +3739,80 @@ def equiprobo(dati):
                         if dati[71] != 0:
                             selezione.play()
                             dati[9] = 0
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
                         if dati[72] != 0:
                             selezione.play()
                             dati[9] = 1
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
                         if dati[73] != 0:
                             selezione.play()
                             dati[9] = 2
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
                         if dati[74] != 0:
                             selezione.play()
                             dati[9] = 3
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
                         if dati[75] != 0:
                             selezione.play()
                             dati[9] = 4
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
                         if dati[76] != 0:
                             selezione.play()
                             dati[9] = 5
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
                         if dati[77] != 0:
                             selezione.play()
                             dati[9] = 6
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
                         if dati[78] != 0:
                             selezione.play()
                             dati[9] = 7
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
                         if dati[79] != 0:
                             selezione.play()
                             dati[9] = 8
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
                         if dati[80] != 0:
                             selezione.play()
                             dati[9] = 9
+                            if dati[10] > 300 + (dati[9] * 100):
+                                dati[10] = 300 + (dati[9] * 100)
                         else:
                             selimp.play()
 
@@ -4392,6 +4456,9 @@ def tecniche(dati):
     while not risposta:
         for event in pygame.event.get():
             ok = True
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     if usa != 0:
@@ -5305,6 +5372,9 @@ def oggetti(dati):
 
     while not risposta:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     if usa != 0:
@@ -5693,6 +5763,9 @@ def chiediconferma(conferma):
     pygame.display.update()
     while True:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     selind.play()
@@ -5824,6 +5897,9 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
 
     while not risposta:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
                     selind.play()
@@ -6012,7 +6088,7 @@ def muri_porte(x, y, nx, ny, stanza, carim, muovi, mostro, robo, porte, cofanett
             if ny == gpy and y >= gsy - (gpy * 3):
                 ny = 0
         # controllo muri-oggetti
-        #          posizione x    posizione y    dim x    dim y    px py nx  ny
+        #          posizione x    posizione y     dim x    dim y   px py  nx  ny
         if oggetto(gsx // 32 * 7, gsy // 18 * 11, gpx * 1, gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
@@ -6389,13 +6465,15 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
         schermo.blit(scudo, (x, y))
 
     # vita-status personaggio
-    lungvitatot = (gpx // 4) * (pvtot // 5)
+    lungvitatot = ((gpx * pvtot) / 4) // 5
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
         lungvita = 0
     indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
+    fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
     vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
     schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 16) + (gpy // 4 * 3)))
     schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
     schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
     persbat = pygame.transform.scale(perso, (gpx, gpy))
@@ -6409,13 +6487,15 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
         schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
 
     # vita-status robo
-    lungentot = (gpx // 4) * (entot // 10)
+    lungentot = ((gpx * entot) / 4) // 10
     lungen = (lungentot * enrob) // entot
     if lungen < 0:
         lungen = 0
     indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
+    fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
     vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
     schermo.blit(indvitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitarob, ((gsx // 32 * 1) + lungentot, (gsy // 18 * 17) + (gpy // 4 * 3)))
     schermo.blit(vitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
     schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 17))
     robobat = pygame.transform.scale(roboo, (gpx, gpy))
@@ -9651,13 +9731,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     nxp = 0
     nyp = 0
     risposta = False
+    difesa = 0
 
     # modifica puntatore a seconda dell'attacco
-    puntat = pygame.image.load('Immagini\Puntatori\Inquadra.png')
-    puntat = pygame.transform.scale(puntat, (gpx, gpy))
+    puntatIn = pygame.image.load('Immagini\Puntatori\InquadraCVin.png')
+    puntatIn = pygame.transform.scale(puntatIn, (gpx, gpy))
+    puntatOut = pygame.image.load('Immagini\Puntatori\InquadraCVout.png')
+    puntatOut = pygame.transform.scale(puntatOut, (gpx, gpy))
     if attacco == 1:
-        puntatogg = pygame.image.load('Immagini\Oggetti\Attacco.png')
-        puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
+        puntatogg1 = pygame.image.load('Immagini\Oggetti\Difesa.png')
+        puntatogg2 = pygame.image.load('Immagini\Oggetti\Attacco.png')
+        puntatogg1 = pygame.transform.scale(puntatogg1, (gpx, gpy))
+        puntatogg2 = pygame.transform.scale(puntatogg2, (gpx, gpy))
     if attacco == 2:
         puntatogg = pygame.image.load('Immagini\Oggetti\Bomba.png')
         puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
@@ -9755,13 +9840,15 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     vitaesche = pygame.image.load('Immagini\Barrevita\Vitaesca.png')
 
     # vita-status personaggio
-    lungvitatot = (gpx // 4) * (pvtot // 5)
+    lungvitatot = ((gpx * pvtot) / 4) // 5
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
         lungvita = 0
     indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
+    fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
     vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
     schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 16) + (gpy // 4 * 3)))
     schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
     schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
     persbat = pygame.transform.scale(perso, (gpx, gpy))
@@ -9775,13 +9862,15 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
 
     # vita-status robo
-    lungentot = (gpx // 4) * (entot // 10)
+    lungentot = ((gpx * entot) / 4) // 10
     lungen = (lungentot * enrob) // entot
     if lungen < 0:
         lungen = 0
     indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
+    fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
     vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
     schermo.blit(indvitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitarob, ((gsx // 32 * 1) + lungentot, (gsy // 18 * 17) + (gpy // 4 * 3)))
     schermo.blit(vitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
     schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 17))
     robobat = pygame.transform.scale(roboo, (gpx, gpy))
@@ -9834,12 +9923,14 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
     tastotempfps = 3
     tastop = 0
+    numTastiPremuti = 0
     danno = 0
     creaesca = False
-    ricaricaschermo1 = False
-    ricaricaschermo2 = False
-    ricaricaschermo3 = False
+    ricaricaschermo = False
+    appenaCaricato = False
     while not risposta:
+        xvp = xp
+        yvp = yp
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -9856,9 +9947,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if tastop == pygame.K_d:
                 nxp = gpx
             tastotempfps = 2
-
-        xvp = xp
-        yvp = yp
+            xvp = xp
+            yvp = yp
 
         n = 0
         while n < 32:
@@ -9874,8 +9964,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             n = n + 1
 
         for event in pygame.event.get():
-            ricaricaschermo1 = False
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
             if event.type == pygame.KEYDOWN:
+                appenaCaricato = False
                 # esci
                 if event.key == pygame.K_q:
                     risposta = True
@@ -9884,13 +9977,21 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # movimento puntatore
                 tastop = event.key
                 if event.key == pygame.K_w:
+                    numTastiPremuti += 1
                     nyp = -gpy
+                    nxp = 0
                 if event.key == pygame.K_a:
+                    numTastiPremuti += 1
                     nxp = -gpx
+                    nyp = 0
                 if event.key == pygame.K_s:
+                    numTastiPremuti += 1
                     nyp = gpy
+                    nxp = 0
                 if event.key == pygame.K_d:
+                    numTastiPremuti += 1
                     nxp = gpx
+                    nyp = 0
                 # attacco
                 if event.key == pygame.K_SPACE:
                     sposta = False
@@ -9903,6 +10004,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             infliggidanno = True
                             danno = att
                             raggio = gpx * 0
+                        # difesa attacco = 1
+                        elif attacco == 1 and (xp == x and yp == y):
+                            difesa = 2
+                            risposta = True
                         # bomba attacco = 2
                         if attacco == 2 and (abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6):
                             # controllo caselle attaccabili
@@ -10272,17 +10377,19 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         if not risposta:
                             selimp.play()
             if event.type == pygame.KEYUP:
-                tastop = 0
-                tastotempfps = 5
-                nxp = 0
-                nyp = 0
+                if tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d:
+                    numTastiPremuti -= 1
+                    if event.key == tastop:
+                        numTastiPremuti = 0
+                else:
+                    numTastiPremuti = 0
+                if numTastiPremuti == 0:
+                    tastop = 0
+                    tastotempfps = 5
+                    nxp = 0
+                    nyp = 0
 
-        if ricaricaschermo1:
-            ricaricaschermo2 = True
-        elif not ricaricaschermo1 and ricaricaschermo2:
-            ricaricaschermo3 = True
-
-        if ricaricaschermo3:
+        if ricaricaschermo and not appenaCaricato:
             schermo.blit(stanzaa, (0, 0))
             # cofanetti
             i = 0
@@ -10313,7 +10420,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
                     j = j + 3
                 i = i + 4
-            # backbround occhio/chiave
+            # background occhio/chiave
             schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
             # vista nemici
             if apriocchio:
@@ -10344,9 +10451,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 m = m + 1
                         n = n + 1
                 i = i + 3
-            ricaricaschermo1 = False
-            ricaricaschermo2 = False
-            ricaricaschermo3 = False
+            ricaricaschermo = False
+            appenaCaricato = True
 
         # visualizza campo attaccabile
         if attacco == 1:
@@ -10370,7 +10476,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 caseattactot[8] = False
             murx = x
             mury = y
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True ,False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True, False, porte, cofanetti)
             if nmury == mury:
                 caseattactot[11] = False
             i = 0
@@ -10541,7 +10647,62 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             j = j + 3
 
         # puntatore
+        if attacco == 1:
+            if (xp == x and yp == y) or (xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy):
+                puntat = puntatIn
+            else:
+                puntat = puntatOut
+        if attacco == 2:
+            if abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6:
+                puntat = puntatIn
+                while i < len(caseattactot):
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                        puntat = puntatOut
+                    i = i + 3
+            else:
+                puntat = puntatOut
+        if attacco == 3:
+            if abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5:
+                puntat = puntatIn
+                while i < len(caseattactot):
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                        puntat = puntatOut
+                    i = i + 3
+            else:
+                puntat = puntatOut
+        if attacco == 4:
+            if abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6:
+                puntat = puntatIn
+                while i < len(caseattactot):
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                        puntat = puntatOut
+                    i = i + 3
+            else:
+                puntat = puntatOut
+        if attacco == 5:
+            if abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5:
+                puntat = puntatIn
+                while i < len(caseattactot):
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                        puntat = puntatOut
+                    i = i + 3
+            else:
+                puntat = puntatOut
+        if attacco == 6:
+            if abs(x - xp) <= gpx * 4 and abs(y - yp) <= gpy * 4:
+                puntat = puntatIn
+                while i < len(caseattactot):
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                        puntat = puntatOut
+                    i = i + 3
+            else:
+                puntat = puntatOut
         schermo.blit(puntat, (xp, yp))
+        if attacco == 1:
+            if (xp == x) and (yp == y):
+                puntatogg = puntatogg1
+            else:
+                puntatogg = puntatogg2
         schermo.blit(puntatogg, (xp, yp))
         if risposta:
             n = 0
@@ -10558,268 +10719,101 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 n = n + 1
 
         # disegna vita-status-raggio visivo mostri
-        if xp == mxa and yp == mya and nemicoa != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxa, mya, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxa + raggiovistaa and caseattactot[i + 1] <= mya + raggiovistaa and caseattactot[i] >= mxa - raggiovistaa and caseattactot[i + 1] >= mya - raggiovistaa and not (caseattactot[i] == mxa and caseattactot[i + 1] == mya)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistaa * 2) + gpx, (raggiovistaa * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxa - raggiovistaa, mya - raggiovistaa))
-            lungvita = (gpx * 8 * pvma) // pvmatot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statoma == 1 or statoma == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statoma == 2 or statoma == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicoa, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxb and yp == myb and nemicob != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxb, myb, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxb + raggiovistab and caseattactot[i + 1] <= myb + raggiovistab and caseattactot[i] >= mxb - raggiovistab and caseattactot[i + 1] >= myb - raggiovistab and not (caseattactot[i] == mxb and caseattactot[i + 1] == myb)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistab * 2) + gpx, (raggiovistab * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxb - raggiovistab, myb - raggiovistab))
-            lungvita = (gpx * 8 * pvmb) // pvmbtot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomb == 1 or statomb == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomb == 2 or statomb == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicob, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxc and yp == myc and nemicoc != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxc, myc, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxc + raggiovistac and caseattactot[i + 1] <= myc + raggiovistac and caseattactot[i] >= mxc - raggiovistac and caseattactot[i + 1] >= myc - raggiovistac and not (caseattactot[i] == mxc and caseattactot[i + 1] == myc)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistac * 2) + gpx, (raggiovistac * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxc - raggiovistac, myc - raggiovistac))
-            lungvita = (gpx * 8 * pvmc) // pvmctot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomc == 1 or statomc == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomc == 2 or statomc == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicoc, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxd and yp == myd and nemicod != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxd, myd, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxd + raggiovistad and caseattactot[i + 1] <= myd + raggiovistad and caseattactot[i] >= mxd - raggiovistad and caseattactot[i + 1] >= myd - raggiovistad and not (caseattactot[i] == mxd and caseattactot[i + 1] == myd)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistad * 2) + gpx, (raggiovistad * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxd - raggiovistad, myd - raggiovistad))
-            lungvita = (gpx * 8 * pvmd) // pvmdtot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomd == 1 or statomd == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomd == 2 or statomd == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicod, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxe and yp == mye and nemicoe != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxe, mye, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxe + raggiovistae and caseattactot[i + 1] <= mye + raggiovistae and caseattactot[i] >= mxe - raggiovistae and caseattactot[i + 1] >= mye - raggiovistae and not (caseattactot[i] == mxe and caseattactot[i + 1] == mye)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistae * 2) + gpx, (raggiovistae * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxe - raggiovistae, mye - raggiovistae))
-            lungvita = (gpx * 8 * pvme) // pvmetot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statome == 1 or statome == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statome == 2 or statome == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicoe, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxf and yp == myf and nemicof != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxf, myf, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxf + raggiovistaf and caseattactot[i + 1] <= myf + raggiovistaf and caseattactot[i] >= mxf - raggiovistaf and caseattactot[i + 1] >= myf - raggiovistaf and not (caseattactot[i] == mxf and caseattactot[i + 1] == myf)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistaf * 2) + gpx, (raggiovistaf * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxf - raggiovistaf, myf - raggiovistaf))
-            lungvita = (gpx * 8 * pvmf) // pvmftot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomf == 1 or statomf == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomf == 2 or statomf == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicof, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxg and yp == myg and nemicog != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxg, myg, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxg + raggiovistag and caseattactot[i + 1] <= myg + raggiovistag and caseattactot[i] >= mxg - raggiovistag and caseattactot[i + 1] >= myg - raggiovistag and not (caseattactot[i] == mxg and caseattactot[i + 1] == myg)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistag * 2) + gpx, (raggiovistag * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxg - raggiovistag, myg - raggiovistag))
-            lungvita = (gpx * 8 * pvmg) // pvmgtot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomg == 1 or statomg == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomg == 2 or statomg == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicog, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxh and yp == myh and nemicoh != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxh, myh, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxh + raggiovistah and caseattactot[i + 1] <= myh + raggiovistah and caseattactot[i] >= mxh - raggiovistah and caseattactot[i + 1] >= myh - raggiovistah and not (caseattactot[i] == mxh and caseattactot[i + 1] == myh)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistah * 2) + gpx, (raggiovistah * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxh - raggiovistah, myh - raggiovistah))
-            lungvita = (gpx * 8 * pvmh) // pvmhtot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomh == 1 or statomh == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomh == 2 or statomh == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicoh, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxi and yp == myi and nemicoi != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxi, myi, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxi + raggiovistai and caseattactot[i + 1] <= myi + raggiovistai and caseattactot[i] >= mxi - raggiovistai and caseattactot[i + 1] >= myi - raggiovistai and not (caseattactot[i] == mxi and caseattactot[i + 1] == myi)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistai * 2) + gpx, (raggiovistai * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxi - raggiovistai, myi - raggiovistai))
-            lungvita = (gpx * 8 * pvmi) // pvmitot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomi == 1 or statomi == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statomi == 2 or statomi == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicoi, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
-        if xp == mxl and yp == myl and nemicol != 0:
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(mxl, myl, stanza, porte, cofanetti)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= mxl + raggiovistal and caseattactot[i + 1] <= myl + raggiovistal and caseattactot[i] >= mxl - raggiovistal and caseattactot[i + 1] >= myl - raggiovistal and not (caseattactot[i] == mxl and caseattactot[i + 1] == myl)):
-                    schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovistal * 2) + gpx, (raggiovistal * 2) + gpy))
-            schermo.blit(campoattaccabile3, (mxl - raggiovistal, myl - raggiovistal))
-            lungvita = (gpx * 8 * pvml) // pvmltot
-            if lungvita < 0:
-                lungvita = 0
-            schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-            schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statoml == 1 or statoml == 3:
-                schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
-            if statoml == 2 or statoml == 3:
-                schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-            schermo.blit(nemicol, (gsx // 32 * 1, gpy // 3))
-            indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-            schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-            schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
-            ricaricaschermo1 = True
+        listaNemici = [mxa, mya, statoma, nemicoa, pvma, pvmatot, raggiovistaa, mxb, myb, statomb, nemicob, pvmb, pvmbtot, raggiovistab, mxc, myc, statomc, nemicoc, pvmc, pvmctot, raggiovistac, mxd, myd, statomd, nemicod, pvmd, pvmdtot, raggiovistad, mxe, mye, statome, nemicoe, pvme, pvmetot, raggiovistae, mxf, myf, statomf, nemicof, pvmf, pvmftot, raggiovistaf, mxg, myg, statomg, nemicog, pvmg, pvmgtot, raggiovistag, mxh, myh, statomh, nemicoh, pvmh, pvmhtot, raggiovistah, mxi, myi, statomi, nemicoi, pvmi, pvmitot, raggiovistai, mxl, myl, statoml, nemicol, pvml, pvmltot, raggiovistal]
+        j = 0
+        while j < len(listaNemici):
+            mx = listaNemici[j]
+            my = listaNemici[j + 1]
+            statom = listaNemici[j + 2]
+            nemico = listaNemici[j + 3]
+            pvm = listaNemici[j + 4]
+            pvmtot = listaNemici[j + 5]
+            raggiovista = listaNemici[j + 6]
+            if xp == mx and yp == my and nemico != 0:
+                # controllo caselle attaccabili
+                caseattactot = trovacasattaccabili(mx, my, stanza, porte, cofanetti)
+                i = 0
+                # disegno le caselle attaccabili
+                while i < len(caseattactot):
+                    if not caseattactot[i + 2] and (caseattactot[i] <= mx + raggiovista and caseattactot[i + 1] <= my + raggiovista and caseattactot[i] >= mx - raggiovista and caseattactot[i + 1] >= my - raggiovista and not (caseattactot[i] == mx and caseattactot[i + 1] == my)):
+                        schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
+                    i = i + 3
+                campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
+                schermo.blit(campoattaccabile3, (mx - raggiovista, my - raggiovista))
+                schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
+                schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
+                if statom == 1 or statom == 3:
+                    schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
+                if statom == 2 or statom == 3:
+                    schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
+                schermo.blit(nemico, (gsx // 32 * 1, gpy // 3))
+                fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+                if pvmtot > 1500:
+                    indvitamost = pygame.transform.scale(indvita, (((gpx * 1500) / 4) // 15, gpy // 4))
+                    schermo.blit(fineindvitamost, ((gsx // 32 * 2) + 1500, gpy // 3))
+                    if pvm > 15000:
+                        pvm = 1500
+                        vitanemsucc = pygame.transform.scale(vitanemico00, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico9
+                    elif pvm > 13500:
+                        pvm -= 13500
+                        vitanemsucc = pygame.transform.scale(vitanemico8, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico9
+                    elif pvm > 12000:
+                        pvm -= 12000
+                        vitanemsucc = pygame.transform.scale(vitanemico7, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico8
+                    elif pvm > 10500:
+                        pvm -= 10500
+                        vitanemsucc = pygame.transform.scale(vitanemico6, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico7
+                    elif pvm > 9000:
+                        pvm -= 9000
+                        vitanemsucc = pygame.transform.scale(vitanemico5, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico6
+                    elif pvm > 7500:
+                        pvm -= 7500
+                        vitanemsucc = pygame.transform.scale(vitanemico4, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico5
+                    elif pvm > 6000:
+                        pvm -= 6000
+                        vitanemsucc = pygame.transform.scale(vitanemico3, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico4
+                    elif pvm > 4500:
+                        pvm -= 4500
+                        vitanemsucc = pygame.transform.scale(vitanemico2, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico3
+                    elif pvm > 3000:
+                        pvm -= 3000
+                        vitanemsucc = pygame.transform.scale(vitanemico1, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico2
+                    elif pvm > 1500:
+                        pvm -= 1500
+                        vitanemsucc = pygame.transform.scale(vitanemico0, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico1
+                    else:
+                        vitanemsucc = pygame.transform.scale(vitanemico00, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemico = vitanemico0
+                else:
+                    lungvitatot = ((gpx * pvmtot) / 4) // 15
+                    indvitamost = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
+                    schermo.blit(fineindvitamost, ((gsx // 32 * 2) + lungvitatot, gpy // 3))
+                    vitanemsucc = pygame.transform.scale(vitanemico00, ((gpx // 4) * (lungvitatot // 15), gpy // 4))
+                    vitanemico = vitanemico0
+                lungvita = ((gpx * pvm) / 4) // 15
+                if lungvita < 0:
+                    lungvita = 0
+                vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
+                schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
+                schermo.blit(vitanemsucc, (gsx // 32 * 2, gpy // 3))
+                schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
+                ricaricaschermo = True
+            j += 7
         if not ((xp == mxa and yp == mya and nemicoa != 0) or (xp == mxb and yp == myb and nemicob != 0) or (xp == mxc and yp == myc and nemicoc != 0) or (xp == mxd and yp == myd and nemicod != 0) or (xp == mxe and yp == mye and nemicoe != 0) or (xp == mxf and yp == myf and nemicof != 0) or (xp == mxg and yp == myg and nemicog != 0) or (xp == mxh and yp == myh and nemicoh != 0) or (xp == mxi and yp == myi and nemicoi != 0) or (xp == mxl and yp == myl and nemicol != 0)):
-            ricaricaschermo1 = False
+            ricaricaschermo = False
+            if (xvp == mxa and yvp == mya and nemicoa != 0) or (xvp == mxb and yvp == myb and nemicob != 0) or (xvp == mxc and yvp == myc and nemicoc != 0) or (xvp == mxd and yvp == myd and nemicod != 0) or (xvp == mxe and yvp == mye and nemicoe != 0) or (xvp == mxf and yvp == myf and nemicof != 0) or (xvp == mxg and yvp == myg and nemicog != 0) or (xvp == mxh and yvp == myh and nemicoh != 0) or (xvp == mxi and yvp == myi and nemicoi != 0) or (xvp == mxl and yvp == myl and nemicol != 0):
+                ricaricaschermo = True
+                appenaCaricato = False
 
         # backbround occhio/chiave
         schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
@@ -10844,20 +10838,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
                 schermo.blit(esche, (gsx // 32 * 1, gpy // 3))
                 indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
+                fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
                 vitaesche = pygame.transform.scale(vitaesche, (lungvita, gpy // 4))
                 schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
+                schermo.blit(fineindvitamost, ((gsx // 32 * 2) + (gpx * 8), gpy // 3))
                 schermo.blit(vitaesche, (gsx // 32 * 2, gpy // 3))
-                ricaricaschermo1 = True
+                ricaricaschermo = True
             i = i + 4
 
         # vita-status personaggio
-        lungvitatot = (gpx // 4) * (pvtot // 5)
+        lungvitatot = ((gpx * pvtot) / 4) // 5
         lungvita = (lungvitatot * pv) // pvtot
         if lungvita < 0:
             lungvita = 0
         indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
+        fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
         vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
         schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
+        schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 16) + (gpy // 4 * 3)))
         schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
         schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
         persbat = pygame.transform.scale(perso, (gpx, gpy))
@@ -10871,13 +10869,15 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
 
         # vita-status robo
-        lungentot = (gpx // 4) * (entot // 10)
+        lungentot = ((gpx * entot) / 4) // 10
         lungen = (lungentot * enrob) // entot
         if lungen < 0:
             lungen = 0
         indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
+        fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
         vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
         schermo.blit(indvitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+        schermo.blit(fineindvitarob, ((gsx // 32 * 1) + lungentot, (gsy // 18 * 17) + (gpy // 4 * 3)))
         schermo.blit(vitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
         schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 17))
         robobat = pygame.transform.scale(roboo, (gpx, gpy))
@@ -10894,7 +10894,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             pygame.display.update()
         clock.tick(fpsmenu)
 
-    return pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xp, yp, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob
+    return pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xp, yp, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob, difesa
 
 
 def aperturacofanetto(stanza, cx, cy, dati):
@@ -10995,7 +10995,6 @@ def gameloop():
             tastop = 0
             startf = False
             aumentoliv = False
-            primadifesa = True
             primopasso = True
             contaesca = 0
             xesca = 0
@@ -11006,7 +11005,7 @@ def gameloop():
             contattogg = 0
             attacco = 0
             # difesa e' grigio perche' viene impostato a ogni ciclo
-            difesa = False
+            difesa = 0
             # 1->d , 2->a , 3->w , 4->s
             npers = 4
             # 1->d , 2->a , 3->s , 4->w
@@ -11207,7 +11206,7 @@ def gameloop():
                 myi = gsy // 18 * 0
                 mxl = gsx // 32 * 0
                 myl = gsy // 18 * 0
-                pvmatot = 50
+                pvmatot = 16000
                 pvmbtot = 50
                 pvmctot = 20
                 pvmdtot = 50
@@ -12307,11 +12306,11 @@ def gameloop():
             primociclo = True
 
         # rallenta per i 30 fps
-        '''if not primopas and tastotempfps != 0 and premuti == 1:
+        '''if not primopas and tastotempfps != 0 and premuti >= 1:
             tastotempfps = tastotempfps - 1
             nx = 0
             ny = 0
-        if not primopas and tastotempfps == 0 and premuti == 1:
+        if not primopas and tastotempfps == 0 and premuti >= 1:
             if tastop == pygame.K_w:
                 ny = -gpy
             if tastop == pygame.K_a:
@@ -12323,11 +12322,11 @@ def gameloop():
             tastotempfps = 5'''
 
         # controllo primo passo
-        if primopas and tastotemp != 0 and premuti == 1:
+        if primopas and tastotemp != 0 and premuti >= 1:
             tastotemp = tastotemp - 1
             nx = 0
             ny = 0
-        if primopas and tastotemp == 0 and premuti == 1:
+        if primopas and tastotemp == 0 and premuti >= 1:
             if tastop == pygame.K_w:
                 ny = -gpy
             if tastop == pygame.K_a:
@@ -12339,6 +12338,7 @@ def gameloop():
             primopas = False
             tastotemp = 5
 
+        tastoTrovato = False
         # catturare gli eventi
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -12346,252 +12346,305 @@ def gameloop():
                 quit()
 
             if event.type == pygame.KEYDOWN:
-                premuti = premuti + 1
-                if premuti > 1:
-                    premuti = 1
                 # movimanti
-                if premuti == 1:
-                    tastop = event.key
-                    # movimenti personaggio
-                    if event.key == pygame.K_w:
-                        npers = 3
-                        pers = persw
-                        arma = armaw
-                        armatura = armaturaw
-                        scudo = scudow
-                        ny = -gpy
-                        nx = 0
-                        primopas = True
-                    if event.key == pygame.K_a:
-                        npers = 2
-                        pers = persa
-                        arma = armaa
-                        armatura = armaturaa
-                        scudo = scudoa
-                        nx = -gpx
-                        ny = 0
-                        primopas = True
-                    if event.key == pygame.K_s:
-                        npers = 4
-                        pers = perss
-                        arma = armas
-                        armatura = armaturas
-                        scudo = scudos
-                        ny = gpy
-                        nx = 0
-                        primopas = True
-                    if event.key == pygame.K_d:
-                        npers = 1
-                        pers = persd
-                        arma = armad
-                        armatura = armaturad
-                        scudo = scudod
-                        nx = gpx
-                        ny = 0
-                        primopas = True
-                    if event.key == pygame.K_e:
-                        nx = 0
-                        ny = 0
-                        attacco = 1
-                    if event.key == pygame.K_r:
-                        nx = 0
-                        ny = 0
-                        primadifesa = True
-                    if event.key == pygame.K_x:
-                        nx = 0
-                        ny = 0
-                        if chiamarob:
-                            chiamarob = False
-                        else:
-                            chiamarob = True
-                    if event.key == pygame.K_SPACE:
-                        # apertura porte
-                        k = 0
-                        while k < len(porte):
-                            if porte[k] == dati[1] and ((porte[k + 1] == x + gpx and porte[k + 2] == y and npers == 1) or (porte[k + 1] == x - gpx and porte[k + 2] == y and npers == 2) or (porte[k + 1] == x and porte[k + 2] == y + gpy and npers == 4) or (porte[k + 1] == x and porte[k + 2] == y - gpy and npers == 3)) and not porte[k + 3]:
-                                suonoaperturacopo.play()
-                                porte[k + 3] = True
-                                # scoprire caselle viste
-                                if True:
-                                    # definire la cornice
-                                    murx = x
-                                    mury = y
-                                    # imposto l'inizio del percorso
-                                    arrivato = False
-                                    while not arrivato:
-                                        nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
-                                        if mury != nmury:
-                                            mury = nmury
+                tastop = event.key
+                # movimenti personaggio
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
+                    premuti += 1
+                    npers = 3
+                    pers = persw
+                    arma = armaw
+                    armatura = armaturaw
+                    scudo = scudow
+                    ny = -gpy
+                    nx = 0
+                    primopas = True
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
+                    premuti += 1
+                    npers = 2
+                    pers = persa
+                    arma = armaa
+                    armatura = armaturaa
+                    scudo = scudoa
+                    nx = -gpx
+                    ny = 0
+                    primopas = True
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
+                    premuti += 1
+                    npers = 4
+                    pers = perss
+                    arma = armas
+                    armatura = armaturas
+                    scudo = scudos
+                    ny = gpy
+                    nx = 0
+                    primopas = True
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
+                    premuti += 1
+                    npers = 1
+                    pers = persd
+                    arma = armad
+                    armatura = armaturad
+                    scudo = scudod
+                    nx = gpx
+                    ny = 0
+                    primopas = True
+
+                if event.key == pygame.K_e and not tastoTrovato:
+                    tastoTrovato = True
+                    nx = 0
+                    ny = 0
+                    attacco = 1
+                if event.key == pygame.K_x and not tastoTrovato:
+                    tastoTrovato = True
+                    nx = 0
+                    ny = 0
+                    if chiamarob:
+                        chiamarob = False
+                    else:
+                        chiamarob = True
+
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
+                    # apertura porte
+                    k = 0
+                    while k < len(porte):
+                        if porte[k] == dati[1] and ((porte[k + 1] == x + gpx and porte[k + 2] == y and npers == 1) or (
+                                porte[k + 1] == x - gpx and porte[k + 2] == y and npers == 2) or (
+                                                            porte[k + 1] == x and porte[
+                                                        k + 2] == y + gpy and npers == 4) or (
+                                                            porte[k + 1] == x and porte[
+                                                        k + 2] == y - gpy and npers == 3)) and not porte[k + 3]:
+                            suonoaperturacopo.play()
+                            porte[k + 3] = True
+                            # scoprire caselle viste
+                            if True:
+                                # definire la cornice
+                                murx = x
+                                mury = y
+                                # imposto l'inizio del percorso
+                                arrivato = False
+                                while not arrivato:
+                                    nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy,
+                                                                                               numstanza, False, 0,
+                                                                                               True, False, porte,
+                                                                                               cofanetti)
+                                    if mury != nmury:
+                                        mury = nmury
+                                    else:
+                                        arrivato = True
+                                inimurx = murx
+                                inimury = mury
+                                andare = "d"
+                                finito = False
+                                c = 5
+                                while not finito:
+                                    if c == 0:
+                                        finito = True
+                                    if inimurx == murx and inimury == mury:
+                                        c = c - 1
+                                    if andare == "d":
+                                        # vado a destra
+                                        nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0,
+                                                                                                   numstanza, False, 0,
+                                                                                                   True, False, porte,
+                                                                                                   cofanetti)
+                                        if murx != nmurx:
+                                            i = 0
+                                            while i < len(caseviste):
+                                                if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                                                    caseviste[i + 2] = True
+                                                    murx = nmurx
+                                                    break
+                                                i = i + 3
                                         else:
-                                            arrivato = True
-                                    inimurx = murx
-                                    inimury = mury
-                                    andare = "d"
-                                    finito = False
-                                    c = 5
-                                    while not finito:
-                                        if c == 0:
-                                            finito = True
-                                        if inimurx == murx and inimury == mury:
-                                            c = c - 1
+                                            andare = "s"
                                         if andare == "d":
-                                            # vado a destra
-                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
-                                            if murx != nmurx:
-                                                i = 0
-                                                while i < len(caseviste):
-                                                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
-                                                        caseviste[i + 2] = True
-                                                        murx = nmurx
-                                                        break
-                                                    i = i + 3
-                                            else:
-                                                andare = "s"
-                                            if andare == "d":
-                                                andare = "w"
+                                            andare = "w"
+                                    if andare == "s":
+                                        # vado in basso
+                                        nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy,
+                                                                                                   numstanza, False, 0,
+                                                                                                   True, False, porte,
+                                                                                                   cofanetti)
+                                        if mury != nmury:
+                                            i = 0
+                                            while i < len(caseviste):
+                                                if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                                                    caseviste[i + 2] = True
+                                                    mury = nmury
+                                                    break
+                                                i = i + 3
+                                        else:
+                                            andare = "a"
                                         if andare == "s":
-                                            # vado in basso
-                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
-                                            if mury != nmury:
-                                                i = 0
-                                                while i < len(caseviste):
-                                                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
-                                                        caseviste[i + 2] = True
-                                                        mury = nmury
-                                                        break
-                                                    i = i + 3
-                                            else:
-                                                andare = "a"
-                                            if andare == "s":
-                                                andare = "d"
+                                            andare = "d"
+                                    if andare == "a":
+                                        # vado a sinistra
+                                        nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0,
+                                                                                                   numstanza, False, 0,
+                                                                                                   True, False, porte,
+                                                                                                   cofanetti)
+                                        if murx != nmurx:
+                                            i = 0
+                                            while i < len(caseviste):
+                                                if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                                                    caseviste[i + 2] = True
+                                                    murx = nmurx
+                                                    break
+                                                i = i + 3
+                                        else:
+                                            andare = "w"
                                         if andare == "a":
-                                            # vado a sinistra
-                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
-                                            if murx != nmurx:
-                                                i = 0
-                                                while i < len(caseviste):
-                                                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
-                                                        caseviste[i + 2] = True
-                                                        murx = nmurx
-                                                        break
-                                                    i = i + 3
-                                            else:
-                                                andare = "w"
-                                            if andare == "a":
-                                                andare = "s"
+                                            andare = "s"
+                                    if andare == "w":
+                                        # vado in alto
+                                        nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy,
+                                                                                                   numstanza, False, 0,
+                                                                                                   True, False, porte,
+                                                                                                   cofanetti)
+                                        if mury != nmury:
+                                            i = 0
+                                            while i < len(caseviste):
+                                                if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                                                    caseviste[i + 2] = True
+                                                    mury = nmury
+                                                    break
+                                                i = i + 3
+                                        else:
+                                            andare = "d"
                                         if andare == "w":
-                                            # vado in alto
-                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
-                                            if mury != nmury:
-                                                i = 0
-                                                while i < len(caseviste):
-                                                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
-                                                        caseviste[i + 2] = True
-                                                        mury = nmury
+                                            andare = "a"
+                                casevisteprov = caseviste
+                                i = 0
+                                while i < len(caseviste):
+                                    n = -1
+                                    fine1 = False
+                                    fine2 = False
+                                    while n <= 28:
+                                        if not fine1 and caseviste[i + 2]:
+                                            murx = casevisteprov[i] + (gpx * n)
+                                            mury = casevisteprov[i + 1]
+                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx,
+                                                                                                       0, numstanza,
+                                                                                                       False, 0, True,
+                                                                                                       False, porte,
+                                                                                                       cofanetti)
+                                            if murx != nmurx:
+                                                j = 0
+                                                while j < len(casevisteprov):
+                                                    if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                                                        casevisteprov[j + 2] = True
                                                         break
-                                                    i = i + 3
+                                                    j = j + 3
                                             else:
-                                                andare = "d"
-                                            if andare == "w":
-                                                andare = "a"
-                                    casevisteprov = caseviste
-                                    i = 0
-                                    while i < len(caseviste):
-                                        n = -1
-                                        fine1 = False
-                                        fine2 = False
-                                        while n <= 28:
-                                            if not fine1 and caseviste[i + 2]:
-                                                murx = casevisteprov[i] + (gpx * n)
-                                                mury = casevisteprov[i + 1]
-                                                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
-                                                if murx != nmurx:
-                                                    j = 0
-                                                    while j < len(casevisteprov):
-                                                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
-                                                            casevisteprov[j + 2] = True
-                                                            break
-                                                        j = j + 3
-                                                else:
-                                                    fine1 = True
-                                            if not fine2 and caseviste[i + 2]:
-                                                murx = casevisteprov[i] - (gpx * n)
-                                                mury = casevisteprov[i + 1]
-                                                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
-                                                if murx != nmurx:
-                                                    j = 0
-                                                    while j < len(casevisteprov):
-                                                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
-                                                            casevisteprov[j + 2] = True
-                                                            break
-                                                        j = j + 3
-                                                else:
-                                                    fine2 = True
-                                            n = n + 1
-                                        n = 0
-                                        fine1 = False
-                                        fine2 = False
-                                        while n <= 14:
-                                            if not fine1 and caseviste[i + 2]:
-                                                murx = casevisteprov[i]
-                                                mury = casevisteprov[i + 1] + (gpy * n)
-                                                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
-                                                if mury != nmury:
-                                                    j = 0
-                                                    while j < len(casevisteprov):
-                                                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
-                                                            casevisteprov[j + 2] = True
-                                                            break
-                                                        j = j + 3
-                                                else:
-                                                    fine1 = True
-                                            if not fine2 and caseviste[i + 2]:
-                                                murx = casevisteprov[i]
-                                                mury = casevisteprov[i + 1] - (gpy * n)
-                                                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
-                                                if mury != nmury:
-                                                    j = 0
-                                                    while j < len(casevisteprov):
-                                                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
-                                                            casevisteprov[j + 2] = True
-                                                            break
-                                                        j = j + 3
-                                                else:
-                                                    fine2 = True
-                                            n = n + 1
-                                        i = i + 3
-                                    caseviste = casevisteprov
-                                caricaini = True
-                                # aggiornare vettore tutteporte
-                                j = 0
-                                while j < len(tutteporte):
-                                    if tutteporte[j] == porte[k] and tutteporte[j + 1] == porte[k + 1] and tutteporte[j + 2] == porte[k + 2]:
-                                        tutteporte[j + 3] = True
-                                    j = j + 4
-                            k = k + 4
-                        # apertura cofanetti
-                        i = 0
-                        while i < len(cofanetti):
-                            if cofanetti[i] == dati[1] and ((cofanetti[i + 1] == x + gpx and cofanetti[i + 2] == y and npers == 1) or (cofanetti[i + 1] == x - gpx and cofanetti[i + 2] == y and npers == 2) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + gpy and npers == 4) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - gpy and npers == 3)) and not cofanetti[i + 3]:
-                                suonoaperturacopo.play()
-                                dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
-                                cofanetti[i + 3] = True
-                                caricaini = True
-                                # aggiornare vettore tutticofanetti
-                                j = 0
-                                while j < len(tutticofanetti):
-                                    if tutticofanetti[j] == cofanetti[i] and tutticofanetti[j + 1] == cofanetti[i + 1] and tutticofanetti[j + 2] == cofanetti[i + 2]:
-                                        tutticofanetti[j + 3] = True
-                                    j = j + 4
-                            i = i + 4
+                                                fine1 = True
+                                        if not fine2 and caseviste[i + 2]:
+                                            murx = casevisteprov[i] - (gpx * n)
+                                            mury = casevisteprov[i + 1]
+                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx,
+                                                                                                       0, numstanza,
+                                                                                                       False, 0, True,
+                                                                                                       False, porte,
+                                                                                                       cofanetti)
+                                            if murx != nmurx:
+                                                j = 0
+                                                while j < len(casevisteprov):
+                                                    if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                                                        casevisteprov[j + 2] = True
+                                                        break
+                                                    j = j + 3
+                                            else:
+                                                fine2 = True
+                                        n = n + 1
+                                    n = 0
+                                    fine1 = False
+                                    fine2 = False
+                                    while n <= 14:
+                                        if not fine1 and caseviste[i + 2]:
+                                            murx = casevisteprov[i]
+                                            mury = casevisteprov[i + 1] + (gpy * n)
+                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0,
+                                                                                                       gpy, numstanza,
+                                                                                                       False, 0, True,
+                                                                                                       False, porte,
+                                                                                                       cofanetti)
+                                            if mury != nmury:
+                                                j = 0
+                                                while j < len(casevisteprov):
+                                                    if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                                                        casevisteprov[j + 2] = True
+                                                        break
+                                                    j = j + 3
+                                            else:
+                                                fine1 = True
+                                        if not fine2 and caseviste[i + 2]:
+                                            murx = casevisteprov[i]
+                                            mury = casevisteprov[i + 1] - (gpy * n)
+                                            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0,
+                                                                                                       -gpy, numstanza,
+                                                                                                       False, 0, True,
+                                                                                                       False, porte,
+                                                                                                       cofanetti)
+                                            if mury != nmury:
+                                                j = 0
+                                                while j < len(casevisteprov):
+                                                    if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                                                        casevisteprov[j + 2] = True
+                                                        break
+                                                    j = j + 3
+                                            else:
+                                                fine2 = True
+                                        n = n + 1
+                                    i = i + 3
+                                caseviste = casevisteprov
+                            caricaini = True
+                            # aggiornare vettore tutteporte
+                            j = 0
+                            while j < len(tutteporte):
+                                if tutteporte[j] == porte[k] and tutteporte[j + 1] == porte[k + 1] and tutteporte[
+                                    j + 2] == porte[k + 2]:
+                                    tutteporte[j + 3] = True
+                                j = j + 4
+                        k = k + 4
+                    # apertura cofanetti
+                    i = 0
+                    while i < len(cofanetti):
+                        if cofanetti[i] == dati[1] and (
+                                (cofanetti[i + 1] == x + gpx and cofanetti[i + 2] == y and npers == 1) or (
+                                cofanetti[i + 1] == x - gpx and cofanetti[i + 2] == y and npers == 2) or (
+                                        cofanetti[i + 1] == x and cofanetti[i + 2] == y + gpy and npers == 4) or (
+                                        cofanetti[i + 1] == x and cofanetti[i + 2] == y - gpy and npers == 3)) and not \
+                        cofanetti[i + 3]:
+                            suonoaperturacopo.play()
+                            dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
+                            cofanetti[i + 3] = True
+                            caricaini = True
+                            # aggiornare vettore tutticofanetti
+                            j = 0
+                            while j < len(tutticofanetti):
+                                if tutticofanetti[j] == cofanetti[i] and tutticofanetti[j + 1] == cofanetti[i + 1] and \
+                                        tutticofanetti[j + 2] == cofanetti[i + 2]:
+                                    tutticofanetti[j + 3] = True
+                                j = j + 4
+                        i = i + 4
 
                 # menu start
-                if event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_ESCAPE and not tastoTrovato:
+                    tastoTrovato = True
                     startf = True
 
             if event.type == pygame.KEYUP:
-                if premuti > 0:
-                    premuti = premuti - 1
+                if tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d:
+                    premuti -= 1
+                    if event.key == tastop:
+                        premuti = 0
+                else:
+                    premuti = 0
                 if premuti == 0:
                     nx = 0
                     ny = 0
@@ -12665,7 +12718,7 @@ def gameloop():
             x, y, dati[1], carim, inutile, cambiosta = muri_porte(x, y, nx, ny, dati[1], carim, 0, False, False, porte, cofanetti)
         # gestione attacchi
         if attacco != 0 and attacco <= 6 and contattogg == 0:
-            pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xesca, yesca, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126],
+            pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xesca, yesca, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob, difesa = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126],
                                                                                                                                                                                                                   stanzaa, dati[1], sfondinoa, sfondinob, sfondinoc, arma, armatura, scudo, robot, armrob,
                                                                                                                                                                                                                   nemicoa, mxa, mya, nemicob, mxb, myb, nemicoc, mxc, myc, nemicod, mxd, myd, nemicoe, mxe, mye,
                                                                                                                                                                                                                   nemicof, mxf, myf, nemicog, mxg, myg, nemicoh, mxh, myh, nemicoi, mxi, myi, nemicol, mxl, myl,
@@ -12714,15 +12767,15 @@ def gameloop():
                 if attacco == 6:
                     dati[40] = dati[40] - 1
         # gestione difesa
-        difesa = False
-        if tastop == pygame.K_r and not sposta:
-            difesa = True
-        if difesa:
+        if sposta:
+            difesa = 0
+        if difesa != 0 and not sposta:
+            sposta = False
             par = par * 2
             dif = dif + dif // 2
-            if primadifesa:
+            if difesa == 2:
+                difesa = 1
                 sposta = True
-                primadifesa = False
                 dati[5] = dati[5] + 3
                 if dati[5] > pvtot:
                     dati[5] = pvtot
@@ -13993,6 +14046,9 @@ def gameloop():
             risposta = False
             while not risposta:
                 for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        quit()
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
                             selezione.play()
@@ -14039,6 +14095,9 @@ gameloop()
                     risposta = False
                     while not risposta:
                         for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
+                                quit()
                             if event.type == pygame.KEYDOWN:
                                 if event.key == pygame.K_SPACE:
                                     selezione.play()
