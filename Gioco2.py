@@ -58,37 +58,29 @@ volumeCanzoni = 0
 volumePuntatore = 0
 volumeEffetti = 0
 
-# puntatore (img + suoni)
+# puntatore
 puntatoreorigi = pygame.image.load("Immagini\Puntatori\Puntatore.png")
 puntatore = pygame.transform.scale(puntatoreorigi, (gpx, gpy))
 puntatoreorigivecchio = pygame.image.load("Immagini\Puntatori\Puntatorevecchio.png")
 puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx, gpy))
-selsta = pygame.mixer.Sound("Audio\Rumoripuntatore\SelSta.wav")
-selsta.set_volume(volumePuntatore)
-selind = pygame.mixer.Sound("Audio\Rumoripuntatore\SelInd.wav")
-selind.set_volume(volumePuntatore)
-spostapun = pygame.mixer.Sound("Audio\Rumoripuntatore\SpostaPun.wav")
-spostapun.set_volume(volumePuntatore)
-selimp = pygame.mixer.Sound("Audio\Rumoripuntatore\SelImp.wav")
-selimp.set_volume(volumePuntatore)
-selezione = pygame.mixer.Sound("Audio\Rumoripuntatore\Selezione.wav")
-selezione.set_volume(volumePuntatore)
-
-# suoni effetti
-rumoreattacco = pygame.mixer.Sound("Audio\Rumoripersonaggio\Attacco.wav")
-rumoreattacco.set_volume(volumeEffetti)
-rumorecamminata = pygame.mixer.Sound("Audio\Rumoripersonaggio\Camminata.wav")
-rumorecamminata.set_volume(volumeEffetti)
-rumorelevelup = pygame.mixer.Sound("Audio\Rumoripersonaggio\Levelup.wav")
-rumorelevelup.set_volume(volumeEffetti)
-suonoaperturacopo = pygame.mixer.Sound("Audio\Rumoriambiente\Aperturaportacofanetti.wav")
-suonoaperturacopo.set_volume(volumeEffetti)
-
-# suono canzoni
-c11 = pygame.mixer.Sound("Audio\Canzoni\Canzone11.wav")
-c11.set_volume(volumeCanzoni)
-c16 = pygame.mixer.Sound("Audio\Canzoni\Canzone16.wav")
-c16.set_volume(volumeCanzoni)
+puntatIn = pygame.image.load('Immagini\Puntatori\InquadraCVin.png')
+puntatIn = pygame.transform.scale(puntatIn, (gpx, gpy))
+puntatOut = pygame.image.load('Immagini\Puntatori\InquadraCVout.png')
+puntatOut = pygame.transform.scale(puntatOut, (gpx, gpy))
+puntatDif = pygame.image.load('Immagini\Oggetti\Difesa.png')
+puntatDif = pygame.transform.scale(puntatDif, (gpx, gpy))
+puntatAtt = pygame.image.load('Immagini\Oggetti\Attacco.png')
+puntatAtt = pygame.transform.scale(puntatAtt, (gpx, gpy))
+puntatBom = pygame.image.load('Immagini\Oggetti\Bomba.png')
+puntatBom = pygame.transform.scale(puntatBom, (gpx, gpy))
+puntatBoV = pygame.image.load('Immagini\Oggetti\BombaVeleno.png')
+puntatBoV = pygame.transform.scale(puntatBoV, (gpx, gpy))
+puntatEsc = pygame.image.load('Immagini\Oggetti\Esca.png')
+puntatEsc = pygame.transform.scale(puntatEsc, (gpx, gpy))
+puntatBoA = pygame.image.load('Immagini\Oggetti\BombaAppiccicosa.png')
+puntatBoA = pygame.transform.scale(puntatBoA, (gpx, gpy))
+puntatBoP = pygame.image.load('Immagini\Oggetti\BombaPotenziata.png')
+puntatBoP = pygame.transform.scale(puntatBoP, (gpx, gpy))
 
 # immagini personaggio
 persw = pygame.image.load('Immagini\Personaggi\Personaggio4.png')
@@ -151,6 +143,8 @@ robogra = pygame.image.load('Immagini\Disegnigraf\RobotGraf.png')
 robograf = pygame.image.load('Immagini\Disegnigraf\RobotGraf2.png')
 robograff = pygame.image.load('Immagini\Disegnigraf\RobotGraf3.png')
 robografff = pygame.image.load('Immagini\Disegnigraf\RobotGraf4.png')
+robograsalva = pygame.image.load('Immagini\Disegnigraf\RobotGrafsalva.png')
+robograsalva = pygame.transform.scale(robograsalva, (gpx * 18, gpy * 18))
 
 # indicatori vita
 indvita = pygame.image.load('Immagini\Barrevita\Indvita.png')
@@ -168,14 +162,15 @@ vitanemico8 = pygame.image.load('Immagini\Barrevita\Vitanemico8.png')
 vitanemico9 = pygame.image.load('Immagini\Barrevita\Vitanemico9.png')
 vitapersonaggio = pygame.image.load('Immagini\Barrevita\Vitapersonaggio.png')
 vitarobo = pygame.image.load('Immagini\Barrevita\Vitarobo.png')
-vitaesche = pygame.image.load('Immagini\Barrevita\Vitaesca.png')
 
-# status
+# sfondi
 sfondostax3 = pygame.image.load('Immagini\Status\Sfondostax3.png')
 sfondosta = pygame.image.load('Immagini\Status\Sfondosta.png')
 sfondomo = pygame.transform.scale(sfondosta, (gpx, gpy))
 sfondosta = pygame.transform.scale(sfondosta, ((gpx // 3 * 4) + (gpx // 4), gpy // 3 * 2))
 sfondostapers = pygame.transform.scale(sfondosta, ((gpx // 3 * 6) + (gpx // 4), gpy // 3 * 2))
+
+# status
 appiccicosoo = pygame.image.load('Immagini\Status\Appiccicoso.png')
 appiccicoso = pygame.transform.scale(appiccicosoo, (gpx // 3 * 2, gpy // 3 * 2))
 avvelenatoo = pygame.image.load('Immagini\Status\Avvelenato.png')
@@ -203,7 +198,7 @@ chiaverobospe = pygame.transform.scale(chiaverobospe, (gpx * 2, gpy * 2))
 sfochiaveocchio = pygame.image.load("Immagini\Oggetti\SfondoOcchioChiave.png")
 sfochiaveocchio = pygame.transform.scale(sfochiaveocchio, (gpx * 5, gpy * 2))
 
-# esche
+# oggetti lanciati
 esche = pygame.image.load("Immagini\Oggetti\Esca.png")
 esche = pygame.transform.scale(esche, (gpx, gpy))
 
@@ -214,6 +209,62 @@ cofanichiu = pygame.image.load("Immagini\Oggetti\CofanettoChiuso.png")
 cofanichiu = pygame.transform.scale(cofanichiu, (gpx, gpy))
 sfocontcof = pygame.image.load("Immagini\Oggetti\SfondoContenutoCofanetto.png")
 sfocontcof = pygame.transform.scale(sfocontcof, (gpx * 16, gpy * 3))
+
+# immagini salvataggi
+s1 = pygame.image.load('Immagini\Salvataggi\S1.png')
+s1 = pygame.transform.scale(s1, (gpx * 3, gpy * 3))
+s2 = pygame.image.load('Immagini\Salvataggi\S2.png')
+s2 = pygame.transform.scale(s2, (gpx * 3, gpy * 3))
+s3 = pygame.image.load('Immagini\Salvataggi\S3.png')
+s3 = pygame.transform.scale(s3, (gpx * 3, gpy * 3))
+
+# caselle attaccabili
+campoattaccabile1 = pygame.image.load('Immagini\Campiattaccabili\Campoattaccabile1.png')
+campoattaccabile1 = pygame.transform.scale(campoattaccabile1, (gpx * 3, gpy * 3))
+campoattaccabile2 = pygame.image.load('Immagini\Campiattaccabili\Campoattaccabile2.png')
+campoattaccabilemostro = pygame.image.load('Immagini\Campiattaccabili\Campoattaccabilemostro.png')
+caselleattaccabilimostro = pygame.image.load('Immagini\Campiattaccabili\Caselleattaccabilimostro.png')
+caselleattaccabilimostro = pygame.transform.scale(caselleattaccabilimostro, (gpx, gpy))
+caselleattaccabili = pygame.image.load('Immagini\Campiattaccabili\Caselleattaccabili.png')
+caselleattaccabili = pygame.transform.scale(caselleattaccabili, (gpx, gpy))
+
+# aumento livello
+saliliv = pygame.image.load('Immagini\Levelup\Saliliv.png')
+saliliv = pygame.transform.scale(saliliv, (gpx, gpy))
+saliliv1 = pygame.image.load('Immagini\Levelup\Saliliv1.png')
+saliliv1 = pygame.transform.scale(saliliv1, (gpx, gpy))
+saliliv2 = pygame.image.load('Immagini\Levelup\Saliliv2.png')
+saliliv2 = pygame.transform.scale(saliliv2, (gpx, gpy))
+saliliv3 = pygame.image.load('Immagini\Levelup\Saliliv3.png')
+saliliv3 = pygame.transform.scale(saliliv3, (gpx, gpy))
+
+# suoni puntatore
+selsta = pygame.mixer.Sound("Audio\Rumoripuntatore\SelSta.wav")
+selsta.set_volume(volumePuntatore)
+selind = pygame.mixer.Sound("Audio\Rumoripuntatore\SelInd.wav")
+selind.set_volume(volumePuntatore)
+spostapun = pygame.mixer.Sound("Audio\Rumoripuntatore\SpostaPun.wav")
+spostapun.set_volume(volumePuntatore)
+selimp = pygame.mixer.Sound("Audio\Rumoripuntatore\SelImp.wav")
+selimp.set_volume(volumePuntatore)
+selezione = pygame.mixer.Sound("Audio\Rumoripuntatore\Selezione.wav")
+selezione.set_volume(volumePuntatore)
+
+# suoni effetti
+rumoreattacco = pygame.mixer.Sound("Audio\Rumoripersonaggio\Attacco.wav")
+rumoreattacco.set_volume(volumeEffetti)
+rumorecamminata = pygame.mixer.Sound("Audio\Rumoripersonaggio\Camminata.wav")
+rumorecamminata.set_volume(volumeEffetti)
+rumorelevelup = pygame.mixer.Sound("Audio\Rumoripersonaggio\Levelup.wav")
+rumorelevelup.set_volume(volumeEffetti)
+suonoaperturacopo = pygame.mixer.Sound("Audio\Rumoriambiente\Aperturaportacofanetti.wav")
+suonoaperturacopo.set_volume(volumeEffetti)
+
+# suono canzoni
+c11 = pygame.mixer.Sound("Audio\Canzoni\Canzone11.wav")
+c11.set_volume(volumeCanzoni)
+c16 = pygame.mixer.Sound("Audio\Canzoni\Canzone16.wav")
+c16.set_volume(volumeCanzoni)
 
 # freccetta invisibile
 pygame.mouse.set_visible(False)
@@ -291,14 +342,6 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
 
 
 def scegli_sal(cosa, lunghezzadati):
-    # immagini salvataggi
-    s1 = pygame.image.load('Immagini\Salvataggi\S1.png')
-    s1 = pygame.transform.scale(s1, (gpx * 3, gpy * 3))
-    s2 = pygame.image.load('Immagini\Salvataggi\S2.png')
-    s2 = pygame.transform.scale(s2, (gpx * 3, gpy * 3))
-    s3 = pygame.image.load('Immagini\Salvataggi\S3.png')
-    s3 = pygame.transform.scale(s3, (gpx * 3, gpy * 3))
-
     # posizione-dimensione puntatore
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx, gpy))
     puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx, gpy))
@@ -599,13 +642,14 @@ def scegli_sal(cosa, lunghezzadati):
             pygame.display.update()
 
 
-def guardaVideo(path):
+def guardaVideo(path, audio):
     listaImg = []
     # load all the image
     for i in os.listdir(path):
         img = pygame.image.load(path + '/' + i).convert()
         img = pygame.transform.scale(img, (gsx, gsy))
         listaImg.append(img)
+    audio.play(-1)
     # play video
     for i in listaImg:
         schermo.blit(i, (0, 0))
@@ -617,15 +661,15 @@ def guardaVideo(path):
                 quit()
             if event.type == pygame.KEYDOWN:
                 selezione.play()
+                audio.stop()
                 return True
+    audio.stop()
     return False
 
 
 def menu():
-    c11.play(-1)
-
     # video
-    fermavideo = guardaVideo('Video/videoinizio')
+    fermavideo = guardaVideo('Video/videoinizio', c16)
     """clock = pygame.time.Clock()
     movie = pygame.movie.Movie(r'Video\videoinizio.mpg')
     movie_screen = pygame.Surface(schermo.get_size())
@@ -643,6 +687,7 @@ def menu():
                 selezione.play()
                 fermavideo = True"""
 
+    c11.play(-1)
     # attesa dopo video
     if not fermavideo:
         schermo.fill(grigioscu)
@@ -815,8 +860,6 @@ def menu():
                                     print "Dati corrotti: " + str(len(dati))
                                     indietro = False
                                     schermo.fill(grigioscu)
-                                    robograsalva = pygame.image.load('Immagini\Disegnigraf\RobotGrafsalva.png')
-                                    robograsalva = pygame.transform.scale(robograsalva, (gpx * 18, gpy * 18))
                                     schermo.blit(robograsalva, (gpx * 15, -gpy * 3))
                                     messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
                                     messaggio("I dati sono corrotti...", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 100)
@@ -5849,7 +5892,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             messaggio("Salva", grigioscu, gsx // 32 * 2, gsy // 18 * 13, 50)
         messaggio(u"Torna al menù principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
         messaggio("Torna a Windows", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 50)
-        messaggio("Esc / Q: torna al gioco", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
+        messaggio(u"Esc / Q: Esci dal menù", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
         if carim:
             if dati[10] <= 0:
                 robosta = robograff
@@ -5995,7 +6038,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 messaggio("Salva", grigioscu, gsx // 32 * 2, gsy // 18 * 13, 50)
             messaggio(u"Torna al menù principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
             messaggio("Torna a Windows", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 50)
-            messaggio("Esc / Q: torna al gioco", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
+            messaggio(u"Esc / Q: Esci dal menù", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
             if carim:
                 if dati[10] <= 0:
                     robosta = robograff
@@ -9734,30 +9777,19 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     difesa = 0
 
     # modifica puntatore a seconda dell'attacco
-    puntatIn = pygame.image.load('Immagini\Puntatori\InquadraCVin.png')
-    puntatIn = pygame.transform.scale(puntatIn, (gpx, gpy))
-    puntatOut = pygame.image.load('Immagini\Puntatori\InquadraCVout.png')
-    puntatOut = pygame.transform.scale(puntatOut, (gpx, gpy))
     if attacco == 1:
-        puntatogg1 = pygame.image.load('Immagini\Oggetti\Difesa.png')
-        puntatogg2 = pygame.image.load('Immagini\Oggetti\Attacco.png')
-        puntatogg1 = pygame.transform.scale(puntatogg1, (gpx, gpy))
-        puntatogg2 = pygame.transform.scale(puntatogg2, (gpx, gpy))
+        puntatogg1 = puntatDif
+        puntatogg2 = puntatAtt
     if attacco == 2:
-        puntatogg = pygame.image.load('Immagini\Oggetti\Bomba.png')
-        puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
+        puntatogg = puntatBom
     if attacco == 3:
-        puntatogg = pygame.image.load('Immagini\Oggetti\BombaVeleno.png')
-        puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
+        puntatogg = puntatBoV
     if attacco == 4:
-        puntatogg = pygame.image.load('Immagini\Oggetti\Esca.png')
-        puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
+        puntatogg = puntatEsc
     if attacco == 5:
-        puntatogg = pygame.image.load('Immagini\Oggetti\BombaAppiccicosa.png')
-        puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
+        puntatogg = puntatBoA
     if attacco == 6:
-        puntatogg = pygame.image.load('Immagini\Oggetti\BombaPotenziata.png')
-        puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
+        puntatogg = puntatBoP
     if attacco == 7:
         puntatogg = pygame.image.load('Immagini\Oggetti\Scossa.png')
         puntatogg = pygame.transform.scale(puntatogg, (gpx, gpy))
@@ -9779,16 +9811,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     if attacco == 9 or attacco == 12 or attacco == 15:
         puntat = None
         puntatogg = None
-
-    campoattaccabile1 = pygame.image.load('Immagini\Campiattaccabili\Campoattaccabile1.png')
-    campoattaccabile1 = pygame.transform.scale(campoattaccabile1, (gpx * 3, gpy * 3))
-    campoattaccabile2 = pygame.image.load('Immagini\Campiattaccabili\Campoattaccabile2.png')
-    campoattaccabilemostro = pygame.image.load('Immagini\Campiattaccabili\Campoattaccabilemostro.png')
-    # caselle attaccabili
-    caselleattaccabilimostro = pygame.image.load('Immagini\Campiattaccabili\Caselleattaccabilimostro.png')
-    caselleattaccabilimostro = pygame.transform.scale(caselleattaccabilimostro, (gpx, gpy))
-    caselleattaccabili = pygame.image.load('Immagini\Campiattaccabili\Caselleattaccabili.png')
-    caselleattaccabili = pygame.transform.scale(caselleattaccabili, (gpx, gpy))
 
     schermo.blit(stanzaa, (0, 0))
     # backbround occhio/chiave
@@ -9835,9 +9857,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         m = m + 1
                 n = n + 1
         i = i + 3
-
-    # ricarico immagine vitaesche
-    vitaesche = pygame.image.load('Immagini\Barrevita\Vitaesca.png')
 
     # vita-status personaggio
     lungvitatot = ((gpx * pvtot) / 4) // 5
@@ -9928,6 +9947,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     creaesca = False
     ricaricaschermo = False
     appenaCaricato = False
+    mvx = 0
+    mvy = 0
     while not risposta:
         xvp = xp
         yvp = yp
@@ -10808,6 +10829,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(vitanemsucc, (gsx // 32 * 2, gpy // 3))
                 schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
                 ricaricaschermo = True
+                if (mx != mvx) or (my != mvy):
+                    appenaCaricato = False
+                    print mvx, mvy, mx, my
+                mvx = mx
+                mvy = my
             j += 7
         if not ((xp == mxa and yp == mya and nemicoa != 0) or (xp == mxb and yp == myb and nemicob != 0) or (xp == mxc and yp == myc and nemicoc != 0) or (xp == mxd and yp == myd and nemicod != 0) or (xp == mxe and yp == mye and nemicoe != 0) or (xp == mxf and yp == myf and nemicof != 0) or (xp == mxg and yp == myg and nemicog != 0) or (xp == mxh and yp == myh and nemicoh != 0) or (xp == mxi and yp == myi and nemicoi != 0) or (xp == mxl and yp == myl and nemicol != 0)):
             ricaricaschermo = False
@@ -10839,7 +10865,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(esche, (gsx // 32 * 1, gpy // 3))
                 indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
                 fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
-                vitaesche = pygame.transform.scale(vitaesche, (lungvita, gpy // 4))
+                vitaesche = pygame.transform.scale(vitanemico0, (lungvita, gpy // 4))
                 schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
                 schermo.blit(fineindvitamost, ((gsx // 32 * 2) + (gpx * 8), gpy // 3))
                 schermo.blit(vitaesche, (gsx // 32 * 2, gpy // 3))
@@ -10969,16 +10995,6 @@ def aperturacofanetto(stanza, cx, cy, dati):
 
 
 def gameloop():
-    # aumento livello
-    saliliv = pygame.image.load('Immagini\Levelup\Saliliv.png')
-    saliliv = pygame.transform.scale(saliliv, (gpx, gpy))
-    saliliv1 = pygame.image.load('Immagini\Levelup\Saliliv1.png')
-    saliliv1 = pygame.transform.scale(saliliv1, (gpx, gpy))
-    saliliv2 = pygame.image.load('Immagini\Levelup\Saliliv2.png')
-    saliliv2 = pygame.transform.scale(saliliv2, (gpx, gpy))
-    saliliv3 = pygame.image.load('Immagini\Levelup\Saliliv3.png')
-    saliliv3 = pygame.transform.scale(saliliv3, (gpx, gpy))
-
     inizio = True
     while True:
         if inizio:
@@ -12897,17 +12913,15 @@ def gameloop():
                     armrob = armrobw
         # gestione tecniche
         if attacco != 0 and attacco > 6 and contattogg == 0:
-            pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xesca, yesca, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob = attacca(
-                x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122],
-                dati[125], dati[126],
-                stanzaa, dati[1], sfondinoa, sfondinob, arma, armatura, scudo, robot, armrob,
-                nemicoa, mxa, mya, nemicob, mxb, myb, nemicoc, mxc, myc, nemicod, mxd, myd, nemicoe, mxe, mye,
-                nemicof, mxf, myf, nemicog, mxg, myg, nemicoh, mxh, myh, nemicoi, mxi, myi, nemicol, mxl, myl,
-                pvmatot, pvmbtot, pvmctot, pvmdtot, pvmetot, pvmftot, pvmgtot, pvmhtot, pvmitot, pvmltot,
-                pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, statoma, statomb, statomc, statomd,
-                statome, statomf, statomg, statomh, statomi, statoml, raggiovistaa, raggiovistab, raggiovistac,
-                raggiovistad, raggiovistae, raggiovistaf, raggiovistag, raggiovistah, raggiovistai, raggiovistal,
-                att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio)
+            pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xesca, yesca, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob, difesa = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122],
+                                                                                                                                                                                                                        dati[125], dati[126], stanzaa, dati[1], sfondinoa, sfondinob, arma, armatura, scudo, robot, armrob,
+                                                                                                                                                                                                                        nemicoa, mxa, mya, nemicob, mxb, myb, nemicoc, mxc, myc, nemicod, mxd, myd, nemicoe, mxe, mye,
+                                                                                                                                                                                                                        nemicof, mxf, myf, nemicog, mxg, myg, nemicoh, mxh, myh, nemicoi, mxi, myi, nemicol, mxl, myl,
+                                                                                                                                                                                                                        pvmatot, pvmbtot, pvmctot, pvmdtot, pvmetot, pvmftot, pvmgtot, pvmhtot, pvmitot, pvmltot,
+                                                                                                                                                                                                                        pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, statoma, statomb, statomc, statomd,
+                                                                                                                                                                                                                        statome, statomf, statomg, statomh, statomi, statoml, raggiovistaa, raggiovistab, raggiovistac,
+                                                                                                                                                                                                                        raggiovistad, raggiovistae, raggiovistaf, raggiovistag, raggiovistah, raggiovistai, raggiovistal,
+                                                                                                                                                                                                                        att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio)
             caricaini = True
             # cambiare posizione dopo l'attacco
             if nrob != 0:
