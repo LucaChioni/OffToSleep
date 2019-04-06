@@ -13291,14 +13291,7 @@ def gameloop():
                 if statoml == 1 or statoml == 3:
                     pvml = pvml - 3
             # movimento mostri
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxa and caseviste[i + 1] == mya:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimosta > 0 or (sposta and muovimosta <= 0)) and pvma > 0 and incasevista) or (primociclo and nemicoa):
+            if ((muovimosta > 0 or (sposta and muovimosta <= 0)) and pvma > 0) or (primociclo and nemicoa):
                 mxav = mxa
                 myav = mya
                 if primociclo:
@@ -13348,14 +13341,7 @@ def gameloop():
                         j = i + 1
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxb and caseviste[i + 1] == myb:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimostb > 0 or (sposta and muovimostb <= 0)) and pvmb > 0 and incasevista) or (primociclo and nemicob):
+            if ((muovimostb > 0 or (sposta and muovimostb <= 0)) and pvmb > 0) or (primociclo and nemicob):
                 mxbv = mxb
                 mybv = myb
                 if primociclo:
@@ -13405,14 +13391,7 @@ def gameloop():
                         j = i + 2
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxc and caseviste[i + 1] == myc:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimostc > 0 or (sposta and muovimostc <= 0)) and pvmc > 0 and incasevista) or (primociclo and nemicoc):
+            if ((muovimostc > 0 or (sposta and muovimostc <= 0)) and pvmc > 0) or (primociclo and nemicoc):
                 mxcv = mxc
                 mycv = myc
                 if primociclo:
@@ -13462,14 +13441,7 @@ def gameloop():
                         j = i + 3
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxd and caseviste[i + 1] == myd:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimostd > 0 or (sposta and muovimostd <= 0)) and pvmd > 0 and incasevista) or (primociclo and nemicod):
+            if ((muovimostd > 0 or (sposta and muovimostd <= 0)) and pvmd > 0) or (primociclo and nemicod):
                 mxdv = mxd
                 mydv = myd
                 if primociclo:
@@ -13519,14 +13491,7 @@ def gameloop():
                         j = i + 4
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxe and caseviste[i + 1] == mye:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimoste > 0 or (sposta and muovimoste <= 0)) and pvme > 0 and incasevista) or (primociclo and nemicoe):
+            if ((muovimoste > 0 or (sposta and muovimoste <= 0)) and pvme > 0) or (primociclo and nemicoe):
                 mxev = mxe
                 myev = mye
                 if primociclo:
@@ -13576,14 +13541,7 @@ def gameloop():
                         j = i + 5
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxf and caseviste[i + 1] == myf:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimostf > 0 or (sposta and muovimostf <= 0)) and pvmf > 0 and incasevista) or (primociclo and nemicof):
+            if ((muovimostf > 0 or (sposta and muovimostf <= 0)) and pvmf > 0) or (primociclo and nemicof):
                 mxfv = mxf
                 myfv = myf
                 if primociclo:
@@ -13633,14 +13591,7 @@ def gameloop():
                         j = i + 6
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxg and caseviste[i + 1] == myg:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimostg > 0 or (sposta and muovimostg <= 0)) and pvmg > 0 and incasevista) or (primociclo and nemicog):
+            if ((muovimostg > 0 or (sposta and muovimostg <= 0)) and pvmg > 0) or (primociclo and nemicog):
                 mxgv = mxg
                 mygv = myg
                 if primociclo:
@@ -13690,14 +13641,7 @@ def gameloop():
                         j = i + 7
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxh and caseviste[i + 1] == myh:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimosth > 0 or (sposta and muovimosth <= 0)) and pvmh > 0 and incasevista) or (primociclo and nemicoh):
+            if ((muovimosth > 0 or (sposta and muovimosth <= 0)) and pvmh > 0) or (primociclo and nemicoh):
                 mxhv = mxh
                 myhv = myh
                 if primociclo:
@@ -13747,14 +13691,7 @@ def gameloop():
                         j = i + 8
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxi and caseviste[i + 1] == myi:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimosti > 0 or (sposta and muovimosti <= 0)) and pvmi > 0 and incasevista) or (primociclo and nemicoi):
+            if ((muovimosti > 0 or (sposta and muovimosti <= 0)) and pvmi > 0) or (primociclo and nemicoi):
                 mxiv = mxi
                 myiv = myi
                 if primociclo:
@@ -13804,14 +13741,7 @@ def gameloop():
                         j = i + 9
                         mostristanze[j] = False
                     i = i + 11
-            incasevista = False
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == mxl and caseviste[i + 1] == myl:
-                    incasevista = True
-                    break
-                i = i + 3
-            if ((muovimostl > 0 or (sposta and muovimostl <= 0)) and pvml > 0 and incasevista) or (primociclo and nemicol):
+            if ((muovimostl > 0 or (sposta and muovimostl <= 0)) and pvml > 0) or (primociclo and nemicol):
                 mxlv = mxl
                 mylv = myl
                 if primociclo:
