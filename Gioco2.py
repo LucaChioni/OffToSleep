@@ -6262,13 +6262,25 @@ def muri_porte(x, y, nx, ny, stanza, carim, muovi, mostro, robo, porte, cofanett
 
 
 def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers,
-                       stanzaa, sfondinoa, sfondinob, sfondinoc, arma, armatura, scudo, robot, armrob, nemicoa, mxa, mya, mxav, myav, nemicob, mxb, myb, mxbv, mybv,
+                       stanzaa, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, nemicoa, mxa, mya, mxav, myav, nemicob, mxb, myb, mxbv, mybv,
                        nemicoc, mxc, myc, mxcv, mycv, nemicod, mxd, myd, mxdv, mydv, nemicoe, mxe, mye, mxev, myev, nemicof, mxf, myf, mxfv, myfv,
                        nemicog, mxg, myg, mxgv, mygv, nemicoh, mxh, myh, mxhv, myhv, nemicoi, mxi, myi, mxiv, myiv, nemicol, mxl, myl, mxlv, mylv,
-                       mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob):
+                       mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza):
     # sfondo
     if caricaini:
         schermo.blit(stanzaa, (0, 0))
+        # porte
+        i = 0
+        while i < len(porte):
+            if not porte[i + 3]:
+                vmurx = porte[i + 1]
+                vmury = porte[i + 2]
+                murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, numStanza, False, False, False, False, porte, cofanetti)
+                if vmurx == murx and vmury == mury:
+                    schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+                else:
+                    schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+            i = i + 4
         # cofanetti
         i = 0
         while i < len(cofanetti):
@@ -9762,7 +9774,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
 
 
 def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp,
-            stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, arma, armatura, scudo, robot, armrob,
+            stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob,
             nemicoa, mxa, mya, nemicob, mxb, myb, nemicoc, mxc, myc, nemicod, mxd, myd, nemicoe, mxe, mye,
             nemicof, mxf, myf, nemicog, mxg, myg, nemicoh, mxh, myh, nemicoi, mxi, myi, nemicol, mxl, myl,
             pvmatot, pvmbtot, pvmctot, pvmdtot, pvmetot, pvmftot, pvmgtot, pvmhtot, pvmitot, pvmltot,
@@ -9833,6 +9845,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
     else:
         schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
+    # porte
+    i = 0
+    while i < len(porte):
+        if not porte[i + 3]:
+            vmurx = porte[i + 1]
+            vmury = porte[i + 2]
+            murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False, False, False, False, porte, cofanetti)
+            if vmurx == murx and vmury == mury:
+                schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+            else:
+                schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+        i = i + 4
     # cofanetti
     i = 0
     while i < len(cofanetti):
@@ -10033,7 +10057,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         statom = 0
                         raggio = 0
                         # chiudi porta attacco = 1
-                        if suPorta:
+                        if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and suPorta:
                             chiudiPorta = [True, xp, yp]
                             risposta = True
                         # normale attacco = 1
@@ -10428,22 +10452,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
         if ricaricaschermo and not appenaCaricato:
             schermo.blit(stanzaa, (0, 0))
-            # cofanetti
+            # porte
             i = 0
-            while i < len(cofanetti):
-                j = 0
-                while j < len(caseviste):
-                    if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
-                            caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
-                                caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (
-                                caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and \
-                            caseviste[j + 2]:
-                        schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
-                        if cofanetti[i + 3]:
-                            schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                        else:
-                            schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-                    j = j + 3
+            while i < len(porte):
+                if not porte[i + 3]:
+                    vmurx = porte[i + 1]
+                    vmury = porte[i + 2]
+                    murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False,
+                                                                                False, False, False, porte, cofanetti)
+                    if vmurx == murx and vmury == mury:
+                        schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+                    else:
+                        schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
                 i = i + 4
             # cofanetti
             i = 0
@@ -10451,6 +10471,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 j = 0
                 while j < len(caseviste):
                     if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and caseviste[j + 2]:
+                        schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
                         if cofanetti[i + 3]:
                             schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
                         else:
@@ -11164,6 +11185,10 @@ def gameloop():
             sfondinob = pygame.transform.scale(sfondinob, (gpx, gpy))
             sfondinoc = pygame.image.load("Immagini\Paesaggi\Sfondino%ic.png" % dati[1]).convert()
             sfondinoc = pygame.transform.scale(sfondinoc, (gpx, gpy))
+            portaVert = pygame.image.load("Immagini\Paesaggi\PortaV%i.png" % dati[1])
+            portaVert = pygame.transform.scale(portaVert, (gpx, gpy))
+            portaOriz = pygame.image.load("Immagini\Paesaggi\PortaO%i.png" % dati[1])
+            portaOriz = pygame.transform.scale(portaOriz, (gpx, gpy))
 
             # mostri
             if dati[1] == 1 and cambiosta:
@@ -12765,7 +12790,7 @@ def gameloop():
         # gestione attacchi
         if attacco != 0 and attacco <= 6 and contattogg == 0:
             pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xesca, yesca, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob, difesa, chiudiPorta = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126],
-                                                                                                                                                                                                                  stanzaa, dati[1], sfondinoa, sfondinob, sfondinoc, arma, armatura, scudo, robot, armrob,
+                                                                                                                                                                                                                  stanzaa, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob,
                                                                                                                                                                                                                   nemicoa, mxa, mya, nemicob, mxb, myb, nemicoc, mxc, myc, nemicod, mxd, myd, nemicoe, mxe, mye,
                                                                                                                                                                                                                   nemicof, mxf, myf, nemicog, mxg, myg, nemicoh, mxh, myh, nemicoi, mxi, myi, nemicol, mxl, myl,
                                                                                                                                                                                                                   pvmatot, pvmbtot, pvmctot, pvmdtot, pvmetot, pvmftot, pvmgtot, pvmhtot, pvmitot, pvmltot,
@@ -13144,7 +13169,7 @@ def gameloop():
         # gestione tecniche
         if attacco != 0 and attacco > 6 and contattogg == 0:
             pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xesca, yesca, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob, difesa, chiudiPorta = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122],
-                                                                                                                                                                                                                        dati[125], dati[126], stanzaa, dati[1], sfondinoa, sfondinob, arma, armatura, scudo, robot, armrob,
+                                                                                                                                                                                                                        dati[125], dati[126], stanzaa, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob,
                                                                                                                                                                                                                         nemicoa, mxa, mya, nemicob, mxb, myb, nemicoc, mxc, myc, nemicod, mxd, myd, nemicoe, mxe, mye,
                                                                                                                                                                                                                         nemicof, mxf, myf, nemicog, mxg, myg, nemicoh, mxh, myh, nemicoi, mxi, myi, nemicol, mxl, myl,
                                                                                                                                                                                                                         pvmatot, pvmbtot, pvmctot, pvmdtot, pvmetot, pvmftot, pvmgtot, pvmhtot, pvmitot, pvmltot,
@@ -14087,10 +14112,10 @@ def gameloop():
         # disegnare gli sfondi e personaggi
         if not carim and not inizio:
             ambiente_movimento(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers,
-                               stanzaa, sfondinoa, sfondinob, sfondinoc, arma, armatura, scudo, robot, armrob, nemicoa, mxa, mya, mxav, myav, nemicob, mxb, myb, mxbv, mybv,
+                               stanzaa, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, nemicoa, mxa, mya, mxav, myav, nemicob, mxb, myb, mxbv, mybv,
                                nemicoc, mxc, myc, mxcv, mycv, nemicod, mxd, myd, mxdv, mydv, nemicoe, mxe, mye, mxev, myev, nemicof, mxf, myf, mxfv, myfv,
                                nemicog, mxg, myg, mxgv, mygv, nemicoh, mxh, myh, mxhv, myhv, nemicoi, mxi, myi, mxiv, myiv, nemicol, mxl, myl, mxlv, mylv,
-                               mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob)
+                               mortoa, mortob, mortoc, mortod, mortoe, mortof, mortog, mortoh, mortoi, mortol, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza)
 
         # animazione aumento di livello
         if aumentoliv and not carim and not inizio:
