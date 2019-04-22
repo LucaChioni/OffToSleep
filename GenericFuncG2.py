@@ -3554,3 +3554,186 @@ def aperturacofanetto(stanza, cx, cy, dati):
     else:
         dati[tesoro] = dati[tesoro] + 1
     return dati, tesoro
+
+
+def scopriCaselleViste(x, y, numstanza, porte, cofanetti, caseviste):
+    # definire la cornice
+    murx = x
+    mury = y
+    # imposto l'inizio del percorso
+    arrivato = False
+    while not arrivato:
+        nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy,
+                                                                   numstanza, False, 0,
+                                                                   True, False, porte,
+                                                                   cofanetti)
+        if mury != nmury:
+            mury = nmury
+        else:
+            arrivato = True
+    inimurx = murx
+    inimury = mury
+    andare = "d"
+    finito = False
+    c = 5
+    while not finito:
+        if c == 0:
+            finito = True
+        if inimurx == murx and inimury == mury:
+            c = c - 1
+        if andare == "d":
+            # vado a destra
+            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0,
+                                                                       numstanza, False, 0,
+                                                                       True, False, porte,
+                                                                       cofanetti)
+            if murx != nmurx:
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                        caseviste[i + 2] = True
+                        murx = nmurx
+                        break
+                    i = i + 3
+            else:
+                andare = "s"
+            if andare == "d":
+                andare = "w"
+        if andare == "s":
+            # vado in basso
+            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy,
+                                                                       numstanza, False, 0,
+                                                                       True, False, porte,
+                                                                       cofanetti)
+            if mury != nmury:
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                        caseviste[i + 2] = True
+                        mury = nmury
+                        break
+                    i = i + 3
+            else:
+                andare = "a"
+            if andare == "s":
+                andare = "d"
+        if andare == "a":
+            # vado a sinistra
+            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0,
+                                                                       numstanza, False, 0,
+                                                                       True, False, porte,
+                                                                       cofanetti)
+            if murx != nmurx:
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                        caseviste[i + 2] = True
+                        murx = nmurx
+                        break
+                    i = i + 3
+            else:
+                andare = "w"
+            if andare == "a":
+                andare = "s"
+        if andare == "w":
+            # vado in alto
+            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy,
+                                                                       numstanza, False, 0,
+                                                                       True, False, porte,
+                                                                       cofanetti)
+            if mury != nmury:
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nmurx and caseviste[i + 1] == nmury:
+                        caseviste[i + 2] = True
+                        mury = nmury
+                        break
+                    i = i + 3
+            else:
+                andare = "d"
+            if andare == "w":
+                andare = "a"
+    casevisteprov = caseviste
+    i = 0
+    while i < len(caseviste):
+        n = -1
+        fine1 = False
+        fine2 = False
+        while n <= 28:
+            if not fine1 and caseviste[i + 2]:
+                murx = casevisteprov[i] + (gpx * n)
+                mury = casevisteprov[i + 1]
+                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx,
+                                                                           0, numstanza,
+                                                                           False, 0, True,
+                                                                           False, porte,
+                                                                           cofanetti)
+                if murx != nmurx:
+                    j = 0
+                    while j < len(casevisteprov):
+                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                            casevisteprov[j + 2] = True
+                            break
+                        j = j + 3
+                else:
+                    fine1 = True
+            if not fine2 and caseviste[i + 2]:
+                murx = casevisteprov[i] - (gpx * n)
+                mury = casevisteprov[i + 1]
+                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx,
+                                                                           0, numstanza,
+                                                                           False, 0, True,
+                                                                           False, porte,
+                                                                           cofanetti)
+                if murx != nmurx:
+                    j = 0
+                    while j < len(casevisteprov):
+                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                            casevisteprov[j + 2] = True
+                            break
+                        j = j + 3
+                else:
+                    fine2 = True
+            n = n + 1
+        n = 0
+        fine1 = False
+        fine2 = False
+        while n <= 14:
+            if not fine1 and caseviste[i + 2]:
+                murx = casevisteprov[i]
+                mury = casevisteprov[i + 1] + (gpy * n)
+                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0,
+                                                                           gpy, numstanza,
+                                                                           False, 0, True,
+                                                                           False, porte,
+                                                                           cofanetti)
+                if mury != nmury:
+                    j = 0
+                    while j < len(casevisteprov):
+                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                            casevisteprov[j + 2] = True
+                            break
+                        j = j + 3
+                else:
+                    fine1 = True
+            if not fine2 and caseviste[i + 2]:
+                murx = casevisteprov[i]
+                mury = casevisteprov[i + 1] - (gpy * n)
+                nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0,
+                                                                           -gpy, numstanza,
+                                                                           False, 0, True,
+                                                                           False, porte,
+                                                                           cofanetti)
+                if mury != nmury:
+                    j = 0
+                    while j < len(casevisteprov):
+                        if casevisteprov[j] == nmurx and casevisteprov[j + 1] == nmury:
+                            casevisteprov[j + 2] = True
+                            break
+                        j = j + 3
+                else:
+                    fine2 = True
+            n = n + 1
+        i = i + 3
+    caseviste = casevisteprov
+    return caseviste
