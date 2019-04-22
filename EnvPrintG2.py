@@ -1235,6 +1235,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 puntaPorta = True
                 xp = xp + nxp
                 yp = yp + nyp
+                nxp = 0
+                nyp = 0
+                break
             i = i + 4
         # mettere il puntatore su cofanetti
         puntaCofanetto = False
@@ -1244,6 +1247,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 puntaCofanetto = True
                 xp = xp + nxp
                 yp = yp + nyp
+                break
             i = i + 4
         # movimento inquadra (ultimi 4 inutili)
         if not puntaPorta and not puntaCofanetto:
@@ -1257,6 +1261,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         xp = xp + nxp
                         yp = yp + nyp
                         puntaPorta = False
+                        break
                 i = i + 3
 
         # esche: id, vita, xesca, yesca

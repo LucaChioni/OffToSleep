@@ -1517,10 +1517,6 @@ def gameloop():
                     else:
                         porte[k + 3] = True
                     # scoprire caselle viste
-                    i = 0
-                    while i < len(caseviste):
-                        caseviste[i + 2] = False
-                        i = i + 3
                     caseviste = scopriCaselleViste(x, y, numstanza, porte, cofanetti, caseviste)
                     # aggiornare vettore tutteporte
                     j = 0
