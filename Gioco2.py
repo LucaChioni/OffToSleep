@@ -2,6 +2,8 @@
 
 from MenuG2 import *
 from EnvPrintG2 import *
+from MovNemiciRobG2 import *
+from AnimazioniG2 import *
 
 
 # freccetta invisibile
@@ -2292,140 +2294,7 @@ def gameloop():
 
         # animazione apertura cofanetto
         if tesoro != -1:
-            schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
-            # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
-            if tesoro >= 11 and tesoro <= 30:
-                messaggio("Hai trovato: Una nuova tecnica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 31:
-                messaggio("Hai trovato: Pozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 32:
-                messaggio("Hai trovato: Caricabatterie", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 33:
-                messaggio("Hai trovato: Bomba", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 34:
-                messaggio("Hai trovato: Medicina", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 35:
-                messaggio("Hai trovato: Bomba velenosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 36:
-                messaggio("Hai trovato: Esca", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 37:
-                messaggio("Hai trovato: Superpozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 38:
-                messaggio("Hai trovato: Caricabatterie migliorato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 39:
-                messaggio("Hai trovato: Bomba appiccicosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 40:
-                messaggio("Hai trovato: Bomba potenziata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 41:
-                messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 42:
-                messaggio("Hai trovato: Spada di legno", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 43:
-                messaggio("Hai trovato: Spada di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 44:
-                messaggio("Hai trovato: Spadone d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 45:
-                messaggio("Hai trovato: Spada del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 46:
-                messaggio("Hai trovato: Spada di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 47:
-                messaggio("Hai trovato: Excalibur", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 48:
-                messaggio("Hai trovato: Lykother", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 49:
-                messaggio("Hai trovato: Sinego", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 50:
-                messaggio("Hai trovato: Mendaxritas", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 51:
-                messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 52:
-                messaggio("Hai trovato: Armatura di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 53:
-                messaggio("Hai trovato: Armatura di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 54:
-                messaggio("Hai trovato: Armatura d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 55:
-                messaggio("Hai trovato: Armatura del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 56:
-                messaggio("Hai trovato: Armatura di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 57:
-                messaggio("Hai trovato: Armatura leggendaria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 58:
-                messaggio("Hai trovato: Lykodes", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 59:
-                messaggio("Hai trovato: Armatura antica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 60:
-                messaggio("Hai trovato: Loriquam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 61:
-                messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 62:
-                messaggio("Hai trovato: Scudo di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 63:
-                messaggio("Hai trovato: Scudo di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 64:
-                messaggio("Hai trovato: Scudo d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 65:
-                messaggio("Hai trovato: Scudo del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 66:
-                messaggio("Hai trovato: Scudo di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 67:
-                messaggio("Hai trovato: Scudo leggentario", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 68:
-                messaggio("Hai trovato: Lykethmos", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 69:
-                messaggio("Hai trovato: Scudo antico", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 70:
-                messaggio("Hai trovato: Clipequam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 71:
-                messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 72:
-                messaggio("Hai trovato: Batteria scarica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 73:
-                messaggio("Hai trovato: Batteria piccola", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 74:
-                messaggio("Hai trovato: Batteria media", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 75:
-                messaggio("Hai trovato: Batteria grande", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 76:
-                messaggio("Hai trovato: Batteria discreta", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 77:
-                messaggio("Hai trovato: Batteria affidabile", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 78:
-                messaggio("Hai trovato: Batteria extra", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 79:
-                messaggio("Hai trovato: Batteria efficiente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro == 80:
-                messaggio("Hai trovato: Batteria illimitata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro >= 81 and tesoro <= 100:
-                messaggio("Hai trovato: Una nuova condizione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if tesoro >= 101 and tesoro <= 120:
-                messaggio("Hai trovato: Cella di memoria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-            if npers == 1:
-                schermo.blit(sfondinoc, (x + gpx, y))
-                schermo.blit(cofaniaper, (x + gpx, y))
-            if npers == 2:
-                schermo.blit(sfondinoc, (x - gpx, y))
-                schermo.blit(cofaniaper, (x - gpx, y))
-            if npers == 4:
-                schermo.blit(sfondinoc, (x, y + gpy))
-                schermo.blit(cofaniaper, (x, y + gpy))
-            if npers == 3:
-                schermo.blit(sfondinoc, (x, y - gpy))
-                schermo.blit(cofaniaper, (x, y - gpy))
-            pygame.display.update()
-            pygame.time.wait(500)
-            risposta = False
-            while not risposta:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_SPACE:
-                            selezione.play()
-                            risposta = True
-            caricaini = True
-            tesoro = -1
+            caricaini, tesoro = animaCofanetto(tesoro, x, y, npers, sfondinoc)
 
         # aggiorna vista dei mostri e metti l'occhio se ti vedono
         if True:
@@ -2496,7 +2365,6 @@ def gameloop():
 
         # animazione camminata personaggio
         if sposta and not inizio:
-            # le animazioni fanno un frame in piu' all'inizio per stabilizzare il framerate
             # mentre ci si sposta
             if x != vx or y != vy:
                 if primopasso and not cambiosta:
@@ -2504,234 +2372,19 @@ def gameloop():
                     primopasso = False
                 # camminata quando si entra in una stanza
                 if cambiosta:
-                    fineanimaz = 1
-                    while fineanimaz > 0:
-                        n = 0
-                        while fineanimaz == 1 and n < 32:
-                            if x == gpx * n:
-                                m = 0
-                                while m < 18:
-                                    if y == gpy * m:
-                                        if (n + m) % 2 == 0:
-                                            schermo.blit(sfondinob, (vx, vy))
-                                        if (n + m) % 2 != 0:
-                                            schermo.blit(sfondinoa, (vx, vy))
-                                    m = m + 1
-                            n = n + 1
-                        if fineanimaz == 1:
-                            rumorecamminata.stop()
-                            rumorecamminata.play()
-                            if npers == 1:
-                                schermo.blit(scudo, (vx + (gpx // 3), y))
-                                schermo.blit(persdm, (vx + (gpx // 3), y))
-                                schermo.blit(armatura, (vx + (gpx // 3), y))
-                                schermo.blit(persdmb1, (vx + (gpx // 3), y))
-                                schermo.blit(arma, (vx + (gpx // 3), y))
-                            if npers == 2:
-                                schermo.blit(arma, (vx - (gpx // 3), y))
-                                schermo.blit(persam, (vx - (gpx // 3), y))
-                                schermo.blit(armatura, (vx - (gpx // 3), y))
-                                schermo.blit(persamb1, (vx - (gpx // 3), y))
-                                schermo.blit(scudo, (vx - (gpx // 3), y))
-                            if npers == 3:
-                                schermo.blit(arma, (x, vy - (gpy // 3)))
-                                schermo.blit(scudo, (x, vy - (gpy // 3)))
-                                schermo.blit(perswm, (x, vy - (gpy // 3)))
-                                schermo.blit(armatura, (x, vy - (gpy // 3)))
-                                schermo.blit(perswmb1, (x, vy - (gpy // 3)))
-                            if npers == 4:
-                                schermo.blit(perssm, (x, vy + (gpy // 3)))
-                                schermo.blit(armatura, (x, vy + (gpy // 3)))
-                                schermo.blit(perssmb1, (x, vy + (gpy // 3)))
-                                schermo.blit(arma, (x, vy + (gpy // 3)))
-                                schermo.blit(scudo, (x, vy + (gpy // 3)))
-                        fineanimaz = fineanimaz - 1
-                        pygame.display.update()
-                        clock.tick(fpsanimazioni)
-                        pygame.display.update()
+                    animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma)
                 # camminata quando non si entra in una stanza
                 if not cambiosta:
-                    fineanimaz = 2
-                    while fineanimaz != 0:
-                        n = 0
-                        while fineanimaz <= 2 and n < 32:
-                            if x == gpx * n:
-                                m = 0
-                                while m < 18:
-                                    if y == gpy * m:
-                                        if (n + m) % 2 == 0:
-                                            schermo.blit(sfondinoa, (x, y))
-                                            schermo.blit(sfondinob, (vx, vy))
-                                        if (n + m) % 2 != 0:
-                                            schermo.blit(sfondinob, (x, y))
-                                            schermo.blit(sfondinoa, (vx, vy))
-                                    m = m + 1
-                            n = n + 1
-                        if npers == 1:
-                            if fineanimaz == 2:
-                                schermo.blit(scudo, (vx + (gpx // 3), y))
-                                schermo.blit(persdm, (vx + (gpx // 3), y))
-                                schermo.blit(armatura, (vx + (gpx // 3), y))
-                                schermo.blit(persdmb1, (vx + (gpx // 3), y))
-                                schermo.blit(arma, (vx + (gpx // 3), y))
-                            if fineanimaz == 1:
-                                schermo.blit(scudo, (vx + (gpx * 2 // 3), y))
-                                schermo.blit(persdm, (vx + (gpx * 2 // 3), y))
-                                schermo.blit(armatura, (vx + (gpx * 2 // 3), y))
-                                schermo.blit(persdmb2, (vx + (gpx * 2 // 3), y))
-                                schermo.blit(arma, (vx + (gpx * 2 // 3), y))
-                        if npers == 2:
-                            if fineanimaz == 2:
-                                schermo.blit(arma, (vx - (gpx // 3), y))
-                                schermo.blit(persam, (vx - (gpx // 3), y))
-                                schermo.blit(armatura, (vx - (gpx // 3), y))
-                                schermo.blit(persamb1, (vx - (gpx // 3), y))
-                                schermo.blit(scudo, (vx - (gpx // 3), y))
-                            if fineanimaz == 1:
-                                schermo.blit(arma, (vx - (gpx * 2 // 3), y))
-                                schermo.blit(persam, (vx - (gpx * 2 // 3), y))
-                                schermo.blit(armatura, (vx - (gpx * 2 // 3), y))
-                                schermo.blit(persamb2, (vx - (gpx * 2 // 3), y))
-                                schermo.blit(scudo, (vx - (gpx * 2 // 3), y))
-                        if npers == 3:
-                            if fineanimaz == 2:
-                                schermo.blit(arma, (x, vy - (gpy // 3)))
-                                schermo.blit(scudo, (x, vy - (gpy // 3)))
-                                schermo.blit(perswm, (x, vy - (gpy // 3)))
-                                schermo.blit(armatura, (x, vy - (gpy // 3)))
-                                schermo.blit(perswmb1, (x, vy - (gpy // 3)))
-                            if fineanimaz == 1:
-                                schermo.blit(arma, (x, vy - (gpy * 2 // 3)))
-                                schermo.blit(scudo, (x, vy - (gpy * 2 // 3)))
-                                schermo.blit(perswm, (x, vy - (gpy * 2 // 3)))
-                                schermo.blit(armatura, (x, vy - (gpy * 2 // 3)))
-                                schermo.blit(perswmb2, (x, vy - (gpy * 2 // 3)))
-                        if npers == 4:
-                            if fineanimaz == 2:
-                                schermo.blit(perssm, (x, vy + (gpy // 3)))
-                                schermo.blit(armatura, (x, vy + (gpy // 3)))
-                                schermo.blit(perssmb1, (x, vy + (gpy // 3)))
-                                schermo.blit(arma, (x, vy + (gpy // 3)))
-                                schermo.blit(scudo, (x, vy + (gpy // 3)))
-                            if fineanimaz == 1:
-                                schermo.blit(perssm, (x, vy + (gpy * 2 // 3)))
-                                schermo.blit(armatura, (x, vy + (gpy * 2 // 3)))
-                                schermo.blit(perssmb2, (x, vy + (gpy * 2 // 3)))
-                                schermo.blit(arma, (x, vy + (gpy * 2 // 3)))
-                                schermo.blit(scudo, (x, vy + (gpy * 2 // 3)))
-                        pygame.display.update()
-                        clock.tick(fpsanimazioni)
-                        fineanimaz = fineanimaz - 1
-                    n = 0
-                    while n < 32:
-                        if x == gpx * n:
-                            m = 0
-                            while m < 18:
-                                if y == gpy * m:
-                                    if (n + m) % 2 == 0:
-                                        schermo.blit(sfondinoa, (x, y))
-                                        schermo.blit(sfondinob, (vx, vy))
-                                    if (n + m) % 2 != 0:
-                                        schermo.blit(sfondinob, (x, y))
-                                        schermo.blit(sfondinoa, (vx, vy))
-                                m = m + 1
-                        n = n + 1
+                    animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma)
             # mentre non ci si sposta
             elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 if primopasso:
                     rumorecamminata.play(-1)
                     primopasso = False
-                fineanimaz = 2
-                while fineanimaz != 0:
-                    n = 0
-                    while fineanimaz <= 2 and n < 32:
-                        if x == gpx * n:
-                            m = 0
-                            while m < 18:
-                                if y == gpy * m:
-                                    if (n + m) % 2 == 0:
-                                        schermo.blit(sfondinoa, (x, y))
-                                    if (n + m) % 2 != 0:
-                                        schermo.blit(sfondinob, (x, y))
-                                m = m + 1
-                        n = n + 1
-                    if npers == 1:
-                        if fineanimaz == 2:
-                            schermo.blit(scudo, (vx, y))
-                            schermo.blit(persdm, (vx, y))
-                            schermo.blit(armatura, (vx, y))
-                            schermo.blit(persdmb1, (vx, y))
-                            schermo.blit(arma, (vx, y))
-                        if fineanimaz == 1:
-                            schermo.blit(scudo, (vx, y))
-                            schermo.blit(persdm, (vx, y))
-                            schermo.blit(armatura, (vx, y))
-                            schermo.blit(persdmb2, (vx, y))
-                            schermo.blit(arma, (vx, y))
-                    if npers == 2:
-                        if fineanimaz == 2:
-                            schermo.blit(arma, (vx, y))
-                            schermo.blit(persam, (vx, y))
-                            schermo.blit(armatura, (vx, y))
-                            schermo.blit(persamb1, (vx, y))
-                            schermo.blit(scudo, (vx, y))
-                        if fineanimaz == 1:
-                            schermo.blit(arma, (vx, y))
-                            schermo.blit(persam, (vx, y))
-                            schermo.blit(armatura, (vx, y))
-                            schermo.blit(persamb2, (vx, y))
-                            schermo.blit(scudo, (vx, y))
-                    if npers == 3:
-                        if fineanimaz == 2:
-                            schermo.blit(arma, (x, vy))
-                            schermo.blit(scudo, (x, vy))
-                            schermo.blit(perswm, (x, vy))
-                            schermo.blit(armatura, (x, vy))
-                            schermo.blit(perswmb1, (x, vy))
-                        if fineanimaz == 1:
-                            schermo.blit(arma, (x, vy))
-                            schermo.blit(scudo, (x, vy))
-                            schermo.blit(perswm, (x, vy))
-                            schermo.blit(armatura, (x, vy))
-                            schermo.blit(perswmb2, (x, vy))
-                    if npers == 4:
-                        if fineanimaz == 2:
-                            schermo.blit(perssm, (x, vy))
-                            schermo.blit(armatura, (x, vy))
-                            schermo.blit(perssmb1, (x, vy))
-                            schermo.blit(arma, (x, vy))
-                            schermo.blit(scudo, (x, vy))
-                        if fineanimaz == 1:
-                            schermo.blit(perssm, (x, vy))
-                            schermo.blit(armatura, (x, vy))
-                            schermo.blit(perssmb2, (x, vy))
-                            schermo.blit(arma, (x, vy))
-                            schermo.blit(scudo, (x, vy))
-                    pygame.display.update()
-                    clock.tick(fpsanimazioni)
-                    fineanimaz = fineanimaz - 1
+                animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma)
 
         # animazione morte nemici
-        vetNemiciMorti = [mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl]
-        i = 0
-        while i < len(vetNemiciMorti):
-            mortoMo = vetNemiciMorti[i]
-            mx = vetNemiciMorti[i + 1]
-            my = vetNemiciMorti[i + 2]
-            if mortoMo == 1:
-                n = 0
-                while n < 32:
-                    if mx == gpx * n:
-                        m = 0
-                        while m < 18:
-                            if my == gpy * m:
-                                if (n + m) % 2 == 0:
-                                    schermo.blit(sfondinoa, (mx, my))
-                                if (n + m) % 2 != 0:
-                                    schermo.blit(sfondinob, (mx, my))
-                            m = m + 1
-                    n = n + 1
-            i += 3
+        animaMorteNemici(mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl, sfondinoa, sfondinob)
 
         sposta = False
 
@@ -2747,103 +2400,7 @@ def gameloop():
         if aumentoliv and not carim and not inizio:
             rumorecamminata.stop()
             rumorelevelup.play()
-            # le animazioni fanno un frame in piu' all'inizio per stabilizzare il framerate
-            fineanimaz = 4
-            while fineanimaz != -1:
-                n = 0
-                while fineanimaz <= 3 and n < 32:
-                    if x == gpx * n:
-                        m = 0
-                        while m < 18:
-                            if y == gpy * m:
-                                if (n + m) % 2 == 0:
-                                    schermo.blit(sfondinoa, (x, y))
-                                if (n + m) % 2 != 0:
-                                    schermo.blit(sfondinob, (x, y))
-                            m = m + 1
-                    n = n + 1
-                if npers == 1:
-                    schermo.blit(scudo, (x, y))
-                    schermo.blit(pers, (x, y))
-                    schermo.blit(armatura, (x, y))
-                    schermo.blit(persdb, (x, y))
-                    schermo.blit(arma, (x, y))
-                    if fineanimaz == 0:
-                        schermo.blit(saliliv, (x, y))
-                    if fineanimaz == 1:
-                        schermo.blit(saliliv1, (x, y))
-                    if fineanimaz == 2:
-                        schermo.blit(saliliv2, (x, y))
-                    if fineanimaz == 3:
-                        schermo.blit(saliliv3, (x, y))
-                if npers == 2:
-                    schermo.blit(arma, (x, y))
-                    schermo.blit(pers, (x, y))
-                    schermo.blit(armatura, (x, y))
-                    schermo.blit(persab, (x, y))
-                    schermo.blit(scudo, (x, y))
-                    if fineanimaz == 0:
-                        schermo.blit(saliliv, (x, y))
-                    if fineanimaz == 1:
-                        schermo.blit(saliliv1, (x, y))
-                    if fineanimaz == 2:
-                        schermo.blit(saliliv2, (x, y))
-                    if fineanimaz == 3:
-                        schermo.blit(saliliv3, (x, y))
-                if npers == 3:
-                    schermo.blit(arma, (x, y))
-                    schermo.blit(scudo, (x, y))
-                    schermo.blit(pers, (x, y))
-                    schermo.blit(armatura, (x, y))
-                    schermo.blit(perswb, (x, y))
-                    if fineanimaz == 0:
-                        schermo.blit(saliliv, (x, y))
-                    if fineanimaz == 1:
-                        schermo.blit(saliliv1, (x, y))
-                    if fineanimaz == 2:
-                        schermo.blit(saliliv2, (x, y))
-                    if fineanimaz == 3:
-                        schermo.blit(saliliv3, (x, y))
-                if npers == 4:
-                    schermo.blit(pers, (x, y))
-                    schermo.blit(armatura, (x, y))
-                    schermo.blit(perssb, (x, y))
-                    schermo.blit(arma, (x, y))
-                    schermo.blit(scudo, (x, y))
-                    if fineanimaz == 0:
-                        schermo.blit(saliliv, (x, y))
-                    if fineanimaz == 1:
-                        schermo.blit(saliliv1, (x, y))
-                    if fineanimaz == 2:
-                        schermo.blit(saliliv2, (x, y))
-                    if fineanimaz == 3:
-                        schermo.blit(saliliv3, (x, y))
-
-                schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
-                i = 1
-                while i <= 100:
-                    if dati[4] == i:
-                        messaggio("Liv +: Punti vita aumentati", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-                        break
-                    i += 3
-                i = 2
-                while i <= 100:
-                    if dati[4] == i:
-                        messaggio("Liv +: Attacco aumentato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-                        break
-                    i += 3
-                i = 3
-                while i <= 100:
-                    if dati[4] == i:
-                        messaggio("Liv +: Difesa aumentata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-                        break
-                    i += 3
-
-                pygame.display.update()
-                clock.tick(fpsanimazioni)
-                #if fineanimaz == 0:
-                    #pygame.time.wait(1000)
-                fineanimaz = fineanimaz - 1
+            animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, dati[4])
             caricaini = True
 
         if not aumentoliv:

@@ -54,7 +54,7 @@ blu = (0, 0, 255)
 # valore volume 0-1
 volumeCanzoni = 0
 volumePuntatore = 1
-volumeEffetti = 0
+volumeEffetti = 1
 
 # puntatore
 puntatoreorigi = pygame.image.load("Immagini\Puntatori\Puntatore.png")
