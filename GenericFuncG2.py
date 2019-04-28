@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import random
 from GlobalVarG2 import *
 
 
@@ -3185,7 +3184,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
     return dati, tesoro
 
 
-def scopriCaselleViste(x, y, numstanza, porte, cofanetti, caseviste):
+def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
     # contiene x e y delle caselle già esplorate
     caselleEsplorate = [x, y]
 
@@ -3195,6 +3194,7 @@ def scopriCaselleViste(x, y, numstanza, porte, cofanetti, caseviste):
         caseviste[i + 2] = False
         i = i + 3
 
+    # caselle viste da rallo
     j = 0
     while j < len(caselleEsplorate):
         nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
@@ -3270,6 +3270,92 @@ def scopriCaselleViste(x, y, numstanza, porte, cofanetti, caseviste):
                     break
                 i += 3
         j += 2
+
+    # se colco non è in una casella vista scopri il campo visto da colco
+    incasevista = False
+    i = 0
+    while i < len(caseviste):
+        if caseviste[i + 2] and caseviste[i] == rx and caseviste[i + 1] == ry:
+            incasevista = True
+            break
+        i = i + 3
+    if not incasevista:
+        caselleEsplorate = [rx, ry]
+        j = 0
+        while j < len(caselleEsplorate):
+            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
+            if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
+                        break
+                    k += 2
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nx and caseviste[i + 1] == ny:
+                        caseviste[i + 2] = True
+                        break
+                    i += 3
+            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
+            if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
+                        break
+                    k += 2
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nx and caseviste[i + 1] == ny:
+                        caseviste[i + 2] = True
+                        break
+                    i += 3
+            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+            if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
+                        break
+                    k += 2
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nx and caseviste[i + 1] == ny:
+                        caseviste[i + 2] = True
+                        break
+                    i += 3
+            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+            if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
+                        break
+                    k += 2
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == nx and caseviste[i + 1] == ny:
+                        caseviste[i + 2] = True
+                        break
+                    i += 3
+            j += 2
 
     return caseviste
 

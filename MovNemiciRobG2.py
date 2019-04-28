@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import random
 from GenericFuncG2 import *
 
 
@@ -280,10 +281,11 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
     return mx, my, muovimost, nmos, visto, dati, vitaesca, vistam
 
 
-#def eseguiAzione():
+def eseguiAzione(rx, ry, xBersaglio, yBersaglio, azione):
+    print "ciao"
 
 
-def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti):
+def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost):
     robo = True
     nrx = 0
     nry = 0
@@ -329,9 +331,58 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                     nrob = 4
             sposta = True
     elif muovirob >= -1:
-        esecuzione = False
-        condizione = False
-        azione = False
+        """dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
+        in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
+                   condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemico+vicinoR, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
+                   tecniche = intero da 1 a 20: scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++"""
+
+        # controllo se la condizione è rispettata
+        i = 101
+        while i <= 110:
+            # azioni su alleati
+            if dati[i] == 1:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 2:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 3:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 4:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 5:
+                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            if dati[i] == 6:
+                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            if dati[i] == 7:
+                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            if dati[i] == 8:
+                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            if dati[i] == 9:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 10:
+                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            # azioni su nemici
+            if dati[i] == 11:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 12:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 13:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 14:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 15:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 16:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 17:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 18:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 19:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if dati[i] == 20:
+                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            i += 1
+
         print ("gambit")
 
     # spostamento

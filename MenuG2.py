@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import random
 from GenericFuncG2 import *
 
 
@@ -3151,7 +3152,7 @@ def equiprobo(dati):
             if dati[i] == 4:
                 messaggio("Freccia elettrica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             if dati[i] == 5:
-                messaggio("Campo elettromagnetico", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             if dati[i] == 6:
                 messaggio("Raffreddamento", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             if dati[i] == 7:
@@ -3171,7 +3172,7 @@ def equiprobo(dati):
             if dati[i] == 14:
                 messaggio("Efficienza", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             if dati[i] == 15:
-                messaggio("Campo elettromagnetico +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             if dati[i] == 16:
                 messaggio("Cura ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             if dati[i] == 17:
@@ -3181,7 +3182,7 @@ def equiprobo(dati):
             if dati[i] == 19:
                 messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             if dati[i] == 20:
-                messaggio("Campo elettromagnetico ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
             c = c + 1
 
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
