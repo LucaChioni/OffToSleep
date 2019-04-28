@@ -638,12 +638,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             sposta = True
                             risposta = True
                         # apri/chiudi porta attacco = 1
-                        if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and suPorta:
+                        elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and suPorta:
                             apriChiudiPorta = [True, xp, yp]
                             sposta = True
                             risposta = True
                         # apri cofanetto attacco = 1
-                        if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and suCofanetto:
+                        elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and suCofanetto:
                             apriCofanetto = [True, xp, yp]
                             sposta = True
                             risposta = True
@@ -984,7 +984,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 npers = 4
                             if xp == x and yp == y - gpy:
                                 npers = 3
-                            rumoreattacco.play()
+                            if infliggidanno:
+                                rumoreattacco.play()
                         # attacco normale se non c'e' il mostro
                         """elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and not sposta and not risposta:
                             if xp == x + gpx and yp == y:
@@ -1100,6 +1101,38 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             ricaricaschermo = False
             appenaCaricato = True
 
+        # disegna porte
+        i = 0
+        while i < len(porte):
+            if not porte[i + 3]:
+                vmurx = porte[i + 1]
+                vmury = porte[i + 2]
+                murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False,
+                                                                            False, False, False, porte, cofanetti)
+                schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
+                if vmurx == murx and vmury == mury:
+                    schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+                else:
+                    schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+            i = i + 4
+        # disegna cofanetti
+        i = 0
+        while i < len(cofanetti):
+            j = 0
+            while j < len(caseviste):
+                if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
+                        caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
+                            caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (
+                            caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and \
+                        caseviste[j + 2]:
+                    schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
+                    if cofanetti[i + 3]:
+                        schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
+                    else:
+                        schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+                j = j + 3
+            i = i + 4
+
         # visualizza campo attaccabile
         if attacco == 1:
             schermo.blit(campoattaccabile1, (x - gpx, y - gpy))
@@ -1110,21 +1143,61 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
             if nmurx == murx:
                 caseattactot[2] = False
+                i = 0
+                while i < len(porte):
+                    if murx + gpx == porte[i + 1] and mury == porte[i + 2]:
+                        caseattactot[2] = True
+                    i = i + 4
+                i = 0
+                while i < len(cofanetti):
+                    if murx + gpx == cofanetti[i + 1] and mury == cofanetti[i + 2]:
+                        caseattactot[2] = True
+                    i = i + 4
             murx = x
             mury = y
             nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
             if nmurx == murx:
                 caseattactot[5] = False
+                i = 0
+                while i < len(porte):
+                    if murx - gpx == porte[i + 1] and mury == porte[i + 2]:
+                        caseattactot[5] = True
+                    i = i + 4
+                i = 0
+                while i < len(cofanetti):
+                    if murx - gpx == cofanetti[i + 1] and mury == cofanetti[i + 2]:
+                        caseattactot[5] = True
+                    i = i + 4
             murx = x
             mury = y
             nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, 0, True, False, porte, cofanetti)
             if nmury == mury:
                 caseattactot[8] = False
+                i = 0
+                while i < len(porte):
+                    if murx == porte[i + 1] and mury + gpy == porte[i + 2]:
+                        caseattactot[8] = True
+                    i = i + 4
+                i = 0
+                while i < len(cofanetti):
+                    if murx == cofanetti[i + 1] and mury + gpy == cofanetti[i + 2]:
+                        caseattactot[8] = True
+                    i = i + 4
             murx = x
             mury = y
             nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True, False, porte, cofanetti)
             if nmury == mury:
                 caseattactot[11] = False
+                i = 0
+                while i < len(porte):
+                    if murx == porte[i + 1] and mury - gpy == porte[i + 2]:
+                        caseattactot[11] = True
+                    i = i + 4
+                i = 0
+                while i < len(cofanetti):
+                    if murx == cofanetti[i + 1] and mury - gpy == cofanetti[i + 2]:
+                        caseattactot[11] = True
+                    i = i + 4
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -1324,38 +1397,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if nemicol != 0 and caseviste[j] == mxl and caseviste[j + 1] == myl and caseviste[j + 2]:
                 schermo.blit(nemicol, (mxl, myl))
             j = j + 3
-
-        # porte
-        i = 0
-        while i < len(porte):
-            if not porte[i + 3]:
-                vmurx = porte[i + 1]
-                vmury = porte[i + 2]
-                murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False,
-                                                                            False, False, False, porte, cofanetti)
-                schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
-                if vmurx == murx and vmury == mury:
-                    schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
-                else:
-                    schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
-            i = i + 4
-        # cofanetti
-        i = 0
-        while i < len(cofanetti):
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
-                        caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
-                            caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (
-                            caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and \
-                        caseviste[j + 2]:
-                    schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
-                    if cofanetti[i + 3]:
-                        schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                    else:
-                        schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-                j = j + 3
-            i = i + 4
 
         # puntatore
         if attacco == 1:
