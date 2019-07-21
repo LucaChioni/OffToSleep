@@ -2020,7 +2020,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio(u"esegue l'azione sul nemico più vicino a Colco nel", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio("raggio di 3 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("raggio di 2 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
         if dati[93] > 0:
@@ -2028,7 +2028,7 @@ def sceglicondiz(dati, condizione):
             if xp == gsx // 32 * 8 and yp == gsy // 18 * 8:
                 schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione sul nemico lontano (distante di 4 o", grigiochi, gsx // 32 * 18,
+                messaggio("esegue l'azione sul nemico lontano (distante di 3 o", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
                 messaggio(u"più caselle) più vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
@@ -2040,10 +2040,9 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione sul nemico con pv < 80% (in caso di", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio("molteplici bersagli, esegue l'azione sul nemico con", grigiochi, gsx // 32 * 18,
+                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
-                messaggio(u"più pv tra quelli che rispettano la condizione)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
-                          40)
+                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
         if dati[95] > 0:
@@ -2053,10 +2052,9 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione sul nemico con pv < 50% (in caso di", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio("molteplici bersagli, esegue l'azione sul nemico con", grigiochi, gsx // 32 * 18,
+                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
-                messaggio(u"più pv tra quelli che rispettano la condizione)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
-                          40)
+                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
         if dati[96] > 0:
@@ -2066,10 +2064,9 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione sul nemico con pv < 30% (in caso di", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio("molteplici bersagli, esegue l'azione sul nemico con", grigiochi, gsx // 32 * 18,
+                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
-                messaggio(u"più pv tra quelli che rispettano la condizione)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
-                          40)
+                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
         if dati[97] > 0:
@@ -2077,7 +2074,11 @@ def sceglicondiz(dati, condizione):
             if xp == gsx // 32 * 8 and yp == gsy // 18 * 12:
                 schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione sul nemico con meno pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("esegue l'azione sul nemico con meno pv (in caso di", grigiochi, gsx // 32 * 18,
+                          gsy // 18 * 14, 40)
+                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
+                          gsy // 18 * 15, 40)
+                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
         if dati[98] > 0:
@@ -2087,7 +2088,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio(u"esegue l'azione quando nei paraggi ci sono più di 1", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio("nemico (in caso di tecnica a bersaglio singolo, l'azione", grigiochi, gsx // 32 * 18,
+                messaggio("nemico (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
                 messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
                           40)
@@ -2100,7 +2101,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione quando nei paraggi ci sono piu' di 4", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio("nemici (in caso di tecnica a bersaglio singolo, l'azione", grigiochi, gsx // 32 * 18,
+                messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
                 messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
                           40)
@@ -2113,7 +2114,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione quando nei paraggi ci sono piu' di 7", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio("nemici (in caso di tecnica a bersaglio singolo, l'azione", grigiochi, gsx // 32 * 18,
+                messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
                 messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
                           40)
@@ -2345,7 +2346,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[12], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio(u"esegue l'azione sul nemico più vicino a Colco nel", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("raggio di 3 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("raggio di 2 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
             if dati[93] > 0:
@@ -2353,7 +2354,7 @@ def sceglicondiz(dati, condizione):
                 if xp == gsx // 32 * 8 and yp == gsy // 18 * 8:
                     schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione sul nemico lontano (distante di 4 o", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio("esegue l'azione sul nemico lontano (distante di 3 o", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
                     messaggio(u"più caselle) più vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
@@ -2363,8 +2364,8 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione sul nemico con pv < 80% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("molteplici bersagli, esegue l'azione sul nemico con", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"più pv tra quelli che rispettano la condizione)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
             if dati[95] > 0:
@@ -2373,8 +2374,8 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione sul nemico con pv < 50% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("molteplici bersagli, esegue l'azione sul nemico con", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"più pv tra quelli che rispettano la condizione)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
             if dati[96] > 0:
@@ -2383,8 +2384,8 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione sul nemico con pv < 30% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("molteplici bersagli, esegue l'azione sul nemico con", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"più pv tra quelli che rispettano la condizione)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
             if dati[97] > 0:
@@ -2392,7 +2393,9 @@ def sceglicondiz(dati, condizione):
                 if xp == gsx // 32 * 8 and yp == gsy // 18 * 12:
                     schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione sul nemico con meno pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio("esegue l'azione sul nemico con meno pv (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
             if dati[98] > 0:
@@ -2401,7 +2404,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio(u"esegue l'azione quando nei paraggi ci sono più di 1", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("nemico (in caso di tecnica a bersaglio singolo, l'azione", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("nemico (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
@@ -2411,7 +2414,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione quando nei paraggi ci sono piu' di 4", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("nemici (in caso di tecnica a bersaglio singolo, l'azione", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
@@ -2421,7 +2424,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione quando nei paraggi ci sono piu' di 7", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("nemici (in caso di tecnica a bersaglio singolo, l'azione", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
@@ -3866,1043 +3869,6 @@ def equiprobo(dati):
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
     return dati
-
-
-"""def tecniche(dati):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
-    sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
-    xp = gsx // 32 * 1
-    yp = gsy // 18 * 6
-    usauno = False
-    usa = 0
-    risposta = False
-    attacco = 0
-
-    esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
-
-    # carico le scenette
-    scetecn = [0]
-    i = 1
-    while i <= 20:
-        tecnica = pygame.image.load("Immagini\GrafTecniche\Tecnica%i.png" % i)
-        scetecn.append(pygame.transform.scale(tecnica, (gpx * 7, gpy * 5)))
-        i = i + 1
-
-    # primo frame
-    if True:
-        schermo.fill(grigioscu)
-        # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
-
-        messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        if dati[11] > 0:
-            messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 6 or usa == 1:
-                schermo.blit(scetecn[1], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 5", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-        if dati[12] > 0:
-            messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-            if (xp == gsx // 32 * 1 and yp == gsy // 18 * 7) or usa == 2:
-                schermo.blit(scetecn[2], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("recupera un po' dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-        if dati[13] > 0:
-            messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-            if (xp == gsx // 32 * 1 and yp == gsy // 18 * 8) or usa == 3:
-                schermo.blit(scetecn[3], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("cura avvelenamento", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-        if dati[14] > 0:
-            messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 9 or usa == 4:
-                schermo.blit(scetecn[4], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 5", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-        if dati[15] > 0:
-            messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 10 or usa == 5:
-                schermo.blit(scetecn[5], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge danni a tutti i nemici entro il raggio di 4", grigiochi, gsx // 32 * 18, gsy // 18 * 10,
-                          40)
-                messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-        if dati[16] > 0:
-            messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 11 or usa == 6:
-                schermo.blit(scetecn[6], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("annulla il surriscaldamento (in battaglia richiede", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 10, 40)
-                messaggio("due turni)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-        if dati[17] > 0:
-            messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            if (xp == gsx // 32 * 1 and yp == gsy // 18 * 12) or usa == 7:
-                schermo.blit(scetecn[7], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 1", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("ricarica un po' Colco (in battaglia richiede due turni", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 10, 40)
-                messaggio("e provoca surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-        if dati[18] > 0:
-            messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-            if (xp == gsx // 32 * 1 and yp == gsy // 18 * 13) or usa == 8:
-                schermo.blit(scetecn[8], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("recupera molti dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-        if dati[19] > 0:
-            messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 14 or usa == 9:
-                schermo.blit(scetecn[9], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-        if dati[20] > 0:
-            messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 15 or usa == 10:
-                schermo.blit(scetecn[10], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-        if dati[21] > 0:
-            messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 6 or usa == 11:
-                schermo.blit(scetecn[11], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 15", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("permette a Colco, se non surriscaldato, di eseguire due", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 10, 40)
-                messaggio("azioni al turno. Dopo 15 turni provoca surriscaldamento", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-        if dati[22] > 0:
-            messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-            if (xp == gsx // 32 * 8 and yp == gsy // 18 * 7) or usa == 12:
-                schermo.blit(scetecn[12], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("incrementa il tuo attacco per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-        if dati[23] > 0:
-            messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-            if (xp == gsx // 32 * 8 and yp == gsy // 18 * 8) or usa == 13:
-                schermo.blit(scetecn[13], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("incrementa la tua difesa per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-        if dati[24] > 0:
-            messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 9 or usa == 14:
-                schermo.blit(scetecn[14], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 30", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("tutte le tecniche costano la meta' dei pe per 15 turni", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 10, 40)
-                messaggio("(si annulla con surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-        if dati[25] > 0:
-            messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 10 or usa == 15:
-                schermo.blit(scetecn[15], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge molti danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 10, 40)
-                messaggio("di 5 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-        if dati[26] > 0:
-            messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-            if (xp == gsx // 32 * 8 and yp == gsy // 18 * 11) or usa == 16:
-                schermo.blit(scetecn[16], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 30", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-        if dati[27] > 0:
-            messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-            if (xp == gsx // 32 * 8 and yp == gsy // 18 * 12) or usa == 17:
-                schermo.blit(scetecn[17], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 1", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("ricarica di molto Colco (in battaglia richiede due", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 10, 40)
-                messaggio("turni e provoca surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-        if dati[28] > 0:
-            messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 13 or usa == 18:
-                schermo.blit(scetecn[18], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-        if dati[29] > 0:
-            messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 14 or usa == 19:
-                schermo.blit(scetecn[19], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-        if dati[30] > 0:
-            messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 15 or usa == 20:
-                schermo.blit(scetecn[20], (gsx // 32 * 23, gsy // 18 * 12))
-                messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                messaggio("Costo Pe: 30", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                messaggio("infligge enormi danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 10, 40)
-                messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-
-        # vita-status personaggio
-        if dati[5] < 0:
-            dati[5] = 0
-        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 18, gsy // 18 * 5, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 18, gsy // 18 * 6, 50)
-        persmen = pygame.transform.scale(persgra, (gpx * 3, gpy * 3))
-        schermo.blit(persmen, (gsx // 32 * 19, (gsy // 18 * 1) + (gpy // 2)))
-        schermo.blit(sfondostastart, (gsx // 32 * 18, (gsy // 18 * 7) + (gpy // 8)))
-        if dati[121]:
-            avvelenato = pygame.transform.scale(avvelenatoo, (gpx, gpy))
-            schermo.blit(avvelenato, (gsx // 32 * 18, gsy // 18 * 7))
-        if dati[123] > 0:
-            attaccopiu = pygame.transform.scale(attaccopiuo, (gpx, gpy))
-            schermo.blit(attaccopiu, ((gsx // 32 * 18) + (2 * gpx // 4 * 3), gsy // 18 * 7))
-        if dati[124] > 0:
-            difesapiu = pygame.transform.scale(difesapiuo, (gpx, gpy))
-            schermo.blit(difesapiu, ((gsx // 32 * 18) + (4 * gpx // 4 * 3), gsy // 18 * 7))
-        # vita-status robo
-        if dati[10] < 0:
-            dati[10] = 0
-        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 25, gsy // 18 * 5, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 25, gsy // 18 * 6, 50)
-        robomen = pygame.transform.scale(robograf, (gpx * 3, gpy * 3))
-        schermo.blit(robomen, (gsx // 32 * 26, (gsy // 18 * 1) + (gpy // 2)))
-        schermo.blit(sfondostastart, (gsx // 32 * 25, (gsy // 18 * 7) + (gpy // 8)))
-        if dati[122] > 0:
-            surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx, gpy))
-            schermo.blit(surriscaldato, (gsx // 32 * 25, gsy // 18 * 7))
-        if dati[125] > 0:
-            velocitapiu = pygame.transform.scale(velocitapiuo, (gpx, gpy))
-            schermo.blit(velocitapiu, ((gsx // 32 * 25) + (2 * gpx // 4 * 3), gsy // 18 * 7))
-        if dati[126] > 0:
-            efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
-            schermo.blit(efficienzapiu, ((gsx // 32 * 25) + (4 * gpx // 4 * 3), gsy // 18 * 7))
-
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-        schermo.blit(puntatore, (xp, yp))
-        pygame.display.update()
-
-    while not risposta:
-        for event in pygame.event.get():
-            ok = True
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    if usa != 0:
-                        selind.play()
-                        if usa == 1:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 6
-                        if usa == 2:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 7
-                        if usa == 3:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 8
-                        if usa == 4:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 9
-                        if usa == 5:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 10
-                        if usa == 6:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 11
-                        if usa == 7:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 12
-                        if usa == 8:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 13
-                        if usa == 9:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 14
-                        if usa == 10:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 15
-                        if usa == 11:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 6
-                        if usa == 12:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 7
-                        if usa == 13:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 8
-                        if usa == 14:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 9
-                        if usa == 15:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 10
-                        if usa == 16:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 11
-                        if usa == 17:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 12
-                        if usa == 18:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 13
-                        if usa == 19:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 14
-                        if usa == 20:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 15
-                        usa = 0
-                    else:
-                        selind.play()
-                        risposta = True
-
-                if event.key == pygame.K_s and xp != gsx // 32 * 16 and xp != gsx // 32 * 19:
-                    if (yp != gsy // 18 * 15):
-                        spostapun.play()
-                        yp = yp + gsy // 18 * 1
-                    elif yp == gsy // 18 * 15:
-                        spostapun.play()
-                        yp = gsy // 18 * 6
-                if event.key == pygame.K_w and xp != gsx // 32 * 16 and xp != gsx // 32 * 19:
-                    if (yp != gsy // 18 * 6):
-                        spostapun.play()
-                        yp = yp - gsy // 18 * 1
-                    elif yp == gsy // 18 * 6:
-                        spostapun.play()
-                        yp = gsy // 18 * 15
-                if event.key == pygame.K_d and xp != gsx // 32 * 16 and xp != gsx // 32 * 19:
-                    if (xp != gsx // 32 * 8):
-                        spostapun.play()
-                        xp = xp + gsx // 32 * 7
-                    elif xp == gsx // 32 * 8:
-                        spostapun.play()
-                        xp = gsx // 32 * 1
-                elif event.key == pygame.K_d and (xp == gsx // 32 * 16 or xp == gsx // 32 * 19):
-                    if xp == gsx // 32 * 16:
-                        spostapun.play()
-                        xp = xp + gsx // 32 * 3
-                    else:
-                        selimp.play()
-                if event.key == pygame.K_a and xp != gsx // 32 * 16 and xp != gsx // 32 * 19:
-                    if (xp != gsx // 32 * 1):
-                        spostapun.play()
-                        xp = xp - gsx // 32 * 7
-                    elif xp == gsx // 32 * 1:
-                        spostapun.play()
-                        xp = gsx // 32 * 8
-                elif event.key == pygame.K_a and (xp == gsx // 32 * 16 or xp == gsx // 32 * 19):
-                    if xp == gsx // 32 * 19:
-                        spostapun.play()
-                        xp = xp - gsx // 32 * 3
-                    else:
-                        selimp.play()
-
-                if event.key == pygame.K_SPACE:
-                    usadue = True
-
-                    # usa?
-                    if xp == gsx // 32 * 16 and yp == gsy // 18 * 14.5:
-                        if usa == 1:
-                            if dati[10] >= 5:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 6
-                                attacco = 7
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 2:
-                            if dati[10] >= 10:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 7
-                                dati[10] = dati[10] - 10
-                                dati[5] = dati[5] + 50
-                                if dati[5] > pvtot:
-                                    dati[5] = pvtot
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 3:
-                            if dati[10] >= 10:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 8
-                                dati[10] = dati[10] - 10
-                                dati[121] = False
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 4:
-                            if dati[10] >= 5:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 9
-                                attacco = 8
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 5:
-                            if dati[10] >= 10:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 10
-                                attacco = 9
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 6:
-                            if dati[10] >= 10:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 11
-                                dati[10] = dati[10] - 10
-                                dati[122] = 0
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 7:
-                            if dati[10] >= 1:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 12
-                                dati[10] = dati[10] - 1
-                                dati[10] = dati[10] + 150
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 8:
-                            if dati[10] >= 20:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 13
-                                dati[10] = dati[10] - 20
-                                dati[5] = dati[5] + 150
-                                if dati[5] > pvtot:
-                                    dati[5] = pvtot
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 9:
-                            if dati[10] >= 10:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 14
-                                attacco = 10
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 10:
-                            if dati[10] >= 10:
-                                xp = gsx // 32 * 1
-                                yp = gsy // 18 * 15
-                                attacco = 11
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 11:
-                            if dati[10] >= 15:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 6
-                                dati[10] = dati[10] - 15
-                                dati[125] = 15
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 12:
-                            if dati[10] >= 20:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 7
-                                dati[10] = dati[10] - 20
-                                dati[123] = 10
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 13:
-                            if dati[10] >= 20:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 8
-                                dati[10] = dati[10] - 20
-                                dati[124] = 10
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 14:
-                            if dati[10] >= 30:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 9
-                                dati[10] = dati[10] - 30
-                                if dati[122] <= 0:
-                                    dati[126] = 15
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 15:
-                            if dati[10] >= 20:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 10
-                                attacco = 12
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 16:
-                            if dati[10] >= 30:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 11
-                                dati[10] = dati[10] - 30
-                                dati[5] = dati[5] + 300
-                                if dati[5] > pvtot:
-                                    dati[5] = pvtot
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 17:
-                            if dati[10] >= 1:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 12
-                                dati[10] = dati[10] - 1
-                                dati[10] = dati[10] + 400
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 18:
-                            if dati[10] >= 20:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 13
-                                attacco = 13
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 19:
-                            if dati[10] >= 20:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 14
-                                attacco = 14
-                            else:
-                                ok = False
-                                selimp.play()
-                        if usa == 20:
-                            if dati[10] >= 30:
-                                xp = gsx // 32 * 8
-                                yp = gsy // 18 * 15
-                                attacco = 15
-                            else:
-                                ok = False
-                                selimp.play()
-                        if ok:
-                            selezione.play()
-                            if attacco != 0:
-                                risposta = True
-                            usa = 0
-                            usadue = False
-                    elif xp == gsx // 32 * 19 and yp == gsy // 18 * 14.5:
-                        selind.play()
-                        if usa == 1:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 6
-                        if usa == 2:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 7
-                        if usa == 3:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 8
-                        if usa == 4:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 9
-                        if usa == 5:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 10
-                        if usa == 6:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 11
-                        if usa == 7:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 12
-                        if usa == 8:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 13
-                        if usa == 9:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 14
-                        if usa == 10:
-                            xp = gsx // 32 * 1
-                            yp = gsy // 18 * 15
-                        if usa == 11:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 6
-                        if usa == 12:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 7
-                        if usa == 13:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 8
-                        if usa == 14:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 9
-                        if usa == 15:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 10
-                        if usa == 16:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 11
-                        if usa == 17:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 12
-                        if usa == 18:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 13
-                        if usa == 19:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 14
-                        if usa == 20:
-                            xp = gsx // 32 * 8
-                            yp = gsy // 18 * 15
-                        usa = 0
-                        usadue = False
-
-                    if usadue:
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
-                            if dati[11] != 0:
-                                usa = 1
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
-                            if dati[12] != 0:
-                                usa = 2
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
-                            if dati[13] != 0:
-                                usa = 3
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
-                            if dati[14] != 0:
-                                usa = 4
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
-                            if dati[15] != 0:
-                                usa = 5
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
-                            if dati[16] != 0:
-                                usa = 6
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
-                            if dati[17] != 0:
-                                usa = 7
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
-                            if dati[18] != 0:
-                                usa = 8
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
-                            if dati[19] != 0:
-                                usa = 9
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
-                            if dati[20] != 0:
-                                usa = 10
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 6:
-                            if dati[21] != 0:
-                                usa = 11
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 7:
-                            if dati[22] != 0:
-                                usa = 12
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 8:
-                            if dati[23] != 0:
-                                usa = 13
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 9:
-                            if dati[24] != 0:
-                                usa = 14
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 10:
-                            if dati[25] != 0:
-                                usa = 15
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 11:
-                            if dati[26] != 0:
-                                usa = 16
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 12:
-                            if dati[27] != 0:
-                                usa = 17
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 13:
-                            if dati[28] != 0:
-                                usa = 18
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 14:
-                            if dati[29] != 0:
-                                usa = 19
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * 15:
-                            if dati[30] != 0:
-                                usa = 20
-                                usauno = True
-                                selezione.play()
-                            else:
-                                selimp.play()
-
-            schermo.fill(grigioscu)
-            # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
-
-            messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            if dati[11] > 0:
-                messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-                if xp == gsx // 32 * 1 and yp == gsy // 18 * 6 or usa == 1:
-                    schermo.blit(scetecn[1], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 5", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-            if dati[12] > 0:
-                messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-                if (xp == gsx // 32 * 1 and yp == gsy // 18 * 7) or usa == 2:
-                    schermo.blit(scetecn[2], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("recupera un po' dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-            if dati[13] > 0:
-                messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-                if (xp == gsx // 32 * 1 and yp == gsy // 18 * 8) or usa == 3:
-                    schermo.blit(scetecn[3], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("cura avvelenamento", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-            if dati[14] > 0:
-                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-                if xp == gsx // 32 * 1 and yp == gsy // 18 * 9 or usa == 4:
-                    schermo.blit(scetecn[4], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 5", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            if dati[15] > 0:
-                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-                if xp == gsx // 32 * 1 and yp == gsy // 18 * 10 or usa == 5:
-                    schermo.blit(scetecn[5], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge danni a tutti i nemici entro il raggio di 4", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            if dati[16] > 0:
-                messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-                if xp == gsx // 32 * 1 and yp == gsy // 18 * 11 or usa == 6:
-                    schermo.blit(scetecn[6], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("annulla il surriscaldamento (in battaglia richiede", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("due turni)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            if dati[17] > 0:
-                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-                if (xp == gsx // 32 * 1 and yp == gsy // 18 * 12) or usa == 7:
-                    schermo.blit(scetecn[7], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 1", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("ricarica un po' Colco (in battaglia richiede due turni", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("e provoca surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            if dati[18] > 0:
-                messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-                if (xp == gsx // 32 * 1 and yp == gsy // 18 * 13) or usa == 8:
-                    schermo.blit(scetecn[8], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("recupera molti dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-            if dati[19] > 0:
-                messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-                if xp == gsx // 32 * 1 and yp == gsy // 18 * 14 or usa == 9:
-                    schermo.blit(scetecn[9], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-            if dati[20] > 0:
-                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-                if xp == gsx // 32 * 1 and yp == gsy // 18 * 15 or usa == 10:
-                    schermo.blit(scetecn[10], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 10", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-            if dati[21] > 0:
-                messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-                if xp == gsx // 32 * 8 and yp == gsy // 18 * 6 or usa == 11:
-                    schermo.blit(scetecn[11], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 15", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("permette a Colco, se non surriscaldato, di eseguire due", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("azioni al turno. Dopo 15 turni provoca surriscaldamento", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-            if dati[22] > 0:
-                messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-                if (xp == gsx // 32 * 8 and yp == gsy // 18 * 7) or usa == 12:
-                    schermo.blit(scetecn[12], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("incrementa il tuo attacco per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-            if dati[23] > 0:
-                messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-                if (xp == gsx // 32 * 8 and yp == gsy // 18 * 8) or usa == 13:
-                    schermo.blit(scetecn[13], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("incrementa la tua difesa per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-            if dati[24] > 0:
-                messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-                if xp == gsx // 32 * 8 and yp == gsy // 18 * 9 or usa == 14:
-                    schermo.blit(scetecn[14], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 30", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("tutte le tecniche costano la meta' dei pe per 15 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("(si annulla con surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-            if dati[25] > 0:
-                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-                if xp == gsx // 32 * 8 and yp == gsy // 18 * 10 or usa == 15:
-                    schermo.blit(scetecn[15], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge molti danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("di 5 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-            if dati[26] > 0:
-                messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-                if (xp == gsx // 32 * 8 and yp == gsy // 18 * 11) or usa == 16:
-                    schermo.blit(scetecn[16], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 30", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-            if dati[27] > 0:
-                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-                if (xp == gsx // 32 * 8 and yp == gsy // 18 * 12) or usa == 17:
-                    schermo.blit(scetecn[17], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 1", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("ricarica di molto Colco (in battaglia richiede due", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("turni e provoca surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-            if dati[28] > 0:
-                messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-                if xp == gsx // 32 * 8 and yp == gsy // 18 * 13 or usa == 18:
-                    schermo.blit(scetecn[18], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-            if dati[29] > 0:
-                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-                if xp == gsx // 32 * 8 and yp == gsy // 18 * 14 or usa == 19:
-                    schermo.blit(scetecn[19], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 20", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-            if dati[30] > 0:
-                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-                if xp == gsx // 32 * 8 and yp == gsy // 18 * 15 or usa == 20:
-                    schermo.blit(scetecn[20], (gsx // 32 * 23, gsy // 18 * 12))
-                    messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 9, 40)
-                    messaggio("Costo Pe: 30", grigiochi, gsx // 32 * 27, gsy // 18 * 9, 40)
-                    messaggio("infligge enormi danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18, gsy // 18 * 10, 40)
-                    messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-
-            # menu conferma
-            if usa != 0:
-                pygame.draw.rect(schermo, grigio, (gsx // 32 * 16, gsy // 18 * 12, gsx // 32 * 6.5, gsy // 18 * 4))
-                puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 3 * 2, gpy // 3 * 2))
-                # posizionare il cursore su menu usa
-                if usauno:
-                    xpv = xp
-                    ypv = yp
-                    xp = gsx // 32 * 19
-                    yp = gsy // 18 * 14.5
-                    usauno = False
-                schermo.blit(puntatorevecchio, (xpv, ypv))
-                messaggio("Usare?", grigiochi, gsx // 32 * 17, gsy // 18 * 12.5, 100)
-                messaggio("Si", grigiochi, gsx // 32 * 17, gsy // 18 * 14.5, 60)
-                messaggio("No", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 60)
-            else:
-                puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
-
-            if not ok:
-                messaggio("Pe insufficienti", rosso, gsx // 32 * 16, gsy // 18 * 16, 60)
-
-            # vita-status personaggio
-            if dati[5] < 0:
-                dati[5] = 0
-            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 18, gsy // 18 * 5, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 18, gsy // 18 * 6, 50)
-            persmen = pygame.transform.scale(persgra, (gpx * 3, gpy * 3))
-            schermo.blit(persmen, (gsx // 32 * 19, (gsy // 18 * 1) + (gpy // 2)))
-            schermo.blit(sfondostastart, (gsx // 32 * 18, (gsy // 18 * 7) + (gpy // 8)))
-            if dati[121]:
-                avvelenato = pygame.transform.scale(avvelenatoo, (gpx, gpy))
-                schermo.blit(avvelenato, (gsx // 32 * 18, gsy // 18 * 7))
-            if dati[123] > 0:
-                attaccopiu = pygame.transform.scale(attaccopiuo, (gpx, gpy))
-                schermo.blit(attaccopiu, ((gsx // 32 * 18) + (2 * gpx // 4 * 3), gsy // 18 * 7))
-            if dati[124] > 0:
-                difesapiu = pygame.transform.scale(difesapiuo, (gpx, gpy))
-                schermo.blit(difesapiu, ((gsx // 32 * 18) + (4 * gpx // 4 * 3), gsy // 18 * 7))
-            # vita-status robo
-            if dati[10] < 0:
-                dati[10] = 0
-            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 25, gsy // 18 * 5, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 25, gsy // 18 * 6, 50)
-            robomen = pygame.transform.scale(robograf, (gpx * 3, gpy * 3))
-            schermo.blit(robomen, (gsx // 32 * 26, (gsy // 18 * 1) + (gpy // 2)))
-            schermo.blit(sfondostastart, (gsx // 32 * 25, (gsy // 18 * 7) + (gpy // 8)))
-            if dati[122] > 0:
-                surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx, gpy))
-                schermo.blit(surriscaldato, (gsx // 32 * 25, gsy // 18 * 7))
-            if dati[125] > 0:
-                velocitapiu = pygame.transform.scale(velocitapiuo, (gpx, gpy))
-                schermo.blit(velocitapiu, ((gsx // 32 * 25) + (2 * gpx // 4 * 3), gsy // 18 * 7))
-            if dati[126] > 0:
-                efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
-                schermo.blit(efficienzapiu, ((gsx // 32 * 25) + (4 * gpx // 4 * 3), gsy // 18 * 7))
-
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-            schermo.blit(puntatore, (xp, yp))
-            pygame.display.update()
-    return dati, attacco"""
 
 
 def oggetti(dati):

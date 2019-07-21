@@ -272,7 +272,7 @@ rumorelevelup.set_volume(volumeEffetti)
 suonoaperturacopo = pygame.mixer.Sound("Audio\Rumoriambiente\Aperturaportacofanetti.wav")
 suonoaperturacopo.set_volume(volumeEffetti)
 
-# suono canzoni
+# suoni canzoni
 c11 = pygame.mixer.Sound("Audio\Canzoni\Canzone11.wav")
 c11.set_volume(volumeCanzoni)
 c16 = pygame.mixer.Sound("Audio\Canzoni\Canzone16.wav")

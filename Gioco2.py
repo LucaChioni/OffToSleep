@@ -1606,7 +1606,7 @@ def gameloop():
         if rx == x and ry == y:
             x = vx
             y = vy
-        if ((sposta and muovirob <= 0) or muovirob > 0) and not morterob:
+        if ((sposta and muovirob <= 0) or muovirob > 0) and not morterob and not cambiosta:
             vrx = rx
             vry = ry
 
@@ -1633,7 +1633,7 @@ def gameloop():
 
             # movimento - gambit
             vetDatiNemici = [pvma, mxa, mya, pvmb, mxb, myb, pvmc, mxc, myc, pvmd, mxd, myd, pvme, mxe, mye, pvmf, mxf, myf, pvmg, mxg, myg, pvmh, mxh, myh, pvmi, mxi, myi, pvml, mxl, myl]
-            rx, ry, muovirob, nrob, dati = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost)
+            rx, ry, muovirob, nrob, dati = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, caseviste)
 
             if muovirob < 0:
                 rx = vrx

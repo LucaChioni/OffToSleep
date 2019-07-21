@@ -282,10 +282,11 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
 
 
 def eseguiAzione(rx, ry, xBersaglio, yBersaglio, azione):
-    print "ciao"
+    print "gambit robo"
+    return True
 
 
-def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost):
+def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, caseviste):
     robo = True
     nrx = 0
     nry = 0
@@ -331,59 +332,171 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                     nrob = 4
             sposta = True
     elif muovirob >= -1:
+        esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
+
         """dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
         in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
                    condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemico+vicinoR, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
                    tecniche = intero da 1 a 20: scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++"""
 
         # controllo se la condizione è rispettata
+        azioneEseguita = False
         i = 101
-        while i <= 110:
+        while i <= 110 and not azioneEseguita:
             # azioni su alleati
+            # pv rallo < 80
             if dati[i] == 1:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if dati[5] < pvtot / 100 * 80 and dati[5] >= pvtot / 100 * 50:
+                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+            # pv rallo < 50
             if dati[i] == 2:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if dati[5] < pvtot / 100 * 50 and dati[5] >= pvtot / 100 * 30:
+                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+            # pv rallo < 30
             if dati[i] == 3:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if dati[5] < pvtot / 100 * 30 and dati[5] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+            # rallo avvelenato
             if dati[i] == 4:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if dati[121]:
+                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+            # colco surriscaldato
             if dati[i] == 5:
-                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if dati[122] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            # pe colco < 80
             if dati[i] == 6:
-                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if dati[10] < entot / 100 * 80 and dati[10] >= entot / 100 * 50:
+                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            # pe colco < 50
             if dati[i] == 7:
-                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if dati[10] < entot / 100 * 50 and dati[10] >= entot / 100 * 30:
+                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            # pe colco < 30
             if dati[i] == 8:
-                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if dati[10] < entot / 100 * 30 and dati[10] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+            # sempre rallo
             if dati[i] == 9:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
+                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+            # sempre colco
             if dati[i] == 10:
-                eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
+                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
             # azioni su nemici
-            if dati[i] == 11:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 12:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 13:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 14:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 15:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 16:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 17:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 18:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 19:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
-            if dati[i] == 20:
-                eseguiAzione(rx, ry, x, y, dati[i + 10])
+            if nmost > 0:
+                mx = 0
+                my = 0
+                # nemico più vicino a rallo
+                if dati[i] == 11:
+                    distMin = -1
+                    j = 0
+                    primoMostro = True
+                    while j < len(vetDatiNemici):
+                        if vetDatiNemici[j] > 0:
+                            if primoMostro:
+                                k = 0
+                                while k < len(caseviste):
+                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
+                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        primoMostro = False
+                                        break
+                                    k = k + 3
+                            elif not primoMostro and abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y) < distMin:
+                                k = 0
+                                while k < len(caseviste):
+                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
+                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        break
+                                    k = k + 3
+                        j += 3
+                    if mx != 0 and my != 0:
+                        azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # nemico vicino
+                if dati[i] == 12:
+                    distMin = -1
+                    j = 0
+                    primoMostro = True
+                    while j < len(vetDatiNemici):
+                        if vetDatiNemici[j] > 0:
+                            if primoMostro and abs(vetDatiNemici[j + 1] - x) <= (gpx * 2) and abs(vetDatiNemici[j + 2] - y) <= (gpy * 2):
+                                k = 0
+                                while k < len(caseviste):
+                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
+                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        primoMostro = False
+                                        break
+                                    k = k + 3
+                            elif not primoMostro and abs(vetDatiNemici[j + 1] - x) <= (gpx * 2) and abs(vetDatiNemici[j + 2] - y) <= (gpy * 2) and abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y) < distMin:
+                                k = 0
+                                while k < len(caseviste):
+                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
+                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        break
+                                    k = k + 3
+                        j += 3
+                    if mx != 0 and my != 0:
+                        azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # nemico lontano
+                if dati[i] == 13:
+                    distMin = -1
+                    j = 0
+                    primoMostro = True
+                    while j < len(vetDatiNemici):
+                        if vetDatiNemici[j] > 0:
+                            if primoMostro and abs(vetDatiNemici[j + 1] - x) >= (gpx * 3) and abs(vetDatiNemici[j + 2] - y) >= (gpy * 3):
+                                k = 0
+                                while k < len(caseviste):
+                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
+                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        primoMostro = False
+                                        break
+                                    k = k + 3
+                            elif not primoMostro and abs(vetDatiNemici[j + 1] - x) >= (gpx * 3) and abs(vetDatiNemici[j + 2] - y) >= (gpy * 3) and abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y) < distMin:
+                                k = 0
+                                while k < len(caseviste):
+                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
+                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        break
+                                    k = k + 3
+                        j += 3
+                    if mx != 0 and my != 0:
+                        azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # nemico pv < 80
+                if dati[i] == 14:
+                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # nemico pv < 50
+                if dati[i] == 15:
+                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # nemico pv < 30
+                if dati[i] == 16:
+                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # nemico con meno pv
+                if dati[i] == 17:
+                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # numero nemici > 1
+                if dati[i] == 18:
+                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # numero nemici > 4
+                if dati[i] == 19:
+                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                # numero nemici > 7
+                if dati[i] == 20:
+                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
             i += 1
-
-        print ("gambit")
 
     # spostamento
     if sposta:
