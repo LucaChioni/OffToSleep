@@ -2006,11 +2006,11 @@ def sceglicondiz(dati, condizione):
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
         if dati[91] > 0:
-            messaggio(u"Nemico più vicino a Rallo", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+            messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
             if xp == gsx // 32 * 8 and yp == gsy // 18 * 6:
                 schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio(u"Nemico più vicino a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio(u"esegue l'azione sul nemico più vicino a te", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
+                messaggio("esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
         if dati[92] > 0:
@@ -2040,7 +2040,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione sul nemico con pv < 80% (in caso di", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
+                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
                 messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
@@ -2052,7 +2052,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione sul nemico con pv < 50% (in caso di", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
+                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
                 messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
@@ -2064,7 +2064,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione sul nemico con pv < 30% (in caso di", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
+                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
                 messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
@@ -2076,7 +2076,7 @@ def sceglicondiz(dati, condizione):
                 messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("esegue l'azione sul nemico con meno pv (in caso di", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18,
+                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
                 messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
@@ -2099,7 +2099,7 @@ def sceglicondiz(dati, condizione):
             if xp == gsx // 32 * 8 and yp == gsy // 18 * 14:
                 schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione quando nei paraggi ci sono piu' di 4", grigiochi, gsx // 32 * 18,
+                messaggio(u"esegue l'azione quando nei paraggi ci sono più di 4", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
                 messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
@@ -2112,7 +2112,7 @@ def sceglicondiz(dati, condizione):
             if xp == gsx // 32 * 8 and yp == gsy // 18 * 15:
                 schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione quando nei paraggi ci sono piu' di 7", grigiochi, gsx // 32 * 18,
+                messaggio(u"esegue l'azione quando nei paraggi ci sono più di 7", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 14, 40)
                 messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
                           gsy // 18 * 15, 40)
@@ -2333,11 +2333,11 @@ def sceglicondiz(dati, condizione):
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
             if dati[91] > 0:
-                messaggio(u"Nemico più vicino a Rallo", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+                messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
                 if xp == gsx // 32 * 8 and yp == gsy // 18 * 6:
                     schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio(u"Nemico più vicino a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio(u"esegue l'azione sul nemico più vicino a te", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
+                    messaggio("esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
             if dati[92] > 0:
@@ -2364,7 +2364,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione sul nemico con pv < 80% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
@@ -2374,7 +2374,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione sul nemico con pv < 50% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
@@ -2384,7 +2384,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione sul nemico con pv < 30% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
@@ -2394,7 +2394,7 @@ def sceglicondiz(dati, condizione):
                     schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("esegue l'azione sul nemico con meno pv (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione sul quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
@@ -2413,7 +2413,7 @@ def sceglicondiz(dati, condizione):
                 if xp == gsx // 32 * 8 and yp == gsy // 18 * 14:
                     schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione quando nei paraggi ci sono piu' di 4", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio(u"esegue l'azione quando nei paraggi ci sono più di 4", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
                     messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
@@ -2423,7 +2423,7 @@ def sceglicondiz(dati, condizione):
                 if xp == gsx // 32 * 8 and yp == gsy // 18 * 15:
                     schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione quando nei paraggi ci sono piu' di 7", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio(u"esegue l'azione quando nei paraggi ci sono più di 7", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
                     messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
                     messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
@@ -3119,7 +3119,7 @@ def equiprobo(dati):
             if dati[i] == 10:
                 messaggio("Sempre a Colco", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
             if dati[i] == 11:
-                messaggio("Nemico piu' vicino a Rallo", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
             if dati[i] == 12:
                 messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
             if dati[i] == 13:
@@ -3608,7 +3608,7 @@ def equiprobo(dati):
                 if dati[i] == 10:
                     messaggio("Sempre a Colco", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    messaggio("Nemico piu' vicino a Rallo", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
                 if dati[i] == 12:
                     messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
                 if dati[i] == 13:

@@ -1632,8 +1632,18 @@ def gameloop():
                     muovirob = 2
 
             # movimento - gambit
-            vetDatiNemici = [pvma, mxa, mya, pvmb, mxb, myb, pvmc, mxc, myc, pvmd, mxd, myd, pvme, mxe, mye, pvmf, mxf, myf, pvmg, mxg, myg, pvmh, mxh, myh, pvmi, mxi, myi, pvml, mxl, myl]
-            rx, ry, muovirob, nrob, dati = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, caseviste)
+            vetDatiNemici = [pvma, mxa, mya, pvmatot, pvmb, mxb, myb, pvmbtot, pvmc, mxc, myc, pvmctot, pvmd, mxd, myd, pvmdtot, pvme, mxe, mye, pvmetot, pvmf, mxf, myf, pvmftot, pvmg, mxg, myg, pvmgtot, pvmh, mxh, myh, pvmhtot, pvmi, mxi, myi, pvmitot, pvml, mxl, myl, pvmltot]
+            rx, ry, muovirob, nrob, dati, vetDatiNemici = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost)
+            pvma = vetDatiNemici[0]
+            pvmb = vetDatiNemici[4]
+            pvmc = vetDatiNemici[8]
+            pvmd = vetDatiNemici[12]
+            pvme = vetDatiNemici[16]
+            pvmf = vetDatiNemici[20]
+            pvmg = vetDatiNemici[24]
+            pvmh = vetDatiNemici[28]
+            pvmi = vetDatiNemici[32]
+            pvml = vetDatiNemici[36]
 
             if muovirob < 0:
                 rx = vrx

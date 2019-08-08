@@ -268,7 +268,7 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
         schermo.blit(scudo, (x, y))
 
     # vita-status personaggio
-    lungvitatot = ((gpx * pvtot) / 4) // 5
+    lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
         lungvita = 0
@@ -290,7 +290,7 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
         schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
 
     # vita-status robo
-    lungentot = ((gpx * entot) / 4) // 10
+    lungentot = int(((gpx * entot) / float(4)) // 10)
     lungen = (lungentot * enrob) // entot
     if lungen < 0:
         lungen = 0
@@ -456,7 +456,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         i = i + 3
 
     # vita-status personaggio
-    lungvitatot = ((gpx * pvtot) / 4) // 5
+    lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
         lungvita = 0
@@ -478,7 +478,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
 
     # vita-status robo
-    lungentot = ((gpx * entot) / 4) // 10
+    lungentot = int(((gpx * entot) / float(4)) // 10)
     lungen = (lungentot * enrob) // entot
     if lungen < 0:
         lungen = 0
@@ -1526,58 +1526,58 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(nemico, (gsx // 32 * 1, gpy // 3))
                 fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
                 if pvmtot > 1500:
-                    indvitamost = pygame.transform.scale(indvita, (((gpx * 1500) / 4) // 15, gpy // 4))
+                    indvitamost = pygame.transform.scale(indvita, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                     schermo.blit(fineindvitamost, ((gsx // 32 * 2) + 1500, gpy // 3))
                     if pvm > 15000:
                         pvm = 1500
-                        vitanemsucc = pygame.transform.scale(vitanemico00, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico00, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico9
                     elif pvm > 13500:
                         pvm -= 13500
-                        vitanemsucc = pygame.transform.scale(vitanemico8, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico8, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico9
                     elif pvm > 12000:
                         pvm -= 12000
-                        vitanemsucc = pygame.transform.scale(vitanemico7, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico7, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico8
                     elif pvm > 10500:
                         pvm -= 10500
-                        vitanemsucc = pygame.transform.scale(vitanemico6, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico6, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico7
                     elif pvm > 9000:
                         pvm -= 9000
-                        vitanemsucc = pygame.transform.scale(vitanemico5, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico5, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico6
                     elif pvm > 7500:
                         pvm -= 7500
-                        vitanemsucc = pygame.transform.scale(vitanemico4, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico4, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico5
                     elif pvm > 6000:
                         pvm -= 6000
-                        vitanemsucc = pygame.transform.scale(vitanemico3, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico3, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico4
                     elif pvm > 4500:
                         pvm -= 4500
-                        vitanemsucc = pygame.transform.scale(vitanemico2, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico2, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico3
                     elif pvm > 3000:
                         pvm -= 3000
-                        vitanemsucc = pygame.transform.scale(vitanemico1, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico1, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico2
                     elif pvm > 1500:
                         pvm -= 1500
-                        vitanemsucc = pygame.transform.scale(vitanemico0, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico0, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico1
                     else:
-                        vitanemsucc = pygame.transform.scale(vitanemico00, (((gpx * 1500) / 4) // 15, gpy // 4))
+                        vitanemsucc = pygame.transform.scale(vitanemico00, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
                         vitanemico = vitanemico0
                 else:
-                    lungvitatot = ((gpx * pvmtot) / 4) // 15
+                    lungvitatot = int(((gpx * pvmtot) / float(4)) // 15)
                     indvitamost = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
                     schermo.blit(fineindvitamost, ((gsx // 32 * 2) + lungvitatot, gpy // 3))
                     vitanemsucc = pygame.transform.scale(vitanemico00, ((gpx // 4) * (lungvitatot // 15), gpy // 4))
                     vitanemico = vitanemico0
-                lungvita = ((gpx * pvm) / 4) // 15
+                lungvita = int(((gpx * pvm) / float(4)) // 15)
                 if lungvita < 0:
                     lungvita = 0
                 vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
@@ -1628,7 +1628,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             i = i + 4
 
         # vita-status personaggio
-        lungvitatot = ((gpx * pvtot) / 4) // 5
+        lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
         lungvita = (lungvitatot * pv) // pvtot
         if lungvita < 0:
             lungvita = 0
@@ -1649,8 +1649,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if difp > 0:
             schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
 
-        # vita-status robo
-        lungentot = ((gpx * entot) / 4) // 10
+        # vita-status-campo visivo robo
+        lungentot = int(((gpx * entot) / float(4)) // 10)
         lungen = (lungentot * enrob) // entot
         if lungen < 0:
             lungen = 0
@@ -1670,6 +1670,21 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             schermo.blit(velocitapiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
         if effp > 0:
             schermo.blit(efficienzapiu, ((gsx // 32 * 1) + (gpx // 4 * 3) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
+        if xp == rx and yp == ry and enrob > 0:
+            # controllo caselle attaccabili
+            caseattactot = trovacasattaccabili(rx, ry, stanza, porte, cofanetti)
+            raggiovista = gpx * 6
+            i = 0
+            # disegno le caselle attaccabili
+            while i < len(caseattactot):
+                if not caseattactot[i + 2] and (caseattactot[i] <= rx + raggiovista and caseattactot[i + 1] <= ry + raggiovista and caseattactot[i] >= rx - raggiovista and caseattactot[i + 1] >= ry - raggiovista and not (caseattactot[i] == rx and caseattactot[i + 1] == ry)):
+                    schermo.blit(caselleattaccabiliRobo, (caseattactot[i], caseattactot[i + 1]))
+                i = i + 3
+            campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
+            schermo.blit(campoattaccabile3, (rx - raggiovista, ry - raggiovista))
+            ricaricaschermo = True
+            if (rx != mvx) or (ry != mvy):
+                appenaCaricato = False
 
         if not risposta:
             pygame.display.update()

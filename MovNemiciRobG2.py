@@ -83,7 +83,7 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
     vistoprov1 = False
     vistoprov2 = False
     if not visto and not vistoesca:
-        # controllo caselle che si vedono per pers e robo
+        # controllo caselle che si vedono (per controllare se vedono pers o robo)
         caseattactot = trovacasattaccabili(mx, my, stanza, porte, cofanetti)
         if abs(x - mx) <= vistam and abs(y - my) <= vistam and dati[5] > 0:
             j = 0
@@ -281,12 +281,23 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
     return mx, my, muovimost, nmos, visto, dati, vitaesca, vistam
 
 
-def eseguiAzione(rx, ry, xBersaglio, yBersaglio, azione):
+def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, azione, suAlleato, nemiciDaColpire):
     print "gambit robo"
-    return True
+    if suAlleato:
+        return True
+    else:
+        if pvm == -1 and xBersaglio == -1 and yBersaglio == -1:
+            i = 0
+            while i < len(nemiciDaColpire):
+                nemiciDaColpire[i + 1] = 0
+                i += 4
+            return True, nemiciDaColpire
+        else:
+            pvm = 0
+            return True, pvm
 
 
-def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, caseviste):
+def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost):
     robo = True
     nrx = 0
     nry = 0
@@ -346,156 +357,348 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
             # azioni su alleati
             # pv rallo < 80
             if dati[i] == 1:
-                if dati[5] < pvtot / 100 * 80 and dati[5] >= pvtot / 100 * 50:
-                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if dati[5] < pvtot / float(100) * 80 and dati[5] >= 0:
+                    azioneEseguita = eseguiAzione(rx, ry, dati[5], x, y, dati[i + 10], True, False)
             # pv rallo < 50
             if dati[i] == 2:
-                if dati[5] < pvtot / 100 * 50 and dati[5] >= pvtot / 100 * 30:
-                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if dati[5] < pvtot / float(100) * 50 and dati[5] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, dati[5], x, y, dati[i + 10], True, False)
             # pv rallo < 30
             if dati[i] == 3:
-                if dati[5] < pvtot / 100 * 30 and dati[5] > 0:
-                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+                if dati[5] < pvtot / float(100) * 30 and dati[5] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, dati[5], x, y, dati[i + 10], True, False)
             # rallo avvelenato
             if dati[i] == 4:
                 if dati[121]:
-                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+                    azioneEseguita = eseguiAzione(rx, ry, dati[5], x, y, dati[i + 10], True, False)
             # colco surriscaldato
             if dati[i] == 5:
                 if dati[122] > 0:
-                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                    azioneEseguita = eseguiAzione(rx, ry, dati[10], rx, ry, dati[i + 10], True, False)
             # pe colco < 80
             if dati[i] == 6:
-                if dati[10] < entot / 100 * 80 and dati[10] >= entot / 100 * 50:
-                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if dati[10] < entot / float(100) * 80 and dati[10] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, dati[10], rx, ry, dati[i + 10], True, False)
             # pe colco < 50
             if dati[i] == 7:
-                if dati[10] < entot / 100 * 50 and dati[10] >= entot / 100 * 30:
-                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if dati[10] < entot / float(100) * 50 and dati[10] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, dati[10], rx, ry, dati[i + 10], True, False)
             # pe colco < 30
             if dati[i] == 8:
-                if dati[10] < entot / 100 * 30 and dati[10] > 0:
-                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                if dati[10] < entot / float(100) * 30 and dati[10] > 0:
+                    azioneEseguita = eseguiAzione(rx, ry, dati[10], rx, ry, dati[i + 10], True, False)
             # sempre rallo
             if dati[i] == 9:
                 if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
-                    azioneEseguita = eseguiAzione(rx, ry, x, y, dati[i + 10])
+                    azioneEseguita = eseguiAzione(rx, ry, dati[10], x, y, dati[i + 10], True, False)
             # sempre colco
             if dati[i] == 10:
                 if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
-                    azioneEseguita = eseguiAzione(rx, ry, rx, ry, dati[i + 10])
+                    azioneEseguita = eseguiAzione(rx, ry, dati[10], rx, ry, dati[i + 10], True, False)
             # azioni su nemici
             if nmost > 0:
+                numeroNemico = 0
+                pvm = 0
                 mx = 0
                 my = 0
-                # nemico più vicino a rallo
+                vistaRobo = gpx * 6
+                caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti)
+                # nemico a caso
                 if dati[i] == 11:
-                    distMin = -1
-                    j = 0
-                    primoMostro = True
-                    while j < len(vetDatiNemici):
-                        if vetDatiNemici[j] > 0:
-                            if primoMostro:
-                                k = 0
-                                while k < len(caseviste):
-                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
-                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
-                                        mx = vetDatiNemici[j + 1]
-                                        my = vetDatiNemici[j + 2]
-                                        primoMostro = False
-                                        break
-                                    k = k + 3
-                            elif not primoMostro and abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y) < distMin:
-                                k = 0
-                                while k < len(caseviste):
-                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
-                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
-                                        mx = vetDatiNemici[j + 1]
-                                        my = vetDatiNemici[j + 2]
-                                        break
-                                    k = k + 3
-                        j += 3
+                    # nemiciPossibili conterrà [numeroNemico, pvm, mx, my] per ogni nemico visto da Colco (serve per scegliere il nemico casuale)
+                    nemiciPossibili = []
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    nemiciPossibili.append(j)
+                                    nemiciPossibili.append(vetDatiNemici[j])
+                                    nemiciPossibili.append(vetDatiNemici[j + 1])
+                                    nemiciPossibili.append(vetDatiNemici[j + 2])
+                                    break
+                                j += 4
+                        k += 3
+                    if len(nemiciPossibili) > 0:
+                        nemicoScelto = random.randint(0, (len(nemiciPossibili) // 4) - 1) * 4
+                        numeroNemico = nemiciPossibili[nemicoScelto]
+                        pvm = nemiciPossibili[nemicoScelto + 1]
+                        mx = nemiciPossibili[nemicoScelto + 2]
+                        my = nemiciPossibili[nemicoScelto + 3]
                     if mx != 0 and my != 0:
-                        azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                        azioneEseguita, pvm = eseguiAzione(rx, ry, pvm, mx, my, dati[i + 10], False, False)
+                        vetDatiNemici[numeroNemico] = pvm
                 # nemico vicino
                 if dati[i] == 12:
                     distMin = -1
-                    j = 0
                     primoMostro = True
-                    while j < len(vetDatiNemici):
-                        if vetDatiNemici[j] > 0:
-                            if primoMostro and abs(vetDatiNemici[j + 1] - x) <= (gpx * 2) and abs(vetDatiNemici[j + 2] - y) <= (gpy * 2):
-                                k = 0
-                                while k < len(caseviste):
-                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
-                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(vetDatiNemici[j + 1] - rx) <= (gpx * 2) and abs(vetDatiNemici[j + 2] - ry) <= (gpy * 2) and vetDatiNemici[j] > 0:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
                                         mx = vetDatiNemici[j + 1]
                                         my = vetDatiNemici[j + 2]
                                         primoMostro = False
                                         break
-                                    k = k + 3
-                            elif not primoMostro and abs(vetDatiNemici[j + 1] - x) <= (gpx * 2) and abs(vetDatiNemici[j + 2] - y) <= (gpy * 2) and abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y) < distMin:
-                                k = 0
-                                while k < len(caseviste):
-                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
-                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
                                         mx = vetDatiNemici[j + 1]
                                         my = vetDatiNemici[j + 2]
                                         break
-                                    k = k + 3
-                        j += 3
+                                j += 4
+                        k += 3
                     if mx != 0 and my != 0:
-                        azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                        azioneEseguita, pvm = eseguiAzione(rx, ry, pvm, mx, my, dati[i + 10], False, False)
+                        vetDatiNemici[numeroNemico] = pvm
                 # nemico lontano
                 if dati[i] == 13:
                     distMin = -1
-                    j = 0
                     primoMostro = True
-                    while j < len(vetDatiNemici):
-                        if vetDatiNemici[j] > 0:
-                            if primoMostro and abs(vetDatiNemici[j + 1] - x) >= (gpx * 3) and abs(vetDatiNemici[j + 2] - y) >= (gpy * 3):
-                                k = 0
-                                while k < len(caseviste):
-                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
-                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and (abs(vetDatiNemici[j + 1] - rx) >= (gpx * 3) or abs(vetDatiNemici[j + 2] - ry) >= (gpy * 3)) and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
                                         mx = vetDatiNemici[j + 1]
                                         my = vetDatiNemici[j + 2]
                                         primoMostro = False
                                         break
-                                    k = k + 3
-                            elif not primoMostro and abs(vetDatiNemici[j + 1] - x) >= (gpx * 3) and abs(vetDatiNemici[j + 2] - y) >= (gpy * 3) and abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y) < distMin:
-                                k = 0
-                                while k < len(caseviste):
-                                    if caseviste[k] == vetDatiNemici[j + 1] and caseviste[k + 1] == vetDatiNemici[j + 2] and caseviste[k + 2]:
-                                        distMin = abs(vetDatiNemici[j + 1] - x) + abs(vetDatiNemici[j + 2] - y)
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
                                         mx = vetDatiNemici[j + 1]
                                         my = vetDatiNemici[j + 2]
                                         break
-                                    k = k + 3
-                        j += 3
+                                j += 4
+                        k += 3
                     if mx != 0 and my != 0:
-                        azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                        azioneEseguita, pvm = eseguiAzione(rx, ry, pvm, mx, my, dati[i + 10], False, False)
+                        vetDatiNemici[numeroNemico] = pvm
                 # nemico pv < 80
                 if dati[i] == 14:
-                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 80:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        primoMostro = False
+                                        break
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        break
+                                j += 4
+                        k += 3
+                    if mx != 0 and my != 0:
+                        azioneEseguita, pvm = eseguiAzione(rx, ry, pvm, mx, my, dati[i + 10], False, False)
+                        vetDatiNemici[numeroNemico] = pvm
                 # nemico pv < 50
                 if dati[i] == 15:
-                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 50:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        primoMostro = False
+                                        break
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        break
+                                j += 4
+                        k += 3
+                    if mx != 0 and my != 0:
+                        azioneEseguita, pvm = eseguiAzione(rx, ry, pvm, mx, my, dati[i + 10], False, False)
+                        vetDatiNemici[numeroNemico] = pvm
                 # nemico pv < 30
                 if dati[i] == 16:
-                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 30:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        primoMostro = False
+                                        break
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        break
+                                j += 4
+                        k += 3
+                    if mx != 0 and my != 0:
+                        azioneEseguita, pvm = eseguiAzione(rx, ry, pvm, mx, my, dati[i + 10], False, False)
+                        vetDatiNemici[numeroNemico] = pvm
                 # nemico con meno pv
                 if dati[i] == 17:
-                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                    pvMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    if primoMostro:
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvMin = pvm
+                                        primoMostro = False
+                                        break
+                                    elif vetDatiNemici[j] < pvMin:
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvMin = pvm
+                                        break
+                                j += 4
+                        k += 3
+                    if mx != 0 and my != 0:
+                        azioneEseguita, pvm = eseguiAzione(rx, ry, pvm, mx, my, dati[i + 10], False, False)
+                        vetDatiNemici[numeroNemico] = pvm
                 # numero nemici > 1
                 if dati[i] == 18:
-                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                    numeroNemici = 0
+                    nemiciDaColpire = []
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    numeroNemici += 1
+                                    nemiciDaColpire.append(j)
+                                    nemiciDaColpire.append(pvm)
+                                    nemiciDaColpire.append(mx)
+                                    nemiciDaColpire.append(my)
+                                    break
+                                j += 4
+                        k += 3
+                    if numeroNemici > 1:
+                        azioneEseguita, nemiciDaColpire = eseguiAzione(rx, ry, -1, -1, -1, dati[i + 10], False, nemiciDaColpire)
+                        k = 0
+                        while k < len(vetDatiNemici):
+                            j = 0
+                            while j < len(nemiciDaColpire):
+                                if k == nemiciDaColpire[j]:
+                                    vetDatiNemici[k] = nemiciDaColpire[j + 1]
+                                    vetDatiNemici[k + 1] = nemiciDaColpire[j + 2]
+                                    vetDatiNemici[k + 2] = nemiciDaColpire[j + 3]
+                                j += 4
+                            k += 4
                 # numero nemici > 4
                 if dati[i] == 19:
-                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                    numeroNemici = 0
+                    nemiciDaColpire = []
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    numeroNemici += 1
+                                    nemiciDaColpire.append(j)
+                                    nemiciDaColpire.append(pvm)
+                                    nemiciDaColpire.append(mx)
+                                    nemiciDaColpire.append(my)
+                                    break
+                                j += 4
+                        k += 3
+                    if numeroNemici > 4:
+                        azioneEseguita, nemiciDaColpire = eseguiAzione(rx, ry, -1, -1, -1, dati[i + 10], False, nemiciDaColpire)
+                        k = 0
+                        while k < len(vetDatiNemici):
+                            j = 0
+                            while j < len(nemiciDaColpire):
+                                if k == nemiciDaColpire[j]:
+                                    vetDatiNemici[k] = nemiciDaColpire[j + 1]
+                                    vetDatiNemici[k + 1] = nemiciDaColpire[j + 2]
+                                    vetDatiNemici[k + 2] = nemiciDaColpire[j + 3]
+                                j += 4
+                            k += 4
                 # numero nemici > 7
                 if dati[i] == 20:
-                    azioneEseguita = eseguiAzione(rx, ry, mx, my, dati[i + 10])
+                    numeroNemici = 0
+                    nemiciDaColpire = []
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
+                            j = 0
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    numeroNemici += 1
+                                    nemiciDaColpire.append(j)
+                                    nemiciDaColpire.append(pvm)
+                                    nemiciDaColpire.append(mx)
+                                    nemiciDaColpire.append(my)
+                                    break
+                                j += 4
+                        k += 3
+                    if numeroNemici > 7:
+                        azioneEseguita, nemiciDaColpire = eseguiAzione(rx, ry, -1, -1, -1, dati[i + 10], False, nemiciDaColpire)
+                        k = 0
+                        while k < len(vetDatiNemici):
+                            j = 0
+                            while j < len(nemiciDaColpire):
+                                if k == nemiciDaColpire[j]:
+                                    vetDatiNemici[k] = nemiciDaColpire[j + 1]
+                                    vetDatiNemici[k + 1] = nemiciDaColpire[j + 2]
+                                    vetDatiNemici[k + 2] = nemiciDaColpire[j + 3]
+                                j += 4
+                            k += 4
             i += 1
 
     # spostamento
@@ -535,4 +738,4 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
 
     # alcuni sono inutili!!!
     rx, ry, stanza, carim, muovirob, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, muovirob, False, robo, porte, cofanetti)
-    return rx, ry, muovirob, nrob, dati
+    return rx, ry, muovirob, nrob, dati, vetDatiNemici
