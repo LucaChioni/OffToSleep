@@ -1632,6 +1632,7 @@ def gameloop():
                     muovirob = 2
 
             # movimento - gambit
+
             vetDatiNemici = [pvma, mxa, mya, pvmatot, pvmb, mxb, myb, pvmbtot, pvmc, mxc, myc, pvmctot, pvmd, mxd, myd, pvmdtot, pvme, mxe, mye, pvmetot, pvmf, mxf, myf, pvmftot, pvmg, mxg, myg, pvmgtot, pvmh, mxh, myh, pvmhtot, pvmi, mxi, myi, pvmitot, pvml, mxl, myl, pvmltot]
             rx, ry, muovirob, nrob, dati, vetDatiNemici = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost)
             pvma = vetDatiNemici[0]
@@ -1727,6 +1728,9 @@ def gameloop():
 
         # movimento-azioni mostri
         if (nmost > 0 and (sposta or muovimosta > 0 or muovimostb > 0 or muovimostc > 0 or muovimostd > 0 or muovimoste > 0 or muovimostf > 0 or muovimostg > 0 or muovimosth > 0 or muovimosti > 0 or muovimostl > 0) and not cambiosta) or primociclo:
+            vetDatiNemici = [pvma, mxa, mya, pvmatot, pvmb, mxb, myb, pvmbtot, pvmc, mxc, myc, pvmctot, pvmd, mxd, myd,
+                             pvmdtot, pvme, mxe, mye, pvmetot, pvmf, mxf, myf, pvmftot, pvmg, mxg, myg, pvmgtot, pvmh,
+                             mxh, myh, pvmhtot, pvmi, mxi, myi, pvmitot, pvml, mxl, myl, pvmltot]
             # controlli mostri per personaggio durante il cammino
             if mxa == x and mya == y:
                 x = vx
@@ -1831,7 +1835,7 @@ def gameloop():
                     myaprimociclo = mya
                     muovimostaprimociclo = muovimosta
                     datiprimociclo = dati
-                mxa, mya, muovimosta, nmos, vistoa, dati, vitaesca, raggiovistaa = movmostro(x, y, rx, ry, mxa, mya, dati[1], tipoa, muovimosta, vistoa, dif, difro, par, dati, statoma, vitaesca, porte, cofanetti)
+                mxa, mya, muovimosta, nmos, vistoa, dati, vitaesca, raggiovistaa = movmostro(x, y, rx, ry, mxa, mya, dati[1], tipoa, muovimosta, vistoa, dif, difro, par, dati, statoma, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxa = mxaprimociclo
                     mya = myaprimociclo
@@ -1886,7 +1890,7 @@ def gameloop():
                     mybprimociclo = myb
                     muovimostbprimociclo = muovimostb
                     datiprimociclo = dati
-                mxb, myb, muovimostb, nmos, vistob, dati, vitaesca, raggiovistab = movmostro(x, y, rx, ry, mxb, myb, dati[1], tipob, muovimostb, vistob, dif, difro, par, dati, statomb, vitaesca, porte, cofanetti)
+                mxb, myb, muovimostb, nmos, vistob, dati, vitaesca, raggiovistab = movmostro(x, y, rx, ry, mxb, myb, dati[1], tipob, muovimostb, vistob, dif, difro, par, dati, statomb, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxb = mxbprimociclo
                     myb = mybprimociclo
@@ -1941,7 +1945,7 @@ def gameloop():
                     mycprimociclo = myc
                     muovimostcprimociclo = muovimostc
                     datiprimociclo = dati
-                mxc, myc, muovimostc, nmos, vistoc, dati, vitaesca, raggiovistac = movmostro(x, y, rx, ry, mxc, myc, dati[1], tipoc, muovimostc, vistoc, dif, difro, par, dati, statomc, vitaesca, porte, cofanetti)
+                mxc, myc, muovimostc, nmos, vistoc, dati, vitaesca, raggiovistac = movmostro(x, y, rx, ry, mxc, myc, dati[1], tipoc, muovimostc, vistoc, dif, difro, par, dati, statomc, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxc = mxcprimociclo
                     myc = mycprimociclo
@@ -1996,7 +2000,7 @@ def gameloop():
                     mydprimociclo = myd
                     muovimostdprimociclo = muovimostd
                     datiprimociclo = dati
-                mxd, myd, muovimostd, nmos, vistod, dati, vitaesca, raggiovistad = movmostro(x, y, rx, ry, mxd, myd, dati[1], tipod, muovimostd, vistod, dif, difro, par, dati, statomd, vitaesca, porte, cofanetti)
+                mxd, myd, muovimostd, nmos, vistod, dati, vitaesca, raggiovistad = movmostro(x, y, rx, ry, mxd, myd, dati[1], tipod, muovimostd, vistod, dif, difro, par, dati, statomd, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxd = mxdprimociclo
                     myd = mydprimociclo
@@ -2051,7 +2055,7 @@ def gameloop():
                     myeprimociclo = mye
                     muovimosteprimociclo = muovimoste
                     datiprimociclo = dati
-                mxe, mye, muovimoste, nmos, vistoe, dati, vitaesca, raggiovistae = movmostro(x, y, rx, ry, mxe, mye, dati[1], tipoe, muovimoste, vistoe, dif, difro, par, dati, statome, vitaesca, porte, cofanetti)
+                mxe, mye, muovimoste, nmos, vistoe, dati, vitaesca, raggiovistae = movmostro(x, y, rx, ry, mxe, mye, dati[1], tipoe, muovimoste, vistoe, dif, difro, par, dati, statome, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxe = mxeprimociclo
                     mye = myeprimociclo
@@ -2106,7 +2110,7 @@ def gameloop():
                     myfprimociclo = myf
                     muovimostfprimociclo = muovimostf
                     datiprimociclo = dati
-                mxf, myf, muovimostf, nmos, vistof, dati, vitaesca, raggiovistaf = movmostro(x, y, rx, ry, mxf, myf, dati[1], tipof, muovimostf, vistof, dif, difro, par, dati, statomf, vitaesca, porte, cofanetti)
+                mxf, myf, muovimostf, nmos, vistof, dati, vitaesca, raggiovistaf = movmostro(x, y, rx, ry, mxf, myf, dati[1], tipof, muovimostf, vistof, dif, difro, par, dati, statomf, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxf = mxfprimociclo
                     myf = myfprimociclo
@@ -2161,7 +2165,7 @@ def gameloop():
                     mygprimociclo = myg
                     muovimostgprimociclo = muovimostg
                     datiprimociclo = dati
-                mxg, myg, muovimostg, nmos, vistog, dati, vitaesca, raggiovistag = movmostro(x, y, rx, ry, mxg, myg, dati[1], tipog, muovimostg, vistog, dif, difro, par, dati, statomg, vitaesca, porte, cofanetti)
+                mxg, myg, muovimostg, nmos, vistog, dati, vitaesca, raggiovistag = movmostro(x, y, rx, ry, mxg, myg, dati[1], tipog, muovimostg, vistog, dif, difro, par, dati, statomg, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxg = mxgprimociclo
                     myg = mygprimociclo
@@ -2216,7 +2220,7 @@ def gameloop():
                     myhprimociclo = myh
                     muovimosthprimociclo = muovimosth
                     datiprimociclo = dati
-                mxh, myh, muovimosth, nmos, vistoh, dati, vitaesca, raggiovistah = movmostro(x, y, rx, ry, mxh, myh, dati[1], tipoh, muovimosth, vistoh, dif, difro, par, dati, statomh, vitaesca, porte, cofanetti)
+                mxh, myh, muovimosth, nmos, vistoh, dati, vitaesca, raggiovistah = movmostro(x, y, rx, ry, mxh, myh, dati[1], tipoh, muovimosth, vistoh, dif, difro, par, dati, statomh, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxh = mxhprimociclo
                     myh = myhprimociclo
@@ -2271,7 +2275,7 @@ def gameloop():
                     myiprimociclo = myi
                     muovimostiprimociclo = muovimosti
                     datiprimociclo = dati
-                mxi, myi, muovimosti, nmos, vistoi, dati, vitaesca, raggiovistai = movmostro(x, y, rx, ry, mxi, myi, dati[1], tipoi, muovimosti, vistoi, dif, difro, par, dati, statomi, vitaesca, porte, cofanetti)
+                mxi, myi, muovimosti, nmos, vistoi, dati, vitaesca, raggiovistai = movmostro(x, y, rx, ry, mxi, myi, dati[1], tipoi, muovimosti, vistoi, dif, difro, par, dati, statomi, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxi = mxiprimociclo
                     myi = myiprimociclo
@@ -2326,7 +2330,7 @@ def gameloop():
                     mylprimociclo = myl
                     muovimostlprimociclo = muovimostl
                     datiprimociclo = dati
-                mxl, myl, muovimostl, nmos, vistol, dati, vitaesca, raggiovistal = movmostro(x, y, rx, ry, mxl, myl, dati[1], tipol, muovimostl, vistol, dif, difro, par, dati, statoml, vitaesca, porte, cofanetti)
+                mxl, myl, muovimostl, nmos, vistol, dati, vitaesca, raggiovistal = movmostro(x, y, rx, ry, mxl, myl, dati[1], tipol, muovimostl, vistol, dif, difro, par, dati, statoml, vitaesca, porte, cofanetti, vetDatiNemici)
                 if primociclo:
                     mxl = mxlprimociclo
                     myl = mylprimociclo
@@ -2384,61 +2388,61 @@ def gameloop():
                                                                                                   dati[1], tipoa, -5,
                                                                                                   vistoa, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicob != 0:
                 inutile, inutile, inutile, inutile, vistob, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxb, myb,
                                                                                                   dati[1], tipob, -5,
                                                                                                   vistob, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicoc != 0:
                 inutile, inutile, inutile, inutile, vistoc, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxc, myc,
                                                                                                   dati[1], tipoc, -5,
                                                                                                   vistoc, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicod != 0:
                 inutile, inutile, inutile, inutile, vistod, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxd, myd,
                                                                                                   dati[1], tipod, -5,
                                                                                                   vistod, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicoe != 0:
                 inutile, inutile, inutile, inutile, vistoe, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxe, mye,
                                                                                                   dati[1], tipoe, -5,
                                                                                                   vistoe, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicof != 0:
                 inutile, inutile, inutile, inutile, vistof, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxf, myf,
                                                                                                   dati[1], tipof, -5,
                                                                                                   vistof, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicog != 0:
                 inutile, inutile, inutile, inutile, vistog, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxg, myg,
                                                                                                   dati[1], tipog, -5,
                                                                                                   vistog, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicoh != 0:
                 inutile, inutile, inutile, inutile, vistoh, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxh, myh,
                                                                                                   dati[1], tipoh, -5,
                                                                                                   vistoh, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicoi != 0:
                 inutile, inutile, inutile, inutile, vistoi, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxi, myi,
                                                                                                   dati[1], tipoi, -5,
                                                                                                   vistoi, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
             if nemicol != 0:
                 inutile, inutile, inutile, inutile, vistol, inutile, inutile, inutile = movmostro(x, y, rx, ry, mxl, myl,
                                                                                                   dati[1], tipol, -5,
                                                                                                   vistol, dif, difro, par,
                                                                                                   dati, 0, vitaesca,
-                                                                                                  porte, cofanetti)
+                                                                                                  porte, cofanetti, vetDatiNemici)
         if vistoa or vistob or vistoc or vistod or vistoe or vistof or vistog or vistoh or vistoi or vistol:
             apriocchio = True
         else:

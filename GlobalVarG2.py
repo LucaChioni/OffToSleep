@@ -281,3 +281,7 @@ c11 = pygame.mixer.Sound("Audio\Canzoni\Canzone11.wav")
 c11.set_volume(volumeCanzoni)
 c16 = pygame.mixer.Sound("Audio\Canzoni\Canzone16.wav")
 c16.set_volume(volumeCanzoni)
+
+# dati tecniche di Colco (scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++)
+costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 30]
+dannoTecniche = [30, 30, 0, 25, 15, 0, 150, 120, 160, 130, 0, 0, 0, 0, 100, 250, 300, 320, 260, 200]

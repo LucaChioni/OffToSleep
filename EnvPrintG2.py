@@ -54,7 +54,6 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
                             m = m + 1
                     n = n + 1
             i = i + 3
-
     else:
         n = 0
         while n < 32:
