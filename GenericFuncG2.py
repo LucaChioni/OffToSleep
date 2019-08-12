@@ -31,7 +31,7 @@ def messaggio(msg, colore, x, y, gr):
     schermo.blit(testo, (x, y))
 
 
-def getStatistiche(dati):
+def getStatistiche(dati, difesa = 0):
     """pvtot = 100 + (dati[4] * 5)
     att = 10 + (dati[4] * 2) + (dati[6] * 10)
     dif = 10 + (dati[4] * 2) + (dati[8] * 10) + 5 + (dati[7] * 5)"""
@@ -40,6 +40,9 @@ def getStatistiche(dati):
     att = 14 + (dati[6] * 10)
     dif = 12 + (dati[8] * 10) + 5 + (dati[7] * 5)
     par = 3 + (dati[7] * 3)
+    if difesa != 0:
+        par = par * 2
+        dif = dif + dif // 2
 
     if dati[4] >= 1:
         i = 1
@@ -3366,120 +3369,15 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
     valoreCasella = 0
     caselleEsplorate = [xPartenza, yPartenza, valoreCasella]
 
-    # caselle viste da Colco
-    arrivato = False
-    j = 0
-    while j < len(caselleEsplorate):
-        valoreCasella += 1
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
-        k = 0
-        while k < len(vetnemici):
-            if nx == vetnemici[k] and ny == vetnemici[k + 1]:
-                nx = caselleEsplorate[j]
-                ny = caselleEsplorate[j + 1]
-            k += 2
-        if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
-            giaVisitata = False
-            k = 0
-            while k < len(caselleEsplorate):
-                if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
-                    giaVisitata = True
-                    break
-                k += 3
-            if not giaVisitata:
-                caselleEsplorate.append(nx)
-                caselleEsplorate.append(ny)
-                caselleEsplorate.append(valoreCasella)
-        if nx == xArrivo and ny == yArrivo:
-            arrivato = True
-            break
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
-        k = 0
-        while k < len(vetnemici):
-            if nx == vetnemici[k] and ny == vetnemici[k + 1]:
-                nx = caselleEsplorate[j]
-                ny = caselleEsplorate[j + 1]
-            k += 2
-        if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
-            giaVisitata = False
-            k = 0
-            while k < len(caselleEsplorate):
-                if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
-                    giaVisitata = True
-                    break
-                k += 3
-            if not giaVisitata:
-                caselleEsplorate.append(nx)
-                caselleEsplorate.append(ny)
-                caselleEsplorate.append(valoreCasella)
-        if nx == xArrivo and ny == yArrivo:
-            arrivato = True
-            break
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
-        k = 0
-        while k < len(vetnemici):
-            if nx == vetnemici[k] and ny == vetnemici[k + 1]:
-                nx = caselleEsplorate[j]
-                ny = caselleEsplorate[j + 1]
-            k += 2
-        if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
-            giaVisitata = False
-            k = 0
-            while k < len(caselleEsplorate):
-                if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
-                    giaVisitata = True
-                    break
-                k += 3
-            if not giaVisitata:
-                caselleEsplorate.append(nx)
-                caselleEsplorate.append(ny)
-                caselleEsplorate.append(valoreCasella)
-        if nx == xArrivo and ny == yArrivo:
-            arrivato = True
-            break
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
-        k = 0
-        while k < len(vetnemici):
-            if nx == vetnemici[k] and ny == vetnemici[k + 1]:
-                nx = caselleEsplorate[j]
-                ny = caselleEsplorate[j + 1]
-            k += 2
-        if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
-            giaVisitata = False
-            k = 0
-            while k < len(caselleEsplorate):
-                if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
-                    giaVisitata = True
-                    break
-                k += 3
-            if not giaVisitata:
-                caselleEsplorate.append(nx)
-                caselleEsplorate.append(ny)
-                caselleEsplorate.append(valoreCasella)
-        if nx == xArrivo and ny == yArrivo:
-            arrivato = True
-            break
-        j += 3
-
     impossibileRaggiungere = False
-    if arrivato:
-        # percorsoTrovato contiene x e y per ogni casella del percorso da restituire
-        percorsoTrovato = []
-        finito = False
-        j = len(caselleEsplorate) - 3
-        while not finito and not impossibileRaggiungere:
-            valoreCasella1 = -1
-            valoreCasella2 = -1
-            valoreCasella3 = -1
-            valoreCasella4 = -1
-            xCasella1 = 0
-            yCasella1 = 0
-            xCasella2 = 0
-            yCasella2 = 0
-            xCasella3 = 0
-            yCasella3 = 0
-            xCasella4 = 0
-            yCasella4 = 0
+    if xPartenza == xArrivo and yPartenza == yArrivo:
+        percorsoTrovato = "arrivato"
+    else:
+        # caselle viste da Colco
+        arrivato = False
+        j = 0
+        while j < len(caselleEsplorate):
+            valoreCasella += 1
             nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
@@ -3488,14 +3386,20 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     ny = caselleEsplorate[j + 1]
                 k += 2
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
-                i = 0
-                while i < len(caselleEsplorate):
-                    if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
-                        valoreCasella1 = caselleEsplorate[i + 2]
-                        xCasella1 = nx
-                        yCasella1 = ny
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
                         break
-                    i += 3
+                    k += 3
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                    caselleEsplorate.append(valoreCasella)
+            if nx == xArrivo and ny == yArrivo:
+                arrivato = True
+                break
             nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
@@ -3504,14 +3408,20 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     ny = caselleEsplorate[j + 1]
                 k += 2
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
-                i = 0
-                while i < len(caselleEsplorate):
-                    if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
-                        valoreCasella2 = caselleEsplorate[i + 2]
-                        xCasella2 = nx
-                        yCasella2 = ny
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
                         break
-                    i += 3
+                    k += 3
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                    caselleEsplorate.append(valoreCasella)
+            if nx == xArrivo and ny == yArrivo:
+                arrivato = True
+                break
             nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
@@ -3520,14 +3430,20 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     ny = caselleEsplorate[j + 1]
                 k += 2
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
-                i = 0
-                while i < len(caselleEsplorate):
-                    if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
-                        valoreCasella3 = caselleEsplorate[i + 2]
-                        xCasella3 = nx
-                        yCasella3 = ny
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
                         break
-                    i += 3
+                    k += 3
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                    caselleEsplorate.append(valoreCasella)
+            if nx == xArrivo and ny == yArrivo:
+                arrivato = True
+                break
             nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
@@ -3536,71 +3452,191 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     ny = caselleEsplorate[j + 1]
                 k += 2
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                giaVisitata = False
+                k = 0
+                while k < len(caselleEsplorate):
+                    if caselleEsplorate[k] == nx and caselleEsplorate[k + 1] == ny:
+                        giaVisitata = True
+                        break
+                    k += 3
+                if not giaVisitata:
+                    caselleEsplorate.append(nx)
+                    caselleEsplorate.append(ny)
+                    caselleEsplorate.append(valoreCasella)
+            if nx == xArrivo and ny == yArrivo:
+                arrivato = True
+                break
+            j += 3
+
+        if arrivato:
+            # percorsoTrovato contiene x e y per ogni casella del percorso da restituire
+            percorsoTrovato = []
+            finito = False
+            j = len(caselleEsplorate) - 3
+            while not finito and not impossibileRaggiungere:
+                valoreCasella1 = -1
+                valoreCasella2 = -1
+                valoreCasella3 = -1
+                valoreCasella4 = -1
+                xCasella1 = 0
+                yCasella1 = 0
+                xCasella2 = 0
+                yCasella2 = 0
+                xCasella3 = 0
+                yCasella3 = 0
+                xCasella4 = 0
+                yCasella4 = 0
+                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
+                k = 0
+                while k < len(vetnemici):
+                    if nx == vetnemici[k] and ny == vetnemici[k + 1]:
+                        nx = caselleEsplorate[j]
+                        ny = caselleEsplorate[j + 1]
+                    k += 2
+                if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                    i = 0
+                    while i < len(caselleEsplorate):
+                        if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
+                            valoreCasella1 = caselleEsplorate[i + 2]
+                            xCasella1 = nx
+                            yCasella1 = ny
+                            break
+                        i += 3
+                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
+                k = 0
+                while k < len(vetnemici):
+                    if nx == vetnemici[k] and ny == vetnemici[k + 1]:
+                        nx = caselleEsplorate[j]
+                        ny = caselleEsplorate[j + 1]
+                    k += 2
+                if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                    i = 0
+                    while i < len(caselleEsplorate):
+                        if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
+                            valoreCasella2 = caselleEsplorate[i + 2]
+                            xCasella2 = nx
+                            yCasella2 = ny
+                            break
+                        i += 3
+                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+                k = 0
+                while k < len(vetnemici):
+                    if nx == vetnemici[k] and ny == vetnemici[k + 1]:
+                        nx = caselleEsplorate[j]
+                        ny = caselleEsplorate[j + 1]
+                    k += 2
+                if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                    i = 0
+                    while i < len(caselleEsplorate):
+                        if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
+                            valoreCasella3 = caselleEsplorate[i + 2]
+                            xCasella3 = nx
+                            yCasella3 = ny
+                            break
+                        i += 3
+                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+                k = 0
+                while k < len(vetnemici):
+                    if nx == vetnemici[k] and ny == vetnemici[k + 1]:
+                        nx = caselleEsplorate[j]
+                        ny = caselleEsplorate[j + 1]
+                    k += 2
+                if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
+                    i = 0
+                    while i < len(caselleEsplorate):
+                        if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
+                            valoreCasella4 = caselleEsplorate[i + 2]
+                            xCasella4 = nx
+                            yCasella4 = ny
+                            break
+                        i += 3
+
+                if valoreCasella1 == -1 and valoreCasella2 == -1 and valoreCasella3 == -1 and valoreCasella4 == -1:
+                    impossibileRaggiungere = True
+                else:
+                    if valoreCasella1 != -1:
+                        valorePiuBasso = valoreCasella1
+                        xProssimaCasella = xCasella1
+                        yProssimaCasella = yCasella1
+                    elif valoreCasella2 != -1:
+                        valorePiuBasso = valoreCasella2
+                        xProssimaCasella = xCasella2
+                        yProssimaCasella = yCasella2
+                    elif valoreCasella3 != -1:
+                        valorePiuBasso = valoreCasella3
+                        xProssimaCasella = xCasella3
+                        yProssimaCasella = yCasella3
+                    elif valoreCasella4 != -1:
+                        valorePiuBasso = valoreCasella4
+                        xProssimaCasella = xCasella4
+                        yProssimaCasella = yCasella4
+                    if valoreCasella2 != -1 and valoreCasella2 < valorePiuBasso:
+                        valorePiuBasso = valoreCasella2
+                        xProssimaCasella = xCasella2
+                        yProssimaCasella = yCasella2
+                    elif valoreCasella2 == valorePiuBasso and random.randint(1, 2) == 1:
+                        xProssimaCasella = xCasella2
+                        yProssimaCasella = yCasella2
+                    if valoreCasella3 != -1 and valoreCasella3 < valorePiuBasso:
+                        valorePiuBasso = valoreCasella3
+                        xProssimaCasella = xCasella3
+                        yProssimaCasella = yCasella3
+                    elif valoreCasella3 == valorePiuBasso and random.randint(1, 2) == 1:
+                        xProssimaCasella = xCasella3
+                        yProssimaCasella = yCasella3
+                    if valoreCasella4 != -1 and valoreCasella4 < valorePiuBasso:
+                        valorePiuBasso = valoreCasella4
+                        xProssimaCasella = xCasella4
+                        yProssimaCasella = yCasella4
+                    elif valoreCasella4 == valorePiuBasso and random.randint(1, 2) == 1:
+                        xProssimaCasella = xCasella4
+                        yProssimaCasella = yCasella4
+                    percorsoTrovato.append(xProssimaCasella)
+                    percorsoTrovato.append(yProssimaCasella)
                 i = 0
                 while i < len(caselleEsplorate):
-                    if caselleEsplorate[i] == nx and caselleEsplorate[i + 1] == ny:
-                        valoreCasella4 = caselleEsplorate[i + 2]
-                        xCasella4 = nx
-                        yCasella4 = ny
-                        break
+                    if caselleEsplorate[i] == xProssimaCasella and caselleEsplorate[i + 1] == yProssimaCasella:
+                        j = i
                     i += 3
-
-            if valoreCasella1 == -1 and valoreCasella2 == -1 and valoreCasella3 == -1 and valoreCasella4 == -1:
-                impossibileRaggiungere = True
-            else:
-                if valoreCasella1 != -1:
-                    valorePiuBasso = valoreCasella1
-                    xProssimaCasella = xCasella1
-                    yProssimaCasella = yCasella1
-                elif valoreCasella2 != -1:
-                    valorePiuBasso = valoreCasella2
-                    xProssimaCasella = xCasella2
-                    yProssimaCasella = yCasella2
-                elif valoreCasella3 != -1:
-                    valorePiuBasso = valoreCasella3
-                    xProssimaCasella = xCasella3
-                    yProssimaCasella = yCasella3
-                elif valoreCasella4 != -1:
-                    valorePiuBasso = valoreCasella4
-                    xProssimaCasella = xCasella4
-                    yProssimaCasella = yCasella4
-                if valoreCasella2 != -1 and valoreCasella2 < valorePiuBasso:
-                    valorePiuBasso = valoreCasella2
-                    xProssimaCasella = xCasella2
-                    yProssimaCasella = yCasella2
-                elif valoreCasella2 == valorePiuBasso and random.randint(1, 2) == 1:
-                    xProssimaCasella = xCasella2
-                    yProssimaCasella = yCasella2
-                if valoreCasella3 != -1 and valoreCasella3 < valorePiuBasso:
-                    valorePiuBasso = valoreCasella3
-                    xProssimaCasella = xCasella3
-                    yProssimaCasella = yCasella3
-                elif valoreCasella3 == valorePiuBasso and random.randint(1, 2) == 1:
-                    xProssimaCasella = xCasella3
-                    yProssimaCasella = yCasella3
-                if valoreCasella4 != -1 and valoreCasella4 < valorePiuBasso:
-                    valorePiuBasso = valoreCasella4
-                    xProssimaCasella = xCasella4
-                    yProssimaCasella = yCasella4
-                elif valoreCasella4 == valorePiuBasso and random.randint(1, 2) == 1:
-                    xProssimaCasella = xCasella4
-                    yProssimaCasella = yCasella4
-                percorsoTrovato.append(xProssimaCasella)
-                percorsoTrovato.append(yProssimaCasella)
-            i = 0
-            while i < len(caselleEsplorate):
-                if caselleEsplorate[i] == xProssimaCasella and caselleEsplorate[i + 1] == yProssimaCasella:
-                    j = i
-                i += 3
-            if xProssimaCasella == xPartenza and yProssimaCasella == yPartenza:
-                finito = True
-    else:
-        impossibileRaggiungere = True
+                if xProssimaCasella == xPartenza and yProssimaCasella == yPartenza:
+                    finito = True
+        else:
+            impossibileRaggiungere = True
 
     if impossibileRaggiungere:
         return False
     else:
         return percorsoTrovato
+
+
+def controllaMorteRallo(vitaRallo, inizio):
+    if vitaRallo <= 0:
+        schermo.fill(grigioscu)
+        messaggio("Sei morto", grigiochi, gsx // 32 * 3, gsy // 18 * 13, 150)
+        pygame.display.update()
+        continua = False
+        while not continua:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    selind.play()
+                    continua = True
+        inizio = True
+    return inizio
+
+
+def controllaMorteColco(dati):
+    if dati[10] <= 0:
+        morterob = True
+        dati[122] = 0
+        dati[125] = 0
+        dati[126] = 0
+    else:
+        morterob = False
+    return morterob, dati
+
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
 pygame.draw.rect(schermo, blu, (nx, ny, gpx, gpy))

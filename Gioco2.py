@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from GenericFuncG2 import *
 from MenuG2 import *
 from EnvPrintG2 import *
 from MovNemiciRobG2 import *
@@ -14,6 +15,9 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            raffredda = -1
+            autoRic1 = -1
+            autoRic2 = -1
             spingiColco = False
             apriChiudiPorta = [False, 0, 0]
             apriCofanetto = [False, 0, 0]
@@ -1373,7 +1377,7 @@ def gameloop():
 
         # statistiche personaggio e robo (liv + arm + scu)
         # se modifichi -> modifica anche equip, equiprobo e ovunque si presenta pvtot
-        esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
+        esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
 
         # ripristina vita e status dopo lv up
         if aumentoliv:
@@ -1401,27 +1405,8 @@ def gameloop():
             startf = False
 
         # morte tua e di robo
-        if dati[5] <= 0:
-            schermo.fill(grigioscu)
-            messaggio("Sei morto", grigiochi, gsx // 32 * 3, gsy // 18 * 13, 150)
-            pygame.display.update()
-            continua = False
-            while continua == False:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
-                    if event.type == pygame.KEYDOWN:
-                        selind.play()
-                        continua = True
-            inizio = True
-        if dati[10] <= 0:
-            morterob = True
-            dati[122] = 0
-            dati[125] = 0
-            dati[126] = 0
-        else:
-            morterob = False
+        inizio = controllaMorteRallo(dati[5], inizio)
+        morterob, dati = controllaMorteColco(dati)
 
         # movimento-azioni personaggio
         if (nx != 0 or ny != 0) and muovimosta <= 0 and muovimostb <= 0 and muovimostc <= 0 and muovimostd <= 0 and muovimoste <= 0 and muovimostf <= 0 and muovimostg <= 0 and muovimosth <= 0 and muovimosti <= 0 and muovimostl <= 0 and muovirob <= 0:
@@ -1486,8 +1471,7 @@ def gameloop():
             difesa = 0
         if difesa != 0 and not sposta:
             sposta = False
-            par = par * 2
-            dif = dif + dif // 2
+            esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
             if difesa == 2:
                 difesa = 1
                 sposta = True
@@ -1619,8 +1603,7 @@ def gameloop():
 
             # efficienza
             if dati[126] > 0:
-                if muovirob == 1 or muovirob == -1:
-                    dati[126] = dati[126] - 1
+                dati[126] = dati[126] - 1
 
             # vel+
             if dati[125] > 0:
@@ -1632,19 +1615,62 @@ def gameloop():
                     muovirob = 2
 
             # movimento - gambit
-
-            vetDatiNemici = [pvma, mxa, mya, pvmatot, pvmb, mxb, myb, pvmbtot, pvmc, mxc, myc, pvmctot, pvmd, mxd, myd, pvmdtot, pvme, mxe, mye, pvmetot, pvmf, mxf, myf, pvmftot, pvmg, mxg, myg, pvmgtot, pvmh, mxh, myh, pvmhtot, pvmi, mxi, myi, pvmitot, pvml, mxl, myl, pvmltot]
-            rx, ry, muovirob, nrob, dati, vetDatiNemici = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost)
+            vetDatiNemici = [pvma, mxa, mya, pvmatot, statoma, pvmb, mxb, myb, pvmbtot, statomb, pvmc, mxc, myc, pvmctot, statomc, pvmd, mxd, myd, pvmdtot, statomd, pvme, mxe, mye, pvmetot, statome, pvmf, mxf, myf, pvmftot, statomf, pvmg, mxg, myg, pvmgtot, statomg, pvmh, mxh, myh, pvmhtot, statomh, pvmi, mxi, myi, pvmitot, statomi, pvml, mxl, myl, pvmltot, statoml]
+            rx, ry, muovirob, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2 = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa)
             pvma = vetDatiNemici[0]
-            pvmb = vetDatiNemici[4]
-            pvmc = vetDatiNemici[8]
-            pvmd = vetDatiNemici[12]
-            pvme = vetDatiNemici[16]
-            pvmf = vetDatiNemici[20]
-            pvmg = vetDatiNemici[24]
-            pvmh = vetDatiNemici[28]
-            pvmi = vetDatiNemici[32]
-            pvml = vetDatiNemici[36]
+            statoma = vetDatiNemici[4]
+            pvmb = vetDatiNemici[5]
+            statomb = vetDatiNemici[9]
+            pvmc = vetDatiNemici[10]
+            statomc = vetDatiNemici[14]
+            pvmd = vetDatiNemici[15]
+            statomd = vetDatiNemici[19]
+            pvme = vetDatiNemici[20]
+            statome = vetDatiNemici[24]
+            pvmf = vetDatiNemici[25]
+            statomf = vetDatiNemici[29]
+            pvmg = vetDatiNemici[30]
+            statomg = vetDatiNemici[34]
+            pvmh = vetDatiNemici[35]
+            statomh = vetDatiNemici[39]
+            pvmi = vetDatiNemici[40]
+            statomi = vetDatiNemici[44]
+            pvml = vetDatiNemici[45]
+            statoml = vetDatiNemici[49]
+
+            # effetto di raffreddamento
+            if True:
+                if raffreddamento:
+                    muovirob = -2
+                    raffredda = 1
+                if raffredda == 0:
+                    dati[122] = 0
+                if raffredda >= 0:
+                    raffredda -= 1
+            # effetto auto-ricarica
+            if True:
+                if ricarica1:
+                    muovirob = -2
+                    autoRic1 = 1
+                if autoRic1 == 0:
+                    dati[10] += dannoTecniche[6]
+                    if dati[10] > entot:
+                        dati[10] = entot
+                    dati[122] = 10
+                if autoRic1 >= 0:
+                    autoRic1 -= 1
+            # effetto auto-ricarica+
+            if True:
+                if ricarica2:
+                    muovirob = -2
+                    autoRic2 = 1
+                if autoRic2 == 0:
+                    dati[10] += dannoTecniche[16]
+                    if dati[10] > entot:
+                        dati[10] = entot
+                    dati[122] = 10
+                if autoRic2 >= 0:
+                    autoRic2 -= 1
 
             if muovirob < 0:
                 rx = vrx

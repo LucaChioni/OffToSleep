@@ -2524,9 +2524,8 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge danni a tutti i nemici entro il raggio di 6", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("infligge danni a tutti i nemici o alleati entro il raggio", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
         if dati[16] > 0:
@@ -2535,8 +2534,8 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[6], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("annulla il surriscaldamento ma richiede due turni", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
+                messaggio("annulla il surriscaldamento ma richiede due turni", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
         if dati[17] > 0:
@@ -2545,9 +2544,8 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[7], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("surriscaldamento", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
         if dati[18] > 0:
@@ -2574,8 +2572,7 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[10], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[9]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14,
-                          40)
+                messaggio("infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
         if dati[21] > 0:
@@ -2584,10 +2581,9 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[11], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[10]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("permette a Colco, se non surriscaldato, di eseguire due", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("azioni al turno. Dopo 15 turni provoca surriscaldamento", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
+                messaggio("permette a Colco, se non surriscaldato, di eseguire due", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("azioni al turno. Dopo 15 turni provoca surriscaldamento", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
         if dati[22] > 0:
@@ -2596,7 +2592,8 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("incrementa il tuo attacco per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("incrementa il tuo attacco per 10 turni (non ha", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
         if dati[23] > 0:
@@ -2605,7 +2602,8 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("incrementa la tua difesa per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("incrementa la tua difesa per 10 turni (non ha", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
         if dati[24] > 0:
@@ -2614,9 +2612,9 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio(u"tutte le tecniche costano la metà dei pe per 15 turni", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("(si annulla con surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio(u"tutte le tecniche costano la metà dei pe per 15 turni.", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("Si annulla con surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
         if dati[25] > 0:
@@ -2625,9 +2623,8 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge molti danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("infligge molti danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
         if dati[26] > 0:
@@ -2645,10 +2642,9 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[17], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("ricarica di molto Colco ma richiede due turni e", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14,
-                          40)
-                messaggio("provoca surriscaldamento", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("ricarica di molto Colco ma richiede due turni e", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("provoca surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
         if dati[28] > 0:
@@ -2666,8 +2662,7 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[19], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[18]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14,
-                          40)
+                messaggio("infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
         if dati[30] > 0:
@@ -2676,9 +2671,8 @@ def sceglitecn(dati, tecnica):
                 schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 3.5))
                 messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                 messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge enormi danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                messaggio("infligge enormi danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
 
@@ -2855,9 +2849,9 @@ def sceglitecn(dati, tecnica):
                     schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge danni a tutti i nemici entro il raggio di 6", grigiochi, gsx // 32 * 18,
+                    messaggio("infligge danni a tutti i nemici o alleati entro il raggio", grigiochi, gsx // 32 * 18,
                               gsy // 18 * 14, 40)
-                    messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
             if dati[16] > 0:
@@ -2868,6 +2862,7 @@ def sceglitecn(dati, tecnica):
                     messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
                     messaggio("annulla il surriscaldamento ma richiede due turni", grigiochi, gsx // 32 * 18,
                               gsy // 18 * 14, 40)
+                    messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
             if dati[17] > 0:
@@ -2878,7 +2873,8 @@ def sceglitecn(dati, tecnica):
                     messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
                     messaggio("ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
                               gsy // 18 * 14, 40)
-                    messaggio("surriscaldamento", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                              40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
             if dati[18] > 0:
@@ -2919,6 +2915,7 @@ def sceglitecn(dati, tecnica):
                               gsy // 18 * 14, 40)
                     messaggio("azioni al turno. Dopo 15 turni provoca surriscaldamento", grigiochi, gsx // 32 * 18,
                               gsy // 18 * 15, 40)
+                    messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
             if dati[22] > 0:
@@ -2927,7 +2924,9 @@ def sceglitecn(dati, tecnica):
                     schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("incrementa il tuo attacco per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio("incrementa il tuo attacco per 10 turni (non ha", grigiochi, gsx // 32 * 18,
+                              gsy // 18 * 14, 40)
+                    messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
             if dati[23] > 0:
@@ -2936,7 +2935,9 @@ def sceglitecn(dati, tecnica):
                     schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("incrementa la tua difesa per 10 turni", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    messaggio("incrementa la tua difesa per 10 turni (non ha", grigiochi, gsx // 32 * 18,
+                              gsy // 18 * 14, 40)
+                    messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
             if dati[24] > 0:
@@ -2945,9 +2946,11 @@ def sceglitecn(dati, tecnica):
                     schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio(u"tutte le tecniche costano la metà dei pe per 15 turni", grigiochi, gsx // 32 * 18,
+                    messaggio(u"tutte le tecniche costano la metà dei pe per 15 turni.", grigiochi, gsx // 32 * 18,
                               gsy // 18 * 14, 40)
-                    messaggio("(si annulla con surriscaldamento)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("Si annulla con surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18,
+                              gsy // 18 * 15, 40)
+                    messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
             if dati[25] > 0:
@@ -2956,9 +2959,9 @@ def sceglitecn(dati, tecnica):
                     schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge molti danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18,
+                    messaggio("infligge molti danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18,
                               gsy // 18 * 14, 40)
-                    messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
             if dati[26] > 0:
@@ -2977,9 +2980,10 @@ def sceglitecn(dati, tecnica):
                     messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
                     messaggio("ricarica di molto Colco ma richiede due turni e", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14,
-                              40)
-                    messaggio("provoca surriscaldamento", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                              gsy // 18 * 14, 40)
+                    messaggio("provoca surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18,
+                              gsy // 18 * 15, 40)
+                    messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
             if dati[28] > 0:
@@ -3007,9 +3011,9 @@ def sceglitecn(dati, tecnica):
                     schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 3.5))
                     messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
                     messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge enormi danni a tutti i nemici entro il raggio", grigiochi, gsx // 32 * 18,
+                    messaggio("infligge enormi danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18,
                               gsy // 18 * 14, 40)
-                    messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
 
