@@ -25,7 +25,7 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
     if tipo == "mostro":
         attlontano = True
         vistam = gpx * 5
-        att = 10
+        att = 30
         if muovimost == 0:
             if statom == 2 or statom == 3:
                 muovimost = -2
@@ -35,7 +35,7 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
         attlontano = False
         avvelena = True
         vistam = gpx * 6
-        att = 5
+        att = 20
         if muovimost == 0:
             if statom == 2 or statom == 3:
                 muovimost = 0
@@ -44,7 +44,7 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
     if tipo == "orco":
         attlontano = False
         vistam = gpx * 5
-        att = 15
+        att = 50
         if muovimost == 0:
             if statom == 2 or statom == 3:
                 muovimost = -3
@@ -314,7 +314,6 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
 
 
 def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy):
-    print "gambit robo"
     esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
     raffreddamento = False
     ricarica1 = False
@@ -327,7 +326,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
     while i < len(nemiciVistiDaColco):
         vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 2])
         vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 3])
-        i += 5
+        i += 6
 
     if azione == 6 or azione == 7 or azione == 11 or azione == 14 or azione == 17:
         if dati[10] >= costoTecniche[azione - 1]:
@@ -501,7 +500,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                     if nemiciVistiDaColco[i + 1] < 0:
                         nemiciVistiDaColco[i + 1] = 0
-                    i += 5
+                    i += 6
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -525,7 +524,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                     if nemiciVistiDaColco[i + 1] < 0:
                         nemiciVistiDaColco[i + 1] = 0
-                    i += 5
+                    i += 6
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -549,12 +548,19 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                     if nemiciVistiDaColco[i + 1] < 0:
                         nemiciVistiDaColco[i + 1] = 0
-                    i += 5
+                    i += 6
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
-        if (not mostroAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) or (not mostroVisto and (azione == 4 or azione == 5 or azione == 6 or azione == 7 or azione == 10 or azione == 11 or azione == 14 or azione == 15 or azione == 17 or azione == 19 or azione == 20)):
+        if not (mostroAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) or not (mostroVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
+            azioneEseguita = True
+            i = 0
+            while i < len(vetNemiciSoloConXeY):
+                if vetNemiciSoloConXeY[i] == xBersaglio and vetNemiciSoloConXeY[i + 1] == yBersaglio:
+                    del vetNemiciSoloConXeY[i + 1]
+                    del vetNemiciSoloConXeY[i]
+                i += 4
             percorsoTrovato = pathFinding(rx, ry, xBersaglio, yBersaglio, stanza, porte, cofanetti, vetNemiciSoloConXeY)
             if percorsoTrovato != "arrivato":
                 if percorsoTrovato and len(percorsoTrovato) >= 4:
@@ -638,18 +644,24 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                             dati[10] -= costoTecniche[azione - 1]
                     # attP
                     if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
-                        dati[123] = dannoTecniche[azione - 1]
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
+                        if dati[123] > 0:
+                            azioneEseguita = False
                         else:
-                            dati[10] -= costoTecniche[azione - 1]
+                            dati[123] = dannoTecniche[azione - 1]
+                            if dati[126] > 0:
+                                dati[10] -= costoTecniche[azione - 1] // 2
+                            else:
+                                dati[10] -= costoTecniche[azione - 1]
                     # difP
                     if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
-                        dati[124] = dannoTecniche[azione - 1]
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
+                        if dati[124] > 0:
+                            azioneEseguita = False
                         else:
-                            dati[10] -= costoTecniche[azione - 1]
+                            dati[124] = dannoTecniche[azione - 1]
+                            if dati[126] > 0:
+                                dati[10] -= costoTecniche[azione - 1] // 2
+                            else:
+                                dati[10] -= costoTecniche[azione - 1]
                     # cura++
                     if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
                         dati[5] += dannoTecniche[azione - 1]
@@ -699,7 +711,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                         nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                         if nemiciVistiDaColco[i + 1] < 0:
                             nemiciVistiDaColco[i + 1] = 0
-                        i += 5
+                        i += 6
                     if dati[126] > 0:
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
@@ -729,7 +741,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                         nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                         if nemiciVistiDaColco[i + 1] < 0:
                             nemiciVistiDaColco[i + 1] = 0
-                        i += 5
+                        i += 6
                     if dati[126] > 0:
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
@@ -759,12 +771,13 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                         nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                         if nemiciVistiDaColco[i + 1] < 0:
                             nemiciVistiDaColco[i + 1] = 0
-                        i += 5
+                        i += 6
                     if dati[126] > 0:
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
-            if (not ralloAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) or (not ralloVisto and (azione == 4 or azione == 5 or azione == 6 or azione == 7 or azione == 10 or azione == 11 or azione == 14 or azione == 15 or azione == 17 or azione == 19 or azione == 20)):
+            if not (ralloAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) or not (ralloVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
+                azioneEseguita = True
                 if abs(rx - xBersaglio) == gpx and abs(ry - yBersaglio) == gpy:
                     if vx == rx + gpx:
                         nrob = 1
@@ -866,7 +879,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                     if nemiciVistiDaColco[i + 1] < 0:
                         nemiciVistiDaColco[i + 1] = 0
-                    i += 5
+                    i += 6
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -891,7 +904,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                     if nemiciVistiDaColco[i + 1] < 0:
                         nemiciVistiDaColco[i + 1] = 0
-                    i += 5
+                    i += 6
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -916,7 +929,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     nemiciVistiDaColco[i + 1] -= dannoTecniche[azione - 1]
                     if nemiciVistiDaColco[i + 1] < 0:
                         nemiciVistiDaColco[i + 1] = 0
-                    i += 5
+                    i += 6
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -952,7 +965,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                         if nemiciVistiDaColco[i + 2] == vetDatiNemici[j + 1] and nemiciVistiDaColco[i + 3] == vetDatiNemici[j + 2]:
                             giaVisitata = True
                             break
-                        i += 5
+                        i += 6
                     if not giaVisitata:
                         nemiciVistiDaColco.append(j)
                         nemiciVistiDaColco.append(vetDatiNemici[j])
@@ -985,7 +998,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 while i < len(nemiciVistiDaColco):
                     vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 2])
                     vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 3])
-                    i += 5
+                    i += 6
                 percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
                 if percorsoTrovato and percorsoTrovato != "arrivato":
                     if len(percorsoTrovato) >= 4:
@@ -1004,7 +1017,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
 
             """dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
             in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
-                       condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemico+vicinoR, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
+                       condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemicoCasuale, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
                        tecniche = intero da 1 a 20: scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++"""
 
             # controllo se la condizione è rispettata
@@ -1023,7 +1036,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # pv rallo < 50
                 if dati[i] == 2:
@@ -1036,7 +1049,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # pv rallo < 30
                 if dati[i] == 3:
@@ -1049,7 +1062,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # rallo avvelenato
                 if dati[i] == 4:
@@ -1062,7 +1075,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # colco surriscaldato
                 if dati[i] == 5:
@@ -1075,7 +1088,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # pe colco < 80
                 if dati[i] == 6:
@@ -1088,7 +1101,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # pe colco < 50
                 if dati[i] == 7:
@@ -1101,7 +1114,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # pe colco < 30
                 if dati[i] == 8:
@@ -1114,10 +1127,10 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # sempre rallo
-                if dati[i] == 9:
+                if dati[i] == 9 and not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0):
                     if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
                         azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
                         k = 0
@@ -1127,10 +1140,10 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # sempre colco
-                if dati[i] == 10:
+                if dati[i] == 10 and not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
                     if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
                         azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
                         k = 0
@@ -1140,7 +1153,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                 if k == nemiciVistiDaColco[j]:
                                     vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
                                     vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 5
+                                j += 6
                             k += 5
                 # azioni su nemici
                 if nmost > 0:
@@ -1178,18 +1191,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             pvmtot = nemiciPossibili[nemicoScelto + 4]
                             statom = nemiciPossibili[nemicoScelto + 5]
                         if mx != 0 and my != 0:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # nemico vicino
                     if dati[i] == 12:
                         distMin = -1
@@ -1221,18 +1237,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if mx != 0 and my != 0:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # nemico lontano
                     if dati[i] == 13:
                         distMin = -1
@@ -1264,18 +1283,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if mx != 0 and my != 0:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # nemico pv < 80
                     if dati[i] == 14:
                         distMin = -1
@@ -1307,18 +1329,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if mx != 0 and my != 0:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # nemico pv < 50
                     if dati[i] == 15:
                         distMin = -1
@@ -1350,18 +1375,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if mx != 0 and my != 0:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # nemico pv < 30
                     if dati[i] == 16:
                         distMin = -1
@@ -1393,18 +1421,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if mx != 0 and my != 0:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # nemico con meno pv
                     if dati[i] == 17:
                         pvMin = -1
@@ -1436,18 +1467,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if mx != 0 and my != 0:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # numero nemici > 1
                     if dati[i] == 18:
                         numeroNemici = 0
@@ -1481,18 +1515,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if numeroNemici > 1:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # numero nemici > 4
                     if dati[i] == 19:
                         numeroNemici = 0
@@ -1526,18 +1563,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if numeroNemici > 4:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                     # numero nemici > 7
                     if dati[i] == 20:
                         numeroNemici = 0
@@ -1571,18 +1611,21 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                                     j += 5
                             k += 3
                         if numeroNemici > 7:
+                            pvmVecchi = pvm
                             azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
-                            vetDatiNemici[numeroNemico] = pvm
-                            vetDatiNemici[numeroNemico + 4] = statom
-                            k = 0
-                            while k < len(vetDatiNemici):
-                                j = 0
-                                while j < len(nemiciVistiDaColco):
-                                    if k == nemiciVistiDaColco[j]:
-                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                    j += 5
-                                k += 5
+                            if pvm != pvmVecchi:
+                                vetDatiNemici[numeroNemico] = pvm
+                                vetDatiNemici[numeroNemico + 4] = statom
+                            else:
+                                k = 0
+                                while k < len(vetDatiNemici):
+                                    j = 0
+                                    while j < len(nemiciVistiDaColco):
+                                        if k == nemiciVistiDaColco[j]:
+                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                        j += 6
+                                    k += 5
                 i += 1
 
     # spostamento

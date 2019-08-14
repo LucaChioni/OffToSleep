@@ -3050,6 +3050,7 @@ def equiprobo(dati):
     yp = gsy // 18 * 6
     carim = True
     risposta = False
+    riordinamento = False
 
     esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
 
@@ -3110,101 +3111,109 @@ def equiprobo(dati):
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
 
         # programmazione Colco
-        messaggio("Condizione...", grigiochi, gsx // 32 * 9, gsy // 18 * 4.5, 60)
+        messaggio("Ordine", grigiochi, gsx // 32 * 8.5, gsy // 18 * 4.5, 60)
+        i = 1
+        while i <= 10:
+            if i == 10:
+                messaggio(str(i), grigiochi, gsx // 32 * 9.3, gsy // 18 * (i + 4.9), 50)
+            else:
+                messaggio(str(i), grigiochi, gsx // 32 * 9.5, gsy // 18 * (i + 4.9), 50)
+            i += 1
+        messaggio("Condizione...", grigiochi, gsx // 32 * 12, gsy // 18 * 4.5, 60)
         c = 6
         for i in range(101, 111):
             if dati[i] == -1:
-                messaggio("---", grigioscu, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("---", grigioscu, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 0:
-                messaggio("---", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("---", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 1:
-                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 2:
-                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 3:
-                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 4:
-                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 5:
-                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 6:
-                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 7:
-                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 8:
-                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 9:
-                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 10:
-                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 11:
-                messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico a caso", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 12:
-                messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico vicino", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 13:
-                messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico lontano", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 14:
-                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 15:
-                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 16:
-                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 17:
-                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 18:
-                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 19:
-                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             if dati[i] == 20:
-                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
             c = c + 1
-        messaggio("...Tecnica", grigiochi, gsx // 32 * 16, gsy // 18 * 4.5, 60)
+        messaggio("...Tecnica", grigiochi, gsx // 32 * 18, gsy // 18 * 4.5, 60)
         c = 6
         for i in range(111, 121):
             if dati[i] == -1:
-                messaggio("---", grigioscu, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("---", grigioscu, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 0:
-                messaggio("---", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("---", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 1:
-                messaggio("Scossa", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Scossa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 2:
-                messaggio("Cura", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Cura", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 3:
-                messaggio("Antidoto", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Antidoto", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 4:
-                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 5:
-                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 6:
-                messaggio("Raffreddamento", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Raffreddamento", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 7:
-                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 8:
-                messaggio("Cura +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Cura +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 9:
-                messaggio("Scossa +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Scossa +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 10:
-                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 11:
-                messaggio("Velocizza", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Velocizza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 12:
-                messaggio("Carica attacco", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Carica attacco", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 13:
-                messaggio("Carica difesa", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Carica difesa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 14:
-                messaggio("Efficienza", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Efficienza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 15:
-                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 16:
-                messaggio("Cura ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Cura ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 17:
-                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 18:
-                messaggio("Scossa ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Scossa ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 19:
-                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             if dati[i] == 20:
-                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
             c = c + 1
 
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
@@ -3404,150 +3413,214 @@ def equiprobo(dati):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     selind.play()
-                    risposta = True
+                    if not riordinamento:
+                        risposta = True
+                    else:
+                        riordinamento = False
                 if event.key == pygame.K_s:
-                    if (yp != gsy // 18 * 15):
-                        spostapun.play()
-                        yp = yp + gsy // 18 * 1
-                    elif yp == gsy // 18 * 15:
-                        spostapun.play()
-                        yp = gsy // 18 * 6
+                    if riordinamento:
+                        if yp != gsy // 18 * 15:
+                            spostapun.play()
+                            i = 0
+                            while i < 10:
+                                if yp == gsy // 18 * (6 + i):
+                                    condizioneSelezionata = dati[101 + i]
+                                    dati[101 + i] = dati[101 + i + 1]
+                                    dati[101 + i + 1] = condizioneSelezionata
+                                    azioneSelezionata = dati[111 + i]
+                                    dati[111 + i] = dati[111 + i + 1]
+                                    dati[111 + i + 1] = azioneSelezionata
+                                    break
+                                i += 1
+                            yp = yp + gsy // 18 * 1
+                        elif yp == gsy // 18 * 15:
+                            selimp.play()
+                    else:
+                        if yp != gsy // 18 * 15:
+                            spostapun.play()
+                            yp = yp + gsy // 18 * 1
+                        elif yp == gsy // 18 * 15:
+                            spostapun.play()
+                            yp = gsy // 18 * 6
                 if event.key == pygame.K_w:
-                    if (yp != gsy // 18 * 6):
+                    if riordinamento:
+                        if yp != gsy // 18 * 6:
+                            spostapun.play()
+                            i = 0
+                            while i < 10:
+                                if yp == gsy // 18 * (6 + i):
+                                    condizioneSelezionata = dati[101 + i]
+                                    dati[101 + i] = dati[101 + i - 1]
+                                    dati[101 + i - 1] = condizioneSelezionata
+                                    azioneSelezionata = dati[111 + i]
+                                    dati[111 + i] = dati[111 + i - 1]
+                                    dati[111 + i - 1] = azioneSelezionata
+                                    break
+                                i += 1
+                            yp = yp - gsy // 18 * 1
+                        elif yp == gsy // 18 * 6:
+                            selimp.play()
+                    else:
+                        if yp != gsy // 18 * 6:
+                            spostapun.play()
+                            yp = yp - gsy // 18 * 1
+                        elif yp == gsy // 18 * 6:
+                            spostapun.play()
+                            yp = gsy // 18 * 15
+                if event.key == pygame.K_d and not riordinamento:
+                    if xp == gsx // 32 * 1:
                         spostapun.play()
-                        yp = yp - gsy // 18 * 1
-                    elif yp == gsy // 18 * 6:
+                        xp = gsx // 32 * 8
+                    elif xp == gsx // 32 * 8:
                         spostapun.play()
-                        yp = gsy // 18 * 15
-                if event.key == pygame.K_d:
-                    if (xp != gsx // 32 * 15):
+                        xp = gsx // 32 * 11
+                    elif xp == gsx // 32 * 11:
                         spostapun.play()
-                        xp = xp + gsx // 32 * 7
-                    elif xp == gsx // 32 * 15:
+                        xp = gsx // 32 * 17
+                    elif xp == gsx // 32 * 17:
                         spostapun.play()
                         xp = gsx // 32 * 1
-                if event.key == pygame.K_a:
-                    if (xp != gsx // 32 * 1):
+                if event.key == pygame.K_a and not riordinamento:
+                    if xp == gsx // 32 * 1:
                         spostapun.play()
-                        xp = xp - gsx // 32 * 7
-                    elif xp == gsx // 32 * 1:
+                        xp = gsx // 32 * 17
+                    elif xp == gsx // 32 * 8:
                         spostapun.play()
-                        xp = gsx // 32 * 15
+                        xp = gsx // 32 * 1
+                    elif xp == gsx // 32 * 11:
+                        spostapun.play()
+                        xp = gsx // 32 * 8
+                    elif xp == gsx // 32 * 17:
+                        spostapun.play()
+                        xp = gsx // 32 * 11
                 if event.key == pygame.K_SPACE:
                     carim = True
-                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
-                    # armrob
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
-                        if dati[71] != 0:
-                            selezione.play()
-                            dati[9] = 0
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
-                        if dati[72] != 0:
-                            selezione.play()
-                            dati[9] = 1
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
-                        if dati[73] != 0:
-                            selezione.play()
-                            dati[9] = 2
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
-                        if dati[74] != 0:
-                            selezione.play()
-                            dati[9] = 3
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
-                        if dati[75] != 0:
-                            selezione.play()
-                            dati[9] = 4
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
-                        if dati[76] != 0:
-                            selezione.play()
-                            dati[9] = 5
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
-                        if dati[77] != 0:
-                            selezione.play()
-                            dati[9] = 6
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
-                        if dati[78] != 0:
-                            selezione.play()
-                            dati[9] = 7
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
-                        if dati[79] != 0:
-                            selezione.play()
-                            dati[9] = 8
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
-                        if dati[80] != 0:
-                            selezione.play()
-                            dati[9] = 9
-                            if dati[10] > 300 + (dati[9] * 100):
-                                dati[10] = 300 + (dati[9] * 100)
-                        else:
-                            selimp.play()
-
-                    # condizioni
-                    i = 101
-                    c = 6
-                    while i <= 110:
-                        if xp == gsx // 32 * 8 and yp == gsy // 18 * c:
-                            if dati[i] != -1:
+                    # riordina
+                    if riordinamento:
+                        selezione.play()
+                        riordinamento = False
+                    else:
+                        # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                        # armrob
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
+                            if dati[71] != 0:
                                 selezione.play()
-                                dati[i] = sceglicondiz(dati, dati[i])
+                                dati[9] = 0
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
                             else:
                                 selimp.play()
-                        i = i + 1
-                        c = c + 1
-
-                    # tecniche
-                    i = 111
-                    c = 6
-                    while i <= 120:
-                        if xp == gsx // 32 * 15 and yp == gsy // 18 * c:
-                            if dati[i] != -1:
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
+                            if dati[72] != 0:
                                 selezione.play()
-                                dati[i] = sceglitecn(dati, dati[i])
+                                dati[9] = 1
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
                             else:
                                 selimp.play()
-                        i = i + 1
-                        c = c + 1
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
+                            if dati[73] != 0:
+                                selezione.play()
+                                dati[9] = 2
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
+                            if dati[74] != 0:
+                                selezione.play()
+                                dati[9] = 3
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
+                            if dati[75] != 0:
+                                selezione.play()
+                                dati[9] = 4
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
+                            if dati[76] != 0:
+                                selezione.play()
+                                dati[9] = 5
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
+                            if dati[77] != 0:
+                                selezione.play()
+                                dati[9] = 6
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
+                            if dati[78] != 0:
+                                selezione.play()
+                                dati[9] = 7
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
+                            if dati[79] != 0:
+                                selezione.play()
+                                dati[9] = 8
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+                        if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
+                            if dati[80] != 0:
+                                selezione.play()
+                                dati[9] = 9
+                                if dati[10] > 300 + (dati[9] * 100):
+                                    dati[10] = 300 + (dati[9] * 100)
+                            else:
+                                selimp.play()
+
+                        # riordina
+                        if xp == gsx // 32 * 8:
+                            selezione.play()
+                            riordinamento = True
+
+                        # condizioni
+                        i = 101
+                        c = 6
+                        while i <= 110:
+                            if xp == gsx // 32 * 11 and yp == gsy // 18 * c:
+                                if dati[i] != -1:
+                                    selezione.play()
+                                    dati[i] = sceglicondiz(dati, dati[i])
+                                else:
+                                    selimp.play()
+                            i = i + 1
+                            c = c + 1
+
+                        # tecniche
+                        i = 111
+                        c = 6
+                        while i <= 120:
+                            if xp == gsx // 32 * 17 and yp == gsy // 18 * c:
+                                if dati[i] != -1:
+                                    selezione.play()
+                                    dati[i] = sceglitecn(dati, dati[i])
+                                else:
+                                    selimp.play()
+                            i = i + 1
+                            c = c + 1
 
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 6, gsy // 18 * 12))
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 8, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12))
+
+            if riordinamento:
+                pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 3), gsx // 32 * 15, gsy // 18 * 1))
 
             if carim:
                 armrobs = pygame.image.load("Immagini\Armrobs\Armrob%is.png" % dati[9])
@@ -3599,101 +3672,109 @@ def equiprobo(dati):
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
 
             # programmazione Colco
-            messaggio("Condizione...", grigiochi, gsx // 32 * 9, gsy // 18 * 4.5, 60)
+            messaggio("Ordine", grigiochi, gsx // 32 * 8.5, gsy // 18 * 4.5, 60)
+            i = 1
+            while i <= 10:
+                if i == 10:
+                    messaggio(str(i), grigiochi, gsx // 32 * 9.3, gsy // 18 * (i + 4.9), 50)
+                else:
+                    messaggio(str(i), grigiochi, gsx // 32 * 9.5, gsy // 18 * (i + 4.9), 50)
+                i += 1
+            messaggio("Condizione...", grigiochi, gsx // 32 * 12, gsy // 18 * 4.5, 60)
             c = 6
             for i in range(101, 111):
                 if dati[i] == -1:
-                    messaggio("---", grigioscu, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("---", grigioscu, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    messaggio("---", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("---", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    messaggio("Rallo con veleno", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Rallo con veleno", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    messaggio("Sempre a Colco", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Sempre a Colco", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico vicino", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico lontano", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
                 c = c + 1
-            messaggio("...Tecnica", grigiochi, gsx // 32 * 16, gsy // 18 * 4.5, 60)
+            messaggio("...Tecnica", grigiochi, gsx // 32 * 18, gsy // 18 * 4.5, 60)
             c = 6
             for i in range(111, 121):
                 if dati[i] == -1:
-                    messaggio("---", grigioscu, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("---", grigioscu, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    messaggio("---", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("---", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    messaggio("Scossa", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Scossa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    messaggio("Cura", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Cura", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    messaggio("Antidoto", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Antidoto", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    messaggio("Freccia elettrica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    messaggio("Raffreddamento", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Raffreddamento", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    messaggio("Auto-ricarica", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    messaggio("Cura +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Cura +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    messaggio("Scossa +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Scossa +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    messaggio("Velocizza", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Velocizza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    messaggio("Carica attacco", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Carica attacco", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    messaggio("Carica difesa", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Carica difesa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    messaggio("Efficienza", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Efficienza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    messaggio("Cura ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Cura ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    messaggio("Scossa ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Scossa ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 16, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
                 c = c + 1
 
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)

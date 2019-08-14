@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from GenericFuncG2 import *
 from MenuG2 import *
 from EnvPrintG2 import *
 from MovNemiciRobG2 import *
@@ -1603,7 +1602,11 @@ def gameloop():
 
             # efficienza
             if dati[126] > 0:
-                dati[126] = dati[126] - 1
+                if dati[125] > 0:
+                    if muovirob == 1 or muovirob == -1:
+                        dati[126] = dati[126] - 1
+                else:
+                    dati[126] = dati[126] - 1
 
             # vel+
             if dati[125] > 0:
