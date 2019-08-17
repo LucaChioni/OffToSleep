@@ -238,18 +238,24 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
 
     # robo
     schermo.blit(robot, (rx, ry))
+    if surrisc > 0:
+        schermo.blit(roboSurrisc, (rx, ry))
     schermo.blit(armrob, (rx, ry))
 
     # personaggio
     if npers == 1:
         schermo.blit(scudo, (x, y))
         schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
         schermo.blit(armatura, (x, y))
         schermo.blit(persdb, (x, y))
         schermo.blit(arma, (x, y))
     if npers == 2:
         schermo.blit(arma, (x, y))
         schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
         schermo.blit(armatura, (x, y))
         schermo.blit(persab, (x, y))
         schermo.blit(scudo, (x, y))
@@ -257,10 +263,14 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
         schermo.blit(arma, (x, y))
         schermo.blit(scudo, (x, y))
         schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
         schermo.blit(armatura, (x, y))
         schermo.blit(perswb, (x, y))
     if npers == 4:
         schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
         schermo.blit(armatura, (x, y))
         schermo.blit(perssb, (x, y))
         schermo.blit(arma, (x, y))
@@ -1344,18 +1354,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
         # robo
         schermo.blit(robot, (rx, ry))
+        if surrisc > 0:
+            schermo.blit(roboSurrisc, (rx, ry))
         schermo.blit(armrob, (rx, ry))
         # personaggio
         if not risposta:
             if npers == 1:
                 schermo.blit(scudo, (x, y))
                 schermo.blit(pers, (x, y))
+                if avvele:
+                    schermo.blit(persAvvele, (x, y))
                 schermo.blit(armatura, (x, y))
                 schermo.blit(persdb, (x, y))
                 schermo.blit(arma, (x, y))
             if npers == 2:
                 schermo.blit(arma, (x, y))
                 schermo.blit(pers, (x, y))
+                if avvele:
+                    schermo.blit(persAvvele, (x, y))
                 schermo.blit(armatura, (x, y))
                 schermo.blit(persab, (x, y))
                 schermo.blit(scudo, (x, y))
@@ -1363,10 +1379,14 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(arma, (x, y))
                 schermo.blit(scudo, (x, y))
                 schermo.blit(pers, (x, y))
+                if avvele:
+                    schermo.blit(persAvvele, (x, y))
                 schermo.blit(armatura, (x, y))
                 schermo.blit(perswb, (x, y))
             if npers == 4:
                 schermo.blit(pers, (x, y))
+                if avvele:
+                    schermo.blit(persAvvele, (x, y))
                 schermo.blit(armatura, (x, y))
                 schermo.blit(perssb, (x, y))
                 schermo.blit(arma, (x, y))

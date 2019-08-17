@@ -1415,6 +1415,9 @@ def gameloop():
             sposta = True
             stanzaVecchia = dati[1]
             x, y, dati[1], carim, inutile, cambiosta = muri_porte(x, y, nx, ny, dati[1], carim, 0, False, False, porte, cofanetti)
+            if (x == rx and y == ry) or (x == mxa and y == mya) or (x == mxb and y == myb) or (x == mxc and y == myc) or (x == mxd and y == myd) or (x == mxe and y == mye) or (x == mxf and y == myf) or (x == mxg and y == myg) or (x == mxh and y == myh) or (x == mxi and y == myi) or (x == mxl and y == myl):
+                x = vx
+                y = vy
         # gestione attacchi
         if attacco != 0 and attacco <= 6 and contattogg == 0:
             pvma, pvmb, pvmc, pvmd, pvme, pvmf, pvmg, pvmh, pvmi, pvml, sposta, creaesca, xesca, yesca, statoma, statomb, statomc, statomd, statome, statomf, statomg, statomh, statomi, statoml, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126],
@@ -1477,7 +1480,7 @@ def gameloop():
                 dati[5] = dati[5] + 3
                 if dati[5] > pvtot:
                     dati[5] = pvtot
-        # gestione att+, dif+
+        # gestione att+ e dif+
         if dati[123] > 0:
             att = att + att // 4
             if sposta:
@@ -1537,6 +1540,26 @@ def gameloop():
             ry = yProv
             spingiColco = False
 
+        # animazione camminata personaggio
+        if sposta and not inizio:
+            # mentre ci si sposta
+            if x != vx or y != vy:
+                if primopasso and not cambiosta:
+                    rumorecamminata.play(-1)
+                    primopasso = False
+                # camminata quando si entra in una stanza
+                if cambiosta:
+                    animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, dati[121])
+                # camminata quando non si entra in una stanza
+                if not cambiosta:
+                    animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, dati[121])
+            # mentre non ci si sposta
+            elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+                if primopasso:
+                    rumorecamminata.play(-1)
+                    primopasso = False
+                animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, dati[121])
+
         # lancio esche
         if creaesca:
             contaesca = contaesca + 1
@@ -1586,9 +1609,6 @@ def gameloop():
             # se surriscaldato toglie vel+ e efficienza
             dati[125] = 0
             dati[126] = 0
-        if rx == x and ry == y:
-            x = vx
-            y = vy
         if ((sposta and muovirob <= 0) or muovirob > 0) and not morterob and not cambiosta:
             vrx = rx
             vry = ry
@@ -1679,7 +1699,7 @@ def gameloop():
                 rx = vrx
                 ry = vry
                 nrob = 0
-            if (rx == mxa and ry == mya) or (rx == mxb and ry == myb) or (rx == mxc and ry == myc) or (rx == mxd and ry == myd) or (rx == mxe and ry == mye) or (rx == mxf and ry == myf) or (rx == mxg and ry == myg) or (rx == mxh and ry == myh) or (rx == mxi and ry == myi) or (rx == mxl and ry == myl):
+            if (rx == x and ry == y) or (rx == mxa and ry == mya) or (rx == mxb and ry == myb) or (rx == mxc and ry == myc) or (rx == mxd and ry == myd) or (rx == mxe and ry == mye) or (rx == mxf and ry == myf) or (rx == mxg and ry == myg) or (rx == mxh and ry == myh) or (rx == mxi and ry == myi) or (rx == mxl and ry == myl):
                 rx = vrx
                 ry = vry
                 nrob = 0
@@ -1755,77 +1775,16 @@ def gameloop():
             robot = robomo
             armrob = armrobmo
 
+        # animazione camminata robo
+        if not inizio and (rx != vrx or ry != vry) and not cambiosta:
+            #rumorecamminataRobo.play()
+            animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, dati[122])
+
         # movimento-azioni mostri
         if (nmost > 0 and (sposta or muovimosta > 0 or muovimostb > 0 or muovimostc > 0 or muovimostd > 0 or muovimoste > 0 or muovimostf > 0 or muovimostg > 0 or muovimosth > 0 or muovimosti > 0 or muovimostl > 0) and not cambiosta) or primociclo:
             vetDatiNemici = [pvma, mxa, mya, pvmatot, pvmb, mxb, myb, pvmbtot, pvmc, mxc, myc, pvmctot, pvmd, mxd, myd,
                              pvmdtot, pvme, mxe, mye, pvmetot, pvmf, mxf, myf, pvmftot, pvmg, mxg, myg, pvmgtot, pvmh,
                              mxh, myh, pvmhtot, pvmi, mxi, myi, pvmitot, pvml, mxl, myl, pvmltot]
-            # controlli mostri per personaggio durante il cammino
-            if mxa == x and mya == y:
-                x = vx
-                y = vy
-            if mxb == x and myb == y:
-                x = vx
-                y = vy
-            if mxc == x and myc == y:
-                x = vx
-                y = vy
-            if mxd == x and myd == y:
-                x = vx
-                y = vy
-            if mxe == x and mye == y:
-                x = vx
-                y = vy
-            if mxf == x and myf == y:
-                x = vx
-                y = vy
-            if mxg == x and myg == y:
-                x = vx
-                y = vy
-            if mxh == x and myh == y:
-                x = vx
-                y = vy
-            if mxi == x and myi == y:
-                x = vx
-                y = vy
-            if mxl == x and myl == y:
-                x = vx
-                y = vy
-            # controlli personaggio per robo durante il cammino
-            if rx == x and ry == y:
-                rx = vrx
-                ry = vry
-            # controlli mostri per robo durante il cammino
-            if mxa == rx and mya == ry:
-                rx = vrx
-                ry = vry
-            if mxb == rx and myb == ry:
-                rx = vrx
-                ry = vry
-            if mxc == rx and myc == ry:
-                rx = vrx
-                ry = vry
-            if mxd == rx and myd == ry:
-                rx = vrx
-                ry = vry
-            if mxe == rx and mye == ry:
-                rx = vrx
-                ry = vry
-            if mxf == rx and myf == ry:
-                rx = vrx
-                ry = vry
-            if mxg == rx and myg == ry:
-                rx = vrx
-                ry = vry
-            if mxh == rx and myh == ry:
-                rx = vrx
-                ry = vry
-            if mxi == rx and myi == ry:
-                rx = vrx
-                ry = vry
-            if mxl == rx and myl == ry:
-                rx = vrx
-                ry = vry
             # veleno mostri
             if (statoma != 0 or statomb != 0 or statomc != 0 or statomd != 0 or statome != 0 or statomf != 0 or statomg != 0 or statomh != 0 or statomi != 0 or statoml != 0) and sposta:
                 if statoma == 1 or statoma == 3:
@@ -2477,26 +2436,6 @@ def gameloop():
         else:
             apriocchio = False
 
-        # animazione camminata personaggio
-        if sposta and not inizio:
-            # mentre ci si sposta
-            if x != vx or y != vy:
-                if primopasso and not cambiosta:
-                    rumorecamminata.play(-1)
-                    primopasso = False
-                # camminata quando si entra in una stanza
-                if cambiosta:
-                    animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma)
-                # camminata quando non si entra in una stanza
-                if not cambiosta:
-                    animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma)
-            # mentre non ci si sposta
-            elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                if primopasso:
-                    rumorecamminata.play(-1)
-                    primopasso = False
-                animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma)
-
         # animazione morte nemici
         animaMorteNemici(mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl, sfondinoa, sfondinob)
 
@@ -2522,6 +2461,8 @@ def gameloop():
 
         vx = x
         vy = y
+        vrx = rx
+        vry = ry
         if contattogg != 1:
             attacco = 0
 

@@ -142,7 +142,7 @@ def animaCofanetto(tesoro, x, y, npers, sfondinoc):
     return caricaini, tesoro
 
 
-def animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma):
+def animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, avvele):
     fineanimaz = 1
     while fineanimaz > 0:
         n = 0
@@ -163,12 +163,16 @@ def animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatur
             if npers == 1:
                 schermo.blit(scudo, (vx + (gpx // 3), y))
                 schermo.blit(persdm, (vx + (gpx // 3), y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx + (gpx // 3), y))
                 schermo.blit(armatura, (vx + (gpx // 3), y))
                 schermo.blit(persdmb1, (vx + (gpx // 3), y))
                 schermo.blit(arma, (vx + (gpx // 3), y))
             if npers == 2:
                 schermo.blit(arma, (vx - (gpx // 3), y))
                 schermo.blit(persam, (vx - (gpx // 3), y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx - (gpx // 3), y))
                 schermo.blit(armatura, (vx - (gpx // 3), y))
                 schermo.blit(persamb1, (vx - (gpx // 3), y))
                 schermo.blit(scudo, (vx - (gpx // 3), y))
@@ -176,10 +180,14 @@ def animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatur
                 schermo.blit(arma, (x, vy - (gpy // 3)))
                 schermo.blit(scudo, (x, vy - (gpy // 3)))
                 schermo.blit(perswm, (x, vy - (gpy // 3)))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy - (gpy // 3)))
                 schermo.blit(armatura, (x, vy - (gpy // 3)))
                 schermo.blit(perswmb1, (x, vy - (gpy // 3)))
             if npers == 4:
                 schermo.blit(perssm, (x, vy + (gpy // 3)))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy + (gpy // 3)))
                 schermo.blit(armatura, (x, vy + (gpy // 3)))
                 schermo.blit(perssmb1, (x, vy + (gpy // 3)))
                 schermo.blit(arma, (x, vy + (gpy // 3)))
@@ -190,7 +198,7 @@ def animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatur
         pygame.display.update()
 
 
-def animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma):
+def animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, avvele):
     fineanimaz = 2
     while fineanimaz != 0:
         n = 0
@@ -211,12 +219,16 @@ def animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura
             if fineanimaz == 2:
                 schermo.blit(scudo, (vx + (gpx // 3), y))
                 schermo.blit(persdm, (vx + (gpx // 3), y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx + (gpx // 3), y))
                 schermo.blit(armatura, (vx + (gpx // 3), y))
                 schermo.blit(persdmb1, (vx + (gpx // 3), y))
                 schermo.blit(arma, (vx + (gpx // 3), y))
             if fineanimaz == 1:
                 schermo.blit(scudo, (vx + (gpx * 2 // 3), y))
                 schermo.blit(persdm, (vx + (gpx * 2 // 3), y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx + (gpx * 2 // 3), y))
                 schermo.blit(armatura, (vx + (gpx * 2 // 3), y))
                 schermo.blit(persdmb2, (vx + (gpx * 2 // 3), y))
                 schermo.blit(arma, (vx + (gpx * 2 // 3), y))
@@ -224,12 +236,16 @@ def animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura
             if fineanimaz == 2:
                 schermo.blit(arma, (vx - (gpx // 3), y))
                 schermo.blit(persam, (vx - (gpx // 3), y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx - (gpx // 3), y))
                 schermo.blit(armatura, (vx - (gpx // 3), y))
                 schermo.blit(persamb1, (vx - (gpx // 3), y))
                 schermo.blit(scudo, (vx - (gpx // 3), y))
             if fineanimaz == 1:
                 schermo.blit(arma, (vx - (gpx * 2 // 3), y))
                 schermo.blit(persam, (vx - (gpx * 2 // 3), y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx - (gpx * 2 // 3), y))
                 schermo.blit(armatura, (vx - (gpx * 2 // 3), y))
                 schermo.blit(persamb2, (vx - (gpx * 2 // 3), y))
                 schermo.blit(scudo, (vx - (gpx * 2 // 3), y))
@@ -238,23 +254,31 @@ def animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura
                 schermo.blit(arma, (x, vy - (gpy // 3)))
                 schermo.blit(scudo, (x, vy - (gpy // 3)))
                 schermo.blit(perswm, (x, vy - (gpy // 3)))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy - (gpy // 3)))
                 schermo.blit(armatura, (x, vy - (gpy // 3)))
                 schermo.blit(perswmb1, (x, vy - (gpy // 3)))
             if fineanimaz == 1:
                 schermo.blit(arma, (x, vy - (gpy * 2 // 3)))
                 schermo.blit(scudo, (x, vy - (gpy * 2 // 3)))
                 schermo.blit(perswm, (x, vy - (gpy * 2 // 3)))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy - (gpy * 2 // 3)))
                 schermo.blit(armatura, (x, vy - (gpy * 2 // 3)))
                 schermo.blit(perswmb2, (x, vy - (gpy * 2 // 3)))
         if npers == 4:
             if fineanimaz == 2:
                 schermo.blit(perssm, (x, vy + (gpy // 3)))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy + (gpy // 3)))
                 schermo.blit(armatura, (x, vy + (gpy // 3)))
                 schermo.blit(perssmb1, (x, vy + (gpy // 3)))
                 schermo.blit(arma, (x, vy + (gpy // 3)))
                 schermo.blit(scudo, (x, vy + (gpy // 3)))
             if fineanimaz == 1:
                 schermo.blit(perssm, (x, vy + (gpy * 2 // 3)))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy + (gpy * 2 // 3)))
                 schermo.blit(armatura, (x, vy + (gpy * 2 // 3)))
                 schermo.blit(perssmb2, (x, vy + (gpy * 2 // 3)))
                 schermo.blit(arma, (x, vy + (gpy * 2 // 3)))
@@ -276,9 +300,41 @@ def animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura
                         schermo.blit(sfondinoa, (vx, vy))
                 m = m + 1
         n = n + 1
+    if npers == 1:
+        schermo.blit(scudo, (x, y))
+        schermo.blit(persd, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(persdb, (x, y))
+        schermo.blit(arma, (x, y))
+    if npers == 2:
+        schermo.blit(arma, (x, y))
+        schermo.blit(persa, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(persab, (x, y))
+        schermo.blit(scudo, (x, y))
+    if npers == 3:
+        schermo.blit(arma, (x, y))
+        schermo.blit(scudo, (x, y))
+        schermo.blit(persw, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(perswb, (x, y))
+    if npers == 4:
+        schermo.blit(perss, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(perssb, (x, y))
+        schermo.blit(arma, (x, y))
+        schermo.blit(scudo, (x, y))
 
 
-def animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma):
+def animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, avvele):
     fineanimaz = 2
     while fineanimaz != 0:
         n = 0
@@ -297,12 +353,16 @@ def animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, a
             if fineanimaz == 2:
                 schermo.blit(scudo, (vx, y))
                 schermo.blit(persdm, (vx, y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx, y))
                 schermo.blit(armatura, (vx, y))
                 schermo.blit(persdmb1, (vx, y))
                 schermo.blit(arma, (vx, y))
             if fineanimaz == 1:
                 schermo.blit(scudo, (vx, y))
                 schermo.blit(persdm, (vx, y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx, y))
                 schermo.blit(armatura, (vx, y))
                 schermo.blit(persdmb2, (vx, y))
                 schermo.blit(arma, (vx, y))
@@ -310,12 +370,16 @@ def animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, a
             if fineanimaz == 2:
                 schermo.blit(arma, (vx, y))
                 schermo.blit(persam, (vx, y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx, y))
                 schermo.blit(armatura, (vx, y))
                 schermo.blit(persamb1, (vx, y))
                 schermo.blit(scudo, (vx, y))
             if fineanimaz == 1:
                 schermo.blit(arma, (vx, y))
                 schermo.blit(persam, (vx, y))
+                if avvele:
+                    schermo.blit(persAvvele, (vx, y))
                 schermo.blit(armatura, (vx, y))
                 schermo.blit(persamb2, (vx, y))
                 schermo.blit(scudo, (vx, y))
@@ -324,23 +388,31 @@ def animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, a
                 schermo.blit(arma, (x, vy))
                 schermo.blit(scudo, (x, vy))
                 schermo.blit(perswm, (x, vy))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy))
                 schermo.blit(armatura, (x, vy))
                 schermo.blit(perswmb1, (x, vy))
             if fineanimaz == 1:
                 schermo.blit(arma, (x, vy))
                 schermo.blit(scudo, (x, vy))
                 schermo.blit(perswm, (x, vy))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy))
                 schermo.blit(armatura, (x, vy))
                 schermo.blit(perswmb2, (x, vy))
         if npers == 4:
             if fineanimaz == 2:
                 schermo.blit(perssm, (x, vy))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy))
                 schermo.blit(armatura, (x, vy))
                 schermo.blit(perssmb1, (x, vy))
                 schermo.blit(arma, (x, vy))
                 schermo.blit(scudo, (x, vy))
             if fineanimaz == 1:
                 schermo.blit(perssm, (x, vy))
+                if avvele:
+                    schermo.blit(persAvvele, (x, vy))
                 schermo.blit(armatura, (x, vy))
                 schermo.blit(perssmb2, (x, vy))
                 schermo.blit(arma, (x, vy))
@@ -470,3 +542,103 @@ def animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, li
         if fineanimaz == 0:
             pygame.time.wait(1000)
         fineanimaz = fineanimaz - 1
+
+
+def animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, surriscalda):
+    fineanimaz = 2
+    while fineanimaz != 0:
+        n = 0
+        while fineanimaz <= 2 and n < 32:
+            if rx == gpx * n:
+                m = 0
+                while m < 18:
+                    if ry == gpy * m:
+                        if (n + m) % 2 == 0:
+                            schermo.blit(sfondinoa, (rx, ry))
+                            schermo.blit(sfondinob, (vrx, vry))
+                        if (n + m) % 2 != 0:
+                            schermo.blit(sfondinob, (rx, ry))
+                            schermo.blit(sfondinoa, (vrx, vry))
+                    m = m + 1
+            n = n + 1
+        if nrob == 1:
+            if fineanimaz == 2:
+                schermo.blit(robodp, (vrx + (gpx // 3), ry))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (vrx + (gpx // 3), ry))
+                schermo.blit(armrob, (vrx + (gpx // 3), ry))
+            if fineanimaz == 1:
+                schermo.blit(robodp, (vrx + (gpx * 2 // 3), ry))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (vrx + (gpx * 2 // 3), ry))
+                schermo.blit(armrob, (vrx + (gpx * 2 // 3), ry))
+        if nrob == 2:
+            if fineanimaz == 2:
+                schermo.blit(roboap, (vrx - (gpx // 3), ry))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (vrx - (gpx // 3), ry))
+                schermo.blit(armrob, (vrx - (gpx // 3), ry))
+            if fineanimaz == 1:
+                schermo.blit(roboap, (vrx - (gpx * 2 // 3), ry))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (vrx - (gpx * 2 // 3), ry))
+                schermo.blit(armrob, (vrx - (gpx * 2 // 3), ry))
+        if nrob == 4:
+            if fineanimaz == 2:
+                schermo.blit(robow, (rx, vry - (gpy // 3)))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (rx, vry - (gpy // 3)))
+                schermo.blit(armrob, (rx, vry - (gpy // 3)))
+            if fineanimaz == 1:
+                schermo.blit(robow, (rx, vry - (gpy * 2 // 3)))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (rx, vry - (gpy * 2 // 3)))
+                schermo.blit(armrob, (rx, vry - (gpy * 2 // 3)))
+        if nrob == 3:
+            if fineanimaz == 2:
+                schermo.blit(robos, (rx, vry + (gpy // 3)))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (rx, vry + (gpy // 3)))
+                schermo.blit(armrob, (rx, vry + (gpy // 3)))
+            if fineanimaz == 1:
+                schermo.blit(robos, (rx, vry + (gpy * 2 // 3)))
+                if surriscalda:
+                    schermo.blit(roboSurrisc, (rx, vry + (gpy * 2 // 3)))
+                schermo.blit(armrob, (rx, vry + (gpy * 2 // 3)))
+        pygame.display.update()
+        clock.tick(fpsanimazioni)
+        fineanimaz = fineanimaz - 1
+    n = 0
+    while n < 32:
+        if rx == gpx * n:
+            m = 0
+            while m < 18:
+                if ry == gpy * m:
+                    if (n + m) % 2 == 0:
+                        schermo.blit(sfondinoa, (rx, ry))
+                        schermo.blit(sfondinob, (vrx, vry))
+                    if (n + m) % 2 != 0:
+                        schermo.blit(sfondinob, (rx, ry))
+                        schermo.blit(sfondinoa, (vrx, vry))
+                m = m + 1
+        n = n + 1
+    if nrob == 1:
+        schermo.blit(robod, (rx, ry))
+        if surriscalda:
+            schermo.blit(roboSurrisc, (rx, ry))
+        schermo.blit(armrob, (rx, ry))
+    if nrob == 2:
+        schermo.blit(roboa, (rx, ry))
+        if surriscalda:
+            schermo.blit(roboSurrisc, (rx, ry))
+        schermo.blit(armrob, (rx, ry))
+    if nrob == 4:
+        schermo.blit(robow, (rx, ry))
+        if surriscalda:
+            schermo.blit(roboSurrisc, (rx, ry))
+        schermo.blit(armrob, (rx, ry))
+    if nrob == 3:
+        schermo.blit(robos, (rx, ry))
+        if surriscalda:
+            schermo.blit(roboSurrisc, (rx, ry))
+        schermo.blit(armrob, (rx, ry))
