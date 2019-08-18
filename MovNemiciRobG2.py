@@ -313,7 +313,7 @@ def movmostro(x, y, rx, ry, mx, my, stanza, tipo, muovimost, visto, dif, difro, 
     return mx, my, muovimost, nmos, visto, dati, vitaesca, vistam
 
 
-def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy):
+def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy, x, y):
     esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
     raffreddamento = False
     ricarica1 = False
@@ -322,6 +322,8 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
     nrob = 0
     sposta = False
     vetNemiciSoloConXeY = []
+    vetNemiciSoloConXeY.append(x)
+    vetNemiciSoloConXeY.append(y)
     i = 0
     while i < len(nemiciVistiDaColco):
         vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 2])
@@ -560,7 +562,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                 if vetNemiciSoloConXeY[i] == xBersaglio and vetNemiciSoloConXeY[i + 1] == yBersaglio:
                     del vetNemiciSoloConXeY[i + 1]
                     del vetNemiciSoloConXeY[i]
-                i += 4
+                i += 2
             percorsoTrovato = pathFinding(rx, ry, xBersaglio, yBersaglio, stanza, porte, cofanetti, vetNemiciSoloConXeY)
             if percorsoTrovato != "arrivato":
                 if percorsoTrovato and len(percorsoTrovato) >= 4:
@@ -777,6 +779,12 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     else:
                         dati[10] -= costoTecniche[azione - 1]
             if not (ralloAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) or not (ralloVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
+                i = 0
+                while i < len(vetNemiciSoloConXeY):
+                    if vetNemiciSoloConXeY[i] == xBersaglio and vetNemiciSoloConXeY[i + 1] == yBersaglio:
+                        del vetNemiciSoloConXeY[i + 1]
+                        del vetNemiciSoloConXeY[i]
+                    i += 2
                 azioneEseguita = True
                 if abs(rx - xBersaglio) == gpx and abs(ry - yBersaglio) == gpy:
                     if vx == rx + gpx:
@@ -1028,7 +1036,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # pv rallo < 80
                 if dati[i] == 1:
                     if dati[5] < pvtot / float(100) * 80 and dati[5] >= 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1041,7 +1049,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # pv rallo < 50
                 if dati[i] == 2:
                     if dati[5] < pvtot / float(100) * 50 and dati[5] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1054,7 +1062,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # pv rallo < 30
                 if dati[i] == 3:
                     if dati[5] < pvtot / float(100) * 30 and dati[5] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1067,7 +1075,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # rallo avvelenato
                 if dati[i] == 4:
                     if dati[121]:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1080,7 +1088,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # colco surriscaldato
                 if dati[i] == 5:
                     if dati[122] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1093,7 +1101,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # pe colco < 80
                 if dati[i] == 6:
                     if dati[10] < entot / float(100) * 80 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1106,7 +1114,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # pe colco < 50
                 if dati[i] == 7:
                     if dati[10] < entot / float(100) * 50 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1119,7 +1127,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # pe colco < 30
                 if dati[i] == 8:
                     if dati[10] < entot / float(100) * 30 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1132,7 +1140,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # sempre rallo
                 if dati[i] == 9 and not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0):
                     if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1145,7 +1153,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 # sempre colco
                 if dati[i] == 10 and not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
                     if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                         k = 0
                         while k < len(vetDatiNemici):
                             j = 0
@@ -1192,7 +1200,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             statom = nemiciPossibili[nemicoScelto + 5]
                         if mx != 0 and my != 0:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1238,7 +1246,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if mx != 0 and my != 0:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1284,7 +1292,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if mx != 0 and my != 0:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1330,7 +1338,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if mx != 0 and my != 0:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1376,7 +1384,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if mx != 0 and my != 0:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1422,7 +1430,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if mx != 0 and my != 0:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1468,7 +1476,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if mx != 0 and my != 0:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1516,7 +1524,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if numeroNemici > 1:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1564,7 +1572,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if numeroNemici > 4:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom
@@ -1612,7 +1620,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                             k += 3
                         if numeroNemici > 7:
                             pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy)
+                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
                             if pvm != pvmVecchi:
                                 vetDatiNemici[numeroNemico] = pvm
                                 vetDatiNemici[numeroNemico + 4] = statom

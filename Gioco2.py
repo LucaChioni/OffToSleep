@@ -1293,12 +1293,12 @@ def gameloop():
                     ny = 0
                     primopas = True
 
-                if event.key == pygame.K_e and not tastoTrovato:
+                if event.key == pygame.K_e and not tastoTrovato and muovirob <= 0 and muovimosta <= 0 and muovimostb <= 0 and muovimostc <= 0 and muovimostd <= 0 and muovimoste <= 0 and muovimostf <= 0 and muovimostg <= 0 and muovimosth <= 0 and muovimosti <= 0 and muovimostl <= 0:
                     tastoTrovato = True
                     nx = 0
                     ny = 0
                     attacco = 1
-                if event.key == pygame.K_x and not tastoTrovato:
+                if event.key == pygame.K_x and not tastoTrovato and muovirob <= 0 and muovimosta <= 0 and muovimostb <= 0 and muovimostc <= 0 and muovimostd <= 0 and muovimoste <= 0 and muovimostf <= 0 and muovimostg <= 0 and muovimosth <= 0 and muovimosti <= 0 and muovimostl <= 0:
                     tastoTrovato = True
                     nx = 0
                     ny = 0
@@ -1307,7 +1307,7 @@ def gameloop():
                     else:
                         chiamarob = True
 
-                if event.key == pygame.K_SPACE and not tastoTrovato:
+                if event.key == pygame.K_SPACE and not tastoTrovato and muovirob <= 0 and muovimosta <= 0 and muovimostb <= 0 and muovimostc <= 0 and muovimostd <= 0 and muovimoste <= 0 and muovimostf <= 0 and muovimostg <= 0 and muovimosth <= 0 and muovimosti <= 0 and muovimostl <= 0:
                     tastoTrovato = True
                     # apertura porte
                     k = 0
@@ -1355,7 +1355,7 @@ def gameloop():
                                 j = j + 4
                         i = i + 4
 
-                if event.key == pygame.K_ESCAPE and not tastoTrovato:
+                if event.key == pygame.K_ESCAPE and not tastoTrovato and muovirob <= 0 and muovimosta <= 0 and muovimostb <= 0 and muovimostc <= 0 and muovimostd <= 0 and muovimoste <= 0 and muovimostf <= 0 and muovimostg <= 0 and muovimosth <= 0 and muovimosti <= 0 and muovimostl <= 0:
                     tastoTrovato = True
                     startf = True
 
@@ -1384,11 +1384,6 @@ def gameloop():
             dati[121] = False
             aumentoliv = False
 
-        # togliere il rumore della camminata
-        if ((tastop != pygame.K_w) and (tastop != pygame.K_a) and (tastop != pygame.K_s) and (tastop != pygame.K_d)) or (dati[5] <= 0):
-            rumorecamminata.stop()
-            primopasso = True
-
         # menu start
         if startf and attacco != 1:
             selsta.play()
@@ -1405,7 +1400,7 @@ def gameloop():
 
         # morte tua e di robo
         inizio = controllaMorteRallo(dati[5], inizio)
-        morterob, dati = controllaMorteColco(dati)
+        morterob, dati, muovirob = controllaMorteColco(dati, muovirob)
 
         # movimento-azioni personaggio
         if (nx != 0 or ny != 0) and muovimosta <= 0 and muovimostb <= 0 and muovimostc <= 0 and muovimostd <= 0 and muovimoste <= 0 and muovimostf <= 0 and muovimostg <= 0 and muovimosth <= 0 and muovimosti <= 0 and muovimostl <= 0 and muovirob <= 0:
@@ -1539,26 +1534,6 @@ def gameloop():
             rx = xProv
             ry = yProv
             spingiColco = False
-
-        # animazione camminata personaggio
-        if sposta and not inizio:
-            # mentre ci si sposta
-            if x != vx or y != vy:
-                if primopasso and not cambiosta:
-                    rumorecamminata.play(-1)
-                    primopasso = False
-                # camminata quando si entra in una stanza
-                if cambiosta:
-                    animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, dati[121])
-                # camminata quando non si entra in una stanza
-                if not cambiosta:
-                    animaPersSpostato(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, dati[121])
-            # mentre non ci si sposta
-            elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                if primopasso:
-                    rumorecamminata.play(-1)
-                    primopasso = False
-                animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, dati[121])
 
         # lancio esche
         if creaesca:
@@ -1774,11 +1749,6 @@ def gameloop():
         if morterob:
             robot = robomo
             armrob = armrobmo
-
-        # animazione camminata robo
-        if not inizio and (rx != vrx or ry != vry) and not cambiosta:
-            #rumorecamminataRobo.play()
-            animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, dati[122])
 
         # movimento-azioni mostri
         if (nmost > 0 and (sposta or muovimosta > 0 or muovimostb > 0 or muovimostc > 0 or muovimostd > 0 or muovimoste > 0 or muovimostf > 0 or muovimostg > 0 or muovimosth > 0 or muovimosti > 0 or muovimostl > 0) and not cambiosta) or primociclo:
@@ -2365,10 +2335,6 @@ def gameloop():
             dati[127] = dati[127] - esptot
             aumentoliv = True
 
-        # animazione apertura cofanetto
-        if tesoro != -1:
-            caricaini, tesoro = animaCofanetto(tesoro, x, y, npers, sfondinoc)
-
         # aggiorna vista dei mostri e metti l'occhio se ti vedono
         if True:
             if nemicoa != 0:
@@ -2436,8 +2402,8 @@ def gameloop():
         else:
             apriocchio = False
 
-        # animazione morte nemici
-        animaMorteNemici(mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl, sfondinoa, sfondinob)
+        # fai tutte le animazioni del turno
+        primopasso, caricaini, tesoro = anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl, caricaini, caseviste)
 
         sposta = False
 
@@ -2448,13 +2414,6 @@ def gameloop():
                                nemicoc, mxc, myc, mxcv, mycv, nemicod, mxd, myd, mxdv, mydv, nemicoe, mxe, mye, mxev, myev, nemicof, mxf, myf, mxfv, myfv,
                                nemicog, mxg, myg, mxgv, mygv, nemicoh, mxh, myh, mxhv, myhv, nemicoi, mxi, myi, mxiv, myiv, nemicol, mxl, myl, mxlv, mylv,
                                caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza)
-
-        # animazione aumento di livello
-        if aumentoliv and not carim and not inizio:
-            rumorecamminata.stop()
-            rumorelevelup.play()
-            animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, dati[4])
-            caricaini = True
 
         if not aumentoliv:
             caricaini = False

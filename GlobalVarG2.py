@@ -52,6 +52,13 @@ verdescu = (0, 120, 0)
 blu = (0, 0, 255)
 
 # valore volume 0-1
+pygame.mixer.set_num_channels(6)
+canzone = pygame.mixer.Channel(0)
+puntatore = pygame.mixer.Channel(1)
+effetti = pygame.mixer.Channel(2)
+passiRallo = pygame.mixer.Channel(3)
+passiColco = pygame.mixer.Channel(4)
+passiNemico = pygame.mixer.Channel(5)
 volumeCanzoni = 0
 volumePuntatore = 1
 volumeEffetti = 1

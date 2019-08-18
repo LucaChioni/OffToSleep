@@ -3627,15 +3627,16 @@ def controllaMorteRallo(vitaRallo, inizio):
     return inizio
 
 
-def controllaMorteColco(dati):
+def controllaMorteColco(dati, muovirob):
     if dati[10] <= 0:
         morterob = True
+        muovirob = 0
         dati[122] = 0
         dati[125] = 0
         dati[126] = 0
     else:
         morterob = False
-    return morterob, dati
+    return morterob, dati, muovirob
 
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
