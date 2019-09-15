@@ -3051,6 +3051,10 @@ def equiprobo(dati):
     carim = True
     risposta = False
     riordinamento = False
+    annullaRiordinamento = False
+    datiPrimaDiRiordinamento = list(dati)
+    vxpGambit = xp
+    vypGambit = yp
 
     esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
 
@@ -3417,6 +3421,7 @@ def equiprobo(dati):
                         risposta = True
                     else:
                         riordinamento = False
+                        annullaRiordinamento = True
                 if event.key == pygame.K_s:
                     if riordinamento:
                         if yp != gsy // 18 * 15:
@@ -3587,6 +3592,9 @@ def equiprobo(dati):
                         if xp == gsx // 32 * 8:
                             selezione.play()
                             riordinamento = True
+                            datiPrimaDiRiordinamento = list(dati)
+                            vxpGambit = xp
+                            vypGambit = yp
 
                         # condizioni
                         i = 101
@@ -3618,6 +3626,12 @@ def equiprobo(dati):
             # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 6, gsy // 18 * 12))
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 8, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12))
+
+            if annullaRiordinamento:
+                dati = list(datiPrimaDiRiordinamento)
+                annullaRiordinamento = False
+                xp = vxpGambit
+                yp = vypGambit
 
             if riordinamento:
                 pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 3), gsx // 32 * 15, gsy // 18 * 1))
@@ -3944,7 +3958,7 @@ def equiprobo(dati):
                     elif dati[9] == 9:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
 
-            # puntatore vecchio
+            # puntatore vecchio batterie/riordinamento gambit
             if dati[9] == 0:
                 schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6))
             if dati[9] == 1:
@@ -3965,6 +3979,8 @@ def equiprobo(dati):
                 schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14))
             if dati[9] == 9:
                 schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 15))
+            if riordinamento:
+                schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
 
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()

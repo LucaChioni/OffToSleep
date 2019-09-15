@@ -3133,7 +3133,6 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 elif c == 1:
                     c = 0
                     i = i - 9
-    if stanza == 1:
         if cx == gpx * 7 and cy == gpy * 12:
             c = 0
             i = 101
@@ -3147,7 +3146,6 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 elif c == 1:
                     c = 0
                     i = i - 9
-    if stanza == 1:
         if cx == gpx * 12 and cy == gpy * 11:
             c = 0
             i = 101
@@ -3175,16 +3173,20 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 elif c == 1:
                     c = 0
                     i = i - 9
-    if stanza == 2:
         if cx == gpx * 5 and cy == gpy * 10:
             tesoro = 11
-    if stanza == 2:
         if cx == gpx * 10 and cy == gpy * 9:
             tesoro = 81
+
+    # assegna oggetto ottenuto
     if dati[tesoro] <= -1 and (tesoro >= 31 and tesoro <= 40):
         dati[tesoro] = dati[tesoro] + 2
     else:
-        dati[tesoro] = dati[tesoro] + 1
+        if tesoro >= 101 and tesoro <= 120:
+            dati[tesoro] = dati[tesoro] + 1
+            dati[tesoro + 10] = dati[tesoro + 10] + 1
+        else:
+            dati[tesoro] = dati[tesoro] + 1
     return dati, tesoro
 
 
