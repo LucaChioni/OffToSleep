@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import random
 from GenericFuncG2 import *
 
 

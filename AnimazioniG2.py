@@ -3,146 +3,6 @@
 from GenericFuncG2 import *
 
 
-def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaini):
-    if tesoro != -1:
-        schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
-        # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
-        if tesoro >= 11 and tesoro <= 30:
-            messaggio("Hai trovato: Una nuova tecnica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 31:
-            messaggio("Hai trovato: Pozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 32:
-            messaggio("Hai trovato: Caricabatterie", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 33:
-            messaggio("Hai trovato: Bomba", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 34:
-            messaggio("Hai trovato: Medicina", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 35:
-            messaggio("Hai trovato: Bomba velenosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 36:
-            messaggio("Hai trovato: Esca", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 37:
-            messaggio("Hai trovato: Superpozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 38:
-            messaggio("Hai trovato: Caricabatterie migliorato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 39:
-            messaggio("Hai trovato: Bomba appiccicosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 40:
-            messaggio("Hai trovato: Bomba potenziata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 41:
-            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 42:
-            messaggio("Hai trovato: Spada di legno", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 43:
-            messaggio("Hai trovato: Spada di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 44:
-            messaggio("Hai trovato: Spadone d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 45:
-            messaggio("Hai trovato: Spada del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 46:
-            messaggio("Hai trovato: Spada di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 47:
-            messaggio("Hai trovato: Excalibur", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 48:
-            messaggio("Hai trovato: Lykother", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 49:
-            messaggio("Hai trovato: Sinego", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 50:
-            messaggio("Hai trovato: Mendaxritas", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 51:
-            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 52:
-            messaggio("Hai trovato: Armatura di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 53:
-            messaggio("Hai trovato: Armatura di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 54:
-            messaggio("Hai trovato: Armatura d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 55:
-            messaggio("Hai trovato: Armatura del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 56:
-            messaggio("Hai trovato: Armatura di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 57:
-            messaggio("Hai trovato: Armatura leggendaria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 58:
-            messaggio("Hai trovato: Lykodes", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 59:
-            messaggio("Hai trovato: Armatura antica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 60:
-            messaggio("Hai trovato: Loriquam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 61:
-            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 62:
-            messaggio("Hai trovato: Scudo di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 63:
-            messaggio("Hai trovato: Scudo di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 64:
-            messaggio("Hai trovato: Scudo d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 65:
-            messaggio("Hai trovato: Scudo del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 66:
-            messaggio("Hai trovato: Scudo di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 67:
-            messaggio("Hai trovato: Scudo leggentario", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 68:
-            messaggio("Hai trovato: Lykethmos", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 69:
-            messaggio("Hai trovato: Scudo antico", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 70:
-            messaggio("Hai trovato: Clipequam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 71:
-            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 72:
-            messaggio("Hai trovato: Batteria scarica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 73:
-            messaggio("Hai trovato: Batteria piccola", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 74:
-            messaggio("Hai trovato: Batteria media", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 75:
-            messaggio("Hai trovato: Batteria grande", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 76:
-            messaggio("Hai trovato: Batteria discreta", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 77:
-            messaggio("Hai trovato: Batteria affidabile", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 78:
-            messaggio("Hai trovato: Batteria extra", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 79:
-            messaggio("Hai trovato: Batteria efficiente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 80:
-            messaggio("Hai trovato: Batteria illimitata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro >= 81 and tesoro <= 100:
-            messaggio("Hai trovato: Una nuova condizione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro >= 101 and tesoro <= 120:
-            messaggio("Hai trovato: Cella di memoria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if npers == 1:
-            schermo.blit(sfondinoc, (x + gpx, y))
-            schermo.blit(cofaniaper, (x + gpx, y))
-        if npers == 2:
-            schermo.blit(sfondinoc, (x - gpx, y))
-            schermo.blit(cofaniaper, (x - gpx, y))
-        if npers == 4:
-            schermo.blit(sfondinoc, (x, y + gpy))
-            schermo.blit(cofaniaper, (x, y + gpy))
-        if npers == 3:
-            schermo.blit(sfondinoc, (x, y - gpy))
-            schermo.blit(cofaniaper, (x, y - gpy))
-        pygame.display.update()
-        pygame.time.wait(500)
-        risposta = False
-        while not risposta:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        selezione.play()
-                        risposta = True
-        caricaini = True
-        tesoro = -1
-
-    return caricaini, tesoro
-
-
 def animaPersCambiosta(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, arma, avvele, fineanimaz):
     if fineanimaz == 1:
         if npers == 1:
@@ -383,27 +243,144 @@ def animaCamminataRallo(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, primopas
     return animazione, primopasso
 
 
-def animaMorteNemici(mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl, sfondinoa, sfondinob, fineanimaz):
-    vetNemiciMorti = [mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl]
-    i = 0
-    while i < len(vetNemiciMorti):
-        mortoMo = vetNemiciMorti[i]
-        mx = vetNemiciMorti[i + 1]
-        my = vetNemiciMorti[i + 2]
-        if mortoMo == 1:
-            n = 0
-            while n < 32:
-                if mx == gpx * n:
-                    m = 0
-                    while m < 18:
-                        if my == gpy * m:
-                            if (n + m) % 2 == 0:
-                                schermo.blit(sfondinoa, (mx, my))
-                            if (n + m) % 2 != 0:
-                                schermo.blit(sfondinob, (mx, my))
-                        m = m + 1
-                n = n + 1
-        i += 3
+def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaini):
+    if tesoro != -1:
+        schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
+        # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
+        if tesoro >= 11 and tesoro <= 30:
+            messaggio("Hai trovato: Una nuova tecnica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 31:
+            messaggio("Hai trovato: Pozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 32:
+            messaggio("Hai trovato: Caricabatterie", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 33:
+            messaggio("Hai trovato: Bomba", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 34:
+            messaggio("Hai trovato: Medicina", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 35:
+            messaggio("Hai trovato: Bomba velenosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 36:
+            messaggio("Hai trovato: Esca", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 37:
+            messaggio("Hai trovato: Superpozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 38:
+            messaggio("Hai trovato: Caricabatterie migliorato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 39:
+            messaggio("Hai trovato: Bomba appiccicosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 40:
+            messaggio("Hai trovato: Bomba potenziata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 41:
+            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 42:
+            messaggio("Hai trovato: Spada di legno", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 43:
+            messaggio("Hai trovato: Spada di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 44:
+            messaggio("Hai trovato: Spadone d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 45:
+            messaggio("Hai trovato: Spada del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 46:
+            messaggio("Hai trovato: Spada di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 47:
+            messaggio("Hai trovato: Excalibur", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 48:
+            messaggio("Hai trovato: Lykother", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 49:
+            messaggio("Hai trovato: Sinego", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 50:
+            messaggio("Hai trovato: Mendaxritas", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 51:
+            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 52:
+            messaggio("Hai trovato: Armatura di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 53:
+            messaggio("Hai trovato: Armatura di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 54:
+            messaggio("Hai trovato: Armatura d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 55:
+            messaggio("Hai trovato: Armatura del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 56:
+            messaggio("Hai trovato: Armatura di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 57:
+            messaggio("Hai trovato: Armatura leggendaria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 58:
+            messaggio("Hai trovato: Lykodes", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 59:
+            messaggio("Hai trovato: Armatura antica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 60:
+            messaggio("Hai trovato: Loriquam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 61:
+            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 62:
+            messaggio("Hai trovato: Scudo di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 63:
+            messaggio("Hai trovato: Scudo di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 64:
+            messaggio("Hai trovato: Scudo d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 65:
+            messaggio("Hai trovato: Scudo del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 66:
+            messaggio("Hai trovato: Scudo di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 67:
+            messaggio("Hai trovato: Scudo leggentario", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 68:
+            messaggio("Hai trovato: Lykethmos", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 69:
+            messaggio("Hai trovato: Scudo antico", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 70:
+            messaggio("Hai trovato: Clipequam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 71:
+            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 72:
+            messaggio("Hai trovato: Batteria scarica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 73:
+            messaggio("Hai trovato: Batteria piccola", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 74:
+            messaggio("Hai trovato: Batteria media", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 75:
+            messaggio("Hai trovato: Batteria grande", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 76:
+            messaggio("Hai trovato: Batteria discreta", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 77:
+            messaggio("Hai trovato: Batteria affidabile", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 78:
+            messaggio("Hai trovato: Batteria extra", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 79:
+            messaggio("Hai trovato: Batteria efficiente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 80:
+            messaggio("Hai trovato: Batteria illimitata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro >= 81 and tesoro <= 100:
+            messaggio("Hai trovato: Una nuova condizione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro >= 101 and tesoro <= 120:
+            messaggio("Hai trovato: Cella di memoria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if npers == 1:
+            schermo.blit(sfondinoc, (x + gpx, y))
+            schermo.blit(cofaniaper, (x + gpx, y))
+        if npers == 2:
+            schermo.blit(sfondinoc, (x - gpx, y))
+            schermo.blit(cofaniaper, (x - gpx, y))
+        if npers == 4:
+            schermo.blit(sfondinoc, (x, y + gpy))
+            schermo.blit(cofaniaper, (x, y + gpy))
+        if npers == 3:
+            schermo.blit(sfondinoc, (x, y - gpy))
+            schermo.blit(cofaniaper, (x, y - gpy))
+        pygame.display.update()
+        pygame.time.wait(500)
+        risposta = False
+        while not risposta:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        selezione.play()
+                        risposta = True
+        caricaini = True
+        tesoro = -1
+
+    return caricaini, tesoro
 
 
 def animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, liv, aumentoliv, carim, inizio, animazione, caricaini, fineanimaz):
@@ -539,7 +516,28 @@ def animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, surr
     return animazione
 
 
-def anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl, caricaini, caseviste):
+def animaMorteNemici(listaNemiciTotali, sfondinoa, sfondinob, fineanimaz):
+    for nemico in listaNemiciTotali:
+        if nemico.morto:
+            n = 0
+            while n < 32:
+                if nemico.x == gpx * n:
+                    m = 0
+                    while m < 18:
+                        if nemico.y == gpy * m:
+                            if (n + m) % 2 == 0:
+                                schermo.blit(sfondinoa, (nemico.x, nemico.y))
+                            if (n + m) % 2 != 0:
+                                schermo.blit(sfondinob, (nemico.x, nemico.y))
+                        m = m + 1
+                n = n + 1
+
+
+def animaSpostamentoNemici(listaNemici):
+    return
+
+
+def anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaini, listaNemici, listaNemiciTotali):
     animazione = False
     # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
     fineanimaz = 2
@@ -596,14 +594,24 @@ def anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nr
             # animazione camminata personaggio
             animazione, primopasso = animaCamminataRallo(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, primopasso, cambiosta, npers, sfondinoa, sfondinob, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
 
+        if not cambiosta:
+            animaSpostamentoNemici(listaNemici)
+
         # animazione apertura cofanetto
         caricaini, tesoro = animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaini)
 
         # animazione aumento di livello
         animazione, caricaini = animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, dati[4], aumentoliv, carim, inizio, animazione, caricaini, fineanimaz)
 
+        vetPosizioneNemici = []
+        for nemico in listaNemici:
+            vetPosizioneNemici.append(nemico.x)
+            vetPosizioneNemici.append(nemico.y)
+            vetPosizioneNemici.append(nemico.vx)
+            vetPosizioneNemici.append(nemico.vy)
+
         # animazione morte nemici
-        animaMorteNemici(mortoa, mxa, mya, mortob, mxb, myb, mortoc, mxc, myc, mortod, mxd, myd, mortoe, mxe, mye, mortof, mxf, myf, mortog, mxg, myg, mortoh, mxh, myh, mortoi, mxi, myi, mortol, mxl, myl, sfondinoa, sfondinob, fineanimaz)
+        animaMorteNemici(listaNemiciTotali, sfondinoa, sfondinob, fineanimaz)
 
         fineanimaz -= 1
         if animazione and fineanimaz != -1:
