@@ -437,7 +437,7 @@ def gameloop():
 
                 nemicoInMovimento = False
                 for nemico in listaNemici:
-                    if nemico.muoviMostro > 0:
+                    if nemico.mosseRimaste > 0:
                         nemicoInMovimento = True
                         break
 
@@ -553,7 +553,7 @@ def gameloop():
         # movimento-azioni personaggio
         nemiciInMovimento = False
         for nemico in listaNemici:
-            if nemico.muoviMostro > 0:
+            if nemico.mosseRimaste > 0:
                 nemiciInMovimento = True
                 break
         if (nx != 0 or ny != 0) and not nemiciInMovimento:
@@ -892,31 +892,34 @@ def gameloop():
                         incasevista = True
                         break
                     i += 3
-                print "prima " + nemico.tipo
-                if (nemico.muoviMostro > 0 or (sposta and nemico.muoviMostro <= 0)) and nemico.vita > 0 and incasevista:
-                    print "dopo " + nemico.tipo
-                    nemico.vx = nemico.x
-                    nemico.vy = nemico.y
-                    nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici)
-                    if direzioneMostro == 1:
-                        nemico.girati("d")
-                    elif direzioneMostro == 2:
-                        nemico.girati("a")
-                    elif direzioneMostro == 3:
-                        nemico.girati("s")
-                    elif direzioneMostro == 4:
-                        nemico.girati("w")
-
-                    i = 0
-                    while i < len(vetDatiNemici):
-                        if nemico.x == vetDatiNemici[i + 1] and nemico.y == vetDatiNemici[i + 2]:
+                if nemico.vita > 0 and incasevista:
+                    if nemico.mosseRimaste > 0:
+                        nemico.vx = nemico.x
+                        nemico.vy = nemico.y
+                        nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici)
+                        if direzioneMostro == 1:
+                            nemico.girati("d")
+                        elif direzioneMostro == 2:
+                            nemico.girati("a")
+                        elif direzioneMostro == 3:
+                            nemico.girati("s")
+                        elif direzioneMostro == 4:
+                            nemico.girati("w")
+                        i = 0
+                        while i < len(vetDatiNemici):
+                            if nemico.x == vetDatiNemici[i + 1] and nemico.y == vetDatiNemici[i + 2]:
+                                nemico.x = nemico.vx
+                                nemico.y = nemico.vy
+                                break
+                            i += 4
+                        if (nemico.x == x and nemico.y == y) or (nemico.x == rx and nemico.y == ry):
                             nemico.x = nemico.vx
                             nemico.y = nemico.vy
-                            break
-                        i += 4
-                    if nemico.muoviMostro < 0 or (nemico.x == x and nemico.y == y) or (nemico.x == rx and nemico.y == ry):
-                        nemico.x = nemico.vx
-                        nemico.y = nemico.vy
+                        nemico.compiMossa()
+                    elif sposta and nemico.mosseRimaste == 0:
+                        nemico.resettaMosseRimaste()
+                    elif sposta and nemico.mosseRimaste < 0:
+                        nemico.mosseRimaste += 1
                 elif nemico.vita <= 0:
                     nmost -= 1
                     dati[127] += nemico.esp
@@ -930,12 +933,6 @@ def gameloop():
             aumentoliv = True
 
         # aggiorna vista dei mostri e metti l'occhio se ti vedono
-        vetDatiNemici = []
-        for nemico in listaNemici:
-            vetDatiNemici.append(nemico.vita)
-            vetDatiNemici.append(nemico.x)
-            vetDatiNemici.append(nemico.y)
-            vetDatiNemici.append(nemico.vitaTotale)
         apriocchio = False
         for nemico in listaNemici:
             nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, dati)
@@ -943,17 +940,16 @@ def gameloop():
                 apriocchio = True
                 break
 
-        # fai tutte le animazioni del turno
-        primopasso, caricaini, tesoro = anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaini, listaNemici, listaNemiciTotali)
+        # fai tutte le animazioni del turno e disegnare gli sfondi e personaggi
+        if not inizio:
+            primopasso, caricaini, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaini, listaNemici, listaNemiciTotali)
+            if not carim:
+                ambiente_movimento(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, stanzaa, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici)
 
         # calncella deinitivamente i mostri morti
         for nemico in listaNemiciTotali:
             if nemico.morto:
                 listaNemiciTotali.remove(nemico)
-
-        # disegnare gli sfondi e personaggi
-        if not carim and not inizio:
-            ambiente_movimento(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, stanzaa, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici)
 
         if not aumentoliv:
             caricaini = False

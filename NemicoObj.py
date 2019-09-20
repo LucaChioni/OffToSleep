@@ -19,29 +19,29 @@ class NemicoObj(object):
         vitaTotale = 0
         esp = 0
         raggioVisivo = 0
-        muovimostro = 0
+        velocita = 0
         attacco = 0
         attaccaDaLontano = False
         if self.tipo == "Orco":
             vitaTotale = 50
             esp = 10
             raggioVisivo = gpx * 4
-            muovimostro = -2
+            velocita = -1
             attacco = 50
             attaccaDaLontano = False
         if self.tipo == "Pipistrello":
             vitaTotale = 20
             esp = 5
             raggioVisivo = gpx * 6
-            muovimostro = 2
+            velocita = 1
             attacco = 20
             attaccaDaLontano = True
         self.vita = vitaTotale
         self.vitaTotale = vitaTotale
         self.esp = esp
         self.raggioVisivo = raggioVisivo
-        self.muoviMostroDefault = muovimostro
-        self.muoviMostro = 0
+        self.velocita = velocita
+        self.mosseRimaste = 0
         self.attacco = attacco
         self.attaccaDaLontano = attaccaDaLontano
 
@@ -65,31 +65,23 @@ class NemicoObj(object):
         elif direzione == "d":
             self.imgAttuale = self.imgD
 
-    def resettaMuoviMostro(self):
-        if self.appiccicato:
-            self.muoviMostro = self.muoviMostroDefault - 1
-            if abs(self.muoviMostro) == 1:
-                self.muoviMostro -= 1
-        else:
-            self.muoviMostro = self.muoviMostroDefault
-
     def danneggia(self, danno):
         self.vita -= danno
         if self.vita <= 0:
             self.vita = 0
 
     def aggiornaVista(self, x, y, rx, ry, stanza, porte, cofanetti, dati):
-        vistoprov1 = False
-        vistoprov2 = False
+        vistoRallo = False
+        vistoRob = False
         caseattactot = trovacasattaccabili(self.x, self.y, stanza, porte, cofanetti)
         if abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(caseattactot):
                 if caseattactot[j] == x and caseattactot[j + 1] == y:
                     if not caseattactot[j + 2]:
-                        vistoprov1 = False
+                        vistoRallo = False
                     else:
-                        vistoprov1 = True
+                        vistoRallo = True
                     break
                 j = j + 3
         if abs(rx - self.x) <= self.raggioVisivo and abs(ry - self.y) <= self.raggioVisivo and dati[10] > 0:
@@ -97,12 +89,32 @@ class NemicoObj(object):
             while j < len(caseattactot):
                 if caseattactot[j] == rx and caseattactot[j + 1] == ry:
                     if not caseattactot[j + 2]:
-                        vistoprov2 = False
+                        vistoRob = False
                     else:
-                        vistoprov2 = True
+                        vistoRob = True
                     break
                 j = j + 3
             if dati[10] <= 0:
-                vistoprov2 = False
-        if vistoprov1 or vistoprov2:
+                vistoRob = False
+        if vistoRallo or vistoRob:
             self.visto = True
+        else:
+            self.visto = False
+
+    def resettaMosseRimaste(self):
+        if self.velocita >= 0:
+            self.mosseRimaste = 1 + self.velocita
+        elif self.velocita < 0:
+            self.mosseRimaste = 1
+
+    def compiMossa(self):
+        if self.appiccicato:
+            if self.velocita >= 0:
+                self.mosseRimaste -= 2
+            elif self.velocita < 0:
+                self.mosseRimaste = self.mosseRimaste - 2 + self.velocita
+        else:
+            if self.velocita >= 0:
+                self.mosseRimaste -= 1
+            elif self.velocita < 0:
+                self.mosseRimaste = self.mosseRimaste - 1 + self.velocita

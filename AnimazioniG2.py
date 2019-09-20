@@ -181,9 +181,9 @@ def animaPersFermo(npers, x, y, vx, vy, sfondinoa, sfondinob, scudo, armatura, a
             schermo.blit(scudo, (x, vy))
 
 
-def animaCamminataRallo(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, primopasso, cambiosta, npers, sfondinoa, sfondinob, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz):
+def animaCamminataRallo(sposta, x, y, vx, vy, rx, ry, vrx, vry, primopasso, cambiosta, npers, sfondinoa, sfondinob, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz):
     animazioneFatta = False
-    if sposta and not inizio:
+    if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
             animazione = True
@@ -383,8 +383,8 @@ def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaini):
     return caricaini, tesoro
 
 
-def animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, liv, aumentoliv, carim, inizio, animazione, caricaini, fineanimaz):
-    if aumentoliv and not carim and not inizio:
+def animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, liv, aumentoliv, carim, animazione, caricaini, fineanimaz):
+    if aumentoliv and not carim:
         animazione = True
         caricaini = True
         if not effetti.get_busy():
@@ -460,8 +460,8 @@ def animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, li
     return animazione, caricaini
 
 
-def animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, surriscalda, inizio, cambiosta, animazione, robot, fineanimaz):
-    if not inizio and (rx != vrx or ry != vry) and not cambiosta:
+def animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, surriscalda, cambiosta, animazione, robot, fineanimaz):
+    if (rx != vrx or ry != vry) and not cambiosta:
         animazione = True
         # rumorecamminataRobo.play()
         if nrob == 1:
@@ -537,7 +537,7 @@ def animaSpostamentoNemici(listaNemici):
     return
 
 
-def anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaini, listaNemici, listaNemiciTotali):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaini, listaNemici, listaNemiciTotali):
     animazione = False
     # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
     fineanimaz = 2
@@ -585,14 +585,14 @@ def anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nr
 
         if y < ry:
             # animazione camminata personaggio
-            animazione, primopasso = animaCamminataRallo(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, primopasso, cambiosta, npers, sfondinoa, sfondinob, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
+            animazione, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, rx, ry, vrx, vry, primopasso, cambiosta, npers, sfondinoa, sfondinob, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
             # animazione camminata robo
-            animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, dati[122], inizio, cambiosta, animazione, robot, fineanimaz)
+            animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
         else:
             # animazione camminata robo
-            animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, dati[122], inizio, cambiosta, animazione, robot, fineanimaz)
+            animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, sfondinoa, sfondinob, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
             # animazione camminata personaggio
-            animazione, primopasso = animaCamminataRallo(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, primopasso, cambiosta, npers, sfondinoa, sfondinob, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
+            animazione, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, rx, ry, vrx, vry, primopasso, cambiosta, npers, sfondinoa, sfondinob, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
 
         if not cambiosta:
             animaSpostamentoNemici(listaNemici)
@@ -601,14 +601,7 @@ def anima(sposta, inizio, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nr
         caricaini, tesoro = animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaini)
 
         # animazione aumento di livello
-        animazione, caricaini = animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, dati[4], aumentoliv, carim, inizio, animazione, caricaini, fineanimaz)
-
-        vetPosizioneNemici = []
-        for nemico in listaNemici:
-            vetPosizioneNemici.append(nemico.x)
-            vetPosizioneNemici.append(nemico.y)
-            vetPosizioneNemici.append(nemico.vx)
-            vetPosizioneNemici.append(nemico.vy)
+        animazione, caricaini = animaLvUp(npers, x, y, pers, sfondinoa, sfondinob, scudo, armatura, arma, dati[4], aumentoliv, carim, animazione, caricaini, fineanimaz)
 
         # animazione morte nemici
         animaMorteNemici(listaNemiciTotali, sfondinoa, sfondinob, fineanimaz)

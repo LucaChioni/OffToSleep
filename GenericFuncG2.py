@@ -3118,6 +3118,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
 
 
 def aperturacofanetto(stanza, cx, cy, dati):
+    tesoro = -1
     # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
     if stanza == 1:
         if cx == gpx * 3 and cy == gpy * 7:
@@ -3179,14 +3180,15 @@ def aperturacofanetto(stanza, cx, cy, dati):
             tesoro = 81
 
     # assegna oggetto ottenuto
-    if dati[tesoro] <= -1 and (tesoro >= 31 and tesoro <= 40):
-        dati[tesoro] = dati[tesoro] + 2
-    else:
-        if tesoro >= 101 and tesoro <= 120:
-            dati[tesoro] = dati[tesoro] + 1
-            dati[tesoro + 10] = dati[tesoro + 10] + 1
+    if tesoro != -1:
+        if dati[tesoro] <= -1 and (tesoro >= 31 and tesoro <= 40):
+            dati[tesoro] = dati[tesoro] + 2
         else:
-            dati[tesoro] = dati[tesoro] + 1
+            if tesoro >= 101 and tesoro <= 120:
+                dati[tesoro] = dati[tesoro] + 1
+                dati[tesoro + 10] = dati[tesoro + 10] + 1
+            else:
+                dati[tesoro] = dati[tesoro] + 1
     return dati, tesoro
 
 

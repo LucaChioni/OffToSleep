@@ -17,9 +17,6 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     # burocrazia
     carim = False
 
-    if nemico.muoviMostro == 0:
-        nemico.resettaMuoviMostro()
-
     # movimenti verso esche o casuali
     primaesca = True
     i = 0
@@ -47,8 +44,8 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     primaesca = True
                 j = j + 3
         i = i + 4
-    vistoprov1 = False
-    vistoprov2 = False
+    vistoRallo = False
+    vistoRob = False
     if not visto and not vistoesca:
         # controllo caselle che si vedono (per controllare se vedono pers o robo)
         caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti)
@@ -57,9 +54,9 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             while j < len(caseattactot):
                 if caseattactot[j] == x and caseattactot[j + 1] == y:
                     if not caseattactot[j + 2]:
-                        vistoprov1 = False
+                        vistoRallo = False
                     else:
-                        vistoprov1 = True
+                        vistoRallo = True
                     break
                 j = j + 3
         if abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo and dati[10] > 0:
@@ -67,21 +64,25 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             while j < len(caseattactot):
                 if caseattactot[j] == rx and caseattactot[j + 1] == ry:
                     if not caseattactot[j + 2]:
-                        vistoprov2 = False
+                        vistoRob = False
                     else:
-                        vistoprov2 = True
+                        vistoRob = True
                     break
                 j = j + 3
             if dati[10] <= 0:
-                vistoprov2 = False
-        if vistoprov1 or vistoprov2:
+                vistoRob = False
+        if vistoRallo or vistoRob:
             visto = True
         if not visto:
             nmos = random.randint(1, 4)
             sposta = True
 
-    if (visto or vistoesca) and nemico.muoviMostro >= -1:
-        if ((abs(rx - nemico.x) + abs(ry - nemico.y)) < (abs(x - nemico.x) + abs(y - nemico.y)) or not vistoprov1) and vistoprov2 and dati[10] > 0 and not vistoesca:
+    if visto or vistoesca:
+        xAlleatoDaEvitare = rx
+        yAlleatoDaEvitare = ry
+        if ((abs(rx - nemico.x) + abs(ry - nemico.y)) < (abs(x - nemico.x) + abs(y - nemico.y)) or not vistoRallo) and vistoRob and dati[10] > 0 and not vistoesca:
+            xAlleatoDaEvitare = x
+            yAlleatoDaEvitare = y
             x = rx
             y = ry
             attrobo = True
@@ -98,13 +99,13 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     vetNemiciSoloConXeY.append(vetNemici[i + 1])
                     vetNemiciSoloConXeY.append(vetNemici[i + 2])
                 i += 4
-            if not (x == rx and y == ry):
-                vetNemiciSoloConXeY.append(rx)
-                vetNemiciSoloConXeY.append(ry)
+            if not (x == xAlleatoDaEvitare and y == yAlleatoDaEvitare):
+                vetNemiciSoloConXeY.append(xAlleatoDaEvitare)
+                vetNemiciSoloConXeY.append(yAlleatoDaEvitare)
             percorsoTrovato = pathFinding(nemico.x, nemico.y, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
             if percorsoTrovato:
                 if len(percorsoTrovato) >= 4:
-                    if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.x:
+                    if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
                         if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
                             nmos = 1
                         if percorsoTrovato[len(percorsoTrovato) - 4] < nemico.x:
@@ -138,7 +139,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     if nemico.y > y and c == 2:
                         nmos = 4
                     sposta = True
-            if (x == nemico.x + gpx and y == nemico.y) or (x == nemico.x - gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + gpy) or (x == nemico.x and y == nemico.y - gpy) or ((x == nemico.x) and (y == nemico.y)):
+            if (x == nemico.x + gpx and y == nemico.y) or (x == nemico.x - gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + gpy) or (x == nemico.x and y == nemico.y - gpy) or (x == nemico.x and y == nemico.y):
                 if vistoesca:
                     danno = nemico.attacco
                     if danno < 0:
@@ -270,11 +271,8 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmy = 0
                 i = i + 4
 
-    if nemico.muoviMostro < -1:
-        nmos = 0
-
     # alcuni sono inutili!!!
-    nemico.x, nemico.y, stanza, carim, nemico.muoviMostro, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, nemico.muoviMostro, True, False, porte, cofanetti)
+    nemico.x, nemico.y, stanza, carim, inutile, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, 1, True, False, porte, cofanetti)
     nemico.visto = visto
     return nemico, nmos, dati, vitaesca
 
