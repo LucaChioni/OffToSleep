@@ -31,7 +31,7 @@ def gameloop():
             nmost = 0
             agg = 0
             primopas = False
-            tastotemp = 5
+            tastotemp = 10
             tastop = 0
             startf = False
             aumentoliv = False
@@ -42,7 +42,6 @@ def gameloop():
             creaesca = False
             vitaesca = []
             premuti = 0
-            contattogg = 0
             attacco = 0
             # difesa e' grigio perche' viene impostato a ogni ciclo
             difesa = 0
@@ -98,7 +97,6 @@ def gameloop():
         # caricare gli oggetti
         if carim:
             premuti = 0
-            contattogg = 0
             if pers == persw:
                 agg = 1
             if pers == persa:
@@ -108,8 +106,8 @@ def gameloop():
             if pers == persd:
                 agg = 4
             # stanza
-            stanzaa = pygame.image.load("Immagini\Paesaggi\Stanza%ia.png" % dati[1]).convert()
-            stanzaa = pygame.transform.scale(stanzaa, (gsx, gsy))
+            imgSfondoStanza = pygame.image.load("Immagini\Paesaggi\Stanza%ia.png" % dati[1]).convert()
+            imgSfondoStanza = pygame.transform.scale(imgSfondoStanza, (gsx, gsy))
             sfondinoa = pygame.image.load("Immagini\Paesaggi\Sfondino%ia.png" % dati[1]).convert()
             sfondinoa = pygame.transform.scale(sfondinoa, (gpx, gpy))
             sfondinob = pygame.image.load("Immagini\Paesaggi\Sfondino%ib.png" % dati[1]).convert()
@@ -207,7 +205,6 @@ def gameloop():
                 ny = 0
                 primopas = False
                 tastop = 0
-                # per inizializzare i mostri
 
                 # carica i cofanetti nella stanza (svuoto e riempio il vettore)
                 i = 0
@@ -334,7 +331,7 @@ def gameloop():
                     robot = robow
                     armrob = armrobw
 
-            caricaini = True
+            caricaTutto = True
             carim = False
             tastotemp = 10
 
@@ -346,25 +343,9 @@ def gameloop():
             armrob = armrobs
             inizio = False
 
-        # rallenta per i 30 fps
-        '''if not primopas and tastotempfps != 0 and premuti >= 1:
-            tastotempfps = tastotempfps - 1
-            nx = 0
-            ny = 0
-        if not primopas and tastotempfps == 0 and premuti >= 1:
-            if tastop == pygame.K_w:
-                ny = -gpy
-            if tastop == pygame.K_a:
-                nx = -gpx
-            if tastop == pygame.K_s:
-                ny = gpy
-            if tastop == pygame.K_d:
-                nx = gpx
-            tastotempfps = 5'''
-
         # controllo primo passo
         if primopas and tastotemp != 0 and premuti >= 1:
-            tastotemp = tastotemp - 1
+            tastotemp -= 1
             nx = 0
             ny = 0
         if primopas and tastotemp == 0 and premuti >= 1:
@@ -377,7 +358,7 @@ def gameloop():
             if tastop == pygame.K_d:
                 nx = gpx
             primopas = False
-            tastotemp = 5
+            tastotemp = 10
 
         tastoTrovato = False
         # catturare gli eventi
@@ -471,7 +452,7 @@ def gameloop():
                             porte[k + 3] = True
                             # scoprire caselle viste
                             caseviste = scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste)
-                            caricaini = True
+                            caricaTutto = True
                             # aggiornare vettore tutteporte
                             j = 0
                             while j < len(tutteporte):
@@ -493,7 +474,7 @@ def gameloop():
                             sposta = True
                             dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
                             cofanetti[i + 3] = True
-                            caricaini = True
+                            caricaTutto = True
                             # aggiornare vettore tutticofanetti
                             j = 0
                             while j < len(tutticofanetti):
@@ -518,8 +499,7 @@ def gameloop():
                     nx = 0
                     ny = 0
                     primopas = False
-                    tastotemp = 5
-                    tastotempfps = 5
+                    tastotemp = 10
                     tastop = 0
 
         # statistiche personaggio e robo (liv + arm + scu)
@@ -541,8 +521,7 @@ def gameloop():
                 dati, inizio, attacco = start(dati, nmost, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, apriocchio)
             else:
                 dati, attacco, sposta = startBattaglia(dati)
-            if attacco != 0:
-                contattogg = 1
+                caricaTutto = True
             carim = True
             startf = False
 
@@ -573,9 +552,9 @@ def gameloop():
                 x = vx
                 y = vy
         # gestione attacchi
-        if attacco != 0 and attacco <= 6 and contattogg == 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], stanzaa, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici)
-            caricaini = True
+        if attacco != 0:
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici)
+            caricaTutto = True
             # cambiare posizione dopo l'attacco
             if npers == 3:
                 pers = persw
@@ -853,36 +832,19 @@ def gameloop():
                 if nrob == 4:
                     robot = robow
                     armrob = armrobw
-        # gestione tecniche
-        if attacco != 0 and attacco > 6 and contattogg == 0:
-            caricaini = True
-            # cambiare posizione dopo l'attacco
-            if nrob != 0:
-                if nrob == 1:
-                    robot = robod
-                    armrob = armrobd
-                if nrob == 2:
-                    robot = roboa
-                    armrob = armroba
-                if nrob == 3:
-                    robot = robos
-                    armrob = armrobs
-                if nrob == 4:
-                    robot = robow
-                    armrob = armrobw
         if morterob:
             robot = robomo
             armrob = armrobmo
 
         # movimento-azioni mostri
         if nmost > 0 and not cambiosta:
-            vetDatiNemici = []
             for nemico in listaNemici:
-                vetDatiNemici.append(nemico.vita)
-                vetDatiNemici.append(nemico.x)
-                vetDatiNemici.append(nemico.y)
-                vetDatiNemici.append(nemico.vitaTotale)
-            for nemico in listaNemici:
+                vetDatiNemici = []
+                for nemicoTemp in listaNemici:
+                    vetDatiNemici.append(nemicoTemp.vita)
+                    vetDatiNemici.append(nemicoTemp.x)
+                    vetDatiNemici.append(nemicoTemp.y)
+                    vetDatiNemici.append(nemicoTemp.vitaTotale)
                 if nemico.avvelenato and sposta:
                     nemico.vita -= 3
                 incasevista = False
@@ -893,18 +855,24 @@ def gameloop():
                         break
                     i += 3
                 if nemico.vita > 0 and incasevista:
+                    if sposta and nemico.mosseRimaste == 0:
+                        nemico.resettaMosseRimaste()
                     if nemico.mosseRimaste > 0:
                         nemico.vx = nemico.x
                         nemico.vy = nemico.y
                         nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici)
                         if direzioneMostro == 1:
                             nemico.girati("d")
+                            nemico.direzione = "d"
                         elif direzioneMostro == 2:
                             nemico.girati("a")
+                            nemico.direzione = "a"
                         elif direzioneMostro == 3:
                             nemico.girati("s")
+                            nemico.direzione = "s"
                         elif direzioneMostro == 4:
                             nemico.girati("w")
+                            nemico.direzione = "w"
                         i = 0
                         while i < len(vetDatiNemici):
                             if nemico.x == vetDatiNemici[i + 1] and nemico.y == vetDatiNemici[i + 2]:
@@ -916,8 +884,6 @@ def gameloop():
                             nemico.x = nemico.vx
                             nemico.y = nemico.vy
                         nemico.compiMossa()
-                    elif sposta and nemico.mosseRimaste == 0:
-                        nemico.resettaMosseRimaste()
                     elif sposta and nemico.mosseRimaste < 0:
                         nemico.mosseRimaste += 1
                 elif nemico.vita <= 0:
@@ -942,9 +908,11 @@ def gameloop():
 
         # fai tutte le animazioni del turno e disegnare gli sfondi e personaggi
         if not inizio:
-            primopasso, caricaini, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaini, listaNemici, listaNemiciTotali)
+            if caricaTutto:
+                disegnaAmbientePrimaAnimazione(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici)
+            primopasso, caricaTutto, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, listaNemiciTotali, imgSfondoStanza, porte, cofanetti, portaOriz, portaVert, caseviste)
             if not carim:
-                ambiente_movimento(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, stanzaa, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici)
+                disegnaAmbienteDopoAnimazione(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, sfondinoa, sfondinob, arma, armatura, scudo, robot, armrob, vitaesca, caseviste, apriocchio, chiamarob, listaNemici)
 
         # calncella deinitivamente i mostri morti
         for nemico in listaNemiciTotali:
@@ -952,22 +920,20 @@ def gameloop():
                 listaNemiciTotali.remove(nemico)
 
         if not aumentoliv:
-            caricaini = False
+            caricaTutto = False
 
+        for nemico in listaNemici:
+            nemico.vx = nemico.x
+            nemico.vy = nemico.y
+            nemico.anima = False
         vx = x
         vy = y
         vrx = rx
         vry = ry
-        if contattogg != 1:
-            attacco = 0
+        attacco = 0
 
         sposta = False
 
-        # mostra il framerate
-        #if clock.get_fps() < 27:
-        #    print (clock.get_fps())
-
-        pygame.display.update()
         clock.tick(fps)
 
 gameloop()

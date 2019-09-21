@@ -35,7 +35,7 @@ class NemicoObj(object):
             raggioVisivo = gpx * 6
             velocita = 1
             attacco = 20
-            attaccaDaLontano = True
+            attaccaDaLontano = False
         self.vita = vitaTotale
         self.vitaTotale = vitaTotale
         self.esp = esp
@@ -44,6 +44,7 @@ class NemicoObj(object):
         self.mosseRimaste = 0
         self.attacco = attacco
         self.attaccaDaLontano = attaccaDaLontano
+        self.anima = False
 
         imgW = pygame.image.load("Immagini\Mostri\\" + tipo + "w.png")
         self.imgW = pygame.transform.scale(imgW, (gpx, gpy))
@@ -54,6 +55,24 @@ class NemicoObj(object):
         imgD = pygame.image.load("Immagini\Mostri\\" + tipo + "d.png")
         self.imgD = pygame.transform.scale(imgD, (gpx, gpy))
         self.girati(direzione)
+        self.direzione = direzione
+
+        imgWMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "wMov1.png")
+        self.imgWMov1 = pygame.transform.scale(imgWMov1, (gpx, gpy))
+        imgWMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "wMov2.png")
+        self.imgWMov2 = pygame.transform.scale(imgWMov2, (gpx, gpy))
+        imgAMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "aMov1.png")
+        self.imgAMov1 = pygame.transform.scale(imgAMov1, (gpx, gpy))
+        imgAMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "aMov2.png")
+        self.imgAMov2 = pygame.transform.scale(imgAMov2, (gpx, gpy))
+        imgSMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "sMov1.png")
+        self.imgSMov1 = pygame.transform.scale(imgSMov1, (gpx, gpy))
+        imgSMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "sMov2.png")
+        self.imgSMov2 = pygame.transform.scale(imgSMov2, (gpx, gpy))
+        imgDMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "dMov1.png")
+        self.imgDMov1 = pygame.transform.scale(imgDMov1, (gpx, gpy))
+        imgDMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "dMov2.png")
+        self.imgDMov2 = pygame.transform.scale(imgDMov2, (gpx, gpy))
 
     def girati(self, direzione):
         if direzione == "w":

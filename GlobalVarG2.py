@@ -35,16 +35,19 @@ pygame.display.set_icon(icona)
 
 # clock
 clock = pygame.time.Clock()
+clockAttacco = pygame.time.Clock()
+clockAnimazioni = pygame.time.Clock()
+clockVideo = pygame.time.Clock()
 fps = 30
-fpsanimazioni = 7
-fpsmenu = 20
-fpsvideo = 12
+fpsAnimazioni = 30
+fpsAttacco = 20
+fpsVideo = 12
 
 # colori
 nero = (0, 0, 0)
-grigioscu = [70, 70, 70]
-grigio = [100, 100, 100]
-grigiochi = [230, 230, 230]
+grigioscu = (70, 70, 70)
+grigio = (100, 100, 100)
+grigiochi = (230, 230, 230)
 bianco = (255, 255, 255)
 rosso = (255, 0, 0)
 verde = (0, 255, 0)

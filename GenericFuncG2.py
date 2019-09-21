@@ -84,19 +84,22 @@ def guardaVideo(path, audio=0):
     if audio != 0:
         audio.play(-1)
     # play video
-    for i in listaImg:
-        schermo.blit(i, (0, 0))
-        pygame.display.update()
-        clock.tick(fpsvideo)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                selezione.play()
-                if audio != 0:
-                    audio.stop()
-                return True
+    i = 0
+    while i < len(listaImg) + 10:
+        if i >= 10:
+            schermo.blit(listaImg[i - 10], (0, 0))
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    selezione.play()
+                    if audio != 0:
+                        audio.stop()
+                    return True
+        clockVideo.tick(fpsVideo)
+        i += 1
     if audio != 0:
         audio.stop()
     return False

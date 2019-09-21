@@ -5,6 +5,7 @@ from GenericFuncG2 import *
 
 def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, porte, cofanetti, vetNemici):
     sposta = False
+    attacca = False
     attrobo = False
     nmos = 0
     nmx = 0
@@ -174,6 +175,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmos = 3
                 if x == nemico.x and y == nemico.y - gpy:
                     nmos = 4
+                attacca = True
                 sposta = False
 
         # nemici che attaccano da lontano
@@ -214,6 +216,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmos = 3
                 if nemico.y > y:
                     nmos = 4
+            attacca = True
             sposta = False
 
     # spostamento
@@ -270,6 +273,9 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmx = 0
                     nmy = 0
                 i = i + 4
+
+    if sposta or attacca:
+        nemico.anima = True
 
     # alcuni sono inutili!!!
     nemico.x, nemico.y, stanza, carim, inutile, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, 1, True, False, porte, cofanetti)

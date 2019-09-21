@@ -3,80 +3,81 @@
 from GenericFuncG2 import *
 
 
-def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, stanzaa, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, caricaini, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici):
-    # sfondo
-    if caricaini:
-        schermo.blit(stanzaa, (0, 0))
-        # porte
-        i = 0
-        while i < len(porte):
-            if not porte[i + 3]:
-                vmurx = porte[i + 1]
-                vmury = porte[i + 2]
-                murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, numStanza, False, False, False, False, porte, cofanetti)
-                schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
-                if vmurx == murx and vmury == mury:
-                    schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+def disegnaAmbientePrimaAnimazione(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici):
+    schermo.blit(imgSfondoStanza, (0, 0))
+    # porte
+    i = 0
+    while i < len(porte):
+        if not porte[i + 3]:
+            vmurx = porte[i + 1]
+            vmury = porte[i + 2]
+            murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, numStanza, False, False, False, False, porte, cofanetti)
+            schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
+            if vmurx == murx and vmury == mury:
+                schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+            else:
+                schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+        i = i + 4
+    # cofanetti
+    i = 0
+    while i < len(cofanetti):
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
+                    caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
+                        caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (
+                        caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and \
+                    caseviste[j + 2]:
+                schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
+                if cofanetti[i + 3]:
+                    schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
                 else:
-                    schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
-            i = i + 4
-        # cofanetti
-        i = 0
-        while i < len(cofanetti):
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and caseviste[j + 2]:
-                    schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
-                    if cofanetti[i + 3]:
-                        schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                    else:
-                        schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-                j = j + 3
-            i = i + 4
-        i = 0
-        # disegno le caselle viste
-        while i < len(caseviste):
-            if caseviste[i + 2]:
-                n = 0
-                while n < 32:
-                    if caseviste[i] == gpx * n:
-                        m = 0
-                        while m < 18:
-                            if caseviste[i + 1] == gpy * m:
-                                if (n + m) % 2 == 0:
-                                    schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
-                                if (n + m) % 2 != 0:
-                                    schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
-                            m = m + 1
-                    n = n + 1
-            i = i + 3
-    else:
-        n = 0
-        while n < 32:
-            if vx == gpx * n:
-                m = 0
-                while m < 18:
-                    if vy == gpy * m:
-                        if (n + m) % 2 == 0:
-                            schermo.blit(sfondinoa, (vx, vy))
-                        if (n + m) % 2 != 0:
-                            schermo.blit(sfondinob, (vx, vy))
-                    m = m + 1
-            n = n + 1
-        n = 0
-        while n < 32:
-            if vrx == gpx * n:
-                m = 0
-                while m < 18:
-                    if vry == gpy * m:
-                        if (n + m) % 2 == 0:
-                            schermo.blit(sfondinoa, (vrx, vry))
-                        if (n + m) % 2 != 0:
-                            schermo.blit(sfondinob, (vrx, vry))
-                    m = m + 1
-            n = n + 1
+                    schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+            j = j + 3
+        i = i + 4
+    i = 0
+    # disegno le caselle viste
+    while i < len(caseviste):
+        if caseviste[i + 2]:
+            n = 0
+            while n < 32:
+                if caseviste[i] == gpx * n:
+                    m = 0
+                    while m < 18:
+                        if caseviste[i + 1] == gpy * m:
+                            if (n + m) % 2 == 0:
+                                schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
+                            if (n + m) % 2 != 0:
+                                schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
+                        m = m + 1
+                n = n + 1
+        i = i + 3
 
-    # disegnare casella sopra la vecchia posizione dei mostri
+    # disegnare casella sopra la vecchia posizione dei personaggi e mostri
+    n = 0
+    while n < 32:
+        if vx == gpx * n:
+            m = 0
+            while m < 18:
+                if vy == gpy * m:
+                    if (n + m) % 2 == 0:
+                        schermo.blit(sfondinoa, (vx, vy))
+                    if (n + m) % 2 != 0:
+                        schermo.blit(sfondinob, (vx, vy))
+                m = m + 1
+        n = n + 1
+    n = 0
+    while n < 32:
+        if vrx == gpx * n:
+            m = 0
+            while m < 18:
+                if vry == gpy * m:
+                    if (n + m) % 2 == 0:
+                        schermo.blit(sfondinoa, (vrx, vry))
+                    if (n + m) % 2 != 0:
+                        schermo.blit(sfondinob, (vrx, vry))
+                m = m + 1
+        n = n + 1
     j = 0
     while j < len(caseviste):
         for nemico in listaNemici:
@@ -208,14 +209,172 @@ def ambiente_movimento(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot,
                 schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
         j = j + 3
 
+    pygame.display.update()
+
+
+def disegnaAmbienteDopoAnimazione(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, sfondinoa, sfondinob, arma, armatura, scudo, robot, armrob, vitaesca, caseviste, apriocchio, chiamarob, listaNemici):
+    # disegnare casella sopra la vecchia posizione dei personaggi e mostri
+    n = 0
+    while n < 32:
+        if vx == gpx * n:
+            m = 0
+            while m < 18:
+                if vy == gpy * m:
+                    if (n + m) % 2 == 0:
+                        schermo.blit(sfondinoa, (vx, vy))
+                    if (n + m) % 2 != 0:
+                        schermo.blit(sfondinob, (vx, vy))
+                m = m + 1
+        n = n + 1
+    n = 0
+    while n < 32:
+        if vrx == gpx * n:
+            m = 0
+            while m < 18:
+                if vry == gpy * m:
+                    if (n + m) % 2 == 0:
+                        schermo.blit(sfondinoa, (vrx, vry))
+                    if (n + m) % 2 != 0:
+                        schermo.blit(sfondinob, (vrx, vry))
+                m = m + 1
+        n = n + 1
+    j = 0
+    while j < len(caseviste):
+        for nemico in listaNemici:
+            if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
+                n = 0
+                while n < 32:
+                    if nemico.vx == gpx * n:
+                        m = 0
+                        while m < 18:
+                            if nemico.vy == gpy * m:
+                                if (n + m) % 2 == 0:
+                                    schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
+                                if (n + m) % 2 != 0:
+                                    schermo.blit(sfondinob, (nemico.vx, nemico.vy))
+                            m = m + 1
+                    n = n + 1
+        j = j + 3
+
+    # backbround occhio/chiave
+    schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
+
+    # vista nemici
+    if apriocchio:
+        schermo.blit(occhioape, (gsx - (gpx * 4 // 3), gpy // 3))
+    else:
+        schermo.blit(occhiochiu, (gsx - (gpx * 4 // 3), gpy // 3))
+
+    # chiave robo
+    if chiamarob:
+        schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
+    else:
+        schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
+
+    # esche: id, vita, xesca, yesca
+    i = 0
+    while i < len(vitaesca):
+        schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+        i = i + 4
+
+    # robo
+    schermo.blit(robot, (rx, ry))
+    if surrisc > 0:
+        schermo.blit(roboSurrisc, (rx, ry))
+    schermo.blit(armrob, (rx, ry))
+
+    # personaggio
+    if npers == 1:
+        schermo.blit(scudo, (x, y))
+        schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(persdb, (x, y))
+        schermo.blit(arma, (x, y))
+    if npers == 2:
+        schermo.blit(arma, (x, y))
+        schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(persab, (x, y))
+        schermo.blit(scudo, (x, y))
+    if npers == 3:
+        schermo.blit(arma, (x, y))
+        schermo.blit(scudo, (x, y))
+        schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(perswb, (x, y))
+    if npers == 4:
+        schermo.blit(pers, (x, y))
+        if avvele:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armatura, (x, y))
+        schermo.blit(perssb, (x, y))
+        schermo.blit(arma, (x, y))
+        schermo.blit(scudo, (x, y))
+
+    # vita-status personaggio
+    lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
+    lungvita = (lungvitatot * pv) // pvtot
+    if lungvita < 0:
+        lungvita = 0
+    indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
+    fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+    vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
+    schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 16) + (gpy // 4 * 3)))
+    schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
+    schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
+    persbat = pygame.transform.scale(perso, (gpx, gpy))
+    schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 16))
+    schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
+    if avvele:
+        schermo.blit(avvelenato, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
+    if attp > 0:
+        schermo.blit(attaccopiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 16) + (gpy // 8)))
+    if difp > 0:
+        schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
+
+    # vita-status robo
+    lungentot = int(((gpx * entot) / float(4)) // 10)
+    lungen = (lungentot * enrob) // entot
+    if lungen < 0:
+        lungen = 0
+    indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
+    fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+    vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
+    schermo.blit(indvitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitarob, ((gsx // 32 * 1) + lungentot, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(vitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 17))
+    robobat = pygame.transform.scale(roboo, (gpx, gpy))
+    schermo.blit(robobat, (gsx // 32 * 0, gsy // 18 * 17))
+    schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
+    if surrisc > 0:
+        schermo.blit(surriscaldato, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
+    if velp > 0:
+        schermo.blit(velocitapiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
+    if effp > 0:
+        schermo.blit(efficienzapiu, ((gsx // 32 * 1) + (gpx // 4 * 3) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
+
+    # disegnare i mostri
+    j = 0
+    while j < len(caseviste):
+        for nemico in listaNemici:
+            if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
+                schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+        j = j + 3
+
+    pygame.display.update()
+
 
 def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici):
-    if attacco <= 6:
-        xp = x
-        yp = y
-    elif attacco > 6:
-        xp = rx
-        yp = ry
+    xp = x
+    yp = y
     nxp = 0
     nyp = 0
     risposta = False
@@ -717,7 +876,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             caseattactot = [x + gpx, y, True, x - gpx, y, True, x, y + gpy, True, x, y - gpy, True]
             murx = x
             mury = y
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
             if nmurx == murx:
                 caseattactot[2] = False
                 i = 0
@@ -732,7 +891,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i = i + 4
             murx = x
             mury = y
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
             if nmurx == murx:
                 caseattactot[5] = False
                 i = 0
@@ -747,7 +906,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i = i + 4
             murx = x
             mury = y
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, 0, True, False, porte, cofanetti)
             if nmury == mury:
                 caseattactot[8] = False
                 i = 0
@@ -762,7 +921,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i = i + 4
             murx = x
             mury = y
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True, False, porte, cofanetti)
             if nmury == mury:
                 caseattactot[11] = False
                 i = 0
@@ -860,7 +1019,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             i = i + 4
         # movimento inquadra (ultimi 4 inutili)
         if not puntaPorta and not puntaCofanetto:
-            xp, yp, stanza, carim, muovi, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, 0, True, False, porte, cofanetti)
+            xp, yp, stanza, inutile, muovi, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, 0, True, False, porte, cofanetti)
         # movimento inquadra quando si è sulle porte
         if puntaPorta:
             i = 0
@@ -1122,7 +1281,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 mvy = my
             j += 7
 
-        # ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
         for nemico in listaNemici:
             if not (xp == nemico.x and yp == nemico.y):
                 ricaricaschermo = False
@@ -1223,6 +1381,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
         if not risposta:
             pygame.display.update()
-        clock.tick(fpsmenu)
+        clockAttacco.tick(fpsAttacco)
 
     return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici
