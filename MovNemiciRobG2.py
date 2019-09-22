@@ -278,7 +278,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
         nemico.anima = True
 
     # alcuni sono inutili!!!
-    nemico.x, nemico.y, stanza, carim, inutile, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, 1, True, False, porte, cofanetti)
+    nemico.x, nemico.y, stanza, carim, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, True, False, porte, cofanetti)
     nemico.visto = visto
     return nemico, nmos, dati, vitaesca
 
@@ -915,7 +915,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
         return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2
 
 
-def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa):
+def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa):
     robo = True
     nrx = 0
     nry = 0
@@ -958,653 +958,652 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
     nrob = 0
     sposta = False
     # movimento robot
-    if muovirob >= -1:
-        if chiamarob:
-            if abs(rx - x) == gpx and abs(ry - y) == gpy:
-                if vx == rx + gpx:
-                    nrob = 1
-                if vx == rx - gpx:
-                    nrob = 2
-                if vy == ry + gpy:
-                    nrob = 3
-                if vy == ry - gpy:
-                    nrob = 4
-                sposta = True
-            else:
-                vetNemiciSoloConXeY = []
-                i = 0
-                while i < len(nemiciVistiDaColco):
-                    vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 2])
-                    vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 3])
-                    i += 6
-                percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
-                if percorsoTrovato and percorsoTrovato != "arrivato":
-                    if len(percorsoTrovato) >= 4:
-                        if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
-                            if percorsoTrovato[len(percorsoTrovato) - 4] > rx:
-                                nrob = 1
-                            if percorsoTrovato[len(percorsoTrovato) - 4] < rx:
-                                nrob = 2
-                            if percorsoTrovato[len(percorsoTrovato) - 3] > ry:
-                                nrob = 3
-                            if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
-                                nrob = 4
-                            sposta = True
+    if chiamarob:
+        if abs(rx - x) == gpx and abs(ry - y) == gpy:
+            if vx == rx + gpx:
+                nrob = 1
+            if vx == rx - gpx:
+                nrob = 2
+            if vy == ry + gpy:
+                nrob = 3
+            if vy == ry - gpy:
+                nrob = 4
+            sposta = True
         else:
-            esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
+            vetNemiciSoloConXeY = []
+            i = 0
+            while i < len(nemiciVistiDaColco):
+                vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 2])
+                vetNemiciSoloConXeY.append(nemiciVistiDaColco[i + 3])
+                i += 6
+            percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+            if percorsoTrovato and percorsoTrovato != "arrivato":
+                if len(percorsoTrovato) >= 4:
+                    if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
+                        if percorsoTrovato[len(percorsoTrovato) - 4] > rx:
+                            nrob = 1
+                        if percorsoTrovato[len(percorsoTrovato) - 4] < rx:
+                            nrob = 2
+                        if percorsoTrovato[len(percorsoTrovato) - 3] > ry:
+                            nrob = 3
+                        if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
+                            nrob = 4
+                        sposta = True
+    else:
+        esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
 
-            """dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
-            in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
-                       condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemicoCasuale, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
-                       tecniche = intero da 1 a 20: scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++"""
+        """dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
+        in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
+                   condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemicoCasuale, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
+                   tecniche = intero da 1 a 20: scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++"""
 
-            # controllo se la condizione è rispettata
-            azioneEseguita = False
-            i = 101
-            while i <= 110 and not azioneEseguita:
-                # azioni su alleati
-                # pv rallo < 80
-                if dati[i] == 1:
-                    if dati[5] < pvtot / float(100) * 80 and dati[5] >= 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+        # controllo se la condizione è rispettata
+        azioneEseguita = False
+        i = 101
+        while i <= 110 and not azioneEseguita:
+            # azioni su alleati
+            # pv rallo < 80
+            if dati[i] == 1:
+                if dati[5] < pvtot / float(100) * 80 and dati[5] >= 0:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # pv rallo < 50
+            if dati[i] == 2:
+                if dati[5] < pvtot / float(100) * 50 and dati[5] > 0:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # pv rallo < 30
+            if dati[i] == 3:
+                if dati[5] < pvtot / float(100) * 30 and dati[5] > 0:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # rallo avvelenato
+            if dati[i] == 4:
+                if dati[121]:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # colco surriscaldato
+            if dati[i] == 5:
+                if dati[122] > 0:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # pe colco < 80
+            if dati[i] == 6:
+                if dati[10] < entot / float(100) * 80 and dati[10] > 0:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # pe colco < 50
+            if dati[i] == 7:
+                if dati[10] < entot / float(100) * 50 and dati[10] > 0:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # pe colco < 30
+            if dati[i] == 8:
+                if dati[10] < entot / float(100) * 30 and dati[10] > 0:
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # sempre rallo
+            if dati[i] == 9 and not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0):
+                if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # sempre colco
+            if dati[i] == 10 and not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
+                if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
+                    azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                    k = 0
+                    while k < len(vetDatiNemici):
+                        j = 0
+                        while j < len(nemiciVistiDaColco):
+                            if k == nemiciVistiDaColco[j]:
+                                vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                            j += 6
+                        k += 5
+            # azioni su nemici
+            if nmost > 0:
+                numeroNemico = 0
+                pvm = 0
+                mx = 0
+                my = 0
+                pvmtot = 0
+                statom = 0
+                # nemico a caso
+                if dati[i] == 11:
+                    # nemiciPossibili conterrà [numeroNemico, pvm, mx, my] per ogni nemico visto da Colco (serve per scegliere il nemico casuale)
+                    nemiciPossibili = []
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # pv rallo < 50
-                if dati[i] == 2:
-                    if dati[5] < pvtot / float(100) * 50 and dati[5] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    nemiciPossibili.append(j)
+                                    nemiciPossibili.append(vetDatiNemici[j])
+                                    nemiciPossibili.append(vetDatiNemici[j + 1])
+                                    nemiciPossibili.append(vetDatiNemici[j + 2])
+                                    nemiciPossibili.append(vetDatiNemici[j + 3])
+                                    nemiciPossibili.append(vetDatiNemici[j + 4])
+                                    break
+                                j += 5
+                        k += 3
+                    if len(nemiciPossibili) > 0:
+                        nemicoScelto = random.randint(0, (len(nemiciPossibili) // 4) - 1) * 4
+                        numeroNemico = nemiciPossibili[nemicoScelto]
+                        pvm = nemiciPossibili[nemicoScelto + 1]
+                        mx = nemiciPossibili[nemicoScelto + 2]
+                        my = nemiciPossibili[nemicoScelto + 3]
+                        pvmtot = nemiciPossibili[nemicoScelto + 4]
+                        statom = nemiciPossibili[nemicoScelto + 5]
+                    if mx != 0 and my != 0:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # nemico vicino
+                if dati[i] == 12:
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # pv rallo < 30
-                if dati[i] == 3:
-                    if dati[5] < pvtot / float(100) * 30 and dati[5] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(vetDatiNemici[j + 1] - rx) <= (gpx * 2) and abs(vetDatiNemici[j + 2] - ry) <= (gpy * 2) and vetDatiNemici[j] > 0:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if mx != 0 and my != 0:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # nemico lontano
+                if dati[i] == 13:
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # rallo avvelenato
-                if dati[i] == 4:
-                    if dati[121]:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[5], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and (abs(vetDatiNemici[j + 1] - rx) >= (gpx * 3) or abs(vetDatiNemici[j + 2] - ry) >= (gpy * 3)) and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if mx != 0 and my != 0:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # nemico pv < 80
+                if dati[i] == 14:
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # colco surriscaldato
-                if dati[i] == 5:
-                    if dati[122] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 80:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if mx != 0 and my != 0:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # nemico pv < 50
+                if dati[i] == 15:
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # pe colco < 80
-                if dati[i] == 6:
-                    if dati[10] < entot / float(100) * 80 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 50:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if mx != 0 and my != 0:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # nemico pv < 30
+                if dati[i] == 16:
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # pe colco < 50
-                if dati[i] == 7:
-                    if dati[10] < entot / float(100) * 50 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 30:
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if mx != 0 and my != 0:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # nemico con meno pv
+                if dati[i] == 17:
+                    pvMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # pe colco < 30
-                if dati[i] == 8:
-                    if dati[10] < entot / float(100) * 30 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    if primoMostro:
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        pvMin = pvm
+                                        primoMostro = False
+                                    elif vetDatiNemici[j] < pvMin:
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        pvMin = pvm
+                                    break
+                                j += 5
+                        k += 3
+                    if mx != 0 and my != 0:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # numero nemici > 1
+                if dati[i] == 18:
+                    numeroNemici = 0
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # sempre rallo
-                if dati[i] == 9 and not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0):
-                    if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], x, y, 0, 0, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    numeroNemici += 1
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if numeroNemici > 1:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # numero nemici > 4
+                if dati[i] == 19:
+                    numeroNemici = 0
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # sempre colco
-                if dati[i] == 10 and not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
-                    if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, dati[10], rx, ry, 0, 0, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                        k = 0
-                        while k < len(vetDatiNemici):
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    numeroNemici += 1
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if numeroNemici > 4:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
+                                j = 0
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+                # numero nemici > 7
+                if dati[i] == 20:
+                    numeroNemici = 0
+                    distMin = -1
+                    primoMostro = True
+                    k = 0
+                    while k < len(caselleAttaccabili):
+                        if caselleAttaccabili[k + 2]:
                             j = 0
-                            while j < len(nemiciVistiDaColco):
-                                if k == nemiciVistiDaColco[j]:
-                                    vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                    vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                j += 6
-                            k += 5
-                # azioni su nemici
-                if nmost > 0:
-                    numeroNemico = 0
-                    pvm = 0
-                    mx = 0
-                    my = 0
-                    pvmtot = 0
-                    statom = 0
-                    # nemico a caso
-                    if dati[i] == 11:
-                        # nemiciPossibili conterrà [numeroNemico, pvm, mx, my] per ogni nemico visto da Colco (serve per scegliere il nemico casuale)
-                        nemiciPossibili = []
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
+                            while j < len(vetDatiNemici):
+                                if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
+                                    numeroNemici += 1
+                                    if primoMostro:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                        primoMostro = False
+                                    elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
+                                        distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
+                                        numeroNemico = j
+                                        pvm = vetDatiNemici[j]
+                                        mx = vetDatiNemici[j + 1]
+                                        my = vetDatiNemici[j + 2]
+                                        pvmtot = vetDatiNemici[j + 3]
+                                        statom = vetDatiNemici[j + 4]
+                                    break
+                                j += 5
+                        k += 3
+                    if numeroNemici > 7:
+                        pvmVecchi = pvm
+                        azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
+                        if pvm != pvmVecchi:
+                            vetDatiNemici[numeroNemico] = pvm
+                            vetDatiNemici[numeroNemico + 4] = statom
+                        else:
+                            k = 0
+                            while k < len(vetDatiNemici):
                                 j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
-                                        nemiciPossibili.append(j)
-                                        nemiciPossibili.append(vetDatiNemici[j])
-                                        nemiciPossibili.append(vetDatiNemici[j + 1])
-                                        nemiciPossibili.append(vetDatiNemici[j + 2])
-                                        nemiciPossibili.append(vetDatiNemici[j + 3])
-                                        nemiciPossibili.append(vetDatiNemici[j + 4])
-                                        break
-                                    j += 5
-                            k += 3
-                        if len(nemiciPossibili) > 0:
-                            nemicoScelto = random.randint(0, (len(nemiciPossibili) // 4) - 1) * 4
-                            numeroNemico = nemiciPossibili[nemicoScelto]
-                            pvm = nemiciPossibili[nemicoScelto + 1]
-                            mx = nemiciPossibili[nemicoScelto + 2]
-                            my = nemiciPossibili[nemicoScelto + 3]
-                            pvmtot = nemiciPossibili[nemicoScelto + 4]
-                            statom = nemiciPossibili[nemicoScelto + 5]
-                        if mx != 0 and my != 0:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # nemico vicino
-                    if dati[i] == 12:
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(vetDatiNemici[j + 1] - rx) <= (gpx * 2) and abs(vetDatiNemici[j + 2] - ry) <= (gpy * 2) and vetDatiNemici[j] > 0:
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if mx != 0 and my != 0:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # nemico lontano
-                    if dati[i] == 13:
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and (abs(vetDatiNemici[j + 1] - rx) >= (gpx * 3) or abs(vetDatiNemici[j + 2] - ry) >= (gpy * 3)) and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if mx != 0 and my != 0:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # nemico pv < 80
-                    if dati[i] == 14:
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 80:
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if mx != 0 and my != 0:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # nemico pv < 50
-                    if dati[i] == 15:
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 50:
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if mx != 0 and my != 0:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # nemico pv < 30
-                    if dati[i] == 16:
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0 and vetDatiNemici[j] < vetDatiNemici[j + 3] / float(100) * 30:
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if mx != 0 and my != 0:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # nemico con meno pv
-                    if dati[i] == 17:
-                        pvMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
-                                        if primoMostro:
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            pvMin = pvm
-                                            primoMostro = False
-                                        elif vetDatiNemici[j] < pvMin:
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            pvMin = pvm
-                                        break
-                                    j += 5
-                            k += 3
-                        if mx != 0 and my != 0:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # numero nemici > 1
-                    if dati[i] == 18:
-                        numeroNemici = 0
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
-                                        numeroNemici += 1
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if numeroNemici > 1:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # numero nemici > 4
-                    if dati[i] == 19:
-                        numeroNemici = 0
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
-                                        numeroNemici += 1
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if numeroNemici > 4:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                    # numero nemici > 7
-                    if dati[i] == 20:
-                        numeroNemici = 0
-                        distMin = -1
-                        primoMostro = True
-                        k = 0
-                        while k < len(caselleAttaccabili):
-                            if caselleAttaccabili[k + 2]:
-                                j = 0
-                                while j < len(vetDatiNemici):
-                                    if caselleAttaccabili[k] == vetDatiNemici[j + 1] and caselleAttaccabili[k + 1] == vetDatiNemici[j + 2] and abs(rx - vetDatiNemici[j + 1]) <= vistaRobo and abs(ry - vetDatiNemici[j + 2]) <= vistaRobo and vetDatiNemici[j] > 0:
-                                        numeroNemici += 1
-                                        if primoMostro:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                            primoMostro = False
-                                        elif abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry) < distMin:
-                                            distMin = abs(vetDatiNemici[j + 1] - rx) + abs(vetDatiNemici[j + 2] - ry)
-                                            numeroNemico = j
-                                            pvm = vetDatiNemici[j]
-                                            mx = vetDatiNemici[j + 1]
-                                            my = vetDatiNemici[j + 2]
-                                            pvmtot = vetDatiNemici[j + 3]
-                                            statom = vetDatiNemici[j + 4]
-                                        break
-                                    j += 5
-                            k += 3
-                        if numeroNemici > 7:
-                            pvmVecchi = pvm
-                            azioneEseguita, pvm, statom, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2 = eseguiAzione(rx, ry, pvm, mx, my, pvmtot, statom, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y)
-                            if pvm != pvmVecchi:
-                                vetDatiNemici[numeroNemico] = pvm
-                                vetDatiNemici[numeroNemico + 4] = statom
-                            else:
-                                k = 0
-                                while k < len(vetDatiNemici):
-                                    j = 0
-                                    while j < len(nemiciVistiDaColco):
-                                        if k == nemiciVistiDaColco[j]:
-                                            vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
-                                            vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
-                                        j += 6
-                                    k += 5
-                i += 1
+                                while j < len(nemiciVistiDaColco):
+                                    if k == nemiciVistiDaColco[j]:
+                                        vetDatiNemici[k] = nemiciVistiDaColco[j + 1]
+                                        vetDatiNemici[k + 4] = nemiciVistiDaColco[j + 5]
+                                    j += 6
+                                k += 5
+            i += 1
 
     # spostamento
     if sposta:
@@ -1642,5 +1641,5 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, muovirob, chiamarob, dati, porte, cofa
                 nry = -gpy
 
     # alcuni sono inutili!!!
-    rx, ry, stanza, carim, muovirob, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, muovirob, False, robo, porte, cofanetti)
-    return rx, ry, muovirob, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2
+    rx, ry, stanza, carim, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, False, robo, porte, cofanetti)
+    return rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2

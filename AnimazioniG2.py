@@ -498,8 +498,8 @@ def animaRoboSpostato(nrob, rx, ry, vrx, vry, armrob, surriscalda, cambiosta, an
     return animazione
 
 
-def animaMorteNemici(listaNemiciTotali, sfondinoa, sfondinob, fineanimaz):
-    for nemico in listaNemiciTotali:
+def animaMorteNemici(listaNemici, sfondinoa, sfondinob, fineanimaz):
+    for nemico in listaNemici:
         if nemico.morto:
             n = 0
             while n < 32:
@@ -518,7 +518,7 @@ def animaMorteNemici(listaNemiciTotali, sfondinoa, sfondinob, fineanimaz):
 def animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
-            if nemico.anima and (nemico.x != nemico.vx or nemico.y != nemico.vy):
+            if nemico.anima and not nemico.morto and (nemico.x != nemico.vx or nemico.y != nemico.vy):
                 animazione = True
                 # rumorecamminataNemico.play()
                 if nemico.direzione == "d":
@@ -576,7 +576,7 @@ def animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
     return animazione
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, listaNemiciTotali, imgSfondoStanza, porte, cofanetti, portaOriz, portaVert, caseviste):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici):
     animazione = False
     # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
     fineanimaz = 10
@@ -655,13 +655,13 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         animazione, caricaTutto = animaLvUp(npers, x, y, pers, scudo, armatura, arma, dati[4], aumentoliv, carim, animazione, caricaTutto, fineanimaz)
 
         # animazione morte nemici
-        animaMorteNemici(listaNemiciTotali, sfondinoa, sfondinob, fineanimaz)
+        animaMorteNemici(listaNemici, sfondinoa, sfondinob, fineanimaz)
 
         fineanimaz -= 1
         if animazione and fineanimaz != -1:
             pygame.display.update()
             clockAnimazioni.tick(fpsAnimazioni)
-            print (clockAnimazioni.get_fps())
+            #print (clockAnimazioni.get_fps())
         if fineanimaz == -1 and aumentoliv:
             pygame.display.update()
             pygame.time.wait(1000)

@@ -163,7 +163,7 @@ def gameloop():
                             listaNemici.append(nemico)
                 nmost = len(listaNemici)
 
-                muovirob = 0
+                mosseRimasteRob = 0
 
             if dati[1] == 2 and cambiosta:
 
@@ -196,7 +196,7 @@ def gameloop():
                             listaNemici.append(nemico)
                 nmost = len(listaNemici)
 
-                muovirob = 0
+                mosseRimasteRob = 0
 
             if cambiosta:
                 stanza = dati[1]
@@ -416,18 +416,18 @@ def gameloop():
                     ny = 0
                     primopas = True
 
-                nemicoInMovimento = False
+                nemiciInMovimento = False
                 for nemico in listaNemici:
                     if nemico.mosseRimaste > 0:
-                        nemicoInMovimento = True
+                        nemiciInMovimento = True
                         break
 
-                if event.key == pygame.K_e and not tastoTrovato and muovirob <= 0 and not nemicoInMovimento:
+                if event.key == pygame.K_e and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
                     nx = 0
                     ny = 0
                     attacco = 1
-                if event.key == pygame.K_x and not tastoTrovato and muovirob <= 0 and not nemicoInMovimento:
+                if event.key == pygame.K_x and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
                     nx = 0
                     ny = 0
@@ -436,7 +436,7 @@ def gameloop():
                     else:
                         chiamarob = True
 
-                if event.key == pygame.K_SPACE and not tastoTrovato and muovirob <= 0 and not nemicoInMovimento:
+                if event.key == pygame.K_SPACE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
                     # apertura porte
                     k = 0
@@ -484,7 +484,7 @@ def gameloop():
                                 j = j + 4
                         i = i + 4
 
-                if event.key == pygame.K_ESCAPE and not tastoTrovato and muovirob <= 0 and not nemicoInMovimento:
+                if event.key == pygame.K_ESCAPE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
                     startf = True
 
@@ -527,7 +527,7 @@ def gameloop():
 
         # morte tua e di robo
         inizio = controllaMorteRallo(dati[5], inizio)
-        morterob, dati, muovirob = controllaMorteColco(dati, muovirob)
+        morterob, dati, mosseRimasteRob = controllaMorteColco(dati, mosseRimasteRob)
 
         # movimento-azioni personaggio
         nemiciInMovimento = False
@@ -535,13 +535,13 @@ def gameloop():
             if nemico.mosseRimaste > 0:
                 nemiciInMovimento = True
                 break
-        if (nx != 0 or ny != 0) and not nemiciInMovimento:
+        if (nx != 0 or ny != 0) and not nemiciInMovimento and mosseRimasteRob <= 0:
             # progresso - stanza - x - y - liv - pv - arma - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(50) - condizioni(20) - gambit(20) - veleno - surriscalda // dimensione: 0-122
             vx = x
             vy = y
             sposta = True
             stanzaVecchia = dati[1]
-            x, y, dati[1], carim, inutile, cambiosta = muri_porte(x, y, nx, ny, dati[1], carim, 0, False, False, porte, cofanetti)
+            x, y, dati[1], carim, cambiosta = muri_porte(x, y, nx, ny, dati[1], carim, False, False, porte, cofanetti)
 
             sovrapposto = False
             for nemico in listaNemici:
@@ -714,7 +714,12 @@ def gameloop():
             # se surriscaldato toglie vel+ e efficienza
             dati[125] = 0
             dati[126] = 0
-        if ((sposta and muovirob <= 0) or muovirob > 0) and not morterob and not cambiosta:
+        if sposta and mosseRimasteRob == 0 and not morterob:
+            if dati[125] > 0:
+                mosseRimasteRob = 2
+            else:
+                mosseRimasteRob = 1
+        if mosseRimasteRob > 0 and not morterob and not cambiosta:
             vrx = rx
             vry = ry
 
@@ -722,25 +727,18 @@ def gameloop():
             if dati[122] > 0:
                 dati[122] = dati[122] - 1
                 dati[10] = dati[10] - 3
-                if muovirob == 0:
-                    muovirob = -2
 
             # efficienza
             if dati[126] > 0:
-                if dati[125] > 0:
-                    if muovirob == 1 or muovirob == -1:
-                        dati[126] = dati[126] - 1
-                else:
-                    dati[126] = dati[126] - 1
+                if mosseRimasteRob == 1:
+                    dati[126] -= 1
 
             # vel+
             if dati[125] > 0:
-                if muovirob == 1 or muovirob == -1:
-                    dati[125] = dati[125] - 1
+                if mosseRimasteRob == 1:
+                    dati[125] -= 1
                 if dati[125] == 0:
                     dati[122] = 10
-                if muovirob == 0:
-                    muovirob = 2
 
             # movimento - gambit
             vetDatiNemici = []
@@ -757,7 +755,7 @@ def gameloop():
                     vetDatiNemici.append(2)
                 elif nemico.avvelenato and nemico.appiccicato:
                     vetDatiNemici.append(3)
-            rx, ry, muovirob, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2 = movrobo(x, y, vx, vy, rx, ry, dati[1], muovirob, chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa)
+            rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2 = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa)
             i = 0
             for nemico in listaNemici:
                 nemico.vita = vetDatiNemici[i]
@@ -776,10 +774,15 @@ def gameloop():
                     nemico.appiccicato = True
                 i += 5
 
+            if dati[122] > 0:
+                mosseRimasteRob -= 2
+            else:
+                mosseRimasteRob -= 1
+
             # effetto di raffreddamento
             if True:
                 if raffreddamento:
-                    muovirob = -2
+                    mosseRimasteRob = -1
                     raffredda = 1
                 if raffredda == 0:
                     dati[122] = 0
@@ -788,7 +791,7 @@ def gameloop():
             # effetto auto-ricarica
             if True:
                 if ricarica1:
-                    muovirob = -2
+                    mosseRimasteRob = -1
                     autoRic1 = 1
                 if autoRic1 == 0:
                     dati[10] += dannoTecniche[6]
@@ -800,7 +803,7 @@ def gameloop():
             # effetto auto-ricarica+
             if True:
                 if ricarica2:
-                    muovirob = -2
+                    mosseRimasteRob = -1
                     autoRic2 = 1
                 if autoRic2 == 0:
                     dati[10] += dannoTecniche[16]
@@ -815,7 +818,7 @@ def gameloop():
                 if nemico.x == rx and nemico.y == ry:
                     sovrapposto = True
                     break
-            if (rx == x and ry == y) or sovrapposto or muovirob < 0:
+            if (rx == x and ry == y) or sovrapposto:
                 rx = vrx
                 ry = vry
                 nrob = 0
@@ -832,6 +835,8 @@ def gameloop():
                 if nrob == 4:
                     robot = robow
                     armrob = armrobw
+        elif sposta and mosseRimasteRob < 0 and not morterob:
+            mosseRimasteRob += 1
         if morterob:
             robot = robomo
             armrob = armrobmo
@@ -890,7 +895,6 @@ def gameloop():
                     nmost -= 1
                     dati[127] += nemico.esp
                     nemico.morto = True
-                    listaNemici.remove(nemico)
 
         # aumentare di livello
         if dati[127] >= esptot and dati[4] < 100 and not carim and not inizio:
@@ -910,13 +914,14 @@ def gameloop():
         if not inizio:
             if caricaTutto:
                 disegnaAmbientePrimaAnimazione(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici)
-            primopasso, caricaTutto, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, listaNemiciTotali, imgSfondoStanza, porte, cofanetti, portaOriz, portaVert, caseviste)
+            primopasso, caricaTutto, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici)
             if not carim:
                 disegnaAmbienteDopoAnimazione(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, sfondinoa, sfondinob, arma, armatura, scudo, robot, armrob, vitaesca, caseviste, apriocchio, chiamarob, listaNemici)
 
         # calncella deinitivamente i mostri morti
-        for nemico in listaNemiciTotali:
+        for nemico in listaNemici:
             if nemico.morto:
+                listaNemici.remove(nemico)
                 listaNemiciTotali.remove(nemico)
 
         if not aumentoliv:
@@ -933,8 +938,6 @@ def gameloop():
         attacco = 0
 
         sposta = False
-
-        clock.tick(fps)
 
 gameloop()
 

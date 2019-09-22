@@ -34,11 +34,9 @@ icona = pygame.image.load("Immagini\Icona.png")
 pygame.display.set_icon(icona)
 
 # clock
-clock = pygame.time.Clock()
 clockAttacco = pygame.time.Clock()
 clockAnimazioni = pygame.time.Clock()
 clockVideo = pygame.time.Clock()
-fps = 30
 fpsAnimazioni = 30
 fpsAttacco = 20
 fpsVideo = 12

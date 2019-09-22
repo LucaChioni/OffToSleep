@@ -167,7 +167,7 @@ def oggetto(x, y, dimx, dimy, px, py, nx, ny):
         y = y + gpy
 
 
-def muri_porte(x, y, nx, ny, stanza, carim, muovi, mostro, robo, porte, cofanetti):
+def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
     cambiosta = False
     # prima stanza
     if (stanza == 1) and ((nx != 0) or (ny != 0)) and not cambiosta:
@@ -298,18 +298,11 @@ def muri_porte(x, y, nx, ny, stanza, carim, muovi, mostro, robo, porte, cofanett
                 ny = 0
             i = i + 4
 
-    # movimento mostri veloci
-    if (mostro or robo) and muovi > 0:
-        muovi = muovi - 1
-    # movimento mostri lenti
-    if (mostro or robo) and muovi < 0:
-        muovi = muovi + 1
-
     # movimento personaggio
     x = x + nx
     y = y + ny
 
-    return x, y, stanza, carim, muovi, cambiosta
+    return x, y, stanza, carim, cambiosta
 
 
 def trovacasattaccabili(x, y, stanza, porte, cofanetti):
@@ -322,7 +315,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x + (gpx * n)
             mury = y + (gpy * m)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
@@ -339,7 +332,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x + (gpx * m)
             mury = y + (gpy * n)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
@@ -1022,7 +1015,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x - (gpx * n)
             mury = y + (gpy * m)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
@@ -1039,7 +1032,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x - (gpx * m)
             mury = y + (gpy * n)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
@@ -1722,7 +1715,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x - (gpx * n)
             mury = y - (gpy * m)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
@@ -1739,7 +1732,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x - (gpx * m)
             mury = y - (gpy * n)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
@@ -2422,7 +2415,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x + (gpx * n)
             mury = y - (gpy * m)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
@@ -2439,7 +2432,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         while m <= range:
             murx = x + (gpx * m)
             mury = y - (gpy * n)
-            nmurx, nmury, stanza, carim, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
@@ -3208,7 +3201,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
     # caselle viste da rallo
     j = 0
     while j < len(caselleEsplorate):
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -3226,7 +3219,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -3244,7 +3237,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -3262,7 +3255,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -3294,7 +3287,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
         caselleEsplorate = [rx, ry]
         j = 0
         while j < len(caselleEsplorate):
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -3312,7 +3305,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -3330,7 +3323,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -3348,7 +3341,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -3385,7 +3378,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
         j = 0
         while j < len(caselleEsplorate):
             valoreCasella += 1
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3407,7 +3400,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
             if nx == xArrivo and ny == yArrivo:
                 arrivato = True
                 break
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3429,7 +3422,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
             if nx == xArrivo and ny == yArrivo:
                 arrivato = True
                 break
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3451,7 +3444,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
             if nx == xArrivo and ny == yArrivo:
                 arrivato = True
                 break
-            nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3493,7 +3486,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                 yCasella3 = 0
                 xCasella4 = 0
                 yCasella4 = 0
-                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, 0, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3509,7 +3502,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella1 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, 0, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3525,7 +3518,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella2 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3541,7 +3534,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella3 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, muovi, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, 0, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -3634,16 +3627,16 @@ def controllaMorteRallo(vitaRallo, inizio):
     return inizio
 
 
-def controllaMorteColco(dati, muovirob):
+def controllaMorteColco(dati, mosseRimasteRob):
     if dati[10] <= 0:
         morterob = True
-        muovirob = 0
+        mosseRimasteRob = 0
         dati[122] = 0
         dati[125] = 0
         dati[126] = 0
     else:
         morterob = False
-    return morterob, dati, muovirob
+    return morterob, dati, mosseRimasteRob
 
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)

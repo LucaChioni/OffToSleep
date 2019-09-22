@@ -307,22 +307,6 @@ def scegli_sal(cosa, lunghezzadati):
 def menu():
     # video
     fermavideo = guardaVideo('Video/videoinizio', c16)
-    """clock = pygame.time.Clock()
-    movie = pygame.movie.Movie(r'Video\videoinizio.mpg')
-    movie_screen = pygame.Surface(schermo.get_size())
-    movie.set_display(movie_screen, pygame.draw.rect(schermo, nero, (0, 0, gsx, gsy), 1))
-    movie.play()
-    while movie.get_busy() and not fermavideo:
-        schermo.blit(movie_screen, (0, 0))
-        pygame.display.update()
-        clock.tick(fps)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                selezione.play()
-                fermavideo = True"""
 
     c11.play(-1)
     # attesa dopo video
@@ -4836,6 +4820,53 @@ def startBattaglia(dati):
 
     # primo frame
     if True:
+        schermo.blit(sfondoStartBattaglia, (0, 0))
+        if difensivi:
+            if xp == gpx * 1:
+                disegnoOggetto = 0
+            if xp == gpx * 2:
+                disegnoOggetto = 1
+            if xp == gpx * 3:
+                disegnoOggetto = 3
+            if xp == gpx * 4:
+                disegnoOggetto = 6
+            if xp == gpx * 5:
+                disegnoOggetto = 7
+        elif offensivi:
+            if xp == gpx * 1:
+                disegnoOggetto = 2
+            if xp == gpx * 2:
+                disegnoOggetto = 4
+            if xp == gpx * 3:
+                disegnoOggetto = 5
+            if xp == gpx * 4:
+                disegnoOggetto = 8
+            if xp == gpx * 5:
+                disegnoOggetto = 9
+        schermo.blit(vettoreOggettiGraf[disegnoOggetto], (gpx // 2, gpy * 1))
+        if dati[disegnoOggetto + 31] <= 0:
+            schermo.blit(puntatOut, (xp, yp))
+            qta = 0
+        else:
+            schermo.blit(puntatIn, (xp, yp))
+            qta = dati[disegnoOggetto + 31]
+        messaggio("x%i" % qta, grigiochi, (gpx * 4) + (gpx // 2), gpy * 3, 80)
+        disegnati = 0
+        i = 0
+        while i < 10:
+            if difensivi and (i == 0 or i == 1 or i == 3 or i == 6 or i == 7):
+                schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), gpy * 5))
+                disegnati += 1
+            if offensivi and (i == 2 or i == 4 or i == 5 or i == 8 or i == 9):
+                schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), (gpy * 5) + (gpy // 2)))
+                disegnati += 1
+            i += 1
+        if difensivi:
+            messaggio("Oggetti curativi", grigiochi, gpx * 1, gpy // 2, 40)
+            schermo.blit(scorriGiu, (gpx * 3, gpy * 6))
+        if offensivi:
+            messaggio("Oggetti offensivi", grigiochi, gpx * 1, gpy // 2, 40)
+            schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
         pygame.display.update()
 
     while not risposta:

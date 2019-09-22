@@ -11,7 +11,7 @@ def disegnaAmbientePrimaAnimazione(x, y, npers, pv, pvtot, avvele, attp, difp, e
         if not porte[i + 3]:
             vmurx = porte[i + 1]
             vmury = porte[i + 2]
-            murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, numStanza, False, False, False, False, porte, cofanetti)
+            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, numStanza, False, False, False, porte, cofanetti)
             schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
             if vmurx == murx and vmury == mury:
                 schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -365,7 +365,7 @@ def disegnaAmbienteDopoAnimazione(x, y, npers, pv, pvtot, avvele, attp, difp, en
     j = 0
     while j < len(caseviste):
         for nemico in listaNemici:
-            if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
+            if not nemico.morto and caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
                 schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
         j = j + 3
 
@@ -419,7 +419,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if not porte[i + 3]:
             vmurx = porte[i + 1]
             vmury = porte[i + 2]
-            murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False, False, False, False, porte, cofanetti)
+            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False, False, False, porte, cofanetti)
             schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
             if vmurx == murx and vmury == mury:
                 schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -782,8 +782,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if not porte[i + 3]:
                     vmurx = porte[i + 1]
                     vmury = porte[i + 2]
-                    murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False,
-                                                                                False, False, False, porte, cofanetti)
+                    murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False, False, False, porte, cofanetti)
                     schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
                     if vmurx == murx and vmury == mury:
                         schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -843,8 +842,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if not porte[i + 3]:
                 vmurx = porte[i + 1]
                 vmury = porte[i + 2]
-                murx, mury, inutile, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False,
-                                                                            False, False, False, porte, cofanetti)
+                murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, stanza, False, False, False, porte, cofanetti)
                 schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
                 if vmurx == murx and vmury == mury:
                     schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -876,7 +874,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             caseattactot = [x + gpx, y, True, x - gpx, y, True, x, y + gpy, True, x, y - gpy, True]
             murx = x
             mury = y
-            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
             if nmurx == murx:
                 caseattactot[2] = False
                 i = 0
@@ -891,7 +889,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i = i + 4
             murx = x
             mury = y
-            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
             if nmurx == murx:
                 caseattactot[5] = False
                 i = 0
@@ -906,7 +904,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i = i + 4
             murx = x
             mury = y
-            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
             if nmury == mury:
                 caseattactot[8] = False
                 i = 0
@@ -921,7 +919,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i = i + 4
             murx = x
             mury = y
-            nmurx, nmury, stanza, inutile, muovi, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, 0, True, False, porte, cofanetti)
+            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
             if nmury == mury:
                 caseattactot[11] = False
                 i = 0
@@ -1019,7 +1017,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             i = i + 4
         # movimento inquadra (ultimi 4 inutili)
         if not puntaPorta and not puntaCofanetto:
-            xp, yp, stanza, inutile, muovi, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, 0, True, False, porte, cofanetti)
+            xp, yp, stanza, inutile, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, True, False, porte, cofanetti)
         # movimento inquadra quando si è sulle porte
         if puntaPorta:
             i = 0
