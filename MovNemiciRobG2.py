@@ -274,11 +274,11 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmy = 0
                 i = i + 4
 
-    if sposta or attacca:
-        nemico.anima = True
-
     # alcuni sono inutili!!!
     nemico.x, nemico.y, stanza, carim, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, True, False, porte, cofanetti)
+
+    if (sposta and (nemico.x != nemico.vx or nemico.y != nemico.vy)) or attacca:
+        nemico.anima = True
     nemico.visto = visto
     return nemico, nmos, dati, vitaesca
 

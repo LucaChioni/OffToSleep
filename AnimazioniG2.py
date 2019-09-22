@@ -524,55 +524,55 @@ def animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
                 if nemico.direzione == "d":
                     if 5 < fineanimaz <= 10:
                         schermo.blit(nemico.imgDMov1, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
                     if 0 < fineanimaz <= 5:
                         schermo.blit(nemico.imgDMov2, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
                 if nemico.direzione == "a":
                     if 5 < fineanimaz <= 10:
                         schermo.blit(nemico.imgAMov1, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
                     if 0 < fineanimaz <= 5:
                         schermo.blit(nemico.imgAMov2, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
                 if nemico.direzione == "w":
                     if 5 < fineanimaz <= 10:
                         schermo.blit(nemico.imgWMov1, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
                     if 0 < fineanimaz <= 5:
                         schermo.blit(nemico.imgWMov2, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
                 if nemico.direzione == "s":
                     if 5 < fineanimaz <= 10:
                         schermo.blit(nemico.imgSMov1, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
                     if 0 < fineanimaz <= 5:
                         schermo.blit(nemico.imgSMov2, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
                         if nemico.appiccicato:
-                            schermo.blit(roboSurrisc, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
     return animazione
 
 

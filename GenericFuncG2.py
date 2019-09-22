@@ -75,6 +75,8 @@ def getStatistiche(dati, difesa = 0):
 
 
 def guardaVideo(path, audio=0):
+    schermo.fill(grigioscu)
+    pygame.display.update()
     listaImg = []
     # load all the images
     for i in os.listdir(path):
@@ -82,7 +84,7 @@ def guardaVideo(path, audio=0):
         img = pygame.transform.scale(img, (gsx, gsy))
         listaImg.append(img)
     if audio != 0:
-        audio.play(-1)
+        audio.play()
     # play video
     i = 0
     while i < len(listaImg) + 10:

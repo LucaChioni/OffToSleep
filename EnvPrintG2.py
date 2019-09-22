@@ -207,6 +207,10 @@ def disegnaAmbientePrimaAnimazione(x, y, npers, pv, pvtot, avvele, attp, difp, e
         for nemico in listaNemici:
             if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
                 schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+                if nemico.appiccicato:
+                    schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
+                if nemico.avvelenato:
+                    schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
         j = j + 3
 
     pygame.display.update()
@@ -367,6 +371,10 @@ def disegnaAmbienteDopoAnimazione(x, y, npers, pv, pvtot, avvele, attp, difp, en
         for nemico in listaNemici:
             if not nemico.morto and caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
                 schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+                if nemico.appiccicato:
+                    schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
+                if nemico.avvelenato:
+                    schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
         j = j + 3
 
     pygame.display.update()
@@ -1082,6 +1090,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             for nemico in listaNemici:
                 if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
                     schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+                    if nemico.appiccicato:
+                        schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
+                    if nemico.avvelenato:
+                        schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
                     break
             j = j + 3
 

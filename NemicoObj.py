@@ -74,6 +74,11 @@ class NemicoObj(object):
         imgDMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "dMov2.png")
         self.imgDMov2 = pygame.transform.scale(imgDMov2, (gpx, gpy))
 
+        imgAvvelenamento = pygame.image.load("Immagini\Mostri\\" + tipo + "Avvele.png")
+        self.imgAvvelenamento = pygame.transform.scale(imgAvvelenamento, (gpx, gpy))
+        imgAppiccicato = pygame.image.load("Immagini\Mostri\\" + tipo + "Appicc.png")
+        self.imgAppiccicato = pygame.transform.scale(imgAppiccicato, (gpx, gpy))
+
     def girati(self, direzione):
         if direzione == "w":
             self.imgAttuale = self.imgW
