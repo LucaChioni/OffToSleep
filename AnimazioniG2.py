@@ -413,11 +413,11 @@ def animaLvUp(npers, x, y, pers, scudo, armatura, arma, liv, aumentoliv, carim, 
             schermo.blit(perssb, (x, y))
             schermo.blit(arma, (x, y))
             schermo.blit(scudo, (x, y))
-        if 5 < fineanimaz <= 10:
+        if 5 <= fineanimaz <= 10:
             schermo.blit(saliliv2, (x, y))
-        if 0 < fineanimaz <= 5:
+        if 1 < fineanimaz <= 5:
             schermo.blit(saliliv1, (x, y))
-        if fineanimaz == 0:
+        if fineanimaz == 1:
             schermo.blit(saliliv, (x, y))
 
         schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
@@ -635,17 +635,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                                 m = m + 1
                 n = n + 1
 
-        if y < ry:
-            # animazione camminata personaggio
-            animazione, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
-            # animazione camminata robo
-            animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
-        else:
-            # animazione camminata robo
-            animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
-            # animazione camminata personaggio
-            animazione, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
-
+        # animazione camminata robo
+        animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
+        # animazione camminata personaggio
+        animazione, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
+        # animazione camminata mostri
         animazione = animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione apertura cofanetto
@@ -658,11 +652,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         animaMorteNemici(listaNemici, sfondinoa, sfondinob, fineanimaz)
 
         fineanimaz -= 1
-        if animazione and fineanimaz != -1:
+        if animazione and fineanimaz > -1:
             pygame.display.update()
             clockAnimazioni.tick(fpsAnimazioni)
             #print (clockAnimazioni.get_fps())
-        if fineanimaz == -1 and aumentoliv:
+        if fineanimaz == 0 and aumentoliv:
             pygame.display.update()
             pygame.time.wait(1000)
 
