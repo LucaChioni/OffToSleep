@@ -362,6 +362,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     mvy = 0
     puntaPorta = False
     puntaCofanetto = False
+    attaccato = False
     while not risposta:
         xvp = xp
         yvp = yp
@@ -574,10 +575,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                     nemico.avvelenato = True
                                 if statom == 2:
                                     nemico.appiccicato = True
-                                nemico.danneggia(danno)
+                                nemico.danneggia(danno, "Rallo")
+                                attaccato = True
                                 sposta = True
                                 risposta = True
-                                break
 
                         # attacco normale se c'e' il mostro
                         if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and sposta and risposta:
@@ -593,6 +594,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 rumoreattacco.play()
                         # attacco normale se non c'e' il mostro
                         """elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and not sposta and not risposta:
+                            attaccato = True
                             if xp == x + gpx and yp == y:
                                 npers = 1
                             if xp == x - gpx and yp == y:
@@ -1228,6 +1230,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
         if not risposta:
             pygame.display.update()
-        clockAttacco.tick(fpsAttacco)
+        elif not sposta or not attaccato:
+            attacco = 0
+        clockAttacco.tick(fpsInquadra)
 
-    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici
+    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco

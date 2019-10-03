@@ -69,6 +69,8 @@ def scegli_sal(cosa, lunghezzadati):
                     if not errore:
                         persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
                         persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
+                        persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                        persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
                         spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
                         spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
                         scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
@@ -77,6 +79,7 @@ def scegli_sal(cosa, lunghezzadati):
                         armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                         schermo.blit(persalva, (gpx * 8, gpy * 12))
+                        schermo.blit(persSalvaBraccia, (gpx * 8, gpy * 12))
                         schermo.blit(armsalva, (gpx * 8, gpy * 12))
                         schermo.blit(scusalva, (gpx * 8, gpy * 12))
                         schermo.blit(spasalva, (gpx * 8, gpy * 12))
@@ -86,6 +89,8 @@ def scegli_sal(cosa, lunghezzadati):
                     if not errore:
                         persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
                         persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
+                        persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                        persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
                         spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
                         spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
                         scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
@@ -94,6 +99,7 @@ def scegli_sal(cosa, lunghezzadati):
                         armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                         schermo.blit(persalva, (gpx * 15, gpy * 12))
+                        schermo.blit(persSalvaBraccia, (gpx * 15, gpy * 12))
                         schermo.blit(armsalva, (gpx * 15, gpy * 12))
                         schermo.blit(scusalva, (gpx * 15, gpy * 12))
                         schermo.blit(spasalva, (gpx * 15, gpy * 12))
@@ -103,6 +109,8 @@ def scegli_sal(cosa, lunghezzadati):
                     if not errore:
                         persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
                         persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
+                        persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                        persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
                         spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
                         spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
                         scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
@@ -111,6 +119,7 @@ def scegli_sal(cosa, lunghezzadati):
                         armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
                         schermo.blit(persalva, (gpx * 22, gpy * 12))
+                        schermo.blit(persSalvaBraccia, (gpx * 22, gpy * 12))
                         schermo.blit(armsalva, (gpx * 22, gpy * 12))
                         schermo.blit(scusalva, (gpx * 22, gpy * 12))
                         schermo.blit(spasalva, (gpx * 22, gpy * 12))
@@ -250,6 +259,8 @@ def scegli_sal(cosa, lunghezzadati):
                         if not errore:
                             persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
                             persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
+                            persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                            persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
                             spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
                             spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
                             scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
@@ -258,6 +269,7 @@ def scegli_sal(cosa, lunghezzadati):
                             armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                             schermo.blit(persalva, (gpx * 8, gpy * 12))
+                            schermo.blit(persSalvaBraccia, (gpx * 8, gpy * 12))
                             schermo.blit(armsalva, (gpx * 8, gpy * 12))
                             schermo.blit(scusalva, (gpx * 8, gpy * 12))
                             schermo.blit(spasalva, (gpx * 8, gpy * 12))
@@ -267,6 +279,8 @@ def scegli_sal(cosa, lunghezzadati):
                         if not errore:
                             persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
                             persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
+                            persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                            persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
                             spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
                             spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
                             scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
@@ -275,6 +289,7 @@ def scegli_sal(cosa, lunghezzadati):
                             armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                             schermo.blit(persalva, (gpx * 15, gpy * 12))
+                            schermo.blit(persSalvaBraccia, (gpx * 15, gpy * 12))
                             schermo.blit(armsalva, (gpx * 15, gpy * 12))
                             schermo.blit(scusalva, (gpx * 15, gpy * 12))
                             schermo.blit(spasalva, (gpx * 15, gpy * 12))
@@ -284,6 +299,8 @@ def scegli_sal(cosa, lunghezzadati):
                         if not errore:
                             persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
                             persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
+                            persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                            persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
                             spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
                             spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
                             scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
@@ -292,6 +309,7 @@ def scegli_sal(cosa, lunghezzadati):
                             armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
                             schermo.blit(persalva, (gpx * 22, gpy * 12))
+                            schermo.blit(persSalvaBraccia, (gpx * 22, gpy * 12))
                             schermo.blit(armsalva, (gpx * 22, gpy * 12))
                             schermo.blit(scusalva, (gpx * 22, gpy * 12))
                             schermo.blit(spasalva, (gpx * 22, gpy * 12))
@@ -334,7 +352,7 @@ def menu():
     # primo frame
     if True:
         schermo.fill(grigioscu)
-        persomenuinizio = pygame.transform.scale(persgraf, (gpx * 18, gpy * 18))
+        persomenuinizio = pygame.transform.scale(persGrafInizio, (gpx * 18, gpy * 18))
         if (c == 1):
             robomenuinizio = pygame.transform.scale(robogra, (gpx * 18, gpy * 18))
         if (c == 2):
@@ -481,6 +499,7 @@ def menu():
                                     print "Dati corrotti: " + str(len(dati))
                                     indietro = False
                                     schermo.fill(grigioscu)
+                                    robograsalva = pygame.transform.scale(robograffff, (gpx * 18, gpy * 18))
                                     schermo.blit(robograsalva, (gpx * 15, -gpy * 3))
                                     messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
                                     messaggio("I dati sono corrotti...", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 100)
@@ -509,7 +528,7 @@ def menu():
                         quit()
 
             schermo.fill(grigioscu)
-            persomenuinizio = pygame.transform.scale(persgraf, (gpx * 18, gpy * 18))
+            persomenuinizio = pygame.transform.scale(persGrafInizio, (gpx * 18, gpy * 18))
             if (c == 1):
                 robomenuinizio = pygame.transform.scale(robogra, (gpx * 18, gpy * 18))
             if (c == 2):
@@ -530,6 +549,7 @@ def menu():
 
 def equip(dati):
     perssta = pygame.transform.scale(perso, (gpx * 8, gpy * 8))
+    persstab = pygame.transform.scale(persob, (gpx * 8, gpy * 8))
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
     puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
     xp = gsx // 32 * 1
@@ -682,6 +702,7 @@ def equip(dati):
             messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 40)
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
         schermo.blit(perssta, (gsx // 32 * 23, gsy // 18 * 4))
+        schermo.blit(persstab, (gsx // 32 * 23, gsy // 18 * 4))
         schermo.blit(armatura, (gsx // 32 * 23, gsy // 18 * 4))
         schermo.blit(arma, (gsx // 32 * 23, gsy // 18 * 4))
         schermo.blit(scudo, (gsx // 32 * 23, gsy // 18 * 4))
@@ -1460,6 +1481,7 @@ def equip(dati):
             esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
 
             schermo.blit(perssta, (gsx // 32 * 23, gsy // 18 * 4))
+            schermo.blit(persstab, (gsx // 32 * 23, gsy // 18 * 4))
             schermo.blit(armatura, (gsx // 32 * 23, gsy // 18 * 4))
             schermo.blit(arma, (gsx // 32 * 23, gsy // 18 * 4))
             schermo.blit(scudo, (gsx // 32 * 23, gsy // 18 * 4))
@@ -4075,7 +4097,7 @@ def oggetti(dati):
             dati[5] = 0
         messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 3.5, 50)
         messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 4.5, 50)
-        persmen = pygame.transform.scale(persgra, (gpx * 3, gpy * 3))
+        persmen = pygame.transform.scale(persGrafMenu, (gpx * 3, gpy * 3))
         schermo.blit(persmen, ((gsx // 32 * 10) + (gpx // 2), gsy // 18 * 3.5))
         schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 5.5) + (gpy // 8)))
         if dati[121]:
@@ -4448,7 +4470,7 @@ def oggetti(dati):
                 dati[5] = 0
             messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 3.5, 50)
             messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 4.5, 50)
-            persmen = pygame.transform.scale(persgra, (gpx * 3, gpy * 3))
+            persmen = pygame.transform.scale(persGrafMenu, (gpx * 3, gpy * 3))
             schermo.blit(persmen, ((gsx // 32 * 10) + (gpx // 2), gsy // 18 * 3.5))
             schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 5.5) + (gpy // 8)))
             if dati[121]:
@@ -4550,7 +4572,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
     c16.play(-1)
 
     sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
-    perssta = pygame.transform.scale(persgra, (gpx * 10, gpy * 10))
+    perssta = pygame.transform.scale(persGrafMenu, (gpx * 10, gpy * 10))
     robosta = pygame.transform.scale(robograf, (gpx * 10, gpy * 10))
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
     avvelenatosta = pygame.transform.scale(avvelenatoo, (gpx, gpy))

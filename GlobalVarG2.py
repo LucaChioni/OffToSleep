@@ -29,7 +29,7 @@ gpx = gsx // 32
 gpy = gsy // 18
 
 # nome-icona
-pygame.display.set_caption("gioco 2")
+pygame.display.set_caption("Gioco 2")
 icona = pygame.image.load("Immagini\Icona.png")
 pygame.display.set_icon(icona)
 
@@ -38,7 +38,7 @@ clockAttacco = pygame.time.Clock()
 clockAnimazioni = pygame.time.Clock()
 clockVideo = pygame.time.Clock()
 fpsAnimazioni = 30
-fpsAttacco = 20
+fpsInquadra = 20
 fpsVideo = 12
 
 # colori
@@ -109,8 +109,8 @@ persab = pygame.image.load('Immagini\Personaggi\Personaggio3b.png')
 persab = pygame.transform.scale(persab, (gpx, gpy))
 perso = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
 perss = pygame.transform.scale(perso, (gpx, gpy))
-perssb = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
-perssb = pygame.transform.scale(perssb, (gpx, gpy))
+persob = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+perssb = pygame.transform.scale(persob, (gpx, gpy))
 persd = pygame.image.load('Immagini\Personaggi\Personaggio2.png')
 persd = pygame.transform.scale(persd, (gpx, gpy))
 persdb = pygame.image.load('Immagini\Personaggi\Personaggio2b.png')
@@ -139,10 +139,20 @@ perswmb1 = pygame.image.load('Immagini\Personaggi\Personaggio4movb1.png')
 perswmb1 = pygame.transform.scale(perswmb1, (gpx, gpy))
 perswmb2 = pygame.image.load('Immagini\Personaggi\Personaggio4movb2.png')
 perswmb2 = pygame.transform.scale(perswmb2, (gpx, gpy))
-persgra = pygame.image.load('Immagini\Disegnigraf\PersonaggioGraf3.png')
-persgraf = pygame.image.load('Immagini\Disegnigraf\PersonaggioGraf.png')
+perswmbAttacco = pygame.image.load('Immagini\Personaggi\Personaggio4movbAttacco.png')
+perswmbAttacco = pygame.transform.scale(perswmbAttacco, (gpx, gpy))
+persambAttacco = pygame.image.load('Immagini\Personaggi\Personaggio3movbAttacco.png')
+persambAttacco = pygame.transform.scale(persambAttacco, (gpx, gpy))
+perssmbAttacco = pygame.image.load('Immagini\Personaggi\Personaggio1movbAttacco.png')
+perssmbAttacco = pygame.transform.scale(perssmbAttacco, (gpx, gpy))
+persdmbAttacco = pygame.image.load('Immagini\Personaggi\Personaggio2movbAttacco.png')
+persdmbAttacco = pygame.transform.scale(persdmbAttacco, (gpx, gpy))
+persmbDifesa = pygame.image.load('Immagini\Personaggi\PersonaggiomovbDifesa.png')
+persmbDifesa = pygame.transform.scale(persmbDifesa, (gpx, gpy))
 persAvvele = pygame.image.load('Immagini\Personaggi\PersonaggioAvvelenato.png')
 persAvvele = pygame.transform.scale(persAvvele, (gpx, gpy))
+persGrafMenu = pygame.image.load('Immagini\Disegnigraf\PersonaggioGrafMenu.png')
+persGrafInizio = pygame.image.load('Immagini\Disegnigraf\PersonaggioGrafInizio.png')
 
 # immagini robot
 robow = pygame.image.load('Immagini\Personaggi\Robot4.png')
@@ -161,14 +171,13 @@ roboap = pygame.image.load('Immagini\Personaggi\Robot3p.png')
 roboap = pygame.transform.scale(roboap, (gpx, gpy))
 armrobmo = pygame.image.load('Immagini\Armrobs\Armrob00.png')
 armrobmo = pygame.transform.scale(armrobmo, (gpx, gpy))
+roboSurrisc = pygame.image.load('Immagini\Personaggi\RobotSurriscaldato.png')
+roboSurrisc = pygame.transform.scale(roboSurrisc, (gpx, gpy))
 robogra = pygame.image.load('Immagini\Disegnigraf\RobotGraf.png')
 robograf = pygame.image.load('Immagini\Disegnigraf\RobotGraf2.png')
 robograff = pygame.image.load('Immagini\Disegnigraf\RobotGraf3.png')
 robografff = pygame.image.load('Immagini\Disegnigraf\RobotGraf4.png')
-robograsalva = pygame.image.load('Immagini\Disegnigraf\RobotGrafsalva.png')
-robograsalva = pygame.transform.scale(robograsalva, (gpx * 18, gpy * 18))
-roboSurrisc = pygame.image.load('Immagini\Personaggi\RobotSurriscaldato.png')
-roboSurrisc = pygame.transform.scale(roboSurrisc, (gpx, gpy))
+robograffff = pygame.image.load('Immagini\Disegnigraf\RobotGrafsalva.png')
 
 # indicatori vita
 indvita = pygame.image.load('Immagini\Barrevita\Indvita.png')
@@ -298,6 +307,6 @@ c11.set_volume(volumeCanzoni)
 c16 = pygame.mixer.Sound("Audio\Canzoni\Canzone16.wav")
 c16.set_volume(volumeCanzoni)
 
-# dati tecniche di Colco (scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++)
+# dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++]
 costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
 dannoTecniche = [40, 30, 0, 30, 20, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]

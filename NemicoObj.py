@@ -2,6 +2,7 @@
 
 from GenericFuncG2 import *
 
+
 class NemicoObj(object):
 
     def __init__(self, x, y, direzione, tipo, stanza):
@@ -44,7 +45,10 @@ class NemicoObj(object):
         self.mosseRimaste = 0
         self.attacco = attacco
         self.attaccaDaLontano = attaccaDaLontano
-        self.anima = False
+        self.animaSpostamento = False
+        self.animaAttacco = False
+        self.animaMorte = False
+        self.animaDanneggiamento = False
 
         imgW = pygame.image.load("Immagini\Mostri\\" + tipo + "w.png")
         self.imgW = pygame.transform.scale(imgW, (gpx, gpy))
@@ -79,6 +83,20 @@ class NemicoObj(object):
         imgAppiccicato = pygame.image.load("Immagini\Mostri\\" + tipo + "Appicc.png")
         self.imgAppiccicato = pygame.transform.scale(imgAppiccicato, (gpx, gpy))
 
+        imgAttaccoW = pygame.image.load("Immagini\Mostri\\" + tipo + "wAttacco.png")
+        self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (gpx, gpy * 2))
+        imgAttaccoA = pygame.image.load("Immagini\Mostri\\" + tipo + "aAttacco.png")
+        self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (gpx * 2, gpy))
+        imgAttaccoS = pygame.image.load("Immagini\Mostri\\" + tipo + "sAttacco.png")
+        self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (gpx, gpy * 2))
+        imgAttaccoD = pygame.image.load("Immagini\Mostri\\" + tipo + "dAttacco.png")
+        self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (gpx * 2, gpy))
+
+        imgMorte1 = pygame.image.load("Immagini\Mostri\MorteMov1.png")
+        self.imgMorte1 = pygame.transform.scale(imgMorte1, (gpx, gpy))
+        imgMorte2 = pygame.image.load("Immagini\Mostri\MorteMov2.png")
+        self.imgMorte2 = pygame.transform.scale(imgMorte2, (gpx, gpy))
+
     def girati(self, direzione):
         if direzione == "w":
             self.imgAttuale = self.imgW
@@ -88,8 +106,10 @@ class NemicoObj(object):
             self.imgAttuale = self.imgS
         elif direzione == "d":
             self.imgAttuale = self.imgD
+        self.direzione = direzione
 
-    def danneggia(self, danno):
+    def danneggia(self, danno, attaccante):
+        self.animaDanneggiamento = attaccante
         self.vita -= danno
         if self.vita <= 0:
             self.vita = 0

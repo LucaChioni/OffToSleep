@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import copy
-
 from MenuG2 import *
 from EnvPrintG2 import *
 from MovNemiciRobG2 import *
@@ -268,12 +266,36 @@ def gameloop():
             # arma
             armaw = pygame.image.load("Immagini\Armi\Arma%iw.png" % dati[6])
             armaw = pygame.transform.scale(armaw, (gpx, gpy))
+            armawMov1 = pygame.image.load("Immagini\Armi\Arma%iwMov1.png" % dati[6])
+            armawMov1 = pygame.transform.scale(armawMov1, (gpx, gpy))
+            armawMov2 = pygame.image.load("Immagini\Armi\Arma%iwMov2.png" % dati[6])
+            armawMov2 = pygame.transform.scale(armawMov2, (gpx, gpy))
             armaa = pygame.image.load("Immagini\Armi\Arma%ia.png" % dati[6])
             armaa = pygame.transform.scale(armaa, (gpx, gpy))
+            armaaMov1 = pygame.image.load("Immagini\Armi\Arma%iaMov1.png" % dati[6])
+            armaaMov1 = pygame.transform.scale(armaaMov1, (gpx, gpy))
+            armaaMov2 = pygame.image.load("Immagini\Armi\Arma%iaMov2.png" % dati[6])
+            armaaMov2 = pygame.transform.scale(armaaMov2, (gpx, gpy))
             armas = pygame.image.load("Immagini\Armi\Arma%is.png" % dati[6])
             armas = pygame.transform.scale(armas, (gpx, gpy))
+            armasMov1 = pygame.image.load("Immagini\Armi\Arma%isMov1.png" % dati[6])
+            armasMov1 = pygame.transform.scale(armasMov1, (gpx, gpy))
+            armasMov2 = pygame.image.load("Immagini\Armi\Arma%isMov2.png" % dati[6])
+            armasMov2 = pygame.transform.scale(armasMov2, (gpx, gpy))
             armad = pygame.image.load("Immagini\Armi\Arma%id.png" % dati[6])
             armad = pygame.transform.scale(armad, (gpx, gpy))
+            armadMov1 = pygame.image.load("Immagini\Armi\Arma%idMov1.png" % dati[6])
+            armadMov1 = pygame.transform.scale(armadMov1, (gpx, gpy))
+            armadMov2 = pygame.image.load("Immagini\Armi\Arma%idMov2.png" % dati[6])
+            armadMov2 = pygame.transform.scale(armadMov2, (gpx, gpy))
+            armasAttacco = pygame.image.load("Immagini\Armi\Arma%isAttacco.png" % dati[6])
+            armasAttacco = pygame.transform.scale(armasAttacco, (gpx, gpy * 2))
+            armaaAttacco = pygame.image.load("Immagini\Armi\Arma%iaAttacco.png" % dati[6])
+            armaaAttacco = pygame.transform.scale(armaaAttacco, (gpx * 2, gpy))
+            armadAttacco = pygame.image.load("Immagini\Armi\Arma%idAttacco.png" % dati[6])
+            armadAttacco = pygame.transform.scale(armadAttacco, (gpx * 2, gpy))
+            armawAttacco = pygame.image.load("Immagini\Armi\Arma%iwAttacco.png" % dati[6])
+            armawAttacco = pygame.transform.scale(armawAttacco, (gpx, gpy * 2))
             # armatura
             armaturaw = pygame.image.load("Immagini\Armature\Armatura%iw.png" % dati[8])
             armaturaw = pygame.transform.scale(armaturaw, (gpx, gpy))
@@ -292,6 +314,8 @@ def gameloop():
             scudos = pygame.transform.scale(scudos, (gpx, gpy))
             scudod = pygame.image.load("Immagini\Scudi\Scudo%id.png" % dati[7])
             scudod = pygame.transform.scale(scudod, (gpx, gpy))
+            scudoDifesa = pygame.image.load("Immagini\Scudi\Scudo%iDifesa.png" % dati[7])
+            scudoDifesa = pygame.transform.scale(scudoDifesa, (gpx, gpy))
             # armatura robot
             armrobw = pygame.image.load("Immagini\Armrobs\Armrob%iw.png" % dati[9])
             armrobw = pygame.transform.scale(armrobw, (gpx, gpy))
@@ -303,18 +327,30 @@ def gameloop():
             armrobd = pygame.transform.scale(armrobd, (gpx, gpy))
             if agg == 1:
                 arma = armaw
+                armaMov1 = armawMov1
+                armaMov2 = armawMov2
+                armaAttacco = armawAttacco
                 armatura = armaturaw
                 scudo = scudow
             if agg == 2:
                 arma = armaa
+                armaMov1 = armaaMov1
+                armaMov2 = armaaMov2
+                armaAttacco = armaaAttacco
                 armatura = armaturaa
                 scudo = scudoa
             if agg == 3:
                 arma = armas
+                armaMov1 = armasMov1
+                armaMov2 = armasMov2
+                armaAttacco = armasAttacco
                 armatura = armaturas
                 scudo = scudos
             if agg == 4:
                 arma = armad
+                armaMov1 = armadMov1
+                armaMov2 = armadMov2
+                armaAttacco = armadAttacco
                 armatura = armaturad
                 scudo = scudod
             if nrob != 0:
@@ -337,6 +373,9 @@ def gameloop():
 
         if inizio:
             arma = armas
+            armaMov1 = armasMov1
+            armaMov2 = armasMov2
+            armaAttacco = armasAttacco
             armatura = armaturas
             scudo = scudos
             robot = robos
@@ -377,6 +416,9 @@ def gameloop():
                     npers = 3
                     pers = persw
                     arma = armaw
+                    armaMov1 = armawMov1
+                    armaMov2 = armawMov2
+                    armaAttacco = armawAttacco
                     armatura = armaturaw
                     scudo = scudow
                     ny = -gpy
@@ -388,6 +430,9 @@ def gameloop():
                     npers = 2
                     pers = persa
                     arma = armaa
+                    armaMov1 = armaaMov1
+                    armaMov2 = armaaMov2
+                    armaAttacco = armaaAttacco
                     armatura = armaturaa
                     scudo = scudoa
                     nx = -gpx
@@ -399,6 +444,9 @@ def gameloop():
                     npers = 4
                     pers = perss
                     arma = armas
+                    armaMov1 = armasMov1
+                    armaMov2 = armasMov2
+                    armaAttacco = armasAttacco
                     armatura = armaturas
                     scudo = scudos
                     ny = gpy
@@ -410,6 +458,9 @@ def gameloop():
                     npers = 1
                     pers = persd
                     arma = armad
+                    armaMov1 = armadMov1
+                    armaMov2 = armadMov2
+                    armaAttacco = armadAttacco
                     armatura = armaturad
                     scudo = scudod
                     nx = gpx
@@ -553,27 +604,39 @@ def gameloop():
                 y = vy
         # gestione attacchi
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici)
             caricaTutto = True
             # cambiare posizione dopo l'attacco
             if npers == 3:
                 pers = persw
                 arma = armaw
+                armaMov1 = armawMov1
+                armaMov2 = armawMov2
+                armaAttacco = armawAttacco
                 armatura = armaturaw
                 scudo = scudow
             if npers == 2:
                 pers = persa
                 arma = armaa
+                armaMov1 = armaaMov1
+                armaMov2 = armaaMov2
+                armaAttacco = armaaAttacco
                 armatura = armaturaa
                 scudo = scudoa
             if npers == 4:
                 pers = perss
                 arma = armas
+                armaMov1 = armasMov1
+                armaMov2 = armasMov2
+                armaAttacco = armasAttacco
                 armatura = armaturas
                 scudo = scudos
             if npers == 1:
                 pers = persd
                 arma = armad
+                armaMov1 = armadMov1
+                armaMov2 = armadMov2
+                armaAttacco = armadAttacco
                 armatura = armaturad
                 scudo = scudod
             # decrementa oggetto utilizzato
@@ -597,7 +660,6 @@ def gameloop():
         if sposta:
             difesa = 0
         if difesa != 0 and not sposta:
-            sposta = False
             esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
             if difesa == 2:
                 difesa = 1
@@ -758,7 +820,8 @@ def gameloop():
             rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2 = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa)
             i = 0
             for nemico in listaNemici:
-                nemico.vita = vetDatiNemici[i]
+                if nemico.vita != vetDatiNemici[i]:
+                    nemico.danneggia(nemico.vita - vetDatiNemici[i], "Colco")
                 statom = vetDatiNemici[i + 4]
                 if statom == 0:
                     nemico.avvelenato = False
@@ -868,16 +931,12 @@ def gameloop():
                         nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici)
                         if direzioneMostro == 1:
                             nemico.girati("d")
-                            nemico.direzione = "d"
                         elif direzioneMostro == 2:
                             nemico.girati("a")
-                            nemico.direzione = "a"
                         elif direzioneMostro == 3:
                             nemico.girati("s")
-                            nemico.direzione = "s"
                         elif direzioneMostro == 4:
                             nemico.girati("w")
-                            nemico.direzione = "w"
                         i = 0
                         while i < len(vetDatiNemici):
                             if nemico.x == vetDatiNemici[i + 1] and nemico.y == vetDatiNemici[i + 2]:
@@ -895,6 +954,7 @@ def gameloop():
                     nmost -= 1
                     dati[127] += nemico.esp
                     nemico.morto = True
+                    nemico.animaMorte = True
 
         # aumentare di livello
         if dati[127] >= esptot and dati[4] < 100 and not carim and not inizio:
@@ -914,23 +974,25 @@ def gameloop():
         if not inizio:
             if caricaTutto:
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto)
-            primopasso, caricaTutto, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici)
+            primopasso, caricaTutto, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, armas, armaturas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici)
             if not carim:
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto)
-
-        # calncella deinitivamente i mostri morti
-        for nemico in listaNemici:
-            if nemico.morto:
-                listaNemici.remove(nemico)
-                listaNemiciTotali.remove(nemico)
 
         if not aumentoliv:
             caricaTutto = False
 
+        # calncella deinitivamente i mostri morti e resetta vx/vy/anima
         for nemico in listaNemici:
             nemico.vx = nemico.x
             nemico.vy = nemico.y
-            nemico.anima = False
+            nemico.animaSpostamento = False
+            nemico.animaAttacco = False
+            nemico.animaMorte = False
+            nemico.animaDanneggiamento = False
+            if nemico.morto:
+                listaNemici.remove(nemico)
+                listaNemiciTotali.remove(nemico)
+
         vx = x
         vy = y
         vrx = rx

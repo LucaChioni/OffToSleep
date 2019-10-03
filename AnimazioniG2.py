@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanimaz):
+def animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, armaMov1, avvele, fineanimaz):
     if 5 < fineanimaz <= 10:
         if npers == 1:
             schermo.blit(scudo, (vx + (gpx // 3), y))
@@ -12,9 +12,9 @@ def animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, arma, avvele, finea
                 schermo.blit(persAvvele, (vx + (gpx // 3), y))
             schermo.blit(armatura, (vx + (gpx // 3), y))
             schermo.blit(persdmb1, (vx + (gpx // 3), y))
-            schermo.blit(arma, (vx + (gpx // 3), y))
+            schermo.blit(armaMov1, (vx + (gpx // 3), y))
         if npers == 2:
-            schermo.blit(arma, (vx - (gpx // 3), y))
+            schermo.blit(armaMov1, (vx - (gpx // 3), y))
             schermo.blit(persam, (vx - (gpx // 3), y))
             if avvele:
                 schermo.blit(persAvvele, (vx - (gpx // 3), y))
@@ -22,7 +22,7 @@ def animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, arma, avvele, finea
             schermo.blit(persamb1, (vx - (gpx // 3), y))
             schermo.blit(scudo, (vx - (gpx // 3), y))
         if npers == 3:
-            schermo.blit(arma, (x, vy - (gpy // 3)))
+            schermo.blit(armaMov1, (x, vy - (gpy // 3)))
             schermo.blit(scudo, (x, vy - (gpy // 3)))
             schermo.blit(perswm, (x, vy - (gpy // 3)))
             if avvele:
@@ -35,11 +35,11 @@ def animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, arma, avvele, finea
                 schermo.blit(persAvvele, (x, vy + (gpy // 3)))
             schermo.blit(armatura, (x, vy + (gpy // 3)))
             schermo.blit(perssmb1, (x, vy + (gpy // 3)))
-            schermo.blit(arma, (x, vy + (gpy // 3)))
+            schermo.blit(armaMov1, (x, vy + (gpy // 3)))
             schermo.blit(scudo, (x, vy + (gpy // 3)))
 
 
-def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
+def animaPersSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, avvele, fineanimaz):
     if npers == 1:
         if 5 < fineanimaz <= 10:
             schermo.blit(scudo, (x - (gpx * fineanimaz // 10), y))
@@ -48,7 +48,7 @@ def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
                 schermo.blit(persAvvele, (x - (gpx * fineanimaz // 10), y))
             schermo.blit(armatura, (x - (gpx * fineanimaz // 10), y))
             schermo.blit(persdmb1, (x - (gpx * fineanimaz // 10), y))
-            schermo.blit(arma, (x - (gpx * fineanimaz // 10), y))
+            schermo.blit(armaMov1, (x - (gpx * fineanimaz // 10), y))
         if 0 < fineanimaz <= 5:
             schermo.blit(scudo, (x - (gpx * fineanimaz // 10), y))
             schermo.blit(persdm, (x - (gpx * fineanimaz // 10), y))
@@ -56,10 +56,10 @@ def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
                 schermo.blit(persAvvele, (x - (gpx * fineanimaz // 10), y))
             schermo.blit(armatura, (x - (gpx * fineanimaz // 10), y))
             schermo.blit(persdmb2, (x - (gpx * fineanimaz // 10), y))
-            schermo.blit(arma, (x - (gpx * fineanimaz // 10), y))
+            schermo.blit(armaMov2, (x - (gpx * fineanimaz // 10), y))
     if npers == 2:
         if 5 < fineanimaz <= 10:
-            schermo.blit(arma, (x + (gpx * fineanimaz // 10), y))
+            schermo.blit(armaMov1, (x + (gpx * fineanimaz // 10), y))
             schermo.blit(persam, (x + (gpx * fineanimaz // 10), y))
             if avvele:
                 schermo.blit(persAvvele, (x + (gpx * fineanimaz // 10), y))
@@ -67,7 +67,7 @@ def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
             schermo.blit(persamb1, (x + (gpx * fineanimaz // 10), y))
             schermo.blit(scudo, (x + (gpx * fineanimaz // 10), y))
         if 0 < fineanimaz <= 5:
-            schermo.blit(arma, (x + (gpx * fineanimaz // 10), y))
+            schermo.blit(armaMov2, (x + (gpx * fineanimaz // 10), y))
             schermo.blit(persam, (x + (gpx * fineanimaz // 10), y))
             if avvele:
                 schermo.blit(persAvvele, (x + (gpx * fineanimaz // 10), y))
@@ -76,7 +76,7 @@ def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
             schermo.blit(scudo, (x + (gpx * fineanimaz // 10), y))
     if npers == 3:
         if 5 < fineanimaz <= 10:
-            schermo.blit(arma, (x, y + (gpy * fineanimaz // 10)))
+            schermo.blit(armaMov1, (x, y + (gpy * fineanimaz // 10)))
             schermo.blit(scudo, (x, y + (gpy * fineanimaz // 10)))
             schermo.blit(perswm, (x, y + (gpy * fineanimaz // 10)))
             if avvele:
@@ -84,7 +84,7 @@ def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
             schermo.blit(armatura, (x, y + (gpy * fineanimaz // 10)))
             schermo.blit(perswmb1, (x, y + (gpy * fineanimaz // 10)))
         if 0 < fineanimaz <= 5:
-            schermo.blit(arma, (x, y + (gpy * fineanimaz // 10)))
+            schermo.blit(armaMov2, (x, y + (gpy * fineanimaz // 10)))
             schermo.blit(scudo, (x, y + (gpy * fineanimaz // 10)))
             schermo.blit(perswm, (x, y + (gpy * fineanimaz // 10)))
             if avvele:
@@ -98,7 +98,7 @@ def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
                 schermo.blit(persAvvele, (x, y - (gpy * fineanimaz // 10)))
             schermo.blit(armatura, (x, y - (gpy * fineanimaz // 10)))
             schermo.blit(perssmb1, (x, y - (gpy * fineanimaz // 10)))
-            schermo.blit(arma, (x, y - (gpy * fineanimaz // 10)))
+            schermo.blit(armaMov1, (x, y - (gpy * fineanimaz // 10)))
             schermo.blit(scudo, (x, y - (gpy * fineanimaz // 10)))
         if 0 < fineanimaz <= 5:
             schermo.blit(perssm, (x, y - (gpy * fineanimaz // 10)))
@@ -106,11 +106,11 @@ def animaPersSpostato(npers, x, y, scudo, armatura, arma, avvele, fineanimaz):
                 schermo.blit(persAvvele, (x, y - (gpy * fineanimaz // 10)))
             schermo.blit(armatura, (x, y - (gpy * fineanimaz // 10)))
             schermo.blit(perssmb2, (x, y - (gpy * fineanimaz // 10)))
-            schermo.blit(arma, (x, y - (gpy * fineanimaz // 10)))
+            schermo.blit(armaMov2, (x, y - (gpy * fineanimaz // 10)))
             schermo.blit(scudo, (x, y - (gpy * fineanimaz // 10)))
 
 
-def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanimaz):
+def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, armaMov1, armaMov2, avvele, fineanimaz):
     if npers == 1:
         if 5 < fineanimaz <= 10:
             schermo.blit(scudo, (vx, y))
@@ -119,7 +119,7 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanima
                 schermo.blit(persAvvele, (vx, y))
             schermo.blit(armatura, (vx, y))
             schermo.blit(persdmb1, (vx, y))
-            schermo.blit(arma, (vx, y))
+            schermo.blit(armaMov1, (vx, y))
         if 0 < fineanimaz <= 5:
             schermo.blit(scudo, (vx, y))
             schermo.blit(persdm, (vx, y))
@@ -127,10 +127,10 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanima
                 schermo.blit(persAvvele, (vx, y))
             schermo.blit(armatura, (vx, y))
             schermo.blit(persdmb2, (vx, y))
-            schermo.blit(arma, (vx, y))
+            schermo.blit(armaMov2, (vx, y))
     if npers == 2:
         if 5 < fineanimaz <= 10:
-            schermo.blit(arma, (vx, y))
+            schermo.blit(armaMov1, (vx, y))
             schermo.blit(persam, (vx, y))
             if avvele:
                 schermo.blit(persAvvele, (vx, y))
@@ -138,7 +138,7 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanima
             schermo.blit(persamb1, (vx, y))
             schermo.blit(scudo, (vx, y))
         if 0 < fineanimaz <= 5:
-            schermo.blit(arma, (vx, y))
+            schermo.blit(armaMov2, (vx, y))
             schermo.blit(persam, (vx, y))
             if avvele:
                 schermo.blit(persAvvele, (vx, y))
@@ -147,7 +147,7 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanima
             schermo.blit(scudo, (vx, y))
     if npers == 3:
         if 5 < fineanimaz <= 10:
-            schermo.blit(arma, (x, vy))
+            schermo.blit(armaMov1, (x, vy))
             schermo.blit(scudo, (x, vy))
             schermo.blit(perswm, (x, vy))
             if avvele:
@@ -155,7 +155,7 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanima
             schermo.blit(armatura, (x, vy))
             schermo.blit(perswmb1, (x, vy))
         if 0 < fineanimaz <= 5:
-            schermo.blit(arma, (x, vy))
+            schermo.blit(armaMov2, (x, vy))
             schermo.blit(scudo, (x, vy))
             schermo.blit(perswm, (x, vy))
             if avvele:
@@ -169,7 +169,7 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanima
                 schermo.blit(persAvvele, (x, vy))
             schermo.blit(armatura, (x, vy))
             schermo.blit(perssmb1, (x, vy))
-            schermo.blit(arma, (x, vy))
+            schermo.blit(armaMov1, (x, vy))
             schermo.blit(scudo, (x, vy))
         if 0 < fineanimaz <= 5:
             schermo.blit(perssm, (x, vy))
@@ -177,37 +177,154 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, avvele, fineanima
                 schermo.blit(persAvvele, (x, vy))
             schermo.blit(armatura, (x, vy))
             schermo.blit(perssmb2, (x, vy))
-            schermo.blit(arma, (x, vy))
+            schermo.blit(armaMov2, (x, vy))
             schermo.blit(scudo, (x, vy))
 
 
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz):
-    animazioneFatta = False
-    if sposta:
+def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, dati, attacco, difesa, tastop, animazione, aumentoliv, fineanimaz):
+    if sposta and not aumentoliv:
         # mentre ci si sposta
         if x != vx or y != vy:
             animazione = True
-            animazioneFatta = True
             if not passiRallo.get_busy():
                 passiRallo.play(rumorecamminata)
             if primopasso and not cambiosta:
                 primopasso = False
             # camminata quando si entra in una stanza
             if cambiosta:
-                animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, arma, dati[121], fineanimaz)
+                animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, armaMov1, dati[121], fineanimaz)
             # camminata quando non si entra in una stanza
             else:
-                animaPersSpostato(npers, x, y, scudo, armatura, arma, dati[121], fineanimaz)
+                animaPersSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, dati[121], fineanimaz)
         # mentre non ci si sposta
         elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
             animazione = True
-            animazioneFatta = True
             if not passiRallo.get_busy():
                 passiRallo.play(rumorecamminata)
             if primopasso:
                 primopasso = False
-            animaPersFermo(npers, x, y, vx, vy, scudo, armatura, arma, dati[121], fineanimaz)
-    if not animazioneFatta:
+            animaPersFermo(npers, x, y, vx, vy, scudo, armatura, armaMov1, armaMov2, dati[121], fineanimaz)
+    return animazione, primopasso
+
+
+def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv):
+    if sposta and not aumentoliv:
+        if attacco == 1 and difesa == 0:
+            animazioneRallo = True
+            if npers == 1:
+                schermo.blit(scudo, (x, y))
+                schermo.blit(pers, (x, y))
+                if dati[121]:
+                    schermo.blit(persAvvele, (x, y))
+                schermo.blit(armatura, (x, y))
+                schermo.blit(persdmbAttacco, (x, y))
+                schermo.blit(armaAttacco, (x, y))
+            if npers == 2:
+                schermo.blit(armaAttacco, (x - gpx, y))
+                schermo.blit(pers, (x, y))
+                if dati[121]:
+                    schermo.blit(persAvvele, (x, y))
+                schermo.blit(armatura, (x, y))
+                schermo.blit(persambAttacco, (x, y))
+                schermo.blit(scudo, (x, y))
+            if npers == 3:
+                schermo.blit(armaAttacco, (x, y - gpy))
+                schermo.blit(scudo, (x, y))
+                schermo.blit(pers, (x, y))
+                if dati[121]:
+                    schermo.blit(persAvvele, (x, y))
+                schermo.blit(armatura, (x, y))
+                schermo.blit(perswmbAttacco, (x, y))
+            if npers == 4:
+                schermo.blit(pers, (x, y))
+                if dati[121]:
+                    schermo.blit(persAvvele, (x, y))
+                schermo.blit(armatura, (x, y))
+                schermo.blit(perssmbAttacco, (x, y))
+                schermo.blit(armaAttacco, (x, y))
+                schermo.blit(scudo, (x, y))
+        if difesa != 0:
+            animazioneRallo = True
+            schermo.blit(perss, (x, y))
+            if dati[121]:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armaturaS, (x, y))
+            schermo.blit(persmbDifesa, (x, y))
+            schermo.blit(armaS, (x, y))
+            schermo.blit(scudoDifesa, (x, y))
+    elif not sposta and not aumentoliv and difesa != 0 and animazione:
+        animazioneRallo = True
+        schermo.blit(perss, (x, y))
+        if dati[121]:
+            schermo.blit(persAvvele, (x, y))
+        schermo.blit(armaturaS, (x, y))
+        schermo.blit(persmbDifesa, (x, y))
+        schermo.blit(armaS, (x, y))
+        schermo.blit(scudoDifesa, (x, y))
+    return animazioneRallo
+
+
+def animaLvUp(npers, x, y, pers, scudo, armatura, arma, liv, aumentoliv, carim, animazione, caricaTutto, fineanimaz):
+    if aumentoliv and not carim:
+        animazione = True
+        caricaTutto = True
+        if not effetti.get_busy():
+            effetti.play(rumorelevelup)
+        if npers == 1:
+            schermo.blit(scudo, (x, y))
+            schermo.blit(pers, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(persdb, (x, y))
+            schermo.blit(arma, (x, y))
+        if npers == 2:
+            schermo.blit(arma, (x, y))
+            schermo.blit(pers, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(persab, (x, y))
+            schermo.blit(scudo, (x, y))
+        if npers == 3:
+            schermo.blit(arma, (x, y))
+            schermo.blit(scudo, (x, y))
+            schermo.blit(pers, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(perswb, (x, y))
+        if npers == 4:
+            schermo.blit(pers, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(perssb, (x, y))
+            schermo.blit(arma, (x, y))
+            schermo.blit(scudo, (x, y))
+        if 5 <= fineanimaz <= 10:
+            schermo.blit(saliliv2, (x, y))
+        if 1 < fineanimaz <= 5:
+            schermo.blit(saliliv1, (x, y))
+        if fineanimaz == 1:
+            schermo.blit(saliliv, (x, y))
+
+        schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
+        i = 1
+        while i <= 100:
+            if liv == i:
+                messaggio("Liv +: Punti vita aumentati", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+                break
+            i += 3
+        i = 2
+        while i <= 100:
+            if liv == i:
+                messaggio("Liv +: Attacco aumentato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+                break
+            i += 3
+        i = 3
+        while i <= 100:
+            if liv == i:
+                messaggio("Liv +: Difesa aumentata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+                break
+            i += 3
+    return animazione, caricaTutto
+
+
+def animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, dati, animazioneRallo):
+    if not animazioneRallo:
         if npers == 1:
             schermo.blit(scudo, (x, y))
             schermo.blit(pers, (x, y))
@@ -240,7 +357,156 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
             schermo.blit(perssb, (x, y))
             schermo.blit(arma, (x, y))
             schermo.blit(scudo, (x, y))
-    return animazione, primopasso
+
+
+def animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, surriscalda, cambiosta, animazione, robot, fineanimaz):
+    if (rx != vrx or ry != vry) and not cambiosta:
+        animazione = True
+        # rumorecamminataRobo.play()
+        if nrob == 1:
+            if 5 < fineanimaz <= 10:
+                schermo.blit(robodp, (rx - (gpx * fineanimaz // 10), ry))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx - (gpx * fineanimaz // 10), ry))
+                schermo.blit(armrob, (rx - (gpx * fineanimaz // 10), ry))
+            if 0 < fineanimaz <= 5:
+                schermo.blit(robodp, (rx - (gpx * fineanimaz // 10), ry))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx - (gpx * fineanimaz // 10), ry))
+                schermo.blit(armrob, (rx - (gpx * fineanimaz // 10), ry))
+        if nrob == 2:
+            if 5 < fineanimaz <= 10:
+                schermo.blit(roboap, (rx + (gpx * fineanimaz // 10), ry))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx + (gpx * fineanimaz // 10), ry))
+                schermo.blit(armrob, (rx + (gpx * fineanimaz // 10), ry))
+            if 0 < fineanimaz <= 5:
+                schermo.blit(roboap, (rx + (gpx * fineanimaz // 10), ry))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx + (gpx * fineanimaz // 10), ry))
+                schermo.blit(armrob, (rx + (gpx * fineanimaz // 10), ry))
+        if nrob == 4:
+            if 5 < fineanimaz <= 10:
+                schermo.blit(robow, (rx, ry + (gpy * fineanimaz // 10)))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx, ry + (gpy * fineanimaz // 10)))
+                schermo.blit(armrob, (rx, ry + (gpy * fineanimaz // 10)))
+            if 0 < fineanimaz <= 5:
+                schermo.blit(robow, (rx, ry + (gpy * fineanimaz // 10)))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx, ry + (gpy * fineanimaz // 10)))
+                schermo.blit(armrob, (rx, ry + (gpy * fineanimaz // 10)))
+        if nrob == 3:
+            if 5 < fineanimaz <= 10:
+                schermo.blit(robos, (rx, ry - (gpy * fineanimaz // 10)))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx, ry - (gpy * fineanimaz // 10)))
+                schermo.blit(armrob, (rx, ry - (gpy * fineanimaz // 10)))
+            if 0 < fineanimaz <= 5:
+                schermo.blit(robos, (rx, ry - (gpy * fineanimaz // 10)))
+                if surriscalda > 0:
+                    schermo.blit(roboSurrisc, (rx, ry - (gpy * fineanimaz // 10)))
+                schermo.blit(armrob, (rx, ry - (gpy * fineanimaz // 10)))
+    else:
+        schermo.blit(robot, (rx, ry))
+        if surriscalda > 0:
+            schermo.blit(roboSurrisc, (rx, ry))
+        schermo.blit(armrob, (rx, ry))
+    return animazione
+
+
+def animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
+    if not cambiosta:
+        for nemico in listaNemici:
+            if nemico.animaSpostamento and not nemico.morto and (nemico.x != nemico.vx or nemico.y != nemico.vy):
+                animazione = True
+                # rumorecamminataNemico.play()
+                if nemico.direzione == "d":
+                    if 5 < fineanimaz <= 10:
+                        schermo.blit(nemico.imgDMov1, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                    if 0 < fineanimaz <= 5:
+                        schermo.blit(nemico.imgDMov2, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                if nemico.direzione == "a":
+                    if 5 < fineanimaz <= 10:
+                        schermo.blit(nemico.imgAMov1, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                    if 0 < fineanimaz <= 5:
+                        schermo.blit(nemico.imgAMov2, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
+                if nemico.direzione == "w":
+                    if 5 < fineanimaz <= 10:
+                        schermo.blit(nemico.imgWMov1, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                    if 0 < fineanimaz <= 5:
+                        schermo.blit(nemico.imgWMov2, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
+                if nemico.direzione == "s":
+                    if 5 < fineanimaz <= 10:
+                        schermo.blit(nemico.imgSMov1, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                    if 0 < fineanimaz <= 5:
+                        schermo.blit(nemico.imgSMov2, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                        if nemico.appiccicato:
+                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+                        if nemico.avvelenato:
+                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
+    return animazione
+
+
+def animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz):
+    if not cambiosta:
+        for nemico in listaNemici:
+            if nemico.animaAttacco and not nemico.morto:
+                animazione = True
+                # rumorecamminataNemico.play()
+                if nemico.direzione == "w":
+                    schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y - gpy))
+                if nemico.direzione == "a":
+                    schermo.blit(nemico.imgAttaccoA, (nemico.x - gpx, nemico.y))
+                if nemico.direzione == "s":
+                    schermo.blit(nemico.imgAttaccoS, (nemico.x, nemico.y))
+                if nemico.direzione == "d":
+                    schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
+                if nemico.appiccicato:
+                    schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                if nemico.avvelenato:
+                    schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+    return animazione
+
+
+def animaMorteNemici(listaNemici, animazione, cambiosta, fineanimaz):
+    if not cambiosta:
+        for nemico in listaNemici:
+            if nemico.animaMorte and nemico.morto:
+                animazione = True
+                if 5 <= fineanimaz <= 10:
+                    schermo.blit(nemico.imgMorte1, (nemico.x, nemico.y))
+                if 1 < fineanimaz <= 5:
+                    schermo.blit(nemico.imgMorte2, (nemico.x, nemico.y))
+    return animazione
 
 
 def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaTutto):
@@ -383,201 +649,9 @@ def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaTutto):
     return caricaTutto, tesoro
 
 
-def animaLvUp(npers, x, y, pers, scudo, armatura, arma, liv, aumentoliv, carim, animazione, caricaTutto, fineanimaz):
-    if aumentoliv and not carim:
-        animazione = True
-        caricaTutto = True
-        if not effetti.get_busy():
-            effetti.play(rumorelevelup)
-        if npers == 1:
-            schermo.blit(scudo, (x, y))
-            schermo.blit(pers, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(persdb, (x, y))
-            schermo.blit(arma, (x, y))
-        if npers == 2:
-            schermo.blit(arma, (x, y))
-            schermo.blit(pers, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(persab, (x, y))
-            schermo.blit(scudo, (x, y))
-        if npers == 3:
-            schermo.blit(arma, (x, y))
-            schermo.blit(scudo, (x, y))
-            schermo.blit(pers, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(perswb, (x, y))
-        if npers == 4:
-            schermo.blit(pers, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(perssb, (x, y))
-            schermo.blit(arma, (x, y))
-            schermo.blit(scudo, (x, y))
-        if 5 <= fineanimaz <= 10:
-            schermo.blit(saliliv2, (x, y))
-        if 1 < fineanimaz <= 5:
-            schermo.blit(saliliv1, (x, y))
-        if fineanimaz == 1:
-            schermo.blit(saliliv, (x, y))
-
-        schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
-        i = 1
-        while i <= 100:
-            if liv == i:
-                messaggio("Liv +: Punti vita aumentati", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-                break
-            i += 3
-        i = 2
-        while i <= 100:
-            if liv == i:
-                messaggio("Liv +: Attacco aumentato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-                break
-            i += 3
-        i = 3
-        while i <= 100:
-            if liv == i:
-                messaggio("Liv +: Difesa aumentata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-                break
-            i += 3
-    return animazione, caricaTutto
-
-
-def animaRoboSpostato(nrob, rx, ry, vrx, vry, armrob, surriscalda, cambiosta, animazione, robot, fineanimaz):
-    if (rx != vrx or ry != vry) and not cambiosta:
-        animazione = True
-        # rumorecamminataRobo.play()
-        if nrob == 1:
-            if 5 < fineanimaz <= 10:
-                schermo.blit(robodp, (rx - (gpx * fineanimaz // 10), ry))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx - (gpx * fineanimaz // 10), ry))
-                schermo.blit(armrob, (rx - (gpx * fineanimaz // 10), ry))
-            if 0 < fineanimaz <= 5:
-                schermo.blit(robodp, (rx - (gpx * fineanimaz // 10), ry))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx - (gpx * fineanimaz // 10), ry))
-                schermo.blit(armrob, (rx - (gpx * fineanimaz // 10), ry))
-        if nrob == 2:
-            if 5 < fineanimaz <= 10:
-                schermo.blit(roboap, (rx + (gpx * fineanimaz // 10), ry))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx + (gpx * fineanimaz // 10), ry))
-                schermo.blit(armrob, (rx + (gpx * fineanimaz // 10), ry))
-            if 0 < fineanimaz <= 5:
-                schermo.blit(roboap, (rx + (gpx * fineanimaz // 10), ry))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx + (gpx * fineanimaz // 10), ry))
-                schermo.blit(armrob, (rx + (gpx * fineanimaz // 10), ry))
-        if nrob == 4:
-            if 5 < fineanimaz <= 10:
-                schermo.blit(robow, (rx, ry + (gpy * fineanimaz // 10)))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx, ry + (gpy * fineanimaz // 10)))
-                schermo.blit(armrob, (rx, ry + (gpy * fineanimaz // 10)))
-            if 0 < fineanimaz <= 5:
-                schermo.blit(robow, (rx, ry + (gpy * fineanimaz // 10)))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx, ry + (gpy * fineanimaz // 10)))
-                schermo.blit(armrob, (rx, ry + (gpy * fineanimaz // 10)))
-        if nrob == 3:
-            if 5 < fineanimaz <= 10:
-                schermo.blit(robos, (rx, ry - (gpy * fineanimaz // 10)))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx, ry - (gpy * fineanimaz // 10)))
-                schermo.blit(armrob, (rx, ry - (gpy * fineanimaz // 10)))
-            if 0 < fineanimaz <= 5:
-                schermo.blit(robos, (rx, ry - (gpy * fineanimaz // 10)))
-                if surriscalda > 0:
-                    schermo.blit(roboSurrisc, (rx, ry - (gpy * fineanimaz // 10)))
-                schermo.blit(armrob, (rx, ry - (gpy * fineanimaz // 10)))
-    else:
-        schermo.blit(robot, (rx, ry))
-        if surriscalda > 0:
-            schermo.blit(roboSurrisc, (rx, ry))
-        schermo.blit(armrob, (rx, ry))
-    return animazione
-
-
-def animaMorteNemici(listaNemici, sfondinoa, sfondinob, fineanimaz):
-    for nemico in listaNemici:
-        if nemico.morto:
-            n = 0
-            while n < 32:
-                if nemico.x == gpx * n:
-                    m = 0
-                    while m < 18:
-                        if nemico.y == gpy * m:
-                            if (n + m) % 2 == 0:
-                                schermo.blit(sfondinoa, (nemico.x, nemico.y))
-                            if (n + m) % 2 != 0:
-                                schermo.blit(sfondinob, (nemico.x, nemico.y))
-                        m = m + 1
-                n = n + 1
-
-
-def animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
-    if not cambiosta:
-        for nemico in listaNemici:
-            if nemico.anima and not nemico.morto and (nemico.x != nemico.vx or nemico.y != nemico.vy):
-                animazione = True
-                # rumorecamminataNemico.play()
-                if nemico.direzione == "d":
-                    if 5 < fineanimaz <= 10:
-                        schermo.blit(nemico.imgDMov1, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                    if 0 < fineanimaz <= 5:
-                        schermo.blit(nemico.imgDMov2, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                if nemico.direzione == "a":
-                    if 5 < fineanimaz <= 10:
-                        schermo.blit(nemico.imgAMov1, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                    if 0 < fineanimaz <= 5:
-                        schermo.blit(nemico.imgAMov2, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x + (gpx * fineanimaz // 10), nemico.y))
-                if nemico.direzione == "w":
-                    if 5 < fineanimaz <= 10:
-                        schermo.blit(nemico.imgWMov1, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                    if 0 < fineanimaz <= 5:
-                        schermo.blit(nemico.imgWMov2, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (gpy * fineanimaz // 10)))
-                if nemico.direzione == "s":
-                    if 5 < fineanimaz <= 10:
-                        schermo.blit(nemico.imgSMov1, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-                    if 0 < fineanimaz <= 5:
-                        schermo.blit(nemico.imgSMov2, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-                        if nemico.appiccicato:
-                            schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-                        if nemico.avvelenato:
-                            schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (gpy * fineanimaz // 10)))
-    return animazione
-
-
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, armaS, armaturaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici):
     animazione = False
+    animazioneRallo = False
     # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
     fineanimaz = 10
     while fineanimaz >= 0:
@@ -621,7 +695,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                                 schermo.blit(sfondinob, (rx, ry))
                         m = m + 1
                 for nemico in listaNemici:
-                    if nemico.anima:
+                    if nemico.animaSpostamento or nemico.animaAttacco or nemico.animaMorte:
                         if nemico.x == gpx * n:
                             m = 0
                             while m < 18:
@@ -636,9 +710,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 n = n + 1
 
         # animazione camminata robo
-        animazione = animaRoboSpostato(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
+        animazione = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
         # animazione camminata personaggio
-        animazione, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, arma, dati, attacco, difesa, tastop, animazione, pers, fineanimaz)
+        animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, dati, attacco, difesa, tastop, animazioneRallo, aumentoliv, fineanimaz)
         # animazione camminata mostri
         animazione = animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
@@ -646,13 +720,22 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         caricaTutto, tesoro = animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaTutto)
 
         # animazione aumento di livello
-        animazione, caricaTutto = animaLvUp(npers, x, y, pers, scudo, armatura, arma, dati[4], aumentoliv, carim, animazione, caricaTutto, fineanimaz)
+        animazioneRallo, caricaTutto = animaLvUp(npers, x, y, pers, scudo, armatura, arma, dati[4], aumentoliv, carim, animazioneRallo, caricaTutto, fineanimaz)
 
         # animazione morte nemici
-        animaMorteNemici(listaNemici, sfondinoa, sfondinob, fineanimaz)
+        animazione = animaMorteNemici(listaNemici, animazione, cambiosta, fineanimaz)
+
+        # animazione attacco nemici
+        animazione = animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz)
+
+        # animazione attacco personaggio (ultima animazione perchè per animare la difesa devo sapere se sono in corso altre animazioni)
+        animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv)
+
+        # disegna Rallo se ci sono animazioni ma non di Rallo
+        animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, dati, animazioneRallo)
 
         fineanimaz -= 1
-        if animazione and fineanimaz > -1:
+        if (animazione or animazioneRallo) and fineanimaz > -1:
             pygame.display.update()
             clockAnimazioni.tick(fpsAnimazioni)
             #print (clockAnimazioni.get_fps())
