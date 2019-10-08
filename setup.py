@@ -5,4 +5,4 @@ cx_Freeze.setup(
     options={"buid_exe": {"packages": ["pygame", "ctypes", "os", "random"]}},
     description="un gran gioco",
     executables=executables
-    )
+)

@@ -15,6 +15,8 @@ class NemicoObj(object):
         self.visto = False
         self.stanzaDiAppartenenza = stanza
         self.morto = False
+        self.xObbiettivo = False
+        self.yObbiettivo = False
 
         self.tipo = tipo
         vitaTotale = 0
@@ -36,7 +38,7 @@ class NemicoObj(object):
             raggioVisivo = gpx * 6
             velocita = 1
             attacco = 20
-            attaccaDaLontano = False
+            attaccaDaLontano = True
         self.vita = vitaTotale
         self.vitaTotale = vitaTotale
         self.esp = esp
@@ -49,53 +51,85 @@ class NemicoObj(object):
         self.animaAttacco = False
         self.animaMorte = False
         self.animaDanneggiamento = False
-
-        imgW = pygame.image.load("Immagini\Mostri\\" + tipo + "w.png")
-        self.imgW = pygame.transform.scale(imgW, (gpx, gpy))
-        imgA = pygame.image.load("Immagini\Mostri\\" + tipo + "a.png")
-        self.imgA = pygame.transform.scale(imgA, (gpx, gpy))
-        imgS = pygame.image.load("Immagini\Mostri\\" + tipo + "s.png")
-        self.imgS = pygame.transform.scale(imgS, (gpx, gpy))
-        imgD = pygame.image.load("Immagini\Mostri\\" + tipo + "d.png")
-        self.imgD = pygame.transform.scale(imgD, (gpx, gpy))
-        self.girati(direzione)
         self.direzione = direzione
 
-        imgWMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "wMov1.png")
+        self.caricaImg()
+        self.girati(direzione)
+
+
+    def caricaImg(self):
+        imgW = pygame.image.load("Immagini\Mostri\\" + self.tipo + "w.png")
+        self.imgW = pygame.transform.scale(imgW, (gpx, gpy))
+        imgA = pygame.image.load("Immagini\Mostri\\" + self.tipo + "a.png")
+        self.imgA = pygame.transform.scale(imgA, (gpx, gpy))
+        imgS = pygame.image.load("Immagini\Mostri\\" + self.tipo + "s.png")
+        self.imgS = pygame.transform.scale(imgS, (gpx, gpy))
+        imgD = pygame.image.load("Immagini\Mostri\\" + self.tipo + "d.png")
+        self.imgD = pygame.transform.scale(imgD, (gpx, gpy))
+
+        imgWMov1 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "wMov1.png")
         self.imgWMov1 = pygame.transform.scale(imgWMov1, (gpx, gpy))
-        imgWMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "wMov2.png")
+        imgWMov2 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "wMov2.png")
         self.imgWMov2 = pygame.transform.scale(imgWMov2, (gpx, gpy))
-        imgAMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "aMov1.png")
+        imgAMov1 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "aMov1.png")
         self.imgAMov1 = pygame.transform.scale(imgAMov1, (gpx, gpy))
-        imgAMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "aMov2.png")
+        imgAMov2 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "aMov2.png")
         self.imgAMov2 = pygame.transform.scale(imgAMov2, (gpx, gpy))
-        imgSMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "sMov1.png")
+        imgSMov1 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "sMov1.png")
         self.imgSMov1 = pygame.transform.scale(imgSMov1, (gpx, gpy))
-        imgSMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "sMov2.png")
+        imgSMov2 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "sMov2.png")
         self.imgSMov2 = pygame.transform.scale(imgSMov2, (gpx, gpy))
-        imgDMov1 = pygame.image.load("Immagini\Mostri\\" + tipo + "dMov1.png")
+        imgDMov1 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "dMov1.png")
         self.imgDMov1 = pygame.transform.scale(imgDMov1, (gpx, gpy))
-        imgDMov2 = pygame.image.load("Immagini\Mostri\\" + tipo + "dMov2.png")
+        imgDMov2 = pygame.image.load("Immagini\Mostri\\" + self.tipo + "dMov2.png")
         self.imgDMov2 = pygame.transform.scale(imgDMov2, (gpx, gpy))
 
-        imgAvvelenamento = pygame.image.load("Immagini\Mostri\\" + tipo + "Avvele.png")
+        imgAvvelenamento = pygame.image.load("Immagini\Mostri\\" + self.tipo + "Avvele.png")
         self.imgAvvelenamento = pygame.transform.scale(imgAvvelenamento, (gpx, gpy))
-        imgAppiccicato = pygame.image.load("Immagini\Mostri\\" + tipo + "Appicc.png")
+        imgAppiccicato = pygame.image.load("Immagini\Mostri\\" + self.tipo + "Appicc.png")
         self.imgAppiccicato = pygame.transform.scale(imgAppiccicato, (gpx, gpy))
 
-        imgAttaccoW = pygame.image.load("Immagini\Mostri\\" + tipo + "wAttacco.png")
-        self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (gpx, gpy * 2))
-        imgAttaccoA = pygame.image.load("Immagini\Mostri\\" + tipo + "aAttacco.png")
-        self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (gpx * 2, gpy))
-        imgAttaccoS = pygame.image.load("Immagini\Mostri\\" + tipo + "sAttacco.png")
-        self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (gpx, gpy * 2))
-        imgAttaccoD = pygame.image.load("Immagini\Mostri\\" + tipo + "dAttacco.png")
-        self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (gpx * 2, gpy))
+        if self.attaccaDaLontano:
+            imgAttaccoW = pygame.image.load("Immagini\Mostri\\" + self.tipo + "wAttacco.png")
+            self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (gpx, gpy))
+            imgAttaccoA = pygame.image.load("Immagini\Mostri\\" + self.tipo + "aAttacco.png")
+            self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (gpx, gpy))
+            imgAttaccoS = pygame.image.load("Immagini\Mostri\\" + self.tipo + "sAttacco.png")
+            self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (gpx, gpy))
+            imgAttaccoD = pygame.image.load("Immagini\Mostri\\" + self.tipo + "dAttacco.png")
+            self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (gpx, gpy))
+            """imgOggettoAttaccoW = pygame.image.load("Immagini\Mostri\\" + self.tipo + "wOggettoAttacco.png")
+            self.imgOggettoAttaccoW = pygame.transform.scale(imgOggettoAttaccoW, (gpx, gpy))
+            imgOggettoAttaccoA = pygame.image.load("Immagini\Mostri\\" + self.tipo + "aOggettoAttacco.png")
+            self.imgOggettoAttaccoA = pygame.transform.scale(imgOggettoAttaccoA, (gpx, gpy))
+            imgOggettoAttaccoS = pygame.image.load("Immagini\Mostri\\" + self.tipo + "sOggettoAttacco.png")
+            self.imgOggettoAttaccoS = pygame.transform.scale(imgOggettoAttaccoS, (gpx, gpy))
+            imgOggettoAttaccoD = pygame.image.load("Immagini\Mostri\\" + self.tipo + "dOggettoAttacco.png")
+            self.imgOggettoAttaccoD = pygame.transform.scale(imgOggettoAttaccoD, (gpx, gpy))"""
+        else:
+            imgAttaccoW = pygame.image.load("Immagini\Mostri\\" + self.tipo + "wAttacco.png")
+            self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (gpx, gpy * 2))
+            imgAttaccoA = pygame.image.load("Immagini\Mostri\\" + self.tipo + "aAttacco.png")
+            self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (gpx * 2, gpy))
+            imgAttaccoS = pygame.image.load("Immagini\Mostri\\" + self.tipo + "sAttacco.png")
+            self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (gpx, gpy * 2))
+            imgAttaccoD = pygame.image.load("Immagini\Mostri\\" + self.tipo + "dAttacco.png")
+            self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (gpx * 2, gpy))
+            self.imgOggettoAttaccoW = 0
+            self.imgOggettoAttaccoA = 0
+            self.imgOggettoAttaccoS = 0
+            self.imgOggettoAttaccoD = 0
 
         imgMorte1 = pygame.image.load("Immagini\Mostri\MorteMov1.png")
         self.imgMorte1 = pygame.transform.scale(imgMorte1, (gpx, gpy))
         imgMorte2 = pygame.image.load("Immagini\Mostri\MorteMov2.png")
         self.imgMorte2 = pygame.transform.scale(imgMorte2, (gpx, gpy))
+
+        imgDanneggiamentoRallo = pygame.image.load("Immagini\Mostri\DannoRallo.png")
+        self.imgDanneggiamentoRallo = pygame.transform.scale(imgDanneggiamentoRallo, (gpx, gpy))
+        imgDanneggiamentoColco = pygame.image.load("Immagini\Mostri\DannoColco.png")
+        self.imgDanneggiamentoColco = pygame.transform.scale(imgDanneggiamentoColco, (gpx, gpy))
+
 
     def girati(self, direzione):
         if direzione == "w":
@@ -108,11 +142,13 @@ class NemicoObj(object):
             self.imgAttuale = self.imgD
         self.direzione = direzione
 
+
     def danneggia(self, danno, attaccante):
         self.animaDanneggiamento = attaccante
         self.vita -= danno
         if self.vita <= 0:
             self.vita = 0
+
 
     def aggiornaVista(self, x, y, rx, ry, stanza, porte, cofanetti, dati):
         vistoRallo = False
@@ -145,11 +181,13 @@ class NemicoObj(object):
         else:
             self.visto = False
 
+
     def resettaMosseRimaste(self):
         if self.velocita >= 0:
             self.mosseRimaste = 1 + self.velocita
         elif self.velocita < 0:
             self.mosseRimaste = 1
+
 
     def compiMossa(self):
         if self.appiccicato:

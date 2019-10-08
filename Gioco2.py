@@ -91,6 +91,7 @@ def gameloop():
 
             carim = True
             cambiosta = True
+            impossibileCliccarePulsanti = True
 
         # caricare gli oggetti
         if carim:
@@ -262,6 +263,7 @@ def gameloop():
 
                 # cambiosta viene cambiato sopra !!!!!!!!!!!!
                 cambiosta = False
+                impossibileCliccarePulsanti = True
 
             # arma
             armaw = pygame.image.load("Immagini\Armi\Arma%iw.png" % dati[6])
@@ -406,7 +408,7 @@ def gameloop():
                 pygame.quit()
                 quit()
 
-            if event.type == pygame.KEYDOWN and not aumentoliv:
+            if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti:
                 # movimanti
                 tastop = event.key
                 # movimenti personaggio
@@ -552,6 +554,8 @@ def gameloop():
                     primopas = False
                     tastotemp = 10
                     tastop = 0
+
+        impossibileCliccarePulsanti = False
 
         # statistiche personaggio e robo (liv + arm + scu)
         # se modifichi -> modifica anche equip, equiprobo e ovunque si presenta pvtot
@@ -961,6 +965,7 @@ def gameloop():
             dati[4] = dati[4] + 1
             dati[127] = dati[127] - esptot
             aumentoliv = True
+            impossibileCliccarePulsanti = True
 
         # aggiorna vista dei mostri e metti l'occhio se ti vedono
         apriocchio = False
@@ -981,8 +986,10 @@ def gameloop():
         if not aumentoliv:
             caricaTutto = False
 
-        # calncella deinitivamente i mostri morti e resetta vx/vy/anima
-        for nemico in listaNemici:
+        # cancella definitivamente i mostri morti e resetta vx/vy/anima
+        i = len(listaNemici) - 1
+        while i >= 0:
+            nemico = listaNemici[i]
             nemico.vx = nemico.x
             nemico.vy = nemico.y
             nemico.animaSpostamento = False
@@ -992,6 +999,7 @@ def gameloop():
             if nemico.morto:
                 listaNemici.remove(nemico)
                 listaNemiciTotali.remove(nemico)
+            i -= 1
 
         vx = x
         vy = y

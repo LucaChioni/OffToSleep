@@ -75,6 +75,8 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
         if vistoRallo or vistoRob:
             visto = True
         if not visto:
+            nemico.xObbiettivo = False
+            nemico.yObbiettivo = False
             nmos = random.randint(1, 4)
             sposta = True
 
@@ -90,6 +92,8 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
         if vistoesca:
             x = vitaesca[escabersaglio + 2]
             y = vitaesca[escabersaglio + 3]
+        nemico.xObbiettivo = x
+        nemico.yObbiettivo = y
 
         # nemici che attaccano da vicino
         if not nemico.attaccaDaLontano:

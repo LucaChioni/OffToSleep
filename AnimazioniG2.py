@@ -481,19 +481,34 @@ def animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz):
         for nemico in listaNemici:
             if nemico.animaAttacco and not nemico.morto:
                 animazione = True
-                # rumorecamminataNemico.play()
-                if nemico.direzione == "w":
-                    schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y - gpy))
-                if nemico.direzione == "a":
-                    schermo.blit(nemico.imgAttaccoA, (nemico.x - gpx, nemico.y))
-                if nemico.direzione == "s":
-                    schermo.blit(nemico.imgAttaccoS, (nemico.x, nemico.y))
-                if nemico.direzione == "d":
-                    schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
-                if nemico.appiccicato:
-                    schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
-                if nemico.avvelenato:
-                    schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                if nemico.attaccaDaLontano:
+                    if nemico.direzione == "w":
+                        schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y))
+                    if nemico.direzione == "a":
+                        schermo.blit(nemico.imgAttaccoA, (nemico.x, nemico.y))
+                    if nemico.direzione == "s":
+                        schermo.blit(nemico.imgAttaccoS, (nemico.x, nemico.y))
+                    if nemico.direzione == "d":
+                        schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
+                    if nemico.appiccicato:
+                        schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                    if nemico.avvelenato:
+                        schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                    print "animazione attacco da lontano: x=" + str(nemico.xObbiettivo) + " y=" + str(nemico.yObbiettivo)
+                else:
+                    # rumorecamminataNemico.play()
+                    if nemico.direzione == "w":
+                        schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y - gpy))
+                    if nemico.direzione == "a":
+                        schermo.blit(nemico.imgAttaccoA, (nemico.x - gpx, nemico.y))
+                    if nemico.direzione == "s":
+                        schermo.blit(nemico.imgAttaccoS, (nemico.x, nemico.y))
+                    if nemico.direzione == "d":
+                        schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
+                    if nemico.appiccicato:
+                        schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                    if nemico.avvelenato:
+                        schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
     return animazione
 
 
@@ -506,6 +521,24 @@ def animaMorteNemici(listaNemici, animazione, cambiosta, fineanimaz):
                     schermo.blit(nemico.imgMorte1, (nemico.x, nemico.y))
                 if 1 < fineanimaz <= 5:
                     schermo.blit(nemico.imgMorte2, (nemico.x, nemico.y))
+    return animazione
+
+
+def animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
+    if not cambiosta:
+        for nemico in listaNemici:
+            if nemico.animaDanneggiamento and not nemico.morto:
+                if not nemico.animaAttacco and not nemico.animaSpostamento:
+                    schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+                animazione = True
+                if nemico.animaDanneggiamento == "Rallo":
+                    schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.x, nemico.y))
+                if nemico.animaDanneggiamento == "Colco":
+                    schermo.blit(nemico.imgDanneggiamentoColco, (nemico.x, nemico.y))
+                if nemico.appiccicato:
+                    schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                if nemico.avvelenato:
+                    schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
     return animazione
 
 
@@ -695,7 +728,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                                 schermo.blit(sfondinob, (rx, ry))
                         m = m + 1
                 for nemico in listaNemici:
-                    if nemico.animaSpostamento or nemico.animaAttacco or nemico.animaMorte:
+                    if nemico.animaSpostamento or nemico.animaAttacco or nemico.animaMorte or nemico.animaDanneggiamento:
                         if nemico.x == gpx * n:
                             m = 0
                             while m < 18:
@@ -727,6 +760,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
         # animazione attacco nemici
         animazione = animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz)
+
+        # animazione danneggiamento dei nemici
+        animazione = animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione attacco personaggio (ultima animazione perchè per animare la difesa devo sapere se sono in corso altre animazioni)
         animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv)
