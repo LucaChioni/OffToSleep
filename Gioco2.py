@@ -39,7 +39,6 @@ def gameloop():
             yesca = 0
             creaesca = False
             vitaesca = []
-            premuti = 0
             attacco = 0
             # difesa e' grigio perche' viene impostato a ogni ciclo
             difesa = 0
@@ -95,7 +94,6 @@ def gameloop():
 
         # caricare gli oggetti
         if carim:
-            premuti = 0
             if pers == persw:
                 agg = 1
             if pers == persa:
@@ -105,17 +103,17 @@ def gameloop():
             if pers == persd:
                 agg = 4
             # stanza
-            imgSfondoStanza = pygame.image.load("Immagini\Paesaggi\Stanza%ia.png" % dati[1]).convert()
+            imgSfondoStanza = pygame.image.load("Immagini/Paesaggi/Stanza%ia.png" % dati[1]).convert()
             imgSfondoStanza = pygame.transform.scale(imgSfondoStanza, (gsx, gsy))
-            sfondinoa = pygame.image.load("Immagini\Paesaggi\Sfondino%ia.png" % dati[1]).convert()
+            sfondinoa = pygame.image.load("Immagini/Paesaggi/Sfondino%ia.png" % dati[1]).convert()
             sfondinoa = pygame.transform.scale(sfondinoa, (gpx, gpy))
-            sfondinob = pygame.image.load("Immagini\Paesaggi\Sfondino%ib.png" % dati[1]).convert()
+            sfondinob = pygame.image.load("Immagini/Paesaggi/Sfondino%ib.png" % dati[1]).convert()
             sfondinob = pygame.transform.scale(sfondinob, (gpx, gpy))
-            sfondinoc = pygame.image.load("Immagini\Paesaggi\Sfondino%ic.png" % dati[1]).convert()
+            sfondinoc = pygame.image.load("Immagini/Paesaggi/Sfondino%ic.png" % dati[1]).convert()
             sfondinoc = pygame.transform.scale(sfondinoc, (gpx, gpy))
-            portaVert = pygame.image.load("Immagini\Paesaggi\PortaV%i.png" % dati[1])
+            portaVert = pygame.image.load("Immagini/Paesaggi/PortaV%i.png" % dati[1])
             portaVert = pygame.transform.scale(portaVert, (gpx, gpy))
-            portaOriz = pygame.image.load("Immagini\Paesaggi\PortaO%i.png" % dati[1])
+            portaOriz = pygame.image.load("Immagini/Paesaggi/PortaO%i.png" % dati[1])
             portaOriz = pygame.transform.scale(portaOriz, (gpx, gpy))
 
             # mostri
@@ -266,66 +264,66 @@ def gameloop():
                 impossibileCliccarePulsanti = True
 
             # arma
-            armaw = pygame.image.load("Immagini\Armi\Arma%iw.png" % dati[6])
+            armaw = pygame.image.load("Immagini/Armi/Arma%iw.png" % dati[6])
             armaw = pygame.transform.scale(armaw, (gpx, gpy))
-            armawMov1 = pygame.image.load("Immagini\Armi\Arma%iwMov1.png" % dati[6])
+            armawMov1 = pygame.image.load("Immagini/Armi/Arma%iwMov1.png" % dati[6])
             armawMov1 = pygame.transform.scale(armawMov1, (gpx, gpy))
-            armawMov2 = pygame.image.load("Immagini\Armi\Arma%iwMov2.png" % dati[6])
+            armawMov2 = pygame.image.load("Immagini/Armi/Arma%iwMov2.png" % dati[6])
             armawMov2 = pygame.transform.scale(armawMov2, (gpx, gpy))
-            armaa = pygame.image.load("Immagini\Armi\Arma%ia.png" % dati[6])
+            armaa = pygame.image.load("Immagini/Armi/Arma%ia.png" % dati[6])
             armaa = pygame.transform.scale(armaa, (gpx, gpy))
-            armaaMov1 = pygame.image.load("Immagini\Armi\Arma%iaMov1.png" % dati[6])
+            armaaMov1 = pygame.image.load("Immagini/Armi/Arma%iaMov1.png" % dati[6])
             armaaMov1 = pygame.transform.scale(armaaMov1, (gpx, gpy))
-            armaaMov2 = pygame.image.load("Immagini\Armi\Arma%iaMov2.png" % dati[6])
+            armaaMov2 = pygame.image.load("Immagini/Armi/Arma%iaMov2.png" % dati[6])
             armaaMov2 = pygame.transform.scale(armaaMov2, (gpx, gpy))
-            armas = pygame.image.load("Immagini\Armi\Arma%is.png" % dati[6])
+            armas = pygame.image.load("Immagini/Armi/Arma%is.png" % dati[6])
             armas = pygame.transform.scale(armas, (gpx, gpy))
-            armasMov1 = pygame.image.load("Immagini\Armi\Arma%isMov1.png" % dati[6])
+            armasMov1 = pygame.image.load("Immagini/Armi/Arma%isMov1.png" % dati[6])
             armasMov1 = pygame.transform.scale(armasMov1, (gpx, gpy))
-            armasMov2 = pygame.image.load("Immagini\Armi\Arma%isMov2.png" % dati[6])
+            armasMov2 = pygame.image.load("Immagini/Armi/Arma%isMov2.png" % dati[6])
             armasMov2 = pygame.transform.scale(armasMov2, (gpx, gpy))
-            armad = pygame.image.load("Immagini\Armi\Arma%id.png" % dati[6])
+            armad = pygame.image.load("Immagini/Armi/Arma%id.png" % dati[6])
             armad = pygame.transform.scale(armad, (gpx, gpy))
-            armadMov1 = pygame.image.load("Immagini\Armi\Arma%idMov1.png" % dati[6])
+            armadMov1 = pygame.image.load("Immagini/Armi/Arma%idMov1.png" % dati[6])
             armadMov1 = pygame.transform.scale(armadMov1, (gpx, gpy))
-            armadMov2 = pygame.image.load("Immagini\Armi\Arma%idMov2.png" % dati[6])
+            armadMov2 = pygame.image.load("Immagini/Armi/Arma%idMov2.png" % dati[6])
             armadMov2 = pygame.transform.scale(armadMov2, (gpx, gpy))
-            armasAttacco = pygame.image.load("Immagini\Armi\Arma%isAttacco.png" % dati[6])
+            armasAttacco = pygame.image.load("Immagini/Armi/Arma%isAttacco.png" % dati[6])
             armasAttacco = pygame.transform.scale(armasAttacco, (gpx, gpy * 2))
-            armaaAttacco = pygame.image.load("Immagini\Armi\Arma%iaAttacco.png" % dati[6])
+            armaaAttacco = pygame.image.load("Immagini/Armi/Arma%iaAttacco.png" % dati[6])
             armaaAttacco = pygame.transform.scale(armaaAttacco, (gpx * 2, gpy))
-            armadAttacco = pygame.image.load("Immagini\Armi\Arma%idAttacco.png" % dati[6])
+            armadAttacco = pygame.image.load("Immagini/Armi/Arma%idAttacco.png" % dati[6])
             armadAttacco = pygame.transform.scale(armadAttacco, (gpx * 2, gpy))
-            armawAttacco = pygame.image.load("Immagini\Armi\Arma%iwAttacco.png" % dati[6])
+            armawAttacco = pygame.image.load("Immagini/Armi/Arma%iwAttacco.png" % dati[6])
             armawAttacco = pygame.transform.scale(armawAttacco, (gpx, gpy * 2))
             # armatura
-            armaturaw = pygame.image.load("Immagini\Armature\Armatura%iw.png" % dati[8])
+            armaturaw = pygame.image.load("Immagini/Armature/Armatura%iw.png" % dati[8])
             armaturaw = pygame.transform.scale(armaturaw, (gpx, gpy))
-            armaturaa = pygame.image.load("Immagini\Armature\Armatura%ia.png" % dati[8])
+            armaturaa = pygame.image.load("Immagini/Armature/Armatura%ia.png" % dati[8])
             armaturaa = pygame.transform.scale(armaturaa, (gpx, gpy))
-            armaturas = pygame.image.load("Immagini\Armature\Armatura%is.png" % dati[8])
+            armaturas = pygame.image.load("Immagini/Armature/Armatura%is.png" % dati[8])
             armaturas = pygame.transform.scale(armaturas, (gpx, gpy))
-            armaturad = pygame.image.load("Immagini\Armature\Armatura%id.png" % dati[8])
+            armaturad = pygame.image.load("Immagini/Armature/Armatura%id.png" % dati[8])
             armaturad = pygame.transform.scale(armaturad, (gpx, gpy))
             # scudo
-            scudow = pygame.image.load("Immagini\Scudi\Scudo%iw.png" % dati[7])
+            scudow = pygame.image.load("Immagini/Scudi/Scudo%iw.png" % dati[7])
             scudow = pygame.transform.scale(scudow, (gpx, gpy))
-            scudoa = pygame.image.load("Immagini\Scudi\Scudo%ia.png" % dati[7])
+            scudoa = pygame.image.load("Immagini/Scudi/Scudo%ia.png" % dati[7])
             scudoa = pygame.transform.scale(scudoa, (gpx, gpy))
-            scudos = pygame.image.load("Immagini\Scudi\Scudo%is.png" % dati[7])
+            scudos = pygame.image.load("Immagini/Scudi/Scudo%is.png" % dati[7])
             scudos = pygame.transform.scale(scudos, (gpx, gpy))
-            scudod = pygame.image.load("Immagini\Scudi\Scudo%id.png" % dati[7])
+            scudod = pygame.image.load("Immagini/Scudi/Scudo%id.png" % dati[7])
             scudod = pygame.transform.scale(scudod, (gpx, gpy))
-            scudoDifesa = pygame.image.load("Immagini\Scudi\Scudo%iDifesa.png" % dati[7])
+            scudoDifesa = pygame.image.load("Immagini/Scudi/Scudo%iDifesa.png" % dati[7])
             scudoDifesa = pygame.transform.scale(scudoDifesa, (gpx, gpy))
             # armatura robot
-            armrobw = pygame.image.load("Immagini\Armrobs\Armrob%iw.png" % dati[9])
+            armrobw = pygame.image.load("Immagini/Armrobs/Armrob%iw.png" % dati[9])
             armrobw = pygame.transform.scale(armrobw, (gpx, gpy))
-            armroba = pygame.image.load("Immagini\Armrobs\Armrob%ia.png" % dati[9])
+            armroba = pygame.image.load("Immagini/Armrobs/Armrob%ia.png" % dati[9])
             armroba = pygame.transform.scale(armroba, (gpx, gpy))
-            armrobs = pygame.image.load("Immagini\Armrobs\Armrob%is.png" % dati[9])
+            armrobs = pygame.image.load("Immagini/Armrobs/Armrob%is.png" % dati[9])
             armrobs = pygame.transform.scale(armrobs, (gpx, gpy))
-            armrobd = pygame.image.load("Immagini\Armrobs\Armrob%id.png" % dati[9])
+            armrobd = pygame.image.load("Immagini/Armrobs/Armrob%id.png" % dati[9])
             armrobd = pygame.transform.scale(armrobd, (gpx, gpy))
             if agg == 1:
                 arma = armaw
@@ -385,11 +383,11 @@ def gameloop():
             inizio = False
 
         # controllo primo passo
-        if primopas and tastotemp != 0 and premuti >= 1:
+        if primopas and tastotemp != 0:
             tastotemp -= 1
             nx = 0
             ny = 0
-        if primopas and tastotemp == 0 and premuti >= 1:
+        if primopas and tastotemp == 0:
             if tastop == pygame.K_w:
                 ny = -gpy
             if tastop == pygame.K_a:
@@ -414,7 +412,6 @@ def gameloop():
                 # movimenti personaggio
                 if event.key == pygame.K_w and not tastoTrovato:
                     tastoTrovato = True
-                    premuti += 1
                     npers = 3
                     pers = persw
                     arma = armaw
@@ -428,7 +425,6 @@ def gameloop():
                     primopas = True
                 if event.key == pygame.K_a and not tastoTrovato:
                     tastoTrovato = True
-                    premuti += 1
                     npers = 2
                     pers = persa
                     arma = armaa
@@ -442,7 +438,6 @@ def gameloop():
                     primopas = True
                 if event.key == pygame.K_s and not tastoTrovato:
                     tastoTrovato = True
-                    premuti += 1
                     npers = 4
                     pers = perss
                     arma = armas
@@ -456,7 +451,6 @@ def gameloop():
                     primopas = True
                 if event.key == pygame.K_d and not tastoTrovato:
                     tastoTrovato = True
-                    premuti += 1
                     npers = 1
                     pers = persd
                     arma = armad
@@ -501,7 +495,7 @@ def gameloop():
                                                             porte[k + 1] == x and porte[
                                                         k + 2] == y - gpy and npers == 3)) and not porte[k + 3]:
                             sposta = True
-                            suonoaperturacopo.play()
+                            canaleSoundInterazioni.play(suonoaperturaporte)
                             porte[k + 3] = True
                             # scoprire caselle viste
                             caseviste = scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste)
@@ -523,7 +517,7 @@ def gameloop():
                                         cofanetti[i + 1] == x and cofanetti[i + 2] == y + gpy and npers == 4) or (
                                         cofanetti[i + 1] == x and cofanetti[i + 2] == y - gpy and npers == 3)) and not \
                         cofanetti[i + 3]:
-                            suonoaperturacopo.play()
+                            canaleSoundInterazioni.play(suonoaperturacofanetti)
                             sposta = True
                             dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
                             cofanetti[i + 3] = True
@@ -542,13 +536,8 @@ def gameloop():
                     startf = True
 
             if event.type == pygame.KEYUP:
-                if tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d:
-                    premuti -= 1
-                    if event.key == tastop:
-                        premuti = 0
-                else:
-                    premuti = 0
-                if premuti == 0:
+                if tastop == event.key:
+                    canaleSoundPassiRallo.stop()
                     nx = 0
                     ny = 0
                     primopas = False
@@ -569,7 +558,7 @@ def gameloop():
 
         # menu start
         if startf and attacco != 1:
-            selsta.play()
+            canaleSoundInterazioni.play(selsta)
             dati[2] = x
             dati[3] = y
             if not apriocchio:
@@ -690,7 +679,7 @@ def gameloop():
             k = 0
             while k < len(porte):
                 if porte[k] == dati[1] and porte[k + 1] == apriChiudiPorta[1] and porte[k + 2] == apriChiudiPorta[2]:
-                    suonoaperturacopo.play()
+                    canaleSoundInterazioni.play(suonoaperturaporte)
                     if porte[k + 3]:
                         porte[k + 3] = False
                     else:
@@ -710,7 +699,7 @@ def gameloop():
             i = 0
             while i < len(cofanetti):
                 if cofanetti[i] == dati[1] and cofanetti[i + 1] == apriCofanetto[1] and cofanetti[i + 2] == apriCofanetto[2] and not cofanetti[i + 3]:
-                    suonoaperturacopo.play()
+                    canaleSoundInterazioni.play(suonoaperturacofanetti)
                     dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
                     cofanetti[i + 3] = True
                     # aggiornare vettore tutticofanetti
@@ -1044,5 +1033,5 @@ pygame.draw.circle(schermo, blu, (300, 100), 5)
 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
 pygame.draw.rect(schermo, rosso, (200, 100, 30, 40), 5)'''
 '''# canzone
-c1 = pygame.mixer.Sound("Audio\Canzone11.wav")
+c1 = pygame.mixer.Sound("Audio/Canzone11.wav")
 c1.play(-1))'''

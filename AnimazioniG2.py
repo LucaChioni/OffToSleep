@@ -186,8 +186,8 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
         # mentre ci si sposta
         if x != vx or y != vy:
             animazione = True
-            if not passiRallo.get_busy():
-                passiRallo.play(rumorecamminata)
+            if not canaleSoundPassiRallo.get_busy():
+                canaleSoundPassiRallo.play(rumorecamminata)
             if primopasso and not cambiosta:
                 primopasso = False
             # camminata quando si entra in una stanza
@@ -199,18 +199,20 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
         # mentre non ci si sposta
         elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
             animazione = True
-            if not passiRallo.get_busy():
-                passiRallo.play(rumorecamminata)
+            if not canaleSoundPassiRallo.get_busy():
+                canaleSoundPassiRallo.play(rumorecamminata)
             if primopasso:
                 primopasso = False
             animaPersFermo(npers, x, y, vx, vy, scudo, armatura, armaMov1, armaMov2, dati[121], fineanimaz)
     return animazione, primopasso
 
 
-def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv):
+def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz):
     if sposta and not aumentoliv:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
+            if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
+                canaleSoundAttacco.play(rumoreattacco)
             if npers == 1:
                 schermo.blit(scudo, (x, y))
                 schermo.blit(pers, (x, y))
@@ -268,8 +270,8 @@ def animaLvUp(npers, x, y, pers, scudo, armatura, arma, liv, aumentoliv, carim, 
     if aumentoliv and not carim:
         animazione = True
         caricaTutto = True
-        if not effetti.get_busy():
-            effetti.play(rumorelevelup)
+        if not canaleSoundLvUp.get_busy():
+            canaleSoundLvUp.play(rumorelevelup)
         if npers == 1:
             schermo.blit(scudo, (x, y))
             schermo.blit(pers, (x, y))
@@ -496,7 +498,7 @@ def animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz):
                         schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
                     print "animazione attacco da lontano: x=" + str(nemico.xObbiettivo) + " y=" + str(nemico.yObbiettivo)
                 else:
-                    # rumorecamminataNemico.play()
+                    # rumoreattaccoNemico.play()
                     if nemico.direzione == "w":
                         schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y - gpy))
                     if nemico.direzione == "a":
@@ -674,7 +676,7 @@ def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaTutto):
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        selezione.play()
+                        canaleSoundPuntatore.play(selezione)
                         risposta = True
         caricaTutto = True
         tesoro = -1
@@ -765,12 +767,13 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         animazione = animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione attacco personaggio (ultima animazione perchè per animare la difesa devo sapere se sono in corso altre animazioni)
-        animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv)
+        animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz)
 
         # disegna Rallo se ci sono animazioni ma non di Rallo
         animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, dati, animazioneRallo)
 
         fineanimaz -= 1
+        pygame.event.pump()
         if (animazione or animazioneRallo) and fineanimaz > -1:
             pygame.display.update()
             clockAnimazioni.tick(fpsAnimazioni)

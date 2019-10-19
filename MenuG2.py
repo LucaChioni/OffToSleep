@@ -45,7 +45,7 @@ def scegli_sal(cosa, lunghezzadati):
         # lettura salvataggi per riconoscerli
         contasalva = 1
         while contasalva <= 3:
-            leggi = open("Salvataggi\Salvataggio%i.txt" % contasalva, "r")
+            leggi = open("Salvataggi/Salvataggio%i.txt" % contasalva, "r")
             leggifile = leggi.read()
             dati = leggifile.split("_")
             dati.pop(len(dati) - 1)
@@ -67,15 +67,15 @@ def scegli_sal(cosa, lunghezzadati):
                         errore = True
                 if contasalva == 1:
                     if not errore:
-                        persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
+                        persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
                         persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                        persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
                         persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                        spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
+                        spasalva = pygame.image.load('Immagini/Armi/Arma%is.png' % dati[6])
                         spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                        scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
+                        scusalva = pygame.image.load('Immagini/Scudi/Scudo%is.png' % dati[7])
                         scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                        armsalva = pygame.image.load('Immagini\Armature\Armatura%is.png' % dati[8])
+                        armsalva = pygame.image.load('Immagini/Armature/Armatura%is.png' % dati[8])
                         armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                         schermo.blit(persalva, (gpx * 8, gpy * 12))
@@ -87,15 +87,15 @@ def scegli_sal(cosa, lunghezzadati):
                         messaggio("Dati corrotti", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                 elif contasalva == 2:
                     if not errore:
-                        persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
+                        persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
                         persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                        persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
                         persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                        spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
+                        spasalva = pygame.image.load('Immagini/Armi/Arma%is.png' % dati[6])
                         spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                        scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
+                        scusalva = pygame.image.load('Immagini/Scudi/Scudo%is.png' % dati[7])
                         scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                        armsalva = pygame.image.load('Immagini\Armature\Armatura%is.png' % dati[8])
+                        armsalva = pygame.image.load('Immagini/Armature/Armatura%is.png' % dati[8])
                         armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                         schermo.blit(persalva, (gpx * 15, gpy * 12))
@@ -107,15 +107,15 @@ def scegli_sal(cosa, lunghezzadati):
                         messaggio("Dati corrotti", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                 elif contasalva == 3:
                     if not errore:
-                        persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
+                        persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
                         persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                        persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
                         persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                        spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
+                        spasalva = pygame.image.load('Immagini/Armi/Arma%is.png' % dati[6])
                         spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                        scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
+                        scusalva = pygame.image.load('Immagini/Scudi/Scudo%is.png' % dati[7])
                         scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                        armsalva = pygame.image.load('Immagini\Armature\Armatura%is.png' % dati[8])
+                        armsalva = pygame.image.load('Immagini/Armature/Armatura%is.png' % dati[8])
                         armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
                         schermo.blit(persalva, (gpx * 22, gpy * 12))
@@ -132,62 +132,68 @@ def scegli_sal(cosa, lunghezzadati):
         pygame.display.update()
 
     while not risposta:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
                     if conferma:
-                        selind.play()
+                        canaleSoundPuntatore.play(selind)
                         xp = vxp
                         yp = vyp
                         conferma = False
                     else:
-                        selind.play()
+                        canaleSoundPuntatore.play(selind)
                         n = -1
                         return n
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
                     if conferma:
                         if xp == gsx // 32 * 19:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 22
                         elif xp == gsx // 32 * 22:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
                     else:
                         if xp == gsx // 32 * 6:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 13
                         else:
                             if xp == gsx // 32 * 13:
-                                spostapun.play()
+                                canaleSoundPuntatore.play(spostapun)
                                 xp = gsx // 32 * 20
                             else:
-                                selimp.play()
-                if event.key == pygame.K_a:
+                                canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
                     if conferma:
                         if xp == gsx // 32 * 22:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 19
                         elif xp == gsx // 32 * 19:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
                     else:
                         if xp == gsx // 32 * 20:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 13
                         else:
                             if xp == gsx // 32 * 13:
-                                spostapun.play()
+                                canaleSoundPuntatore.play(spostapun)
                                 xp = gsx // 32 * 6
                             else:
-                                selimp.play()
-                if event.key == pygame.K_SPACE:
+                                canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
                     if conferma and xp == gsx // 32 * 19 and yp == gsy // 18 * 6:
-                        selezione.play()
-                        return n
+                        canaleSoundPuntatore.play(selezione)
                         risposta = True
+                        return n
                     if not conferma and yp == gsy // 18 * 10:
-                        selezione.play()
+                        canaleSoundPuntatore.play(selezione)
                         if xp == gsx // 32 * 6:
                             conferma = True
                             primaconf = True
@@ -201,11 +207,12 @@ def scegli_sal(cosa, lunghezzadati):
                             primaconf = True
                             n = 3
                     if conferma and xp == gsx // 32 * 22 and yp == gsy // 18 * 6:
-                        selind.play()
+                        canaleSoundPuntatore.play(selind)
                         xp = vxp
                         yp = vyp
                         conferma = False
 
+        if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 5, gsy // 18 * 7, gsx // 32 * 22, gsy // 18 * 9.5))
@@ -235,7 +242,7 @@ def scegli_sal(cosa, lunghezzadati):
             # lettura salvataggi per riconoscerli
             contasalva = 1
             while contasalva <= 3:
-                leggi = open("Salvataggi\Salvataggio%i.txt" % contasalva, "r")
+                leggi = open("Salvataggi/Salvataggio%i.txt" % contasalva, "r")
                 leggifile = leggi.read()
                 dati = leggifile.split("_")
                 dati.pop(len(dati) - 1)
@@ -257,15 +264,15 @@ def scegli_sal(cosa, lunghezzadati):
                             errore = True
                     if contasalva == 1:
                         if not errore:
-                            persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
+                            persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
                             persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                            persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
                             persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                            spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
+                            spasalva = pygame.image.load('Immagini/Armi/Arma%is.png' % dati[6])
                             spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                            scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
+                            scusalva = pygame.image.load('Immagini/Scudi/Scudo%is.png' % dati[7])
                             scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                            armsalva = pygame.image.load('Immagini\Armature\Armatura%is.png' % dati[8])
+                            armsalva = pygame.image.load('Immagini/Armature/Armatura%is.png' % dati[8])
                             armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                             schermo.blit(persalva, (gpx * 8, gpy * 12))
@@ -277,15 +284,15 @@ def scegli_sal(cosa, lunghezzadati):
                             messaggio("Dati corrotti", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                     elif contasalva == 2:
                         if not errore:
-                            persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
+                            persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
                             persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                            persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
                             persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                            spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
+                            spasalva = pygame.image.load('Immagini/Armi/Arma%is.png' % dati[6])
                             spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                            scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
+                            scusalva = pygame.image.load('Immagini/Scudi/Scudo%is.png' % dati[7])
                             scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                            armsalva = pygame.image.load('Immagini\Armature\Armatura%is.png' % dati[8])
+                            armsalva = pygame.image.load('Immagini/Armature/Armatura%is.png' % dati[8])
                             armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                             schermo.blit(persalva, (gpx * 15, gpy * 12))
@@ -297,15 +304,15 @@ def scegli_sal(cosa, lunghezzadati):
                             messaggio("Dati corrotti", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                     elif contasalva == 3:
                         if not errore:
-                            persalva = pygame.image.load('Immagini\Personaggi\Personaggio1.png')
+                            persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
                             persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.image.load('Immagini\Personaggi\Personaggio1b.png')
+                            persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
                             persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                            spasalva = pygame.image.load('Immagini\Armi\Arma%is.png' % dati[6])
+                            spasalva = pygame.image.load('Immagini/Armi/Arma%is.png' % dati[6])
                             spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                            scusalva = pygame.image.load('Immagini\Scudi\Scudo%is.png' % dati[7])
+                            scusalva = pygame.image.load('Immagini/Scudi/Scudo%is.png' % dati[7])
                             scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                            armsalva = pygame.image.load('Immagini\Armature\Armatura%is.png' % dati[8])
+                            armsalva = pygame.image.load('Immagini/Armature/Armatura%is.png' % dati[8])
                             armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
                             schermo.blit(persalva, (gpx * 22, gpy * 12))
@@ -324,9 +331,7 @@ def scegli_sal(cosa, lunghezzadati):
 
 def menu():
     # video
-    fermavideo = guardaVideo('Video/videoinizio', c16)
-
-    c11.play(-1)
+    fermavideo = guardaVideo('Video/videoinizio')
     # attesa dopo video
     if not fermavideo:
         schermo.fill(grigioscu)
@@ -339,7 +344,7 @@ def menu():
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    selezione.play()
+                    canaleSoundPuntatore.play(selezione)
                     finevideo = False
 
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx, gpy))
@@ -371,45 +376,54 @@ def menu():
         pygame.display.update()
 
     while True:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(c11)
+
         # posizione porte e cofanetti nel vettore dati
         porteini = 128
         portefin = 155
         cofaniini = portefin + 1
         cofanifin = 179
         lunghezzadati = cofanifin + 1
+
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_s:
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
                     if yp != gsy // 18 * 13:
                         if yp == gsy // 18 * 3:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 5.5
                         elif yp == gsy // 18 * 5.5:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 8
                         elif yp == gsy // 18 * 8:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 13
                     else:
-                        selimp.play()
-                if event.key == pygame.K_w:
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
                     if yp != gsy // 18 * 3:
                         if yp == gsy // 18 * 5.5:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 3
                         elif yp == gsy // 18 * 8:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 5.5
                         elif yp == gsy // 18 * 13:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 8
                     else:
-                        selimp.play()
-                if event.key == pygame.K_SPACE:
-                    selezione.play()
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
+                    canaleSoundPuntatore.play(selezione)
 
                     # nuova partita
                     if yp == gsy // 18 * 3:
@@ -427,7 +441,7 @@ def menu():
                                 False, 0, 0, 0, 0, 0, 0,# <- altre statistiche
                                 2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
                                 1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False]# <- cofanetti
-                        c11.stop()
+                        canaleSoundCanzone.stop()
                         i = porteini
                         while i <= portefin:
                             dati[i + 1] = dati[i + 1] * gpx
@@ -446,7 +460,7 @@ def menu():
 
                         # lettura salvataggio
                         if n != -1:
-                            leggi = open("Salvataggi\Salvataggio%i.txt" % n, "r")
+                            leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
                             leggifile = leggi.read()
                             dati = leggifile.split("_")
                             dati.pop(len(dati) - 1)
@@ -466,7 +480,7 @@ def menu():
                                             quit()
                                         if event.type == pygame.KEYDOWN:
                                             if event.key == pygame.K_q:
-                                                selind.play()
+                                                canaleSoundPuntatore.play(selind)
                                                 indietro = True
                             else:
                                 errore = False
@@ -493,7 +507,7 @@ def menu():
 
                                         print "Salvataggio: " + str(n)
                                         leggi.close()
-                                        c11.stop()
+                                        canaleSoundCanzone.stop()
                                         return dati, porteini, portefin, cofaniini, cofanifin
                                 if len(dati) != lunghezzadati or errore:
                                     print "Dati corrotti: " + str(len(dati))
@@ -511,7 +525,7 @@ def menu():
                                                 quit()
                                             if event.type == pygame.KEYDOWN:
                                                 if event.key == pygame.K_q:
-                                                    selind.play()
+                                                    canaleSoundPuntatore.play(selind)
                                                     indietro = True
                             leggi.close()
 
@@ -519,7 +533,7 @@ def menu():
                     if yp == gsy // 18 * 8:
                         n = scegli_sal(2, lunghezzadati)
                         if n != -1:
-                            leggi = open("Salvataggi\Salvataggio%i.txt" % n, "w")
+                            leggi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
                             leggi.close()
 
                     # esci dal gioco
@@ -527,6 +541,7 @@ def menu():
                         pygame.quit()
                         quit()
 
+        if tastoTrovato:
             schermo.fill(grigioscu)
             persomenuinizio = pygame.transform.scale(persGrafInizio, (gpx * 18, gpy * 18))
             if (c == 1):
@@ -548,178 +563,134 @@ def menu():
 
 
 def equip(dati):
-    perssta = pygame.transform.scale(perso, (gpx * 8, gpy * 8))
-    persstab = pygame.transform.scale(persob, (gpx * 8, gpy * 8))
+    perssta = pygame.transform.scale(perso, (gpx * 5, gpy * 5))
+    persstab = pygame.transform.scale(persob, (gpx * 5, gpy * 5))
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
     puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
     xp = gsx // 32 * 1
-    yp = gsy // 18 * 6
+    yp = gsy // 18 * 6.8
     carim = True
     risposta = False
 
     esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
 
+    vetImgArmi = []
+    i = 0
+    while i <= 9:
+        if dati[41 + i] > 0:
+            img = pygame.image.load("Immagini/Armi/Arma%iMenu.png" % i)
+            if i == 0:
+                vetImgArmi.append(pygame.transform.scale(img, (int(gpx * 1.2), int(gpy * 1.2))))
+            else:
+                vetImgArmi.append(pygame.transform.scale(img, (int(gpx * 2.3), int(gpy * 2.3))))
+        else:
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            vetImgArmi.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
+        i += 1
+    vetImgArmature = []
+    i = 0
+    while i <= 9:
+        if dati[51 + i] > 0:
+            img = pygame.image.load("Immagini/Armature/Armatura%iMenu.png" % i)
+            vetImgArmature.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
+        else:
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            vetImgArmature.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
+        i += 1
+    vetImgScudi = []
+    i = 0
+    while i <= 9:
+        if dati[61 + i] > 0:
+            img = pygame.image.load("Immagini/Scudi/Scudo%iMenu.png" % i)
+            if i == 0:
+                vetImgScudi.append(pygame.transform.scale(img, (int(gpx * 1.2), int(gpy * 1.2))))
+            else:
+                vetImgScudi.append(pygame.transform.scale(img, (int(gpx * 2.5), int(gpy * 2.5))))
+        else:
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            vetImgScudi.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
+        i += 1
+
     # primo frame
     if True:
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12))
+        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12.5))
         # linea(dove,colore,inizio,fine,spessore)
-        '''pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 8, (gsy // 18 * 15) + (gpy // 2)), 10)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 15, (gsy // 18 * 15) + (gpy // 2)), 10)'''
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 4.5, (gsy // 18 * 6) + (gpy // 2)),
+                         (gsx // 32 * 4.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)),
+                         (gsx // 32 * 8, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 11.5, (gsy // 18 * 6) + (gpy // 2)),
+                         (gsx // 32 * 11.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)),
+                         (gsx // 32 * 15, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 6) + (gpy // 2)),
+                         (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
 
         if carim:
-            armas = pygame.image.load("Immagini\Armi\Arma%is.png" % dati[6])
-            arma = pygame.transform.scale(armas, (gpx * 8, gpy * 8))
-            scudos = pygame.image.load("Immagini\Scudi\Scudo%is.png" % dati[7])
-            scudo = pygame.transform.scale(scudos, (gpx * 8, gpy * 8))
-            armaturas = pygame.image.load("Immagini\Armature\Armatura%is.png" % dati[8])
-            armatura = pygame.transform.scale(armaturas, (gpx * 8, gpy * 8))
+            armas = pygame.image.load("Immagini/Armi/Arma%is.png" % dati[6])
+            arma = pygame.transform.scale(armas, (gpx * 5, gpy * 5))
+            scudos = pygame.image.load("Immagini/Scudi/Scudo%is.png" % dati[7])
+            scudo = pygame.transform.scale(scudos, (gpx * 5, gpy * 5))
+            armaturas = pygame.image.load("Immagini/Armature/Armatura%is.png" % dati[8])
+            armatura = pygame.transform.scale(armaturas, (gpx * 5, gpy * 5))
             carim = False
         messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Armi", grigiochi, gsx // 32 * 2.5, gsy // 18 * 4.5, 60)
-        if dati[41] > 0:
-            messaggio("Niente", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-        if dati[42] > 0:
-            messaggio("Spada di legno", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-        if dati[43] > 0:
-            messaggio("Spada di ferro", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-        if dati[44] > 0:
-            messaggio("Spadone d'acciaio", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-        if dati[45] > 0:
-            messaggio("Spada del toro", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-        if dati[46] > 0:
-            messaggio("Spada di diamante", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-        if dati[47] > 0:
-            messaggio("Excalibur", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-        if dati[48] > 0:
-            messaggio("Lykother", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-        if dati[49] > 0:
-            messaggio("Sinego", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-        if dati[50] > 0:
-            messaggio("Mendaxritas", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-        messaggio("Armature", grigiochi, gsx // 32 * 9.5, gsy // 18 * 4.5, 60)
-        if dati[51] > 0:
-            messaggio("Niente", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-        if dati[52] > 0:
-            messaggio("Armatura di pelle", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-        if dati[53] > 0:
-            messaggio("Armatura di ferro", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-        if dati[54] > 0:
-            messaggio("Armatura d'acciaio", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-        if dati[55] > 0:
-            messaggio("Armatura del toro", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-        if dati[56] > 0:
-            messaggio("Armatura di diamante", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-        if dati[57] > 0:
-            messaggio("Armatura leggendaria", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-        if dati[58] > 0:
-            messaggio("Lykodes", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-        if dati[59] > 0:
-            messaggio("Armatura antica", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-        if dati[60] > 0:
-            messaggio("Loriquam", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-        messaggio("Scudi", grigiochi, gsx // 32 * 16.5, gsy // 18 * 4.5, 60)
-        if dati[61] > 0:
-            messaggio("Niente", grigiochi, gsx // 32 * 16, gsy // 18 * 6, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 6, 40)
-        if dati[62] > 0:
-            messaggio("Scudo di pelle", grigiochi, gsx // 32 * 16, gsy // 18 * 7, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 7, 40)
-        if dati[63] > 0:
-            messaggio("Scudo di ferro", grigiochi, gsx // 32 * 16, gsy // 18 * 8, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 8, 40)
-        if dati[64] > 0:
-            messaggio("Scudo d'acciaio", grigiochi, gsx // 32 * 16, gsy // 18 * 9, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 9, 40)
-        if dati[65] > 0:
-            messaggio("Scudo del toro", grigiochi, gsx // 32 * 16, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 10, 40)
-        if dati[66] > 0:
-            messaggio("Scudo di diamante", grigiochi, gsx // 32 * 16, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 11, 40)
-        if dati[67] > 0:
-            messaggio("Scudo leggendario", grigiochi, gsx // 32 * 16, gsy // 18 * 12, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 12, 40)
-        if dati[68] > 0:
-            messaggio("Lykethmos", grigiochi, gsx // 32 * 16, gsy // 18 * 13, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 13, 40)
-        if dati[69] > 0:
-            messaggio("Scudo antico", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 40)
-        if dati[70] > 0:
-            messaggio("Clipequam", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 40)
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-        schermo.blit(perssta, (gsx // 32 * 23, gsy // 18 * 4))
-        schermo.blit(persstab, (gsx // 32 * 23, gsy // 18 * 4))
-        schermo.blit(armatura, (gsx // 32 * 23, gsy // 18 * 4))
-        schermo.blit(arma, (gsx // 32 * 23, gsy // 18 * 4))
-        schermo.blit(scudo, (gsx // 32 * 23, gsy // 18 * 4))
+        messaggio("Armi", grigiochi, gsx // 32 * 3, gsy // 18 * 4.5, 80)
+        i = 0
+        while i < 10:
+            if i < 5:
+                if i == 0:
+                    schermo.blit(vetImgArmi[i], (gsx // 32 * 2, (gsy // 18 * 6.5 + (gpy * 2 * i))))
+                else:
+                    schermo.blit(vetImgArmi[i], (gsx // 32 * 1.5, (gsy // 18 * 5.8 + (gpy * 2 * i))))
+            else:
+                schermo.blit(vetImgArmi[i], (gsx // 32 * 5, (gsy // 18 * 5.8 + (gpy * 2 * (i - 5)))))
+            i += 1
+        messaggio("Armature", grigiochi, gsx // 32 * 9, gsy // 18 * 4.5, 80)
+        i = 0
+        while i < 10:
+            if i < 5:
+                schermo.blit(vetImgArmature[i], (gsx // 32 * 8.5, (gsy // 18 * 5.8 + (gpy * 2 * i))))
+            else:
+                schermo.blit(vetImgArmature[i], (gsx // 32 * 12, (gsy // 18 * 5.8 + (gpy * 2 * (i - 5)))))
+            i += 1
+        messaggio("Scudi", grigiochi, gsx // 32 * 17, gsy // 18 * 4.5, 80)
+        i = 0
+        while i < 10:
+            if i < 5:
+                if i == 0:
+                    schermo.blit(vetImgScudi[i], (gsx // 32 * 16.2, (gsy // 18 * 6.5 + (gpy * 2 * i))))
+                else:
+                    schermo.blit(vetImgScudi[i], (gsx // 32 * 15.5, int((gsy // 18 * 5.8) + (gpy * 2 * i))))
+            else:
+                schermo.blit(vetImgScudi[i], (gsx // 32 * 19, (gsy // 18 * 5.8 + (gpy * 2 * (i - 5)))))
+            i += 1
+
+        esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
+
+        schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 4))
+        schermo.blit(persstab, (gsx // 32 * 24.5, gsy // 18 * 4))
+        schermo.blit(armatura, (gsx // 32 * 24.5, gsy // 18 * 4))
+        schermo.blit(arma, (gsx // 32 * 24.5, gsy // 18 * 4))
+        schermo.blit(scudo, (gsx // 32 * 24.5, gsy // 18 * 4))
         messaggio("Attacco: %i" % att, grigiochi, gsx // 32 * 23, gsy // 18 * 13, 45)
         messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 14, 45)
         messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 15, 45)
         # confronto statistiche
         # armi
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
+        if xp == gsx // 32 * 1 and yp == gsy // 18 * 6.8:
             if dati[41] != 0:
+                messaggio("Niente", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 0 - (dati[6] * 10)
                 if dati[6] > 0:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
                 else:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
+        if xp == gsx // 32 * 1 and yp == gsy // 18 * 8.8:
             if dati[42] != 0:
+                messaggio("Spada di legno", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 10 - (dati[6] * 10)
                 if dati[6] > 1:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -727,8 +698,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 1:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
+        if xp == gsx // 32 * 1 and yp == gsy // 18 * 10.8:
             if dati[43] != 0:
+                messaggio("Spada di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 20 - (dati[6] * 10)
                 if dati[6] > 2:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -736,8 +708,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 2:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
+        if xp == gsx // 32 * 1 and yp == gsy // 18 * 12.8:
             if dati[44] != 0:
+                messaggio("Spadone d'acciaio", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 30 - (dati[6] * 10)
                 if dati[6] > 3:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -745,8 +718,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 3:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
+        if xp == gsx // 32 * 1 and yp == gsy // 18 * 14.8:
             if dati[45] != 0:
+                messaggio("Spada del toro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 40 - (dati[6] * 10)
                 if dati[6] > 4:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -754,8 +728,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 4:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
+        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 6.8:
             if dati[46] != 0:
+                messaggio("Spada di diamante", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 50 - (dati[6] * 10)
                 if dati[6] > 5:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -763,8 +738,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 5:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
+        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 8.8:
             if dati[47] != 0:
+                messaggio("Excalibur", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 60 - (dati[6] * 10)
                 if dati[6] > 6:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -772,8 +748,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 6:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
+        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 10.8:
             if dati[48] != 0:
+                messaggio("Lykother", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 70 - (dati[6] * 10)
                 if dati[6] > 7:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -781,8 +758,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 7:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
+        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 12.8:
             if dati[49] != 0:
+                messaggio("Sinego", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 80 - (dati[6] * 10)
                 if dati[6] > 8:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -790,8 +768,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                 elif dati[6] == 8:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
+        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 14.8:
             if dati[50] != 0:
+                messaggio("Mendaxritas", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 90 - (dati[6] * 10)
                 if dati[6] > 9:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -800,15 +779,17 @@ def equip(dati):
                 elif dati[6] == 9:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
         # armature
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 6:
+        if xp == gsx // 32 * 8 and yp == gsy // 18 * 6.8:
             if dati[51] != 0:
+                messaggio("Niente", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 0 - (dati[8] * 10)
                 if dati[8] > 0:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
                 else:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 7:
+        if xp == gsx // 32 * 8 and yp == gsy // 18 * 8.8:
             if dati[52] != 0:
+                messaggio("Armatura di pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 10 - (dati[8] * 10)
                 if dati[8] > 1:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -816,8 +797,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 1:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 8:
+        if xp == gsx // 32 * 8 and yp == gsy // 18 * 10.8:
             if dati[53] != 0:
+                messaggio("Armatura di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 20 - (dati[8] * 10)
                 if dati[8] > 2:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -825,8 +807,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 2:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 9:
+        if xp == gsx // 32 * 8 and yp == gsy // 18 * 12.8:
             if dati[54] != 0:
+                messaggio("Armatura d'acciaio", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 30 - (dati[8] * 10)
                 if dati[8] > 3:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -834,8 +817,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 3:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 10:
+        if xp == gsx // 32 * 8 and yp == gsy // 18 * 14.8:
             if dati[55] != 0:
+                messaggio("Armatura del toro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 40 - (dati[8] * 10)
                 if dati[8] > 4:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -843,8 +827,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 4:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 11:
+        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 6.8:
             if dati[56] != 0:
+                messaggio("Armatura di diamante", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 50 - (dati[8] * 10)
                 if dati[8] > 5:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -852,8 +837,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 5:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 12:
+        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 8.8:
             if dati[57] != 0:
+                messaggio("Armatura leggendaria", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 60 - (dati[8] * 10)
                 if dati[8] > 6:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -861,8 +847,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 6:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 13:
+        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 10.8:
             if dati[58] != 0:
+                messaggio("Lykodes", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 70 - (dati[8] * 10)
                 if dati[8] > 7:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -870,8 +857,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 7:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 14:
+        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 12.8:
             if dati[59] != 0:
+                messaggio("Armatura antica", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 80 - (dati[8] * 10)
                 if dati[8] > 8:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -879,8 +867,9 @@ def equip(dati):
                     messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                 elif dati[8] == 8:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 15:
+        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 14.8:
             if dati[60] != 0:
+                messaggio("Loriquam", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 90 - (dati[8] * 10)
                 if dati[8] > 9:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -889,8 +878,9 @@ def equip(dati):
                 elif dati[8] == 9:
                     messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
         # scudi
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 6:
+        if xp == gsx // 32 * 15 and yp == gsy // 18 * 6.8:
             if dati[61] != 0:
+                messaggio("Niente", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 0 - (dati[7] * 5)
                 if dati[7] > 0:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -901,8 +891,9 @@ def equip(dati):
                     messaggio(str(diff) + "%", rosso, gsx // 32 * 30, gsy // 18 * 15, 50)
                 else:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 7:
+        if xp == gsx // 32 * 15 and yp == gsy // 18 * 8.8:
             if dati[62] != 0:
+                messaggio("Scudo di pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 5 - (dati[7] * 5)
                 if dati[7] > 1:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -917,8 +908,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 1:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 8:
+        if xp == gsx // 32 * 15 and yp == gsy // 18 * 10.8:
             if dati[63] != 0:
+                messaggio("Scudo di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 10 - (dati[7] * 5)
                 if dati[7] > 2:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -933,8 +925,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 2:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 9:
+        if xp == gsx // 32 * 15 and yp == gsy // 18 * 12.8:
             if dati[64] != 0:
+                messaggio("Scudo d'acciaio", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 15 - (dati[7] * 5)
                 if dati[7] > 3:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -949,8 +942,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 3:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 10:
+        if xp == gsx // 32 * 15 and yp == gsy // 18 * 14.8:
             if dati[65] != 0:
+                messaggio("Scudo del toro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 20 - (dati[7] * 5)
                 if dati[7] > 4:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -965,8 +959,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 4:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 11:
+        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 6.8:
             if dati[66] != 0:
+                messaggio("Scudo di diamante", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 25 - (dati[7] * 5)
                 if dati[7] > 5:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -981,8 +976,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 5:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 12:
+        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 8.8:
             if dati[67] != 0:
+                messaggio("Scudo leggendario", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 30 - (dati[7] * 5)
                 if dati[7] > 6:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -997,8 +993,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 6:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 13:
+        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 10.8:
             if dati[68] != 0:
+                messaggio("Lykethmos", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 35 - (dati[7] * 5)
                 if dati[7] > 7:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1013,8 +1010,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 7:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 14:
+        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 12.8:
             if dati[69] != 0:
+                messaggio("Scudo antico", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 40 - (dati[7] * 5)
                 if dati[7] > 8:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1029,8 +1027,9 @@ def equip(dati):
                     messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                 elif dati[7] == 8:
                     messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 15:
+        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 14.8:
             if dati[70] != 0:
+                messaggio("Clipequam", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                 diff = 45 - (dati[7] * 5)
                 if dati[7] > 9:
                     messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1048,457 +1047,377 @@ def equip(dati):
 
         # puntatore vecchio
         if dati[6] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
         if dati[6] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 7))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
         if dati[6] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
         if dati[6] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 9))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
         if dati[6] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
         if dati[6] == 5:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 11))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 6.8))
         if dati[6] == 6:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 8.8))
         if dati[6] == 7:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 13))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 10.8))
         if dati[6] == 8:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 12.8))
         if dati[6] == 9:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 15))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 14.8))
 
         if dati[8] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 6))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 6.8))
         if dati[8] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 7))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 8.8))
         if dati[8] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 8))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 10.8))
         if dati[8] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 9))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 12.8))
         if dati[8] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 10))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 14.8))
         if dati[8] == 5:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 11))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 6.8))
         if dati[8] == 6:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 12))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 8.8))
         if dati[8] == 7:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 13))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 10.8))
         if dati[8] == 8:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 14))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 12.8))
         if dati[8] == 9:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 15))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 14.8))
 
         if dati[7] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 6))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 6.8))
         if dati[7] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 7))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 8.8))
         if dati[7] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 8))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 10.8))
         if dati[7] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 9))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 12.8))
         if dati[7] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 10))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 14.8))
         if dati[7] == 5:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 11))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 6.8))
         if dati[7] == 6:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 12))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 8.8))
         if dati[7] == 7:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 13))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 10.8))
         if dati[7] == 8:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 14))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 12.8))
         if dati[7] == 9:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 15))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 14.8))
 
         schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    selind.play()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
+                    canaleSoundPuntatore.play(selind)
                     risposta = True
-                if event.key == pygame.K_s:
-                    if (yp != gsy // 18 * 15):
-                        spostapun.play()
-                        yp = yp + gsy // 18 * 1
-                    elif yp == gsy // 18 * 15:
-                        spostapun.play()
-                        yp = gsy // 18 * 6
-                if event.key == pygame.K_w:
-                    if (yp != gsy // 18 * 6):
-                        spostapun.play()
-                        yp = yp - gsy // 18 * 1
-                    elif yp == gsy // 18 * 6:
-                        spostapun.play()
-                        yp = gsy // 18 * 15
-                if event.key == pygame.K_d:
-                    if (xp != gsx // 32 * 15):
-                        spostapun.play()
-                        xp = xp + gsx // 32 * 7
-                    elif xp == gsx // 32 * 15:
-                        spostapun.play()
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
+                    if yp != gsy // 18 * 14.8:
+                        canaleSoundPuntatore.play(spostapun)
+                        yp += gsy // 18 * 2
+                    elif yp == gsy // 18 * 14.8:
+                        canaleSoundPuntatore.play(spostapun)
+                        yp = gsy // 18 * 6.8
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
+                    if yp != gsy // 18 * 6.8:
+                        canaleSoundPuntatore.play(spostapun)
+                        yp = yp - gsy // 18 * 2
+                    elif yp == gsy // 18 * 6.8:
+                        canaleSoundPuntatore.play(spostapun)
+                        yp = gsy // 18 * 14.8
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
+                    if xp != gsx // 32 * 18.5:
+                        canaleSoundPuntatore.play(spostapun)
+                        xp = xp + gsx // 32 * 3.5
+                    elif xp == gsx // 32 * 18.5:
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 1
-                if event.key == pygame.K_a:
-                    if (xp != gsx // 32 * 1):
-                        spostapun.play()
-                        xp = xp - gsx // 32 * 7
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
+                    if xp != gsx // 32 * 1:
+                        canaleSoundPuntatore.play(spostapun)
+                        xp = xp - gsx // 32 * 3.5
                     elif xp == gsx // 32 * 1:
-                        spostapun.play()
-                        xp = gsx // 32 * 15
-                if event.key == pygame.K_SPACE:
+                        canaleSoundPuntatore.play(spostapun)
+                        xp = gsx // 32 * 18.5
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
                     carim = True
                     # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
                     # armi
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
+                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 6.8:
                         if dati[41] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 0
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 8.8:
                         if dati[42] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 1
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 10.8:
                         if dati[43] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 2
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 12.8:
                         if dati[44] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 3
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 14.8:
                         if dati[45] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 4
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 6.8:
                         if dati[46] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 5
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 8.8:
                         if dati[47] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 6
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 10.8:
                         if dati[48] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 7
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 12.8:
                         if dati[49] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 8
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 14.8:
                         if dati[50] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[6] = 9
                         else:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
                     # armature
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 6:
+                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 6.8:
                         if dati[51] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 0
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 7:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 8.8:
                         if dati[52] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 1
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 8:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 10.8:
                         if dati[53] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 2
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 9:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 12.8:
                         if dati[54] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 3
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 10:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 14.8:
                         if dati[55] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 4
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 11:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 6.8:
                         if dati[56] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 5
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 12:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 8.8:
                         if dati[57] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 6
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 13:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 10.8:
                         if dati[58] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 7
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 14:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 12.8:
                         if dati[59] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 8
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 8 and yp == gsy // 18 * 15:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 14.8:
                         if dati[60] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[8] = 9
                         else:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
                     # scudi
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 6:
+                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 6.8:
                         if dati[61] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 0
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 7:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 8.8:
                         if dati[62] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 1
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 8:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 10.8:
                         if dati[63] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 2
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 9:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 12.8:
                         if dati[64] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 3
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 10:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 14.8:
                         if dati[65] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 4
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 11:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 6.8:
                         if dati[66] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 5
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 12:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 8.8:
                         if dati[67] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 6
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 13:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 10.8:
                         if dati[68] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 7
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 14:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 12.8:
                         if dati[69] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 8
                         else:
-                            selimp.play()
-                    if xp == gsx // 32 * 15 and yp == gsy // 18 * 15:
+                            canaleSoundPuntatore.play(selimp)
+                    if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 14.8:
                         if dati[70] != 0:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             dati[7] = 9
                         else:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
 
+        if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12))
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12.5))
             # linea(dove,colore,inizio,fine,spessore)
-            '''pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 8, (gsy // 18 * 15) + (gpy // 2)), 10)
-            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 15, (gsy // 18 * 15) + (gpy // 2)), 10)'''
+            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 4.5, (gsy // 18 * 6) + (gpy // 2)), (gsx // 32 * 4.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 8, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
+            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 11.5, (gsy // 18 * 6) + (gpy // 2)), (gsx // 32 * 11.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 15, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
+            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 6) + (gpy // 2)), (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
 
             if carim:
-                armas = pygame.image.load("Immagini\Armi\Arma%is.png" % dati[6])
-                arma = pygame.transform.scale(armas, (gpx * 8, gpy * 8))
-                scudos = pygame.image.load("Immagini\Scudi\Scudo%is.png" % dati[7])
-                scudo = pygame.transform.scale(scudos, (gpx * 8, gpy * 8))
-                armaturas = pygame.image.load("Immagini\Armature\Armatura%is.png" % dati[8])
-                armatura = pygame.transform.scale(armaturas, (gpx * 8, gpy * 8))
+                armas = pygame.image.load("Immagini/Armi/Arma%is.png" % dati[6])
+                arma = pygame.transform.scale(armas, (gpx * 5, gpy * 5))
+                scudos = pygame.image.load("Immagini/Scudi/Scudo%is.png" % dati[7])
+                scudo = pygame.transform.scale(scudos, (gpx * 5, gpy * 5))
+                armaturas = pygame.image.load("Immagini/Armature/Armatura%is.png" % dati[8])
+                armatura = pygame.transform.scale(armaturas, (gpx * 5, gpy * 5))
                 carim = False
             messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Armi", grigiochi, gsx // 32 * 2.5, gsy // 18 * 4.5, 60)
-            if dati[41] > 0:
-                messaggio("Niente", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-            if dati[42] > 0:
-                messaggio("Spada di legno", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-            if dati[43] > 0:
-                messaggio("Spada di ferro", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-            if dati[44] > 0:
-                messaggio("Spadone d'acciaio", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            if dati[45] > 0:
-                messaggio("Spada del toro", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            if dati[46] > 0:
-                messaggio("Spada di diamante", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            if dati[47] > 0:
-                messaggio("Excalibur", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            if dati[48] > 0:
-                messaggio("Lykother", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-            if dati[49] > 0:
-                messaggio("Sinego", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-            if dati[50] > 0:
-                messaggio("Mendaxritas", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-            messaggio("Armature", grigiochi, gsx // 32 * 9.5, gsy // 18 * 4.5, 60)
-            if dati[51] > 0:
-                messaggio("Niente", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
-            if dati[52] > 0:
-                messaggio("Armatura di pelle", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
-            if dati[53] > 0:
-                messaggio("Armatura di ferro", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
-            if dati[54] > 0:
-                messaggio("Armatura d'acciaio", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
-            if dati[55] > 0:
-                messaggio("Armatura del toro", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
-            if dati[56] > 0:
-                messaggio("Armatura di diamante", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
-            if dati[57] > 0:
-                messaggio("Armatura leggendaria", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
-            if dati[58] > 0:
-                messaggio("Lykodes", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
-            if dati[59] > 0:
-                messaggio("Armatura antica", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
-            if dati[60] > 0:
-                messaggio("Loriquam", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
-            messaggio("Scudi", grigiochi, gsx // 32 * 16.5, gsy // 18 * 4.5, 60)
-            if dati[61] > 0:
-                messaggio("Niente", grigiochi, gsx // 32 * 16, gsy // 18 * 6, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 6, 40)
-            if dati[62] > 0:
-                messaggio("Scudo di pelle", grigiochi, gsx // 32 * 16, gsy // 18 * 7, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 7, 40)
-            if dati[63] > 0:
-                messaggio("Scudo di ferro", grigiochi, gsx // 32 * 16, gsy // 18 * 8, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 8, 40)
-            if dati[64] > 0:
-                messaggio("Scudo d'acciaio", grigiochi, gsx // 32 * 16, gsy // 18 * 9, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 9, 40)
-            if dati[65] > 0:
-                messaggio("Scudo del toro", grigiochi, gsx // 32 * 16, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 10, 40)
-            if dati[66] > 0:
-                messaggio("Scudo di diamante", grigiochi, gsx // 32 * 16, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 11, 40)
-            if dati[67] > 0:
-                messaggio("Scudo leggendario", grigiochi, gsx // 32 * 16, gsy // 18 * 12, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 12, 40)
-            if dati[68] > 0:
-                messaggio("Lykethmos", grigiochi, gsx // 32 * 16, gsy // 18 * 13, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 13, 40)
-            if dati[69] > 0:
-                messaggio("Scudo antico", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 40)
-            if dati[70] > 0:
-                messaggio("Clipequam", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 40)
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+            messaggio("Armi", grigiochi, gsx // 32 * 3, gsy // 18 * 4.5, 80)
+            i = 0
+            while i < 10:
+                if i < 5:
+                    if i == 0:
+                        schermo.blit(vetImgArmi[i], (gsx // 32 * 2, (gsy // 18 * 6.5 + (gpy * 2 * i))))
+                    else:
+                        schermo.blit(vetImgArmi[i], (gsx // 32 * 1.5, (gsy // 18 * 5.8 + (gpy * 2 * i))))
+                else:
+                    schermo.blit(vetImgArmi[i], (gsx // 32 * 5, (gsy // 18 * 5.8 + (gpy * 2 * (i - 5)))))
+                i += 1
+            messaggio("Armature", grigiochi, gsx // 32 * 9, gsy // 18 * 4.5, 80)
+            i = 0
+            while i < 10:
+                if i < 5:
+                    schermo.blit(vetImgArmature[i], (gsx // 32 * 8.5, (gsy // 18 * 5.8 + (gpy * 2 * i))))
+                else:
+                    schermo.blit(vetImgArmature[i], (gsx // 32 * 12, (gsy // 18 * 5.8 + (gpy * 2 * (i - 5)))))
+                i += 1
+            messaggio("Scudi", grigiochi, gsx // 32 * 17, gsy // 18 * 4.5, 80)
+            i = 0
+            while i < 10:
+                if i < 5:
+                    if i == 0:
+                        schermo.blit(vetImgScudi[i], (gsx // 32 * 16.2, (gsy // 18 * 6.5 + (gpy * 2 * i))))
+                    else:
+                        schermo.blit(vetImgScudi[i], (gsx // 32 * 15.5, int((gsy // 18 * 5.8) + (gpy * 2 * i))))
+                else:
+                    schermo.blit(vetImgScudi[i], (gsx // 32 * 19, (gsy // 18 * 5.8 + (gpy * 2 * (i - 5)))))
+                i += 1
 
             esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati)
 
-            schermo.blit(perssta, (gsx // 32 * 23, gsy // 18 * 4))
-            schermo.blit(persstab, (gsx // 32 * 23, gsy // 18 * 4))
-            schermo.blit(armatura, (gsx // 32 * 23, gsy // 18 * 4))
-            schermo.blit(arma, (gsx // 32 * 23, gsy // 18 * 4))
-            schermo.blit(scudo, (gsx // 32 * 23, gsy // 18 * 4))
+            schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 4))
+            schermo.blit(persstab, (gsx // 32 * 24.5, gsy // 18 * 4))
+            schermo.blit(armatura, (gsx // 32 * 24.5, gsy // 18 * 4))
+            schermo.blit(arma, (gsx // 32 * 24.5, gsy // 18 * 4))
+            schermo.blit(scudo, (gsx // 32 * 24.5, gsy // 18 * 4))
             messaggio("Attacco: %i" % att, grigiochi, gsx // 32 * 23, gsy // 18 * 13, 45)
             messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 14, 45)
             messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 15, 45)
             # confronto statistiche
             # armi
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
+            if xp == gsx // 32 * 1 and yp == gsy // 18 * 6.8:
                 if dati[41] != 0:
+                    messaggio("Niente", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 0 - (dati[6] * 10)
                     if dati[6] > 0:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
                     else:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
+            if xp == gsx // 32 * 1 and yp == gsy // 18 * 8.8:
                 if dati[42] != 0:
+                    messaggio("Spada di legno", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 10 - (dati[6] * 10)
                     if dati[6] > 1:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1506,8 +1425,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 1:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
+            if xp == gsx // 32 * 1 and yp == gsy // 18 * 10.8:
                 if dati[43] != 0:
+                    messaggio("Spada di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 20 - (dati[6] * 10)
                     if dati[6] > 2:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1515,8 +1435,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 2:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
+            if xp == gsx // 32 * 1 and yp == gsy // 18 * 12.8:
                 if dati[44] != 0:
+                    messaggio("Spadone d'acciaio", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 30 - (dati[6] * 10)
                     if dati[6] > 3:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1524,8 +1445,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 3:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
+            if xp == gsx // 32 * 1 and yp == gsy // 18 * 14.8:
                 if dati[45] != 0:
+                    messaggio("Spada del toro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 40 - (dati[6] * 10)
                     if dati[6] > 4:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1533,8 +1455,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 4:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
+            if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 6.8:
                 if dati[46] != 0:
+                    messaggio("Spada di diamante", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 50 - (dati[6] * 10)
                     if dati[6] > 5:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1542,8 +1465,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 5:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
+            if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 8.8:
                 if dati[47] != 0:
+                    messaggio("Excalibur", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 60 - (dati[6] * 10)
                     if dati[6] > 6:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1551,8 +1475,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 6:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
+            if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 10.8:
                 if dati[48] != 0:
+                    messaggio("Lykother", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 70 - (dati[6] * 10)
                     if dati[6] > 7:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1560,8 +1485,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 7:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
+            if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 12.8:
                 if dati[49] != 0:
+                    messaggio("Sinego", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 80 - (dati[6] * 10)
                     if dati[6] > 8:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1569,8 +1495,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
                     elif dati[6] == 8:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-            if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
+            if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 14.8:
                 if dati[50] != 0:
+                    messaggio("Mendaxritas", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 90 - (dati[6] * 10)
                     if dati[6] > 9:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
@@ -1579,15 +1506,17 @@ def equip(dati):
                     elif dati[6] == 9:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
             # armature
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 6:
+            if xp == gsx // 32 * 8 and yp == gsy // 18 * 6.8:
                 if dati[51] != 0:
+                    messaggio("Niente", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 0 - (dati[8] * 10)
                     if dati[8] > 0:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
                     else:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 7:
+            if xp == gsx // 32 * 8 and yp == gsy // 18 * 8.8:
                 if dati[52] != 0:
+                    messaggio("Armatura di pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 10 - (dati[8] * 10)
                     if dati[8] > 1:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1595,8 +1524,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 1:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 8:
+            if xp == gsx // 32 * 8 and yp == gsy // 18 * 10.8:
                 if dati[53] != 0:
+                    messaggio("Armatura di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 20 - (dati[8] * 10)
                     if dati[8] > 2:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1604,8 +1534,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 2:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 9:
+            if xp == gsx // 32 * 8 and yp == gsy // 18 * 12.8:
                 if dati[54] != 0:
+                    messaggio("Armatura d'acciaio", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 30 - (dati[8] * 10)
                     if dati[8] > 3:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1613,8 +1544,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 3:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 10:
+            if xp == gsx // 32 * 8 and yp == gsy // 18 * 14.8:
                 if dati[55] != 0:
+                    messaggio("Armatura del toro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 40 - (dati[8] * 10)
                     if dati[8] > 4:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1622,8 +1554,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 4:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 11:
+            if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 6.8:
                 if dati[56] != 0:
+                    messaggio("Armatura di diamante", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 50 - (dati[8] * 10)
                     if dati[8] > 5:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1631,8 +1564,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 5:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 12:
+            if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 8.8:
                 if dati[57] != 0:
+                    messaggio("Armatura leggendaria", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 60 - (dati[8] * 10)
                     if dati[8] > 6:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1640,8 +1574,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 6:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 13:
+            if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 10.8:
                 if dati[58] != 0:
+                    messaggio("Lykodes", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 70 - (dati[8] * 10)
                     if dati[8] > 7:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1649,8 +1584,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 7:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 14:
+            if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 12.8:
                 if dati[59] != 0:
+                    messaggio("Armatura antica", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 80 - (dati[8] * 10)
                     if dati[8] > 8:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1658,8 +1594,9 @@ def equip(dati):
                         messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
                     elif dati[8] == 8:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if xp == gsx // 32 * 8 and yp == gsy // 18 * 15:
+            if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 14.8:
                 if dati[60] != 0:
+                    messaggio("Loriquam", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 90 - (dati[8] * 10)
                     if dati[8] > 9:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1668,8 +1605,9 @@ def equip(dati):
                     elif dati[8] == 9:
                         messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
             # scudi
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 6:
+            if xp == gsx // 32 * 15 and yp == gsy // 18 * 6.8:
                 if dati[61] != 0:
+                    messaggio("Niente", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 0 - (dati[7] * 5)
                     if dati[7] > 0:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1680,8 +1618,9 @@ def equip(dati):
                         messaggio(str(diff) + "%", rosso, gsx // 32 * 30, gsy // 18 * 15, 50)
                     else:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 7:
+            if xp == gsx // 32 * 15 and yp == gsy // 18 * 8.8:
                 if dati[62] != 0:
+                    messaggio("Scudo di pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 5 - (dati[7] * 5)
                     if dati[7] > 1:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1696,8 +1635,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 1:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 8:
+            if xp == gsx // 32 * 15 and yp == gsy // 18 * 10.8:
                 if dati[63] != 0:
+                    messaggio("Scudo di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 10 - (dati[7] * 5)
                     if dati[7] > 2:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1712,8 +1652,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 2:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 9:
+            if xp == gsx // 32 * 15 and yp == gsy // 18 * 12.8:
                 if dati[64] != 0:
+                    messaggio("Scudo d'acciaio", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 15 - (dati[7] * 5)
                     if dati[7] > 3:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1728,8 +1669,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 3:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 10:
+            if xp == gsx // 32 * 15 and yp == gsy // 18 * 14.8:
                 if dati[65] != 0:
+                    messaggio("Scudo del toro", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 20 - (dati[7] * 5)
                     if dati[7] > 4:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1744,8 +1686,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 4:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 11:
+            if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 6.8:
                 if dati[66] != 0:
+                    messaggio("Scudo di diamante", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 25 - (dati[7] * 5)
                     if dati[7] > 5:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1760,8 +1703,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 5:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 12:
+            if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 8.8:
                 if dati[67] != 0:
+                    messaggio("Scudo leggendario", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 30 - (dati[7] * 5)
                     if dati[7] > 6:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1776,8 +1720,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 6:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 13:
+            if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 10.8:
                 if dati[68] != 0:
+                    messaggio("Lykethmos", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 35 - (dati[7] * 5)
                     if dati[7] > 7:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1792,8 +1737,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 7:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 14:
+            if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 12.8:
                 if dati[69] != 0:
+                    messaggio("Scudo antico", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 40 - (dati[7] * 5)
                     if dati[7] > 8:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1808,8 +1754,9 @@ def equip(dati):
                         messaggio("+" + str(diff) + "%", verde, gsx // 32 * 30, gsy // 18 * 15, 50)
                     elif dati[7] == 8:
                         messaggio("+" + str(diff) + "%", grigiochi, gsx // 32 * 30, gsy // 18 * 15, 50)
-            if xp == gsx // 32 * 15 and yp == gsy // 18 * 15:
+            if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 14.8:
                 if dati[70] != 0:
+                    messaggio("Clipequam", grigiochi, gsx // 32 * 23, gsy // 18 * 11, 60)
                     diff = 45 - (dati[7] * 5)
                     if dati[7] > 9:
                         messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
@@ -1827,67 +1774,67 @@ def equip(dati):
 
             # puntatore vecchio
             if dati[6] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
             if dati[6] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 7))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
             if dati[6] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
             if dati[6] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 9))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
             if dati[6] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
             if dati[6] == 5:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 11))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 6.8))
             if dati[6] == 6:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 8.8))
             if dati[6] == 7:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 13))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 10.8))
             if dati[6] == 8:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 12.8))
             if dati[6] == 9:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 15))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 14.8))
 
             if dati[8] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 6))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 6.8))
             if dati[8] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 7))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 8.8))
             if dati[8] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 8))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 10.8))
             if dati[8] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 9))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 12.8))
             if dati[8] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 10))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 14.8))
             if dati[8] == 5:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 11))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 6.8))
             if dati[8] == 6:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 12))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 8.8))
             if dati[8] == 7:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 13))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 10.8))
             if dati[8] == 8:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 14))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 12.8))
             if dati[8] == 9:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 15))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 14.8))
 
             if dati[7] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 6))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 6.8))
             if dati[7] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 7))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 8.8))
             if dati[7] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 8))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 10.8))
             if dati[7] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 9))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 12.8))
             if dati[7] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 10))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 14.8))
             if dati[7] == 5:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 11))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 6.8))
             if dati[7] == 6:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 12))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 8.8))
             if dati[7] == 7:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 13))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 10.8))
             if dati[7] == 8:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 14))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 12.8))
             if dati[7] == 9:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 15))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 14.8))
 
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
@@ -1905,7 +1852,7 @@ def sceglicondiz(dati, condizione):
     scecond = [0]
     i = 1
     while i <= 20:
-        condizioneimm = pygame.image.load("Immagini\GrafCondizioni\Condizione%i.png" % i)
+        condizioneimm = pygame.image.load("Immagini/GrafCondizioni/Condizione%i.png" % i)
         scecond.append(pygame.transform.scale(condizioneimm, (gpx * 12, gpy * 9)))
         i = i + 1
 
@@ -2150,67 +2097,75 @@ def sceglicondiz(dati, condizione):
         pygame.display.update()
 
     while not risposta:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    selind.play()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
+                    canaleSoundPuntatore.play(selind)
                     risposta = True
 
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
                     if yp == gsy // 18 * 4.5:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         yp = yp + gsy // 18 * 1.5
                     else:
                         if yp != gsy // 18 * 15:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp + gsy // 18 * 1
                         elif yp == gsy // 18 * 15:
                             if xp == gsx // 32 * 1:
-                                spostapun.play()
+                                canaleSoundPuntatore.play(spostapun)
                                 yp = gsy // 18 * 4.5
                             else:
-                                spostapun.play()
+                                canaleSoundPuntatore.play(spostapun)
                                 yp = gsy // 18 * 6
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
                     if yp == gsy // 18 * 6:
                         if xp == gsx // 32 * 1:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp - gsy // 18 * 1.5
                         else:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 15
                     else:
                         if yp != gsy // 18 * 4.5:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp - gsy // 18 * 1
                         elif yp == gsy // 18 * 4.5:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 15
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
                     if yp != gsy // 18 * 4.5:
                         if xp != gsx // 32 * 8:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = xp + gsx // 32 * 7
                         elif xp == gsx // 32 * 8:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 1
                     else:
-                        selimp.play()
-                if event.key == pygame.K_a:
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
                     if yp != gsy // 18 * 4.5:
                         if xp != gsx // 32 * 1:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = xp - gsx // 32 * 7
                         elif xp == gsx // 32 * 1:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 8
                     else:
-                        selimp.play()
+                        canaleSoundPuntatore.play(selimp)
 
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
 
                     # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)-condizioni(20)-gambit(20) // dimensione: 0-120
                     i = 81
@@ -2219,10 +2174,10 @@ def sceglicondiz(dati, condizione):
                     while i <= 90:
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * k:
                             if dati[i] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 return c
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         i = i + 1
                         c = c + 1
                         k = k + 1
@@ -2232,17 +2187,18 @@ def sceglicondiz(dati, condizione):
                     while i <= 100:
                         if xp == gsx // 32 * 8 and yp == gsy // 18 * k:
                             if dati[i] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 return c
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         i = i + 1
                         c = c + 1
                         k = k + 1
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 4.5:
-                        selezione.play()
+                        canaleSoundPuntatore.play(selezione)
                         return 0
 
+        if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
@@ -2471,7 +2427,7 @@ def sceglitecn(dati, tecnica):
     scetecn = [0]
     i = 1
     while i <= 20:
-        tecnicaimm = pygame.image.load("Immagini\GrafTecniche\Tecnica%i.png" % i)
+        tecnicaimm = pygame.image.load("Immagini/GrafTecniche/Tecnica%i.png" % i)
         scetecn.append(pygame.transform.scale(tecnicaimm, (gpx * 12, gpy * 9)))
         i = i + 1
 
@@ -2705,67 +2661,75 @@ def sceglitecn(dati, tecnica):
         pygame.display.update()
 
     while not risposta:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    selind.play()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
+                    canaleSoundPuntatore.play(selind)
                     risposta = True
 
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
                     if yp == gsy // 18 * 4.5:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         yp = yp + gsy // 18 * 1.5
                     else:
                         if yp != gsy // 18 * 15:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp + gsy // 18 * 1
                         elif yp == gsy // 18 * 15:
                             if xp == gsx // 32 * 1:
-                                spostapun.play()
+                                canaleSoundPuntatore.play(spostapun)
                                 yp = gsy // 18 * 4.5
                             else:
-                                spostapun.play()
+                                canaleSoundPuntatore.play(spostapun)
                                 yp = gsy // 18 * 6
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
                     if yp == gsy // 18 * 6:
                         if xp == gsx // 32 * 1:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp - gsy // 18 * 1.5
                         else:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 15
                     else:
                         if yp != gsy // 18 * 4.5:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp - gsy // 18 * 1
                         elif yp == gsy // 18 * 4.5:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 15
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
                     if yp != gsy // 18 * 4.5:
                         if xp != gsx // 32 * 8:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = xp + gsx // 32 * 7
                         elif xp == gsx // 32 * 8:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 1
                     else:
-                        selimp.play()
-                if event.key == pygame.K_a:
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
                     if yp != gsy // 18 * 4.5:
                         if xp != gsx // 32 * 1:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = xp - gsx // 32 * 7
                         elif xp == gsx // 32 * 1:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             xp = gsx // 32 * 8
                     else:
-                        selimp.play()
+                        canaleSoundPuntatore.play(selimp)
 
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
 
                     i = 11
                     c = 1
@@ -2773,12 +2737,12 @@ def sceglitecn(dati, tecnica):
                     while i <= 20:
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * k:
                             if dati[i] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 tecnica = c
                                 risposta = True
                                 break
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         i = i + 1
                         c = c + 1
                         k = k + 1
@@ -2788,20 +2752,21 @@ def sceglitecn(dati, tecnica):
                     while i <= 30:
                         if xp == gsx // 32 * 8 and yp == gsy // 18 * k:
                             if dati[i] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 tecnica = c
                                 risposta = True
                                 break
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         i = i + 1
                         c = c + 1
                         k = k + 1
                     if xp == gsx // 32 * 1 and yp == gsy // 18 * 4.5:
-                        selezione.play()
+                        canaleSoundPuntatore.play(selezione)
                         risposta = True
                         tecnica = 0
 
+        if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
@@ -3071,7 +3036,7 @@ def equiprobo(dati):
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 8, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12))
 
         if carim:
-            armrobs = pygame.image.load("Immagini\Armrobs\Armrob%is.png" % dati[9])
+            armrobs = pygame.image.load("Immagini/Armrobs/Armrob%is.png" % dati[9])
             armrob = pygame.transform.scale(armrobs, (gpx * 8, gpy * 8))
             carim = False
         messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
@@ -3415,22 +3380,26 @@ def equiprobo(dati):
         pygame.display.update()
 
     while not risposta:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    selind.play()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
+                    canaleSoundPuntatore.play(selind)
                     if not riordinamento:
                         risposta = True
                     else:
                         riordinamento = False
                         annullaRiordinamento = True
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
                     if riordinamento:
                         if yp != gsy // 18 * 15:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             i = 0
                             while i < 10:
                                 if yp == gsy // 18 * (6 + i):
@@ -3444,18 +3413,19 @@ def equiprobo(dati):
                                 i += 1
                             yp = yp + gsy // 18 * 1
                         elif yp == gsy // 18 * 15:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
                     else:
                         if yp != gsy // 18 * 15:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp + gsy // 18 * 1
                         elif yp == gsy // 18 * 15:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 6
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
                     if riordinamento:
                         if yp != gsy // 18 * 6:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             i = 0
                             while i < 10:
                                 if yp == gsy // 18 * (6 + i):
@@ -3469,133 +3439,136 @@ def equiprobo(dati):
                                 i += 1
                             yp = yp - gsy // 18 * 1
                         elif yp == gsy // 18 * 6:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
                     else:
                         if yp != gsy // 18 * 6:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = yp - gsy // 18 * 1
                         elif yp == gsy // 18 * 6:
-                            spostapun.play()
+                            canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 15
-                if event.key == pygame.K_d and not riordinamento:
+                if event.key == pygame.K_d and not riordinamento and not tastoTrovato:
+                    tastoTrovato = True
                     if xp == gsx // 32 * 1:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 8
                     elif xp == gsx // 32 * 8:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 11
                     elif xp == gsx // 32 * 11:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 17
                     elif xp == gsx // 32 * 17:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 1
-                if event.key == pygame.K_a and not riordinamento:
+                if event.key == pygame.K_a and not riordinamento and not tastoTrovato:
+                    tastoTrovato = True
                     if xp == gsx // 32 * 1:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 17
                     elif xp == gsx // 32 * 8:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 1
                     elif xp == gsx // 32 * 11:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 8
                     elif xp == gsx // 32 * 17:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 11
                 if event.key == pygame.K_SPACE:
+                    tastoTrovato = True
                     carim = True
                     # riordina
                     if riordinamento:
-                        selezione.play()
+                        canaleSoundPuntatore.play(selezione)
                         riordinamento = False
                     else:
                         # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
                         # armrob
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
                             if dati[71] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 0
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
                             if dati[72] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 1
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
                             if dati[73] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 2
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
                             if dati[74] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 3
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
                             if dati[75] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 4
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
                             if dati[76] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 5
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
                             if dati[77] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 6
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
                             if dati[78] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 7
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
                             if dati[79] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 8
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
                             if dati[80] != 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 dati[9] = 9
                                 if dati[10] > 300 + (dati[9] * 100):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
 
                         # riordina
                         if xp == gsx // 32 * 8:
-                            selezione.play()
+                            canaleSoundPuntatore.play(selezione)
                             riordinamento = True
                             datiPrimaDiRiordinamento = list(dati)
                             vxpGambit = xp
@@ -3607,10 +3580,10 @@ def equiprobo(dati):
                         while i <= 110:
                             if xp == gsx // 32 * 11 and yp == gsy // 18 * c:
                                 if dati[i] != -1:
-                                    selezione.play()
+                                    canaleSoundPuntatore.play(selezione)
                                     dati[i] = sceglicondiz(dati, dati[i])
                                 else:
-                                    selimp.play()
+                                    canaleSoundPuntatore.play(selimp)
                             i = i + 1
                             c = c + 1
 
@@ -3620,13 +3593,14 @@ def equiprobo(dati):
                         while i <= 120:
                             if xp == gsx // 32 * 17 and yp == gsy // 18 * c:
                                 if dati[i] != -1:
-                                    selezione.play()
+                                    canaleSoundPuntatore.play(selezione)
                                     dati[i] = sceglitecn(dati, dati[i])
                                 else:
-                                    selimp.play()
+                                    canaleSoundPuntatore.play(selimp)
                             i = i + 1
                             c = c + 1
 
+        if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 6, gsy // 18 * 12))
@@ -3642,7 +3616,7 @@ def equiprobo(dati):
                 pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 3), gsx // 32 * 15, gsy // 18 * 1))
 
             if carim:
-                armrobs = pygame.image.load("Immagini\Armrobs\Armrob%is.png" % dati[9])
+                armrobs = pygame.image.load("Immagini/Armrobs/Armrob%is.png" % dati[9])
                 armrob = pygame.transform.scale(armrobs, (gpx * 8, gpy * 8))
                 carim = False
             messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
@@ -4015,10 +3989,10 @@ def oggetti(dati):
 
         if carim:
             if dati[oggetton + 30] >= 0:
-                oggetto = pygame.image.load("Immagini\Oggetti\Oggetto%i.png" % oggetton)
+                oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % oggetton)
                 oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
             else:
-                oggetto = pygame.image.load("Immagini\Oggetti\Sconosciuto.png")
+                oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
                 oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
             carim = False
 
@@ -4136,14 +4110,17 @@ def oggetti(dati):
         pygame.display.update()
 
     while not risposta:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
                     if usa != 0:
-                        selind.play()
+                        canaleSoundPuntatore.play(selind)
                         xp = gsx // 32 * 1
                         if usa == 1:
                             yp = gsy // 18 * 6
@@ -4167,49 +4144,54 @@ def oggetti(dati):
                             yp = gsy // 18 * 15
                         usa = 0
                     else:
-                        selind.play()
+                        canaleSoundPuntatore.play(selind)
                         risposta = True
-                if event.key == pygame.K_s and xp != gsx // 32 * 10 and xp != gsx // 32 * 13:
-                        if xp != gsx // 32 * 12 and xp != gsx // 32 * 15:
-                            carim = True
-                            if yp != gsy // 18 * 15:
-                                spostapun.play()
-                                oggetton = oggetton + 1
-                                yp = yp + gsy // 18 * 1
-                            elif yp == gsy // 18 * 15:
-                                spostapun.play()
-                                yp = gsy // 18 * 6
-                                oggetton = 1
-                if event.key == pygame.K_w and xp != gsx // 32 * 10 and xp != gsx // 32 * 13:
+                if event.key == pygame.K_s and xp != gsx // 32 * 10 and xp != gsx // 32 * 13 and not tastoTrovato:
+                    tastoTrovato = True
+                    if xp != gsx // 32 * 12 and xp != gsx // 32 * 15:
                         carim = True
-                        if xp != gsx // 32 * 13:
-                            if (yp != gsy // 18 * 6):
-                                spostapun.play()
-                                oggetton = oggetton - 1
-                                yp = yp - gsy // 18 * 1
-                            elif yp == gsy // 18 * 6:
-                                spostapun.play()
-                                yp = gsy // 18 * 15
-                                oggetton = 10
-                if event.key == pygame.K_a:
+                        if yp != gsy // 18 * 15:
+                            canaleSoundPuntatore.play(spostapun)
+                            oggetton = oggetton + 1
+                            yp = yp + gsy // 18 * 1
+                        elif yp == gsy // 18 * 15:
+                            canaleSoundPuntatore.play(spostapun)
+                            yp = gsy // 18 * 6
+                            oggetton = 1
+                if event.key == pygame.K_w and xp != gsx // 32 * 10 and xp != gsx // 32 * 13 and not tastoTrovato:
+                    tastoTrovato = True
+                    carim = True
+                    if xp != gsx // 32 * 13:
+                        if (yp != gsy // 18 * 6):
+                            canaleSoundPuntatore.play(spostapun)
+                            oggetton = oggetton - 1
+                            yp = yp - gsy // 18 * 1
+                        elif yp == gsy // 18 * 6:
+                            canaleSoundPuntatore.play(spostapun)
+                            yp = gsy // 18 * 15
+                            oggetton = 10
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
                     if xp == gsx // 32 * 13:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = xp - gsx // 32 * 3
                     elif xp == gsx // 32 * 10:
-                        selimp.play()
-                if event.key == pygame.K_d:
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
                     if xp == gsx // 32 * 10:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = xp + gsx // 32 * 3
                     elif xp == gsx // 32 * 13:
-                        selimp.play()
-                if event.key == pygame.K_SPACE:
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
                     carim = True
                     usadue = True
 
                     # usa?
                     if xp == gsx // 32 * 10 and yp == gsy // 18 * 14.5:
-                        selezione.play()
+                        canaleSoundPuntatore.play(selezione)
                         xp = gsx // 32 * 1
                         # pozione
                         if usa == 1:
@@ -4267,7 +4249,7 @@ def oggetti(dati):
                         usa = 0
                         usadue = False
                     elif xp == gsx // 32 * 13 and yp == gsy // 18 * 14.5:
-                        selind.play()
+                        canaleSoundPuntatore.play(selind)
                         xp = gsx // 32 * 1
                         if usa == 1:
                             yp = gsy // 18 * 6
@@ -4296,85 +4278,86 @@ def oggetti(dati):
                     if usadue:
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 6:
                             if dati[31] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 1
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 7:
                             if dati[32] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 2
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 8:
                             if dati[33] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 3
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 9:
                             if dati[34] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 4
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 10:
                             if dati[35] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 5
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 11:
                             if dati[36] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 6
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 12:
                             if dati[37] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 7
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 13:
                             if dati[38] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 8
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 14:
                             if dati[39] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 9
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
                         if xp == gsx // 32 * 1 and yp == gsy // 18 * 15:
                             if dati[40] > 0:
-                                selezione.play()
+                                canaleSoundPuntatore.play(selezione)
                                 usa = 10
                                 usauno = True
                             else:
-                                selimp.play()
+                                canaleSoundPuntatore.play(selimp)
 
+        if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 9, gsy // 18 * 11))
 
             if carim:
                 if dati[oggetton + 30] >= 0:
-                    oggetto = pygame.image.load("Immagini\Oggetti\Oggetto%i.png" % oggetton)
+                    oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % oggetton)
                     oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
                 else:
-                    oggetto = pygame.image.load("Immagini\Oggetti\Sconosciuto.png")
+                    oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
                     oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
                 carim = False
 
@@ -4516,7 +4499,7 @@ def chiediconferma(conferma):
     yp = gsy // 18 * 10
     schermo.fill(grigioscu)
     if conferma == 1:
-        messaggio(u"Tornare al menù principale?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
+        messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
     elif conferma == 2:
         messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
     messaggio("Si", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 120)
@@ -4525,40 +4508,48 @@ def chiediconferma(conferma):
     schermo.blit(puntatore, (xp, yp))
     pygame.display.update()
     while True:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    selind.play()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
+                    canaleSoundPuntatore.play(selind)
                     return False, False
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
                     if xp == gsx // 32 * 18:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 6
                     elif xp == gsx // 32 * 6:
-                        selimp.play()
-                if event.key == pygame.K_d:
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
                     if xp == gsx // 32 * 6:
-                        spostapun.play()
+                        canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 18
                     elif xp == gsx // 32 * 18:
-                        selimp.play()
-                if event.key == pygame.K_SPACE:
+                        canaleSoundPuntatore.play(selimp)
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
                     if xp == gsx // 32 * 6:
-                        selezione.play()
+                        canaleSoundPuntatore.play(selezione)
                         if conferma == 1:
                             return True, True
                         elif conferma == 2:
                             pygame.quit()
                             quit()
                     elif xp == gsx // 32 * 18:
-                        selind.play()
+                        canaleSoundPuntatore.play(selind)
                         return False, False
+
+        if tastoTrovato:
             schermo.fill(grigioscu)
             if conferma == 1:
-                messaggio(u"Tornare al menù principale?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
+                messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
             elif conferma == 2:
                 messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
             messaggio("Si", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 120)
@@ -4569,8 +4560,6 @@ def chiediconferma(conferma):
 
 
 def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, apriocchio):
-    c16.play(-1)
-
     sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
     perssta = pygame.transform.scale(persGrafMenu, (gpx * 10, gpy * 10))
     robosta = pygame.transform.scale(robograf, (gpx * 10, gpy * 10))
@@ -4595,7 +4584,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-        messaggio(u"Menù start", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 150)
+        messaggio(u"Menu start", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 150)
         messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
         """if not apriocchio:
             messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
@@ -4609,9 +4598,9 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             messaggio("Salva", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 50)
         else:
             messaggio("Salva", grigioscu, gsx // 32 * 2, gsy // 18 * 13, 50)
-        messaggio(u"Torna al menù principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
+        messaggio(u"Torna al menu principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
         messaggio("Torna a Windows", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 50)
-        messaggio(u"Esc / Q: Esci dal menù", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
+        messaggio(u"Esc / Q: Esci dal menu", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
         if carim:
             if dati[10] <= 0:
                 robosta = robograff
@@ -4656,16 +4645,23 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         pygame.display.update()
 
     while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(c27)
+
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
+                    tastoTrovato = True
                     selind.play()
                     inizio = False
                     risposta = True
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
                     if (yp != gsy // 18 * 9) and (yp != gsy // 18 * 15):
                         spostapun.play()
                         yp = yp + gsy // 18 * 1
@@ -4677,7 +4673,8 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                             if yp == gsy // 18 * 15:
                                 spostapun.play()
                                 yp = gsy // 18 * 5
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
                     if (yp != gsy // 18 * 13) and (yp != gsy // 18 * 5):
                         spostapun.play()
                         yp = yp - gsy // 18 * 1
@@ -4689,7 +4686,8 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                             if yp == gsy // 18 * 5:
                                 spostapun.play()
                                 yp = gsy // 18 * 15
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
                     if yp == gsy // 18 * 13 and nmost > -1:
                         selimp.play()
                     else:
@@ -4731,6 +4729,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     if yp == gsy // 18 * 15:
                         conferma = 2
 
+        if tastoTrovato:
             # chiedere conferma per uscire
             if conferma != 0:
                 inizio, risposta = chiediconferma(conferma)
@@ -4739,7 +4738,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-            messaggio(u"Menù start", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 150)
+            messaggio(u"Menu start", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 150)
             messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
             """if not apriocchio:
                 messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
@@ -4753,9 +4752,9 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 messaggio("Salva", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 50)
             else:
                 messaggio("Salva", grigioscu, gsx // 32 * 2, gsy // 18 * 13, 50)
-            messaggio(u"Torna al menù principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
+            messaggio(u"Torna al menu principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
             messaggio("Torna a Windows", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 50)
-            messaggio(u"Esc / Q: Esci dal menù", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
+            messaggio(u"Esc / Q: Esci dal menu", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
             if carim:
                 if dati[10] <= 0:
                     robosta = robograff
@@ -4805,7 +4804,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 pygame.display.update()
             else:
                 schermo.fill(grigioscu)
-    c16.stop()
+    canaleSoundCanzone.stop()
     return dati, inizio, attacco
 
 
@@ -4829,14 +4828,14 @@ def startBattaglia(dati):
     nomiOggettiIco = ["Pozione", "Caricabatterie", "Bomba", "Medicina", "BombaVeleno", "Esca", "Superpozione", "CaricabatterieMigliorato", "BombaAppiccicosa", "BombaPotenziata"]
     while oggetton <= 10:
         if dati[oggetton + 30] >= 0:
-            oggetto = pygame.image.load("Immagini\Oggetti\Oggetto%i.png" % oggetton)
+            oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % oggetton)
             vettoreOggettiGraf.append(pygame.transform.scale(oggetto, (gpx * 4, gpy * 4)))
-            oggetto = pygame.image.load("Immagini\Oggetti\%s.png" % nomiOggettiIco[oggetton - 1])
+            oggetto = pygame.image.load("Immagini/Oggetti/%s.png" % nomiOggettiIco[oggetton - 1])
             vettoreOggettiIco.append(pygame.transform.scale(oggetto, (gpx, gpy)))
         else:
-            oggetto = pygame.image.load("Immagini\Oggetti\Sconosciuto.png")
+            oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
             vettoreOggettiGraf.append(pygame.transform.scale(oggetto, (gpx * 4, gpy * 4)))
-            oggetto = pygame.image.load("Immagini\Oggetti\SconosciutoIco.png")
+            oggetto = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
             vettoreOggettiIco.append(pygame.transform.scale(oggetto, (gpx, gpy)))
         oggetton += 1
 
@@ -4892,29 +4891,35 @@ def startBattaglia(dati):
         pygame.display.update()
 
     while not risposta:
+        tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
+                    tastoTrovato = True
                     selind.play()
                     risposta = True
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastoTrovato = True
                     if xp != gpx * 1:
                         spostapun.play()
                         xp = xp - gpx
                     else:
                         spostapun.play()
                         xp = gpx * 5
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastoTrovato = True
                     if xp != gpx * 5:
                         spostapun.play()
                         xp = xp + gpx
                     else:
                         spostapun.play()
                         xp = gpx * 1
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastoTrovato = True
                     if offensivi:
                         spostapun.play()
                         yp = gpy * 5
@@ -4922,7 +4927,8 @@ def startBattaglia(dati):
                         difensivi = True
                     else:
                         selimp.play()
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastoTrovato = True
                     if difensivi:
                         spostapun.play()
                         yp = (gpy * 5) + (gpy // 2)
@@ -4930,7 +4936,8 @@ def startBattaglia(dati):
                         offensivi = True
                     else:
                         selimp.play()
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastoTrovato = True
                     # pozione
                     if difensivi and xp == gpx * 1 and dati[31] > 0:
                         dati[5] = dati[5] + 100
@@ -4995,6 +5002,7 @@ def startBattaglia(dati):
                     else:
                         selimp.play()
 
+        if tastoTrovato:
             schermo.blit(sfondoStartBattaglia, (0, 0))
             if difensivi:
                 if xp == gpx * 1:

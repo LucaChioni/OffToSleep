@@ -7,26 +7,10 @@ from GlobalVarG2 import *
 
 def messaggio(msg, colore, x, y, gr):
     gr = gr - 10
+    gr = gpx * gr // 60
     y = y - (gpy // 8)
     carattere = "Gentium Book Basic"
-    if gsx >= 3840 and gsy >= 2160:
-        font = pygame.font.SysFont(carattere, gr * 2)
-    if (gsx < 3840 and gsx > 1920) and (gsy < 2160 and gsy > 1080):
-        font = pygame.font.SysFont(carattere, gr * 4 // 3)
-    if gsx == 1920 and gsy == 1080:
-        font = pygame.font.SysFont(carattere, gr)
-    if (gsx < 1920 and gsx > 1600) and (gsy < 1080 and gsy > 900):
-        font = pygame.font.SysFont(carattere, gr * 7 // 8)
-    if gsx == 1600 and gsy == 900:
-        font = pygame.font.SysFont(carattere, gr * 5 // 6)
-    if (gsx < 1600 and gsx > 1280) and (gsy < 900 and gsy > 720):
-        font = pygame.font.SysFont(carattere, gr * 3 // 4)
-    if gsx == 1280 and gsy == 720:
-        font = pygame.font.SysFont(carattere, gr * 2 // 3)
-    if (gsx < 1280 and gsx >= 1024) and (gsy < 720 and gsy >= 576):
-        font = pygame.font.SysFont(carattere, gr // 2)
-    if gsx < 1024 and gsy < 576:
-        font = pygame.font.SysFont(carattere, gr // 5 * 2)
+    font = pygame.font.SysFont(carattere, gr)
     testo = font.render(msg, True, colore)
     schermo.blit(testo, (x, y))
 
@@ -84,7 +68,7 @@ def guardaVideo(path, audio=0):
         img = pygame.transform.scale(img, (gsx, gsy))
         listaImg.append(img)
     if audio != 0:
-        audio.play()
+        canaleSoundCanzone.play(audio)
     # play video
     i = 0
     while i < len(listaImg) + 10:
@@ -96,19 +80,20 @@ def guardaVideo(path, audio=0):
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    selezione.play()
+                    canaleSoundPuntatore.play(selezione)
                     if audio != 0:
-                        audio.stop()
+                        canaleSoundCanzone.stop()
                     return True
+        pygame.event.pump()
         clockVideo.tick(fpsVideo)
         i += 1
     if audio != 0:
-        audio.stop()
+        canaleSoundCanzone.stop()
     return False
 
 
 def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti):
-    scrivi = open("Salvataggi\Salvataggio%i.txt" % n, "w")
+    scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
     # conversione della posizione in caselle
     dati[2] = dati[2] // gpx
     dati[3] = dati[3] // gpy
@@ -3623,7 +3608,7 @@ def controllaMorteRallo(vitaRallo, inizio):
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    selind.play()
+                    canaleSoundPuntatore.play(selind)
                     continua = True
         inizio = True
     return inizio

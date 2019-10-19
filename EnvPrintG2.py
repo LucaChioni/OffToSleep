@@ -408,7 +408,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if event.key == pygame.K_q:
                     risposta = True
                     sposta = False
-                    selind.play()
+                    canaleSoundPuntatore.play(selind)
                 # movimento puntatore
                 tastop = event.key
                 if event.key == pygame.K_w:
@@ -532,7 +532,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                     sposta = True
                                     risposta = True
                                 else:
-                                    selimp.play()
+                                    canaleSoundPuntatore.play(selimp)
                         # bomba appiccicosa attacco = 5
                         if attacco == 5 and (abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5):
                             # controllo caselle attaccabili
@@ -590,8 +590,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 npers = 4
                             if xp == x and yp == y - gpy:
                                 npers = 3
-                            if infliggidanno:
-                                rumoreattacco.play()
                         # attacco normale se non c'e' il mostro
                         """elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and not sposta and not risposta:
                             attaccato = True
@@ -607,7 +605,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             risposta = True"""
 
                         if not risposta:
-                            selimp.play()
+                            canaleSoundPuntatore.play(selimp)
             if event.type == pygame.KEYUP:
                 if tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d:
                     numTastiPremuti -= 1
@@ -1232,6 +1230,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             pygame.display.update()
         elif not sposta or not attaccato:
             attacco = 0
+        pygame.event.pump()
         clockAttacco.tick(fpsInquadra)
 
     return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco
