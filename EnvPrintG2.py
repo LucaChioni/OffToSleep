@@ -217,7 +217,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici):
     xp = x
     yp = y
     nxp = 0
@@ -460,7 +460,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         # normale attacco = 1
                         elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)):
                             infliggidanno = True
-                            danno = att
+                            danno = attVicino
                             raggio = gpx * 0
                         # difesa attacco = 1
                         elif attacco == 1 and (xp == x and yp == y):
@@ -468,6 +468,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             risposta = True
                         # bomba attacco = 2
                         if attacco == 2 and (abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6):
+                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
@@ -485,6 +486,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 risposta = True
                         # bomba veleno attacco = 3
                         if attacco == 3 and (abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5):
+                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
@@ -503,6 +505,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 risposta = True
                         # esca attacco = 4
                         if attacco == 4 and (abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6):
+                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
@@ -535,6 +538,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                     canaleSoundPuntatore.play(selimp)
                         # bomba appiccicosa attacco = 5
                         if attacco == 5 and (abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5):
+                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
@@ -553,6 +557,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 risposta = True
                         # bomba potenziata attacco = 6
                         if attacco == 6 and (abs(x - xp) <= gpx * 4 and abs(y - yp) <= gpy * 4):
+                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
@@ -576,7 +581,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 if statom == 2:
                                     nemico.appiccicato = True
                                 nemico.danneggia(danno, "Rallo")
-                                attaccato = True
                                 sposta = True
                                 risposta = True
 
@@ -592,7 +596,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 npers = 3
                         # attacco normale se non c'e' il mostro
                         """elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and not sposta and not risposta:
-                            attaccato = True
                             if xp == x + gpx and yp == y:
                                 npers = 1
                             if xp == x - gpx and yp == y:

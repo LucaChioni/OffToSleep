@@ -20,10 +20,13 @@ def getStatistiche(dati, difesa = 0):
     att = 10 + (dati[4] * 2) + (dati[6] * 10)
     dif = 10 + (dati[4] * 2) + (dati[8] * 10) + 5 + (dati[7] * 5)"""
     esptot = pow(dati[4], 2) + (dati[4] * 10)
-    pvtot = 100
-    att = 14 + (dati[6] * 10)
-    dif = 12 + (dati[8] * 10) + 5 + (dati[7] * 5)
-    par = 3 + (dati[7] * 3)
+    pvtot = 50
+    attVicino = 14 + ((dati[6] * dati[6]) * 10)
+    attLontano = 12 + ((dati[128] * dati[128]) * 5)
+    # velFrecce indica le caselle al turno fatte dalle frecce lanciate
+    velFrecce = 4 + (dati[128] * dati[128])
+    dif = 7 + ((dati[8] * dati[8]) * 10) + 5 + ((dati[7] * dati[7]) * 5)
+    par = 3 + ((dati[7] * dati[7]) * 3)
     if difesa != 0:
         par = par * 2
         dif = dif + dif // 2
@@ -40,7 +43,8 @@ def getStatistiche(dati, difesa = 0):
         i = 2
         while i <= 100:
             if dati[4] <= i + 2:
-                att += (i * 2)
+                attVicino += (i * 2)
+                attLontano += i
                 break
             i += 3
 
@@ -55,7 +59,7 @@ def getStatistiche(dati, difesa = 0):
     entot = 300 + (dati[9] * 100)
     difro = 10 + (dati[9] * 10)
 
-    return esptot, pvtot, entot, att, dif, difro, par
+    return esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par
 
 
 def guardaVideo(path, audio=0):

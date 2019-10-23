@@ -264,57 +264,57 @@ def gameloop():
                 impossibileCliccarePulsanti = True
 
             # arma
-            armaw = pygame.image.load("Immagini/Armi/Arma%iw.png" % dati[6])
+            armaw = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iw.png" % dati[6])
             armaw = pygame.transform.scale(armaw, (gpx, gpy))
-            armawMov1 = pygame.image.load("Immagini/Armi/Arma%iwMov1.png" % dati[6])
+            armawMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwMov1.png" % dati[6])
             armawMov1 = pygame.transform.scale(armawMov1, (gpx, gpy))
-            armawMov2 = pygame.image.load("Immagini/Armi/Arma%iwMov2.png" % dati[6])
+            armawMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwMov2.png" % dati[6])
             armawMov2 = pygame.transform.scale(armawMov2, (gpx, gpy))
-            armaa = pygame.image.load("Immagini/Armi/Arma%ia.png" % dati[6])
+            armaa = pygame.image.load("Immagini/EquipRallo/Spade/Spada%ia.png" % dati[6])
             armaa = pygame.transform.scale(armaa, (gpx, gpy))
-            armaaMov1 = pygame.image.load("Immagini/Armi/Arma%iaMov1.png" % dati[6])
+            armaaMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaMov1.png" % dati[6])
             armaaMov1 = pygame.transform.scale(armaaMov1, (gpx, gpy))
-            armaaMov2 = pygame.image.load("Immagini/Armi/Arma%iaMov2.png" % dati[6])
+            armaaMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaMov2.png" % dati[6])
             armaaMov2 = pygame.transform.scale(armaaMov2, (gpx, gpy))
-            armas = pygame.image.load("Immagini/Armi/Arma%is.png" % dati[6])
+            armas = pygame.image.load("Immagini/EquipRallo/Spade/Spada%is.png" % dati[6])
             armas = pygame.transform.scale(armas, (gpx, gpy))
-            armasMov1 = pygame.image.load("Immagini/Armi/Arma%isMov1.png" % dati[6])
+            armasMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isMov1.png" % dati[6])
             armasMov1 = pygame.transform.scale(armasMov1, (gpx, gpy))
-            armasMov2 = pygame.image.load("Immagini/Armi/Arma%isMov2.png" % dati[6])
+            armasMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isMov2.png" % dati[6])
             armasMov2 = pygame.transform.scale(armasMov2, (gpx, gpy))
-            armad = pygame.image.load("Immagini/Armi/Arma%id.png" % dati[6])
+            armad = pygame.image.load("Immagini/EquipRallo/Spade/Spada%id.png" % dati[6])
             armad = pygame.transform.scale(armad, (gpx, gpy))
-            armadMov1 = pygame.image.load("Immagini/Armi/Arma%idMov1.png" % dati[6])
+            armadMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idMov1.png" % dati[6])
             armadMov1 = pygame.transform.scale(armadMov1, (gpx, gpy))
-            armadMov2 = pygame.image.load("Immagini/Armi/Arma%idMov2.png" % dati[6])
+            armadMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idMov2.png" % dati[6])
             armadMov2 = pygame.transform.scale(armadMov2, (gpx, gpy))
-            armasAttacco = pygame.image.load("Immagini/Armi/Arma%isAttacco.png" % dati[6])
+            armasAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isAttacco.png" % dati[6])
             armasAttacco = pygame.transform.scale(armasAttacco, (gpx, gpy * 2))
-            armaaAttacco = pygame.image.load("Immagini/Armi/Arma%iaAttacco.png" % dati[6])
+            armaaAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaAttacco.png" % dati[6])
             armaaAttacco = pygame.transform.scale(armaaAttacco, (gpx * 2, gpy))
-            armadAttacco = pygame.image.load("Immagini/Armi/Arma%idAttacco.png" % dati[6])
+            armadAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idAttacco.png" % dati[6])
             armadAttacco = pygame.transform.scale(armadAttacco, (gpx * 2, gpy))
-            armawAttacco = pygame.image.load("Immagini/Armi/Arma%iwAttacco.png" % dati[6])
+            armawAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwAttacco.png" % dati[6])
             armawAttacco = pygame.transform.scale(armawAttacco, (gpx, gpy * 2))
             # armatura
-            armaturaw = pygame.image.load("Immagini/Armature/Armatura%iw.png" % dati[8])
+            armaturaw = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iw.png" % dati[8])
             armaturaw = pygame.transform.scale(armaturaw, (gpx, gpy))
-            armaturaa = pygame.image.load("Immagini/Armature/Armatura%ia.png" % dati[8])
+            armaturaa = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%ia.png" % dati[8])
             armaturaa = pygame.transform.scale(armaturaa, (gpx, gpy))
-            armaturas = pygame.image.load("Immagini/Armature/Armatura%is.png" % dati[8])
+            armaturas = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % dati[8])
             armaturas = pygame.transform.scale(armaturas, (gpx, gpy))
-            armaturad = pygame.image.load("Immagini/Armature/Armatura%id.png" % dati[8])
+            armaturad = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%id.png" % dati[8])
             armaturad = pygame.transform.scale(armaturad, (gpx, gpy))
             # scudo
-            scudow = pygame.image.load("Immagini/Scudi/Scudo%iw.png" % dati[7])
+            scudow = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iw.png" % dati[7])
             scudow = pygame.transform.scale(scudow, (gpx, gpy))
-            scudoa = pygame.image.load("Immagini/Scudi/Scudo%ia.png" % dati[7])
+            scudoa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%ia.png" % dati[7])
             scudoa = pygame.transform.scale(scudoa, (gpx, gpy))
-            scudos = pygame.image.load("Immagini/Scudi/Scudo%is.png" % dati[7])
+            scudos = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%is.png" % dati[7])
             scudos = pygame.transform.scale(scudos, (gpx, gpy))
-            scudod = pygame.image.load("Immagini/Scudi/Scudo%id.png" % dati[7])
+            scudod = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%id.png" % dati[7])
             scudod = pygame.transform.scale(scudod, (gpx, gpy))
-            scudoDifesa = pygame.image.load("Immagini/Scudi/Scudo%iDifesa.png" % dati[7])
+            scudoDifesa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iDifesa.png" % dati[7])
             scudoDifesa = pygame.transform.scale(scudoDifesa, (gpx, gpy))
             # armatura robot
             armrobw = pygame.image.load("Immagini/Armrobs/Armrob%iw.png" % dati[9])
@@ -548,7 +548,7 @@ def gameloop():
 
         # statistiche personaggio e robo (liv + arm + scu)
         # se modifichi -> modifica anche equip, equiprobo e ovunque si presenta pvtot
-        esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
+        esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati, difesa)
 
         # ripristina vita e status dopo lv up
         if aumentoliv:
@@ -597,7 +597,7 @@ def gameloop():
                 y = vy
         # gestione attacchi
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, att, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici)
             caricaTutto = True
             # cambiare posizione dopo l'attacco
             if npers == 3:
@@ -653,7 +653,7 @@ def gameloop():
         if sposta:
             difesa = 0
         if difesa != 0 and not sposta:
-            esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
+            esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati, difesa)
             if difesa == 2:
                 difesa = 1
                 sposta = True
@@ -662,7 +662,7 @@ def gameloop():
                     dati[5] = pvtot
         # gestione att+ e dif+
         if dati[123] > 0:
-            att = att + att // 4
+            attVicino = attVicino + attVicino // 4
             if sposta:
                 dati[123] = dati[123] - 1
         if dati[124] > 0:

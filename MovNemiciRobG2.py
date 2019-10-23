@@ -290,7 +290,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
 
 
 def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy, x, y):
-    esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
+    esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati, difesa)
     raffreddamento = False
     ricarica1 = False
     ricarica2 = False
@@ -996,7 +996,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vet
                             nrob = 4
                         sposta = True
     else:
-        esptot, pvtot, entot, att, dif, difro, par = getStatistiche(dati, difesa)
+        esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati, difesa)
 
         """dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
         in gambit: prime 10 -> condizioni, ultime 10 -> tecniche

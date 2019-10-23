@@ -493,9 +493,9 @@ def animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz):
                     if nemico.direzione == "d":
                         schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
                     if nemico.appiccicato:
-                        schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                     if nemico.avvelenato:
-                        schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
                     print "animazione attacco da lontano: x=" + str(nemico.xObbiettivo) + " y=" + str(nemico.yObbiettivo)
                 else:
                     # rumoreattaccoNemico.play()
@@ -508,9 +508,9 @@ def animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz):
                     if nemico.direzione == "d":
                         schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
                     if nemico.appiccicato:
-                        schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                     if nemico.avvelenato:
-                        schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                        schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
     return animazione
 
 
@@ -538,9 +538,9 @@ def animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
                 if nemico.animaDanneggiamento == "Colco":
                     schermo.blit(nemico.imgDanneggiamentoColco, (nemico.x, nemico.y))
                 if nemico.appiccicato:
-                    schermo.blit(nemico.imgAppiccicato, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                    schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                 if nemico.avvelenato:
-                    schermo.blit(nemico.imgAvvelenamento, (nemico.x - (gpx * fineanimaz // 10), nemico.y))
+                    schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
     return animazione
 
 
