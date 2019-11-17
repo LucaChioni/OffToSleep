@@ -3,12 +3,12 @@
 from GenericFuncG2 import *
 
 
-def scegli_sal(cosa, lunghezzadati):
+def scegli_sal(cosa, lunghezzadati, canzone):
     # posizione-dimensione puntatore
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx, gpy))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx, gpy))
-    xp = gsx // 32 * 6
-    yp = gsy // 18 * 10
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
+    xp = gsx // 32 * 6.5
+    yp = gsy // 18 * 9.5
 
     risposta = False
     conferma = False
@@ -22,17 +22,18 @@ def scegli_sal(cosa, lunghezzadati):
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 5, gsy // 18 * 7, gsx // 32 * 22, gsy // 18 * 9.5))
         if cosa == 1:
-            messaggio("Carica partita", grigiochi, gsx // 32 * 4, gsy // 18 * 4, 90)
+            messaggio("Carica partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
         if cosa == 2:
-            messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 4, gsy // 18 * 4, 90)
+            messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 5, gsy // 18 * 5, 100)
         if cosa == 3:
-            messaggio("Salva partita", grigiochi, gsx // 32 * 4, gsy // 18 * 4, 90)
+            messaggio("Salva partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
         if conferma:
             if primaconf:
                 vxp = xp
                 vyp = yp
-                xp = gsx // 32 * 22
-                yp = gsy // 18 * 6
+                xp = gsx // 32 * 22.3
+                yp = gsy // 18 * 6.3
+                voceMarcata = 2
                 primaconf = False
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 18, gsy // 18 * 3.5, gsx // 32 * 9, gsy // 18 * 5))
             messaggio("Confermi?", grigiochi, gsx // 32 * 20, gsy // 18 * 4.5, 70)
@@ -134,6 +135,8 @@ def scegli_sal(cosa, lunghezzadati):
         pygame.display.update()
 
     while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(canzone)
         tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -158,18 +161,18 @@ def scegli_sal(cosa, lunghezzadati):
                         if voceMarcata == 1:
                             voceMarcata += 1
                             canaleSoundPuntatore.play(spostapun)
-                            xp = gsx // 32 * 22
-                        elif xp == gsx // 32 * 22:
+                            xp = gsx // 32 * 22.3
+                        else:
                             canaleSoundPuntatore.play(selimp)
                     else:
                         if salMarcato == 1:
                             salMarcato += 1
                             canaleSoundPuntatore.play(spostapun)
-                            xp = gsx // 32 * 13
+                            xp = gsx // 32 * 13.5
                         elif salMarcato == 2:
                             salMarcato += 1
                             canaleSoundPuntatore.play(spostapun)
-                            xp = gsx // 32 * 20
+                            xp = gsx // 32 * 20.5
                         else:
                             canaleSoundPuntatore.play(selimp)
                 if event.key == pygame.K_a and not tastoTrovato:
@@ -178,18 +181,18 @@ def scegli_sal(cosa, lunghezzadati):
                         if voceMarcata == 2:
                             voceMarcata -= 1
                             canaleSoundPuntatore.play(spostapun)
-                            xp = gsx // 32 * 19
-                        elif xp == gsx // 32 * 19:
+                            xp = gsx // 32 * 19.3
+                        else:
                             canaleSoundPuntatore.play(selimp)
                     else:
                         if salMarcato == 3:
                             salMarcato -= 1
                             canaleSoundPuntatore.play(spostapun)
-                            xp = gsx // 32 * 13
+                            xp = gsx // 32 * 13.5
                         elif salMarcato == 2:
                             salMarcato -= 1
                             canaleSoundPuntatore.play(spostapun)
-                            xp = gsx // 32 * 6
+                            xp = gsx // 32 * 6.5
                         else:
                             canaleSoundPuntatore.play(selimp)
                 if event.key == pygame.K_SPACE and not tastoTrovato:
@@ -215,17 +218,18 @@ def scegli_sal(cosa, lunghezzadati):
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 5, gsy // 18 * 7, gsx // 32 * 22, gsy // 18 * 9.5))
             if cosa == 1:
-                messaggio("Carica partita", grigiochi, gsx // 32 * 4, gsy // 18 * 4, 90)
+                messaggio("Carica partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
             if cosa == 2:
-                messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 4, gsy // 18 * 4, 90)
+                messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 5, gsy // 18 * 5, 100)
             if cosa == 3:
-                messaggio("Salva partita", grigiochi, gsx // 32 * 4, gsy // 18 * 4, 90)
+                messaggio("Salva partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
             if conferma:
                 if primaconf:
                     vxp = xp
                     vyp = yp
-                    xp = gsx // 32 * 22
-                    yp = gsy // 18 * 6
+                    xp = gsx // 32 * 22.3
+                    yp = gsy // 18 * 6.3
+                    voceMarcata = 2
                     primaconf = False
                 pygame.draw.rect(schermo, grigio, (gsx // 32 * 18, gsy // 18 * 3.5, gsx // 32 * 9, gsy // 18 * 5))
                 messaggio("Confermi?", grigiochi, gsx // 32 * 20, gsy // 18 * 4.5, 70)
@@ -345,9 +349,9 @@ def menu():
                     canaleSoundPuntatore.play(selezione)
                     finevideo = False
 
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx, gpy))
-    xp = gsx // 32 * 2
-    yp = gsy // 18 * 3
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    xp = gsx // 32 * 3
+    yp = gsy // 18 * 3.5
     voceMarcata = 1
 
     # numero per la posizione di robo all'avvio
@@ -397,13 +401,13 @@ def menu():
                     if voceMarcata != 4:
                         if voceMarcata == 1:
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 5.5
+                            yp = gsy // 18 * 6
                         elif voceMarcata == 2:
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 8
+                            yp = gsy // 18 * 8.5
                         elif voceMarcata == 3:
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 13
+                            yp = gsy // 18 * 13.5
                         voceMarcata += 1
                     else:
                         canaleSoundPuntatore.play(selimp)
@@ -412,13 +416,13 @@ def menu():
                     if voceMarcata != 1:
                         if voceMarcata == 2:
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 3
+                            yp = gsy // 18 * 3.5
                         elif voceMarcata == 3:
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 5.5
+                            yp = gsy // 18 * 6
                         elif voceMarcata == 4:
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 8
+                            yp = gsy // 18 * 8.5
                         voceMarcata -= 1
                     else:
                         canaleSoundPuntatore.play(selimp)
@@ -432,11 +436,11 @@ def menu():
                         y = gsy // 18 * 2
                         # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
                         # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - porte(131-?) - cofanetti(?-?) // dimensione: 0-130 + porte e cofanetti
-                        dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 300,# <- statistiche
+                        dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 240,# <- statistiche
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
                                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
                                 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,# <- equpaggiamento
-                                2, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- batterie
+                                2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
                                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
                                 False, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
@@ -457,7 +461,7 @@ def menu():
 
                     # carica partita
                     if voceMarcata == 2:
-                        n = scegli_sal(1, lunghezzadati)
+                        n = scegli_sal(1, lunghezzadati, c11)
 
                         # lettura salvataggio
                         if n != -1:
@@ -532,7 +536,7 @@ def menu():
 
                     # cancella partita
                     if voceMarcata == 3:
-                        n = scegli_sal(2, lunghezzadati)
+                        n = scegli_sal(2, lunghezzadati, c11)
                         if n != -1:
                             leggi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
                             leggi.close()
@@ -563,11 +567,11 @@ def menu():
             pygame.display.update()
 
 
-def equip(dati):
+def equip(dati, canzone):
     perssta = pygame.transform.scale(perso, (gpx * 5, gpy * 5))
     persstab = pygame.transform.scale(persob, (gpx * 5, gpy * 5))
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
     xp = gsx // 32 * 1
     yp = gsy // 18 * 6.8
     carim = True
@@ -589,7 +593,7 @@ def equip(dati):
     i = 0
     while i < 5:
         if dati[41 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iMenu.png" % i)
+            img = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iMenu.png" % i)
         else:
             img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
         vetImgArchi.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
@@ -1136,6 +1140,9 @@ def equip(dati):
         pygame.display.update()
 
     while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(canzone)
+
         tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1883,11 +1890,11 @@ def equip(dati):
     return dati
 
 
-def sceglicondiz(dati, condizione):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
+def sceglicondiz(dati, condizione, canzone):
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
     xp = gsx // 32 * 1
-    yp = gsy // 18 * 4.5
+    yp = gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
 
@@ -1903,243 +1910,271 @@ def sceglicondiz(dati, condizione):
     if True:
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 2))
+        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
 
         messaggio("Scegli condizione", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 45)
+        messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
         if voceMarcata == 0:
-            messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-            messaggio("cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+            messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+            messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         if dati[81] > 0:
-            messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+            messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
             if voceMarcata == 1:
-                schermo.blit(scecond[1], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Rallo con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su di te quando hai pv < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[1], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Rallo con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo quando ha pv < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
         if dati[82] > 0:
-            messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+            messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
             if voceMarcata == 2:
-                schermo.blit(scecond[2], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Rallo con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su di te quando hai pv < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[2], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Rallo con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo quando ha pv < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
         if dati[83] > 0:
-            messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+            messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
             if voceMarcata == 3:
-                schermo.blit(scecond[3], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Rallo con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su di te quando hai pv < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[3], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Rallo con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo quando ha pv < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
         if dati[84] > 0:
-            messaggio("Rallo con veleno", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+            messaggio("Rallo con veleno", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
             if voceMarcata == 4:
-                schermo.blit(scecond[4], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Rallo con veleno:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su di te quando hai veleno", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[4], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Rallo con veleno:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione su Rallo quando è avvelenato", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
         if dati[85] > 0:
-            messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+            messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
             if voceMarcata == 5:
-                schermo.blit(scecond[5], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Colco surriscaldato:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su Colco quando ha surriscaldamento", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
+                schermo.blit(scecond[5], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Colco surriscaldato:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione su Colco quando è surriscaldato", grigiochi, gsx // 32 * 18,
+                          gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
         if dati[86] > 0:
-            messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+            messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
             if voceMarcata == 6:
-                schermo.blit(scecond[6], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Colco con pe < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su Colco quando ha pe < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[6], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Colco con pe < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco quando ha pe < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
         if dati[87] > 0:
-            messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+            messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
             if voceMarcata == 7:
-                schermo.blit(scecond[7], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Colco con pe < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su Colco quando ha pe < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[7], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Colco con pe < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco quando ha pe < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
         if dati[88] > 0:
-            messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+            messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
             if voceMarcata == 8:
-                schermo.blit(scecond[8], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Colco con pe < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su Colco quando ha pe < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[8], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Colco con pe < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco quando ha pe < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
         if dati[89] > 0:
-            messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+            messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
             if voceMarcata == 9:
-                schermo.blit(scecond[9], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Sempre a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su di te in continuazione (se l'azione", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("comporta uno status alterativo, viene eseguita solo", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio(u"quando lo status non è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scecond[9], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Sempre a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
         if dati[90] > 0:
-            messaggio("Sempre a Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+            messaggio("Sempre a Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
             if voceMarcata == 10:
-                schermo.blit(scecond[10], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Sempre a Colco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su Colco in continuazione (se l'azione", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("comporta uno status alterativo, viene eseguita solo", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio(u"quando lo status non è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scecond[10], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Sempre a Colco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco in continuazione (se la tecnica associata", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
         if dati[91] > 0:
-            messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+            messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
             if voceMarcata == 11:
-                schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
         if dati[92] > 0:
-            messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+            messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
             if voceMarcata == 12:
-                schermo.blit(scecond[12], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio(u"esegue l'azione sul nemico più vicino a Colco nel", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("raggio di 2 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scecond[12], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione sul nemico più vicino a Colco nel raggio di 2 caselle", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
         if dati[93] > 0:
-            messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+            messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
             if voceMarcata == 13:
-                schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione sul nemico lontano (distante di 3 o", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio(u"più caselle) più vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
         if dati[94] > 0:
-            messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+            messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
             if voceMarcata == 14:
-                schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione sul nemico con pv < 80% (in caso di", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico con pv < 80% (in caso di molteplici bersagli,", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
         if dati[95] > 0:
-            messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+            messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
             if voceMarcata == 15:
-                schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione sul nemico con pv < 50% (in caso di", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico con pv < 50% (in caso di molteplici bersagli,", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
         if dati[96] > 0:
-            messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+            messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
             if voceMarcata == 16:
-                schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione sul nemico con pv < 30% (in caso di", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico con pv < 30% (in caso di molteplici bersagli,", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
         if dati[97] > 0:
-            messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+            messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
             if voceMarcata == 17:
-                schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("esegue l'azione sul nemico con meno pv (in caso di", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione sul nemico con meno pv (in caso di molteplici bersagli,", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
         if dati[98] > 0:
-            messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+            messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
             if voceMarcata == 18:
-                schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio(u"esegue l'azione quando nei paraggi ci sono più di 1", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("nemico (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
-                          40)
+                schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 1 nemico (in caso di", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
         if dati[99] > 0:
-            messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+            messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
             if voceMarcata == 19:
-                schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio(u"esegue l'azione quando nei paraggi ci sono più di 4", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
-                          40)
+                schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
         if dati[100] > 0:
-            messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+            messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
             if voceMarcata == 20:
-                schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio(u"esegue l'azione quando nei paraggi ci sono più di 7", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16,
-                          40)
+                schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
 
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
 
         # puntatore vecchio
         i = 1
-        k = 6
+        k = 6.1
         while i <= 10:
             if condizione == i:
                 schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
             i = i + 1
             k = k + 1
         i = 11
-        k = 6
+        k = 6.1
         while i <= 20:
             if condizione == i:
                 schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
             i = i + 1
             k = k + 1
         if condizione == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.5))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
 
         schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(canzone)
+
         tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -2163,11 +2198,12 @@ def sceglicondiz(dati, condizione):
                             if voceMarcata == 10:
                                 voceMarcata -= 10
                                 canaleSoundPuntatore.play(spostapun)
-                                yp = gsy // 18 * 4.5
+                                yp = gsy // 18 * 4.6
                             else:
-                                voceMarcata -= 9
+                                voceMarcata -= 20
                                 canaleSoundPuntatore.play(spostapun)
-                                yp = gsy // 18 * 6
+                                yp = gsy // 18 * 4.6
+                            xp = gsx // 32 * 1
                         else:
                             voceMarcata += 1
                             canaleSoundPuntatore.play(spostapun)
@@ -2180,9 +2216,10 @@ def sceglicondiz(dati, condizione):
                             canaleSoundPuntatore.play(spostapun)
                             yp = yp - gsy // 18 * 1.5
                         else:
-                            voceMarcata += 9
+                            voceMarcata -= 11
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 15
+                            yp = gsy // 18 * 4.6
+                        xp = gsx // 32 * 1
                     else:
                         if voceMarcata != 0:
                             voceMarcata -= 1
@@ -2191,7 +2228,7 @@ def sceglicondiz(dati, condizione):
                         else:
                             voceMarcata += 10
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 15
+                            yp = gsy // 18 * 15.1
                 if event.key == pygame.K_d and not tastoTrovato:
                     tastoTrovato = True
                     if voceMarcata != 0:
@@ -2241,225 +2278,246 @@ def sceglicondiz(dati, condizione):
         if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 2))
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
 
             messaggio("Scegli condizione", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 45)
+            messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
             if voceMarcata == 0:
-                messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             if dati[81] > 0:
-                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
                 if voceMarcata == 1:
-                    schermo.blit(scecond[1], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Rallo con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su di te quando hai pv < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[1], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Rallo con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo quando ha pv < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
             if dati[82] > 0:
-                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
                 if voceMarcata == 2:
-                    schermo.blit(scecond[2], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Rallo con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su di te quando hai pv < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[2], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Rallo con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo quando ha pv < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
             if dati[83] > 0:
-                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
                 if voceMarcata == 3:
-                    schermo.blit(scecond[3], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Rallo con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su di te quando hai pv < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[3], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Rallo con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo quando ha pv < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
             if dati[84] > 0:
-                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
                 if voceMarcata == 4:
-                    schermo.blit(scecond[4], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Rallo con veleno:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su di te quando hai veleno", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[4], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Rallo con veleno:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Rallo quando è avvelenato", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
             if dati[85] > 0:
-                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
                 if voceMarcata == 5:
-                    schermo.blit(scecond[5], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Colco surriscaldato:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su Colco quando ha surriscaldamento", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[5], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Colco surriscaldato:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Colco quando è surriscaldato", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
             if dati[86] > 0:
-                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
                 if voceMarcata == 6:
-                    schermo.blit(scecond[6], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Colco con pe < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su Colco quando ha pe < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[6], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Colco con pe < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco quando ha pe < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
             if dati[87] > 0:
-                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
                 if voceMarcata == 7:
-                    schermo.blit(scecond[7], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Colco con pe < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su Colco quando ha pe < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[7], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Colco con pe < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco quando ha pe < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
             if dati[88] > 0:
-                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
                 if voceMarcata == 8:
-                    schermo.blit(scecond[8], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Colco con pe < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su Colco quando ha pe < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[8], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Colco con pe < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco quando ha pe < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
             if dati[89] > 0:
-                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
                 if voceMarcata == 9:
-                    schermo.blit(scecond[9], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Sempre a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su di te in continuazione (se l'azione", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("comporta uno status alterativo, viene eseguita solo", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"quando lo status non è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[9], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Sempre a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
             if dati[90] > 0:
-                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
                 if voceMarcata == 10:
-                    schermo.blit(scecond[10], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Sempre a Colco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su Colco in continuazione (se l'azione", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("comporta uno status alterativo, viene eseguita solo", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"quando lo status non è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[10], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Sempre a Colco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco in continuazione (se la tecnica associata", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
             if dati[91] > 0:
-                messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+                messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
                 if voceMarcata == 11:
-                    schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
             if dati[92] > 0:
-                messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+                messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
                 if voceMarcata == 12:
-                    schermo.blit(scecond[12], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio(u"esegue l'azione sul nemico più vicino a Colco nel", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("raggio di 2 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scecond[12], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione sul nemico più vicino a Colco nel raggio di 2 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
             if dati[93] > 0:
-                messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+                messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
                 if voceMarcata == 13:
-                    schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione sul nemico lontano (distante di 3 o", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"più caselle) più vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
             if dati[94] > 0:
-                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
                 if voceMarcata == 14:
-                    schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione sul nemico con pv < 80% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico con pv < 80% (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
             if dati[95] > 0:
-                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
                 if voceMarcata == 15:
-                    schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione sul nemico con pv < 50% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico con pv < 50% (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
             if dati[96] > 0:
-                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
                 if voceMarcata == 16:
-                    schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione sul nemico con pv < 30% (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico con pv < 30% (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
             if dati[97] > 0:
-                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
                 if voceMarcata == 17:
-                    schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("esegue l'azione sul nemico con meno pv (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio(u"molteplici bersagli, esegue l'azione su quello più", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio("vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione sul nemico con meno pv (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
             if dati[98] > 0:
-                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
                 if voceMarcata == 18:
-                    schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio(u"esegue l'azione quando nei paraggi ci sono più di 1", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("nemico (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 1 nemico (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
             if dati[99] > 0:
-                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
                 if voceMarcata == 19:
-                    schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio(u"esegue l'azione quando nei paraggi ci sono più di 4", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
             if dati[100] > 0:
-                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
                 if voceMarcata == 20:
-                    schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio(u"esegue l'azione quando nei paraggi ci sono più di 7", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
-                    messaggio("nemici (in caso di tecnica a bersaglio singolo, questa", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
-                    messaggio(u"viene eseguita sul nemico più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
 
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
 
             # puntatore vecchio
             i = 1
-            k = 6
+            k = 6.1
             while i <= 10:
                 if condizione == i:
                     schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             i = 11
-            k = 6
+            k = 6.1
             while i <= 20:
                 if condizione == i:
                     schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             if condizione == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.5))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
 
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
     return condizione
 
 
-def sceglitecn(dati, tecnica):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
+def sceglitecn(dati, tecnica, canzone):
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
     xp = gsx // 32 * 1
-    yp = gsy // 18 * 4.5
+    yp = gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
 
@@ -2475,221 +2533,246 @@ def sceglitecn(dati, tecnica):
     if True:
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 2))
+        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
 
         messaggio("Scegli tecnica", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 45)
+        messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
         if voceMarcata == 0:
-            messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-            messaggio("cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+            messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+            messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         if dati[11] > 0:
-            messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+            messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
             if voceMarcata == 1:
-                schermo.blit(scetecn[1], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[0]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[1], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[0]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
         if dati[12] > 0:
-            messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+            messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
             if voceMarcata == 2:
-                schermo.blit(scetecn[2], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[1]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("recupera un po' dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[2], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[1]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Recupera un po' di pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
         if dati[13] > 0:
-            messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+            messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
             if voceMarcata == 3:
-                schermo.blit(scetecn[3], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[2]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("cura avvelenamento", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[3], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[2]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
         if dati[14] > 0:
-            messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+            messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
             if voceMarcata == 4:
-                schermo.blit(scetecn[4], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[3]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[4], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[3]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
         if dati[15] > 0:
-            messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+            messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
             if voceMarcata == 5:
-                schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge danni a tutti i nemici o alleati entro il raggio", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
         if dati[16] > 0:
-            messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+            messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
             if voceMarcata == 6:
-                schermo.blit(scetecn[6], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("annulla il surriscaldamento ma richiede due turni", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scetecn[6], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
         if dati[17] > 0:
-            messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+            messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
             if voceMarcata == 7:
-                schermo.blit(scetecn[7], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
-                          40)
+                schermo.blit(scetecn[7], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
+                          gsy // 18 * 14.5, 35)
+                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
         if dati[18] > 0:
-            messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+            messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
             if voceMarcata == 8:
-                schermo.blit(scetecn[8], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[7]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("recupera molti dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[8], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[7]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("recupera molti pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
         if dati[19] > 0:
-            messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+            messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
             if voceMarcata == 9:
-                schermo.blit(scetecn[9], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[8]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[9], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[8]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
         if dati[20] > 0:
-            messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+            messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
             if voceMarcata == 10:
-                schermo.blit(scetecn[10], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[9]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14,
-                          40)
+                schermo.blit(scetecn[10], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[9]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
         if dati[21] > 0:
-            messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+            messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
             if voceMarcata == 11:
-                schermo.blit(scetecn[11], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[10]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("permette a Colco, se non surriscaldato, di eseguire due", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("azioni al turno. Dopo 15 turni provoca surriscaldamento", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scetecn[11], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[10]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno.", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("Dopo 15 turni provoca surriscaldamento (applicata sempre su Colco)", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
         if dati[22] > 0:
-            messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+            messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
             if voceMarcata == 12:
-                schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("incrementa il tuo attacco per 10 turni (non ha", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Incrementa l'attacco di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
         if dati[23] > 0:
-            messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+            messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
             if voceMarcata == 13:
-                schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("incrementa la tua difesa per 10 turni (non ha", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Incrementa la difesa di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
         if dati[24] > 0:
-            messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+            messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
             if voceMarcata == 14:
-                schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio(u"tutte le tecniche costano la metà dei pe per 15 turni.", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("Si annulla con surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
         if dati[25] > 0:
-            messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+            messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
             if voceMarcata == 15:
-                schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge molti danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge molti danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
         if dati[26] > 0:
-            messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+            messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
             if voceMarcata == 16:
-                schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
         if dati[27] > 0:
-            messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+            messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
             if voceMarcata == 17:
-                schermo.blit(scetecn[17], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("ricarica di molto Colco ma richiede due turni e", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("provoca surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 15, 40)
-                messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                schermo.blit(scetecn[17], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Ricarica di molto Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
+                          gsy // 18 * 14.5, 35)
+                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
         if dati[28] > 0:
-            messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+            messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
             if voceMarcata == 18:
-                schermo.blit(scetecn[18], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[17]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                schermo.blit(scetecn[18], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[17]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
         if dati[29] > 0:
-            messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+            messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
             if voceMarcata == 19:
-                schermo.blit(scetecn[19], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[18]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14,
-                          40)
+                schermo.blit(scetecn[19], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[18]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
         if dati[30] > 0:
-            messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+            messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
             if voceMarcata == 20:
-                schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 3.5))
-                messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                messaggio("infligge enormi danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14, 40)
-                messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 4))
+                messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                messaggio("Infligge enormi danni a tutti i nemici o alleati entro il raggio di 6", grigiochi,
+                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
 
@@ -2697,26 +2780,29 @@ def sceglitecn(dati, tecnica):
 
         # puntatore vecchio
         i = 1
-        k = 6
+        k = 6.1
         while i <= 10:
             if tecnica == i:
                 schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
             i = i + 1
             k = k + 1
         i = 11
-        k = 6
+        k = 6.1
         while i <= 20:
             if tecnica == i:
                 schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
             i = i + 1
             k = k + 1
         if tecnica == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.5))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
 
         schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(canzone)
+
         tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -2740,11 +2826,12 @@ def sceglitecn(dati, tecnica):
                             if voceMarcata == 10:
                                 voceMarcata -= 10
                                 canaleSoundPuntatore.play(spostapun)
-                                yp = gsy // 18 * 4.5
+                                yp = gsy // 18 * 4.6
                             else:
-                                voceMarcata -= 9
+                                voceMarcata -= 20
                                 canaleSoundPuntatore.play(spostapun)
-                                yp = gsy // 18 * 6
+                                yp = gsy // 18 * 4.6
+                            xp = gsx // 32 * 1
                         else:
                             voceMarcata += 1
                             canaleSoundPuntatore.play(spostapun)
@@ -2757,14 +2844,15 @@ def sceglitecn(dati, tecnica):
                             canaleSoundPuntatore.play(spostapun)
                             yp = yp - gsy // 18 * 1.5
                         else:
-                            voceMarcata += 9
+                            voceMarcata -= 11
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 15
+                            yp = yp - gsy // 18 * 1.5
+                        xp = gsx // 32 * 1
                     else:
                         if voceMarcata == 0:
                             voceMarcata += 10
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 15
+                            yp = gsy // 18 * 15.1
                         else:
                             voceMarcata -= 1
                             canaleSoundPuntatore.play(spostapun)
@@ -2820,221 +2908,233 @@ def sceglitecn(dati, tecnica):
         if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 15, gsy // 18 * 11))
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 2))
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
 
             messaggio("Scegli tecnica", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 45)
+            messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
             if voceMarcata == 0:
-                messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                messaggio("cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             if dati[11] > 0:
-                messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+                messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
                 if voceMarcata == 1:
-                    schermo.blit(scetecn[1], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[0]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[1], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[0]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
             if dati[12] > 0:
-                messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+                messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
                 if voceMarcata == 2:
-                    schermo.blit(scetecn[2], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[1]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("recupera un po' dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[2], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[1]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Recupera un po' di pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
             if dati[13] > 0:
-                messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+                messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
                 if voceMarcata == 3:
-                    schermo.blit(scetecn[3], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[2]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("cura avvelenamento", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[3], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[2]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
             if dati[14] > 0:
-                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
                 if voceMarcata == 4:
-                    schermo.blit(scetecn[4], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[3]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[4], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[3]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
             if dati[15] > 0:
-                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
                 if voceMarcata == 5:
-                    schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge danni a tutti i nemici o alleati entro il raggio", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
             if dati[16] > 0:
-                messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+                messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
                 if voceMarcata == 6:
-                    schermo.blit(scetecn[6], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("annulla il surriscaldamento ma richiede due turni", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scetecn[6], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
             if dati[17] > 0:
-                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
                 if voceMarcata == 7:
-                    schermo.blit(scetecn[7], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
-                              40)
+                    schermo.blit(scetecn[7], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
             if dati[18] > 0:
-                messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+                messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
                 if voceMarcata == 8:
-                    schermo.blit(scetecn[8], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[7]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("recupera molti dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[8], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[7]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("recupera molti pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
             if dati[19] > 0:
-                messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+                messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
                 if voceMarcata == 9:
-                    schermo.blit(scetecn[9], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[8]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[9], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[8]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
             if dati[20] > 0:
-                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
                 if voceMarcata == 10:
-                    schermo.blit(scetecn[10], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[9]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14,
-                              40)
+                    schermo.blit(scetecn[10], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[9]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
             if dati[21] > 0:
-                messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+                messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
                 if voceMarcata == 11:
-                    schermo.blit(scetecn[11], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[10]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("permette a Colco, se non surriscaldato, di eseguire due", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("azioni al turno. Dopo 15 turni provoca surriscaldamento", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 15, 40)
-                    messaggio("(applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scetecn[11], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[10]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno.", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("Dopo 15 turni provoca surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
             if dati[22] > 0:
-                messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+                messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
                 if voceMarcata == 12:
-                    schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("incrementa il tuo attacco per 10 turni (non ha", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Incrementa l'attacco di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
             if dati[23] > 0:
-                messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+                messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
                 if voceMarcata == 13:
-                    schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("incrementa la tua difesa per 10 turni (non ha", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Incrementa la difesa di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
             if dati[24] > 0:
-                messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+                messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
                 if voceMarcata == 14:
-                    schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio(u"tutte le tecniche costano la metà dei pe per 15 turni.", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("Si annulla con surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 15, 40)
-                    messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
             if dati[25] > 0:
-                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
                 if voceMarcata == 15:
-                    schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge molti danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge molti danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
             if dati[26] > 0:
-                messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+                messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
                 if voceMarcata == 16:
-                    schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
             if dati[27] > 0:
-                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
                 if voceMarcata == 17:
-                    schermo.blit(scetecn[17], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("ricarica di molto Colco ma richiede due turni e", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("provoca surriscaldamento (applicata sempre su", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 15, 40)
-                    messaggio("Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 16, 40)
+                    schermo.blit(scetecn[17], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Ricarica di molto Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
             if dati[28] > 0:
-                messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+                messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
                 if voceMarcata == 18:
-                    schermo.blit(scetecn[18], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[17]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14, 40)
+                    schermo.blit(scetecn[18], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[17]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
             if dati[29] > 0:
-                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
                 if voceMarcata == 19:
-                    schermo.blit(scetecn[19], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[18]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14,
-                              40)
+                    schermo.blit(scetecn[19], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[18]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14, 40)
+                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
             if dati[30] > 0:
-                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
                 if voceMarcata == 20:
-                    schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 3.5))
-                    messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13, 40)
-                    messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27, gsy // 18 * 13, 40)
-                    messaggio("infligge enormi danni a tutti i nemici o alleati entro", grigiochi, gsx // 32 * 18,
-                              gsy // 18 * 14, 40)
-                    messaggio("il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 40)
+                    schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 4))
+                    messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
+                    messaggio("Infligge enormi danni a tutti i nemici o alleati entro il raggio di 6", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
 
@@ -3042,34 +3142,33 @@ def sceglitecn(dati, tecnica):
 
             # puntatore vecchio
             i = 1
-            k = 6
+            k = 6.1
             while i <= 10:
                 if tecnica == i:
                     schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             i = 11
-            k = 6
+            k = 6.1
             while i <= 20:
                 if tecnica == i:
                     schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             if tecnica == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.5))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
 
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
     return tecnica
 
 
-def equiprobo(dati):
-    robosta = pygame.transform.scale(roboo, (gpx * 8, gpy * 8))
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
+def equiprobo(dati, canzone):
+    robosta = pygame.transform.scale(roboo, (gpx * 5, gpy * 5))
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
     xp = gsx // 32 * 1
-    yp = gsy // 18 * 6
-    carim = True
+    yp = gsy // 18 * 6.8
     risposta = False
     riordinamento = False
     annullaRiordinamento = False
@@ -3079,14 +3178,32 @@ def equiprobo(dati):
     voceMarcata = 1
     voceGambitMarcata = 11
 
+    vetImgBatterie = []
+    i = 0
+    while i < 5:
+        if dati[41 + i] > 0:
+            img = pygame.image.load("Immagini/EquipRobo/Batteria%is.png" % i)
+            vetImgBatterie.append(pygame.transform.scale(img, (gpx * 5, gpy * 5)))
+        i += 1
+
+    vetIcoBatterie = []
+    i = 0
+    while i < 5:
+        if dati[41 + i] > 0:
+            img = pygame.image.load("Immagini/EquipRobo/Batteria%iMenu.png" % i)
+        else:
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+        vetIcoBatterie.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
+        i += 1
+
     esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
 
     # primo frame
     if True:
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 6, gsy // 18 * 12))
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 8, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12))
+        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 12.5))
+        pygame.draw.rect(schermo, grigio, (gsx // 32 * 7, gsy // 18 * 4, gsx // 32 * 16, gsy // 18 * 12.5))
 
         if annullaRiordinamento:
             dati = list(datiPrimaDiRiordinamento)
@@ -3096,351 +3213,240 @@ def equiprobo(dati):
             voceMarcata = voceGambitMarcata
 
         if riordinamento:
-            pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 3), gsx // 32 * 15, gsy // 18 * 1))
+            pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
 
-        if carim:
-            armrobs = pygame.image.load("Immagini/Armrobs/Armrob%is.png" % dati[9])
-            armrob = pygame.transform.scale(armrobs, (gpx * 8, gpy * 8))
-            carim = False
         messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
 
         # equip batteria
         messaggio("Batterie", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 60)
-        if dati[71] > 0:
-            messaggio("Niente", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-        if dati[72] > 0:
-            messaggio("Batteria scarica", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-        if dati[73] > 0:
-            messaggio("Batteria piccola", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-        if dati[74] > 0:
-            messaggio("Batteria media", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-        if dati[75] > 0:
-            messaggio("Batteria grande", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-        if dati[76] > 0:
-            messaggio("Batteria discreta", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-        if dati[77] > 0:
-            messaggio("Batteria affidabile", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-        if dati[78] > 0:
-            messaggio("Batteria extra", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-        if dati[79] > 0:
-            messaggio("Batteria efficiente", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-        if dati[80] > 0:
-            messaggio("Batteria illimitata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+        i = 0
+        while i < 5:
+            schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.4, (gsy // 18 * 6 + (gpy * 2 * i))))
+            i += 1
 
         # programmazione Colco
-        messaggio("Ordine", grigiochi, gsx // 32 * 8.5, gsy // 18 * 4.5, 60)
+        messaggio("Ordine", grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 60)
         i = 1
         while i <= 10:
             if i == 10:
-                messaggio(str(i), grigiochi, gsx // 32 * 9.3, gsy // 18 * (i + 4.9), 50)
+                messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
             else:
-                messaggio(str(i), grigiochi, gsx // 32 * 9.5, gsy // 18 * (i + 4.9), 50)
+                messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
             i += 1
-        messaggio("Condizione...", grigiochi, gsx // 32 * 12, gsy // 18 * 4.5, 60)
-        c = 6
+        messaggio("Condizione...", grigiochi, gsx // 32 * 11, gsy // 18 * 4.5, 60)
+        c = 6.1
         for i in range(101, 111):
             if dati[i] == -1:
-                messaggio("---", grigioscu, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("---", grigioscu, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 0:
-                messaggio("---", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 1:
-                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 2:
-                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 3:
-                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 4:
-                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 5:
-                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 6:
-                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 7:
-                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 8:
-                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 9:
-                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 10:
-                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 11:
-                messaggio("Nemico a caso", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 12:
-                messaggio("Nemico vicino", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 13:
-                messaggio("Nemico lontano", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 14:
-                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 15:
-                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 16:
-                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 17:
-                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 18:
-                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 19:
-                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 20:
-                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
-            c = c + 1
-        messaggio("...Tecnica", grigiochi, gsx // 32 * 18, gsy // 18 * 4.5, 60)
-        c = 6
+                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+            c += 1
+        messaggio("...Tecnica", grigiochi, gsx // 32 * 17.5, gsy // 18 * 4.5, 60)
+        c = 6.1
         for i in range(111, 121):
             if dati[i] == -1:
-                messaggio("---", grigioscu, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("---", grigioscu, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 0:
-                messaggio("---", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 1:
-                messaggio("Scossa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 2:
-                messaggio("Cura", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 3:
-                messaggio("Antidoto", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 4:
-                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 5:
-                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 6:
-                messaggio("Raffreddamento", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 7:
-                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 8:
-                messaggio("Cura +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 9:
-                messaggio("Scossa +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 10:
-                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 11:
-                messaggio("Velocizza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 12:
-                messaggio("Carica attacco", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 13:
-                messaggio("Carica difesa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 14:
-                messaggio("Efficienza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 15:
-                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 16:
-                messaggio("Cura ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 17:
-                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 18:
-                messaggio("Scossa ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 19:
-                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 20:
-                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             c = c + 1
 
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
 
         esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
 
-        schermo.blit(robosta, (gsx // 32 * 23.5, gsy // 18 * 3.5))
-        schermo.blit(armrob, (gsx // 32 * 23.5, gsy // 18 * 3.5))
-        messaggio("Pe totali: %i" % entot, grigiochi, gsx // 32 * 24, gsy // 18 * 13, 45)
-        messaggio("Difesa: %i" % difro, grigiochi, gsx // 32 * 24, gsy // 18 * 14, 45)
+        schermo.blit(robosta, (gsx // 32 * 25, gsy // 18 * 10))
+        schermo.blit(vetImgBatterie[dati[9]], (gsx // 32 * 25, gsy // 18 * 10))
+        messaggio("Statistiche:", grigiochi, gsx // 32 * 24, gsy // 18 * 7.7, 50)
+        messaggio("Pe totali: %i" % entot, grigiochi, gsx // 32 * 24, gsy // 18 * 8.5, 35)
+        messaggio("Difesa: %i" % difro, grigiochi, gsx // 32 * 24, gsy // 18 * 9, 35)
 
-        # mostrare differenze statistiche delle batterie
+        # mostrare descrizione batterie / priorità / condizioni / azioni
         if voceMarcata == 1:
             if dati[71] != 0:
-                diff = 0 - (dati[9] * 100)
+                messaggio("Batteria piccola:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio("Batteria che contiene poca alimentazione", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                diff = 0 - (dati[9] * dati[9] * 60)
                 if dati[9] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                else:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 0 - (dati[9] * 10)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                diff = 0 - (dati[9] * dati[9] * 30)
                 if dati[9] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                else:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
         if voceMarcata == 2:
             if dati[72] != 0:
-                diff = 100 - (dati[9] * 100)
+                messaggio("Batteria discreta:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio("Batteria con una buona capienza e", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio("ottimizzazione del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                diff = 60 - (dati[9] * dati[9] * 60)
                 if dati[9] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 1:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 10 - (dati[9] * 10)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                diff = 30 - (dati[9] * dati[9] * 30)
                 if dati[9] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[9] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 1:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
         if voceMarcata == 3:
             if dati[73] != 0:
-                diff = 200 - (dati[9] * 100)
+                messaggio("Batteria capiente:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio(u"Batteria con una grande capacità e un", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio("ottimo sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                diff = 240 - (dati[9] * dati[9] * 60)
                 if dati[9] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 2:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 20 - (dati[9] * 10)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                diff = 120 - (dati[9] * dati[9] * 30)
                 if dati[9] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[9] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 2:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
         if voceMarcata == 4:
             if dati[74] != 0:
-                diff = 300 - (dati[9] * 100)
+                messaggio("Batteria enorme:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio("Grande batteria che permette a Colco di", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio(u"utilizzare le tecniche più dispendiose", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                diff = 540 - (dati[9] * dati[9] * 60)
                 if dati[9] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 3:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 30 - (dati[9] * 10)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                diff = 270 - (dati[9] * dati[9] * 30)
                 if dati[9] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[9] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 3:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
         if voceMarcata == 5:
             if dati[75] != 0:
-                diff = 400 - (dati[9] * 100)
+                messaggio("Batteria illimitata:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio("Batteria incredibilmente capiente.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio("Permette un eccellente ottimizzazione", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio("del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                diff = 960 - (dati[9] * dati[9] * 60)
                 if dati[9] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 4:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 40 - (dati[9] * 10)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                diff = 480 - (dati[9] * dati[9] * 30)
                 if dati[9] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[9] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 4:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if voceMarcata == 6:
-            if dati[76] != 0:
-                diff = 500 - (dati[9] * 100)
-                if dati[9] > 5:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] < 5:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 5:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 50 - (dati[9] * 10)
-                if dati[9] > 5:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] < 5:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 5:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if voceMarcata == 7:
-            if dati[77] != 0:
-                diff = 600 - (dati[9] * 100)
-                if dati[9] > 6:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] < 6:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 6:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 60 - (dati[9] * 10)
-                if dati[9] > 6:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] < 6:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 6:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if voceMarcata == 8:
-            if dati[78] != 0:
-                diff = 700 - (dati[9] * 100)
-                if dati[9] > 7:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] < 7:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 7:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 70 - (dati[9] * 10)
-                if dati[9] > 7:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] < 7:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 7:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if voceMarcata == 9:
-            if dati[79] != 0:
-                diff = 800 - (dati[9] * 100)
-                if dati[9] > 8:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] < 8:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 8:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 80 - (dati[9] * 10)
-                if dati[9] > 8:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] < 8:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 8:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-        if voceMarcata == 10:
-            if dati[80] != 0:
-                diff = 900 - (dati[9] * 100)
-                if dati[9] > 9:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] < 9:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                elif dati[9] == 9:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                diff = 90 - (dati[9] * 10)
-                if dati[9] > 9:
-                    messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] < 9:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                elif dati[9] == 9:
-                    messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+
+        if 6 <= voceMarcata <= 15:
+            messaggio(u"Ordine:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+            messaggio(u"Determina il livello di priorità dell'evento.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+            messaggio(u"Colco eseguirà la prima tecnica della lista", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+            messaggio(u"la cui condizione si è verificata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+
+        if 16 <= voceMarcata <= 25:
+            messaggio("Condizione:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+            messaggio("Indica la situazione che si deve verificare", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+            messaggio(u"affinchè Colco esegua la tecnica associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+            messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+
+        if 26 <= voceMarcata <= 35:
+            messaggio("Tecnica:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+            messaggio(u"La tecnica che Colco eseguirà quando si", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+            messaggio("verifica la condizione associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+            messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
 
         # puntatore vecchio batterie/riordinamento gambit
         if dati[9] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
         if dati[9] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 7))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
         if dati[9] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
         if dati[9] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 9))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
         if dati[9] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10))
-        if dati[9] == 5:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 11))
-        if dati[9] == 6:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12))
-        if dati[9] == 7:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 13))
-        if dati[9] == 8:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14))
-        if dati[9] == 9:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 15))
+            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
         if riordinamento:
             schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
 
@@ -3448,6 +3454,9 @@ def equiprobo(dati):
         pygame.display.update()
 
     while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(canzone)
+
         tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -3466,11 +3475,11 @@ def equiprobo(dati):
                 if event.key == pygame.K_s and not tastoTrovato:
                     tastoTrovato = True
                     if riordinamento:
-                        if voceMarcata != 20:
+                        if voceMarcata != 15:
                             canaleSoundPuntatore.play(spostapun)
                             i = 0
                             while i < 10:
-                                if voceMarcata == i + 11:
+                                if voceMarcata == i + 6:
                                     condizioneSelezionata = dati[101 + i]
                                     dati[101 + i] = dati[101 + i + 1]
                                     dati[101 + i + 1] = condizioneSelezionata
@@ -3484,22 +3493,32 @@ def equiprobo(dati):
                         else:
                             canaleSoundPuntatore.play(selimp)
                     else:
-                        if voceMarcata == 10 or voceMarcata == 20 or voceMarcata == 30 or voceMarcata == 40:
-                            voceMarcata -= 9
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 6
+                        if 1 <= voceMarcata <= 5:
+                            if voceMarcata == 5:
+                                voceMarcata -= 4
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = gsy // 18 * 6.8
+                            else:
+                                voceMarcata += 1
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = yp + gsy // 18 * 2
                         else:
-                            voceMarcata += 1
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = yp + gsy // 18 * 1
+                            if voceMarcata == 15 or voceMarcata == 25 or voceMarcata == 35:
+                                voceMarcata -= 9
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = gsy // 18 * 6
+                            else:
+                                voceMarcata += 1
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = yp + gsy // 18 * 1
                 if event.key == pygame.K_w and not tastoTrovato:
                     tastoTrovato = True
                     if riordinamento:
-                        if voceMarcata != 11:
+                        if voceMarcata != 6:
                             canaleSoundPuntatore.play(spostapun)
                             i = 0
                             while i < 10:
-                                if voceMarcata == i + 11:
+                                if voceMarcata == i + 6:
                                     condizioneSelezionata = dati[101 + i]
                                     dati[101 + i] = dati[101 + i - 1]
                                     dati[101 + i - 1] = condizioneSelezionata
@@ -3513,53 +3532,148 @@ def equiprobo(dati):
                         else:
                             canaleSoundPuntatore.play(selimp)
                     else:
-                        if voceMarcata == 1 or voceMarcata == 11 or voceMarcata == 21 or voceMarcata == 31:
-                            voceMarcata += 9
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 15
+                        if 1 <= voceMarcata <= 5:
+                            if voceMarcata == 1:
+                                voceMarcata += 4
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = gsy // 18 * 14.8
+                            else:
+                                voceMarcata -= 1
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = yp - gsy // 18 * 2
                         else:
-                            voceMarcata -= 1
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = yp - gsy // 18 * 1
+                            if voceMarcata == 6 or voceMarcata == 16 or voceMarcata == 26:
+                                voceMarcata += 9
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = gsy // 18 * 15
+                            else:
+                                voceMarcata -= 1
+                                canaleSoundPuntatore.play(spostapun)
+                                yp = yp - gsy // 18 * 1
                 if event.key == pygame.K_d and not riordinamento and not tastoTrovato:
                     tastoTrovato = True
-                    if 1 <= voceMarcata <= 10:
+                    if 1 <= voceMarcata <= 5:
+                        canaleSoundPuntatore.play(spostapun)
+                        if voceMarcata == 1:
+                            voceMarcata += 6
+                            yp = gsy // 18 * 7
+                        elif voceMarcata == 2:
+                            voceMarcata += 7
+                            yp = gsy // 18 * 9
+                        elif voceMarcata == 3:
+                            voceMarcata += 8
+                            yp = gsy // 18 * 11
+                        elif voceMarcata == 4:
+                            voceMarcata += 9
+                            yp = gsy // 18 * 13
+                        elif voceMarcata == 5:
+                            voceMarcata += 10
+                            yp = gsy // 18 * 15
+                        xp = gsx // 32 * 7
+                    elif 6 <= voceMarcata <= 15:
                         voceMarcata += 10
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 8
-                    elif 11 <= voceMarcata <= 20:
+                        xp = gsx // 32 * 10
+                    elif 16 <= voceMarcata <= 25:
                         voceMarcata += 10
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 11
-                    elif 21 <= voceMarcata <= 30:
-                        voceMarcata += 10
+                        xp = gsx // 32 * 16.5
+                    elif 26 <= voceMarcata <= 35:
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 17
-                    elif 31 <= voceMarcata <= 40:
-                        voceMarcata -= 30
-                        canaleSoundPuntatore.play(spostapun)
+                        if 26 <= voceMarcata <= 27:
+                            if voceMarcata == 26:
+                                voceMarcata -= 25
+                            elif voceMarcata == 27:
+                                voceMarcata -= 26
+                            yp = gsy // 18 * 6.8
+                        elif 28 <= voceMarcata <= 29:
+                            if voceMarcata == 28:
+                                voceMarcata -= 26
+                            elif voceMarcata == 29:
+                                voceMarcata -= 27
+                            yp = gsy // 18 * 8.8
+                        elif 30 <= voceMarcata <= 31:
+                            if voceMarcata == 30:
+                                voceMarcata -= 27
+                            elif voceMarcata == 31:
+                                voceMarcata -= 28
+                            yp = gsy // 18 * 10.8
+                        elif 32 <= voceMarcata <= 33:
+                            if voceMarcata == 32:
+                                voceMarcata -= 28
+                            elif voceMarcata == 33:
+                                voceMarcata -= 29
+                            yp = gsy // 18 * 12.8
+                        elif 34 <= voceMarcata <= 35:
+                            if voceMarcata == 34:
+                                voceMarcata -= 29
+                            elif voceMarcata == 35:
+                                voceMarcata -= 30
+                            yp = gsy // 18 * 14.8
                         xp = gsx // 32 * 1
                 if event.key == pygame.K_a and not riordinamento and not tastoTrovato:
                     tastoTrovato = True
-                    if 1 <= voceMarcata <= 10:
-                        voceMarcata += 30
+                    if 1 <= voceMarcata <= 5:
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 17
-                    elif 11 <= voceMarcata <= 20:
-                        voceMarcata -= 10
+                        if voceMarcata == 1:
+                            voceMarcata += 26
+                            yp = gsy // 18 * 7
+                        elif voceMarcata == 2:
+                            voceMarcata += 27
+                            yp = gsy // 18 * 9
+                        elif voceMarcata == 3:
+                            voceMarcata += 28
+                            yp = gsy // 18 * 11
+                        elif voceMarcata == 4:
+                            voceMarcata += 29
+                            yp = gsy // 18 * 13
+                        elif voceMarcata == 5:
+                            voceMarcata += 30
+                            yp = gsy // 18 * 15
+                        xp = gsx // 32 * 16.5
+                    elif 6 <= voceMarcata <= 15:
                         canaleSoundPuntatore.play(spostapun)
+                        if 6 <= voceMarcata <= 7:
+                            if voceMarcata == 6:
+                                voceMarcata -= 5
+                            elif voceMarcata == 7:
+                                voceMarcata -= 6
+                            yp = gsy // 18 * 6.8
+                        elif 8 <= voceMarcata <= 9:
+                            if voceMarcata == 8:
+                                voceMarcata -= 6
+                            elif voceMarcata == 9:
+                                voceMarcata -= 7
+                            yp = gsy // 18 * 8.8
+                        elif 10 <= voceMarcata <= 11:
+                            if voceMarcata == 10:
+                                voceMarcata -= 7
+                            elif voceMarcata == 11:
+                                voceMarcata -= 8
+                            yp = gsy // 18 * 10.8
+                        elif 12 <= voceMarcata <= 13:
+                            if voceMarcata == 12:
+                                voceMarcata -= 8
+                            elif voceMarcata == 13:
+                                voceMarcata -= 9
+                            yp = gsy // 18 * 12.8
+                        elif 14 <= voceMarcata <= 15:
+                            if voceMarcata == 14:
+                                voceMarcata -= 9
+                            elif voceMarcata == 15:
+                                voceMarcata -= 10
+                            yp = gsy // 18 * 14.8
                         xp = gsx // 32 * 1
-                    elif 21 <= voceMarcata <= 30:
+                    elif 16 <= voceMarcata <= 25:
                         voceMarcata -= 10
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 8
-                    elif 31 <= voceMarcata <= 40:
+                        xp = gsx // 32 * 7
+                    elif 26 <= voceMarcata <= 35:
                         voceMarcata -= 10
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 11
+                        xp = gsx // 32 * 10
                 if event.key == pygame.K_SPACE:
                     tastoTrovato = True
-                    carim = True
                     # riordina
                     if riordinamento:
                         canaleSoundPuntatore.play(selezione)
@@ -3607,49 +3721,9 @@ def equiprobo(dati):
                                     dati[10] = 300 + (dati[9] * 100)
                             else:
                                 canaleSoundPuntatore.play(selimp)
-                        if voceMarcata == 6:
-                            if dati[76] != 0:
-                                canaleSoundPuntatore.play(selezione)
-                                dati[9] = 5
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
-                            else:
-                                canaleSoundPuntatore.play(selimp)
-                        if voceMarcata == 7:
-                            if dati[77] != 0:
-                                canaleSoundPuntatore.play(selezione)
-                                dati[9] = 6
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
-                            else:
-                                canaleSoundPuntatore.play(selimp)
-                        if voceMarcata == 8:
-                            if dati[78] != 0:
-                                canaleSoundPuntatore.play(selezione)
-                                dati[9] = 7
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
-                            else:
-                                canaleSoundPuntatore.play(selimp)
-                        if voceMarcata == 9:
-                            if dati[79] != 0:
-                                canaleSoundPuntatore.play(selezione)
-                                dati[9] = 8
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
-                            else:
-                                canaleSoundPuntatore.play(selimp)
-                        if voceMarcata == 10:
-                            if dati[80] != 0:
-                                canaleSoundPuntatore.play(selezione)
-                                dati[9] = 9
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
-                            else:
-                                canaleSoundPuntatore.play(selimp)
 
                         # riordina
-                        if 11 <= voceMarcata <= 20:
+                        if 6 <= voceMarcata <= 15:
                             canaleSoundPuntatore.play(selezione)
                             riordinamento = True
                             datiPrimaDiRiordinamento = list(dati)
@@ -3659,12 +3733,12 @@ def equiprobo(dati):
 
                         # condizioni
                         i = 101
-                        c = 21
+                        c = 16
                         while i <= 110:
                             if voceMarcata == c:
                                 if dati[i] != -1:
                                     canaleSoundPuntatore.play(selezione)
-                                    dati[i] = sceglicondiz(dati, dati[i])
+                                    dati[i] = sceglicondiz(dati, dati[i], canzone)
                                 else:
                                     canaleSoundPuntatore.play(selimp)
                             i += 1
@@ -3672,12 +3746,12 @@ def equiprobo(dati):
 
                         # tecniche
                         i = 111
-                        c = 31
+                        c = 26
                         while i <= 120:
                             if voceMarcata == c:
                                 if dati[i] != -1:
                                     canaleSoundPuntatore.play(selezione)
-                                    dati[i] = sceglitecn(dati, dati[i])
+                                    dati[i] = sceglitecn(dati, dati[i], canzone)
                                 else:
                                     canaleSoundPuntatore.play(selimp)
                             i += 1
@@ -3686,8 +3760,8 @@ def equiprobo(dati):
         if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 6, gsy // 18 * 12))
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 8, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12))
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 12.5))
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 7, gsy // 18 * 4, gsx // 32 * 16, gsy // 18 * 12.5))
 
             if annullaRiordinamento:
                 dati = list(datiPrimaDiRiordinamento)
@@ -3697,351 +3771,240 @@ def equiprobo(dati):
                 voceMarcata = voceGambitMarcata
 
             if riordinamento:
-                pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 3), gsx // 32 * 15, gsy // 18 * 1))
+                pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
 
-            if carim:
-                armrobs = pygame.image.load("Immagini/Armrobs/Armrob%is.png" % dati[9])
-                armrob = pygame.transform.scale(armrobs, (gpx * 8, gpy * 8))
-                carim = False
             messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
 
             # equip batteria
             messaggio("Batterie", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 60)
-            if dati[71] > 0:
-                messaggio("Niente", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
-            if dati[72] > 0:
-                messaggio("Batteria scarica", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
-            if dati[73] > 0:
-                messaggio("Batteria piccola", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-            if dati[74] > 0:
-                messaggio("Batteria media", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            if dati[75] > 0:
-                messaggio("Batteria grande", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            if dati[76] > 0:
-                messaggio("Batteria discreta", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            if dati[77] > 0:
-                messaggio("Batteria affidabile", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            if dati[78] > 0:
-                messaggio("Batteria extra", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-            if dati[79] > 0:
-                messaggio("Batteria efficiente", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
-            if dati[80] > 0:
-                messaggio("Batteria illimitata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+            i = 0
+            while i < 5:
+                schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.4, (gsy // 18 * 6 + (gpy * 2 * i))))
+                i += 1
 
             # programmazione Colco
-            messaggio("Ordine", grigiochi, gsx // 32 * 8.5, gsy // 18 * 4.5, 60)
+            messaggio("Ordine", grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 60)
             i = 1
             while i <= 10:
                 if i == 10:
-                    messaggio(str(i), grigiochi, gsx // 32 * 9.3, gsy // 18 * (i + 4.9), 50)
+                    messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
                 else:
-                    messaggio(str(i), grigiochi, gsx // 32 * 9.5, gsy // 18 * (i + 4.9), 50)
+                    messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
                 i += 1
-            messaggio("Condizione...", grigiochi, gsx // 32 * 12, gsy // 18 * 4.5, 60)
-            c = 6
+            messaggio("Condizione...", grigiochi, gsx // 32 * 11, gsy // 18 * 4.5, 60)
+            c = 6.1
             for i in range(101, 111):
                 if dati[i] == -1:
-                    messaggio("---", grigioscu, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("---", grigioscu, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    messaggio("---", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    messaggio("Rallo con veleno", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    messaggio("Sempre a Colco", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    messaggio("Nemico vicino", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    messaggio("Nemico lontano", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 12, gsy // 18 * c, 40)
-                c = c + 1
-            messaggio("...Tecnica", grigiochi, gsx // 32 * 18, gsy // 18 * 4.5, 60)
-            c = 6
+                    messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                c += 1
+            messaggio("...Tecnica", grigiochi, gsx // 32 * 17.5, gsy // 18 * 4.5, 60)
+            c = 6.1
             for i in range(111, 121):
                 if dati[i] == -1:
-                    messaggio("---", grigioscu, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("---", grigioscu, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    messaggio("---", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    messaggio("Scossa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    messaggio("Cura", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    messaggio("Antidoto", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    messaggio("Freccia elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    messaggio("Raffreddamento", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    messaggio("Auto-ricarica", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    messaggio("Cura +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    messaggio("Scossa +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    messaggio("Velocizza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    messaggio("Carica attacco", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    messaggio("Carica difesa", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    messaggio("Efficienza", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    messaggio("Cura ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    messaggio("Scossa ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 18, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 c = c + 1
 
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
 
             esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
 
-            schermo.blit(robosta, (gsx // 32 * 23.5, gsy // 18 * 3.5))
-            schermo.blit(armrob, (gsx // 32 * 23.5, gsy // 18 * 3.5))
-            messaggio("Pe totali: %i" % entot, grigiochi, gsx // 32 * 24, gsy // 18 * 13, 45)
-            messaggio("Difesa: %i" % difro, grigiochi, gsx // 32 * 24, gsy // 18 * 14, 45)
+            schermo.blit(robosta, (gsx // 32 * 25, gsy // 18 * 10))
+            schermo.blit(vetImgBatterie[dati[9]], (gsx // 32 * 25, gsy // 18 * 10))
+            messaggio("Statistiche:", grigiochi, gsx // 32 * 24, gsy // 18 * 7.7, 50)
+            messaggio("Pe totali: %i" % entot, grigiochi, gsx // 32 * 24, gsy // 18 * 8.5, 35)
+            messaggio("Difesa: %i" % difro, grigiochi, gsx // 32 * 24, gsy // 18 * 9, 35)
 
-            # mostrare differenze statistiche delle batterie
+            # mostrare descrizione batterie / priorità / condizioni / azioni
             if voceMarcata == 1:
                 if dati[71] != 0:
-                    diff = 0 - (dati[9] * 100)
+                    messaggio("Batteria piccola:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                    messaggio("Batteria che contiene poca alimentazione", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    diff = 0 - (dati[9] * dati[9] * 60)
                     if dati[9] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    else:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 0 - (dati[9] * 10)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    diff = 0 - (dati[9] * dati[9] * 30)
                     if dati[9] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    else:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 2:
                 if dati[72] != 0:
-                    diff = 100 - (dati[9] * 100)
+                    messaggio("Batteria discreta:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                    messaggio("Batteria con una buona capienza e", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                    messaggio("ottimizzazione del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    diff = 60 - (dati[9] * dati[9] * 60)
                     if dati[9] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 1:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 10 - (dati[9] * 10)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    diff = 30 - (dati[9] * dati[9] * 30)
                     if dati[9] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[9] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 1:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 3:
                 if dati[73] != 0:
-                    diff = 200 - (dati[9] * 100)
+                    messaggio("Batteria capiente:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                    messaggio(u"Batteria con una grande capacità e un", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                    messaggio("ottimo sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    diff = 240 - (dati[9] * dati[9] * 60)
                     if dati[9] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 2:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 20 - (dati[9] * 10)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    diff = 120 - (dati[9] * dati[9] * 30)
                     if dati[9] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[9] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 2:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 4:
                 if dati[74] != 0:
-                    diff = 300 - (dati[9] * 100)
+                    messaggio("Batteria enorme:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                    messaggio("Grande batteria che permette a Colco di", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                    messaggio(u"utilizzare le tecniche più dispendiose", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    diff = 540 - (dati[9] * dati[9] * 60)
                     if dati[9] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 3:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 30 - (dati[9] * 10)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    diff = 270 - (dati[9] * dati[9] * 30)
                     if dati[9] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[9] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 3:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 5:
                 if dati[75] != 0:
-                    diff = 400 - (dati[9] * 100)
+                    messaggio("Batteria illimitata:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                    messaggio("Batteria incredibilmente capiente.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                    messaggio("Permette un eccellente ottimizzazione", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                    messaggio("del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    diff = 960 - (dati[9] * dati[9] * 60)
                     if dati[9] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 4:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 40 - (dati[9] * 10)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    diff = 480 - (dati[9] * dati[9] * 30)
                     if dati[9] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[9] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 4:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if voceMarcata == 6:
-                if dati[76] != 0:
-                    diff = 500 - (dati[9] * 100)
-                    if dati[9] > 5:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] < 5:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 5:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 50 - (dati[9] * 10)
-                    if dati[9] > 5:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] < 5:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 5:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if voceMarcata == 7:
-                if dati[77] != 0:
-                    diff = 600 - (dati[9] * 100)
-                    if dati[9] > 6:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] < 6:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 6:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 60 - (dati[9] * 10)
-                    if dati[9] > 6:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] < 6:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 6:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if voceMarcata == 8:
-                if dati[78] != 0:
-                    diff = 700 - (dati[9] * 100)
-                    if dati[9] > 7:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] < 7:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 7:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 70 - (dati[9] * 10)
-                    if dati[9] > 7:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] < 7:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 7:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if voceMarcata == 9:
-                if dati[79] != 0:
-                    diff = 800 - (dati[9] * 100)
-                    if dati[9] > 8:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] < 8:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 8:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 80 - (dati[9] * 10)
-                    if dati[9] > 8:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] < 8:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 8:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
-            if voceMarcata == 10:
-                if dati[80] != 0:
-                    diff = 900 - (dati[9] * 100)
-                    if dati[9] > 9:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] < 9:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    elif dati[9] == 9:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 13, 50)
-                    diff = 90 - (dati[9] * 10)
-                    if dati[9] > 9:
-                        messaggio(str(diff), rosso, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] < 9:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 30, gsy // 18 * 14, 50)
-                    elif dati[9] == 9:
-                        messaggio("+" + str(diff), grigiochi, gsx // 32 * 30, gsy // 18 * 14, 50)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+
+            if 6 <= voceMarcata <= 15:
+                messaggio(u"Ordine:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio(u"Determina il livello di priorità dell'evento.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio(u"Colco eseguirà la prima tecnica della lista", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio(u"la cui condizione si è verificata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+
+            if 16 <= voceMarcata <= 25:
+                messaggio("Condizione:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio("Indica la situazione che si deve verificare", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio(u"affinchè Colco esegua la tecnica associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+
+            if 26 <= voceMarcata <= 35:
+                messaggio("Tecnica:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
+                messaggio(u"La tecnica che Colco eseguirà quando si", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
+                messaggio("verifica la condizione associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
+                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
 
             # puntatore vecchio batterie/riordinamento gambit
             if dati[9] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
             if dati[9] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 7))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
             if dati[9] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
             if dati[9] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 9))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
             if dati[9] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10))
-            if dati[9] == 5:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 11))
-            if dati[9] == 6:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12))
-            if dati[9] == 7:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 13))
-            if dati[9] == 8:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14))
-            if dati[9] == 9:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 15))
+                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
             if riordinamento:
                 schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
 
@@ -4050,13 +4013,12 @@ def equiprobo(dati):
     return dati
 
 
-def oggetti(dati):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 12 * 5, gpy // 12 * 5))
+def oggetti(dati, canzone):
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
     sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
     xp = gsx // 32 * 1
-    yp = gsy // 18 * 6
-    carim = True
+    yp = gsy // 18 * 5
     usauno = False
     usa = 0
     risposta = False
@@ -4064,156 +4026,197 @@ def oggetti(dati):
     oggetton = 1
     voceMarcata = 0
 
+    imgOggetti = []
+    i = 1
+    while i <= 10:
+        if dati[i + 30] >= 0:
+            oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % i)
+            oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
+        else:
+            oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
+            oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
+        imgOggetti.append(oggetto)
+        i += 1
+
     esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
 
     # primo frame
     if True:
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 9, gsy // 18 * 11))
-
-        if carim:
-            if dati[oggetton + 30] >= 0:
-                oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % oggetton)
-                oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
-            else:
-                oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
-                oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
-            carim = False
+        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
 
         # pozione, carica batt, bomba, antidoto, bomba veleno, esca, super poz, carica migliorato, bomba pot, bomba atomica
         messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
         if dati[31] >= 0:
-            messaggio("Pozione x %i" % dati[31], grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+            messaggio("Pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
+            messaggio("x %i" % dati[31], grigiochi, gsx // 32 * 9.3, gsy // 18 * 5, 45)
             if oggetton == 1:
-                messaggio("Pozione: recupera 100 pv", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+                messaggio("Pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
         if dati[32] >= 0:
-            messaggio("Caricabatterie x %i" % dati[32], grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+            messaggio("Caricabatterie", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
+            messaggio("x %i" % dati[32], grigiochi, gsx // 32 * 9.3, gsy // 18 * 6, 45)
             if oggetton == 2:
-                messaggio("Caricabatterie: recupera 250 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+                messaggio("Caricabatterie:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
         if dati[33] >= 0:
-            messaggio("Bomba x %i" % dati[33], grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+            messaggio("Medicina", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
+            messaggio("x %i" % dati[33], grigiochi, gsx // 32 * 9.3, gsy // 18 * 7, 45)
             if oggetton == 3:
-                messaggio("Bomba: infligge un po' di danni ai nemici su", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                messaggio(u"cui è lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-        if dati[34] >= 0:
-            messaggio("Medicina x %i" % dati[34], grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            if oggetton == 4:
-                messaggio("Medicina: cura avvelenamento", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+                messaggio("Medicina:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-        if dati[35] >= 0:
-            messaggio("Bomba velenosa x %i" % dati[35], grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            if oggetton == 5:
-                messaggio("Bomba velenosa: infligge avvelenamento a", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                messaggio("un nemico", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-        if dati[36] >= 0:
-            messaggio("Esca x %i" % dati[36], grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            if oggetton == 6:
-                messaggio(u"Esca: distrae i nemici finché non viene distrutta.", grigiochi, gsx // 32 * 20,
-                          gsy // 18 * 14, 40)
-                messaggio(u"È possibile riprenderla passandoci sopra.", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
-        else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-        if dati[37] >= 0:
-            messaggio("Super pozione x %i" % dati[37], grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            if oggetton == 7:
-                messaggio("Super pozione: recupera 300 pv", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+        if dati[34] >= 0:
+            messaggio("Super pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
+            messaggio("x %i" % dati[34], grigiochi, gsx // 32 * 9.3, gsy // 18 * 8, 45)
+            if oggetton == 4:
+                messaggio("Super pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-        if dati[38] >= 0:
-            messaggio("Caricabatterie migliorato x %i" % dati[38], grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-            if oggetton == 8:
-                messaggio("Caricabatterie migliorato: recupera 600 pe", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                messaggio("di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
+        if dati[35] >= 0:
+            messaggio("Caricabatterie migliorato", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
+            messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
+            if oggetton == 5:
+                messaggio("Caricabatterie migliorato:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+        if dati[36] >= 0:
+            messaggio("Bomba", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
+            messaggio("x %i" % dati[36], grigiochi, gsx // 32 * 9.3, gsy // 18 * 11, 45)
+            if oggetton == 6:
+                messaggio("Bomba:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", grigiochi, gsx // 32 * 20,
+                          gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+        else:
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+        if dati[37] >= 0:
+            messaggio("Bomba velenosa", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
+            messaggio("x %i" % dati[37], grigiochi, gsx // 32 * 9.3, gsy // 18 * 12, 45)
+            if oggetton == 7:
+                messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Infligge avvelenamento al nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
+                          gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+        else:
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+        if dati[38] >= 0:
+            messaggio("Esca", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
+            messaggio("x %i" % dati[38], grigiochi, gsx // 32 * 9.3, gsy // 18 * 13, 45)
+            if oggetton == 8:
+                messaggio("Esca:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", grigiochi, gsx // 32 * 20,
+                          gsy // 18 * 14.5, 35)
+                messaggio("riprenderla passandoci sopra", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+        else:
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
         if dati[39] >= 0:
-            messaggio("Bomba appiccicosa x %i" % dati[39], grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+            messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
+            messaggio("x %i" % dati[39], grigiochi, gsx // 32 * 9.3, gsy // 18 * 14, 45)
             if oggetton == 9:
-                messaggio(u"Bomba appiccicosa: dimezza la velocità di", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                messaggio("un nemico", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
+                messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
+                          gsy // 18 * 14.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
         if dati[40] >= 0:
-            messaggio("Bomba potenziata x %i" % dati[40], grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+            messaggio("Bomba potenziata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
+            messaggio("x %i" % dati[40], grigiochi, gsx // 32 * 9.3, gsy // 18 * 15, 45)
             if oggetton == 10:
-                messaggio("Bomba potenziata: infligge molti danni ai", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                messaggio(u"nemici su cui è lanciata in un vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
+                messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", grigiochi, gsx // 32 * 20,
+                          gsy // 18 * 14.5, 35)
+                messaggio("vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
 
         # menu conferma
         if usa != 0:
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 10, gsy // 18 * 12, gsx // 32 * 6.5, gsy // 18 * 4))
-            puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 3 * 2, gpy // 3 * 2))
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 11, gsy // 18 * 12.5, gsx // 32 * 8, gsy // 18 * 4))
             # posizionare il cursore su menu usa
             if usauno:
                 xpv = xp
                 ypv = yp
-                xp = gsx // 32 * 13
-                yp = gsy // 18 * 14.5
+                xp = gsx // 32 * 15
+                yp = gsy // 18 * 15.1
                 voceMarcata = 2
                 usauno = False
             schermo.blit(puntatorevecchio, (xpv, ypv))
-            messaggio("Usare?", grigiochi, gsx // 32 * 11, gsy // 18 * 12.5, 100)
-            messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 14.5, 60)
-            messaggio("No", grigiochi, gsx // 32 * 14, gsy // 18 * 14.5, 60)
-        else:
-            puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
+            messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
+            messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
+            messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
 
         # vita-status personaggio
         if dati[5] < 0:
             dati[5] = 0
-        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 3.5, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 4.5, 50)
+        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 4, 50)
+        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 5, 50)
         persmen = pygame.transform.scale(persGrafMenu, (gpx * 3, gpy * 3))
-        schermo.blit(persmen, ((gsx // 32 * 10) + (gpx // 2), gsy // 18 * 3.5))
-        schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 5.5) + (gpy // 8)))
+        schermo.blit(persmen, (gsx // 32 * 11, gsy // 18 * 4))
+        schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 6) + (gpy // 8)))
         if dati[121]:
             avvelenato = pygame.transform.scale(avvelenatoo, (gpx, gpy))
-            schermo.blit(avvelenato, (gsx // 32 * 14, gsy // 18 * 5.5))
+            schermo.blit(avvelenato, (gsx // 32 * 14, gsy // 18 * 6))
         if dati[123] > 0:
             attaccopiu = pygame.transform.scale(attaccopiuo, (gpx, gpy))
-            schermo.blit(attaccopiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 5.5))
+            schermo.blit(attaccopiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 6))
         if dati[124] > 0:
             difesapiu = pygame.transform.scale(difesapiuo, (gpx, gpy))
-            schermo.blit(difesapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 5.5))
+            schermo.blit(difesapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 6))
         # vita-status robo
         if dati[10] < 0:
             dati[10] = 0
-        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 14, gsy // 18 * 8.5, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 9.5, 50)
+        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 14, gsy // 18 * 9, 50)
+        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 10, 50)
         robomen = pygame.transform.scale(robograf, (gpx * 3, gpy * 3))
-        schermo.blit(robomen, ((gsx // 32 * 10) + (gpx // 2), gsy // 18 * 7.5))
-        schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 10.5) + (gpy // 8)))
+        schermo.blit(robomen, (gsx // 32 * 11, gsy // 18 * 8))
+        schermo.blit(sfondostastart, (gsx // 32 * 14, gsy // 18 * 11))
         if dati[122] > 0:
             surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx, gpy))
-            schermo.blit(surriscaldato, (gsx // 32 * 14, gsy // 18 * 10.5))
+            schermo.blit(surriscaldato, (gsx // 32 * 14, gsy // 18 * 11))
         if dati[125] > 0:
             velocitapiu = pygame.transform.scale(velocitapiuo, (gpx, gpy))
-            schermo.blit(velocitapiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 10.5))
+            schermo.blit(velocitapiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 11))
         if dati[126] > 0:
             efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
-            schermo.blit(efficienzapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 10.5))
+            schermo.blit(efficienzapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 11))
 
         if attacco != 0:
             risposta = True
 
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-        schermo.blit(oggetto, (gsx // 32 * 20, gsy // 18 * 3))
+        schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 20, gsy // 18 * 3))
         schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(canzone)
+
         tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -4228,15 +4231,15 @@ def oggetti(dati):
                         canaleSoundPuntatore.play(selind)
                         xp = gsx // 32 * 1
                         if usa == 1:
-                            yp = gsy // 18 * 6
+                            yp = gsy // 18 * 5
                         if usa == 2:
-                            yp = gsy // 18 * 7
+                            yp = gsy // 18 * 6
                         if usa == 3:
-                            yp = gsy // 18 * 8
+                            yp = gsy // 18 * 7
                         if usa == 4:
-                            yp = gsy // 18 * 9
+                            yp = gsy // 18 * 8
                         if usa == 5:
-                            yp = gsy // 18 * 10
+                            yp = gsy // 18 * 9
                         if usa == 6:
                             yp = gsy // 18 * 11
                         if usa == 7:
@@ -4253,22 +4256,28 @@ def oggetti(dati):
                         risposta = True
                 if event.key == pygame.K_s and voceMarcata == 0 and not tastoTrovato:
                     tastoTrovato = True
-                    carim = True
-                    if oggetton != 10:
+                    if oggetton != 10 and oggetton != 5:
                         canaleSoundPuntatore.play(spostapun)
                         oggetton = oggetton + 1
                         yp = yp + gsy // 18 * 1
+                    elif oggetton == 5:
+                        canaleSoundPuntatore.play(spostapun)
+                        oggetton = oggetton + 1
+                        yp = yp + gsy // 18 * 2
                     elif oggetton == 10:
                         canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 6
+                        yp = gsy // 18 * 5
                         oggetton = 1
                 if event.key == pygame.K_w and voceMarcata == 0 and not tastoTrovato:
                     tastoTrovato = True
-                    carim = True
-                    if oggetton != 1:
+                    if oggetton != 1 and oggetton != 6:
                         canaleSoundPuntatore.play(spostapun)
                         oggetton = oggetton - 1
                         yp = yp - gsy // 18 * 1
+                    elif oggetton == 6:
+                        canaleSoundPuntatore.play(spostapun)
+                        oggetton = oggetton - 1
+                        yp = yp - gsy // 18 * 2
                     elif oggetton == 1:
                         canaleSoundPuntatore.play(spostapun)
                         yp = gsy // 18 * 15
@@ -4291,7 +4300,6 @@ def oggetti(dati):
                         canaleSoundPuntatore.play(selimp)
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     tastoTrovato = True
-                    carim = True
                     usadue = True
 
                     # usa?
@@ -4305,44 +4313,44 @@ def oggetti(dati):
                             if dati[5] > pvtot:
                                 dati[5] = pvtot
                             dati[31] = dati[31] - 1
-                            yp = gsy // 18 * 6
+                            yp = gsy // 18 * 5
                         # carica batt
                         if usa == 2:
                             dati[10] = dati[10] + 250
                             if dati[10] > entot:
                                 dati[10] = entot
                             dati[32] = dati[32] - 1
-                            yp = gsy // 18 * 7
-                        # bomba
-                        if usa == 3:
-                            attacco = 2
-                            yp = gsy // 18 * 8
+                            yp = gsy // 18 * 6
                         # antidoto
-                        if usa == 4:
+                        if usa == 3:
                             dati[121] = 0
-                            dati[34] = dati[34] - 1
-                            yp = gsy // 18 * 9
-                        # bomba veleno
-                        if usa == 5:
-                            attacco = 3
-                            yp = gsy // 18 * 10
-                        # esca
-                        if usa == 6:
-                            attacco = 4
-                            yp = gsy // 18 * 11
+                            dati[33] = dati[33] - 1
+                            yp = gsy // 18 * 7
                         # super pozione
-                        if usa == 7:
+                        if usa == 4:
                             dati[5] = dati[5] + 300
                             if dati[5] > pvtot:
                                 dati[5] = pvtot
-                            dati[37] = dati[37] - 1
-                            yp = gsy // 18 * 12
+                            dati[34] = dati[34] - 1
+                            yp = gsy // 18 * 8
                         # carica migliorato
-                        if usa == 8:
+                        if usa == 5:
                             dati[10] = dati[10] + 600
                             if dati[10] > entot:
                                 dati[10] = entot
-                            dati[38] = dati[38] - 1
+                            dati[35] = dati[35] - 1
+                            yp = gsy // 18 * 9
+                        # bomba
+                        if usa == 6:
+                            attacco = 2
+                            yp = gsy // 18 * 11
+                        # bomba veleno
+                        if usa == 7:
+                            attacco = 3
+                            yp = gsy // 18 * 12
+                        # esca
+                        if usa == 8:
+                            attacco = 4
                             yp = gsy // 18 * 13
                         # bomba appiccicosa
                         if usa == 9:
@@ -4359,15 +4367,15 @@ def oggetti(dati):
                         canaleSoundPuntatore.play(selind)
                         xp = gsx // 32 * 1
                         if usa == 1:
-                            yp = gsy // 18 * 6
+                            yp = gsy // 18 * 5
                         if usa == 2:
-                            yp = gsy // 18 * 7
+                            yp = gsy // 18 * 6
                         if usa == 3:
-                            yp = gsy // 18 * 8
+                            yp = gsy // 18 * 7
                         if usa == 4:
-                            yp = gsy // 18 * 9
+                            yp = gsy // 18 * 8
                         if usa == 5:
-                            yp = gsy // 18 * 10
+                            yp = gsy // 18 * 9
                         if usa == 6:
                             yp = gsy // 18 * 11
                         if usa == 7:
@@ -4457,166 +4465,190 @@ def oggetti(dati):
         if tastoTrovato:
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 5, gsx // 32 * 9, gsy // 18 * 11))
-
-            if carim:
-                if dati[oggetton + 30] >= 0:
-                    oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % oggetton)
-                    oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
-                else:
-                    oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
-                    oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
-                carim = False
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
 
             # pozione, carica batt, bomba, antidoto, bomba veleno, esca, super poz, carica migliorato, bomba pot, bomba atomica
             messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
             if dati[31] >= 0:
-                messaggio("Pozione x %i" % dati[31], grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+                messaggio("Pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
+                messaggio("x %i" % dati[31], grigiochi, gsx // 32 * 9.3, gsy // 18 * 5, 45)
                 if oggetton == 1:
-                    messaggio("Pozione: recupera 100 pv", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+                    messaggio("Pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
             if dati[32] >= 0:
-                messaggio("Caricabatterie x %i" % dati[32], grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+                messaggio("Caricabatterie", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
+                messaggio("x %i" % dati[32], grigiochi, gsx // 32 * 9.3, gsy // 18 * 6, 45)
                 if oggetton == 2:
-                    messaggio("Caricabatterie: recupera 250 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+                    messaggio("Caricabatterie:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
             if dati[33] >= 0:
-                messaggio("Bomba x %i" % dati[33], grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+                messaggio("Medicina", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
+                messaggio("x %i" % dati[33], grigiochi, gsx // 32 * 9.3, gsy // 18 * 7, 45)
                 if oggetton == 3:
-                    messaggio("Bomba: infligge un po' di danni ai nemici su", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                    messaggio(u"cui è lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
-            if dati[34] >= 0:
-                messaggio("Medicina x %i" % dati[34], grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-                if oggetton == 4:
-                    messaggio("Medicina: cura avvelenamento", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+                    messaggio("Medicina:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
-            if dati[35] >= 0:
-                messaggio("Bomba velenosa x %i" % dati[35], grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-                if oggetton == 5:
-                    messaggio("Bomba velenosa: infligge avvelenamento a", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                    messaggio("un nemico", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
-            if dati[36] >= 0:
-                messaggio("Esca x %i" % dati[36], grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-                if oggetton == 6:
-                    messaggio(u"Esca: distrae i nemici finché non viene distrutta.", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                    messaggio(u"È possibile riprenderla passandoci sopra.", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
-            else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
-            if dati[37] >= 0:
-                messaggio("Super pozione x %i" % dati[37], grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-                if oggetton == 7:
-                    messaggio("Super pozione: recupera 300 pv", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
+            if dati[34] >= 0:
+                messaggio("Super pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
+                messaggio("x %i" % dati[34], grigiochi, gsx // 32 * 9.3, gsy // 18 * 8, 45)
+                if oggetton == 4:
+                    messaggio("Super pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
-            if dati[38] >= 0:
-                messaggio("Caricabatterie migliorato x %i" % dati[38], grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
-                if oggetton == 8:
-                    messaggio("Caricabatterie migliorato: recupera 600 pe", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                    messaggio("di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
+            if dati[35] >= 0:
+                messaggio("Caricabatterie migliorato", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
+                messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
+                if oggetton == 5:
+                    messaggio("Caricabatterie migliorato:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+            if dati[36] >= 0:
+                messaggio("Bomba", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
+                messaggio("x %i" % dati[36], grigiochi, gsx // 32 * 9.3, gsy // 18 * 11, 45)
+                if oggetton == 6:
+                    messaggio("Bomba:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+            else:
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+            if dati[37] >= 0:
+                messaggio("Bomba velenosa", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
+                messaggio("x %i" % dati[37], grigiochi, gsx // 32 * 9.3, gsy // 18 * 12, 45)
+                if oggetton == 7:
+                    messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Infligge avvelenamento al nemico su cui viene lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+            else:
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+            if dati[38] >= 0:
+                messaggio("Esca", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
+                messaggio("x %i" % dati[38], grigiochi, gsx // 32 * 9.3, gsy // 18 * 13, 45)
+                if oggetton == 8:
+                    messaggio("Esca:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("riprenderla passandoci sopra", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+            else:
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
             if dati[39] >= 0:
-                messaggio("Bomba appiccicosa x %i" % dati[39], grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+                messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
+                messaggio("x %i" % dati[39], grigiochi, gsx // 32 * 9.3, gsy // 18 * 14, 45)
                 if oggetton == 9:
-                    messaggio(u"Bomba appiccicosa: dimezza la velocità di", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                    messaggio("un nemico", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
+                    messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
             if dati[40] >= 0:
-                messaggio("Bomba potenziata x %i" % dati[40], grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+                messaggio("Bomba potenziata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
+                messaggio("x %i" % dati[40], grigiochi, gsx // 32 * 9.3, gsy // 18 * 15, 45)
                 if oggetton == 10:
-                    messaggio("Bomba potenziata: infligge molti danni ai", grigiochi, gsx // 32 * 20, gsy // 18 * 14, 40)
-                    messaggio(u"nemici su cui è lanciata in un vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 40)
+                    messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
+                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
 
             # menu conferma
             if usa != 0:
-                pygame.draw.rect(schermo, grigio, (gsx // 32 * 10, gsy // 18 * 12, gsx // 32 * 6.5, gsy // 18 * 4))
-                puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 3 * 2, gpy // 3 * 2))
+                pygame.draw.rect(schermo, grigio, (gsx // 32 * 11, gsy // 18 * 12.5, gsx // 32 * 8, gsy // 18 * 4))
                 # posizionare il cursore su menu usa
                 if usauno:
                     xpv = xp
                     ypv = yp
-                    xp = gsx // 32 * 13
-                    yp = gsy // 18 * 14.5
+                    xp = gsx // 32 * 15
+                    yp = gsy // 18 * 15.1
                     voceMarcata = 2
                     usauno = False
                 schermo.blit(puntatorevecchio, (xpv, ypv))
-                messaggio("Usare?", grigiochi, gsx // 32 * 11, gsy // 18 * 12.5, 100)
-                messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 14.5, 60)
-                messaggio("No", grigiochi, gsx // 32 * 14, gsy // 18 * 14.5, 60)
-            else:
-                puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 12 * 5, gpy // 12 * 5))
+                messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
+                messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
+                messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
 
             # vita-status personaggio
             if dati[5] < 0:
                 dati[5] = 0
-            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 3.5, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 4.5, 50)
+            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 4, 50)
+            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 5, 50)
             persmen = pygame.transform.scale(persGrafMenu, (gpx * 3, gpy * 3))
-            schermo.blit(persmen, ((gsx // 32 * 10) + (gpx // 2), gsy // 18 * 3.5))
-            schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 5.5) + (gpy // 8)))
+            schermo.blit(persmen, (gsx // 32 * 11, gsy // 18 * 4))
+            schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 6) + (gpy // 8)))
             if dati[121]:
                 avvelenato = pygame.transform.scale(avvelenatoo, (gpx, gpy))
-                schermo.blit(avvelenato, (gsx // 32 * 14, gsy // 18 * 5.5))
+                schermo.blit(avvelenato, (gsx // 32 * 14, gsy // 18 * 6))
             if dati[123] > 0:
                 attaccopiu = pygame.transform.scale(attaccopiuo, (gpx, gpy))
-                schermo.blit(attaccopiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 5.5))
+                schermo.blit(attaccopiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 6))
             if dati[124] > 0:
                 difesapiu = pygame.transform.scale(difesapiuo, (gpx, gpy))
-                schermo.blit(difesapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 5.5))
+                schermo.blit(difesapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 6))
             # vita-status robo
             if dati[10] < 0:
                 dati[10] = 0
-            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 14, gsy // 18 * 8.5, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 9.5, 50)
+            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 14, gsy // 18 * 9, 50)
+            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 10, 50)
             robomen = pygame.transform.scale(robograf, (gpx * 3, gpy * 3))
-            schermo.blit(robomen, ((gsx // 32 * 10) + (gpx // 2), gsy // 18 * 7.5))
-            schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 10.5) + (gpy // 8)))
+            schermo.blit(robomen, (gsx // 32 * 11, gsy // 18 * 8))
+            schermo.blit(sfondostastart, (gsx // 32 * 14, gsy // 18 * 11))
             if dati[122] > 0:
                 surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx, gpy))
-                schermo.blit(surriscaldato, (gsx // 32 * 14, gsy // 18 * 10.5))
+                schermo.blit(surriscaldato, (gsx // 32 * 14, gsy // 18 * 11))
             if dati[125] > 0:
                 velocitapiu = pygame.transform.scale(velocitapiuo, (gpx, gpy))
-                schermo.blit(velocitapiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 10.5))
+                schermo.blit(velocitapiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 11))
             if dati[126] > 0:
                 efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
-                schermo.blit(efficienzapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 10.5))
+                schermo.blit(efficienzapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 11))
 
             if attacco != 0:
                 risposta = True
 
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-            schermo.blit(oggetto, (gsx // 32 * 20, gsy // 18 * 3))
+            schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 20, gsy // 18 * 3))
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
     return dati, attacco
 
 
-def chiediconferma(conferma):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx * 2, gpy * 2))
-    xp = gsx // 32 * 18
-    yp = gsy // 18 * 10
+def chiediconferma(conferma, canzone):
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    xp = gsx // 32 * 17.5
+    yp = gsy // 18 * 10.3
     schermo.fill(grigioscu)
     if conferma == 1:
-        messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
+        messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6, 120)
     elif conferma == 2:
-        messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
-    messaggio("Si", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 120)
-    messaggio("No", grigiochi, gsx // 32 * 21, gsy // 18 * 10, 120)
+        messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 8, gsy // 18 * 6.5, 120)
+    messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 9.5, 120)
+    messaggio("No", grigiochi, gsx // 32 * 19, gsy // 18 * 9.5, 120)
     messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
     schermo.blit(puntatore, (xp, yp))
     pygame.display.update()
     voceMarcata = 2
     while True:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(canzone)
         tastoTrovato = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -4633,7 +4665,7 @@ def chiediconferma(conferma):
                     if voceMarcata == 2:
                         voceMarcata -= 1
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 6
+                        xp = gsx // 32 * 9.5
                     else:
                         canaleSoundPuntatore.play(selimp)
                 if event.key == pygame.K_d and not tastoTrovato:
@@ -4641,7 +4673,7 @@ def chiediconferma(conferma):
                     if voceMarcata == 1:
                         voceMarcata += 1
                         canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 18
+                        xp = gsx // 32 * 17.5
                     else:
                         canaleSoundPuntatore.play(selimp)
                 if event.key == pygame.K_SPACE and not tastoTrovato:
@@ -4660,11 +4692,11 @@ def chiediconferma(conferma):
         if tastoTrovato:
             schermo.fill(grigioscu)
             if conferma == 1:
-                messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
+                messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6, 120)
             elif conferma == 2:
-                messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 120)
-            messaggio("Si", grigiochi, gsx // 32 * 9, gsy // 18 * 10, 120)
-            messaggio("No", grigiochi, gsx // 32 * 21, gsy // 18 * 10, 120)
+                messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 8, gsy // 18 * 6.5, 120)
+            messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 9.5, 120)
+            messaggio("No", grigiochi, gsx // 32 * 19, gsy // 18 * 9.5, 120)
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
@@ -4696,7 +4728,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-        messaggio(u"Menu start", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 150)
+        messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
         messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
         """if not apriocchio:
             messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
@@ -4811,7 +4843,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     inizio = False
                     # oggetti
                     if voceMarcata == 1:
-                        dati, attacco = oggetti(dati)
+                        dati, attacco = oggetti(dati, c27)
                         carim = True
                     # tecniche
                     """if yp == gsy // 18 * 6:
@@ -4820,11 +4852,11 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                         carim = True"""
                     # equip pers
                     if voceMarcata == 2:
-                        dati = equip(dati)
+                        dati = equip(dati, c27)
                         carim = True
                     # equip robot
                     if voceMarcata == 3:
-                        dati = equiprobo(dati)
+                        dati = equiprobo(dati, c27)
                         carim = True
                     # mappa
                     if voceMarcata == 4:
@@ -4835,7 +4867,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     # salva
                     if voceMarcata == 6:
                         #if nmost == -1:
-                        n = scegli_sal(3, len(dati))
+                        n = scegli_sal(3, len(dati), c27)
                         if n != -1:
                             salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti)
                     # menu
@@ -4848,13 +4880,13 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         if tastoTrovato:
             # chiedere conferma per uscire
             if conferma != 0:
-                inizio, risposta = chiediconferma(conferma)
+                inizio, risposta = chiediconferma(conferma, c27)
                 conferma = 0
 
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-            messaggio(u"Menu start", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 150)
+            messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
             messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
             """if not apriocchio:
                 messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
@@ -4942,7 +4974,7 @@ def startBattaglia(dati):
     oggetton = 1
     vettoreOggettiGraf = []
     vettoreOggettiIco = []
-    nomiOggettiIco = ["Pozione", "Caricabatterie", "Bomba", "Medicina", "BombaVeleno", "Esca", "Superpozione", "CaricabatterieMigliorato", "BombaAppiccicosa", "BombaPotenziata"]
+    nomiOggettiIco = ["Pozione", "Caricabatterie", "Medicina", "Superpozione", "CaricabatterieMigliorato", "Bomba", "BombaVeleno", "Esca", "BombaAppiccicosa", "BombaPotenziata"]
     while oggetton <= 10:
         if dati[oggetton + 30] >= 0:
             oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % oggetton)
@@ -4960,26 +4992,26 @@ def startBattaglia(dati):
     if True:
         schermo.blit(sfondoStartBattaglia, (0, 0))
         if difensivi:
-            if xp == gpx * 1:
+            if voceMarcata == 1:
                 disegnoOggetto = 0
-            if xp == gpx * 2:
+            if voceMarcata == 2:
                 disegnoOggetto = 1
-            if xp == gpx * 3:
-                disegnoOggetto = 3
-            if xp == gpx * 4:
-                disegnoOggetto = 6
-            if xp == gpx * 5:
-                disegnoOggetto = 7
-        elif offensivi:
-            if xp == gpx * 1:
+            if voceMarcata == 3:
                 disegnoOggetto = 2
-            if xp == gpx * 2:
+            if voceMarcata == 4:
+                disegnoOggetto = 3
+            if voceMarcata == 5:
                 disegnoOggetto = 4
-            if xp == gpx * 3:
+        elif offensivi:
+            if voceMarcata == 1:
                 disegnoOggetto = 5
-            if xp == gpx * 4:
+            if voceMarcata == 2:
+                disegnoOggetto = 6
+            if voceMarcata == 3:
+                disegnoOggetto = 7
+            if voceMarcata == 4:
                 disegnoOggetto = 8
-            if xp == gpx * 5:
+            if voceMarcata == 5:
                 disegnoOggetto = 9
         schermo.blit(vettoreOggettiGraf[disegnoOggetto], (gpx // 2, gpy * 1))
         if dati[disegnoOggetto + 31] <= 0:
@@ -4992,10 +5024,10 @@ def startBattaglia(dati):
         disegnati = 0
         i = 0
         while i < 10:
-            if difensivi and (i == 0 or i == 1 or i == 3 or i == 6 or i == 7):
+            if difensivi and (i == 0 or i == 1 or i == 2 or i == 3 or i == 4):
                 schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), gpy * 5))
                 disegnati += 1
-            if offensivi and (i == 2 or i == 4 or i == 5 or i == 8 or i == 9):
+            if offensivi and (i == 5 or i == 6 or i == 7 or i == 8 or i == 9):
                 schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), (gpy * 5) + (gpy // 2)))
                 disegnati += 1
             i += 1
@@ -5005,7 +5037,9 @@ def startBattaglia(dati):
         if offensivi:
             messaggio("Oggetti offensivi", grigiochi, gpx * 1, gpy // 2, 40)
             schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
-        pygame.display.update()
+
+        if not risposta:
+            pygame.display.update()
 
     while not risposta:
         tastoTrovato = False
@@ -5059,64 +5093,66 @@ def startBattaglia(dati):
                         canaleSoundPuntatore.play(selimp)
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     tastoTrovato = True
-                    # pozione
-                    if difensivi and voceMarcata == 1 and dati[31] > 0:
-                        dati[5] = dati[5] + 100
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
-                        dati[31] = dati[31] - 1
-                        sposta = True
-                        risposta = True
-                    # carica batt
-                    if difensivi and voceMarcata == 2 and dati[32] > 0:
-                        dati[10] = dati[10] + 250
-                        if dati[10] > entot:
-                            dati[10] = entot
-                        dati[32] = dati[32] - 1
-                        sposta = True
-                        risposta = True
+                    if difensivi:
+                        # pozione
+                        if voceMarcata == 1 and dati[31] > 0:
+                            dati[5] = dati[5] + 100
+                            if dati[5] > pvtot:
+                                dati[5] = pvtot
+                            dati[31] = dati[31] - 1
+                            sposta = True
+                            risposta = True
+                        # carica batt
+                        if voceMarcata == 2 and dati[32] > 0:
+                            dati[10] = dati[10] + 250
+                            if dati[10] > entot:
+                                dati[10] = entot
+                            dati[32] = dati[32] - 1
+                            sposta = True
+                            risposta = True
+                        # antidoto
+                        if voceMarcata == 3 and dati[33] > 0:
+                            dati[121] = 0
+                            dati[33] = dati[33] - 1
+                            sposta = True
+                            risposta = True
+                        # super pozione
+                        if voceMarcata == 4 and dati[34] > 0:
+                            dati[5] = dati[5] + 300
+                            if dati[5] > pvtot:
+                                dati[5] = pvtot
+                            dati[34] = dati[34] - 1
+                            sposta = True
+                            risposta = True
+                        # carica migliorato
+                        if voceMarcata == 5 and dati[35] > 0:
+                            dati[10] = dati[10] + 600
+                            if dati[10] > entot:
+                                dati[10] = entot
+                            dati[35] = dati[35] - 1
+                            sposta = True
+                            risposta = True
                     # bomba
-                    if offensivi and voceMarcata == 1 and dati[33] > 0:
-                        attacco = 2
-                        risposta = True
-                    # antidoto
-                    if difensivi and voceMarcata == 3 and dati[34] > 0:
-                        dati[121] = 0
-                        dati[34] = dati[34] - 1
-                        sposta = True
-                        risposta = True
-                    # bomba veleno
-                    if offensivi and voceMarcata == 2 and dati[35] > 0:
-                        attacco = 3
-                        risposta = True
-                    # esca
-                    if offensivi and voceMarcata == 3 and dati[36] > 0:
-                        attacco = 4
-                        risposta = True
-                    # super pozione
-                    if difensivi and voceMarcata == 4 and dati[37] > 0:
-                        dati[5] = dati[5] + 300
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
-                        dati[37] = dati[37] - 1
-                        sposta = True
-                        risposta = True
-                    # carica migliorato
-                    if difensivi and voceMarcata == 5 and dati[38] > 0:
-                        dati[10] = dati[10] + 600
-                        if dati[10] > entot:
-                            dati[10] = entot
-                        dati[38] = dati[38] - 1
-                        sposta = True
-                        risposta = True
-                    # bomba appiccicosa
-                    if offensivi and voceMarcata == 4 and dati[39] > 0:
-                        attacco = 5
-                        risposta = True
-                    # bomba potenziata
-                    if offensivi and voceMarcata == 5 and dati[40] > 0:
-                        attacco = 6
-                        risposta = True
+                    elif offensivi:
+                        if voceMarcata == 1 and dati[36] > 0:
+                            attacco = 2
+                            risposta = True
+                        # bomba veleno
+                        if voceMarcata == 2 and dati[37] > 0:
+                            attacco = 3
+                            risposta = True
+                        # esca
+                        if voceMarcata == 3 and dati[38] > 0:
+                            attacco = 4
+                            risposta = True
+                        # bomba appiccicosa
+                        if voceMarcata == 4 and dati[39] > 0:
+                            attacco = 5
+                            risposta = True
+                        # bomba potenziata
+                        if voceMarcata == 5 and dati[40] > 0:
+                            attacco = 6
+                            risposta = True
 
                     if risposta:
                         canaleSoundPuntatore.play(selezione)
@@ -5131,18 +5167,18 @@ def startBattaglia(dati):
                 if voceMarcata == 2:
                     disegnoOggetto = 1
                 if voceMarcata == 3:
-                    disegnoOggetto = 3
+                    disegnoOggetto = 2
                 if voceMarcata == 4:
-                    disegnoOggetto = 6
+                    disegnoOggetto = 3
                 if voceMarcata == 5:
-                    disegnoOggetto = 7
+                    disegnoOggetto = 4
             elif offensivi:
                 if voceMarcata == 1:
-                    disegnoOggetto = 2
-                if voceMarcata == 2:
-                    disegnoOggetto = 4
-                if voceMarcata == 3:
                     disegnoOggetto = 5
+                if voceMarcata == 2:
+                    disegnoOggetto = 6
+                if voceMarcata == 3:
+                    disegnoOggetto = 7
                 if voceMarcata == 4:
                     disegnoOggetto = 8
                 if voceMarcata == 5:
@@ -5158,10 +5194,10 @@ def startBattaglia(dati):
             disegnati = 0
             i = 0
             while i < 10:
-                if difensivi and (i == 0 or i == 1 or i == 3 or i == 6 or i == 7):
+                if difensivi and (i == 0 or i == 1 or i == 2 or i == 3 or i == 4):
                     schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), gpy * 5))
                     disegnati += 1
-                if offensivi and (i == 2 or i == 4 or i == 5 or i == 8 or i == 9):
+                if offensivi and (i == 5 or i == 6 or i == 7 or i == 8 or i == 9):
                     schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), (gpy * 5) + (gpy // 2)))
                     disegnati += 1
                 i += 1

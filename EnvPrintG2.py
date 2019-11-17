@@ -172,6 +172,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
     persbat = pygame.transform.scale(perso, (gpx, gpy))
     schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 16))
+    schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 16))
     schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
     if avvele:
         schermo.blit(avvelenato, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
@@ -316,6 +317,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
     persbat = pygame.transform.scale(perso, (gpx, gpy))
     schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 16))
+    schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 16))
     schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
     if avvele:
         schermo.blit(avvelenato, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
@@ -1184,6 +1186,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
         persbat = pygame.transform.scale(perso, (gpx, gpy))
         schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 16))
+        schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 16))
         schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
         if avvele:
             schermo.blit(avvelenato, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))

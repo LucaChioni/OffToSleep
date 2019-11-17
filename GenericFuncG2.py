@@ -56,8 +56,8 @@ def getStatistiche(dati, difesa = 0):
                 break
             i += 3
 
-    entot = 300 + (dati[9] * 100)
-    difro = 10 + (dati[9] * 10)
+    entot = 240 + (dati[9] * dati[9] * 60)
+    difro = 20 + (dati[9] * dati[9] * 30)
 
     return esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par
 
@@ -647,18 +647,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                     if posizione >= 39 and posizione <= 41:
                         caseattacbassodestra[j + 2] = False
                     if posizione >= 47 and posizione <= 48:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19a basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 41:
                         caseattacbassodestra[j + 2] = False
                     posizione = posizione + 1
                     j = j + 3
@@ -1362,18 +1350,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                         caseattacbassosinistra[j + 2] = False
                     posizione = posizione + 1
                     j = j + 3
-            # situazione: 19a basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
             # situazione: 19.5a basso-sinistra
             if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + (gpy * 6):
                 # posizione -> per associare le caselle alle posizioni del vettore
@@ -2047,18 +2023,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                     if posizione >= 39 and posizione <= 41:
                         caseattacaltosinistra[j + 2] = False
                     if posizione >= 47 and posizione <= 48:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19a alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 41:
                         caseattacaltosinistra[j + 2] = False
                     posizione = posizione + 1
                     j = j + 3
@@ -2762,18 +2726,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                         caseattacaltodestra[j + 2] = False
                     posizione = posizione + 1
                     j = j + 3
-            # situazione: 19a alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
             # situazione: 19.5a alto-destra
             if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - (gpy * 6):
                 # posizione -> per associare le caselle alle posizioni del vettore
@@ -3100,7 +3052,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
 
     # caseattactot[x, y, flag, ... ] -> per definire la visibilita' ridotta da tutti gli ostacoli
     caseattactot = caseattacaltodestra + caseattacaltosinistra + caseattacbassodestra + caseattacbassosinistra
-
     return caseattactot
 
 

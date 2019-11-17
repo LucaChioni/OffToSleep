@@ -182,6 +182,7 @@ def animaPersFermo(npers, x, y, vx, vy, scudo, armatura, armaMov1, armaMov2, avv
 
 
 def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, dati, attacco, difesa, tastop, animazione, aumentoliv, fineanimaz):
+    animazCamminataBreve = False
     if sposta and not aumentoliv:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -192,6 +193,7 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
                 primopasso = False
             # camminata quando si entra in una stanza
             if cambiosta:
+                animazCamminataBreve = True
                 animaPersCambiosta(npers, x, y, vx, vy, scudo, armatura, armaMov1, dati[121], fineanimaz)
             # camminata quando non si entra in una stanza
             else:
@@ -204,7 +206,9 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
             if primopasso:
                 primopasso = False
             animaPersFermo(npers, x, y, vx, vy, scudo, armatura, armaMov1, armaMov2, dati[121], fineanimaz)
-    return animazione, primopasso
+    else:
+        canaleSoundPassiRallo.stop()
+    return animazione, primopasso, animazCamminataBreve
 
 
 def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, armaS, armaturaS, armaAttacco, scudoDifesa, dati, attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz):
@@ -544,7 +548,7 @@ def animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
     return animazione
 
 
-def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaTutto):
+def animaCofanetto(tesoro, x, y, vx, vy, npers, pers, avvele, armatura, arma, scudo, sfondinoc, caricaTutto):
     if tesoro != -1:
         schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
         # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
@@ -657,15 +661,43 @@ def animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaTutto):
         if npers == 1:
             schermo.blit(sfondinoc, (x + gpx, y))
             schermo.blit(cofaniaper, (x + gpx, y))
+            schermo.blit(scudo, (x, y))
+            schermo.blit(pers, (x, y))
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(persdb, (x, y))
+            schermo.blit(arma, (x, y))
         if npers == 2:
             schermo.blit(sfondinoc, (x - gpx, y))
             schermo.blit(cofaniaper, (x - gpx, y))
-        if npers == 4:
-            schermo.blit(sfondinoc, (x, y + gpy))
-            schermo.blit(cofaniaper, (x, y + gpy))
+            schermo.blit(arma, (vx, y))
+            schermo.blit(pers, (vx, y))
+            if avvele:
+                schermo.blit(persAvvele, (vx, y))
+            schermo.blit(armatura, (vx, y))
+            schermo.blit(persab, (vx, y))
+            schermo.blit(scudo, (vx, y))
         if npers == 3:
             schermo.blit(sfondinoc, (x, y - gpy))
             schermo.blit(cofaniaper, (x, y - gpy))
+            schermo.blit(arma, (x, vy))
+            schermo.blit(scudo, (x, vy))
+            schermo.blit(pers, (x, vy))
+            if avvele:
+                schermo.blit(persAvvele, (x, vy))
+            schermo.blit(armatura, (x, vy))
+            schermo.blit(perswb, (x, vy))
+        if npers == 4:
+            schermo.blit(sfondinoc, (x, y + gpy))
+            schermo.blit(cofaniaper, (x, y + gpy))
+            schermo.blit(pers, (x, vy))
+            if avvele:
+                schermo.blit(persAvvele, (x, vy))
+            schermo.blit(armatura, (x, vy))
+            schermo.blit(perssb, (x, vy))
+            schermo.blit(arma, (x, vy))
+            schermo.blit(scudo, (x, vy))
         pygame.display.update()
         pygame.time.wait(500)
         risposta = False
@@ -747,12 +779,12 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         # animazione camminata robo
         animazione = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
         # animazione camminata personaggio
-        animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, dati, attacco, difesa, tastop, animazioneRallo, aumentoliv, fineanimaz)
+        animazioneRallo, primopasso, animazCamminataBreve = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, dati, attacco, difesa, tastop, animazioneRallo, aumentoliv, fineanimaz)
         # animazione camminata mostri
         animazione = animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione apertura cofanetto
-        caricaTutto, tesoro = animaCofanetto(tesoro, x, y, npers, sfondinoc, caricaTutto)
+        caricaTutto, tesoro = animaCofanetto(tesoro, x, y, vx, vy, npers, pers, dati[121], armatura, arma, scudo, sfondinoc, caricaTutto)
 
         # animazione aumento di livello
         animazioneRallo, caricaTutto = animaLvUp(npers, x, y, pers, scudo, armatura, arma, dati[4], aumentoliv, carim, animazioneRallo, caricaTutto, fineanimaz)

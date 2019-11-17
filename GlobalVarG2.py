@@ -44,9 +44,9 @@ fpsVideo = 12
 
 # colori
 nero = (0, 0, 0)
-grigioscu = (60, 60, 60)
-grigio = (110, 110, 110)
-grigiochi = (250, 250, 250)
+grigioscu = (50, 50, 50)
+grigio = (80, 80, 80)
+grigiochi = (230, 230, 230)
 bianco = (255, 255, 255)
 rosso = (255, 0, 0)
 verde = (0, 255, 0)
@@ -158,7 +158,7 @@ robodp = pygame.image.load('Immagini/Personaggi/Robot2p.png')
 robodp = pygame.transform.scale(robodp, (gpx, gpy))
 roboap = pygame.image.load('Immagini/Personaggi/Robot3p.png')
 roboap = pygame.transform.scale(roboap, (gpx, gpy))
-armrobmo = pygame.image.load('Immagini/Armrobs/Armrob00.png')
+armrobmo = pygame.image.load('Immagini/EquipRobo/Batteria00.png')
 armrobmo = pygame.transform.scale(armrobmo, (gpx, gpy))
 roboSurrisc = pygame.image.load('Immagini/Personaggi/RobotSurriscaldato.png')
 roboSurrisc = pygame.transform.scale(roboSurrisc, (gpx, gpy))
@@ -269,48 +269,44 @@ saliliv3 = pygame.image.load('Immagini/Levelup/Saliliv3.png')
 saliliv3 = pygame.transform.scale(saliliv3, (gpx, gpy))
 
 # canali / volume (0-1)
+volumeCanzoni = 0
+volumePuntatore = 0
+volumeEffetti = 0
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)
+canaleSoundCanzone.set_volume(volumeCanzoni)
 canaleSoundPuntatore = pygame.mixer.Channel(1)
+canaleSoundPuntatore.set_volume(volumePuntatore)
 canaleSoundPassiRallo = pygame.mixer.Channel(2)
+canaleSoundPassiRallo.set_volume(volumeEffetti)
 canaleSoundPassiColco = pygame.mixer.Channel(3)
+canaleSoundPassiColco.set_volume(volumeEffetti)
 canaleSoundPassiNemico = pygame.mixer.Channel(4)
+canaleSoundPassiNemico.set_volume(volumeEffetti)
 canaleSoundLvUp = pygame.mixer.Channel(5)
+canaleSoundLvUp.set_volume(volumeEffetti)
 canaleSoundInterazioni = pygame.mixer.Channel(6)
+canaleSoundInterazioni.set_volume(volumeEffetti)
 canaleSoundAttacco = pygame.mixer.Channel(7)
-volumeCanzoni = 0
-volumePuntatore = 1
-volumeEffetti = 1
+canaleSoundAttacco.set_volume(volumeEffetti)
 
 # suoni puntatore
 selsta = pygame.mixer.Sound("Audio/Rumoripuntatore/SelSta.wav")
-selsta.set_volume(volumePuntatore)
 selind = pygame.mixer.Sound("Audio/Rumoripuntatore/SelInd.wav")
-selind.set_volume(volumePuntatore)
 spostapun = pygame.mixer.Sound("Audio/Rumoripuntatore/SpostaPun.wav")
-spostapun.set_volume(volumePuntatore)
 selimp = pygame.mixer.Sound("Audio/Rumoripuntatore/SelImp.wav")
-selimp.set_volume(volumePuntatore)
 selezione = pygame.mixer.Sound("Audio/Rumoripuntatore/Selezione.wav")
-selezione.set_volume(volumePuntatore)
 
 # suoni effetti
 rumoreattacco = pygame.mixer.Sound("Audio/Rumoripersonaggio/Attacco.wav")
-rumoreattacco.set_volume(volumeEffetti)
 rumorecamminata = pygame.mixer.Sound("Audio/Rumoripersonaggio/Camminata.wav")
-rumorecamminata.set_volume(volumeEffetti)
 rumorelevelup = pygame.mixer.Sound("Audio/Rumoripersonaggio/Levelup.wav")
-rumorelevelup.set_volume(volumeEffetti)
 suonoaperturacofanetti = pygame.mixer.Sound("Audio/Rumoriambiente/Aperturaportacofanetti.wav")
-suonoaperturacofanetti.set_volume(volumeEffetti)
 suonoaperturaporte = pygame.mixer.Sound("Audio/Rumoriambiente/Aperturaportacofanetti.wav")
-suonoaperturaporte.set_volume(volumeEffetti)
 
 # suoni canzoni
 c11 = pygame.mixer.Sound("Audio/Canzoni/Canzone11.wav")
-c11.set_volume(volumeCanzoni)
 c27 = pygame.mixer.Sound("Audio/Canzoni/Canzone27.wav")
-c27.set_volume(volumeCanzoni)
 
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++]
 costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]

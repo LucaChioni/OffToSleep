@@ -317,13 +317,13 @@ def gameloop():
             scudoDifesa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iDifesa.png" % dati[7])
             scudoDifesa = pygame.transform.scale(scudoDifesa, (gpx, gpy))
             # armatura robot
-            armrobw = pygame.image.load("Immagini/Armrobs/Armrob%iw.png" % dati[9])
+            armrobw = pygame.image.load("Immagini/EquipRobo/Batteria%iw.png" % dati[9])
             armrobw = pygame.transform.scale(armrobw, (gpx, gpy))
-            armroba = pygame.image.load("Immagini/Armrobs/Armrob%ia.png" % dati[9])
+            armroba = pygame.image.load("Immagini/EquipRobo/Batteria%ia.png" % dati[9])
             armroba = pygame.transform.scale(armroba, (gpx, gpy))
-            armrobs = pygame.image.load("Immagini/Armrobs/Armrob%is.png" % dati[9])
+            armrobs = pygame.image.load("Immagini/EquipRobo/Batteria%is.png" % dati[9])
             armrobs = pygame.transform.scale(armrobs, (gpx, gpy))
-            armrobd = pygame.image.load("Immagini/Armrobs/Armrob%id.png" % dati[9])
+            armrobd = pygame.image.load("Immagini/EquipRobo/Batteria%id.png" % dati[9])
             armrobd = pygame.transform.scale(armrobd, (gpx, gpy))
             if agg == 1:
                 arma = armaw
@@ -636,13 +636,13 @@ def gameloop():
             if sposta:
                 # bomba attacco = 2
                 if attacco == 2:
-                    dati[33] = dati[33] - 1
+                    dati[36] = dati[36] - 1
                 # bomba veleno attacco = 3
                 if attacco == 3:
-                    dati[35] = dati[35] - 1
+                    dati[37] = dati[37] - 1
                 # esca attacco = 4
                 if attacco == 4:
-                    dati[36] = dati[36] - 1
+                    dati[38] = dati[38] - 1
                 # bomba appiccicosa attacco = 5
                 if attacco == 5:
                     dati[39] = dati[39] - 1
@@ -785,7 +785,10 @@ def gameloop():
 
             # efficienza
             if dati[126] > 0:
-                if mosseRimasteRob == 1:
+                if dati[125] > 0:
+                    if mosseRimasteRob == 1:
+                        dati[126] -= 1
+                else:
                     dati[126] -= 1
 
             # vel+
@@ -835,39 +838,15 @@ def gameloop():
             else:
                 mosseRimasteRob -= 1
 
-            # effetto di raffreddamento
-            if True:
-                if raffreddamento:
-                    mosseRimasteRob = -1
-                    raffredda = 1
-                if raffredda == 0:
-                    dati[122] = 0
-                if raffredda >= 0:
-                    raffredda -= 1
-            # effetto auto-ricarica
-            if True:
-                if ricarica1:
-                    mosseRimasteRob = -1
-                    autoRic1 = 1
-                if autoRic1 == 0:
-                    dati[10] += dannoTecniche[6]
-                    if dati[10] > entot:
-                        dati[10] = entot
-                    dati[122] = 10
-                if autoRic1 >= 0:
-                    autoRic1 -= 1
-            # effetto auto-ricarica+
-            if True:
-                if ricarica2:
-                    mosseRimasteRob = -1
-                    autoRic2 = 1
-                if autoRic2 == 0:
-                    dati[10] += dannoTecniche[16]
-                    if dati[10] > entot:
-                        dati[10] = entot
-                    dati[122] = 10
-                if autoRic2 >= 0:
-                    autoRic2 -= 1
+            if raffreddamento:
+                mosseRimasteRob = -1
+                raffredda = 1
+            if ricarica1:
+                mosseRimasteRob = -1
+                autoRic1 = 1
+            if ricarica2:
+                mosseRimasteRob = -1
+                autoRic2 = 1
 
             sovrapposto = False
             for nemico in listaNemici:
@@ -891,8 +870,30 @@ def gameloop():
                 if nrob == 4:
                     robot = robow
                     armrob = armrobw
+        # effetto di raffreddamento / auto-ricarica / auto-ricarica+
         elif sposta and mosseRimasteRob < 0 and not morterob:
             mosseRimasteRob += 1
+        if mosseRimasteRob >= 0:
+            if raffredda == 0:
+                dati[122] = 0
+            if raffredda >= 0:
+                raffredda -= 1
+
+            if autoRic1 == 0:
+                dati[10] += dannoTecniche[6]
+                if dati[10] > entot:
+                    dati[10] = entot
+                dati[122] = 10
+            if autoRic1 >= 0:
+                autoRic1 -= 1
+
+            if autoRic2 == 0:
+                dati[10] += dannoTecniche[16]
+                if dati[10] > entot:
+                    dati[10] = entot
+                dati[122] = 10
+            if autoRic2 >= 0:
+                autoRic2 -= 1
         if morterob:
             robot = robomo
             armrob = armrobmo
