@@ -296,14 +296,26 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
     return x, y, stanza, carim, cambiosta
 
 
-def trovacasattaccabili(x, y, stanza, porte, cofanetti):
-    range = 6
+def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
+    if raggio == -1:
+        if x >= gsx - x:
+            rangeX = x // gpx
+        else:
+            rangeX = (gsx // gpx) - (x // gpx)
+        if y >= gsy - y:
+            rangeY = y // gpy
+        else:
+            rangeY = (gsy // gpy) - (y // gpy)
+    else:
+        rangeX = raggio // gpx
+        rangeY = raggio // gpy
+
     # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in basso a destra
     caseattac = []
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeX:
+        m = 1
+        while m <= rangeY:
             murx = x + (gpx * n)
             mury = y + (gpy * m)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
@@ -317,10 +329,10 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                 caseattac.append(False)
             m = m + 1
         n = n + 1
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeY:
+        m = 1
+        while m <= rangeX:
             murx = x + (gpx * m)
             mury = y + (gpy * n)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
@@ -337,9 +349,9 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
     caseattacbassodestra = []
     # riempio caseattacbassodestra come se tutto il campo in basso a destra fosse libero
     n = 0
-    while n <= range:
+    while n <= rangeX:
         m = 0
-        while m <= range:
+        while m <= rangeY:
             caseattacbassodestra.append(x + (gpx * n))
             caseattacbassodestra.append(y + (gpy * m))
             caseattacbassodestra.append(True)
@@ -350,648 +362,139 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
     i = 0
     while i < len(caseattac):
         if not caseattac[i + 2]:
-            # situazione: 1a basso-destra
-            if caseattac[i] == x and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione <= 6:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 9 and posizione <= 13:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2a basso-destra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 2 and posizione <= 6:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3a basso-destra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 3 and posizione <= 6:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4a basso-destra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 4 and posizione <= 6:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 13:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5a basso-destra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 5 and posizione <= 6:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5a basso-destra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 6:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 6ab basso-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 8 and posizione <= 9:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 15 and posizione <= 19:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 23 and posizione <= 27:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 30 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 37 and posizione <= 41:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 45 and posizione <= 48:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7a basso-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 9 and posizione <= 11:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8a basso-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 27:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9a basso-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 11 and posizione <= 13:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10a basso-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 20:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5a basso-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 13:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 11ab basso-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 16 and posizione <= 17:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 23 and posizione <= 25:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 31 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 46 and posizione <= 48:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12a basso-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 17 and posizione <= 18:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13a basso-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 34:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14a basso-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 27:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5a basso-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 20:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 15ab basso-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 24 and posizione <= 25:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 31 and posizione <= 33:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16a basso-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 25 and posizione <= 26:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17a basso-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 34:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5a basso-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 27:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 18ab basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 32 and posizione <= 33:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19a basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5a basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 34:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20ab basso-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione >= 40 and posizione <= 41:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5a basso-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 41:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.75ab basso-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 48:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 1b basso-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 7:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 14 and posizione <= 15:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 21 and posizione <= 23:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 28 and posizione <= 31:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 35 and posizione <= 39:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 47:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2b basso-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 14:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 21 and posizione <= 22:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 28 and posizione <= 29:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 35 and posizione <= 37:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 44:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3b basso-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 21:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 28:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 35 and posizione <= 36:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4b basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 28:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 35:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5b basso-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 35:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione == 42:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5b basso-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 42:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7b basso-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 15:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 22 and posizione <= 23:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 29 and posizione <= 31:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 37 and posizione <= 39:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 44 and posizione <= 47:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8b basso-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 22:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 29 and posizione <= 30:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 43 and posizione <= 45:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9b basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 29:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10b basso-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 36:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5b basso-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 43:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12b basso-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 23:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 30 and posizione <= 31:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 45 and posizione <= 47:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13b basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 30:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 37 and posizione <= 38:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 44 and posizione <= 46:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14b basso-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 37:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 44 and posizione <= 45:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5b basso-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 44:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16b basso-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 31:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17b basso-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 38:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 45 and posizione <= 46:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5b basso-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 45:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19b basso-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 39:
-                        caseattacbassodestra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5b basso-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 46:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5b basso-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassodestra):
-                    if posizione == 47:
-                        caseattacbassodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-        i = i + 3
+            # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacbassodestra):
+                if caseattacbassodestra[j] == caseattac[i] and caseattacbassodestra[j + 1] == caseattac[i + 1]:
+                    caseattacbassodestra[j + 2] = False
+                elif caseattacbassodestra[j + 2]:
+                    xLatoSinistroCasella = caseattacbassodestra[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacbassodestra[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacbassodestra[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacbassodestra[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
+
+                    if caseattacbassodestra[j + 2] and yLatoSuperioreCasella >= caseattac[i + 1] and xLatoSinistroCasella >= caseattac[i]:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta1LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta1LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoDestro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoSuperiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoDestro == 0 and latoSuperiore == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacbassodestra[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta2LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta2LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoSinistro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoInferiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoSinistro == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacbassodestra[j + 2] = False
+                        elif (yLatoSuperioreCasella > yRetta1LatoDestroCasella and xLatoDestroCasella < xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoSinistroCasella and xLatoSinistroCasella > xRetta2LatoInferioreCasella):
+                            caseattacbassodestra[j + 2] = False
+
+                j += 3
+        i += 3
 
     # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in basso a sinistra
     caseattac = []
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeX:
+        m = 1
+        while m <= rangeY:
             murx = x - (gpx * n)
             mury = y + (gpy * m)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
@@ -1005,10 +508,10 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                 caseattac.append(False)
             m = m + 1
         n = n + 1
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeY:
+        m = 1
+        while m <= rangeX:
             murx = x - (gpx * m)
             mury = y + (gpy * n)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
@@ -1025,9 +528,9 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
     caseattacbassosinistra = []
     # riempio caseattacbassosinistra come se tutto il campo in basso a sinistra fosse libero
     n = 0
-    while n <= range:
+    while n <= rangeX:
         m = 0
-        while m <= range:
+        while m <= rangeY:
             caseattacbassosinistra.append(x - (gpx * n))
             caseattacbassosinistra.append(y + (gpy * m))
             caseattacbassosinistra.append(True)
@@ -1038,648 +541,138 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
     i = 0
     while i < len(caseattac):
         if not caseattac[i + 2]:
-            # situazione: 1a basso-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione <= 6:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 9 and posizione <= 13:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2a basso-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 2 and posizione <= 6:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3a basso-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 3 and posizione <= 6:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4a basso-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 4 and posizione <= 6:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 13:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5a basso-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 5 and posizione <= 6:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5a basso-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 6:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 6ab basso-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 8 and posizione <= 9:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 15 and posizione <= 19:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 23 and posizione <= 27:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 30 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 37 and posizione <= 41:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 45 and posizione <= 48:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7a basso-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 9 and posizione <= 11:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8a basso-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 27:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9a basso-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 11 and posizione <= 13:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10a basso-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 20:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5a basso-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 13:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 11ab basso-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 16 and posizione <= 17:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 23 and posizione <= 25:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 31 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 46 and posizione <= 48:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12a basso-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 17 and posizione <= 18:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13a basso-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 34:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14a basso-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 27:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5a basso-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 20:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 15ab basso-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 24 and posizione <= 25:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 31 and posizione <= 33:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16a basso-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 25 and posizione <= 26:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17a basso-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 34:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5a basso-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 27:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 18ab basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 32 and posizione <= 33:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19a basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5a basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 34:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20ab basso-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione >= 40 and posizione <= 41:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5a basso-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 41:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.75ab basso-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y + (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 48:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 1b basso-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 7:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 14 and posizione <= 15:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 21 and posizione <= 23:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 28 and posizione <= 31:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 35 and posizione <= 39:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 47:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2b basso-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 14:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 21 and posizione <= 22:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 28 and posizione <= 29:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 35 and posizione <= 37:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 44:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3b basso-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 21:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 28:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 35 and posizione <= 36:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4b basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 28:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 35:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5b basso-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 35:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione == 42:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5b basso-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 42:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7b basso-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 15:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 22 and posizione <= 23:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 29 and posizione <= 31:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 37 and posizione <= 39:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 44 and posizione <= 47:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8b basso-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 22:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 29 and posizione <= 30:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 43 and posizione <= 45:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9b basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 29:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10b basso-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 36:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5b basso-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y + gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 43:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12b basso-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 23:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 30 and posizione <= 31:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 45 and posizione <= 47:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13b basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 30:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 37 and posizione <= 38:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 44 and posizione <= 46:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14b basso-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 37:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 44 and posizione <= 45:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5b basso-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y + (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 44:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16b basso-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 31:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17b basso-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 38:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 45 and posizione <= 46:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5b basso-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y + (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 45:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19b basso-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 39:
-                        caseattacbassosinistra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5b basso-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y + (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 46:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5b basso-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y + (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacbassosinistra):
-                    if posizione == 47:
-                        caseattacbassosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-        i = i + 3
+            # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = - deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = - deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacbassosinistra):
+                if caseattacbassosinistra[j] == caseattac[i] and caseattacbassosinistra[j + 1] == caseattac[i + 1]:
+                    caseattacbassosinistra[j + 2] = False
+                elif caseattacbassosinistra[j + 2]:
+                    xLatoSinistroCasella = caseattacbassosinistra[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacbassosinistra[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacbassosinistra[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacbassosinistra[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
 
-    # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in alto a sinistra
+                    if caseattacbassosinistra[j + 2] and yLatoSuperioreCasella >= caseattac[i + 1] and xLatoDestroCasella <= caseattac[i] + gpx:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoSinistro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoSuperiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoSinistro == 0 and latoSuperiore == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacbassosinistra[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoDestro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoInferiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoDestro == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacbassosinistra[j + 2] = False
+                        elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
+                            caseattacbassosinistra[j + 2] = False
+
+                j += 3
+        i += 3
+
     caseattac = []
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeX:
+        m = 1
+        while m <= rangeY:
             murx = x - (gpx * n)
             mury = y - (gpy * m)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
@@ -1693,10 +686,10 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                 caseattac.append(False)
             m = m + 1
         n = n + 1
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeY:
+        m = 1
+        while m <= rangeX:
             murx = x - (gpx * m)
             mury = y - (gpy * n)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
@@ -1713,9 +706,9 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
     caseattacaltosinistra = []
     # riempio caseattacaltosinistra come se tutto il campo in alto a sinistra fosse libero
     n = 0
-    while n <= range:
+    while n <= rangeX:
         m = 0
-        while m <= range:
+        while m <= rangeY:
             caseattacaltosinistra.append(x - (gpx * n))
             caseattacaltosinistra.append(y - (gpy * m))
             caseattacaltosinistra.append(True)
@@ -1726,648 +719,138 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
     i = 0
     while i < len(caseattac):
         if not caseattac[i + 2]:
-            # situazione: 1a alto-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione <= 6:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 9 and posizione <= 13:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2a alto-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 2 and posizione <= 6:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3a alto-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 3 and posizione <= 6:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4a alto-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 4 and posizione <= 6:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 13:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5a alto-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 5 and posizione <= 6:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5a alto-sinistra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 6:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 6ab alto-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 8 and posizione <= 9:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 15 and posizione <= 19:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 23 and posizione <= 27:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 30 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 37 and posizione <= 41:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 45 and posizione <= 48:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7a alto-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 9 and posizione <= 11:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8a alto-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 27:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9a alto-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 11 and posizione <= 13:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10a alto-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 20:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5a alto-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 13:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 11ab alto-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 16 and posizione <= 17:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 23 and posizione <= 25:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 31 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 46 and posizione <= 48:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12a alto-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 17 and posizione <= 18:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13a alto-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 34:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14a alto-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 27:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5a alto-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 20:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 15ab alto-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 24 and posizione <= 25:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 31 and posizione <= 33:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16a alto-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 25 and posizione <= 26:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17a alto-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 34:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5a alto-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 27:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 18ab alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 32 and posizione <= 33:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19a alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5a alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 34:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20ab alto-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione >= 40 and posizione <= 41:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5a alto-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 41:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.75ab alto-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 48:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 1b alto-sinistra
-            if caseattac[i] == x - gpx and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 7:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 14 and posizione <= 15:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 21 and posizione <= 23:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 28 and posizione <= 31:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 35 and posizione <= 39:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 47:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2b alto-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 14:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 21 and posizione <= 22:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 28 and posizione <= 29:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 35 and posizione <= 37:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 44:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3b alto-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 21:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 28:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 35 and posizione <= 36:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4b alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 28:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 35:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5b alto-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 35:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione == 42:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5b alto-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 42:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7b alto-sinistra
-            if caseattac[i] == x - (gpx * 2) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 15:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 22 and posizione <= 23:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 29 and posizione <= 31:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 37 and posizione <= 39:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 44 and posizione <= 47:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8b alto-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 22:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 29 and posizione <= 30:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 43 and posizione <= 45:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9b alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 29:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10b alto-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 36:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5b alto-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 43:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12b alto-sinistra
-            if caseattac[i] == x - (gpx * 3) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 23:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 30 and posizione <= 31:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 45 and posizione <= 47:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13b alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 30:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 37 and posizione <= 38:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 44 and posizione <= 46:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14b alto-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 37:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 44 and posizione <= 45:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5b alto-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 44:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16b alto-sinistra
-            if caseattac[i] == x - (gpx * 4) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 31:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17b alto-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 38:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 45 and posizione <= 46:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5b alto-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 45:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19b alto-sinistra
-            if caseattac[i] == x - (gpx * 5) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 39:
-                        caseattacaltosinistra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5b alto-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 46:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5b alto-sinistra
-            if caseattac[i] == x - (gpx * 6) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltosinistra):
-                    if posizione == 47:
-                        caseattacaltosinistra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-        i = i + 3
+            # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacaltosinistra):
+                if caseattacaltosinistra[j] == caseattac[i] and caseattacaltosinistra[j + 1] == caseattac[i + 1]:
+                    caseattacaltosinistra[j + 2] = False
+                elif caseattacaltosinistra[j + 2]:
+                    xLatoSinistroCasella = caseattacaltosinistra[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacaltosinistra[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacaltosinistra[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacaltosinistra[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
 
-    # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in alto a destra
+                    if caseattacaltosinistra[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + gpy and xLatoDestroCasella <= caseattac[i] + gpx:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta1LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta1LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoDestro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoSuperiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoDestro == 0 and latoSuperiore == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacaltosinistra[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta2LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta2LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoSinistro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoInferiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoSinistro == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacaltosinistra[j + 2] = False
+                        elif (yLatoSuperioreCasella > yRetta1LatoDestroCasella and xLatoDestroCasella < xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoSinistroCasella and xLatoSinistroCasella > xRetta2LatoInferioreCasella):
+                            caseattacaltosinistra[j + 2] = False
+
+                j += 3
+        i += 3
+
     caseattac = []
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeX:
+        m = 1
+        while m <= rangeY:
             murx = x + (gpx * n)
             mury = y - (gpy * m)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
@@ -2381,10 +864,10 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
                 caseattac.append(False)
             m = m + 1
         n = n + 1
-    n = -1
-    while n < range:
-        m = 0
-        while m <= range:
+    n = 0
+    while n < rangeY:
+        m = 1
+        while m <= rangeX:
             murx = x + (gpx * m)
             mury = y - (gpy * n)
             nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
@@ -2399,11 +882,11 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
         n = n + 1
     # caseattacaltodestra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in alto a destra
     caseattacaltodestra = []
-    # riempio caseattacaltosinistra come se tutto il campo in alto a destra fosse libero
+    # riempio caseattacaltodestra come se tutto il campo in alto a destra fosse libero
     n = 0
-    while n <= range:
+    while n <= rangeX:
         m = 0
-        while m <= range:
+        while m <= rangeY:
             caseattacaltodestra.append(x + (gpx * n))
             caseattacaltodestra.append(y - (gpy * m))
             caseattacaltodestra.append(True)
@@ -2414,644 +897,798 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti):
     i = 0
     while i < len(caseattac):
         if not caseattac[i + 2]:
-            # situazione: 1a alto-destra
-            if caseattac[i] == x and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione <= 6:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 9 and posizione <= 13:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2a alto-destra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 2 and posizione <= 6:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3a alto-destra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 3 and posizione <= 6:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4a alto-destra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 4 and posizione <= 6:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 13:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5a alto-destra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 5 and posizione <= 6:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5a alto-destra
-            if caseattac[i] == x and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 6:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 6ab alto-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 8 and posizione <= 9:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 15 and posizione <= 19:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 23 and posizione <= 27:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 30 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 37 and posizione <= 41:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 45 and posizione <= 48:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7a alto-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 9 and posizione <= 11:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 17 and posizione <= 20:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8a alto-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 10 and posizione <= 13:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 27:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9a alto-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 11 and posizione <= 13:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10a alto-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 12 and posizione <= 13:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 20:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5a alto-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 13:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 11ab alto-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 16 and posizione <= 17:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 23 and posizione <= 25:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 31 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 46 and posizione <= 48:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12a alto-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 17 and posizione <= 18:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 25 and posizione <= 27:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13a alto-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 18 and posizione <= 20:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 34:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14a alto-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 19 and posizione <= 20:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 27:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5a alto-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 20:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 15ab alto-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 24 and posizione <= 25:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 31 and posizione <= 33:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16a alto-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 25 and posizione <= 26:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17a alto-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 26 and posizione <= 27:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 34:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5a alto-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 27:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 18ab alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 32 and posizione <= 33:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 39 and posizione <= 41:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19a alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 33 and posizione <= 34:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 41:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5a alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 34:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20ab alto-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione >= 40 and posizione <= 41:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 47 and posizione <= 48:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5a alto-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 41:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.75ab alto-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y - (gpy * 6):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 48:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 1b alto-destra
-            if caseattac[i] == x + gpx and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 7:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 14 and posizione <= 15:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 21 and posizione <= 23:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 28 and posizione <= 31:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 35 and posizione <= 39:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 47:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 2b alto-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 14:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 21 and posizione <= 22:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 28 and posizione <= 29:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 35 and posizione <= 37:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 44:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 3b alto-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 21:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 28:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 35 and posizione <= 36:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 4b alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 28:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 35:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 42 and posizione <= 43:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5b alto-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 35:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione == 42:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 5.5b alto-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 42:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 7b alto-destra
-            if caseattac[i] == x + (gpx * 2) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 15:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 22 and posizione <= 23:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 29 and posizione <= 31:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 37 and posizione <= 39:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 44 and posizione <= 47:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 8b alto-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 22:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 29 and posizione <= 30:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 43 and posizione <= 45:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 9b alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 29:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 36 and posizione <= 37:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10b alto-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 36:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 43 and posizione <= 44:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 10.5b alto-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y - gpy:
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 43:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 12b alto-destra
-            if caseattac[i] == x + (gpx * 3) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 23:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 30 and posizione <= 31:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 45 and posizione <= 47:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 13b alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 30:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 37 and posizione <= 38:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 44 and posizione <= 46:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14b alto-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 37:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 44 and posizione <= 45:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 14.5b alto-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y - (gpy * 2):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 44:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 16b alto-destra
-            if caseattac[i] == x + (gpx * 4) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 31:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 38 and posizione <= 39:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17b alto-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 38:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 45 and posizione <= 46:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 17.5b alto-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y - (gpy * 3):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 45:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19b alto-destra
-            if caseattac[i] == x + (gpx * 5) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 39:
-                        caseattacaltodestra[j + 2] = False
-                    if posizione >= 46 and posizione <= 47:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 19.5b alto-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y - (gpy * 4):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 46:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-            # situazione: 20.5b alto-destra
-            if caseattac[i] == x + (gpx * 6) and caseattac[i + 1] == y - (gpy * 5):
-                # posizione -> per associare le caselle alle posizioni del vettore
-                posizione = 0
-                j = 0
-                while j < len(caseattacaltodestra):
-                    if posizione == 47:
-                        caseattacaltodestra[j + 2] = False
-                    posizione = posizione + 1
-                    j = j + 3
-        i = i + 3
+            # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = - deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = - deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacaltodestra):
+                if caseattacaltodestra[j] == caseattac[i] and caseattacaltodestra[j + 1] == caseattac[i + 1]:
+                    caseattacaltodestra[j + 2] = False
+                elif caseattacaltodestra[j + 2]:
+                    xLatoSinistroCasella = caseattacaltodestra[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacaltodestra[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacaltodestra[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacaltodestra[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
 
-    # caseattactot[x, y, flag, ... ] -> per definire la visibilita' ridotta da tutti gli ostacoli
-    caseattactot = caseattacaltodestra + caseattacaltosinistra + caseattacbassodestra + caseattacbassosinistra
+                    if caseattacaltodestra[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + gpy and xLatoSinistroCasella >= caseattac[i]:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoSinistro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoSuperiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoSinistro == 0 and latoSuperiore == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacaltodestra[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoDestro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoInferiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoDestro == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacaltodestra[j + 2] = False
+                        elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
+                            caseattacaltodestra[j + 2] = False
+
+                j += 3
+        i += 3
+
+    # caselle a destra del personaggio
+    caseattac = []
+    n = 0
+    while n <= rangeX:
+        murx = x + (gpx * n)
+        mury = y
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
+        if murx != nmurx:
+            caseattac.append(nmurx)
+            caseattac.append(nmury)
+            caseattac.append(True)
+        else:
+            caseattac.append(nmurx + gpx)
+            caseattac.append(nmury)
+            caseattac.append(False)
+        n += 1
+    # caseattacdestra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a destra
+    caseattacdestra = []
+    # riempio caseattacdestra come se tutto il campo a destra fosse libero
+    n = 0
+    while n <= rangeX:
+        m = 0
+        while m <= rangeY:
+            caseattacdestra.append(x + (gpx * n))
+            caseattacdestra.append(y - (gpy * m))
+            caseattacdestra.append(True)
+            m = m + 1
+        m = 1
+        while m <= rangeY:
+            caseattacdestra.append(x + (gpx * n))
+            caseattacdestra.append(y + (gpy * m))
+            caseattacdestra.append(True)
+            m = m + 1
+        n = n + 1
+    # imposto a False le caselle che non si vedono
+    caseattacdestra[2] = False
+    i = 0
+    while i < len(caseattac):
+        if not caseattac[i + 2]:
+            # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = - deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacdestra):
+                if caseattacdestra[j] == caseattac[i] and caseattacdestra[j + 1] == caseattac[i + 1]:
+                    caseattacdestra[j + 2] = False
+                elif caseattacdestra[j + 2]:
+                    xLatoSinistroCasella = caseattacdestra[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacdestra[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacdestra[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacdestra[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
+
+                    if caseattacdestra[j + 2] and xLatoSinistroCasella >= caseattac[i]:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoSinistro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoSuperiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoSinistro == 0 and latoSuperiore == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacdestra[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta2LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta2LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoSinistro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoInferiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoSinistro == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacdestra[j + 2] = False
+                        elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoSinistroCasella and xLatoSinistroCasella > xRetta2LatoInferioreCasella):
+                            caseattacdestra[j + 2] = False
+
+                j += 3
+        i += 3
+
+    # caselle a sinistra del personaggio
+    caseattac = []
+    n = 0
+    while n <= rangeX:
+        murx = x - (gpx * n)
+        mury = y
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
+        if murx != nmurx:
+            caseattac.append(nmurx)
+            caseattac.append(nmury)
+            caseattac.append(True)
+        else:
+            caseattac.append(nmurx - gpx)
+            caseattac.append(nmury)
+            caseattac.append(False)
+        n += 1
+    # caseattacsinistra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a destra
+    caseattacsinistra = []
+    # riempio caseattacsinistra come se tutto il campo a destra fosse libero
+    n = 0
+    while n <= rangeX:
+        m = 0
+        while m <= rangeY:
+            caseattacsinistra.append(x - (gpx * n))
+            caseattacsinistra.append(y - (gpy * m))
+            caseattacsinistra.append(True)
+            m = m + 1
+        m = 1
+        while m <= rangeY:
+            caseattacsinistra.append(x - (gpx * n))
+            caseattacsinistra.append(y + (gpy * m))
+            caseattacsinistra.append(True)
+            m = m + 1
+        n = n + 1
+    # imposto a False le caselle che non si vedono
+    caseattacsinistra[2] = False
+    i = 0
+    while i < len(caseattac):
+        if not caseattac[i + 2]:
+            # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = - deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacsinistra):
+                if caseattacsinistra[j] == caseattac[i] and caseattacsinistra[j + 1] == caseattac[i + 1]:
+                    caseattacsinistra[j + 2] = False
+                elif caseattacsinistra[j + 2]:
+                    xLatoSinistroCasella = caseattacsinistra[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacsinistra[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacsinistra[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacsinistra[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
+
+                    if caseattacsinistra[j + 2] and xLatoDestroCasella <= caseattac[i] + gpx:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta1LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta1LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoDestro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoSuperiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoDestro == 0 and latoSuperiore == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacsinistra[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoDestro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoInferiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoDestro == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacsinistra[j + 2] = False
+                        elif (yLatoSuperioreCasella > yRetta1LatoDestroCasella and xLatoDestroCasella < xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
+                            caseattacsinistra[j + 2] = False
+
+                j += 3
+        i += 3
+
+    # caselle sopra il personaggio
+    caseattac = []
+    n = 0
+    while n <= rangeY:
+        murx = x
+        mury = y - (gpy * n)
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
+        if mury != nmury:
+            caseattac.append(nmurx)
+            caseattac.append(nmury)
+            caseattac.append(True)
+        else:
+            caseattac.append(nmurx)
+            caseattac.append(nmury - gpy)
+            caseattac.append(False)
+        n += 1
+    # caseattacalto[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a destra
+    caseattacalto = []
+    # riempio caseattacalto come se tutto il campo a destra fosse libero
+    n = 0
+    while n <= rangeY:
+        m = 0
+        while m <= rangeX:
+            caseattacalto.append(x + (gpx * m))
+            caseattacalto.append(y - (gpy * n))
+            caseattacalto.append(True)
+            m = m + 1
+        m = 1
+        while m <= rangeX:
+            caseattacalto.append(x - (gpx * m))
+            caseattacalto.append(y - (gpy * n))
+            caseattacalto.append(True)
+            m = m + 1
+        n = n + 1
+    # imposto a False le caselle che non si vedono
+    caseattacalto[2] = False
+    i = 0
+    while i < len(caseattac):
+        if not caseattac[i + 2]:
+            # la prima retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + gpy
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = - deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacalto):
+                if caseattacalto[j] == caseattac[i] and caseattacalto[j + 1] == caseattac[i + 1]:
+                    caseattacalto[j + 2] = False
+                elif caseattacalto[j + 2]:
+                    xLatoSinistroCasella = caseattacalto[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacalto[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacalto[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacalto[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
+
+                    if caseattacalto[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + gpy:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta1LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta1LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoSinistro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoInferiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoSinistro == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacalto[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta2
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
+                            elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta2
+                            if latoInferiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoInferiore == 0 and latoDestro != 0:
+                                    altezza = latoSuperiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoInferiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoInferiore == 0 and latoDestro == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacalto[j + 2] = False
+                        elif (yLatoInferioreCasella < yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoInferioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
+                            caseattacalto[j + 2] = False
+
+                j += 3
+        i += 3
+
+    # caselle sotto il personaggio
+    caseattac = []
+    n = 0
+    while n <= rangeY:
+        murx = x
+        mury = y + (gpy * n)
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
+        if mury != nmury:
+            caseattac.append(nmurx)
+            caseattac.append(nmury)
+            caseattac.append(True)
+        else:
+            caseattac.append(nmurx)
+            caseattac.append(nmury + gpy)
+            caseattac.append(False)
+        n += 1
+    # caseattacbasso[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a destra
+    caseattacbasso = []
+    # riempio caseattacbasso come se tutto il campo a destra fosse libero
+    n = 0
+    while n <= rangeY:
+        m = 0
+        while m <= rangeX:
+            caseattacbasso.append(x + (gpx * m))
+            caseattacbasso.append(y + (gpy * n))
+            caseattacbasso.append(True)
+            m = m + 1
+        m = 1
+        while m <= rangeX:
+            caseattacbasso.append(x - (gpx * m))
+            caseattacbasso.append(y + (gpy * n))
+            caseattacbasso.append(True)
+            m = m + 1
+        n = n + 1
+    # imposto a False le caselle che non si vedono
+    caseattacbasso[2] = False
+    i = 0
+    while i < len(caseattac):
+        if not caseattac[i + 2]:
+            # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i]
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare1 = - deltaYRetta / deltaXRetta
+            altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            # la seconda retta va dal personaggio all'angolo in alto a destra dell'ostacolo
+            xInizioRetta = (x + (gpx / 2.0))
+            xFineRetta = caseattac[i] + gpx
+            deltaXRetta = abs(xInizioRetta - xFineRetta)
+            yInizioRetta = (y + (gpy / 2.0))
+            yFineRetta = caseattac[i + 1]
+            deltaYRetta = abs(yInizioRetta - yFineRetta)
+            coeffAngolare2 = deltaYRetta / deltaXRetta
+            altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
+            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            j = 0
+            while j < len(caseattacbasso):
+                if caseattacbasso[j] == caseattac[i] and caseattacbasso[j + 1] == caseattac[i + 1]:
+                    caseattacbasso[j + 2] = False
+                elif caseattacbasso[j + 2]:
+                    xLatoSinistroCasella = caseattacbasso[j]
+                    yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
+                    yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
+                    xLatoDestroCasella = caseattacbasso[j] + gpx
+                    yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
+                    yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
+                    yLatoSuperioreCasella = caseattacbasso[j + 1]
+                    xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / coeffAngolare2
+                    yLatoInferioreCasella = caseattacbasso[j + 1] + gpy
+                    xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / coeffAngolare1
+                    xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / coeffAngolare2
+
+                    if caseattacbasso[j + 2] and yLatoSuperioreCasella >= caseattac[i + 1]:
+                        if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
+                            elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoSinistro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoSinistro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoSinistro == 0 and latoSuperiore != 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoSinistro == 0 and latoSuperiore == 0:
+                                    altezza = latoDestro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacbasso[j + 2] = False
+                        elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
+                            # trovo le misure dei lati interni delle caselle intersecate dalla retta1
+                            latoSuperiore = 0
+                            latoInferiore = 0
+                            latoDestro = 0
+                            latoSinistro = 0
+                            if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
+                                latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoInferioreCasella)
+                            elif yRetta2LatoSinistroCasella < yLatoSuperioreCasella:
+                                latoSinistro = gpy
+                            if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
+                                latoDestro = abs(yRetta2LatoDestroCasella - yLatoInferioreCasella)
+                            elif yRetta2LatoDestroCasella < yLatoSuperioreCasella:
+                                latoDestro = gpy
+                            if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
+                                latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
+                                latoSuperiore = gpx
+                            if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
+                                latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
+                            elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
+                                latoInferiore = gpx
+                            # calcolo la parte di area interna di ogni casella intersecata dalla retta1
+                            if latoSuperiore != 0 and latoDestro != 0:
+                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                            else:
+                                if latoSuperiore == 0 and latoDestro != 0:
+                                    altezza = latoInferiore
+                                    base1 = latoSinistro
+                                    base2 = latoDestro
+                                elif latoDestro == 0 and latoSuperiore != 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                elif latoDestro == 0 and latoSuperiore == 0:
+                                    altezza = latoSinistro
+                                    base1 = latoInferiore
+                                    base2 = latoSuperiore
+                                area = (base1 + base2) * altezza / 2.0
+                            if area > (gpx * gpy / 2.0):
+                                caseattacbasso[j + 2] = False
+                        elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoSuperioreCasella > yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoSuperioreCasella):
+                            caseattacbasso[j + 2] = False
+
+                j += 3
+        i += 3
+
+    caseattactot = caseattacaltodestra + caseattacaltosinistra + caseattacbassodestra + caseattacbassosinistra + caseattacdestra + caseattacsinistra + caseattacalto + caseattacbasso
     return caseattactot
 
 

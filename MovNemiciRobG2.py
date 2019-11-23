@@ -34,7 +34,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 distminy = vitaesca[i + 3]
                 escabersaglio = i
             # controllo caselle che si vedono
-            caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti)
+            caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti, nemico.raggioVisivo)
             j = 0
             while j < len(caseattactot):
                 if caseattactot[j] == distminx and caseattactot[j + 1] == distminy and not caseattactot[j + 2]:
@@ -49,7 +49,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     vistoRob = False
     if not visto and not vistoesca:
         # controllo caselle che si vedono (per controllare se vedono pers o robo)
-        caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti)
+        caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti, nemico.raggioVisivo)
         if abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(caseattactot):
@@ -936,7 +936,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vet
     # trova i nemici visti
     nemiciVistiDaColco = []
     vistaRobo = gpx * 6
-    caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti)
+    caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
     k = 0
     while k < len(caselleAttaccabili):
         if caselleAttaccabili[k + 2]:

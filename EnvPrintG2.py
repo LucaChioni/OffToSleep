@@ -473,7 +473,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -491,7 +491,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -510,7 +510,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -543,7 +543,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -562,7 +562,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 4)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -792,7 +792,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
             schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
             # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -803,7 +803,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
             schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
             # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -814,7 +814,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
             schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
             # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -825,7 +825,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
             schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
             # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -836,7 +836,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 9, gpy * 9))
             schermo.blit(campoattaccabile3, (x - (gpx * 4), y - (gpy * 4)))
             # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti)
+            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 4)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -1050,7 +1050,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             raggiovista = nemico.raggioVisivo
             if xp == mx and yp == my:
                 # controllo caselle attaccabili
-                caseattactot = trovacasattaccabili(mx, my, stanza, porte, cofanetti)
+                caseattactot = trovacasattaccabili(mx, my, stanza, porte, cofanetti, nemico.raggioVisivo)
                 i = 0
                 # disegno le caselle attaccabili
                 while i < len(caseattactot):
@@ -1218,8 +1218,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             schermo.blit(efficienzapiu, ((gsx // 32 * 1) + (gpx // 4 * 3) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
         if xp == rx and yp == ry and enrob > 0:
             # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(rx, ry, stanza, porte, cofanetti)
             raggiovista = gpx * 6
+            caseattactot = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):

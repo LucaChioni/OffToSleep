@@ -406,7 +406,7 @@ def gameloop():
                 pygame.quit()
                 quit()
 
-            if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti:
+            if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti and not tastoTrovato:
                 # movimanti
                 tastop = event.key
                 # movimenti personaggio
