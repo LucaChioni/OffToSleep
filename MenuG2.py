@@ -383,10 +383,10 @@ def menu():
             canaleSoundCanzone.play(c11)
 
         # posizione porte e cofanetti nel vettore dati
-        porteini = 131
-        portefin = 158
+        porteini = 132
+        portefin = 159
         cofaniini = portefin + 1
-        cofanifin = 182
+        cofanifin = 183
         lunghezzadati = cofanifin + 1
 
         tastoTrovato = False
@@ -435,7 +435,7 @@ def menu():
                         x = gsx // 32 * 6
                         y = gsy // 18 * 2
                         # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
-                        # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - porte(131-?) - cofanetti(?-?) // dimensione: 0-130 + porte e cofanetti
+                        # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - denaro - porte(132-?) - cofanetti(?-?) // dimensione: 0-130 + porte e cofanetti
                         dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 240,# <- statistiche
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
                                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
@@ -443,7 +443,7 @@ def menu():
                                 2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
                                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
-                                False, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
+                                False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
                                 2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
                                 1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False]# <- cofanetti
                         canaleSoundCanzone.stop()
@@ -586,7 +586,7 @@ def equip(dati, canzone):
         if dati[41 + i] > 0:
             img = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iMenu.png" % i)
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
         vetImgSpade.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
         i += 1
     vetImgArchi = []
@@ -595,7 +595,7 @@ def equip(dati, canzone):
         if dati[41 + i] > 0:
             img = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iMenu.png" % i)
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
         vetImgArchi.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
         i += 1
     vetImgArmature = []
@@ -604,7 +604,7 @@ def equip(dati, canzone):
         if dati[51 + i] > 0:
             img = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iMenu.png" % i)
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
         vetImgArmature.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
         i += 1
     vetImgScudi = []
@@ -613,7 +613,7 @@ def equip(dati, canzone):
         if dati[61 + i] > 0:
             img = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iMenu.png" % i)
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
         vetImgScudi.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
         i += 1
     vetImgGuanti = []
@@ -622,7 +622,7 @@ def equip(dati, canzone):
         if dati[61 + i] > 0:
             img = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iMenu.png" % i)
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
         vetImgGuanti.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
         i += 1
     vetImgCollane = []
@@ -631,9 +631,11 @@ def equip(dati, canzone):
         if dati[61 + i] > 0:
             img = pygame.image.load("Immagini/EquipRallo/Collane/Collana%iMenu.png" % i)
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
         vetImgCollane.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
         i += 1
+    sfondoOggetto = pygame.image.load("Immagini/EquipRallo/SfondoOggetto.png")
+    sfondoOggetto = pygame.transform.scale(sfondoOggetto, (int(gpx * 2), int(gpy * 2)))
 
     # primo frame
     if True:
@@ -656,43 +658,49 @@ def equip(dati, canzone):
             scudo = pygame.transform.scale(scudos, (gpx * 5, gpy * 5))
             armaturas = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % dati[8])
             armatura = pygame.transform.scale(armaturas, (gpx * 5, gpy * 5))
-            """guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
+            guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
             guanti = pygame.transform.scale(guantis, (gpx * 5, gpy * 5))
             collanas = pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % dati[130])
-            collana = pygame.transform.scale(collanas, (gpx * 5, gpy * 5))"""
+            collana = pygame.transform.scale(collanas, (gpx * 5, gpy * 5))
             carim = False
         messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.4, 70)
-        messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.5, 50)
+        messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.2, 70)
+        messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
+            schermo.blit(sfondoOggetto, (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgSpade[i], (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
             i += 1
-        messaggio("Archi", grigiochi, gsx // 32 * 5.5, gsy // 18 * 5.5, 50)
+        messaggio("Archi", grigiochi, gsx // 32 * 5.5, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
+            schermo.blit(sfondoOggetto, (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgArchi[i], (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
             i += 1
-        messaggio("Protezioni", grigiochi, gsx // 32 * 9.3, gsy // 18 * 4.4, 70)
-        messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.5, 50)
+        messaggio("Protezioni", grigiochi, gsx // 32 * 9.3, gsy // 18 * 4.2, 70)
+        messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
+            schermo.blit(sfondoOggetto, (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgArmature[i], (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
             i += 1
-        messaggio("Scudi", grigiochi, gsx // 32 * 12.5, gsy // 18 * 5.5, 50)
+        messaggio("Scudi", grigiochi, gsx // 32 * 12.5, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
+            schermo.blit(sfondoOggetto, (gsx // 32 * 12.2, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgScudi[i], (gsx // 32 * 12.2, int((gsy // 18 * 6) + (gpy * 2 * i))))
             i += 1
-        messaggio("Accessori", grigiochi, gsx // 32 * 16.3, gsy // 18 * 4.4, 70)
-        messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.5, 50)
+        messaggio("Accessori", grigiochi, gsx // 32 * 16.3, gsy // 18 * 4.2, 70)
+        messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
+            schermo.blit(sfondoOggetto, (gsx // 32 * 15.7, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgGuanti[i], (gsx // 32 * 15.7, int((gsy // 18 * 6) + (gpy * 2 * i))))
             i += 1
-        messaggio("Collane", grigiochi, gsx // 32 * 19.2, gsy // 18 * 5.5, 50)
+        messaggio("Collane", grigiochi, gsx // 32 * 19.2, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
+            schermo.blit(sfondoOggetto, (gsx // 32 * 19.2, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgCollane[i], (gsx // 32 * 19.2, ((gsy // 18 * 6) + (gpy * 2 * i))))
             i += 1
 
@@ -702,7 +710,9 @@ def equip(dati, canzone):
         schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 11.3))
         schermo.blit(persstab, (gsx // 32 * 24.5, gsy // 18 * 11.3))
         schermo.blit(armatura, (gsx // 32 * 24.5, gsy // 18 * 11.3))
+        schermo.blit(collana, (gsx // 32 * 24.5, gsy // 18 * 11.3))
         schermo.blit(spada, (gsx // 32 * 24.5, gsy // 18 * 11.3))
+        schermo.blit(guanti, (gsx // 32 * 24.5, gsy // 18 * 11.3))
         schermo.blit(scudo, (gsx // 32 * 24.5, gsy // 18 * 11.3))
         messaggio("Statistiche:", grigiochi, gsx // 32 * 23, gsy // 18 * 6.7, 50)
         messaggio("Punti vita: %i" % pvtot, grigiochi, gsx // 32 * 23, gsy // 18 * 7.5, 35)
@@ -1030,8 +1040,8 @@ def equip(dati, canzone):
             if dati[65] != 0:
                 messaggio("Guanti confortevoli:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio(u"Guanti che aumentano la probabilità di", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("parare un attacco grazie ad una presa agevole", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("parare gli attacchi grazie ad una presa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
+                messaggio("agevole dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 if dati[129] != 4:
                     messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
                 if dati[129] == 1:
@@ -1405,43 +1415,49 @@ def equip(dati, canzone):
                 scudo = pygame.transform.scale(scudos, (gpx * 5, gpy * 5))
                 armaturas = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % dati[8])
                 armatura = pygame.transform.scale(armaturas, (gpx * 5, gpy * 5))
-                """guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
+                guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
                 guanti = pygame.transform.scale(guantis, (gpx * 5, gpy * 5))
                 collanas = pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % dati[130])
-                collana = pygame.transform.scale(collanas, (gpx * 5, gpy * 5))"""
+                collana = pygame.transform.scale(collanas, (gpx * 5, gpy * 5))
                 carim = False
             messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.4, 70)
-            messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.5, 50)
+            messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.2, 70)
+            messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
+                schermo.blit(sfondoOggetto, (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgSpade[i], (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
                 i += 1
-            messaggio("Archi", grigiochi, gsx // 32 * 5.5, gsy // 18 * 5.5, 50)
+            messaggio("Archi", grigiochi, gsx // 32 * 5.5, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
+                schermo.blit(sfondoOggetto, (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgArchi[i], (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
                 i += 1
-            messaggio("Protezioni", grigiochi, gsx // 32 * 9.3, gsy // 18 * 4.4, 70)
-            messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.5, 50)
+            messaggio("Protezioni", grigiochi, gsx // 32 * 9.3, gsy // 18 * 4.2, 70)
+            messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
+                schermo.blit(sfondoOggetto, (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgArmature[i], (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
                 i += 1
-            messaggio("Scudi", grigiochi, gsx // 32 * 12.5, gsy // 18 * 5.5, 50)
+            messaggio("Scudi", grigiochi, gsx // 32 * 12.5, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
+                schermo.blit(sfondoOggetto, (gsx // 32 * 12.2, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgScudi[i], (gsx // 32 * 12.2, int((gsy // 18 * 6) + (gpy * 2 * i))))
                 i += 1
-            messaggio("Accessori", grigiochi, gsx // 32 * 16.3, gsy // 18 * 4.4, 70)
-            messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.5, 50)
+            messaggio("Accessori", grigiochi, gsx // 32 * 16.3, gsy // 18 * 4.2, 70)
+            messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
+                schermo.blit(sfondoOggetto, (gsx // 32 * 15.7, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgGuanti[i], (gsx // 32 * 15.7, int((gsy // 18 * 6) + (gpy * 2 * i))))
                 i += 1
-            messaggio("Collane", grigiochi, gsx // 32 * 19.2, gsy // 18 * 5.5, 50)
+            messaggio("Collane", grigiochi, gsx // 32 * 19.2, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
+                schermo.blit(sfondoOggetto, (gsx // 32 * 19.2, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgCollane[i], (gsx // 32 * 19.2, ((gsy // 18 * 6) + (gpy * 2 * i))))
                 i += 1
 
@@ -1451,7 +1467,9 @@ def equip(dati, canzone):
             schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 11.3))
             schermo.blit(persstab, (gsx // 32 * 24.5, gsy // 18 * 11.3))
             schermo.blit(armatura, (gsx // 32 * 24.5, gsy // 18 * 11.3))
+            schermo.blit(collana, (gsx // 32 * 24.5, gsy // 18 * 11.3))
             schermo.blit(spada, (gsx // 32 * 24.5, gsy // 18 * 11.3))
+            schermo.blit(guanti, (gsx // 32 * 24.5, gsy // 18 * 11.3))
             schermo.blit(scudo, (gsx // 32 * 24.5, gsy // 18 * 11.3))
             messaggio("Statistiche:", grigiochi, gsx // 32 * 23, gsy // 18 * 6.7, 50)
             messaggio("Punti vita: %i" % pvtot, grigiochi, gsx // 32 * 23, gsy // 18 * 7.5, 35)
@@ -1779,8 +1797,8 @@ def equip(dati, canzone):
                 if dati[65] != 0:
                     messaggio("Guanti confortevoli:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                     messaggio(u"Guanti che aumentano la probabilità di", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("parare un attacco grazie ad una presa agevole", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("parare gli attacchi grazie ad una presa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
+                    messaggio("agevole dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     if dati[129] != 4:
                         messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
                     if dati[129] == 1:
@@ -1802,7 +1820,7 @@ def equip(dati, canzone):
                     messaggio("Collana medicinale:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                     messaggio("Collana composta da erbe il cui odore", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                     messaggio(u"neutralizza la tissicità del veleno", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio(u"(non ha effetto se si è già avvelenati)", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
             if voceMarcata == 28:
                 if dati[68] != 0:
                     messaggio("Collana rigenerante:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -3192,11 +3210,11 @@ def equiprobo(dati, canzone):
         if dati[41 + i] > 0:
             img = pygame.image.load("Immagini/EquipRobo/Batteria%iMenu.png" % i)
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
         vetIcoBatterie.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
         i += 1
-
-    esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+    sfondoOggetto = pygame.image.load("Immagini/EquipRallo/SfondoOggetto.png")
+    sfondoOggetto = pygame.transform.scale(sfondoOggetto, (int(gpx * 2), int(gpy * 2)))
 
     # primo frame
     if True:
@@ -3213,7 +3231,7 @@ def equiprobo(dati, canzone):
             voceMarcata = voceGambitMarcata
 
         if riordinamento:
-            pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
+            pygame.draw.rect(schermo, grigiochi, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
 
         messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
 
@@ -3221,7 +3239,8 @@ def equiprobo(dati, canzone):
         messaggio("Batterie", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 60)
         i = 0
         while i < 5:
-            schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.4, (gsy // 18 * 6 + (gpy * 2 * i))))
+            schermo.blit(sfondoOggetto, (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
+            schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
             i += 1
 
         # programmazione Colco
@@ -3229,9 +3248,15 @@ def equiprobo(dati, canzone):
         i = 1
         while i <= 10:
             if i == 10:
-                messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                if riordinamento and voceMarcata == i + 5:
+                    messaggio(str(i), grigio, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                else:
+                    messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
             else:
-                messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                if riordinamento and voceMarcata == i + 5:
+                    messaggio(str(i), grigio, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                else:
+                    messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
             i += 1
         messaggio("Condizione...", grigiochi, gsx // 32 * 11, gsy // 18 * 4.5, 60)
         c = 6.1
@@ -3239,47 +3264,110 @@ def equiprobo(dati, canzone):
             if dati[i] == -1:
                 messaggio("---", grigioscu, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 0:
-                messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("---", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 1:
-                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Rallo con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 2:
-                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Rallo con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 3:
-                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Rallo con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 4:
-                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Rallo con veleno", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 5:
-                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Colco surriscaldato", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 6:
-                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Colco con pe < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 7:
-                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Colco con pe < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 8:
-                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Colco con pe < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 9:
-                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Sempre a Rallo", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 10:
-                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Sempre a Colco", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 11:
-                messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Nemico a caso", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 12:
-                messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Nemico vicino", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 13:
-                messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Nemico lontano", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 14:
-                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Nemico con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 15:
-                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Nemico con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 16:
-                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Nemico con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 17:
-                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Nemico con meno pv", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 18:
-                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Numero di nemici > 1", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 19:
-                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Numero di nemici > 4", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             if dati[i] == 20:
-                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 95:
+                    messaggio("Numero di nemici > 7", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                else:
+                    messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
             c += 1
         messaggio("...Tecnica", grigiochi, gsx // 32 * 17.5, gsy // 18 * 4.5, 60)
         c = 6.1
@@ -3287,47 +3375,110 @@ def equiprobo(dati, canzone):
             if dati[i] == -1:
                 messaggio("---", grigioscu, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 0:
-                messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("---", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 1:
-                messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Scossa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 2:
-                messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Cura", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 3:
-                messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Antidoto", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 4:
-                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Freccia elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 5:
-                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Tempesta elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 6:
-                messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Raffreddamento", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 7:
-                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Auto-ricarica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 8:
-                messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Cura +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 9:
-                messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Scossa +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 10:
-                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Freccia elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 11:
-                messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Velocizza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 12:
-                messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Carica attacco", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 13:
-                messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Carica difesa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 14:
-                messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Efficienza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 15:
-                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Tempesta elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 16:
-                messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Cura ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 17:
-                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Auto-ricarica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 18:
-                messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Scossa ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 19:
-                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Freccia Elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             if dati[i] == 20:
-                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                if riordinamento and voceMarcata == i - 105:
+                    messaggio("Tempesta elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                else:
+                    messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
             c = c + 1
 
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
@@ -3685,40 +3836,45 @@ def equiprobo(dati, canzone):
                             if dati[71] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 0
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
+                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                if dati[10] > entot:
+                                    dati[10] = entot
                             else:
                                 canaleSoundPuntatore.play(selimp)
                         if voceMarcata == 2:
                             if dati[72] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 1
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
+                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                if dati[10] > entot:
+                                    dati[10] = entot
                             else:
                                 canaleSoundPuntatore.play(selimp)
                         if voceMarcata == 3:
                             if dati[73] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 2
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
+                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                if dati[10] > entot:
+                                    dati[10] = entot
                             else:
                                 canaleSoundPuntatore.play(selimp)
                         if voceMarcata == 4:
                             if dati[74] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 3
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
+                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                if dati[10] > entot:
+                                    dati[10] = entot
                             else:
                                 canaleSoundPuntatore.play(selimp)
                         if voceMarcata == 5:
                             if dati[75] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 4
-                                if dati[10] > 300 + (dati[9] * 100):
-                                    dati[10] = 300 + (dati[9] * 100)
+                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                if dati[10] > entot:
+                                    dati[10] = entot
                             else:
                                 canaleSoundPuntatore.play(selimp)
 
@@ -3771,7 +3927,7 @@ def equiprobo(dati, canzone):
                 voceMarcata = voceGambitMarcata
 
             if riordinamento:
-                pygame.draw.rect(schermo, grigioscu, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
+                pygame.draw.rect(schermo, grigiochi, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
 
             messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
 
@@ -3779,7 +3935,8 @@ def equiprobo(dati, canzone):
             messaggio("Batterie", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 60)
             i = 0
             while i < 5:
-                schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.4, (gsy // 18 * 6 + (gpy * 2 * i))))
+                schermo.blit(sfondoOggetto, (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
+                schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
                 i += 1
 
             # programmazione Colco
@@ -3787,9 +3944,15 @@ def equiprobo(dati, canzone):
             i = 1
             while i <= 10:
                 if i == 10:
-                    messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                    if riordinamento and voceMarcata == i + 5:
+                        messaggio(str(i), grigio, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                    else:
+                        messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
                 else:
-                    messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                    if riordinamento and voceMarcata == i + 5:
+                        messaggio(str(i), grigio, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                    else:
+                        messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
                 i += 1
             messaggio("Condizione...", grigiochi, gsx // 32 * 11, gsy // 18 * 4.5, 60)
             c = 6.1
@@ -3797,47 +3960,110 @@ def equiprobo(dati, canzone):
                 if dati[i] == -1:
                     messaggio("---", grigioscu, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("---", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Rallo con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Rallo con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Rallo con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Rallo con veleno", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Colco surriscaldato", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Colco con pe < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Colco con pe < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Colco con pe < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Sempre a Rallo", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Sempre a Colco", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Nemico a caso", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Nemico vicino", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Nemico lontano", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Nemico con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Nemico con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Nemico con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Nemico con meno pv", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Numero di nemici > 1", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Numero di nemici > 4", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 95:
+                        messaggio("Numero di nemici > 7", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
                 c += 1
             messaggio("...Tecnica", grigiochi, gsx // 32 * 17.5, gsy // 18 * 4.5, 60)
             c = 6.1
@@ -3845,47 +4071,110 @@ def equiprobo(dati, canzone):
                 if dati[i] == -1:
                     messaggio("---", grigioscu, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("---", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Scossa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Cura", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Antidoto", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Freccia elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Tempesta elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Raffreddamento", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Auto-ricarica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Cura +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Scossa +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Freccia elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Velocizza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Carica attacco", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Carica difesa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Efficienza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Tempesta elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Cura ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Auto-ricarica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Scossa ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Freccia Elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    if riordinamento and voceMarcata == i - 105:
+                        messaggio("Tempesta elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    else:
+                        messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
                 c = c + 1
 
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
@@ -4057,7 +4346,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
         if dati[32] >= 0:
             messaggio("Caricabatterie", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
             messaggio("x %i" % dati[32], grigiochi, gsx // 32 * 9.3, gsy // 18 * 6, 45)
@@ -4067,7 +4356,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
         if dati[33] >= 0:
             messaggio("Medicina", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
             messaggio("x %i" % dati[33], grigiochi, gsx // 32 * 9.3, gsy // 18 * 7, 45)
@@ -4077,7 +4366,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
         if dati[34] >= 0:
             messaggio("Super pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
             messaggio("x %i" % dati[34], grigiochi, gsx // 32 * 9.3, gsy // 18 * 8, 45)
@@ -4087,7 +4376,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
         if dati[35] >= 0:
             messaggio("Caricabatterie migliorato", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
             messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
@@ -4097,7 +4386,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
         if dati[36] >= 0:
             messaggio("Bomba", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
             messaggio("x %i" % dati[36], grigiochi, gsx // 32 * 9.3, gsy // 18 * 11, 45)
@@ -4108,7 +4397,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
         if dati[37] >= 0:
             messaggio("Bomba velenosa", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
             messaggio("x %i" % dati[37], grigiochi, gsx // 32 * 9.3, gsy // 18 * 12, 45)
@@ -4119,7 +4408,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
         if dati[38] >= 0:
             messaggio("Esca", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
             messaggio("x %i" % dati[38], grigiochi, gsx // 32 * 9.3, gsy // 18 * 13, 45)
@@ -4130,7 +4419,7 @@ def oggetti(dati, canzone):
                 messaggio("riprenderla passandoci sopra", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
         if dati[39] >= 0:
             messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
             messaggio("x %i" % dati[39], grigiochi, gsx // 32 * 9.3, gsy // 18 * 14, 45)
@@ -4141,7 +4430,7 @@ def oggetti(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
         if dati[40] >= 0:
             messaggio("Bomba potenziata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
             messaggio("x %i" % dati[40], grigiochi, gsx // 32 * 9.3, gsy // 18 * 15, 45)
@@ -4152,7 +4441,7 @@ def oggetti(dati, canzone):
                 messaggio("vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
 
         # menu conferma
         if usa != 0:
@@ -4478,7 +4767,7 @@ def oggetti(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
             if dati[32] >= 0:
                 messaggio("Caricabatterie", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
                 messaggio("x %i" % dati[32], grigiochi, gsx // 32 * 9.3, gsy // 18 * 6, 45)
@@ -4488,7 +4777,7 @@ def oggetti(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
             if dati[33] >= 0:
                 messaggio("Medicina", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
                 messaggio("x %i" % dati[33], grigiochi, gsx // 32 * 9.3, gsy // 18 * 7, 45)
@@ -4498,7 +4787,7 @@ def oggetti(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
             if dati[34] >= 0:
                 messaggio("Super pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
                 messaggio("x %i" % dati[34], grigiochi, gsx // 32 * 9.3, gsy // 18 * 8, 45)
@@ -4508,7 +4797,7 @@ def oggetti(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
             if dati[35] >= 0:
                 messaggio("Caricabatterie migliorato", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
                 messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
@@ -4518,57 +4807,62 @@ def oggetti(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
             if dati[36] >= 0:
                 messaggio("Bomba", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
                 messaggio("x %i" % dati[36], grigiochi, gsx // 32 * 9.3, gsy // 18 * 11, 45)
                 if oggetton == 6:
                     messaggio("Bomba:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", grigiochi, gsx // 32 * 20,
+                              gsy // 18 * 14.5, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
             if dati[37] >= 0:
                 messaggio("Bomba velenosa", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
                 messaggio("x %i" % dati[37], grigiochi, gsx // 32 * 9.3, gsy // 18 * 12, 45)
                 if oggetton == 7:
                     messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Infligge avvelenamento al nemico su cui viene lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("Infligge avvelenamento al nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
+                              gsy // 18 * 14.5, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
             if dati[38] >= 0:
                 messaggio("Esca", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
                 messaggio("x %i" % dati[38], grigiochi, gsx // 32 * 9.3, gsy // 18 * 13, 45)
                 if oggetton == 8:
                     messaggio("Esca:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", grigiochi, gsx // 32 * 20,
+                              gsy // 18 * 14.5, 35)
                     messaggio("riprenderla passandoci sopra", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
             if dati[39] >= 0:
                 messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
                 messaggio("x %i" % dati[39], grigiochi, gsx // 32 * 9.3, gsy // 18 * 14, 45)
                 if oggetton == 9:
                     messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
+                              gsy // 18 * 14.5, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
             if dati[40] >= 0:
                 messaggio("Bomba potenziata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
                 messaggio("x %i" % dati[40], grigiochi, gsx // 32 * 9.3, gsy // 18 * 15, 45)
                 if oggetton == 10:
                     messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
+                    messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", grigiochi, gsx // 32 * 20,
+                              gsy // 18 * 14.5, 35)
                     messaggio("vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 40)
+                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
 
             # menu conferma
             if usa != 0:
@@ -4721,19 +5015,15 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
     conferma = 0
     voceMarcata = 1
 
-    esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
-
     # primo frame
     if True:
+        esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
         messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
         messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
-        """if not apriocchio:
-            messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
-        else:
-            messaggio("Tecniche", grigioscu, gsx // 32 * 2, gsy // 18 * 6, 50)"""
         messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
         messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 50)
         messaggio("Mappa", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 50)
@@ -4753,6 +5043,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 robosta = robograf
                 robosta = pygame.transform.scale(robosta, (gpx * 10, gpy * 10))
             carim = False
+
         # vita-status personaggio
         if dati[5] < 0:
             dati[5] = 0
@@ -4774,15 +5065,22 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         # vita-status robo
         if dati[10] < 0:
             dati[10] = 0
-        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 23, gsy // 18 * 13, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 23, gsy // 18 * 14, 50)
-        schermo.blit(sfondostastart, (gsx // 32 * 23, (gsy // 18 * 15) + (gpy // 8)))
+        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 23.5, gsy // 18 * 13, 50)
+        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 23.5, gsy // 18 * 14, 50)
+        schermo.blit(sfondostastart, (gsx // 32 * 23.5, (gsy // 18 * 15) + (gpy // 8)))
         if dati[122] > 0:
-            schermo.blit(surriscaldatosta, (gsx // 32 * 23, gsy // 18 * 15))
+            schermo.blit(surriscaldatosta, (gsx // 32 * 23.5, gsy // 18 * 15))
         if dati[125] > 0:
-            schermo.blit(velocitapiusta, ((gsx // 32 * 23) + (2 * gpx // 4 * 3), gsy // 18 * 15))
+            schermo.blit(velocitapiusta, ((gsx // 32 * 23.5) + (2 * gpx // 4 * 3), gsy // 18 * 15))
         if dati[126] > 0:
-            schermo.blit(efficienzapiusta, ((gsx // 32 * 23) + (4 * gpx // 4 * 3), gsy // 18 * 15))
+            schermo.blit(efficienzapiusta, ((gsx // 32 * 23.5) + (4 * gpx // 4 * 3), gsy // 18 * 15))
+
+        if attacco != 0:
+            risposta = True
+
+        schermo.blit(sacchettoDenaroStart, (gsx // 32 * 24, gsy // 18 * 2.5))
+        messaggio("Denaro: " + str(dati[131]), grigiochi, gsx // 32 * 24, gsy // 18 * 6, 50)
+
         schermo.blit(perssta, (gsx // 32 * 12, gsy // 18 * 2))
         schermo.blit(robosta, (gsx // 32 * 21, gsy // 18 * 2))
         schermo.blit(puntatore, (xp, yp))
@@ -4878,6 +5176,8 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                         conferma = 2
 
         if tastoTrovato:
+            esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+
             # chiedere conferma per uscire
             if conferma != 0:
                 inizio, risposta = chiediconferma(conferma, c27)
@@ -4888,10 +5188,6 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
             messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
             messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
-            """if not apriocchio:
-                messaggio("Tecniche", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
-            else:
-                messaggio("Tecniche", grigioscu, gsx // 32 * 2, gsy // 18 * 6, 50)"""
             messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
             messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 50)
             messaggio("Mappa", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 50)
@@ -4932,18 +5228,21 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             # vita-status robo
             if dati[10] < 0:
                 dati[10] = 0
-            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 23, gsy // 18 * 13, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 23, gsy // 18 * 14, 50)
-            schermo.blit(sfondostastart, (gsx // 32 * 23, (gsy // 18 * 15) + (gpy // 8)))
+            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 23.5, gsy // 18 * 13, 50)
+            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 23.5, gsy // 18 * 14, 50)
+            schermo.blit(sfondostastart, (gsx // 32 * 23.5, (gsy // 18 * 15) + (gpy // 8)))
             if dati[122] > 0:
-                schermo.blit(surriscaldatosta, (gsx // 32 * 23, gsy // 18 * 15))
+                schermo.blit(surriscaldatosta, (gsx // 32 * 23.5, gsy // 18 * 15))
             if dati[125] > 0:
-                schermo.blit(velocitapiusta, ((gsx // 32 * 23) + (2 * gpx // 4 * 3), gsy // 18 * 15))
+                schermo.blit(velocitapiusta, ((gsx // 32 * 23.5) + (2 * gpx // 4 * 3), gsy // 18 * 15))
             if dati[126] > 0:
-                schermo.blit(efficienzapiusta, ((gsx // 32 * 23) + (4 * gpx // 4 * 3), gsy // 18 * 15))
+                schermo.blit(efficienzapiusta, ((gsx // 32 * 23.5) + (4 * gpx // 4 * 3), gsy // 18 * 15))
 
             if attacco != 0:
                 risposta = True
+
+            schermo.blit(sacchettoDenaroStart, (gsx // 32 * 24, gsy // 18 * 2.5))
+            messaggio("Denaro: " + str(dati[131]), grigiochi, gsx // 32 * 24, gsy // 18 * 6, 50)
 
             schermo.blit(perssta, (gsx // 32 * 12, gsy // 18 * 2))
             schermo.blit(robosta, (gsx // 32 * 21, gsy // 18 * 2))

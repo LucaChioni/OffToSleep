@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro):
     if caricaTutto:
         schermo.blit(imgSfondoStanza, (0, 0))
         # porte
@@ -40,62 +40,30 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         # disegno le caselle viste
         while i < len(caseviste):
             if caseviste[i + 2]:
-                n = 0
-                while n < 32:
-                    if caseviste[i] == gpx * n:
-                        m = 0
-                        while m < 18:
-                            if caseviste[i + 1] == gpy * m:
-                                if (n + m) % 2 == 0:
-                                    schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
-                                if (n + m) % 2 != 0:
-                                    schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
-                            m = m + 1
-                    n = n + 1
-            i = i + 3
+                if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
+                if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
+            i += 3
 
     # disegnare casella sopra la vecchia posizione dei personaggi e mostri
-    n = 0
-    while n < 32:
-        if vx == gpx * n:
-            m = 0
-            while m < 18:
-                if vy == gpy * m:
-                    if (n + m) % 2 == 0:
-                        schermo.blit(sfondinoa, (vx, vy))
-                    if (n + m) % 2 != 0:
-                        schermo.blit(sfondinob, (vx, vy))
-                m = m + 1
-        n = n + 1
-    n = 0
-    while n < 32:
-        if vrx == gpx * n:
-            m = 0
-            while m < 18:
-                if vry == gpy * m:
-                    if (n + m) % 2 == 0:
-                        schermo.blit(sfondinoa, (vrx, vry))
-                    if (n + m) % 2 != 0:
-                        schermo.blit(sfondinob, (vrx, vry))
-                m = m + 1
-        n = n + 1
+    if ((vx / gpx) + (vy / gpy)) % 2 == 0:
+        schermo.blit(sfondinoa, (vx, vy))
+    if ((vx / gpx) + (vy / gpy)) % 2 == 1:
+        schermo.blit(sfondinob, (vx, vy))
+    if ((vrx / gpx) + (vry / gpy)) % 2 == 0:
+        schermo.blit(sfondinoa, (vrx, vry))
+    if ((vrx / gpx) + (vry / gpy)) % 2 == 1:
+        schermo.blit(sfondinob, (vrx, vry))
     j = 0
     while j < len(caseviste):
         for nemico in listaNemici:
             if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
-                n = 0
-                while n < 32:
-                    if nemico.vx == gpx * n:
-                        m = 0
-                        while m < 18:
-                            if nemico.vy == gpy * m:
-                                if (n + m) % 2 == 0:
-                                    schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
-                                if (n + m) % 2 != 0:
-                                    schermo.blit(sfondinob, (nemico.vx, nemico.vy))
-                            m = m + 1
-                    n = n + 1
-        j = j + 3
+                if ((nemico.vx / gpx) + (nemico.vy / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
+                if ((nemico.vx / gpx) + (nemico.vy / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (nemico.vx, nemico.vy))
+        j += 3
 
     # backbround occhio/chiave
     schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
@@ -118,45 +86,19 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
         i = i + 4
 
+    # denaro: qta, x, y
+    i = 0
+    while i < len(vettoreDenaro):
+        schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+        i += 3
+
     # robo
     schermo.blit(robot, (rx, ry))
     if surrisc > 0:
         schermo.blit(roboSurrisc, (rx, ry))
     schermo.blit(armrob, (rx, ry))
 
-    # personaggio
-    if npers == 1:
-        schermo.blit(scudo, (x, y))
-        schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(persdb, (x, y))
-        schermo.blit(arma, (x, y))
-    if npers == 2:
-        schermo.blit(arma, (x, y))
-        schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(persab, (x, y))
-        schermo.blit(scudo, (x, y))
-    if npers == 3:
-        schermo.blit(arma, (x, y))
-        schermo.blit(scudo, (x, y))
-        schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(perswb, (x, y))
-    if npers == 4:
-        schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(perssb, (x, y))
-        schermo.blit(arma, (x, y))
-        schermo.blit(scudo, (x, y))
+    disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, guanti)
 
     # vita-status personaggio
     lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
@@ -218,7 +160,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro):
     xp = x
     yp = y
     nxp = 0
@@ -289,19 +231,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     # disegno le caselle viste
     while i < len(caseviste):
         if caseviste[i + 2]:
-            n = 0
-            while n < 32:
-                if caseviste[i] == gpx * n:
-                    m = 0
-                    while m < 18:
-                        if caseviste[i + 1] == gpy * m:
-                            if (n + m) % 2 == 0:
-                                schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
-                            if (n + m) % 2 != 0:
-                                schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
-                        m = m + 1
-                n = n + 1
-        i = i + 3
+            if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 0:
+                schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
+            if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 1:
+                schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
+        i += 3
 
     # vita-status personaggio
     lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
@@ -348,6 +282,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     if effp > 0:
         schermo.blit(efficienzapiu, ((gsx // 32 * 1) + (gpx // 4 * 3) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
 
+    # controllo caselle attaccabili
+    if attacco == 2:
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
+    if attacco == 3:
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
+    if attacco == 4:
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
+    if attacco == 5:
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
+    if attacco == 6:
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 4)
+
     tastotempfps = 3
     tastop = 0
     numTastiPremuti = 0
@@ -387,18 +333,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             xvp = xp
             yvp = yp
 
-        n = 0
-        while n < 32:
-            if xvp == gpx * n:
-                m = 0
-                while m < 18:
-                    if yvp == gpy * m:
-                        if (n + m) % 2 == 0:
-                            schermo.blit(sfondinoa, (xvp, yvp))
-                        if (n + m) % 2 != 0:
-                            schermo.blit(sfondinob, (xvp, yvp))
-                    m = m + 1
-            n = n + 1
+        if ((xvp / gpx) + (yvp / gpy)) % 2 == 0:
+            schermo.blit(sfondinoa, (xvp, yvp))
+        if ((xvp / gpx) + (yvp / gpy)) % 2 == 1:
+            schermo.blit(sfondinob, (xvp, yvp))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -449,16 +387,40 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             spingiColco = True
                             sposta = True
                             risposta = True
+                            if xp == x + gpx and yp == y:
+                                npers = 1
+                            if xp == x - gpx and yp == y:
+                                npers = 2
+                            if xp == x and yp == y + gpy:
+                                npers = 4
+                            if xp == x and yp == y - gpy:
+                                npers = 3
                         # apri/chiudi porta attacco = 1
                         elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and suPorta:
                             apriChiudiPorta = [True, xp, yp]
                             sposta = True
                             risposta = True
+                            if xp == x + gpx and yp == y:
+                                npers = 1
+                            if xp == x - gpx and yp == y:
+                                npers = 2
+                            if xp == x and yp == y + gpy:
+                                npers = 4
+                            if xp == x and yp == y - gpy:
+                                npers = 3
                         # apri cofanetto attacco = 1
                         elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and suCofanetto:
                             apriCofanetto = [True, xp, yp]
                             sposta = True
                             risposta = True
+                            if xp == x + gpx and yp == y:
+                                npers = 1
+                            if xp == x - gpx and yp == y:
+                                npers = 2
+                            if xp == x and yp == y + gpy:
+                                npers = 4
+                            if xp == x and yp == y - gpy:
+                                npers = 3
                         # normale attacco = 1
                         elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)):
                             infliggidanno = True
@@ -473,7 +435,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -491,7 +452,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -510,7 +470,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -543,7 +502,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -562,7 +520,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 4)
                             i = 0
                             # disegno le caselle attaccabili
                             while i < len(caseattactot):
@@ -587,7 +544,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 risposta = True
 
                         # attacco normale se c'e' il mostro
-                        if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and sposta and risposta:
+                        if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and sposta and risposta and infliggidanno:
+                            sposta = True
+                            attaccato = True
                             if xp == x + gpx and yp == y:
                                 npers = 1
                             if xp == x - gpx and yp == y:
@@ -670,19 +629,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             # disegno le caselle viste
             while i < len(caseviste):
                 if caseviste[i + 2]:
-                    n = 0
-                    while n < 32:
-                        if caseviste[i] == gpx * n:
-                            m = 0
-                            while m < 18:
-                                if caseviste[i + 1] == gpy * m:
-                                    if (n + m) % 2 == 0:
-                                        schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
-                                    if (n + m) % 2 != 0:
-                                        schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
-                                m = m + 1
-                        n = n + 1
-                i = i + 3
+                    if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 0:
+                        schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
+                    if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 1:
+                        schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
+                i += 3
             ricaricaschermo = False
             appenaCaricato = True
 
@@ -791,8 +742,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 2:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
             schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -802,8 +751,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 3:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
             schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -813,8 +760,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 4:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
             schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -824,8 +769,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 5:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
             schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 5)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -835,8 +778,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 6:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 9, gpy * 9))
             schermo.blit(campoattaccabile3, (x - (gpx * 4), y - (gpy * 4)))
-            # controllo caselle attaccabili
-            caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 4)
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
@@ -886,6 +827,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
             i = i + 4
 
+        # denaro: qta, x, y
+        i = 0
+        while i < len(vettoreDenaro):
+            schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+            i += 3
+
         # robo
         schermo.blit(robot, (rx, ry))
         if surrisc > 0:
@@ -893,38 +840,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         schermo.blit(armrob, (rx, ry))
         # personaggio
         if not risposta:
-            if npers == 1:
-                schermo.blit(scudo, (x, y))
-                schermo.blit(pers, (x, y))
-                if avvele:
-                    schermo.blit(persAvvele, (x, y))
-                schermo.blit(armatura, (x, y))
-                schermo.blit(persdb, (x, y))
-                schermo.blit(arma, (x, y))
-            if npers == 2:
-                schermo.blit(arma, (x, y))
-                schermo.blit(pers, (x, y))
-                if avvele:
-                    schermo.blit(persAvvele, (x, y))
-                schermo.blit(armatura, (x, y))
-                schermo.blit(persab, (x, y))
-                schermo.blit(scudo, (x, y))
-            if npers == 3:
-                schermo.blit(arma, (x, y))
-                schermo.blit(scudo, (x, y))
-                schermo.blit(pers, (x, y))
-                if avvele:
-                    schermo.blit(persAvvele, (x, y))
-                schermo.blit(armatura, (x, y))
-                schermo.blit(perswb, (x, y))
-            if npers == 4:
-                schermo.blit(pers, (x, y))
-                if avvele:
-                    schermo.blit(persAvvele, (x, y))
-                schermo.blit(armatura, (x, y))
-                schermo.blit(perssb, (x, y))
-                schermo.blit(arma, (x, y))
-                schermo.blit(scudo, (x, y))
+            disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, guanti)
 
         # disegnare i mostri
         j = 0
@@ -1028,18 +944,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if puntatogg != 0:
             schermo.blit(puntatogg, (xp, yp))
         if risposta:
-            n = 0
-            m = 0
-            while n < 32:
-                if xp == gpx * n:
-                    while m < 18:
-                        if yp == gpy * m:
-                            if (n + m) % 2 == 0:
-                                schermo.blit(sfondinoa, (xp, yp))
-                            if (n + m) % 2 != 0:
-                                schermo.blit(sfondinob, (xp, yp))
-                        m = m + 1
-                n = n + 1
+            if ((xp / gpx) + (yp / gpy)) % 2 == 0:
+                schermo.blit(sfondinoa, (xp, yp))
+            if ((xp / gpx) + (yp / gpy)) % 2 == 1:
+                schermo.blit(sfondinob, (xp, yp))
 
         # disegna vita-status-raggio visivo mostri
         for nemico in listaNemici:
@@ -1050,12 +958,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             raggiovista = nemico.raggioVisivo
             if xp == mx and yp == my:
                 # controllo caselle attaccabili
-                caseattactot = trovacasattaccabili(mx, my, stanza, porte, cofanetti, nemico.raggioVisivo)
+                caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, nemico.raggioVisivo)
                 i = 0
                 # disegno le caselle attaccabili
-                while i < len(caseattactot):
-                    if not caseattactot[i + 2] and (caseattactot[i] <= mx + raggiovista and caseattactot[i + 1] <= my + raggiovista and caseattactot[i] >= mx - raggiovista and caseattactot[i + 1] >= my - raggiovista and not (caseattactot[i] == mx and caseattactot[i + 1] == my)):
-                        schermo.blit(caselleattaccabilimostro, (caseattactot[i], caseattactot[i + 1]))
+                while i < len(caseattactotMostri):
+                    if not caseattactotMostri[i + 2] and (caseattactotMostri[i] <= mx + raggiovista and caseattactotMostri[i + 1] <= my + raggiovista and caseattactotMostri[i] >= mx - raggiovista and caseattactotMostri[i + 1] >= my - raggiovista and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my)):
+                        schermo.blit(caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
                     i = i + 3
                 campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
                 schermo.blit(campoattaccabile3, (mx - raggiovista, my - raggiovista))
@@ -1219,12 +1127,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if xp == rx and yp == ry and enrob > 0:
             # controllo caselle attaccabili
             raggiovista = gpx * 6
-            caseattactot = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
+            caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
             i = 0
             # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= rx + raggiovista and caseattactot[i + 1] <= ry + raggiovista and caseattactot[i] >= rx - raggiovista and caseattactot[i + 1] >= ry - raggiovista and not (caseattactot[i] == rx and caseattactot[i + 1] == ry)):
-                    schermo.blit(caselleattaccabiliRobo, (caseattactot[i], caseattactot[i + 1]))
+            while i < len(caseattactotRobo):
+                if not caseattactotRobo[i + 2] and (caseattactotRobo[i] <= rx + raggiovista and caseattactotRobo[i + 1] <= ry + raggiovista and caseattactotRobo[i] >= rx - raggiovista and caseattactotRobo[i + 1] >= ry - raggiovista and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry)):
+                    schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
                 i = i + 3
             campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
             schermo.blit(campoattaccabile3, (rx - raggiovista, ry - raggiovista))

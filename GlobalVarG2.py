@@ -227,6 +227,10 @@ sfochiaveocchio = pygame.transform.scale(sfochiaveocchio, (gpx * 5, gpy * 2))
 # oggetti lanciati
 esche = pygame.image.load("Immagini/Oggetti/Esca.png")
 esche = pygame.transform.scale(esche, (gpx, gpy))
+sacchettoDenaroStart = pygame.image.load('Immagini/Oggetti/SacchettoDenaro.png')
+sacchettoDenaroStart = pygame.transform.scale(sacchettoDenaroStart, (gpx * 4, gpy * 4))
+sacchettoDenaroo = pygame.image.load('Immagini/Oggetti/SacchettoDenaroIco.png')
+sacchettoDenaro = pygame.transform.scale(sacchettoDenaroo, (gpx, gpy))
 
 # cofanetti
 cofaniaper = pygame.image.load("Immagini/Oggetti/CofanettoAperto.png")

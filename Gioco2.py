@@ -39,6 +39,7 @@ def gameloop():
             yesca = 0
             creaesca = False
             vitaesca = []
+            vettoreDenaro = []
             attacco = 0
             # difesa e' grigio perche' viene impostato a ogni ciclo
             difesa = 0
@@ -252,12 +253,9 @@ def gameloop():
                 caseviste = scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste)
 
                 # eliminare tutte le esche
-                i = 1
-                while i < len(vitaesca):
-                    del vitaesca[i + 2]
-                    del vitaesca[i + 1]
-                    del vitaesca[i]
-                    del vitaesca[i - 1]
+                vitaesca = []
+                # elimino tutti i sacchetti di denaro
+                vettoreDenaro = []
 
                 # cambiosta viene cambiato sopra !!!!!!!!!!!!
                 cambiosta = False
@@ -296,6 +294,23 @@ def gameloop():
             armadAttacco = pygame.transform.scale(armadAttacco, (gpx * 2, gpy))
             armawAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwAttacco.png" % dati[6])
             armawAttacco = pygame.transform.scale(armawAttacco, (gpx, gpy * 2))
+            # arco
+            arcow = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iw.png" % dati[128])
+            arcow = pygame.transform.scale(arcow, (gpx, gpy))
+            arcoa = pygame.image.load("Immagini/EquipRallo/Archi/Arco%ia.png" % dati[128])
+            arcoa = pygame.transform.scale(arcoa, (gpx, gpy))
+            arcos = pygame.image.load("Immagini/EquipRallo/Archi/Arco%is.png" % dati[128])
+            arcos = pygame.transform.scale(arcos, (gpx, gpy))
+            arcod = pygame.image.load("Immagini/EquipRallo/Archi/Arco%id.png" % dati[128])
+            arcod = pygame.transform.scale(arcod, (gpx, gpy))
+            arcosAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%isAttacco.png" % dati[128])
+            arcosAttacco = pygame.transform.scale(arcosAttacco, (gpx, gpy * 2))
+            arcoaAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iaAttacco.png" % dati[128])
+            arcoaAttacco = pygame.transform.scale(arcoaAttacco, (gpx * 2, gpy))
+            arcodAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%idAttacco.png" % dati[128])
+            arcodAttacco = pygame.transform.scale(arcodAttacco, (gpx * 2, gpy))
+            arcowAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iwAttacco.png" % dati[128])
+            arcowAttacco = pygame.transform.scale(arcowAttacco, (gpx, gpy * 2))
             # armatura
             armaturaw = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iw.png" % dati[8])
             armaturaw = pygame.transform.scale(armaturaw, (gpx, gpy))
@@ -316,6 +331,50 @@ def gameloop():
             scudod = pygame.transform.scale(scudod, (gpx, gpy))
             scudoDifesa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iDifesa.png" % dati[7])
             scudoDifesa = pygame.transform.scale(scudoDifesa, (gpx, gpy))
+            # guanti
+            guantiw = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iw.png" % dati[129])
+            guantiw = pygame.transform.scale(guantiw, (gpx, gpy))
+            guantiwMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwMov1.png" % dati[129])
+            guantiwMov1 = pygame.transform.scale(guantiwMov1, (gpx, gpy))
+            guantiwMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwMov2.png" % dati[129])
+            guantiwMov2 = pygame.transform.scale(guantiwMov2, (gpx, gpy))
+            guantia = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%ia.png" % dati[129])
+            guantia = pygame.transform.scale(guantia, (gpx, gpy))
+            guantiaMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaMov1.png" % dati[129])
+            guantiaMov1 = pygame.transform.scale(guantiaMov1, (gpx, gpy))
+            guantiaMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaMov2.png" % dati[129])
+            guantiaMov2 = pygame.transform.scale(guantiaMov2, (gpx, gpy))
+            guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
+            guantis = pygame.transform.scale(guantis, (gpx, gpy))
+            guantisMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isMov1.png" % dati[129])
+            guantisMov1 = pygame.transform.scale(guantisMov1, (gpx, gpy))
+            guantisMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isMov2.png" % dati[129])
+            guantisMov2 = pygame.transform.scale(guantisMov2, (gpx, gpy))
+            guantid = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%id.png" % dati[129])
+            guantid = pygame.transform.scale(guantid, (gpx, gpy))
+            guantidMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idMov1.png" % dati[129])
+            guantidMov1 = pygame.transform.scale(guantidMov1, (gpx, gpy))
+            guantidMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idMov2.png" % dati[129])
+            guantidMov2 = pygame.transform.scale(guantidMov2, (gpx, gpy))
+            guantisAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isAttacco.png" % dati[129])
+            guantisAttacco = pygame.transform.scale(guantisAttacco, (gpx, gpy))
+            guantiaAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaAttacco.png" % dati[129])
+            guantiaAttacco = pygame.transform.scale(guantiaAttacco, (gpx, gpy))
+            guantidAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idAttacco.png" % dati[129])
+            guantidAttacco = pygame.transform.scale(guantidAttacco, (gpx, gpy))
+            guantiwAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwAttacco.png" % dati[129])
+            guantiwAttacco = pygame.transform.scale(guantiwAttacco, (gpx, gpy))
+            guantiDifesa = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iDifesa.png" % dati[129])
+            guantiDifesa = pygame.transform.scale(guantiDifesa, (gpx, gpy))
+            # collana
+            collanaw = pygame.image.load("Immagini/EquipRallo/Collane/Collana%iw.png" % dati[130])
+            collanaw = pygame.transform.scale(collanaw, (gpx, gpy))
+            collanaa = pygame.image.load("Immagini/EquipRallo/Collane/Collana%ia.png" % dati[130])
+            collanaa = pygame.transform.scale(collanaa, (gpx, gpy))
+            collanas = pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % dati[130])
+            collanas = pygame.transform.scale(collanas, (gpx, gpy))
+            collanad = pygame.image.load("Immagini/EquipRallo/Collane/Collana%id.png" % dati[130])
+            collanad = pygame.transform.scale(collanad, (gpx, gpy))
             # armatura robot
             armrobw = pygame.image.load("Immagini/EquipRobo/Batteria%iw.png" % dati[9])
             armrobw = pygame.transform.scale(armrobw, (gpx, gpy))
@@ -332,6 +391,13 @@ def gameloop():
                 armaAttacco = armawAttacco
                 armatura = armaturaw
                 scudo = scudow
+                arco = arcow
+                arcoAttacco = arcowAttacco
+                guanti = guantiw
+                guantiMov1 = guantiwMov1
+                guantiMov2 = guantiwMov2
+                guantiAttacco = guantiwAttacco
+                collana = collanaw
             if agg == 2:
                 arma = armaa
                 armaMov1 = armaaMov1
@@ -339,6 +405,13 @@ def gameloop():
                 armaAttacco = armaaAttacco
                 armatura = armaturaa
                 scudo = scudoa
+                arco = arcoa
+                arcoAttacco = arcoaAttacco
+                guanti = guantia
+                guantiMov1 = guantiaMov1
+                guantiMov2 = guantiaMov2
+                guantiAttacco = guantiaAttacco
+                collana = collanaa
             if agg == 3:
                 arma = armas
                 armaMov1 = armasMov1
@@ -346,6 +419,13 @@ def gameloop():
                 armaAttacco = armasAttacco
                 armatura = armaturas
                 scudo = scudos
+                arco = arcos
+                arcoAttacco = arcosAttacco
+                guanti = guantis
+                guantiMov1 = guantisMov1
+                guantiMov2 = guantisMov2
+                guantiAttacco = guantisAttacco
+                collana = collanas
             if agg == 4:
                 arma = armad
                 armaMov1 = armadMov1
@@ -353,6 +433,13 @@ def gameloop():
                 armaAttacco = armadAttacco
                 armatura = armaturad
                 scudo = scudod
+                arco = arcod
+                arcoAttacco = arcodAttacco
+                guanti = guantid
+                guantiMov1 = guantidMov1
+                guantiMov2 = guantidMov2
+                guantiAttacco = guantidAttacco
+                collana = collanad
             if nrob != 0:
                 if nrob == 1:
                     robot = robod
@@ -378,6 +465,13 @@ def gameloop():
             armaAttacco = armasAttacco
             armatura = armaturas
             scudo = scudos
+            arco = arcos
+            arcoAttacco = arcosAttacco
+            guanti = guantis
+            guantiMov1 = guantisMov1
+            guantiMov2 = guantisMov2
+            guantiAttacco = guantisAttacco
+            collana = collanas
             robot = robos
             armrob = armrobs
             inizio = False
@@ -420,6 +514,13 @@ def gameloop():
                     armaAttacco = armawAttacco
                     armatura = armaturaw
                     scudo = scudow
+                    arco = arcow
+                    arcoAttacco = arcowAttacco
+                    guanti = guantiw
+                    guantiMov1 = guantiwMov1
+                    guantiMov2 = guantiwMov2
+                    guantiAttacco = guantiwAttacco
+                    collana = collanaw
                     ny = -gpy
                     nx = 0
                     primopas = True
@@ -433,6 +534,13 @@ def gameloop():
                     armaAttacco = armaaAttacco
                     armatura = armaturaa
                     scudo = scudoa
+                    arco = arcoa
+                    arcoAttacco = arcoaAttacco
+                    guanti = guantia
+                    guantiMov1 = guantiaMov1
+                    guantiMov2 = guantiaMov2
+                    guantiAttacco = guantiaAttacco
+                    collana = collanaa
                     nx = -gpx
                     ny = 0
                     primopas = True
@@ -446,6 +554,13 @@ def gameloop():
                     armaAttacco = armasAttacco
                     armatura = armaturas
                     scudo = scudos
+                    arco = arcos
+                    arcoAttacco = arcosAttacco
+                    guanti = guantis
+                    guantiMov1 = guantisMov1
+                    guantiMov2 = guantisMov2
+                    guantiAttacco = guantisAttacco
+                    collana = collanas
                     ny = gpy
                     nx = 0
                     primopas = True
@@ -459,6 +574,13 @@ def gameloop():
                     armaAttacco = armadAttacco
                     armatura = armaturad
                     scudo = scudod
+                    arco = arcod
+                    arcoAttacco = arcodAttacco
+                    guanti = guantid
+                    guantiMov1 = guantidMov1
+                    guantiMov2 = guantidMov2
+                    guantiAttacco = guantidAttacco
+                    collana = collanad
                     nx = gpx
                     ny = 0
                     primopas = True
@@ -580,7 +702,6 @@ def gameloop():
                 nemiciInMovimento = True
                 break
         if (nx != 0 or ny != 0) and not nemiciInMovimento and mosseRimasteRob <= 0:
-            # progresso - stanza - x - y - liv - pv - arma - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(50) - condizioni(20) - gambit(20) - veleno - surriscalda // dimensione: 0-122
             vx = x
             vy = y
             sposta = True
@@ -597,7 +718,7 @@ def gameloop():
                 y = vy
         # gestione attacchi
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro)
             caricaTutto = True
             # cambiare posizione dopo l'attacco
             if npers == 3:
@@ -608,6 +729,13 @@ def gameloop():
                 armaAttacco = armawAttacco
                 armatura = armaturaw
                 scudo = scudow
+                arco = arcow
+                arcoAttacco = arcowAttacco
+                guanti = guantiw
+                guantiMov1 = guantiwMov1
+                guantiMov2 = guantiwMov2
+                guantiAttacco = guantiwAttacco
+                collana = collanaw
             if npers == 2:
                 pers = persa
                 arma = armaa
@@ -616,6 +744,13 @@ def gameloop():
                 armaAttacco = armaaAttacco
                 armatura = armaturaa
                 scudo = scudoa
+                arco = arcoa
+                arcoAttacco = arcoaAttacco
+                guanti = guantia
+                guantiMov1 = guantiaMov1
+                guantiMov2 = guantiaMov2
+                guantiAttacco = guantiaAttacco
+                collana = collanaa
             if npers == 4:
                 pers = perss
                 arma = armas
@@ -624,6 +759,13 @@ def gameloop():
                 armaAttacco = armasAttacco
                 armatura = armaturas
                 scudo = scudos
+                arco = arcos
+                arcoAttacco = arcosAttacco
+                guanti = guantis
+                guantiMov1 = guantisMov1
+                guantiMov2 = guantisMov2
+                guantiAttacco = guantisAttacco
+                collana = collanas
             if npers == 1:
                 pers = persd
                 arma = armad
@@ -632,6 +774,13 @@ def gameloop():
                 armaAttacco = armadAttacco
                 armatura = armaturad
                 scudo = scudod
+                arco = arcod
+                arcoAttacco = arcodAttacco
+                guanti = guantid
+                guantiMov1 = guantidMov1
+                guantiMov2 = guantidMov2
+                guantiAttacco = guantidAttacco
+                collana = collanad
             # decrementa oggetto utilizzato
             if sposta:
                 # bomba attacco = 2
@@ -671,9 +820,14 @@ def gameloop():
                 dati[124] = dati[124] - 1
         # veleno
         if dati[121] and sposta:
-            dati[5] = dati[5] - 3
+            dati[5] = dati[5] - 5
             if dati[5] < 0:
                 dati[5] = 0
+        # effetto collana rigenerante
+        if dati[130] == 2 and sposta:
+            dati[5] = dati[5] + 1
+            if dati[5] > pvtot:
+                dati[5] = pvtot
         # apertura/chiusura porte
         if apriChiudiPorta[0]:
             k = 0
@@ -734,18 +888,10 @@ def gameloop():
         while i < len(vitaesca):
             cancellata = False
             if vitaesca[i] <= 0:
-                n = 0
-                while n < 32:
-                    if vitaesca[i + 1] == gpx * n:
-                        m = 0
-                        while m < 18:
-                            if vitaesca[i + 2] == gpy * m:
-                                if (n + m) % 2 == 0:
-                                    schermo.blit(sfondinoa, (vitaesca[i + 1], vitaesca[i + 2]))
-                                if (n + m) % 2 != 0:
-                                    schermo.blit(sfondinob, (vitaesca[i + 1], vitaesca[i + 2]))
-                            m = m + 1
-                    n = n + 1
+                if ((vitaesca[i + 1] / gpx) + (vitaesca[i + 2] / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (vitaesca[i + 1], vitaesca[i + 2]))
+                if ((vitaesca[i + 1] / gpx) + (vitaesca[i + 2] / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (vitaesca[i + 1], vitaesca[i + 2]))
                 del vitaesca[i + 2]
                 del vitaesca[i + 1]
                 del vitaesca[i]
@@ -922,7 +1068,7 @@ def gameloop():
                     if nemico.mosseRimaste > 0:
                         nemico.vx = nemico.x
                         nemico.vy = nemico.y
-                        nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici)
+                        nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, vettoreDenaro)
                         if direzioneMostro == 1:
                             nemico.girati("d")
                         elif direzioneMostro == 2:
@@ -947,6 +1093,14 @@ def gameloop():
                 elif nemico.vita <= 0:
                     nmost -= 1
                     dati[127] += nemico.esp
+                    # effetto apprendimaschera
+                    if dati[130] == 3:
+                        dati[127] += nemico.esp
+                    # metto il suo denaro nella casella in cui è morto (vettore => qta, x, y)
+                    if nemico.denaro > 0:
+                        vettoreDenaro.append(nemico.denaro)
+                        vettoreDenaro.append(nemico.x)
+                        vettoreDenaro.append(nemico.y)
                     nemico.morto = True
                     nemico.animaMorte = True
 
@@ -960,18 +1114,27 @@ def gameloop():
         # aggiorna vista dei mostri e metti l'occhio se ti vedono
         apriocchio = False
         for nemico in listaNemici:
-            nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, dati)
-            if nemico.visto:
-                apriocchio = True
-                break
+            if (abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo):
+                incasevista = False
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i + 2] and caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
+                        incasevista = True
+                        break
+                    i += 3
+                if nemico.vita > 0 and incasevista:
+                    nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, dati)
+                    if nemico.visto:
+                        apriocchio = True
+                        break
 
         # fai tutte le animazioni del turno e disegnare gli sfondi e personaggi
         if not inizio:
             if caricaTutto:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto)
-            primopasso, caricaTutto, tesoro = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, armas, armaturas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici)
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro)
+            primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro)
             if not carim:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto)
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro)
 
         if not aumentoliv:
             caricaTutto = False
@@ -990,6 +1153,29 @@ def gameloop():
                 listaNemici.remove(nemico)
                 listaNemiciTotali.remove(nemico)
             i -= 1
+
+        # prendere il denaro da terra
+        i = 0
+        while i < len(vettoreDenaro):
+            denaroPreso = False
+            if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
+                dati[131] += vettoreDenaro[i]
+                # effetto portafortuna
+                if dati[130] == 4:
+                    dati[131] += vettoreDenaro[i]
+                del vettoreDenaro[i + 2]
+                del vettoreDenaro[i + 1]
+                del vettoreDenaro[i]
+                denaroPreso = True
+            if not denaroPreso:
+                for nemico in listaNemici:
+                    if vettoreDenaro[i + 1] == nemico.x and vettoreDenaro[i + 2] == nemico.y:
+                        nemico.denaro += vettoreDenaro[i]
+                        del vettoreDenaro[i + 2]
+                        del vettoreDenaro[i + 1]
+                        del vettoreDenaro[i]
+                        break
+            i += 3
 
         vx = x
         vy = y

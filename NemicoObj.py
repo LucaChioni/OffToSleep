@@ -25,6 +25,8 @@ class NemicoObj(object):
         velocita = 0
         attacco = 0
         attaccaDaLontano = False
+        velenoso = False
+        denaro = 0
         if self.tipo == "Orco":
             vitaTotale = 50
             esp = 10
@@ -32,13 +34,17 @@ class NemicoObj(object):
             velocita = -1
             attacco = 50
             attaccaDaLontano = False
+            velenoso = False
+            denaro = random.randint(3, 7)
         if self.tipo == "Pipistrello":
             vitaTotale = 20
             esp = 5
             raggioVisivo = gpx * 6
             velocita = 1
             attacco = 20
-            attaccaDaLontano = True
+            attaccaDaLontano = False
+            velenoso = True
+            denaro = random.randint(0, 3)
         self.vita = vitaTotale
         self.vitaTotale = vitaTotale
         self.esp = esp
@@ -52,6 +58,8 @@ class NemicoObj(object):
         self.animaMorte = False
         self.animaDanneggiamento = False
         self.direzione = direzione
+        self.velenoso = velenoso
+        self.denaro = denaro
 
         self.caricaImg()
         self.girati(direzione)

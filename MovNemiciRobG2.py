@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, porte, cofanetti, vetNemici):
+def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, porte, cofanetti, vetNemici, vettoreDenaro):
     sposta = False
     attacca = False
     attrobo = False
@@ -12,44 +12,65 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     nmy = 0
     vistoesca = False
     escabersaglio = 0
-    avvelena = False
+    avvelena = nemico.velenoso
     visto = False
 
     # burocrazia
     carim = False
 
+    caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti, nemico.raggioVisivo)
+
+    vistoDenaro = False
+    primoSacchetto = True
+    xDenaro = 0
+    yDenaro = 0
+    # trovo sacchetto di denaro più vicino
+    i = 0
+    while i < len(vettoreDenaro):
+        j = 0
+        while j < len(caseattactot):
+            if caseattactot[j] == vettoreDenaro[i + 1] and caseattactot[j + 1] == vettoreDenaro[i + 2]:
+                if primoSacchetto:
+                    distminx = vettoreDenaro[i + 1]
+                    distminy = vettoreDenaro[i + 2]
+                    xDenaro = distminx
+                    yDenaro = distminy
+                    vistoDenaro = True
+                    primoSacchetto = False
+                elif abs(vettoreDenaro[i + 1] - nemico.x) + abs(vettoreDenaro[i + 2] - nemico.y) < abs(distminx - nemico.x) + abs(distminy - nemico.y):
+                    distminx = vettoreDenaro[i + 1]
+                    distminy = vettoreDenaro[i + 2]
+                    xDenaro = distminx
+                    yDenaro = distminy
+                    escabersaglio = i
+                break
+            j += 3
+        i += 3
+
     # movimenti verso esche o casuali
     primaesca = True
     i = 0
     while i < len(vitaesca):
-        if abs(vitaesca[i + 2] - nemico.x) <= nemico.raggioVisivo and abs(vitaesca[i + 3] - nemico.y) <= nemico.raggioVisivo:
-            if primaesca:
-                distminx = vitaesca[i + 2]
-                distminy = vitaesca[i + 3]
-                escabersaglio = i
-                vistoesca = True
-                primaesca = False
-            if not primaesca and (abs(vitaesca[i + 2] - nemico.x) + abs(vitaesca[i + 3] - nemico.y) < abs(distminx - nemico.x) + abs(distminy - nemico.y)):
-                distminx = vitaesca[i + 2]
-                distminy = vitaesca[i + 3]
-                escabersaglio = i
-            # controllo caselle che si vedono
-            caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti, nemico.raggioVisivo)
-            j = 0
-            while j < len(caseattactot):
-                if caseattactot[j] == distminx and caseattactot[j + 1] == distminy and not caseattactot[j + 2]:
-                    distminx = 0
-                    distminy = 0
-                    escabersaglio = 0
-                    vistoesca = False
-                    primaesca = True
-                j = j + 3
-        i = i + 4
+        j = 0
+        while j < len(caseattactot):
+            if caseattactot[j] == vitaesca[i + 2] and caseattactot[j + 1] == vitaesca[i + 3]:
+                if primaesca:
+                    distminx = vitaesca[i + 2]
+                    distminy = vitaesca[i + 3]
+                    escabersaglio = i
+                    vistoesca = True
+                    primaesca = False
+                elif abs(vitaesca[i + 2] - nemico.x) + abs(vitaesca[i + 3] - nemico.y) < abs(distminx - nemico.x) + abs(distminy - nemico.y):
+                    distminx = vitaesca[i + 2]
+                    distminy = vitaesca[i + 3]
+                    escabersaglio = i
+                break
+            j += 3
+        i += 4
     vistoRallo = False
     vistoRob = False
     if not visto and not vistoesca:
-        # controllo caselle che si vedono (per controllare se vedono pers o robo)
-        caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti, nemico.raggioVisivo)
+        # controllo caselle che si vedono (per controllare se si vedono pers o robo)
         if abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(caseattactot):
@@ -81,22 +102,21 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             sposta = True
 
     if visto or vistoesca:
-        xAlleatoDaEvitare = rx
-        yAlleatoDaEvitare = ry
-        if ((abs(rx - nemico.x) + abs(ry - nemico.y)) < (abs(x - nemico.x) + abs(y - nemico.y)) or not vistoRallo) and vistoRob and dati[10] > 0 and not vistoesca:
-            xAlleatoDaEvitare = x
-            yAlleatoDaEvitare = y
-            x = rx
-            y = ry
-            attrobo = True
-        if vistoesca:
-            x = vitaesca[escabersaglio + 2]
-            y = vitaesca[escabersaglio + 3]
         nemico.xObbiettivo = x
         nemico.yObbiettivo = y
+        if ((abs(rx - nemico.x) + abs(ry - nemico.y)) < (abs(x - nemico.x) + abs(y - nemico.y)) or not vistoRallo) and vistoRob and dati[10] > 0 and not vistoesca:
+            nemico.xObbiettivo = rx
+            nemico.yObbiettivo = ry
+            attrobo = True
+        if vistoDenaro and (abs(xDenaro - nemico.x) + abs(yDenaro - nemico.y)) <= (abs(nemico.xObbiettivo - nemico.x) + abs(nemico.yObbiettivo - nemico.y)):
+            nemico.xObbiettivo = xDenaro
+            nemico.yObbiettivo = yDenaro
+        if vistoesca:
+            nemico.xObbiettivo = vitaesca[escabersaglio + 2]
+            nemico.yObbiettivo = vitaesca[escabersaglio + 3]
 
-        # nemici che attaccano da vicino
-        if not nemico.attaccaDaLontano:
+        # andare verso il sacchetto di denaro
+        if nemico.xObbiettivo == xDenaro and nemico.yObbiettivo == yDenaro:
             vetNemiciSoloConXeY = []
             i = 0
             while i < len(vetNemici):
@@ -104,10 +124,75 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     vetNemiciSoloConXeY.append(vetNemici[i + 1])
                     vetNemiciSoloConXeY.append(vetNemici[i + 2])
                 i += 4
-            if not (x == xAlleatoDaEvitare and y == yAlleatoDaEvitare):
-                vetNemiciSoloConXeY.append(xAlleatoDaEvitare)
-                vetNemiciSoloConXeY.append(yAlleatoDaEvitare)
-            percorsoTrovato = pathFinding(nemico.x, nemico.y, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte,
+                                          cofanetti, vetNemiciSoloConXeY)
+            if percorsoTrovato:
+                if len(percorsoTrovato) >= 4:
+                    if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[
+                        len(percorsoTrovato) - 3] != nemico.y:
+                        if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
+                            nmos = 1
+                        if percorsoTrovato[len(percorsoTrovato) - 4] < nemico.x:
+                            nmos = 2
+                        if percorsoTrovato[len(percorsoTrovato) - 3] > nemico.y:
+                            nmos = 3
+                        if percorsoTrovato[len(percorsoTrovato) - 3] < nemico.y:
+                            nmos = 4
+                        sposta = True
+            else:
+                if abs(nemico.xObbiettivo - nemico.x) > abs(nemico.yObbiettivo - nemico.y):
+                    if nemico.x < nemico.xObbiettivo:
+                        nmos = 1
+                    if nemico.x > nemico.xObbiettivo:
+                        nmos = 2
+                    sposta = True
+                if abs(nemico.yObbiettivo - nemico.y) > abs(nemico.xObbiettivo - nemico.x):
+                    if nemico.y < nemico.yObbiettivo:
+                        nmos = 3
+                    if nemico.y > nemico.yObbiettivo:
+                        nmos = 4
+                    sposta = True
+                if (abs(nemico.xObbiettivo - nemico.x) == abs(nemico.yObbiettivo - nemico.y)) and (
+                        nemico.xObbiettivo != nemico.x) and (nemico.yObbiettivo != nemico.y):
+                    c = random.randint(1, 2)
+                    if nemico.x < nemico.xObbiettivo and c == 1:
+                        nmos = 1
+                    if nemico.x > nemico.xObbiettivo and c == 1:
+                        nmos = 2
+                    if nemico.y < nemico.yObbiettivo and c == 2:
+                        nmos = 3
+                    if nemico.y > nemico.yObbiettivo and c == 2:
+                        nmos = 4
+                    sposta = True
+            if abs(nemico.xObbiettivo - nemico.x) == gpx and abs(nemico.yObbiettivo - nemico.y) == 0:
+                if nemico.x < nemico.xObbiettivo:
+                    nmos = 1
+                if nemico.x > nemico.xObbiettivo:
+                    nmos = 2
+                sposta = True
+            if abs(nemico.yObbiettivo - nemico.y) == gpy and abs(nemico.xObbiettivo - nemico.x) == 0:
+                if nemico.y < nemico.yObbiettivo:
+                    nmos = 3
+                if nemico.y > nemico.yObbiettivo:
+                    nmos = 4
+                sposta = True
+
+        # nemici che attaccano da vicino
+        elif not nemico.attaccaDaLontano:
+            vetNemiciSoloConXeY = []
+            i = 0
+            while i < len(vetNemici):
+                if not (vetNemici[i + 1] == nemico.x and vetNemici[i + 2] == nemico.y):
+                    vetNemiciSoloConXeY.append(vetNemici[i + 1])
+                    vetNemiciSoloConXeY.append(vetNemici[i + 2])
+                i += 4
+            if not (nemico.xObbiettivo == x and nemico.yObbiettivo == y):
+                vetNemiciSoloConXeY.append(x)
+                vetNemiciSoloConXeY.append(y)
+            if not (nemico.xObbiettivo == rx and nemico.yObbiettivo == ry):
+                vetNemiciSoloConXeY.append(rx)
+                vetNemiciSoloConXeY.append(ry)
+            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, vetNemiciSoloConXeY)
             if percorsoTrovato:
                 if len(percorsoTrovato) >= 4:
                     if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
@@ -121,30 +206,30 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                             nmos = 4
                         sposta = True
             else:
-                if abs(x - nemico.x) > abs(y - nemico.y):
-                    if nemico.x < x:
+                if abs(nemico.xObbiettivo - nemico.x) > abs(nemico.yObbiettivo - nemico.y):
+                    if nemico.x < nemico.xObbiettivo:
                         nmos = 1
-                    if nemico.x > x:
+                    if nemico.x > nemico.xObbiettivo:
                         nmos = 2
                     sposta = True
-                if abs(y - nemico.y) > abs(x - nemico.x):
-                    if nemico.y < y:
+                if abs(nemico.yObbiettivo - nemico.y) > abs(nemico.xObbiettivo - nemico.x):
+                    if nemico.y < nemico.yObbiettivo:
                         nmos = 3
-                    if nemico.y > y:
+                    if nemico.y > nemico.yObbiettivo:
                         nmos = 4
                     sposta = True
-                if (abs(x - nemico.x) == abs(y - nemico.y)) and (x != nemico.x) and (y != nemico.y):
+                if (abs(nemico.xObbiettivo - nemico.x) == abs(nemico.yObbiettivo - nemico.y)) and (nemico.xObbiettivo != nemico.x) and (nemico.yObbiettivo != nemico.y):
                     c = random.randint(1, 2)
-                    if nemico.x < x and c == 1:
+                    if nemico.x < nemico.xObbiettivo and c == 1:
                         nmos = 1
-                    if nemico.x > x and c == 1:
+                    if nemico.x > nemico.xObbiettivo and c == 1:
                         nmos = 2
-                    if nemico.y < y and c == 2:
+                    if nemico.y < nemico.yObbiettivo and c == 2:
                         nmos = 3
-                    if nemico.y > y and c == 2:
+                    if nemico.y > nemico.yObbiettivo and c == 2:
                         nmos = 4
                     sposta = True
-            if (x == nemico.x + gpx and y == nemico.y) or (x == nemico.x - gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + gpy) or (x == nemico.x and y == nemico.y - gpy) or (x == nemico.x and y == nemico.y):
+            if (nemico.xObbiettivo == nemico.x + gpx and nemico.yObbiettivo == nemico.y) or (nemico.xObbiettivo == nemico.x - gpx and nemico.yObbiettivo == nemico.y) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y + gpy) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y - gpy) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y):
                 if vistoesca:
                     danno = nemico.attacco
                     if danno < 0:
@@ -166,24 +251,24 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                             danno = 0
                             avvelena = False
                             print ("parato:", par)
-                        if avvelena:
+                        if avvelena and not dati[130] == 1:
                             dati[121] = True
                         print ("attacco vicino", nemico.tipo, "a rallo", danno)
                         dati[5] = dati[5] - danno
                 nmos = 0
-                if x == nemico.x + gpx and y == nemico.y:
+                if nemico.xObbiettivo == nemico.x + gpx and nemico.yObbiettivo == nemico.y:
                     nmos = 1
-                if x == nemico.x - gpx and y == nemico.y:
+                if nemico.xObbiettivo == nemico.x - gpx and nemico.yObbiettivo == nemico.y:
                     nmos = 2
-                if x == nemico.x and y == nemico.y + gpy:
+                if nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y + gpy:
                     nmos = 3
-                if x == nemico.x and y == nemico.y - gpy:
+                if nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y - gpy:
                     nmos = 4
                 attacca = True
                 sposta = False
 
         # nemici che attaccano da lontano
-        if nemico.attaccaDaLontano:
+        elif nemico.attaccaDaLontano:
             if vistoesca:
                 danno = nemico.attacco
                 if danno < 0:
@@ -205,28 +290,87 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                         danno = 0
                         avvelena = False
                         print ("parato:", par)
-                    if avvelena:
+                    if avvelena and not dati[130] == 1:
                         dati[121] = True
                     print ("attacco lontano", nemico.tipo, "a rallo", danno)
                     dati[5] = dati[5] - danno
             nmos = 0
-            if abs(x - nemico.x) > abs(y - nemico.y):
-                if nemico.x < x:
+            if abs(nemico.xObbiettivo - nemico.x) > abs(nemico.yObbiettivo - nemico.y):
+                if nemico.x < nemico.xObbiettivo:
                     nmos = 1
-                if nemico.x > x:
+                if nemico.x > nemico.xObbiettivo:
                     nmos = 2
-            if abs(y - nemico.y) > abs(x - nemico.x):
-                if nemico.y < y:
+            if abs(nemico.yObbiettivo - nemico.y) > abs(nemico.xObbiettivo - nemico.x):
+                if nemico.y < nemico.yObbiettivo:
                     nmos = 3
-                if nemico.y > y:
+                if nemico.y > nemico.yObbiettivo:
                     nmos = 4
             attacca = True
             sposta = False
+    elif vistoDenaro:
+        nemico.xObbiettivo = xDenaro
+        nemico.yObbiettivo = yDenaro
+        vetNemiciSoloConXeY = []
+        i = 0
+        while i < len(vetNemici):
+            if not (vetNemici[i + 1] == nemico.x and vetNemici[i + 2] == nemico.y):
+                vetNemiciSoloConXeY.append(vetNemici[i + 1])
+                vetNemiciSoloConXeY.append(vetNemici[i + 2])
+            i += 4
+        percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+        if percorsoTrovato:
+            if len(percorsoTrovato) >= 4:
+                if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
+                    if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
+                        nmos = 1
+                    if percorsoTrovato[len(percorsoTrovato) - 4] < nemico.x:
+                        nmos = 2
+                    if percorsoTrovato[len(percorsoTrovato) - 3] > nemico.y:
+                        nmos = 3
+                    if percorsoTrovato[len(percorsoTrovato) - 3] < nemico.y:
+                        nmos = 4
+                    sposta = True
+        else:
+            if abs(nemico.xObbiettivo - nemico.x) > abs(nemico.yObbiettivo - nemico.y):
+                if nemico.x < nemico.xObbiettivo:
+                    nmos = 1
+                if nemico.x > nemico.xObbiettivo:
+                    nmos = 2
+                sposta = True
+            if abs(nemico.yObbiettivo - nemico.y) > abs(nemico.xObbiettivo - nemico.x):
+                if nemico.y < nemico.yObbiettivo:
+                    nmos = 3
+                if nemico.y > nemico.yObbiettivo:
+                    nmos = 4
+                sposta = True
+            if (abs(nemico.xObbiettivo - nemico.x) == abs(nemico.yObbiettivo - nemico.y)) and (nemico.xObbiettivo != nemico.x) and (nemico.yObbiettivo != nemico.y):
+                c = random.randint(1, 2)
+                if nemico.x < nemico.xObbiettivo and c == 1:
+                    nmos = 1
+                if nemico.x > nemico.xObbiettivo and c == 1:
+                    nmos = 2
+                if nemico.y < nemico.yObbiettivo and c == 2:
+                    nmos = 3
+                if nemico.y > nemico.yObbiettivo and c == 2:
+                    nmos = 4
+                sposta = True
+        if abs(nemico.xObbiettivo - nemico.x) == gpx and abs(nemico.yObbiettivo - nemico.y) == 0:
+            if nemico.x < nemico.xObbiettivo:
+                nmos = 1
+            if nemico.x > nemico.xObbiettivo:
+                nmos = 2
+            sposta = True
+        if abs(nemico.yObbiettivo - nemico.y) == gpy and abs(nemico.xObbiettivo - nemico.x) == 0:
+            if nemico.y < nemico.yObbiettivo:
+                nmos = 3
+            if nemico.y > nemico.yObbiettivo:
+                nmos = 4
+            sposta = True
 
     # spostamento
-    if sposta:
+    if sposta and not vistoDenaro:
         if nmos == 1:
-            if nemico.x + gpx == x and nemico.y == y:
+            if nemico.x + gpx == nemico.xObbiettivo and nemico.y == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
@@ -239,7 +383,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmy = 0
                 i = i + 4
         if nmos == 2:
-            if nemico.x - gpx == x and nemico.y == y:
+            if nemico.x - gpx == nemico.xObbiettivo and nemico.y == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
@@ -252,7 +396,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmy = 0
                 i = i + 4
         if nmos == 3:
-            if nemico.x == x and nemico.y + gpy == y:
+            if nemico.x == nemico.xObbiettivo and nemico.y + gpy == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
@@ -265,12 +409,49 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     nmy = 0
                 i = i + 4
         if nmos == 4:
-            if nemico.x == x and nemico.y - gpy == y:
+            if nemico.x == nemico.xObbiettivo and nemico.y - gpy == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
                 nmx = 0
                 nmy = -gpy
+            i = 2
+            while i <= len(vitaesca):
+                if nemico.x == vitaesca[i] and nemico.y - gpy == vitaesca[i + 1]:
+                    nmx = 0
+                    nmy = 0
+                i = i + 4
+    elif sposta and vistoDenaro:
+        if nmos == 1:
+            nmx = gpx
+            nmy = 0
+            i = 2
+            while i <= len(vitaesca):
+                if nemico.x + gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
+                    nmx = 0
+                    nmy = 0
+                i = i + 4
+        if nmos == 2:
+            nmx = -gpx
+            nmy = 0
+            i = 2
+            while i <= len(vitaesca):
+                if nemico.x - gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
+                    nmx = 0
+                    nmy = 0
+                i = i + 4
+        if nmos == 3:
+            nmx = 0
+            nmy = gpy
+            i = 2
+            while i <= len(vitaesca):
+                if nemico.x == vitaesca[i] and nemico.y + gpy == vitaesca[i + 1]:
+                    nmx = 0
+                    nmy = 0
+                i = i + 4
+        if nmos == 4:
+            nmx = 0
+            nmy = -gpy
             i = 2
             while i <= len(vitaesca):
                 if nemico.x == vitaesca[i] and nemico.y - gpy == vitaesca[i + 1]:
