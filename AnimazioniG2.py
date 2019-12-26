@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, guantiMov1, collana, avvele, fineanimaz):
+def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):
     if npers == 1:
         x = x - (gpx * 2 // 3)
     if npers == 2:
@@ -15,10 +15,10 @@ def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, g
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, guantiMov1, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
 
 
-def animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
+def animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
     if npers == 1:
         x = x - (gpx * fineanimaz // 10)
     if npers == 2:
@@ -30,23 +30,23 @@ def animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, guantiMov1, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
     elif 0 < fineanimaz <= 5:
         frame = 2
-        disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, guantiMov2, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
+def animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, guantiMov1, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
     elif 0 < fineanimaz <= 5:
         frame = 2
-        disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, guantiMov2, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, arco, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazione, aumentoliv, fineanimaz):
+def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazione, aumentoliv, fineanimaz):
     animazCamminataBreve = False
     if sposta and not aumentoliv:
         # mentre ci si sposta
@@ -59,10 +59,10 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
             # camminata quando si entra in una stanza
             if cambiosta:
                 animazCamminataBreve = True
-                animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, guantiMov1, collana, avvele, fineanimaz)
+                animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
             # camminata quando non si entra in una stanza
             else:
-                animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
+                animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
         # mentre non ci si sposta
         elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
             animazione = True
@@ -70,22 +70,23 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
                 canaleSoundPassiRallo.play(rumorecamminata)
             if primopasso:
                 primopasso = False
-            animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
+            animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
     else:
         canaleSoundPassiRallo.stop()
     return animazione, primopasso, animazCamminataBreve
 
 
-def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, guanti, armaS, armaturaS, arcoS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, avvele, attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz):
+def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, guanti, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, avvele, attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz):
     if sposta and not aumentoliv:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
             if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
                 canaleSoundAttacco.play(rumoreattacco)
-            disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, guantiAttacco, False, False, True)
+            disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
         if difesa != 0:
             animazioneRallo = True
             schermo.blit(arcoS, (x, y))
+            schermo.blit(faretraS, (x, y))
             schermo.blit(perss, (x, y))
             if avvele:
                 schermo.blit(persAvvele, (x, y))
@@ -98,6 +99,7 @@ def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana,
     elif not sposta and not aumentoliv and difesa != 0 and animazione:
         animazioneRallo = True
         schermo.blit(arcoS, (x, y))
+        schermo.blit(faretraS, (x, y))
         schermo.blit(perss, (x, y))
         if avvele:
             schermo.blit(persAvvele, (x, y))
@@ -110,13 +112,13 @@ def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana,
     return animazioneRallo
 
 
-def animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, guanti, collana, liv, aumentoliv, carim, animazione, caricaTutto, tastop, fineanimaz):
+def animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, faretra, guanti, collana, liv, aumentoliv, carim, animazione, caricaTutto, tastop, fineanimaz):
     if aumentoliv and not carim:
         animazione = True
         if not canaleSoundLvUp.get_busy():
             canaleSoundLvUp.play(rumorelevelup)
         avvele = False
-        disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, guanti)
+        disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         if 5 <= fineanimaz <= 10:
             schermo.blit(saliliv2, (x, y))
         if 1 < fineanimaz <= 5:
@@ -160,9 +162,9 @@ def animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, guanti, collana, l
     return animazione, caricaTutto, tastop
 
 
-def animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, arco, guanti, collana, avvele, animazioneRallo):
+def animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, avvele, animazioneRallo):
     if not animazioneRallo:
-        disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, guanti)
+        disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
 
 def animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, surriscalda, cambiosta, animazione, robot, fineanimaz):
@@ -350,7 +352,7 @@ def animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
     return animazione
 
 
-def animaCofanetto(tesoro, x, y, vx, vy, npers, pers, avvele, armatura, arma, scudo, sfondinoc, caricaTutto):
+def animaCofanetto(tesoro, x, y, vx, vy, npers, pers, avvele, armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto):
     if tesoro != -1:
         schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
         # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
@@ -460,46 +462,19 @@ def animaCofanetto(tesoro, x, y, vx, vy, npers, pers, avvele, armatura, arma, sc
             messaggio("Hai trovato: Una nuova condizione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro >= 101 and tesoro <= 120:
             messaggio("Hai trovato: Cella di memoria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         if npers == 1:
             schermo.blit(sfondinoc, (x + gpx, y))
             schermo.blit(cofaniaper, (x + gpx, y))
-            schermo.blit(scudo, (x, y))
-            schermo.blit(pers, (x, y))
-            if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(persdb, (x, y))
-            schermo.blit(arma, (x, y))
         if npers == 2:
             schermo.blit(sfondinoc, (x - gpx, y))
             schermo.blit(cofaniaper, (x - gpx, y))
-            schermo.blit(arma, (vx, y))
-            schermo.blit(pers, (vx, y))
-            if avvele:
-                schermo.blit(persAvvele, (vx, y))
-            schermo.blit(armatura, (vx, y))
-            schermo.blit(persab, (vx, y))
-            schermo.blit(scudo, (vx, y))
         if npers == 3:
             schermo.blit(sfondinoc, (x, y - gpy))
             schermo.blit(cofaniaper, (x, y - gpy))
-            schermo.blit(arma, (x, vy))
-            schermo.blit(scudo, (x, vy))
-            schermo.blit(pers, (x, vy))
-            if avvele:
-                schermo.blit(persAvvele, (x, vy))
-            schermo.blit(armatura, (x, vy))
-            schermo.blit(perswb, (x, vy))
         if npers == 4:
             schermo.blit(sfondinoc, (x, y + gpy))
             schermo.blit(cofaniaper, (x, y + gpy))
-            schermo.blit(pers, (x, vy))
-            if avvele:
-                schermo.blit(persAvvele, (x, vy))
-            schermo.blit(armatura, (x, vy))
-            schermo.blit(perssb, (x, vy))
-            schermo.blit(arma, (x, vy))
-            schermo.blit(scudo, (x, vy))
         pygame.display.update()
         pygame.time.wait(500)
         risposta = False
@@ -541,7 +516,7 @@ def animaDenaro(vettoreDenaro, sfondinoa, sfondinob):
 
 
 def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, caricaTutto, tastop, fineanimaz):
-    if fineanimaz == 5:
+    if fineanimaz == 1:
         i = 0
         while i < len(vettoreDenaro):
             if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
@@ -569,7 +544,7 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, caricaTutto, tastop, finea
     return caricaTutto, tastop
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro):
     animazione = False
     animazioneRallo = False
     # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
@@ -611,21 +586,21 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         # animazione camminata robo
         animazione = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
         # animazione camminata personaggio
-        animazioneRallo, primopasso, animazCamminataBreve = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, arco, guantiMov1, guantiMov2, collana, dati[121], attacco, difesa, tastop, animazioneRallo, aumentoliv, fineanimaz)
+        animazioneRallo, primopasso, animazCamminataBreve = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, dati[121], attacco, difesa, tastop, animazioneRallo, aumentoliv, fineanimaz)
         # animazione camminata mostri
         animazione = animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione apertura cofanetto
-        caricaTutto, tesoro = animaCofanetto(tesoro, x, y, vx, vy, npers, pers, dati[121], armatura, arma, scudo, sfondinoc, caricaTutto)
+        caricaTutto, tesoro = animaCofanetto(tesoro, x, y, vx, vy, npers, pers, dati[121], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto)
 
         # animazione aumento di livello
-        animazioneRallo, caricaTutto, tastop = animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, guanti, collana, dati[4], aumentoliv, carim, animazioneRallo, caricaTutto, tastop, fineanimaz)
+        animazioneRallo, caricaTutto, tastop = animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[4], aumentoliv, carim, animazioneRallo, caricaTutto, tastop, fineanimaz)
 
         # animazione morte nemici
         animazione = animaMorteNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione attacco personaggio (ultima animazione perchè per animare la difesa devo sapere se sono in corso altre animazioni)
-        animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, guanti, armaS, armaturaS, arcoS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, dati[121], attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz)
+        animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, guanti, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, dati[121], attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz)
 
         # animazione attacco nemici
         animazione = animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz)
@@ -637,7 +612,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         caricaTutto, tastop = animaRaccoltaDenaro(x, y, vettoreDenaro, dati[130], caricaTutto, tastop, fineanimaz)
 
         # disegna Rallo se ci sono animazioni ma non di Rallo
-        animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, arco, guanti, collana, dati[121], animazioneRallo)
+        animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[121], animazioneRallo)
 
         fineanimaz -= 1
         pygame.event.pump()

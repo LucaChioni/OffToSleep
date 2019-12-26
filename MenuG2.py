@@ -70,62 +70,65 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                         errore = True
                 if contasalva == 1:
                     if not errore:
-                        persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
-                        persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
-                        persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                        spasalva = pygame.image.load('Immagini/EquipRallo/Spade/Spada%is.png' % dati[6])
-                        spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                        scusalva = pygame.image.load('Immagini/EquipRallo/Scudi/Scudo%is.png' % dati[7])
-                        scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                        armsalva = pygame.image.load('Immagini/EquipRallo/Armature/Armatura%is.png' % dati[8])
-                        armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
+                        persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
+                        persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
+                        spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
+                        arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
+                        armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
+                        scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
+                        guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
+                        colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
+                        schermo.blit(arcsalva, (gpx * 8, gpy * 12))
                         schermo.blit(persalva, (gpx * 8, gpy * 12))
                         schermo.blit(persSalvaBraccia, (gpx * 8, gpy * 12))
                         schermo.blit(armsalva, (gpx * 8, gpy * 12))
-                        schermo.blit(scusalva, (gpx * 8, gpy * 12))
+                        schermo.blit(colsalva, (gpx * 8, gpy * 12))
                         schermo.blit(spasalva, (gpx * 8, gpy * 12))
+                        schermo.blit(guasalva, (gpx * 8, gpy * 12))
+                        schermo.blit(scusalva, (gpx * 8, gpy * 12))
                     else:
                         messaggio("Dati corrotti", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                 elif contasalva == 2:
                     if not errore:
-                        persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
-                        persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
-                        persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                        spasalva = pygame.image.load('Immagini/EquipRallo/Spade/Spada%is.png' % dati[6])
-                        spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                        scusalva = pygame.image.load('Immagini/EquipRallo/Scudi/Scudo%is.png' % dati[7])
-                        scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                        armsalva = pygame.image.load('Immagini/EquipRallo/Armature/Armatura%is.png' % dati[8])
-                        armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
+                        persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
+                        persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
+                        spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
+                        arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
+                        armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
+                        scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
+                        guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
+                        colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
+                        schermo.blit(arcsalva, (gpx * 15, gpy * 12))
                         schermo.blit(persalva, (gpx * 15, gpy * 12))
                         schermo.blit(persSalvaBraccia, (gpx * 15, gpy * 12))
                         schermo.blit(armsalva, (gpx * 15, gpy * 12))
-                        schermo.blit(scusalva, (gpx * 15, gpy * 12))
+                        schermo.blit(colsalva, (gpx * 15, gpy * 12))
                         schermo.blit(spasalva, (gpx * 15, gpy * 12))
+                        schermo.blit(guasalva, (gpx * 15, gpy * 12))
+                        schermo.blit(scusalva, (gpx * 15, gpy * 12))
                     else:
                         messaggio("Dati corrotti", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                 elif contasalva == 3:
                     if not errore:
-                        persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
-                        persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
-                        persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                        spasalva = pygame.image.load('Immagini/EquipRallo/Spade/Spada%is.png' % dati[6])
-                        spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                        scusalva = pygame.image.load('Immagini/EquipRallo/Scudi/Scudo%is.png' % dati[7])
-                        scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                        armsalva = pygame.image.load('Immagini/EquipRallo/Armature/Armatura%is.png' % dati[8])
-                        armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
+                        persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
+                        persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
+                        spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
+                        arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
+                        armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
+                        scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
+                        guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
+                        colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
                         messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
+                        schermo.blit(arcsalva, (gpx * 22, gpy * 12))
                         schermo.blit(persalva, (gpx * 22, gpy * 12))
                         schermo.blit(persSalvaBraccia, (gpx * 22, gpy * 12))
                         schermo.blit(armsalva, (gpx * 22, gpy * 12))
-                        schermo.blit(scusalva, (gpx * 22, gpy * 12))
+                        schermo.blit(colsalva, (gpx * 22, gpy * 12))
                         schermo.blit(spasalva, (gpx * 22, gpy * 12))
+                        schermo.blit(guasalva, (gpx * 22, gpy * 12))
+                        schermo.blit(scusalva, (gpx * 22, gpy * 12))
                     else:
                         messaggio("Dati corrotti", grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
             contasalva = contasalva + 1
@@ -266,62 +269,65 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                             errore = True
                     if contasalva == 1:
                         if not errore:
-                            persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
-                            persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
-                            persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                            spasalva = pygame.image.load('Immagini/EquipRallo/Spade/Spada%is.png' % dati[6])
-                            spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                            scusalva = pygame.image.load('Immagini/EquipRallo/Scudi/Scudo%is.png' % dati[7])
-                            scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                            armsalva = pygame.image.load('Immagini/EquipRallo/Armature/Armatura%is.png' % dati[8])
-                            armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
+                            persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
+                            persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
+                            spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
+                            arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
+                            armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
+                            scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
+                            guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
+                            colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
+                            schermo.blit(arcsalva, (gpx * 8, gpy * 12))
                             schermo.blit(persalva, (gpx * 8, gpy * 12))
                             schermo.blit(persSalvaBraccia, (gpx * 8, gpy * 12))
                             schermo.blit(armsalva, (gpx * 8, gpy * 12))
-                            schermo.blit(scusalva, (gpx * 8, gpy * 12))
+                            schermo.blit(colsalva, (gpx * 8, gpy * 12))
                             schermo.blit(spasalva, (gpx * 8, gpy * 12))
+                            schermo.blit(guasalva, (gpx * 8, gpy * 12))
+                            schermo.blit(scusalva, (gpx * 8, gpy * 12))
                         else:
                             messaggio("Dati corrotti", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
                     elif contasalva == 2:
                         if not errore:
-                            persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
-                            persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
-                            persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                            spasalva = pygame.image.load('Immagini/EquipRallo/Spade/Spada%is.png' % dati[6])
-                            spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                            scusalva = pygame.image.load('Immagini/EquipRallo/Scudi/Scudo%is.png' % dati[7])
-                            scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                            armsalva = pygame.image.load('Immagini/EquipRallo/Armature/Armatura%is.png' % dati[8])
-                            armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
+                            persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
+                            persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
+                            spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
+                            arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
+                            armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
+                            scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
+                            guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
+                            colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
+                            schermo.blit(arcsalva, (gpx * 15, gpy * 12))
                             schermo.blit(persalva, (gpx * 15, gpy * 12))
                             schermo.blit(persSalvaBraccia, (gpx * 15, gpy * 12))
                             schermo.blit(armsalva, (gpx * 15, gpy * 12))
-                            schermo.blit(scusalva, (gpx * 15, gpy * 12))
+                            schermo.blit(colsalva, (gpx * 15, gpy * 12))
                             schermo.blit(spasalva, (gpx * 15, gpy * 12))
+                            schermo.blit(guasalva, (gpx * 15, gpy * 12))
+                            schermo.blit(scusalva, (gpx * 15, gpy * 12))
                         else:
                             messaggio("Dati corrotti", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
                     elif contasalva == 3:
                         if not errore:
-                            persalva = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
-                            persalva = pygame.transform.scale(persalva, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
-                            persSalvaBraccia = pygame.transform.scale(persSalvaBraccia, (gpx * 3, gpy * 3))
-                            spasalva = pygame.image.load('Immagini/EquipRallo/Spade/Spada%is.png' % dati[6])
-                            spasalva = pygame.transform.scale(spasalva, (gpx * 3, gpy * 3))
-                            scusalva = pygame.image.load('Immagini/EquipRallo/Scudi/Scudo%is.png' % dati[7])
-                            scusalva = pygame.transform.scale(scusalva, (gpx * 3, gpy * 3))
-                            armsalva = pygame.image.load('Immagini/EquipRallo/Armature/Armatura%is.png' % dati[8])
-                            armsalva = pygame.transform.scale(armsalva, (gpx * 3, gpy * 3))
+                            persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
+                            persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
+                            spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
+                            arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
+                            armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
+                            scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
+                            guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
+                            colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
                             messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
+                            schermo.blit(arcsalva, (gpx * 22, gpy * 12))
                             schermo.blit(persalva, (gpx * 22, gpy * 12))
                             schermo.blit(persSalvaBraccia, (gpx * 22, gpy * 12))
                             schermo.blit(armsalva, (gpx * 22, gpy * 12))
-                            schermo.blit(scusalva, (gpx * 22, gpy * 12))
+                            schermo.blit(colsalva, (gpx * 22, gpy * 12))
                             schermo.blit(spasalva, (gpx * 22, gpy * 12))
+                            schermo.blit(guasalva, (gpx * 22, gpy * 12))
+                            schermo.blit(scusalva, (gpx * 22, gpy * 12))
                         else:
                             messaggio("Dati corrotti", grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
                 contasalva = contasalva + 1
@@ -383,10 +389,10 @@ def menu():
             canaleSoundCanzone.play(c11)
 
         # posizione porte e cofanetti nel vettore dati
-        porteini = 132
-        portefin = 159
+        porteini = 134
+        portefin = 161
         cofaniini = portefin + 1
-        cofanifin = 183
+        cofanifin = 185
         lunghezzadati = cofanifin + 1
 
         tastoTrovato = False
@@ -435,15 +441,15 @@ def menu():
                         x = gsx // 32 * 6
                         y = gsy // 18 * 2
                         # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
-                        # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - denaro - porte(132-?) - cofanetti(?-?) // dimensione: 0-130 + porte e cofanetti
-                        dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 240,# <- statistiche
+                        # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra - porte(134-?) - cofanetti(?-?) // dimensione: 0-133 + porte e cofanetti
+                        dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 220,# <- statistiche
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
                                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
                                 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,# <- equpaggiamento
                                 2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
                                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
-                                False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
+                                False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
                                 2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
                                 1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False]# <- cofanetti
                         canaleSoundCanzone.stop()
@@ -572,6 +578,8 @@ def equip(dati, canzone):
     persstab = pygame.transform.scale(persob, (gpx * 5, gpy * 5))
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
     puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
+    sfondoOggetto = pygame.transform.scale(sfondoOggettoMenu, (int(gpx * 2), int(gpy * 2)))
+    sconosciutoEquip = pygame.transform.scale(sconosciutoEquipMenu, (int(gpx * 2), int(gpy * 2)))
     xp = gsx // 32 * 1
     yp = gsy // 18 * 6.8
     carim = True
@@ -581,61 +589,38 @@ def equip(dati, canzone):
     esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
 
     vetImgSpade = []
-    i = 0
-    while i < 5:
-        if dati[41 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iMenu.png" % i)
-        else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
-        vetImgSpade.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
-        i += 1
     vetImgArchi = []
-    i = 0
-    while i < 5:
-        if dati[41 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iMenu.png" % i)
-        else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
-        vetImgArchi.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
-        i += 1
     vetImgArmature = []
-    i = 0
-    while i < 5:
-        if dati[51 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iMenu.png" % i)
-        else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
-        vetImgArmature.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
-        i += 1
     vetImgScudi = []
-    i = 0
-    while i < 5:
-        if dati[61 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iMenu.png" % i)
-        else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
-        vetImgScudi.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
-        i += 1
     vetImgGuanti = []
-    i = 0
-    while i < 5:
-        if dati[61 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iMenu.png" % i)
-        else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
-        vetImgGuanti.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
-        i += 1
     vetImgCollane = []
     i = 0
     while i < 5:
-        if dati[61 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRallo/Collane/Collana%iMenu.png" % i)
+        if dati[41 + i] > 0:
+            vetImgSpade.append(vetImgSpadeMenu[i])
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
-        vetImgCollane.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
+            vetImgSpade.append(sconosciutoEquip)
+        if dati[46 + i] > 0:
+            vetImgArchi.append(vetImgArchiMenu[i])
+        else:
+            vetImgArchi.append(sconosciutoEquip)
+        if dati[51 + i] > 0:
+            vetImgArmature.append(vetImgArmatureMenu[i])
+        else:
+            vetImgArmature.append(sconosciutoEquip)
+        if dati[56 + i] > 0:
+            vetImgScudi.append(vetImgScudiMenu[i])
+        else:
+            vetImgScudi.append(sconosciutoEquip)
+        if dati[61 + i] > 0:
+            vetImgGuanti.append(vetImgGuantiMenu[i])
+        else:
+            vetImgGuanti.append(sconosciutoEquip)
+        if dati[66 + i] > 0:
+            vetImgCollane.append(vetImgCollaneMenu[i])
+        else:
+            vetImgCollane.append(sconosciutoEquip)
         i += 1
-    sfondoOggetto = pygame.image.load("Immagini/EquipRallo/SfondoOggetto.png")
-    sfondoOggetto = pygame.transform.scale(sfondoOggetto, (int(gpx * 2), int(gpy * 2)))
 
     # primo frame
     if True:
@@ -650,18 +635,12 @@ def equip(dati, canzone):
         pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
 
         if carim:
-            spadas = pygame.image.load("Immagini/EquipRallo/Spade/Spada%is.png" % dati[6])
-            spada = pygame.transform.scale(spadas, (gpx * 5, gpy * 5))
-            arcos = pygame.image.load("Immagini/EquipRallo/Archi/Arco%is.png" % dati[128])
-            arco = pygame.transform.scale(arcos, (gpx * 5, gpy * 5))
-            scudos = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%is.png" % dati[7])
-            scudo = pygame.transform.scale(scudos, (gpx * 5, gpy * 5))
-            armaturas = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % dati[8])
-            armatura = pygame.transform.scale(armaturas, (gpx * 5, gpy * 5))
-            guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
-            guanti = pygame.transform.scale(guantis, (gpx * 5, gpy * 5))
-            collanas = pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % dati[130])
-            collana = pygame.transform.scale(collanas, (gpx * 5, gpy * 5))
+            spada = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 5, gpy * 5))
+            arco = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 5, gpy * 5))
+            scudo = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 5, gpy * 5))
+            armatura = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 5, gpy * 5))
+            guanti = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 5, gpy * 5))
+            collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
             carim = False
         messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
         messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.2, 70)
@@ -1079,7 +1058,7 @@ def equip(dati, canzone):
         if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 14.8:
             if dati[70] != 0:
                 messaggio("Portafortuna:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio(u"Collana che permette di ottenere più soldi", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
+                messaggio(u"Collana che permette di ottenere più monete", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("dai nemici", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
 
@@ -1407,18 +1386,12 @@ def equip(dati, canzone):
             pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
 
             if carim:
-                spadas = pygame.image.load("Immagini/EquipRallo/Spade/Spada%is.png" % dati[6])
-                spada = pygame.transform.scale(spadas, (gpx * 5, gpy * 5))
-                arcos = pygame.image.load("Immagini/EquipRallo/Archi/Arco%is.png" % dati[128])
-                arco = pygame.transform.scale(arcos, (gpx * 5, gpy * 5))
-                scudos = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%is.png" % dati[7])
-                scudo = pygame.transform.scale(scudos, (gpx * 5, gpy * 5))
-                armaturas = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % dati[8])
-                armatura = pygame.transform.scale(armaturas, (gpx * 5, gpy * 5))
-                guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
-                guanti = pygame.transform.scale(guantis, (gpx * 5, gpy * 5))
-                collanas = pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % dati[130])
-                collana = pygame.transform.scale(collanas, (gpx * 5, gpy * 5))
+                spada = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 5, gpy * 5))
+                arco = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 5, gpy * 5))
+                scudo = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 5, gpy * 5))
+                armatura = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 5, gpy * 5))
+                guanti = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 5, gpy * 5))
+                collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
                 carim = False
             messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
             messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.2, 70)
@@ -1836,7 +1809,7 @@ def equip(dati, canzone):
             if voceMarcata == 30:
                 if dati[70] != 0:
                     messaggio("Portafortuna:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio(u"Collana che permette di ottenere più soldi", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
+                    messaggio(u"Collana che permette di ottenere più monete", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                     messaggio("dai nemici", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
 
@@ -1917,12 +1890,7 @@ def sceglicondiz(dati, condizione, canzone):
     voceMarcata = 0
 
     # carico le scenette
-    scecond = [0]
-    i = 1
-    while i <= 20:
-        condizioneimm = pygame.image.load("Immagini/GrafCondizioni/Condizione%i.png" % i)
-        scecond.append(pygame.transform.scale(condizioneimm, (gpx * 12, gpy * 9)))
-        i = i + 1
+    scecond = vetImgCondizioniMenu
 
     # primo frame
     if True:
@@ -2134,7 +2102,7 @@ def sceglicondiz(dati, condizione, canzone):
             if voceMarcata == 18:
                 schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 4))
                 messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 1 nemico (in caso di", grigiochi,
+                messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di", grigiochi,
                           gsx // 32 * 18, gsy // 18 * 14.5, 35)
                 messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi,
                           gsx // 32 * 18, gsy // 18 * 15, 35)
@@ -2480,7 +2448,7 @@ def sceglicondiz(dati, condizione, canzone):
                 if voceMarcata == 18:
                     schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 4))
                     messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 1 nemico (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
                     messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                     messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
@@ -2540,12 +2508,7 @@ def sceglitecn(dati, tecnica, canzone):
     voceMarcata = 0
 
     # carico le scenette
-    scetecn = [0]
-    i = 1
-    while i <= 20:
-        tecnicaimm = pygame.image.load("Immagini/GrafTecniche/Tecnica%i.png" % i)
-        scetecn.append(pygame.transform.scale(tecnicaimm, (gpx * 12, gpy * 9)))
-        i = i + 1
+    scetecn = vetImgTecnicheMenu
 
     # primo frame
     if True:
@@ -3185,6 +3148,8 @@ def equiprobo(dati, canzone):
     robosta = pygame.transform.scale(roboo, (gpx * 5, gpy * 5))
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
     puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
+    sfondoOggetto = pygame.transform.scale(sfondoOggettoMenu, (int(gpx * 2), int(gpy * 2)))
+    sconosciutoEquip = pygame.transform.scale(sconosciutoEquipMenu, (int(gpx * 2), int(gpy * 2)))
     xp = gsx // 32 * 1
     yp = gsy // 18 * 6.8
     risposta = False
@@ -3196,25 +3161,16 @@ def equiprobo(dati, canzone):
     voceMarcata = 1
     voceGambitMarcata = 11
 
-    vetImgBatterie = []
-    i = 0
-    while i < 5:
-        if dati[41 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRobo/Batteria%is.png" % i)
-            vetImgBatterie.append(pygame.transform.scale(img, (gpx * 5, gpy * 5)))
-        i += 1
+    vetImgBatterie = vetImgBatterieMenu
 
     vetIcoBatterie = []
     i = 0
     while i < 5:
         if dati[41 + i] > 0:
-            img = pygame.image.load("Immagini/EquipRobo/Batteria%iMenu.png" % i)
+            vetIcoBatterie.append(vetIcoBatterieMenu[i])
         else:
-            img = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
-        vetIcoBatterie.append(pygame.transform.scale(img, (int(gpx * 2), int(gpy * 2))))
+            vetIcoBatterie.append(sconosciutoEquip)
         i += 1
-    sfondoOggetto = pygame.image.load("Immagini/EquipRallo/SfondoOggetto.png")
-    sfondoOggetto = pygame.transform.scale(sfondoOggetto, (int(gpx * 2), int(gpy * 2)))
 
     # primo frame
     if True:
@@ -3498,7 +3454,7 @@ def equiprobo(dati, canzone):
                 messaggio("Batteria che contiene poca alimentazione", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                 messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                diff = 0 - (dati[9] * dati[9] * 60)
+                diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 0:
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 diff = 0 - (dati[9] * dati[9] * 30)
@@ -3510,7 +3466,7 @@ def equiprobo(dati, canzone):
                 messaggio("Batteria con una buona capienza e", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                 messaggio("ottimizzazione del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                diff = 60 - (dati[9] * dati[9] * 60)
+                diff = (1 * 1 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 1:
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 1:
@@ -3526,7 +3482,7 @@ def equiprobo(dati, canzone):
                 messaggio(u"Batteria con una grande capacità e un", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                 messaggio("ottimo sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                diff = 240 - (dati[9] * dati[9] * 60)
+                diff = (2 * 2 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 2:
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 2:
@@ -3542,7 +3498,7 @@ def equiprobo(dati, canzone):
                 messaggio("Grande batteria che permette a Colco di", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                 messaggio(u"utilizzare le tecniche più dispendiose", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                diff = 540 - (dati[9] * dati[9] * 60)
+                diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 3:
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 3:
@@ -3558,7 +3514,7 @@ def equiprobo(dati, canzone):
                 messaggio("Batteria incredibilmente capiente.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                 messaggio("Permette un eccellente ottimizzazione", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                 messaggio("del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                diff = 960 - (dati[9] * dati[9] * 60)
+                diff = (4 * 4 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 4:
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[9] < 4:
@@ -4194,7 +4150,7 @@ def equiprobo(dati, canzone):
                     messaggio("Batteria che contiene poca alimentazione", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                     messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                    diff = 0 - (dati[9] * dati[9] * 60)
+                    diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 0:
                         messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     diff = 0 - (dati[9] * dati[9] * 30)
@@ -4206,7 +4162,7 @@ def equiprobo(dati, canzone):
                     messaggio("Batteria con una buona capienza e", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                     messaggio("ottimizzazione del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                    diff = 60 - (dati[9] * dati[9] * 60)
+                    diff = (1 * 1 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 1:
                         messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 1:
@@ -4222,7 +4178,7 @@ def equiprobo(dati, canzone):
                     messaggio(u"Batteria con una grande capacità e un", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                     messaggio("ottimo sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                    diff = 240 - (dati[9] * dati[9] * 60)
+                    diff = (2 * 2 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 2:
                         messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 2:
@@ -4238,7 +4194,7 @@ def equiprobo(dati, canzone):
                     messaggio("Grande batteria che permette a Colco di", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                     messaggio(u"utilizzare le tecniche più dispendiose", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                    diff = 540 - (dati[9] * dati[9] * 60)
+                    diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 3:
                         messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 3:
@@ -4254,7 +4210,7 @@ def equiprobo(dati, canzone):
                     messaggio("Batteria incredibilmente capiente.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
                     messaggio("Permette un eccellente ottimizzazione", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
                     messaggio("del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
-                    diff = 960 - (dati[9] * dati[9] * 60)
+                    diff = (4 * 4 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 4:
                         messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[9] < 4:
@@ -4306,6 +4262,7 @@ def oggetti(dati, canzone):
     puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
     puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
     sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
+    sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 10, gpy * 10))
     xp = gsx // 32 * 1
     yp = gsy // 18 * 5
     usauno = False
@@ -4319,12 +4276,9 @@ def oggetti(dati, canzone):
     i = 1
     while i <= 10:
         if dati[i + 30] >= 0:
-            oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % i)
-            oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
+            imgOggetti.append(vetImgOggettiMenu[i - 1])
         else:
-            oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
-            oggetto = pygame.transform.scale(oggetto, (gpx * 10, gpy * 10))
-        imgOggetti.append(oggetto)
+            imgOggetti.append(sconosciutoOggetto)
         i += 1
 
     esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
@@ -5007,6 +4961,20 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
     difesapiusta = pygame.transform.scale(difesapiuo, (gpx, gpy))
     velocitapiusta = pygame.transform.scale(velocitapiuo, (gpx, gpy))
     efficienzapiusta = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
+    if dati[133] == 0:
+        faretraFrecceStart = faretraFrecceStart0
+        maxFrecce = 1
+    elif dati[133] == 1:
+        faretraFrecceStart = faretraFrecceStart1
+        maxFrecce = 5
+    elif dati[133] == 2:
+        faretraFrecceStart = faretraFrecceStart2
+        maxFrecce = 20
+    elif dati[133] == 3:
+        faretraFrecceStart = faretraFrecceStart3
+        maxFrecce = 60
+    else:
+        faretraFrecceStart = 0
     xp = gsx // 32 * 1
     yp = gsy // 18 * 5
     carim = True
@@ -5047,21 +5015,21 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         # vita-status personaggio
         if dati[5] < 0:
             dati[5] = 0
-        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 13, 50)
-        messaggio("Lv:  " + str(dati[4]), grigiochi, gsx // 32 * 14, gsy // 18 * 14, 50)
+        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 13.5, gsy // 18 * 13, 50)
+        messaggio("Lv:  " + str(dati[4]), grigiochi, gsx // 32 * 13.5, gsy // 18 * 14, 50)
         if dati[4] < 100:
-            messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), grigiochi, (gsx // 32 * 16) + (gpx // 2),
-                      gsy // 18 * 14, 50)
+            messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), grigiochi, gsx // 32 * 16, gsy // 18 * 14,
+                      50)
         else:
-            messaggio("Esp:  -- / --", grigiochi, (gsx // 32 * 16) + (gpx // 2), gsy // 18 * 14, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 15, 50)
-        schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 16) + (gpy // 8)))
+            messaggio("Esp:  -- / --", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 50)
+        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 13.5, gsy // 18 * 15, 50)
+        schermo.blit(sfondostastart, (gsx // 32 * 13.5, (gsy // 18 * 16) + (gpy // 8)))
         if dati[121]:
-            schermo.blit(avvelenatosta, (gsx // 32 * 14, gsy // 18 * 16))
+            schermo.blit(avvelenatosta, (gsx // 32 * 13.5, gsy // 18 * 16))
         if dati[123] > 0:
-            schermo.blit(attaccopiusta, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 16))
+            schermo.blit(attaccopiusta, ((gsx // 32 * 13.5) + (2 * gpx // 4 * 3), gsy // 18 * 16))
         if dati[124] > 0:
-            schermo.blit(difesapiusta, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 16))
+            schermo.blit(difesapiusta, ((gsx // 32 * 13.5) + (4 * gpx // 4 * 3), gsy // 18 * 16))
         # vita-status robo
         if dati[10] < 0:
             dati[10] = 0
@@ -5078,10 +5046,13 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         if attacco != 0:
             risposta = True
 
-        schermo.blit(sacchettoDenaroStart, (gsx // 32 * 24, gsy // 18 * 2.5))
-        messaggio("Denaro: " + str(dati[131]), grigiochi, gsx // 32 * 24, gsy // 18 * 6, 50)
+        if faretraFrecceStart != 0:
+            schermo.blit(faretraFrecceStart, (gsx // 32 * 21.5, gsy // 18 * 2.5))
+            messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), grigiochi, gsx // 32 * 21.5, gsy // 18 * 6, 50)
+        schermo.blit(sacchettoDenaroStart, (gsx // 32 * 26.5, gsy // 18 * 2.5))
+        messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26.5, gsy // 18 * 6, 50)
 
-        schermo.blit(perssta, (gsx // 32 * 12, gsy // 18 * 2))
+        schermo.blit(perssta, (gsx // 32 * 11.5, gsy // 18 * 2))
         schermo.blit(robosta, (gsx // 32 * 21, gsy // 18 * 2))
         schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
@@ -5211,20 +5182,20 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             # vita-status personaggio
             if dati[5] < 0:
                 dati[5] = 0
-            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 13, 50)
-            messaggio("Lv:  " + str(dati[4]), grigiochi, gsx // 32 * 14, gsy // 18 * 14, 50)
+            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 13.5, gsy // 18 * 13, 50)
+            messaggio("Lv:  " + str(dati[4]), grigiochi, gsx // 32 * 13.5, gsy // 18 * 14, 50)
             if dati[4] < 100:
-                messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), grigiochi, (gsx // 32 * 16) + (gpx // 2), gsy // 18 * 14, 50)
+                messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), grigiochi, gsx // 32 * 16, gsy // 18 * 14, 50)
             else:
-                messaggio("Esp:  -- / --", grigiochi, (gsx // 32 * 16) + (gpx // 2), gsy // 18 * 14, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 15, 50)
-            schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 16) + (gpy // 8)))
+                messaggio("Esp:  -- / --", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 50)
+            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 13.5, gsy // 18 * 15, 50)
+            schermo.blit(sfondostastart, (gsx // 32 * 13.5, (gsy // 18 * 16) + (gpy // 8)))
             if dati[121]:
-                schermo.blit(avvelenatosta, (gsx // 32 * 14, gsy // 18 * 16))
+                schermo.blit(avvelenatosta, (gsx // 32 * 13.5, gsy // 18 * 16))
             if dati[123] > 0:
-                schermo.blit(attaccopiusta, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 16))
+                schermo.blit(attaccopiusta, ((gsx // 32 * 13.5) + (2 * gpx // 4 * 3), gsy // 18 * 16))
             if dati[124] > 0:
-                schermo.blit(difesapiusta, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 16))
+                schermo.blit(difesapiusta, ((gsx // 32 * 13.5) + (4 * gpx // 4 * 3), gsy // 18 * 16))
             # vita-status robo
             if dati[10] < 0:
                 dati[10] = 0
@@ -5241,10 +5212,13 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             if attacco != 0:
                 risposta = True
 
-            schermo.blit(sacchettoDenaroStart, (gsx // 32 * 24, gsy // 18 * 2.5))
-            messaggio("Denaro: " + str(dati[131]), grigiochi, gsx // 32 * 24, gsy // 18 * 6, 50)
+            if faretraFrecceStart != 0:
+                schermo.blit(faretraFrecceStart, (gsx // 32 * 21.5, gsy // 18 * 2.5))
+                messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), grigiochi, gsx // 32 * 21.5, gsy // 18 * 6, 50)
+            schermo.blit(sacchettoDenaroStart, (gsx // 32 * 26.5, gsy // 18 * 2.5))
+            messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26.5, gsy // 18 * 6, 50)
 
-            schermo.blit(perssta, (gsx // 32 * 12, gsy // 18 * 2))
+            schermo.blit(perssta, (gsx // 32 * 11.5, gsy // 18 * 2))
             schermo.blit(robosta, (gsx // 32 * 21, gsy // 18 * 2))
             schermo.blit(puntatore, (xp, yp))
             if not risposta:
@@ -5258,6 +5232,8 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
 def startBattaglia(dati):
     xp = gpx * 1
     yp = gpy * 5
+    sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 4, gpy * 4))
+    sconosciutoOggettoIco = pygame.transform.scale(sconosciutoOggettoIcoMenu, (gpx, gpy))
 
     esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
 
@@ -5273,18 +5249,13 @@ def startBattaglia(dati):
     oggetton = 1
     vettoreOggettiGraf = []
     vettoreOggettiIco = []
-    nomiOggettiIco = ["Pozione", "Caricabatterie", "Medicina", "Superpozione", "CaricabatterieMigliorato", "Bomba", "BombaVeleno", "Esca", "BombaAppiccicosa", "BombaPotenziata"]
     while oggetton <= 10:
         if dati[oggetton + 30] >= 0:
-            oggetto = pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % oggetton)
-            vettoreOggettiGraf.append(pygame.transform.scale(oggetto, (gpx * 4, gpy * 4)))
-            oggetto = pygame.image.load("Immagini/Oggetti/%s.png" % nomiOggettiIco[oggetton - 1])
-            vettoreOggettiIco.append(pygame.transform.scale(oggetto, (gpx, gpy)))
+            vettoreOggettiGraf.append(vetImgOggettiStart[oggetton - 1])
+            vettoreOggettiIco.append(vetIcoOggettiMenu[oggetton - 1])
         else:
-            oggetto = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
-            vettoreOggettiGraf.append(pygame.transform.scale(oggetto, (gpx * 4, gpy * 4)))
-            oggetto = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
-            vettoreOggettiIco.append(pygame.transform.scale(oggetto, (gpx, gpy)))
+            vettoreOggettiGraf.append(sconosciutoOggetto)
+            vettoreOggettiIco.append(sconosciutoOggettoIco)
         oggetton += 1
 
     # primo frame

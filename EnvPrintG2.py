@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, surrisc, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce):
     if caricaTutto:
         schermo.blit(imgSfondoStanza, (0, 0))
         # porte
@@ -98,7 +98,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         schermo.blit(roboSurrisc, (rx, ry))
     schermo.blit(armrob, (rx, ry))
 
-    disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, guanti)
+    disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
     # vita-status personaggio
     lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
@@ -108,42 +108,21 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
     fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
     vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
-    schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
-    schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 16) + (gpy // 4 * 3)))
-    schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
-    schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
+    schermo.blit(sfondoRallo, (gsx // 32 * 0, gsy // 18 * 17))
+    schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
     persbat = pygame.transform.scale(perso, (gpx, gpy))
-    schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 16))
-    schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 16))
-    schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
+    schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 17))
+    schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 17))
+    schermo.blit(imgNumFrecce, (gsx // 32 * 1.2, gsy // 18 * 17))
+    messaggio("x " + str(numFrecce), grigiochi, gsx // 32 * 1.8, gsy // 18 * 17.2, 40)
     if avvele:
-        schermo.blit(avvelenato, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
+        schermo.blit(avvelenato, (gsx // 32 * 3, gsy // 18 * 17))
     if attp > 0:
-        schermo.blit(attaccopiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 16) + (gpy // 8)))
+        schermo.blit(attaccopiu, (gsx // 32 * 4, gsy // 18 * 17))
     if difp > 0:
-        schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
-
-    # vita-status robo
-    lungentot = int(((gpx * entot) / float(4)) // 10)
-    lungen = (lungentot * enrob) // entot
-    if lungen < 0:
-        lungen = 0
-    indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
-    fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
-    vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
-    schermo.blit(indvitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
-    schermo.blit(fineindvitarob, ((gsx // 32 * 1) + lungentot, (gsy // 18 * 17) + (gpy // 4 * 3)))
-    schermo.blit(vitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
-    schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 17))
-    robobat = pygame.transform.scale(roboo, (gpx, gpy))
-    schermo.blit(robobat, (gsx // 32 * 0, gsy // 18 * 17))
-    schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
-    if surrisc > 0:
-        schermo.blit(surriscaldato, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
-    if velp > 0:
-        schermo.blit(velocitapiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
-    if effp > 0:
-        schermo.blit(efficienzapiu, ((gsx // 32 * 1) + (gpx // 4 * 3) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
+        schermo.blit(difesapiu, (gsx // 32 * 5, gsy // 18 * 17))
 
     # disegnare i mostri
     j = 0
@@ -160,7 +139,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce):
     xp = x
     yp = y
     nxp = 0
@@ -175,6 +154,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         puntatogg3 = puntatPor
         puntatogg4 = puntatSpinta
         puntatogg5 = puntatCof
+        puntatogg6 = puntatArc
     if attacco == 2:
         puntatogg = puntatBom
     if attacco == 3:
@@ -245,44 +225,25 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
     fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
     vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
-    schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
-    schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 16) + (gpy // 4 * 3)))
-    schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
-    schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
+    schermo.blit(sfondoRallo, (gsx // 32 * 0, gsy // 18 * 17))
+    schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 17) + (gpy // 4 * 3)))
+    schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
     persbat = pygame.transform.scale(perso, (gpx, gpy))
-    schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 16))
-    schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 16))
-    schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
+    schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 17))
+    schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 17))
+    schermo.blit(imgNumFrecce, (gsx // 32 * 1.2, gsy // 18 * 17))
+    messaggio("x " + str(numFrecce), grigiochi, gsx // 32 * 1.8, gsy // 18 * 17.2, 40)
     if avvele:
-        schermo.blit(avvelenato, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
+        schermo.blit(avvelenato, (gsx // 32 * 3, gsy // 18 * 17))
     if attp > 0:
-        schermo.blit(attaccopiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 16) + (gpy // 8)))
+        schermo.blit(attaccopiu, (gsx // 32 * 4, gsy // 18 * 17))
     if difp > 0:
-        schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
-
-    # vita-status robo
-    lungentot = int(((gpx * entot) / float(4)) // 10)
-    lungen = (lungentot * enrob) // entot
-    if lungen < 0:
-        lungen = 0
-    indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
-    fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
-    vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
-    schermo.blit(indvitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
-    schermo.blit(fineindvitarob, ((gsx // 32 * 1) + lungentot, (gsy // 18 * 17) + (gpy // 4 * 3)))
-    schermo.blit(vitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
-    schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 17))
-    robobat = pygame.transform.scale(roboo, (gpx, gpy))
-    schermo.blit(robobat, (gsx // 32 * 0, gsy // 18 * 17))
-    schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
-    if surrisc > 0:
-        schermo.blit(surriscaldato, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
-    if velp > 0:
-        schermo.blit(velocitapiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
-    if effp > 0:
-        schermo.blit(efficienzapiu, ((gsx // 32 * 1) + (gpx // 4 * 3) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
+        schermo.blit(difesapiu, (gsx // 32 * 5, gsy // 18 * 17))
 
     # controllo caselle attaccabili
+    if attacco == 1:
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, -1)
     if attacco == 2:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 6)
     if attacco == 3:
@@ -300,14 +261,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     danno = 0
     creaesca = False
     ricaricaschermo = False
-    appenaCaricato = False
     suPorta = False
     suCofanetto = False
     apriChiudiPorta = [False, 0, 0]
     apriCofanetto = [False, 0, 0]
     spingiColco = False
-    mvx = 0
-    mvy = 0
     puntaPorta = False
     puntaCofanetto = False
     attaccato = False
@@ -343,7 +301,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN:
-                appenaCaricato = False
                 # esci
                 if event.key == pygame.K_q:
                     risposta = True
@@ -583,7 +540,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     nxp = 0
                     nyp = 0
 
-        if ricaricaschermo and not appenaCaricato:
+        if ricaricaschermo:
             schermo.blit(stanzaa, (0, 0))
             # porte
             i = 0
@@ -635,7 +592,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
                 i += 3
             ricaricaschermo = False
-            appenaCaricato = True
 
         # disegna porte
         i = 0
@@ -670,73 +626,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
         # visualizza campo attaccabile
         if attacco == 1:
-            schermo.blit(campoattaccabile1, (x - gpx, y - gpy))
-            # controllo caselle attaccabili
-            caseattactot = [x + gpx, y, True, x - gpx, y, True, x, y + gpy, True, x, y - gpy, True]
-            murx = x
-            mury = y
-            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
-            if nmurx == murx:
-                caseattactot[2] = False
-                i = 0
-                while i < len(porte):
-                    if murx + gpx == porte[i + 1] and mury == porte[i + 2]:
-                        caseattactot[2] = True
-                    i = i + 4
-                i = 0
-                while i < len(cofanetti):
-                    if murx + gpx == cofanetti[i + 1] and mury == cofanetti[i + 2]:
-                        caseattactot[2] = True
-                    i = i + 4
-            murx = x
-            mury = y
-            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
-            if nmurx == murx:
-                caseattactot[5] = False
-                i = 0
-                while i < len(porte):
-                    if murx - gpx == porte[i + 1] and mury == porte[i + 2]:
-                        caseattactot[5] = True
-                    i = i + 4
-                i = 0
-                while i < len(cofanetti):
-                    if murx - gpx == cofanetti[i + 1] and mury == cofanetti[i + 2]:
-                        caseattactot[5] = True
-                    i = i + 4
-            murx = x
-            mury = y
-            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
-            if nmury == mury:
-                caseattactot[8] = False
-                i = 0
-                while i < len(porte):
-                    if murx == porte[i + 1] and mury + gpy == porte[i + 2]:
-                        caseattactot[8] = True
-                    i = i + 4
-                i = 0
-                while i < len(cofanetti):
-                    if murx == cofanetti[i + 1] and mury + gpy == cofanetti[i + 2]:
-                        caseattactot[8] = True
-                    i = i + 4
-            murx = x
-            mury = y
-            nmurx, nmury, stanza, inutile, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
-            if nmury == mury:
-                caseattactot[11] = False
-                i = 0
-                while i < len(porte):
-                    if murx == porte[i + 1] and mury - gpy == porte[i + 2]:
-                        caseattactot[11] = True
-                    i = i + 4
-                i = 0
-                while i < len(cofanetti):
-                    if murx == cofanetti[i + 1] and mury - gpy == cofanetti[i + 2]:
-                        caseattactot[11] = True
-                    i = i + 4
             i = 0
             # disegno le caselle attaccabili
             while i < len(caseattactot):
-                if not caseattactot[i + 2]:
+                if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
                     schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
                 i = i + 3
         if attacco == 2:
@@ -840,7 +733,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         schermo.blit(armrob, (rx, ry))
         # personaggio
         if not risposta:
-            disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, guanti)
+            disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
         # disegnare i mostri
         j = 0
@@ -884,13 +777,15 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             puntatogg = puntatogg5
                         break
                     i = i + 4
-                puntandoNemico = False
                 for nemico in listaNemici:
                     if xp == nemico.x and yp == nemico.y:
-                        puntandoNemico = True
+                        suPorta = False
+                        suCofanetto = False
+                        if (xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy):
+                            puntatogg = puntatogg2
+                        else:
+                            puntatogg = puntatogg6
                         break
-                if not suPorta and not suCofanetto and puntandoNemico:
-                    puntatogg = puntatogg2
             if ((xp == x and yp == y) or (xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and puntatogg != 0:
                 puntat = puntatIn
             else:
@@ -949,7 +844,62 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if ((xp / gpx) + (yp / gpy)) % 2 == 1:
                 schermo.blit(sfondinob, (xp, yp))
 
-        # disegna vita-status-raggio visivo mostri
+        # backbround occhio/chiave
+        schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
+        # vista nemici
+        if apriocchio:
+            schermo.blit(occhioape, (gsx - (gpx * 4 // 3), gpy // 3))
+        else:
+            schermo.blit(occhiochiu, (gsx - (gpx * 4 // 3), gpy // 3))
+        # chiave robo
+        if chiamarob:
+            schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
+        else:
+            schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
+
+        # disegna vita esche
+        i = 0
+        while i < len(vitaesca):
+            if xp == vitaesca[i + 2] and yp == vitaesca[i + 3]:
+                lungvita = (gpx * 8 * vitaesca[i + 1]) // 100
+                if lungvita < 0:
+                    lungvita = 0
+                schermo.blit(sfondoEsche, (gsx // 32 * 1, gpy // 3))
+                schermo.blit(esche, (gsx // 32 * 1, gpy // 3))
+                indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
+                fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+                vitaesche = pygame.transform.scale(vitanemico0, (lungvita, gpy // 4))
+                schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
+                schermo.blit(fineindvitamost, ((gsx // 32 * 2) + (gpx * 8), gpy // 3))
+                schermo.blit(vitaesche, (gsx // 32 * 2, gpy // 3))
+                ricaricaschermo = True
+            i = i + 4
+
+        # vita-status personaggio
+        lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
+        lungvita = (lungvitatot * pv) // pvtot
+        if lungvita < 0:
+            lungvita = 0
+        indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
+        fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+        vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
+        schermo.blit(sfondoRallo, (gsx // 32 * 0, gsy // 18 * 17))
+        schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+        schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 17) + (gpy // 4 * 3)))
+        schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
+        persbat = pygame.transform.scale(perso, (gpx, gpy))
+        schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 17))
+        schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 17))
+        schermo.blit(imgNumFrecce, (gsx // 32 * 1.2, gsy // 18 * 17))
+        messaggio("x " + str(numFrecce), grigiochi, gsx // 32 * 1.8, gsy // 18 * 17.2, 40)
+        if avvele:
+            schermo.blit(avvelenato, (gsx // 32 * 3, gsy // 18 * 17))
+        if attp > 0:
+            schermo.blit(attaccopiu, (gsx // 32 * 4, gsy // 18 * 17))
+        if difp > 0:
+            schermo.blit(difesapiu, (gsx // 32 * 5, gsy // 18 * 17))
+
+        # disegna vita-status-raggio visivo nemici
         for nemico in listaNemici:
             mx = nemico.x
             my = nemico.y
@@ -967,17 +917,16 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i = i + 3
                 campoattaccabile3 = pygame.transform.scale(campoattaccabilemostro, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
                 schermo.blit(campoattaccabile3, (mx - raggiovista, my - raggiovista))
-                schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-                schermo.blit(sfondosta, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
+                schermo.blit(sfondoMostro, (gpx // 3, gpy // 3))
                 if nemico.avvelenato:
-                    schermo.blit(avvelenato, (gsx // 32 * 2, (gpy // 3) + (gpy // 4)))
+                    schermo.blit(avvelenato, ((gpx // 3) + gpx + (gpx // 8), (gpy // 3) + (gpy // 4)))
                 if nemico.appiccicato:
-                    schermo.blit(appiccicoso, ((gsx // 32 * 2) + (gpx // 4 * 3), (gpy // 3) + (gpy // 4)))
-                schermo.blit(nemico.imgAttuale, (gsx // 32 * 1, gpy // 3))
+                    schermo.blit(appiccicoso, ((gpx // 3) + (gpx * 2) + (gpx // 8), (gpy // 3) + (gpy // 4)))
+                schermo.blit(nemico.imgS, (gpx // 3, gpy // 3))
                 fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
                 if pvmtot > 1500:
                     indvitamost = pygame.transform.scale(indvita, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
-                    schermo.blit(fineindvitamost, ((gsx // 32 * 2) + 1500, gpy // 3))
+                    schermo.blit(fineindvitamost, (((gpx // 3) + (gpx * 2)) + 1500, gpy // 3))
                     if pvm > 15000:
                         pvm = 1500
                         vitanemsucc = pygame.transform.scale(vitanemico00, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
@@ -1024,121 +973,52 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 else:
                     lungvitatot = int(((gpx * pvmtot) / float(4)) // 15)
                     indvitamost = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
-                    schermo.blit(fineindvitamost, ((gsx // 32 * 2) + lungvitatot, gpy // 3))
-                    vitanemsucc = pygame.transform.scale(vitanemico00, ((gpx // 4) * (lungvitatot // 15), gpy // 4))
+                    schermo.blit(fineindvitamost, ((gpx // 3) + gpx + lungvitatot, gpy // 3))
+                    vitanemsucc = pygame.transform.scale(vitanemico00, (lungvitatot, gpy // 4))
                     vitanemico = vitanemico0
                 lungvita = int(((gpx * pvm) / float(4)) // 15)
                 if lungvita < 0:
                     lungvita = 0
                 vitanem = pygame.transform.scale(vitanemico, (lungvita, gpy // 4))
-                schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-                schermo.blit(vitanemsucc, (gsx // 32 * 2, gpy // 3))
-                schermo.blit(vitanem, (gsx // 32 * 2, gpy // 3))
+                schermo.blit(indvitamost, ((gpx // 3) + gpx, gpy // 3))
+                schermo.blit(vitanemsucc, ((gpx // 3) + gpx, gpy // 3))
+                schermo.blit(vitanem, ((gpx // 3) + gpx, gpy // 3))
                 ricaricaschermo = True
-                if (mx != mvx) or (my != mvy):
-                    appenaCaricato = False
-                mvx = mx
-                mvy = my
-            j += 7
-
-        for nemico in listaNemici:
-            if not (xp == nemico.x and yp == nemico.y):
-                ricaricaschermo = False
-                if xvp == nemico.x and yvp == nemico.y:
-                    ricaricaschermo = True
-                    appenaCaricato = False
-                    break
-
-        # backbround occhio/chiave
-        schermo.blit(sfochiaveocchio, (gsx - (gpx * 5), 0))
-        # vista nemici
-        if apriocchio:
-            schermo.blit(occhioape, (gsx - (gpx * 4 // 3), gpy // 3))
-        else:
-            schermo.blit(occhiochiu, (gsx - (gpx * 4 // 3), gpy // 3))
-        # chiave robo
-        if chiamarob:
-            schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
-        else:
-            schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
-
-        # disegna vita esche
-        i = 0
-        while i < len(vitaesca):
-            if xp == vitaesca[i + 2] and yp == vitaesca[i + 3]:
-                lungvita = (gpx * 8 * vitaesca[i + 1]) // 100
-                if lungvita < 0:
-                    lungvita = 0
-                schermo.blit(sfondomo, (gsx // 32 * 1, gpy // 3))
-                schermo.blit(esche, (gsx // 32 * 1, gpy // 3))
-                indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
-                fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
-                vitaesche = pygame.transform.scale(vitanemico0, (lungvita, gpy // 4))
-                schermo.blit(indvitamost, (gsx // 32 * 2, gpy // 3))
-                schermo.blit(fineindvitamost, ((gsx // 32 * 2) + (gpx * 8), gpy // 3))
-                schermo.blit(vitaesche, (gsx // 32 * 2, gpy // 3))
-                ricaricaschermo = True
-            i = i + 4
-
-        # vita-status personaggio
-        lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
-        lungvita = (lungvitatot * pv) // pvtot
-        if lungvita < 0:
-            lungvita = 0
-        indvitapers = pygame.transform.scale(indvita, (lungvitatot, gpy // 4))
-        fineindvitapers = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
-        vitaral = pygame.transform.scale(vitapersonaggio, (lungvita, gpy // 4))
-        schermo.blit(indvitapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
-        schermo.blit(fineindvitapers, ((gsx // 32 * 1) + lungvitatot, (gsy // 18 * 16) + (gpy // 4 * 3)))
-        schermo.blit(vitaral, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 4 * 3)))
-        schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 16))
-        persbat = pygame.transform.scale(perso, (gpx, gpy))
-        schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 16))
-        schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 16))
-        schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
-        if avvele:
-            schermo.blit(avvelenato, (gsx // 32 * 1, (gsy // 18 * 16) + (gpy // 8)))
-        if attp > 0:
-            schermo.blit(attaccopiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 16) + (gpy // 8)))
-        if difp > 0:
-            schermo.blit(difesapiu, ((gsx // 32 * 1) + (gpx // 4 * 6), (gsy // 18 * 16) + (gpy // 8)))
 
         # vita-status-campo visivo robo
-        lungentot = int(((gpx * entot) / float(4)) // 10)
-        lungen = (lungentot * enrob) // entot
-        if lungen < 0:
-            lungen = 0
-        indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
-        fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
-        vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
-        schermo.blit(indvitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
-        schermo.blit(fineindvitarob, ((gsx // 32 * 1) + lungentot, (gsy // 18 * 17) + (gpy // 4 * 3)))
-        schermo.blit(vitarob, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 4 * 3)))
-        schermo.blit(sfondomo, (gsx // 32 * 0, gsy // 18 * 17))
-        robobat = pygame.transform.scale(roboo, (gpx, gpy))
-        schermo.blit(robobat, (gsx // 32 * 0, gsy // 18 * 17))
-        schermo.blit(sfondostapers, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
-        if surrisc > 0:
-            schermo.blit(surriscaldato, (gsx // 32 * 1, (gsy // 18 * 17) + (gpy // 8)))
-        if velp > 0:
-            schermo.blit(velocitapiu, ((gsx // 32 * 1) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
-        if effp > 0:
-            schermo.blit(efficienzapiu, ((gsx // 32 * 1) + (gpx // 4 * 3) + (gpx // 4 * 3), (gsy // 18 * 17) + (gpy // 8)))
-        if xp == rx and yp == ry and enrob > 0:
-            # controllo caselle attaccabili
-            raggiovista = gpx * 6
-            caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactotRobo):
-                if not caseattactotRobo[i + 2] and (caseattactotRobo[i] <= rx + raggiovista and caseattactotRobo[i + 1] <= ry + raggiovista and caseattactotRobo[i] >= rx - raggiovista and caseattactotRobo[i + 1] >= ry - raggiovista and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry)):
-                    schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
-                i = i + 3
-            campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
-            schermo.blit(campoattaccabile3, (rx - raggiovista, ry - raggiovista))
-            ricaricaschermo = True
-            if (rx != mvx) or (ry != mvy):
-                appenaCaricato = False
+        if xp == rx and yp == ry:
+            if enrob > 0:
+                # controllo caselle attaccabili
+                raggiovista = gpx * 6
+                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
+                i = 0
+                # disegno le caselle attaccabili
+                while i < len(caseattactotRobo):
+                    if not caseattactotRobo[i + 2] and (caseattactotRobo[i] <= rx + raggiovista and caseattactotRobo[i + 1] <= ry + raggiovista and caseattactotRobo[i] >= rx - raggiovista and caseattactotRobo[i + 1] >= ry - raggiovista and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry)):
+                        schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
+                    i = i + 3
+                campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
+                schermo.blit(campoattaccabile3, (rx - raggiovista, ry - raggiovista))
+                ricaricaschermo = True
+            lungentot = int(((gpx * entot) / float(4)) // 15)
+            lungen = int(((gpx * enrob) / float(4)) // 15)
+            if lungen < 0:
+                lungen = 0
+            indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
+            fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+            vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
+            schermo.blit(sfondoColco, (gpx // 3, gpy // 3))
+            schermo.blit(indvitarob, ((gpx // 3) + gpx, gpy // 3))
+            schermo.blit(fineindvitarob, ((gpx // 3) + gpx + lungentot, gpy // 3))
+            schermo.blit(vitarob, ((gpx // 3) + gpx, gpy // 3))
+            robobat = pygame.transform.scale(roboo, (gpx, gpy))
+            schermo.blit(robobat, (gpx // 3, gpy // 3))
+            if surrisc > 0:
+                schermo.blit(surriscaldato, ((gpx // 3) + gpx + (gpx // 8), (gpy // 3) + (gpy // 4)))
+            if velp > 0:
+                schermo.blit(velocitapiu, ((gpx // 3) + (gpx * 2) + (gpx // 8), (gpy // 3) + (gpy // 4)))
+            if effp > 0:
+                schermo.blit(efficienzapiu, ((gpx // 3) + (gpx * 3) + (gpx // 8), (gpy // 3) + (gpy // 4)))
 
         if not risposta:
             pygame.display.update()

@@ -48,8 +48,8 @@ grigioscu = (50, 50, 50)
 grigio = (80, 80, 80)
 grigiochi = (230, 230, 230)
 bianco = (255, 255, 255)
-rosso = (255, 0, 0)
-verde = (0, 255, 0)
+rosso = (255, 130, 0)
+verde = (130, 255, 0)
 verdescu = (0, 120, 0)
 blu = (0, 0, 255)
 
@@ -66,21 +66,23 @@ puntatDif = pygame.image.load('Immagini/Oggetti/Difesa.png')
 puntatDif = pygame.transform.scale(puntatDif, (gpx, gpy))
 puntatAtt = pygame.image.load('Immagini/Oggetti/Attacco.png')
 puntatAtt = pygame.transform.scale(puntatAtt, (gpx, gpy))
+puntatArc = pygame.image.load('Immagini/Oggetti/AttaccoDistanza.png')
+puntatArc = pygame.transform.scale(puntatArc, (gpx, gpy))
 puntatPor = pygame.image.load('Immagini/Oggetti/ApriChiudiPorta.png')
 puntatPor = pygame.transform.scale(puntatPor, (gpx, gpy))
 puntatCof = pygame.image.load('Immagini/Oggetti/ApriCofanetto.png')
 puntatCof = pygame.transform.scale(puntatCof, (gpx, gpy))
 puntatSpinta = pygame.image.load('Immagini/Oggetti/SpingiColco.png')
 puntatSpinta = pygame.transform.scale(puntatSpinta, (gpx, gpy))
-puntatBom = pygame.image.load('Immagini/Oggetti/Bomba.png')
+puntatBom = pygame.image.load('Immagini/Oggetti/Oggetto6Ico.png')
 puntatBom = pygame.transform.scale(puntatBom, (gpx, gpy))
-puntatBoV = pygame.image.load('Immagini/Oggetti/BombaVeleno.png')
+puntatBoV = pygame.image.load('Immagini/Oggetti/Oggetto7Ico.png')
 puntatBoV = pygame.transform.scale(puntatBoV, (gpx, gpy))
-puntatEsc = pygame.image.load('Immagini/Oggetti/Esca.png')
+puntatEsc = pygame.image.load('Immagini/Oggetti/Oggetto8Ico.png')
 puntatEsc = pygame.transform.scale(puntatEsc, (gpx, gpy))
-puntatBoA = pygame.image.load('Immagini/Oggetti/BombaAppiccicosa.png')
+puntatBoA = pygame.image.load('Immagini/Oggetti/Oggetto9Ico.png')
 puntatBoA = pygame.transform.scale(puntatBoA, (gpx, gpy))
-puntatBoP = pygame.image.load('Immagini/Oggetti/BombaPotenziata.png')
+puntatBoP = pygame.image.load('Immagini/Oggetti/Oggetto10Ico.png')
 puntatBoP = pygame.transform.scale(puntatBoP, (gpx, gpy))
 scorriSu = pygame.image.load("Immagini/Puntatori/ScorriOggettiSu.png")
 scorriSu = pygame.transform.scale(scorriSu, (gpx, gpy))
@@ -187,10 +189,14 @@ vitarobo = pygame.image.load('Immagini/Barrevita/Vitarobo.png')
 
 # sfondi
 sfondostax3 = pygame.image.load('Immagini/Status/Sfondostax3.png')
-sfondosta = pygame.image.load('Immagini/Status/Sfondosta.png')
-sfondomo = pygame.transform.scale(sfondosta, (gpx, gpy))
-sfondosta = pygame.transform.scale(sfondosta, ((gpx // 3 * 4) + (gpx // 4), gpy // 3 * 2))
-sfondostapers = pygame.transform.scale(sfondosta, ((gpx // 3 * 6) + (gpx // 4), gpy // 3 * 2))
+sfondosta = pygame.image.load('Immagini/Status/SfondoRallo.png')
+sfondoRallo = pygame.transform.scale(sfondosta, (gpx * 6, gpy))
+sfondosta = pygame.image.load('Immagini/Status/SfondoColco.png')
+sfondoColco = pygame.transform.scale(sfondosta, (gpx * 4, gpy))
+sfondosta = pygame.image.load('Immagini/Status/SfondoNemici.png')
+sfondoMostro = pygame.transform.scale(sfondosta, (gpx * 3, gpy))
+sfondosta = pygame.image.load('Immagini/Status/SfondoEsche.png')
+sfondoEsche = pygame.transform.scale(sfondosta, (gpx, gpy))
 sfondoStartBattaglia = pygame.image.load('Immagini/Oggetti/SfondoStartBattaglia.png')
 sfondoStartBattaglia = pygame.transform.scale(sfondoStartBattaglia, (gpx * 7, gpy * 7))
 sfondoStatAumentata = pygame.image.load('Immagini/Levelup/SfondoStatisticaAumentata.png')
@@ -198,37 +204,47 @@ sfondoStatAumentata = pygame.transform.scale(sfondoStatAumentata, (gpx * 7, gpy 
 
 # status
 appiccicosoo = pygame.image.load('Immagini/Status/Appiccicoso.png')
-appiccicoso = pygame.transform.scale(appiccicosoo, (gpx // 3 * 2, gpy // 3 * 2))
+appiccicoso = pygame.transform.scale(appiccicosoo, (gpx * 3 // 4, gpy * 3 // 4))
 avvelenatoo = pygame.image.load('Immagini/Status/Avvelenato.png')
-avvelenato = pygame.transform.scale(avvelenatoo, (gpx // 3 * 2, gpy // 3 * 2))
+avvelenato = pygame.transform.scale(avvelenatoo, (gpx * 3 // 4, gpy * 3 // 4))
 surriscaldatoo = pygame.image.load('Immagini/Status/Surriscaldato.png')
-surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx // 3 * 2, gpy // 3 * 2))
+surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx * 3 // 4, gpy * 3 // 4))
 attaccopiuo = pygame.image.load('Immagini/Status/Attaccopiu.png')
-attaccopiu = pygame.transform.scale(attaccopiuo, (gpx // 3 * 2, gpy // 3 * 2))
+attaccopiu = pygame.transform.scale(attaccopiuo, (gpx * 3 // 4, gpy * 3 // 4))
 difesapiuo = pygame.image.load('Immagini/Status/Difesapiu.png')
-difesapiu = pygame.transform.scale(difesapiuo, (gpx // 3 * 2, gpy // 3 * 2))
+difesapiu = pygame.transform.scale(difesapiuo, (gpx * 3 // 4, gpy * 3 // 4))
 velocitapiuo = pygame.image.load('Immagini/Status/Velocitapiu.png')
-velocitapiu = pygame.transform.scale(velocitapiuo, (gpx // 3 * 2, gpy // 3 * 2))
+velocitapiu = pygame.transform.scale(velocitapiuo, (gpx * 3 // 4, gpy * 3 // 4))
 efficienzapiuo = pygame.image.load('Immagini/Status/Efficienzapiu.png')
-efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx // 3 * 2, gpy // 3 * 2))
+efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx * 3 // 4, gpy * 3 // 4))
+imgNumFrecce = pygame.image.load('Immagini/Status/NumFrecce.png')
+imgNumFrecce = pygame.transform.scale(imgNumFrecce, (gpx * 3 // 4, gpy * 3 // 4))
+
+# menu alto destra
+sfochiaveocchio = pygame.image.load("Immagini/Oggetti/SfondoOcchioChiave.png")
+sfochiaveocchio = pygame.transform.scale(sfochiaveocchio, (gpx * 5, gpy * 2))
 occhioape = pygame.image.load('Immagini/Status/OcchioAperto.png')
 occhioape = pygame.transform.scale(occhioape, (gpx, gpy))
 occhiochiu = pygame.image.load('Immagini/Status/OcchioChiuso.png')
 occhiochiu = pygame.transform.scale(occhiochiu, (gpx, gpy))
-
-# chiave robo
 chiaveroboacc = pygame.image.load('Immagini/Oggetti/ChiaveColcoAcc.png')
 chiaveroboacc = pygame.transform.scale(chiaveroboacc, (gpx * 2, gpy * 2))
 chiaverobospe = pygame.image.load('Immagini/Oggetti/ChiaveColcoSpe.png')
 chiaverobospe = pygame.transform.scale(chiaverobospe, (gpx * 2, gpy * 2))
-sfochiaveocchio = pygame.image.load("Immagini/Oggetti/SfondoOcchioChiave.png")
-sfochiaveocchio = pygame.transform.scale(sfochiaveocchio, (gpx * 5, gpy * 2))
 
-# oggetti lanciati
-esche = pygame.image.load("Immagini/Oggetti/Esca.png")
+# oggetti sulla schermata
+esche = pygame.image.load("Immagini/Oggetti/Oggetto8Ico.png")
 esche = pygame.transform.scale(esche, (gpx, gpy))
 sacchettoDenaroStart = pygame.image.load('Immagini/Oggetti/SacchettoDenaro.png')
 sacchettoDenaroStart = pygame.transform.scale(sacchettoDenaroStart, (gpx * 4, gpy * 4))
+faretraFrecceStart0 = pygame.image.load('Immagini/EquipRallo/Faretre/Faretra0Menu.png')
+faretraFrecceStart0 = pygame.transform.scale(faretraFrecceStart0, (gpx * 4, gpy * 4))
+faretraFrecceStart1 = pygame.image.load('Immagini/EquipRallo/Faretre/Faretra1Menu.png')
+faretraFrecceStart1 = pygame.transform.scale(faretraFrecceStart1, (gpx * 4, gpy * 4))
+faretraFrecceStart2 = pygame.image.load('Immagini/EquipRallo/Faretre/Faretra2Menu.png')
+faretraFrecceStart2 = pygame.transform.scale(faretraFrecceStart2, (gpx * 4, gpy * 4))
+faretraFrecceStart3 = pygame.image.load('Immagini/EquipRallo/Faretre/Faretra3Menu.png')
+faretraFrecceStart3 = pygame.transform.scale(faretraFrecceStart3, (gpx * 4, gpy * 4))
 sacchettoDenaroo = pygame.image.load('Immagini/Oggetti/SacchettoDenaroIco.png')
 sacchettoDenaro = pygame.transform.scale(sacchettoDenaroo, (gpx, gpy))
 
@@ -271,6 +287,70 @@ saliliv2 = pygame.image.load('Immagini/Levelup/Saliliv2.png')
 saliliv2 = pygame.transform.scale(saliliv2, (gpx, gpy))
 saliliv3 = pygame.image.load('Immagini/Levelup/Saliliv3.png')
 saliliv3 = pygame.transform.scale(saliliv3, (gpx, gpy))
+
+# img equipaggiamento, condizioni, tecniche, oggetti
+sfondoOggettoMenu = pygame.image.load("Immagini/EquipRallo/SfondoOggetto.png")
+sconosciutoEquipMenu = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
+sconosciutoOggettoMenu = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
+sconosciutoOggettoIcoMenu = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+vetImgSpadeMenu = []
+vetImgArchiMenu = []
+vetImgArmatureMenu = []
+vetImgScudiMenu = []
+vetImgGuantiMenu = []
+vetImgCollaneMenu = []
+contatoreGlobale = 0
+while contatoreGlobale < 5:
+    vetImgSpadeMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRallo/Spade/Spada%iMenu.png" % contatoreGlobale), (int(gpx * 2), int(gpy * 2))))
+    vetImgArchiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRallo/Archi/Arco%iMenu.png" % contatoreGlobale), (int(gpx * 2), int(gpy * 2))))
+    vetImgArmatureMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iMenu.png" % contatoreGlobale), (int(gpx * 2), int(gpy * 2))))
+    vetImgScudiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iMenu.png" % contatoreGlobale), (int(gpx * 2), int(gpy * 2))))
+    vetImgGuantiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iMenu.png" % contatoreGlobale), (int(gpx * 2), int(gpy * 2))))
+    vetImgCollaneMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRallo/Collane/Collana%iMenu.png" % contatoreGlobale), (int(gpx * 2), int(gpy * 2))))
+    contatoreGlobale += 1
+vetImgCondizioniMenu = [0]
+contatoreGlobale = 1
+while contatoreGlobale <= 20:
+    vetImgCondizioniMenu.append(pygame.transform.scale(pygame.image.load("Immagini/GrafCondizioni/Condizione%i.png" % contatoreGlobale), (gpx * 12, gpy * 9)))
+    contatoreGlobale += 1
+vetImgTecnicheMenu = [0]
+contatoreGlobale = 1
+while contatoreGlobale <= 20:
+    vetImgTecnicheMenu.append(pygame.transform.scale(pygame.image.load("Immagini/GrafTecniche/Tecnica%i.png" % contatoreGlobale), (gpx * 12, gpy * 9)))
+    contatoreGlobale += 1
+vetImgBatterieMenu = []
+vetIcoBatterieMenu = []
+contatoreGlobale = 0
+while contatoreGlobale < 5:
+    vetImgBatterieMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale), (gpx * 5, gpy * 5)))
+    vetIcoBatterieMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale), (gpx * 2, gpy * 2)))
+    contatoreGlobale += 1
+vetImgOggettiMenu = []
+vetImgOggettiStart = []
+vetIcoOggettiMenu = []
+contatoreGlobale = 1
+while contatoreGlobale <= 10:
+    vetImgOggettiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale), (gpx * 10, gpy * 10)))
+    vetImgOggettiStart.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale), (gpx * 4, gpy * 4)))
+    vetIcoOggettiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale), (gpx, gpy)))
+    contatoreGlobale += 1
+
+# img equipaggiamento pixellato
+vetImgSpadePixellate = []
+vetImgArchiPixellate = []
+vetImgArmaturePixellate = []
+vetImgScudiPixellate = []
+vetImgGuantiPixellate = []
+vetImgCollanePixellate = []
+contatoreGlobale = 0
+while contatoreGlobale < 5:
+    vetImgSpadePixellate.append(pygame.image.load("Immagini/EquipRallo/Spade/Spada%is.png" % contatoreGlobale))
+    vetImgArchiPixellate.append(pygame.image.load("Immagini/EquipRallo/Archi/Arco%is.png" % contatoreGlobale))
+    vetImgArmaturePixellate.append(pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % contatoreGlobale))
+    vetImgScudiPixellate.append(pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%is.png" % contatoreGlobale))
+    vetImgGuantiPixellate.append(pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % contatoreGlobale))
+    vetImgCollanePixellate.append(pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % contatoreGlobale))
+    contatoreGlobale += 1
 
 # canali / volume (0-1)
 volumeCanzoni = 0

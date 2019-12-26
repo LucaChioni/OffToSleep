@@ -311,6 +311,15 @@ def gameloop():
             arcodAttacco = pygame.transform.scale(arcodAttacco, (gpx * 2, gpy))
             arcowAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iwAttacco.png" % dati[128])
             arcowAttacco = pygame.transform.scale(arcowAttacco, (gpx, gpy * 2))
+            # faretra
+            faretraw = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%iw.png" % dati[133])
+            faretraw = pygame.transform.scale(faretraw, (gpx, gpy))
+            faretraa = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%ia.png" % dati[133])
+            faretraa = pygame.transform.scale(faretraa, (gpx, gpy))
+            faretras = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%is.png" % dati[133])
+            faretras = pygame.transform.scale(faretras, (gpx, gpy))
+            faretrad = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%id.png" % dati[133])
+            faretrad = pygame.transform.scale(faretrad, (gpx, gpy))
             # armatura
             armaturaw = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iw.png" % dati[8])
             armaturaw = pygame.transform.scale(armaturaw, (gpx, gpy))
@@ -392,6 +401,7 @@ def gameloop():
                 armatura = armaturaw
                 scudo = scudow
                 arco = arcow
+                faretra = faretraw
                 arcoAttacco = arcowAttacco
                 guanti = guantiw
                 guantiMov1 = guantiwMov1
@@ -406,6 +416,7 @@ def gameloop():
                 armatura = armaturaa
                 scudo = scudoa
                 arco = arcoa
+                faretra = faretraa
                 arcoAttacco = arcoaAttacco
                 guanti = guantia
                 guantiMov1 = guantiaMov1
@@ -420,6 +431,7 @@ def gameloop():
                 armatura = armaturas
                 scudo = scudos
                 arco = arcos
+                faretra = faretras
                 arcoAttacco = arcosAttacco
                 guanti = guantis
                 guantiMov1 = guantisMov1
@@ -434,6 +446,7 @@ def gameloop():
                 armatura = armaturad
                 scudo = scudod
                 arco = arcod
+                faretra = faretrad
                 arcoAttacco = arcodAttacco
                 guanti = guantid
                 guantiMov1 = guantidMov1
@@ -466,6 +479,7 @@ def gameloop():
             armatura = armaturas
             scudo = scudos
             arco = arcos
+            faretra = faretras
             arcoAttacco = arcosAttacco
             guanti = guantis
             guantiMov1 = guantisMov1
@@ -515,6 +529,7 @@ def gameloop():
                     armatura = armaturaw
                     scudo = scudow
                     arco = arcow
+                    faretra = faretraw
                     arcoAttacco = arcowAttacco
                     guanti = guantiw
                     guantiMov1 = guantiwMov1
@@ -535,6 +550,7 @@ def gameloop():
                     armatura = armaturaa
                     scudo = scudoa
                     arco = arcoa
+                    faretra = faretraa
                     arcoAttacco = arcoaAttacco
                     guanti = guantia
                     guantiMov1 = guantiaMov1
@@ -555,6 +571,7 @@ def gameloop():
                     armatura = armaturas
                     scudo = scudos
                     arco = arcos
+                    faretra = faretras
                     arcoAttacco = arcosAttacco
                     guanti = guantis
                     guantiMov1 = guantisMov1
@@ -575,6 +592,7 @@ def gameloop():
                     armatura = armaturad
                     scudo = scudod
                     arco = arcod
+                    faretra = faretrad
                     arcoAttacco = arcodAttacco
                     guanti = guantid
                     guantiMov1 = guantidMov1
@@ -718,7 +736,7 @@ def gameloop():
                 y = vy
         # gestione attacchi
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132])
             caricaTutto = True
             # cambiare posizione dopo l'attacco
             if npers == 3:
@@ -730,6 +748,7 @@ def gameloop():
                 armatura = armaturaw
                 scudo = scudow
                 arco = arcow
+                faretra = faretraw
                 arcoAttacco = arcowAttacco
                 guanti = guantiw
                 guantiMov1 = guantiwMov1
@@ -745,6 +764,7 @@ def gameloop():
                 armatura = armaturaa
                 scudo = scudoa
                 arco = arcoa
+                faretra = faretraa
                 arcoAttacco = arcoaAttacco
                 guanti = guantia
                 guantiMov1 = guantiaMov1
@@ -760,6 +780,7 @@ def gameloop():
                 armatura = armaturas
                 scudo = scudos
                 arco = arcos
+                faretra = faretras
                 arcoAttacco = arcosAttacco
                 guanti = guantis
                 guantiMov1 = guantisMov1
@@ -775,6 +796,7 @@ def gameloop():
                 armatura = armaturad
                 scudo = scudod
                 arco = arcod
+                faretra = faretrad
                 arcoAttacco = arcodAttacco
                 guanti = guantid
                 guantiMov1 = guantidMov1
@@ -1016,9 +1038,9 @@ def gameloop():
                 if nrob == 4:
                     robot = robow
                     armrob = armrobw
-        # effetto di raffreddamento / auto-ricarica / auto-ricarica+
         elif sposta and mosseRimasteRob < 0 and not morterob:
             mosseRimasteRob += 1
+        # effetto di raffreddamento / auto-ricarica / auto-ricarica+
         if mosseRimasteRob >= 0:
             if raffredda == 0:
                 dati[122] = 0
@@ -1131,10 +1153,10 @@ def gameloop():
         # fai tutte le animazioni del turno e disegnare gli sfondi e personaggi
         if not inizio:
             if caricaTutto:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro)
-            primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro)
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[122], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132])
+            primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro)
             if not carim:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro)
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[122], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132])
 
         if not aumentoliv:
             caricaTutto = False
@@ -1159,10 +1181,7 @@ def gameloop():
         while i < len(vettoreDenaro):
             denaroPreso = False
             if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
-                dati[131] += vettoreDenaro[i]
-                # effetto portafortuna
-                if dati[130] == 4:
-                    dati[131] += vettoreDenaro[i]
+                dati[131] = ottieniMonete(dati, vettoreDenaro[i])
                 del vettoreDenaro[i + 2]
                 del vettoreDenaro[i + 1]
                 del vettoreDenaro[i]
