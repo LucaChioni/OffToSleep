@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from GenericFuncG2 import *
+import math
 
 
 def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):
@@ -76,14 +77,21 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
     return animazione, primopasso, animazCamminataBreve
 
 
-def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, guanti, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, avvele, attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz):
-    if sposta and not aumentoliv:
+def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, guanti, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, avvele, attacco, difesa, animazioneRallo, animazione, aumentoliv, attaccoADistanza, fineanimaz):
+    if sposta:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
-            if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
-                canaleSoundAttacco.play(rumoreattacco)
-            disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
-        if difesa != 0:
+            if attaccoADistanza:
+                if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
+                    canaleSoundAttacco.play(rumoreAttaccoArco)
+                if not aumentoliv:
+                    disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
+            else:
+                if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
+                    canaleSoundAttacco.play(rumoreAttaccoSpada)
+                if not aumentoliv:
+                    disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
+        if difesa != 0 and not aumentoliv:
             animazioneRallo = True
             schermo.blit(arcoS, (x, y))
             schermo.blit(faretraS, (x, y))
@@ -115,7 +123,7 @@ def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana,
 def animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, faretra, guanti, collana, liv, aumentoliv, carim, animazione, caricaTutto, tastop, fineanimaz):
     if aumentoliv and not carim:
         animazione = True
-        if not canaleSoundLvUp.get_busy():
+        if not canaleSoundLvUp.get_busy() and fineanimaz > 1:
             canaleSoundLvUp.play(rumorelevelup)
         avvele = False
         disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
@@ -342,9 +350,9 @@ def animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
                     schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
                 animazione = True
                 if nemico.animaDanneggiamento == "Rallo":
-                    schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.x, nemico.y))
+                    schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.vx, nemico.vy))
                 if nemico.animaDanneggiamento == "Colco":
-                    schermo.blit(nemico.imgDanneggiamentoColco, (nemico.x, nemico.y))
+                    schermo.blit(nemico.imgDanneggiamentoColco, (nemico.vx, nemico.vy))
                 if nemico.appiccicato:
                     schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                 if nemico.avvelenato:
@@ -352,10 +360,10 @@ def animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
     return animazione
 
 
-def animaCofanetto(tesoro, x, y, vx, vy, npers, pers, avvele, armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto):
+def animaCofanetto(tesoro, x, y, npers, pers, avvele, armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto):
     if tesoro != -1:
         schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
-        # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
+        # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(5) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
         if tesoro >= 11 and tesoro <= 30:
             messaggio("Hai trovato: Una nuova tecnica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 31:
@@ -363,17 +371,17 @@ def animaCofanetto(tesoro, x, y, vx, vy, npers, pers, avvele, armatura, arma, sc
         if tesoro == 32:
             messaggio("Hai trovato: Caricabatterie", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 33:
-            messaggio("Hai trovato: Bomba", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 34:
             messaggio("Hai trovato: Medicina", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 35:
-            messaggio("Hai trovato: Bomba velenosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 36:
-            messaggio("Hai trovato: Esca", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 37:
+        if tesoro == 34:
             messaggio("Hai trovato: Superpozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 38:
+        if tesoro == 35:
             messaggio("Hai trovato: Caricabatterie migliorato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 36:
+            messaggio("Hai trovato: Bomba", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 37:
+            messaggio("Hai trovato: Bomba velenosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 38:
+            messaggio("Hai trovato: Esca", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 39:
             messaggio("Hai trovato: Bomba appiccicosa", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 40:
@@ -381,87 +389,81 @@ def animaCofanetto(tesoro, x, y, vx, vy, npers, pers, avvele, armatura, arma, sc
         if tesoro == 41:
             messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 42:
-            messaggio("Hai trovato: Spada di legno", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 43:
             messaggio("Hai trovato: Spada di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 44:
+        if tesoro == 43:
             messaggio("Hai trovato: Spadone d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 45:
-            messaggio("Hai trovato: Spada del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 46:
-            messaggio("Hai trovato: Spada di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 47:
-            messaggio("Hai trovato: Excalibur", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 48:
+        if tesoro == 44:
             messaggio("Hai trovato: Lykother", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 49:
-            messaggio("Hai trovato: Sinego", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 50:
+        if tesoro == 45:
             messaggio("Hai trovato: Mendaxritas", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 46:
+            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 47:
+            messaggio("Hai trovato: Arco di legno", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 48:
+            messaggio("Hai trovato: Arco di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 49:
+            messaggio("Hai trovato: Arco di precisione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 50:
+            messaggio("Hai trovato: Accipiter", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 51:
             messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 52:
             messaggio("Hai trovato: Armatura di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 53:
-            messaggio("Hai trovato: Armatura di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 54:
             messaggio("Hai trovato: Armatura d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 55:
-            messaggio("Hai trovato: Armatura del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 56:
-            messaggio("Hai trovato: Armatura di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 57:
-            messaggio("Hai trovato: Armatura leggendaria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 58:
+        if tesoro == 54:
             messaggio("Hai trovato: Lykodes", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 59:
-            messaggio("Hai trovato: Armatura antica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 60:
+        if tesoro == 55:
             messaggio("Hai trovato: Loriquam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 56:
+            messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 57:
+            messaggio("Hai trovato: Scudo di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 58:
+            messaggio("Hai trovato: Scudo d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 59:
+            messaggio("Hai trovato: Lykethmos", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 60:
+            messaggio("Hai trovato: Clipequam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 61:
             messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 62:
-            messaggio("Hai trovato: Scudo di pelle", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+            messaggio("Hai trovato: Guanti vitali", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 63:
-            messaggio("Hai trovato: Scudo di ferro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+            messaggio("Hai trovato: Guanti difensivi", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 64:
-            messaggio("Hai trovato: Scudo d'acciaio", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+            messaggio("Hai trovato: Guanti offensivi", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 65:
-            messaggio("Hai trovato: Scudo del toro", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+            messaggio("Hai trovato: Guanti confortevoli", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 66:
-            messaggio("Hai trovato: Scudo di diamante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 67:
-            messaggio("Hai trovato: Scudo leggentario", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 68:
-            messaggio("Hai trovato: Lykethmos", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 69:
-            messaggio("Hai trovato: Scudo antico", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 70:
-            messaggio("Hai trovato: Clipequam", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 71:
             messaggio("Hai trovato: Niente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 72:
-            messaggio("Hai trovato: Batteria scarica", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 73:
+        if tesoro == 67:
+            messaggio("Hai trovato: Collana medicinale", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 68:
+            messaggio("Hai trovato: Collana rigenerante", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 69:
+            messaggio("Hai trovato: Apprendimaschera", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 70:
+            messaggio("Hai trovato: Portafortuna", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 71:
             messaggio("Hai trovato: Batteria piccola", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 74:
-            messaggio("Hai trovato: Batteria media", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 75:
-            messaggio("Hai trovato: Batteria grande", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 76:
+        if tesoro == 72:
             messaggio("Hai trovato: Batteria discreta", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 77:
-            messaggio("Hai trovato: Batteria affidabile", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 78:
-            messaggio("Hai trovato: Batteria extra", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 79:
-            messaggio("Hai trovato: Batteria efficiente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
-        if tesoro == 80:
+        if tesoro == 73:
+            messaggio("Hai trovato: Batteria capiente", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 74:
+            messaggio("Hai trovato: Batteria enorme", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 75:
             messaggio("Hai trovato: Batteria illimitata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro >= 81 and tesoro <= 100:
             messaggio("Hai trovato: Una nuova condizione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro >= 101 and tesoro <= 120:
             messaggio("Hai trovato: Cella di memoria", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 131:
+            messaggio("Hai trovato: 50 monete", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+        if tesoro == 132:
+            messaggio("Hai trovato: 5 frecce", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         if npers == 1:
             schermo.blit(sfondinoc, (x + gpx, y))
@@ -520,6 +522,8 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, caricaTutto, tastop, finea
         i = 0
         while i < len(vettoreDenaro):
             if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
+                if canaleSoundPassiRallo.get_busy():
+                    canaleSoundPassiRallo.stop()
                 denaroTrovato = vettoreDenaro[i]
                 # effetto portafortuna
                 if collana == 4:
@@ -544,9 +548,51 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, caricaTutto, tastop, finea
     return caricaTutto, tastop
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro):
+def animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, fineanimaz):
+    # disegno le frecce lanciate
+    if attaccoADistanza:
+        xInizioRetta = x
+        xFineRetta = attaccoADistanza.vx
+        yInizioRetta = y
+        yFineRetta = attaccoADistanza.vy
+        deltaXRetta = xFineRetta - xInizioRetta
+        deltaYRetta = yFineRetta - yInizioRetta
+        angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
+        angoloInGradi = math.degrees(angoloInRadianti)
+        imgFrecciaLanciata_temp = pygame.transform.rotate(imgFrecciaLanciata, angoloInGradi)
+        global quadrettoSottoLaFreccia
+        if fineanimaz > 5:
+            if fineanimaz != 10:
+                schermo.blit(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
+            quadrettoSottoLaFreccia = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - gpy, gpx * 3, gpy * 3))
+            schermo.blit(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
+        elif fineanimaz == 5:
+            schermo.blit(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
+
+
+def scriviDannoInflitto(listaNemici, fineanimaz):
+    if fineanimaz > 0:
+        for nemico in listaNemici:
+            i = len(nemico.danniRicevuti) - 1
+            while i >= 0:
+                messaggio("-" + str(nemico.danniRicevuti[i]), bianco, nemico.x - (gpx // 3), nemico.y - (gpy // 3 * (i + 1)), 40)
+                i -= 1
+
+
+def cancellaDanniInflitti(listaNemici, schermo_prima_delle_animazioni, fineanimaz):
+    if fineanimaz == 0:
+        for nemico in listaNemici:
+            i = len(nemico.danniRicevuti) - 1
+            while i >= 0:
+                del nemico.danniRicevuti[i]
+                schermo.blit(schermo_prima_delle_animazioni.subsurface(pygame.Rect(nemico.x - (gpx // 3), nemico.y - (gpy // 3 * 3), gpx * 2, gpy * 2)), (nemico.x - (gpx // 3), nemico.y - (gpy // 3 * 3)))
+                i -= 1
+
+
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza):
     animazione = False
     animazioneRallo = False
+    schermo_prima_delle_animazioni = schermo.copy()
     # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
     fineanimaz = 10
     while fineanimaz >= 0:
@@ -583,6 +629,15 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         animaEsche(vitaesca, sfondinoa, sfondinob)
         animaDenaro(vettoreDenaro, sfondinoa, sfondinob)
 
+        if fineanimaz == 10:
+            schermo_prima_delle_animazioni = schermo.copy()
+
+        # all'ultimo frame cancello tutti i numeri che indicano i danni inflitti
+        cancellaDanniInflitti(listaNemici, schermo_prima_delle_animazioni, fineanimaz)
+
+        # animazioni di tutte le frecce lanciate nel turno
+        animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, fineanimaz)
+
         # animazione camminata robo
         animazione = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
         # animazione camminata personaggio
@@ -590,17 +645,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         # animazione camminata mostri
         animazione = animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
-        # animazione apertura cofanetto
-        caricaTutto, tesoro = animaCofanetto(tesoro, x, y, vx, vy, npers, pers, dati[121], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto)
-
-        # animazione aumento di livello
-        animazioneRallo, caricaTutto, tastop = animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[4], aumentoliv, carim, animazioneRallo, caricaTutto, tastop, fineanimaz)
-
         # animazione morte nemici
         animazione = animaMorteNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione attacco personaggio (ultima animazione perchè per animare la difesa devo sapere se sono in corso altre animazioni)
-        animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, guanti, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, dati[121], attacco, difesa, animazioneRallo, animazione, aumentoliv, fineanimaz)
+        animazioneRallo = animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, guanti, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, dati[121], attacco, difesa, animazioneRallo, animazione, aumentoliv, attaccoADistanza, fineanimaz)
 
         # animazione attacco nemici
         animazione = animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz)
@@ -608,11 +657,20 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         # animazione danneggiamento dei nemici
         animazione = animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
+        # animazione apertura cofanetto
+        caricaTutto, tesoro = animaCofanetto(tesoro, x, y, npers, pers, dati[121], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto)
+
+        # animazione aumento di livello
+        animazioneRallo, caricaTutto, tastop = animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[4], aumentoliv, carim, animazioneRallo, caricaTutto, tastop, fineanimaz)
+
         # anima raccolta denaro
         caricaTutto, tastop = animaRaccoltaDenaro(x, y, vettoreDenaro, dati[130], caricaTutto, tastop, fineanimaz)
 
         # disegna Rallo se ci sono animazioni ma non di Rallo
         animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[121], animazioneRallo)
+
+        # scrivo i danni infilli e ricevuti sopra le img dei personaggi
+        scriviDannoInflitto(listaNemici, fineanimaz)
 
         fineanimaz -= 1
         pygame.event.pump()

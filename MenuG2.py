@@ -586,7 +586,7 @@ def equip(dati, canzone):
     risposta = False
     voceMarcata = 1
 
-    esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
     vetImgSpade = []
     vetImgArchi = []
@@ -683,7 +683,7 @@ def equip(dati, canzone):
             schermo.blit(vetImgCollane[i], (gsx // 32 * 19.2, ((gsy // 18 * 6) + (gpy * 2 * i))))
             i += 1
 
-        esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+        esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
         schermo.blit(arco, (gsx // 32 * 24.5, gsy // 18 * 11.3))
         schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 11.3))
@@ -697,12 +697,11 @@ def equip(dati, canzone):
         messaggio("Punti vita: %i" % pvtot, grigiochi, gsx // 32 * 23, gsy // 18 * 7.5, 35)
         messaggio("Attacco ravvicinato: %i" % attVicino, grigiochi, gsx // 32 * 23, gsy // 18 * 8, 35)
         messaggio("Attacco a distanza: %i" % attLontano, grigiochi, gsx // 32 * 23, gsy // 18 * 8.5, 35)
-        messaggio(u"Velocità frecce: %i" % velFrecce, grigiochi, gsx // 32 * 23, gsy // 18 * 9, 35)
-        messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 9.5, 35)
-        messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 10, 35)
+        messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 9, 35)
+        messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 9.5, 35)
         # confronto statistiche
         # spade
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 6.8:
+        if voceMarcata == 1:
             if dati[41] != 0:
                 messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Rimuovi spada", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -711,7 +710,7 @@ def equip(dati, canzone):
                 diff = 0 - ((dati[6] * dati[6]) * 10)
                 if dati[6] > 0:
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 8.8:
+        if voceMarcata == 2:
             if dati[42] != 0:
                 messaggio("Spada di ferro:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Semplice spada di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -722,7 +721,7 @@ def equip(dati, canzone):
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                 elif dati[6] < 1:
                     messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 10.8:
+        if voceMarcata == 3:
             if dati[43] != 0:
                 messaggio("Spadone d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Grande spadone in acciaio con ornamenti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -733,10 +732,11 @@ def equip(dati, canzone):
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                 elif dati[6] < 2:
                     messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 12.8:
+        if voceMarcata == 4:
             if dati[44] != 0:
                 messaggio("Lykother:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Spada molto leggera e affilata. Si dice che in", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
+                messaggio("Spada molto leggera e affilata. Si dice che in", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8,
+                          35)
                 messaggio("origine fosse un dente di un lupo enorme", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 90 - ((dati[6] * dati[6]) * 10)
@@ -744,7 +744,7 @@ def equip(dati, canzone):
                     messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                 elif dati[6] < 3:
                     messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
-        if xp == gsx // 32 * 1 and yp == gsy // 18 * 14.8:
+        if voceMarcata == 5:
             if dati[45] != 0:
                 messaggio("Mendaxritas:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Potentissima spada composta da materiali", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -756,75 +756,61 @@ def equip(dati, canzone):
                 elif dati[6] < 4:
                     messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
         # archi
-        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 6.8:
+        if voceMarcata == 6:
             if dati[46] != 0:
                 messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Rimuovi arco", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diffAtt = 0 - ((dati[128] * dati[128]) * 5)
-                diffVel = 0 - (dati[128] * dati[128])
                 if dati[128] > 0:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
-        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 8.8:
+        if voceMarcata == 7:
             if dati[47] != 0:
                 messaggio("Arco di legno:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Semplice arco in legno usato dalla maggior", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("parte dei forestieri", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diffAtt = 5 - ((dati[128] * dati[128]) * 5)
-                diffVel = 1 - (dati[128] * dati[128])
                 if dati[128] > 1:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[128] < 1:
                     messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
-        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 10.8:
+        if voceMarcata == 8:
             if dati[48] != 0:
                 messaggio("Arco di ferro:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio(u"Elaborato arco in ferro usato solo dai più", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("esperti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diffAtt = 20 - ((dati[128] * dati[128]) * 5)
-                diffVel = 4 - (dati[128] * dati[128])
                 if dati[128] > 2:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[128] < 2:
                     messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
-        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 12.8:
+        if voceMarcata == 9:
             if dati[49] != 0:
                 messaggio("Arco di precisione:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Sofisticato arco in legno e acciaio. Molto", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("leggero e potente. Massima espressione", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("dell'ingegno umano", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diffAtt = 45 - ((dati[128] * dati[128]) * 5)
-                diffVel = 9 - (dati[128] * dati[128])
                 if dati[128] > 3:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[128] < 3:
                     messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
-        if xp == gsx // 32 * 4.5 and yp == gsy // 18 * 14.8:
+        if voceMarcata == 10:
             if dati[50] != 0:
                 messaggio("Accipiter:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Potentissimo arco di origine sconosciuta", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diffAtt = 80 - ((dati[128] * dati[128]) * 5)
-                diffVel = 16 - (dati[128] * dati[128])
                 if dati[128] > 4:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[128] < 4:
                     messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                    messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
         # armature
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 6.8:
+        if voceMarcata == 11:
             if dati[51] != 0:
                 messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Rimuovi armatura", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -832,8 +818,8 @@ def equip(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 0 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 8.8:
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+        if voceMarcata == 12:
             if dati[52] != 0:
                 messaggio("Armatura di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Semplice armatura in pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -841,10 +827,10 @@ def equip(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 10 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[8] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 10.8:
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+        if voceMarcata == 13:
             if dati[53] != 0:
                 messaggio("Armatura d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Grande armatura d'acciaio con ornamenti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -852,10 +838,10 @@ def equip(dati, canzone):
                 messaggio("dell'esercito", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 40 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[8] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 12.8:
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+        if voceMarcata == 14:
             if dati[54] != 0:
                 messaggio("Lykodes:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Armatura formata da materiali leggieri e", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -863,10 +849,10 @@ def equip(dati, canzone):
                 messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 90 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[8] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
-        if xp == gsx // 32 * 8 and yp == gsy // 18 * 14.8:
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+        if voceMarcata == 15:
             if dati[55] != 0:
                 messaggio("Loriquam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Armatura incredibilmente resistente.", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -874,11 +860,11 @@ def equip(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 160 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[8] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
         # scudi
-        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 6.8:
+        if voceMarcata == 16:
             if dati[56] != 0:
                 messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Rimuovi scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -886,11 +872,11 @@ def equip(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 0 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 diff = 0 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 0:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 8.8:
+                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 17:
             if dati[57] != 0:
                 messaggio("Scudo di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Semplice scudo in pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -898,31 +884,32 @@ def equip(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 5 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[7] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                 diff = 3 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 1:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                 elif dati[7] < 1:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 10.8:
+                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 18:
             if dati[58] != 0:
                 messaggio("Scudo d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Sofisticato scudo in acciaio e oro. Studiato", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
+                messaggio("Sofisticato scudo in acciaio e oro. Studiato", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8,
+                          35)
                 messaggio(u"per respingere gli attacchi più pesanti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 20 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[7] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                 diff = 12 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 2:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                 elif dati[7] < 2:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 12.8:
+                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 19:
             if dati[59] != 0:
                 messaggio("Lykethmos:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Scudo molto leggere e resistente. Si dice", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -930,15 +917,15 @@ def equip(dati, canzone):
                 messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 45 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[7] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                 diff = 27 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 3:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                 elif dati[7] < 3:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 11.5 and yp == gsy // 18 * 14.8:
+                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 20:
             if dati[60] != 0:
                 messaggio("Clipequam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio(u"Scudo incredibilmente resistente. Non è ", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -946,16 +933,16 @@ def equip(dati, canzone):
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 diff = 80 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[7] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                 diff = 48 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 4:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                 elif dati[7] < 4:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
+                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
         # guanti
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 6.8:
+        if voceMarcata == 21:
             if dati[61] != 0:
                 messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Rimuovi guanti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -964,13 +951,13 @@ def equip(dati, canzone):
                 if dati[129] == 1:
                     messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                 elif dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[129] == 3:
                     messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 8.8:
+                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 22:
             if dati[62] != 0:
                 messaggio("Guanti vitali:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Guanti che aumentano i punti vita massimi", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -979,28 +966,28 @@ def equip(dati, canzone):
                 if dati[129] != 1:
                     messaggio("+50", verde, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                 if dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[129] == 3:
                     messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 10.8:
+                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 23:
             if dati[63] != 0:
                 messaggio("Guanti difensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Guanti che consentono di subire meno danno", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("grazie ad una presa salda dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 if dati[129] != 2:
-                    messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                 if dati[129] == 1:
                     messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                 elif dati[129] == 3:
                     messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 12.8:
+                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 24:
             if dati[64] != 0:
                 messaggio("Guanti offensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Guanti che consentono una presa salda", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
@@ -1012,53 +999,54 @@ def equip(dati, canzone):
                 if dati[129] == 1:
                     messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                 elif dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
-        if xp == gsx // 32 * 15 and yp == gsy // 18 * 14.8:
+                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+        if voceMarcata == 25:
             if dati[65] != 0:
                 messaggio("Guanti confortevoli:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio(u"Guanti che aumentano la probabilità di", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("parare gli attacchi grazie ad una presa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("agevole dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 if dati[129] != 4:
-                    messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
+                    messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                 if dati[129] == 1:
                     messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                 elif dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[129] == 3:
                     messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
         # collane
-        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 6.8:
+        if voceMarcata == 26:
             if dati[66] != 0:
                 messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Rimuovi collana", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 8.8:
+        if voceMarcata == 27:
             if dati[67] != 0:
                 messaggio("Collana medicinale:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Collana composta da erbe il cui odore", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio(u"neutralizza la tissicità del veleno", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 10.8:
+                messaggio(u"(non ha effetto se si è già avvelenati)", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+        if voceMarcata == 28:
             if dati[68] != 0:
                 messaggio("Collana rigenerante:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio("Collana composta da erbe il cui odore", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("ripristina punti vita ogni turno", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 12.8:
+        if voceMarcata == 29:
             if dati[69] != 0:
                 messaggio("Apprendimaschera:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                 messaggio(u"Collana che consente di ricevere più punti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("esperienza", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-        if xp == gsx // 32 * 18.5 and yp == gsy // 18 * 14.8:
+        if voceMarcata == 30:
             if dati[70] != 0:
                 messaggio("Portafortuna:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio(u"Collana che permette di ottenere più monete", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
+                messaggio(u"Collana che permette di ottenere più monete", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8,
+                          35)
                 messaggio("dai nemici", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
 
@@ -1434,7 +1422,9 @@ def equip(dati, canzone):
                 schermo.blit(vetImgCollane[i], (gsx // 32 * 19.2, ((gsy // 18 * 6) + (gpy * 2 * i))))
                 i += 1
 
-            esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+            if dati[5] > pvtot:
+                dati[5] = pvtot
 
             schermo.blit(arco, (gsx // 32 * 24.5, gsy // 18 * 11.3))
             schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 11.3))
@@ -1448,9 +1438,8 @@ def equip(dati, canzone):
             messaggio("Punti vita: %i" % pvtot, grigiochi, gsx // 32 * 23, gsy // 18 * 7.5, 35)
             messaggio("Attacco ravvicinato: %i" % attVicino, grigiochi, gsx // 32 * 23, gsy // 18 * 8, 35)
             messaggio("Attacco a distanza: %i" % attLontano, grigiochi, gsx // 32 * 23, gsy // 18 * 8.5, 35)
-            messaggio(u"Velocità frecce: %i" % velFrecce, grigiochi, gsx // 32 * 23, gsy // 18 * 9, 35)
-            messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 9.5, 35)
-            messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 10, 35)
+            messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 9, 35)
+            messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 9.5, 35)
             # confronto statistiche
             # spade
             if voceMarcata == 1:
@@ -1513,67 +1502,53 @@ def equip(dati, canzone):
                     messaggio("Rimuovi arco", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                    diffAtt = 0 - ((dati[128] * dati[128]) * 5)
-                    diffVel = 0 - (dati[128] * dati[128])
+                    diffAtt = 0 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 0:
                         messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 7:
                 if dati[47] != 0:
                     messaggio("Arco di legno:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                     messaggio("Semplice arco in legno usato dalla maggior", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                     messaggio("parte dei forestieri", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                    diffAtt = 5 - ((dati[128] * dati[128]) * 5)
-                    diffVel = 1 - (dati[128] * dati[128])
+                    diffAtt = 5 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 1:
                         messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[128] < 1:
                         messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 8:
                 if dati[48] != 0:
                     messaggio("Arco di ferro:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                     messaggio(u"Elaborato arco in ferro usato solo dai più", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                     messaggio("esperti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                    diffAtt = 20 - ((dati[128] * dati[128]) * 5)
-                    diffVel = 4 - (dati[128] * dati[128])
+                    diffAtt = 20 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 2:
                         messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[128] < 2:
                         messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 9:
                 if dati[49] != 0:
                     messaggio("Arco di precisione:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                     messaggio("Sofisticato arco in legno e acciaio. Molto", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                     messaggio("leggero e potente. Massima espressione", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("dell'ingegno umano", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                    diffAtt = 45 - ((dati[128] * dati[128]) * 5)
-                    diffVel = 9 - (dati[128] * dati[128])
+                    diffAtt = 45 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 3:
                         messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[128] < 3:
                         messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 10:
                 if dati[50] != 0:
                     messaggio("Accipiter:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
                     messaggio("Potentissimo arco di origine sconosciuta", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                    diffAtt = 80 - ((dati[128] * dati[128]) * 5)
-                    diffVel = 16 - (dati[128] * dati[128])
+                    diffAtt = 80 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 4:
                         messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio(str(diffVel), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[128] < 4:
                         messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
-                        messaggio("+" + str(diffVel), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             # armature
             if voceMarcata == 11:
                 if dati[51] != 0:
@@ -1583,7 +1558,7 @@ def equip(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 0 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 12:
                 if dati[52] != 0:
                     messaggio("Armatura di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1592,9 +1567,9 @@ def equip(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 10 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[8] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 13:
                 if dati[53] != 0:
                     messaggio("Armatura d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1603,9 +1578,9 @@ def equip(dati, canzone):
                     messaggio("dell'esercito", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 40 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[8] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 14:
                 if dati[54] != 0:
                     messaggio("Lykodes:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1614,9 +1589,9 @@ def equip(dati, canzone):
                     messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 90 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[8] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             if voceMarcata == 15:
                 if dati[55] != 0:
                     messaggio("Loriquam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1625,9 +1600,9 @@ def equip(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 160 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[8] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
             # scudi
             if voceMarcata == 16:
                 if dati[56] != 0:
@@ -1637,10 +1612,10 @@ def equip(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 0 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     diff = 0 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 0:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 17:
                 if dati[57] != 0:
                     messaggio("Scudo di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1649,14 +1624,14 @@ def equip(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 5 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[7] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                     diff = 3 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 1:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                     elif dati[7] < 1:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 18:
                 if dati[58] != 0:
                     messaggio("Scudo d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1665,14 +1640,14 @@ def equip(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 20 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[7] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                     diff = 12 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 2:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                     elif dati[7] < 2:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 19:
                 if dati[59] != 0:
                     messaggio("Lykethmos:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1681,14 +1656,14 @@ def equip(dati, canzone):
                     messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 45 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[7] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                     diff = 27 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 3:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                     elif dati[7] < 3:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 20:
                 if dati[60] != 0:
                     messaggio("Clipequam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1697,14 +1672,14 @@ def equip(dati, canzone):
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     diff = 80 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[7] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                     diff = 48 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 4:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                     elif dati[7] < 4:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             # guanti
             if voceMarcata == 21:
                 if dati[61] != 0:
@@ -1715,12 +1690,12 @@ def equip(dati, canzone):
                     if dati[129] == 1:
                         messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                     elif dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[129] == 3:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                         messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 22:
                 if dati[62] != 0:
                     messaggio("Guanti vitali:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1730,12 +1705,12 @@ def equip(dati, canzone):
                     if dati[129] != 1:
                         messaggio("+50", verde, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                     if dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[129] == 3:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                         messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 23:
                 if dati[63] != 0:
                     messaggio("Guanti difensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1743,14 +1718,14 @@ def equip(dati, canzone):
                     messaggio("grazie ad una presa salda dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     if dati[129] != 2:
-                        messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 9, 35)
                     if dati[129] == 1:
                         messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                     elif dati[129] == 3:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                         messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 24:
                 if dati[64] != 0:
                     messaggio("Guanti offensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1758,14 +1733,14 @@ def equip(dati, canzone):
                     messaggio("dell'arma. Aumentano l'attacco", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     if dati[129] != 3:
-                        messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8, 35)
                         messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                     if dati[129] == 1:
                         messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                     elif dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
             if voceMarcata == 25:
                 if dati[65] != 0:
                     messaggio("Guanti confortevoli:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
@@ -1773,13 +1748,13 @@ def equip(dati, canzone):
                     messaggio("parare gli attacchi grazie ad una presa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                     messaggio("agevole dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                     if dati[129] != 4:
-                        messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 10, 35)
+                        messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
                     if dati[129] == 1:
                         messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                     elif dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                     elif dati[129] == 3:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                         messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
             # collane
             if voceMarcata == 26:
@@ -1878,6 +1853,7 @@ def equip(dati, canzone):
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
             schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
+
     return dati
 
 
@@ -3439,7 +3415,7 @@ def equiprobo(dati, canzone):
 
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
 
-        esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+        esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
         schermo.blit(robosta, (gsx // 32 * 25, gsy // 18 * 10))
         schermo.blit(vetImgBatterie[dati[9]], (gsx // 32 * 25, gsy // 18 * 10))
@@ -3792,7 +3768,7 @@ def equiprobo(dati, canzone):
                             if dati[71] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 0
-                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
@@ -3801,7 +3777,7 @@ def equiprobo(dati, canzone):
                             if dati[72] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 1
-                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
@@ -3810,7 +3786,7 @@ def equiprobo(dati, canzone):
                             if dati[73] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 2
-                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
@@ -3819,7 +3795,7 @@ def equiprobo(dati, canzone):
                             if dati[74] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 3
-                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
@@ -3828,7 +3804,7 @@ def equiprobo(dati, canzone):
                             if dati[75] != 0:
                                 canaleSoundPuntatore.play(selezione)
                                 dati[9] = 4
-                                esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
@@ -4135,7 +4111,7 @@ def equiprobo(dati, canzone):
 
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
 
-            esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
             schermo.blit(robosta, (gsx // 32 * 25, gsy // 18 * 10))
             schermo.blit(vetImgBatterie[dati[9]], (gsx // 32 * 25, gsy // 18 * 10))
@@ -4281,7 +4257,7 @@ def oggetti(dati, canzone):
             imgOggetti.append(sconosciutoOggetto)
         i += 1
 
-    esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
     # primo frame
     if True:
@@ -4985,7 +4961,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
 
     # primo frame
     if True:
-        esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+        esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
@@ -5147,7 +5123,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                         conferma = 2
 
         if tastoTrovato:
-            esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
             # chiedere conferma per uscire
             if conferma != 0:
@@ -5235,7 +5211,7 @@ def startBattaglia(dati):
     sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 4, gpy * 4))
     sconosciutoOggettoIco = pygame.transform.scale(sconosciutoOggettoIcoMenu, (gpx, gpy))
 
-    esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par = getStatistiche(dati)
+    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
     attacco = 0
     disegnoOggetto = 0

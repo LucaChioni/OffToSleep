@@ -247,6 +247,8 @@ faretraFrecceStart3 = pygame.image.load('Immagini/EquipRallo/Faretre/Faretra3Men
 faretraFrecceStart3 = pygame.transform.scale(faretraFrecceStart3, (gpx * 4, gpy * 4))
 sacchettoDenaroo = pygame.image.load('Immagini/Oggetti/SacchettoDenaroIco.png')
 sacchettoDenaro = pygame.transform.scale(sacchettoDenaroo, (gpx, gpy))
+imgFrecciaLanciata = pygame.image.load('Immagini/Oggetti/Freccia.png')
+imgFrecciaLanciata = pygame.transform.scale(imgFrecciaLanciata, (gpx, gpy))
 
 # cofanetti
 cofaniaper = pygame.image.load("Immagini/Oggetti/CofanettoAperto.png")
@@ -354,8 +356,8 @@ while contatoreGlobale < 5:
 
 # canali / volume (0-1)
 volumeCanzoni = 0
-volumePuntatore = 0
-volumeEffetti = 0
+volumePuntatore = 1
+volumeEffetti = 1
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundCanzone.set_volume(volumeCanzoni)
@@ -382,7 +384,8 @@ selimp = pygame.mixer.Sound("Audio/Rumoripuntatore/SelImp.wav")
 selezione = pygame.mixer.Sound("Audio/Rumoripuntatore/Selezione.wav")
 
 # suoni effetti
-rumoreattacco = pygame.mixer.Sound("Audio/Rumoripersonaggio/Attacco.wav")
+rumoreAttaccoSpada = pygame.mixer.Sound("Audio/Rumoripersonaggio/AttaccoSpada.wav")
+rumoreAttaccoArco = pygame.mixer.Sound("Audio/Rumoripersonaggio/AttaccoArco.wav")
 rumorecamminata = pygame.mixer.Sound("Audio/Rumoripersonaggio/Camminata.wav")
 rumorelevelup = pygame.mixer.Sound("Audio/Rumoripersonaggio/Levelup.wav")
 suonoaperturacofanetti = pygame.mixer.Sound("Audio/Rumoriambiente/Aperturaportacofanetti.wav")

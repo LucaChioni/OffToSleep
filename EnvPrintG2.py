@@ -139,7 +139,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, surrisc, vx, vy,
     pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce):
     xp = x
     yp = y
     nxp = 0
@@ -269,6 +269,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     puntaPorta = False
     puntaCofanetto = False
     attaccato = False
+    attaccoADistanza = False
     while not risposta:
         xvp = xp
         yvp = yp
@@ -378,11 +379,22 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 npers = 4
                             if xp == x and yp == y - gpy:
                                 npers = 3
-                        # normale attacco = 1
+                        # attacco ravvicinato attacco = 1
                         elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)):
                             infliggidanno = True
                             danno = attVicino
                             raggio = gpx * 0
+                        # attacco lontano attacco = 1
+                        elif attacco == 1 and not ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy) or (xp == x and yp == y) or (xp == rx and yp == ry)) and numFrecce > 0:
+                            j = 0
+                            while j < len(caseattactot):
+                                if caseattactot[j] == xp and caseattactot[j + 1] == yp:
+                                    if caseattactot[j + 2]:
+                                        infliggidanno = True
+                                        danno = attLontano
+                                        raggio = gpx * 0
+                                    break
+                                j += 3
                         # difesa attacco = 1
                         elif attacco == 1 and (xp == x and yp == y):
                             difesa = 2
@@ -490,8 +502,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 sposta = True
                                 risposta = True
 
+                        nemicoColpito = False
                         for nemico in listaNemici:
                             if (((abs(nemico.x - xp) <= raggio and abs(nemico.y - yp) <= raggio) and attacco != 1) or ((xp == nemico.x and yp == nemico.y) and attacco == 1)) and infliggidanno:
+                                nemicoColpito = nemico
                                 if statom == 1:
                                     nemico.avvelenato = True
                                 if statom == 2:
@@ -500,9 +514,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 sposta = True
                                 risposta = True
 
-                        # attacco normale se c'e' il mostro
+                        # attacco da vicino
                         if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and sposta and risposta and infliggidanno:
-                            sposta = True
                             attaccato = True
                             if xp == x + gpx and yp == y:
                                 npers = 1
@@ -512,18 +525,30 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 npers = 4
                             if xp == x and yp == y - gpy:
                                 npers = 3
-                        # attacco normale se non c'e' il mostro
-                        """elif attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and not sposta and not risposta:
-                            if xp == x + gpx and yp == y:
-                                npers = 1
-                            if xp == x - gpx and yp == y:
-                                npers = 2
-                            if xp == x and yp == y + gpy:
-                                npers = 4
-                            if xp == x and yp == y - gpy:
-                                npers = 3
-                            sposta = True
-                            risposta = True"""
+                        # attacco con arco
+                        elif attacco == 1 and not ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and sposta and risposta and infliggidanno:
+                            attaccato = True
+                            attaccoADistanza = nemicoColpito
+                            if abs(x - xp) > abs(y - yp):
+                                if x < xp:
+                                    npers = 1
+                                if x > xp:
+                                    npers = 2
+                            if abs(y - yp) > abs(x - xp):
+                                if y < yp:
+                                    npers = 4
+                                if y > yp:
+                                    npers = 3
+                            if (abs(x - xp) == abs(y - yp)) and (x != xp) and (y != yp):
+                                c = random.randint(1, 2)
+                                if x < xp and c == 1:
+                                    npers = 1
+                                if x > xp and c == 1:
+                                    npers = 2
+                                if y < yp and c == 2:
+                                    npers = 4
+                                if y > yp and c == 2:
+                                    npers = 3
 
                         if not risposta:
                             canaleSoundPuntatore.play(selimp)
@@ -624,59 +649,42 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 j = j + 3
             i = i + 4
 
-        # visualizza campo attaccabile
-        if attacco == 1:
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+        # disegno le caselle attaccabili
+        i = 0
+        while i < len(caseattactot):
+            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                cofanettoOPorta = False
+                j = 0
+                while j < len(cofanetti):
+                    if cofanetti[j + 1] == caseattactot[i] and cofanetti[j + 2] == caseattactot[i + 1]:
+                        cofanettoOPorta = True
+                        break
+                    j += 4
+                j = 0
+                while j < len(porte):
+                    if porte[j + 1] == caseattactot[i] and porte[j + 2] == caseattactot[i + 1]:
+                        cofanettoOPorta = True
+                        break
+                    j += 4
+                if not cofanettoOPorta:
                     schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
+            i = i + 3
+        # visualizza campo attaccabile se sto usando un oggetto
         if attacco == 2:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
             schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= x + gpx * 6 and caseattactot[i + 1] <= y + gpy * 6 and caseattactot[i] >= x - gpx * 6 and caseattactot[i + 1] >= y - gpy * 6 and not (caseattactot[i] == x and caseattactot[i + 1] == y)):
-                    schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
         if attacco == 3:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
             schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= x + gpx * 5 and caseattactot[i + 1] <= y + gpy * 5 and caseattactot[i] >= x - gpx * 5 and caseattactot[i + 1] >= y - gpy * 5 and not (caseattactot[i] == x and caseattactot[i + 1] == y)):
-                    schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
         if attacco == 4:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
             schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= x + gpx * 6 and caseattactot[i + 1] <= y + gpy * 6 and caseattactot[i] >= x - gpx * 6 and caseattactot[i + 1] >= y - gpy * 6 and not (caseattactot[i] == x and caseattactot[i + 1] == y)):
-                    schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
         if attacco == 5:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
             schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= x + gpx * 5 and caseattactot[i + 1] <= y + gpy * 5 and caseattactot[i] >= x - gpx * 5 and caseattactot[i + 1] >= y - gpy * 5 and not (caseattactot[i] == x and caseattactot[i + 1] == y)):
-                    schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
         if attacco == 6:
             campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 9, gpy * 9))
             schermo.blit(campoattaccabile3, (x - (gpx * 4), y - (gpy * 4)))
-            i = 0
-            # disegno le caselle attaccabili
-            while i < len(caseattactot):
-                if not caseattactot[i + 2] and (caseattactot[i] <= x + gpx * 4 and caseattactot[i + 1] <= y + gpy * 4 and caseattactot[i] >= x - gpx * 4 and caseattactot[i + 1] >= y - gpy * 4 and not (caseattactot[i] == x and caseattactot[i + 1] == y)):
-                    schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-                i = i + 3
 
         # mettere il puntatore su porte
         i = 0
@@ -750,6 +758,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
         # puntatore
         if attacco == 1:
+            nemicoInCampoVisivoArco = False
             puntatogg = 0
             if (xp == x) and (yp == y):
                 suPorta = False
@@ -785,8 +794,15 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             puntatogg = puntatogg2
                         else:
                             puntatogg = puntatogg6
+                            j = 0
+                            while j < len(caseattactot):
+                                if caseattactot[j] == nemico.x and caseattactot[j + 1] == nemico.y:
+                                    if caseattactot[j + 2]:
+                                        nemicoInCampoVisivoArco = True
+                                    break
+                                j += 3
                         break
-            if ((xp == x and yp == y) or (xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and puntatogg != 0:
+            if (((xp == x and yp == y) or (xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and puntatogg != 0) or (puntatogg == puntatogg6 and nemicoInCampoVisivoArco and numFrecce > 0):
                 puntat = puntatIn
             else:
                 puntat = puntatOut
@@ -926,7 +942,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
                 if pvmtot > 1500:
                     indvitamost = pygame.transform.scale(indvita, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
-                    schermo.blit(fineindvitamost, (((gpx // 3) + (gpx * 2)) + 1500, gpy // 3))
+                    lungvitatot = int(((gpx * 1500) / float(4)) // 15)
+                    schermo.blit(fineindvitamost, ((gpx // 3) + gpx + lungvitatot, gpy // 3))
                     if pvm > 15000:
                         pvm = 1500
                         vitanemsucc = pygame.transform.scale(vitanemico00, (int(((gpx * 1500) / float(4)) // 15), gpy // 4))
@@ -1027,4 +1044,4 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         pygame.event.pump()
         clockAttacco.tick(fpsInquadra)
 
-    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco
+    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza

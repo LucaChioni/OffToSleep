@@ -23,17 +23,15 @@ def getStatistiche(dati, difesa=0):
     pvtot = 50
     if dati[129] == 1:
         pvtot += 50
-    attVicino = 14 + ((dati[6] * dati[6]) * 10)
-    attLontano = 12 + ((dati[128] * dati[128]) * 5)
+    attVicino = 6 + ((dati[6] * dati[6]) * 10)
+    attLontano = 4 + ((dati[128] * dati[128]) * 10)
     if dati[129] == 3:
-        attVicino += 30
+        attVicino += 20
         attLontano += 20
-    # velFrecce indica le caselle al turno fatte dalle frecce lanciate
-    velFrecce = 4 + (dati[128] * dati[128])
     dif = 7 + ((dati[8] * dati[8]) * 10) + 5 + ((dati[7] * dati[7]) * 5)
     if dati[129] == 2:
         dif += 30
-    par = 3 + ((dati[7] * dati[7]) * 3)
+    par = 2 + ((dati[7] * dati[7]) * 3)
     if dati[129] == 4:
         par += 10
     if difesa != 0:
@@ -52,8 +50,8 @@ def getStatistiche(dati, difesa=0):
         i = 2
         while i <= 100:
             if dati[4] <= i + 2:
-                attVicino += (i * 2)
-                attLontano += i
+                attVicino += (i * 3)
+                attLontano += (i * 2)
                 break
             i += 3
 
@@ -68,7 +66,7 @@ def getStatistiche(dati, difesa=0):
     entot = 220 + (dati[9] * dati[9] * 80)
     difro = 20 + (dati[9] * dati[9] * 30)
 
-    return esptot, pvtot, entot, attVicino, attLontano, velFrecce, dif, difro, par
+    return esptot, pvtot, entot, attVicino, attLontano, dif, difro, par
 
 
 def guardaVideo(path, audio=0):
@@ -1713,7 +1711,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
 
 def aperturacofanetto(stanza, cx, cy, dati):
     tesoro = -1
-    # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20)
+    # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
     if stanza == 1:
         if cx == gpx * 3 and cy == gpy * 7:
             c = 0
@@ -1774,7 +1772,11 @@ def aperturacofanetto(stanza, cx, cy, dati):
             tesoro = 81
 
     # assegna oggetto ottenuto
-    if tesoro != -1:
+    if tesoro == 131:
+        dati[tesoro] = ottieniMonete(dati, 50)
+    elif tesoro == 132:
+        dati[tesoro] = ottieniFrecce(dati, 5)
+    elif tesoro != -1:
         if dati[tesoro] <= -1 and (tesoro >= 31 and tesoro <= 40):
             dati[tesoro] = dati[tesoro] + 2
         else:
@@ -2237,106 +2239,148 @@ def controllaMorteColco(dati, mosseRimasteRob):
     return morterob, dati, mosseRimasteRob
 
 
-def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attacco=False):
+def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False):
     # personaggio: 1=d, 2=a, 3=w, 4=s
-    if npers == 1:
-        schermo.blit(scudo, (x, y))
-        if inMovimento:
-            schermo.blit(persdm, (x, y))
-        else:
+    if attaccoDaLontano:
+        if npers == 1:
             schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(collana, (x, y))
-        schermo.blit(faretra, (x, y))
-        schermo.blit(arco, (x, y))
-        if attacco:
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
+            schermo.blit(faretra, (x, y))
             schermo.blit(persdmbAttacco, (x, y))
-        elif inMovimento:
-            if frame == 1:
-                schermo.blit(persdmb1, (x, y))
-            elif frame == 2:
-                schermo.blit(persdmb2, (x, y))
-        else:
-            schermo.blit(persdb, (x, y))
-        schermo.blit(arma, (x, y))
-        schermo.blit(guanti, (x, y))
-    if npers == 2:
-        if attacco:
-            schermo.blit(arma, (x - gpx, y))
-        else:
-            schermo.blit(arma, (x, y))
-        if inMovimento:
-            schermo.blit(persam, (x, y))
-        else:
+            schermo.blit(arco, (x, y))
+            schermo.blit(guanti, (x, y))
+        if npers == 2:
             schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(collana, (x, y))
-        schermo.blit(faretra, (x, y))
-        schermo.blit(arco, (x, y))
-        if attacco:
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
+            schermo.blit(faretra, (x, y))
             schermo.blit(persambAttacco, (x, y))
-        elif inMovimento:
-            if frame == 1:
-                schermo.blit(persamb1, (x, y))
-            elif frame == 2:
-                schermo.blit(persamb2, (x, y))
-        else:
-            schermo.blit(persab, (x, y))
-        schermo.blit(guanti, (x, y))
-        schermo.blit(scudo, (x, y))
-    if npers == 3:
-        if attacco:
-            schermo.blit(arma, (x, y - gpy))
-        else:
-            schermo.blit(arma, (x, y))
-        if attacco:
+            schermo.blit(arco, (x - gpx, y))
+            schermo.blit(guanti, (x, y))
+        if npers == 3:
+            schermo.blit(arco, (x, y - gpy))
             schermo.blit(perswmbAttacco, (x, y))
-        elif inMovimento:
-            if frame == 1:
-                schermo.blit(perswmb1, (x, y))
-            elif frame == 2:
-                schermo.blit(perswmb2, (x, y))
-        else:
-            schermo.blit(perswb, (x, y))
-        schermo.blit(guanti, (x, y))
-        schermo.blit(scudo, (x, y))
-        if inMovimento:
-            schermo.blit(perswm, (x, y))
-        else:
+            schermo.blit(guanti, (x, y))
             schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(collana, (x, y))
-        schermo.blit(faretra, (x, y))
-        schermo.blit(arco, (x, y))
-    if npers == 4:
-        schermo.blit(arco, (x, y))
-        schermo.blit(faretra, (x, y))
-        if inMovimento:
-            schermo.blit(perssm, (x, y))
-        else:
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
+            schermo.blit(faretra, (x, y))
+        if npers == 4:
+            schermo.blit(faretra, (x, y))
             schermo.blit(pers, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armatura, (x, y))
-        schermo.blit(collana, (x, y))
-        if attacco:
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
             schermo.blit(perssmbAttacco, (x, y))
-        elif inMovimento:
-            if frame == 1:
-                schermo.blit(perssmb1, (x, y))
-            elif frame == 2:
-                schermo.blit(perssmb2, (x, y))
-        else:
-            schermo.blit(perssb, (x, y))
-        schermo.blit(arma, (x, y))
-        schermo.blit(guanti, (x, y))
-        schermo.blit(scudo, (x, y))
+            schermo.blit(arco, (x, y))
+            schermo.blit(guanti, (x, y))
+    else:
+        if npers == 1:
+            schermo.blit(scudo, (x, y))
+            if inMovimento:
+                schermo.blit(persdm, (x, y))
+            else:
+                schermo.blit(pers, (x, y))
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
+            schermo.blit(faretra, (x, y))
+            schermo.blit(arco, (x, y))
+            if attaccoRavvicinato:
+                schermo.blit(persdmbAttacco, (x, y))
+            elif inMovimento:
+                if frame == 1:
+                    schermo.blit(persdmb1, (x, y))
+                elif frame == 2:
+                    schermo.blit(persdmb2, (x, y))
+            else:
+                schermo.blit(persdb, (x, y))
+            schermo.blit(arma, (x, y))
+            schermo.blit(guanti, (x, y))
+        if npers == 2:
+            if attaccoRavvicinato:
+                schermo.blit(arma, (x - gpx, y))
+            else:
+                schermo.blit(arma, (x, y))
+            if inMovimento:
+                schermo.blit(persam, (x, y))
+            else:
+                schermo.blit(pers, (x, y))
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
+            schermo.blit(faretra, (x, y))
+            schermo.blit(arco, (x, y))
+            if attaccoRavvicinato:
+                schermo.blit(persambAttacco, (x, y))
+            elif inMovimento:
+                if frame == 1:
+                    schermo.blit(persamb1, (x, y))
+                elif frame == 2:
+                    schermo.blit(persamb2, (x, y))
+            else:
+                schermo.blit(persab, (x, y))
+            schermo.blit(guanti, (x, y))
+            schermo.blit(scudo, (x, y))
+        if npers == 3:
+            if attaccoRavvicinato:
+                schermo.blit(arma, (x, y - gpy))
+            else:
+                schermo.blit(arma, (x, y))
+            if attaccoRavvicinato:
+                schermo.blit(perswmbAttacco, (x, y))
+            elif inMovimento:
+                if frame == 1:
+                    schermo.blit(perswmb1, (x, y))
+                elif frame == 2:
+                    schermo.blit(perswmb2, (x, y))
+            else:
+                schermo.blit(perswb, (x, y))
+            schermo.blit(guanti, (x, y))
+            schermo.blit(scudo, (x, y))
+            if inMovimento:
+                schermo.blit(perswm, (x, y))
+            else:
+                schermo.blit(pers, (x, y))
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
+            schermo.blit(faretra, (x, y))
+            schermo.blit(arco, (x, y))
+        if npers == 4:
+            schermo.blit(arco, (x, y))
+            schermo.blit(faretra, (x, y))
+            if inMovimento:
+                schermo.blit(perssm, (x, y))
+            else:
+                schermo.blit(pers, (x, y))
+            if avvele:
+                schermo.blit(persAvvele, (x, y))
+            schermo.blit(armatura, (x, y))
+            schermo.blit(collana, (x, y))
+            if attaccoRavvicinato:
+                schermo.blit(perssmbAttacco, (x, y))
+            elif inMovimento:
+                if frame == 1:
+                    schermo.blit(perssmb1, (x, y))
+                elif frame == 2:
+                    schermo.blit(perssmb2, (x, y))
+            else:
+                schermo.blit(perssb, (x, y))
+            schermo.blit(arma, (x, y))
+            schermo.blit(guanti, (x, y))
+            schermo.blit(scudo, (x, y))
 
 
 def ottieniMonete(dati, moneteOttenute):
