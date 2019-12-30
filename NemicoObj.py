@@ -64,8 +64,6 @@ class NemicoObj(object):
         self.velenoso = velenoso
         self.denaro = denaro
         self.difesa = difesa
-        self.danniRicevuti = []
-        self.quadrettoSottoIlValoreDelDanno = 0
 
         self.caricaImg()
         self.girati(direzione)
@@ -163,7 +161,6 @@ class NemicoObj(object):
         if danno < 0:
             danno = 0
         self.vita -= danno
-        self.danniRicevuti.append(danno)
         if self.vita < 0:
             self.vita = 0
 
