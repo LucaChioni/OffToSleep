@@ -15,6 +15,7 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            nemicoInquadrato = False
             raffredda = -1
             autoRic1 = -1
             autoRic2 = -1
@@ -197,6 +198,7 @@ def gameloop():
                 mosseRimasteRob = 0
 
             if cambiosta:
+                nemicoInquadrato = False
                 stanza = dati[1]
                 # fermare la camminata dopo il cambio stanza
                 nx = 0
@@ -510,7 +512,6 @@ def gameloop():
             nx = 0
             ny = 0
 
-
         tastoTrovato = False
         # catturare gli eventi
         for event in pygame.event.get():
@@ -626,6 +627,10 @@ def gameloop():
                         chiamarob = False
                     else:
                         chiamarob = True
+                if event.key == pygame.K_q and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento and nemicoInquadrato:
+                    canaleSoundPuntatore.play(selind)
+                    nemicoInquadrato = False
+                    caricaTutto = True
 
                 if event.key == pygame.K_SPACE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
@@ -741,7 +746,7 @@ def gameloop():
         # gestione attacchi
         attaccoADistanza = False
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132])
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato)
             # tolgo una freccia se uso l'attacco a distanza
             if attaccoADistanza:
                 dati[132] -= 1
@@ -922,6 +927,10 @@ def gameloop():
                     schermo.blit(sfondinoa, (vitaesca[i + 1], vitaesca[i + 2]))
                 if ((vitaesca[i + 1] / gpx) + (vitaesca[i + 2] / gpy)) % 2 == 1:
                     schermo.blit(sfondinob, (vitaesca[i + 1], vitaesca[i + 2]))
+                # tolgo la selezione dell'esca morta
+                if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vitaesca[i - 1]:
+                    nemicoInquadrato = False
+                    caricaTutto = True
                 del vitaesca[i + 2]
                 del vitaesca[i + 1]
                 del vitaesca[i]
@@ -1161,10 +1170,10 @@ def gameloop():
         # fai tutte le animazioni del turno e disegnare gli sfondi e personaggi
         if not inizio:
             if caricaTutto:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[122], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132])
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
             primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza)
             if not carim:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[122], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132])
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
 
         if not aumentoliv:
             caricaTutto = False
@@ -1180,6 +1189,8 @@ def gameloop():
             nemico.animaMorte = False
             nemico.animaDanneggiamento = False
             if nemico.morto:
+                nemicoInquadrato = False
+                caricaTutto = True
                 listaNemici.remove(nemico)
                 listaNemiciTotali.remove(nemico)
             i -= 1
