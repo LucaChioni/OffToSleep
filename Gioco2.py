@@ -120,7 +120,6 @@ def gameloop():
 
             # mostri
             if dati[1] == 1 and cambiosta:
-
                 # posizione personaggio e robot al cambio stanza
                 if not inizio:
                     if stanzaVecchia == 2:
@@ -162,10 +161,7 @@ def gameloop():
                             listaNemici.append(nemico)
                 nmost = len(listaNemici)
 
-                mosseRimasteRob = 0
-
             if dati[1] == 2 and cambiosta:
-
                 # posizione personaggio e robot al cambio stanza
                 if not inizio:
                     if stanzaVecchia == 1:
@@ -195,9 +191,8 @@ def gameloop():
                             listaNemici.append(nemico)
                 nmost = len(listaNemici)
 
-                mosseRimasteRob = 0
-
             if cambiosta:
+                mosseRimasteRob = 0
                 nemicoInquadrato = False
                 stanza = dati[1]
                 # fermare la camminata dopo il cambio stanza

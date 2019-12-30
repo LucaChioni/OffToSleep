@@ -9,12 +9,15 @@ def scegli_sal(cosa, lunghezzadati, canzone):
     puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
     xp = gsx // 32 * 6.5
     yp = gsy // 18 * 9.5
+    vxp = xp
+    vyp = yp
 
     risposta = False
     conferma = False
     primaconf = False
     salMarcato = 1
     voceMarcata = 2
+    n = -1
 
     # primo frame
     if True:
@@ -46,6 +49,7 @@ def scegli_sal(cosa, lunghezzadati, canzone):
         schermo.blit(s3, (gsx // 32 * 22, gsy // 18 * 8))
 
         # lettura salvataggi per riconoscerli
+        leggi = 0
         contasalva = 1
         while contasalva <= 3:
             leggi = open("Salvataggi/Salvataggio%i.txt" % contasalva, "r")
@@ -63,11 +67,14 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 errore = False
                 if len(dati) != lunghezzadati:
                     errore = True
-                for i in range(0, len(dati)):
+                i = 0
+                while i < len(dati):
                     try:
                         dati[i] = int(dati[i])
                     except ValueError:
                         errore = True
+                        break
+                    i += 1
                 if contasalva == 1:
                     if not errore:
                         persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
@@ -367,13 +374,13 @@ def menu():
     if True:
         schermo.fill(grigioscu)
         persomenuinizio = pygame.transform.scale(persGrafInizio, (gpx * 18, gpy * 18))
-        if (c == 1):
+        if c == 1:
             robomenuinizio = pygame.transform.scale(robogra, (gpx * 18, gpy * 18))
-        if (c == 2):
+        elif c == 2:
             robomenuinizio = pygame.transform.scale(robograf, (gpx * 18, gpy * 18))
-        if (c == 3):
+        elif c == 3:
             robomenuinizio = pygame.transform.scale(robograff, (gpx * 18, gpy * 18))
-        if (c == 4):
+        else:
             robomenuinizio = pygame.transform.scale(robografff, (gpx * 18, gpy * 18))
         schermo.blit(persomenuinizio, (gpx * 15, 0))
         schermo.blit(robomenuinizio, (gpx * 3, 0))
@@ -582,11 +589,17 @@ def equip(dati, canzone):
     sconosciutoEquip = pygame.transform.scale(sconosciutoEquipMenu, (int(gpx * 2), int(gpy * 2)))
     xp = gsx // 32 * 1
     yp = gsy // 18 * 6.8
-    carim = True
     risposta = False
     voceMarcata = 1
 
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+    spada = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 5, gpy * 5))
+    arco = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 5, gpy * 5))
+    scudo = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 5, gpy * 5))
+    armatura = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 5, gpy * 5))
+    guanti = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 5, gpy * 5))
+    collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
+    carim = False
 
     vetImgSpade = []
     vetImgArchi = []
@@ -4241,6 +4254,8 @@ def oggetti(dati, canzone):
     sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 10, gpy * 10))
     xp = gsx // 32 * 1
     yp = gsy // 18 * 5
+    xpv = xp
+    ypv = yp
     usauno = False
     usa = 0
     risposta = False
@@ -4951,12 +4966,14 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         maxFrecce = 60
     else:
         faretraFrecceStart = 0
+        maxFrecce = 0
     xp = gsx // 32 * 1
     yp = gsy // 18 * 5
     carim = True
     risposta = False
     attacco = 0
     conferma = 0
+    inizio = False
     voceMarcata = 1
 
     # primo frame

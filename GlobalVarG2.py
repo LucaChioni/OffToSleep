@@ -356,8 +356,8 @@ while contatoreGlobale < 5:
 
 # canali / volume (0-1)
 volumeCanzoni = 0
-volumePuntatore = 1
-volumeEffetti = 1
+volumePuntatore = 0
+volumeEffetti = 0
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundCanzone.set_volume(volumeCanzoni)

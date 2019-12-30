@@ -324,6 +324,9 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
             rangeYBasso = (gsy // gpy) - (y // gpy) - 3
 
     margineDiErrore = 1
+    base1 = 0
+    base2 = 0
+    altezza = 0
 
     # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in basso a destra
     caseattac = []
@@ -1968,6 +1971,11 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
     # caselleEsplorate contiene x, y e valore delle caselle già esplorate (il valore serve per trovare il percorso più breve)
     valoreCasella = 0
     caselleEsplorate = [xPartenza, yPartenza, valoreCasella]
+
+    valorePiuBasso = 0
+    xProssimaCasella = 0
+    yProssimaCasella = 0
+    percorsoTrovato = []
 
     impossibileRaggiungere = False
     if xPartenza == xArrivo and yPartenza == yArrivo:

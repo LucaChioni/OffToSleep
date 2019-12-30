@@ -246,7 +246,8 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
         j = j + 3
 
-    pygame.display.update()
+    if not caricaTutto:
+        pygame.display.update()
 
 
 def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato):
@@ -272,6 +273,15 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     nyp = 0
     risposta = False
     difesa = 0
+
+    puntat = puntatOut
+    puntatogg = 0
+    puntatogg1 = puntatDif
+    puntatogg2 = puntatAtt
+    puntatogg3 = puntatPor
+    puntatogg4 = puntatSpinta
+    puntatogg5 = puntatCof
+    puntatogg6 = puntatArc
 
     # modifica puntatore a seconda dell'attacco
     if attacco == 1:
@@ -368,6 +378,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         schermo.blit(difesapiu, (gsx // 32 * 5, gsy // 18 * 17))
 
     # controllo caselle attaccabili
+    caseattactot = 0
     if attacco == 1:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, -1)
     if attacco == 2:

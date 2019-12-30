@@ -17,6 +17,8 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
 
     # burocrazia
     carim = False
+    distminx = 0
+    distminy = 0
 
     caseattactot = trovacasattaccabili(nemico.x, nemico.y, stanza, porte, cofanetti, nemico.raggioVisivo)
 
