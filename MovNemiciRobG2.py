@@ -31,7 +31,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     while i < len(vettoreDenaro):
         j = 0
         while j < len(caseattactot):
-            if caseattactot[j] == vettoreDenaro[i + 1] and caseattactot[j + 1] == vettoreDenaro[i + 2]:
+            if caseattactot[j] == vettoreDenaro[i + 1] and caseattactot[j + 1] == vettoreDenaro[i + 2] and not (x == vettoreDenaro[i + 1] and y == vettoreDenaro[i + 2]) and not (rx == vettoreDenaro[i + 1] and ry == vettoreDenaro[i + 2]):
                 if primoSacchetto:
                     distminx = vettoreDenaro[i + 1]
                     distminy = vettoreDenaro[i + 2]
@@ -44,7 +44,6 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     distminy = vettoreDenaro[i + 2]
                     xDenaro = distminx
                     yDenaro = distminy
-                    escabersaglio = i
                 break
             j += 3
         i += 3

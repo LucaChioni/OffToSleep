@@ -941,7 +941,7 @@ def gameloop():
                 del vitaesca[i + 1]
                 del vitaesca[i]
                 del vitaesca[i - 1]
-                dati[36] = dati[36] + 1
+                dati[38] += 1
             i = i + 4
 
         # movimento-azioni robo

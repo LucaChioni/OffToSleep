@@ -36,8 +36,8 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                         schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
                 j = j + 3
             i = i + 4
-        i = 0
         # disegno le caselle viste
+        i = 0
         while i < len(caseviste):
             if caseviste[i + 2]:
                 if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 0:
@@ -343,8 +343,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
             j = j + 3
         i = i + 4
-    i = 0
     # disegno le caselle viste
+    i = 0
     while i < len(caseviste):
         if caseviste[i + 2]:
             if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 0:
@@ -561,8 +561,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            i = 0
                             # disegno le caselle attaccabili
+                            i = 0
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
@@ -578,8 +578,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            i = 0
                             # disegno le caselle attaccabili
+                            i = 0
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
@@ -596,8 +596,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            i = 0
                             # disegno le caselle attaccabili
+                            i = 0
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
@@ -605,10 +605,17 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             if continua:
                                 # conferma lancio esche
                                 confesca = True
+                                i = 0
+                                while i < len(vettoreDenaro):
+                                    if vettoreDenaro[i + 1] == xp and vettoreDenaro[i + 2] == yp:
+                                        confesca = False
+                                        break
+                                    i += 3
                                 i = 2
                                 while i < len(vitaesca):
                                     if vitaesca[i] == xp and vitaesca[i + 1] == yp:
                                         confesca = False
+                                        break
                                     i = i + 4
                                 for nemico in listaNemici:
                                     if nemico.x == xp and nemico.y == yp:
@@ -628,8 +635,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            i = 0
                             # disegno le caselle attaccabili
+                            i = 0
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
@@ -646,8 +653,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             attaccato = True
                             # controllo caselle attaccabili
                             continua = True
-                            i = 0
                             # disegno le caselle attaccabili
+                            i = 0
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
@@ -767,8 +774,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
             # fai vedere stanze visitate
             # caseviste[x, y, flag, ... ] -> riempito come se non vedessi niente
-            i = 0
             # disegno le caselle viste
+            i = 0
             while i < len(caseviste):
                 if caseviste[i + 2]:
                     if ((caseviste[i] / gpx) + (caseviste[i + 1] / gpy)) % 2 == 0:
@@ -969,6 +976,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 2:
             if abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6:
                 puntat = puntatIn
+                i = 0
                 while i < len(caseattactot):
                     if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                         puntat = puntatOut
@@ -978,6 +986,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 3:
             if abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5:
                 puntat = puntatIn
+                i = 0
                 while i < len(caseattactot):
                     if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                         puntat = puntatOut
@@ -987,15 +996,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 4:
             if abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6:
                 puntat = puntatIn
+                i = 0
                 while i < len(caseattactot):
                     if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                         puntat = puntatOut
+                        break
                     i = i + 3
+                i = 0
+                while i < len(vettoreDenaro):
+                    if vettoreDenaro[i + 1] == xp and vettoreDenaro[i + 2] == yp:
+                        puntat = puntatOut
+                        break
+                    i += 3
             else:
                 puntat = puntatOut
         if attacco == 5:
             if abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5:
                 puntat = puntatIn
+                i = 0
                 while i < len(caseattactot):
                     if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                         puntat = puntatOut
@@ -1005,6 +1023,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 6:
             if abs(x - xp) <= gpx * 4 and abs(y - yp) <= gpy * 4:
                 puntat = puntatIn
+                i = 0
                 while i < len(caseattactot):
                     if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                         puntat = puntatOut
@@ -1087,8 +1106,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 raggiovista = nemico.raggioVisivo
                 # controllo caselle attaccabili
                 caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, nemico.raggioVisivo)
-                i = 0
                 # disegno le caselle attaccabili
+                i = 0
                 while i < len(caseattactotMostri):
                     if not caseattactotMostri[i + 2] and (caseattactotMostri[i] <= mx + raggiovista and caseattactotMostri[i + 1] <= my + raggiovista and caseattactotMostri[i] >= mx - raggiovista and caseattactotMostri[i + 1] >= my - raggiovista and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my)):
                         schermo.blit(caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
@@ -1171,8 +1190,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # controllo caselle attaccabili
                 raggiovista = gpx * 6
                 caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
-                i = 0
                 # disegno le caselle attaccabili
+                i = 0
                 while i < len(caseattactotRobo):
                     if not caseattactotRobo[i + 2] and (caseattactotRobo[i] <= rx + raggiovista and caseattactotRobo[i + 1] <= ry + raggiovista and caseattactotRobo[i] >= rx - raggiovista and caseattactotRobo[i + 1] >= ry - raggiovista and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry)):
                         schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
@@ -1209,8 +1228,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             raggiovista = nemicoInquadrato.raggioVisivo
             # controllo caselle attaccabili
             caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, nemicoInquadrato.raggioVisivo)
-            i = 0
             # disegno le caselle attaccabili
+            i = 0
             while i < len(caseattactotMostri):
                 if not caseattactotMostri[i + 2] and (
                         caseattactotMostri[i] <= mx + raggiovista and caseattactotMostri[i + 1] <= my + raggiovista and
