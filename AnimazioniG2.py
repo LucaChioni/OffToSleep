@@ -570,6 +570,25 @@ def animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, 
             schermo.blit(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
 
 
+def scriviDannoInflitto(listaNemici, fineanimaz):
+    if fineanimaz > 0:
+        for nemico in listaNemici:
+            i = len(nemico.danniRicevuti) - 1
+            while i >= 0:
+                messaggio("-" + str(nemico.danniRicevuti[i]), bianco, nemico.x - (gpx // 3), nemico.y - (gpy // 3 * (i + 1)), 40)
+                i -= 1
+
+
+def cancellaDanniInflitti(listaNemici, schermo_prima_delle_animazioni, fineanimaz):
+    if fineanimaz == 0:
+        for nemico in listaNemici:
+            i = len(nemico.danniRicevuti) - 1
+            while i >= 0:
+                del nemico.danniRicevuti[i]
+                schermo.blit(schermo_prima_delle_animazioni.subsurface(pygame.Rect(nemico.x - (gpx // 3), nemico.y - (gpy // 3 * 3), gpx * 2, gpy * 2)), (nemico.x - (gpx // 3), nemico.y - (gpy // 3 * 3)))
+                i -= 1
+
+
 def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza):
     animazione = False
     animazioneRallo = False
@@ -613,6 +632,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         if fineanimaz == 10:
             schermo_prima_delle_animazioni = schermo.copy()
 
+        # all'ultimo frame cancello tutti i numeri che indicano i danni inflitti
+        cancellaDanniInflitti(listaNemici, schermo_prima_delle_animazioni, fineanimaz)
+
         # animazioni di tutte le frecce lanciate nel turno
         animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, fineanimaz)
 
@@ -646,6 +668,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
         # disegna Rallo se ci sono animazioni ma non di Rallo
         animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[121], animazioneRallo)
+
+        # scrivo i danni infilli e ricevuti sopra le img dei personaggi
+        scriviDannoInflitto(listaNemici, fineanimaz)
 
         fineanimaz -= 1
         pygame.event.pump()
