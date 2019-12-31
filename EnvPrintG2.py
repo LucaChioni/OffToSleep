@@ -269,6 +269,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 break
             i += 4
 
+    xvp = xp
+    yvp = yp
     nxp = 0
     nyp = 0
     risposta = False
@@ -398,6 +400,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     danno = 0
     creaesca = False
     ricaricaschermo = False
+    appenaCaricato = False
     suPorta = False
     suCofanetto = False
     apriChiudiPorta = [False, 0, 0]
@@ -409,6 +412,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     attaccoADistanza = False
     sposta = False
     while not risposta:
+        if xp != xvp or yp != yvp:
+            appenaCaricato = False
         xvp = xp
         yvp = yp
 
@@ -732,7 +737,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     nxp = 0
                     nyp = 0
 
-        if ricaricaschermo:
+        if ricaricaschermo and not appenaCaricato:
             schermo.blit(stanzaa, (0, 0))
             # porte
             i = 0
@@ -784,6 +789,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
                 i += 3
             ricaricaschermo = False
+            appenaCaricato = True
 
         # disegna porte
         i = 0
@@ -1184,7 +1190,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 ricaricaschermo = True
                 break
         # vita-status-campo visivo robo
-        if (xp == rx and yp == ry) or (nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca):
+        if xp == rx and yp == ry:
             puntandoSuUnNemicoOColcoOEsca = True
             if enrob > 0:
                 # controllo caselle attaccabili
@@ -1193,7 +1199,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
-                    if not caseattactotRobo[i + 2] and (caseattactotRobo[i] <= rx + raggiovista and caseattactotRobo[i + 1] <= ry + raggiovista and caseattactotRobo[i] >= rx - raggiovista and caseattactotRobo[i + 1] >= ry - raggiovista and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry)):
+                    if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
                         schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
                     i = i + 3
                 campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
@@ -1218,9 +1224,41 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(velocitapiu, ((gpx * 2) + (gpx // 8), gpy // 4))
             if effp > 0:
                 schermo.blit(efficienzapiu, ((gpx * 3) + (gpx // 8), gpy // 4))
-        # se non sto puntando su colco o un nemico o un esca, disegno la vita del mostro selezionato (con E o attaccandolo)
+        # vita colco selezionato
+        if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca:
+            if enrob > 0:
+                # controllo caselle attaccabili
+                raggiovista = gpx * 6
+                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
+                # disegno le caselle attaccabili
+                i = 0
+                while i < len(caseattactotRobo):
+                    if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
+                        schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
+                    i = i + 3
+                campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
+                schermo.blit(campoattaccabile3, (rx - raggiovista, ry - raggiovista))
+            lungentot = int(((gpx * entot) / float(4)) // 15)
+            lungen = int(((gpx * enrob) / float(4)) // 15)
+            if lungen < 0:
+                lungen = 0
+            indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
+            fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+            vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
+            schermo.blit(sfondoColco, (0, 0))
+            schermo.blit(indvitarob, (gpx, 0))
+            schermo.blit(fineindvitarob, (gpx + lungentot, 0))
+            schermo.blit(vitarob, (gpx, 0))
+            robobat = pygame.transform.scale(roboo, (gpx, gpy))
+            schermo.blit(robobat, (0, 0))
+            if surrisc > 0:
+                schermo.blit(surriscaldato, (gpx + (gpx // 8), gpy // 4))
+            if velp > 0:
+                schermo.blit(velocitapiu, ((gpx * 2) + (gpx // 8), gpy // 4))
+            if effp > 0:
+                schermo.blit(efficienzapiu, ((gpx * 3) + (gpx // 8), gpy // 4))
+        # vita nemico selezionato
         elif not puntandoSuUnNemicoOColcoOEsca and not type(nemicoInquadrato) is str and nemicoInquadrato:
-            puntandoSuUnNemicoOColcoOEsca = True
             mx = nemicoInquadrato.x
             my = nemicoInquadrato.y
             pvm = nemicoInquadrato.vita
@@ -1308,10 +1346,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             schermo.blit(indvitamost, (gpx, 0))
             schermo.blit(vitanemsucc, (gpx, 0))
             schermo.blit(vitanem, (gpx, 0))
-            ricaricaschermo = True
         # vita esche selezionate
         elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and not puntandoSuUnNemicoOColcoOEsca:
-            puntandoSuUnNemicoOColcoOEsca = True
             idEscaInquadrata = int(nemicoInquadrato[4:])
             i = 0
             while i < len(vitaesca):
@@ -1327,7 +1363,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     schermo.blit(indvitamost, (gpx, 0))
                     schermo.blit(fineindvitamost, (gpx + (gpx * 8), 0))
                     schermo.blit(vitaesche, (gpx, 0))
-                    ricaricaschermo = True
                     break
                 i += 4
 

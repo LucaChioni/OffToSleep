@@ -293,40 +293,24 @@ def animaSpostamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
 
 
 def animaAttaccoNemici(listaNemici, animazione, cambiosta, fineanimaz):
-    if not cambiosta:
+    if not cambiosta and fineanimaz != 0:
         for nemico in listaNemici:
             if nemico.animaAttacco and not nemico.morto:
                 animazione = True
                 # if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
                 #     canaleSoundAttacco.play(rumoreattacco)
-                if nemico.attaccaDaLontano:
-                    if nemico.direzione == "w":
-                        schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y))
-                    if nemico.direzione == "a":
-                        schermo.blit(nemico.imgAttaccoA, (nemico.x, nemico.y))
-                    if nemico.direzione == "s":
-                        schermo.blit(nemico.imgAttaccoS, (nemico.x, nemico.y))
-                    if nemico.direzione == "d":
-                        schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
-                    if nemico.appiccicato:
-                        schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
-                    if nemico.avvelenato:
-                        schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
-                    print "animazione attacco da lontano: x=" + str(nemico.xObbiettivo) + " y=" + str(nemico.yObbiettivo)
-                else:
-                    # rumoreattaccoNemico.play()
-                    if nemico.direzione == "w":
-                        schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y - gpy))
-                    if nemico.direzione == "a":
-                        schermo.blit(nemico.imgAttaccoA, (nemico.x - gpx, nemico.y))
-                    if nemico.direzione == "s":
-                        schermo.blit(nemico.imgAttaccoS, (nemico.x, nemico.y))
-                    if nemico.direzione == "d":
-                        schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
-                    if nemico.appiccicato:
-                        schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
-                    if nemico.avvelenato:
-                        schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
+                if nemico.direzione == "w":
+                    schermo.blit(nemico.imgAttaccoW, (nemico.x, nemico.y - gpy))
+                if nemico.direzione == "a":
+                    schermo.blit(nemico.imgAttaccoA, (nemico.x - gpx, nemico.y))
+                if nemico.direzione == "s":
+                    schermo.blit(nemico.imgAttaccoS, (nemico.x, nemico.y))
+                if nemico.direzione == "d":
+                    schermo.blit(nemico.imgAttaccoD, (nemico.x, nemico.y))
+                if nemico.appiccicato:
+                    schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
+                if nemico.avvelenato:
+                    schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
     return animazione
 
 
@@ -548,9 +532,9 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, caricaTutto, tastop, finea
     return caricaTutto, tastop
 
 
-def animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, fineanimaz):
+def animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, listaNemici, cambiosta, fineanimaz):
     # disegno le frecce lanciate
-    if attaccoADistanza:
+    if attaccoADistanza and not cambiosta:
         xInizioRetta = x
         xFineRetta = attaccoADistanza.vx
         yInizioRetta = y
@@ -568,6 +552,26 @@ def animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, 
             schermo.blit(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
         elif fineanimaz == 5:
             schermo.blit(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
+    # disegno gli oggetti lanciati dai nemici
+    if not cambiosta:
+        for nemico in listaNemici:
+            if nemico.attaccaDaLontano and nemico.animaAttacco and not nemico.morto:
+                xInizioRetta = nemico.x
+                xFineRetta = nemico.xObbiettivo
+                yInizioRetta = nemico.y
+                yFineRetta = nemico.yObbiettivo
+                deltaXRetta = xFineRetta - xInizioRetta
+                deltaYRetta = yFineRetta - yInizioRetta
+                angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
+                angoloInGradi = math.degrees(angoloInRadianti)
+                imgFrecciaLanciata_temp = pygame.transform.rotate(nemico.imgOggettoLanciato, angoloInGradi)
+                if fineanimaz > 5:
+                    if fineanimaz != 10:
+                        schermo.blit(nemico.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
+                    nemico.quadrettoSottoOggettoLanciato = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - gpy, gpx * 3, gpy * 3))
+                    schermo.blit(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
+                elif fineanimaz == 5:
+                    schermo.blit(nemico.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
 
 
 def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza):
@@ -605,6 +609,27 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
                         schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
                         schermo.blit(sfondinob, (nemico.x, nemico.y))
+                    if nemico.animaAttacco:
+                        if nemico.direzione == "w":
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
+                                schermo.blit(sfondinob, (nemico.x, nemico.y - gpy))
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
+                                schermo.blit(sfondinoa, (nemico.x, nemico.y - gpy))
+                        if nemico.direzione == "a":
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
+                                schermo.blit(sfondinob, (nemico.x - gpx, nemico.y))
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
+                                schermo.blit(sfondinoa, (nemico.x - gpx, nemico.y))
+                        if nemico.direzione == "s":
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
+                                schermo.blit(sfondinob, (nemico.x, nemico.y + gpy))
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
+                                schermo.blit(sfondinoa, (nemico.x, nemico.y + gpy))
+                        if nemico.direzione == "d":
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
+                                schermo.blit(sfondinob, (nemico.x + gpx, nemico.y))
+                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
+                                schermo.blit(sfondinoa, (nemico.x + gpx, nemico.y))
 
         # disegno le esche e il denaro
         animaEsche(vitaesca, sfondinoa, sfondinob)
@@ -614,7 +639,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             schermo_prima_delle_animazioni = schermo.copy()
 
         # animazioni di tutte le frecce lanciate nel turno
-        animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, fineanimaz)
+        animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, listaNemici, cambiosta, fineanimaz)
 
         # animazione camminata robo
         animazione = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)

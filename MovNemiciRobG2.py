@@ -31,7 +31,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     while i < len(vettoreDenaro):
         j = 0
         while j < len(caseattactot):
-            if caseattactot[j] == vettoreDenaro[i + 1] and caseattactot[j + 1] == vettoreDenaro[i + 2] and not (x == vettoreDenaro[i + 1] and y == vettoreDenaro[i + 2]) and not (rx == vettoreDenaro[i + 1] and ry == vettoreDenaro[i + 2]):
+            if caseattactot[j] == vettoreDenaro[i + 1] and caseattactot[j + 1] == vettoreDenaro[i + 2] and caseattactot[j + 2] and not (x == vettoreDenaro[i + 1] and y == vettoreDenaro[i + 2]) and not (rx == vettoreDenaro[i + 1] and ry == vettoreDenaro[i + 2]):
                 if primoSacchetto:
                     distminx = vettoreDenaro[i + 1]
                     distminy = vettoreDenaro[i + 2]
@@ -54,7 +54,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     while i < len(vitaesca):
         j = 0
         while j < len(caseattactot):
-            if caseattactot[j] == vitaesca[i + 2] and caseattactot[j + 1] == vitaesca[i + 3]:
+            if caseattactot[j] == vitaesca[i + 2] and caseattactot[j + 1] == vitaesca[i + 3] and caseattactot[j + 2]:
                 if primaesca:
                     distminx = vitaesca[i + 2]
                     distminy = vitaesca[i + 3]
@@ -539,106 +539,122 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
     elif not suAlleato:
         mostroAccanto = False
         mostroVisto = False
-        vistaRobo = gpx * 6
         if (rx == xBersaglio and ry == yBersaglio) or (rx + gpx == xBersaglio and ry == yBersaglio) or (rx - gpx == xBersaglio and ry == yBersaglio) or (rx == xBersaglio and ry + gpy == yBersaglio) or (rx == xBersaglio and ry - gpy == yBersaglio):
             mostroAccanto = True
             mostroVisto = True
         else:
             i = 0
             while i < len(caselleVisteDaColco):
-                if caselleVisteDaColco[i] == xBersaglio and caselleVisteDaColco[i + 1] == yBersaglio and abs(rx - xBersaglio) <= vistaRobo and abs(ry - yBersaglio) <= vistaRobo and caselleVisteDaColco[i + 2]:
+                if caselleVisteDaColco[i] == xBersaglio and caselleVisteDaColco[i + 1] == yBersaglio and caselleVisteDaColco[i + 2]:
                     mostroVisto = True
+                    break
                 i += 3
-        if azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18:
-            if mostroAccanto:
-                if dati[10] >= costoTecniche[azione - 1]:
-                    azioneEseguita = True
-                # scossa
-                if azione == 1 and dati[10] >= costoTecniche[azione - 1]:
-                    danno = dannoTecniche[azione - 1]
-                    if danno < 0:
-                        danno = 0
-                    pvm -= danno
-                    if pvm < 0:
-                        pvm = 0
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # cura
-                if azione == 2 and dati[10] >= costoTecniche[azione - 1]:
-                    pvm += dannoTecniche[azione - 1]
-                    if pvm > pvmtot:
-                        pvm = pvmtot
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # antidoto
-                if azione == 3 and dati[10] >= costoTecniche[azione - 1]:
-                    if statom == 1:
-                        statom = 0
-                    elif statom == 3:
-                        statom = 2
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # cura+
-                if azione == 8 and dati[10] >= costoTecniche[azione - 1]:
-                    pvm += dannoTecniche[azione - 1]
-                    if pvm > pvmtot:
-                        pvm = pvmtot
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # scossa+
-                if azione == 9 and dati[10] >= costoTecniche[azione - 1]:
-                    danno = dannoTecniche[azione - 1]
-                    if danno < 0:
-                        danno = 0
-                    pvm -= danno
-                    if pvm < 0:
-                        pvm = 0
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # attP
-                if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # difP
-                if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # cura++
-                if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
-                    pvm += dannoTecniche[azione - 1]
-                    if pvm > pvmtot:
-                        pvm = pvmtot
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-                # scossa++
-                if azione == 18 and dati[10] >= costoTecniche[azione - 1]:
-                    danno = dannoTecniche[azione - 1]
-                    if danno < 0:
-                        danno = 0
-                    pvm -= danno
-                    if pvm < 0:
-                        pvm = 0
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
-        elif mostroVisto:
+        if mostroAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18):
+            if dati[10] >= costoTecniche[azione - 1]:
+                azioneEseguita = True
+            # scossa
+            if azione == 1 and dati[10] >= costoTecniche[azione - 1]:
+                danno = dannoTecniche[azione - 1]
+                if danno < 0:
+                    danno = 0
+                pvm -= danno
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # cura
+            if azione == 2 and dati[10] >= costoTecniche[azione - 1]:
+                pvm += dannoTecniche[azione - 1]
+                if pvm > pvmtot:
+                    pvm = pvmtot
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # antidoto
+            if azione == 3 and dati[10] >= costoTecniche[azione - 1]:
+                if statom == 1:
+                    statom = 0
+                elif statom == 3:
+                    statom = 2
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # cura+
+            if azione == 8 and dati[10] >= costoTecniche[azione - 1]:
+                pvm += dannoTecniche[azione - 1]
+                if pvm > pvmtot:
+                    pvm = pvmtot
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # scossa+
+            if azione == 9 and dati[10] >= costoTecniche[azione - 1]:
+                danno = dannoTecniche[azione - 1]
+                if danno < 0:
+                    danno = 0
+                pvm -= danno
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # attP
+            if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # difP
+            if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # cura++
+            if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
+                pvm += dannoTecniche[azione - 1]
+                if pvm > pvmtot:
+                    pvm = pvmtot
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # scossa++
+            if azione == 18 and dati[10] >= costoTecniche[azione - 1]:
+                danno = dannoTecniche[azione - 1]
+                if danno < 0:
+                    danno = 0
+                pvm -= danno
+                if dati[126] > 0:
+                    dati[10] -= costoTecniche[azione - 1] // 2
+                else:
+                    dati[10] -= costoTecniche[azione - 1]
+            # giro Colco verso l'obiettivo
+            if azioneEseguita:
+                if abs(xBersaglio - rx) > abs(yBersaglio - ry):
+                    if rx < xBersaglio:
+                        nrob = 1
+                    if rx > xBersaglio:
+                        nrob = 2
+                if abs(yBersaglio - ry) > abs(xBersaglio - rx):
+                    if ry < yBersaglio:
+                        nrob = 3
+                    if ry > yBersaglio:
+                        nrob = 4
+                if (abs(xBersaglio - rx) == abs(yBersaglio - ry)) and (
+                        xBersaglio != rx) and (yBersaglio != ry):
+                    c = random.randint(1, 2)
+                    if rx < xBersaglio and c == 1:
+                        nrob = 1
+                    if rx > xBersaglio and c == 1:
+                        nrob = 2
+                    if ry < yBersaglio and c == 2:
+                        nrob = 3
+                    if ry > yBersaglio and c == 2:
+                        nrob = 4
+        elif mostroVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20):
             if dati[10] >= costoTecniche[azione - 1]:
                 azioneEseguita = True
             # freccia
@@ -647,8 +663,6 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                 if danno < 0:
                     danno = 0
                 pvm -= danno
-                if pvm < 0:
-                    pvm = 0
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -671,8 +685,6 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                 if danno < 0:
                     danno = 0
                 pvm -= danno
-                if pvm < 0:
-                    pvm = 0
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -695,8 +707,6 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                 if danno < 0:
                     danno = 0
                 pvm -= danno
-                if pvm < 0:
-                    pvm = 0
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
@@ -713,13 +723,37 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
-        if not (mostroAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) or not (mostroVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
+            # giro Colco verso l'obiettivo
+            if azioneEseguita:
+                if abs(xBersaglio - rx) > abs(yBersaglio - ry):
+                    if rx < xBersaglio:
+                        nrob = 1
+                    if rx > xBersaglio:
+                        nrob = 2
+                if abs(yBersaglio - ry) > abs(xBersaglio - rx):
+                    if ry < yBersaglio:
+                        nrob = 3
+                    if ry > yBersaglio:
+                        nrob = 4
+                if (abs(xBersaglio - rx) == abs(yBersaglio - ry)) and (
+                        xBersaglio != rx) and (yBersaglio != ry):
+                    c = random.randint(1, 2)
+                    if rx < xBersaglio and c == 1:
+                        nrob = 1
+                    if rx > xBersaglio and c == 1:
+                        nrob = 2
+                    if ry < yBersaglio and c == 2:
+                        nrob = 3
+                    if ry > yBersaglio and c == 2:
+                        nrob = 4
+        elif mostroVisto and not azioneEseguita:
             azioneEseguita = True
             i = 0
             while i < len(vetNemiciSoloConXeY):
                 if vetNemiciSoloConXeY[i] == xBersaglio and vetNemiciSoloConXeY[i + 1] == yBersaglio:
                     del vetNemiciSoloConXeY[i + 1]
                     del vetNemiciSoloConXeY[i]
+                    break
                 i += 2
             percorsoTrovato = pathFinding(rx, ry, xBersaglio, yBersaglio, stanza, porte, cofanetti, vetNemiciSoloConXeY)
             if percorsoTrovato != "arrivato":
@@ -738,15 +772,15 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
     else:
         ralloAccanto = False
         ralloVisto = False
-        vistaRobo = gpx * 6
         if (rx == xBersaglio and ry == yBersaglio) or (rx + gpx == xBersaglio and ry == yBersaglio) or (rx - gpx == xBersaglio and ry == yBersaglio) or (rx == xBersaglio and ry + gpy == yBersaglio) or (rx == xBersaglio and ry - gpy == yBersaglio):
             ralloAccanto = True
             ralloVisto = True
         else:
             i = 0
             while i < len(caselleVisteDaColco):
-                if caselleVisteDaColco[i] == xBersaglio and caselleVisteDaColco[i + 1] == yBersaglio and abs(rx - xBersaglio) <= vistaRobo and abs(ry - yBersaglio) <= vistaRobo and caselleVisteDaColco[i + 2]:
+                if caselleVisteDaColco[i] == xBersaglio and caselleVisteDaColco[i + 1] == yBersaglio and caselleVisteDaColco[i + 2]:
                     ralloVisto = True
+                    break
                 i += 3
         if suAlleato == 1:
             if azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18:
@@ -843,6 +877,29 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                    # giro Colco verso l'obiettivo
+                    if azioneEseguita:
+                        if abs(xBersaglio - rx) > abs(yBersaglio - ry):
+                            if rx < xBersaglio:
+                                nrob = 1
+                            if rx > xBersaglio:
+                                nrob = 2
+                        if abs(yBersaglio - ry) > abs(xBersaglio - rx):
+                            if ry < yBersaglio:
+                                nrob = 3
+                            if ry > yBersaglio:
+                                nrob = 4
+                        if (abs(xBersaglio - rx) == abs(yBersaglio - ry)) and (
+                                xBersaglio != rx) and (yBersaglio != ry):
+                            c = random.randint(1, 2)
+                            if rx < xBersaglio and c == 1:
+                                nrob = 1
+                            if rx > xBersaglio and c == 1:
+                                nrob = 2
+                            if ry < yBersaglio and c == 2:
+                                nrob = 3
+                            if ry > yBersaglio and c == 2:
+                                nrob = 4
             elif ralloVisto:
                 if dati[10] >= costoTecniche[azione - 1]:
                     azioneEseguita = True
@@ -936,7 +993,30 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
-            if not (ralloAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) or not (ralloVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
+                # giro Colco verso l'obiettivo
+                if azioneEseguita:
+                    if abs(xBersaglio - rx) > abs(yBersaglio - ry):
+                        if rx < xBersaglio:
+                            nrob = 1
+                        if rx > xBersaglio:
+                            nrob = 2
+                    if abs(yBersaglio - ry) > abs(xBersaglio - rx):
+                        if ry < yBersaglio:
+                            nrob = 3
+                        if ry > yBersaglio:
+                            nrob = 4
+                    if (abs(xBersaglio - rx) == abs(yBersaglio - ry)) and (
+                            xBersaglio != rx) and (yBersaglio != ry):
+                        c = random.randint(1, 2)
+                        if rx < xBersaglio and c == 1:
+                            nrob = 1
+                        if rx > xBersaglio and c == 1:
+                            nrob = 2
+                        if ry < yBersaglio and c == 2:
+                            nrob = 3
+                        if ry > yBersaglio and c == 2:
+                            nrob = 4
+            if not (ralloAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) and not (ralloVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
                 i = 0
                 while i < len(vetNemiciSoloConXeY):
                     if vetNemiciSoloConXeY[i] == xBersaglio and vetNemiciSoloConXeY[i + 1] == yBersaglio:
@@ -944,7 +1024,7 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                         del vetNemiciSoloConXeY[i]
                     i += 2
                 azioneEseguita = True
-                if abs(rx - xBersaglio) == gpx and abs(ry - yBersaglio) == gpy and ((xBersaglio == rx + gpx and yBersaglio == ry) or (xBersaglio == rx - gpx and yBersaglio == ry) or (xBersaglio == rx and yBersaglio == ry + gpy) or (xBersaglio == rx and yBersaglio == ry - gpy)):
+                if abs(rx - x) == gpx and abs(ry - y) == gpy and ((vx == rx + gpx and vy == ry) or (vx == rx - gpx and vy == ry) or (vx == rx and vy == ry + gpy) or (vx == rx and vy == ry - gpy)):
                     if vx == rx + gpx and vy == ry:
                         nrob = 1
                     elif vx == rx - gpx and vy == ry:
@@ -969,7 +1049,6 @@ def eseguiAzione(rx, ry, pvm, xBersaglio, yBersaglio, pvmtot, statom, azione, su
                                     nrob = 4
                                 sposta = True
         if suAlleato == 2:
-            print costoTecniche[azione - 1], azione
             if dati[10] >= costoTecniche[azione - 1]:
                 azioneEseguita = True
             # scossa
@@ -1190,7 +1269,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vet
         azioneEseguita = False
         i = 101
         while i <= 110 and not azioneEseguita:
-            if dati[i + 10] != 0:
+            if dati[i] != 0 and dati[i + 10] != 0:
                 # azioni su alleati
                 # pv rallo < 80
                 if dati[i] == 1:

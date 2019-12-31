@@ -690,8 +690,7 @@ def gameloop():
 
         impossibileCliccarePulsanti = False
 
-        # statistiche personaggio e robo (liv + arm + scu)
-        # se modifichi -> modifica anche equip, equiprobo e ovunque si presenta pvtot
+        # statistiche personaggio e robo
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
         # ripristina vita e status dopo lv up

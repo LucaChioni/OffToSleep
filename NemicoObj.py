@@ -44,7 +44,7 @@ class NemicoObj(object):
             raggioVisivo = gpx * 6
             velocita = 1
             attacco = 20
-            attaccaDaLontano = False
+            attaccaDaLontano = True
             velenoso = True
             denaro = random.randint(0, 3)
             difesa = 0
@@ -64,6 +64,7 @@ class NemicoObj(object):
         self.velenoso = velenoso
         self.denaro = denaro
         self.difesa = difesa
+        self.quadrettoSottoOggettoLanciato = 0
 
         self.caricaImg()
         self.girati(direzione)
@@ -101,36 +102,19 @@ class NemicoObj(object):
         imgAppiccicato = pygame.image.load("Immagini/Mostri/" + self.tipo + "Appicc.png")
         self.imgAppiccicato = pygame.transform.scale(imgAppiccicato, (gpx, gpy))
 
+        imgAttaccoW = pygame.image.load("Immagini/Mostri/" + self.tipo + "wAttacco.png")
+        self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (gpx, gpy * 2))
+        imgAttaccoA = pygame.image.load("Immagini/Mostri/" + self.tipo + "aAttacco.png")
+        self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (gpx * 2, gpy))
+        imgAttaccoS = pygame.image.load("Immagini/Mostri/" + self.tipo + "sAttacco.png")
+        self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (gpx, gpy * 2))
+        imgAttaccoD = pygame.image.load("Immagini/Mostri/" + self.tipo + "dAttacco.png")
+        self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (gpx * 2, gpy))
         if self.attaccaDaLontano:
-            imgAttaccoW = pygame.image.load("Immagini/Mostri/" + self.tipo + "wAttacco.png")
-            self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (gpx, gpy))
-            imgAttaccoA = pygame.image.load("Immagini/Mostri/" + self.tipo + "aAttacco.png")
-            self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (gpx, gpy))
-            imgAttaccoS = pygame.image.load("Immagini/Mostri/" + self.tipo + "sAttacco.png")
-            self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (gpx, gpy))
-            imgAttaccoD = pygame.image.load("Immagini/Mostri/" + self.tipo + "dAttacco.png")
-            self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (gpx, gpy))
-            # imgOggettoAttaccoW = pygame.image.load("Immagini/Mostri/" + self.tipo + "wOggettoAttacco.png")
-            # self.imgOggettoAttaccoW = pygame.transform.scale(imgOggettoAttaccoW, (gpx, gpy))
-            # imgOggettoAttaccoA = pygame.image.load("Immagini/Mostri/" + self.tipo + "aOggettoAttacco.png")
-            # self.imgOggettoAttaccoA = pygame.transform.scale(imgOggettoAttaccoA, (gpx, gpy))
-            # imgOggettoAttaccoS = pygame.image.load("Immagini/Mostri/" + self.tipo + "sOggettoAttacco.png")
-            # self.imgOggettoAttaccoS = pygame.transform.scale(imgOggettoAttaccoS, (gpx, gpy))
-            # imgOggettoAttaccoD = pygame.image.load("Immagini/Mostri/" + self.tipo + "dOggettoAttacco.png")
-            # self.imgOggettoAttaccoD = pygame.transform.scale(imgOggettoAttaccoD, (gpx, gpy))
+            imgOggettoLanciato = pygame.image.load("Immagini/Mostri/" + self.tipo + "OggettoLanciato.png")
+            self.imgOggettoLanciato = pygame.transform.scale(imgOggettoLanciato, (gpx, gpy))
         else:
-            imgAttaccoW = pygame.image.load("Immagini/Mostri/" + self.tipo + "wAttacco.png")
-            self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (gpx, gpy * 2))
-            imgAttaccoA = pygame.image.load("Immagini/Mostri/" + self.tipo + "aAttacco.png")
-            self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (gpx * 2, gpy))
-            imgAttaccoS = pygame.image.load("Immagini/Mostri/" + self.tipo + "sAttacco.png")
-            self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (gpx, gpy * 2))
-            imgAttaccoD = pygame.image.load("Immagini/Mostri/" + self.tipo + "dAttacco.png")
-            self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (gpx * 2, gpy))
-            self.imgOggettoAttaccoW = 0
-            self.imgOggettoAttaccoA = 0
-            self.imgOggettoAttaccoS = 0
-            self.imgOggettoAttaccoD = 0
+            self.imgOggettoLanciato = 0
 
         imgMorte1 = pygame.image.load("Immagini/Mostri/MorteMov1.png")
         self.imgMorte1 = pygame.transform.scale(imgMorte1, (gpx, gpy))

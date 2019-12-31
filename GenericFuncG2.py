@@ -1709,6 +1709,20 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
         i += 3
 
     caseattactot = caseattacaltodestra + caseattacaltosinistra + caseattacbassodestra + caseattacbassosinistra + caseattacdestra + caseattacsinistra + caseattacalto + caseattacbasso
+    # tolgo le caselle duplicate
+    i = 0
+    while i < len(caseattactot):
+        j = i + 3
+        while j < len(caseattactot):
+            if caseattactot[i] == caseattactot[j] and caseattactot[i + 1] == caseattactot[j + 1]:
+                if not caseattactot[i + 2] or not caseattactot[j + 2]:
+                    caseattactot[i + 2] = False
+                del caseattactot[j + 2]
+                del caseattactot[j + 1]
+                del caseattactot[j]
+            else:
+                j += 3
+        i += 3
     return caseattactot
 
 
@@ -2219,6 +2233,14 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
 
 def controllaMorteRallo(vitaRallo, inizio):
     if vitaRallo <= 0:
+        canaleSoundCanzone.stop()
+        canaleSoundPuntatore.stop()
+        canaleSoundPassiRallo.stop()
+        canaleSoundPassiColco.stop()
+        canaleSoundPassiNemico.stop()
+        canaleSoundLvUp.stop()
+        canaleSoundInterazioni.stop()
+        canaleSoundAttacco.stop()
         schermo.fill(grigioscu)
         messaggio("Sei morto", grigiochi, gsx // 32 * 3, gsy // 18 * 13, 150)
         pygame.display.update()
