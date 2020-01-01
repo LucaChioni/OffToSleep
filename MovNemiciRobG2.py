@@ -119,18 +119,20 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
         # andare verso il sacchetto di denaro
         if nemico.xObbiettivo == xDenaro and nemico.yObbiettivo == yDenaro:
             vetNemiciSoloConXeY = []
+            vetNemiciSoloConXeY.append(x)
+            vetNemiciSoloConXeY.append(y)
+            vetNemiciSoloConXeY.append(rx)
+            vetNemiciSoloConXeY.append(ry)
             i = 0
             while i < len(vetNemici):
                 if not (vetNemici[i + 1] == nemico.x and vetNemici[i + 2] == nemico.y):
                     vetNemiciSoloConXeY.append(vetNemici[i + 1])
                     vetNemiciSoloConXeY.append(vetNemici[i + 2])
                 i += 4
-            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte,
-                                          cofanetti, vetNemiciSoloConXeY)
+            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, vetNemiciSoloConXeY)
             if percorsoTrovato:
                 if len(percorsoTrovato) >= 4:
-                    if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[
-                        len(percorsoTrovato) - 3] != nemico.y:
+                    if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
                         if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
                             nmos = 1
                         if percorsoTrovato[len(percorsoTrovato) - 4] < nemico.x:
@@ -276,38 +278,186 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     danno = 0
                 print ("attacco lontano", nemico.tipo, "a esca", danno)
                 vitaesca[escabersaglio + 1] = vitaesca[escabersaglio + 1] - danno
+                nmos = 0
+                if abs(nemico.xObbiettivo - nemico.x) > abs(nemico.yObbiettivo - nemico.y):
+                    if nemico.x < nemico.xObbiettivo:
+                        nmos = 1
+                    if nemico.x > nemico.xObbiettivo:
+                        nmos = 2
+                if abs(nemico.yObbiettivo - nemico.y) > abs(nemico.xObbiettivo - nemico.x):
+                    if nemico.y < nemico.yObbiettivo:
+                        nmos = 3
+                    if nemico.y > nemico.yObbiettivo:
+                        nmos = 4
+                if (abs(nemico.xObbiettivo - nemico.x) == abs(nemico.yObbiettivo - nemico.y)) and (nemico.xObbiettivo != nemico.x) and (nemico.yObbiettivo != nemico.y):
+                    c = random.randint(1, 2)
+                    if nemico.x < nemico.xObbiettivo and c == 1:
+                        nmos = 1
+                    if nemico.x > nemico.xObbiettivo and c == 1:
+                        nmos = 2
+                    if nemico.y < nemico.yObbiettivo and c == 2:
+                        nmos = 3
+                    if nemico.y > nemico.yObbiettivo and c == 2:
+                        nmos = 4
+                attacca = True
+                sposta = False
             else:
-                if attrobo:
-                    danno = nemico.attacco - difro
-                    if danno < 0:
-                        danno = 0
-                    print ("attacco lontano", nemico.tipo, "a robo", danno)
-                    dati[10] = dati[10] - danno
-                else:
-                    danno = nemico.attacco - dif
-                    if danno < 0:
-                        danno = 0
-                    if random.randint(1, 100) <= par and dati[7] > 0:
-                        danno = 0
-                        avvelena = False
-                        print ("parato:", par)
-                    if avvelena and not dati[130] == 1:
-                        dati[121] = True
-                    print ("attacco lontano", nemico.tipo, "a rallo", danno)
-                    dati[5] = dati[5] - danno
-            nmos = 0
-            if abs(nemico.xObbiettivo - nemico.x) > abs(nemico.yObbiettivo - nemico.y):
-                if nemico.x < nemico.xObbiettivo:
-                    nmos = 1
-                if nemico.x > nemico.xObbiettivo:
-                    nmos = 2
-            if abs(nemico.yObbiettivo - nemico.y) > abs(nemico.xObbiettivo - nemico.x):
-                if nemico.y < nemico.yObbiettivo:
-                    nmos = 3
-                if nemico.y > nemico.yObbiettivo:
-                    nmos = 4
-            attacca = True
-            sposta = False
+                if (x == nemico.x + gpx and y == nemico.y) or (x == nemico.x - gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + gpy) or (x == nemico.x and y == nemico.y - gpy) or (rx == nemico.x + gpx and ry == nemico.y) or (rx == nemico.x - gpx and ry == nemico.y) or (rx == nemico.x and ry == nemico.y + gpy) or (rx == nemico.x and ry == nemico.y - gpy):
+                    # nmos: 1=d, 2=a, 3=s, 4=w
+                    xRalloVicino = 0
+                    yRalloVicino = 0
+                    xColcoVicino = 0
+                    yColcoVicino = 0
+                    casellaDaControllarePrima = 0
+                    if (x == nemico.x + gpx and y == nemico.y) or (x == nemico.x - gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + gpy) or (x == nemico.x and y == nemico.y - gpy):
+                        xRalloVicino = x
+                        yRalloVicino = y
+                    if (rx == nemico.x + gpx and ry == nemico.y) or (rx == nemico.x - gpx and ry == nemico.y) or (rx == nemico.x and ry == nemico.y + gpy) or (rx == nemico.x and ry == nemico.y - gpy):
+                        xColcoVicino = rx
+                        yColcoVicino = ry
+                    if xRalloVicino != 0 and yRalloVicino != 0 and xColcoVicino != 0 and yColcoVicino != 0:
+                        casellaTrovata = False
+                        nmxProbabile = gpx
+                        nmyProbabile = 0
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        if not ((x == mxProbabile + gpx and y == myProbabile) or (x == mxProbabile - gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + gpy) or (x == mxProbabile and y == myProbabile - gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + gpx and ry == myProbabile) or (rx == mxProbabile - gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + gpy) or (rx == mxProbabile and ry == myProbabile - gpy) or (rx == mxProbabile and ry == myProbabile)):
+                            if casellaTrovata:
+                                if random.randint(0, 1) == 0:
+                                    nmos = 1
+                                    sposta = True
+                            else:
+                                nmos = 1
+                                sposta = True
+                                casellaTrovata = True
+                        nmxProbabile = -gpx
+                        nmyProbabile = 0
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        if not ((x == mxProbabile + gpx and y == myProbabile) or (x == mxProbabile - gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + gpy) or (x == mxProbabile and y == myProbabile - gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + gpx and ry == myProbabile) or (rx == mxProbabile - gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + gpy) or (rx == mxProbabile and ry == myProbabile - gpy) or (rx == mxProbabile and ry == myProbabile)):
+                            if casellaTrovata:
+                                if random.randint(0, 1) == 0:
+                                    nmos = 2
+                                    sposta = True
+                            else:
+                                nmos = 2
+                                sposta = True
+                                casellaTrovata = True
+                        nmxProbabile = 0
+                        nmyProbabile = gpy
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        if not ((x == mxProbabile + gpx and y == myProbabile) or (x == mxProbabile - gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + gpy) or (x == mxProbabile and y == myProbabile - gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + gpx and ry == myProbabile) or (rx == mxProbabile - gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + gpy) or (rx == mxProbabile and ry == myProbabile - gpy) or (rx == mxProbabile and ry == myProbabile)):
+                            if casellaTrovata:
+                                if random.randint(0, 1) == 0:
+                                    nmos = 3
+                                    sposta = True
+                            else:
+                                nmos = 3
+                                sposta = True
+                                casellaTrovata = True
+                        nmxProbabile = 0
+                        nmyProbabile = -gpy
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        if not ((x == mxProbabile + gpx and y == myProbabile) or (x == mxProbabile - gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + gpy) or (x == mxProbabile and y == myProbabile - gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + gpx and ry == myProbabile) or (rx == mxProbabile - gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + gpy) or (rx == mxProbabile and ry == myProbabile - gpy) or (rx == mxProbabile and ry == myProbabile)):
+                            if casellaTrovata:
+                                if random.randint(0, 1) == 0:
+                                    nmos = 4
+                                    sposta = True
+                            else:
+                                nmos = 4
+                                sposta = True
+                    else:
+                        if xRalloVicino != 0 and yRalloVicino != 0:
+                            if nemico.x - gpx == xRalloVicino and nemico.y == yRalloVicino:
+                                casellaDaControllarePrima = 1
+                            elif nemico.x + gpx == xRalloVicino and nemico.y == yRalloVicino:
+                                casellaDaControllarePrima = 2
+                            elif nemico.x == xRalloVicino and nemico.y - gpy == yRalloVicino:
+                                casellaDaControllarePrima = 3
+                            elif nemico.x == xRalloVicino and nemico.y + gpy == yRalloVicino:
+                                casellaDaControllarePrima = 4
+                        elif xColcoVicino != 0 and yColcoVicino != 0:
+                            if nemico.x - gpx == xColcoVicino and nemico.y == yColcoVicino:
+                                casellaDaControllarePrima = 1
+                            elif nemico.x + gpx == xColcoVicino and nemico.y == yColcoVicino:
+                                casellaDaControllarePrima = 2
+                            elif nemico.x == xColcoVicino and nemico.y - gpy == yColcoVicino:
+                                casellaDaControllarePrima = 3
+                            elif nemico.x == xColcoVicino and nemico.y + gpy == yColcoVicino:
+                                casellaDaControllarePrima = 4
+
+                        ordineCaselleDaControllare = []
+                        ordineCaselleDaControllare.append(casellaDaControllarePrima)
+                        caselleDaControllare = [1, 2, 3, 4]
+                        caselleDaControllare.remove(casellaDaControllarePrima)
+                        i = 0
+                        while i < 3:
+                            print ordineCaselleDaControllare
+                            ordineCaselleDaControllare.append(caselleDaControllare.pop(random.randint(0, len(caselleDaControllare) - 1)))
+                            i += 1
+                        print ordineCaselleDaControllare
+
+                        for i in ordineCaselleDaControllare:
+                            nmxProbabile = 0
+                            nmyProbabile = 0
+                            if i == 1:
+                                nmxProbabile = gpx
+                                nmyProbabile = 0
+                            elif i == 2:
+                                nmxProbabile = -gpx
+                                nmyProbabile = 0
+                            elif i == 3:
+                                nmxProbabile = 0
+                                nmyProbabile = gpy
+                            elif i == 4:
+                                nmxProbabile = 0
+                                nmyProbabile = -gpy
+                            mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                            if not ((x == mxProbabile + gpx and y == myProbabile) or (x == mxProbabile - gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + gpy) or (x == mxProbabile and y == myProbabile - gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + gpx and ry == myProbabile) or (rx == mxProbabile - gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + gpy) or (rx == mxProbabile and ry == myProbabile - gpy) or (rx == mxProbabile and ry == myProbabile)):
+                                nmos = i
+                                sposta = True
+                                break
+
+                if not sposta:
+                    if attrobo:
+                        danno = nemico.attacco - difro
+                        if danno < 0:
+                            danno = 0
+                        print ("attacco lontano", nemico.tipo, "a robo", danno)
+                        dati[10] = dati[10] - danno
+                    else:
+                        danno = nemico.attacco - dif
+                        if danno < 0:
+                            danno = 0
+                        if random.randint(1, 100) <= par and dati[7] > 0:
+                            danno = 0
+                            avvelena = False
+                            print ("parato:", par)
+                        if avvelena and not dati[130] == 1:
+                            dati[121] = True
+                        print ("attacco lontano", nemico.tipo, "a rallo", danno)
+                        dati[5] = dati[5] - danno
+                    nmos = 0
+                    if abs(nemico.xObbiettivo - nemico.x) > abs(nemico.yObbiettivo - nemico.y):
+                        if nemico.x < nemico.xObbiettivo:
+                            nmos = 1
+                        if nemico.x > nemico.xObbiettivo:
+                            nmos = 2
+                    if abs(nemico.yObbiettivo - nemico.y) > abs(nemico.xObbiettivo - nemico.x):
+                        if nemico.y < nemico.yObbiettivo:
+                            nmos = 3
+                        if nemico.y > nemico.yObbiettivo:
+                            nmos = 4
+                    if (abs(nemico.xObbiettivo - nemico.x) == abs(nemico.yObbiettivo - nemico.y)) and (nemico.xObbiettivo != nemico.x) and (nemico.yObbiettivo != nemico.y):
+                        c = random.randint(1, 2)
+                        if nemico.x < nemico.xObbiettivo and c == 1:
+                            nmos = 1
+                        if nemico.x > nemico.xObbiettivo and c == 1:
+                            nmos = 2
+                        if nemico.y < nemico.yObbiettivo and c == 2:
+                            nmos = 3
+                        if nemico.y > nemico.yObbiettivo and c == 2:
+                            nmos = 4
+                    attacca = True
+                    sposta = False
     elif vistoDenaro:
         nemico.xObbiettivo = xDenaro
         nemico.yObbiettivo = yDenaro
@@ -370,6 +520,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
 
     # spostamento
     if sposta and not vistoDenaro:
+        # 1=d, 2=a, 3=s, 4=w
         if nmos == 1:
             if nemico.x + gpx == nemico.xObbiettivo and nemico.y == nemico.yObbiettivo:
                 nmx = 0
@@ -1227,6 +1378,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vet
     sposta = False
     # movimento robot
     if chiamarob:
+        azioneEseguita = False
         if abs(rx - x) == gpx and abs(ry - y) == gpy and ((vx == rx + gpx and vy == ry) or (vx == rx - gpx and vy == ry) or (vx == rx and vy == ry + gpy) or (vx == rx and vy == ry - gpy)):
             if vx == rx + gpx and vy == ry:
                 nrob = 1
@@ -1237,6 +1389,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vet
             elif vy == ry - gpy and vx == rx:
                 nrob = 4
             sposta = True
+            azioneEseguita = True
         else:
             vetNemiciSoloConXeY = []
             i = 0
@@ -1257,13 +1410,14 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vet
                         if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                             nrob = 4
                         sposta = True
+                        azioneEseguita = True
     else:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
-        """dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
-        in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
-                   condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemicoCasuale, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
-                   tecniche = intero da 1 a 20: scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++"""
+        # dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
+        # in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
+        #            condizioni = intero da 1 a 20: pvR<80, pvR<50, pvR<30, velenoR, surrisC, peC<80, peC<50, peC<30, sempreR, sempreC, nemicoCasuale, nemicoVicino, nemicoLontano, pvN<80, pvN<50, pvN<30, nemico-pv, numN>1, numN>4, numN>7
+        #            tecniche = intero da 1 a 20: scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++
 
         # controllo se la condizione è rispettata
         azioneEseguita = False
@@ -1911,4 +2065,4 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, vet
 
     # alcuni sono inutili!!!
     rx, ry, stanza, carim, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, False, robo, porte, cofanetti)
-    return rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2
+    return rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2, azioneEseguita

@@ -78,7 +78,7 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
 
 
 def animaAttaccoDifesaRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, guanti, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armaAttacco, arcoAttacco, guantiAttacco, scudoDifesa, guantiDifesa, avvele, attacco, difesa, animazioneRallo, animazione, aumentoliv, attaccoADistanza, fineanimaz):
-    if sposta:
+    if sposta and fineanimaz != 0:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
             if attaccoADistanza:
@@ -344,7 +344,7 @@ def animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz):
     return animazione
 
 
-def animaCofanetto(tesoro, x, y, npers, pers, avvele, armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto):
+def animaAperturaCofanetto(tesoro, x, y, npers, pers, avvele, armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto):
     if tesoro != -1:
         schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
         # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(5) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
@@ -479,26 +479,69 @@ def animaCofanetto(tesoro, x, y, npers, pers, avvele, armatura, arma, scudo, col
     return caricaTutto, tesoro
 
 
-def animaEsche(vitaesca, sfondinoa, sfondinob):
+def animaEsche(vitaesca, caseviste, sfondinoa, sfondinob):
     i = 0
     while i < len(vitaesca):
-        if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
-            schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
-        if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
-            schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
-        schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == vitaesca[i + 2] - gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + gpy)) and caseviste[j + 2]:
+                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
+                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
+                schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                break
+            j += 3
         i += 4
 
 
-def animaDenaro(vettoreDenaro, sfondinoa, sfondinob):
+def animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob):
     i = 0
     while i < len(vettoreDenaro):
-        if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 0:
-            schermo.blit(sfondinoa, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
-        if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 1:
-            schermo.blit(sfondinob, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
-        schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == vettoreDenaro[i + 1] - gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + gpy)) and caseviste[j + 2]:
+                if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                break
+            j += 3
         i += 3
+
+
+def animaCofanetti(cofanetti, caseviste, sfondinoc):
+    # cofanetti[stanza, x, y, True / False, ...]
+    i = 0
+    while i < len(cofanetti):
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == cofanetti[i + 1] - gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + gpy)) and caseviste[j + 2]:
+                schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
+                if cofanetti[i + 3]:
+                    schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
+                else:
+                    schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+                break
+            j += 3
+        i += 4
+
+
+def animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc):
+    # porte[stanza, x, y, True / False, ...]
+    i = 0
+    while i < len(porte):
+        if not porte[i + 3]:
+            vmurx = porte[i + 1]
+            vmury = porte[i + 2]
+            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, gpx, 0, numStanza, False, False, False, porte, cofanetti)
+            schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
+            if vmurx == murx and vmury == mury:
+                schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+            else:
+                schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+        i = i + 4
 
 
 def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, caricaTutto, tastop, fineanimaz):
@@ -532,8 +575,52 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, caricaTutto, tastop, finea
     return caricaTutto, tastop
 
 
-def animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, listaNemici, cambiosta, fineanimaz):
-    # disegno le frecce lanciate
+def disegnaCaselleAccantoAiPersCheAttaccano(x, y, attacco, npers, rx, ry, nrob, listaNemici, schermo_prima_delle_animazioni, cambiosta, fineanimaz):
+    if attacco == 1:
+        global quadrettoSottoLaSpada
+        xAttaccoPers = -gpx
+        yAttaccoPers = -gpy
+        # 1=d, 2=a, 3=w, 4=s
+        if npers == 1:
+            xAttaccoPers = x + gpx
+            yAttaccoPers = y
+        if npers == 2:
+            xAttaccoPers = x - gpx
+            yAttaccoPers = y
+        if npers == 3:
+            xAttaccoPers = x
+            yAttaccoPers = y - gpy
+        if npers == 4:
+            xAttaccoPers = x
+            yAttaccoPers = y + gpy
+        if fineanimaz == 10:
+            quadrettoSottoLaSpada = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoPers, yAttaccoPers, gpx, gpy))
+        else:
+            schermo.blit(quadrettoSottoLaSpada, (xAttaccoPers, yAttaccoPers))
+    for nemico in listaNemici:
+        if nemico.animaAttacco and not cambiosta:
+            xAttaccoNemico = 0
+            yAttaccoNemico = 0
+            if nemico.direzione == "w":
+                xAttaccoNemico = nemico.x
+                yAttaccoNemico = nemico.y - gpy
+            if nemico.direzione == "a":
+                xAttaccoNemico = nemico.x - gpx
+                yAttaccoNemico = nemico.y
+            if nemico.direzione == "s":
+                xAttaccoNemico = nemico.x
+                yAttaccoNemico = nemico.y + gpy
+            if nemico.direzione == "d":
+                xAttaccoNemico = nemico.x + gpx
+                yAttaccoNemico = nemico.y
+            if fineanimaz == 10:
+                nemico.quadrettoSottoArma = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoNemico, yAttaccoNemico, gpx, gpy))
+            else:
+                schermo.blit(nemico.quadrettoSottoArma, (xAttaccoNemico, yAttaccoNemico))
+
+
+def animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, listaNemici, schermo_prima_delle_animazioni, cambiosta, fineanimaz):
+    # disegno le frecce lanciate da Rallo
     if attaccoADistanza and not cambiosta:
         xInizioRetta = x
         xFineRetta = attaccoADistanza.vx
@@ -574,7 +661,7 @@ def animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, 
                     schermo.blit(nemico.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, guantiS, collanaS, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza):
     animazione = False
     animazioneRallo = False
     schermo_prima_delle_animazioni = schermo.copy()
@@ -609,37 +696,19 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
                         schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
                         schermo.blit(sfondinob, (nemico.x, nemico.y))
-                    if nemico.animaAttacco:
-                        if nemico.direzione == "w":
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
-                                schermo.blit(sfondinob, (nemico.x, nemico.y - gpy))
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
-                                schermo.blit(sfondinoa, (nemico.x, nemico.y - gpy))
-                        if nemico.direzione == "a":
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
-                                schermo.blit(sfondinob, (nemico.x - gpx, nemico.y))
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
-                                schermo.blit(sfondinoa, (nemico.x - gpx, nemico.y))
-                        if nemico.direzione == "s":
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
-                                schermo.blit(sfondinob, (nemico.x, nemico.y + gpy))
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
-                                schermo.blit(sfondinoa, (nemico.x, nemico.y + gpy))
-                        if nemico.direzione == "d":
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
-                                schermo.blit(sfondinob, (nemico.x + gpx, nemico.y))
-                            if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
-                                schermo.blit(sfondinoa, (nemico.x + gpx, nemico.y))
 
         # disegno le esche e il denaro
-        animaEsche(vitaesca, sfondinoa, sfondinob)
-        animaDenaro(vettoreDenaro, sfondinoa, sfondinob)
+        animaEsche(vitaesca, caseviste, sfondinoa, sfondinob)
+        animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob)
+        animaCofanetti(cofanetti, caseviste, sfondinoc)
+        animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc)
 
         if fineanimaz == 10:
             schermo_prima_delle_animazioni = schermo.copy()
 
         # animazioni di tutte le frecce lanciate nel turno
-        animaFrecceLanciate(x, y, attaccoADistanza, schermo_prima_delle_animazioni, listaNemici, cambiosta, fineanimaz)
+        disegnaCaselleAccantoAiPersCheAttaccano(x, y, attacco, npers, rx, ry, nrob, listaNemici, schermo_prima_delle_animazioni, cambiosta, fineanimaz)
+        animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, listaNemici, schermo_prima_delle_animazioni, cambiosta, fineanimaz)
 
         # animazione camminata robo
         animazione = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, dati[122], cambiosta, animazione, robot, fineanimaz)
@@ -661,7 +730,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         animazione = animaDanneggiamentoNemici(listaNemici, animazione, cambiosta, fineanimaz)
 
         # animazione apertura cofanetto
-        caricaTutto, tesoro = animaCofanetto(tesoro, x, y, npers, pers, dati[121], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto)
+        caricaTutto, tesoro = animaAperturaCofanetto(tesoro, x, y, npers, pers, dati[121], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, caricaTutto)
 
         # animazione aumento di livello
         animazioneRallo, caricaTutto, tastop = animaLvUp(npers, x, y, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[4], aumentoliv, carim, animazioneRallo, caricaTutto, tastop, fineanimaz)
@@ -672,11 +741,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         # disegna Rallo se ci sono animazioni ma non di Rallo
         animaRalloFermo(x, y, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, dati[121], animazioneRallo)
 
-        fineanimaz -= 1
         pygame.event.pump()
-        if (animazione or animazioneRallo) and fineanimaz > -1:
+        if (animazione or animazioneRallo) and fineanimaz > 0:
             pygame.display.update()
             clockAnimazioni.tick(fpsAnimazioni)
-            #print (clockAnimazioni.get_fps())
+            # print (clockAnimazioni.get_fps())
+        fineanimaz -= 1
 
     return primopasso, caricaTutto, tesoro, tastop

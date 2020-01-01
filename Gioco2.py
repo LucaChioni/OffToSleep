@@ -492,6 +492,7 @@ def gameloop():
             tastotemp -= 1
             nx = 0
             ny = 0
+            sposta = False
         if primopas and tastotemp == 0:
             if tastop == pygame.K_w:
                 ny = -gpy
@@ -716,12 +717,14 @@ def gameloop():
         inizio = controllaMorteRallo(dati[5], inizio)
         morterob, dati, mosseRimasteRob = controllaMorteColco(dati, mosseRimasteRob)
 
-        # movimento-azioni personaggio
+        # controllo se ci sono nemici in movimento per decidere se fare animazioni o no
         nemiciInMovimento = False
         for nemico in listaNemici:
             if nemico.mosseRimaste > 0:
                 nemiciInMovimento = True
                 break
+
+        # movimento-azioni personaggio
         if (nx != 0 or ny != 0) and not nemiciInMovimento and mosseRimasteRob <= 0:
             vx = x
             vy = y
@@ -877,6 +880,29 @@ def gameloop():
                         j = j + 4
                 k = k + 4
             apriChiudiPorta = [False, 0, 0]
+            # controllo se devo deselezionare il nemico / esca / colco inquadrato
+            vettoreVuoto = []
+            # vita colco selezionato
+            if nemicoInquadrato == "Colco":
+                raggiungibile = pathFinding(x, y, rx, ry, numstanza, porte, cofanetti, vettoreVuoto)
+                if not raggiungibile:
+                    nemicoInquadrato = False
+            # vita nemico selezionato
+            elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+                raggiungibile = pathFinding(x, y, nemicoInquadrato.x, nemicoInquadrato.y, numstanza, porte, cofanetti, vettoreVuoto)
+                if not raggiungibile:
+                    nemicoInquadrato = False
+            # vita esche selezionate
+            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+                idEscaInquadrata = int(nemicoInquadrato[4:])
+                i = 0
+                while i < len(vitaesca):
+                    if idEscaInquadrata == vitaesca[i]:
+                        raggiungibile = pathFinding(x, y, vitaesca[i + 2], vitaesca[i + 3], numstanza, porte, cofanetti, vettoreVuoto)
+                        if not raggiungibile:
+                            nemicoInquadrato = False
+                        break
+                    i += 4
         # apertura cofanetti
         if apriCofanetto[0]:
             i = 0
@@ -944,6 +970,7 @@ def gameloop():
             i = i + 4
 
         # movimento-azioni robo
+        azioneRobEseguita = False
         if dati[122] > 0:
             # se surriscaldato toglie vel+ e efficienza
             dati[125] = 0
@@ -992,7 +1019,7 @@ def gameloop():
                     vetDatiNemici.append(2)
                 elif nemico.avvelenato and nemico.appiccicato:
                     vetDatiNemici.append(3)
-            rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2 = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa)
+            rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa)
             i = 0
             for nemico in listaNemici:
                 if nemico.vita != vetDatiNemici[i]:
@@ -1036,6 +1063,7 @@ def gameloop():
                 rx = vrx
                 ry = vry
                 nrob = 0
+                azioneRobEseguita = False
             if nrob != 0:
                 if nrob == 1:
                     robot = robod
@@ -1165,7 +1193,9 @@ def gameloop():
         if not inizio:
             if caricaTutto:
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
-            primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza)
+                caricaTutto = False
+            if azioneRobEseguita or nemiciInMovimento or sposta:
+                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza)
             if not carim:
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
 

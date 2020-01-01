@@ -65,6 +65,7 @@ class NemicoObj(object):
         self.denaro = denaro
         self.difesa = difesa
         self.quadrettoSottoOggettoLanciato = 0
+        self.quadrettoSottoArma = 0
 
         self.caricaImg()
         self.girati(direzione)

@@ -34,6 +34,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                         schermo.blit(cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
                     else:
                         schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+                    break
                 j = j + 3
             i = i + 4
         # disegno le caselle viste
@@ -83,13 +84,31 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     # esche: id, vita, xesca, yesca
     i = 0
     while i < len(vitaesca):
-        schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
-        i = i + 4
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == vitaesca[i + 2] - gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + gpy)) and caseviste[j + 2]:
+                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
+                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
+                schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                break
+            j += 3
+        i += 4
 
     # denaro: qta, x, y
     i = 0
     while i < len(vettoreDenaro):
-        schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == vettoreDenaro[i + 1] - gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + gpy)) and caseviste[j + 2]:
+                if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                break
+            j += 3
         i += 3
 
     # robo
@@ -898,13 +917,31 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         # esche: id, vita, xesca, yesca
         i = 0
         while i < len(vitaesca):
-            schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
-            i = i + 4
+            j = 0
+            while j < len(caseviste):
+                if ((caseviste[j] == vitaesca[i + 2] - gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + gpy)) and caseviste[j + 2]:
+                    if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
+                        schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
+                    if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
+                        schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
+                    schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                    break
+                j += 3
+            i += 4
 
         # denaro: qta, x, y
         i = 0
         while i < len(vettoreDenaro):
-            schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+            j = 0
+            while j < len(caseviste):
+                if ((caseviste[j] == vettoreDenaro[i + 1] - gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + gpy)) and caseviste[j + 2]:
+                    if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 0:
+                        schermo.blit(sfondinoa, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                    if ((vettoreDenaro[i + 1] / gpx) + (vettoreDenaro[i + 2] / gpy)) % 2 == 1:
+                        schermo.blit(sfondinob, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                    schermo.blit(sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                    break
+                j += 3
             i += 3
 
         # robo
