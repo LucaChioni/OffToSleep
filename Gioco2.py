@@ -29,8 +29,6 @@ def gameloop():
             sposta = False
             nmost = 0
             agg = 0
-            primopas = False
-            tastotemp = 10
             tastop = 0
             startf = False
             aumentoliv = False
@@ -198,7 +196,6 @@ def gameloop():
                 # fermare la camminata dopo il cambio stanza
                 nx = 0
                 ny = 0
-                primopas = False
                 tastop = 0
 
                 # carica i cofanetti nella stanza (svuoto e riempio il vettore)
@@ -466,7 +463,6 @@ def gameloop():
 
             caricaTutto = True
             carim = False
-            tastotemp = 10
 
         if inizio:
             arma = armas
@@ -486,24 +482,6 @@ def gameloop():
             robot = robos
             armrob = armrobs
             inizio = False
-
-        # controllo primo passo
-        if primopas and tastotemp != 0:
-            tastotemp -= 1
-            nx = 0
-            ny = 0
-            sposta = False
-        if primopas and tastotemp == 0:
-            if tastop == pygame.K_w:
-                ny = -gpy
-            if tastop == pygame.K_a:
-                nx = -gpx
-            if tastop == pygame.K_s:
-                ny = gpy
-            if tastop == pygame.K_d:
-                nx = gpx
-            primopas = False
-            tastotemp = 10
         if tastop == 0:
             nx = 0
             ny = 0
@@ -539,7 +517,6 @@ def gameloop():
                     collana = collanaw
                     ny = -gpy
                     nx = 0
-                    primopas = True
                 if event.key == pygame.K_a and not tastoTrovato:
                     tastoTrovato = True
                     npers = 2
@@ -560,7 +537,6 @@ def gameloop():
                     collana = collanaa
                     nx = -gpx
                     ny = 0
-                    primopas = True
                 if event.key == pygame.K_s and not tastoTrovato:
                     tastoTrovato = True
                     npers = 4
@@ -581,7 +557,6 @@ def gameloop():
                     collana = collanas
                     ny = gpy
                     nx = 0
-                    primopas = True
                 if event.key == pygame.K_d and not tastoTrovato:
                     tastoTrovato = True
                     npers = 1
@@ -602,7 +577,6 @@ def gameloop():
                     collana = collanad
                     nx = gpx
                     ny = 0
-                    primopas = True
 
                 nemiciInMovimento = False
                 for nemico in listaNemici:
@@ -685,8 +659,6 @@ def gameloop():
                     canaleSoundPassiRallo.stop()
                     nx = 0
                     ny = 0
-                    primopas = False
-                    tastotemp = 10
                     tastop = 0
 
         impossibileCliccarePulsanti = False
@@ -1196,6 +1168,8 @@ def gameloop():
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
                 primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza)
+            elif not sposta:
+                canaleSoundPassiRallo.stop()
             if not carim:
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
 
@@ -1212,8 +1186,9 @@ def gameloop():
             nemico.animaAttacco = False
             nemico.animaMorte = False
             nemico.animaDanneggiamento = False
-            if nemico.morto:
+            if not type(nemicoInquadrato) is str and nemicoInquadrato and nemicoInquadrato.morto:
                 nemicoInquadrato = False
+            if nemico.morto:
                 caricaTutto = True
                 listaNemici.remove(nemico)
                 listaNemiciTotali.remove(nemico)
