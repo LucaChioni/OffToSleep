@@ -337,6 +337,8 @@ while contatoreGlobale <= 10:
     vetIcoOggettiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale), (gpx, gpy)))
     contatoreGlobale += 1
 
+fdsa = 0
+
 # img equipaggiamento pixellato
 vetImgSpadePixellate = []
 vetImgArchiPixellate = []

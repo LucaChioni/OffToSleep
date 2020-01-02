@@ -17,6 +17,10 @@ class NemicoObj(object):
         self.morto = False
         self.xObbiettivo = False
         self.yObbiettivo = False
+        self.xPosizioneUltimoBersaglio = False
+        self.yPosizioneUltimoBersaglio = False
+        self.quadrettoSottoOggettoLanciato = 0
+        self.quadrettoSottoArma = 0
 
         self.tipo = tipo
         vitaTotale = 0
@@ -39,7 +43,7 @@ class NemicoObj(object):
             denaro = random.randint(3, 7)
             difesa = 2
         if self.tipo == "Pipistrello":
-            vitaTotale = 2000
+            vitaTotale = 20
             esp = 5
             raggioVisivo = gpx * 6
             velocita = 1
@@ -64,8 +68,6 @@ class NemicoObj(object):
         self.velenoso = velenoso
         self.denaro = denaro
         self.difesa = difesa
-        self.quadrettoSottoOggettoLanciato = 0
-        self.quadrettoSottoArma = 0
 
         self.caricaImg()
         self.girati(direzione)
@@ -174,8 +176,6 @@ class NemicoObj(object):
                         vistoRob = True
                     break
                 j = j + 3
-            if dati[10] <= 0:
-                vistoRob = False
         if vistoRallo or vistoRob:
             self.visto = True
         else:
@@ -200,3 +200,119 @@ class NemicoObj(object):
                 self.mosseRimaste -= 1
             elif self.velocita < 0:
                 self.mosseRimaste = self.mosseRimaste - 1 + self.velocita
+
+
+    def settaObbiettivo(self, x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, attaccoADistanzaRobo):
+        vistoRallo = False
+        vistoRob = False
+        vistoesca = False
+        escabersaglio = 0
+        vistoDenaro = False
+        xDenaro = 0
+        yDenaro = 0
+
+        caseattactot = trovacasattaccabili(self.x, self.y, stanza, porte, cofanetti, self.raggioVisivo)
+
+        distminx = 0
+        distminy = 0
+        primoSacchetto = True
+        i = 0
+        while i < len(vettoreDenaro):
+            j = 0
+            while j < len(caseattactot):
+                if caseattactot[j] == vettoreDenaro[i + 1] and caseattactot[j + 1] == vettoreDenaro[i + 2] and caseattactot[j + 2] and not (x == vettoreDenaro[i + 1] and y == vettoreDenaro[i + 2]) and not (rx == vettoreDenaro[i + 1] and ry == vettoreDenaro[i + 2]):
+                    if primoSacchetto:
+                        distminx = vettoreDenaro[i + 1]
+                        distminy = vettoreDenaro[i + 2]
+                        xDenaro = distminx
+                        yDenaro = distminy
+                        vistoDenaro = True
+                        primoSacchetto = False
+                    elif abs(vettoreDenaro[i + 1] - self.x) + abs(vettoreDenaro[i + 2] - self.y) < abs(distminx - self.x) + abs(distminy - self.y):
+                        distminx = vettoreDenaro[i + 1]
+                        distminy = vettoreDenaro[i + 2]
+                        xDenaro = distminx
+                        yDenaro = distminy
+                    break
+                j += 3
+            i += 3
+        primaesca = True
+        i = 0
+        while i < len(vitaesca):
+            j = 0
+            while j < len(caseattactot):
+                if caseattactot[j] == vitaesca[i + 2] and caseattactot[j + 1] == vitaesca[i + 3] and caseattactot[j + 2]:
+                    if primaesca:
+                        distminx = vitaesca[i + 2]
+                        distminy = vitaesca[i + 3]
+                        escabersaglio = i
+                        vistoesca = True
+                        primaesca = False
+                    elif abs(vitaesca[i + 2] - self.x) + abs(vitaesca[i + 3] - self.y) < abs(
+                            distminx - self.x) + abs(distminy - self.y):
+                        distminx = vitaesca[i + 2]
+                        distminy = vitaesca[i + 3]
+                        escabersaglio = i
+                    break
+                j += 3
+            i += 4
+        if not vistoesca:
+            # controllo caselle che si vedono (per controllare se si vedono pers o robo)
+            if abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
+                j = 0
+                while j < len(caseattactot):
+                    if caseattactot[j] == x and caseattactot[j + 1] == y:
+                        if not caseattactot[j + 2]:
+                            vistoRallo = False
+                        else:
+                            vistoRallo = True
+                        break
+                    j = j + 3
+            if abs(rx - self.x) <= self.raggioVisivo and abs(ry - self.y) <= self.raggioVisivo and dati[10] > 0:
+                j = 0
+                while j < len(caseattactot):
+                    if caseattactot[j] == rx and caseattactot[j + 1] == ry:
+                        if not caseattactot[j + 2]:
+                            vistoRob = False
+                        else:
+                            vistoRob = True
+                        break
+                    j = j + 3
+                if dati[10] <= 0:
+                    vistoRob = False
+
+        self.xObbiettivo = False
+        self.yObbiettivo = False
+        if vistoRallo or vistoRob or vistoesca:
+            self.xObbiettivo = x
+            self.yObbiettivo = y
+            if ((abs(rx - self.x) + abs(ry - self.y)) < (abs(x - self.x) + abs(y - self.y)) or not vistoRallo) and vistoRob and dati[10] > 0 and not vistoesca:
+                self.xObbiettivo = rx
+                self.yObbiettivo = ry
+                attrobo = True
+            if vistoDenaro and (abs(xDenaro - self.x) + abs(yDenaro - self.y)) <= (abs(self.xObbiettivo - self.x) + abs(self.yObbiettivo - self.y)):
+                self.xObbiettivo = xDenaro
+                self.yObbiettivo = yDenaro
+            if vistoesca:
+                self.xObbiettivo = vitaesca[escabersaglio + 2]
+                self.yObbiettivo = vitaesca[escabersaglio + 3]
+
+        if self.xObbiettivo and self.yObbiettivo:
+            self.xPosizioneUltimoBersaglio = self.xObbiettivo
+            self.yPosizioneUltimoBersaglio = self.yObbiettivo
+        elif self.x == self.xPosizioneUltimoBersaglio and self.y == self.yPosizioneUltimoBersaglio:
+            self.xPosizioneUltimoBersaglio = False
+            self.yPosizioneUltimoBersaglio = False
+
+        if not self.xObbiettivo and not self.yObbiettivo:
+            if self == attaccoADistanza:
+                self.xPosizioneUltimoBersaglio = x
+                self.yPosizioneUltimoBersaglio = y
+            elif attaccoADistanzaRobo:
+                for nemico in attaccoADistanzaRobo:
+                    if self == nemico:
+                        self.xPosizioneUltimoBersaglio = rx
+                        self.yPosizioneUltimoBersaglio = ry
+                        break
+
+        return vistoRallo, vistoRob, vistoesca, escabersaglio, vistoDenaro, xDenaro, yDenaro
