@@ -810,6 +810,29 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             ricaricaschermo = False
             appenaCaricato = True
 
+        # disegno le caselle attaccabili
+        i = 0
+        while i < len(caseattactot):
+            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
+            i = i + 3
+        # visualizza campo attaccabile se sto usando un oggetto
+        if attacco == 2:
+            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
+            schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
+        if attacco == 3:
+            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
+            schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
+        if attacco == 4:
+            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
+            schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
+        if attacco == 5:
+            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
+            schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
+        if attacco == 6:
+            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 9, gpy * 9))
+            schermo.blit(campoattaccabile3, (x - (gpx * 4), y - (gpy * 4)))
+
         # disegna porte
         i = 0
         while i < len(porte):
@@ -840,43 +863,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         schermo.blit(cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
                 j = j + 3
             i = i + 4
-
-        # disegno le caselle attaccabili
-        i = 0
-        while i < len(caseattactot):
-            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
-                cofanettoOPorta = False
-                j = 0
-                while j < len(cofanetti):
-                    if cofanetti[j + 1] == caseattactot[i] and cofanetti[j + 2] == caseattactot[i + 1]:
-                        cofanettoOPorta = True
-                        break
-                    j += 4
-                j = 0
-                while j < len(porte):
-                    if porte[j + 1] == caseattactot[i] and porte[j + 2] == caseattactot[i + 1]:
-                        cofanettoOPorta = True
-                        break
-                    j += 4
-                if not cofanettoOPorta:
-                    schermo.blit(caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-            i = i + 3
-        # visualizza campo attaccabile se sto usando un oggetto
-        if attacco == 2:
-            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
-            schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
-        if attacco == 3:
-            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
-            schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
-        if attacco == 4:
-            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 13, gpy * 13))
-            schermo.blit(campoattaccabile3, (x - (gpx * 6), y - (gpy * 6)))
-        if attacco == 5:
-            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 11, gpy * 11))
-            schermo.blit(campoattaccabile3, (x - (gpx * 5), y - (gpy * 5)))
-        if attacco == 6:
-            campoattaccabile3 = pygame.transform.scale(campoattaccabile2, (gpx * 9, gpy * 9))
-            schermo.blit(campoattaccabile3, (x - (gpx * 4), y - (gpy * 4)))
 
         # mettere il puntatore su porte
         i = 0
@@ -1383,7 +1369,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             schermo.blit(indvitamost, (gpx, 0))
             schermo.blit(vitanemsucc, (gpx, 0))
             schermo.blit(vitanem, (gpx, 0))
-        # vita esche selezionate
+        # vita esca selezionata
         elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and not puntandoSuUnNemicoOColcoOEsca:
             idEscaInquadrata = int(nemicoInquadrato[4:])
             i = 0

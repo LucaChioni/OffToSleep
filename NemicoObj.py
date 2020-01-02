@@ -39,7 +39,7 @@ class NemicoObj(object):
             denaro = random.randint(3, 7)
             difesa = 2
         if self.tipo == "Pipistrello":
-            vitaTotale = 20
+            vitaTotale = 2000
             esp = 5
             raggioVisivo = gpx * 6
             velocita = 1
