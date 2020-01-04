@@ -38,9 +38,11 @@ pygame.display.set_icon(icona)
 clockAttacco = pygame.time.Clock()
 clockAnimazioni = pygame.time.Clock()
 clockVideo = pygame.time.Clock()
+clockMenu = pygame.time.Clock()
 fpsAnimazioni = 30
 fpsInquadra = 20
 fpsVideo = 12
+fpsMenu = 20
 
 # colori
 nero = (0, 0, 0)
@@ -356,7 +358,7 @@ while contatoreGlobale < 5:
 
 # canali / volume (0-1)
 volumeCanzoni = 0
-volumePuntatore = 0
+volumePuntatore = 1
 volumeEffetti = 1
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)

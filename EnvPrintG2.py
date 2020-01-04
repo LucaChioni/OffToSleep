@@ -413,7 +413,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     if attacco == 6:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, gpx * 4)
 
-    tastotempfps = 3
+    tastotempfps = 2
     tastop = 0
     numTastiPremuti = 0
     danno = 0
