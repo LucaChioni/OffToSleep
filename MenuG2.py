@@ -67,14 +67,12 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 errore = False
                 if len(dati) != lunghezzadati:
                     errore = True
-                i = 0
-                while i < len(dati):
-                    try:
-                        dati[i] = int(dati[i])
-                    except ValueError:
-                        errore = True
-                        break
-                    i += 1
+                else:
+                    for i in range(0, len(dati)):
+                        try:
+                            dati[i] = int(dati[i])
+                        except ValueError:
+                            errore = True
                 if contasalva == 1:
                     if not errore:
                         persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
@@ -269,11 +267,12 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                     errore = False
                     if len(dati) != lunghezzadati:
                         errore = True
-                    for i in range(0, len(dati)):
-                        try:
-                            dati[i] = int(dati[i])
-                        except ValueError:
-                            errore = True
+                    else:
+                        for i in range(0, len(dati)):
+                            try:
+                                dati[i] = int(dati[i])
+                            except ValueError:
+                                errore = True
                     if contasalva == 1:
                         if not errore:
                             persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
@@ -502,7 +501,9 @@ def menu():
                                                 indietro = True
                             else:
                                 errore = False
-                                if len(dati) == lunghezzadati:
+                                if len(dati) != lunghezzadati:
+                                    errore = True
+                                else:
                                     for i in range(0, len(dati)):
                                         try:
                                             dati[i] = int(dati[i])
@@ -2693,7 +2694,7 @@ def sceglitecn(dati, tecnica, canzone):
                 schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 4))
                 messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                 messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"Recupera un enorme quantità dei pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
@@ -3058,7 +3059,7 @@ def sceglitecn(dati, tecnica, canzone):
                     schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 4))
                     messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Recupera un enorme parte dei tuoi pv", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio(u"Recupera un enorme quantità dei pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
                     messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:

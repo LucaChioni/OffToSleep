@@ -337,8 +337,6 @@ while contatoreGlobale <= 10:
     vetIcoOggettiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale), (gpx, gpy)))
     contatoreGlobale += 1
 
-fdsa = 0
-
 # img equipaggiamento pixellato
 vetImgSpadePixellate = []
 vetImgArchiPixellate = []
@@ -357,8 +355,8 @@ while contatoreGlobale < 5:
     contatoreGlobale += 1
 
 # canali / volume (0-1)
-volumeCanzoni = 1
-volumePuntatore = 1
+volumeCanzoni = 0
+volumePuntatore = 0
 volumeEffetti = 1
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)

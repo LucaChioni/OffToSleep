@@ -15,6 +15,9 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            raffreddamento = False
+            ricarica1 = False
+            ricarica2 = False
             nemicoInquadrato = False
             raffredda = -1
             autoRic1 = -1
@@ -483,6 +486,7 @@ def gameloop():
             inizio = False
 
         if tastop == 0:
+            canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
 
@@ -716,6 +720,7 @@ def gameloop():
         attaccoADistanza = False
         if attacco != 0:
             sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato)
+            tastop = 0
             # tolgo una freccia se uso l'attacco a distanza
             if attaccoADistanza:
                 dati[132] -= 1
@@ -952,79 +957,63 @@ def gameloop():
                 mosseRimasteRob = 2
             else:
                 mosseRimasteRob = 1
-        attaccoADistanzaRobo = False
-        if mosseRimasteRob > 0 and not morterob and not cambiosta:
-            vrx = rx
-            vry = ry
-
+        # effetto di surriscalda / raffreddamento / auto-ricarica / auto-ricarica+
+        if sposta:
             # surriscalda
             if dati[122] > 0:
                 dati[122] = dati[122] - 1
                 dati[10] = dati[10] - 3
-
             # efficienza
             if dati[126] > 0:
-                if dati[125] > 0:
-                    if mosseRimasteRob == 1:
-                        dati[126] -= 1
-                else:
-                    dati[126] -= 1
-
+                dati[126] -= 1
             # vel+
             if dati[125] > 0:
-                if mosseRimasteRob == 1:
-                    dati[125] -= 1
+                dati[125] -= 1
                 if dati[125] == 0:
                     dati[122] = 10
+            # raffred
+            if raffredda >= 0:
+                raffreddamento = False
+                raffredda -= 1
+            if raffredda == 0:
+                dati[122] = 0
+            # autoric
+            if autoRic1 >= 0:
+                ricarica1 = False
+                autoRic1 -= 1
+            if autoRic1 == 0:
+                dati[10] += dannoTecniche[6]
+                if dati[10] > entot:
+                    dati[10] = entot
+                dati[122] = 10
+            # autoric+
+            if autoRic2 >= 0:
+                ricarica2 = False
+                autoRic2 -= 1
+            if autoRic2 == 0:
+                dati[10] += dannoTecniche[16]
+                if dati[10] > entot:
+                    dati[10] = entot
+                dati[122] = 10
+        attaccoADistanzaRobo = False
+        tecnicaUsata = False
+        if mosseRimasteRob > 0 and not morterob and not cambiosta:
+            vrx = rx
+            vry = ry
 
             # movimento - gambit
-            vetDatiNemici = []
-            for nemico in listaNemici:
-                vetDatiNemici.append(nemico.vita)
-                vetDatiNemici.append(nemico.x)
-                vetDatiNemici.append(nemico.y)
-                vetDatiNemici.append(nemico.vitaTotale)
-                if not nemico.avvelenato and not nemico.appiccicato:
-                    vetDatiNemici.append(0)
-                elif nemico.avvelenato and not nemico.appiccicato:
-                    vetDatiNemici.append(1)
-                elif not nemico.avvelenato and nemico.appiccicato:
-                    vetDatiNemici.append(2)
-                elif nemico.avvelenato and nemico.appiccicato:
-                    vetDatiNemici.append(3)
-            rx, ry, nrob, dati, vetDatiNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, attaccoADistanzaRobo = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, vetDatiNemici, nmost, difesa)
-            i = 0
-            for nemico in listaNemici:
-                if nemico.vita != vetDatiNemici[i]:
-                    nemico.danneggia(nemico.vita - vetDatiNemici[i], "Colco")
-                statom = vetDatiNemici[i + 4]
-                if statom == 0:
-                    nemico.avvelenato = False
-                    nemico.appiccicato = False
-                elif statom == 1:
-                    nemico.avvelenato = True
-                    nemico.appiccicato = False
-                elif statom == 2:
-                    nemico.avvelenato = False
-                    nemico.appiccicato = True
-                elif statom == 3:
-                    nemico.avvelenato = True
-                    nemico.appiccicato = True
-                i += 5
+            if raffredda < 0 and autoRic1 < 0 and autoRic2 < 0:
+                rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, attaccoADistanzaRobo, tecnicaUsata = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa)
 
-            if dati[122] > 0:
+            if dati[122] > 0 or raffreddamento or ricarica1 or ricarica2:
                 mosseRimasteRob -= 2
             else:
                 mosseRimasteRob -= 1
-
             if raffreddamento:
-                mosseRimasteRob = -1
                 raffredda = 1
             if ricarica1:
-                mosseRimasteRob = -1
                 autoRic1 = 1
             if ricarica2:
-                mosseRimasteRob = -1
                 autoRic2 = 1
 
             sovrapposto = False
@@ -1052,28 +1041,6 @@ def gameloop():
                     armrob = armrobw
         elif sposta and mosseRimasteRob < 0 and not morterob:
             mosseRimasteRob += 1
-        # effetto di raffreddamento / auto-ricarica / auto-ricarica+
-        if mosseRimasteRob >= 0:
-            if raffredda == 0:
-                dati[122] = 0
-            if raffredda >= 0:
-                raffredda -= 1
-
-            if autoRic1 == 0:
-                dati[10] += dannoTecniche[6]
-                if dati[10] > entot:
-                    dati[10] = entot
-                dati[122] = 10
-            if autoRic1 >= 0:
-                autoRic1 -= 1
-
-            if autoRic2 == 0:
-                dati[10] += dannoTecniche[16]
-                if dati[10] > entot:
-                    dati[10] = entot
-                dati[122] = 10
-            if autoRic2 >= 0:
-                autoRic2 -= 1
         if morterob:
             robot = robomo
             armrob = armrobmo
@@ -1170,7 +1137,7 @@ def gameloop():
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, attaccoADistanzaRobo)
+                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, attaccoADistanzaRobo, tecnicaUsata)
             if not carim:
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
 
@@ -1189,8 +1156,8 @@ def gameloop():
             nemico.animaDanneggiamento = False
             if not type(nemicoInquadrato) is str and nemicoInquadrato and nemicoInquadrato.morto:
                 nemicoInquadrato = False
-            if nemico.morto:
                 caricaTutto = True
+            if nemico.morto:
                 listaNemici.remove(nemico)
                 listaNemiciTotali.remove(nemico)
             i -= 1

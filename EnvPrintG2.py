@@ -1217,16 +1217,16 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             puntandoSuUnNemicoOColcoOEsca = True
             if enrob > 0:
                 # controllo caselle attaccabili
-                raggiovista = gpx * 6
-                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
+                vistaRobo = gpx * 8
+                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
                     if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
                         schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
                     i = i + 3
-                campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
-                schermo.blit(campoattaccabile3, (rx - raggiovista, ry - raggiovista))
+                campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((vistaRobo * 2) + gpx, (vistaRobo * 2) + gpy))
+                schermo.blit(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
                 ricaricaschermo = True
             lungentot = int(((gpx * entot) / float(4)) // 15)
             lungen = int(((gpx * enrob) / float(4)) // 15)
@@ -1251,16 +1251,16 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca:
             if enrob > 0:
                 # controllo caselle attaccabili
-                raggiovista = gpx * 6
-                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, raggiovista)
+                vistaRobo = gpx * 8
+                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
                     if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
                         schermo.blit(caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
                     i = i + 3
-                campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((raggiovista * 2) + gpx, (raggiovista * 2) + gpy))
-                schermo.blit(campoattaccabile3, (rx - raggiovista, ry - raggiovista))
+                campoattaccabile3 = pygame.transform.scale(campoattaccabileRobo, ((vistaRobo * 2) + gpx, (vistaRobo * 2) + gpy))
+                schermo.blit(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
             lungentot = int(((gpx * entot) / float(4)) // 15)
             lungen = int(((gpx * enrob) / float(4)) // 15)
             if lungen < 0:
