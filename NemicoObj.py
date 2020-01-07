@@ -15,12 +15,15 @@ class NemicoObj(object):
         self.visto = False
         self.stanzaDiAppartenenza = stanza
         self.morto = False
+        self.inCasellaVista = False
         self.xObbiettivo = False
         self.yObbiettivo = False
         self.xPosizioneUltimoBersaglio = False
         self.yPosizioneUltimoBersaglio = False
         self.quadrettoSottoOggettoLanciato = 0
         self.quadrettoSottoArma = 0
+        self.ralloParato = False
+        self.bersaglioColpito = []
 
         self.tipo = tipo
         vitaTotale = 0
@@ -63,7 +66,8 @@ class NemicoObj(object):
         self.animaSpostamento = False
         self.animaAttacco = False
         self.animaMorte = False
-        self.animaDanneggiamento = False
+        self.animaDanneggiamento = []
+        self.animazioneFatta = False
         self.direzione = direzione
         self.velenoso = velenoso
         self.denaro = denaro
@@ -116,8 +120,11 @@ class NemicoObj(object):
         if self.attaccaDaLontano:
             imgOggettoLanciato = pygame.image.load("Immagini/Mostri/" + self.tipo + "OggettoLanciato.png")
             self.imgOggettoLanciato = pygame.transform.scale(imgOggettoLanciato, (gpx, gpy))
+            imgDanneggiamentoOggettoLanciato = pygame.image.load("Immagini/Mostri/" + self.tipo + "DanneggiamentoOggettoLanciato.png")
+            self.imgDanneggiamentoOggettoLanciato = pygame.transform.scale(imgDanneggiamentoOggettoLanciato, (gpx, gpy))
         else:
             self.imgOggettoLanciato = 0
+            self.imgDanneggiamentoOggettoLanciato = 0
 
         imgMorte1 = pygame.image.load("Immagini/Mostri/MorteMov1.png")
         self.imgMorte1 = pygame.transform.scale(imgMorte1, (gpx, gpy))
@@ -143,7 +150,8 @@ class NemicoObj(object):
 
 
     def danneggia(self, danno, attaccante):
-        self.animaDanneggiamento = attaccante
+        self.animaDanneggiamento.append(attaccante)
+        self.animaDanneggiamento.append(danno)
         danno -= self.difesa
         if danno < 0:
             danno = 0
@@ -283,6 +291,7 @@ class NemicoObj(object):
 
         self.xObbiettivo = False
         self.yObbiettivo = False
+        attrobo = False
         if vistoRallo or vistoRob or vistoesca:
             self.xObbiettivo = x
             self.yObbiettivo = y
@@ -315,4 +324,4 @@ class NemicoObj(object):
                         self.yPosizioneUltimoBersaglio = ry
                         break
 
-        return vistoRallo, vistoRob, vistoesca, escabersaglio, vistoDenaro, xDenaro, yDenaro
+        return vistoRallo, vistoRob, vistoesca, escabersaglio, vistoDenaro, xDenaro, yDenaro, attrobo

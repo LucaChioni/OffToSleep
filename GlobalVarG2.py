@@ -289,8 +289,6 @@ saliliv1 = pygame.image.load('Immagini/Levelup/Saliliv1.png')
 saliliv1 = pygame.transform.scale(saliliv1, (gpx, gpy))
 saliliv2 = pygame.image.load('Immagini/Levelup/Saliliv2.png')
 saliliv2 = pygame.transform.scale(saliliv2, (gpx, gpy))
-saliliv3 = pygame.image.load('Immagini/Levelup/Saliliv3.png')
-saliliv3 = pygame.transform.scale(saliliv3, (gpx, gpy))
 
 # img equipaggiamento, condizioni, tecniche, oggetti
 sfondoOggettoMenu = pygame.image.load("Immagini/EquipRallo/SfondoOggetto.png")
@@ -388,6 +386,7 @@ selezione = pygame.mixer.Sound("Audio/Rumoripuntatore/Selezione.wav")
 # suoni effetti
 rumoreAttaccoSpada = pygame.mixer.Sound("Audio/Rumoripersonaggio/AttaccoSpada.wav")
 rumoreAttaccoArco = pygame.mixer.Sound("Audio/Rumoripersonaggio/AttaccoArco.wav")
+rumoreParata = pygame.mixer.Sound("Audio/Rumoripersonaggio/ParataConScudo.wav")
 rumorecamminata = pygame.mixer.Sound("Audio/Rumoripersonaggio/Camminata.wav")
 rumorelevelup = pygame.mixer.Sound("Audio/Rumoripersonaggio/Levelup.wav")
 suonoaperturacofanetti = pygame.mixer.Sound("Audio/Rumoriambiente/Aperturaportacofanetti.wav")

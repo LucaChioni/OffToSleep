@@ -16,9 +16,6 @@ def messaggio(msg, colore, x, y, gr):
 
 
 def getStatistiche(dati, difesa=0):
-    """pvtot = 100 + (dati[4] * 5)
-    att = 10 + (dati[4] * 2) + (dati[6] * 10)
-    dif = 10 + (dati[4] * 2) + (dati[8] * 10) + 5 + (dati[7] * 5)"""
     esptot = 1 + pow(dati[4], 2) + (dati[4] * 2)
     pvtot = 50
     if dati[129] == 1:
@@ -1728,21 +1725,10 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
 
 def aperturacofanetto(stanza, cx, cy, dati):
     tesoro = -1
-    # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-80 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
+    # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
     if stanza == 1:
         if cx == gpx * 3 and cy == gpy * 7:
-            c = 0
-            i = 101
-            while i <= 120:
-                if dati[i] == -1:
-                    tesoro = i
-                    break
-                if c == 0:
-                    c = 1
-                    i = i + 10
-                elif c == 1:
-                    c = 0
-                    i = i - 9
+            tesoro = 31
         if cx == gpx * 7 and cy == gpy * 12:
             c = 0
             i = 101
@@ -1756,6 +1742,8 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 elif c == 1:
                     c = 0
                     i = i - 9
+            if tesoro == -1:
+                tesoro = -2
         if cx == gpx * 12 and cy == gpy * 11:
             c = 0
             i = 101
@@ -1769,6 +1757,8 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 elif c == 1:
                     c = 0
                     i = i - 9
+            if tesoro == -1:
+                tesoro = -2
     if stanza == 2:
         if cx == gpx * 3 and cy == gpy * 5:
             c = 0
@@ -1783,25 +1773,31 @@ def aperturacofanetto(stanza, cx, cy, dati):
                 elif c == 1:
                     c = 0
                     i = i - 9
+            if tesoro == -1:
+                tesoro = -2
         if cx == gpx * 5 and cy == gpy * 10:
             tesoro = 11
         if cx == gpx * 10 and cy == gpy * 9:
             tesoro = 81
 
     # assegna oggetto ottenuto
-    if tesoro == 131:
-        dati[tesoro] = ottieniMonete(dati, 50)
-    elif tesoro == 132:
-        dati[tesoro] = ottieniFrecce(dati, 5)
-    elif tesoro != -1:
-        if dati[tesoro] <= -1 and (tesoro >= 31 and tesoro <= 40):
-            dati[tesoro] = dati[tesoro] + 2
+    if tesoro != -1 and tesoro != -2:
+        if tesoro >= 11 and tesoro <= 30:
+            dati, tesoro = ottieniTecnica(dati, tesoro)
+        elif tesoro >= 31 and tesoro <= 40:
+            dati, tesoro = ottieniOggetto(dati, tesoro, 1)
+        elif tesoro >= 41 and tesoro <= 75:
+            dati, tesoro = ottieniArmaBatteria(dati, tesoro)
+        elif tesoro >= 81 and tesoro <= 100:
+            dati, tesoro = ottieniCondizione(dati, tesoro)
+        elif tesoro >= 101 and tesoro <= 120:
+            dati = ottieniCellaDiMemoria(dati, tesoro)
+        elif tesoro == 131:
+            dati[tesoro] = ottieniMonete(dati, 50)
+        elif tesoro == 132:
+            dati[tesoro] = ottieniFrecce(dati, 5)
         else:
-            if tesoro >= 101 and tesoro <= 120:
-                dati[tesoro] = dati[tesoro] + 1
-                dati[tesoro + 10] = dati[tesoro + 10] + 1
-            else:
-                dati[tesoro] = dati[tesoro] + 1
+            tesoro = -2
     return dati, tesoro
 
 
@@ -1992,15 +1988,27 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
     percorsoTrovato = []
 
     impossibileRaggiungere = False
-    if xPartenza == xArrivo and yPartenza == yArrivo:
+    if (xPartenza == xArrivo and yPartenza == yArrivo + gpy) or (xPartenza == xArrivo and yPartenza == yArrivo - gpy) or (xPartenza == xArrivo + gpx and yPartenza == yArrivo) or (xPartenza == xArrivo and yPartenza - gpx == yArrivo):
+        k = 0
+        while k < len(vetnemici):
+            if xArrivo == vetnemici[k] and yArrivo == vetnemici[k + 1]:
+                impossibileRaggiungere = True
+            k += 2
+    if xPartenza == xArrivo and yPartenza == yArrivo and not impossibileRaggiungere:
         percorsoTrovato = "arrivato"
-    else:
+    elif not impossibileRaggiungere:
         # caselle viste da Colco
         arrivato = False
         j = 0
         while j < len(caselleEsplorate):
             valoreCasella += 1
             nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
+            if nx == xArrivo and ny == yArrivo:
+                caselleEsplorate.append(nx)
+                caselleEsplorate.append(ny)
+                caselleEsplorate.append(valoreCasella)
+                arrivato = True
+                break
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2019,10 +2027,13 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            if nx == xArrivo and ny == yArrivo:
-                arrivato = True
-                break
             nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
+            if nx == xArrivo and ny == yArrivo:
+                caselleEsplorate.append(nx)
+                caselleEsplorate.append(ny)
+                caselleEsplorate.append(valoreCasella)
+                arrivato = True
+                break
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2041,10 +2052,13 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            if nx == xArrivo and ny == yArrivo:
-                arrivato = True
-                break
             nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            if nx == xArrivo and ny == yArrivo:
+                caselleEsplorate.append(nx)
+                caselleEsplorate.append(ny)
+                caselleEsplorate.append(valoreCasella)
+                arrivato = True
+                break
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2063,10 +2077,13 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            if nx == xArrivo and ny == yArrivo:
-                arrivato = True
-                break
             nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            if nx == xArrivo and ny == yArrivo:
+                caselleEsplorate.append(nx)
+                caselleEsplorate.append(ny)
+                caselleEsplorate.append(valoreCasella)
+                arrivato = True
+                break
             k = 0
             while k < len(vetnemici):
                 if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2085,9 +2102,6 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            if nx == xArrivo and ny == yArrivo:
-                arrivato = True
-                break
             j += 3
 
         if arrivato:
@@ -2219,6 +2233,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                 while i < len(caselleEsplorate):
                     if caselleEsplorate[i] == xProssimaCasella and caselleEsplorate[i + 1] == yProssimaCasella:
                         j = i
+                        break
                     i += 3
                 if xProssimaCasella == xPartenza and yProssimaCasella == yPartenza:
                     finito = True
@@ -2438,6 +2453,47 @@ def ottieniFrecce(dati, frecceOttenute):
     if FrecceTot > maxFrecce:
         FrecceTot = maxFrecce
     return FrecceTot
+
+
+def ottieniOggetto(dati, numOggetto, qta):
+    if dati[numOggetto] <= -1:
+        dati[numOggetto] += 1
+        dati[numOggetto] += qta
+    elif dati[numOggetto] < 99:
+        dati[numOggetto] += qta
+    else:
+        numOggetto = -2
+    return dati, numOggetto
+
+
+def ottieniCellaDiMemoria(dati, numCella):
+    dati[numCella] += 1
+    dati[numCella + 10] += 1
+    return dati
+
+
+def ottieniTecnica(dati, tecnica):
+    if dati[tecnica] <= 0:
+        dati[tecnica] = 1
+    else:
+        tecnica = -2
+    return dati, tecnica
+
+
+def ottieniArmaBatteria(dati, armaBatteria):
+    if dati[armaBatteria] <= 0:
+        dati[armaBatteria] = 1
+    else:
+        armaBatteria = -2
+    return dati, armaBatteria
+
+
+def ottieniCondizione(dati, condizione):
+    if dati[condizione] <= 0:
+        dati[condizione] = 1
+    else:
+        condizione = -2
+    return dati, condizione
 
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)

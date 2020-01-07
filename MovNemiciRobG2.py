@@ -3,10 +3,9 @@
 from GenericFuncG2 import *
 
 
-def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, porte, cofanetti, vetNemici, vistoRallo, vistoRob, vistoesca, escabersaglio, vistoDenaro, xDenaro, yDenaro):
+def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, porte, cofanetti, vetNemici, vistoRallo, vistoRob, vistoesca, escabersaglio, vistoDenaro, xDenaro, yDenaro, attrobo):
     sposta = False
     attacca = False
-    attrobo = False
     nmos = 0
     nmx = 0
     nmy = 0
@@ -91,24 +90,31 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     if danno < 0:
                         danno = 0
                     print ("attacco vicino", nemico.tipo, "a esca", danno)
+                    nemico.bersaglioColpito.append("Esca")
+                    nemico.bersaglioColpito.append(danno)
                     vitaesca[escabersaglio + 1] = vitaesca[escabersaglio + 1] - danno
                 else:
                     if attrobo:
                         danno = nemico.attacco - difro
                         if danno < 0:
                             danno = 0
+                        nemico.bersaglioColpito.append("Colco")
+                        nemico.bersaglioColpito.append(danno)
                         print ("attacco vicino", nemico.tipo, "a robo", danno)
                         dati[10] = dati[10] - danno
                     else:
                         danno = nemico.attacco - dif
                         if danno < 0:
                             danno = 0
-                        if random.randint(1, 100) <= par and dati[7] > 0:
+                        if random.randint(1, 100) <= par:
                             danno = 0
                             avvelena = False
+                            nemico.ralloParato = True
                             print ("parato:", par)
                         if avvelena and not dati[130] == 1:
                             dati[121] = True
+                        nemico.bersaglioColpito.append("Rallo")
+                        nemico.bersaglioColpito.append(danno)
                         print ("attacco vicino", nemico.tipo, "a rallo", danno)
                         dati[5] = dati[5] - danno
                 nmos = 0
@@ -329,9 +335,10 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                         danno = nemico.attacco - dif
                         if danno < 0:
                             danno = 0
-                        if random.randint(1, 100) <= par and dati[7] > 0:
+                        if random.randint(1, 100) <= par:
                             danno = 0
                             avvelena = False
+                            nemico.ralloParato = True
                             print ("parato:", par)
                         if avvelena and not dati[130] == 1:
                             dati[121] = True
@@ -1304,6 +1311,8 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                             nrob = 4
                         sposta = True
                         azioneEseguita = True
+        if azioneEseguita and sposta:
+            tecnicaUsata = "spostamento"
     else:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
@@ -1521,7 +1530,9 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                 # tecniche = scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++
-                if azioneEseguita and not sposta:
+                if azioneEseguita and sposta:
+                    tecnicaUsata = "spostamento"
+                elif azioneEseguita:
                     if dati[i + 10] == 1:
                         tecnicaUsata = "scossa"
                     if dati[i + 10] == 2:

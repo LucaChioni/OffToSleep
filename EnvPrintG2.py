@@ -134,8 +134,8 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     persbat = pygame.transform.scale(perso, (gpx, gpy))
     schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 17))
     schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 17))
-    schermo.blit(imgNumFrecce, (gsx // 32 * 1.2, gsy // 18 * 17))
-    messaggio("x " + str(numFrecce), grigiochi, gsx // 32 * 1.8, gsy // 18 * 17.2, 40)
+    schermo.blit(imgNumFrecce, (int(gsx // 32 * 1.2), gsy // 18 * 17))
+    messaggio("x " + str(numFrecce), grigiochi, int(gsx // 32 * 1.8), int(gsy // 18 * 17.2), 40)
     if avvele:
         schermo.blit(avvelenato, (gsx // 32 * 3, gsy // 18 * 17))
     if attp > 0:
@@ -1096,8 +1096,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         persbat = pygame.transform.scale(perso, (gpx, gpy))
         schermo.blit(persbat, (gsx // 32 * 0, gsy // 18 * 17))
         schermo.blit(perssb, (gsx // 32 * 0, gsy // 18 * 17))
-        schermo.blit(imgNumFrecce, (gsx // 32 * 1.2, gsy // 18 * 17))
-        messaggio("x " + str(numFrecce), grigiochi, gsx // 32 * 1.8, gsy // 18 * 17.2, 40)
+        schermo.blit(imgNumFrecce, (int(gsx // 32 * 1.2), gsy // 18 * 17))
+        messaggio("x " + str(numFrecce), grigiochi, int(gsx // 32 * 1.8), int(gsy // 18 * 17.2), 40)
         if avvele:
             schermo.blit(avvelenato, (gsx // 32 * 3, gsy // 18 * 17))
         if attp > 0:

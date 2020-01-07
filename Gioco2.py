@@ -1065,13 +1065,13 @@ def gameloop():
                     i += 3
                 if nemico.vita > 0 and incasevista:
                     # trovo l'obbiettivo
-                    nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro = nemico.settaObbiettivo(x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, attaccoADistanzaRobo)
+                    nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo = nemico.settaObbiettivo(x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, attaccoADistanzaRobo)
                     if sposta and nemico.mosseRimaste == 0:
                         nemico.resettaMosseRimaste()
                     if nemico.mosseRimaste > 0:
                         nemico.vx = nemico.x
                         nemico.vy = nemico.y
-                        nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro)
+                        nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo)
                         if direzioneMostro == 1:
                             nemico.girati("d")
                         elif direzioneMostro == 2:
@@ -1085,11 +1085,13 @@ def gameloop():
                             if nemico.x == vetDatiNemici[i + 1] and nemico.y == vetDatiNemici[i + 2]:
                                 nemico.x = nemico.vx
                                 nemico.y = nemico.vy
+                                nemico.animaSpostamento = False
                                 break
                             i += 4
                         if (nemico.x == x and nemico.y == y) or (nemico.x == rx and nemico.y == ry):
                             nemico.x = nemico.vx
                             nemico.y = nemico.vy
+                            nemico.animaSpostamento = False
                         nemico.compiMossa()
                     elif sposta and nemico.mosseRimaste < 0:
                         nemico.mosseRimaste += 1
@@ -1114,22 +1116,21 @@ def gameloop():
             aumentoliv = True
             impossibileCliccarePulsanti = True
 
-        # aggiorna vista dei mostri e metti l'occhio se ti vedono
+        # aggiorna vista dei mostri e metti l'occhio se ti vedono + aggiorna nemico.inCasellaVista
         apriocchio = False
         for nemico in listaNemici:
+            nemico.inCasellaVista = False
+            i = 0
+            while i < len(caseviste):
+                if caseviste[i + 2] and caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
+                    nemico.inCasellaVista = True
+                    break
+                i += 3
             if (abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo):
-                incasevista = False
-                i = 0
-                while i < len(caseviste):
-                    if caseviste[i + 2] and caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
-                        incasevista = True
-                        break
-                    i += 3
-                if nemico.vita > 0 and incasevista:
+                if nemico.vita > 0 and nemico.inCasellaVista:
                     nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, dati)
                     if nemico.visto:
                         apriocchio = True
-                        break
 
         # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
         if not inizio:
@@ -1137,7 +1138,7 @@ def gameloop():
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, guantis, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, attaccoADistanzaRobo, tecnicaUsata)
+                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, attaccoADistanzaRobo, tecnicaUsata, nemicoInquadrato)
             if not carim:
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
 
@@ -1153,7 +1154,9 @@ def gameloop():
             nemico.animaSpostamento = False
             nemico.animaAttacco = False
             nemico.animaMorte = False
-            nemico.animaDanneggiamento = False
+            nemico.animaDanneggiamento = []
+            nemico.bersaglioColpito = []
+            nemico.ralloParato = False
             if not type(nemicoInquadrato) is str and nemicoInquadrato and nemicoInquadrato.morto:
                 nemicoInquadrato = False
                 caricaTutto = True
