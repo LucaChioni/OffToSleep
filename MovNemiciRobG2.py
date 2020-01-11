@@ -10,6 +10,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     nmx = 0
     nmy = 0
     avvelena = nemico.velenoso
+    surriscalda = nemico.surriscaldante
 
     # burocrazia
     carim = False
@@ -90,8 +91,9 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     if danno < 0:
                         danno = 0
                     print ("attacco vicino", nemico.tipo, "a esca", danno)
-                    nemico.bersaglioColpito.append("Esca")
-                    nemico.bersaglioColpito.append(danno)
+                    nemico.bersaglioColpito.append("Esca" + str(vitaesca[escabersaglio]))
+                    nemico.bersaglioColpito.append(-danno)
+                    nemico.bersaglioColpito.append("")
                     vitaesca[escabersaglio + 1] = vitaesca[escabersaglio + 1] - danno
                 else:
                     if attrobo:
@@ -99,7 +101,12 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                         if danno < 0:
                             danno = 0
                         nemico.bersaglioColpito.append("Colco")
-                        nemico.bersaglioColpito.append(danno)
+                        nemico.bersaglioColpito.append(-danno)
+                        if surriscalda:
+                            dati[122] = 10
+                            nemico.bersaglioColpito.append("surriscalda")
+                        else:
+                            nemico.bersaglioColpito.append("")
                         print ("attacco vicino", nemico.tipo, "a robo", danno)
                         dati[10] = dati[10] - danno
                     else:
@@ -111,10 +118,13 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                             avvelena = False
                             nemico.ralloParato = True
                             print ("parato:", par)
+                        nemico.bersaglioColpito.append("Rallo")
+                        nemico.bersaglioColpito.append(-danno)
                         if avvelena and not dati[130] == 1:
                             dati[121] = True
-                        nemico.bersaglioColpito.append("Rallo")
-                        nemico.bersaglioColpito.append(danno)
+                            nemico.bersaglioColpito.append("avvelena")
+                        else:
+                            nemico.bersaglioColpito.append("")
                         print ("attacco vicino", nemico.tipo, "a rallo", danno)
                         dati[5] = dati[5] - danno
                 nmos = 0
@@ -186,6 +196,9 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 danno = nemico.attacco
                 if danno < 0:
                     danno = 0
+                nemico.bersaglioColpito.append("Esca" + str(vitaesca[escabersaglio]))
+                nemico.bersaglioColpito.append(-danno)
+                nemico.bersaglioColpito.append("")
                 print ("attacco lontano", nemico.tipo, "a esca", danno)
                 vitaesca[escabersaglio + 1] = vitaesca[escabersaglio + 1] - danno
                 nmos = 0
@@ -329,6 +342,13 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                         danno = nemico.attacco - difro
                         if danno < 0:
                             danno = 0
+                        nemico.bersaglioColpito.append("Colco")
+                        nemico.bersaglioColpito.append(-danno)
+                        if surriscalda:
+                            dati[122] = 10
+                            nemico.bersaglioColpito.append("surriscalda")
+                        else:
+                            nemico.bersaglioColpito.append("")
                         print ("attacco lontano", nemico.tipo, "a robo", danno)
                         dati[10] = dati[10] - danno
                     else:
@@ -340,8 +360,13 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                             avvelena = False
                             nemico.ralloParato = True
                             print ("parato:", par)
+                        nemico.bersaglioColpito.append("Rallo")
+                        nemico.bersaglioColpito.append(-danno)
                         if avvelena and not dati[130] == 1:
                             dati[121] = True
+                            nemico.bersaglioColpito.append("avvelena")
+                        else:
+                            nemico.bersaglioColpito.append("")
                         print ("attacco lontano", nemico.tipo, "a rallo", danno)
                         dati[5] = dati[5] - danno
                     nmos = 0
@@ -545,7 +570,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     return nemico, nmos, dati, vitaesca
 
 
-def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo):
+def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco):
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
     raffreddamento = False
     ricarica1 = False
@@ -564,6 +589,8 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
     if azione == 6 or azione == 7 or azione == 11 or azione == 14 or azione == 17:
         if dati[10] >= costoTecniche[azione - 1]:
             azioneEseguita = True
+            attaccoDiColco.append("Colco")
+            attaccoDiColco.append(0)
         # raffred
         if azione == 6 and dati[10] >= costoTecniche[azione - 1]:
             raffreddamento = True
@@ -571,6 +598,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 dati[10] -= costoTecniche[azione - 1] // 2
             else:
                 dati[10] -= costoTecniche[azione - 1]
+            attaccoDiColco.append("raffredda")
         # ricarica
         if azione == 7 and dati[10] >= costoTecniche[azione - 1]:
             ricarica1 = True
@@ -578,6 +606,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 dati[10] -= costoTecniche[azione - 1] // 2
             else:
                 dati[10] -= costoTecniche[azione - 1]
+            attaccoDiColco.append("")
         # velocizza
         if azione == 11 and dati[10] >= costoTecniche[azione - 1]:
             if dati[122] > 0:
@@ -588,6 +617,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append("velocizza")
         # efficienza
         if azione == 14 and dati[10] >= costoTecniche[azione - 1]:
             if dati[122] > 0:
@@ -598,6 +628,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 else:
                     dati[10] -= costoTecniche[azione - 1]
                 dati[126] = dannoTecniche[azione - 1]
+                attaccoDiColco.append("efficienza")
         # ricarica+
         if azione == 17 and dati[10] >= costoTecniche[azione - 1]:
             ricarica2 = True
@@ -605,11 +636,19 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 dati[10] -= costoTecniche[azione - 1] // 2
             else:
                 dati[10] -= costoTecniche[azione - 1]
+            attaccoDiColco.append("")
         if not suAlleato:
-            return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo
+            return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco
         else:
-            return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo
+            return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco
     elif not suAlleato:
+        ralloVisto = False
+        i = 0
+        while i < len(caselleVisteDaColco):
+            if caselleVisteDaColco[i] == x and caselleVisteDaColco[i + 1] == y and caselleVisteDaColco[i + 2]:
+                ralloVisto = True
+                break
+            i += 3
         mostroAccanto = False
         mostroVisto = True
         if (rx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx + gpx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx - gpx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx == nemicoBersaglio.x and ry + gpy == nemicoBersaglio.y) or (rx == nemicoBersaglio.x and ry - gpy == nemicoBersaglio.y):
@@ -628,6 +667,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                dannoEffettivo = danno - nemicoBersaglio.difesa
+                if dannoEffettivo < 0:
+                    dannoEffettivo = 0
+                attaccoDiColco.append(-dannoEffettivo)
+                attaccoDiColco.append("")
             # cura
             if azione == 2 and dati[10] >= costoTecniche[azione - 1]:
                 nemicoBersaglio.vita += dannoTecniche[azione - 1]
@@ -637,6 +682,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                attaccoDiColco.append(dannoTecniche[azione - 1])
+                attaccoDiColco.append("")
             # antidoto
             if azione == 3 and dati[10] >= costoTecniche[azione - 1]:
                 nemicoBersaglio.avvelenato = False
@@ -644,6 +692,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                attaccoDiColco.append(0)
+                attaccoDiColco.append("antidoto")
             # cura+
             if azione == 8 and dati[10] >= costoTecniche[azione - 1]:
                 nemicoBersaglio.vita += dannoTecniche[azione - 1]
@@ -653,6 +704,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                attaccoDiColco.append(dannoTecniche[azione - 1])
+                attaccoDiColco.append("")
             # scossa+
             if azione == 9 and dati[10] >= costoTecniche[azione - 1]:
                 danno = dannoTecniche[azione - 1]
@@ -663,18 +717,30 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                dannoEffettivo = danno - nemicoBersaglio.difesa
+                if dannoEffettivo < 0:
+                    dannoEffettivo = 0
+                attaccoDiColco.append(-dannoEffettivo)
+                attaccoDiColco.append("")
             # attP
             if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                attaccoDiColco.append(0)
+                attaccoDiColco.append("")
             # difP
             if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
                 if dati[126] > 0:
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                attaccoDiColco.append(0)
+                attaccoDiColco.append("")
             # cura++
             if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
                 nemicoBersaglio.vita += dannoTecniche[azione - 1]
@@ -684,6 +750,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                attaccoDiColco.append(dannoTecniche[azione - 1])
+                attaccoDiColco.append("")
             # scossa++
             if azione == 18 and dati[10] >= costoTecniche[azione - 1]:
                 danno = dannoTecniche[azione - 1]
@@ -694,6 +763,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                attaccoDiColco.append(nemicoBersaglio)
+                dannoEffettivo = danno - nemicoBersaglio.difesa
+                if dannoEffettivo < 0:
+                    dannoEffettivo = 0
+                attaccoDiColco.append(-dannoEffettivo)
+                attaccoDiColco.append("")
             # giro Colco verso l'obiettivo
             if azioneEseguita:
                 if abs(nemicoBersaglio.x - rx) > abs(nemicoBersaglio.y - ry):
@@ -731,9 +806,29 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
             # tempesta
             if azione == 5 and dati[10] >= costoTecniche[azione - 1]:
-                listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
+                if ralloVisto:
+                    listaNemiciAttaccatiADistanzaRobo.append("Rallo")
+                    danno = dannoTecniche[azione - 1] - dif
+                    if danno < 0:
+                        danno = 0
+                    dati[5] -= danno
+                    if dati[5] < 0:
+                        dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 danno = dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -743,6 +838,20 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
+                listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
+                attaccoDiColco.append(nemicoBersaglio)
+                dannoEffettivo = danno - nemicoBersaglio.difesa
+                if dannoEffettivo < 0:
+                    dannoEffettivo = 0
+                attaccoDiColco.append(-dannoEffettivo)
+                attaccoDiColco.append("")
             # freccia+
             if azione == 10 and dati[10] >= costoTecniche[azione - 1]:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
@@ -754,9 +863,29 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
             # tempesta+
             if azione == 15 and dati[10] >= costoTecniche[azione - 1]:
-                listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
+                if ralloVisto:
+                    listaNemiciAttaccatiADistanzaRobo.append("Rallo")
+                    danno = dannoTecniche[azione - 1] - dif
+                    if danno < 0:
+                        danno = 0
+                    dati[5] -= danno
+                    if dati[5] < 0:
+                        dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 danno = dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -766,6 +895,20 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
+                listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
+                attaccoDiColco.append(nemicoBersaglio)
+                dannoEffettivo = danno - nemicoBersaglio.difesa
+                if dannoEffettivo < 0:
+                    dannoEffettivo = 0
+                attaccoDiColco.append(-dannoEffettivo)
+                attaccoDiColco.append("")
             # freccia++
             if azione == 19 and dati[10] >= costoTecniche[azione - 1]:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
@@ -777,9 +920,29 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
             # tempesta++
             if azione == 20 and dati[10] >= costoTecniche[azione - 1]:
-                listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
+                if ralloVisto:
+                    listaNemiciAttaccatiADistanzaRobo.append("Rallo")
+                    danno = dannoTecniche[azione - 1] - dif
+                    if danno < 0:
+                        danno = 0
+                    dati[5] -= danno
+                    if dati[5] < 0:
+                        dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 danno = dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -789,6 +952,20 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
+                listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
+                attaccoDiColco.append(nemicoBersaglio)
+                dannoEffettivo = danno - nemicoBersaglio.difesa
+                if dannoEffettivo < 0:
+                    dannoEffettivo = 0
+                attaccoDiColco.append(-dannoEffettivo)
+                attaccoDiColco.append("")
             # giro Colco verso l'obiettivo
             if azioneEseguita:
                 if abs(nemicoBersaglio.x - rx) > abs(nemicoBersaglio.y - ry):
@@ -836,7 +1013,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                             nrob = 4
                         sposta = True
-        return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo
+        return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco
     else:
         ralloAccanto = False
         ralloVisto = False
@@ -867,6 +1044,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        dannoEffettivo = danno - dif
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                     # cura
                     if azione == 2 and dati[10] >= costoTecniche[azione - 1]:
                         dati[5] += dannoTecniche[azione - 1]
@@ -876,6 +1059,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        attaccoDiColco.append(dannoTecniche[azione - 1])
+                        attaccoDiColco.append("")
                     # antidoto
                     if azione == 3 and dati[10] >= costoTecniche[azione - 1]:
                         dati[121] = False
@@ -883,6 +1069,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        attaccoDiColco.append(0)
+                        attaccoDiColco.append("antidoto")
                     # cura+
                     if azione == 8 and dati[10] >= costoTecniche[azione - 1]:
                         dati[5] += dannoTecniche[azione - 1]
@@ -892,6 +1081,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        attaccoDiColco.append(dannoTecniche[azione - 1])
+                        attaccoDiColco.append("")
                     # scossa+
                     if azione == 9 and dati[10] >= costoTecniche[azione - 1]:
                         danno = dannoTecniche[azione - 1] - dif
@@ -904,6 +1096,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        dannoEffettivo = danno - dif
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                     # attP
                     if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
                         if dati[123] > 0:
@@ -914,6 +1112,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                                 dati[10] -= costoTecniche[azione - 1] // 2
                             else:
                                 dati[10] -= costoTecniche[azione - 1]
+                            attaccoDiColco.append("Rallo")
+                            attaccoDiColco.append(0)
+                            attaccoDiColco.append("attP")
                     # difP
                     if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
                         if dati[124] > 0:
@@ -924,6 +1125,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                                 dati[10] -= costoTecniche[azione - 1] // 2
                             else:
                                 dati[10] -= costoTecniche[azione - 1]
+                            attaccoDiColco.append("Rallo")
+                            attaccoDiColco.append(0)
+                            attaccoDiColco.append("difP")
                     # cura++
                     if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
                         dati[5] += dannoTecniche[azione - 1]
@@ -933,6 +1137,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        attaccoDiColco.append(dannoTecniche[azione - 1])
+                        attaccoDiColco.append("")
                     # scossa++
                     if azione == 18 and dati[10] >= costoTecniche[azione - 1]:
                         danno = dannoTecniche[azione - 1] - dif
@@ -945,6 +1152,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dati[10] -= costoTecniche[azione - 1] // 2
                         else:
                             dati[10] -= costoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        dannoEffettivo = danno - dif
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                     # giro Colco verso l'obiettivo
                     if azioneEseguita:
                         if abs(x - rx) > abs(y - ry):
@@ -984,6 +1197,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 # tempesta
                 if azione == 5 and dati[10] >= costoTecniche[azione - 1]:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
@@ -993,6 +1212,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                     danno = dannoTecniche[azione - 1]
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -1002,6 +1227,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
+                    for nemico in listaNemiciAttaccatiADistanzaRobo:
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                 # freccia+
                 if azione == 10 and dati[10] >= costoTecniche[azione - 1]:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
@@ -1015,6 +1247,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 # tempesta+
                 if azione == 15 and dati[10] >= costoTecniche[azione - 1]:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
@@ -1024,6 +1262,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                     danno = dannoTecniche[azione - 1]
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -1033,6 +1277,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
+                    for nemico in listaNemiciAttaccatiADistanzaRobo:
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                 # freccia++
                 if azione == 19 and dati[10] >= costoTecniche[azione - 1]:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
@@ -1046,6 +1297,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 # tempesta++
                 if azione == 20 and dati[10] >= costoTecniche[azione - 1]:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
@@ -1055,6 +1312,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                     danno = dannoTecniche[azione - 1]
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -1064,6 +1327,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecniche[azione - 1] // 2
                     else:
                         dati[10] -= costoTecniche[azione - 1]
+                    for nemico in listaNemiciAttaccatiADistanzaRobo:
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                 # giro Colco verso l'obiettivo
                 if azioneEseguita:
                     if abs(x - rx) > abs(y - ry):
@@ -1116,6 +1386,10 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
         if suAlleato == 2:
             if dati[10] >= costoTecniche[azione - 1]:
                 azioneEseguita = True
+                if azione != 5 and azione != 15 and azione != 20:
+                    attaccoDiColco.append("Colco")
+                    attaccoDiColco.append(0)
+                    attaccoDiColco.append("")
             # scossa
             if azione == 1 and dati[10] >= costoTecniche[azione - 1]:
                 if dati[126] > 0:
@@ -1186,6 +1460,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 danno = dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -1195,6 +1475,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
             # freccia+
             if azione == 10 and dati[10] >= costoTecniche[azione - 1]:
                 if dati[126] > 0:
@@ -1203,14 +1490,20 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1]
             # tempesta+
             if azione == 15 and dati[10] >= costoTecniche[azione - 1]:
-                listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                 if ralloVisto:
+                    listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 danno = dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -1220,6 +1513,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
             # freccia++
             if azione == 19 and dati[10] >= costoTecniche[azione - 1]:
                 if dati[126] > 0:
@@ -1228,14 +1528,20 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1]
             # tempesa++
             if azione == 20 and dati[10] >= costoTecniche[azione - 1]:
-                listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                 if ralloVisto:
+                    listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
+                    attaccoDiColco.append("Rallo")
+                    dannoEffettivo = danno - dif
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
                 danno = dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
@@ -1245,7 +1551,14 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[10] -= costoTecniche[azione - 1] // 2
                 else:
                     dati[10] -= costoTecniche[azione - 1]
-        return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
+                    attaccoDiColco.append(nemico)
+                    dannoEffettivo = danno - nemico.difesa
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiColco.append(-dannoEffettivo)
+                    attaccoDiColco.append("")
+        return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco
 
 
 def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa):
@@ -1257,6 +1570,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
     ricarica2 = False
     listaNemiciAttaccatiADistanzaRobo = []
     tecnicaUsata = False
+    attaccoDiColco = []
 
     # burocrazia
     carim = False
@@ -1330,43 +1644,43 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                 # pv rallo < 80
                 if dati[i] == 1:
                     if dati[5] < pvtot / float(100) * 80 and dati[5] >= 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # pv rallo < 50
                 if dati[i] == 2:
                     if dati[5] < pvtot / float(100) * 50 and dati[5] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # pv rallo < 30
                 if dati[i] == 3:
                     if dati[5] < pvtot / float(100) * 30 and dati[5] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # rallo avvelenato
                 if dati[i] == 4:
                     if dati[121]:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # colco surriscaldato
                 if dati[i] == 5:
                     if dati[122] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # pe colco < 80
                 if dati[i] == 6:
                     if dati[10] < entot / float(100) * 80 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # pe colco < 50
                 if dati[i] == 7:
                     if dati[10] < entot / float(100) * 50 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # pe colco < 30
                 if dati[i] == 8:
                     if dati[10] < entot / float(100) * 30 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # sempre rallo
                 if dati[i] == 9 and not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0):
                     if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # sempre colco
                 if dati[i] == 10 and not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
                     if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                 # azioni su nemici
                 if nmost > 0 and len(nemiciVistiDaColco) > 0:
                     nemicoBersaglio = False
@@ -1375,7 +1689,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                         nemicoBersaglio = nemiciVistiDaColco[random.randint(0, (len(nemiciVistiDaColco) - 1))]
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # nemico vicino
                     if dati[i] == 12:
@@ -1392,7 +1706,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                     nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # nemico lontano
                     if dati[i] == 13:
@@ -1409,7 +1723,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                     nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # nemico pv < 80
                     if dati[i] == 14:
@@ -1426,7 +1740,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                     nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # nemico pv < 50
                     if dati[i] == 15:
@@ -1443,7 +1757,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                     nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # nemico pv < 30
                     if dati[i] == 16:
@@ -1460,7 +1774,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                     nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # nemico con meno pv
                     if dati[i] == 17:
@@ -1479,7 +1793,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                 nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # numero nemici > 1
                     if dati[i] == 18 and len(nemiciVistiDaColco) > 1:
@@ -1495,7 +1809,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                 nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # numero nemici > 4
                     if dati[i] == 19 and len(nemiciVistiDaColco) > 4:
@@ -1511,7 +1825,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                 nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                     # numero nemici > 7
                     if dati[i] == 20 and len(nemiciVistiDaColco) > 7:
@@ -1527,7 +1841,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                 nemicoBersaglio = nemico
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco)
                             nemiciVistiDaColco.append(nemicoBersaglio)
                 # tecniche = scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++
                 if azioneEseguita and sposta:
@@ -1619,4 +1933,4 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
 
     # alcuni sono inutili!!!
     rx, ry, stanza, carim, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, False, robo, porte, cofanetti)
-    return rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata
+    return rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco

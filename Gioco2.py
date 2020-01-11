@@ -693,6 +693,23 @@ def gameloop():
         inizio = controllaMorteRallo(dati[5], inizio)
         morterob, dati, mosseRimasteRob = controllaMorteColco(dati, mosseRimasteRob)
 
+        # setto stato personaggi all'inizio del turno
+        for nemico in listaNemici:
+            nemico.statoInizioTurno = []
+            nemico.statoInizioTurno.append(nemico.vita)
+            nemico.statoInizioTurno.append(nemico.avvelenato)
+            nemico.statoInizioTurno.append(nemico.appiccicato)
+        statoRalloInizioTurno = []
+        statoRalloInizioTurno.append(dati[5])
+        statoRalloInizioTurno.append(dati[121])
+        statoRalloInizioTurno.append(dati[123])
+        statoRalloInizioTurno.append(dati[124])
+        statoColcoInizioTurno = []
+        statoColcoInizioTurno.append(dati[10])
+        statoColcoInizioTurno.append(dati[122])
+        statoColcoInizioTurno.append(dati[125])
+        statoColcoInizioTurno.append(dati[126])
+
         # controllo se ci sono nemici in movimento per decidere se fare animazioni o no
         nemiciInMovimento = False
         for nemico in listaNemici:
@@ -718,8 +735,10 @@ def gameloop():
                 y = vy
         # gestione attacchi
         attaccoADistanza = False
+        # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
+        attaccoDiRallo = []
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato)
             tastop = 0
             # tolgo una freccia se uso l'attacco a distanza
             if attaccoADistanza:
@@ -911,7 +930,7 @@ def gameloop():
             contaesca = contaesca + 1
             # id, vita, xesca, yesca
             vitaesca.append(contaesca)
-            vitaesca.append(100)
+            vitaesca.append(1000)
             vitaesca.append(xesca)
             vitaesca.append(yesca)
             creaesca = False
@@ -939,12 +958,23 @@ def gameloop():
         i = 1
         while i < len(vitaesca):
             if vitaesca[i + 1] == x and vitaesca[i + 2] == y:
+                # tolgo la selezione dell'esca morta
+                if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vitaesca[i - 1]:
+                    nemicoInquadrato = False
+                    caricaTutto = True
                 del vitaesca[i + 2]
                 del vitaesca[i + 1]
                 del vitaesca[i]
                 del vitaesca[i - 1]
                 dati[38] += 1
             i = i + 4
+        # statoEscheInizioTurno["Esca"+id1, pv1, "Esca"+id2, pv2, ...]
+        statoEscheInizioTurno = []
+        i = 0
+        while i < len(vitaesca):
+            statoEscheInizioTurno.append("Esca" + str(vitaesca[i]))
+            statoEscheInizioTurno.append(vitaesca[i + 1])
+            i += 4
 
         # movimento-azioni robo
         azioneRobEseguita = False
@@ -996,6 +1026,8 @@ def gameloop():
                     dati[10] = entot
                 dati[122] = 10
         attaccoADistanzaRobo = False
+        # attaccoDiColco [obbiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perchè deve rimanere per più turni)]
+        attaccoDiColco = []
         tecnicaUsata = False
         if mosseRimasteRob > 0 and not morterob and not cambiosta:
             vrx = rx
@@ -1003,7 +1035,7 @@ def gameloop():
 
             # movimento - gambit
             if raffredda < 0 and autoRic1 < 0 and autoRic2 < 0:
-                rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, attaccoADistanzaRobo, tecnicaUsata = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa)
+                rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, attaccoADistanzaRobo, tecnicaUsata, attaccoDiColco = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa)
 
             if dati[122] > 0 or raffreddamento or ricarica1 or ricarica2:
                 mosseRimasteRob -= 2
@@ -1135,12 +1167,12 @@ def gameloop():
         # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
         if not inizio:
             if caricaTutto:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
+                disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, True)
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, attaccoADistanzaRobo, tecnicaUsata, nemicoInquadrato)
+                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, attaccoADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno)
             if not carim:
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato)
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, False)
 
         if not aumentoliv:
             caricaTutto = False
@@ -1154,7 +1186,7 @@ def gameloop():
             nemico.animaSpostamento = False
             nemico.animaAttacco = False
             nemico.animaMorte = False
-            nemico.animaDanneggiamento = []
+            nemico.animaDanneggiamento = False
             nemico.bersaglioColpito = []
             nemico.ralloParato = False
             if not type(nemicoInquadrato) is str and nemicoInquadrato and nemicoInquadrato.morto:

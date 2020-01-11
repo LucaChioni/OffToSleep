@@ -23,6 +23,7 @@ class NemicoObj(object):
         self.quadrettoSottoOggettoLanciato = 0
         self.quadrettoSottoArma = 0
         self.ralloParato = False
+        self.statoInizioTurno = []
         self.bersaglioColpito = []
 
         self.tipo = tipo
@@ -33,6 +34,7 @@ class NemicoObj(object):
         attacco = 0
         attaccaDaLontano = False
         velenoso = False
+        surriscaldante = False
         denaro = 0
         difesa = 0
         if self.tipo == "Orco":
@@ -43,6 +45,7 @@ class NemicoObj(object):
             attacco = 50
             attaccaDaLontano = False
             velenoso = False
+            surriscaldante = False
             denaro = random.randint(3, 7)
             difesa = 2
         if self.tipo == "Pipistrello":
@@ -53,6 +56,7 @@ class NemicoObj(object):
             attacco = 20
             attaccaDaLontano = True
             velenoso = True
+            surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 0
         self.vita = vitaTotale
@@ -66,10 +70,11 @@ class NemicoObj(object):
         self.animaSpostamento = False
         self.animaAttacco = False
         self.animaMorte = False
-        self.animaDanneggiamento = []
+        self.animaDanneggiamento = False
         self.animazioneFatta = False
         self.direzione = direzione
         self.velenoso = velenoso
+        self.surriscaldante = surriscaldante
         self.denaro = denaro
         self.difesa = difesa
 
@@ -150,8 +155,7 @@ class NemicoObj(object):
 
 
     def danneggia(self, danno, attaccante):
-        self.animaDanneggiamento.append(attaccante)
-        self.animaDanneggiamento.append(danno)
+        self.animaDanneggiamento = attaccante
         danno -= self.difesa
         if danno < 0:
             danno = 0

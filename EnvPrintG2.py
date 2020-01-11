@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, primaDiAnima):
     if caricaTutto:
         schermo.blit(imgSfondoStanza, (0, 0))
         # porte
@@ -144,7 +144,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         schermo.blit(difesapiu, (gsx // 32 * 5, gsy // 18 * 17))
 
     # disegno la vita del mostro / Colco / esca selezionato
-    if nemicoInquadrato == "Colco":
+    if nemicoInquadrato == "Colco" or not nemicoInquadrato:
         lungentot = int(((gpx * entot) / float(4)) // 15)
         lungen = int(((gpx * enrob) / float(4)) // 15)
         if lungen < 0:
@@ -169,26 +169,42 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         i = 0
         while i < len(vitaesca):
             if idEscaInquadrata == vitaesca[i]:
-                lungvita = (gpx * 8 * vitaesca[i + 1]) // 100
+                pvEsca = vitaesca[i + 1]
+                if primaDiAnima:
+                    idEscaInizioturno = 0
+                    j = 0
+                    while j < len(statoEscheInizioTurno):
+                        if statoEscheInizioTurno[j] == nemicoInquadrato:
+                            idEscaInizioturno = j
+                            break
+                        j += 2
+                    pvEsca = statoEscheInizioTurno[idEscaInizioturno + 1]
+                lungvita = int(((gpx * pvEsca) / float(4)) // 15)
                 if lungvita < 0:
                     lungvita = 0
                 schermo.blit(sfondoEsche, (0, 0))
                 schermo.blit(esche, (0, 0))
-                indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
+                indvitamost = pygame.transform.scale(indvita, (int(((gpx * 1000) / float(4)) // 15), gpy // 4))
                 fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
                 vitaesche = pygame.transform.scale(vitanemico0, (lungvita, gpy // 4))
                 schermo.blit(indvitamost, (gpx, 0))
-                schermo.blit(fineindvitamost, (gpx + (gpx * 8), 0))
+                schermo.blit(fineindvitamost, (gpx + int(((gpx * 1000) / float(4)) // 15), 0))
                 schermo.blit(vitaesche, (gpx, 0))
                 break
             i += 4
     elif nemicoInquadrato and not type(nemicoInquadrato) is str:
         pvm = nemicoInquadrato.vita
+        nemicoAvvelenato = nemicoInquadrato.avvelenato
+        nemicoAppiccicato = nemicoInquadrato.appiccicato
+        if primaDiAnima:
+            pvm = nemicoInquadrato.statoInizioTurno[0]
+            nemicoAvvelenato = nemicoInquadrato.statoInizioTurno[1]
+            nemicoAppiccicato = nemicoInquadrato.statoInizioTurno[2]
         pvmtot = nemicoInquadrato.vitaTotale
         schermo.blit(sfondoMostro, (0, 0))
-        if nemicoInquadrato.avvelenato:
+        if nemicoAvvelenato:
             schermo.blit(avvelenato, (gpx + (gpx // 8), gpy // 4))
-        if nemicoInquadrato.appiccicato:
+        if nemicoAppiccicato:
             schermo.blit(appiccicoso, ((gpx * 2) + (gpx // 8), gpy // 4))
         schermo.blit(nemicoInquadrato.imgS, (0, 0))
         fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
@@ -288,6 +304,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 break
             i += 4
 
+    attaccoDiRallo = [False, 0, False]
     xvp = xp
     yvp = yp
     nxp = 0
@@ -702,6 +719,19 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 # inquadro il nemico colpito se non sto usando un oggetto
                                 if attacco == 1:
                                     nemicoInquadrato = nemico
+
+                                attaccoDiRallo.append(nemico)
+                                dannoApprossimato = danno - nemico.difesa
+                                if dannoApprossimato < 0:
+                                    dannoApprossimato = 0
+                                attaccoDiRallo.append(-dannoApprossimato)
+                                if attacco == 3:
+                                    attaccoDiRallo.append("avvelena")
+                                elif attacco == 5:
+                                    attaccoDiRallo.append("appiccica")
+                                else:
+                                    attaccoDiRallo.append("")
+
                                 sposta = True
                                 risposta = True
 
@@ -1111,16 +1141,16 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         while i < len(vitaesca):
             if xp == vitaesca[i + 2] and yp == vitaesca[i + 3]:
                 puntandoSuUnNemicoOColcoOEsca = True
-                lungvita = (gpx * 8 * vitaesca[i + 1]) // 100
+                lungvita = int(((gpx * vitaesca[i + 1]) / float(4)) // 15)
                 if lungvita < 0:
                     lungvita = 0
                 schermo.blit(sfondoEsche, (0, 0))
                 schermo.blit(esche, (0, 0))
-                indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
+                indvitamost = pygame.transform.scale(indvita, (int(((gpx * 1000) / float(4)) // 15), gpy // 4))
                 fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
                 vitaesche = pygame.transform.scale(vitanemico0, (lungvita, gpy // 4))
                 schermo.blit(indvitamost, (gpx, 0))
-                schermo.blit(fineindvitamost, (gpx + (gpx * 8), 0))
+                schermo.blit(fineindvitamost, (gpx + int(((gpx * 1000) / float(4)) // 15), 0))
                 schermo.blit(vitaesche, (gpx, 0))
                 ricaricaschermo = True
             i += 4
@@ -1375,19 +1405,40 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             i = 0
             while i < len(vitaesca):
                 if idEscaInquadrata == vitaesca[i]:
-                    lungvita = (gpx * 8 * vitaesca[i + 1]) // 100
+                    lungvita = int(((gpx * vitaesca[i + 1]) / float(4)) // 15)
                     if lungvita < 0:
                         lungvita = 0
                     schermo.blit(sfondoEsche, (0, 0))
                     schermo.blit(esche, (0, 0))
-                    indvitamost = pygame.transform.scale(indvita, (gpx * 8, gpy // 4))
+                    indvitamost = pygame.transform.scale(indvita, (int(((gpx * 1000) / float(4)) // 15), gpy // 4))
                     fineindvitamost = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
                     vitaesche = pygame.transform.scale(vitanemico0, (lungvita, gpy // 4))
                     schermo.blit(indvitamost, (gpx, 0))
-                    schermo.blit(fineindvitamost, (gpx + (gpx * 8), 0))
+                    schermo.blit(fineindvitamost, (gpx + int(((gpx * 1000) / float(4)) // 15), 0))
                     schermo.blit(vitaesche, (gpx, 0))
                     break
                 i += 4
+        # altrimenti mostro solo la vita di colco
+        elif not puntandoSuUnNemicoOColcoOEsca:
+            lungentot = int(((gpx * entot) / float(4)) // 15)
+            lungen = int(((gpx * enrob) / float(4)) // 15)
+            if lungen < 0:
+                lungen = 0
+            indvitarob = pygame.transform.scale(indvita, (lungentot, gpy // 4))
+            fineindvitarob = pygame.transform.scale(fineindvita, (gpx // 12, gpy // 4))
+            vitarob = pygame.transform.scale(vitarobo, (lungen, gpy // 4))
+            schermo.blit(sfondoColco, (0, 0))
+            schermo.blit(indvitarob, (gpx, 0))
+            schermo.blit(fineindvitarob, (gpx + lungentot, 0))
+            schermo.blit(vitarob, (gpx, 0))
+            robobat = pygame.transform.scale(roboo, (gpx, gpy))
+            schermo.blit(robobat, (0, 0))
+            if surrisc > 0:
+                schermo.blit(surriscaldato, (gpx + (gpx // 8), gpy // 4))
+            if velp > 0:
+                schermo.blit(velocitapiu, ((gpx * 2) + (gpx // 8), gpy // 4))
+            if effp > 0:
+                schermo.blit(efficienzapiu, ((gpx * 3) + (gpx // 8), gpy // 4))
 
         if not risposta:
             pygame.display.update()
@@ -1396,4 +1447,4 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         pygame.event.pump()
         clockAttacco.tick(fpsInquadra)
 
-    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato
+    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo
