@@ -66,6 +66,20 @@ def getStatistiche(dati, difesa=0):
     return esptot, pvtot, entot, attVicino, attLontano, dif, difro, par
 
 
+def getVitaTotRallo(livello, guanti):
+    pvtot = 50
+    if guanti == 1:
+        pvtot += 50
+    if livello >= 1:
+        i = 1
+        while i <= 100:
+            if livello <= i + 2:
+                pvtot += (i * 5)
+                break
+            i += 3
+    return pvtot
+
+
 def guardaVideo(path, audio=0):
     schermo.fill(grigioscu)
     pygame.display.update()

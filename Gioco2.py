@@ -15,6 +15,8 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            ultimoObbiettivoColco = []
+            obbiettivoCasualeColco = False
             raffreddamento = False
             ricarica1 = False
             ricarica2 = False
@@ -34,7 +36,7 @@ def gameloop():
             agg = 0
             tastop = 0
             startf = False
-            aumentoliv = False
+            aumentoliv = 0
             primopasso = True
             contaesca = 0
             xesca = 0
@@ -600,6 +602,10 @@ def gameloop():
                     if chiamarob:
                         chiamarob = False
                     else:
+                        ultimoObbiettivoColco = []
+                        ultimoObbiettivoColco.append("Telecomando")
+                        ultimoObbiettivoColco.append(x)
+                        ultimoObbiettivoColco.append(y)
                         chiamarob = True
                 if event.key == pygame.K_q and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento and nemicoInquadrato:
                     canaleSoundPuntatore.play(selind)
@@ -671,10 +677,10 @@ def gameloop():
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
         # ripristina vita e status dopo lv up
-        if aumentoliv:
+        if aumentoliv != 0:
             dati[5] = pvtot
             dati[121] = False
-            aumentoliv = False
+            aumentoliv = 0
 
         # menu start
         if startf and attacco != 1:
@@ -1035,7 +1041,7 @@ def gameloop():
 
             # movimento - gambit
             if raffredda < 0 and autoRic1 < 0 and autoRic2 < 0:
-                rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, attaccoADistanzaRobo, tecnicaUsata, attaccoDiColco = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa)
+                rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, attaccoADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco)
 
             if dati[122] > 0 or raffreddamento or ricarica1 or ricarica2:
                 mosseRimasteRob -= 2
@@ -1142,11 +1148,13 @@ def gameloop():
                     nemico.animaMorte = True
 
         # aumentare di livello
-        if dati[127] >= esptot and dati[4] < 100 and not carim and not inizio:
-            dati[4] = dati[4] + 1
-            dati[127] = dati[127] - esptot
-            aumentoliv = True
-            impossibileCliccarePulsanti = True
+        if not carim and not inizio:
+            while dati[127] >= esptot and dati[4] < 100:
+                dati[4] += 1
+                dati[127] -= esptot
+                aumentoliv += 1
+                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
+                impossibileCliccarePulsanti = True
 
         # aggiorna vista dei mostri e metti l'occhio se ti vedono + aggiorna nemico.inCasellaVista
         apriocchio = False
@@ -1167,14 +1175,17 @@ def gameloop():
         # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
         if not inizio:
             if caricaTutto:
+                if aumentoliv != 0:
+                    pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, True)
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
                 primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, attaccoADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno)
             if not carim:
+                pvtot = getVitaTotRallo(dati[4], dati[129])
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, False)
 
-        if not aumentoliv:
+        if aumentoliv == 0:
             caricaTutto = False
 
         # cancella definitivamente i mostri morti e resetta vx/vy/anima

@@ -126,9 +126,10 @@ def animaDifesaRallo(sposta, x, y, armaS, armaturaS, arcoS, faretraS, collanaS, 
 
 
 def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, carim, caricaTutto, tastop, animazioneRallo, fineanimaz):
-    if aumentoliv and not carim:
+    if aumentoliv != 0 and not carim:
+        liv -= aumentoliv
         animazioneRallo = True
-        if not canaleSoundLvUp.get_busy() and fineanimaz == 10:
+        if fineanimaz == 10:
             canaleSoundLvUp.play(rumorelevelup)
         avvele = False
         disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
@@ -143,19 +144,19 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
         i = 1
         while i <= 100:
             if liv == i:
-                messaggio("Liv +: Punti vita aumentati", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+                messaggio("Liv +: Attacco aumentato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
                 break
             i += 3
         i = 2
         while i <= 100:
             if liv == i:
-                messaggio("Liv +: Attacco aumentato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+                messaggio("Liv +: Difesa aumentata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
                 break
             i += 3
         i = 3
         while i <= 100:
             if liv == i:
-                messaggio("Liv +: Difesa aumentata", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+                messaggio("Liv +: Punti vita aumentati", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
                 break
             i += 3
         if fineanimaz == 1:
@@ -167,13 +168,14 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
-                    if event.type == pygame.KEYDOWN:
+                    if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                         canaleSoundPuntatore.play(selezione)
                         risposta = True
+                        aumentoliv -= 1
 
         caricaTutto = True
         tastop = 0
-    return animazioneRallo, caricaTutto, tastop
+    return animazioneRallo, caricaTutto, tastop, aumentoliv
 
 
 def animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, avvele, azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz):
@@ -697,7 +699,7 @@ def animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, attaccoADistanzaRobo, ne
                 schermo.blit(nemicoAttaccante.imgDanneggiamentoOggettoLanciato, (xFineRetta, yFineRetta))
 
 
-def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz):
+def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv):
     if fineanimaz == 10:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
@@ -723,6 +725,10 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
         velenoRallo = statoRalloInizioTurno[1]
         attPRallo = statoRalloInizioTurno[2]
         difPRallo = statoRalloInizioTurno[3]
+        if aumentoliv != 0:
+            pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
+            pvRallo = pvtot
+            velenoRallo = False
         lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
         lungvita = (lungvitatot * pvRallo) // pvtot
         if lungvita < 0:
@@ -968,7 +974,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                         break
                 if attaccoNemico:
                     azioniDaEseguire.append("attaccoNemici")
-    if len(azioniDaEseguire) == 0 and aumentoliv and "aumentaLv" in azioniPossibili:
+    if len(azioniDaEseguire) == 0 and aumentoliv != 0 and "aumentaLv" in azioniPossibili:
         azioniDaEseguire.append("aumentaLv")
         azioniPossibili.remove("aumentaLv")
 
@@ -1025,7 +1031,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animaCofanetti(cofanetti, caseviste, sfondinoc)
             animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc)
 
-            statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz)
+            statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv)
 
             if fineanimaz == 10:
                 schermo_prima_delle_animazioni = schermo.copy()
@@ -1045,7 +1051,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "aumentaLv" in azioniDaEseguire:
                 # animazione aumento di livello
-                animazioneRallo, caricaTutto, tastop = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, fineanimaz)
+                animazioneRallo, caricaTutto, tastop, aumentoliv = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, fineanimaz)
 
             # con movimentoColcoNemici vengono eseguite le animazioni di: movimento colco, movimento nemici, morti nemici
             if "movimentoColcoNemici" in azioniDaEseguire:
@@ -1124,9 +1130,10 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                             break
                     if attaccoNemico and "attaccoNemici" in azioniPossibili:
                         azioniDaEseguire.append("attaccoNemici")
-        if len(azioniDaEseguire) == 0 and aumentoliv and "aumentaLv" in azioniPossibili:
+        if len(azioniDaEseguire) == 0 and aumentoliv != 0 and "aumentaLv" in azioniPossibili:
             azioniDaEseguire.append("aumentaLv")
-            azioniPossibili.remove("aumentaLv")
+            if aumentoliv == 0:
+                azioniPossibili.remove("aumentaLv")
 
     if tesoro != -1:
         pygame.display.update()
@@ -1136,10 +1143,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        canaleSoundPuntatore.play(selezione)
-                        risposta = True
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    canaleSoundPuntatore.play(selezione)
+                    risposta = True
         caricaTutto = True
         tesoro = -1
     if denaroRaccolto:
@@ -1150,10 +1156,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        canaleSoundPuntatore.play(selezione)
-                        risposta = True
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    canaleSoundPuntatore.play(selezione)
+                    risposta = True
         caricaTutto = True
         tastop = 0
 
