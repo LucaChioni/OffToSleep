@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, primaDiAnima):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, primaDiAnima):
     if caricaTutto:
         schermo.blit(imgSfondoStanza, (0, 0))
         # porte
@@ -111,11 +111,43 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             j += 3
         i += 3
 
-    # robo
-    schermo.blit(robot, (rx, ry))
-    if surrisc > 0:
-        schermo.blit(roboSurrisc, (rx, ry))
-    schermo.blit(armrob, (rx, ry))
+    # robo (anche in caso di raffreddamento e autoricarica)
+    if (raffreddamento and not primaDiAnima) or (raffredda > 0 and not raffreddamento):
+        schermo.blit(armrobS, (rx, ry))
+        schermo.blit(robos, (rx, ry))
+        imgAnimazione = 0
+        i = 0
+        while i < len(vetAnimazioniTecniche):
+            if vetAnimazioniTecniche[i] == "raffred":
+                imgAnimazione = vetAnimazioniTecniche[i + 1][0]
+                break
+            i += 2
+        schermo.blit(imgAnimazione, (rx, ry))
+    elif (ricarica1 and not primaDiAnima) or (autoRic1 > 0 and not ricarica1):
+        schermo.blit(robomo, (rx, ry))
+        imgAnimazione = 0
+        i = 0
+        while i < len(vetAnimazioniTecniche):
+            if vetAnimazioniTecniche[i] == "ricarica":
+                imgAnimazione = vetAnimazioniTecniche[i + 1][0]
+                break
+            i += 2
+        schermo.blit(imgAnimazione, (rx, ry))
+    elif (ricarica2 and not primaDiAnima) or (autoRic2 > 0 and not ricarica2):
+        schermo.blit(robomo, (rx, ry))
+        imgAnimazione = 0
+        i = 0
+        while i < len(vetAnimazioniTecniche):
+            if vetAnimazioniTecniche[i] == "ricarica+":
+                imgAnimazione = vetAnimazioniTecniche[i + 1][0]
+                break
+            i += 2
+        schermo.blit(imgAnimazione, (rx, ry))
+    else:
+        schermo.blit(robot, (rx, ry))
+        if surrisc > 0:
+            schermo.blit(roboSurrisc, (rx, ry))
+        schermo.blit(armrob, (rx, ry))
 
     disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
@@ -285,7 +317,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -960,11 +992,44 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 j += 3
             i += 3
 
-        # robo
-        schermo.blit(robot, (rx, ry))
-        if surrisc > 0:
-            schermo.blit(roboSurrisc, (rx, ry))
-        schermo.blit(armrob, (rx, ry))
+        # robo (anche in caso di raffreddamento e autoricarica)
+        if raffredda > 0:
+            schermo.blit(armrobS, (rx, ry))
+            schermo.blit(robos, (rx, ry))
+            imgAnimazione = 0
+            i = 0
+            while i < len(vetAnimazioniTecniche):
+                if vetAnimazioniTecniche[i] == "raffred":
+                    imgAnimazione = vetAnimazioniTecniche[i + 1][0]
+                    break
+                i += 2
+            schermo.blit(imgAnimazione, (rx, ry))
+        elif autoRic1 > 0:
+            schermo.blit(robomo, (rx, ry))
+            imgAnimazione = 0
+            i = 0
+            while i < len(vetAnimazioniTecniche):
+                if vetAnimazioniTecniche[i] == "ricarica":
+                    imgAnimazione = vetAnimazioniTecniche[i + 1][0]
+                    break
+                i += 2
+            schermo.blit(imgAnimazione, (rx, ry))
+        elif autoRic2 > 0:
+            schermo.blit(robomo, (rx, ry))
+            imgAnimazione = 0
+            i = 0
+            while i < len(vetAnimazioniTecniche):
+                if vetAnimazioniTecniche[i] == "ricarica+":
+                    imgAnimazione = vetAnimazioniTecniche[i + 1][0]
+                    break
+                i += 2
+            schermo.blit(imgAnimazione, (rx, ry))
+        else:
+            schermo.blit(robot, (rx, ry))
+            if surrisc > 0:
+                schermo.blit(roboSurrisc, (rx, ry))
+            schermo.blit(armrob, (rx, ry))
+
         # personaggio
         if not risposta:
             disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)

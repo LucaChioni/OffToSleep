@@ -572,6 +572,10 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
 
 def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco):
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
+    if dati[126] > 0:
+        costoTecnicaUsata = costoTecniche[azione - 1] // 2
+    else:
+        costoTecnicaUsata = costoTecniche[azione - 1]
     raffreddamento = False
     ricarica1 = False
     ricarica2 = False
@@ -587,55 +591,33 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
         vetNemiciSoloConXeY.append(nemico.y)
 
     if azione == 6 or azione == 7 or azione == 11 or azione == 14 or azione == 17:
-        if dati[10] >= costoTecniche[azione - 1]:
+        if dati[10] >= costoTecnicaUsata and not (dati[122] > 0 and (azione == 11 or azione == 14)):
             azioneEseguita = True
+            attaccoDiColco.append("Colco")
+            attaccoDiColco.append(-costoTecnicaUsata)
+            attaccoDiColco.append("")
+            dati[10] -= costoTecnicaUsata
             attaccoDiColco.append("Colco")
             attaccoDiColco.append(0)
         # raffred
-        if azione == 6 and dati[10] >= costoTecniche[azione - 1]:
+        if azione == 6 and dati[10] >= costoTecnicaUsata:
             raffreddamento = True
-            if dati[126] > 0:
-                dati[10] -= costoTecniche[azione - 1] // 2
-            else:
-                dati[10] -= costoTecniche[azione - 1]
             attaccoDiColco.append("raffredda")
         # ricarica
-        if azione == 7 and dati[10] >= costoTecniche[azione - 1]:
+        if azione == 7 and dati[10] >= costoTecnicaUsata:
             ricarica1 = True
-            if dati[126] > 0:
-                dati[10] -= costoTecniche[azione - 1] // 2
-            else:
-                dati[10] -= costoTecniche[azione - 1]
             attaccoDiColco.append("")
         # velocizza
-        if azione == 11 and dati[10] >= costoTecniche[azione - 1]:
-            if dati[122] > 0:
-                azioneEseguita = False
-            else:
-                dati[125] = dannoTecniche[azione - 1]
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-                attaccoDiColco.append("velocizza")
+        if azione == 11 and dati[10] >= costoTecnicaUsata and dati[122] <= 0:
+            dati[125] = dannoTecniche[azione - 1]
+            attaccoDiColco.append("velocizza")
         # efficienza
-        if azione == 14 and dati[10] >= costoTecniche[azione - 1]:
-            if dati[122] > 0:
-                azioneEseguita = False
-            else:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-                dati[126] = dannoTecniche[azione - 1]
-                attaccoDiColco.append("efficienza")
+        if azione == 14 and dati[10] >= costoTecnicaUsata and dati[122] <= 0:
+            dati[126] = dannoTecniche[azione - 1]
+            attaccoDiColco.append("efficienza")
         # ricarica+
-        if azione == 17 and dati[10] >= costoTecniche[azione - 1]:
+        if azione == 17 and dati[10] >= costoTecnicaUsata:
             ricarica2 = True
-            if dati[126] > 0:
-                dati[10] -= costoTecniche[azione - 1] // 2
-            else:
-                dati[10] -= costoTecniche[azione - 1]
             attaccoDiColco.append("")
         if not suAlleato:
             return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco
@@ -655,18 +637,19 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             mostroAccanto = True
             mostroVisto = True
         if mostroAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18):
-            if dati[10] >= costoTecniche[azione - 1]:
+            if dati[10] >= costoTecnicaUsata:
                 azioneEseguita = True
+                attaccoDiColco.append("Colco")
+                attaccoDiColco.append(-costoTecnicaUsata)
+                attaccoDiColco.append("")
+                dati[10] -= costoTecnicaUsata
             # scossa
-            if azione == 1 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 1 and dati[10] >= costoTecnicaUsata:
                 danno = dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 attaccoDiColco.append(nemicoBersaglio)
                 dannoEffettivo = danno - nemicoBersaglio.difesa
                 if dannoEffettivo < 0:
@@ -674,49 +657,34 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
             # cura
-            if azione == 2 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 2 and dati[10] >= costoTecnicaUsata:
                 nemicoBersaglio.vita += dannoTecniche[azione - 1]
                 if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
                     nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
                 attaccoDiColco.append(nemicoBersaglio)
                 attaccoDiColco.append(dannoTecniche[azione - 1])
                 attaccoDiColco.append("")
             # antidoto
-            if azione == 3 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 3 and dati[10] >= costoTecnicaUsata:
                 nemicoBersaglio.avvelenato = False
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
                 attaccoDiColco.append(nemicoBersaglio)
                 attaccoDiColco.append(0)
                 attaccoDiColco.append("antidoto")
             # cura+
-            if azione == 8 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 8 and dati[10] >= costoTecnicaUsata:
                 nemicoBersaglio.vita += dannoTecniche[azione - 1]
                 if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
                     nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
                 attaccoDiColco.append(nemicoBersaglio)
                 attaccoDiColco.append(dannoTecniche[azione - 1])
                 attaccoDiColco.append("")
             # scossa+
-            if azione == 9 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 9 and dati[10] >= costoTecnicaUsata:
                 danno = dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 attaccoDiColco.append(nemicoBersaglio)
                 dannoEffettivo = danno - nemicoBersaglio.difesa
                 if dannoEffettivo < 0:
@@ -724,45 +692,30 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
             # attP
-            if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+            if azione == 12 and dati[10] >= costoTecnicaUsata:
                 attaccoDiColco.append(nemicoBersaglio)
                 attaccoDiColco.append(0)
                 attaccoDiColco.append("")
             # difP
-            if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+            if azione == 13 and dati[10] >= costoTecnicaUsata:
                 attaccoDiColco.append(nemicoBersaglio)
                 attaccoDiColco.append(0)
                 attaccoDiColco.append("")
             # cura++
-            if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 16 and dati[10] >= costoTecnicaUsata:
                 nemicoBersaglio.vita += dannoTecniche[azione - 1]
                 if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
                     nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
                 attaccoDiColco.append(nemicoBersaglio)
                 attaccoDiColco.append(dannoTecniche[azione - 1])
                 attaccoDiColco.append("")
             # scossa++
-            if azione == 18 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 18 and dati[10] >= costoTecnicaUsata:
                 danno = dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 attaccoDiColco.append(nemicoBersaglio)
                 dannoEffettivo = danno - nemicoBersaglio.difesa
                 if dannoEffettivo < 0:
@@ -793,19 +746,20 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if ry > nemicoBersaglio.y and c == 2:
                         nrob = 4
         elif mostroVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20):
-            if dati[10] >= costoTecniche[azione - 1]:
+            if dati[10] >= costoTecnicaUsata:
                 azioneEseguita = True
+                attaccoDiColco.append("Colco")
+                attaccoDiColco.append(-costoTecnicaUsata)
+                attaccoDiColco.append("")
+                dati[10] -= costoTecnicaUsata
             # freccia
-            if azione == 4 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 4 and dati[10] >= costoTecnicaUsata:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
                 danno = dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     attaccoDiColco.append(nemico)
                     dannoEffettivo = danno - nemico.difesa
@@ -814,7 +768,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
             # tempesta
-            if azione == 5 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 5 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
@@ -824,7 +778,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -833,18 +787,16 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
-                    attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
-                    attaccoDiColco.append(-dannoEffettivo)
-                    attaccoDiColco.append("")
+                    if nemico != "Rallo":
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
                 attaccoDiColco.append(nemicoBersaglio)
                 dannoEffettivo = danno - nemicoBersaglio.difesa
@@ -853,16 +805,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
             # freccia+
-            if azione == 10 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 10 and dati[10] >= costoTecnicaUsata:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
                 danno = dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     attaccoDiColco.append(nemico)
                     dannoEffettivo = danno - nemico.difesa
@@ -871,7 +820,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
             # tempesta+
-            if azione == 15 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 15 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
@@ -881,7 +830,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -890,18 +839,16 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
-                    attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
-                    attaccoDiColco.append(-dannoEffettivo)
-                    attaccoDiColco.append("")
+                    if nemico != "Rallo":
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
                 attaccoDiColco.append(nemicoBersaglio)
                 dannoEffettivo = danno - nemicoBersaglio.difesa
@@ -910,16 +857,13 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
             # freccia++
-            if azione == 19 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 19 and dati[10] >= costoTecnicaUsata:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
                 danno = dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     attaccoDiColco.append(nemico)
                     dannoEffettivo = danno - nemico.difesa
@@ -928,7 +872,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
             # tempesta++
-            if azione == 20 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 20 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
@@ -938,7 +882,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -947,18 +891,16 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
-                    attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
-                    attaccoDiColco.append(-dannoEffettivo)
-                    attaccoDiColco.append("")
+                    if nemico != "Rallo":
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
                 attaccoDiColco.append(nemicoBersaglio)
                 dannoEffettivo = danno - nemicoBersaglio.difesa
@@ -1030,130 +972,92 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
         if suAlleato == 1:
             if azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18:
                 if ralloAccanto:
-                    if dati[10] >= costoTecniche[azione - 1]:
+                    if dati[10] >= costoTecnicaUsata and not (azione == 12 and dati[123] > 0) and not (azione == 13 and dati[124] > 0):
                         azioneEseguita = True
+                        attaccoDiColco.append("Colco")
+                        attaccoDiColco.append(-costoTecnicaUsata)
+                        attaccoDiColco.append("")
+                        dati[10] -= costoTecnicaUsata
                     # scossa
-                    if azione == 1 and dati[10] >= costoTecniche[azione - 1]:
+                    if azione == 1 and dati[10] >= costoTecnicaUsata:
                         danno = dannoTecniche[azione - 1] - dif
                         if danno < 0:
                             danno = 0
                         dati[5] -= danno
                         if dati[5] < 0:
                             dati[5] = 0
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
-                        else:
-                            dati[10] -= costoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
-                        dannoEffettivo = danno - dif
+                        dannoEffettivo = danno
                         if dannoEffettivo < 0:
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
                     # cura
-                    if azione == 2 and dati[10] >= costoTecniche[azione - 1]:
+                    if azione == 2 and dati[10] >= costoTecnicaUsata:
                         dati[5] += dannoTecniche[azione - 1]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
-                        else:
-                            dati[10] -= costoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(dannoTecniche[azione - 1])
                         attaccoDiColco.append("")
                     # antidoto
-                    if azione == 3 and dati[10] >= costoTecniche[azione - 1]:
+                    if azione == 3 and dati[10] >= costoTecnicaUsata:
                         dati[121] = False
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
-                        else:
-                            dati[10] -= costoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(0)
                         attaccoDiColco.append("antidoto")
                     # cura+
-                    if azione == 8 and dati[10] >= costoTecniche[azione - 1]:
+                    if azione == 8 and dati[10] >= costoTecnicaUsata:
                         dati[5] += dannoTecniche[azione - 1]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
-                        else:
-                            dati[10] -= costoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(dannoTecniche[azione - 1])
                         attaccoDiColco.append("")
                     # scossa+
-                    if azione == 9 and dati[10] >= costoTecniche[azione - 1]:
+                    if azione == 9 and dati[10] >= costoTecnicaUsata:
                         danno = dannoTecniche[azione - 1] - dif
                         if danno < 0:
                             danno = 0
                         dati[5] -= danno
                         if dati[5] < 0:
                             dati[5] = 0
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
-                        else:
-                            dati[10] -= costoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
-                        dannoEffettivo = danno - dif
+                        dannoEffettivo = danno
                         if dannoEffettivo < 0:
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
                     # attP
-                    if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
-                        if dati[123] > 0:
-                            azioneEseguita = False
-                        else:
-                            dati[123] = dannoTecniche[azione - 1]
-                            if dati[126] > 0:
-                                dati[10] -= costoTecniche[azione - 1] // 2
-                            else:
-                                dati[10] -= costoTecniche[azione - 1]
-                            attaccoDiColco.append("Rallo")
-                            attaccoDiColco.append(0)
-                            attaccoDiColco.append("attP")
+                    if azione == 12 and dati[10] >= costoTecnicaUsata and dati[123] <= 0:
+                        dati[123] = dannoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        attaccoDiColco.append(0)
+                        attaccoDiColco.append("attP")
                     # difP
-                    if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
-                        if dati[124] > 0:
-                            azioneEseguita = False
-                        else:
-                            dati[124] = dannoTecniche[azione - 1]
-                            if dati[126] > 0:
-                                dati[10] -= costoTecniche[azione - 1] // 2
-                            else:
-                                dati[10] -= costoTecniche[azione - 1]
-                            attaccoDiColco.append("Rallo")
-                            attaccoDiColco.append(0)
-                            attaccoDiColco.append("difP")
+                    if azione == 13 and dati[10] >= costoTecnicaUsata and dati[124] <= 0:
+                        dati[124] = dannoTecniche[azione - 1]
+                        attaccoDiColco.append("Rallo")
+                        attaccoDiColco.append(0)
+                        attaccoDiColco.append("difP")
                     # cura++
-                    if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
+                    if azione == 16 and dati[10] >= costoTecnicaUsata:
                         dati[5] += dannoTecniche[azione - 1]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
-                        else:
-                            dati[10] -= costoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(dannoTecniche[azione - 1])
                         attaccoDiColco.append("")
                     # scossa++
-                    if azione == 18 and dati[10] >= costoTecniche[azione - 1]:
+                    if azione == 18 and dati[10] >= costoTecnicaUsata:
                         danno = dannoTecniche[azione - 1] - dif
                         if danno < 0:
                             danno = 0
                         dati[5] -= danno
                         if dati[5] < 0:
                             dati[5] = 0
-                        if dati[126] > 0:
-                            dati[10] -= costoTecniche[azione - 1] // 2
-                        else:
-                            dati[10] -= costoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
-                        dannoEffettivo = danno - dif
+                        dannoEffettivo = danno
                         if dannoEffettivo < 0:
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
@@ -1182,10 +1086,14 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             if ry > y and c == 2:
                                 nrob = 4
             elif ralloVisto:
-                if dati[10] >= costoTecniche[azione - 1]:
+                if dati[10] >= costoTecnicaUsata:
                     azioneEseguita = True
+                    attaccoDiColco.append("Colco")
+                    attaccoDiColco.append(-costoTecnicaUsata)
+                    attaccoDiColco.append("")
+                    dati[10] -= costoTecnicaUsata
                 # freccia
-                if azione == 4 and dati[10] >= costoTecniche[azione - 1]:
+                if azione == 4 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
@@ -1193,18 +1101,14 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
                 # tempesta
-                if azione == 5 and dati[10] >= costoTecniche[azione - 1]:
+                if azione == 5 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
@@ -1213,7 +1117,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -1222,20 +1126,17 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
                         nemico.danneggia(danno, "Colco")
-                    nemicoBersaglio.danneggia(danno, "Colco")
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
+                    if nemicoBersaglio:
+                        nemicoBersaglio.danneggia(danno, "Colco")
                     for nemico in listaNemiciAttaccatiADistanzaRobo:
-                        attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
-                        attaccoDiColco.append(-dannoEffettivo)
-                        attaccoDiColco.append("")
+                        if nemico != "Rallo":
+                            dannoEffettivo = danno - nemico.difesa
+                            if dannoEffettivo < 0:
+                                dannoEffettivo = 0
+                            attaccoDiColco.append(-dannoEffettivo)
+                            attaccoDiColco.append("")
                 # freccia+
-                if azione == 10 and dati[10] >= costoTecniche[azione - 1]:
+                if azione == 10 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
@@ -1243,18 +1144,14 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
                 # tempesta+
-                if azione == 15 and dati[10] >= costoTecniche[azione - 1]:
+                if azione == 15 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
@@ -1263,7 +1160,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -1272,20 +1169,18 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
                         nemico.danneggia(danno, "Colco")
-                    nemicoBersaglio.danneggia(danno, "Colco")
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
+                    if nemicoBersaglio:
+                        nemicoBersaglio.danneggia(danno, "Colco")
                     for nemico in listaNemiciAttaccatiADistanzaRobo:
-                        attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
-                        attaccoDiColco.append(-dannoEffettivo)
-                        attaccoDiColco.append("")
+                        if nemico != "Rallo":
+                            attaccoDiColco.append(nemico)
+                            dannoEffettivo = danno - nemico.difesa
+                            if dannoEffettivo < 0:
+                                dannoEffettivo = 0
+                            attaccoDiColco.append(-dannoEffettivo)
+                            attaccoDiColco.append("")
                 # freccia++
-                if azione == 19 and dati[10] >= costoTecniche[azione - 1]:
+                if azione == 19 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
@@ -1293,18 +1188,14 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dati[5] -= danno
                     if dati[5] < 0:
                         dati[5] = 0
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
                 # tempesta++
-                if azione == 20 and dati[10] >= costoTecniche[azione - 1]:
+                if azione == 20 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
                     if danno < 0:
@@ -1313,7 +1204,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -1322,18 +1213,16 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
                         nemico.danneggia(danno, "Colco")
-                    nemicoBersaglio.danneggia(danno, "Colco")
-                    if dati[126] > 0:
-                        dati[10] -= costoTecniche[azione - 1] // 2
-                    else:
-                        dati[10] -= costoTecniche[azione - 1]
+                    if nemicoBersaglio:
+                        nemicoBersaglio.danneggia(danno, "Colco")
                     for nemico in listaNemiciAttaccatiADistanzaRobo:
-                        attaccoDiColco.append(nemico)
-                        dannoEffettivo = danno - nemico.difesa
-                        if dannoEffettivo < 0:
-                            dannoEffettivo = 0
-                        attaccoDiColco.append(-dannoEffettivo)
-                        attaccoDiColco.append("")
+                        if nemico != "Rallo":
+                            attaccoDiColco.append(nemico)
+                            dannoEffettivo = danno - nemico.difesa
+                            if dannoEffettivo < 0:
+                                dannoEffettivo = 0
+                            attaccoDiColco.append(-dannoEffettivo)
+                            attaccoDiColco.append("")
                 # giro Colco verso l'obiettivo
                 if azioneEseguita:
                     if abs(x - rx) > abs(y - ry):
@@ -1384,74 +1273,18 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                                     nrob = 4
                                 sposta = True
         if suAlleato == 2:
-            if dati[10] >= costoTecniche[azione - 1]:
+            if dati[10] >= costoTecnicaUsata:
                 azioneEseguita = True
+                attaccoDiColco.append("Colco")
+                attaccoDiColco.append(-costoTecnicaUsata)
+                attaccoDiColco.append("")
+                dati[10] -= costoTecnicaUsata
                 if azione != 5 and azione != 15 and azione != 20:
                     attaccoDiColco.append("Colco")
                     attaccoDiColco.append(0)
                     attaccoDiColco.append("")
-            # scossa
-            if azione == 1 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # cura
-            if azione == 2 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # antidoto
-            if azione == 3 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # cura+
-            if azione == 8 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # scossa+
-            if azione == 9 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # attP
-            if azione == 12 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # difP
-            if azione == 13 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # cura++
-            if azione == 16 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # scossa++
-            if azione == 18 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
-            # freccia
-            if azione == 4 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
             # tempesta
-            if azione == 5 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 5 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
@@ -1461,7 +1294,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -1470,26 +1303,18 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
-                    attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
-                    attaccoDiColco.append(-dannoEffettivo)
-                    attaccoDiColco.append("")
-            # freccia+
-            if azione == 10 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                    if nemico != "Rallo":
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
             # tempesta+
-            if azione == 15 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 15 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
@@ -1499,7 +1324,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -1508,26 +1333,18 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
-                    attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
-                    attaccoDiColco.append(-dannoEffettivo)
-                    attaccoDiColco.append("")
-            # freccia++
-            if azione == 19 and dati[10] >= costoTecniche[azione - 1]:
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                    if nemico != "Rallo":
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
             # tempesa++
-            if azione == 20 and dati[10] >= costoTecniche[azione - 1]:
+            if azione == 20 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
                     danno = dannoTecniche[azione - 1] - dif
@@ -1537,7 +1354,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if dati[5] < 0:
                         dati[5] = 0
                     attaccoDiColco.append("Rallo")
-                    dannoEffettivo = danno - dif
+                    dannoEffettivo = danno
                     if dannoEffettivo < 0:
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
@@ -1546,18 +1363,16 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
-                nemicoBersaglio.danneggia(danno, "Colco")
-                if dati[126] > 0:
-                    dati[10] -= costoTecniche[azione - 1] // 2
-                else:
-                    dati[10] -= costoTecniche[azione - 1]
+                if nemicoBersaglio:
+                    nemicoBersaglio.danneggia(danno, "Colco")
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
-                    attaccoDiColco.append(nemico)
-                    dannoEffettivo = danno - nemico.difesa
-                    if dannoEffettivo < 0:
-                        dannoEffettivo = 0
-                    attaccoDiColco.append(-dannoEffettivo)
-                    attaccoDiColco.append("")
+                    if nemico != "Rallo":
+                        attaccoDiColco.append(nemico)
+                        dannoEffettivo = danno - nemico.difesa
+                        if dannoEffettivo < 0:
+                            dannoEffettivo = 0
+                        attaccoDiColco.append(-dannoEffettivo)
+                        attaccoDiColco.append("")
         return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco
 
 

@@ -2663,7 +2663,7 @@ def sceglitecn(dati, tecnica, canzone):
                 schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 4))
                 messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                 messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi,
+                messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi,
                           gsx // 32 * 18, gsy // 18 * 14.5, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
@@ -2782,7 +2782,7 @@ def sceglitecn(dati, tecnica, canzone):
                 schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 4))
                 messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                 messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge molti danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi,
+                messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi,
                           gsx // 32 * 18, gsy // 18 * 14.5, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
@@ -2794,7 +2794,8 @@ def sceglitecn(dati, tecnica, canzone):
                 schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 4))
                 messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                 messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio(u"Recupera un enorme quantità dei pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                messaggio(u"Recupera un enorme quantità dei pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                          35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
@@ -2840,9 +2841,9 @@ def sceglitecn(dati, tecnica, canzone):
                 schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 4))
                 messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                 messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge enormi danni a tutti i nemici o alleati entro il raggio di 6", grigiochi,
+                messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di", grigiochi,
                           gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                messaggio("Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
         else:
             messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
@@ -3059,7 +3060,7 @@ def sceglitecn(dati, tecnica, canzone):
                     schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 4))
                     messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
                     messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
@@ -3169,7 +3170,7 @@ def sceglitecn(dati, tecnica, canzone):
                     schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 4))
                     messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge molti danni a tutti i nemici o alleati entro il raggio di 6 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
                     messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
@@ -3224,8 +3225,8 @@ def sceglitecn(dati, tecnica, canzone):
                     schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 4))
                     messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge enormi danni a tutti i nemici o alleati entro il raggio di 6", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
+                    messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
+                    messaggio("Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)

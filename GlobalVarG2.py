@@ -354,10 +354,64 @@ while contatoreGlobale < 5:
     vetImgCollanePixellate.append(pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % contatoreGlobale))
     contatoreGlobale += 1
 
+# img animazioni tecniche
+imgDanneggiamentoColco = pygame.image.load('Immagini/AnimazioniTecniche/Danneggiamento.png')
+imgDanneggiamentoColco = pygame.transform.scale(imgDanneggiamentoColco, (gpx, gpy))
+vetAnimazioniTecniche = []
+nomiTecniche = ["scossa", "scossa+", "scossa++", "freccia", "freccia+", "freccia++", "tempesta", "tempesta+", "tempesta++", "cura", "cura+", "cura++", "antidoto", "attP", "difP", "ricarica", "ricarica+", "raffred", "velocizza", "efficienza"]
+for contatoreGlobale in nomiTecniche:
+    vetAnimazioniTecniche.append(contatoreGlobale)
+    vetAnimaImgTecniche = []
+    if contatoreGlobale.startswith("scossa") or contatoreGlobale.startswith("freccia") or contatoreGlobale.startswith("cura") or contatoreGlobale == "antidoto" or contatoreGlobale == "attP" or contatoreGlobale == "difP":
+        if contatoreGlobale.startswith("freccia"):
+            contatoreGlobale = "freccia"
+        img1 = pygame.image.load("Immagini/AnimazioniTecniche/%swAnima1.png" % contatoreGlobale)
+        img2 = pygame.image.load("Immagini/AnimazioniTecniche/%swAnima2.png" % contatoreGlobale)
+        img1 = pygame.transform.scale(img1, (gpx, gpy * 2))
+        img2 = pygame.transform.scale(img2, (gpx, gpy * 2))
+        vetAnimaImgTecniche.append(img1)
+        vetAnimaImgTecniche.append(img2)
+        img1 = pygame.image.load("Immagini/AnimazioniTecniche/%saAnima1.png" % contatoreGlobale)
+        img2 = pygame.image.load("Immagini/AnimazioniTecniche/%saAnima2.png" % contatoreGlobale)
+        img1 = pygame.transform.scale(img1, (gpx * 2, gpy))
+        img2 = pygame.transform.scale(img2, (gpx * 2, gpy))
+        vetAnimaImgTecniche.append(img1)
+        vetAnimaImgTecniche.append(img2)
+        img1 = pygame.image.load("Immagini/AnimazioniTecniche/%ssAnima1.png" % contatoreGlobale)
+        img2 = pygame.image.load("Immagini/AnimazioniTecniche/%ssAnima2.png" % contatoreGlobale)
+        img1 = pygame.transform.scale(img1, (gpx, gpy * 2))
+        img2 = pygame.transform.scale(img2, (gpx, gpy * 2))
+        vetAnimaImgTecniche.append(img1)
+        vetAnimaImgTecniche.append(img2)
+        img1 = pygame.image.load("Immagini/AnimazioniTecniche/%sdAnima1.png" % contatoreGlobale)
+        img2 = pygame.image.load("Immagini/AnimazioniTecniche/%sdAnima2.png" % contatoreGlobale)
+        img1 = pygame.transform.scale(img1, (gpx * 2, gpy))
+        img2 = pygame.transform.scale(img2, (gpx * 2, gpy))
+        vetAnimaImgTecniche.append(img1)
+        vetAnimaImgTecniche.append(img2)
+    elif contatoreGlobale.startswith("ricarica") or contatoreGlobale == "raffred" or contatoreGlobale == "velocizza" or contatoreGlobale == "efficienza":
+        img1 = pygame.image.load("Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale)
+        img1 = pygame.transform.scale(img1, (gpx, gpy))
+        vetAnimaImgTecniche.append(img1)
+    elif contatoreGlobale.startswith("tempesta"):
+        img1 = pygame.image.load("Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale)
+        img2 = pygame.image.load("Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale)
+        img1 = pygame.transform.scale(img1, (gpx * 17, gpy * 17))
+        img2 = pygame.transform.scale(img2, (gpx * 17, gpy * 17))
+        vetAnimaImgTecniche.append(img1)
+        vetAnimaImgTecniche.append(img2)
+    vetAnimazioniTecniche.append(vetAnimaImgTecniche)
+imgFrecciaEletttricaLanciata = pygame.image.load('Immagini/AnimazioniTecniche/FrecciaLanciata.png')
+imgFrecciaEletttricaLanciata = pygame.transform.scale(imgFrecciaEletttricaLanciata, (gpx, gpy))
+imgFrecciaEletttricaLanciataP = pygame.image.load('Immagini/AnimazioniTecniche/FrecciaLanciata+.png')
+imgFrecciaEletttricaLanciataP = pygame.transform.scale(imgFrecciaEletttricaLanciataP, (gpx, gpy))
+imgFrecciaEletttricaLanciataPP = pygame.image.load('Immagini/AnimazioniTecniche/FrecciaLanciata++.png')
+imgFrecciaEletttricaLanciataPP = pygame.transform.scale(imgFrecciaEletttricaLanciataPP, (gpx, gpy))
+
 # canali / volume (0-1)
 volumeCanzoni = 0
-volumePuntatore = 1
-volumeEffetti = 1
+volumePuntatore = 0
+volumeEffetti = 0
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundCanzone.set_volume(volumeCanzoni)

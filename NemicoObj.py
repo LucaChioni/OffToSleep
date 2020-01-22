@@ -214,7 +214,7 @@ class NemicoObj(object):
                 self.mosseRimaste = self.mosseRimaste - 1 + self.velocita
 
 
-    def settaObbiettivo(self, x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, attaccoADistanzaRobo):
+    def settaObbiettivo(self, x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo):
         vistoRallo = False
         vistoRob = False
         vistoesca = False
@@ -321,8 +321,8 @@ class NemicoObj(object):
             if self == attaccoADistanza:
                 self.xPosizioneUltimoBersaglio = x
                 self.yPosizioneUltimoBersaglio = y
-            elif attaccoADistanzaRobo:
-                for nemico in attaccoADistanzaRobo:
+            elif listaNemiciAttaccatiADistanzaRobo:
+                for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if self == nemico:
                         self.xPosizioneUltimoBersaglio = rx
                         self.yPosizioneUltimoBersaglio = ry
