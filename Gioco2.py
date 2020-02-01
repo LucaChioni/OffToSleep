@@ -15,6 +15,7 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            animaOggetto = [False, 0, 0]
             ultimoObbiettivoColco = []
             obbiettivoCasualeColco = False
             raffreddamento = False
@@ -45,7 +46,6 @@ def gameloop():
             vitaesca = []
             vettoreDenaro = []
             attacco = 0
-            # difesa e' grigio perche' viene impostato a ogni ciclo
             difesa = 0
             # 1->d , 2->a , 3->w , 4->s
             npers = 4
@@ -595,7 +595,12 @@ def gameloop():
                     nx = 0
                     ny = 0
                     attacco = 1
-                if event.key == pygame.K_x and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                if event.key == pygame.K_q and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento and nemicoInquadrato:
+                    tastoTrovato = True
+                    canaleSoundPuntatore.play(selind)
+                    nemicoInquadrato = False
+                    caricaTutto = True
+                if event.key == pygame.K_LSHIFT and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
                     nx = 0
                     ny = 0
@@ -607,9 +612,85 @@ def gameloop():
                         ultimoObbiettivoColco.append(x)
                         ultimoObbiettivoColco.append(y)
                         chiamarob = True
-                if event.key == pygame.K_q and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento and nemicoInquadrato:
-                    canaleSoundPuntatore.play(selind)
-                    nemicoInquadrato = False
+                if event.key == pygame.K_x and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                    listaNemiciVisti = []
+                    for nemico in listaNemici:
+                        if nemico.inCasellaVista:
+                            listaNemiciVisti.append(nemico)
+                    listaEscheViste = []
+                    i = 0
+                    while i < len(vitaesca):
+                        j = 0
+                        while j < len(caseviste):
+                            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
+                                listaEscheViste.append(vitaesca[i])
+                                listaEscheViste.append(vitaesca[i + 1])
+                                listaEscheViste.append(vitaesca[i + 2])
+                                listaEscheViste.append(vitaesca[i + 3])
+                            j += 3
+                        i += 4
+                    tastoTrovato = True
+                    if not nemicoInquadrato:
+                        nemicoInquadrato = "Colco"
+                    elif type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
+                        if len(listaNemiciVisti) > 0:
+                            nemicoInquadrato = listaNemiciVisti[0]
+                        elif len(listaEscheViste) > 0:
+                            nemicoInquadrato = "Esca" + str(listaEscheViste[0])
+                        else:
+                            nemicoInquadrato = "Colco"
+                    elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadrato) < len(listaNemiciVisti) - 1:
+                            nemicoInquadrato = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadrato) + 1]
+                        elif len(listaEscheViste) > 0:
+                            nemicoInquadrato = "Esca" + str(listaEscheViste[0])
+                        else:
+                            nemicoInquadrato = "Colco"
+                    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadrato[4:])) + 3 < len(listaEscheViste) - 1:
+                            nemicoInquadrato = "Esca" + str(listaEscheViste[listaEscheViste.index(int(nemicoInquadrato[4:])) + 4])
+                        else:
+                            nemicoInquadrato = "Colco"
+                    caricaTutto = True
+                if event.key == pygame.K_z and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                    listaNemiciVisti = []
+                    for nemico in listaNemici:
+                        if nemico.inCasellaVista:
+                            listaNemiciVisti.append(nemico)
+                    listaEscheViste = []
+                    i = 0
+                    while i < len(vitaesca):
+                        j = 0
+                        while j < len(caseviste):
+                            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
+                                listaEscheViste.append(vitaesca[i])
+                                listaEscheViste.append(vitaesca[i + 1])
+                                listaEscheViste.append(vitaesca[i + 2])
+                                listaEscheViste.append(vitaesca[i + 3])
+                            j += 3
+                        i += 4
+                    tastoTrovato = True
+                    if not nemicoInquadrato:
+                        nemicoInquadrato = "Colco"
+                    elif type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
+                        if len(listaEscheViste) > 0:
+                            nemicoInquadrato = "Esca" + str(listaEscheViste[len(listaEscheViste) - 4])
+                        elif len(listaNemiciVisti) > 0:
+                            nemicoInquadrato = listaNemiciVisti[len(listaNemiciVisti) - 1]
+                        else:
+                            nemicoInquadrato = "Colco"
+                    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadrato[4:])) != 0:
+                            nemicoInquadrato = "Esca" + str(listaEscheViste[listaEscheViste.index(int(nemicoInquadrato[4:])) - 4])
+                        elif len(listaNemiciVisti) > 0:
+                            nemicoInquadrato = listaNemiciVisti[len(listaNemiciVisti) - 1]
+                        else:
+                            nemicoInquadrato = "Colco"
+                    elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadrato) != 0:
+                            nemicoInquadrato = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadrato) - 1]
+                        else:
+                            nemicoInquadrato = "Colco"
                     caricaTutto = True
 
                 if event.key == pygame.K_SPACE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
@@ -690,7 +771,72 @@ def gameloop():
             if not apriocchio:
                 dati, inizio, attacco = start(dati, nmost, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, apriocchio)
             else:
-                dati, attacco, sposta = startBattaglia(dati)
+                dati, attacco, sposta, animaOggetto, npers = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry)
+                # cambiare posizione dopo l'uso di caricabatterie
+                if npers == 3:
+                    pers = persw
+                    arma = armaw
+                    armaMov1 = armawMov1
+                    armaMov2 = armawMov2
+                    armaAttacco = armawAttacco
+                    armatura = armaturaw
+                    scudo = scudow
+                    arco = arcow
+                    faretra = faretraw
+                    arcoAttacco = arcowAttacco
+                    guanti = guantiw
+                    guantiMov1 = guantiwMov1
+                    guantiMov2 = guantiwMov2
+                    guantiAttacco = guantiwAttacco
+                    collana = collanaw
+                if npers == 2:
+                    pers = persa
+                    arma = armaa
+                    armaMov1 = armaaMov1
+                    armaMov2 = armaaMov2
+                    armaAttacco = armaaAttacco
+                    armatura = armaturaa
+                    scudo = scudoa
+                    arco = arcoa
+                    faretra = faretraa
+                    arcoAttacco = arcoaAttacco
+                    guanti = guantia
+                    guantiMov1 = guantiaMov1
+                    guantiMov2 = guantiaMov2
+                    guantiAttacco = guantiaAttacco
+                    collana = collanaa
+                if npers == 4:
+                    pers = perss
+                    arma = armas
+                    armaMov1 = armasMov1
+                    armaMov2 = armasMov2
+                    armaAttacco = armasAttacco
+                    armatura = armaturas
+                    scudo = scudos
+                    arco = arcos
+                    faretra = faretras
+                    arcoAttacco = arcosAttacco
+                    guanti = guantis
+                    guantiMov1 = guantisMov1
+                    guantiMov2 = guantisMov2
+                    guantiAttacco = guantisAttacco
+                    collana = collanas
+                if npers == 1:
+                    pers = persd
+                    arma = armad
+                    armaMov1 = armadMov1
+                    armaMov2 = armadMov2
+                    armaAttacco = armadAttacco
+                    armatura = armaturad
+                    scudo = scudod
+                    arco = arcod
+                    faretra = faretrad
+                    arcoAttacco = arcodAttacco
+                    guanti = guantid
+                    guantiMov1 = guantidMov1
+                    guantiMov2 = guantidMov2
+                    guantiAttacco = guantidAttacco
+                    collana = collanad
                 caricaTutto = True
             carim = True
             startf = False
@@ -744,7 +890,7 @@ def gameloop():
         # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
         attaccoDiRallo = []
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto)
             tastop = 0
             # tolgo una freccia se uso l'attacco a distanza
             if attaccoADistanza:
@@ -882,27 +1028,20 @@ def gameloop():
                         j = j + 4
                 k = k + 4
             apriChiudiPorta = [False, 0, 0]
-            # controllo se devo deselezionare il nemico / esca / colco inquadrato
-            vettoreVuoto = []
-            # vita colco selezionato
-            if nemicoInquadrato == "Colco":
-                raggiungibile = pathFinding(x, y, rx, ry, stanza, porte, cofanetti, vettoreVuoto)
-                if not raggiungibile:
-                    nemicoInquadrato = False
-            # vita nemico selezionato
-            elif not type(nemicoInquadrato) is str and nemicoInquadrato:
-                raggiungibile = pathFinding(x, y, nemicoInquadrato.x, nemicoInquadrato.y, stanza, porte, cofanetti, vettoreVuoto)
-                if not raggiungibile:
-                    nemicoInquadrato = False
+            # controllo se devo deselezionare il nemico/esca inquadrato
+            if not type(nemicoInquadrato) is str and nemicoInquadrato and not nemicoInquadrato.inCasellaVista:
+                nemicoInquadrato = False
             # vita esche selezionate
             elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
                 idEscaInquadrata = int(nemicoInquadrato[4:])
                 i = 0
                 while i < len(vitaesca):
                     if idEscaInquadrata == vitaesca[i]:
-                        raggiungibile = pathFinding(x, y, vitaesca[i + 2], vitaesca[i + 3], stanza, porte, cofanetti, vettoreVuoto)
-                        if not raggiungibile:
-                            nemicoInquadrato = False
+                        j = 0
+                        while j < len(caseviste):
+                            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and not caseviste[j + 2]:
+                                nemicoInquadrato = False
+                            j += 3
                         break
                     i += 4
         # apertura cofanetti
@@ -931,6 +1070,12 @@ def gameloop():
             ry = yProv
             spingiColco = False
 
+        # esche prima del turno
+        eschePrimaDelTurno = []
+        i = 0
+        while i < len(vitaesca):
+            eschePrimaDelTurno.append(vitaesca[i])
+            i += 4
         # lancio esche
         if creaesca:
             contaesca = contaesca + 1
@@ -964,7 +1109,7 @@ def gameloop():
         i = 1
         while i < len(vitaesca):
             if vitaesca[i + 1] == x and vitaesca[i + 2] == y:
-                # tolgo la selezione dell'esca morta
+                # tolgo la selezione dell'esca ripresa
                 if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vitaesca[i - 1]:
                     nemicoInquadrato = False
                     caricaTutto = True
@@ -1059,7 +1204,7 @@ def gameloop():
                 if nemico.x == rx and nemico.y == ry:
                     sovrapposto = True
                     break
-            if (rx == x and ry == y) or sovrapposto:
+            if sovrapposto:
                 rx = vrx
                 ry = vry
                 nrob = 0
@@ -1177,13 +1322,13 @@ def gameloop():
             if caricaTutto:
                 if aumentoliv != 0:
                     pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
-                disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, True)
+                disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, True)
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2)
+                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno)
             if not carim:
                 pvtot = getVitaTotRallo(dati[4], dati[129])
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, False)
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, False)
 
         if aumentoliv == 0:
             caricaTutto = False
@@ -1233,7 +1378,7 @@ def gameloop():
         vrx = rx
         vry = ry
         attacco = 0
-
+        animaOggetto = [False, 0, 0]
         sposta = False
 
 gameloop()

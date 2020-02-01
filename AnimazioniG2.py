@@ -47,7 +47,7 @@ def animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, a
         disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazioneRallo, fineanimaz):
+def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazioneRallo, fineanimaz):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -72,31 +72,59 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scud
             if primopasso:
                 primopasso = False
             animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
+        # quando si apre una porta
+        elif difesa == 0:
+            animazioneRallo = True
+            disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     elif canaleSoundPassiRallo.get_busy():
         canaleSoundPassiRallo.stop()
     return animazioneRallo, primopasso
 
 
-def animaAttaccoRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, animazioneRallo, attaccoADistanza, fineanimaz):
+def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, vrx, vry, armrobS, sfondinoa, sfondinob, animazioneRallo, attaccoADistanza, animaOggetto, fineanimaz):
     if sposta and fineanimaz != 0:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
             if attaccoADistanza:
-                if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
+                if fineanimaz == 10:
                     canaleSoundAttacco.play(rumoreAttaccoArco)
                 disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
             else:
-                if fineanimaz == 10 and not canaleSoundAttacco.get_busy():
+                if fineanimaz == 10:
                     canaleSoundAttacco.play(rumoreAttaccoSpada)
                 disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
+        elif animaOggetto[0]:
+            animazioneRallo = True
+            if animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+            if animaOggetto[0] == "pozione" or animaOggetto[0] == "superPozione":
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                if fineanimaz > 5:
+                    schermo.blit(imgAnimaPozione1, (x, y))
+                else:
+                    schermo.blit(imgAnimaPozione2, (x, y))
+            elif animaOggetto[0] == "medicina":
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                if fineanimaz > 5:
+                    schermo.blit(imgAnimaMedicina1, (x, y))
+                else:
+                    schermo.blit(imgAnimaMedicina2, (x, y))
+            elif animaOggetto[0] == "caricaBatterie" or animaOggetto[0] == "caricaBatterieMigliorato":
+                if ((vrx / gpx) + (vry / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (vrx, vry))
+                if ((vrx / gpx) + (vry / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (vrx, vry))
+                schermo.blit(armrobS, (vrx, vry))
+                schermo.blit(robos, (vrx, vry))
+                schermo.blit(imgAnimaCaricabatterie, (vrx, vry))
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     return animazioneRallo
 
 
-def animaDifesaRallo(sposta, x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, avvele, difesa, animazioneRallo, nemicoAttaccante, fineanimaz):
+def animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, avvele, difesa, animazioneRallo, nemicoAttaccante, fineanimaz):
     if nemicoAttaccante and nemicoAttaccante.ralloParato and fineanimaz == 10:
         canaleSoundAttacco.play(rumoreParata)
-    if sposta and fineanimaz != 0:
-        if difesa != 0 or (nemicoAttaccante and nemicoAttaccante.ralloParato):
+    if fineanimaz != 0 and (difesa != 0 or (nemicoAttaccante and nemicoAttaccante.ralloParato)):
             animazioneRallo = True
             schermo.blit(arcoS, (x, y))
             schermo.blit(faretraS, (x, y))
@@ -109,19 +137,6 @@ def animaDifesaRallo(sposta, x, y, armaS, armaturaS, arcoS, faretraS, collanaS, 
             schermo.blit(armaS, (x, y))
             schermo.blit(guantiDifesa, (x, y))
             schermo.blit(scudoDifesa, (x, y))
-    elif not sposta and (difesa != 0 or (nemicoAttaccante and nemicoAttaccante.ralloParato)) and fineanimaz != 0:
-        animazioneRallo = True
-        schermo.blit(arcoS, (x, y))
-        schermo.blit(faretraS, (x, y))
-        schermo.blit(perss, (x, y))
-        if avvele:
-            schermo.blit(persAvvele, (x, y))
-        schermo.blit(armaturaS, (x, y))
-        schermo.blit(collanaS, (x, y))
-        schermo.blit(persmbDifesa, (x, y))
-        schermo.blit(armaS, (x, y))
-        schermo.blit(guantiDifesa, (x, y))
-        schermo.blit(scudoDifesa, (x, y))
     return animazioneRallo
 
 
@@ -497,17 +512,22 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
                         schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
 
 
-def animaEsche(vitaesca, caseviste, sfondinoa, sfondinob):
+def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob):
     i = 0
     while i < len(vitaesca):
         j = 0
         while j < len(caseviste):
-            if ((caseviste[j] == vitaesca[i + 2] - gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + gpy)) and caseviste[j + 2]:
-                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
-                    schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
-                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
-                    schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
-                schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
+                k = 0
+                while k < len(eschePrimaDelTurno):
+                    if eschePrimaDelTurno[k] == vitaesca[i]:
+                        if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
+                            schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
+                        if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
+                            schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
+                        schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                        break
+                    k += 2
                 break
             j += 3
         i += 4
@@ -705,20 +725,29 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana):
     return denaroRaccolto
 
 
-def eliminaOggettoLanciato(x, y, attaccoADistanza, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz):
+def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz):
     # disegno il terreno sotto le frecce lanciate da Rallo
-    if "attaccoRallo" in azioniDaEseguire and attaccoADistanza and not cambiosta:
+    if "attaccoRallo" in azioniDaEseguire and (attaccoADistanza or animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata") and not cambiosta:
         xInizioRetta = x
-        xFineRetta = attaccoADistanza.vx
         yInizioRetta = y
-        yFineRetta = attaccoADistanza.vy
+        if animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
+            xFineRetta = animaOggetto[1]
+            yFineRetta = animaOggetto[2]
+        else:
+            xFineRetta = attaccoADistanza.vx
+            yFineRetta = attaccoADistanza.vy
         global quadrettoSottoLaFreccia
+        global quadrettoSottoEsplosione
         if fineanimaz > 5:
+            if fineanimaz == 10 and (animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata"):
+                quadrettoSottoEsplosione = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xFineRetta - (gpx * 2), yFineRetta - (gpy * 2), gpx * 5, gpy * 5))
             if fineanimaz != 10:
                 schermo.blit(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
             quadrettoSottoLaFreccia = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - gpy, gpx * 3, gpy * 3))
         elif fineanimaz == 5:
             schermo.blit(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - gpy))
+        elif fineanimaz == 0 and (animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata"):
+            schermo.blit(quadrettoSottoEsplosione, ((xFineRetta - (gpx * 2), yFineRetta - (gpy * 2))))
 
     # disegno il terreno sotto le frecce elettriche lanciate da Colco
     if "attaccoColco" in azioniDaEseguire and listaNemiciAttaccatiADistanzaRobo and len(listaNemiciAttaccatiADistanzaRobo) == 1 and tecnicaUsata.startswith("freccia") and not cambiosta:
@@ -834,20 +863,46 @@ def disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, te
                 schermo.blit(nemicoAttaccante.quadrettoSottoArma, (xAttaccoNemico, yAttaccoNemico))
 
 
-def animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz):
-    # disegno le frecce lanciate da Rallo
-    if "attaccoRallo" in azioniDaEseguire and attaccoADistanza and not cambiosta:
+def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz):
+    # disegno le frecce e gli oggetti lanciati da Rallo
+    if "attaccoRallo" in azioniDaEseguire and (attaccoADistanza or animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata") and not cambiosta:
         xInizioRetta = x
-        xFineRetta = attaccoADistanza.vx
         yInizioRetta = y
-        yFineRetta = attaccoADistanza.vy
-        deltaXRetta = xFineRetta - xInizioRetta
-        deltaYRetta = yFineRetta - yInizioRetta
-        angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
-        angoloInGradi = math.degrees(angoloInRadianti)
-        imgFrecciaLanciata_temp = pygame.transform.rotate(imgFrecciaLanciata, angoloInGradi)
+        if animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
+            xFineRetta = animaOggetto[1]
+            yFineRetta = animaOggetto[2]
+            imgFrecciaLanciata_temp = 0
+            if animaOggetto[0] == "bomba":
+                imgFrecciaLanciata_temp = vetIcoOggettiMenu[5]
+            elif animaOggetto[0] == "bombaVeleno":
+                imgFrecciaLanciata_temp = vetIcoOggettiMenu[6]
+            elif animaOggetto[0] == "esca":
+                imgFrecciaLanciata_temp = vetIcoOggettiMenu[7]
+            elif animaOggetto[0] == "bombaAppiccicosa":
+                imgFrecciaLanciata_temp = vetIcoOggettiMenu[8]
+            elif animaOggetto[0] == "bombaPotenziata":
+                imgFrecciaLanciata_temp = vetIcoOggettiMenu[9]
+        else:
+            xFineRetta = attaccoADistanza.vx
+            yFineRetta = attaccoADistanza.vy
+            deltaXRetta = xFineRetta - xInizioRetta
+            deltaYRetta = yFineRetta - yInizioRetta
+            angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
+            angoloInGradi = math.degrees(angoloInRadianti)
+            imgFrecciaLanciata_temp = pygame.transform.rotate(imgFrecciaLanciata, angoloInGradi)
         if fineanimaz > 5:
             schermo.blit(imgFrecciaLanciata_temp, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz))))
+        elif animaOggetto[0] and fineanimaz > 0:
+            if animaOggetto[0] == "bomba":
+                schermo.blit(imgAnimaBomba, (animaOggetto[1] - gpx, animaOggetto[2] - gpy))
+            elif animaOggetto[0] == "bombaVeleno":
+                schermo.blit(imgAnimaBombaVeleno, (animaOggetto[1], animaOggetto[2]))
+            elif animaOggetto[0] == "esca":
+                schermo.blit(vetIcoOggettiMenu[7], (animaOggetto[1], animaOggetto[2]))
+            elif animaOggetto[0] == "bombaAppiccicosa":
+                schermo.blit(imgAnimaBombaAppiccicosa, (animaOggetto[1], animaOggetto[2]))
+            elif animaOggetto[0] == "bombaPotenziata":
+                schermo.blit(imgAnimaBombaPotenziata, (animaOggetto[1] - (gpx * 2), animaOggetto[2] - (gpy * 2)))
 
     # disegno le frecce elettriche lanciate da Colco
     if "attaccoColco" in azioniDaEseguire and listaNemiciAttaccatiADistanzaRobo and len(listaNemiciAttaccatiADistanzaRobo) == 1 and tecnicaUsata.startswith("freccia") and not cambiosta:
@@ -888,7 +943,7 @@ def animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, listaNemiciAttaccatiADis
 
 
 def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv):
-    if fineanimaz == 10:
+    if fineanimaz == 5:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
         # vita-status personaggio (statoRalloInizioTurno[pv, veleno, attP, difP])
@@ -1106,12 +1161,27 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
     return statoRalloInizioTurno, statoColcoInizioTurno
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2):
+def disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca):
+    if nemicoInquadrato == "Colco":
+        schermo.blit(puntatoreInquadraNemici, (rx, ry))
+    elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+        schermo.blit(puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
+    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+        idEscaInquadrata = int(nemicoInquadrato[4:])
+        i = 0
+        while i < len(vitaesca):
+            if idEscaInquadrata == vitaesca[i]:
+                schermo.blit(puntatoreInquadraNemici, (vitaesca[i + 2], vitaesca[i + 3]))
+                break
+            i += 4
+
+
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno):
     schermo_prima_delle_animazioni = schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemici", "attaccoNemici", "aumentaLv"]
     azioniDaEseguire = []
-    if sposta and attacco != 0:
+    if sposta and (attacco == 1 or animaOggetto[0]):
         azioniDaEseguire.append("attaccoRallo")
     elif sposta:
         azioniDaEseguire.append("movimentoRallo")
@@ -1120,7 +1190,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         if nemico.animaSpostamento or nemico.animaMorte:
             spostamentoNemico = True
             break
-    if sposta and attacco == 0 and not cambiosta and ((tecnicaUsata and tecnicaUsata == "spostamento") or spostamentoNemico):
+    if sposta and attacco == 0 and not animaOggetto[0] and not cambiosta and ((tecnicaUsata and tecnicaUsata == "spostamento") or spostamentoNemico) and not (tecnicaUsata and tecnicaUsata != "spostamento"):
         azioniPossibili.remove("attaccoColco")
         azioniPossibili.remove("movimentoColcoNemici")
         azioniDaEseguire.append("movimentoColcoNemici")
@@ -1157,9 +1227,6 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         nemico.animazioneFatta = False
     while len(azioniDaEseguire) > 0:
         # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
-        animazioneRallo = False
-        animazioneColco = False
-        animazioneNemici = False
         nemicoAttaccante = False
         if "attaccoNemici" in azioniDaEseguire:
             for nemico in listaNemici:
@@ -1168,6 +1235,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     break
         fineanimaz = 10
         while fineanimaz >= 0:
+            animazioneRallo = False
+            animazioneColco = False
+            animazioneNemici = False
             # ridisegnare il quadratino dove sono i personaggi
             if cambiosta:
                 if fineanimaz == 10:
@@ -1198,7 +1268,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                             schermo.blit(sfondinob, (nemico.x, nemico.y))
 
             # disegno le esche e il denaro
-            animaEsche(vitaesca, caseviste, sfondinoa, sfondinob)
+            animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob)
             animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob)
             animaCofanetti(cofanetti, caseviste, sfondinoc)
             animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc)
@@ -1207,7 +1277,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if fineanimaz == 10:
                 schermo_prima_delle_animazioni = schermo.copy()
-            eliminaOggettoLanciato(x, y, attaccoADistanza, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
+            eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
             disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
 
             # disegna personaggi se ci sono animazioni ma non loro
@@ -1219,13 +1289,12 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if not "movimentoRallo" in azioniDaEseguire and canaleSoundPassiRallo.get_busy():
                 canaleSoundPassiRallo.stop()
             # animazione difesa Rallo
-            animazioneRallo = animaDifesaRallo(sposta, x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, statoRalloInizioTurno[1], difesa, animazioneRallo, nemicoAttaccante, fineanimaz)
+            animazioneRallo = animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, statoRalloInizioTurno[1], difesa, animazioneRallo, nemicoAttaccante, fineanimaz)
 
             if "aumentaLv" in azioniDaEseguire:
                 # animazione aumento di livello
                 animazioneRallo, caricaTutto, tastop, aumentoliv = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, fineanimaz)
 
-            # con movimentoColcoNemici vengono eseguite le animazioni di: movimento colco, movimento nemici, morti nemici
             if "movimentoColcoNemici" in azioniDaEseguire:
                 # animazione camminata robo
                 animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
@@ -1236,28 +1305,27 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], attacco, difesa, tastop, animazioneRallo, fineanimaz)
+                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], attacco, difesa, tastop, animazioneRallo, fineanimaz)
 
-            # con attaccoNemici vengono eseguite le animazioni di: frecce nemici, attacco nemici
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco
                 animaDanneggiamentoColco(rx, ry, nemicoAttaccante, cambiosta, fineanimaz)
 
                 # animazione attacco nemici
-                animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz)
+                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz)
                 animazioneNemici = animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz)
 
             if "attaccoRallo" in azioniDaEseguire:
                 # animazione attacco Rallo
-                animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
-                animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, scudo, armatura, collana, arco, faretra, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, animazioneRallo, attaccoADistanza, fineanimaz)
+                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
+                animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, sfondinoa, sfondinob, animazioneRallo, attaccoADistanza, animaOggetto, fineanimaz)
 
                 # animazione danneggiamento dei nemici
                 animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo")
 
             if "attaccoColco" in azioniDaEseguire:
                 # animazione attacco Colco
-                animaFrecceLanciate(x, y, attaccoADistanza, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
+                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
                 animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, fineanimaz)
 
                 # animazione danneggiamento dei nemici
@@ -1267,6 +1335,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, pers, statoRalloInizioTurno[1], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, animazioneRallo)
             # anima raccolta denaro
             denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, dati[130])
+
+            # disegno img puntatoreInquadraNemici
+            disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca)
 
             if animazioneRallo:
                 animazioneRalloFatta = True

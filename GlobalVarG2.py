@@ -2,7 +2,8 @@
 
 import ctypes
 import pygame
-pygame.mixer.init(44100, -16, 1, 512)
+#pygame.mixer.init(44100, -16, 1, 512)
+pygame.mixer.init(22100, -16, 2, 64)
 pygame.init()
 
 # adattamento schermo
@@ -90,6 +91,8 @@ scorriSu = pygame.image.load("Immagini/Puntatori/ScorriOggettiSu.png")
 scorriSu = pygame.transform.scale(scorriSu, (gpx, gpy))
 scorriGiu = pygame.image.load("Immagini/Puntatori/ScorriOggettiGiu.png")
 scorriGiu = pygame.transform.scale(scorriGiu, (gpx, gpy))
+puntatoreInquadraNemici = pygame.image.load("Immagini/Puntatori/InquadraNemicoSelezionato.png")
+puntatoreInquadraNemici = pygame.transform.scale(puntatoreInquadraNemici, (gpx, gpy))
 
 # immagini personaggio
 persw = pygame.image.load('Immagini/Personaggi/Personaggio4.png')
@@ -354,6 +357,26 @@ while contatoreGlobale < 5:
     vetImgCollanePixellate.append(pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % contatoreGlobale))
     contatoreGlobale += 1
 
+# img animazioni oggetti
+imgAnimaBomba = pygame.image.load('Immagini/AnimazioniOggetti/Bomba.png')
+imgAnimaBomba = pygame.transform.scale(imgAnimaBomba, (gpx * 3, gpy * 3))
+imgAnimaBombaVeleno = pygame.image.load('Immagini/AnimazioniOggetti/BombaVeleno.png')
+imgAnimaBombaVeleno = pygame.transform.scale(imgAnimaBombaVeleno, (gpx, gpy))
+imgAnimaBombaAppiccicosa = pygame.image.load('Immagini/AnimazioniOggetti/BombaAppiccicosa.png')
+imgAnimaBombaAppiccicosa = pygame.transform.scale(imgAnimaBombaAppiccicosa, (gpx, gpy))
+imgAnimaBombaPotenziata = pygame.image.load('Immagini/AnimazioniOggetti/BombaPotenziata.png')
+imgAnimaBombaPotenziata = pygame.transform.scale(imgAnimaBombaPotenziata, (gpx * 5, gpy * 5))
+imgAnimaPozione1 = pygame.image.load('Immagini/AnimazioniOggetti/Pozione1.png')
+imgAnimaPozione1 = pygame.transform.scale(imgAnimaPozione1, (gpx, gpy))
+imgAnimaPozione2 = pygame.image.load('Immagini/AnimazioniOggetti/Pozione2.png')
+imgAnimaPozione2 = pygame.transform.scale(imgAnimaPozione2, (gpx, gpy))
+imgAnimaMedicina1 = pygame.image.load('Immagini/AnimazioniOggetti/Medicina1.png')
+imgAnimaMedicina1 = pygame.transform.scale(imgAnimaMedicina1, (gpx, gpy))
+imgAnimaMedicina2 = pygame.image.load('Immagini/AnimazioniOggetti/Medicina2.png')
+imgAnimaMedicina2 = pygame.transform.scale(imgAnimaMedicina2, (gpx, gpy))
+imgAnimaCaricabatterie = pygame.image.load('Immagini/AnimazioniOggetti/Caricabatterie.png')
+imgAnimaCaricabatterie = pygame.transform.scale(imgAnimaCaricabatterie, (gpx, gpy))
+
 # img animazioni tecniche
 imgDanneggiamentoColco = pygame.image.load('Immagini/AnimazioniTecniche/Danneggiamento.png')
 imgDanneggiamentoColco = pygame.transform.scale(imgDanneggiamentoColco, (gpx, gpy))
@@ -410,8 +433,8 @@ imgFrecciaEletttricaLanciataPP = pygame.transform.scale(imgFrecciaEletttricaLanc
 
 # canali / volume (0-1)
 volumeCanzoni = 0
-volumePuntatore = 0
-volumeEffetti = 0
+volumePuntatore = 1
+volumeEffetti = 1
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundCanzone.set_volume(volumeCanzoni)

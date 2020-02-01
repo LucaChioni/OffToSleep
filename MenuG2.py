@@ -153,7 +153,7 @@ def scegli_sal(cosa, lunghezzadati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -204,7 +204,7 @@ def scegli_sal(cosa, lunghezzadati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_a or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_a:
                 if conferma:
                     if voceMarcata == 2:
@@ -432,7 +432,7 @@ def menu():
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -576,7 +576,7 @@ def menu():
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_s:
                 if voceMarcata != 4:
                     if voceMarcata == 1:
@@ -1187,7 +1187,7 @@ def equip(dati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -1410,7 +1410,7 @@ def equip(dati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_s:
                 if voceMarcata == 5 or voceMarcata == 10 or voceMarcata == 15 or voceMarcata == 20 or voceMarcata == 25 or voceMarcata == 30:
                     voceMarcata -= 4
@@ -2229,7 +2229,7 @@ def sceglicondiz(dati, condizione, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -2282,7 +2282,7 @@ def sceglicondiz(dati, condizione, canzone):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_w:
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
@@ -2879,7 +2879,7 @@ def sceglitecn(dati, tecnica, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -2934,7 +2934,7 @@ def sceglitecn(dati, tecnica, canzone):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_w:
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
@@ -3685,7 +3685,7 @@ def equiprobo(dati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -3811,7 +3811,7 @@ def equiprobo(dati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_w:
                 if riordinamento:
                     if voceMarcata != 6:
@@ -4609,7 +4609,7 @@ def oggetti(dati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -4831,7 +4831,7 @@ def oggetti(dati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_w and voceMarcata == 0:
                 if oggetton != 1 and oggetton != 6:
                     canaleSoundPuntatore.play(spostapun)
@@ -5074,7 +5074,7 @@ def chiediconferma(conferma, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -5113,7 +5113,7 @@ def chiediconferma(conferma, canzone):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_a:
                 if voceMarcata == 2:
                     voceMarcata -= 1
@@ -5262,7 +5262,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -5332,7 +5332,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_s:
                 if voceMarcata != 5 and voceMarcata != 8:
                     canaleSoundPuntatore.play(spostapun)
@@ -5445,7 +5445,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
     return dati, inizio, attacco
 
 
-def startBattaglia(dati):
+def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
     xp = gpx * 1
     yp = gpy * 5
     sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 4, gpy * 4))
@@ -5521,10 +5521,28 @@ def startBattaglia(dati):
                 disegnati += 1
             i += 1
         if difensivi:
-            messaggio("Oggetti curativi", grigiochi, gpx * 1, gpy // 2, 40)
+            if voceMarcata == 1:
+                messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 2:
+                messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 3:
+                messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 4:
+                messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 5:
+                messaggio("Caricabatterie migliorato", grigiochi, gpx // 3, gpy // 3, 45)
             schermo.blit(scorriGiu, (gpx * 3, gpy * 6))
         if offensivi:
-            messaggio("Oggetti offensivi", grigiochi, gpx * 1, gpy // 2, 40)
+            if voceMarcata == 1:
+                messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 2:
+                messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 3:
+                messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 4:
+                messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 45)
+            if voceMarcata == 5:
+                messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 45)
             schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
 
         if not risposta:
@@ -5535,7 +5553,7 @@ def startBattaglia(dati):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 2
+            tastotempfps = 3
 
         primoMovimento = False
         tastoTrovato = False
@@ -5568,6 +5586,7 @@ def startBattaglia(dati):
                     if difensivi:
                         # pozione
                         if voceMarcata == 1 and dati[31] > 0:
+                            animaOggetto[0] = "pozione"
                             dati[5] = dati[5] + 100
                             if dati[5] > pvtot:
                                 dati[5] = pvtot
@@ -5575,21 +5594,33 @@ def startBattaglia(dati):
                             sposta = True
                             risposta = True
                         # carica batt
-                        if voceMarcata == 2 and dati[32] > 0:
+                        if voceMarcata == 2 and dati[32] > 0 and (abs(x - rx) + abs(y - ry)) <= gpx:
+                            animaOggetto[0] = "caricaBatterie"
                             dati[10] = dati[10] + 250
                             if dati[10] > entot:
                                 dati[10] = entot
                             dati[32] = dati[32] - 1
+                            # npers: 1=d, 2=a, 3=w, 4=s
+                            if x < rx:
+                                npers = 1
+                            elif x > rx:
+                                npers = 2
+                            elif y < ry:
+                                npers = 4
+                            elif y > ry:
+                                npers = 3
                             sposta = True
                             risposta = True
                         # antidoto
                         if voceMarcata == 3 and dati[33] > 0:
+                            animaOggetto[0] = "medicina"
                             dati[121] = 0
                             dati[33] = dati[33] - 1
                             sposta = True
                             risposta = True
                         # super pozione
                         if voceMarcata == 4 and dati[34] > 0:
+                            animaOggetto[0] = "superPozione"
                             dati[5] = dati[5] + 300
                             if dati[5] > pvtot:
                                 dati[5] = pvtot
@@ -5597,15 +5628,25 @@ def startBattaglia(dati):
                             sposta = True
                             risposta = True
                         # carica migliorato
-                        if voceMarcata == 5 and dati[35] > 0:
+                        if voceMarcata == 5 and dati[35] > 0 and (abs(x - rx) + abs(y - ry)) <= gpx:
+                            animaOggetto[0] = "caricaBatterieMigliorato"
                             dati[10] = dati[10] + 600
                             if dati[10] > entot:
                                 dati[10] = entot
                             dati[35] = dati[35] - 1
+                            # npers: 1=d, 2=a, 3=w, 4=s
+                            if x < rx:
+                                npers = 1
+                            elif x > rx:
+                                npers = 2
+                            elif y < ry:
+                                npers = 4
+                            elif y > ry:
+                                npers = 3
                             sposta = True
                             risposta = True
-                    # bomba
                     elif offensivi:
+                        # bomba
                         if voceMarcata == 1 and dati[36] > 0:
                             attacco = 2
                             risposta = True
@@ -5635,7 +5676,7 @@ def startBattaglia(dati):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
+                tastotempfps = 3
             if tastop == pygame.K_w:
                 if offensivi:
                     canaleSoundPuntatore.play(spostapun)
@@ -5697,6 +5738,9 @@ def startBattaglia(dati):
             if dati[disegnoOggetto + 31] <= 0:
                 schermo.blit(puntatOut, (xp, yp))
                 qta = 0
+            elif (disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > gpx:
+                schermo.blit(puntatOut, (xp, yp))
+                qta = dati[disegnoOggetto + 31]
             else:
                 schermo.blit(puntatIn, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
@@ -5712,14 +5756,32 @@ def startBattaglia(dati):
                     disegnati += 1
                 i += 1
             if difensivi:
-                messaggio("Oggetti curativi", grigiochi, gpx * 1, gpy // 2, 40)
+                if voceMarcata == 1:
+                    messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 2:
+                    messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 3:
+                    messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 4:
+                    messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 5:
+                    messaggio("Caricabatterie migliorato", grigiochi, gpx // 3, gpy // 3, 45)
                 schermo.blit(scorriGiu, (gpx * 3, gpy * 6))
             if offensivi:
-                messaggio("Oggetti offensivi", grigiochi, gpx * 1, gpy // 2, 40)
+                if voceMarcata == 1:
+                    messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 2:
+                    messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 3:
+                    messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 4:
+                    messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 45)
+                if voceMarcata == 5:
+                    messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 45)
                 schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
 
             if not risposta:
                 pygame.display.update()
 
         clockMenu.tick(fpsMenu)
-    return dati, attacco, sposta
+    return dati, attacco, sposta, animaOggetto, npers

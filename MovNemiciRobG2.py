@@ -1423,7 +1423,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
             azioneEseguita = True
         else:
             vetNemiciSoloConXeY = []
-            for nemico in nemiciVistiDaColco:
+            for nemico in listaNemici:
                 vetNemiciSoloConXeY.append(nemico.x)
                 vetNemiciSoloConXeY.append(nemico.y)
             percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
@@ -1793,28 +1793,34 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
             if ultimoObbiettivoColco[0] == "Telecomando":
                 vetNemiciSoloConXeY.append(x)
                 vetNemiciSoloConXeY.append(y)
-                for nemico in nemiciVistiDaColco:
+                for nemico in listaNemici:
                     vetNemiciSoloConXeY.append(nemico.x)
                     vetNemiciSoloConXeY.append(nemico.y)
             elif ultimoObbiettivoColco[0] == "Nemico":
                 vetNemiciSoloConXeY.append(x)
                 vetNemiciSoloConXeY.append(y)
-                for nemico in nemiciVistiDaColco:
+                for nemico in listaNemici:
                     if not (ultimoObbiettivoColco[1] == nemico.x and ultimoObbiettivoColco[2] == nemico.y):
                         vetNemiciSoloConXeY.append(nemico.x)
                         vetNemiciSoloConXeY.append(nemico.y)
 
             if (abs(rx - ultimoObbiettivoColco[1]) == gpx and abs(ry - ultimoObbiettivoColco[2]) == 0) or (abs(rx - ultimoObbiettivoColco[1]) == 0 and abs(ry - ultimoObbiettivoColco[2]) == gpy):
-                if rx + gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
-                    nrob = 1
-                if rx - gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
-                    nrob = 2
-                if rx == ultimoObbiettivoColco[1] and ry + gpy == ultimoObbiettivoColco[2]:
-                    nrob = 3
-                if rx == ultimoObbiettivoColco[1] and ry - gpy == ultimoObbiettivoColco[2]:
-                    nrob = 4
-                sposta = True
-                azioneEseguita = True
+                posizioneOstacolata = False
+                for nemico in listaNemici:
+                    if ultimoObbiettivoColco[1] == nemico.x and ultimoObbiettivoColco[2] == nemico.y:
+                        posizioneOstacolata = True
+                        break
+                if not posizioneOstacolata:
+                    if rx + gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
+                        nrob = 1
+                    if rx - gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
+                        nrob = 2
+                    if rx == ultimoObbiettivoColco[1] and ry + gpy == ultimoObbiettivoColco[2]:
+                        nrob = 3
+                    if rx == ultimoObbiettivoColco[1] and ry - gpy == ultimoObbiettivoColco[2]:
+                        nrob = 4
+                    sposta = True
+                    azioneEseguita = True
             else:
                 percorsoTrovato = pathFinding(rx, ry, ultimoObbiettivoColco[1], ultimoObbiettivoColco[2], stanza, porte, cofanetti, vetNemiciSoloConXeY)
                 if percorsoTrovato and percorsoTrovato != "arrivato":

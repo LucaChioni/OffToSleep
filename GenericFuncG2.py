@@ -2477,6 +2477,8 @@ def ottieniOggetto(dati, numOggetto, qta):
         dati[numOggetto] += qta
     else:
         numOggetto = -2
+    if dati[numOggetto] > 99:
+        dati[numOggetto] = 99
     return dati, numOggetto
 
 

@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, primaDiAnima):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, primaDiAnima):
     if caricaTutto:
         schermo.blit(imgSfondoStanza, (0, 0))
         # porte
@@ -86,12 +86,24 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     while i < len(vitaesca):
         j = 0
         while j < len(caseviste):
-            if ((caseviste[j] == vitaesca[i + 2] - gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + gpy)) and caseviste[j + 2]:
-                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
-                    schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
-                if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
-                    schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
-                schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
+                if primaDiAnima:
+                    k = 0
+                    while k < len(eschePrimaDelTurno):
+                        if eschePrimaDelTurno[k] == vitaesca[i]:
+                            if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
+                                schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
+                            if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
+                                schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
+                            schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                            break
+                        k += 1
+                else:
+                    if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 0:
+                        schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
+                    if ((vitaesca[i + 2] / gpx) + (vitaesca[i + 3] / gpy)) % 2 == 1:
+                        schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
+                    schermo.blit(esche, (vitaesca[i + 2], vitaesca[i + 3]))
                 break
             j += 3
         i += 4
@@ -313,11 +325,25 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
         j = j + 3
 
+    # disegno img puntatoreInquadraNemici
+    if nemicoInquadrato == "Colco":
+        schermo.blit(puntatoreInquadraNemici, (rx, ry))
+    elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+        schermo.blit(puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
+    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+        idEscaInquadrata = int(nemicoInquadrato[4:])
+        i = 0
+        while i < len(vitaesca):
+            if idEscaInquadrata == vitaesca[i]:
+                schermo.blit(puntatoreInquadraNemici, (vitaesca[i + 2], vitaesca[i + 3]))
+                break
+            i += 4
+
     if not caricaTutto:
         pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -514,10 +540,166 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 quit()
             if event.type == pygame.KEYDOWN:
                 # esci
-                if event.key == pygame.K_q:
+                if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
                     risposta = True
                     sposta = False
                     canaleSoundPuntatore.play(selind)
+
+                # attiva / disattiva il gambit
+                if event.key == pygame.K_LSHIFT:
+                    if chiamarob:
+                        chiamarob = False
+                    else:
+                        ultimoObbiettivoColco = []
+                        ultimoObbiettivoColco.append("Telecomando")
+                        ultimoObbiettivoColco.append(x)
+                        ultimoObbiettivoColco.append(y)
+                        chiamarob = True
+
+                # scorrere il puntatore sui nemici / esche / Colco
+                if event.key == pygame.K_x:
+                    nemicoInquadratoTemp = False
+                    # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
+                    listaNemiciVisti = []
+                    for nemico in listaNemici:
+                        if nemico.inCasellaVista:
+                            listaNemiciVisti.append(nemico)
+                            if nemico.x == xp and nemico.y == yp:
+                                nemicoInquadratoTemp = nemico
+                    listaEscheViste = []
+                    i = 0
+                    while i < len(vitaesca):
+                        j = 0
+                        while j < len(caseviste):
+                            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
+                                listaEscheViste.append(vitaesca[i])
+                                listaEscheViste.append(vitaesca[i + 1])
+                                listaEscheViste.append(vitaesca[i + 2])
+                                listaEscheViste.append(vitaesca[i + 3])
+                                if vitaesca[i + 2] == xp and vitaesca[i + 3] == yp:
+                                    nemicoInquadratoTemp = "Esca" + str(vitaesca[i])
+                            j += 3
+                        i += 4
+                    if rx == xp and ry == yp:
+                        nemicoInquadratoTemp = "Colco"
+
+                    if not nemicoInquadratoTemp:
+                        if type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
+                            xp = rx
+                            yp = ry
+                        elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+                            xp = nemicoInquadrato.x
+                            yp = nemicoInquadrato.y
+                        elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
+                            i = 0
+                            while i < len(vitaesca):
+                                if nemicoInquadratoTemp[4:] == vitaesca[i]:
+                                    xp = vitaesca[i + 2]
+                                    yp = vitaesca[i + 3]
+                                    break
+                                i += 4
+                        else:
+                            xp = rx
+                            yp = ry
+                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
+                        if len(listaNemiciVisti) > 0:
+                            xp = listaNemiciVisti[0].x
+                            yp = listaNemiciVisti[0].y
+                        elif len(listaEscheViste) > 0:
+                            xp = listaEscheViste[2]
+                            yp = listaEscheViste[3]
+                        else:
+                            xp = rx
+                            yp = ry
+                    elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
+                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadratoTemp) < len(listaNemiciVisti) - 1:
+                            xp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) + 1].x
+                            yp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) + 1].y
+                        elif len(listaEscheViste) > 0:
+                            xp = listaEscheViste[2]
+                            yp = listaEscheViste[3]
+                        else:
+                            xp = rx
+                            yp = ry
+                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
+                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3 < len(listaEscheViste) - 1:
+                            xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 4 + 2]
+                            yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 4 + 3]
+                        else:
+                            xp = rx
+                            yp = ry
+                if event.key == pygame.K_z:
+                    nemicoInquadratoTemp = False
+                    # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
+                    listaNemiciVisti = []
+                    for nemico in listaNemici:
+                        if nemico.inCasellaVista:
+                            listaNemiciVisti.append(nemico)
+                            if nemico.x == xp and nemico.y == yp:
+                                nemicoInquadratoTemp = nemico
+                    listaEscheViste = []
+                    i = 0
+                    while i < len(vitaesca):
+                        j = 0
+                        while j < len(caseviste):
+                            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
+                                listaEscheViste.append(vitaesca[i])
+                                listaEscheViste.append(vitaesca[i + 1])
+                                listaEscheViste.append(vitaesca[i + 2])
+                                listaEscheViste.append(vitaesca[i + 3])
+                                if vitaesca[i + 2] == xp and vitaesca[i + 3] == yp:
+                                    nemicoInquadratoTemp = "Esca" + str(vitaesca[i])
+                            j += 3
+                        i += 4
+                    if rx == xp and ry == yp:
+                        nemicoInquadratoTemp = "Colco"
+
+                    if not nemicoInquadratoTemp:
+                        if type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
+                            xp = rx
+                            yp = ry
+                        elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+                            xp = nemicoInquadrato.x
+                            yp = nemicoInquadrato.y
+                        elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
+                            i = 0
+                            while i < len(vitaesca):
+                                if nemicoInquadratoTemp[4:] == vitaesca[i]:
+                                    xp = vitaesca[i + 2]
+                                    yp = vitaesca[i + 3]
+                                    break
+                                i += 4
+                        else:
+                            xp = rx
+                            yp = ry
+                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
+                        if len(listaEscheViste) > 0:
+                            xp = listaEscheViste[len(listaEscheViste) - 4 + 2]
+                            yp = listaEscheViste[len(listaEscheViste) - 4 + 3]
+                        elif len(listaNemiciVisti) > 0:
+                            xp = listaNemiciVisti[len(listaNemiciVisti) - 1].x
+                            yp = listaNemiciVisti[len(listaNemiciVisti) - 1].y
+                        else:
+                            xp = rx
+                            yp = ry
+                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
+                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadratoTemp[4:])) != 0:
+                            xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) - 4 + 2]
+                            yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) - 4 + 3]
+                        elif len(listaNemiciVisti) > 0:
+                            xp = listaNemiciVisti[len(listaNemiciVisti) - 1].x
+                            yp = listaNemiciVisti[len(listaNemiciVisti) - 1].y
+                        else:
+                            xp = rx
+                            yp = ry
+                    elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
+                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadratoTemp) != 0:
+                            xp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) - 1].x
+                            yp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) - 1].y
+                        else:
+                            xp = rx
+                            yp = ry
+
                 # movimento puntatore
                 tastop = event.key
                 if event.key == pygame.K_e:
@@ -631,7 +813,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             risposta = True
                         # bomba attacco = 2
                         if attacco == 2 and (abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6):
-                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             # disegno le caselle attaccabili
@@ -639,8 +820,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
+                                    break
                                 i = i + 3
                             if continua:
+                                n = random.randint(1, 2)
+                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                                    if xp > x:
+                                        npers = 1
+                                    else:
+                                        npers = 2
+                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                                    if yp > y:
+                                        npers = 4
+                                    else:
+                                        npers = 3
+                                animaOggetto[0] = "bomba"
+                                animaOggetto[1] = xp
+                                animaOggetto[2] = yp
+                                attaccato = True
                                 infliggidanno = True
                                 danno = 10
                                 raggio = gpx * 1
@@ -648,7 +845,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 risposta = True
                         # bomba veleno attacco = 3
                         if attacco == 3 and (abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5):
-                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             # disegno le caselle attaccabili
@@ -656,8 +852,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
+                                    break
                                 i = i + 3
                             if continua:
+                                n = random.randint(1, 2)
+                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                                    if xp > x:
+                                        npers = 1
+                                    else:
+                                        npers = 2
+                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                                    if yp > y:
+                                        npers = 4
+                                    else:
+                                        npers = 3
+                                animaOggetto[0] = "bombaVeleno"
+                                animaOggetto[1] = xp
+                                animaOggetto[2] = yp
+                                attaccato = True
                                 infliggidanno = True
                                 danno = 20
                                 statom = 1
@@ -666,7 +878,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 risposta = True
                         # esca attacco = 4
                         if attacco == 4 and (abs(x - xp) <= gpx * 6 and abs(y - yp) <= gpy * 6):
-                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             # disegno le caselle attaccabili
@@ -674,6 +885,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
+                                    break
                                 i = i + 3
                             if continua:
                                 # conferma lancio esche
@@ -695,17 +907,29 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                         confesca = False
                                         break
                                 if confesca:
+                                    n = random.randint(1, 2)
+                                    if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                                        if xp > x:
+                                            npers = 1
+                                        else:
+                                            npers = 2
+                                    elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                                        if yp > y:
+                                            npers = 4
+                                        else:
+                                            npers = 3
+                                    animaOggetto[0] = "esca"
+                                    animaOggetto[1] = xp
+                                    animaOggetto[2] = yp
+                                    attaccato = True
                                     infliggidanno = True
                                     danno = 0
                                     raggio = 0
                                     creaesca = True
                                     sposta = True
                                     risposta = True
-                                else:
-                                    canaleSoundPuntatore.play(selimp)
                         # bomba appiccicosa attacco = 5
                         if attacco == 5 and (abs(x - xp) <= gpx * 5 and abs(y - yp) <= gpy * 5):
-                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             # disegno le caselle attaccabili
@@ -713,8 +937,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
+                                    break
                                 i = i + 3
                             if continua:
+                                n = random.randint(1, 2)
+                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                                    if xp > x:
+                                        npers = 1
+                                    else:
+                                        npers = 2
+                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                                    if yp > y:
+                                        npers = 4
+                                    else:
+                                        npers = 3
+                                animaOggetto[0] = "bombaAppiccicosa"
+                                animaOggetto[1] = xp
+                                animaOggetto[2] = yp
+                                attaccato = True
                                 infliggidanno = True
                                 danno = 20
                                 statom = 2
@@ -723,7 +963,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 risposta = True
                         # bomba potenziata attacco = 6
                         if attacco == 6 and (abs(x - xp) <= gpx * 4 and abs(y - yp) <= gpy * 4):
-                            attaccato = True
                             # controllo caselle attaccabili
                             continua = True
                             # disegno le caselle attaccabili
@@ -731,8 +970,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             while i < len(caseattactot):
                                 if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
                                     continua = False
+                                    break
                                 i = i + 3
                             if continua:
+                                n = random.randint(1, 2)
+                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                                    if xp > x:
+                                        npers = 1
+                                    else:
+                                        npers = 2
+                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                                    if yp > y:
+                                        npers = 4
+                                    else:
+                                        npers = 3
+                                animaOggetto[0] = "bombaPotenziata"
+                                animaOggetto[1] = xp
+                                animaOggetto[2] = yp
+                                attaccato = True
                                 infliggidanno = True
                                 danno = 200
                                 raggio = gpx * 2
@@ -858,8 +1113,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 schermo.blit(chiaveroboacc, (gsx - (gpx * 4), 0))
             else:
                 schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
-            # fai vedere stanze visitate
-            # caseviste[x, y, flag, ... ] -> riempito come se non vedessi niente
             # disegno le caselle viste
             i = 0
             while i < len(caseviste):
@@ -871,6 +1124,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 i += 3
             ricaricaschermo = False
             appenaCaricato = True
+
+        # disegno la casella sotto i nemici e Colco
+        for nemico in listaNemici:
+            if nemico.inCasellaVista:
+                if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (nemico.x, nemico.y))
+                if ((nemico.x / gpx) + (nemico.y / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (nemico.x, nemico.y))
+        if ((rx / gpx) + (ry / gpy)) % 2 == 0:
+            schermo.blit(sfondinoa, (rx, ry))
+        if ((rx / gpx) + (ry / gpy)) % 2 == 1:
+            schermo.blit(sfondinob, (rx, ry))
 
         # disegno le caselle attaccabili
         i = 0
@@ -1505,6 +1770,20 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if effp > 0:
                 schermo.blit(efficienzapiu, ((gpx * 3) + (gpx // 8), gpy // 4))
 
+        # disegno img puntatoreInquadraNemici
+        if nemicoInquadrato == "Colco":
+            schermo.blit(puntatoreInquadraNemici, (rx, ry))
+        elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+            schermo.blit(puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
+        elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+            idEscaInquadrata = int(nemicoInquadrato[4:])
+            i = 0
+            while i < len(vitaesca):
+                if idEscaInquadrata == vitaesca[i]:
+                    schermo.blit(puntatoreInquadraNemici, (vitaesca[i + 2], vitaesca[i + 3]))
+                    break
+                i += 4
+
         if not risposta:
             pygame.display.update()
         elif not sposta or not attaccato:
@@ -1512,4 +1791,4 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         pygame.event.pump()
         clockAttacco.tick(fpsInquadra)
 
-    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo
+    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto
