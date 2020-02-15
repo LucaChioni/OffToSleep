@@ -87,6 +87,8 @@ def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana,
             animazioneRallo = True
             if attaccoADistanza:
                 if fineanimaz == 10:
+                    canaleSoundAttacco.play(rumoreLancioFreccia)
+                elif fineanimaz == 5:
                     canaleSoundAttacco.play(rumoreAttaccoArco)
                 disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
             else:
@@ -98,18 +100,24 @@ def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana,
             if animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
                 disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
             if animaOggetto[0] == "pozione" or animaOggetto[0] == "superPozione":
+                if fineanimaz == 10:
+                    canaleSoundAttacco.play(suonoUsoPozione)
                 disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
                 if fineanimaz > 5:
                     schermo.blit(imgAnimaPozione1, (x, y))
                 else:
                     schermo.blit(imgAnimaPozione2, (x, y))
             elif animaOggetto[0] == "medicina":
+                if fineanimaz == 10:
+                    canaleSoundAttacco.play(suonoUsoMedicina)
                 disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
                 if fineanimaz > 5:
                     schermo.blit(imgAnimaMedicina1, (x, y))
                 else:
                     schermo.blit(imgAnimaMedicina2, (x, y))
             elif animaOggetto[0] == "caricaBatterie" or animaOggetto[0] == "caricaBatterieMigliorato":
+                if fineanimaz == 10:
+                    canaleSoundAttacco.play(suonoUsoCaricabatterie)
                 if ((vrx / gpx) + (vry / gpy)) % 2 == 0:
                     schermo.blit(sfondinoa, (vrx, vry))
                 if ((vrx / gpx) + (vry / gpy)) % 2 == 1:
@@ -512,7 +520,13 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
                         schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
 
 
-def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob):
+def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob, azioniDaEseguire, animaOggetto):
+    if not "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
+        if ((animaOggetto[1] / gpx) + (animaOggetto[2] / gpy)) % 2 == 0:
+            schermo.blit(sfondinoa, (animaOggetto[1], animaOggetto[2]))
+        if ((animaOggetto[1] / gpx) + (animaOggetto[2] / gpy)) % 2 == 1:
+            schermo.blit(sfondinob, (animaOggetto[1], animaOggetto[2]))
+        schermo.blit(vetIcoOggettiMenu[7], (animaOggetto[1], animaOggetto[2]))
     i = 0
     while i < len(vitaesca):
         j = 0
@@ -706,11 +720,13 @@ def animaAperturaCofanetto(tesoro, x, y, npers, pers, avvele, armatura, arma, sc
     return animazioneRallo
 
 
-def animaRaccoltaDenaro(x, y, vettoreDenaro, collana):
+def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, fineanimaz):
     denaroRaccolto = False
     i = 0
     while i < len(vettoreDenaro):
         if vettoreDenaro[i + 1] == x and vettoreDenaro[i + 2] == y:
+            if fineanimaz == 1:
+                canaleSoundInterazioni.play(suonoRaccoltaMonete)
             if canaleSoundPassiRallo.get_busy():
                 canaleSoundPassiRallo.stop()
             denaroTrovato = vettoreDenaro[i]
@@ -869,6 +885,8 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
         xInizioRetta = x
         yInizioRetta = y
         if animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
+            if fineanimaz == 10:
+                canaleSoundAttacco.play(suonoLancioOggetti)
             xFineRetta = animaOggetto[1]
             yFineRetta = animaOggetto[2]
             imgFrecciaLanciata_temp = 0
@@ -1268,7 +1286,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                             schermo.blit(sfondinob, (nemico.x, nemico.y))
 
             # disegno le esche e il denaro
-            animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob)
+            animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob, azioniDaEseguire, animaOggetto)
             animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob)
             animaCofanetti(cofanetti, caseviste, sfondinoc)
             animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc)
@@ -1334,7 +1352,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             # animazione apertura cofanetto
             animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, pers, statoRalloInizioTurno[1], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, animazioneRallo)
             # anima raccolta denaro
-            denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, dati[130])
+            denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, dati[130], fineanimaz)
 
             # disegno img puntatoreInquadraNemici
             disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca)

@@ -547,6 +547,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
                 # attiva / disattiva il gambit
                 if event.key == pygame.K_LSHIFT:
+                    canaleSoundInterazioni.play(suonoTeleColco)
                     if chiamarob:
                         chiamarob = False
                     else:
@@ -559,6 +560,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # scorrere il puntatore sui nemici / esche / Colco
                 if event.key == pygame.K_x:
                     nemicoInquadratoTemp = False
+                    canaleSoundPuntatore.play(spostaPunBattaglia)
                     # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
                     listaNemiciVisti = []
                     for nemico in listaNemici:
@@ -630,6 +632,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             yp = ry
                 if event.key == pygame.K_z:
                     nemicoInquadratoTemp = False
+                    canaleSoundPuntatore.play(spostaPunBattaglia)
                     # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
                     listaNemiciVisti = []
                     for nemico in listaNemici:
@@ -719,7 +722,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 if xp == nemico.x and yp == nemico.y:
                                     nemicoInquadrato = nemico
                                     selezioneAvvenuta = True
-                    if not selezioneAvvenuta:
+                    if selezioneAvvenuta:
+                        canaleSoundPuntatore.play(selObbiettivo)
+                    else:
                         canaleSoundPuntatore.play(selimp)
                 if event.key == pygame.K_w:
                     suPorta = False
@@ -1195,6 +1200,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         i = 0
         while i < len(porte):
             if porte[i + 1] == xp + nxp and porte[i + 2] == yp + nyp and not porte[i + 3]:
+                if nxp != 0 or nyp != 0:
+                    canaleSoundPuntatore.play(spostaPunBattaglia)
                 puntaPorta = True
                 xp = xp + nxp
                 yp = yp + nyp
@@ -1207,6 +1214,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         i = 0
         while i < len(cofanetti):
             if cofanetti[i + 1] == xp + nxp and cofanetti[i + 2] == yp + nyp:
+                if nxp != 0 or nyp != 0:
+                    canaleSoundPuntatore.play(spostaPunBattaglia)
                 puntaCofanetto = True
                 xp = xp + nxp
                 yp = yp + nyp
@@ -1215,12 +1224,16 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         # movimento inquadra (ultimi 4 inutili)
         if not puntaPorta and not puntaCofanetto:
             xp, yp, stanza, inutile, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, True, False, porte, cofanetti)
+            if xp != xvp or yp != yvp:
+                canaleSoundPuntatore.play(spostaPunBattaglia)
         # movimento inquadra quando si è sulle porte
         if puntaPorta:
             i = 0
             while i < len(caseviste):
                 if caseviste[i] == xp + nxp and caseviste[i + 1] == yp + nyp:
                     if caseviste[i + 2]:
+                        if nxp != 0 or nyp != 0:
+                            canaleSoundPuntatore.play(spostaPunBattaglia)
                         xp = xp + nxp
                         yp = yp + nyp
                         puntaPorta = False

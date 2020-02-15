@@ -153,7 +153,7 @@ def scegli_sal(cosa, lunghezzadati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -204,15 +204,13 @@ def scegli_sal(cosa, lunghezzadati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_a or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_a:
                 if conferma:
                     if voceMarcata == 2:
                         voceMarcata -= 1
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 19.3
-                    else:
-                        canaleSoundPuntatore.play(selimp)
                 else:
                     if salMarcato == 3:
                         salMarcato -= 1
@@ -222,16 +220,16 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                         salMarcato -= 1
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 6.5
-                    else:
-                        canaleSoundPuntatore.play(selimp)
+                    elif salMarcato == 1:
+                        salMarcato += 2
+                        canaleSoundPuntatore.play(spostapun)
+                        xp = gsx // 32 * 20.5
             if tastop == pygame.K_d:
                 if conferma:
                     if voceMarcata == 1:
                         voceMarcata += 1
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 22.3
-                    else:
-                        canaleSoundPuntatore.play(selimp)
                 else:
                     if salMarcato == 1:
                         salMarcato += 1
@@ -241,8 +239,10 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                         salMarcato += 1
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 20.5
-                    else:
-                        canaleSoundPuntatore.play(selimp)
+                    elif salMarcato == 3:
+                        salMarcato -= 2
+                        canaleSoundPuntatore.play(spostapun)
+                        xp = gsx // 32 * 6.5
 
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
@@ -432,7 +432,7 @@ def menu():
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -576,7 +576,7 @@ def menu():
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_s:
                 if voceMarcata != 4:
                     if voceMarcata == 1:
@@ -590,7 +590,9 @@ def menu():
                         yp = gsy // 18 * 13.5
                     voceMarcata += 1
                 else:
-                    canaleSoundPuntatore.play(selimp)
+                    canaleSoundPuntatore.play(spostapun)
+                    yp = gsy // 18 * 3.5
+                    voceMarcata -= 3
             if tastop == pygame.K_w:
                 if voceMarcata != 1:
                     if voceMarcata == 2:
@@ -604,7 +606,9 @@ def menu():
                         yp = gsy // 18 * 8.5
                     voceMarcata -= 1
                 else:
-                    canaleSoundPuntatore.play(selimp)
+                    canaleSoundPuntatore.play(spostapun)
+                    yp = gsy // 18 * 13.5
+                    voceMarcata += 3
             schermo.fill(grigioscu)
             persomenuinizio = pygame.transform.scale(persGrafInizio, (gpx * 18, gpy * 18))
             if (c == 1):
@@ -1187,7 +1191,7 @@ def equip(dati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -1410,7 +1414,7 @@ def equip(dati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_s:
                 if voceMarcata == 5 or voceMarcata == 10 or voceMarcata == 15 or voceMarcata == 20 or voceMarcata == 25 or voceMarcata == 30:
                     voceMarcata -= 4
@@ -2229,7 +2233,7 @@ def sceglicondiz(dati, condizione, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -2282,18 +2286,18 @@ def sceglicondiz(dati, condizione, canzone):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_w:
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
                         canaleSoundPuntatore.play(spostapun)
                         yp = yp - gsy // 18 * 1.5
+                        xp = gsx // 32 * 1
                     else:
-                        voceMarcata -= 11
+                        voceMarcata += 9
                         canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 4.6
-                    xp = gsx // 32 * 1
+                        yp = gsy // 18 * 15.1
                 else:
                     if voceMarcata != 0:
                         voceMarcata -= 1
@@ -2313,8 +2317,6 @@ def sceglicondiz(dati, condizione, canzone):
                         voceMarcata += 10
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 8
-                else:
-                    canaleSoundPuntatore.play(selimp)
             if tastop == pygame.K_s:
                 if voceMarcata == 0:
                     voceMarcata += 1
@@ -2326,11 +2328,11 @@ def sceglicondiz(dati, condizione, canzone):
                             voceMarcata -= 10
                             canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 4.6
+                            xp = gsx // 32 * 1
                         else:
-                            voceMarcata -= 20
+                            voceMarcata -= 9
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 4.6
-                        xp = gsx // 32 * 1
+                            yp = gsy // 18 * 6.1
                     else:
                         voceMarcata += 1
                         canaleSoundPuntatore.play(spostapun)
@@ -2345,8 +2347,6 @@ def sceglicondiz(dati, condizione, canzone):
                         voceMarcata -= 10
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 1
-                else:
-                    canaleSoundPuntatore.play(selimp)
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
@@ -2879,7 +2879,7 @@ def sceglitecn(dati, tecnica, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -2934,18 +2934,18 @@ def sceglitecn(dati, tecnica, canzone):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_w:
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
                         canaleSoundPuntatore.play(spostapun)
                         yp = yp - gsy // 18 * 1.5
+                        xp = gsx // 32 * 1
                     else:
-                        voceMarcata -= 11
+                        voceMarcata += 9
                         canaleSoundPuntatore.play(spostapun)
-                        yp = yp - gsy // 18 * 1.5
-                    xp = gsx // 32 * 1
+                        yp = gsy // 18 * 15.1
                 else:
                     if voceMarcata == 0:
                         voceMarcata += 10
@@ -2965,8 +2965,6 @@ def sceglitecn(dati, tecnica, canzone):
                         voceMarcata += 10
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 8
-                else:
-                    canaleSoundPuntatore.play(selimp)
             if tastop == pygame.K_s:
                 if voceMarcata == 0:
                     voceMarcata += 1
@@ -2978,11 +2976,11 @@ def sceglitecn(dati, tecnica, canzone):
                             voceMarcata -= 10
                             canaleSoundPuntatore.play(spostapun)
                             yp = gsy // 18 * 4.6
+                            xp = gsx // 32 * 1
                         else:
-                            voceMarcata -= 20
+                            voceMarcata -= 9
                             canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 4.6
-                        xp = gsx // 32 * 1
+                            yp = gsy // 18 * 6.1
                     else:
                         voceMarcata += 1
                         canaleSoundPuntatore.play(spostapun)
@@ -2997,8 +2995,6 @@ def sceglitecn(dati, tecnica, canzone):
                         voceMarcata -= 10
                         canaleSoundPuntatore.play(spostapun)
                         xp = gsx // 32 * 1
-                else:
-                    canaleSoundPuntatore.play(selimp)
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
@@ -3685,7 +3681,7 @@ def equiprobo(dati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -3811,7 +3807,7 @@ def equiprobo(dati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_w:
                 if riordinamento:
                     if voceMarcata != 6:
@@ -3829,8 +3825,6 @@ def equiprobo(dati, canzone):
                             i += 1
                         voceMarcata -= 1
                         yp = yp - gsy // 18 * 1
-                    else:
-                        canaleSoundPuntatore.play(selimp)
                 else:
                     if 1 <= voceMarcata <= 5:
                         if voceMarcata == 1:
@@ -3927,8 +3921,6 @@ def equiprobo(dati, canzone):
                             i += 1
                         voceMarcata += 1
                         yp = yp + gsy // 18 * 1
-                    else:
-                        canaleSoundPuntatore.play(selimp)
                 else:
                     if 1 <= voceMarcata <= 5:
                         if voceMarcata == 5:
@@ -4609,7 +4601,7 @@ def oggetti(dati, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -4831,7 +4823,7 @@ def oggetti(dati, canzone):
 
         if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_w and voceMarcata == 0:
                 if oggetton != 1 and oggetton != 6:
                     canaleSoundPuntatore.play(spostapun)
@@ -4850,8 +4842,6 @@ def oggetti(dati, canzone):
                     voceMarcata -= 1
                     canaleSoundPuntatore.play(spostapun)
                     xp = xp - gsx // 32 * 3
-                elif voceMarcata == 1:
-                    canaleSoundPuntatore.play(selimp)
             if tastop == pygame.K_s and voceMarcata == 0:
                 if oggetton != 10 and oggetton != 5:
                     canaleSoundPuntatore.play(spostapun)
@@ -4870,8 +4860,6 @@ def oggetti(dati, canzone):
                     voceMarcata += 1
                     canaleSoundPuntatore.play(spostapun)
                     xp = xp + gsx // 32 * 3
-                elif voceMarcata == 2:
-                    canaleSoundPuntatore.play(selimp)
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
@@ -5074,7 +5062,7 @@ def chiediconferma(conferma, canzone):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -5113,21 +5101,17 @@ def chiediconferma(conferma, canzone):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_a:
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     canaleSoundPuntatore.play(spostapun)
                     xp = gsx // 32 * 9.5
-                else:
-                    canaleSoundPuntatore.play(selimp)
             if tastop == pygame.K_d:
                 if voceMarcata == 1:
                     voceMarcata += 1
                     canaleSoundPuntatore.play(spostapun)
                     xp = gsx // 32 * 17.5
-                else:
-                    canaleSoundPuntatore.play(selimp)
             schermo.fill(grigioscu)
             if conferma == 1:
                 messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6, 120)
@@ -5262,7 +5246,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -5287,20 +5271,15 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     tastoTrovato = True
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     tastoTrovato = True
-                    if voceMarcata == 6 and nmost > -1:
-                        canaleSoundPuntatore.play(selimp)
-                    else:
+                    if voceMarcata != 6 or (voceMarcata == 6 and nmost == -1):
                         canaleSoundPuntatore.play(selezione)
+                    else:
+                        canaleSoundPuntatore.play(selimp)
                     inizio = False
                     # oggetti
                     if voceMarcata == 1:
                         dati, attacco = oggetti(dati, c27)
                         carim = True
-                    # tecniche
-                    """if yp == gsy // 18 * 6:
-                        #if not apriocchio:
-                        dati, attacco = tecniche(dati)
-                        carim = True"""
                     # equip pers
                     if voceMarcata == 2:
                         dati = equip(dati, c27)
@@ -5332,7 +5311,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_s:
                 if voceMarcata != 5 and voceMarcata != 8:
                     canaleSoundPuntatore.play(spostapun)
@@ -5553,7 +5532,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
         elif tastotempfps == 0:
-            tastotempfps = 3
+            tastotempfps = 2
 
         primoMovimento = False
         tastoTrovato = False
@@ -5668,7 +5647,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                             risposta = True
 
                     if risposta:
-                        canaleSoundPuntatore.play(selezione)
+                        if offensivi:
+                            canaleSoundPuntatore.play(selezione)
                     else:
                         canaleSoundPuntatore.play(selimp)
             if event.type == pygame.KEYUP and tastop == event.key:
@@ -5676,15 +5656,13 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
 
         if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 3
+                tastotempfps = 2
             if tastop == pygame.K_w:
                 if offensivi:
                     canaleSoundPuntatore.play(spostapun)
                     yp = gpy * 5
                     offensivi = False
                     difensivi = True
-                else:
-                    canaleSoundPuntatore.play(selimp)
             if tastop == pygame.K_a:
                 if voceMarcata != 1:
                     voceMarcata -= 1
@@ -5700,8 +5678,6 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                     yp = (gpy * 5) + (gpy // 2)
                     difensivi = False
                     offensivi = True
-                else:
-                    canaleSoundPuntatore.play(selimp)
             if tastop == pygame.K_d:
                 if voceMarcata != 5:
                     voceMarcata += 1

@@ -15,6 +15,9 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            # rumore porte (dipende dalla stanza)
+            rumoreAperturaPorte = 0
+            rumoreChiusuraPorte = 0
             animaOggetto = [False, 0, 0]
             ultimoObbiettivoColco = []
             obbiettivoCasualeColco = False
@@ -123,6 +126,10 @@ def gameloop():
 
             # mostri
             if dati[1] == 1 and cambiosta:
+                # rumore porte
+                rumoreAperturaPorte = suonoaperturaporte1
+                rumoreChiusuraPorte = suonochiusuraporte1
+
                 # posizione personaggio e robot al cambio stanza
                 if not inizio:
                     if stanzaVecchia == 2:
@@ -165,6 +172,10 @@ def gameloop():
                 nmost = len(listaNemici)
 
             if dati[1] == 2 and cambiosta:
+                # rumore porte
+                rumoreAperturaPorte = suonoaperturaporte2
+                rumoreChiusuraPorte = suonochiusuraporte2
+
                 # posizione personaggio e robot al cambio stanza
                 if not inizio:
                     if stanzaVecchia == 1:
@@ -591,6 +602,7 @@ def gameloop():
                         break
 
                 if event.key == pygame.K_e and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                    canaleSoundPuntatore.play(spostaPunBattaglia)
                     tastoTrovato = True
                     nx = 0
                     ny = 0
@@ -601,6 +613,7 @@ def gameloop():
                     nemicoInquadrato = False
                     caricaTutto = True
                 if event.key == pygame.K_LSHIFT and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                    canaleSoundInterazioni.play(suonoTeleColco)
                     tastoTrovato = True
                     nx = 0
                     ny = 0
@@ -613,6 +626,7 @@ def gameloop():
                         ultimoObbiettivoColco.append(y)
                         chiamarob = True
                 if event.key == pygame.K_x and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                    canaleSoundPuntatore.play(selObbiettivo)
                     listaNemiciVisti = []
                     for nemico in listaNemici:
                         if nemico.inCasellaVista:
@@ -653,6 +667,7 @@ def gameloop():
                             nemicoInquadrato = "Colco"
                     caricaTutto = True
                 if event.key == pygame.K_z and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                    canaleSoundPuntatore.play(selObbiettivo)
                     listaNemiciVisti = []
                     for nemico in listaNemici:
                         if nemico.inCasellaVista:
@@ -705,7 +720,7 @@ def gameloop():
                                                             porte[k + 1] == x and porte[
                                                         k + 2] == y - gpy and npers == 3)) and not porte[k + 3]:
                             sposta = True
-                            canaleSoundInterazioni.play(suonoaperturaporte)
+                            canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
                             # scoprire caselle viste
                             caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
@@ -1013,10 +1028,11 @@ def gameloop():
             k = 0
             while k < len(porte):
                 if porte[k] == dati[1] and porte[k + 1] == apriChiudiPorta[1] and porte[k + 2] == apriChiudiPorta[2]:
-                    canaleSoundInterazioni.play(suonoaperturaporte)
                     if porte[k + 3]:
+                        canaleSoundInterazioni.play(rumoreChiusuraPorte)
                         porte[k + 3] = False
                     else:
+                        canaleSoundInterazioni.play(rumoreAperturaPorte)
                         porte[k + 3] = True
                     # scoprire caselle viste
                     caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
@@ -1109,6 +1125,7 @@ def gameloop():
         i = 1
         while i < len(vitaesca):
             if vitaesca[i + 1] == x and vitaesca[i + 2] == y:
+                canaleSoundInterazioni.play(suonoRaccoltaEsca)
                 # tolgo la selezione dell'esca ripresa
                 if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vitaesca[i - 1]:
                     nemicoInquadrato = False

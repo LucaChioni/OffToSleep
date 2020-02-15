@@ -2,8 +2,10 @@
 
 import ctypes
 import pygame
+# i suoi vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
+pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
 #pygame.mixer.init(44100, -16, 1, 512)
-pygame.mixer.init(22100, -16, 2, 64)
+#pygame.mixer.init(22100, -16, 2, 64)
 pygame.init()
 
 # adattamento schermo
@@ -454,20 +456,41 @@ canaleSoundAttacco = pygame.mixer.Channel(7)
 canaleSoundAttacco.set_volume(volumeEffetti)
 
 # suoni puntatore
-selsta = pygame.mixer.Sound("Audio/Rumoripuntatore/SelSta.wav")
-selind = pygame.mixer.Sound("Audio/Rumoripuntatore/SelInd.wav")
-spostapun = pygame.mixer.Sound("Audio/Rumoripuntatore/SpostaPun.wav")
-selimp = pygame.mixer.Sound("Audio/Rumoripuntatore/SelImp.wav")
-selezione = pygame.mixer.Sound("Audio/Rumoripuntatore/Selezione.wav")
+selsta = pygame.mixer.Sound("Audio/RumoriPuntatore/SelSta.wav")
+selind = pygame.mixer.Sound("Audio/RumoriPuntatore/SelInd.wav")
+spostapun = pygame.mixer.Sound("Audio/RumoriPuntatore/SpostaPun.wav")
+selimp = pygame.mixer.Sound("Audio/RumoriPuntatore/SelImp.wav")
+selezione = pygame.mixer.Sound("Audio/RumoriPuntatore/Selezione.wav")
+spostaPunBattaglia = pygame.mixer.Sound("Audio/RumoriPuntatore/SpostaPunBattaglia.wav")
+selObbiettivo = pygame.mixer.Sound("Audio/RumoriPuntatore/SelObbiettivo.wav")
 
-# suoni effetti
-rumoreAttaccoSpada = pygame.mixer.Sound("Audio/Rumoripersonaggio/AttaccoSpada.wav")
-rumoreAttaccoArco = pygame.mixer.Sound("Audio/Rumoripersonaggio/AttaccoArco.wav")
-rumoreParata = pygame.mixer.Sound("Audio/Rumoripersonaggio/ParataConScudo.wav")
-rumorecamminata = pygame.mixer.Sound("Audio/Rumoripersonaggio/Camminata.wav")
-rumorelevelup = pygame.mixer.Sound("Audio/Rumoripersonaggio/Levelup.wav")
-suonoaperturacofanetti = pygame.mixer.Sound("Audio/Rumoriambiente/Aperturaportacofanetti.wav")
-suonoaperturaporte = pygame.mixer.Sound("Audio/Rumoriambiente/Aperturaportacofanetti.wav")
+# suoni personaggio
+rumoreAttaccoSpada = pygame.mixer.Sound("Audio/RumoriPersonaggio/AttaccoSpada.wav")
+rumoreLancioFreccia = pygame.mixer.Sound("Audio/RumoriPersonaggio/LancioFreccia.wav")
+rumoreAttaccoArco = pygame.mixer.Sound("Audio/RumoriPersonaggio/AttaccoArco.wav")
+rumoreParata = pygame.mixer.Sound("Audio/RumoriPersonaggio/ParataConScudo.wav")
+rumorecamminata = pygame.mixer.Sound("Audio/RumoriPersonaggio/Camminata.wav")
+rumorelevelup = pygame.mixer.Sound("Audio/RumoriPersonaggio/Levelup.wav")
+
+# suoni apertura-chiusura cofanetti-porte
+suonoaperturacofanetti = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaCofanetto.wav")
+suonoaperturaporte1 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta1.wav")
+suonoaperturaporte2 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta2.wav")
+suonoaperturaporte3 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta3.wav")
+suonochiusuraporte1 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta1.wav")
+suonochiusuraporte2 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta2.wav")
+suonochiusuraporte3 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta3.wav")
+
+# souno raccolta esca - monete
+suonoRaccoltaEsca = pygame.mixer.Sound("Audio/RumoriAmbiente/RaccoltaEsca.wav")
+suonoRaccoltaMonete = pygame.mixer.Sound("Audio/RumoriAmbiente/RaccoltaMonete.wav")
+
+# suoni oggetti
+suonoTeleColco = pygame.mixer.Sound("Audio/RumoriOggetti/TeleColco.wav")
+suonoLancioOggetti = pygame.mixer.Sound("Audio/RumoriOggetti/LancioOggetti.wav")
+suonoUsoPozione = pygame.mixer.Sound("Audio/RumoriOggetti/Pozione.wav")
+suonoUsoCaricabatterie = pygame.mixer.Sound("Audio/RumoriOggetti/Caricabatterie.wav")
+suonoUsoMedicina = pygame.mixer.Sound("Audio/RumoriOggetti/Medicina.wav")
 
 # suoni canzoni
 c11 = pygame.mixer.Sound("Audio/Canzoni/Canzone11.wav")
