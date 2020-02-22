@@ -485,12 +485,28 @@ suonochiusuraporte3 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta3.wa
 suonoRaccoltaEsca = pygame.mixer.Sound("Audio/RumoriAmbiente/RaccoltaEsca.wav")
 suonoRaccoltaMonete = pygame.mixer.Sound("Audio/RumoriAmbiente/RaccoltaMonete.wav")
 
-# suoni oggetti
+# suoni robo
+rumoreCamminataColco = pygame.mixer.Sound("Audio/RumoriColco/Camminata.wav")
+rumoreScossaFreccia = pygame.mixer.Sound("Audio/RumoriColco/ScossaFreccia.wav")
+rumoreTempestaElettrica = pygame.mixer.Sound("Audio/RumoriColco/TempestaElettrica.wav")
+rumoreCuraRobo = pygame.mixer.Sound("Audio/RumoriColco/Cura.wav")
+rumoreAntidoto = pygame.mixer.Sound("Audio/RumoriColco/Antidoto.wav")
+rumoreAttPDifP = pygame.mixer.Sound("Audio/RumoriColco/AttPDifP.wav")
+rumoreAutoricarica = pygame.mixer.Sound("Audio/RumoriColco/Autoricarica.wav")
+rumoreRaffreddamento = pygame.mixer.Sound("Audio/RumoriColco/Raffreddamento.wav")
+rumoreVelocizzaEfficienza = pygame.mixer.Sound("Audio/RumoriColco/VelocizzaEfficienza.wav")
+
+# suono oggetti
 suonoTeleColco = pygame.mixer.Sound("Audio/RumoriOggetti/TeleColco.wav")
 suonoLancioOggetti = pygame.mixer.Sound("Audio/RumoriOggetti/LancioOggetti.wav")
 suonoUsoPozione = pygame.mixer.Sound("Audio/RumoriOggetti/Pozione.wav")
 suonoUsoCaricabatterie = pygame.mixer.Sound("Audio/RumoriOggetti/Caricabatterie.wav")
 suonoUsoMedicina = pygame.mixer.Sound("Audio/RumoriOggetti/Medicina.wav")
+suonoUsoBomba = pygame.mixer.Sound("Audio/RumoriOggetti/Bomba.wav")
+suonoUsoBombaVeleno = pygame.mixer.Sound("Audio/RumoriOggetti/BombaVeleno.wav")
+suonoUsoEsca = pygame.mixer.Sound("Audio/RumoriOggetti/Esca.wav")
+suonoUsoBombaAppiccicosa = pygame.mixer.Sound("Audio/RumoriOggetti/BombaAppiccicosa.wav")
+suonoUsoBombaPotenziata = pygame.mixer.Sound("Audio/RumoriOggetti/BombaPotenziata.wav")
 
 # suoni canzoni
 c11 = pygame.mixer.Sound("Audio/Canzoni/Canzone11.wav")

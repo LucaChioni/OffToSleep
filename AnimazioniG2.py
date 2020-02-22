@@ -212,7 +212,8 @@ def animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, fare
 def animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, surriscalda, cambiosta, animazioneColco, fineanimaz):
     if (rx != vrx or ry != vry) and not cambiosta:
         animazioneColco = True
-        # rumorecamminataRobo.play()
+        if nrob != 0 and fineanimaz == 10:
+            canaleSoundPassiColco.play(rumoreCamminataColco)
         # nrob => 1=d, 2=a, 3=s, 4=w
         if nrob == 1:
             if 5 < fineanimaz <= 10:
@@ -296,6 +297,24 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
                     imgAnimazione = vetAnimazioniTecniche[i + 1][0]
                 break
             i += 2
+
+        if fineanimaz == 10:
+            if tecnicaUsata.startswith("scossa") or tecnicaUsata.startswith("freccia"):
+                canaleSoundAttacco.play(rumoreScossaFreccia)
+            elif tecnicaUsata.startswith("tempesta"):
+                canaleSoundAttacco.play(rumoreTempestaElettrica)
+            elif tecnicaUsata.startswith("cura"):
+                canaleSoundAttacco.play(rumoreCuraRobo)
+            elif tecnicaUsata == "antidoto":
+                canaleSoundAttacco.play(rumoreAntidoto)
+            elif tecnicaUsata == "attP" or tecnicaUsata == "difP":
+                canaleSoundAttacco.play(rumoreAttPDifP)
+            elif tecnicaUsata.startswith("ricarica"):
+                canaleSoundAttacco.play(rumoreAutoricarica)
+            elif tecnicaUsata == "raffred":
+                canaleSoundAttacco.play(rumoreRaffreddamento)
+            elif tecnicaUsata == "velocizza" or tecnicaUsata == "efficienza":
+                canaleSoundAttacco.play(rumoreVelocizzaEfficienza)
 
         if tecnicaUsata.startswith("scossa") or tecnicaUsata.startswith("freccia") or tecnicaUsata.startswith("cura") or tecnicaUsata == "antidoto" or tecnicaUsata == "attP" or tecnicaUsata == "difP":
             schermo.blit(robot, (rx, ry))
@@ -913,14 +932,24 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
         elif animaOggetto[0] and fineanimaz > 0:
             if animaOggetto[0] == "bomba":
                 schermo.blit(imgAnimaBomba, (animaOggetto[1] - gpx, animaOggetto[2] - gpy))
+                if fineanimaz == 5:
+                    canaleSoundAttacco.play(suonoUsoBomba)
             elif animaOggetto[0] == "bombaVeleno":
                 schermo.blit(imgAnimaBombaVeleno, (animaOggetto[1], animaOggetto[2]))
+                if fineanimaz == 5:
+                    canaleSoundAttacco.play(suonoUsoBombaVeleno)
             elif animaOggetto[0] == "esca":
                 schermo.blit(vetIcoOggettiMenu[7], (animaOggetto[1], animaOggetto[2]))
+                if fineanimaz == 5:
+                    canaleSoundAttacco.play(suonoUsoEsca)
             elif animaOggetto[0] == "bombaAppiccicosa":
                 schermo.blit(imgAnimaBombaAppiccicosa, (animaOggetto[1], animaOggetto[2]))
+                if fineanimaz == 5:
+                    canaleSoundAttacco.play(suonoUsoBombaAppiccicosa)
             elif animaOggetto[0] == "bombaPotenziata":
                 schermo.blit(imgAnimaBombaPotenziata, (animaOggetto[1] - (gpx * 2), animaOggetto[2] - (gpy * 2)))
+                if fineanimaz == 5:
+                    canaleSoundAttacco.play(suonoUsoBombaPotenziata)
 
     # disegno le frecce elettriche lanciate da Colco
     if "attaccoColco" in azioniDaEseguire and listaNemiciAttaccatiADistanzaRobo and len(listaNemiciAttaccatiADistanzaRobo) == 1 and tecnicaUsata.startswith("freccia") and not cambiosta:
