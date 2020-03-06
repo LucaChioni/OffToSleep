@@ -60,6 +60,12 @@ def getStatistiche(dati, difesa=0):
                 break
             i += 3
 
+    if dati[123] > 0:
+        attVicino += attVicino // 4
+        attLontano += attLontano // 4
+    if dati[124] > 0:
+        dif += dif // 4
+
     entot = 220 + (dati[9] * dati[9] * 80)
     difro = 20 + (dati[9] * dati[9] * 30)
 
@@ -2510,6 +2516,82 @@ def ottieniCondizione(dati, condizione):
     else:
         condizione = -2
     return dati, condizione
+
+
+def dialoga(y, avanzamentoStoria, personaggio):
+    if canaleSoundPassiRallo.get_busy():
+        canaleSoundPassiRallo.stop()
+    oggettoRicevuto = False
+    menuMercante = False
+
+    numeroMessaggiTotali = len(personaggio.partiDialogo)
+    numeromessaggioAttuale = 0
+    prosegui = True
+    fineDialogo = False
+    while not fineDialogo:
+        tastoTrovato = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                tastoTrovato = True
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                if event.key == pygame.K_q and not tastoTrovato:
+                    canaleSoundPuntatore.play(selind)
+                    tastoTrovato = True
+                    fineDialogo = True
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    canaleSoundPuntatore.play(selezione)
+                    tastoTrovato = True
+                    if numeromessaggioAttuale == numeroMessaggiTotali:
+                        if personaggio.avanzamentoStoria:
+                            avanzamentoStoria = avanzamentoStoria + 1
+                        if personaggio.oggettoDato:
+                            oggettoRicevuto = personaggio.oggettoDato
+                        if personaggio.menuMercante:
+                            menuMercante = personaggio.menuMercante
+                        fineDialogo = True
+                    else:
+                        prosegui = True
+        if prosegui and not fineDialogo:
+            if y > gsy // 2:
+                schermo.blit(sfondoDialoghiSopra, (0, 0))
+                messaggio("Q: esci", grigiochi, gsx // 32 * 28, gsy // 18 * 1, 50)
+                messaggio(personaggio.nome + ":", grigiochi, gsx // 32 * 1, gpy * 4 // 5, 80)
+                riga = 0
+                for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
+                    messaggio(frase, grigiochi, gsx // 32 * 1, (gpy * 7 // 3) + riga, 50)
+                    riga += gpy * 4 // 5
+            else:
+                schermo.blit(sfondoDialoghiSotto, (0, gsy * 2 // 3))
+                messaggio("Q: esci", grigiochi, gsx // 32 * 28, (gsy * 2 // 3) + gpy, 50)
+                messaggio(personaggio.nome + ":", grigiochi, gsx // 32 * 1, (gsy * 2 // 3) + (gpy * 4 // 5), 80)
+                riga = 0
+                for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
+                    messaggio(frase, grigiochi, gsx // 32 * 1, ((gsy * 2 // 3) + (gpy * 7 // 3)) + riga, 50)
+                    riga += gpy * 4 // 5
+            numeromessaggioAttuale += 1
+            prosegui = False
+            pygame.display.update()
+    return avanzamentoStoria, oggettoRicevuto, menuMercante
+
+
+def animaOggettoSpecialeRicevuto(oggettoRicevuto):
+    if canaleSoundPassiRallo.get_busy():
+        canaleSoundPassiRallo.stop()
+    canaleSoundInterazioni.play(suonoRaccoltaMonete)
+    schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
+    messaggio("Hai ottenuto: " + oggettoRicevuto, grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+    pygame.display.update()
+    risposta = False
+    while not risposta:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                canaleSoundPuntatore.play(selezione)
+                risposta = True
 
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)

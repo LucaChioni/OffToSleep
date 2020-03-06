@@ -81,7 +81,6 @@ class NemicoObj(object):
         self.caricaImg()
         self.girati(direzione)
 
-
     def caricaImg(self):
         imgW = pygame.image.load("Immagini/Mostri/" + self.tipo + "w.png")
         self.imgW = pygame.transform.scale(imgW, (gpx, gpy))
@@ -141,7 +140,6 @@ class NemicoObj(object):
         imgDanneggiamentoColco = pygame.image.load("Immagini/Mostri/DannoColco.png")
         self.imgDanneggiamentoColco = pygame.transform.scale(imgDanneggiamentoColco, (gpx, gpy))
 
-
     def girati(self, direzione):
         if direzione == "w":
             self.imgAttuale = self.imgW
@@ -153,7 +151,6 @@ class NemicoObj(object):
             self.imgAttuale = self.imgD
         self.direzione = direzione
 
-
     def danneggia(self, danno, attaccante):
         self.animaDanneggiamento = attaccante
         danno -= self.difesa
@@ -162,7 +159,6 @@ class NemicoObj(object):
         self.vita -= danno
         if self.vita < 0:
             self.vita = 0
-
 
     def aggiornaVista(self, x, y, rx, ry, stanza, porte, cofanetti, dati):
         vistoRallo = False
@@ -193,13 +189,11 @@ class NemicoObj(object):
         else:
             self.visto = False
 
-
     def resettaMosseRimaste(self):
         if self.velocita >= 0:
             self.mosseRimaste = 1 + self.velocita
         elif self.velocita < 0:
             self.mosseRimaste = 1
-
 
     def compiMossa(self):
         if self.appiccicato:
@@ -212,7 +206,6 @@ class NemicoObj(object):
                 self.mosseRimaste -= 1
             elif self.velocita < 0:
                 self.mosseRimaste = self.mosseRimaste - 1 + self.velocita
-
 
     def settaObbiettivo(self, x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo):
         vistoRallo = False

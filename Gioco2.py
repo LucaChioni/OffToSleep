@@ -5,6 +5,8 @@ from EnvPrintG2 import *
 from MovNemiciRobG2 import *
 from AnimazioniG2 import *
 from NemicoObj import *
+from PersonaggioObj import *
+from FadeToBlackClass import *
 
 
 # freccetta invisibile
@@ -15,6 +17,8 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            stanzaCambiata = False
+            uscitoDaMenu = 0
             # rumore porte (dipende dalla stanza)
             rumoreAperturaPorte = 0
             rumoreChiusuraPorte = 0
@@ -31,6 +35,9 @@ def gameloop():
             spingiColco = False
             apriChiudiPorta = [False, 0, 0]
             apriCofanetto = [False, 0, 0]
+            interagisciConPersonaggio = False
+            oggettoRicevuto = False
+            visualizzaMenuMercante = False
             stanzaVecchia = 0
             chiamarob = True
             tesoro = -1
@@ -93,6 +100,7 @@ def gameloop():
             vry = vy
 
             stanzeGiaVisitate = []
+            listaPersonaggi = []
             listaNemici = []
             listaNemiciTotali = []
 
@@ -102,6 +110,18 @@ def gameloop():
 
         # caricare gli oggetti
         if carim:
+            if cambiosta:
+                sprites = pygame.sprite.Group(Fade(0))
+                schermoFadeToBlack = schermo.copy()
+                i = 0
+                while i <= 6:
+                    sprites.update()
+                    schermo.blit(schermoFadeToBlack, (0, 0))
+                    sprites.draw(schermo)
+                    pygame.display.update()
+                    clockFadeToBlack.tick(fpsFadeToBlack)
+                    i += 1
+
             if pers == persw:
                 agg = 1
             if pers == persa:
@@ -110,21 +130,8 @@ def gameloop():
                 agg = 3
             if pers == persd:
                 agg = 4
-            # stanza
-            imgSfondoStanza = pygame.image.load("Immagini/Paesaggi/Stanza%ia.png" % dati[1]).convert()
-            imgSfondoStanza = pygame.transform.scale(imgSfondoStanza, (gsx, gsy))
-            sfondinoa = pygame.image.load("Immagini/Paesaggi/Sfondino%ia.png" % dati[1]).convert()
-            sfondinoa = pygame.transform.scale(sfondinoa, (gpx, gpy))
-            sfondinob = pygame.image.load("Immagini/Paesaggi/Sfondino%ib.png" % dati[1]).convert()
-            sfondinob = pygame.transform.scale(sfondinob, (gpx, gpy))
-            sfondinoc = pygame.image.load("Immagini/Paesaggi/Sfondino%ic.png" % dati[1]).convert()
-            sfondinoc = pygame.transform.scale(sfondinoc, (gpx, gpy))
-            portaVert = pygame.image.load("Immagini/Paesaggi/PortaV%i.png" % dati[1])
-            portaVert = pygame.transform.scale(portaVert, (gpx, gpy))
-            portaOriz = pygame.image.load("Immagini/Paesaggi/PortaO%i.png" % dati[1])
-            portaOriz = pygame.transform.scale(portaOriz, (gpx, gpy))
 
-            # mostri
+            # mostri - personaggi
             if dati[1] == 1 and cambiosta:
                 # rumore porte
                 rumoreAperturaPorte = suonoaperturaporte1
@@ -171,6 +178,8 @@ def gameloop():
                             listaNemici.append(nemico)
                 nmost = len(listaNemici)
 
+                listaPersonaggi = []
+
             if dati[1] == 2 and cambiosta:
                 # rumore porte
                 rumoreAperturaPorte = suonoaperturaporte2
@@ -205,7 +214,27 @@ def gameloop():
                             listaNemici.append(nemico)
                 nmost = len(listaNemici)
 
+                listaPersonaggi = []
+                personaggio = PersonaggioObj(gsx // 32 * 2, gsy // 18 * 4, "d", "Mercante", dati[0])
+                listaPersonaggi.append(personaggio)
+                personaggio = PersonaggioObj(gsx // 32 * 8, gsy // 18 * 3, "a", "Tizio", dati[0])
+                listaPersonaggi.append(personaggio)
+
             if cambiosta:
+                # stanza
+                imgSfondoStanza = pygame.image.load("Immagini/Paesaggi/Stanza%ia.png" % dati[1]).convert()
+                imgSfondoStanza = pygame.transform.scale(imgSfondoStanza, (gsx, gsy))
+                sfondinoa = pygame.image.load("Immagini/Paesaggi/Sfondino%ia.png" % dati[1]).convert()
+                sfondinoa = pygame.transform.scale(sfondinoa, (gpx, gpy))
+                sfondinob = pygame.image.load("Immagini/Paesaggi/Sfondino%ib.png" % dati[1]).convert()
+                sfondinob = pygame.transform.scale(sfondinob, (gpx, gpy))
+                sfondinoc = pygame.image.load("Immagini/Paesaggi/Sfondino%ic.png" % dati[1]).convert()
+                sfondinoc = pygame.transform.scale(sfondinoc, (gpx, gpy))
+                portaVert = pygame.image.load("Immagini/Paesaggi/PortaV%i.png" % dati[1])
+                portaVert = pygame.transform.scale(portaVert, (gpx, gpy))
+                portaOriz = pygame.image.load("Immagini/Paesaggi/PortaO%i.png" % dati[1])
+                portaOriz = pygame.transform.scale(portaOriz, (gpx, gpy))
+
                 mosseRimasteRob = 0
                 nemicoInquadrato = False
                 stanza = dati[1]
@@ -268,140 +297,142 @@ def gameloop():
 
                 # cambiosta viene cambiato sopra !!!!!!!!!!!!
                 cambiosta = False
+                stanzaCambiata = True
                 impossibileCliccarePulsanti = True
 
-            # arma
-            armaw = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iw.png" % dati[6])
-            armaw = pygame.transform.scale(armaw, (gpx, gpy))
-            armawMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwMov1.png" % dati[6])
-            armawMov1 = pygame.transform.scale(armawMov1, (gpx, gpy))
-            armawMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwMov2.png" % dati[6])
-            armawMov2 = pygame.transform.scale(armawMov2, (gpx, gpy))
-            armaa = pygame.image.load("Immagini/EquipRallo/Spade/Spada%ia.png" % dati[6])
-            armaa = pygame.transform.scale(armaa, (gpx, gpy))
-            armaaMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaMov1.png" % dati[6])
-            armaaMov1 = pygame.transform.scale(armaaMov1, (gpx, gpy))
-            armaaMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaMov2.png" % dati[6])
-            armaaMov2 = pygame.transform.scale(armaaMov2, (gpx, gpy))
-            armas = pygame.image.load("Immagini/EquipRallo/Spade/Spada%is.png" % dati[6])
-            armas = pygame.transform.scale(armas, (gpx, gpy))
-            armasMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isMov1.png" % dati[6])
-            armasMov1 = pygame.transform.scale(armasMov1, (gpx, gpy))
-            armasMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isMov2.png" % dati[6])
-            armasMov2 = pygame.transform.scale(armasMov2, (gpx, gpy))
-            armad = pygame.image.load("Immagini/EquipRallo/Spade/Spada%id.png" % dati[6])
-            armad = pygame.transform.scale(armad, (gpx, gpy))
-            armadMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idMov1.png" % dati[6])
-            armadMov1 = pygame.transform.scale(armadMov1, (gpx, gpy))
-            armadMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idMov2.png" % dati[6])
-            armadMov2 = pygame.transform.scale(armadMov2, (gpx, gpy))
-            armasAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isAttacco.png" % dati[6])
-            armasAttacco = pygame.transform.scale(armasAttacco, (gpx, gpy * 2))
-            armaaAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaAttacco.png" % dati[6])
-            armaaAttacco = pygame.transform.scale(armaaAttacco, (gpx * 2, gpy))
-            armadAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idAttacco.png" % dati[6])
-            armadAttacco = pygame.transform.scale(armadAttacco, (gpx * 2, gpy))
-            armawAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwAttacco.png" % dati[6])
-            armawAttacco = pygame.transform.scale(armawAttacco, (gpx, gpy * 2))
-            # arco
-            arcow = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iw.png" % dati[128])
-            arcow = pygame.transform.scale(arcow, (gpx, gpy))
-            arcoa = pygame.image.load("Immagini/EquipRallo/Archi/Arco%ia.png" % dati[128])
-            arcoa = pygame.transform.scale(arcoa, (gpx, gpy))
-            arcos = pygame.image.load("Immagini/EquipRallo/Archi/Arco%is.png" % dati[128])
-            arcos = pygame.transform.scale(arcos, (gpx, gpy))
-            arcod = pygame.image.load("Immagini/EquipRallo/Archi/Arco%id.png" % dati[128])
-            arcod = pygame.transform.scale(arcod, (gpx, gpy))
-            arcosAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%isAttacco.png" % dati[128])
-            arcosAttacco = pygame.transform.scale(arcosAttacco, (gpx, gpy * 2))
-            arcoaAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iaAttacco.png" % dati[128])
-            arcoaAttacco = pygame.transform.scale(arcoaAttacco, (gpx * 2, gpy))
-            arcodAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%idAttacco.png" % dati[128])
-            arcodAttacco = pygame.transform.scale(arcodAttacco, (gpx * 2, gpy))
-            arcowAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iwAttacco.png" % dati[128])
-            arcowAttacco = pygame.transform.scale(arcowAttacco, (gpx, gpy * 2))
-            # faretra
-            faretraw = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%iw.png" % dati[133])
-            faretraw = pygame.transform.scale(faretraw, (gpx, gpy))
-            faretraa = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%ia.png" % dati[133])
-            faretraa = pygame.transform.scale(faretraa, (gpx, gpy))
-            faretras = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%is.png" % dati[133])
-            faretras = pygame.transform.scale(faretras, (gpx, gpy))
-            faretrad = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%id.png" % dati[133])
-            faretrad = pygame.transform.scale(faretrad, (gpx, gpy))
-            # armatura
-            armaturaw = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iw.png" % dati[8])
-            armaturaw = pygame.transform.scale(armaturaw, (gpx, gpy))
-            armaturaa = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%ia.png" % dati[8])
-            armaturaa = pygame.transform.scale(armaturaa, (gpx, gpy))
-            armaturas = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % dati[8])
-            armaturas = pygame.transform.scale(armaturas, (gpx, gpy))
-            armaturad = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%id.png" % dati[8])
-            armaturad = pygame.transform.scale(armaturad, (gpx, gpy))
-            # scudo
-            scudow = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iw.png" % dati[7])
-            scudow = pygame.transform.scale(scudow, (gpx, gpy))
-            scudoa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%ia.png" % dati[7])
-            scudoa = pygame.transform.scale(scudoa, (gpx, gpy))
-            scudos = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%is.png" % dati[7])
-            scudos = pygame.transform.scale(scudos, (gpx, gpy))
-            scudod = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%id.png" % dati[7])
-            scudod = pygame.transform.scale(scudod, (gpx, gpy))
-            scudoDifesa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iDifesa.png" % dati[7])
-            scudoDifesa = pygame.transform.scale(scudoDifesa, (gpx, gpy))
-            # guanti
-            guantiw = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iw.png" % dati[129])
-            guantiw = pygame.transform.scale(guantiw, (gpx, gpy))
-            guantiwMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwMov1.png" % dati[129])
-            guantiwMov1 = pygame.transform.scale(guantiwMov1, (gpx, gpy))
-            guantiwMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwMov2.png" % dati[129])
-            guantiwMov2 = pygame.transform.scale(guantiwMov2, (gpx, gpy))
-            guantia = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%ia.png" % dati[129])
-            guantia = pygame.transform.scale(guantia, (gpx, gpy))
-            guantiaMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaMov1.png" % dati[129])
-            guantiaMov1 = pygame.transform.scale(guantiaMov1, (gpx, gpy))
-            guantiaMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaMov2.png" % dati[129])
-            guantiaMov2 = pygame.transform.scale(guantiaMov2, (gpx, gpy))
-            guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
-            guantis = pygame.transform.scale(guantis, (gpx, gpy))
-            guantisMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isMov1.png" % dati[129])
-            guantisMov1 = pygame.transform.scale(guantisMov1, (gpx, gpy))
-            guantisMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isMov2.png" % dati[129])
-            guantisMov2 = pygame.transform.scale(guantisMov2, (gpx, gpy))
-            guantid = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%id.png" % dati[129])
-            guantid = pygame.transform.scale(guantid, (gpx, gpy))
-            guantidMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idMov1.png" % dati[129])
-            guantidMov1 = pygame.transform.scale(guantidMov1, (gpx, gpy))
-            guantidMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idMov2.png" % dati[129])
-            guantidMov2 = pygame.transform.scale(guantidMov2, (gpx, gpy))
-            guantisAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isAttacco.png" % dati[129])
-            guantisAttacco = pygame.transform.scale(guantisAttacco, (gpx, gpy))
-            guantiaAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaAttacco.png" % dati[129])
-            guantiaAttacco = pygame.transform.scale(guantiaAttacco, (gpx, gpy))
-            guantidAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idAttacco.png" % dati[129])
-            guantidAttacco = pygame.transform.scale(guantidAttacco, (gpx, gpy))
-            guantiwAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwAttacco.png" % dati[129])
-            guantiwAttacco = pygame.transform.scale(guantiwAttacco, (gpx, gpy))
-            guantiDifesa = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iDifesa.png" % dati[129])
-            guantiDifesa = pygame.transform.scale(guantiDifesa, (gpx, gpy))
-            # collana
-            collanaw = pygame.image.load("Immagini/EquipRallo/Collane/Collana%iw.png" % dati[130])
-            collanaw = pygame.transform.scale(collanaw, (gpx, gpy))
-            collanaa = pygame.image.load("Immagini/EquipRallo/Collane/Collana%ia.png" % dati[130])
-            collanaa = pygame.transform.scale(collanaa, (gpx, gpy))
-            collanas = pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % dati[130])
-            collanas = pygame.transform.scale(collanas, (gpx, gpy))
-            collanad = pygame.image.load("Immagini/EquipRallo/Collane/Collana%id.png" % dati[130])
-            collanad = pygame.transform.scale(collanad, (gpx, gpy))
-            # armatura robot
-            armrobw = pygame.image.load("Immagini/EquipRobo/Batteria%iw.png" % dati[9])
-            armrobw = pygame.transform.scale(armrobw, (gpx, gpy))
-            armroba = pygame.image.load("Immagini/EquipRobo/Batteria%ia.png" % dati[9])
-            armroba = pygame.transform.scale(armroba, (gpx, gpy))
-            armrobs = pygame.image.load("Immagini/EquipRobo/Batteria%is.png" % dati[9])
-            armrobs = pygame.transform.scale(armrobs, (gpx, gpy))
-            armrobd = pygame.image.load("Immagini/EquipRobo/Batteria%id.png" % dati[9])
-            armrobd = pygame.transform.scale(armrobd, (gpx, gpy))
+            if not cambiosta:
+                # arma
+                armaw = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iw.png" % dati[6])
+                armaw = pygame.transform.scale(armaw, (gpx, gpy))
+                armawMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwMov1.png" % dati[6])
+                armawMov1 = pygame.transform.scale(armawMov1, (gpx, gpy))
+                armawMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwMov2.png" % dati[6])
+                armawMov2 = pygame.transform.scale(armawMov2, (gpx, gpy))
+                armaa = pygame.image.load("Immagini/EquipRallo/Spade/Spada%ia.png" % dati[6])
+                armaa = pygame.transform.scale(armaa, (gpx, gpy))
+                armaaMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaMov1.png" % dati[6])
+                armaaMov1 = pygame.transform.scale(armaaMov1, (gpx, gpy))
+                armaaMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaMov2.png" % dati[6])
+                armaaMov2 = pygame.transform.scale(armaaMov2, (gpx, gpy))
+                armas = pygame.image.load("Immagini/EquipRallo/Spade/Spada%is.png" % dati[6])
+                armas = pygame.transform.scale(armas, (gpx, gpy))
+                armasMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isMov1.png" % dati[6])
+                armasMov1 = pygame.transform.scale(armasMov1, (gpx, gpy))
+                armasMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isMov2.png" % dati[6])
+                armasMov2 = pygame.transform.scale(armasMov2, (gpx, gpy))
+                armad = pygame.image.load("Immagini/EquipRallo/Spade/Spada%id.png" % dati[6])
+                armad = pygame.transform.scale(armad, (gpx, gpy))
+                armadMov1 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idMov1.png" % dati[6])
+                armadMov1 = pygame.transform.scale(armadMov1, (gpx, gpy))
+                armadMov2 = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idMov2.png" % dati[6])
+                armadMov2 = pygame.transform.scale(armadMov2, (gpx, gpy))
+                armasAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%isAttacco.png" % dati[6])
+                armasAttacco = pygame.transform.scale(armasAttacco, (gpx, gpy * 2))
+                armaaAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iaAttacco.png" % dati[6])
+                armaaAttacco = pygame.transform.scale(armaaAttacco, (gpx * 2, gpy))
+                armadAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%idAttacco.png" % dati[6])
+                armadAttacco = pygame.transform.scale(armadAttacco, (gpx * 2, gpy))
+                armawAttacco = pygame.image.load("Immagini/EquipRallo/Spade/Spada%iwAttacco.png" % dati[6])
+                armawAttacco = pygame.transform.scale(armawAttacco, (gpx, gpy * 2))
+                # arco
+                arcow = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iw.png" % dati[128])
+                arcow = pygame.transform.scale(arcow, (gpx, gpy))
+                arcoa = pygame.image.load("Immagini/EquipRallo/Archi/Arco%ia.png" % dati[128])
+                arcoa = pygame.transform.scale(arcoa, (gpx, gpy))
+                arcos = pygame.image.load("Immagini/EquipRallo/Archi/Arco%is.png" % dati[128])
+                arcos = pygame.transform.scale(arcos, (gpx, gpy))
+                arcod = pygame.image.load("Immagini/EquipRallo/Archi/Arco%id.png" % dati[128])
+                arcod = pygame.transform.scale(arcod, (gpx, gpy))
+                arcosAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%isAttacco.png" % dati[128])
+                arcosAttacco = pygame.transform.scale(arcosAttacco, (gpx, gpy * 2))
+                arcoaAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iaAttacco.png" % dati[128])
+                arcoaAttacco = pygame.transform.scale(arcoaAttacco, (gpx * 2, gpy))
+                arcodAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%idAttacco.png" % dati[128])
+                arcodAttacco = pygame.transform.scale(arcodAttacco, (gpx * 2, gpy))
+                arcowAttacco = pygame.image.load("Immagini/EquipRallo/Archi/Arco%iwAttacco.png" % dati[128])
+                arcowAttacco = pygame.transform.scale(arcowAttacco, (gpx, gpy * 2))
+                # faretra
+                faretraw = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%iw.png" % dati[133])
+                faretraw = pygame.transform.scale(faretraw, (gpx, gpy))
+                faretraa = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%ia.png" % dati[133])
+                faretraa = pygame.transform.scale(faretraa, (gpx, gpy))
+                faretras = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%is.png" % dati[133])
+                faretras = pygame.transform.scale(faretras, (gpx, gpy))
+                faretrad = pygame.image.load("Immagini/EquipRallo/Faretre/Faretra%id.png" % dati[133])
+                faretrad = pygame.transform.scale(faretrad, (gpx, gpy))
+                # armatura
+                armaturaw = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%iw.png" % dati[8])
+                armaturaw = pygame.transform.scale(armaturaw, (gpx, gpy))
+                armaturaa = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%ia.png" % dati[8])
+                armaturaa = pygame.transform.scale(armaturaa, (gpx, gpy))
+                armaturas = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%is.png" % dati[8])
+                armaturas = pygame.transform.scale(armaturas, (gpx, gpy))
+                armaturad = pygame.image.load("Immagini/EquipRallo/Armature/Armatura%id.png" % dati[8])
+                armaturad = pygame.transform.scale(armaturad, (gpx, gpy))
+                # scudo
+                scudow = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iw.png" % dati[7])
+                scudow = pygame.transform.scale(scudow, (gpx, gpy))
+                scudoa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%ia.png" % dati[7])
+                scudoa = pygame.transform.scale(scudoa, (gpx, gpy))
+                scudos = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%is.png" % dati[7])
+                scudos = pygame.transform.scale(scudos, (gpx, gpy))
+                scudod = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%id.png" % dati[7])
+                scudod = pygame.transform.scale(scudod, (gpx, gpy))
+                scudoDifesa = pygame.image.load("Immagini/EquipRallo/Scudi/Scudo%iDifesa.png" % dati[7])
+                scudoDifesa = pygame.transform.scale(scudoDifesa, (gpx, gpy))
+                # guanti
+                guantiw = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iw.png" % dati[129])
+                guantiw = pygame.transform.scale(guantiw, (gpx, gpy))
+                guantiwMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwMov1.png" % dati[129])
+                guantiwMov1 = pygame.transform.scale(guantiwMov1, (gpx, gpy))
+                guantiwMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwMov2.png" % dati[129])
+                guantiwMov2 = pygame.transform.scale(guantiwMov2, (gpx, gpy))
+                guantia = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%ia.png" % dati[129])
+                guantia = pygame.transform.scale(guantia, (gpx, gpy))
+                guantiaMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaMov1.png" % dati[129])
+                guantiaMov1 = pygame.transform.scale(guantiaMov1, (gpx, gpy))
+                guantiaMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaMov2.png" % dati[129])
+                guantiaMov2 = pygame.transform.scale(guantiaMov2, (gpx, gpy))
+                guantis = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%is.png" % dati[129])
+                guantis = pygame.transform.scale(guantis, (gpx, gpy))
+                guantisMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isMov1.png" % dati[129])
+                guantisMov1 = pygame.transform.scale(guantisMov1, (gpx, gpy))
+                guantisMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isMov2.png" % dati[129])
+                guantisMov2 = pygame.transform.scale(guantisMov2, (gpx, gpy))
+                guantid = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%id.png" % dati[129])
+                guantid = pygame.transform.scale(guantid, (gpx, gpy))
+                guantidMov1 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idMov1.png" % dati[129])
+                guantidMov1 = pygame.transform.scale(guantidMov1, (gpx, gpy))
+                guantidMov2 = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idMov2.png" % dati[129])
+                guantidMov2 = pygame.transform.scale(guantidMov2, (gpx, gpy))
+                guantisAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%isAttacco.png" % dati[129])
+                guantisAttacco = pygame.transform.scale(guantisAttacco, (gpx, gpy))
+                guantiaAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iaAttacco.png" % dati[129])
+                guantiaAttacco = pygame.transform.scale(guantiaAttacco, (gpx, gpy))
+                guantidAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%idAttacco.png" % dati[129])
+                guantidAttacco = pygame.transform.scale(guantidAttacco, (gpx, gpy))
+                guantiwAttacco = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iwAttacco.png" % dati[129])
+                guantiwAttacco = pygame.transform.scale(guantiwAttacco, (gpx, gpy))
+                guantiDifesa = pygame.image.load("Immagini/EquipRallo/Guanti/Guanti%iDifesa.png" % dati[129])
+                guantiDifesa = pygame.transform.scale(guantiDifesa, (gpx, gpy))
+                # collana
+                collanaw = pygame.image.load("Immagini/EquipRallo/Collane/Collana%iw.png" % dati[130])
+                collanaw = pygame.transform.scale(collanaw, (gpx, gpy))
+                collanaa = pygame.image.load("Immagini/EquipRallo/Collane/Collana%ia.png" % dati[130])
+                collanaa = pygame.transform.scale(collanaa, (gpx, gpy))
+                collanas = pygame.image.load("Immagini/EquipRallo/Collane/Collana%is.png" % dati[130])
+                collanas = pygame.transform.scale(collanas, (gpx, gpy))
+                collanad = pygame.image.load("Immagini/EquipRallo/Collane/Collana%id.png" % dati[130])
+                collanad = pygame.transform.scale(collanad, (gpx, gpy))
+                # armatura robot
+                armrobw = pygame.image.load("Immagini/EquipRobo/Batteria%iw.png" % dati[9])
+                armrobw = pygame.transform.scale(armrobw, (gpx, gpy))
+                armroba = pygame.image.load("Immagini/EquipRobo/Batteria%ia.png" % dati[9])
+                armroba = pygame.transform.scale(armroba, (gpx, gpy))
+                armrobs = pygame.image.load("Immagini/EquipRobo/Batteria%is.png" % dati[9])
+                armrobs = pygame.transform.scale(armrobs, (gpx, gpy))
+                armrobd = pygame.image.load("Immagini/EquipRobo/Batteria%id.png" % dati[9])
+                armrobd = pygame.transform.scale(armrobd, (gpx, gpy))
             if agg == 1:
                 arma = armaw
                 armaMov1 = armawMov1
@@ -755,6 +786,21 @@ def gameloop():
                                     tutticofanetti[j + 3] = True
                                 j = j + 4
                         i = i + 4
+                    # interazioni con altri personaggi
+                    for personaggio in listaPersonaggi:
+                        if (personaggio.x == x + gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - gpy and npers == 3):
+                            canaleSoundPuntatore.play(selezione)
+                            if npers == 1:
+                                personaggio.girati("a")
+                            elif npers == 2:
+                                personaggio.girati("d")
+                            elif npers == 3:
+                                personaggio.girati("s")
+                            elif npers == 4:
+                                personaggio.girati("w")
+                            disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu)
+                            dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(y, dati[0], personaggio)
+                            caricaTutto = True
 
                 if event.key == pygame.K_ESCAPE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
@@ -785,6 +831,7 @@ def gameloop():
             dati[3] = y
             if not apriocchio:
                 dati, inizio, attacco = start(dati, nmost, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, apriocchio)
+                uscitoDaMenu = 2
             else:
                 dati, attacco, sposta, animaOggetto, npers = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry)
                 # cambiare posizione dopo l'uso di caricabatterie
@@ -884,6 +931,13 @@ def gameloop():
                 nemiciInMovimento = True
                 break
 
+        # faccio animazione di quando ricevo un oggetto speciale
+        if oggettoRicevuto:
+            disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu)
+            animaOggettoSpecialeRicevuto(oggettoRicevuto)
+            oggettoRicevuto = False
+            caricaTutto = True
+
         # movimento-azioni personaggio
         if (nx != 0 or ny != 0) and not nemiciInMovimento and mosseRimasteRob <= 0:
             vx = x
@@ -897,6 +951,10 @@ def gameloop():
                 if nemico.x == x and nemico.y == y:
                     sovrapposto = True
                     break
+            for personaggio in listaPersonaggi:
+                if personaggio.x == x and personaggio.y == y:
+                    sovrapposto = True
+                    break
             if (x == rx and y == ry) or sovrapposto:
                 x = vx
                 y = vy
@@ -905,7 +963,7 @@ def gameloop():
         # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
         attaccoDiRallo = []
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi)
             tastop = 0
             # tolgo una freccia se uso l'attacco a distanza
             if attaccoADistanza:
@@ -1005,14 +1063,10 @@ def gameloop():
                 if dati[5] > pvtot:
                     dati[5] = pvtot
         # gestione att+ e dif+
-        if dati[123] > 0:
-            attVicino = attVicino + attVicino // 4
-            if sposta:
-                dati[123] = dati[123] - 1
-        if dati[124] > 0:
-            dif = dif + dif // 4
-            if sposta:
-                dati[124] = dati[124] - 1
+        if dati[123] > 0 and sposta:
+            dati[123] = dati[123] - 1
+        if dati[124] > 0 and sposta:
+            dati[124] = dati[124] - 1
         # veleno
         if dati[121] and sposta:
             dati[5] = dati[5] - 5
@@ -1060,6 +1114,29 @@ def gameloop():
                             j += 3
                         break
                     i += 4
+        # interazioni con altri personaggi
+        if interagisciConPersonaggio:
+            for personaggio in listaPersonaggi:
+                if (personaggio.x == x + gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - gpy and npers == 3):
+                    canaleSoundPuntatore.play(selezione)
+                    if npers == 1:
+                        personaggio.girati("a")
+                    elif npers == 2:
+                        personaggio.girati("d")
+                    elif npers == 3:
+                        personaggio.girati("s")
+                    elif npers == 4:
+                        personaggio.girati("w")
+                    # aggiorno lo schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
+                    disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu)
+                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(y, dati[0], personaggio)
+                    caricaTutto = True
+            interagisciConPersonaggio = False
+        # menu mercante
+        if visualizzaMenuMercante:
+            dati = menuMercante(dati)
+            visualizzaMenuMercante = False
+            uscitoDaMenu = 1
         # apertura cofanetti
         if apriCofanetto[0]:
             i = 0
@@ -1203,7 +1280,7 @@ def gameloop():
 
             # movimento - gambit
             if raffredda < 0 and autoRic1 < 0 and autoRic2 < 0:
-                rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi)
 
             if dati[122] > 0 or raffreddamento or ricarica1 or ricarica2:
                 mosseRimasteRob -= 2
@@ -1271,7 +1348,7 @@ def gameloop():
                     if nemico.mosseRimaste > 0:
                         nemico.vx = nemico.x
                         nemico.vy = nemico.y
-                        nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo)
+                        nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo, listaPersonaggi)
                         if direzioneMostro == 1:
                             nemico.girati("d")
                         elif direzioneMostro == 2:
@@ -1339,13 +1416,13 @@ def gameloop():
             if caricaTutto:
                 if aumentoliv != 0:
                     pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
-                disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, True)
+                disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu)
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno)
+                primopasso, caricaTutto, tesoro, tastop = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi)
             if not carim:
                 pvtot = getVitaTotRallo(dati[4], dati[129])
-                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, False)
+                disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu)
 
         if aumentoliv == 0:
             caricaTutto = False
@@ -1369,6 +1446,10 @@ def gameloop():
                 listaNemici.remove(nemico)
                 listaNemiciTotali.remove(nemico)
             i -= 1
+
+        # aggiorna i dialoghi di tutti i personaggi in base all'avanzamento nella storia
+        for personaggio in listaPersonaggi:
+            personaggio.aggiornaDialogo(dati[0])
 
         # prendere il denaro da terra
         i = 0
@@ -1396,6 +1477,8 @@ def gameloop():
         vry = ry
         attacco = 0
         animaOggetto = [False, 0, 0]
+        stanzaCambiata = False
+        uscitoDaMenu -= 1
         sposta = False
 
 gameloop()

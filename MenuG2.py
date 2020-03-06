@@ -27,6 +27,10 @@ def scegli_sal(cosa, lunghezzadati, canzone):
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 5, gsy // 18 * 7, gsx // 32 * 22, gsy // 18 * 9.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 5, gsy // 18 * 7))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 7))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 26, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 5, gsy // 18 * 15.5))
         if cosa == 1:
             messaggio("Carica partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
         if cosa == 2:
@@ -42,6 +46,10 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 voceMarcata = 2
                 primaconf = False
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 18, gsy // 18 * 3.5, gsx // 32 * 9, gsy // 18 * 5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 5, gsy // 18 * 7))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 7))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 26, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 5, gsy // 18 * 15.5))
             messaggio("Confermi?", grigiochi, gsx // 32 * 20, gsy // 18 * 4.5, 70)
             messaggio("Si", grigiochi, gsx // 32 * 20.2, gsy // 18 * 6, 70)
             messaggio("No", grigiochi, gsx // 32 * 23.2, gsy // 18 * 6, 70)
@@ -247,6 +255,10 @@ def scegli_sal(cosa, lunghezzadati, canzone):
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 5, gsy // 18 * 7, gsx // 32 * 22, gsy // 18 * 9.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 5, gsy // 18 * 7))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 7))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 26, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 5, gsy // 18 * 15.5))
             if cosa == 1:
                 messaggio("Carica partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
             if cosa == 2:
@@ -262,6 +274,8 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                     voceMarcata = 2
                     primaconf = False
                 pygame.draw.rect(schermo, grigio, (gsx // 32 * 18, gsy // 18 * 3.5, gsx // 32 * 9, gsy // 18 * 5))
+                schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 18, gsy // 18 * 3.5))
+                schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 3.5))
                 messaggio("Confermi?", grigiochi, gsx // 32 * 20, gsy // 18 * 4.5, 70)
                 messaggio("Si", grigiochi, gsx // 32 * 20.2, gsy // 18 * 6, 70)
                 messaggio("No", grigiochi, gsx // 32 * 23.2, gsy // 18 * 6, 70)
@@ -694,12 +708,21 @@ def equip(dati, canzone):
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 21, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 21, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
         # linea(dove,colore,inizio,fine,spessore)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 4.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 4.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 8, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 11.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 11.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 15, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 4.5, (gsy // 18 * 5.5) + (gpy // 2)),
+                         (gsx // 32 * 4.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)),
+                         (gsx // 32 * 8, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 11.5, (gsy // 18 * 5.5) + (gpy // 2)),
+                         (gsx // 32 * 11.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)),
+                         (gsx // 32 * 15, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
+        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 5.5) + (gpy // 2)),
+                         (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
 
         if carim:
             spada = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 5, gpy * 5))
@@ -710,7 +733,7 @@ def equip(dati, canzone):
             collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
             carim = False
         messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.2, 70)
+        messaggio("Armi", grigiochi, gsx // 32 * 3.6, gsy // 18 * 4.3, 60)
         messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
@@ -723,7 +746,7 @@ def equip(dati, canzone):
             schermo.blit(sfondoOggetto, (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgArchi[i], (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
             i += 1
-        messaggio("Protezioni", grigiochi, gsx // 32 * 9.3, gsy // 18 * 4.2, 70)
+        messaggio("Protezioni", grigiochi, gsx // 32 * 9.6, gsy // 18 * 4.3, 60)
         messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
@@ -736,7 +759,7 @@ def equip(dati, canzone):
             schermo.blit(sfondoOggetto, (gsx // 32 * 12.2, (gsy // 18 * 6 + (gpy * 2 * i))))
             schermo.blit(vetImgScudi[i], (gsx // 32 * 12.2, int((gsy // 18 * 6) + (gpy * 2 * i))))
             i += 1
-        messaggio("Accessori", grigiochi, gsx // 32 * 16.3, gsy // 18 * 4.2, 70)
+        messaggio("Accessori", grigiochi, gsx // 32 * 16.7, gsy // 18 * 4.3, 60)
         messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
@@ -751,6 +774,8 @@ def equip(dati, canzone):
             i += 1
 
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+        if dati[5] > pvtot:
+            dati[5] = pvtot
 
         schermo.blit(arco, (gsx // 32 * 24.5, gsy // 18 * 11.3))
         schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 11.3))
@@ -829,7 +854,7 @@ def equip(dati, canzone):
                 messaggio("Rimuovi arco", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                diffAtt = 0 - ((dati[128] * dati[128]) * 5)
+                diffAtt = 0 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 0:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
         if voceMarcata == 7:
@@ -838,7 +863,7 @@ def equip(dati, canzone):
                 messaggio("Semplice arco in legno usato dalla maggior", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("parte dei forestieri", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                diffAtt = 5 - ((dati[128] * dati[128]) * 5)
+                diffAtt = 5 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 1:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[128] < 1:
@@ -849,7 +874,7 @@ def equip(dati, canzone):
                 messaggio(u"Elaborato arco in ferro usato solo dai più", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("esperti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                diffAtt = 20 - ((dati[128] * dati[128]) * 5)
+                diffAtt = 20 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 2:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[128] < 2:
@@ -860,7 +885,7 @@ def equip(dati, canzone):
                 messaggio("Sofisticato arco in legno e acciaio. Molto", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("leggero e potente. Massima espressione", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("dell'ingegno umano", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                diffAtt = 45 - ((dati[128] * dati[128]) * 5)
+                diffAtt = 45 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 3:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[128] < 3:
@@ -871,7 +896,7 @@ def equip(dati, canzone):
                 messaggio("Potentissimo arco di origine sconosciuta", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
-                diffAtt = 80 - ((dati[128] * dati[128]) * 5)
+                diffAtt = 80 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 4:
                     messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[128] < 4:
@@ -1020,7 +1045,7 @@ def equip(dati, canzone):
                 elif dati[129] == 2:
                     messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[129] == 3:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
                     messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
@@ -1035,7 +1060,7 @@ def equip(dati, canzone):
                 if dati[129] == 2:
                     messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[129] == 3:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
                     messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
@@ -1050,7 +1075,7 @@ def equip(dati, canzone):
                 if dati[129] == 1:
                     messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
                 elif dati[129] == 3:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
                     messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
@@ -1061,7 +1086,7 @@ def equip(dati, canzone):
                 messaggio("dell'arma. Aumentano l'attacco", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
                 messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
                 if dati[129] != 3:
-                    messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
                 if dati[129] == 1:
                     messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
@@ -1082,7 +1107,7 @@ def equip(dati, canzone):
                 elif dati[129] == 2:
                     messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
                 elif dati[129] == 3:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
                     messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
         # collane
         if voceMarcata == 26:
@@ -1454,6 +1479,10 @@ def equip(dati, canzone):
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 21, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 21, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
             # linea(dove,colore,inizio,fine,spessore)
             pygame.draw.line(schermo, grigioscu, (gsx // 32 * 4.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 4.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
             pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 8, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
@@ -1470,7 +1499,7 @@ def equip(dati, canzone):
                 collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
                 carim = False
             messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Armi", grigiochi, gsx // 32 * 3.3, gsy // 18 * 4.2, 70)
+            messaggio("Armi", grigiochi, gsx // 32 * 3.6, gsy // 18 * 4.3, 60)
             messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
@@ -1483,7 +1512,7 @@ def equip(dati, canzone):
                 schermo.blit(sfondoOggetto, (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgArchi[i], (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
                 i += 1
-            messaggio("Protezioni", grigiochi, gsx // 32 * 9.3, gsy // 18 * 4.2, 70)
+            messaggio("Protezioni", grigiochi, gsx // 32 * 9.6, gsy // 18 * 4.3, 60)
             messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
@@ -1496,7 +1525,7 @@ def equip(dati, canzone):
                 schermo.blit(sfondoOggetto, (gsx // 32 * 12.2, (gsy // 18 * 6 + (gpy * 2 * i))))
                 schermo.blit(vetImgScudi[i], (gsx // 32 * 12.2, int((gsy // 18 * 6) + (gpy * 2 * i))))
                 i += 1
-            messaggio("Accessori", grigiochi, gsx // 32 * 16.3, gsy // 18 * 4.2, 70)
+            messaggio("Accessori", grigiochi, gsx // 32 * 16.7, gsy // 18 * 4.3, 60)
             messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
@@ -1965,6 +1994,10 @@ def sceglicondiz(dati, condizione, canzone):
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
 
         messaggio("Scegli condizione", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
         messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
@@ -2350,6 +2383,10 @@ def sceglicondiz(dati, condizione, canzone):
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
 
             messaggio("Scegli condizione", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
             messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
@@ -2605,6 +2642,10 @@ def sceglitecn(dati, tecnica, canzone):
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
 
         messaggio("Scegli tecnica", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
         messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
@@ -2998,6 +3039,10 @@ def sceglitecn(dati, tecnica, canzone):
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
 
             messaggio("Scegli tecnica", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
             messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
@@ -3290,7 +3335,15 @@ def equiprobo(dati, canzone):
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 12.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 5, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 5, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 7, gsy // 18 * 4, gsx // 32 * 16, gsy // 18 * 12.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 7, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 22, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 22, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 7, gsy // 18 * 15.5))
 
         if annullaRiordinamento:
             dati = list(datiPrimaDiRiordinamento)
@@ -3671,6 +3724,9 @@ def equiprobo(dati, canzone):
             schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
 
         schermo.blit(puntatore, (xp, yp))
+        if voceMarcata >= 6 and not riordinamento:
+            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 7.5, yp + (int(gpy * 0.7))), (gsx // 32 * 22.5, yp + (int(gpy * 0.7))), 2)
+
         pygame.display.update()
 
     while not risposta:
@@ -4003,7 +4059,15 @@ def equiprobo(dati, canzone):
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 5, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 5, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 7, gsy // 18 * 4, gsx // 32 * 16, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 7, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 22, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 22, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 7, gsy // 18 * 15.5))
 
             if annullaRiordinamento:
                 dati = list(datiPrimaDiRiordinamento)
@@ -4384,6 +4448,9 @@ def equiprobo(dati, canzone):
                 schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
 
             schermo.blit(puntatore, (xp, yp))
+            if voceMarcata >= 6 and not riordinamento:
+                pygame.draw.line(schermo, grigioscu, (gsx // 32 * 7.5, yp + (int(gpy * 0.7))), (gsx // 32 * 22.5, yp + (int(gpy * 0.7))), 2)
+
             pygame.display.update()
 
         clockMenu.tick(fpsMenu)
@@ -4425,6 +4492,28 @@ def oggetti(dati, canzone):
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+
+        # menu conferma
+        if usa != 0:
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 10, gsy // 18 * 12.5, gsx // 32 * 9, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 18, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 18, gsy // 18 * 15.5))
+            # posizionare il cursore su menu usa
+            if usauno:
+                xpv = xp
+                ypv = yp
+                xp = gsx // 32 * 15
+                yp = gsy // 18 * 15.1
+                voceMarcata = 2
+                usauno = False
+            schermo.blit(puntatorevecchio, (xpv, ypv))
+            messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
+            messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
+            messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
 
         # pozione, carica batt, bomba, antidoto, bomba veleno, esca, super poz, carica migliorato, bomba pot, bomba atomica
         messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
@@ -4469,10 +4558,10 @@ def oggetti(dati, canzone):
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
         if dati[35] >= 0:
-            messaggio("Caricabatterie migliorato", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
+            messaggio("Carica plus", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
             messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
             if oggetton == 5:
-                messaggio("Caricabatterie migliorato:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                messaggio("Carica plus:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
                 messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                 messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
@@ -4534,22 +4623,6 @@ def oggetti(dati, canzone):
         else:
             messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
 
-        # menu conferma
-        if usa != 0:
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 11, gsy // 18 * 12.5, gsx // 32 * 8, gsy // 18 * 4))
-            # posizionare il cursore su menu usa
-            if usauno:
-                xpv = xp
-                ypv = yp
-                xp = gsx // 32 * 15
-                yp = gsy // 18 * 15.1
-                voceMarcata = 2
-                usauno = False
-            schermo.blit(puntatorevecchio, (xpv, ypv))
-            messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
-            messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
-            messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
-
         # vita-status personaggio
         if dati[5] < 0:
             dati[5] = 0
@@ -4591,6 +4664,11 @@ def oggetti(dati, canzone):
         messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
         schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 20, gsy // 18 * 3))
         schermo.blit(puntatore, (xp, yp))
+        if usa == 0:
+            pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))), (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
+        else:
+            pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))), (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
+
         pygame.display.update()
 
     while not risposta:
@@ -4863,6 +4941,28 @@ def oggetti(dati, canzone):
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+
+            # menu conferma
+            if usa != 0:
+                pygame.draw.rect(schermo, grigio, (gsx // 32 * 10, gsy // 18 * 12.5, gsx // 32 * 9, gsy // 18 * 4))
+                schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 18, gsy // 18 * 12.5))
+                schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 18, gsy // 18 * 15.5))
+                # posizionare il cursore su menu usa
+                if usauno:
+                    xpv = xp
+                    ypv = yp
+                    xp = gsx // 32 * 15
+                    yp = gsy // 18 * 15.1
+                    voceMarcata = 2
+                    usauno = False
+                schermo.blit(puntatorevecchio, (xpv, ypv))
+                messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
+                messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
+                messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
 
             # pozione, carica batt, bomba, antidoto, bomba veleno, esca, super poz, carica migliorato, bomba pot, bomba atomica
             messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
@@ -4907,10 +5007,10 @@ def oggetti(dati, canzone):
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
             if dati[35] >= 0:
-                messaggio("Caricabatterie migliorato", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
+                messaggio("Carica plus", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
                 messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
                 if oggetton == 5:
-                    messaggio("Caricabatterie migliorato:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
+                    messaggio("Carica plus:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
                     messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
                     messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
@@ -4972,22 +5072,6 @@ def oggetti(dati, canzone):
             else:
                 messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
 
-            # menu conferma
-            if usa != 0:
-                pygame.draw.rect(schermo, grigio, (gsx // 32 * 11, gsy // 18 * 12.5, gsx // 32 * 8, gsy // 18 * 4))
-                # posizionare il cursore su menu usa
-                if usauno:
-                    xpv = xp
-                    ypv = yp
-                    xp = gsx // 32 * 15
-                    yp = gsy // 18 * 15.1
-                    voceMarcata = 2
-                    usauno = False
-                schermo.blit(puntatorevecchio, (xpv, ypv))
-                messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
-                messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
-                messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
-
             # vita-status personaggio
             if dati[5] < 0:
                 dati[5] = 0
@@ -5029,6 +5113,11 @@ def oggetti(dati, canzone):
             messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
             schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 20, gsy // 18 * 3))
             schermo.blit(puntatore, (xp, yp))
+            if usa == 0:
+                pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))), (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
+            else:
+                pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))), (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
+
             pygame.display.update()
 
         clockMenu.tick(fpsMenu)
@@ -5045,7 +5134,7 @@ def chiediconferma(conferma, canzone):
 
     schermo.fill(grigioscu)
     if conferma == 1:
-        messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6, 120)
+        messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6.5, 120)
     elif conferma == 2:
         messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 8, gsy // 18 * 6.5, 120)
     messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 9.5, 120)
@@ -5114,7 +5203,7 @@ def chiediconferma(conferma, canzone):
                     xp = gsx // 32 * 17.5
             schermo.fill(grigioscu)
             if conferma == 1:
-                messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6, 120)
+                messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6.5, 120)
             elif conferma == 2:
                 messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 8, gsy // 18 * 6.5, 120)
             messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 9.5, 120)
@@ -5171,6 +5260,10 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         schermo.fill(grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
         pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
         messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
         messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
         messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
@@ -5350,6 +5443,10 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             schermo.fill(grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
             messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
             messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
             messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
@@ -5501,27 +5598,27 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
             i += 1
         if difensivi:
             if voceMarcata == 1:
-                messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 2:
-                messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 3:
-                messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 4:
-                messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 5:
-                messaggio("Caricabatterie migliorato", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Carica plus", grigiochi, gpx // 3, gpy // 3, 55)
             schermo.blit(scorriGiu, (gpx * 3, gpy * 6))
         if offensivi:
             if voceMarcata == 1:
-                messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 2:
-                messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 3:
-                messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 4:
-                messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 55)
             if voceMarcata == 5:
-                messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 45)
+                messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 55)
             schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
 
         if not risposta:
@@ -5733,27 +5830,27 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                 i += 1
             if difensivi:
                 if voceMarcata == 1:
-                    messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 2:
-                    messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 3:
-                    messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 4:
-                    messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 5:
-                    messaggio("Caricabatterie migliorato", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Carica plus", grigiochi, gpx // 3, gpy // 3, 55)
                 schermo.blit(scorriGiu, (gpx * 3, gpy * 6))
             if offensivi:
                 if voceMarcata == 1:
-                    messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 2:
-                    messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 3:
-                    messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 4:
-                    messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 55)
                 if voceMarcata == 5:
-                    messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 45)
+                    messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 55)
                 schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
 
             if not risposta:
@@ -5761,3 +5858,901 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
 
         clockMenu.tick(fpsMenu)
     return dati, attacco, sposta, animaOggetto, npers
+
+
+def menuMercante(dati):
+    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
+    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
+    sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 10, gpy * 10))
+    xp = gsx // 32 * 10.5
+    yp = gsy // 18 * 6.1
+    xpv = xp
+    ypv = yp
+    usauno = False
+    usa = 0
+    risposta = False
+    oggetton = 0
+    voceMarcata = 0
+    numeroOggettiAcquistati = 1
+    moneteInsufficienti = False
+    inventarioPieno = False
+
+    maxFrecce = 1
+    if dati[133] == 1:
+        maxFrecce = 5
+    elif dati[133] == 2:
+        maxFrecce = 20
+    elif dati[133] == 3:
+        maxFrecce = 60
+
+    tastop = 0
+    tastotempfps = 5
+
+    imgOggetti = []
+    i = 1
+    while i <= 10:
+        if (i == 1 and dati[0] > -1) or (i == 2 and dati[0] > -1) or (i == 3 and dati[0] > -1) or (i == 4 and dati[0] > -1) or (i == 5 and dati[0] > -1) or (i == 6 and dati[0] > -1) or (i == 7 and dati[0] > -1) or (i == 8 and dati[0] > -1) or (i == 9 and dati[0] > -1) or (i == 10 and dati[0] > -1):
+            imgOggetti.append(vetImgOggettiMercante[i - 1])
+        else:
+            imgOggetti.append(sconosciutoOggetto)
+        i += 1
+
+    # primo frame
+    if True:
+        schermo.fill(grigioscu)
+        # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
+        pygame.draw.rect(schermo, grigio, (gsx // 32 * 10.5, gsy // 18 * 4, gsx // 32 * 11, gsy // 18 * 13.5))
+        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 10.5, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 20.5, gsy // 18 * 4))
+        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 20.5, gsy // 18 * 16.5))
+        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 10.5, gsy // 18 * 16.5))
+
+        schermo.blit(sacchettoDenaroMercante, (gsx // 32 * 22, gsy // 18 * 14))
+        messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26, gsy // 18 * 15.8, 50)
+
+        schermo.blit(mercanteGraf, (gsx // 32 * 0, gsy // 18 * 8.5))
+        schermo.blit(sfondoDialogoMercante, (gsx // 32 * 0.5, gsy // 18 * 4))
+        if moneteInsufficienti:
+            messaggio("Non hai abbastanza monete!", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+        elif inventarioPieno:
+            messaggio("Non puoi prenderne altri...", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+        elif usa == 0:
+            messaggio("Prendi quello che ti serve", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+        else:
+            messaggio("Quanti te ne servono?", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+
+        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+        if 1 <= oggetton <= 10:
+            schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 23, gsy // 18 * 3))
+        elif oggetton == 0:
+            schermo.blit(frecciaMenu, (gsx // 32 * 23, gsy // 18 * 3))
+        elif oggetton == 11:
+            if dati[133] == 0:
+                schermo.blit(faretra1Menu, (gsx // 32 * 23, gsy // 18 * 3))
+            elif dati[133] == 1:
+                schermo.blit(faretra2Menu, (gsx // 32 * 23, gsy // 18 * 3))
+            else:
+                schermo.blit(faretra3Menu, (gsx // 32 * 23, gsy // 18 * 3))
+
+        # menu conferma
+        if usa != 0:
+            # posizionare il cursore sul menu compra
+            if usauno:
+                xpv = xp
+                ypv = yp
+                xp = gsx // 32 * 5.3
+                yp = gsy // 18 * 6.5
+                voceMarcata = 2
+                usauno = False
+            schermo.blit(puntatorevecchio, (xpv, ypv))
+            messaggio("x" + str(numeroOggettiAcquistati), grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 50)
+            if oggetton == 11:
+                schermo.blit(scorriSuGiuBloccato, (gsx // 32 * 8.5, gsy // 18 * 4.3))
+                if dati[133] == 1:
+                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 1] * numeroOggettiAcquistati),
+                              grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                elif dati[133] >= 2:
+                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 2] * numeroOggettiAcquistati),
+                              grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                else:
+                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi,
+                              gsx // 32 * 1, gsy // 18 * 5.3, 50)
+            else:
+                schermo.blit(scorriSuGiu, (gsx // 32 * 8.5, gsy // 18 * 4.3))
+                messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi,
+                          gsx // 32 * 1, gsy // 18 * 5.3, 50)
+            messaggio("Conferma", grigiochi, gsx // 32 * 2, gsy // 18 * 6.5, 50)
+            messaggio("Annulla", grigiochi, gsx // 32 * 6, gsy // 18 * 6.5, 50)
+
+        messaggio("Acquista oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
+        messaggio("Oggetti acquistabili", grigiochi, gsx // 32 * 11.5, gsy // 18 * 4.8, 40)
+        messaggio("Costo", grigiochi, gsx // 32 * 16.5, gsy // 18 * 4.8, 40)
+        messaggio("Posseduti", grigiochi, gsx // 32 * 18.5, gsy // 18 * 4.8, 40)
+        pygame.draw.line(schermo, grigiochi, (int(gpx * 11), int(gpy * 5.5)), (int(gpx * 21), int(gpy * 5.5)), 1)
+
+        messaggio("Freccia", grigiochi, gsx // 32 * 11.5, gsy // 18 * 6.2, 40)
+        messaggio(str(costoOggetti[0]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 6.2, 40)
+        messaggio("x%i" % dati[132], grigiochi, gsx // 32 * 19, gsy // 18 * 6.2, 40)
+        if oggetton == 0:
+            messaggio("Freccia:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+            messaggio("Usate per attaccare i nemici a distanza", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        if imgOggetti[0] != sconosciutoOggetto:
+            messaggio("Pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
+            messaggio(str(costoOggetti[1]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 7.1, 40)
+            if dati[31] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
+            else:
+                messaggio("x%i" % dati[31], grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
+            if oggetton == 1:
+                messaggio("Pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
+        if imgOggetti[1] != sconosciutoOggetto:
+            messaggio("Caricabatterie", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
+            messaggio(str(costoOggetti[2]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8, 40)
+            if dati[32] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
+            else:
+                messaggio("x%i" % dati[32], grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
+            if oggetton == 2:
+                messaggio("Caricabatterie:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
+        if imgOggetti[2] != sconosciutoOggetto:
+            messaggio("Medicina", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
+            messaggio(str(costoOggetti[3]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8.9, 40)
+            if dati[33] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
+            else:
+                messaggio("x%i" % dati[33], grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
+            if oggetton == 3:
+                messaggio("Medicina:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
+        if imgOggetti[3] != sconosciutoOggetto:
+            messaggio("Super pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
+            messaggio(str(costoOggetti[4]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 9.8, 40)
+            if dati[34] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
+            else:
+                messaggio("x%i" % dati[34], grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
+            if oggetton == 4:
+                messaggio("Super pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
+        if imgOggetti[4] != sconosciutoOggetto:
+            messaggio("Carica plus", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
+            messaggio(str(costoOggetti[5]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 10.7, 40)
+            if dati[35] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
+            else:
+                messaggio("x%i" % dati[35], grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
+            if oggetton == 5:
+                messaggio("Carica plus:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
+        if imgOggetti[5] != sconosciutoOggetto:
+            messaggio("Bomba", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
+            messaggio(str(costoOggetti[6]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 11.6, 40)
+            if dati[36] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
+            else:
+                messaggio("x%i" % dati[36], grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
+            if oggetton == 6:
+                messaggio("Bomba:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Infligge un po' di danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5,
+                          gsy // 18 * 12.5, 35)
+                messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
+        if imgOggetti[6] != sconosciutoOggetto:
+            messaggio("Bomba velenosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
+            messaggio(str(costoOggetti[7]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 12.5, 40)
+            if dati[37] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
+            else:
+                messaggio("x%i" % dati[37], grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
+            if oggetton == 7:
+                messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Infligge avvelenamento al nemico su cui viene", grigiochi, gsx // 32 * 22.5,
+                          gsy // 18 * 12.5, 35)
+                messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
+        if imgOggetti[7] != sconosciutoOggetto:
+            messaggio("Esca", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
+            messaggio(str(costoOggetti[8]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 13.4, 40)
+            if dati[38] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
+            else:
+                messaggio("x%i" % dati[38], grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
+            if oggetton == 8:
+                messaggio("Esca:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio(u"Distrae i nemici finché non viene distrutta. È", grigiochi, gsx // 32 * 22.5,
+                          gsy // 18 * 12.5, 35)
+                messaggio("possibile riprenderla passandoci sopra", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
+        if imgOggetti[8] != sconosciutoOggetto:
+            messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
+            messaggio(str(costoOggetti[9]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 14.3, 40)
+            if dati[39] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
+            else:
+                messaggio("x%i" % dati[39], grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
+            if oggetton == 9:
+                messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio(u"Dimezza la velocità del nemico su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5,
+                          35)
+                messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
+        if imgOggetti[9] != sconosciutoOggetto:
+            messaggio("Bomba potenziata", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
+            messaggio(str(costoOggetti[10]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 15.2, 40)
+            if dati[40] < 0:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
+            else:
+                messaggio("x%i" % dati[40], grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
+            if oggetton == 10:
+                messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Infligge molti danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5,
+                          35)
+                messaggio("lanciata in un vasto raggio", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+        else:
+            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
+        messaggio("Faretra", grigiochi, gsx // 32 * 11.5, gsy // 18 * 16.1, 40)
+        if dati[133] == 0:
+            messaggio(str(costoOggetti[11]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+        if dati[133] == 1:
+            messaggio(str(costoOggetti[12]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+        if dati[133] >= 2:
+            messaggio(str(costoOggetti[13]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+        if dati[133] == 3:
+            messaggio("x1", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
+        else:
+            messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
+        if oggetton == 11:
+            messaggio("Faretra:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+            messaggio(u"Permette di trasportare più frecce", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+
+        schermo.blit(puntatore, (xp, yp))
+        if usa == 0:
+            pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))),
+                             (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
+        else:
+            pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))),
+                             (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
+        pygame.display.update()
+
+    while not risposta:
+        if not canaleSoundCanzone.get_busy():
+            canaleSoundCanzone.play(c27)
+
+        # rallenta per i 20 fps
+        if tastotempfps != 0 and tastop != 0:
+            tastotempfps = tastotempfps - 1
+        elif tastotempfps == 0:
+            tastotempfps = 2
+
+        primoMovimento = False
+        tastoTrovato = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                tastoTrovato = True
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                tastop = event.key
+                tastotempfps = 5
+                if event.key == pygame.K_q and not tastoTrovato:
+                    canaleSoundPuntatore.play(selind)
+                    numeroOggettiAcquistati = 1
+                    moneteInsufficienti = False
+                    inventarioPieno = False
+                    tastoTrovato = True
+                    voceMarcata = 0
+                    if usa != 0:
+                        xp = gsx // 32 * 10.5
+                        if usa == -1:
+                            yp = gsy // 18 * 6.1
+                        if usa == 1:
+                            yp = gsy // 18 * 7
+                        if usa == 2:
+                            yp = gsy // 18 * 7.9
+                        if usa == 3:
+                            yp = gsy // 18 * 8.8
+                        if usa == 4:
+                            yp = gsy // 18 * 9.7
+                        if usa == 5:
+                            yp = gsy // 18 * 10.6
+                        if usa == 6:
+                            yp = gsy // 18 * 11.5
+                        if usa == 7:
+                            yp = gsy // 18 * 12.4
+                        if usa == 8:
+                            yp = gsy // 18 * 13.3
+                        if usa == 9:
+                            yp = gsy // 18 * 14.2
+                        if usa == 10:
+                            yp = gsy // 18 * 15.1
+                        if usa == 11:
+                            yp = gsy // 18 * 16
+                        usa = 0
+                    else:
+                        risposta = True
+                if event.key == pygame.K_s and not tastoTrovato:
+                    moneteInsufficienti = False
+                    inventarioPieno = False
+                    primoMovimento = True
+                    tastoTrovato = True
+                if event.key == pygame.K_w and not tastoTrovato:
+                    moneteInsufficienti = False
+                    inventarioPieno = False
+                    primoMovimento = True
+                    tastoTrovato = True
+                if event.key == pygame.K_a and voceMarcata != 0 and not tastoTrovato:
+                    moneteInsufficienti = False
+                    inventarioPieno = False
+                    primoMovimento = True
+                    tastoTrovato = True
+                if event.key == pygame.K_d and voceMarcata != 0 and not tastoTrovato:
+                    moneteInsufficienti = False
+                    inventarioPieno = False
+                    primoMovimento = True
+                    tastoTrovato = True
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    moneteInsufficienti = False
+                    inventarioPieno = False
+                    tastoTrovato = True
+                    usadue = True
+
+                    # usa?
+                    if voceMarcata == 1:
+                        if 1 <= oggetton <= 10 and costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                            canaleSoundInterazioni.play(rumoreAcquisto)
+                            dati[131] -= costoOggetti[oggetton] * numeroOggettiAcquistati
+                            voceMarcata = 0
+                            xp = gsx // 32 * 10.5
+                            # freccia
+                            if usa == -1:
+                                dati[132] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 6.1
+                            # pozione
+                            if usa == 1:
+                                dati[31] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 7
+                            # carica batt
+                            if usa == 2:
+                                dati[32] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 7.9
+                            # antidoto
+                            if usa == 3:
+                                dati[33] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 8.8
+                            # super pozione
+                            if usa == 4:
+                                dati[34] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 9.7
+                            # carica migliorato
+                            if usa == 5:
+                                dati[35] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 10.6
+                            # bomba
+                            if usa == 6:
+                                dati[36] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 11.5
+                            # bomba veleno
+                            if usa == 7:
+                                dati[37] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 12.4
+                            # esca
+                            if usa == 8:
+                                dati[38] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 13.3
+                            # bomba appiccicosa
+                            if usa == 9:
+                                dati[39] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 14.2
+                            # bomba potenziata
+                            if usa == 10:
+                                dati[40] += numeroOggettiAcquistati
+                                yp = gsy // 18 * 15.1
+                            usa = 0
+                            usadue = False
+                        elif oggetton == 11:
+                            if dati[133] == 0 and costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                                canaleSoundInterazioni.play(rumoreAcquisto)
+                                dati[131] -= costoOggetti[oggetton] * numeroOggettiAcquistati
+                                voceMarcata = 0
+                                xp = gsx // 32 * 10.5
+                                # faretra
+                                if usa == 10:
+                                    dati[40] += numeroOggettiAcquistati
+                                    yp = gsy // 18 * 15.1
+                                usa = 0
+                                usadue = False
+                            elif dati[133] == 1 and costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
+                                canaleSoundInterazioni.play(rumoreAcquisto)
+                                dati[131] -= costoOggetti[oggetton + 1] * numeroOggettiAcquistati
+                                voceMarcata = 0
+                                xp = gsx // 32 * 10.5
+                                # faretra
+                                if usa == 10:
+                                    dati[40] += numeroOggettiAcquistati
+                                    yp = gsy // 18 * 15.1
+                                usa = 0
+                                usadue = False
+                            elif dati[133] == 2 and costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
+                                canaleSoundInterazioni.play(rumoreAcquisto)
+                                dati[131] -= costoOggetti[oggetton + 2] * numeroOggettiAcquistati
+                                voceMarcata = 0
+                                xp = gsx // 32 * 10.5
+                                # faretra
+                                if usa == 10:
+                                    dati[40] += numeroOggettiAcquistati
+                                    yp = gsy // 18 * 15.1
+                                usa = 0
+                                usadue = False
+                            else:
+                                canaleSoundPuntatore.play(selimp)
+                                moneteInsufficienti = True
+                                usadue = False
+                        else:
+                            canaleSoundPuntatore.play(selimp)
+                            moneteInsufficienti = True
+                            usadue = False
+                    elif voceMarcata == 2:
+                        canaleSoundPuntatore.play(selind)
+                        voceMarcata = 0
+                        numeroOggettiAcquistati = 1
+                        moneteInsufficienti = False
+                        inventarioPieno = False
+                        xp = gsx // 32 * 10.5
+                        if usa == -1:
+                            yp = gsy // 18 * 6.1
+                        if usa == 1:
+                            yp = gsy // 18 * 7
+                        if usa == 2:
+                            yp = gsy // 18 * 7.9
+                        if usa == 3:
+                            yp = gsy // 18 * 8.8
+                        if usa == 4:
+                            yp = gsy // 18 * 9.7
+                        if usa == 5:
+                            yp = gsy // 18 * 10.6
+                        if usa == 6:
+                            yp = gsy // 18 * 11.5
+                        if usa == 7:
+                            yp = gsy // 18 * 12.4
+                        if usa == 8:
+                            yp = gsy // 18 * 13.3
+                        if usa == 9:
+                            yp = gsy // 18 * 14.2
+                        if usa == 10:
+                            yp = gsy // 18 * 15.1
+                        if usa == 11:
+                            yp = gsy // 18 * 16
+                        usa = 0
+                        usadue = False
+
+                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                    if usadue:
+                        if 1 <= oggetton <= 10 and dati[30 + oggetton] < 99:
+                            numeroOggettiAcquistati = 1
+                            if oggetton == 1:
+                                if imgOggetti[0] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 1
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 2:
+                                if imgOggetti[1] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 2
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 3:
+                                if imgOggetti[2] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 3
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 4:
+                                if imgOggetti[3] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 4
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 5:
+                                if imgOggetti[4] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 5
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 6:
+                                if imgOggetti[5] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 6
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 7:
+                                if imgOggetti[6] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 7
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 8:
+                                if imgOggetti[7] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 8
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 9:
+                                if imgOggetti[8] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 9
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                            if oggetton == 10:
+                                if imgOggetti[9] != sconosciutoOggetto:
+                                    canaleSoundPuntatore.play(selezione)
+                                    usa = 10
+                                    usauno = True
+                                else:
+                                    canaleSoundPuntatore.play(selimp)
+                        elif oggetton == 0 and dati[132] < maxFrecce:
+                            canaleSoundPuntatore.play(selezione)
+                            usa = -1
+                            usauno = True
+                        elif oggetton == 11 and dati[133] != 3:
+                            canaleSoundPuntatore.play(selezione)
+                            usa = 11
+                            usauno = True
+                        else:
+                            inventarioPieno = True
+                            canaleSoundPuntatore.play(selimp)
+            if event.type == pygame.KEYUP and tastop == event.key:
+                tastop = 0
+
+        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
+            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+                tastotempfps = 2
+            if tastop == pygame.K_w:
+                if voceMarcata == 0:
+                    if oggetton != 0:
+                        canaleSoundPuntatore.play(spostapun)
+                        oggetton = oggetton - 1
+                        yp = yp - gsy // 18 * 0.9
+                    elif oggetton == 0:
+                        canaleSoundPuntatore.play(spostapun)
+                        yp = gsy // 18 * 16
+                        oggetton = 11
+                elif voceMarcata != 0:
+                    if oggetton != 11:
+                        canaleSoundPuntatore.play(spostapun)
+                        if 1 <= oggetton <= 10 and numeroOggettiAcquistati + dati[30 + oggetton] >= 99:
+                            numeroOggettiAcquistati = 1
+                        elif oggetton == 0 and numeroOggettiAcquistati + dati[132] < maxFrecce:
+                            numeroOggettiAcquistati = 1
+                        else:
+                            numeroOggettiAcquistati += 1
+                    else:
+                        canaleSoundPuntatore.play(selimp)
+                        numeroOggettiAcquistati = 1
+            if tastop == pygame.K_a and voceMarcata != 0:
+                if voceMarcata == 2:
+                    voceMarcata -= 1
+                    canaleSoundPuntatore.play(spostapun)
+                    xp = xp - gsx // 32 * 4
+            if tastop == pygame.K_s:
+                if voceMarcata == 0:
+                    if oggetton != 11:
+                        canaleSoundPuntatore.play(spostapun)
+                        oggetton = oggetton + 1
+                        yp = yp + gsy // 18 * 0.9
+                    elif oggetton == 11:
+                        canaleSoundPuntatore.play(spostapun)
+                        yp = gsy // 18 * 6.1
+                        oggetton = 0
+                elif voceMarcata != 0:
+                    if oggetton != 11:
+                        canaleSoundPuntatore.play(spostapun)
+                        if 1 <= oggetton <= 10 and numeroOggettiAcquistati == 1:
+                            numeroOggettiAcquistati = 99 - dati[30 + oggetton]
+                        elif oggetton == 0 and numeroOggettiAcquistati == 1:
+                            numeroOggettiAcquistati = maxFrecce - dati[132]
+                        else:
+                            numeroOggettiAcquistati -= 1
+                    else:
+                        canaleSoundPuntatore.play(selimp)
+                        numeroOggettiAcquistati = 1
+            if tastop == pygame.K_d and voceMarcata != 0:
+                if voceMarcata == 1:
+                    voceMarcata += 1
+                    canaleSoundPuntatore.play(spostapun)
+                    xp = xp + gsx // 32 * 4
+
+            maxFrecce = 1
+            if dati[133] == 1:
+                maxFrecce = 5
+            elif dati[133] == 2:
+                maxFrecce = 20
+            elif dati[133] == 3:
+                maxFrecce = 60
+
+            schermo.fill(grigioscu)
+            # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
+            pygame.draw.rect(schermo, grigio, (gsx // 32 * 10.5, gsy // 18 * 4, gsx // 32 * 11, gsy // 18 * 13.5))
+            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 10.5, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 20.5, gsy // 18 * 4))
+            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 20.5, gsy // 18 * 16.5))
+            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 10.5, gsy // 18 * 16.5))
+
+            schermo.blit(sacchettoDenaroMercante, (gsx // 32 * 22, gsy // 18 * 14))
+            messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26, gsy // 18 * 15.8, 50)
+
+            schermo.blit(mercanteGraf, (gsx // 32 * 0, gsy // 18 * 8.5))
+            schermo.blit(sfondoDialogoMercante, (gsx // 32 * 0.5, gsy // 18 * 4))
+            if moneteInsufficienti:
+                messaggio("Non hai abbastanza monete!", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+            elif inventarioPieno:
+                messaggio("Non puoi prenderne altri...", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+            elif usa == 0:
+                messaggio("Prendi quello che ti serve", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+            else:
+                messaggio("Quanti te ne servono?", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+
+            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+            if 1 <= oggetton <= 10:
+                schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 23, gsy // 18 * 3))
+            elif oggetton == 0:
+                schermo.blit(frecciaMenu, (gsx // 32 * 23, gsy // 18 * 3))
+            elif oggetton == 11:
+                if dati[133] == 0:
+                    schermo.blit(faretra1Menu, (gsx // 32 * 23, gsy // 18 * 3))
+                elif dati[133] == 1:
+                    schermo.blit(faretra2Menu, (gsx // 32 * 23, gsy // 18 * 3))
+                else:
+                    schermo.blit(faretra3Menu, (gsx // 32 * 23, gsy // 18 * 3))
+
+            # menu conferma
+            if usa != 0:
+                # posizionare il cursore sul menu compra
+                if usauno:
+                    xpv = xp
+                    ypv = yp
+                    xp = gsx // 32 * 5.3
+                    yp = gsy // 18 * 6.5
+                    voceMarcata = 2
+                    usauno = False
+                schermo.blit(puntatorevecchio, (xpv, ypv))
+                messaggio("x" + str(numeroOggettiAcquistati), grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 50)
+                if oggetton == 11:
+                    schermo.blit(scorriSuGiuBloccato, (gsx // 32 * 8.5, gsy // 18 * 4.3))
+                    if dati[133] == 1:
+                        messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 1] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                    elif dati[133] >= 2:
+                        messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 2] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                    else:
+                        messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                else:
+                    schermo.blit(scorriSuGiu, (gsx // 32 * 8.5, gsy // 18 * 4.3))
+                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                messaggio("Conferma", grigiochi, gsx // 32 * 2, gsy // 18 * 6.5, 50)
+                messaggio("Annulla", grigiochi, gsx // 32 * 6, gsy // 18 * 6.5, 50)
+
+            messaggio("Acquista oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
+            messaggio("Oggetti acquistabili", grigiochi, gsx // 32 * 11.5, gsy // 18 * 4.8, 40)
+            messaggio("Costo", grigiochi, gsx // 32 * 16.5, gsy // 18 * 4.8, 40)
+            messaggio("Posseduti", grigiochi, gsx // 32 * 18.5, gsy // 18 * 4.8, 40)
+            pygame.draw.line(schermo, grigiochi, (int(gpx * 11), int(gpy * 5.5)), (int(gpx * 21), int(gpy * 5.5)), 1)
+
+            messaggio("Freccia", grigiochi, gsx // 32 * 11.5, gsy // 18 * 6.2, 40)
+            messaggio(str(costoOggetti[0]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 6.2, 40)
+            messaggio("x%i" % dati[132], grigiochi, gsx // 32 * 19, gsy // 18 * 6.2, 40)
+            if oggetton == 0:
+                messaggio("Freccia:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio("Usate per attaccare i nemici a distanza", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            if imgOggetti[0] != sconosciutoOggetto:
+                messaggio("Pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
+                messaggio(str(costoOggetti[1]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 7.1, 40)
+                if dati[31] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
+                else:
+                    messaggio("x%i" % dati[31], grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
+                if oggetton == 1:
+                    messaggio("Pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
+            if imgOggetti[1] != sconosciutoOggetto:
+                messaggio("Caricabatterie", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
+                messaggio(str(costoOggetti[2]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8, 40)
+                if dati[32] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
+                else:
+                    messaggio("x%i" % dati[32], grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
+                if oggetton == 2:
+                    messaggio("Caricabatterie:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
+            if imgOggetti[2] != sconosciutoOggetto:
+                messaggio("Medicina", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
+                messaggio(str(costoOggetti[3]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8.9, 40)
+                if dati[33] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
+                else:
+                    messaggio("x%i" % dati[33], grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
+                if oggetton == 3:
+                    messaggio("Medicina:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
+            if imgOggetti[3] != sconosciutoOggetto:
+                messaggio("Super pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
+                messaggio(str(costoOggetti[4]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 9.8, 40)
+                if dati[34] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
+                else:
+                    messaggio("x%i" % dati[34], grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
+                if oggetton == 4:
+                    messaggio("Super pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
+            if imgOggetti[4] != sconosciutoOggetto:
+                messaggio("Carica plus", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
+                messaggio(str(costoOggetti[5]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 10.7, 40)
+                if dati[35] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
+                else:
+                    messaggio("x%i" % dati[35], grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
+                if oggetton == 5:
+                    messaggio("Carica plus:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
+            if imgOggetti[5] != sconosciutoOggetto:
+                messaggio("Bomba", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
+                messaggio(str(costoOggetti[6]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 11.6, 40)
+                if dati[36] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
+                else:
+                    messaggio("x%i" % dati[36], grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
+                if oggetton == 6:
+                    messaggio("Bomba:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Infligge un po' di danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
+            if imgOggetti[6] != sconosciutoOggetto:
+                messaggio("Bomba velenosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
+                messaggio(str(costoOggetti[7]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 12.5, 40)
+                if dati[37] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
+                else:
+                    messaggio("x%i" % dati[37], grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
+                if oggetton == 7:
+                    messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Infligge avvelenamento al nemico su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
+            if imgOggetti[7] != sconosciutoOggetto:
+                messaggio("Esca", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
+                messaggio(str(costoOggetti[8]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 13.4, 40)
+                if dati[38] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
+                else:
+                    messaggio("x%i" % dati[38], grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
+                if oggetton == 8:
+                    messaggio("Esca:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio(u"Distrae i nemici finché non viene distrutta. È", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("possibile riprenderla passandoci sopra", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
+            if imgOggetti[8] != sconosciutoOggetto:
+                messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
+                messaggio(str(costoOggetti[9]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 14.3, 40)
+                if dati[39] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
+                else:
+                    messaggio("x%i" % dati[39], grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
+                if oggetton == 9:
+                    messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio(u"Dimezza la velocità del nemico su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
+            if imgOggetti[9] != sconosciutoOggetto:
+                messaggio("Bomba potenziata", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
+                messaggio(str(costoOggetti[10]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 15.2, 40)
+                if dati[40] < 0:
+                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
+                else:
+                    messaggio("x%i" % dati[40], grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
+                if oggetton == 10:
+                    messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                    messaggio("Infligge molti danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                    messaggio("lanciata in un vasto raggio", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+            else:
+                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
+            messaggio("Faretra", grigiochi, gsx // 32 * 11.5, gsy // 18 * 16.1, 40)
+            if dati[133] == 0:
+                messaggio(str(costoOggetti[11]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+            if dati[133] == 1:
+                messaggio(str(costoOggetti[12]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+            if dati[133] >= 2:
+                messaggio(str(costoOggetti[13]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+            if dati[133] == 3:
+                messaggio("x1", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
+            else:
+                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
+            if oggetton == 11:
+                messaggio("Faretra:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
+                messaggio(u"Permette di trasportare più frecce", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
+                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+
+            schermo.blit(puntatore, (xp, yp))
+            if usa == 0:
+                pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))), (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
+            else:
+                pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))), (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
+            pygame.display.update()
+
+        clockMenu.tick(fpsMenu)
+
+    return dati

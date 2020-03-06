@@ -42,10 +42,12 @@ clockAttacco = pygame.time.Clock()
 clockAnimazioni = pygame.time.Clock()
 clockVideo = pygame.time.Clock()
 clockMenu = pygame.time.Clock()
+clockFadeToBlack = pygame.time.Clock()
 fpsAnimazioni = 30
 fpsInquadra = 20
 fpsVideo = 12
 fpsMenu = 20
+fpsFadeToBlack = 30
 
 # colori
 nero = (0, 0, 0)
@@ -93,89 +95,109 @@ scorriSu = pygame.image.load("Immagini/Puntatori/ScorriOggettiSu.png")
 scorriSu = pygame.transform.scale(scorriSu, (gpx, gpy))
 scorriGiu = pygame.image.load("Immagini/Puntatori/ScorriOggettiGiu.png")
 scorriGiu = pygame.transform.scale(scorriGiu, (gpx, gpy))
+puntatDialoghi = pygame.image.load('Immagini/Oggetti/IcoDialogo.png')
+puntatDialoghi = pygame.transform.scale(puntatDialoghi, (gpx, gpy))
 puntatoreInquadraNemici = pygame.image.load("Immagini/Puntatori/InquadraNemicoSelezionato.png")
 puntatoreInquadraNemici = pygame.transform.scale(puntatoreInquadraNemici, (gpx, gpy))
 
 # immagini personaggio
-persw = pygame.image.load('Immagini/Personaggi/Personaggio4.png')
+persw = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio4.png')
 persw = pygame.transform.scale(persw, (gpx, gpy))
-perswb = pygame.image.load('Immagini/Personaggi/Personaggio4b.png')
+perswb = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio4b.png')
 perswb = pygame.transform.scale(perswb, (gpx, gpy))
-persa = pygame.image.load('Immagini/Personaggi/Personaggio3.png')
+persa = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio3.png')
 persa = pygame.transform.scale(persa, (gpx, gpy))
-persab = pygame.image.load('Immagini/Personaggi/Personaggio3b.png')
+persab = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio3b.png')
 persab = pygame.transform.scale(persab, (gpx, gpy))
-perso = pygame.image.load('Immagini/Personaggi/Personaggio1.png')
+perso = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio1.png')
 perss = pygame.transform.scale(perso, (gpx, gpy))
-persob = pygame.image.load('Immagini/Personaggi/Personaggio1b.png')
+persob = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio1b.png')
 perssb = pygame.transform.scale(persob, (gpx, gpy))
-persd = pygame.image.load('Immagini/Personaggi/Personaggio2.png')
+persd = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio2.png')
 persd = pygame.transform.scale(persd, (gpx, gpy))
-persdb = pygame.image.load('Immagini/Personaggi/Personaggio2b.png')
+persdb = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio2b.png')
 persdb = pygame.transform.scale(persdb, (gpx, gpy))
-perssm = pygame.image.load('Immagini/Personaggi/Personaggio1mov.png')
+perssm = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio1mov.png')
 perssm = pygame.transform.scale(perssm, (gpx, gpy))
-perssmb1 = pygame.image.load('Immagini/Personaggi/Personaggio1movb1.png')
+perssmb1 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio1movb1.png')
 perssmb1 = pygame.transform.scale(perssmb1, (gpx, gpy))
-perssmb2 = pygame.image.load('Immagini/Personaggi/Personaggio1movb2.png')
+perssmb2 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio1movb2.png')
 perssmb2 = pygame.transform.scale(perssmb2, (gpx, gpy))
-persdm = pygame.image.load('Immagini/Personaggi/Personaggio2mov.png')
+persdm = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio2mov.png')
 persdm = pygame.transform.scale(persdm, (gpx, gpy))
-persdmb1 = pygame.image.load('Immagini/Personaggi/Personaggio2movb1.png')
+persdmb1 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio2movb1.png')
 persdmb1 = pygame.transform.scale(persdmb1, (gpx, gpy))
-persdmb2 = pygame.image.load('Immagini/Personaggi/Personaggio2movb2.png')
+persdmb2 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio2movb2.png')
 persdmb2 = pygame.transform.scale(persdmb2, (gpx, gpy))
-persam = pygame.image.load('Immagini/Personaggi/Personaggio3mov.png')
+persam = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio3mov.png')
 persam = pygame.transform.scale(persam, (gpx, gpy))
-persamb1 = pygame.image.load('Immagini/Personaggi/Personaggio3movb1.png')
+persamb1 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio3movb1.png')
 persamb1 = pygame.transform.scale(persamb1, (gpx, gpy))
-persamb2 = pygame.image.load('Immagini/Personaggi/Personaggio3movb2.png')
+persamb2 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio3movb2.png')
 persamb2 = pygame.transform.scale(persamb2, (gpx, gpy))
-perswm = pygame.image.load('Immagini/Personaggi/Personaggio4mov.png')
+perswm = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio4mov.png')
 perswm = pygame.transform.scale(perswm, (gpx, gpy))
-perswmb1 = pygame.image.load('Immagini/Personaggi/Personaggio4movb1.png')
+perswmb1 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio4movb1.png')
 perswmb1 = pygame.transform.scale(perswmb1, (gpx, gpy))
-perswmb2 = pygame.image.load('Immagini/Personaggi/Personaggio4movb2.png')
+perswmb2 = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio4movb2.png')
 perswmb2 = pygame.transform.scale(perswmb2, (gpx, gpy))
-perswmbAttacco = pygame.image.load('Immagini/Personaggi/Personaggio4movbAttacco.png')
+perswmbAttacco = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio4movbAttacco.png')
 perswmbAttacco = pygame.transform.scale(perswmbAttacco, (gpx, gpy))
-persambAttacco = pygame.image.load('Immagini/Personaggi/Personaggio3movbAttacco.png')
+persambAttacco = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio3movbAttacco.png')
 persambAttacco = pygame.transform.scale(persambAttacco, (gpx, gpy))
-perssmbAttacco = pygame.image.load('Immagini/Personaggi/Personaggio1movbAttacco.png')
+perssmbAttacco = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio1movbAttacco.png')
 perssmbAttacco = pygame.transform.scale(perssmbAttacco, (gpx, gpy))
-persdmbAttacco = pygame.image.load('Immagini/Personaggi/Personaggio2movbAttacco.png')
+persdmbAttacco = pygame.image.load('Immagini/Personaggi/Rallo/Personaggio2movbAttacco.png')
 persdmbAttacco = pygame.transform.scale(persdmbAttacco, (gpx, gpy))
-persmbDifesa = pygame.image.load('Immagini/Personaggi/PersonaggiomovbDifesa.png')
+persmbDifesa = pygame.image.load('Immagini/Personaggi/Rallo/PersonaggiomovbDifesa.png')
 persmbDifesa = pygame.transform.scale(persmbDifesa, (gpx, gpy))
-persAvvele = pygame.image.load('Immagini/Personaggi/PersonaggioAvvelenato.png')
+persAvvele = pygame.image.load('Immagini/Personaggi/Rallo/PersonaggioAvvelenato.png')
 persAvvele = pygame.transform.scale(persAvvele, (gpx, gpy))
 persGrafMenu = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafMenu.png')
 persGrafInizio = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafInizio.png')
 
 # immagini robot
-robow = pygame.image.load('Immagini/Personaggi/Robot4.png')
+robow = pygame.image.load('Immagini/Personaggi/Colco/Robot4.png')
 robow = pygame.transform.scale(robow, (gpx, gpy))
-roboa = pygame.image.load('Immagini/Personaggi/Robot3.png')
+roboa = pygame.image.load('Immagini/Personaggi/Colco/Robot3.png')
 roboa = pygame.transform.scale(roboa, (gpx, gpy))
-roboo = pygame.image.load('Immagini/Personaggi/Robot1.png')
+roboo = pygame.image.load('Immagini/Personaggi/Colco/Robot1.png')
 robos = pygame.transform.scale(roboo, (gpx, gpy))
-robod = pygame.image.load('Immagini/Personaggi/Robot2.png')
+robod = pygame.image.load('Immagini/Personaggi/Colco/Robot2.png')
 robod = pygame.transform.scale(robod, (gpx, gpy))
-robomo = pygame.image.load('Immagini/Personaggi/Robot0.png')
+robomo = pygame.image.load('Immagini/Personaggi/Colco/Robot0.png')
 robomo = pygame.transform.scale(robomo, (gpx, gpy))
-robodp = pygame.image.load('Immagini/Personaggi/Robot2p.png')
+robodp = pygame.image.load('Immagini/Personaggi/Colco/Robot2p.png')
 robodp = pygame.transform.scale(robodp, (gpx, gpy))
-roboap = pygame.image.load('Immagini/Personaggi/Robot3p.png')
+roboap = pygame.image.load('Immagini/Personaggi/Colco/Robot3p.png')
 roboap = pygame.transform.scale(roboap, (gpx, gpy))
 armrobmo = pygame.image.load('Immagini/EquipRobo/Batteria00.png')
 armrobmo = pygame.transform.scale(armrobmo, (gpx, gpy))
-roboSurrisc = pygame.image.load('Immagini/Personaggi/RobotSurriscaldato.png')
+roboSurrisc = pygame.image.load('Immagini/Personaggi/Colco/RobotSurriscaldato.png')
 roboSurrisc = pygame.transform.scale(roboSurrisc, (gpx, gpy))
 robogra = pygame.image.load('Immagini/Disegnigraf/RobotGraf.png')
 robograf = pygame.image.load('Immagini/Disegnigraf/RobotGraf2.png')
 robograff = pygame.image.load('Immagini/Disegnigraf/RobotGraf3.png')
 robografff = pygame.image.load('Immagini/Disegnigraf/RobotGraf4.png')
 robograffff = pygame.image.load('Immagini/Disegnigraf/RobotGrafsalva.png')
+
+# img menu mercante
+mercanteGraf = pygame.image.load('Immagini/Disegnigraf/Mercante.png')
+mercanteGraf = pygame.transform.scale(mercanteGraf, (gpx * 12, gpy * 9))
+scorriSuGiu = pygame.image.load('Immagini/Puntatori/ScorriSuGiu.png')
+scorriSuGiu = pygame.transform.scale(scorriSuGiu, (gpx, gpy))
+scorriSuGiuBloccato = pygame.image.load('Immagini/Puntatori/ScorriSuGiuBloccato.png')
+scorriSuGiuBloccato = pygame.transform.scale(scorriSuGiuBloccato, (gpx, gpy))
+sfondoDialogoMercante = pygame.image.load('Immagini/DecorazioniMenu/SfondoDialogoMercante.png')
+sfondoDialogoMercante = pygame.transform.scale(sfondoDialogoMercante, (int(gpx * 9.5), int(gpy * 4.5)))
+faretra1Menu = pygame.image.load('Immagini/Oggetti/Faretra1Menu.png')
+faretra1Menu = pygame.transform.scale(faretra1Menu, (gpx * 8, gpy * 8))
+faretra2Menu = pygame.image.load('Immagini/Oggetti/Faretra2Menu.png')
+faretra2Menu = pygame.transform.scale(faretra2Menu, (gpx * 8, gpy * 8))
+faretra3Menu = pygame.image.load('Immagini/Oggetti/Faretra3Menu.png')
+faretra3Menu = pygame.transform.scale(faretra3Menu, (gpx * 8, gpy * 8))
+frecciaMenu = pygame.image.load('Immagini/Oggetti/FrecciaMenu.png')
+frecciaMenu = pygame.transform.scale(frecciaMenu, (gpx * 8, gpy * 8))
 
 # indicatori vita
 indvita = pygame.image.load('Immagini/Barrevita/Indvita.png')
@@ -208,6 +230,14 @@ sfondoStartBattaglia = pygame.image.load('Immagini/Oggetti/SfondoStartBattaglia.
 sfondoStartBattaglia = pygame.transform.scale(sfondoStartBattaglia, (gpx * 7, gpy * 7))
 sfondoStatAumentata = pygame.image.load('Immagini/Levelup/SfondoStatisticaAumentata.png')
 sfondoStatAumentata = pygame.transform.scale(sfondoStatAumentata, (gpx * 7, gpy * 7))
+sfondoTriangolinoAltoDestra = pygame.image.load('Immagini/DecorazioniMenu/TriangoloAltoDestra.png')
+sfondoTriangolinoAltoDestra = pygame.transform.scale(sfondoTriangolinoAltoDestra, (gpx, gpy))
+sfondoTriangolinoAltoSinistra = pygame.image.load('Immagini/DecorazioniMenu/TriangoloAltoSinistra.png')
+sfondoTriangolinoAltoSinistra = pygame.transform.scale(sfondoTriangolinoAltoSinistra, (gpx, gpy))
+sfondoTriangolinoBassoDestra = pygame.image.load('Immagini/DecorazioniMenu/TriangoloBassoDestra.png')
+sfondoTriangolinoBassoDestra = pygame.transform.scale(sfondoTriangolinoBassoDestra, (gpx, gpy))
+sfondoTriangolinoBassoSinistra = pygame.image.load('Immagini/DecorazioniMenu/TriangoloBassoSinistra.png')
+sfondoTriangolinoBassoSinistra = pygame.transform.scale(sfondoTriangolinoBassoSinistra, (gpx, gpy))
 
 # status
 appiccicosoo = pygame.image.load('Immagini/Status/Appiccicoso.png')
@@ -242,8 +272,10 @@ chiaverobospe = pygame.transform.scale(chiaverobospe, (gpx * 2, gpy * 2))
 # oggetti sulla schermata
 esche = pygame.image.load("Immagini/Oggetti/Oggetto8Ico.png")
 esche = pygame.transform.scale(esche, (gpx, gpy))
-sacchettoDenaroStart = pygame.image.load('Immagini/Oggetti/SacchettoDenaro.png')
+sacchettoDenaroStart = pygame.image.load('Immagini/Oggetti/SacchettoDenaroSinistra.png')
 sacchettoDenaroStart = pygame.transform.scale(sacchettoDenaroStart, (gpx * 4, gpy * 4))
+sacchettoDenaroMercante = pygame.image.load('Immagini/Oggetti/SacchettoDenaroDestra.png')
+sacchettoDenaroMercante = pygame.transform.scale(sacchettoDenaroMercante, (gpx * 4, gpy * 4))
 faretraFrecceStart0 = pygame.image.load('Immagini/EquipRallo/Faretre/Faretra0Menu.png')
 faretraFrecceStart0 = pygame.transform.scale(faretraFrecceStart0, (gpx * 4, gpy * 4))
 faretraFrecceStart1 = pygame.image.load('Immagini/EquipRallo/Faretre/Faretra1Menu.png')
@@ -333,14 +365,18 @@ while contatoreGlobale < 5:
     vetIcoBatterieMenu.append(pygame.transform.scale(pygame.image.load("Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale), (gpx * 2, gpy * 2)))
     contatoreGlobale += 1
 vetImgOggettiMenu = []
+vetImgOggettiMercante = []
 vetImgOggettiStart = []
 vetIcoOggettiMenu = []
 contatoreGlobale = 1
 while contatoreGlobale <= 10:
     vetImgOggettiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale), (gpx * 10, gpy * 10)))
+    vetImgOggettiMercante.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale), (gpx * 8, gpy * 8)))
     vetImgOggettiStart.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale), (gpx * 4, gpy * 4)))
     vetIcoOggettiMenu.append(pygame.transform.scale(pygame.image.load("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale), (gpx, gpy)))
     contatoreGlobale += 1
+# costo oggetti => costoOggetti[frecce, faretra1, faretra2, faretra3, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata]
+costoOggetti = [1, 5, 5, 7, 20, 20, 10, 15, 30, 50, 50, 10, 50, 250]
 
 # img equipaggiamento pixellato
 vetImgSpadePixellate = []
@@ -433,10 +469,16 @@ imgFrecciaEletttricaLanciataP = pygame.transform.scale(imgFrecciaEletttricaLanci
 imgFrecciaEletttricaLanciataPP = pygame.image.load('Immagini/AnimazioniTecniche/FrecciaLanciata++.png')
 imgFrecciaEletttricaLanciataPP = pygame.transform.scale(imgFrecciaEletttricaLanciataPP, (gpx, gpy))
 
-# canali / volume (0-1)
+# img sfondi dialoghi
+sfondoDialoghiSopra = pygame.image.load('Immagini/Dialoghi/SfondoSopra.png')
+sfondoDialoghiSopra = pygame.transform.scale(sfondoDialoghiSopra, (gsx, gsy // 3))
+sfondoDialoghiSotto = pygame.image.load('Immagini/Dialoghi/SfondoSotto.png')
+sfondoDialoghiSotto = pygame.transform.scale(sfondoDialoghiSotto, (gsx, gsy // 3))
+
+# canali audio / volume (0-1)
 volumeCanzoni = 0
-volumePuntatore = 1
-volumeEffetti = 1
+volumePuntatore = 0
+volumeEffetti = 0
 pygame.mixer.set_num_channels(8)
 canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundCanzone.set_volume(volumeCanzoni)
@@ -484,6 +526,7 @@ suonochiusuraporte3 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta3.wa
 # souno raccolta esca - monete
 suonoRaccoltaEsca = pygame.mixer.Sound("Audio/RumoriAmbiente/RaccoltaEsca.wav")
 suonoRaccoltaMonete = pygame.mixer.Sound("Audio/RumoriAmbiente/RaccoltaMonete.wav")
+rumoreAcquisto = pygame.mixer.Sound("Audio/RumoriAmbiente/Acquisto.wav")
 
 # suoni robo
 rumoreCamminataColco = pygame.mixer.Sound("Audio/RumoriColco/Camminata.wav")

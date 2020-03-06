@@ -4,15 +4,15 @@ from GenericFuncG2 import *
 import math
 
 
-def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):
+def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, schermo_prima_delle_animazioni, fineanimaz):
     if npers == 1:
-        x = x - (gpx * 2 // 3)
+        x = x - (gpx * fineanimaz // 10)
     if npers == 2:
-        x = x + (gpx * 2 // 3)
+        x = x + (gpx * fineanimaz // 10)
     if npers == 3:
-        y = y + (gpy * 2 // 3)
+        y = y + (gpy * fineanimaz // 10)
     if npers == 4:
-        y = y - (gpy * 2 // 3)
+        y = y - (gpy * fineanimaz // 10)
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
@@ -47,7 +47,7 @@ def animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, a
         disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazioneRallo, fineanimaz):
+def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazioneRallo, schermo_prima_delle_animazioni, fineanimaz):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -58,7 +58,7 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers
                 primopasso = False
             # camminata quando si entra in una stanza
             if cambiosta:
-                animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz)
+                animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, schermo_prima_delle_animazioni, fineanimaz)
                 if fineanimaz == 0:
                     canaleSoundPassiRallo.stop()
             # camminata quando non si entra in una stanza
@@ -646,7 +646,7 @@ def animaAperturaCofanetto(tesoro, x, y, npers, pers, avvele, armatura, arma, sc
         if tesoro == 34:
             messaggio("Hai trovato: Superpozione", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 35:
-            messaggio("Hai trovato: Caricabatterie migliorato", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+            messaggio("Hai trovato: Carica plus", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 36:
             messaggio("Hai trovato: Bomba", grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
         if tesoro == 37:
@@ -1223,7 +1223,17 @@ def disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca):
             i += 4
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno):
+def animaPersonaggi(listaPersonaggi, caseviste):
+    for personaggio in listaPersonaggi:
+        j = 0
+        while j < len(caseviste):
+            if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
+                schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+                break
+            j += 3
+
+
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi):
     schermo_prima_delle_animazioni = schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemici", "attaccoNemici", "aumentaLv"]
@@ -1319,6 +1329,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob)
             animaCofanetti(cofanetti, caseviste, sfondinoc)
             animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc)
+            animaPersonaggi(listaPersonaggi, caseviste)
 
             statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv)
 
@@ -1327,10 +1338,15 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
             disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
 
+            if cambiosta:
+                quadrettoSottoRallo = schermo_prima_delle_animazioni.subsurface(pygame.Rect(x - gpx, y - gpy, gpx * 3, gpy * 3))
+                schermo.blit(quadrettoSottoRallo, (x - gpx, y - gpy))
+
             # disegna personaggi se ci sono animazioni ma non loro
             animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, statoColcoInizioTurno[1], tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, fineanimaz)
             animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, fineanimaz)
-            animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, statoRalloInizioTurno[1], azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz)
+            if not cambiosta:
+                animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, statoRalloInizioTurno[1], azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz)
 
             # tolgo il rumore passi quando non c'è l'animazione
             if not "movimentoRallo" in azioniDaEseguire and canaleSoundPassiRallo.get_busy():
@@ -1352,7 +1368,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], attacco, difesa, tastop, animazioneRallo, fineanimaz)
+                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], attacco, difesa, tastop, animazioneRallo, schermo_prima_delle_animazioni, fineanimaz)
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco

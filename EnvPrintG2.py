@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from GenericFuncG2 import *
+from FadeToBlackClass import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, primaDiAnima):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu):
     if caricaTutto:
         schermo.blit(imgSfondoStanza, (0, 0))
         # porte
@@ -163,7 +164,20 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
 
     disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
-    # vita-status personaggio
+    # disegno tutti i personaggi
+    for personaggio in listaPersonaggi:
+        j = 0
+        while j < len(caseviste):
+            if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
+                if ((personaggio.x / gpx) + (personaggio.y / gpy)) % 2 == 0:
+                    schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
+                if ((personaggio.x / gpx) + (personaggio.y / gpy)) % 2 == 1:
+                    schermo.blit(sfondinob, (personaggio.x, personaggio.y))
+                schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+                break
+            j += 3
+
+    # vita-status rallo
     lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
@@ -340,10 +354,25 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             i += 4
 
     if not caricaTutto:
-        pygame.display.update()
+        if stanzaCambiata or uscitoDaMenu > 0:
+            if uscitoDaMenu > 0:
+                sprites = pygame.sprite.Group(Fade(1))
+            else:
+                sprites = pygame.sprite.Group(Fade(2))
+            schermoFadeToBlack = schermo.copy()
+            i = 0
+            while i <= 6:
+                sprites.update()
+                schermo.blit(schermoFadeToBlack, (0, 0))
+                sprites.draw(schermo)
+                pygame.display.update()
+                clockFadeToBlack.tick(fpsFadeToBlack)
+                i += 1
+        else:
+            pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -378,6 +407,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     puntatogg4 = puntatSpinta
     puntatogg5 = puntatCof
     puntatogg6 = puntatArc
+    puntatogg7 = puntatDialoghi
 
     # modifica puntatore a seconda dell'attacco
     if attacco == 1:
@@ -387,6 +417,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         puntatogg4 = puntatSpinta
         puntatogg5 = puntatCof
         puntatogg6 = puntatArc
+        puntatogg7 = puntatDialoghi
     if attacco == 2:
         puntatogg = puntatBom
     if attacco == 3:
@@ -505,6 +536,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     attaccato = False
     attaccoADistanza = False
     sposta = False
+    interagisciConPersonaggio = False
     while not risposta:
         if xp != xvp or yp != yvp:
             appenaCaricato = False
@@ -757,6 +789,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         infliggidanno = False
                         statom = 0
                         raggio = 0
+                        # interagisci con personaggi
+                        if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)):
+                            interagisciConPersonaggio = True
+                            risposta = True
+                            if xp == x + gpx and yp == y:
+                                npers = 1
+                            if xp == x - gpx and yp == y:
+                                npers = 2
+                            if xp == x and yp == y + gpy:
+                                npers = 4
+                            if xp == x and yp == y - gpy:
+                                npers = 3
                         # spingi Colco attacco = 1
                         if attacco == 1 and ((xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and (xp == rx and yp == ry):
                             spingiColco = True
@@ -1312,6 +1356,15 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if not risposta:
             disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
+        # disegno tutti i personaggi
+        for personaggio in listaPersonaggi:
+            j = 0
+            while j < len(caseviste):
+                if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
+                    schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+                    break
+                j += 3
+
         # disegnare i mostri
         j = 0
         while j < len(caseviste):
@@ -1370,6 +1423,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                         nemicoInCampoVisivoArco = True
                                     break
                                 j += 3
+                        break
+                for personaggio in listaPersonaggi:
+                    if xp == personaggio.x and yp == personaggio.y:
+                        suPorta = False
+                        suCofanetto = False
+                        puntatogg = puntatogg7
                         break
             if (((xp == x and yp == y) or (xp == x + gpx and yp == y) or (xp == x - gpx and yp == y) or (xp == x and yp == y + gpy) or (xp == x and yp == y - gpy)) and puntatogg != 0) or (puntatogg == puntatogg6 and nemicoInCampoVisivoArco and numFrecce > 0):
                 puntat = puntatIn
@@ -1454,7 +1513,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         else:
             schermo.blit(chiaverobospe, (gsx - (gpx * 4), 0))
 
-        # vita-status personaggio
+        # vita-status rallo
         lungvitatot = int(((gpx * pvtot) / float(4)) // 5)
         lungvita = (lungvitatot * pv) // pvtot
         if lungvita < 0:
@@ -1804,4 +1863,4 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         pygame.event.pump()
         clockAttacco.tick(fpsInquadra)
 
-    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto
+    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio
