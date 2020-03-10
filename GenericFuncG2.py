@@ -2550,24 +2550,28 @@ def dialoga(y, avanzamentoStoria, personaggio):
                     puntatoreSpostato = True
                     prosegui = True
                     if voceMarcata != 1 and voceMarcata != 3:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata -= 1
                 if event.key == pygame.K_a and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
                     prosegui = True
                     if voceMarcata != 1 and voceMarcata != 2:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata -= 2
                 if event.key == pygame.K_s and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
                     prosegui = True
                     if voceMarcata != 2 and voceMarcata != 4:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata += 1
                 if event.key == pygame.K_d and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
                     prosegui = True
                     if voceMarcata != 3 and voceMarcata != 4:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata += 2
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
