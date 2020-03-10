@@ -2,17 +2,18 @@
 
 import os
 import random
-from GlobalVarG2 import *
+import pygame
+import GlobalVarG2
 
 
 def messaggio(msg, colore, x, y, gr):
     gr = gr - 10
-    gr = gpx * gr // 60
-    y = y - (gpy // 8)
+    gr = GlobalVarG2.gpx * gr // 60
+    y = y - (GlobalVarG2.gpy // 8)
     carattere = "Gentium Book Basic"
     font = pygame.font.SysFont(carattere, gr)
     testo = font.render(msg, True, colore)
-    schermo.blit(testo, (x, y))
+    GlobalVarG2.schermo.blit(testo, (x, y))
 
 
 def getStatistiche(dati, difesa=0):
@@ -87,44 +88,44 @@ def getVitaTotRallo(livello, guanti):
 
 
 def guardaVideo(path, audio=0):
-    schermo.fill(grigioscu)
+    GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
     pygame.display.update()
     listaImg = []
     # load all the images
     for i in os.listdir(path):
         img = pygame.image.load(path + '/' + i).convert()
-        img = pygame.transform.scale(img, (gsx, gsy))
+        img = pygame.transform.scale(img, (GlobalVarG2.gsx, GlobalVarG2.gsy))
         listaImg.append(img)
     if audio != 0:
-        canaleSoundCanzone.play(audio)
+        GlobalVarG2.canaleSoundCanzone.play(audio)
     # play video
     i = 0
     while i < len(listaImg) + 10:
         if i >= 10:
-            schermo.blit(listaImg[i - 10], (0, 0))
+            GlobalVarG2.schermo.blit(listaImg[i - 10], (0, 0))
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    canaleSoundPuntatore.play(selezione)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     if audio != 0:
-                        canaleSoundCanzone.stop()
+                        GlobalVarG2.canaleSoundCanzone.stop()
                     return True
         pygame.event.pump()
-        clockVideo.tick(fpsVideo)
+        GlobalVarG2.clockVideo.tick(GlobalVarG2.fpsVideo)
         i += 1
     if audio != 0:
-        canaleSoundCanzone.stop()
+        GlobalVarG2.canaleSoundCanzone.stop()
     return False
 
 
 def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti):
     scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
     # conversione della posizione in caselle
-    dati[2] = dati[2] // gpx
-    dati[3] = dati[3] // gpy
+    dati[2] = dati[2] // GlobalVarG2.gpx
+    dati[3] = dati[3] // GlobalVarG2.gpy
     i = porteini
     while i <= portefin:
         j = 0
@@ -132,8 +133,8 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
             if dati[i] == porte[j] and dati[i + 1] == porte[j + 1] and dati[i + 2] == porte[j + 2]:
                 dati[i + 3] = porte[j + 3]
             j = j + 4
-        dati[i + 1] = dati[i + 1] // gpx
-        dati[i + 2] = dati[i + 2] // gpy
+        dati[i + 1] = dati[i + 1] // GlobalVarG2.gpx
+        dati[i + 2] = dati[i + 2] // GlobalVarG2.gpy
         i = i + 4
     i = cofaniini
     while i <= cofanifin:
@@ -142,8 +143,8 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
             if dati[i] == cofanetti[j] and dati[i + 1] == cofanetti[j + 1] and dati[i + 2] == cofanetti[j + 2]:
                 dati[i + 3] = cofanetti[j + 3]
             j = j + 4
-        dati[i + 1] = dati[i + 1] // gpx
-        dati[i + 2] = dati[i + 2] // gpy
+        dati[i + 1] = dati[i + 1] // GlobalVarG2.gpx
+        dati[i + 2] = dati[i + 2] // GlobalVarG2.gpy
         i = i + 4
 
     for i in range(0, len(dati)):
@@ -151,17 +152,17 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
     scrivi.close()
 
     # conversione della posizione in pixel
-    dati[2] = dati[2] * gpx
-    dati[3] = dati[3] * gpy
+    dati[2] = dati[2] * GlobalVarG2.gpx
+    dati[3] = dati[3] * GlobalVarG2.gpy
     i = porteini
     while i <= portefin:
-        dati[i + 1] = dati[i + 1] * gpx
-        dati[i + 2] = dati[i + 2] * gpy
+        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
         i = i + 4
     i = cofaniini
     while i <= cofanifin:
-        dati[i + 1] = dati[i + 1] * gpx
-        dati[i + 2] = dati[i + 2] * gpy
+        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
         i = i + 4
 
 
@@ -171,15 +172,15 @@ def oggetto(x, y, dimx, dimy, px, py, nx, ny):
     dimx = dimx + x
     dimy = dimy + y
     while x < dimx:
-        if (ny == -gpy and py == dimy and px == x) or (ny == gpy and py == y - gpy and px == x):
+        if (ny == -GlobalVarG2.gpy and py == dimy and px == x) or (ny == GlobalVarG2.gpy and py == y - GlobalVarG2.gpy and px == x):
             return True
-        x = x + gpx
+        x = x + GlobalVarG2.gpx
     x = a
     y = b
     while y < dimy:
-        if (nx == -gpx and px == dimx and py == y) or (nx == gpx and px == x - gpx and py == y):
+        if (nx == -GlobalVarG2.gpx and px == dimx and py == y) or (nx == GlobalVarG2.gpx and px == x - GlobalVarG2.gpx and py == y):
             return True
-        y = y + gpy
+        y = y + GlobalVarG2.gpy
 
 
 def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
@@ -187,128 +188,128 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
     # prima stanza
     if (stanza == 1) and ((nx != 0) or (ny != 0)) and not cambiosta:
         # porte
-        if ny == -gpy and x == gsx // 32 * 6 and y == gsy // 18 * 2 and not mostro and not robo:
+        if ny == -GlobalVarG2.gpy and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 2 and not mostro and not robo:
             stanza = 2
             cambiosta = True
             carim = True
         else:
             # bordi stanza
-            if nx == -gpx and x <= gpx * 2:
+            if nx == -GlobalVarG2.gpx and x <= GlobalVarG2.gpx * 2:
                 nx = 0
-            if nx == gpx and x >= gsx - (gpx * 3):
+            if nx == GlobalVarG2.gpx and x >= GlobalVarG2.gsx - (GlobalVarG2.gpx * 3):
                 nx = 0
-            if ny == -gpy and y <= gpy * 2:
+            if ny == -GlobalVarG2.gpy and y <= GlobalVarG2.gpy * 2:
                 ny = 0
-            if ny == gpy and y >= gsy - (gpy * 3):
+            if ny == GlobalVarG2.gpy and y >= GlobalVarG2.gsy - (GlobalVarG2.gpy * 3):
                 ny = 0
         # controllo muri-oggetti
         #          posizione x    posizione y     dim x    dim y   px py  nx  ny
-        if oggetto(gsx // 32 * 7, gsy // 18 * 11, gpx * 1, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 11, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 18, gsy // 18 * 7, gpx * 2, gpy * 2, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gpx * 2, GlobalVarG2.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 21, gsy // 18 * 11, gpx * 4, gpy * 4, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 11, GlobalVarG2.gpx * 4, GlobalVarG2.gpy * 4, x, y, nx, ny):
             nx = 0
             ny = 0
         # controllo se le porte sono chiuse o aperte
         i = 0
         while i < len(porte):
             if not porte[i + 3]:
-                if oggetto(porte[i + 1], porte[i + 2], gpx * 1, gpy * 1, x, y, nx, ny):
+                if oggetto(porte[i + 1], porte[i + 2], GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 1, x, y, nx, ny):
                     nx = 0
                     ny = 0
             i = i + 4
         # controllo cofanetti
         i = 0
         while i < len(cofanetti):
-            if oggetto(cofanetti[i + 1], cofanetti[i + 2], gpx * 1, gpy * 1, x, y, nx, ny):
+            if oggetto(cofanetti[i + 1], cofanetti[i + 2], GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 1, x, y, nx, ny):
                 nx = 0
                 ny = 0
             i = i + 4
     # seconda stanza
     if (stanza == 2) and ((nx != 0) or (ny != 0)) and not cambiosta:
         # porte
-        if ny == -gpy and x == gsx // 32 * 6 and y == gsy // 18 * 2 and not mostro and not robo:
+        if ny == -GlobalVarG2.gpy and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 2 and not mostro and not robo:
             stanza = 1
             cambiosta = True
             carim = True
         else:
             # bordi stanza
-            if nx == -gpx and x <= gpx * 2:
+            if nx == -GlobalVarG2.gpx and x <= GlobalVarG2.gpx * 2:
                 nx = 0
-            if nx == gpx and x >= gsx - (gpx * 3):
+            if nx == GlobalVarG2.gpx and x >= GlobalVarG2.gsx - (GlobalVarG2.gpx * 3):
                 nx = 0
-            if ny == -gpy and y <= gpy * 2:
+            if ny == -GlobalVarG2.gpy and y <= GlobalVarG2.gpy * 2:
                 ny = 0
-            if ny == gpy and y >= gsy - (gpy * 3):
+            if ny == GlobalVarG2.gpy and y >= GlobalVarG2.gsy - (GlobalVarG2.gpy * 3):
                 ny = 0
         # controllo muri-oggetti
         #          posizione x    posizione y    dim x    dim y    px py nx  ny
-        if oggetto(gsx // 32 * 9, gsy // 18 * 2, gpx * 1, gpy * 6, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 2, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 6, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 2, gsy // 18 * 7, gpx * 1, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 4, gsy // 18 * 7, gpx * 12, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 2, gsy // 18 * 11, gpx * 6, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11, GlobalVarG2.gpx * 6, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 7, gsy // 18 * 13, gpx * 5, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 13, GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 9, gsy // 18 * 13, gpx * 1, gpy * 3, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 11, gsy // 18 * 11, gpx * 1, gpy * 3, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 11, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 13, gsy // 18 * 11, gpx * 3, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 13, GlobalVarG2.gsy // 18 * 11, GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 15, gsy // 18 * 10, gpx * 1, gpy * 2, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 10, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 15, gsy // 18 * 4, gpx * 1, gpy * 5, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 5, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 15, gsy // 18 * 2, gpx * 1, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 2, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 15, gsy // 18 * 6, gpx * 9, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 6, GlobalVarG2.gpx * 9, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 23, gsy // 18 * 4, gpx * 4, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gpx * 4, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 23, gsy // 18 * 6, gpx * 1, gpy * 6, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 6, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 6, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 23, gsy // 18 * 13, gpx * 1, gpy * 3, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 13, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 26, gsy // 18 * 4, gpx * 1, gpy * 3, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
-        if oggetto(gsx // 32 * 26, gsy // 18 * 6, gpx * 4, gpy * 1, x, y, nx, ny):
+        if oggetto(GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 6, GlobalVarG2.gpx * 4, GlobalVarG2.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
         # controllo se le porte sono chiuse o aperte
         i = 0
         while i < len(porte):
             if not porte[i + 3]:
-                if oggetto(porte[i + 1], porte[i + 2], gpx * 1, gpy * 1, x, y, nx, ny):
+                if oggetto(porte[i + 1], porte[i + 2], GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 1, x, y, nx, ny):
                     nx = 0
                     ny = 0
             i = i + 4
         # controllo cofanetti
         i = 0
         while i < len(cofanetti):
-            if oggetto(cofanetti[i + 1], cofanetti[i + 2], gpx * 1, gpy * 1, x, y, nx, ny):
+            if oggetto(cofanetti[i + 1], cofanetti[i + 2], GlobalVarG2.gpx * 1, GlobalVarG2.gpy * 1, x, y, nx, ny):
                 nx = 0
                 ny = 0
             i = i + 4
@@ -322,23 +323,23 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
 
 def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     if raggio == -1:
-        rangeXSinistra = (x // gpx) - 2
-        rangeXDestra = (gsx // gpx) - (x // gpx) - 3
-        rangeYAlto = (y // gpy) - 2
-        rangeYBasso = (gsy // gpy) - (y // gpy) - 3
+        rangeXSinistra = (x // GlobalVarG2.gpx) - 2
+        rangeXDestra = (GlobalVarG2.gsx // GlobalVarG2.gpx) - (x // GlobalVarG2.gpx) - 3
+        rangeYAlto = (y // GlobalVarG2.gpy) - 2
+        rangeYBasso = (GlobalVarG2.gsy // GlobalVarG2.gpy) - (y // GlobalVarG2.gpy) - 3
     else:
-        rangeXSinistra = raggio // gpx
-        if (x // gpx) - rangeXSinistra < 2:
-            rangeXSinistra = (x // gpx) - 2
-        rangeXDestra = raggio // gpx
-        if (x // gpx) + rangeXDestra > 30:
-            rangeXDestra = (gsx // gpx) - (x // gpx) - 3
-        rangeYAlto = raggio // gpy
-        if (y // gpy) - rangeYAlto < 2:
-            rangeYAlto = (y // gpy) - 2
-        rangeYBasso = raggio // gpy
-        if (y // gpy) + rangeYBasso > 16:
-            rangeYBasso = (gsy // gpy) - (y // gpy) - 3
+        rangeXSinistra = raggio // GlobalVarG2.gpx
+        if (x // GlobalVarG2.gpx) - rangeXSinistra < 2:
+            rangeXSinistra = (x // GlobalVarG2.gpx) - 2
+        rangeXDestra = raggio // GlobalVarG2.gpx
+        if (x // GlobalVarG2.gpx) + rangeXDestra > 30:
+            rangeXDestra = (GlobalVarG2.gsx // GlobalVarG2.gpx) - (x // GlobalVarG2.gpx) - 3
+        rangeYAlto = raggio // GlobalVarG2.gpy
+        if (y // GlobalVarG2.gpy) - rangeYAlto < 2:
+            rangeYAlto = (y // GlobalVarG2.gpy) - 2
+        rangeYBasso = raggio // GlobalVarG2.gpy
+        if (y // GlobalVarG2.gpy) + rangeYBasso > 16:
+            rangeYBasso = (GlobalVarG2.gsy // GlobalVarG2.gpy) - (y // GlobalVarG2.gpy) - 3
 
     margineDiErrore = 1
     base1 = 0
@@ -351,15 +352,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeXDestra:
         m = 1
         while m <= rangeYBasso:
-            murx = x + (gpx * n)
-            mury = y + (gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
+            murx = x + (GlobalVarG2.gpx * n)
+            mury = y + (GlobalVarG2.gpy * m)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, GlobalVarG2.gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
                 caseattac.append(True)
             else:
-                caseattac.append(nmurx + gpx)
+                caseattac.append(nmurx + GlobalVarG2.gpx)
                 caseattac.append(nmury)
                 caseattac.append(False)
             m = m + 1
@@ -368,13 +369,13 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeYBasso:
         m = 1
         while m <= rangeXDestra:
-            murx = x + (gpx * m)
-            mury = y + (gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
+            murx = x + (GlobalVarG2.gpx * m)
+            mury = y + (GlobalVarG2.gpy * n)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, GlobalVarG2.gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury + gpy:
+                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury + GlobalVarG2.gpy:
                         caseattac[i + 2] = False
                         break
                     i = i + 3
@@ -387,8 +388,8 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeXDestra:
         m = 0
         while m <= rangeYBasso:
-            caseattacbassodestra.append(x + (gpx * n))
-            caseattacbassodestra.append(y + (gpy * m))
+            caseattacbassodestra.append(x + (GlobalVarG2.gpx * n))
+            caseattacbassodestra.append(y + (GlobalVarG2.gpy * m))
             caseattacbassodestra.append(True)
             m = m + 1
         n = n + 1
@@ -398,25 +399,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacbassodestra):
                 if caseattacbassodestra[j] == caseattac[i] and caseattacbassodestra[j + 1] == caseattac[i + 1]:
@@ -425,13 +426,13 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacbassodestra[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacbassodestra[j] + gpx
+                    xLatoDestroCasella = caseattacbassodestra[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacbassodestra[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacbassodestra[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacbassodestra[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
@@ -445,22 +446,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta1LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta1LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoDestro != 0:
                                     altezza = latoInferiore
@@ -475,7 +476,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacbassodestra[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
@@ -486,22 +487,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta2LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta2LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoSinistro != 0:
                                     altezza = latoSuperiore
@@ -516,7 +517,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacbassodestra[j + 2] = False
                         elif (yLatoSuperioreCasella > yRetta1LatoDestroCasella and xLatoDestroCasella < xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoSinistroCasella and xLatoSinistroCasella > xRetta2LatoInferioreCasella):
                             caseattacbassodestra[j + 2] = False
@@ -530,15 +531,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeXSinistra:
         m = 1
         while m <= rangeYBasso:
-            murx = x - (gpx * n)
-            mury = y + (gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
+            murx = x - (GlobalVarG2.gpx * n)
+            mury = y + (GlobalVarG2.gpy * m)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -GlobalVarG2.gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
                 caseattac.append(True)
             else:
-                caseattac.append(nmurx - gpx)
+                caseattac.append(nmurx - GlobalVarG2.gpx)
                 caseattac.append(nmury)
                 caseattac.append(False)
             m = m + 1
@@ -547,13 +548,13 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeYBasso:
         m = 1
         while m <= rangeXSinistra:
-            murx = x - (gpx * m)
-            mury = y + (gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
+            murx = x - (GlobalVarG2.gpx * m)
+            mury = y + (GlobalVarG2.gpy * n)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, GlobalVarG2.gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury + gpy:
+                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury + GlobalVarG2.gpy:
                         caseattac[i + 2] = False
                         break
                     i = i + 3
@@ -566,8 +567,8 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeXSinistra:
         m = 0
         while m <= rangeYBasso:
-            caseattacbassosinistra.append(x - (gpx * n))
-            caseattacbassosinistra.append(y + (gpy * m))
+            caseattacbassosinistra.append(x - (GlobalVarG2.gpx * n))
+            caseattacbassosinistra.append(y + (GlobalVarG2.gpy * m))
             caseattacbassosinistra.append(True)
             m = m + 1
         n = n + 1
@@ -577,25 +578,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacbassosinistra):
                 if caseattacbassosinistra[j] == caseattac[i] and caseattacbassosinistra[j + 1] == caseattac[i + 1]:
@@ -604,17 +605,17 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacbassosinistra[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacbassosinistra[j] + gpx
+                    xLatoDestroCasella = caseattacbassosinistra[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacbassosinistra[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacbassosinistra[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacbassosinistra[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
-                    if caseattacbassosinistra[j + 2] and yLatoSuperioreCasella >= caseattac[i + 1] and xLatoDestroCasella <= caseattac[i] + gpx:
+                    if caseattacbassosinistra[j + 2] and yLatoSuperioreCasella >= caseattac[i + 1] and xLatoDestroCasella <= caseattac[i] + GlobalVarG2.gpx:
                         if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta1
                             latoSuperiore = 0
@@ -624,22 +625,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoSinistro != 0:
                                     altezza = latoInferiore
@@ -654,7 +655,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacbassosinistra[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
@@ -665,22 +666,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoDestro != 0:
                                     altezza = latoSuperiore
@@ -695,7 +696,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacbassosinistra[j + 2] = False
                         elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
                             caseattacbassosinistra[j + 2] = False
@@ -709,15 +710,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeXSinistra:
         m = 1
         while m <= rangeYAlto:
-            murx = x - (gpx * n)
-            mury = y - (gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
+            murx = x - (GlobalVarG2.gpx * n)
+            mury = y - (GlobalVarG2.gpy * m)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -GlobalVarG2.gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
                 caseattac.append(True)
             else:
-                caseattac.append(nmurx - gpx)
+                caseattac.append(nmurx - GlobalVarG2.gpx)
                 caseattac.append(nmury)
                 caseattac.append(False)
             m = m + 1
@@ -726,13 +727,13 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeYAlto:
         m = 1
         while m <= rangeXSinistra:
-            murx = x - (gpx * m)
-            mury = y - (gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
+            murx = x - (GlobalVarG2.gpx * m)
+            mury = y - (GlobalVarG2.gpy * n)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -GlobalVarG2.gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury - gpy:
+                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury - GlobalVarG2.gpy:
                         caseattac[i + 2] = False
                         break
                     i = i + 3
@@ -745,8 +746,8 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeXSinistra:
         m = 0
         while m <= rangeYAlto:
-            caseattacaltosinistra.append(x - (gpx * n))
-            caseattacaltosinistra.append(y - (gpy * m))
+            caseattacaltosinistra.append(x - (GlobalVarG2.gpx * n))
+            caseattacaltosinistra.append(y - (GlobalVarG2.gpy * m))
             caseattacaltosinistra.append(True)
             m = m + 1
         n = n + 1
@@ -756,25 +757,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacaltosinistra):
                 if caseattacaltosinistra[j] == caseattac[i] and caseattacaltosinistra[j + 1] == caseattac[i + 1]:
@@ -783,17 +784,17 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacaltosinistra[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacaltosinistra[j] + gpx
+                    xLatoDestroCasella = caseattacaltosinistra[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacaltosinistra[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacaltosinistra[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacaltosinistra[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
-                    if caseattacaltosinistra[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + gpy and xLatoDestroCasella <= caseattac[i] + gpx:
+                    if caseattacaltosinistra[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + GlobalVarG2.gpy and xLatoDestroCasella <= caseattac[i] + GlobalVarG2.gpx:
                         if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta1
                             latoSuperiore = 0
@@ -803,22 +804,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta1LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta1LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoDestro != 0:
                                     altezza = latoInferiore
@@ -833,7 +834,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacaltosinistra[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
@@ -844,22 +845,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta2LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta2LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoSinistro != 0:
                                     altezza = latoSuperiore
@@ -874,7 +875,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacaltosinistra[j + 2] = False
                         elif (yLatoSuperioreCasella > yRetta1LatoDestroCasella and xLatoDestroCasella < xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoSinistroCasella and xLatoSinistroCasella > xRetta2LatoInferioreCasella):
                             caseattacaltosinistra[j + 2] = False
@@ -888,15 +889,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeXDestra:
         m = 1
         while m <= rangeYAlto:
-            murx = x + (gpx * n)
-            mury = y - (gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
+            murx = x + (GlobalVarG2.gpx * n)
+            mury = y - (GlobalVarG2.gpy * m)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, GlobalVarG2.gpx, 0, stanza, False, True, False, porte, cofanetti)
             if murx != nmurx:
                 caseattac.append(nmurx)
                 caseattac.append(nmury)
                 caseattac.append(True)
             else:
-                caseattac.append(nmurx + gpx)
+                caseattac.append(nmurx + GlobalVarG2.gpx)
                 caseattac.append(nmury)
                 caseattac.append(False)
             m = m + 1
@@ -905,13 +906,13 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n < rangeYAlto:
         m = 1
         while m <= rangeXDestra:
-            murx = x + (gpx * m)
-            mury = y - (gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
+            murx = x + (GlobalVarG2.gpx * m)
+            mury = y - (GlobalVarG2.gpy * n)
+            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -GlobalVarG2.gpy, stanza, False, True, False, porte, cofanetti)
             if mury == nmury:
                 i = 0
                 while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury - gpy:
+                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury - GlobalVarG2.gpy:
                         caseattac[i + 2] = False
                         break
                     i = i + 3
@@ -924,8 +925,8 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeXDestra:
         m = 0
         while m <= rangeYAlto:
-            caseattacaltodestra.append(x + (gpx * n))
-            caseattacaltodestra.append(y - (gpy * m))
+            caseattacaltodestra.append(x + (GlobalVarG2.gpx * n))
+            caseattacaltodestra.append(y - (GlobalVarG2.gpy * m))
             caseattacaltodestra.append(True)
             m = m + 1
         n = n + 1
@@ -935,25 +936,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacaltodestra):
                 if caseattacaltodestra[j] == caseattac[i] and caseattacaltodestra[j + 1] == caseattac[i + 1]:
@@ -962,17 +963,17 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacaltodestra[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacaltodestra[j] + gpx
+                    xLatoDestroCasella = caseattacaltodestra[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacaltodestra[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacaltodestra[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacaltodestra[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
-                    if caseattacaltodestra[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + gpy and xLatoSinistroCasella >= caseattac[i]:
+                    if caseattacaltodestra[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + GlobalVarG2.gpy and xLatoSinistroCasella >= caseattac[i]:
                         if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta1
                             latoSuperiore = 0
@@ -982,22 +983,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoSinistro != 0:
                                     altezza = latoInferiore
@@ -1012,7 +1013,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacaltodestra[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
@@ -1023,22 +1024,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoDestro != 0:
                                     altezza = latoSuperiore
@@ -1053,7 +1054,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacaltodestra[j + 2] = False
                         elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
                             caseattacaltodestra[j + 2] = False
@@ -1065,15 +1066,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     caseattac = []
     n = 0
     while n <= rangeXDestra:
-        murx = x + (gpx * n)
+        murx = x + (GlobalVarG2.gpx * n)
         mury = y
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, gpx, 0, stanza, False, True, False, porte, cofanetti)
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, GlobalVarG2.gpx, 0, stanza, False, True, False, porte, cofanetti)
         if murx != nmurx:
             caseattac.append(nmurx)
             caseattac.append(nmury)
             caseattac.append(True)
         else:
-            caseattac.append(nmurx + gpx)
+            caseattac.append(nmurx + GlobalVarG2.gpx)
             caseattac.append(nmury)
             caseattac.append(False)
         n += 1
@@ -1084,14 +1085,14 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeXDestra:
         m = 0
         while m <= rangeYAlto:
-            caseattacdestra.append(x + (gpx * n))
-            caseattacdestra.append(y - (gpy * m))
+            caseattacdestra.append(x + (GlobalVarG2.gpx * n))
+            caseattacdestra.append(y - (GlobalVarG2.gpy * m))
             caseattacdestra.append(True)
             m = m + 1
         m = 1
         while m <= rangeYBasso:
-            caseattacdestra.append(x + (gpx * n))
-            caseattacdestra.append(y + (gpy * m))
+            caseattacdestra.append(x + (GlobalVarG2.gpx * n))
+            caseattacdestra.append(y + (GlobalVarG2.gpy * m))
             caseattacdestra.append(True)
             m = m + 1
         n = n + 1
@@ -1101,25 +1102,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacdestra):
                 if caseattacdestra[j] == caseattac[i] and caseattacdestra[j + 1] == caseattac[i + 1]:
@@ -1128,13 +1129,13 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacdestra[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacdestra[j] + gpx
+                    xLatoDestroCasella = caseattacdestra[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacdestra[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacdestra[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacdestra[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
@@ -1148,22 +1149,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoSinistro != 0:
                                     altezza = latoInferiore
@@ -1178,7 +1179,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacdestra[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
@@ -1189,22 +1190,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta2LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta2LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoSinistro != 0:
                                     altezza = latoSuperiore
@@ -1219,7 +1220,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacdestra[j + 2] = False
                         elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoSinistroCasella and xLatoSinistroCasella > xRetta2LatoInferioreCasella):
                             caseattacdestra[j + 2] = False
@@ -1231,15 +1232,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     caseattac = []
     n = 0
     while n <= rangeXSinistra:
-        murx = x - (gpx * n)
+        murx = x - (GlobalVarG2.gpx * n)
         mury = y
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -gpx, 0, stanza, False, True, False, porte, cofanetti)
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -GlobalVarG2.gpx, 0, stanza, False, True, False, porte, cofanetti)
         if murx != nmurx:
             caseattac.append(nmurx)
             caseattac.append(nmury)
             caseattac.append(True)
         else:
-            caseattac.append(nmurx - gpx)
+            caseattac.append(nmurx - GlobalVarG2.gpx)
             caseattac.append(nmury)
             caseattac.append(False)
         n += 1
@@ -1250,14 +1251,14 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeXSinistra:
         m = 0
         while m <= rangeYAlto:
-            caseattacsinistra.append(x - (gpx * n))
-            caseattacsinistra.append(y - (gpy * m))
+            caseattacsinistra.append(x - (GlobalVarG2.gpx * n))
+            caseattacsinistra.append(y - (GlobalVarG2.gpy * m))
             caseattacsinistra.append(True)
             m = m + 1
         m = 1
         while m <= rangeYBasso:
-            caseattacsinistra.append(x - (gpx * n))
-            caseattacsinistra.append(y + (gpy * m))
+            caseattacsinistra.append(x - (GlobalVarG2.gpx * n))
+            caseattacsinistra.append(y + (GlobalVarG2.gpy * m))
             caseattacsinistra.append(True)
             m = m + 1
         n = n + 1
@@ -1267,25 +1268,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacsinistra):
                 if caseattacsinistra[j] == caseattac[i] and caseattacsinistra[j + 1] == caseattac[i + 1]:
@@ -1294,17 +1295,17 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacsinistra[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacsinistra[j] + gpx
+                    xLatoDestroCasella = caseattacsinistra[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacsinistra[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacsinistra[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacsinistra[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
-                    if caseattacsinistra[j + 2] and xLatoDestroCasella <= caseattac[i] + gpx:
+                    if caseattacsinistra[j + 2] and xLatoDestroCasella <= caseattac[i] + GlobalVarG2.gpx:
                         if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta1
                             latoSuperiore = 0
@@ -1314,22 +1315,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta1LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta1LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoDestro != 0:
                                     altezza = latoInferiore
@@ -1344,7 +1345,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacsinistra[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
@@ -1355,22 +1356,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoDestro != 0:
                                     altezza = latoSuperiore
@@ -1385,7 +1386,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacsinistra[j + 2] = False
                         elif (yLatoSuperioreCasella > yRetta1LatoDestroCasella and xLatoDestroCasella < xRetta1LatoSuperioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
                             caseattacsinistra[j + 2] = False
@@ -1398,15 +1399,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     n = 0
     while n <= rangeYAlto:
         murx = x
-        mury = y - (gpy * n)
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -gpy, stanza, False, True, False, porte, cofanetti)
+        mury = y - (GlobalVarG2.gpy * n)
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -GlobalVarG2.gpy, stanza, False, True, False, porte, cofanetti)
         if mury != nmury:
             caseattac.append(nmurx)
             caseattac.append(nmury)
             caseattac.append(True)
         else:
             caseattac.append(nmurx)
-            caseattac.append(nmury - gpy)
+            caseattac.append(nmury - GlobalVarG2.gpy)
             caseattac.append(False)
         n += 1
     # caseattacalto[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli sopra
@@ -1416,14 +1417,14 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeYAlto:
         m = 0
         while m <= rangeXDestra:
-            caseattacalto.append(x + (gpx * m))
-            caseattacalto.append(y - (gpy * n))
+            caseattacalto.append(x + (GlobalVarG2.gpx * m))
+            caseattacalto.append(y - (GlobalVarG2.gpy * n))
             caseattacalto.append(True)
             m = m + 1
         m = 1
         while m <= rangeXSinistra:
-            caseattacalto.append(x - (gpx * m))
-            caseattacalto.append(y - (gpy * n))
+            caseattacalto.append(x - (GlobalVarG2.gpx * m))
+            caseattacalto.append(y - (GlobalVarG2.gpy * n))
             caseattacalto.append(True)
             m = m + 1
         n = n + 1
@@ -1433,25 +1434,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
-            yFineRetta = caseattac[i + 1] + gpy
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
+            yFineRetta = caseattac[i + 1] + GlobalVarG2.gpy
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacalto):
                 if caseattacalto[j] == caseattac[i] and caseattacalto[j + 1] == caseattac[i + 1]:
@@ -1460,17 +1461,17 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacalto[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacalto[j] + gpx
+                    xLatoDestroCasella = caseattacalto[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacalto[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacalto[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacalto[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
-                    if caseattacalto[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + gpy:
+                    if caseattacalto[j + 2] and yLatoInferioreCasella <= caseattac[i + 1] + GlobalVarG2.gpy:
                         if (yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
                             latoSuperiore = 0
@@ -1480,22 +1481,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta1LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta1LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoSinistro != 0:
                                     altezza = latoSuperiore
@@ -1510,7 +1511,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacalto[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta2
@@ -1521,22 +1522,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoSinistroCasella > yLatoInferioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoSuperioreCasella)
                             elif yRetta2LatoDestroCasella > yLatoInferioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta2
                             if latoInferiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoInferiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoInferiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoInferiore == 0 and latoDestro != 0:
                                     altezza = latoSuperiore
@@ -1551,7 +1552,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacalto[j + 2] = False
                         elif (yLatoInferioreCasella < yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoInferioreCasella) and (yLatoInferioreCasella < yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoInferioreCasella):
                             caseattacalto[j + 2] = False
@@ -1564,15 +1565,15 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     n = 0
     while n <= rangeYBasso:
         murx = x
-        mury = y + (gpy * n)
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, gpy, stanza, False, True, False, porte, cofanetti)
+        mury = y + (GlobalVarG2.gpy * n)
+        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, GlobalVarG2.gpy, stanza, False, True, False, porte, cofanetti)
         if mury != nmury:
             caseattac.append(nmurx)
             caseattac.append(nmury)
             caseattac.append(True)
         else:
             caseattac.append(nmurx)
-            caseattac.append(nmury + gpy)
+            caseattac.append(nmury + GlobalVarG2.gpy)
             caseattac.append(False)
         n += 1
     # caseattacbasso[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a destra
@@ -1582,14 +1583,14 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while n <= rangeYBasso:
         m = 0
         while m <= rangeXDestra:
-            caseattacbasso.append(x + (gpx * m))
-            caseattacbasso.append(y + (gpy * n))
+            caseattacbasso.append(x + (GlobalVarG2.gpx * m))
+            caseattacbasso.append(y + (GlobalVarG2.gpy * n))
             caseattacbasso.append(True)
             m = m + 1
         m = 1
         while m <= rangeXSinistra:
-            caseattacbasso.append(x - (gpx * m))
-            caseattacbasso.append(y + (gpy * n))
+            caseattacbasso.append(x - (GlobalVarG2.gpx * m))
+            caseattacbasso.append(y + (GlobalVarG2.gpy * n))
             caseattacbasso.append(True)
             m = m + 1
         n = n + 1
@@ -1599,25 +1600,25 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
     while i < len(caseattac):
         if not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
             xFineRetta = caseattac[i]
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in alto a destra dell'ostacolo
-            xInizioRetta = (x + (gpx / 2.0))
-            xFineRetta = caseattac[i] + gpx
+            xInizioRetta = (x + (GlobalVarG2.gpx / 2.0))
+            xFineRetta = caseattac[i] + GlobalVarG2.gpx
             deltaXRetta = abs(xInizioRetta - xFineRetta)
-            yInizioRetta = (y + (gpy / 2.0))
+            yInizioRetta = (y + (GlobalVarG2.gpy / 2.0))
             yFineRetta = caseattac[i + 1]
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacbasso):
                 if caseattacbasso[j] == caseattac[i] and caseattacbasso[j + 1] == caseattac[i + 1]:
@@ -1626,13 +1627,13 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                     xLatoSinistroCasella = caseattacbasso[j]
                     yRetta1LatoSinistroCasella = (coeffAngolare1 * xLatoSinistroCasella) + altezzaRetta1
                     yRetta2LatoSinistroCasella = (coeffAngolare2 * xLatoSinistroCasella) + altezzaRetta2
-                    xLatoDestroCasella = caseattacbasso[j] + gpx
+                    xLatoDestroCasella = caseattacbasso[j] + GlobalVarG2.gpx
                     yRetta1LatoDestroCasella = (coeffAngolare1 * xLatoDestroCasella) + altezzaRetta1
                     yRetta2LatoDestroCasella = (coeffAngolare2 * xLatoDestroCasella) + altezzaRetta2
                     yLatoSuperioreCasella = caseattacbasso[j + 1]
                     xRetta1LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoSuperioreCasella = (yLatoSuperioreCasella - altezzaRetta2) / float(coeffAngolare2)
-                    yLatoInferioreCasella = caseattacbasso[j + 1] + gpy
+                    yLatoInferioreCasella = caseattacbasso[j + 1] + GlobalVarG2.gpy
                     xRetta1LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta1) / float(coeffAngolare1)
                     xRetta2LatoInferioreCasella = (yLatoInferioreCasella - altezzaRetta2) / float(coeffAngolare2)
 
@@ -1646,22 +1647,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta1LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta1LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta1LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta1LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta1LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta1LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta1LatoSuperioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoSuperioreCasella < xLatoSinistroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta1LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta1LatoInferioreCasella - xLatoDestroCasella)
                             elif xRetta1LatoInferioreCasella < xLatoSinistroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoSinistro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoSinistro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoSinistro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoSinistro != 0:
                                     altezza = latoInferiore
@@ -1676,7 +1677,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacbasso[j + 2] = False
                         elif (yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella) or (yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella) or (xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella) or (xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella):
                             # trovo le misure dei lati interni delle caselle intersecate dalla retta1
@@ -1687,22 +1688,22 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                             if yLatoSuperioreCasella <= yRetta2LatoSinistroCasella <= yLatoInferioreCasella:
                                 latoSinistro = abs(yRetta2LatoSinistroCasella - yLatoInferioreCasella)
                             elif yRetta2LatoSinistroCasella < yLatoSuperioreCasella:
-                                latoSinistro = gpy
+                                latoSinistro = GlobalVarG2.gpy
                             if yLatoSuperioreCasella <= yRetta2LatoDestroCasella <= yLatoInferioreCasella:
                                 latoDestro = abs(yRetta2LatoDestroCasella - yLatoInferioreCasella)
                             elif yRetta2LatoDestroCasella < yLatoSuperioreCasella:
-                                latoDestro = gpy
+                                latoDestro = GlobalVarG2.gpy
                             if xLatoSinistroCasella <= xRetta2LatoSuperioreCasella <= xLatoDestroCasella:
                                 latoSuperiore = abs(xRetta2LatoSuperioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoSuperioreCasella > xLatoDestroCasella:
-                                latoSuperiore = gpx
+                                latoSuperiore = GlobalVarG2.gpx
                             if xLatoSinistroCasella <= xRetta2LatoInferioreCasella <= xLatoDestroCasella:
                                 latoInferiore = abs(xRetta2LatoInferioreCasella - xLatoSinistroCasella)
                             elif xRetta2LatoInferioreCasella > xLatoDestroCasella:
-                                latoInferiore = gpx
+                                latoInferiore = GlobalVarG2.gpx
                             # calcolo la parte di area interna di ogni casella intersecata dalla retta1
                             if latoSuperiore != 0 and latoDestro != 0:
-                                area = (gpx * gpy) - ((gpx - latoSuperiore) * (gpy - latoDestro) / 2.0)
+                                area = (GlobalVarG2.gpx * GlobalVarG2.gpy) - ((GlobalVarG2.gpx - latoSuperiore) * (GlobalVarG2.gpy - latoDestro) / 2.0)
                             else:
                                 if latoSuperiore == 0 and latoDestro != 0:
                                     altezza = latoInferiore
@@ -1717,7 +1718,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, raggio):
                                     base1 = latoInferiore
                                     base2 = latoSuperiore
                                 area = (base1 + base2) * altezza / 2.0
-                            if area > (gpx * gpy / 2.0) + margineDiErrore:
+                            if area > (GlobalVarG2.gpx * GlobalVarG2.gpy / 2.0) + margineDiErrore:
                                 caseattacbasso[j + 2] = False
                         elif (yLatoSuperioreCasella > yRetta1LatoSinistroCasella and xLatoSinistroCasella > xRetta1LatoSuperioreCasella) and (yLatoSuperioreCasella > yRetta2LatoDestroCasella and xLatoDestroCasella < xRetta2LatoSuperioreCasella):
                             caseattacbasso[j + 2] = False
@@ -1747,9 +1748,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
     tesoro = -1
     # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
     if stanza == 1:
-        if cx == gpx * 3 and cy == gpy * 7:
+        if cx == GlobalVarG2.gpx * 3 and cy == GlobalVarG2.gpy * 7:
             tesoro = 31
-        if cx == gpx * 7 and cy == gpy * 12:
+        if cx == GlobalVarG2.gpx * 7 and cy == GlobalVarG2.gpy * 12:
             c = 0
             i = 101
             while i <= 120:
@@ -1764,7 +1765,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
                     i = i - 9
             if tesoro == -1:
                 tesoro = -2
-        if cx == gpx * 12 and cy == gpy * 11:
+        if cx == GlobalVarG2.gpx * 12 and cy == GlobalVarG2.gpy * 11:
             c = 0
             i = 101
             while i <= 120:
@@ -1780,7 +1781,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
             if tesoro == -1:
                 tesoro = -2
     if stanza == 2:
-        if cx == gpx * 3 and cy == gpy * 5:
+        if cx == GlobalVarG2.gpx * 3 and cy == GlobalVarG2.gpy * 5:
             c = 0
             i = 101
             while i <= 120:
@@ -1795,9 +1796,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
                     i = i - 9
             if tesoro == -1:
                 tesoro = -2
-        if cx == gpx * 5 and cy == gpy * 10:
+        if cx == GlobalVarG2.gpx * 5 and cy == GlobalVarG2.gpy * 10:
             tesoro = 11
-        if cx == gpx * 10 and cy == gpy * 9:
+        if cx == GlobalVarG2.gpx * 10 and cy == GlobalVarG2.gpy * 9:
             tesoro = 81
 
     # assegna oggetto ottenuto
@@ -1834,7 +1835,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
     # caselle viste da rallo
     j = 0
     while j < len(caselleEsplorate):
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1852,7 +1853,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1870,7 +1871,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1888,7 +1889,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1920,7 +1921,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
         caselleEsplorate = [rx, ry]
         j = 0
         while j < len(caselleEsplorate):
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1938,7 +1939,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1956,7 +1957,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1974,7 +1975,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -2008,7 +2009,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
     percorsoTrovato = []
 
     impossibileRaggiungere = False
-    if (xPartenza == xArrivo and yPartenza == yArrivo + gpy) or (xPartenza == xArrivo and yPartenza == yArrivo - gpy) or (xPartenza == xArrivo + gpx and yPartenza == yArrivo) or (xPartenza == xArrivo and yPartenza - gpx == yArrivo):
+    if (xPartenza == xArrivo and yPartenza == yArrivo + GlobalVarG2.gpy) or (xPartenza == xArrivo and yPartenza == yArrivo - GlobalVarG2.gpy) or (xPartenza == xArrivo + GlobalVarG2.gpx and yPartenza == yArrivo) or (xPartenza == xArrivo and yPartenza - GlobalVarG2.gpx == yArrivo):
         k = 0
         while k < len(vetnemici):
             if xArrivo == vetnemici[k] and yArrivo == vetnemici[k + 1]:
@@ -2022,7 +2023,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
         j = 0
         while j < len(caselleEsplorate):
             valoreCasella += 1
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2047,7 +2048,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2072,7 +2073,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2097,7 +2098,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2142,7 +2143,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                 yCasella3 = 0
                 xCasella4 = 0
                 yCasella4 = 0
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -gpy, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2158,7 +2159,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella1 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, gpy, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2174,7 +2175,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella2 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -gpx, 0, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2190,7 +2191,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella3 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], gpx, 0, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2268,16 +2269,16 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
 
 def controllaMorteRallo(vitaRallo, inizio):
     if vitaRallo <= 0:
-        canaleSoundCanzone.stop()
-        canaleSoundPuntatore.stop()
-        canaleSoundPassiRallo.stop()
-        canaleSoundPassiColco.stop()
-        canaleSoundPassiNemico.stop()
-        canaleSoundLvUp.stop()
-        canaleSoundInterazioni.stop()
-        canaleSoundAttacco.stop()
-        schermo.fill(grigioscu)
-        messaggio("Sei morto", grigiochi, gsx // 32 * 3, gsy // 18 * 13, 150)
+        GlobalVarG2.canaleSoundCanzone.stop()
+        GlobalVarG2.canaleSoundPuntatore.stop()
+        GlobalVarG2.canaleSoundPassiRallo.stop()
+        GlobalVarG2.canaleSoundPassiColco.stop()
+        GlobalVarG2.canaleSoundPassiNemico.stop()
+        GlobalVarG2.canaleSoundLvUp.stop()
+        GlobalVarG2.canaleSoundInterazioni.stop()
+        GlobalVarG2.canaleSoundAttacco.stop()
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+        messaggio("Sei morto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 13, 150)
         pygame.display.update()
         continua = False
         while not continua:
@@ -2286,7 +2287,7 @@ def controllaMorteRallo(vitaRallo, inizio):
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     continua = True
         inizio = True
     return inizio
@@ -2308,144 +2309,144 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
     # personaggio: 1=d, 2=a, 3=w, 4=s
     if attaccoDaLontano:
         if npers == 1:
-            schermo.blit(pers, (x, y))
+            GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
-            schermo.blit(faretra, (x, y))
-            schermo.blit(persdmbAttacco, (x, y))
-            schermo.blit(arco, (x, y))
-            schermo.blit(guanti, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
+            GlobalVarG2.schermo.blit(GlobalVarG2.persdmbAttacco, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
         if npers == 2:
-            schermo.blit(pers, (x, y))
+            GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
-            schermo.blit(faretra, (x, y))
-            schermo.blit(persambAttacco, (x, y))
-            schermo.blit(arco, (x - gpx, y))
-            schermo.blit(guanti, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
+            GlobalVarG2.schermo.blit(GlobalVarG2.persambAttacco, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x - GlobalVarG2.gpx, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
         if npers == 3:
-            schermo.blit(arco, (x, y - gpy))
-            schermo.blit(perswmbAttacco, (x, y))
-            schermo.blit(guanti, (x, y))
-            schermo.blit(pers, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x, y - GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(GlobalVarG2.perswmbAttacco, (x, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
+            GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
-            schermo.blit(faretra, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
         if npers == 4:
-            schermo.blit(faretra, (x, y))
-            schermo.blit(pers, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
+            GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
-            schermo.blit(perssmbAttacco, (x, y))
-            schermo.blit(arco, (x, y))
-            schermo.blit(guanti, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
+            GlobalVarG2.schermo.blit(GlobalVarG2.perssmbAttacco, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
     else:
         if npers == 1:
-            schermo.blit(scudo, (x, y))
+            GlobalVarG2.schermo.blit(scudo, (x, y))
             if inMovimento:
-                schermo.blit(persdm, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persdm, (x, y))
             else:
-                schermo.blit(pers, (x, y))
+                GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
-            schermo.blit(faretra, (x, y))
-            schermo.blit(arco, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x, y))
             if attaccoRavvicinato:
-                schermo.blit(persdmbAttacco, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persdmbAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    schermo.blit(persdmb1, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.persdmb1, (x, y))
                 elif frame == 2:
-                    schermo.blit(persdmb2, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.persdmb2, (x, y))
             else:
-                schermo.blit(persdb, (x, y))
-            schermo.blit(arma, (x, y))
-            schermo.blit(guanti, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persdb, (x, y))
+            GlobalVarG2.schermo.blit(arma, (x, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
         if npers == 2:
             if attaccoRavvicinato:
-                schermo.blit(arma, (x - gpx, y))
+                GlobalVarG2.schermo.blit(arma, (x - GlobalVarG2.gpx, y))
             else:
-                schermo.blit(arma, (x, y))
+                GlobalVarG2.schermo.blit(arma, (x, y))
             if inMovimento:
-                schermo.blit(persam, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persam, (x, y))
             else:
-                schermo.blit(pers, (x, y))
+                GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
-            schermo.blit(faretra, (x, y))
-            schermo.blit(arco, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x, y))
             if attaccoRavvicinato:
-                schermo.blit(persambAttacco, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persambAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    schermo.blit(persamb1, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.persamb1, (x, y))
                 elif frame == 2:
-                    schermo.blit(persamb2, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.persamb2, (x, y))
             else:
-                schermo.blit(persab, (x, y))
-            schermo.blit(guanti, (x, y))
-            schermo.blit(scudo, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persab, (x, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
+            GlobalVarG2.schermo.blit(scudo, (x, y))
         if npers == 3:
             if attaccoRavvicinato:
-                schermo.blit(arma, (x, y - gpy))
+                GlobalVarG2.schermo.blit(arma, (x, y - GlobalVarG2.gpy))
             else:
-                schermo.blit(arma, (x, y))
+                GlobalVarG2.schermo.blit(arma, (x, y))
             if attaccoRavvicinato:
-                schermo.blit(perswmbAttacco, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.perswmbAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    schermo.blit(perswmb1, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.perswmb1, (x, y))
                 elif frame == 2:
-                    schermo.blit(perswmb2, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.perswmb2, (x, y))
             else:
-                schermo.blit(perswb, (x, y))
-            schermo.blit(guanti, (x, y))
-            schermo.blit(scudo, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.perswb, (x, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
+            GlobalVarG2.schermo.blit(scudo, (x, y))
             if inMovimento:
-                schermo.blit(perswm, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.perswm, (x, y))
             else:
-                schermo.blit(pers, (x, y))
+                GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
-            schermo.blit(faretra, (x, y))
-            schermo.blit(arco, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x, y))
         if npers == 4:
-            schermo.blit(arco, (x, y))
-            schermo.blit(faretra, (x, y))
+            GlobalVarG2.schermo.blit(arco, (x, y))
+            GlobalVarG2.schermo.blit(faretra, (x, y))
             if inMovimento:
-                schermo.blit(perssm, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.perssm, (x, y))
             else:
-                schermo.blit(pers, (x, y))
+                GlobalVarG2.schermo.blit(pers, (x, y))
             if avvele:
-                schermo.blit(persAvvele, (x, y))
-            schermo.blit(armatura, (x, y))
-            schermo.blit(collana, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.persAvvele, (x, y))
+            GlobalVarG2.schermo.blit(armatura, (x, y))
+            GlobalVarG2.schermo.blit(collana, (x, y))
             if attaccoRavvicinato:
-                schermo.blit(perssmbAttacco, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.perssmbAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    schermo.blit(perssmb1, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.perssmb1, (x, y))
                 elif frame == 2:
-                    schermo.blit(perssmb2, (x, y))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.perssmb2, (x, y))
             else:
-                schermo.blit(perssb, (x, y))
-            schermo.blit(arma, (x, y))
-            schermo.blit(guanti, (x, y))
-            schermo.blit(scudo, (x, y))
+                GlobalVarG2.schermo.blit(GlobalVarG2.perssb, (x, y))
+            GlobalVarG2.schermo.blit(arma, (x, y))
+            GlobalVarG2.schermo.blit(guanti, (x, y))
+            GlobalVarG2.schermo.blit(scudo, (x, y))
 
 
 def ottieniMonete(dati, moneteOttenute):
@@ -2519,10 +2520,14 @@ def ottieniCondizione(dati, condizione):
 
 
 def dialoga(y, avanzamentoStoria, personaggio):
-    if canaleSoundPassiRallo.get_busy():
-        canaleSoundPassiRallo.stop()
+    if GlobalVarG2.canaleSoundPassiRallo.get_busy():
+        GlobalVarG2.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
     menuMercante = False
+    sceltaEffettuata = 0
+    voceMarcata = 1
+    puntatoreSpostato = False
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
 
     numeroMessaggiTotali = len(personaggio.partiDialogo)
     numeromessaggioAttuale = 0
@@ -2537,39 +2542,113 @@ def dialoga(y, avanzamentoStoria, personaggio):
                 quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato:
                 if event.key == pygame.K_q and not tastoTrovato:
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     tastoTrovato = True
                     fineDialogo = True
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    canaleSoundPuntatore.play(selezione)
+                if event.key == pygame.K_w and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
-                    if numeromessaggioAttuale == numeroMessaggiTotali:
-                        if personaggio.avanzamentoStoria:
-                            avanzamentoStoria = avanzamentoStoria + 1
-                        if personaggio.oggettoDato:
-                            oggettoRicevuto = personaggio.oggettoDato
-                        if personaggio.menuMercante:
-                            menuMercante = personaggio.menuMercante
+                    puntatoreSpostato = True
+                    prosegui = True
+                    if voceMarcata != 1 and voceMarcata != 3:
+                        voceMarcata -= 1
+                if event.key == pygame.K_a and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                    tastoTrovato = True
+                    puntatoreSpostato = True
+                    prosegui = True
+                    if voceMarcata != 1 and voceMarcata != 2:
+                        voceMarcata -= 2
+                if event.key == pygame.K_s and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                    tastoTrovato = True
+                    puntatoreSpostato = True
+                    prosegui = True
+                    if voceMarcata != 2 and voceMarcata != 4:
+                        voceMarcata += 1
+                if event.key == pygame.K_d and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                    tastoTrovato = True
+                    puntatoreSpostato = True
+                    prosegui = True
+                    if voceMarcata != 3 and voceMarcata != 4:
+                        voceMarcata += 2
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    tastoTrovato = True
+                    if sceltaEffettuata != 0 and sceltaEffettuata != personaggio.scelta:
+                        fineDialogo = True
+                    elif numeromessaggioAttuale == numeroMessaggiTotali:
+                        if not personaggio.scelta or (personaggio.scelta and personaggio.scelta == sceltaEffettuata):
+                            if personaggio.avanzamentoStoria:
+                                avanzamentoStoria = avanzamentoStoria + 1
+                            if personaggio.oggettoDato:
+                                oggettoRicevuto = personaggio.oggettoDato
+                            if personaggio.menuMercante:
+                                menuMercante = personaggio.menuMercante
                         fineDialogo = True
                     else:
+                        if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                            sceltaEffettuata = voceMarcata
                         prosegui = True
         if prosegui and not fineDialogo:
-            if y > gsy // 2:
-                schermo.blit(sfondoDialoghiSopra, (0, 0))
-                messaggio("Q: esci", grigiochi, gsx // 32 * 28, gsy // 18 * 1, 50)
-                messaggio(personaggio.nome + ":", grigiochi, gsx // 32 * 1, gpy * 4 // 5, 80)
-                riga = 0
-                for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
-                    messaggio(frase, grigiochi, gsx // 32 * 1, (gpy * 7 // 3) + riga, 50)
-                    riga += gpy * 4 // 5
+            if puntatoreSpostato:
+                numeromessaggioAttuale -= 1
+                puntatoreSpostato = False
+            if y > GlobalVarG2.gsy // 2:
+                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSopra, (0, 0))
+                messaggio("Q: esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 1, 50)
+                messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 4 // 5, 80)
+                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
+                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "???DOMANDA???":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    if voceMarcata == 1:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2)))
+                    if voceMarcata == 2:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2)))
+                    if voceMarcata == 3:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2)))
+                    if voceMarcata == 4:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2)))
+                else:
+                    riga = 0
+                    for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
+                        messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + riga, 50)
+                        riga += GlobalVarG2.gpy * 4 // 5
             else:
-                schermo.blit(sfondoDialoghiSotto, (0, gsy * 2 // 3))
-                messaggio("Q: esci", grigiochi, gsx // 32 * 28, (gsy * 2 // 3) + gpy, 50)
-                messaggio(personaggio.nome + ":", grigiochi, gsx // 32 * 1, (gsy * 2 // 3) + (gpy * 4 // 5), 80)
-                riga = 0
-                for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
-                    messaggio(frase, grigiochi, gsx // 32 * 1, ((gsy * 2 // 3) + (gpy * 7 // 3)) + riga, 50)
-                    riga += gpy * 4 // 5
+                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSotto, (0, GlobalVarG2.gsy * 2 // 3))
+                messaggio("Q: esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 28, (GlobalVarG2.gsy * 2 // 3) + GlobalVarG2.gpy, 50)
+                messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
+                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
+                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "???DOMANDA???":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    if voceMarcata == 1:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2)))
+                    if voceMarcata == 2:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2)))
+                    if voceMarcata == 3:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2)))
+                    if voceMarcata == 4:
+                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2)))
+                else:
+                    riga = 0
+                    for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
+                        messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + riga, 50)
+                        riga += GlobalVarG2.gpy * 4 // 5
             numeromessaggioAttuale += 1
             prosegui = False
             pygame.display.update()
@@ -2577,11 +2656,11 @@ def dialoga(y, avanzamentoStoria, personaggio):
 
 
 def animaOggettoSpecialeRicevuto(oggettoRicevuto):
-    if canaleSoundPassiRallo.get_busy():
-        canaleSoundPassiRallo.stop()
-    canaleSoundInterazioni.play(suonoRaccoltaMonete)
-    schermo.blit(sfocontcof, (gsx // 32 * 0, gsy // 18 * 0))
-    messaggio("Hai ottenuto: " + oggettoRicevuto, grigiochi, gsx // 32 * 1, gsy // 18 * 1, 60)
+    if GlobalVarG2.canaleSoundPassiRallo.get_busy():
+        GlobalVarG2.canaleSoundPassiRallo.stop()
+    GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoRaccoltaMonete)
+    GlobalVarG2.schermo.blit(GlobalVarG2.sfocontcof, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 0))
+    messaggio("Hai ottenuto: " + oggettoRicevuto, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
     pygame.display.update()
     risposta = False
     while not risposta:
@@ -2590,10 +2669,10 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                canaleSoundPuntatore.play(selezione)
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                 risposta = True
 
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-pygame.draw.rect(schermo, blu, (nx, ny, gpx, gpy))
+pygame.draw.rect(GlobalVarG2.schermo, blu, (nx, ny, GlobalVarG2.gpx, GlobalVarG2.gpy))
 pygame.display.update()"""

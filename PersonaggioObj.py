@@ -13,6 +13,7 @@ class PersonaggioObj(object):
         self.oggettoDato = False
         self.avanzamentoStoria = False
         self.menuMercante = False
+        self.scelta = False
 
         self.caricaImg()
         self.girati(direzione)
@@ -20,13 +21,13 @@ class PersonaggioObj(object):
 
     def caricaImg(self):
         imgW = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png")
-        self.imgW = pygame.transform.scale(imgW, (gpx, gpy))
+        self.imgW = pygame.transform.scale(imgW, (GlobalVarG2.gpx, GlobalVarG2.gpy))
         imgA = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png")
-        self.imgA = pygame.transform.scale(imgA, (gpx, gpy))
+        self.imgA = pygame.transform.scale(imgA, (GlobalVarG2.gpx, GlobalVarG2.gpy))
         imgS = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png")
-        self.imgS = pygame.transform.scale(imgS, (gpx, gpy))
+        self.imgS = pygame.transform.scale(imgS, (GlobalVarG2.gpx, GlobalVarG2.gpy))
         imgD = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png")
-        self.imgD = pygame.transform.scale(imgD, (gpx, gpy))
+        self.imgD = pygame.transform.scale(imgD, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
     def girati(self, direzione):
         if direzione == "w":
@@ -40,6 +41,9 @@ class PersonaggioObj(object):
         self.direzione = direzione
 
     def aggiornaDialogo(self, avanzamentoStoria):
+        # se c'è una scelta la variabile self.scelta conterrà il numero corrispondente a quella giusta (se ce n'è più di una giusta, la variabile conterrà i nueri di queste una dopo l'altra (es. 12, 134))
+        # i dialoghi che iniziano con "???DOMANDA???" contengono 6 frasi in totale (ossia => "???DOMANDA???", la domanda posta, opzione 1, opzione 2, opzione 3, opzione 4)
+        # i dialoghi che iniziano con "!!!RISPOSTA!!!" contengono 5 frasi in totale (ossia => "!!!RISPOSTA!!!", risposta opzione 1, risposta opzione 2, risposta opzione 3, risposta opzione 4)
         if self.tipo == "Mercante":
             self.partiDialogo = []
             self.nome = "Bob"
@@ -47,6 +51,7 @@ class PersonaggioObj(object):
                 self.oggettoDato = False
                 self.avanzamentoStoria = False
                 self.menuMercante = True
+                self.scelta = False
                 dialogo = []
                 dialogo.append("Ciao,")
                 dialogo.append("ecco la merce")
@@ -63,6 +68,7 @@ class PersonaggioObj(object):
                 self.oggettoDato = "oggetto speciale"
                 self.avanzamentoStoria = True
                 self.menuMercante = False
+                self.scelta = False
                 dialogo = []
                 dialogo.append("Ciao,")
                 dialogo.append(u"la merce è finita")
@@ -79,6 +85,7 @@ class PersonaggioObj(object):
                 self.oggettoDato = False
                 self.avanzamentoStoria = False
                 self.menuMercante = False
+                self.scelta = False
                 dialogo = []
                 dialogo.append("Vattene")
                 dialogo.append("")
@@ -92,6 +99,28 @@ class PersonaggioObj(object):
                 self.oggettoDato = False
                 self.avanzamentoStoria = True
                 self.menuMercante = False
+                self.scelta = 3
+                dialogo = []
+                dialogo.append("Ti sto per fare una domanda")
+                dialogo.append("")
+                dialogo.append("")
+                dialogo.append("")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("???DOMANDA???")
+                dialogo.append("Quanto fa 2+3?")
+                dialogo.append("Che schifo di domanda!")
+                dialogo.append("(cambia discorso parlando di carote)")
+                dialogo.append("Almeno 3")
+                dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("!!!RISPOSTA!!!")
+                dialogo.append("Scusa...")
+                dialogo.append("Scusa, non mi interessano le carote")
+                dialogo.append("Non mi pare... ma te la do per buona")
+                dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
+                self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append(u"Ho compato tutto ciò che aveva il mercante")
                 dialogo.append("")
@@ -102,6 +131,7 @@ class PersonaggioObj(object):
                 self.oggettoDato = False
                 self.avanzamentoStoria = False
                 self.menuMercante = False
+                self.scelta = False
                 dialogo = []
                 dialogo.append("Muhahahaha")
                 dialogo.append("")

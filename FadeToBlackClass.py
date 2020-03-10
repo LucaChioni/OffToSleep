@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from GlobalVarG2 import *
+import pygame
 
 
 class Fade(pygame.sprite.Sprite):

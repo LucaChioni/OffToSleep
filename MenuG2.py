@@ -5,10 +5,10 @@ from GenericFuncG2 import *
 
 def scegli_sal(cosa, lunghezzadati, canzone):
     # posizione-dimensione puntatore
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    xp = gsx // 32 * 6.5
-    yp = gsy // 18 * 9.5
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    xp = GlobalVarG2.gsx // 32 * 6.5
+    yp = GlobalVarG2.gsy // 18 * 9.5
     vxp = xp
     vyp = yp
 
@@ -24,43 +24,48 @@ def scegli_sal(cosa, lunghezzadati, canzone):
 
     # primo frame
     if True:
-        schermo.fill(grigioscu)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 5, gsy // 18 * 7, gsx // 32 * 22, gsy // 18 * 9.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 5, gsy // 18 * 7))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 7))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 26, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 5, gsy // 18 * 15.5))
-        if cosa == 1:
-            messaggio("Carica partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
         if cosa == 2:
-            messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 5, gsy // 18 * 5, 100)
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.rossoScuro, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 9.5))
+        else:
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 9.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 7))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 15.5))
+        if cosa == 1:
+            messaggio("Carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
+            messaggio("SHIFT: cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
+        if cosa == 2:
+            messaggio("Cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
+            messaggio("SHIFT: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
         if cosa == 3:
-            messaggio("Salva partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
+            messaggio("Salva partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
         if conferma:
             if primaconf:
                 vxp = xp
                 vyp = yp
-                xp = gsx // 32 * 22.3
-                yp = gsy // 18 * 6.3
+                xp = GlobalVarG2.gsx // 32 * 22.3
+                yp = GlobalVarG2.gsy // 18 * 6.3
                 voceMarcata = 2
                 primaconf = False
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 18, gsy // 18 * 3.5, gsx // 32 * 9, gsy // 18 * 5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 5, gsy // 18 * 7))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 7))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 26, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 5, gsy // 18 * 15.5))
-            messaggio("Confermi?", grigiochi, gsx // 32 * 20, gsy // 18 * 4.5, 70)
-            messaggio("Si", grigiochi, gsx // 32 * 20.2, gsy // 18 * 6, 70)
-            messaggio("No", grigiochi, gsx // 32 * 23.2, gsy // 18 * 6, 70)
-            schermo.blit(puntatorevecchio, (vxp, vyp))
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-        schermo.blit(s1, (gsx // 32 * 8, gsy // 18 * 8))
-        schermo.blit(s2, (gsx // 32 * 15, gsy // 18 * 8))
-        schermo.blit(s3, (gsx // 32 * 22, gsy // 18 * 8))
+            if cosa == 2:
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.rossoScuro, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 5))
+            else:
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 3.5))
+            messaggio("Confermi?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 4.5, 70)
+            messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20.2, GlobalVarG2.gsy // 18 * 6, 70)
+            messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.2, GlobalVarG2.gsy // 18 * 6, 70)
+            GlobalVarG2.schermo.blit(puntatorevecchio, (vxp, vyp))
+        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+        GlobalVarG2.schermo.blit(GlobalVarG2.s1, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 8))
+        GlobalVarG2.schermo.blit(GlobalVarG2.s2, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 8))
+        GlobalVarG2.schermo.blit(GlobalVarG2.s3, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 8))
 
         # lettura salvataggi per riconoscerli
-        leggi = 0
         contasalva = 1
         while contasalva <= 3:
             leggi = open("Salvataggi/Salvataggio%i.txt" % contasalva, "r")
@@ -69,11 +74,11 @@ def scegli_sal(cosa, lunghezzadati, canzone):
             dati.pop(len(dati) - 1)
             if len(dati) == 0:
                 if contasalva == 1:
-                    messaggio("Slot vuoto", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
+                    messaggio("Slot vuoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 11, 60)
                 elif contasalva == 2:
-                    messaggio("Slot vuoto", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
+                    messaggio("Slot vuoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.5, GlobalVarG2.gsy // 18 * 11, 60)
                 elif contasalva == 3:
-                    messaggio("Slot vuoto", grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
+                    messaggio("Slot vuoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 11, 60)
             else:
                 errore = False
                 if len(dati) != lunghezzadati:
@@ -86,76 +91,76 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                             errore = True
                 if contasalva == 1:
                     if not errore:
-                        persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
-                        spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
-                        arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
-                        armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
-                        scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
-                        guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
-                        colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
-                        messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
-                        schermo.blit(arcsalva, (gpx * 8, gpy * 12))
-                        schermo.blit(persalva, (gpx * 8, gpy * 12))
-                        schermo.blit(persSalvaBraccia, (gpx * 8, gpy * 12))
-                        schermo.blit(armsalva, (gpx * 8, gpy * 12))
-                        schermo.blit(colsalva, (gpx * 8, gpy * 12))
-                        schermo.blit(spasalva, (gpx * 8, gpy * 12))
-                        schermo.blit(guasalva, (gpx * 8, gpy * 12))
-                        schermo.blit(scusalva, (gpx * 8, gpy * 12))
+                        persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        armsalva = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        scusalva = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        guasalva = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        colsalva = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        messaggio("Livello: " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 11, 60)
+                        GlobalVarG2.schermo.blit(arcsalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(persalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(persSalvaBraccia, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(armsalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(colsalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(spasalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(guasalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(scusalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
                     else:
-                        messaggio("Dati corrotti", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
+                        messaggio("Dati corrotti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 11, 60)
                 elif contasalva == 2:
                     if not errore:
-                        persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
-                        spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
-                        arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
-                        armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
-                        scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
-                        guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
-                        colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
-                        messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
-                        schermo.blit(arcsalva, (gpx * 15, gpy * 12))
-                        schermo.blit(persalva, (gpx * 15, gpy * 12))
-                        schermo.blit(persSalvaBraccia, (gpx * 15, gpy * 12))
-                        schermo.blit(armsalva, (gpx * 15, gpy * 12))
-                        schermo.blit(colsalva, (gpx * 15, gpy * 12))
-                        schermo.blit(spasalva, (gpx * 15, gpy * 12))
-                        schermo.blit(guasalva, (gpx * 15, gpy * 12))
-                        schermo.blit(scusalva, (gpx * 15, gpy * 12))
+                        persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        armsalva = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        scusalva = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        guasalva = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        colsalva = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        messaggio("Livello: " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.5, GlobalVarG2.gsy // 18 * 11, 60)
+                        GlobalVarG2.schermo.blit(arcsalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(persalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(persSalvaBraccia, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(armsalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(colsalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(spasalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(guasalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(scusalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
                     else:
-                        messaggio("Dati corrotti", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
+                        messaggio("Dati corrotti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.5, GlobalVarG2.gsy // 18 * 11, 60)
                 elif contasalva == 3:
                     if not errore:
-                        persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
-                        persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
-                        spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
-                        arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
-                        armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
-                        scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
-                        guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
-                        colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
-                        messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
-                        schermo.blit(arcsalva, (gpx * 22, gpy * 12))
-                        schermo.blit(persalva, (gpx * 22, gpy * 12))
-                        schermo.blit(persSalvaBraccia, (gpx * 22, gpy * 12))
-                        schermo.blit(armsalva, (gpx * 22, gpy * 12))
-                        schermo.blit(colsalva, (gpx * 22, gpy * 12))
-                        schermo.blit(spasalva, (gpx * 22, gpy * 12))
-                        schermo.blit(guasalva, (gpx * 22, gpy * 12))
-                        schermo.blit(scusalva, (gpx * 22, gpy * 12))
+                        persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        armsalva = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        scusalva = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        guasalva = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        colsalva = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                        messaggio("Livello: " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 11, 60)
+                        GlobalVarG2.schermo.blit(arcsalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(persalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(persSalvaBraccia, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(armsalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(colsalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(spasalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(guasalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                        GlobalVarG2.schermo.blit(scusalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
                     else:
-                        messaggio("Dati corrotti", grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
+                        messaggio("Dati corrotti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 11, 60)
             contasalva = contasalva + 1
-        leggi.close()
+            leggi.close()
 
-        schermo.blit(puntatore, (xp, yp))
+        GlobalVarG2.schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(canzone)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -176,12 +181,12 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
                     if conferma:
-                        canaleSoundPuntatore.play(selind)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         xp = vxp
                         yp = vyp
                         conferma = False
                     else:
-                        canaleSoundPuntatore.play(selind)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         n = -1
                         return n
                 if event.key == pygame.K_d and not tastoTrovato:
@@ -190,100 +195,127 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
+                if event.key == pygame.K_LSHIFT and not tastoTrovato:
+                    tastoTrovato = True
+                    if conferma and (cosa == 1 or cosa == 2):
+                        xp = vxp
+                        yp = vyp
+                        conferma = False
+                    if cosa == 1:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
+                        cosa = 2
+                    elif cosa == 2:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
+                        cosa = 1
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     tastoTrovato = True
                     if conferma:
                         if voceMarcata == 1:
-                            canaleSoundPuntatore.play(selezione)
-                            risposta = True
-                            return n
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            if cosa == 1 or cosa == 3:
+                                risposta = True
+                                return n
+                            else:
+                                leggi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
+                                leggi.close()
+                                xp = vxp
+                                yp = vyp
+                                conferma = False
                         if voceMarcata == 2:
-                            canaleSoundPuntatore.play(selind)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                             xp = vxp
                             yp = vyp
                             conferma = False
                     else:
-                        canaleSoundPuntatore.play(selezione)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         conferma = True
                         primaconf = True
                         n = salMarcato
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0):
+        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or tastop == pygame.K_LSHIFT or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0):
             if not primoMovimento and (tastop == pygame.K_a or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_a:
                 if conferma:
                     if voceMarcata == 2:
                         voceMarcata -= 1
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 19.3
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 19.3
                 else:
                     if salMarcato == 3:
                         salMarcato -= 1
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 13.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 13.5
                     elif salMarcato == 2:
                         salMarcato -= 1
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 6.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 6.5
                     elif salMarcato == 1:
                         salMarcato += 2
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 20.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 20.5
             if tastop == pygame.K_d:
                 if conferma:
                     if voceMarcata == 1:
                         voceMarcata += 1
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 22.3
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 22.3
                 else:
                     if salMarcato == 1:
                         salMarcato += 1
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 13.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 13.5
                     elif salMarcato == 2:
                         salMarcato += 1
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 20.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 20.5
                     elif salMarcato == 3:
                         salMarcato -= 2
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 6.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 6.5
 
-            schermo.fill(grigioscu)
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 5, gsy // 18 * 7, gsx // 32 * 22, gsy // 18 * 9.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 5, gsy // 18 * 7))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 7))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 26, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 5, gsy // 18 * 15.5))
-            if cosa == 1:
-                messaggio("Carica partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
             if cosa == 2:
-                messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 5, gsy // 18 * 5, 100)
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.rossoScuro, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 9.5))
+            else:
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 9.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 7))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 15.5))
+            if cosa == 1:
+                messaggio("Carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
+                messaggio("SHIFT: cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
+            if cosa == 2:
+                messaggio("Cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
+                messaggio("SHIFT: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
             if cosa == 3:
-                messaggio("Salva partita", grigiochi, gsx // 32 * 5, gsy // 18 * 4.5, 120)
+                messaggio("Salva partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
             if conferma:
                 if primaconf:
                     vxp = xp
                     vyp = yp
-                    xp = gsx // 32 * 22.3
-                    yp = gsy // 18 * 6.3
+                    xp = GlobalVarG2.gsx // 32 * 22.3
+                    yp = GlobalVarG2.gsy // 18 * 6.3
                     voceMarcata = 2
                     primaconf = False
-                pygame.draw.rect(schermo, grigio, (gsx // 32 * 18, gsy // 18 * 3.5, gsx // 32 * 9, gsy // 18 * 5))
-                schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 18, gsy // 18 * 3.5))
-                schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 26, gsy // 18 * 3.5))
-                messaggio("Confermi?", grigiochi, gsx // 32 * 20, gsy // 18 * 4.5, 70)
-                messaggio("Si", grigiochi, gsx // 32 * 20.2, gsy // 18 * 6, 70)
-                messaggio("No", grigiochi, gsx // 32 * 23.2, gsy // 18 * 6, 70)
-                schermo.blit(puntatorevecchio, (vxp, vyp))
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-            schermo.blit(s1, (gsx // 32 * 8, gsy // 18 * 8))
-            schermo.blit(s2, (gsx // 32 * 15, gsy // 18 * 8))
-            schermo.blit(s3, (gsx // 32 * 22, gsy // 18 * 8))
+                if cosa == 2:
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.rossoScuro, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 5))
+                else:
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 5))
+                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5))
+                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 3.5))
+                messaggio("Confermi?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 4.5, 70)
+                messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20.2, GlobalVarG2.gsy // 18 * 6, 70)
+                messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.2, GlobalVarG2.gsy // 18 * 6, 70)
+                GlobalVarG2.schermo.blit(puntatorevecchio, (vxp, vyp))
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            GlobalVarG2.schermo.blit(GlobalVarG2.s1, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 8))
+            GlobalVarG2.schermo.blit(GlobalVarG2.s2, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 8))
+            GlobalVarG2.schermo.blit(GlobalVarG2.s3, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 8))
 
             # lettura salvataggi per riconoscerli
             contasalva = 1
@@ -294,11 +326,11 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 dati.pop(len(dati) - 1)
                 if len(dati) == 0:
                     if contasalva == 1:
-                        messaggio("Slot vuoto", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
+                        messaggio("Slot vuoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 11, 60)
                     elif contasalva == 2:
-                        messaggio("Slot vuoto", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
+                        messaggio("Slot vuoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.5, GlobalVarG2.gsy // 18 * 11, 60)
                     elif contasalva == 3:
-                        messaggio("Slot vuoto", grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
+                        messaggio("Slot vuoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 11, 60)
                 else:
                     errore = False
                     if len(dati) != lunghezzadati:
@@ -311,74 +343,74 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                                 errore = True
                     if contasalva == 1:
                         if not errore:
-                            persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
-                            spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
-                            arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
-                            armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
-                            scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
-                            guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
-                            colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
-                            messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
-                            schermo.blit(arcsalva, (gpx * 8, gpy * 12))
-                            schermo.blit(persalva, (gpx * 8, gpy * 12))
-                            schermo.blit(persSalvaBraccia, (gpx * 8, gpy * 12))
-                            schermo.blit(armsalva, (gpx * 8, gpy * 12))
-                            schermo.blit(colsalva, (gpx * 8, gpy * 12))
-                            schermo.blit(spasalva, (gpx * 8, gpy * 12))
-                            schermo.blit(guasalva, (gpx * 8, gpy * 12))
-                            schermo.blit(scusalva, (gpx * 8, gpy * 12))
+                            persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            armsalva = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            scusalva = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            guasalva = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            colsalva = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            messaggio("Livello: " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 11, 60)
+                            GlobalVarG2.schermo.blit(arcsalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(persalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(persSalvaBraccia, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(armsalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(colsalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(spasalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(guasalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(scusalva, (GlobalVarG2.gpx * 8, GlobalVarG2.gpy * 12))
                         else:
-                            messaggio("Dati corrotti", grigiochi, gsx // 32 * 7.5, gsy // 18 * 11, 60)
+                            messaggio("Dati corrotti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 11, 60)
                     elif contasalva == 2:
                         if not errore:
-                            persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
-                            spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
-                            arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
-                            armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
-                            scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
-                            guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
-                            colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
-                            messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
-                            schermo.blit(arcsalva, (gpx * 15, gpy * 12))
-                            schermo.blit(persalva, (gpx * 15, gpy * 12))
-                            schermo.blit(persSalvaBraccia, (gpx * 15, gpy * 12))
-                            schermo.blit(armsalva, (gpx * 15, gpy * 12))
-                            schermo.blit(colsalva, (gpx * 15, gpy * 12))
-                            schermo.blit(spasalva, (gpx * 15, gpy * 12))
-                            schermo.blit(guasalva, (gpx * 15, gpy * 12))
-                            schermo.blit(scusalva, (gpx * 15, gpy * 12))
+                            persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            armsalva = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            scusalva = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            guasalva = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            colsalva = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            messaggio("Livello: " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.5, GlobalVarG2.gsy // 18 * 11, 60)
+                            GlobalVarG2.schermo.blit(arcsalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(persalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(persSalvaBraccia, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(armsalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(colsalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(spasalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(guasalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(scusalva, (GlobalVarG2.gpx * 15, GlobalVarG2.gpy * 12))
                         else:
-                            messaggio("Dati corrotti", grigiochi, gsx // 32 * 14.5, gsy // 18 * 11, 60)
+                            messaggio("Dati corrotti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.5, GlobalVarG2.gsy // 18 * 11, 60)
                     elif contasalva == 3:
                         if not errore:
-                            persalva = pygame.transform.scale(perso, (gpx * 3, gpy * 3))
-                            persSalvaBraccia = pygame.transform.scale(persob, (gpx * 3, gpy * 3))
-                            spasalva = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 3, gpy * 3))
-                            arcsalva = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 3, gpy * 3))
-                            armsalva = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 3, gpy * 3))
-                            scusalva = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 3, gpy * 3))
-                            guasalva = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 3, gpy * 3))
-                            colsalva = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 3, gpy * 3))
-                            messaggio("Livello: " + str(dati[4]), grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
-                            schermo.blit(arcsalva, (gpx * 22, gpy * 12))
-                            schermo.blit(persalva, (gpx * 22, gpy * 12))
-                            schermo.blit(persSalvaBraccia, (gpx * 22, gpy * 12))
-                            schermo.blit(armsalva, (gpx * 22, gpy * 12))
-                            schermo.blit(colsalva, (gpx * 22, gpy * 12))
-                            schermo.blit(spasalva, (gpx * 22, gpy * 12))
-                            schermo.blit(guasalva, (gpx * 22, gpy * 12))
-                            schermo.blit(scusalva, (gpx * 22, gpy * 12))
+                            persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            armsalva = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            scusalva = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            guasalva = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            colsalva = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            messaggio("Livello: " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 11, 60)
+                            GlobalVarG2.schermo.blit(arcsalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(persalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(persSalvaBraccia, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(armsalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(colsalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(spasalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(guasalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
+                            GlobalVarG2.schermo.blit(scusalva, (GlobalVarG2.gpx * 22, GlobalVarG2.gpy * 12))
                         else:
-                            messaggio("Dati corrotti", grigiochi, gsx // 32 * 21.5, gsy // 18 * 11, 60)
+                            messaggio("Dati corrotti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 11, 60)
                 contasalva = contasalva + 1
-            leggi.close()
+                leggi.close()
 
-            schermo.blit(puntatore, (xp, yp))
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
 
 
 def menu():
@@ -386,8 +418,8 @@ def menu():
     fermavideo = guardaVideo('Video/videoinizio')
     # attesa dopo video
     if not fermavideo:
-        schermo.fill(grigioscu)
-        messaggio("Premi un tasto per continuare...", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 100)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+        messaggio("Premi un tasto per continuare...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
         pygame.display.update()
         finevideo = True
         while finevideo:
@@ -396,13 +428,15 @@ def menu():
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    canaleSoundPuntatore.play(selezione)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     finevideo = False
 
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    xp = gsx // 32 * 3
-    yp = gsy // 18 * 3.5
+    xp = GlobalVarG2.gsx // 32 * 3
+    yp = GlobalVarG2.gsy // 18 * 3.5
     voceMarcata = 1
+    primoFrame = True
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
 
     tastop = 0
     tastotempfps = 5
@@ -410,30 +444,9 @@ def menu():
     # numero per la posizione di robo all'avvio
     c = random.randint(1, 4)
 
-    # primo frame
-    if True:
-        schermo.fill(grigioscu)
-        persomenuinizio = pygame.transform.scale(persGrafInizio, (gpx * 18, gpy * 18))
-        if c == 1:
-            robomenuinizio = pygame.transform.scale(robogra, (gpx * 18, gpy * 18))
-        elif c == 2:
-            robomenuinizio = pygame.transform.scale(robograf, (gpx * 18, gpy * 18))
-        elif c == 3:
-            robomenuinizio = pygame.transform.scale(robograff, (gpx * 18, gpy * 18))
-        else:
-            robomenuinizio = pygame.transform.scale(robografff, (gpx * 18, gpy * 18))
-        schermo.blit(persomenuinizio, (gpx * 15, 0))
-        schermo.blit(robomenuinizio, (gpx * 3, 0))
-        messaggio("Nuova partita", grigiochi, gsx // 32 * 4, gsy // 18 * 3, 90)
-        messaggio("Carica partita", grigiochi, gsx // 32 * 4, gsy // 18 * 5.5, 90)
-        messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 4, gsy // 18 * 8, 90)
-        messaggio("Esci", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 90)
-        schermo.blit(puntatore, (xp, yp))
-        pygame.display.update()
-
     while True:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(c11)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(GlobalVarG2.c11)
 
         # posizione porte e cofanetti nel vettore dati
         porteini = 134
@@ -466,12 +479,12 @@ def menu():
                     tastoTrovato = True
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selezione)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
 
                     # nuova partita
                     if voceMarcata == 1:
-                        x = gsx // 32 * 6
-                        y = gsy // 18 * 2
+                        x = GlobalVarG2.gsx // 32 * 6
+                        y = GlobalVarG2.gsy // 18 * 2
                         # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
                         # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra - porte(134-?) - cofanetti(?-?) // dimensione: 0-133 + porte e cofanetti
                         dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 220,# <- statistiche
@@ -484,22 +497,22 @@ def menu():
                                 False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
                                 2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
                                 1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False]# <- cofanetti
-                        canaleSoundCanzone.stop()
+                        GlobalVarG2.canaleSoundCanzone.stop()
                         i = porteini
                         while i <= portefin:
-                            dati[i + 1] = dati[i + 1] * gpx
-                            dati[i + 2] = dati[i + 2] * gpy
+                            dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                            dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
                             i = i + 4
                         i = cofaniini
                         while i <= cofanifin:
-                            dati[i + 1] = dati[i + 1] * gpx
-                            dati[i + 2] = dati[i + 2] * gpy
+                            dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                            dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
                             i = i + 4
                         return dati, porteini, portefin, cofaniini, cofanifin
 
                     # carica partita
                     if voceMarcata == 2:
-                        n = scegli_sal(1, lunghezzadati, c11)
+                        n = scegli_sal(1, lunghezzadati, GlobalVarG2.c11)
 
                         # lettura salvataggio
                         if n != -1:
@@ -510,11 +523,11 @@ def menu():
                             if len(dati) == 0:
                                 print "Slot vuoto"
                                 indietro = False
-                                schermo.fill(grigioscu)
-                                robograsalva = pygame.transform.scale(robograff, (gpx * 18, gpy * 18))
-                                schermo.blit(robograsalva, (gpx * 3, -gpy * 5))
-                                messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-                                messaggio("Slot di salvataggio vuoto...", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 100)
+                                GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+                                robograsalva = pygame.transform.scale(GlobalVarG2.robograff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                                GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 3, -GlobalVarG2.gpy * 5))
+                                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+                                messaggio("Slot di salvataggio vuoto...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
                                 pygame.display.update()
                                 while not indietro:
                                     for event in pygame.event.get():
@@ -523,7 +536,7 @@ def menu():
                                             quit()
                                         if event.type == pygame.KEYDOWN:
                                             if event.key == pygame.K_q:
-                                                canaleSoundPuntatore.play(selind)
+                                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                                                 indietro = True
                             else:
                                 errore = False
@@ -537,31 +550,31 @@ def menu():
                                             errore = True
                                     if not errore:
                                         # conversione della posizione in pixel
-                                        dati[2] = dati[2] * gpx
-                                        dati[3] = dati[3] * gpy
+                                        dati[2] = dati[2] * GlobalVarG2.gpx
+                                        dati[3] = dati[3] * GlobalVarG2.gpy
                                         i = porteini
                                         while i <= portefin:
-                                            dati[i + 1] = dati[i + 1] * gpx
-                                            dati[i + 2] = dati[i + 2] * gpy
+                                            dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                                            dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
                                             i = i + 4
                                         i = cofaniini
                                         while i <= cofanifin:
-                                            dati[i + 1] = dati[i + 1] * gpx
-                                            dati[i + 2] = dati[i + 2] * gpy
+                                            dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                                            dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
                                             i = i + 4
 
                                         print "Salvataggio: " + str(n)
                                         leggi.close()
-                                        canaleSoundCanzone.stop()
+                                        GlobalVarG2.canaleSoundCanzone.stop()
                                         return dati, porteini, portefin, cofaniini, cofanifin
                                 if len(dati) != lunghezzadati or errore:
                                     print "Dati corrotti: " + str(len(dati))
                                     indietro = False
-                                    schermo.fill(grigioscu)
-                                    robograsalva = pygame.transform.scale(robograffff, (gpx * 18, gpy * 18))
-                                    schermo.blit(robograsalva, (gpx * 15, -gpy * 3))
-                                    messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-                                    messaggio("I dati sono corrotti...", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 100)
+                                    GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+                                    robograsalva = pygame.transform.scale(GlobalVarG2.robograffff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                                    GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 15, -GlobalVarG2.gpy * 3))
+                                    messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+                                    messaggio("I dati sono corrotti...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
                                     pygame.display.update()
                                     while not indietro:
                                         for event in pygame.event.get():
@@ -570,16 +583,14 @@ def menu():
                                                 quit()
                                             if event.type == pygame.KEYDOWN:
                                                 if event.key == pygame.K_q:
-                                                    canaleSoundPuntatore.play(selind)
+                                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                                                     indietro = True
                             leggi.close()
 
-                    # cancella partita
+                    # Impostazioni
                     if voceMarcata == 3:
-                        n = scegli_sal(2, lunghezzadati, c11)
-                        if n != -1:
-                            leggi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
-                            leggi.close()
+                        menuImpostazioni(GlobalVarG2.c11, True)
+                        primoFrame = True
 
                     # esci dal gioco
                     if voceMarcata == 4:
@@ -588,72 +599,79 @@ def menu():
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0):
+        if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame:
+            if primoFrame:
+                puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+                xp = GlobalVarG2.gsx // 32 * 3
+                yp = GlobalVarG2.gsy // 18 * 3.5
+                if voceMarcata == 3:
+                    yp = GlobalVarG2.gsy // 18 * 8.5
+                primoFrame = False
             if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
                 tastotempfps = 2
             if tastop == pygame.K_s:
                 if voceMarcata != 4:
                     if voceMarcata == 1:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 6
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 6
                     elif voceMarcata == 2:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 8.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 8.5
                     elif voceMarcata == 3:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 13.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 13.5
                     voceMarcata += 1
                 else:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = gsy // 18 * 3.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 3.5
                     voceMarcata -= 3
             if tastop == pygame.K_w:
                 if voceMarcata != 1:
                     if voceMarcata == 2:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 3.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 3.5
                     elif voceMarcata == 3:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 6
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 6
                     elif voceMarcata == 4:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 8.5
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 8.5
                     voceMarcata -= 1
                 else:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = gsy // 18 * 13.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 13.5
                     voceMarcata += 3
-            schermo.fill(grigioscu)
-            persomenuinizio = pygame.transform.scale(persGrafInizio, (gpx * 18, gpy * 18))
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+            persomenuinizio = pygame.transform.scale(GlobalVarG2.persGrafInizio, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
             if (c == 1):
-                robomenuinizio = pygame.transform.scale(robogra, (gpx * 18, gpy * 18))
+                robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
             if (c == 2):
-                robomenuinizio = pygame.transform.scale(robograf, (gpx * 18, gpy * 18))
+                robomenuinizio = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
             if (c == 3):
-                robomenuinizio = pygame.transform.scale(robograff, (gpx * 18, gpy * 18))
+                robomenuinizio = pygame.transform.scale(GlobalVarG2.robograff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
             if (c == 4):
-                robomenuinizio = pygame.transform.scale(robografff, (gpx * 18, gpy * 18))
-            schermo.blit(persomenuinizio, (gpx * 15, 0))
-            schermo.blit(robomenuinizio, (gpx * 3, 0))
-            messaggio("Nuova partita", grigiochi, gsx // 32 * 4, gsy // 18 * 3, 90)
-            messaggio("Carica partita", grigiochi, gsx // 32 * 4, gsy // 18 * 5.5, 90)
-            messaggio("Cancella salvataggio", grigiochi, gsx // 32 * 4, gsy // 18 * 8, 90)
-            messaggio("Esci", grigiochi, gsx // 32 * 4, gsy // 18 * 13, 90)
-            schermo.blit(puntatore, (xp, yp))
+                robomenuinizio = pygame.transform.scale(GlobalVarG2.robografff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+            GlobalVarG2.schermo.blit(persomenuinizio, (GlobalVarG2.gpx * 15, 0))
+            GlobalVarG2.schermo.blit(robomenuinizio, (GlobalVarG2.gpx * 3, 0))
+            messaggio("Nuova partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 3, 90)
+            messaggio("Carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 5.5, 90)
+            messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 8, 90)
+            messaggio("Esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 90)
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
 
 
 def equip(dati, canzone):
-    perssta = pygame.transform.scale(perso, (gpx * 5, gpy * 5))
-    persstab = pygame.transform.scale(persob, (gpx * 5, gpy * 5))
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    sfondoOggetto = pygame.transform.scale(sfondoOggettoMenu, (int(gpx * 2), int(gpy * 2)))
-    sconosciutoEquip = pygame.transform.scale(sconosciutoEquipMenu, (int(gpx * 2), int(gpy * 2)))
-    xp = gsx // 32 * 1
-    yp = gsy // 18 * 6.8
+    perssta = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    persstab = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    sfondoOggetto = pygame.transform.scale(GlobalVarG2.sfondoOggettoMenu, (int(GlobalVarG2.gpx * 2), int(GlobalVarG2.gpy * 2)))
+    sconosciutoEquip = pygame.transform.scale(GlobalVarG2.sconosciutoEquipMenu, (int(GlobalVarG2.gpx * 2), int(GlobalVarG2.gpy * 2)))
+    xp = GlobalVarG2.gsx // 32 * 1
+    yp = GlobalVarG2.gsy // 18 * 6.8
     risposta = False
     voceMarcata = 1
 
@@ -661,12 +679,12 @@ def equip(dati, canzone):
     tastotempfps = 5
 
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-    spada = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 5, gpy * 5))
-    arco = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 5, gpy * 5))
-    scudo = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 5, gpy * 5))
-    armatura = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 5, gpy * 5))
-    guanti = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 5, gpy * 5))
-    collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
+    spada = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    arco = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    scudo = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    armatura = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    guanti = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    collana = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
     carim = False
 
     vetImgSpade = []
@@ -678,539 +696,539 @@ def equip(dati, canzone):
     i = 0
     while i < 5:
         if dati[41 + i] > 0:
-            vetImgSpade.append(vetImgSpadeMenu[i])
+            vetImgSpade.append(GlobalVarG2.vetImgSpadeMenu[i])
         else:
             vetImgSpade.append(sconosciutoEquip)
         if dati[46 + i] > 0:
-            vetImgArchi.append(vetImgArchiMenu[i])
+            vetImgArchi.append(GlobalVarG2.vetImgArchiMenu[i])
         else:
             vetImgArchi.append(sconosciutoEquip)
         if dati[51 + i] > 0:
-            vetImgArmature.append(vetImgArmatureMenu[i])
+            vetImgArmature.append(GlobalVarG2.vetImgArmatureMenu[i])
         else:
             vetImgArmature.append(sconosciutoEquip)
         if dati[56 + i] > 0:
-            vetImgScudi.append(vetImgScudiMenu[i])
+            vetImgScudi.append(GlobalVarG2.vetImgScudiMenu[i])
         else:
             vetImgScudi.append(sconosciutoEquip)
         if dati[61 + i] > 0:
-            vetImgGuanti.append(vetImgGuantiMenu[i])
+            vetImgGuanti.append(GlobalVarG2.vetImgGuantiMenu[i])
         else:
             vetImgGuanti.append(sconosciutoEquip)
         if dati[66 + i] > 0:
-            vetImgCollane.append(vetImgCollaneMenu[i])
+            vetImgCollane.append(GlobalVarG2.vetImgCollaneMenu[i])
         else:
             vetImgCollane.append(sconosciutoEquip)
         i += 1
 
     # primo frame
     if True:
-        schermo.fill(grigioscu)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 21, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 21, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+        pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 12.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
         # linea(dove,colore,inizio,fine,spessore)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 4.5, (gsy // 18 * 5.5) + (gpy // 2)),
-                         (gsx // 32 * 4.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)),
-                         (gsx // 32 * 8, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 11.5, (gsy // 18 * 5.5) + (gpy // 2)),
-                         (gsx // 32 * 11.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)),
-                         (gsx // 32 * 15, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
-        pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 5.5) + (gpy // 2)),
-                         (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 4.5, (GlobalVarG2.gsy // 18 * 5.5) + (GlobalVarG2.gpy // 2)),
+                         (GlobalVarG2.gsx // 32 * 4.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 30)
+        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 8, (GlobalVarG2.gsy // 18 * 4) + (GlobalVarG2.gpy // 2)),
+                         (GlobalVarG2.gsx // 32 * 8, (GlobalVarG2.gsy // 18 * 15.5) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 20)
+        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 11.5, (GlobalVarG2.gsy // 18 * 5.5) + (GlobalVarG2.gpy // 2)),
+                         (GlobalVarG2.gsx // 32 * 11.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 30)
+        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 15, (GlobalVarG2.gsy // 18 * 4) + (GlobalVarG2.gpy // 2)),
+                         (GlobalVarG2.gsx // 32 * 15, (GlobalVarG2.gsy // 18 * 15.5) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 20)
+        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 18.5, (GlobalVarG2.gsy // 18 * 5.5) + (GlobalVarG2.gpy // 2)),
+                         (GlobalVarG2.gsx // 32 * 18.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 30)
 
         if carim:
-            spada = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 5, gpy * 5))
-            arco = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 5, gpy * 5))
-            scudo = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 5, gpy * 5))
-            armatura = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 5, gpy * 5))
-            guanti = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 5, gpy * 5))
-            collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
+            spada = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+            arco = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+            scudo = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+            armatura = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+            guanti = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+            collana = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
             carim = False
-        messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Armi", grigiochi, gsx // 32 * 3.6, gsy // 18 * 4.3, 60)
-        messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.3, 50)
+        messaggio("Equipaggiamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+        messaggio("Armi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3.6, GlobalVarG2.gsy // 18 * 4.3, 60)
+        messaggio("Spade", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
-            schermo.blit(sfondoOggetto, (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
-            schermo.blit(vetImgSpade[i], (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 1.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(vetImgSpade[i], (GlobalVarG2.gsx // 32 * 1.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
             i += 1
-        messaggio("Archi", grigiochi, gsx // 32 * 5.5, gsy // 18 * 5.3, 50)
+        messaggio("Archi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.5, GlobalVarG2.gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
-            schermo.blit(sfondoOggetto, (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
-            schermo.blit(vetImgArchi[i], (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 5.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(vetImgArchi[i], (GlobalVarG2.gsx // 32 * 5.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
             i += 1
-        messaggio("Protezioni", grigiochi, gsx // 32 * 9.6, gsy // 18 * 4.3, 60)
-        messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.3, 50)
+        messaggio("Protezioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.6, GlobalVarG2.gsy // 18 * 4.3, 60)
+        messaggio("Armature", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.4, GlobalVarG2.gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
-            schermo.blit(sfondoOggetto, (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
-            schermo.blit(vetImgArmature[i], (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 8.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(vetImgArmature[i], (GlobalVarG2.gsx // 32 * 8.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
             i += 1
-        messaggio("Scudi", grigiochi, gsx // 32 * 12.5, gsy // 18 * 5.3, 50)
+        messaggio("Scudi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12.5, GlobalVarG2.gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
-            schermo.blit(sfondoOggetto, (gsx // 32 * 12.2, (gsy // 18 * 6 + (gpy * 2 * i))))
-            schermo.blit(vetImgScudi[i], (gsx // 32 * 12.2, int((gsy // 18 * 6) + (gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 12.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(vetImgScudi[i], (GlobalVarG2.gsx // 32 * 12.2, int((GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy * 2 * i))))
             i += 1
-        messaggio("Accessori", grigiochi, gsx // 32 * 16.7, gsy // 18 * 4.3, 60)
-        messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.3, 50)
+        messaggio("Accessori", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.7, GlobalVarG2.gsy // 18 * 4.3, 60)
+        messaggio("Guanti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 15.8, GlobalVarG2.gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
-            schermo.blit(sfondoOggetto, (gsx // 32 * 15.7, (gsy // 18 * 6 + (gpy * 2 * i))))
-            schermo.blit(vetImgGuanti[i], (gsx // 32 * 15.7, int((gsy // 18 * 6) + (gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 15.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(vetImgGuanti[i], (GlobalVarG2.gsx // 32 * 15.7, int((GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy * 2 * i))))
             i += 1
-        messaggio("Collane", grigiochi, gsx // 32 * 19.2, gsy // 18 * 5.3, 50)
+        messaggio("Collane", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19.2, GlobalVarG2.gsy // 18 * 5.3, 50)
         i = 0
         while i < 5:
-            schermo.blit(sfondoOggetto, (gsx // 32 * 19.2, (gsy // 18 * 6 + (gpy * 2 * i))))
-            schermo.blit(vetImgCollane[i], (gsx // 32 * 19.2, ((gsy // 18 * 6) + (gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 19.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(vetImgCollane[i], (GlobalVarG2.gsx // 32 * 19.2, ((GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy * 2 * i))))
             i += 1
 
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
         if dati[5] > pvtot:
             dati[5] = pvtot
 
-        schermo.blit(arco, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        schermo.blit(persstab, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        schermo.blit(armatura, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        schermo.blit(collana, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        schermo.blit(spada, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        schermo.blit(guanti, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        schermo.blit(scudo, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-        messaggio("Statistiche:", grigiochi, gsx // 32 * 23, gsy // 18 * 6.7, 50)
-        messaggio("Punti vita: %i" % pvtot, grigiochi, gsx // 32 * 23, gsy // 18 * 7.5, 35)
-        messaggio("Attacco ravvicinato: %i" % attVicino, grigiochi, gsx // 32 * 23, gsy // 18 * 8, 35)
-        messaggio("Attacco a distanza: %i" % attLontano, grigiochi, gsx // 32 * 23, gsy // 18 * 8.5, 35)
-        messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 9, 35)
-        messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 9.5, 35)
+        GlobalVarG2.schermo.blit(arco, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        GlobalVarG2.schermo.blit(perssta, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        GlobalVarG2.schermo.blit(persstab, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        GlobalVarG2.schermo.blit(armatura, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        GlobalVarG2.schermo.blit(collana, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        GlobalVarG2.schermo.blit(spada, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        GlobalVarG2.schermo.blit(guanti, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        GlobalVarG2.schermo.blit(scudo, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+        messaggio("Statistiche:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 6.7, 50)
+        messaggio("Punti vita: %i" % pvtot, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 7.5, 35)
+        messaggio("Attacco ravvicinato: %i" % attVicino, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 8, 35)
+        messaggio("Attacco a distanza: %i" % attLontano, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 8.5, 35)
+        messaggio("Difesa: %i" % dif, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 9, 35)
+        messaggio(u"Probabilità parata: %i" % par + "%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 9.5, 35)
         # confronto statistiche
         # spade
         if voceMarcata == 1:
             if dati[41] != 0:
-                messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Rimuovi spada", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Rimuovi spada", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 0 - ((dati[6] * dati[6]) * 10)
                 if dati[6] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
         if voceMarcata == 2:
             if dati[42] != 0:
-                messaggio("Spada di ferro:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Semplice spada di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Spada di ferro:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Semplice spada di ferro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 10 - ((dati[6] * dati[6]) * 10)
                 if dati[6] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                 elif dati[6] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
         if voceMarcata == 3:
             if dati[43] != 0:
-                messaggio("Spadone d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Grande spadone in acciaio con ornamenti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("in oro. Rappresenta il modello di spada", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("migliore mai prodotto dall'uomo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Spadone d'acciaio:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Grande spadone in acciaio con ornamenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("in oro. Rappresenta il modello di spada", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("migliore mai prodotto dall'uomo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 40 - ((dati[6] * dati[6]) * 10)
                 if dati[6] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                 elif dati[6] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
         if voceMarcata == 4:
             if dati[44] != 0:
-                messaggio("Lykother:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Spada molto leggera e affilata. Si dice che in", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8,
+                messaggio("Lykother:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Spada molto leggera e affilata. Si dice che in", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8,
                           35)
-                messaggio("origine fosse un dente di un lupo enorme", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("origine fosse un dente di un lupo enorme", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 90 - ((dati[6] * dati[6]) * 10)
                 if dati[6] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                 elif dati[6] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
         if voceMarcata == 5:
             if dati[45] != 0:
-                messaggio("Mendaxritas:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Potentissima spada composta da materiali", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("ignoti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Mendaxritas:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Potentissima spada composta da materiali", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("ignoti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 160 - ((dati[6] * dati[6]) * 10)
                 if dati[6] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                 elif dati[6] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
         # archi
         if voceMarcata == 6:
             if dati[46] != 0:
-                messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Rimuovi arco", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Rimuovi arco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diffAtt = 0 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 0:
-                    messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
         if voceMarcata == 7:
             if dati[47] != 0:
-                messaggio("Arco di legno:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Semplice arco in legno usato dalla maggior", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("parte dei forestieri", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Arco di legno:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Semplice arco in legno usato dalla maggior", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("parte dei forestieri", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diffAtt = 5 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 1:
-                    messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[128] < 1:
-                    messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
         if voceMarcata == 8:
             if dati[48] != 0:
-                messaggio("Arco di ferro:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio(u"Elaborato arco in ferro usato solo dai più", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("esperti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Arco di ferro:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio(u"Elaborato arco in ferro usato solo dai più", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("esperti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diffAtt = 20 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 2:
-                    messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[128] < 2:
-                    messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
         if voceMarcata == 9:
             if dati[49] != 0:
-                messaggio("Arco di precisione:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Sofisticato arco in legno e acciaio. Molto", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("leggero e potente. Massima espressione", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("dell'ingegno umano", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Arco di precisione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Sofisticato arco in legno e acciaio. Molto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("leggero e potente. Massima espressione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("dell'ingegno umano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diffAtt = 45 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 3:
-                    messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[128] < 3:
-                    messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
         if voceMarcata == 10:
             if dati[50] != 0:
-                messaggio("Accipiter:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Potentissimo arco di origine sconosciuta", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Accipiter:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Potentissimo arco di origine sconosciuta", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diffAtt = 80 - ((dati[128] * dati[128]) * 10)
                 if dati[128] > 4:
-                    messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[128] < 4:
-                    messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
         # armature
         if voceMarcata == 11:
             if dati[51] != 0:
-                messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Rimuovi armatura", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Rimuovi armatura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 0 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 12:
             if dati[52] != 0:
-                messaggio("Armatura di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Semplice armatura in pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Armatura di pelle:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Semplice armatura in pelle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 10 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[8] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 13:
             if dati[53] != 0:
-                messaggio("Armatura d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Grande armatura d'acciaio con ornamenti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("in oro. Usata solo dagli ufficiali", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("dell'esercito", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Armatura d'acciaio:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Grande armatura d'acciaio con ornamenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("in oro. Usata solo dagli ufficiali", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("dell'esercito", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 40 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[8] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 14:
             if dati[54] != 0:
-                messaggio("Lykodes:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Armatura formata da materiali leggieri e", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("resistenti. Si dice essere composta da ossa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Lykodes:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Armatura formata da materiali leggieri e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("resistenti. Si dice essere composta da ossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("di un enorme lupo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 90 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[8] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 15:
             if dati[55] != 0:
-                messaggio("Loriquam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Armatura incredibilmente resistente.", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio(u"La sua origine è ignota", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Loriquam:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Armatura incredibilmente resistente.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio(u"La sua origine è ignota", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 160 - ((dati[8] * dati[8]) * 10)
                 if dati[8] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[8] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         # scudi
         if voceMarcata == 16:
             if dati[56] != 0:
-                messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Rimuovi scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Rimuovi scudo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 0 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 diff = 0 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 0:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 17:
             if dati[57] != 0:
-                messaggio("Scudo di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Semplice scudo in pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Scudo di pelle:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Semplice scudo in pelle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 5 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[7] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 diff = 3 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 1:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                 elif dati[7] < 1:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 18:
             if dati[58] != 0:
-                messaggio("Scudo d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Sofisticato scudo in acciaio e oro. Studiato", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8,
+                messaggio("Scudo d'acciaio:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Sofisticato scudo in acciaio e oro. Studiato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8,
                           35)
-                messaggio(u"per respingere gli attacchi più pesanti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio(u"per respingere gli attacchi più pesanti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 20 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[7] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 diff = 12 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 2:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                 elif dati[7] < 2:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 19:
             if dati[59] != 0:
-                messaggio("Lykethmos:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Scudo molto leggere e resistente. Si dice", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio(u"essere composto dalle ossa più resistenti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Lykethmos:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Scudo molto leggere e resistente. Si dice", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio(u"essere composto dalle ossa più resistenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("di un enorme lupo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 45 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[7] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 diff = 27 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 3:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                 elif dati[7] < 3:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 20:
             if dati[60] != 0:
-                messaggio("Clipequam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio(u"Scudo incredibilmente resistente. Non è ", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("nota l'origine", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Clipequam:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio(u"Scudo incredibilmente resistente. Non è ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("nota l'origine", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 diff = 80 - ((dati[7] * dati[7]) * 5)
                 if dati[7] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[7] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 diff = 48 - ((dati[7] * dati[7]) * 3)
                 if dati[7] > 4:
-                    messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                 elif dati[7] < 4:
-                    messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         # guanti
         if voceMarcata == 21:
             if dati[61] != 0:
-                messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Rimuovi guanti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Rimuovi guanti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 if dati[129] == 1:
-                    messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                    messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                 elif dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[129] == 3:
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 22:
             if dati[62] != 0:
-                messaggio("Guanti vitali:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Guanti che aumentano i punti vita massimi", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("del portatore", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Guanti vitali:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Guanti che aumentano i punti vita massimi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("del portatore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 if dati[129] != 1:
-                    messaggio("+50", verde, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                    messaggio("+50", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                 if dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[129] == 3:
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 23:
             if dati[63] != 0:
-                messaggio("Guanti difensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Guanti che consentono di subire meno danno", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("grazie ad una presa salda dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Guanti difensivi:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Guanti che consentono di subire meno danno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("grazie ad una presa salda dello scudo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 if dati[129] != 2:
-                    messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+30", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 if dati[129] == 1:
-                    messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                    messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                 elif dati[129] == 3:
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 24:
             if dati[64] != 0:
-                messaggio("Guanti offensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Guanti che consentono una presa salda", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("dell'arma. Aumentano l'attacco", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Guanti offensivi:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Guanti che consentono una presa salda", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("dell'arma. Aumentano l'attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 if dati[129] != 3:
-                    messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8, 35)
-                    messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+20", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                    messaggio("+20", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 if dati[129] == 1:
-                    messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                    messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                 elif dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[129] == 4:
-                    messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
         if voceMarcata == 25:
             if dati[65] != 0:
-                messaggio("Guanti confortevoli:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio(u"Guanti che aumentano la probabilità di", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("parare gli attacchi grazie ad una presa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("agevole dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Guanti confortevoli:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio(u"Guanti che aumentano la probabilità di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("parare gli attacchi grazie ad una presa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("agevole dello scudo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                 if dati[129] != 4:
-                    messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                    messaggio("+10%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                 if dati[129] == 1:
-                    messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                    messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                 elif dati[129] == 2:
-                    messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[129] == 3:
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                    messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                    messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
         # collane
         if voceMarcata == 26:
             if dati[66] != 0:
-                messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Rimuovi collana", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Rimuovi collana", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
         if voceMarcata == 27:
             if dati[67] != 0:
-                messaggio("Collana medicinale:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Collana composta da erbe il cui odore", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio(u"neutralizza la tissicità del veleno", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio(u"(non ha effetto se si è già avvelenati)", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Collana medicinale:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Collana composta da erbe il cui odore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio(u"neutralizza la tissicità del veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio(u"(non ha effetto se si è già avvelenati)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
         if voceMarcata == 28:
             if dati[68] != 0:
-                messaggio("Collana rigenerante:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio("Collana composta da erbe il cui odore", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("ripristina punti vita ogni turno", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Collana rigenerante:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio("Collana composta da erbe il cui odore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("ripristina punti vita ogni turno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
         if voceMarcata == 29:
             if dati[69] != 0:
-                messaggio("Apprendimaschera:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio(u"Collana che consente di ricevere più punti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                messaggio("esperienza", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("Apprendimaschera:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio(u"Collana che consente di ricevere più punti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                messaggio("esperienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
         if voceMarcata == 30:
             if dati[70] != 0:
-                messaggio("Portafortuna:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                messaggio(u"Collana che permette di ottenere più monete", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8,
+                messaggio("Portafortuna:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                messaggio(u"Collana che permette di ottenere più monete", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8,
                           35)
-                messaggio("dai nemici", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                messaggio("dai nemici", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
 
         # puntatore vecchio
         if dati[6] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 6.8))
         if dati[6] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 8.8))
         if dati[6] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 10.8))
         if dati[6] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 12.8))
         if dati[6] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 14.8))
         if dati[128] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 6.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 6.8))
         if dati[128] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 8.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 8.8))
         if dati[128] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 10.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 10.8))
         if dati[128] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 12.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 12.8))
         if dati[128] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 14.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 14.8))
         if dati[8] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 6.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 6.8))
         if dati[8] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 8.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 8.8))
         if dati[8] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 10.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 10.8))
         if dati[8] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 12.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 12.8))
         if dati[8] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 14.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 14.8))
         if dati[7] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 6.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 6.8))
         if dati[7] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 8.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8.8))
         if dati[7] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 10.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 10.8))
         if dati[7] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 12.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 12.8))
         if dati[7] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 14.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 14.8))
         if dati[129] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 6.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 6.8))
         if dati[129] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 8.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 8.8))
         if dati[129] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 10.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 10.8))
         if dati[129] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 12.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 12.8))
         if dati[129] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 14.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 14.8))
         if dati[130] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 6.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 6.8))
         if dati[130] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 8.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 8.8))
         if dati[130] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 10.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 10.8))
         if dati[130] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 12.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 12.8))
         if dati[130] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 14.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 14.8))
 
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-        schermo.blit(puntatore, (xp, yp))
+        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+        GlobalVarG2.schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(canzone)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -1230,7 +1248,7 @@ def equip(dati, canzone):
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
                 if event.key == pygame.K_s and not tastoTrovato:
                     primoMovimento = True
@@ -1251,189 +1269,189 @@ def equip(dati, canzone):
                     # spade
                     if voceMarcata == 1:
                         if dati[41] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[6] = 0
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 2:
                         if dati[42] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[6] = 1
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 3:
                         if dati[43] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[6] = 2
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 4:
                         if dati[44] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[6] = 3
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 5:
                         if dati[45] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[6] = 4
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     # spade
                     if voceMarcata == 6:
                         if dati[46] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[128] = 0
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 7:
                         if dati[47] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[128] = 1
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 8:
                         if dati[48] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[128] = 2
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 9:
                         if dati[49] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[128] = 3
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 10:
                         if dati[50] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[128] = 4
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     # armature
                     if voceMarcata == 11:
                         if dati[51] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[8] = 0
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 12:
                         if dati[52] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[8] = 1
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 13:
                         if dati[53] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[8] = 2
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 14:
                         if dati[54] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[8] = 3
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 15:
                         if dati[55] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[8] = 4
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     # scudi
                     if voceMarcata == 16:
                         if dati[56] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[7] = 0
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 17:
                         if dati[57] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[7] = 1
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 18:
                         if dati[58] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[7] = 2
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 19:
                         if dati[59] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[7] = 3
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 20:
                         if dati[60] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[7] = 4
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     # guanti
                     if voceMarcata == 21:
                         if dati[61] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[129] = 0
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 22:
                         if dati[62] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[129] = 1
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 23:
                         if dati[63] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[129] = 2
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 24:
                         if dati[64] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[129] = 3
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 25:
                         if dati[65] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[129] = 4
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     # collane
                     if voceMarcata == 26:
                         if dati[66] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[130] = 0
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 27:
                         if dati[67] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[130] = 1
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 28:
                         if dati[68] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[130] = 2
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 29:
                         if dati[69] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[130] = 3
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     if voceMarcata == 30:
                         if dati[70] != 0:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             dati[130] = 4
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
 
@@ -1443,543 +1461,543 @@ def equip(dati, canzone):
             if tastop == pygame.K_s:
                 if voceMarcata == 5 or voceMarcata == 10 or voceMarcata == 15 or voceMarcata == 20 or voceMarcata == 25 or voceMarcata == 30:
                     voceMarcata -= 4
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = gsy // 18 * 6.8
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 6.8
                 else:
                     voceMarcata += 1
-                    canaleSoundPuntatore.play(spostapun)
-                    yp += gsy // 18 * 2
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp += GlobalVarG2.gsy // 18 * 2
             if tastop == pygame.K_w:
                 if voceMarcata == 1 or voceMarcata == 6 or voceMarcata == 11 or voceMarcata == 16 or voceMarcata == 21 or voceMarcata == 26:
                     voceMarcata += 4
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = gsy // 18 * 14.8
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 14.8
                 else:
                     voceMarcata -= 1
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = yp - gsy // 18 * 2
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = yp - GlobalVarG2.gsy // 18 * 2
             if tastop == pygame.K_d:
                 if voceMarcata == 26 or voceMarcata == 27 or voceMarcata == 28 or voceMarcata == 29 or voceMarcata == 30:
                     voceMarcata -= 25
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 1
                 else:
                     voceMarcata += 5
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp + gsx // 32 * 3.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp + GlobalVarG2.gsx // 32 * 3.5
             if tastop == pygame.K_a:
                 if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
                     voceMarcata += 25
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 18.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 18.5
                 else:
                     voceMarcata -= 5
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp - gsx // 32 * 3.5
-            schermo.fill(grigioscu)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp - GlobalVarG2.gsx // 32 * 3.5
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 21, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 21, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 21, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
             # linea(dove,colore,inizio,fine,spessore)
-            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 4.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 4.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
-            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 8, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 8, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
-            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 11.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 11.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
-            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 15, (gsy // 18 * 4) + (gpy // 2)), (gsx // 32 * 15, (gsy // 18 * 15.5) + (gpy // 2)), gpx // 20)
-            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 18.5, (gsy // 18 * 5.5) + (gpy // 2)), (gsx // 32 * 18.5, (gsy // 18 * 15) + (gpy // 2)), gpx // 30)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 4.5, (GlobalVarG2.gsy // 18 * 5.5) + (GlobalVarG2.gpy // 2)), (GlobalVarG2.gsx // 32 * 4.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 30)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 8, (GlobalVarG2.gsy // 18 * 4) + (GlobalVarG2.gpy // 2)), (GlobalVarG2.gsx // 32 * 8, (GlobalVarG2.gsy // 18 * 15.5) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 20)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 11.5, (GlobalVarG2.gsy // 18 * 5.5) + (GlobalVarG2.gpy // 2)), (GlobalVarG2.gsx // 32 * 11.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 30)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 15, (GlobalVarG2.gsy // 18 * 4) + (GlobalVarG2.gpy // 2)), (GlobalVarG2.gsx // 32 * 15, (GlobalVarG2.gsy // 18 * 15.5) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 20)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 18.5, (GlobalVarG2.gsy // 18 * 5.5) + (GlobalVarG2.gpy // 2)), (GlobalVarG2.gsx // 32 * 18.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 2)), GlobalVarG2.gpx // 30)
 
             if carim:
-                spada = pygame.transform.scale(vetImgSpadePixellate[dati[6]], (gpx * 5, gpy * 5))
-                arco = pygame.transform.scale(vetImgArchiPixellate[dati[128]], (gpx * 5, gpy * 5))
-                scudo = pygame.transform.scale(vetImgScudiPixellate[dati[7]], (gpx * 5, gpy * 5))
-                armatura = pygame.transform.scale(vetImgArmaturePixellate[dati[8]], (gpx * 5, gpy * 5))
-                guanti = pygame.transform.scale(vetImgGuantiPixellate[dati[129]], (gpx * 5, gpy * 5))
-                collana = pygame.transform.scale(vetImgCollanePixellate[dati[130]], (gpx * 5, gpy * 5))
+                spada = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+                arco = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+                scudo = pygame.transform.scale(GlobalVarG2.vetImgScudiPixellate[dati[7]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+                armatura = pygame.transform.scale(GlobalVarG2.vetImgArmaturePixellate[dati[8]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+                guanti = pygame.transform.scale(GlobalVarG2.vetImgGuantiPixellate[dati[129]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+                collana = pygame.transform.scale(GlobalVarG2.vetImgCollanePixellate[dati[130]], (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
                 carim = False
-            messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Armi", grigiochi, gsx // 32 * 3.6, gsy // 18 * 4.3, 60)
-            messaggio("Spade", grigiochi, gsx // 32 * 2, gsy // 18 * 5.3, 50)
+            messaggio("Equipaggiamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+            messaggio("Armi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3.6, GlobalVarG2.gsy // 18 * 4.3, 60)
+            messaggio("Spade", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
-                schermo.blit(sfondoOggetto, (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
-                schermo.blit(vetImgSpade[i], (gsx // 32 * 1.7, (gsy // 18 * 6 + (gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 1.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(vetImgSpade[i], (GlobalVarG2.gsx // 32 * 1.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
                 i += 1
-            messaggio("Archi", grigiochi, gsx // 32 * 5.5, gsy // 18 * 5.3, 50)
+            messaggio("Archi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.5, GlobalVarG2.gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
-                schermo.blit(sfondoOggetto, (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
-                schermo.blit(vetImgArchi[i], (gsx // 32 * 5.2, (gsy // 18 * 6 + (gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 5.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(vetImgArchi[i], (GlobalVarG2.gsx // 32 * 5.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
                 i += 1
-            messaggio("Protezioni", grigiochi, gsx // 32 * 9.6, gsy // 18 * 4.3, 60)
-            messaggio("Armature", grigiochi, gsx // 32 * 8.4, gsy // 18 * 5.3, 50)
+            messaggio("Protezioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.6, GlobalVarG2.gsy // 18 * 4.3, 60)
+            messaggio("Armature", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.4, GlobalVarG2.gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
-                schermo.blit(sfondoOggetto, (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
-                schermo.blit(vetImgArmature[i], (gsx // 32 * 8.7, (gsy // 18 * 6 + (gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 8.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(vetImgArmature[i], (GlobalVarG2.gsx // 32 * 8.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
                 i += 1
-            messaggio("Scudi", grigiochi, gsx // 32 * 12.5, gsy // 18 * 5.3, 50)
+            messaggio("Scudi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12.5, GlobalVarG2.gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
-                schermo.blit(sfondoOggetto, (gsx // 32 * 12.2, (gsy // 18 * 6 + (gpy * 2 * i))))
-                schermo.blit(vetImgScudi[i], (gsx // 32 * 12.2, int((gsy // 18 * 6) + (gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 12.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(vetImgScudi[i], (GlobalVarG2.gsx // 32 * 12.2, int((GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy * 2 * i))))
                 i += 1
-            messaggio("Accessori", grigiochi, gsx // 32 * 16.7, gsy // 18 * 4.3, 60)
-            messaggio("Guanti", grigiochi, gsx // 32 * 15.8, gsy // 18 * 5.3, 50)
+            messaggio("Accessori", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.7, GlobalVarG2.gsy // 18 * 4.3, 60)
+            messaggio("Guanti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 15.8, GlobalVarG2.gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
-                schermo.blit(sfondoOggetto, (gsx // 32 * 15.7, (gsy // 18 * 6 + (gpy * 2 * i))))
-                schermo.blit(vetImgGuanti[i], (gsx // 32 * 15.7, int((gsy // 18 * 6) + (gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 15.7, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(vetImgGuanti[i], (GlobalVarG2.gsx // 32 * 15.7, int((GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy * 2 * i))))
                 i += 1
-            messaggio("Collane", grigiochi, gsx // 32 * 19.2, gsy // 18 * 5.3, 50)
+            messaggio("Collane", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19.2, GlobalVarG2.gsy // 18 * 5.3, 50)
             i = 0
             while i < 5:
-                schermo.blit(sfondoOggetto, (gsx // 32 * 19.2, (gsy // 18 * 6 + (gpy * 2 * i))))
-                schermo.blit(vetImgCollane[i], (gsx // 32 * 19.2, ((gsy // 18 * 6) + (gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 19.2, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(vetImgCollane[i], (GlobalVarG2.gsx // 32 * 19.2, ((GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy * 2 * i))))
                 i += 1
 
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
             if dati[5] > pvtot:
                 dati[5] = pvtot
 
-            schermo.blit(arco, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            schermo.blit(perssta, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            schermo.blit(persstab, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            schermo.blit(armatura, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            schermo.blit(collana, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            schermo.blit(spada, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            schermo.blit(guanti, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            schermo.blit(scudo, (gsx // 32 * 24.5, gsy // 18 * 11.3))
-            messaggio("Statistiche:", grigiochi, gsx // 32 * 23, gsy // 18 * 6.7, 50)
-            messaggio("Punti vita: %i" % pvtot, grigiochi, gsx // 32 * 23, gsy // 18 * 7.5, 35)
-            messaggio("Attacco ravvicinato: %i" % attVicino, grigiochi, gsx // 32 * 23, gsy // 18 * 8, 35)
-            messaggio("Attacco a distanza: %i" % attLontano, grigiochi, gsx // 32 * 23, gsy // 18 * 8.5, 35)
-            messaggio("Difesa: %i" % dif, grigiochi, gsx // 32 * 23, gsy // 18 * 9, 35)
-            messaggio(u"Probabilità parata: %i" % par + "%", grigiochi, gsx // 32 * 23, gsy // 18 * 9.5, 35)
+            GlobalVarG2.schermo.blit(arco, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            GlobalVarG2.schermo.blit(perssta, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            GlobalVarG2.schermo.blit(persstab, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            GlobalVarG2.schermo.blit(armatura, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            GlobalVarG2.schermo.blit(collana, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            GlobalVarG2.schermo.blit(spada, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            GlobalVarG2.schermo.blit(guanti, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            GlobalVarG2.schermo.blit(scudo, (GlobalVarG2.gsx // 32 * 24.5, GlobalVarG2.gsy // 18 * 11.3))
+            messaggio("Statistiche:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 6.7, 50)
+            messaggio("Punti vita: %i" % pvtot, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 7.5, 35)
+            messaggio("Attacco ravvicinato: %i" % attVicino, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 8, 35)
+            messaggio("Attacco a distanza: %i" % attLontano, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 8.5, 35)
+            messaggio("Difesa: %i" % dif, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 9, 35)
+            messaggio(u"Probabilità parata: %i" % par + "%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 9.5, 35)
             # confronto statistiche
             # spade
             if voceMarcata == 1:
                 if dati[41] != 0:
-                    messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Rimuovi spada", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Rimuovi spada", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 0 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
             if voceMarcata == 2:
                 if dati[42] != 0:
-                    messaggio("Spada di ferro:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Semplice spada di ferro", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Spada di ferro:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Semplice spada di ferro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 10 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                     elif dati[6] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
             if voceMarcata == 3:
                 if dati[43] != 0:
-                    messaggio("Spadone d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Grande spadone in acciaio con ornamenti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("in oro. Rappresenta il modello di spada", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("migliore mai prodotto dall'uomo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Spadone d'acciaio:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Grande spadone in acciaio con ornamenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("in oro. Rappresenta il modello di spada", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("migliore mai prodotto dall'uomo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 40 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                     elif dati[6] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
             if voceMarcata == 4:
                 if dati[44] != 0:
-                    messaggio("Lykother:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Spada molto leggera e affilata. Si dice che in", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("origine fosse un dente di un lupo enorme", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Lykother:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Spada molto leggera e affilata. Si dice che in", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("origine fosse un dente di un lupo enorme", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 90 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                     elif dati[6] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
             if voceMarcata == 5:
                 if dati[45] != 0:
-                    messaggio("Mendaxritas:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Potentissima spada composta da materiali", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("ignoti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Mendaxritas:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Potentissima spada composta da materiali", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("ignoti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 160 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
                     elif dati[6] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
             # archi
             if voceMarcata == 6:
                 if dati[46] != 0:
-                    messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Rimuovi arco", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Rimuovi arco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diffAtt = 0 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 0:
-                        messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
             if voceMarcata == 7:
                 if dati[47] != 0:
-                    messaggio("Arco di legno:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Semplice arco in legno usato dalla maggior", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("parte dei forestieri", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Arco di legno:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Semplice arco in legno usato dalla maggior", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("parte dei forestieri", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diffAtt = 5 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 1:
-                        messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[128] < 1:
-                        messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
             if voceMarcata == 8:
                 if dati[48] != 0:
-                    messaggio("Arco di ferro:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio(u"Elaborato arco in ferro usato solo dai più", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("esperti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Arco di ferro:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio(u"Elaborato arco in ferro usato solo dai più", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("esperti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diffAtt = 20 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 2:
-                        messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[128] < 2:
-                        messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
             if voceMarcata == 9:
                 if dati[49] != 0:
-                    messaggio("Arco di precisione:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Sofisticato arco in legno e acciaio. Molto", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("leggero e potente. Massima espressione", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("dell'ingegno umano", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Arco di precisione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Sofisticato arco in legno e acciaio. Molto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("leggero e potente. Massima espressione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("dell'ingegno umano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diffAtt = 45 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 3:
-                        messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[128] < 3:
-                        messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
             if voceMarcata == 10:
                 if dati[50] != 0:
-                    messaggio("Accipiter:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Potentissimo arco di origine sconosciuta", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Accipiter:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Potentissimo arco di origine sconosciuta", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diffAtt = 80 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 4:
-                        messaggio(str(diffAtt), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diffAtt), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[128] < 4:
-                        messaggio("+" + str(diffAtt), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diffAtt), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
             # armature
             if voceMarcata == 11:
                 if dati[51] != 0:
-                    messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Rimuovi armatura", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Rimuovi armatura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 0 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 12:
                 if dati[52] != 0:
-                    messaggio("Armatura di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Semplice armatura in pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Armatura di pelle:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Semplice armatura in pelle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 10 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[8] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 13:
                 if dati[53] != 0:
-                    messaggio("Armatura d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Grande armatura d'acciaio con ornamenti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("in oro. Usata solo dagli ufficiali", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("dell'esercito", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Armatura d'acciaio:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Grande armatura d'acciaio con ornamenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("in oro. Usata solo dagli ufficiali", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("dell'esercito", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 40 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[8] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 14:
                 if dati[54] != 0:
-                    messaggio("Lykodes:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Armatura formata da materiali leggieri e", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("resistenti. Si dice essere composta da ossa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Lykodes:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Armatura formata da materiali leggieri e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("resistenti. Si dice essere composta da ossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("di un enorme lupo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 90 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[8] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 15:
                 if dati[55] != 0:
-                    messaggio("Loriquam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Armatura incredibilmente resistente.", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio(u"La sua origine è ignota", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Loriquam:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Armatura incredibilmente resistente.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio(u"La sua origine è ignota", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 160 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[8] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             # scudi
             if voceMarcata == 16:
                 if dati[56] != 0:
-                    messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Rimuovi scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Rimuovi scudo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 0 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     diff = 0 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 0:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 17:
                 if dati[57] != 0:
-                    messaggio("Scudo di pelle:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Semplice scudo in pelle", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Scudo di pelle:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Semplice scudo in pelle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 5 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[7] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     diff = 3 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 1:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                     elif dati[7] < 1:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 18:
                 if dati[58] != 0:
-                    messaggio("Scudo d'acciaio:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Sofisticato scudo in acciaio e oro. Studiato", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio(u"per respingere gli attacchi più pesanti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Scudo d'acciaio:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Sofisticato scudo in acciaio e oro. Studiato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio(u"per respingere gli attacchi più pesanti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 20 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[7] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     diff = 12 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 2:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                     elif dati[7] < 2:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 19:
                 if dati[59] != 0:
-                    messaggio("Lykethmos:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Scudo molto leggere e resistente. Si dice", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio(u"essere composto dalle ossa più resistenti", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("di un enorme lupo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Lykethmos:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Scudo molto leggere e resistente. Si dice", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio(u"essere composto dalle ossa più resistenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("di un enorme lupo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 45 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[7] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     diff = 27 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 3:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                     elif dati[7] < 3:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 20:
                 if dati[60] != 0:
-                    messaggio("Clipequam:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio(u"Scudo incredibilmente resistente. Non è ", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("nota l'origine", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Clipequam:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio(u"Scudo incredibilmente resistente. Non è ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("nota l'origine", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     diff = 80 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[7] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     diff = 48 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 4:
-                        messaggio(str(diff) + "%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio(str(diff) + "%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                     elif dati[7] < 4:
-                        messaggio("+" + str(diff) + "%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+" + str(diff) + "%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             # guanti
             if voceMarcata == 21:
                 if dati[61] != 0:
-                    messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Rimuovi guanti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Rimuovi guanti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     if dati[129] == 1:
-                        messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                        messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                     elif dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[129] == 3:
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 22:
                 if dati[62] != 0:
-                    messaggio("Guanti vitali:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Guanti che aumentano i punti vita massimi", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("del portatore", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Guanti vitali:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Guanti che aumentano i punti vita massimi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("del portatore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     if dati[129] != 1:
-                        messaggio("+50", verde, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                        messaggio("+50", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                     if dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[129] == 3:
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 23:
                 if dati[63] != 0:
-                    messaggio("Guanti difensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Guanti che consentono di subire meno danno", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("grazie ad una presa salda dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Guanti difensivi:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Guanti che consentono di subire meno danno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("grazie ad una presa salda dello scudo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     if dati[129] != 2:
-                        messaggio("+30", verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+30", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     if dati[129] == 1:
-                        messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                        messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                     elif dati[129] == 3:
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 24:
                 if dati[64] != 0:
-                    messaggio("Guanti offensivi:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Guanti che consentono una presa salda", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("dell'arma. Aumentano l'attacco", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Guanti offensivi:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Guanti che consentono una presa salda", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("dell'arma. Aumentano l'attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     if dati[129] != 3:
-                        messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8, 35)
-                        messaggio("+20", verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+20", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                        messaggio("+20", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     if dati[129] == 1:
-                        messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                        messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                     elif dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[129] == 4:
-                        messaggio("-10%", rosso, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("-10%", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
             if voceMarcata == 25:
                 if dati[65] != 0:
-                    messaggio("Guanti confortevoli:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio(u"Guanti che aumentano la probabilità di", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("parare gli attacchi grazie ad una presa", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("agevole dello scudo", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Guanti confortevoli:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio(u"Guanti che aumentano la probabilità di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("parare gli attacchi grazie ad una presa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("agevole dello scudo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
                     if dati[129] != 4:
-                        messaggio("+10%", verde, gsx // 32 * 28, gsy // 18 * 9.5, 35)
+                        messaggio("+10%", GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9.5, 35)
                     if dati[129] == 1:
-                        messaggio("-50", rosso, gsx // 32 * 28, gsy // 18 * 7.5, 35)
+                        messaggio("-50", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 7.5, 35)
                     elif dati[129] == 2:
-                        messaggio("-30", rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("-30", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[129] == 3:
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8, 35)
-                        messaggio("-20", rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8, 35)
+                        messaggio("-20", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
             # collane
             if voceMarcata == 26:
                 if dati[66] != 0:
-                    messaggio("Niente:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Rimuovi collana", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Niente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Rimuovi collana", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
             if voceMarcata == 27:
                 if dati[67] != 0:
-                    messaggio("Collana medicinale:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Collana composta da erbe il cui odore", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio(u"neutralizza la tissicità del veleno", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio(u"(non ha effetto se si è già avvelenati)", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Collana medicinale:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Collana composta da erbe il cui odore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio(u"neutralizza la tissicità del veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio(u"(non ha effetto se si è già avvelenati)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
             if voceMarcata == 28:
                 if dati[68] != 0:
-                    messaggio("Collana rigenerante:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio("Collana composta da erbe il cui odore", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("ripristina punti vita ogni turno", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Collana rigenerante:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio("Collana composta da erbe il cui odore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("ripristina punti vita ogni turno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
             if voceMarcata == 29:
                 if dati[69] != 0:
-                    messaggio("Apprendimaschera:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio(u"Collana che consente di ricevere più punti", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("esperienza", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Apprendimaschera:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio(u"Collana che consente di ricevere più punti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("esperienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
             if voceMarcata == 30:
                 if dati[70] != 0:
-                    messaggio("Portafortuna:", grigiochi, gsx // 32 * 23, gsy // 18 * 3.8, 60)
-                    messaggio(u"Collana che permette di ottenere più monete", grigiochi, gsx // 32 * 23, gsy // 18 * 4.8, 35)
-                    messaggio("dai nemici", grigiochi, gsx // 32 * 23, gsy // 18 * 5.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 23, gsy // 18 * 5.8, 35)
+                    messaggio("Portafortuna:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3.8, 60)
+                    messaggio(u"Collana che permette di ottenere più monete", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4.8, 35)
+                    messaggio("dai nemici", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 5.8, 35)
 
             # puntatore vecchio
             if dati[6] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 6.8))
             if dati[6] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 8.8))
             if dati[6] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 10.8))
             if dati[6] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 12.8))
             if dati[6] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 14.8))
             if dati[128] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 6.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 6.8))
             if dati[128] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 8.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 8.8))
             if dati[128] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 10.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 10.8))
             if dati[128] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 12.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 12.8))
             if dati[128] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 4.5, gsy // 18 * 14.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 4.5, GlobalVarG2.gsy // 18 * 14.8))
             if dati[8] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 6.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 6.8))
             if dati[8] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 8.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 8.8))
             if dati[8] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 10.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 10.8))
             if dati[8] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 12.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 12.8))
             if dati[8] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * 14.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 14.8))
             if dati[7] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 6.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 6.8))
             if dati[7] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 8.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8.8))
             if dati[7] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 10.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 10.8))
             if dati[7] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 12.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 12.8))
             if dati[7] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 11.5, gsy // 18 * 14.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 14.8))
             if dati[129] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 6.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 6.8))
             if dati[129] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 8.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 8.8))
             if dati[129] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 10.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 10.8))
             if dati[129] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 12.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 12.8))
             if dati[129] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 15, gsy // 18 * 14.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 14.8))
             if dati[130] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 6.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 6.8))
             if dati[130] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 8.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 8.8))
             if dati[130] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 10.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 10.8))
             if dati[130] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 12.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 12.8))
             if dati[130] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 18.5, gsy // 18 * 14.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 14.8))
 
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-            schermo.blit(puntatore, (xp, yp))
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
     return dati
 
 
 def sceglicondiz(dati, condizione, canzone):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    xp = gsx // 32 * 1
-    yp = gsy // 18 * 4.6
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    xp = GlobalVarG2.gsx // 32 * 1
+    yp = GlobalVarG2.gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
 
@@ -1987,280 +2005,280 @@ def sceglicondiz(dati, condizione, canzone):
     tastotempfps = 5
 
     # carico le scenette
-    scecond = vetImgCondizioniMenu
+    scecond = GlobalVarG2.vetImgCondizioniMenu
 
     # primo frame
     if True:
-        schermo.fill(grigioscu)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+        pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 12.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
 
-        messaggio("Scegli condizione", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
+        messaggio("Scegli condizione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+        messaggio("Cancella", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4.7, 45)
         if voceMarcata == 0:
-            messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-            messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+            messaggio("Cancella:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+            messaggio("Cancella il settaggio di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+            messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+            messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         if dati[81] > 0:
-            messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+            messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
             if voceMarcata == 1:
-                schermo.blit(scecond[1], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Rallo con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Rallo quando ha pv < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scecond[1], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Rallo con pv < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo quando ha pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
         if dati[82] > 0:
-            messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+            messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
             if voceMarcata == 2:
-                schermo.blit(scecond[2], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Rallo con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Rallo quando ha pv < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scecond[2], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Rallo con pv < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo quando ha pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
         if dati[83] > 0:
-            messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+            messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
             if voceMarcata == 3:
-                schermo.blit(scecond[3], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Rallo con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Rallo quando ha pv < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scecond[3], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Rallo con pv < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo quando ha pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
         if dati[84] > 0:
-            messaggio("Rallo con veleno", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+            messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
             if voceMarcata == 4:
-                schermo.blit(scecond[4], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Rallo con veleno:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione su Rallo quando è avvelenato", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scecond[4], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Rallo con veleno:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione su Rallo quando è avvelenato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
         if dati[85] > 0:
-            messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+            messaggio("Colco surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
             if voceMarcata == 5:
-                schermo.blit(scecond[5], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Colco surriscaldato:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione su Colco quando è surriscaldato", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[5], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Colco surriscaldato:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione su Colco quando è surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
         if dati[86] > 0:
-            messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+            messaggio("Colco con pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
             if voceMarcata == 6:
-                schermo.blit(scecond[6], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Colco con pe < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Colco quando ha pe < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scecond[6], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Colco con pe < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco quando ha pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
         if dati[87] > 0:
-            messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+            messaggio("Colco con pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
             if voceMarcata == 7:
-                schermo.blit(scecond[7], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Colco con pe < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Colco quando ha pe < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scecond[7], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Colco con pe < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco quando ha pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
         if dati[88] > 0:
-            messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+            messaggio("Colco con pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
             if voceMarcata == 8:
-                schermo.blit(scecond[8], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Colco con pe < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Colco quando ha pe < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scecond[8], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Colco con pe < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco quando ha pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
         if dati[89] > 0:
-            messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+            messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
             if voceMarcata == 9:
-                schermo.blit(scecond[9], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Sempre a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[9], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Sempre a Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio(u"è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
         if dati[90] > 0:
-            messaggio("Sempre a Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+            messaggio("Sempre a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
             if voceMarcata == 10:
-                schermo.blit(scecond[10], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Sempre a Colco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su Colco in continuazione (se la tecnica associata", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[10], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Sempre a Colco:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su Colco in continuazione (se la tecnica associata", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio(u"è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
         if dati[91] > 0:
-            messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+            messaggio("Nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
             if voceMarcata == 11:
-                schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[11], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Nemico a caso:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
         if dati[92] > 0:
-            messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+            messaggio("Nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
             if voceMarcata == 12:
-                schermo.blit(scecond[12], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione sul nemico più vicino a Colco nel raggio di 2 caselle", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[12], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Nemico vicino:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione sul nemico più vicino a Colco nel raggio di 2 caselle", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
         if dati[93] > 0:
-            messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+            messaggio("Nemico lontano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
             if voceMarcata == 13:
-                schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[13], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Nemico lontano:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("vicino a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
         if dati[94] > 0:
-            messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+            messaggio("Nemico con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
             if voceMarcata == 14:
-                schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su un nemico con pv < 80% (in caso di molteplici bersagli,", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                GlobalVarG2.schermo.blit(scecond[14], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Nemico con pv < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico con pv < 80% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
         if dati[95] > 0:
-            messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+            messaggio("Nemico con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
             if voceMarcata == 15:
-                schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su un nemico con pv < 50% (in caso di molteplici bersagli,", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                GlobalVarG2.schermo.blit(scecond[15], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Nemico con pv < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico con pv < 50% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
         if dati[96] > 0:
-            messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+            messaggio("Nemico con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
             if voceMarcata == 16:
-                schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione su un nemico con pv < 30% (in caso di molteplici bersagli,", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                GlobalVarG2.schermo.blit(scecond[16], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Nemico con pv < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione su un nemico con pv < 30% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
         if dati[97] > 0:
-            messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+            messaggio("Nemico con meno pv", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
             if voceMarcata == 17:
-                schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Esegue l'azione sul nemico con meno pv (in caso di molteplici bersagli,", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15,
+                GlobalVarG2.schermo.blit(scecond[17], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Nemico con meno pv:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Esegue l'azione sul nemico con meno pv (in caso di molteplici bersagli,", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
         if dati[98] > 0:
-            messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+            messaggio("Numero di nemici > 1", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
             if voceMarcata == 18:
-                schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[18], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Numero di nemici > 1:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
         if dati[99] > 0:
-            messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+            messaggio("Numero di nemici > 4", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
             if voceMarcata == 19:
-                schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[19], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Numero di nemici > 4:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
         if dati[100] > 0:
-            messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
+            messaggio("Numero di nemici > 7", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
             if voceMarcata == 20:
-                schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scecond[20], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Numero di nemici > 7:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
 
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
         # puntatore vecchio
         i = 1
         k = 6.1
         while i <= 10:
             if condizione == i:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * k))
             i = i + 1
             k = k + 1
         i = 11
         k = 6.1
         while i <= 20:
             if condizione == i:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * k))
             i = i + 1
             k = k + 1
         if condizione == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.6))
 
-        schermo.blit(puntatore, (xp, yp))
+        GlobalVarG2.schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(canzone)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -2280,7 +2298,7 @@ def sceglicondiz(dati, condizione, canzone):
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
 
                 if event.key == pygame.K_s and not tastoTrovato:
@@ -2305,14 +2323,14 @@ def sceglicondiz(dati, condizione, canzone):
                     while i <= 100:
                         if voceMarcata == c:
                             if dati[i] != 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 return c
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         i += 1
                         c += 1
                     if voceMarcata == 0:
-                        canaleSoundPuntatore.play(selezione)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         return 0
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
@@ -2324,310 +2342,310 @@ def sceglicondiz(dati, condizione, canzone):
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp - gsy // 18 * 1.5
-                        xp = gsx // 32 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp - GlobalVarG2.gsy // 18 * 1.5
+                        xp = GlobalVarG2.gsx // 32 * 1
                     else:
                         voceMarcata += 9
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 15.1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 15.1
                 else:
                     if voceMarcata != 0:
                         voceMarcata -= 1
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp - gsy // 18 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp - GlobalVarG2.gsy // 18 * 1
                     else:
                         voceMarcata += 10
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 15.1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 15.1
             if tastop == pygame.K_a:
                 if voceMarcata != 0:
                     if 11 <= voceMarcata <= 20:
                         voceMarcata -= 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = xp - gsx // 32 * 7
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = xp - GlobalVarG2.gsx // 32 * 7
                     else:
                         voceMarcata += 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 8
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 8
             if tastop == pygame.K_s:
                 if voceMarcata == 0:
                     voceMarcata += 1
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = yp + gsy // 18 * 1.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = yp + GlobalVarG2.gsy // 18 * 1.5
                 else:
                     if voceMarcata == 10 or voceMarcata == 20:
                         if voceMarcata == 10:
                             voceMarcata -= 10
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 4.6
-                            xp = gsx // 32 * 1
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 4.6
+                            xp = GlobalVarG2.gsx // 32 * 1
                         else:
                             voceMarcata -= 9
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 6.1
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 6.1
                     else:
                         voceMarcata += 1
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp + gsy // 18 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp + GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_d:
                 if voceMarcata != 0:
                     if 1 <= voceMarcata <= 10:
                         voceMarcata += 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = xp + gsx // 32 * 7
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = xp + GlobalVarG2.gsx // 32 * 7
                     else:
                         voceMarcata -= 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 1
-            schermo.fill(grigioscu)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 1
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
 
-            messaggio("Scegli condizione", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
+            messaggio("Scegli condizione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+            messaggio("Cancella", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4.7, 45)
             if voceMarcata == 0:
-                messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("Cancella:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Cancella il settaggio di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             if dati[81] > 0:
-                messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+                messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
                 if voceMarcata == 1:
-                    schermo.blit(scecond[1], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Rallo con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo quando ha pv < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[1], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Rallo con pv < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo quando ha pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
             if dati[82] > 0:
-                messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+                messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
                 if voceMarcata == 2:
-                    schermo.blit(scecond[2], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Rallo con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo quando ha pv < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[2], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Rallo con pv < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo quando ha pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
             if dati[83] > 0:
-                messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+                messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
                 if voceMarcata == 3:
-                    schermo.blit(scecond[3], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Rallo con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo quando ha pv < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[3], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Rallo con pv < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo quando ha pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
             if dati[84] > 0:
-                messaggio("Rallo con veleno", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+                messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
                 if voceMarcata == 4:
-                    schermo.blit(scecond[4], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Rallo con veleno:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Rallo quando è avvelenato", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[4], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Rallo con veleno:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Rallo quando è avvelenato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
             if dati[85] > 0:
-                messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+                messaggio("Colco surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
                 if voceMarcata == 5:
-                    schermo.blit(scecond[5], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Colco surriscaldato:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Colco quando è surriscaldato", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[5], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Colco surriscaldato:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Colco quando è surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
             if dati[86] > 0:
-                messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+                messaggio("Colco con pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
                 if voceMarcata == 6:
-                    schermo.blit(scecond[6], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Colco con pe < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Colco quando ha pe < 80%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[6], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Colco con pe < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco quando ha pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
             if dati[87] > 0:
-                messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+                messaggio("Colco con pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
                 if voceMarcata == 7:
-                    schermo.blit(scecond[7], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Colco con pe < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Colco quando ha pe < 50%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[7], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Colco con pe < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco quando ha pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
             if dati[88] > 0:
-                messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+                messaggio("Colco con pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
                 if voceMarcata == 8:
-                    schermo.blit(scecond[8], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Colco con pe < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Colco quando ha pe < 30%", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[8], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Colco con pe < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco quando ha pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
             if dati[89] > 0:
-                messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+                messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
                 if voceMarcata == 9:
-                    schermo.blit(scecond[9], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Sempre a Rallo:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[9], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Sempre a Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
             if dati[90] > 0:
-                messaggio("Sempre a Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+                messaggio("Sempre a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
                 if voceMarcata == 10:
-                    schermo.blit(scecond[10], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Sempre a Colco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Colco in continuazione (se la tecnica associata", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio(u"è attivo)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[10], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Sempre a Colco:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Colco in continuazione (se la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
             if dati[91] > 0:
-                messaggio("Nemico a caso", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+                messaggio("Nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
                 if voceMarcata == 11:
-                    schermo.blit(scecond[11], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Nemico a caso:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su un nemico a caso", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[11], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Nemico a caso:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
             if dati[92] > 0:
-                messaggio("Nemico vicino", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+                messaggio("Nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
                 if voceMarcata == 12:
-                    schermo.blit(scecond[12], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Nemico vicino:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione sul nemico più vicino a Colco nel raggio di 2 caselle", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[12], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Nemico vicino:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione sul nemico più vicino a Colco nel raggio di 2 caselle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
             if dati[93] > 0:
-                messaggio("Nemico lontano", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+                messaggio("Nemico lontano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
                 if voceMarcata == 13:
-                    schermo.blit(scecond[13], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Nemico lontano:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("vicino a Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[13], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Nemico lontano:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("vicino a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
             if dati[94] > 0:
-                messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+                messaggio("Nemico con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
                 if voceMarcata == 14:
-                    schermo.blit(scecond[14], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Nemico con pv < 80%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su un nemico con pv < 80% (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[14], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Nemico con pv < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico con pv < 80% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
             if dati[95] > 0:
-                messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+                messaggio("Nemico con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
                 if voceMarcata == 15:
-                    schermo.blit(scecond[15], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Nemico con pv < 50%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su un nemico con pv < 50% (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[15], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Nemico con pv < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico con pv < 50% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
             if dati[96] > 0:
-                messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+                messaggio("Nemico con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
                 if voceMarcata == 16:
-                    schermo.blit(scecond[16], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Nemico con pv < 30%:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su un nemico con pv < 30% (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[16], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Nemico con pv < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su un nemico con pv < 30% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
             if dati[97] > 0:
-                messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+                messaggio("Nemico con meno pv", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
                 if voceMarcata == 17:
-                    schermo.blit(scecond[17], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Nemico con meno pv:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione sul nemico con meno pv (in caso di molteplici bersagli,", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[17], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Nemico con meno pv:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione sul nemico con meno pv (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
             if dati[98] > 0:
-                messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+                messaggio("Numero di nemici > 1", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
                 if voceMarcata == 18:
-                    schermo.blit(scecond[18], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Numero di nemici > 1:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[18], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Numero di nemici > 1:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
             if dati[99] > 0:
-                messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+                messaggio("Numero di nemici > 4", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
                 if voceMarcata == 19:
-                    schermo.blit(scecond[19], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Numero di nemici > 4:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[19], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Numero di nemici > 4:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
             if dati[100] > 0:
-                messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
+                messaggio("Numero di nemici > 7", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
                 if voceMarcata == 20:
-                    schermo.blit(scecond[20], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Numero di nemici > 7:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("a Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scecond[20], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Numero di nemici > 7:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
 
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
             # puntatore vecchio
             i = 1
             k = 6.1
             while i <= 10:
                 if condizione == i:
-                    schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
+                    GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             i = 11
             k = 6.1
             while i <= 20:
                 if condizione == i:
-                    schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
+                    GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             if condizione == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.6))
 
-            schermo.blit(puntatore, (xp, yp))
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
     return condizione
 
 
 def sceglitecn(dati, tecnica, canzone):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    xp = gsx // 32 * 1
-    yp = gsy // 18 * 4.6
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    xp = GlobalVarG2.gsx // 32 * 1
+    yp = GlobalVarG2.gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
 
@@ -2635,286 +2653,286 @@ def sceglitecn(dati, tecnica, canzone):
     tastotempfps = 5
 
     # carico le scenette
-    scetecn = vetImgTecnicheMenu
+    scetecn = GlobalVarG2.vetImgTecnicheMenu
 
     # primo frame
     if True:
-        schermo.fill(grigioscu)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+        pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 12.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
 
-        messaggio("Scegli tecnica", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
+        messaggio("Scegli tecnica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+        messaggio("Cancella", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4.7, 45)
         if voceMarcata == 0:
-            messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-            messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-            messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+            messaggio("Cancella:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+            messaggio("Cancella il settaggio di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+            messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+            messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         if dati[11] > 0:
-            messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+            messaggio("Scossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
             if voceMarcata == 1:
-                schermo.blit(scetecn[1], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[0]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[1], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Scossa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[0]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge danni a un nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
         if dati[12] > 0:
-            messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+            messaggio("Cura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
             if voceMarcata == 2:
-                schermo.blit(scetecn[2], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[1]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Recupera un po' di pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[2], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Cura:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[1]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Recupera un po' di pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
         if dati[13] > 0:
-            messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+            messaggio("Antidoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
             if voceMarcata == 3:
-                schermo.blit(scetecn[3], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[2]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[3], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Antidoto:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[2]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Cura avvelenamento a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
         if dati[14] > 0:
-            messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+            messaggio("Freccia elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
             if voceMarcata == 4:
-                schermo.blit(scetecn[4], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[3]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[4], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Freccia elettrica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[3]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge danni a distanza a un nemico", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
         if dati[15] > 0:
-            messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+            messaggio("Tempesta elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
             if voceMarcata == 5:
-                schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[5], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Tempesta elettrica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Colco", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
         if dati[16] > 0:
-            messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+            messaggio("Raffreddamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
             if voceMarcata == 6:
-                schermo.blit(scetecn[6], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[6], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Raffreddamento:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[5]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
         if dati[17] > 0:
-            messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+            messaggio("Auto-ricarica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
             if voceMarcata == 7:
-                schermo.blit(scetecn[7], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14.5, 35)
-                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[7], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Auto-ricarica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[6]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Ricarica un po' Colco ma richiede due turni e provoca", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
         if dati[18] > 0:
-            messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+            messaggio("Cura +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
             if voceMarcata == 8:
-                schermo.blit(scetecn[8], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[7]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("recupera molti pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[8], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Cura +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[7]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("recupera molti pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
         if dati[19] > 0:
-            messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+            messaggio("Scossa +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
             if voceMarcata == 9:
-                schermo.blit(scetecn[9], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[8]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[9], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Scossa +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[8]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge molti danni a un nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
         if dati[20] > 0:
-            messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+            messaggio("Freccia elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
             if voceMarcata == 10:
-                schermo.blit(scetecn[10], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[9]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scetecn[10], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Freccia elettrica +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[9]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge molti danni a distanza a un nemico", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
         if dati[21] > 0:
-            messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+            messaggio("Velocizza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
             if voceMarcata == 11:
-                schermo.blit(scetecn[11], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[10]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno.", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("Dopo 15 turni provoca surriscaldamento (applicata sempre su Colco)", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[11], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Velocizza:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[10]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno.", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("Dopo 15 turni provoca surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
         if dati[22] > 0:
-            messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+            messaggio("Carica attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
             if voceMarcata == 12:
-                schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Incrementa l'attacco di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[12], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Carica attacco:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[11]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Incrementa l'attacco di Rallo per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
         if dati[23] > 0:
-            messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+            messaggio("Carica difesa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
             if voceMarcata == 13:
-                schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Incrementa la difesa di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[13], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Carica difesa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[12]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Incrementa la difesa di Rallo per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
         if dati[24] > 0:
-            messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+            messaggio("Efficienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
             if voceMarcata == 14:
-                schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[14], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Efficienza:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[13]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
         if dati[25] > 0:
-            messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+            messaggio("Tempesta elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
             if voceMarcata == 15:
-                schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[15], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Tempesta elettrica +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[14]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Colco", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
         if dati[26] > 0:
-            messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+            messaggio("Cura ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
             if voceMarcata == 16:
-                schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio(u"Recupera un enorme quantità dei pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scetecn[16], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Cura ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[15]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio(u"Recupera un enorme quantità dei pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
         if dati[27] > 0:
-            messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+            messaggio("Auto-ricarica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
             if voceMarcata == 17:
-                schermo.blit(scetecn[17], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Ricarica di molto Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18,
-                          gsy // 18 * 14.5, 35)
-                messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[17], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Auto-ricarica +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[16]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Ricarica di molto Colco ma richiede due turni e provoca", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
         if dati[28] > 0:
-            messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+            messaggio("Scossa ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
             if voceMarcata == 18:
-                schermo.blit(scetecn[18], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[17]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[18], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Scossa ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[17]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge enormi danni a un nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
         if dati[29] > 0:
-            messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+            messaggio("Freccia Elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
             if voceMarcata == 19:
-                schermo.blit(scetecn[19], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[18]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5,
+                GlobalVarG2.schermo.blit(scetecn[19], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Freccia Elettrica ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[18]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge enormi danni a distanza a un nemico", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5,
                           35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
         if dati[30] > 0:
-            messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
+            messaggio("Tempesta elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
             if voceMarcata == 20:
-                schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 4))
-                messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di", grigiochi,
-                          gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                GlobalVarG2.schermo.blit(scetecn[20], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                messaggio("Tempesta elettrica ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[19]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di", GlobalVarG2.grigiochi,
+                          GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15, 40)
 
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
         # puntatore vecchio
         i = 1
         k = 6.1
         while i <= 10:
             if tecnica == i:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * k))
             i = i + 1
             k = k + 1
         i = 11
         k = 6.1
         while i <= 20:
             if tecnica == i:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * k))
             i = i + 1
             k = k + 1
         if tecnica == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.6))
 
-        schermo.blit(puntatore, (xp, yp))
+        GlobalVarG2.schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(canzone)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -2934,7 +2952,7 @@ def sceglitecn(dati, tecnica, canzone):
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
 
                 if event.key == pygame.K_s and not tastoTrovato:
@@ -2958,16 +2976,16 @@ def sceglitecn(dati, tecnica, canzone):
                     while i <= 30:
                         if voceMarcata == c:
                             if dati[i] != 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 tecnica = c
                                 risposta = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             break
                         i += 1
                         c += 1
                     if voceMarcata == 0:
-                        canaleSoundPuntatore.play(selezione)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         tecnica = 0
                         risposta = True
             if event.type == pygame.KEYUP and tastop == event.key:
@@ -2980,333 +2998,333 @@ def sceglitecn(dati, tecnica, canzone):
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp - gsy // 18 * 1.5
-                        xp = gsx // 32 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp - GlobalVarG2.gsy // 18 * 1.5
+                        xp = GlobalVarG2.gsx // 32 * 1
                     else:
                         voceMarcata += 9
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 15.1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 15.1
                 else:
                     if voceMarcata == 0:
                         voceMarcata += 10
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 15.1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 15.1
                     else:
                         voceMarcata -= 1
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp - gsy // 18 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp - GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_a:
                 if voceMarcata != 0:
                     if 11 <= voceMarcata <= 20:
                         voceMarcata -= 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = xp - gsx // 32 * 7
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = xp - GlobalVarG2.gsx // 32 * 7
                     else:
                         voceMarcata += 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 8
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 8
             if tastop == pygame.K_s:
                 if voceMarcata == 0:
                     voceMarcata += 1
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = yp + gsy // 18 * 1.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = yp + GlobalVarG2.gsy // 18 * 1.5
                 else:
                     if voceMarcata == 10 or voceMarcata == 20:
                         if voceMarcata == 10:
                             voceMarcata -= 10
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 4.6
-                            xp = gsx // 32 * 1
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 4.6
+                            xp = GlobalVarG2.gsx // 32 * 1
                         else:
                             voceMarcata -= 9
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 6.1
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 6.1
                     else:
                         voceMarcata += 1
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp + gsy // 18 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp + GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_d:
                 if voceMarcata != 0:
                     if 1 <= voceMarcata <= 10:
                         voceMarcata += 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = xp + gsx // 32 * 7
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = xp + GlobalVarG2.gsx // 32 * 7
                     else:
                         voceMarcata -= 10
-                        canaleSoundPuntatore.play(spostapun)
-                        xp = gsx // 32 * 1
-            schermo.fill(grigioscu)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 1
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,(posizionex,posizioney,larghezza,altezza,spessore))
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 15, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 15, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 15, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
 
-            messaggio("Scegli tecnica", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Cancella", grigiochi, gsx // 32 * 2, gsy // 18 * 4.7, 45)
+            messaggio("Scegli tecnica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+            messaggio("Cancella", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4.7, 45)
             if voceMarcata == 0:
-                messaggio("Cancella:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                messaggio("Cancella il settaggio di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                messaggio("Cancella:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Cancella il settaggio di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             if dati[11] > 0:
-                messaggio("Scossa", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+                messaggio("Scossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
                 if voceMarcata == 1:
-                    schermo.blit(scetecn[1], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Scossa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[0]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[1], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Scossa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[0]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge danni a un nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
             if dati[12] > 0:
-                messaggio("Cura", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+                messaggio("Cura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
                 if voceMarcata == 2:
-                    schermo.blit(scetecn[2], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Cura:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[1]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Recupera un po' di pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[2], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Cura:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[1]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Recupera un po' di pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
             if dati[13] > 0:
-                messaggio("Antidoto", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+                messaggio("Antidoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
                 if voceMarcata == 3:
-                    schermo.blit(scetecn[3], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Antidoto:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[2]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[3], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Antidoto:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[2]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Cura avvelenamento a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
             if dati[14] > 0:
-                messaggio("Freccia elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+                messaggio("Freccia elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
                 if voceMarcata == 4:
-                    schermo.blit(scetecn[4], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Freccia elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[3]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[4], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Freccia elettrica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[3]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge danni a distanza a un nemico", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
             if dati[15] > 0:
-                messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+                messaggio("Tempesta elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
                 if voceMarcata == 5:
-                    schermo.blit(scetecn[5], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Tempesta elettrica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[4]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[5], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Tempesta elettrica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 10.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.2, 40)
             if dati[16] > 0:
-                messaggio("Raffreddamento", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+                messaggio("Raffreddamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
                 if voceMarcata == 6:
-                    schermo.blit(scetecn[6], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Raffreddamento:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[5]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[6], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Raffreddamento:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[5]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.2, 40)
             if dati[17] > 0:
-                messaggio("Auto-ricarica", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+                messaggio("Auto-ricarica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
                 if voceMarcata == 7:
-                    schermo.blit(scetecn[7], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Auto-ricarica:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[6]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Ricarica un po' Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[7], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Auto-ricarica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[6]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Ricarica un po' Colco ma richiede due turni e provoca", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12.2, 40)
             if dati[18] > 0:
-                messaggio("Cura +", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+                messaggio("Cura +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
                 if voceMarcata == 8:
-                    schermo.blit(scetecn[8], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Cura +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[7]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("recupera molti pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[8], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Cura +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[7]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("recupera molti pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
             if dati[19] > 0:
-                messaggio("Scossa +", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+                messaggio("Scossa +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
                 if voceMarcata == 9:
-                    schermo.blit(scetecn[9], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Scossa +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[8]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge molti danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[9], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Scossa +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[8]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge molti danni a un nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
             if dati[20] > 0:
-                messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+                messaggio("Freccia elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
                 if voceMarcata == 10:
-                    schermo.blit(scetecn[10], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Freccia elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[9]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge molti danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[10], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Freccia elettrica +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[9]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge molti danni a distanza a un nemico", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
             if dati[21] > 0:
-                messaggio("Velocizza", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+                messaggio("Velocizza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
                 if voceMarcata == 11:
-                    schermo.blit(scetecn[11], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Velocizza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[10]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno.", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("Dopo 15 turni provoca surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[11], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Velocizza:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[10]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Dopo 15 turni provoca surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 6.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 6.2, 40)
             if dati[22] > 0:
-                messaggio("Carica attacco", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+                messaggio("Carica attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
                 if voceMarcata == 12:
-                    schermo.blit(scetecn[12], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Carica attacco:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[11]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Incrementa l'attacco di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[12], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Carica attacco:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[11]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Incrementa l'attacco di Rallo per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 7.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 7.2, 40)
             if dati[23] > 0:
-                messaggio("Carica difesa", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+                messaggio("Carica difesa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
                 if voceMarcata == 13:
-                    schermo.blit(scetecn[13], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Carica difesa:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[12]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Incrementa la difesa di Rallo per 10 turni (non ha effetto sui nemici)", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[13], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Carica difesa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[12]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Incrementa la difesa di Rallo per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 8.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
             if dati[24] > 0:
-                messaggio("Efficienza", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+                messaggio("Efficienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
                 if voceMarcata == 14:
-                    schermo.blit(scetecn[14], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Efficienza:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[13]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[14], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Efficienza:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[13]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 9.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
             if dati[25] > 0:
-                messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+                messaggio("Tempesta elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
                 if voceMarcata == 15:
-                    schermo.blit(scetecn[15], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Tempesta elettrica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[14]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[15], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Tempesta elettrica +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[14]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 10.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
             if dati[26] > 0:
-                messaggio("Cura ++", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+                messaggio("Cura ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
                 if voceMarcata == 16:
-                    schermo.blit(scetecn[16], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Cura ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[15]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio(u"Recupera un enorme quantità dei pv di Rallo", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[16], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Cura ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[15]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio(u"Recupera un enorme quantità dei pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 11.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
             if dati[27] > 0:
-                messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+                messaggio("Auto-ricarica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
                 if voceMarcata == 17:
-                    schermo.blit(scetecn[17], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Auto-ricarica +:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[16]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Ricarica di molto Colco ma richiede due turni e provoca", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("surriscaldamento (applicata sempre su Colco)", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[17], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Auto-ricarica +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[16]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Ricarica di molto Colco ma richiede due turni e provoca", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("surriscaldamento (applicata sempre su Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 12.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
             if dati[28] > 0:
-                messaggio("Scossa ++", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+                messaggio("Scossa ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
                 if voceMarcata == 18:
-                    schermo.blit(scetecn[18], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Scossa ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[17]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge enormi danni a un nemico vicino", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[18], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Scossa ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[17]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge enormi danni a un nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 13.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
             if dati[29] > 0:
-                messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+                messaggio("Freccia Elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
                 if voceMarcata == 19:
-                    schermo.blit(scetecn[19], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Freccia Elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[18]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge enormi danni a distanza a un nemico", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[19], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Freccia Elettrica ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[18]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge enormi danni a distanza a un nemico", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 14.2, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
             if dati[30] > 0:
-                messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 9, gsy // 18 * 15.2, 40)
+                messaggio("Tempesta elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
                 if voceMarcata == 20:
-                    schermo.blit(scetecn[20], (gsx // 32 * 18, gsy // 18 * 4))
-                    messaggio("Tempesta elettrica ++:", grigiochi, gsx // 32 * 18, gsy // 18 * 13.5, 60)
-                    messaggio("Costo Pe: " + str(costoTecniche[19]), grigiochi, gsx // 32 * 27.5, gsy // 18 * 13.8, 45)
-                    messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di", grigiochi, gsx // 32 * 18, gsy // 18 * 14.5, 35)
-                    messaggio("Colco", grigiochi, gsx // 32 * 18, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 18, gsy // 18 * 15.5, 35)
+                    GlobalVarG2.schermo.blit(scetecn[20], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
+                    messaggio("Tempesta elettrica ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[19]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
+                    messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 9, gsy // 18 * 15, 40)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15, 40)
 
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
             # puntatore vecchio
             i = 1
             k = 6.1
             while i <= 10:
                 if tecnica == i:
-                    schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * k))
+                    GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             i = 11
             k = 6.1
             while i <= 20:
                 if tecnica == i:
-                    schermo.blit(puntatorevecchio, (gsx // 32 * 8, gsy // 18 * k))
+                    GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * k))
                 i = i + 1
                 k = k + 1
             if tecnica == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 4.6))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.6))
 
-            schermo.blit(puntatore, (xp, yp))
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
     return tecnica
 
 
 def equiprobo(dati, canzone):
-    robosta = pygame.transform.scale(roboo, (gpx * 5, gpy * 5))
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    sfondoOggetto = pygame.transform.scale(sfondoOggettoMenu, (int(gpx * 2), int(gpy * 2)))
-    sconosciutoEquip = pygame.transform.scale(sconosciutoEquipMenu, (int(gpx * 2), int(gpy * 2)))
-    xp = gsx // 32 * 1
-    yp = gsy // 18 * 6.8
+    robosta = pygame.transform.scale(GlobalVarG2.roboo, (GlobalVarG2.gpx * 5, GlobalVarG2.gpy * 5))
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    sfondoOggetto = pygame.transform.scale(GlobalVarG2.sfondoOggettoMenu, (int(GlobalVarG2.gpx * 2), int(GlobalVarG2.gpy * 2)))
+    sconosciutoEquip = pygame.transform.scale(GlobalVarG2.sconosciutoEquipMenu, (int(GlobalVarG2.gpx * 2), int(GlobalVarG2.gpy * 2)))
+    xp = GlobalVarG2.gsx // 32 * 1
+    yp = GlobalVarG2.gsy // 18 * 6.8
     risposta = False
     riordinamento = False
     annullaRiordinamento = False
@@ -3319,31 +3337,31 @@ def equiprobo(dati, canzone):
     tastop = 0
     tastotempfps = 5
 
-    vetImgBatterie = vetImgBatterieMenu
+    vetImgBatterie = GlobalVarG2.vetImgBatterieMenu
 
     vetIcoBatterie = []
     i = 0
     while i < 5:
         if dati[41 + i] > 0:
-            vetIcoBatterie.append(vetIcoBatterieMenu[i])
+            vetIcoBatterie.append(GlobalVarG2.vetIcoBatterieMenu[i])
         else:
             vetIcoBatterie.append(sconosciutoEquip)
         i += 1
 
     # primo frame
     if True:
-        schermo.fill(grigioscu)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 12.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 5, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 5, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 7, gsy // 18 * 4, gsx // 32 * 16, gsy // 18 * 12.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 7, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 22, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 22, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 7, gsy // 18 * 15.5))
+        pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 12.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
+        pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 12.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 15.5))
 
         if annullaRiordinamento:
             dati = list(datiPrimaDiRiordinamento)
@@ -3353,385 +3371,385 @@ def equiprobo(dati, canzone):
             voceMarcata = voceGambitMarcata
 
         if riordinamento:
-            pygame.draw.rect(schermo, grigiochi, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigiochi, (xp, yp - (GlobalVarG2.gpy // 4), GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 1))
 
-        messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
+        messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
 
         # equip batteria
-        messaggio("Batterie", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 60)
+        messaggio("Batterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4.5, 60)
         i = 0
         while i < 5:
-            schermo.blit(sfondoOggetto, (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
-            schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 2.5, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+            GlobalVarG2.schermo.blit(vetIcoBatterie[i], (GlobalVarG2.gsx // 32 * 2.5, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
             i += 1
 
         # programmazione Colco
-        messaggio("Ordine", grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 60)
+        messaggio("Ordine", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 4.5, 60)
         i = 1
         while i <= 10:
             if i == 10:
                 if riordinamento and voceMarcata == i + 5:
-                    messaggio(str(i), grigio, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                    messaggio(str(i), GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 8.3, GlobalVarG2.gsy // 18 * (i + 5), 50)
                 else:
-                    messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                    messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.3, GlobalVarG2.gsy // 18 * (i + 5), 50)
             else:
                 if riordinamento and voceMarcata == i + 5:
-                    messaggio(str(i), grigio, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                    messaggio(str(i), GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * (i + 5), 50)
                 else:
-                    messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                    messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * (i + 5), 50)
             i += 1
-        messaggio("Condizione...", grigiochi, gsx // 32 * 11, gsy // 18 * 4.5, 60)
+        messaggio("Condizione...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4.5, 60)
         c = 6.1
         for i in range(101, 111):
             if dati[i] == -1:
-                messaggio("---", grigioscu, gsx // 32 * 11, gsy // 18 * c, 40)
+                messaggio("---", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 0:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("---", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 1:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Rallo con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 2:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Rallo con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 3:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Rallo con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 4:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Rallo con veleno", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con veleno", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 5:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Colco surriscaldato", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco surriscaldato", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 6:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Colco con pe < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 7:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Colco con pe < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 8:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Colco con pe < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 9:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Sempre a Rallo", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Sempre a Rallo", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 10:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Sempre a Colco", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Sempre a Colco", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Sempre a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 11:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Nemico a caso", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico a caso", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 12:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Nemico vicino", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico vicino", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 13:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Nemico lontano", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico lontano", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico lontano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 14:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Nemico con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 15:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Nemico con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 16:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Nemico con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 17:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Nemico con meno pv", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con meno pv", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Nemico con meno pv", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 18:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Numero di nemici > 1", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 1", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 1", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 19:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Numero di nemici > 4", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 4", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 4", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 20:
                 if riordinamento and voceMarcata == i - 95:
-                    messaggio("Numero di nemici > 7", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 7", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 7", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
             c += 1
-        messaggio("...Tecnica", grigiochi, gsx // 32 * 17.5, gsy // 18 * 4.5, 60)
+        messaggio("...Tecnica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * 4.5, 60)
         c = 6.1
         for i in range(111, 121):
             if dati[i] == -1:
-                messaggio("---", grigioscu, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                messaggio("---", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 0:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("---", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 1:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Scossa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Scossa", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Scossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 2:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Cura", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Cura", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Cura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 3:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Antidoto", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Antidoto", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Antidoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 4:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Freccia elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 5:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Tempesta elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 6:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Raffreddamento", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Raffreddamento", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Raffreddamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 7:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Auto-ricarica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 8:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Cura +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Cura +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Cura +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 9:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Scossa +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Scossa +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Scossa +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 10:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Freccia elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 11:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Velocizza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Velocizza", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Velocizza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 12:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Carica attacco", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Carica attacco", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Carica attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 13:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Carica difesa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Carica difesa", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Carica difesa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 14:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Efficienza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Efficienza", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Efficienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 15:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Tempesta elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 16:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Cura ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Cura ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Cura ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 17:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Auto-ricarica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 18:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Scossa ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Scossa ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Scossa ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 19:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Freccia Elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Freccia Elettrica ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Freccia Elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             if dati[i] == 20:
                 if riordinamento and voceMarcata == i - 105:
-                    messaggio("Tempesta elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 else:
-                    messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
             c = c + 1
 
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
-        schermo.blit(robosta, (gsx // 32 * 25, gsy // 18 * 10))
-        schermo.blit(vetImgBatterie[dati[9]], (gsx // 32 * 25, gsy // 18 * 10))
-        messaggio("Statistiche:", grigiochi, gsx // 32 * 24, gsy // 18 * 7.7, 50)
-        messaggio("Pe totali: %i" % entot, grigiochi, gsx // 32 * 24, gsy // 18 * 8.5, 35)
-        messaggio("Difesa: %i" % difro, grigiochi, gsx // 32 * 24, gsy // 18 * 9, 35)
+        GlobalVarG2.schermo.blit(robosta, (GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 10))
+        GlobalVarG2.schermo.blit(vetImgBatterie[dati[9]], (GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 10))
+        messaggio("Statistiche:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 7.7, 50)
+        messaggio("Pe totali: %i" % entot, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 8.5, 35)
+        messaggio("Difesa: %i" % difro, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 9, 35)
 
         # mostrare descrizione batterie / priorità / condizioni / azioni
         if voceMarcata == 1:
             if dati[71] != 0:
-                messaggio("Batteria piccola:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio("Batteria che contiene poca alimentazione", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio("Batteria piccola:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio("Batteria che contiene poca alimentazione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                 diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 diff = 0 - (dati[9] * dati[9] * 30)
                 if dati[9] > 0:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 2:
             if dati[72] != 0:
-                messaggio("Batteria discreta:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio("Batteria con una buona capienza e", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio("ottimizzazione del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio("Batteria discreta:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio("Batteria con una buona capienza e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio("ottimizzazione del sistema difensivo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                 diff = (1 * 1 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[9] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 diff = 30 - (dati[9] * dati[9] * 30)
                 if dati[9] > 1:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[9] < 1:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 3:
             if dati[73] != 0:
-                messaggio("Batteria capiente:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio(u"Batteria con una grande capacità e un", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio("ottimo sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio("Batteria capiente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio(u"Batteria con una grande capacità e un", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio("ottimo sistema difensivo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                 diff = (2 * 2 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[9] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 diff = 120 - (dati[9] * dati[9] * 30)
                 if dati[9] > 2:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[9] < 2:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 4:
             if dati[74] != 0:
-                messaggio("Batteria enorme:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio("Grande batteria che permette a Colco di", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio(u"utilizzare le tecniche più dispendiose", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio("Batteria enorme:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio("Grande batteria che permette a Colco di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio(u"utilizzare le tecniche più dispendiose", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                 diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[9] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 diff = 270 - (dati[9] * dati[9] * 30)
                 if dati[9] > 3:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[9] < 3:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
         if voceMarcata == 5:
             if dati[75] != 0:
-                messaggio("Batteria illimitata:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio("Batteria incredibilmente capiente.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio("Permette un eccellente ottimizzazione", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio("del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio("Batteria illimitata:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio("Batteria incredibilmente capiente.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio("Permette un eccellente ottimizzazione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio("del sistema difensivo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                 diff = (4 * 4 * 80) - (dati[9] * dati[9] * 80)
                 if dati[9] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 elif dati[9] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                 diff = 480 - (dati[9] * dati[9] * 30)
                 if dati[9] > 4:
-                    messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                 elif dati[9] < 4:
-                    messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                    messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
 
         if 6 <= voceMarcata <= 15:
-            messaggio(u"Ordine:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-            messaggio(u"Determina il livello di priorità dell'evento.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-            messaggio(u"Colco eseguirà la prima tecnica della lista", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-            messaggio(u"la cui condizione si è verificata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+            messaggio(u"Ordine:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+            messaggio(u"Determina il livello di priorità dell'evento.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+            messaggio(u"Colco eseguirà la prima tecnica della lista", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+            messaggio(u"la cui condizione si è verificata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
 
         if 16 <= voceMarcata <= 25:
-            messaggio("Condizione:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-            messaggio("Indica la situazione che si deve verificare", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-            messaggio(u"affinchè Colco esegua la tecnica associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-            messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+            messaggio("Condizione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+            messaggio("Indica la situazione che si deve verificare", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+            messaggio(u"affinchè Colco esegua la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+            messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
 
         if 26 <= voceMarcata <= 35:
-            messaggio("Tecnica:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-            messaggio(u"La tecnica che Colco eseguirà quando si", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-            messaggio("verifica la condizione associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-            messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+            messaggio("Tecnica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+            messaggio(u"La tecnica che Colco eseguirà quando si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+            messaggio("verifica la condizione associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+            messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
 
         # puntatore vecchio batterie/riordinamento gambit
         if dati[9] == 0:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 6.8))
         if dati[9] == 1:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 8.8))
         if dati[9] == 2:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 10.8))
         if dati[9] == 3:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 12.8))
         if dati[9] == 4:
-            schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 14.8))
         if riordinamento:
-            schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
+            GlobalVarG2.schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
 
-        schermo.blit(puntatore, (xp, yp))
+        GlobalVarG2.schermo.blit(puntatore, (xp, yp))
         if voceMarcata >= 6 and not riordinamento:
-            pygame.draw.line(schermo, grigioscu, (gsx // 32 * 7.5, yp + (int(gpy * 0.7))), (gsx // 32 * 22.5, yp + (int(gpy * 0.7))), 2)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 7.5, yp + (int(GlobalVarG2.gpy * 0.7))), (GlobalVarG2.gsx // 32 * 22.5, yp + (int(GlobalVarG2.gpy * 0.7))), 2)
 
         pygame.display.update()
 
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(canzone)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -3751,7 +3769,7 @@ def equiprobo(dati, canzone):
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     if not riordinamento:
                         risposta = True
                     else:
@@ -3773,60 +3791,60 @@ def equiprobo(dati, canzone):
                     tastoTrovato = True
                     # riordina
                     if riordinamento:
-                        canaleSoundPuntatore.play(selezione)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         riordinamento = False
                     else:
                         # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
                         # armrob
                         if voceMarcata == 1:
                             if dati[71] != 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 dati[9] = 0
                                 esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if voceMarcata == 2:
                             if dati[72] != 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 dati[9] = 1
                                 esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if voceMarcata == 3:
                             if dati[73] != 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 dati[9] = 2
                                 esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if voceMarcata == 4:
                             if dati[74] != 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 dati[9] = 3
                                 esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if voceMarcata == 5:
                             if dati[75] != 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 dati[9] = 4
                                 esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
                                 if dati[10] > entot:
                                     dati[10] = entot
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
 
                         # riordina
                         if 6 <= voceMarcata <= 15:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             riordinamento = True
                             datiPrimaDiRiordinamento = list(dati)
                             vxpGambit = xp
@@ -3839,10 +3857,10 @@ def equiprobo(dati, canzone):
                         while i <= 110:
                             if voceMarcata == c:
                                 if dati[i] != -1:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     dati[i] = sceglicondiz(dati, dati[i], canzone)
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             i += 1
                             c += 1
 
@@ -3852,10 +3870,10 @@ def equiprobo(dati, canzone):
                         while i <= 120:
                             if voceMarcata == c:
                                 if dati[i] != -1:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     dati[i] = sceglitecn(dati, dati[i], canzone)
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             i += 1
                             c += 1
             if event.type == pygame.KEYUP and tastop == event.key:
@@ -3867,7 +3885,7 @@ def equiprobo(dati, canzone):
             if tastop == pygame.K_w:
                 if riordinamento:
                     if voceMarcata != 6:
-                        canaleSoundPuntatore.play(spostapun)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         i = 0
                         while i < 10:
                             if voceMarcata == i + 6:
@@ -3880,90 +3898,90 @@ def equiprobo(dati, canzone):
                                 break
                             i += 1
                         voceMarcata -= 1
-                        yp = yp - gsy // 18 * 1
+                        yp = yp - GlobalVarG2.gsy // 18 * 1
                 else:
                     if 1 <= voceMarcata <= 5:
                         if voceMarcata == 1:
                             voceMarcata += 4
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 14.8
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 14.8
                         else:
                             voceMarcata -= 1
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = yp - gsy // 18 * 2
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = yp - GlobalVarG2.gsy // 18 * 2
                     else:
                         if voceMarcata == 6 or voceMarcata == 16 or voceMarcata == 26:
                             voceMarcata += 9
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 15
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 15
                         else:
                             voceMarcata -= 1
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = yp - gsy // 18 * 1
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = yp - GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_a and not riordinamento:
                 if 1 <= voceMarcata <= 5:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if voceMarcata == 1:
                         voceMarcata += 26
-                        yp = gsy // 18 * 7
+                        yp = GlobalVarG2.gsy // 18 * 7
                     elif voceMarcata == 2:
                         voceMarcata += 27
-                        yp = gsy // 18 * 9
+                        yp = GlobalVarG2.gsy // 18 * 9
                     elif voceMarcata == 3:
                         voceMarcata += 28
-                        yp = gsy // 18 * 11
+                        yp = GlobalVarG2.gsy // 18 * 11
                     elif voceMarcata == 4:
                         voceMarcata += 29
-                        yp = gsy // 18 * 13
+                        yp = GlobalVarG2.gsy // 18 * 13
                     elif voceMarcata == 5:
                         voceMarcata += 30
-                        yp = gsy // 18 * 15
-                    xp = gsx // 32 * 16.5
+                        yp = GlobalVarG2.gsy // 18 * 15
+                    xp = GlobalVarG2.gsx // 32 * 16.5
                 elif 6 <= voceMarcata <= 15:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if 6 <= voceMarcata <= 7:
                         if voceMarcata == 6:
                             voceMarcata -= 5
                         elif voceMarcata == 7:
                             voceMarcata -= 6
-                        yp = gsy // 18 * 6.8
+                        yp = GlobalVarG2.gsy // 18 * 6.8
                     elif 8 <= voceMarcata <= 9:
                         if voceMarcata == 8:
                             voceMarcata -= 6
                         elif voceMarcata == 9:
                             voceMarcata -= 7
-                        yp = gsy // 18 * 8.8
+                        yp = GlobalVarG2.gsy // 18 * 8.8
                     elif 10 <= voceMarcata <= 11:
                         if voceMarcata == 10:
                             voceMarcata -= 7
                         elif voceMarcata == 11:
                             voceMarcata -= 8
-                        yp = gsy // 18 * 10.8
+                        yp = GlobalVarG2.gsy // 18 * 10.8
                     elif 12 <= voceMarcata <= 13:
                         if voceMarcata == 12:
                             voceMarcata -= 8
                         elif voceMarcata == 13:
                             voceMarcata -= 9
-                        yp = gsy // 18 * 12.8
+                        yp = GlobalVarG2.gsy // 18 * 12.8
                     elif 14 <= voceMarcata <= 15:
                         if voceMarcata == 14:
                             voceMarcata -= 9
                         elif voceMarcata == 15:
                             voceMarcata -= 10
-                        yp = gsy // 18 * 14.8
-                    xp = gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 14.8
+                    xp = GlobalVarG2.gsx // 32 * 1
                 elif 16 <= voceMarcata <= 25:
                     voceMarcata -= 10
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 7
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 7
                 elif 26 <= voceMarcata <= 35:
                     voceMarcata -= 10
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 10
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 10
             if tastop == pygame.K_s:
                 if riordinamento:
                     if voceMarcata != 15:
-                        canaleSoundPuntatore.play(spostapun)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         i = 0
                         while i < 10:
                             if voceMarcata == i + 6:
@@ -3976,98 +3994,98 @@ def equiprobo(dati, canzone):
                                 break
                             i += 1
                         voceMarcata += 1
-                        yp = yp + gsy // 18 * 1
+                        yp = yp + GlobalVarG2.gsy // 18 * 1
                 else:
                     if 1 <= voceMarcata <= 5:
                         if voceMarcata == 5:
                             voceMarcata -= 4
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 6.8
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 6.8
                         else:
                             voceMarcata += 1
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = yp + gsy // 18 * 2
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = yp + GlobalVarG2.gsy // 18 * 2
                     else:
                         if voceMarcata == 15 or voceMarcata == 25 or voceMarcata == 35:
                             voceMarcata -= 9
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = gsy // 18 * 6
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 6
                         else:
                             voceMarcata += 1
-                            canaleSoundPuntatore.play(spostapun)
-                            yp = yp + gsy // 18 * 1
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = yp + GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_d and not riordinamento:
                 if 1 <= voceMarcata <= 5:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if voceMarcata == 1:
                         voceMarcata += 6
-                        yp = gsy // 18 * 7
+                        yp = GlobalVarG2.gsy // 18 * 7
                     elif voceMarcata == 2:
                         voceMarcata += 7
-                        yp = gsy // 18 * 9
+                        yp = GlobalVarG2.gsy // 18 * 9
                     elif voceMarcata == 3:
                         voceMarcata += 8
-                        yp = gsy // 18 * 11
+                        yp = GlobalVarG2.gsy // 18 * 11
                     elif voceMarcata == 4:
                         voceMarcata += 9
-                        yp = gsy // 18 * 13
+                        yp = GlobalVarG2.gsy // 18 * 13
                     elif voceMarcata == 5:
                         voceMarcata += 10
-                        yp = gsy // 18 * 15
-                    xp = gsx // 32 * 7
+                        yp = GlobalVarG2.gsy // 18 * 15
+                    xp = GlobalVarG2.gsx // 32 * 7
                 elif 6 <= voceMarcata <= 15:
                     voceMarcata += 10
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 10
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 10
                 elif 16 <= voceMarcata <= 25:
                     voceMarcata += 10
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 16.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 16.5
                 elif 26 <= voceMarcata <= 35:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if 26 <= voceMarcata <= 27:
                         if voceMarcata == 26:
                             voceMarcata -= 25
                         elif voceMarcata == 27:
                             voceMarcata -= 26
-                        yp = gsy // 18 * 6.8
+                        yp = GlobalVarG2.gsy // 18 * 6.8
                     elif 28 <= voceMarcata <= 29:
                         if voceMarcata == 28:
                             voceMarcata -= 26
                         elif voceMarcata == 29:
                             voceMarcata -= 27
-                        yp = gsy // 18 * 8.8
+                        yp = GlobalVarG2.gsy // 18 * 8.8
                     elif 30 <= voceMarcata <= 31:
                         if voceMarcata == 30:
                             voceMarcata -= 27
                         elif voceMarcata == 31:
                             voceMarcata -= 28
-                        yp = gsy // 18 * 10.8
+                        yp = GlobalVarG2.gsy // 18 * 10.8
                     elif 32 <= voceMarcata <= 33:
                         if voceMarcata == 32:
                             voceMarcata -= 28
                         elif voceMarcata == 33:
                             voceMarcata -= 29
-                        yp = gsy // 18 * 12.8
+                        yp = GlobalVarG2.gsy // 18 * 12.8
                     elif 34 <= voceMarcata <= 35:
                         if voceMarcata == 34:
                             voceMarcata -= 29
                         elif voceMarcata == 35:
                             voceMarcata -= 30
-                        yp = gsy // 18 * 14.8
-                    xp = gsx // 32 * 1
-            schermo.fill(grigioscu)
+                        yp = GlobalVarG2.gsy // 18 * 14.8
+                    xp = GlobalVarG2.gsx // 32 * 1
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione,larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 5, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 5, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 5, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 7, gsy // 18 * 4, gsx // 32 * 16, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 7, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 22, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 22, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 7, gsy // 18 * 15.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 7, GlobalVarG2.gsy // 18 * 15.5))
 
             if annullaRiordinamento:
                 dati = list(datiPrimaDiRiordinamento)
@@ -4077,393 +4095,393 @@ def equiprobo(dati, canzone):
                 voceMarcata = voceGambitMarcata
 
             if riordinamento:
-                pygame.draw.rect(schermo, grigiochi, (xp, yp - (gpy // 4), gsx // 32 * 16, gsy // 18 * 1))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigiochi, (xp, yp - (GlobalVarG2.gpy // 4), GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 1))
 
-            messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
+            messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
 
             # equip batteria
-            messaggio("Batterie", grigiochi, gsx // 32 * 2, gsy // 18 * 4.5, 60)
+            messaggio("Batterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4.5, 60)
             i = 0
             while i < 5:
-                schermo.blit(sfondoOggetto, (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
-                schermo.blit(vetIcoBatterie[i], (gsx // 32 * 2.5, (gsy // 18 * 6 + (gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(sfondoOggetto, (GlobalVarG2.gsx // 32 * 2.5, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
+                GlobalVarG2.schermo.blit(vetIcoBatterie[i], (GlobalVarG2.gsx // 32 * 2.5, (GlobalVarG2.gsy // 18 * 6 + (GlobalVarG2.gpy * 2 * i))))
                 i += 1
 
             # programmazione Colco
-            messaggio("Ordine", grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 60)
+            messaggio("Ordine", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 4.5, 60)
             i = 1
             while i <= 10:
                 if i == 10:
                     if riordinamento and voceMarcata == i + 5:
-                        messaggio(str(i), grigio, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                        messaggio(str(i), GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 8.3, GlobalVarG2.gsy // 18 * (i + 5), 50)
                     else:
-                        messaggio(str(i), grigiochi, gsx // 32 * 8.3, gsy // 18 * (i + 5), 50)
+                        messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.3, GlobalVarG2.gsy // 18 * (i + 5), 50)
                 else:
                     if riordinamento and voceMarcata == i + 5:
-                        messaggio(str(i), grigio, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                        messaggio(str(i), GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * (i + 5), 50)
                     else:
-                        messaggio(str(i), grigiochi, gsx // 32 * 8.5, gsy // 18 * (i + 5), 50)
+                        messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * (i + 5), 50)
                 i += 1
-            messaggio("Condizione...", grigiochi, gsx // 32 * 11, gsy // 18 * 4.5, 60)
+            messaggio("Condizione...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4.5, 60)
             c = 6.1
             for i in range(101, 111):
                 if dati[i] == -1:
-                    messaggio("---", grigioscu, gsx // 32 * 11, gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 0:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("---", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("---", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("---", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 1:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con pv < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Rallo con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 2:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con pv < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Rallo con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 3:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con pv < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Rallo con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 4:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con veleno", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con veleno", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Rallo con veleno", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 5:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco surriscaldato", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco surriscaldato", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Colco surriscaldato", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 6:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco con pe < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco con pe < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Colco con pe < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco con pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 7:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco con pe < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco con pe < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Colco con pe < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco con pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 8:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco con pe < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco con pe < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Colco con pe < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Colco con pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 9:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Sempre a Rallo", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Sempre a Rallo", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Sempre a Rallo", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 10:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Sempre a Colco", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Sempre a Colco", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Sempre a Colco", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Sempre a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 11:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico a caso", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico a caso", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Nemico a caso", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 12:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico vicino", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico vicino", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Nemico vicino", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 13:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico lontano", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico lontano", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Nemico lontano", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico lontano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 14:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con pv < 80%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con pv < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Nemico con pv < 80%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 15:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con pv < 50%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con pv < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Nemico con pv < 50%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 16:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con pv < 30%", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con pv < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Nemico con pv < 30%", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 17:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con meno pv", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con meno pv", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Nemico con meno pv", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Nemico con meno pv", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 18:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Numero di nemici > 1", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Numero di nemici > 1", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Numero di nemici > 1", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Numero di nemici > 1", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 19:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Numero di nemici > 4", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Numero di nemici > 4", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Numero di nemici > 4", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Numero di nemici > 4", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 20:
                     if riordinamento and voceMarcata == i - 95:
-                        messaggio("Numero di nemici > 7", grigio, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Numero di nemici > 7", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Numero di nemici > 7", grigiochi, gsx // 32 * 11, gsy // 18 * c, 40)
+                        messaggio("Numero di nemici > 7", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 c += 1
-            messaggio("...Tecnica", grigiochi, gsx // 32 * 17.5, gsy // 18 * 4.5, 60)
+            messaggio("...Tecnica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * 4.5, 60)
             c = 6.1
             for i in range(111, 121):
                 if dati[i] == -1:
-                    messaggio("---", grigioscu, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 0:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("---", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("---", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("---", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 1:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Scossa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Scossa", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Scossa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Scossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 2:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Cura", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Cura", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Cura", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Cura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 3:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Antidoto", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Antidoto", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Antidoto", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Antidoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 4:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Freccia elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Freccia elettrica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Freccia elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Freccia elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 5:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Tempesta elettrica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Tempesta elettrica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Tempesta elettrica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Tempesta elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 6:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Raffreddamento", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Raffreddamento", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Raffreddamento", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Raffreddamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 7:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Auto-ricarica", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Auto-ricarica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Auto-ricarica", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Auto-ricarica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 8:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Cura +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Cura +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Cura +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Cura +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 9:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Scossa +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Scossa +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Scossa +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Scossa +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 10:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Freccia elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Freccia elettrica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Freccia elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Freccia elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 11:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Velocizza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Velocizza", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Velocizza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Velocizza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 12:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Carica attacco", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Carica attacco", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Carica attacco", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Carica attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 13:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Carica difesa", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Carica difesa", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Carica difesa", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Carica difesa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 14:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Efficienza", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Efficienza", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Efficienza", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Efficienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 15:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Tempesta elettrica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Tempesta elettrica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Tempesta elettrica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Tempesta elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 16:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Cura ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Cura ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Cura ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Cura ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 17:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Auto-ricarica +", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Auto-ricarica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Auto-ricarica +", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Auto-ricarica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 18:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Scossa ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Scossa ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Scossa ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Scossa ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 19:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Freccia Elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Freccia Elettrica ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Freccia Elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Freccia Elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 20:
                     if riordinamento and voceMarcata == i - 105:
-                        messaggio("Tempesta elettrica ++", grigio, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Tempesta elettrica ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                     else:
-                        messaggio("Tempesta elettrica ++", grigiochi, gsx // 32 * 17.5, gsy // 18 * c, 40)
+                        messaggio("Tempesta elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 c = c + 1
 
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
-            schermo.blit(robosta, (gsx // 32 * 25, gsy // 18 * 10))
-            schermo.blit(vetImgBatterie[dati[9]], (gsx // 32 * 25, gsy // 18 * 10))
-            messaggio("Statistiche:", grigiochi, gsx // 32 * 24, gsy // 18 * 7.7, 50)
-            messaggio("Pe totali: %i" % entot, grigiochi, gsx // 32 * 24, gsy // 18 * 8.5, 35)
-            messaggio("Difesa: %i" % difro, grigiochi, gsx // 32 * 24, gsy // 18 * 9, 35)
+            GlobalVarG2.schermo.blit(robosta, (GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 10))
+            GlobalVarG2.schermo.blit(vetImgBatterie[dati[9]], (GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 10))
+            messaggio("Statistiche:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 7.7, 50)
+            messaggio("Pe totali: %i" % entot, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 8.5, 35)
+            messaggio("Difesa: %i" % difro, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 9, 35)
 
             # mostrare descrizione batterie / priorità / condizioni / azioni
             if voceMarcata == 1:
                 if dati[71] != 0:
-                    messaggio("Batteria piccola:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                    messaggio("Batteria che contiene poca alimentazione", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    messaggio("Batteria piccola:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                    messaggio("Batteria che contiene poca alimentazione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                     diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     diff = 0 - (dati[9] * dati[9] * 30)
                     if dati[9] > 0:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 2:
                 if dati[72] != 0:
-                    messaggio("Batteria discreta:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                    messaggio("Batteria con una buona capienza e", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                    messaggio("ottimizzazione del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    messaggio("Batteria discreta:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                    messaggio("Batteria con una buona capienza e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                    messaggio("ottimizzazione del sistema difensivo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                     diff = (1 * 1 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[9] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     diff = 30 - (dati[9] * dati[9] * 30)
                     if dati[9] > 1:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[9] < 1:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 3:
                 if dati[73] != 0:
-                    messaggio("Batteria capiente:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                    messaggio(u"Batteria con una grande capacità e un", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                    messaggio("ottimo sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    messaggio("Batteria capiente:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                    messaggio(u"Batteria con una grande capacità e un", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                    messaggio("ottimo sistema difensivo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                     diff = (2 * 2 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[9] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     diff = 120 - (dati[9] * dati[9] * 30)
                     if dati[9] > 2:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[9] < 2:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 4:
                 if dati[74] != 0:
-                    messaggio("Batteria enorme:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                    messaggio("Grande batteria che permette a Colco di", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                    messaggio(u"utilizzare le tecniche più dispendiose", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                    messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    messaggio("Batteria enorme:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                    messaggio("Grande batteria che permette a Colco di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                    messaggio(u"utilizzare le tecniche più dispendiose", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                     diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[9] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     diff = 270 - (dati[9] * dati[9] * 30)
                     if dati[9] > 3:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[9] < 3:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
             if voceMarcata == 5:
                 if dati[75] != 0:
-                    messaggio("Batteria illimitata:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                    messaggio("Batteria incredibilmente capiente.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                    messaggio("Permette un eccellente ottimizzazione", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                    messaggio("del sistema difensivo", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                    messaggio("Batteria illimitata:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                    messaggio("Batteria incredibilmente capiente.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                    messaggio("Permette un eccellente ottimizzazione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                    messaggio("del sistema difensivo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
                     diff = (4 * 4 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     elif dati[9] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 8.5, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 8.5, 35)
                     diff = 480 - (dati[9] * dati[9] * 30)
                     if dati[9] > 4:
-                        messaggio(str(diff), rosso, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio(str(diff), GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
                     elif dati[9] < 4:
-                        messaggio("+" + str(diff), verde, gsx // 32 * 28, gsy // 18 * 9, 35)
+                        messaggio("+" + str(diff), GlobalVarG2.verde, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 9, 35)
 
             if 6 <= voceMarcata <= 15:
-                messaggio(u"Ordine:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio(u"Determina il livello di priorità dell'evento.", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio(u"Colco eseguirà la prima tecnica della lista", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio(u"la cui condizione si è verificata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio(u"Ordine:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio(u"Determina il livello di priorità dell'evento.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio(u"Colco eseguirà la prima tecnica della lista", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio(u"la cui condizione si è verificata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
 
             if 16 <= voceMarcata <= 25:
-                messaggio("Condizione:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio("Indica la situazione che si deve verificare", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio(u"affinchè Colco esegua la tecnica associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio("Condizione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio("Indica la situazione che si deve verificare", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio(u"affinchè Colco esegua la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
 
             if 26 <= voceMarcata <= 35:
-                messaggio("Tecnica:", grigiochi, gsx // 32 * 24, gsy // 18 * 4.8, 60)
-                messaggio(u"La tecnica che Colco eseguirà quando si", grigiochi, gsx // 32 * 24, gsy // 18 * 5.8, 35)
-                messaggio("verifica la condizione associata", grigiochi, gsx // 32 * 24, gsy // 18 * 6.3, 35)
-                messaggio("", grigiochi, gsx // 32 * 24, gsy // 18 * 6.8, 35)
+                messaggio("Tecnica:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 4.8, 60)
+                messaggio(u"La tecnica che Colco eseguirà quando si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 5.8, 35)
+                messaggio("verifica la condizione associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.3, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 6.8, 35)
 
             # puntatore vecchio batterie/riordinamento gambit
             if dati[9] == 0:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 6.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 6.8))
             if dati[9] == 1:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 8.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 8.8))
             if dati[9] == 2:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 10.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 10.8))
             if dati[9] == 3:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 12.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 12.8))
             if dati[9] == 4:
-                schermo.blit(puntatorevecchio, (gsx // 32 * 1, gsy // 18 * 14.8))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 14.8))
             if riordinamento:
-                schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
+                GlobalVarG2.schermo.blit(puntatorevecchio, (vxpGambit, vypGambit))
 
-            schermo.blit(puntatore, (xp, yp))
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             if voceMarcata >= 6 and not riordinamento:
-                pygame.draw.line(schermo, grigioscu, (gsx // 32 * 7.5, yp + (int(gpy * 0.7))), (gsx // 32 * 22.5, yp + (int(gpy * 0.7))), 2)
+                pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (GlobalVarG2.gsx // 32 * 7.5, yp + (int(GlobalVarG2.gpy * 0.7))), (GlobalVarG2.gsx // 32 * 22.5, yp + (int(GlobalVarG2.gpy * 0.7))), 2)
 
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
     return dati
 
 
 def oggetti(dati, canzone):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
-    sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 10, gpy * 10))
-    xp = gsx // 32 * 1
-    yp = gsy // 18 * 5
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    sfondostastart = pygame.transform.scale(GlobalVarG2.sfondostax3, (GlobalVarG2.gpx * 4, GlobalVarG2.gpy))
+    sconosciutoOggetto = pygame.transform.scale(GlobalVarG2.sconosciutoOggettoMenu, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
+    xp = GlobalVarG2.gsx // 32 * 1
+    yp = GlobalVarG2.gsy // 18 * 5
     xpv = xp
     ypv = yp
     usauno = False
@@ -4480,7 +4498,7 @@ def oggetti(dati, canzone):
     i = 1
     while i <= 10:
         if dati[i + 30] >= 0:
-            imgOggetti.append(vetImgOggettiMenu[i - 1])
+            imgOggetti.append(GlobalVarG2.vetImgOggettiMenu[i - 1])
         else:
             imgOggetti.append(sconosciutoOggetto)
         i += 1
@@ -4489,191 +4507,191 @@ def oggetti(dati, canzone):
 
     # primo frame
     if True:
-        schermo.fill(grigioscu)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+        pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 12.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
 
         # menu conferma
         if usa != 0:
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 10, gsy // 18 * 12.5, gsx // 32 * 9, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 18, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 18, gsy // 18 * 15.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 12.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5))
             # posizionare il cursore su menu usa
             if usauno:
                 xpv = xp
                 ypv = yp
-                xp = gsx // 32 * 15
-                yp = gsy // 18 * 15.1
+                xp = GlobalVarG2.gsx // 32 * 15
+                yp = GlobalVarG2.gsy // 18 * 15.1
                 voceMarcata = 2
                 usauno = False
-            schermo.blit(puntatorevecchio, (xpv, ypv))
-            messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
-            messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
-            messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
+            GlobalVarG2.schermo.blit(puntatorevecchio, (xpv, ypv))
+            messaggio("Usare?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.3, GlobalVarG2.gsy // 18 * 13.2, 80)
+            messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13, GlobalVarG2.gsy // 18 * 15, 60)
+            messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 15, 60)
 
         # pozione, carica batt, bomba, antidoto, bomba veleno, esca, super poz, carica migliorato, bomba pot, bomba atomica
-        messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
+        messaggio("Oggetti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
         if dati[31] >= 0:
-            messaggio("Pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
-            messaggio("x %i" % dati[31], grigiochi, gsx // 32 * 9.3, gsy // 18 * 5, 45)
+            messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 45)
+            messaggio("x %i" % dati[31], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 5, 45)
             if oggetton == 1:
-                messaggio("Pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Recupera 100 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 45)
         if dati[32] >= 0:
-            messaggio("Caricabatterie", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
-            messaggio("x %i" % dati[32], grigiochi, gsx // 32 * 9.3, gsy // 18 * 6, 45)
+            messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 45)
+            messaggio("x %i" % dati[32], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 6, 45)
             if oggetton == 2:
-                messaggio("Caricabatterie:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Caricabatterie:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Recupera 250 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 45)
         if dati[33] >= 0:
-            messaggio("Medicina", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
-            messaggio("x %i" % dati[33], grigiochi, gsx // 32 * 9.3, gsy // 18 * 7, 45)
+            messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 45)
+            messaggio("x %i" % dati[33], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 7, 45)
             if oggetton == 3:
-                messaggio("Medicina:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Medicina:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Cura avvelenamento a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 45)
         if dati[34] >= 0:
-            messaggio("Super pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
-            messaggio("x %i" % dati[34], grigiochi, gsx // 32 * 9.3, gsy // 18 * 8, 45)
+            messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 45)
+            messaggio("x %i" % dati[34], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 8, 45)
             if oggetton == 4:
-                messaggio("Super pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Super pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Recupera 300 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 45)
         if dati[35] >= 0:
-            messaggio("Carica plus", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
-            messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
+            messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 45)
+            messaggio("x %i" % dati[35], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 9, 45)
             if oggetton == 5:
-                messaggio("Carica plus:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Carica plus:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Recupera 600 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 45)
         if dati[36] >= 0:
-            messaggio("Bomba", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
-            messaggio("x %i" % dati[36], grigiochi, gsx // 32 * 9.3, gsy // 18 * 11, 45)
+            messaggio("Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11, 45)
+            messaggio("x %i" % dati[36], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 11, 45)
             if oggetton == 6:
-                messaggio("Bomba:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", grigiochi, gsx // 32 * 20,
-                          gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Bomba:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11, 45)
         if dati[37] >= 0:
-            messaggio("Bomba velenosa", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
-            messaggio("x %i" % dati[37], grigiochi, gsx // 32 * 9.3, gsy // 18 * 12, 45)
+            messaggio("Bomba velenosa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 45)
+            messaggio("x %i" % dati[37], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 12, 45)
             if oggetton == 7:
-                messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Infligge avvelenamento al nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
-                          gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Bomba velenosa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Infligge avvelenamento al nemico su cui viene lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 45)
         if dati[38] >= 0:
-            messaggio("Esca", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
-            messaggio("x %i" % dati[38], grigiochi, gsx // 32 * 9.3, gsy // 18 * 13, 45)
+            messaggio("Esca", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 45)
+            messaggio("x %i" % dati[38], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 13, 45)
             if oggetton == 8:
-                messaggio("Esca:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", grigiochi, gsx // 32 * 20,
-                          gsy // 18 * 14.5, 35)
-                messaggio("riprenderla passandoci sopra", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Esca:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("riprenderla passandoci sopra", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 45)
         if dati[39] >= 0:
-            messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
-            messaggio("x %i" % dati[39], grigiochi, gsx // 32 * 9.3, gsy // 18 * 14, 45)
+            messaggio("Bomba appiccicosa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 45)
+            messaggio("x %i" % dati[39], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 14, 45)
             if oggetton == 9:
-                messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
-                          gsy // 18 * 14.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Bomba appiccicosa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 45)
         if dati[40] >= 0:
-            messaggio("Bomba potenziata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
-            messaggio("x %i" % dati[40], grigiochi, gsx // 32 * 9.3, gsy // 18 * 15, 45)
+            messaggio("Bomba potenziata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 45)
+            messaggio("x %i" % dati[40], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 15, 45)
             if oggetton == 10:
-                messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", grigiochi, gsx // 32 * 20,
-                          gsy // 18 * 14.5, 35)
-                messaggio("vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                messaggio("Bomba potenziata:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                          GlobalVarG2.gsy // 18 * 14.5, 35)
+                messaggio("vasto raggio", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
         else:
-            messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
+            messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 45)
 
         # vita-status personaggio
         if dati[5] < 0:
             dati[5] = 0
-        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 4, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 5, 50)
-        persmen = pygame.transform.scale(persGrafMenu, (gpx * 3, gpy * 3))
-        schermo.blit(persmen, (gsx // 32 * 11, gsy // 18 * 4))
-        schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 6) + (gpy // 8)))
+        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 4, 50)
+        messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 5, 50)
+        persmen = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+        GlobalVarG2.schermo.blit(persmen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, (GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy // 8)))
         if dati[121]:
-            avvelenato = pygame.transform.scale(avvelenatoo, (gpx, gpy))
-            schermo.blit(avvelenato, (gsx // 32 * 14, gsy // 18 * 6))
+            avvelenato = pygame.transform.scale(GlobalVarG2.avvelenatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(avvelenato, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 6))
         if dati[123] > 0:
-            attaccopiu = pygame.transform.scale(attaccopiuo, (gpx, gpy))
-            schermo.blit(attaccopiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 6))
+            attaccopiu = pygame.transform.scale(GlobalVarG2.attaccopiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(attaccopiu, ((GlobalVarG2.gsx // 32 * 14) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 6))
         if dati[124] > 0:
-            difesapiu = pygame.transform.scale(difesapiuo, (gpx, gpy))
-            schermo.blit(difesapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 6))
+            difesapiu = pygame.transform.scale(GlobalVarG2.difesapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(difesapiu, ((GlobalVarG2.gsx // 32 * 14) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 6))
         # vita-status robo
         if dati[10] < 0:
             dati[10] = 0
-        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 14, gsy // 18 * 9, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 10, 50)
-        robomen = pygame.transform.scale(robograf, (gpx * 3, gpy * 3))
-        schermo.blit(robomen, (gsx // 32 * 11, gsy // 18 * 8))
-        schermo.blit(sfondostastart, (gsx // 32 * 14, gsy // 18 * 11))
+        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 9, 50)
+        messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 10, 50)
+        robomen = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+        GlobalVarG2.schermo.blit(robomen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 8))
+        GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
         if dati[122] > 0:
-            surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx, gpy))
-            schermo.blit(surriscaldato, (gsx // 32 * 14, gsy // 18 * 11))
+            surriscaldato = pygame.transform.scale(GlobalVarG2.surriscaldatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(surriscaldato, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
         if dati[125] > 0:
-            velocitapiu = pygame.transform.scale(velocitapiuo, (gpx, gpy))
-            schermo.blit(velocitapiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 11))
+            velocitapiu = pygame.transform.scale(GlobalVarG2.velocitapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(velocitapiu, ((GlobalVarG2.gsx // 32 * 14) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
         if dati[126] > 0:
-            efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
-            schermo.blit(efficienzapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 11))
+            efficienzapiu = pygame.transform.scale(GlobalVarG2.efficienzapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(efficienzapiu, ((GlobalVarG2.gsx // 32 * 14) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
 
         if attacco != 0:
             risposta = True
 
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-        schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 20, gsy // 18 * 3))
-        schermo.blit(puntatore, (xp, yp))
+        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+        GlobalVarG2.schermo.blit(imgOggetti[oggetton - 1], (GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 3))
+        GlobalVarG2.schermo.blit(puntatore, (xp, yp))
         if usa == 0:
-            pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))), (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xp + (int(GlobalVarG2.gpx // 1.5))), yp + (int(GlobalVarG2.gpy * 0.7))), (xp + (int(GlobalVarG2.gpx * 9.5)), yp + (int(GlobalVarG2.gpy * 0.7))), 2)
         else:
-            pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))), (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xpv + (int(GlobalVarG2.gpx // 1.5))), ypv + (int(GlobalVarG2.gpy * 0.7))), (xpv + (int(GlobalVarG2.gpx * 9.5)), ypv + (int(GlobalVarG2.gpy * 0.7))), 2)
 
         pygame.display.update()
 
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(canzone)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -4695,31 +4713,31 @@ def oggetti(dati, canzone):
                     tastoTrovato = True
                     voceMarcata = 0
                     if usa != 0:
-                        canaleSoundPuntatore.play(selind)
-                        xp = gsx // 32 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                        xp = GlobalVarG2.gsx // 32 * 1
                         if usa == 1:
-                            yp = gsy // 18 * 5
+                            yp = GlobalVarG2.gsy // 18 * 5
                         if usa == 2:
-                            yp = gsy // 18 * 6
+                            yp = GlobalVarG2.gsy // 18 * 6
                         if usa == 3:
-                            yp = gsy // 18 * 7
+                            yp = GlobalVarG2.gsy // 18 * 7
                         if usa == 4:
-                            yp = gsy // 18 * 8
+                            yp = GlobalVarG2.gsy // 18 * 8
                         if usa == 5:
-                            yp = gsy // 18 * 9
+                            yp = GlobalVarG2.gsy // 18 * 9
                         if usa == 6:
-                            yp = gsy // 18 * 11
+                            yp = GlobalVarG2.gsy // 18 * 11
                         if usa == 7:
-                            yp = gsy // 18 * 12
+                            yp = GlobalVarG2.gsy // 18 * 12
                         if usa == 8:
-                            yp = gsy // 18 * 13
+                            yp = GlobalVarG2.gsy // 18 * 13
                         if usa == 9:
-                            yp = gsy // 18 * 14
+                            yp = GlobalVarG2.gsy // 18 * 14
                         if usa == 10:
-                            yp = gsy // 18 * 15
+                            yp = GlobalVarG2.gsy // 18 * 15
                         usa = 0
                     else:
-                        canaleSoundPuntatore.play(selind)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         risposta = True
                 if event.key == pygame.K_s and voceMarcata == 0 and not tastoTrovato:
                     primoMovimento = True
@@ -4740,87 +4758,87 @@ def oggetti(dati, canzone):
                     # usa?
                     if voceMarcata == 1:
                         voceMarcata = 0
-                        canaleSoundPuntatore.play(selezione)
-                        xp = gsx // 32 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        xp = GlobalVarG2.gsx // 32 * 1
                         # pozione
                         if usa == 1:
                             dati[5] = dati[5] + 100
                             if dati[5] > pvtot:
                                 dati[5] = pvtot
                             dati[31] = dati[31] - 1
-                            yp = gsy // 18 * 5
+                            yp = GlobalVarG2.gsy // 18 * 5
                         # carica batt
                         if usa == 2:
                             dati[10] = dati[10] + 250
                             if dati[10] > entot:
                                 dati[10] = entot
                             dati[32] = dati[32] - 1
-                            yp = gsy // 18 * 6
+                            yp = GlobalVarG2.gsy // 18 * 6
                         # antidoto
                         if usa == 3:
                             dati[121] = 0
                             dati[33] = dati[33] - 1
-                            yp = gsy // 18 * 7
+                            yp = GlobalVarG2.gsy // 18 * 7
                         # super pozione
                         if usa == 4:
                             dati[5] = dati[5] + 300
                             if dati[5] > pvtot:
                                 dati[5] = pvtot
                             dati[34] = dati[34] - 1
-                            yp = gsy // 18 * 8
+                            yp = GlobalVarG2.gsy // 18 * 8
                         # carica migliorato
                         if usa == 5:
                             dati[10] = dati[10] + 600
                             if dati[10] > entot:
                                 dati[10] = entot
                             dati[35] = dati[35] - 1
-                            yp = gsy // 18 * 9
+                            yp = GlobalVarG2.gsy // 18 * 9
                         # bomba
                         if usa == 6:
                             attacco = 2
-                            yp = gsy // 18 * 11
+                            yp = GlobalVarG2.gsy // 18 * 11
                         # bomba veleno
                         if usa == 7:
                             attacco = 3
-                            yp = gsy // 18 * 12
+                            yp = GlobalVarG2.gsy // 18 * 12
                         # esca
                         if usa == 8:
                             attacco = 4
-                            yp = gsy // 18 * 13
+                            yp = GlobalVarG2.gsy // 18 * 13
                         # bomba appiccicosa
                         if usa == 9:
                             attacco = 5
-                            yp = gsy // 18 * 14
+                            yp = GlobalVarG2.gsy // 18 * 14
                         # bomba potenziata
                         if usa == 10:
                             attacco = 6
-                            yp = gsy // 18 * 15
+                            yp = GlobalVarG2.gsy // 18 * 15
                         usa = 0
                         usadue = False
                     elif voceMarcata == 2:
                         voceMarcata = 0
-                        canaleSoundPuntatore.play(selind)
-                        xp = gsx // 32 * 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                        xp = GlobalVarG2.gsx // 32 * 1
                         if usa == 1:
-                            yp = gsy // 18 * 5
+                            yp = GlobalVarG2.gsy // 18 * 5
                         if usa == 2:
-                            yp = gsy // 18 * 6
+                            yp = GlobalVarG2.gsy // 18 * 6
                         if usa == 3:
-                            yp = gsy // 18 * 7
+                            yp = GlobalVarG2.gsy // 18 * 7
                         if usa == 4:
-                            yp = gsy // 18 * 8
+                            yp = GlobalVarG2.gsy // 18 * 8
                         if usa == 5:
-                            yp = gsy // 18 * 9
+                            yp = GlobalVarG2.gsy // 18 * 9
                         if usa == 6:
-                            yp = gsy // 18 * 11
+                            yp = GlobalVarG2.gsy // 18 * 11
                         if usa == 7:
-                            yp = gsy // 18 * 12
+                            yp = GlobalVarG2.gsy // 18 * 12
                         if usa == 8:
-                            yp = gsy // 18 * 13
+                            yp = GlobalVarG2.gsy // 18 * 13
                         if usa == 9:
-                            yp = gsy // 18 * 14
+                            yp = GlobalVarG2.gsy // 18 * 14
                         if usa == 10:
-                            yp = gsy // 18 * 15
+                            yp = GlobalVarG2.gsy // 18 * 15
                         usa = 0
                         usadue = False
 
@@ -4828,74 +4846,74 @@ def oggetti(dati, canzone):
                     if usadue:
                         if oggetton == 1:
                             if dati[31] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 1
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 2:
                             if dati[32] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 2
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 3:
                             if dati[33] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 3
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 4:
                             if dati[34] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 4
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 5:
                             if dati[35] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 5
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 6:
                             if dati[36] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 6
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 7:
                             if dati[37] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 7
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 8:
                             if dati[38] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 8
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 9:
                             if dati[39] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 9
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         if oggetton == 10:
                             if dati[40] > 0:
-                                canaleSoundPuntatore.play(selezione)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                 usa = 10
                                 usauno = True
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
 
@@ -4904,248 +4922,248 @@ def oggetti(dati, canzone):
                 tastotempfps = 2
             if tastop == pygame.K_w and voceMarcata == 0:
                 if oggetton != 1 and oggetton != 6:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     oggetton = oggetton - 1
-                    yp = yp - gsy // 18 * 1
+                    yp = yp - GlobalVarG2.gsy // 18 * 1
                 elif oggetton == 6:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     oggetton = oggetton - 1
-                    yp = yp - gsy // 18 * 2
+                    yp = yp - GlobalVarG2.gsy // 18 * 2
                 elif oggetton == 1:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = gsy // 18 * 15
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 15
                     oggetton = 10
             if tastop == pygame.K_a and voceMarcata != 0:
                 if voceMarcata == 2:
                     voceMarcata -= 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp - gsx // 32 * 3
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp - GlobalVarG2.gsx // 32 * 3
             if tastop == pygame.K_s and voceMarcata == 0:
                 if oggetton != 10 and oggetton != 5:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     oggetton = oggetton + 1
-                    yp = yp + gsy // 18 * 1
+                    yp = yp + GlobalVarG2.gsy // 18 * 1
                 elif oggetton == 5:
-                    canaleSoundPuntatore.play(spostapun)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     oggetton = oggetton + 1
-                    yp = yp + gsy // 18 * 2
+                    yp = yp + GlobalVarG2.gsy // 18 * 2
                 elif oggetton == 10:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = gsy // 18 * 5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 5
                     oggetton = 1
             if tastop == pygame.K_d and voceMarcata != 0:
                 if voceMarcata == 1:
                     voceMarcata += 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp + gsx // 32 * 3
-            schermo.fill(grigioscu)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp + GlobalVarG2.gsx // 32 * 3
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
 
             # menu conferma
             if usa != 0:
-                pygame.draw.rect(schermo, grigio, (gsx // 32 * 10, gsy // 18 * 12.5, gsx // 32 * 9, gsy // 18 * 4))
-                schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 18, gsy // 18 * 12.5))
-                schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 18, gsy // 18 * 15.5))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 12.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 4))
+                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 12.5))
+                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5))
                 # posizionare il cursore su menu usa
                 if usauno:
                     xpv = xp
                     ypv = yp
-                    xp = gsx // 32 * 15
-                    yp = gsy // 18 * 15.1
+                    xp = GlobalVarG2.gsx // 32 * 15
+                    yp = GlobalVarG2.gsy // 18 * 15.1
                     voceMarcata = 2
                     usauno = False
-                schermo.blit(puntatorevecchio, (xpv, ypv))
-                messaggio("Usare?", grigiochi, gsx // 32 * 13.3, gsy // 18 * 13.2, 80)
-                messaggio("Si", grigiochi, gsx // 32 * 13, gsy // 18 * 15, 60)
-                messaggio("No", grigiochi, gsx // 32 * 16, gsy // 18 * 15, 60)
+                GlobalVarG2.schermo.blit(puntatorevecchio, (xpv, ypv))
+                messaggio("Usare?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.3, GlobalVarG2.gsy // 18 * 13.2, 80)
+                messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13, GlobalVarG2.gsy // 18 * 15, 60)
+                messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 15, 60)
 
             # pozione, carica batt, bomba, antidoto, bomba veleno, esca, super poz, carica migliorato, bomba pot, bomba atomica
-            messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
+            messaggio("Oggetti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
             if dati[31] >= 0:
-                messaggio("Pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
-                messaggio("x %i" % dati[31], grigiochi, gsx // 32 * 9.3, gsy // 18 * 5, 45)
+                messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 45)
+                messaggio("x %i" % dati[31], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 5, 45)
                 if oggetton == 1:
-                    messaggio("Pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 100 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 45)
             if dati[32] >= 0:
-                messaggio("Caricabatterie", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
-                messaggio("x %i" % dati[32], grigiochi, gsx // 32 * 9.3, gsy // 18 * 6, 45)
+                messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 45)
+                messaggio("x %i" % dati[32], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 6, 45)
                 if oggetton == 2:
-                    messaggio("Caricabatterie:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Caricabatterie:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 250 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 45)
             if dati[33] >= 0:
-                messaggio("Medicina", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
-                messaggio("x %i" % dati[33], grigiochi, gsx // 32 * 9.3, gsy // 18 * 7, 45)
+                messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 45)
+                messaggio("x %i" % dati[33], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 7, 45)
                 if oggetton == 3:
-                    messaggio("Medicina:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Medicina:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Cura avvelenamento a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 45)
             if dati[34] >= 0:
-                messaggio("Super pozione", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
-                messaggio("x %i" % dati[34], grigiochi, gsx // 32 * 9.3, gsy // 18 * 8, 45)
+                messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 45)
+                messaggio("x %i" % dati[34], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 8, 45)
                 if oggetton == 4:
-                    messaggio("Super pozione:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Super pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 300 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 45)
             if dati[35] >= 0:
-                messaggio("Carica plus", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
-                messaggio("x %i" % dati[35], grigiochi, gsx // 32 * 9.3, gsy // 18 * 9, 45)
+                messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 45)
+                messaggio("x %i" % dati[35], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 9, 45)
                 if oggetton == 5:
-                    messaggio("Carica plus:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 20, gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Carica plus:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Recupera 600 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 45)
             if dati[36] >= 0:
-                messaggio("Bomba", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
-                messaggio("x %i" % dati[36], grigiochi, gsx // 32 * 9.3, gsy // 18 * 11, 45)
+                messaggio("Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11, 45)
+                messaggio("x %i" % dati[36], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 11, 45)
                 if oggetton == 6:
-                    messaggio("Bomba:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", grigiochi, gsx // 32 * 20,
-                              gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Bomba:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                              GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 11, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11, 45)
             if dati[37] >= 0:
-                messaggio("Bomba velenosa", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
-                messaggio("x %i" % dati[37], grigiochi, gsx // 32 * 9.3, gsy // 18 * 12, 45)
+                messaggio("Bomba velenosa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 45)
+                messaggio("x %i" % dati[37], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 12, 45)
                 if oggetton == 7:
-                    messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Infligge avvelenamento al nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
-                              gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Bomba velenosa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Infligge avvelenamento al nemico su cui viene lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                              GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 12, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 45)
             if dati[38] >= 0:
-                messaggio("Esca", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
-                messaggio("x %i" % dati[38], grigiochi, gsx // 32 * 9.3, gsy // 18 * 13, 45)
+                messaggio("Esca", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 45)
+                messaggio("x %i" % dati[38], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 13, 45)
                 if oggetton == 8:
-                    messaggio("Esca:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", grigiochi, gsx // 32 * 20,
-                              gsy // 18 * 14.5, 35)
-                    messaggio("riprenderla passandoci sopra", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Esca:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Distrae i nemici finché non viene distrutta. È possibile", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                              GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("riprenderla passandoci sopra", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 45)
             if dati[39] >= 0:
-                messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
-                messaggio("x %i" % dati[39], grigiochi, gsx // 32 * 9.3, gsy // 18 * 14, 45)
+                messaggio("Bomba appiccicosa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 45)
+                messaggio("x %i" % dati[39], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 14, 45)
                 if oggetton == 9:
-                    messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", grigiochi, gsx // 32 * 20,
-                              gsy // 18 * 14.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Bomba appiccicosa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                              GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 45)
             if dati[40] >= 0:
-                messaggio("Bomba potenziata", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
-                messaggio("x %i" % dati[40], grigiochi, gsx // 32 * 9.3, gsy // 18 * 15, 45)
+                messaggio("Bomba potenziata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 45)
+                messaggio("x %i" % dati[40], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 15, 45)
                 if oggetton == 10:
-                    messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 20, gsy // 18 * 13.5, 60)
-                    messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", grigiochi, gsx // 32 * 20,
-                              gsy // 18 * 14.5, 35)
-                    messaggio("vasto raggio", grigiochi, gsx // 32 * 20, gsy // 18 * 15, 35)
-                    messaggio("", grigiochi, gsx // 32 * 20, gsy // 18 * 15.5, 35)
+                    messaggio("Bomba potenziata:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Infligge molti danni ai nemici su cui viene lanciata in un", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20,
+                              GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("vasto raggio", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
-                messaggio("???", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 45)
+                messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 45)
 
             # vita-status personaggio
             if dati[5] < 0:
                 dati[5] = 0
-            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 14, gsy // 18 * 4, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 5, 50)
-            persmen = pygame.transform.scale(persGrafMenu, (gpx * 3, gpy * 3))
-            schermo.blit(persmen, (gsx // 32 * 11, gsy // 18 * 4))
-            schermo.blit(sfondostastart, (gsx // 32 * 14, (gsy // 18 * 6) + (gpy // 8)))
+            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 4, 50)
+            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 5, 50)
+            persmen = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+            GlobalVarG2.schermo.blit(persmen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, (GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy // 8)))
             if dati[121]:
-                avvelenato = pygame.transform.scale(avvelenatoo, (gpx, gpy))
-                schermo.blit(avvelenato, (gsx // 32 * 14, gsy // 18 * 6))
+                avvelenato = pygame.transform.scale(GlobalVarG2.avvelenatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                GlobalVarG2.schermo.blit(avvelenato, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 6))
             if dati[123] > 0:
-                attaccopiu = pygame.transform.scale(attaccopiuo, (gpx, gpy))
-                schermo.blit(attaccopiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 6))
+                attaccopiu = pygame.transform.scale(GlobalVarG2.attaccopiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                GlobalVarG2.schermo.blit(attaccopiu, ((GlobalVarG2.gsx // 32 * 14) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 6))
             if dati[124] > 0:
-                difesapiu = pygame.transform.scale(difesapiuo, (gpx, gpy))
-                schermo.blit(difesapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 6))
+                difesapiu = pygame.transform.scale(GlobalVarG2.difesapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                GlobalVarG2.schermo.blit(difesapiu, ((GlobalVarG2.gsx // 32 * 14) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 6))
             # vita-status robo
             if dati[10] < 0:
                 dati[10] = 0
-            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 14, gsy // 18 * 9, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 14, gsy // 18 * 10, 50)
-            robomen = pygame.transform.scale(robograf, (gpx * 3, gpy * 3))
-            schermo.blit(robomen, (gsx // 32 * 11, gsy // 18 * 8))
-            schermo.blit(sfondostastart, (gsx // 32 * 14, gsy // 18 * 11))
+            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 9, 50)
+            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 10, 50)
+            robomen = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+            GlobalVarG2.schermo.blit(robomen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 8))
+            GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
             if dati[122] > 0:
-                surriscaldato = pygame.transform.scale(surriscaldatoo, (gpx, gpy))
-                schermo.blit(surriscaldato, (gsx // 32 * 14, gsy // 18 * 11))
+                surriscaldato = pygame.transform.scale(GlobalVarG2.surriscaldatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                GlobalVarG2.schermo.blit(surriscaldato, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
             if dati[125] > 0:
-                velocitapiu = pygame.transform.scale(velocitapiuo, (gpx, gpy))
-                schermo.blit(velocitapiu, ((gsx // 32 * 14) + (2 * gpx // 4 * 3), gsy // 18 * 11))
+                velocitapiu = pygame.transform.scale(GlobalVarG2.velocitapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                GlobalVarG2.schermo.blit(velocitapiu, ((GlobalVarG2.gsx // 32 * 14) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
             if dati[126] > 0:
-                efficienzapiu = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
-                schermo.blit(efficienzapiu, ((gsx // 32 * 14) + (4 * gpx // 4 * 3), gsy // 18 * 11))
+                efficienzapiu = pygame.transform.scale(GlobalVarG2.efficienzapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                GlobalVarG2.schermo.blit(efficienzapiu, ((GlobalVarG2.gsx // 32 * 14) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
 
             if attacco != 0:
                 risposta = True
 
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-            schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 20, gsy // 18 * 3))
-            schermo.blit(puntatore, (xp, yp))
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            GlobalVarG2.schermo.blit(imgOggetti[oggetton - 1], (GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 3))
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             if usa == 0:
-                pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))), (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
+                pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xp + (int(GlobalVarG2.gpx // 1.5))), yp + (int(GlobalVarG2.gpy * 0.7))), (xp + (int(GlobalVarG2.gpx * 9.5)), yp + (int(GlobalVarG2.gpy * 0.7))), 2)
             else:
-                pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))), (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
+                pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xpv + (int(GlobalVarG2.gpx // 1.5))), ypv + (int(GlobalVarG2.gpy * 0.7))), (xpv + (int(GlobalVarG2.gpx * 9.5)), ypv + (int(GlobalVarG2.gpy * 0.7))), 2)
 
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
     return dati, attacco
 
 
 def chiediconferma(conferma, canzone):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    xp = gsx // 32 * 17.5
-    yp = gsy // 18 * 10.3
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    xp = GlobalVarG2.gsx // 32 * 17.5
+    yp = GlobalVarG2.gsy // 18 * 10.3
 
     tastop = 0
     tastotempfps = 5
 
-    schermo.fill(grigioscu)
+    GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
     if conferma == 1:
-        messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6.5, 120)
+        messaggio(u"Tornare al menu principale?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 6.5, 120)
     elif conferma == 2:
-        messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 8, gsy // 18 * 6.5, 120)
-    messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 9.5, 120)
-    messaggio("No", grigiochi, gsx // 32 * 19, gsy // 18 * 9.5, 120)
-    messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-    schermo.blit(puntatore, (xp, yp))
+        messaggio("Tornare a Windows?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 6.5, 120)
+    messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 9.5, 120)
+    messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 9.5, 120)
+    messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+    GlobalVarG2.schermo.blit(puntatore, (xp, yp))
     pygame.display.update()
     voceMarcata = 2
     while True:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(canzone)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -5165,7 +5183,7 @@ def chiediconferma(conferma, canzone):
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     return False, False
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
@@ -5176,14 +5194,14 @@ def chiediconferma(conferma, canzone):
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     tastoTrovato = True
                     if voceMarcata == 1:
-                        canaleSoundPuntatore.play(selezione)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         if conferma == 1:
                             return True, True
                         elif conferma == 2:
                             pygame.quit()
                             quit()
                     elif voceMarcata == 2:
-                        canaleSoundPuntatore.play(selind)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         return False, False
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
@@ -5194,55 +5212,55 @@ def chiediconferma(conferma, canzone):
             if tastop == pygame.K_a:
                 if voceMarcata == 2:
                     voceMarcata -= 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 9.5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 9.5
             if tastop == pygame.K_d:
                 if voceMarcata == 1:
                     voceMarcata += 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gsx // 32 * 17.5
-            schermo.fill(grigioscu)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 17.5
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             if conferma == 1:
-                messaggio(u"Tornare al menu principale?", grigiochi, gsx // 32 * 5, gsy // 18 * 6.5, 120)
+                messaggio(u"Tornare al menu principale?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 6.5, 120)
             elif conferma == 2:
-                messaggio("Tornare a Windows?", grigiochi, gsx // 32 * 8, gsy // 18 * 6.5, 120)
-            messaggio("Si", grigiochi, gsx // 32 * 11, gsy // 18 * 9.5, 120)
-            messaggio("No", grigiochi, gsx // 32 * 19, gsy // 18 * 9.5, 120)
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-            schermo.blit(puntatore, (xp, yp))
+                messaggio("Tornare a Windows?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 6.5, 120)
+            messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 9.5, 120)
+            messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 9.5, 120)
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
 
 
 def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, apriocchio):
-    sfondostastart = pygame.transform.scale(sfondostax3, (gpx * 4, gpy))
-    perssta = pygame.transform.scale(persGrafMenu, (gpx * 10, gpy * 10))
-    robosta = pygame.transform.scale(robograf, (gpx * 10, gpy * 10))
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    avvelenatosta = pygame.transform.scale(avvelenatoo, (gpx, gpy))
-    surriscaldatosta = pygame.transform.scale(surriscaldatoo, (gpx, gpy))
-    attaccopiusta = pygame.transform.scale(attaccopiuo, (gpx, gpy))
-    difesapiusta = pygame.transform.scale(difesapiuo, (gpx, gpy))
-    velocitapiusta = pygame.transform.scale(velocitapiuo, (gpx, gpy))
-    efficienzapiusta = pygame.transform.scale(efficienzapiuo, (gpx, gpy))
+    sfondostastart = pygame.transform.scale(GlobalVarG2.sfondostax3, (GlobalVarG2.gpx * 4, GlobalVarG2.gpy))
+    perssta = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
+    robosta = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    avvelenatosta = pygame.transform.scale(GlobalVarG2.avvelenatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    surriscaldatosta = pygame.transform.scale(GlobalVarG2.surriscaldatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    attaccopiusta = pygame.transform.scale(GlobalVarG2.attaccopiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    difesapiusta = pygame.transform.scale(GlobalVarG2.difesapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    velocitapiusta = pygame.transform.scale(GlobalVarG2.velocitapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    efficienzapiusta = pygame.transform.scale(GlobalVarG2.efficienzapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
     if dati[133] == 0:
-        faretraFrecceStart = faretraFrecceStart0
+        faretraFrecceStart = GlobalVarG2.faretraFrecceStart0
         maxFrecce = 1
     elif dati[133] == 1:
-        faretraFrecceStart = faretraFrecceStart1
+        faretraFrecceStart = GlobalVarG2.faretraFrecceStart1
         maxFrecce = 5
     elif dati[133] == 2:
-        faretraFrecceStart = faretraFrecceStart2
+        faretraFrecceStart = GlobalVarG2.faretraFrecceStart2
         maxFrecce = 20
     elif dati[133] == 3:
-        faretraFrecceStart = faretraFrecceStart3
+        faretraFrecceStart = GlobalVarG2.faretraFrecceStart3
         maxFrecce = 60
     else:
         faretraFrecceStart = 0
         maxFrecce = 0
-    xp = gsx // 32 * 1
-    yp = gsy // 18 * 5
+    xp = GlobalVarG2.gsx // 32 * 1
+    yp = GlobalVarG2.gsy // 18 * 5
     carim = True
     risposta = False
     attacco = 0
@@ -5257,83 +5275,84 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
     if True:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
-        schermo.fill(grigioscu)
+        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
-        messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
-        messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
-        messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 50)
-        messaggio("Mappa", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 50)
-        messaggio("Diario", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 50)
+        pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 12.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 4))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 15.5))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
+        messaggio("Menu start", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+        messaggio("Oggetti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 50)
+        messaggio("Equipaggiamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 50)
+        messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 50)
+        messaggio("Mappa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 50)
+        messaggio("Diario", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 50)
+        messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 50)
         if nmost == -1:
-            messaggio("Salva", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 50)
+            messaggio("Salva", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
         else:
-            messaggio("Salva", grigioscu, gsx // 32 * 2, gsy // 18 * 13, 50)
-        messaggio(u"Torna al menu principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
-        messaggio("Torna a Windows", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 50)
-        messaggio(u"Esc / Q: Esci dal menu", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
+            messaggio("Salva", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
+        messaggio(u"Torna al menu principale", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
+        messaggio("Torna a Windows", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
+        messaggio(u"Esc / Q: Esci dal menu", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 1, 50)
         if carim:
             if dati[10] <= 0:
-                robosta = robograff
-                robosta = pygame.transform.scale(robosta, (gpx * 10, gpy * 10))
+                robosta = GlobalVarG2.robograff
+                robosta = pygame.transform.scale(robosta, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
             else:
-                robosta = robograf
-                robosta = pygame.transform.scale(robosta, (gpx * 10, gpy * 10))
+                robosta = GlobalVarG2.robograf
+                robosta = pygame.transform.scale(robosta, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
             carim = False
 
         # vita-status personaggio
         if dati[5] < 0:
             dati[5] = 0
-        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 13.5, gsy // 18 * 13, 50)
-        messaggio("Lv:  " + str(dati[4]), grigiochi, gsx // 32 * 13.5, gsy // 18 * 14, 50)
+        messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 13, 50)
+        messaggio("Lv:  " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 14, 50)
         if dati[4] < 100:
-            messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), grigiochi, gsx // 32 * 16, gsy // 18 * 14,
+            messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 14,
                       50)
         else:
-            messaggio("Esp:  -- / --", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 13.5, gsy // 18 * 15, 50)
-        schermo.blit(sfondostastart, (gsx // 32 * 13.5, (gsy // 18 * 16) + (gpy // 8)))
+            messaggio("Esp:  -- / --", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 14, 50)
+        messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 15, 50)
+        GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 13.5, (GlobalVarG2.gsy // 18 * 16) + (GlobalVarG2.gpy // 8)))
         if dati[121]:
-            schermo.blit(avvelenatosta, (gsx // 32 * 13.5, gsy // 18 * 16))
+            GlobalVarG2.schermo.blit(avvelenatosta, (GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 16))
         if dati[123] > 0:
-            schermo.blit(attaccopiusta, ((gsx // 32 * 13.5) + (2 * gpx // 4 * 3), gsy // 18 * 16))
+            GlobalVarG2.schermo.blit(attaccopiusta, ((GlobalVarG2.gsx // 32 * 13.5) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 16))
         if dati[124] > 0:
-            schermo.blit(difesapiusta, ((gsx // 32 * 13.5) + (4 * gpx // 4 * 3), gsy // 18 * 16))
+            GlobalVarG2.schermo.blit(difesapiusta, ((GlobalVarG2.gsx // 32 * 13.5) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 16))
         # vita-status robo
         if dati[10] < 0:
             dati[10] = 0
-        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 23.5, gsy // 18 * 13, 50)
-        messaggio("Status alterativi: ", grigiochi, gsx // 32 * 23.5, gsy // 18 * 14, 50)
-        schermo.blit(sfondostastart, (gsx // 32 * 23.5, (gsy // 18 * 15) + (gpy // 8)))
+        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 13, 50)
+        messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 14, 50)
+        GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 23.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 8)))
         if dati[122] > 0:
-            schermo.blit(surriscaldatosta, (gsx // 32 * 23.5, gsy // 18 * 15))
+            GlobalVarG2.schermo.blit(surriscaldatosta, (GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 15))
         if dati[125] > 0:
-            schermo.blit(velocitapiusta, ((gsx // 32 * 23.5) + (2 * gpx // 4 * 3), gsy // 18 * 15))
+            GlobalVarG2.schermo.blit(velocitapiusta, ((GlobalVarG2.gsx // 32 * 23.5) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 15))
         if dati[126] > 0:
-            schermo.blit(efficienzapiusta, ((gsx // 32 * 23.5) + (4 * gpx // 4 * 3), gsy // 18 * 15))
+            GlobalVarG2.schermo.blit(efficienzapiusta, ((GlobalVarG2.gsx // 32 * 23.5) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 15))
 
         if attacco != 0:
             risposta = True
 
         if faretraFrecceStart != 0:
-            schermo.blit(faretraFrecceStart, (gsx // 32 * 21.5, gsy // 18 * 2.5))
-            messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), grigiochi, gsx // 32 * 21.5, gsy // 18 * 6, 50)
-        schermo.blit(sacchettoDenaroStart, (gsx // 32 * 26.5, gsy // 18 * 2.5))
-        messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26.5, gsy // 18 * 6, 50)
+            GlobalVarG2.schermo.blit(faretraFrecceStart, (GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 2.5))
+            messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 6, 50)
+        GlobalVarG2.schermo.blit(GlobalVarG2.sacchettoDenaroStart, (GlobalVarG2.gsx // 32 * 26.5, GlobalVarG2.gsy // 18 * 2.5))
+        messaggio("Monete: " + str(dati[131]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 26.5, GlobalVarG2.gsy // 18 * 6, 50)
 
-        schermo.blit(perssta, (gsx // 32 * 11.5, gsy // 18 * 2))
-        schermo.blit(robosta, (gsx // 32 * 21, gsy // 18 * 2))
-        schermo.blit(puntatore, (xp, yp))
+        GlobalVarG2.schermo.blit(perssta, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 2))
+        GlobalVarG2.schermo.blit(robosta, (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 2))
+        GlobalVarG2.schermo.blit(puntatore, (xp, yp))
         pygame.display.update()
 
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(c27)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(GlobalVarG2.c27)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -5353,7 +5372,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 tastotempfps = 5
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     inizio = False
                     risposta = True
                 if event.key == pygame.K_s and not tastoTrovato:
@@ -5364,22 +5383,22 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     tastoTrovato = True
                 if event.key == pygame.K_SPACE and not tastoTrovato:
                     tastoTrovato = True
-                    if voceMarcata != 6 or (voceMarcata == 6 and nmost == -1):
-                        canaleSoundPuntatore.play(selezione)
+                    if voceMarcata != 7 or (voceMarcata == 7 and nmost == -1):
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     else:
-                        canaleSoundPuntatore.play(selimp)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                     inizio = False
                     # oggetti
                     if voceMarcata == 1:
-                        dati, attacco = oggetti(dati, c27)
+                        dati, attacco = oggetti(dati, GlobalVarG2.c27)
                         carim = True
                     # equip pers
                     if voceMarcata == 2:
-                        dati = equip(dati, c27)
+                        dati = equip(dati, GlobalVarG2.c27)
                         carim = True
                     # equip robot
                     if voceMarcata == 3:
-                        dati = equiprobo(dati, c27)
+                        dati = equiprobo(dati, GlobalVarG2.c27)
                         carim = True
                     # mappa
                     if voceMarcata == 4:
@@ -5387,17 +5406,20 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     # diario
                     if voceMarcata == 5:
                         print ("diario")
-                    # salva
+                    # impostazioni
                     if voceMarcata == 6:
+                        menuImpostazioni(GlobalVarG2.c27, False)
+                    # salva
+                    if voceMarcata == 7:
                         #if nmost == -1:
-                        n = scegli_sal(3, len(dati), c27)
+                        n = scegli_sal(3, len(dati), GlobalVarG2.c27)
                         if n != -1:
                             salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti)
                     # menu
-                    if voceMarcata == 7:
+                    if voceMarcata == 8:
                         conferma = 1
                     # chiudi
-                    if voceMarcata == 8:
+                    if voceMarcata == 9:
                         conferma = 2
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
@@ -5406,126 +5428,127 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_s:
-                if voceMarcata != 5 and voceMarcata != 8:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = yp + gsy // 18 * 1
+                if voceMarcata != 5 and voceMarcata != 9:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = yp + GlobalVarG2.gsy // 18 * 1
                     voceMarcata += 1
                 else:
                     if voceMarcata == 5:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp + gsy // 18 * 4
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp + GlobalVarG2.gsy // 18 * 3
                         voceMarcata += 1
-                    elif voceMarcata == 8:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 5
+                    elif voceMarcata == 9:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 5
                         voceMarcata = 1
             if tastop == pygame.K_w:
                 if voceMarcata != 6 and voceMarcata != 1:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = yp - gsy // 18 * 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = yp - GlobalVarG2.gsy // 18 * 1
                     voceMarcata -= 1
                 else:
                     if voceMarcata == 6:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = yp - gsy // 18 * 4
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = yp - GlobalVarG2.gsy // 18 * 3
                         voceMarcata -= 1
                     elif voceMarcata == 1:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 15
-                        voceMarcata = 8
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 15
+                        voceMarcata = 9
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
             # chiedere conferma per uscire
             if conferma != 0:
-                inizio, risposta = chiediconferma(conferma, c27)
+                inizio, risposta = chiediconferma(conferma, GlobalVarG2.c27)
                 conferma = 0
 
-            schermo.fill(grigioscu)
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 1, gsy // 18 * 4, gsx // 32 * 10, gsy // 18 * 12.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 1, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 10, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 10, gsy // 18 * 15.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 1, gsy // 18 * 15.5))
-            messaggio("Menu start", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 5, 50)
-            messaggio("Equipaggiamento", grigiochi, gsx // 32 * 2, gsy // 18 * 6, 50)
-            messaggio("Setta Colco", grigiochi, gsx // 32 * 2, gsy // 18 * 7, 50)
-            messaggio("Mappa", grigiochi, gsx // 32 * 2, gsy // 18 * 8, 50)
-            messaggio("Diario", grigiochi, gsx // 32 * 2, gsy // 18 * 9, 50)
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
+            messaggio("Menu start", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+            messaggio("Oggetti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 50)
+            messaggio("Equipaggiamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 50)
+            messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 50)
+            messaggio("Mappa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 50)
+            messaggio("Diario", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 50)
+            messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 50)
             if nmost == -1:
-                messaggio("Salva", grigiochi, gsx // 32 * 2, gsy // 18 * 13, 50)
+                messaggio("Salva", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
             else:
-                messaggio("Salva", grigioscu, gsx // 32 * 2, gsy // 18 * 13, 50)
-            messaggio(u"Torna al menu principale", grigiochi, gsx // 32 * 2, gsy // 18 * 14, 50)
-            messaggio("Torna a Windows", grigiochi, gsx // 32 * 2, gsy // 18 * 15, 50)
-            messaggio(u"Esc / Q: Esci dal menu", grigiochi, gsx // 32 * 23, gsy // 18 * 1, 50)
+                messaggio("Salva", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
+            messaggio(u"Torna al menu principale", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
+            messaggio("Torna a Windows", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
+            messaggio(u"Esc / Q: Esci dal menu", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 1, 50)
             if carim:
                 if dati[10] <= 0:
-                    robosta = robograff
-                    robosta = pygame.transform.scale(robosta, (gpx * 10, gpy * 10))
+                    robosta = GlobalVarG2.robograff
+                    robosta = pygame.transform.scale(robosta, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
                 else:
-                    robosta = robograf
-                    robosta = pygame.transform.scale(robosta, (gpx * 10, gpy * 10))
+                    robosta = GlobalVarG2.robograf
+                    robosta = pygame.transform.scale(robosta, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
                 carim = False
 
             # vita-status personaggio
             if dati[5] < 0:
                 dati[5] = 0
-            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), grigiochi, gsx // 32 * 13.5, gsy // 18 * 13, 50)
-            messaggio("Lv:  " + str(dati[4]), grigiochi, gsx // 32 * 13.5, gsy // 18 * 14, 50)
+            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 13, 50)
+            messaggio("Lv:  " + str(dati[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 14, 50)
             if dati[4] < 100:
-                messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), grigiochi, gsx // 32 * 16, gsy // 18 * 14, 50)
+                messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 14, 50)
             else:
-                messaggio("Esp:  -- / --", grigiochi, gsx // 32 * 16, gsy // 18 * 14, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 13.5, gsy // 18 * 15, 50)
-            schermo.blit(sfondostastart, (gsx // 32 * 13.5, (gsy // 18 * 16) + (gpy // 8)))
+                messaggio("Esp:  -- / --", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 14, 50)
+            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 15, 50)
+            GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 13.5, (GlobalVarG2.gsy // 18 * 16) + (GlobalVarG2.gpy // 8)))
             if dati[121]:
-                schermo.blit(avvelenatosta, (gsx // 32 * 13.5, gsy // 18 * 16))
+                GlobalVarG2.schermo.blit(avvelenatosta, (GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 16))
             if dati[123] > 0:
-                schermo.blit(attaccopiusta, ((gsx // 32 * 13.5) + (2 * gpx // 4 * 3), gsy // 18 * 16))
+                GlobalVarG2.schermo.blit(attaccopiusta, ((GlobalVarG2.gsx // 32 * 13.5) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 16))
             if dati[124] > 0:
-                schermo.blit(difesapiusta, ((gsx // 32 * 13.5) + (4 * gpx // 4 * 3), gsy // 18 * 16))
+                GlobalVarG2.schermo.blit(difesapiusta, ((GlobalVarG2.gsx // 32 * 13.5) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 16))
             # vita-status robo
             if dati[10] < 0:
                 dati[10] = 0
-            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), grigiochi, gsx // 32 * 23.5, gsy // 18 * 13, 50)
-            messaggio("Status alterativi: ", grigiochi, gsx // 32 * 23.5, gsy // 18 * 14, 50)
-            schermo.blit(sfondostastart, (gsx // 32 * 23.5, (gsy // 18 * 15) + (gpy // 8)))
+            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 13, 50)
+            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 14, 50)
+            GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 23.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 8)))
             if dati[122] > 0:
-                schermo.blit(surriscaldatosta, (gsx // 32 * 23.5, gsy // 18 * 15))
+                GlobalVarG2.schermo.blit(surriscaldatosta, (GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 15))
             if dati[125] > 0:
-                schermo.blit(velocitapiusta, ((gsx // 32 * 23.5) + (2 * gpx // 4 * 3), gsy // 18 * 15))
+                GlobalVarG2.schermo.blit(velocitapiusta, ((GlobalVarG2.gsx // 32 * 23.5) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 15))
             if dati[126] > 0:
-                schermo.blit(efficienzapiusta, ((gsx // 32 * 23.5) + (4 * gpx // 4 * 3), gsy // 18 * 15))
+                GlobalVarG2.schermo.blit(efficienzapiusta, ((GlobalVarG2.gsx // 32 * 23.5) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 15))
 
             if attacco != 0:
                 risposta = True
 
             if faretraFrecceStart != 0:
-                schermo.blit(faretraFrecceStart, (gsx // 32 * 21.5, gsy // 18 * 2.5))
-                messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), grigiochi, gsx // 32 * 21.5, gsy // 18 * 6, 50)
-            schermo.blit(sacchettoDenaroStart, (gsx // 32 * 26.5, gsy // 18 * 2.5))
-            messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26.5, gsy // 18 * 6, 50)
+                GlobalVarG2.schermo.blit(faretraFrecceStart, (GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 2.5))
+                messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 21.5, GlobalVarG2.gsy // 18 * 6, 50)
+            GlobalVarG2.schermo.blit(GlobalVarG2.sacchettoDenaroStart, (GlobalVarG2.gsx // 32 * 26.5, GlobalVarG2.gsy // 18 * 2.5))
+            messaggio("Monete: " + str(dati[131]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 26.5, GlobalVarG2.gsy // 18 * 6, 50)
 
-            schermo.blit(perssta, (gsx // 32 * 11.5, gsy // 18 * 2))
-            schermo.blit(robosta, (gsx // 32 * 21, gsy // 18 * 2))
-            schermo.blit(puntatore, (xp, yp))
+            GlobalVarG2.schermo.blit(perssta, (GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 2))
+            GlobalVarG2.schermo.blit(robosta, (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 2))
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             if not risposta:
                 pygame.display.update()
             else:
-                schermo.fill(grigioscu)
+                GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
 
-        clockMenu.tick(fpsMenu)
-    canaleSoundCanzone.stop()
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
+    GlobalVarG2.canaleSoundCanzone.stop()
     return dati, inizio, attacco
 
 
 def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
-    xp = gpx * 1
-    yp = gpy * 5
-    sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 4, gpy * 4))
-    sconosciutoOggettoIco = pygame.transform.scale(sconosciutoOggettoIcoMenu, (gpx, gpy))
+    xp = GlobalVarG2.gpx * 1
+    yp = GlobalVarG2.gpy * 5
+    sconosciutoOggetto = pygame.transform.scale(GlobalVarG2.sconosciutoOggettoMenu, (GlobalVarG2.gpx * 4, GlobalVarG2.gpy * 4))
+    sconosciutoOggettoIco = pygame.transform.scale(GlobalVarG2.sconosciutoOggettoIcoMenu, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
@@ -5546,8 +5569,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
     vettoreOggettiIco = []
     while oggetton <= 10:
         if dati[oggetton + 30] >= 0:
-            vettoreOggettiGraf.append(vetImgOggettiStart[oggetton - 1])
-            vettoreOggettiIco.append(vetIcoOggettiMenu[oggetton - 1])
+            vettoreOggettiGraf.append(GlobalVarG2.vetImgOggettiStart[oggetton - 1])
+            vettoreOggettiIco.append(GlobalVarG2.vetIcoOggettiMenu[oggetton - 1])
         else:
             vettoreOggettiGraf.append(sconosciutoOggetto)
             vettoreOggettiIco.append(sconosciutoOggettoIco)
@@ -5555,7 +5578,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
 
     # primo frame
     if True:
-        schermo.blit(sfondoStartBattaglia, (0, 0))
+        GlobalVarG2.schermo.blit(GlobalVarG2.sfondoStartBattaglia, (0, 0))
         if difensivi:
             if voceMarcata == 1:
                 disegnoOggetto = 0
@@ -5578,48 +5601,48 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                 disegnoOggetto = 8
             if voceMarcata == 5:
                 disegnoOggetto = 9
-        schermo.blit(vettoreOggettiGraf[disegnoOggetto], (gpx // 2, gpy * 1))
+        GlobalVarG2.schermo.blit(vettoreOggettiGraf[disegnoOggetto], (GlobalVarG2.gpx // 2, GlobalVarG2.gpy * 1))
         if dati[disegnoOggetto + 31] <= 0:
-            schermo.blit(puntatOut, (xp, yp))
+            GlobalVarG2.schermo.blit(GlobalVarG2.puntatOut, (xp, yp))
             qta = 0
         else:
-            schermo.blit(puntatIn, (xp, yp))
+            GlobalVarG2.schermo.blit(GlobalVarG2.puntatIn, (xp, yp))
             qta = dati[disegnoOggetto + 31]
-        messaggio("x%i" % qta, grigiochi, (gpx * 4) + (gpx // 2), gpy * 3, 80)
+        messaggio("x%i" % qta, GlobalVarG2.grigiochi, (GlobalVarG2.gpx * 4) + (GlobalVarG2.gpx // 2), GlobalVarG2.gpy * 3, 80)
         disegnati = 0
         i = 0
         while i < 10:
             if difensivi and (i == 0 or i == 1 or i == 2 or i == 3 or i == 4):
-                schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), gpy * 5))
+                GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), GlobalVarG2.gpy * 5))
                 disegnati += 1
             if offensivi and (i == 5 or i == 6 or i == 7 or i == 8 or i == 9):
-                schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), (gpy * 5) + (gpy // 2)))
+                GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), (GlobalVarG2.gpy * 5) + (GlobalVarG2.gpy // 2)))
                 disegnati += 1
             i += 1
         if difensivi:
             if voceMarcata == 1:
-                messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 2:
-                messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 3:
-                messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 4:
-                messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 5:
-                messaggio("Carica plus", grigiochi, gpx // 3, gpy // 3, 55)
-            schermo.blit(scorriGiu, (gpx * 3, gpy * 6))
+                messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
+            GlobalVarG2.schermo.blit(GlobalVarG2.scorriGiu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 6))
         if offensivi:
             if voceMarcata == 1:
-                messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 2:
-                messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Bomba velenosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 3:
-                messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Esca", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 4:
-                messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 55)
+                messaggio("Bomba appiccicosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
             if voceMarcata == 5:
-                messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 55)
-            schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
+                messaggio("Bomba potenziata", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
+            GlobalVarG2.schermo.blit(GlobalVarG2.scorriSu, (GlobalVarG2.gpx * 3, (GlobalVarG2.gpy * 5) - (GlobalVarG2.gpy // 2)))
 
         if not risposta:
             pygame.display.update()
@@ -5643,7 +5666,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                 tastotempfps = 5
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
                     tastoTrovato = True
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
@@ -5670,7 +5693,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                             sposta = True
                             risposta = True
                         # carica batt
-                        if voceMarcata == 2 and dati[32] > 0 and (abs(x - rx) + abs(y - ry)) <= gpx:
+                        if voceMarcata == 2 and dati[32] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVarG2.gpx:
                             animaOggetto[0] = "caricaBatterie"
                             dati[10] = dati[10] + 250
                             if dati[10] > entot:
@@ -5704,7 +5727,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                             sposta = True
                             risposta = True
                         # carica migliorato
-                        if voceMarcata == 5 and dati[35] > 0 and (abs(x - rx) + abs(y - ry)) <= gpx:
+                        if voceMarcata == 5 and dati[35] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVarG2.gpx:
                             animaOggetto[0] = "caricaBatterieMigliorato"
                             dati[10] = dati[10] + 600
                             if dati[10] > entot:
@@ -5745,9 +5768,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
 
                     if risposta:
                         if offensivi:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     else:
-                        canaleSoundPuntatore.play(selimp)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
 
@@ -5756,35 +5779,35 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                 tastotempfps = 2
             if tastop == pygame.K_w:
                 if offensivi:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = gpy * 5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gpy * 5
                     offensivi = False
                     difensivi = True
             if tastop == pygame.K_a:
                 if voceMarcata != 1:
                     voceMarcata -= 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp - gpx
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp - GlobalVarG2.gpx
                 else:
                     voceMarcata += 4
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gpx * 5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gpx * 5
             if tastop == pygame.K_s:
                 if difensivi:
-                    canaleSoundPuntatore.play(spostapun)
-                    yp = (gpy * 5) + (gpy // 2)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = (GlobalVarG2.gpy * 5) + (GlobalVarG2.gpy // 2)
                     difensivi = False
                     offensivi = True
             if tastop == pygame.K_d:
                 if voceMarcata != 5:
                     voceMarcata += 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp + gpx
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp + GlobalVarG2.gpx
                 else:
                     voceMarcata -= 4
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = gpx * 1
-            schermo.blit(sfondoStartBattaglia, (0, 0))
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gpx * 1
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoStartBattaglia, (0, 0))
             if difensivi:
                 if voceMarcata == 1:
                     disegnoOggetto = 0
@@ -5807,65 +5830,65 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                     disegnoOggetto = 8
                 if voceMarcata == 5:
                     disegnoOggetto = 9
-            schermo.blit(vettoreOggettiGraf[disegnoOggetto], (gpx // 2, gpy * 1))
+            GlobalVarG2.schermo.blit(vettoreOggettiGraf[disegnoOggetto], (GlobalVarG2.gpx // 2, GlobalVarG2.gpy * 1))
             if dati[disegnoOggetto + 31] <= 0:
-                schermo.blit(puntatOut, (xp, yp))
+                GlobalVarG2.schermo.blit(GlobalVarG2.puntatOut, (xp, yp))
                 qta = 0
-            elif (disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > gpx:
-                schermo.blit(puntatOut, (xp, yp))
+            elif (disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > GlobalVarG2.gpx:
+                GlobalVarG2.schermo.blit(GlobalVarG2.puntatOut, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
             else:
-                schermo.blit(puntatIn, (xp, yp))
+                GlobalVarG2.schermo.blit(GlobalVarG2.puntatIn, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
-            messaggio("x%i" % qta, grigiochi, (gpx * 4) + (gpx // 2), gpy * 3, 80)
+            messaggio("x%i" % qta, GlobalVarG2.grigiochi, (GlobalVarG2.gpx * 4) + (GlobalVarG2.gpx // 2), GlobalVarG2.gpy * 3, 80)
             disegnati = 0
             i = 0
             while i < 10:
                 if difensivi and (i == 0 or i == 1 or i == 2 or i == 3 or i == 4):
-                    schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), gpy * 5))
+                    GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), GlobalVarG2.gpy * 5))
                     disegnati += 1
                 if offensivi and (i == 5 or i == 6 or i == 7 or i == 8 or i == 9):
-                    schermo.blit(vettoreOggettiIco[i], (gpx * (disegnati + 1), (gpy * 5) + (gpy // 2)))
+                    GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), (GlobalVarG2.gpy * 5) + (GlobalVarG2.gpy // 2)))
                     disegnati += 1
                 i += 1
             if difensivi:
                 if voceMarcata == 1:
-                    messaggio("Pozione", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 2:
-                    messaggio("Caricabatterie", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 3:
-                    messaggio("Medicina", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 4:
-                    messaggio("Super pozione", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 5:
-                    messaggio("Carica plus", grigiochi, gpx // 3, gpy // 3, 55)
-                schermo.blit(scorriGiu, (gpx * 3, gpy * 6))
+                    messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
+                GlobalVarG2.schermo.blit(GlobalVarG2.scorriGiu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 6))
             if offensivi:
                 if voceMarcata == 1:
-                    messaggio("Bomba", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 2:
-                    messaggio("Bomba velenosa", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Bomba velenosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 3:
-                    messaggio("Esca", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Esca", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 4:
-                    messaggio("Bomba appiccicosa", grigiochi, gpx // 3, gpy // 3, 55)
+                    messaggio("Bomba appiccicosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
                 if voceMarcata == 5:
-                    messaggio("Bomba potenziata", grigiochi, gpx // 3, gpy // 3, 55)
-                schermo.blit(scorriSu, (gpx * 3, (gpy * 5) - (gpy // 2)))
+                    messaggio("Bomba potenziata", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
+                GlobalVarG2.schermo.blit(GlobalVarG2.scorriSu, (GlobalVarG2.gpx * 3, (GlobalVarG2.gpy * 5) - (GlobalVarG2.gpy // 2)))
 
             if not risposta:
                 pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
     return dati, attacco, sposta, animaOggetto, npers
 
 
 def menuMercante(dati):
-    puntatore = pygame.transform.scale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatorevecchio = pygame.transform.scale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    sconosciutoOggetto = pygame.transform.scale(sconosciutoOggettoMenu, (gpx * 10, gpy * 10))
-    xp = gsx // 32 * 10.5
-    yp = gsy // 18 * 6.1
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    sconosciutoOggetto = pygame.transform.scale(GlobalVarG2.sconosciutoOggettoMenu, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
+    xp = GlobalVarG2.gsx // 32 * 10.5
+    yp = GlobalVarG2.gsy // 18 * 6.1
     xpv = xp
     ypv = yp
     usauno = False
@@ -5876,6 +5899,7 @@ def menuMercante(dati):
     numeroOggettiAcquistati = 1
     moneteInsufficienti = False
     inventarioPieno = False
+    primoFrame = True
 
     maxFrecce = 1
     if dati[133] == 1:
@@ -5892,266 +5916,14 @@ def menuMercante(dati):
     i = 1
     while i <= 10:
         if (i == 1 and dati[0] > -1) or (i == 2 and dati[0] > -1) or (i == 3 and dati[0] > -1) or (i == 4 and dati[0] > -1) or (i == 5 and dati[0] > -1) or (i == 6 and dati[0] > -1) or (i == 7 and dati[0] > -1) or (i == 8 and dati[0] > -1) or (i == 9 and dati[0] > -1) or (i == 10 and dati[0] > -1):
-            imgOggetti.append(vetImgOggettiMercante[i - 1])
+            imgOggetti.append(GlobalVarG2.vetImgOggettiMercante[i - 1])
         else:
             imgOggetti.append(sconosciutoOggetto)
         i += 1
 
-    # primo frame
-    if True:
-        schermo.fill(grigioscu)
-        # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-        pygame.draw.rect(schermo, grigio, (gsx // 32 * 10.5, gsy // 18 * 4, gsx // 32 * 11, gsy // 18 * 13.5))
-        schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 10.5, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 20.5, gsy // 18 * 4))
-        schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 20.5, gsy // 18 * 16.5))
-        schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 10.5, gsy // 18 * 16.5))
-
-        schermo.blit(sacchettoDenaroMercante, (gsx // 32 * 22, gsy // 18 * 14))
-        messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26, gsy // 18 * 15.8, 50)
-
-        schermo.blit(mercanteGraf, (gsx // 32 * 0, gsy // 18 * 8.5))
-        schermo.blit(sfondoDialogoMercante, (gsx // 32 * 0.5, gsy // 18 * 4))
-        if moneteInsufficienti:
-            messaggio("Non hai abbastanza monete!", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
-        elif inventarioPieno:
-            messaggio("Non puoi prenderne altri...", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
-        elif usa == 0:
-            messaggio("Prendi quello che ti serve", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
-        else:
-            messaggio("Quanti te ne servono?", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
-
-        messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
-        if 1 <= oggetton <= 10:
-            schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 23, gsy // 18 * 3))
-        elif oggetton == 0:
-            schermo.blit(frecciaMenu, (gsx // 32 * 23, gsy // 18 * 3))
-        elif oggetton == 11:
-            if dati[133] == 0:
-                schermo.blit(faretra1Menu, (gsx // 32 * 23, gsy // 18 * 3))
-            elif dati[133] == 1:
-                schermo.blit(faretra2Menu, (gsx // 32 * 23, gsy // 18 * 3))
-            else:
-                schermo.blit(faretra3Menu, (gsx // 32 * 23, gsy // 18 * 3))
-
-        # menu conferma
-        if usa != 0:
-            # posizionare il cursore sul menu compra
-            if usauno:
-                xpv = xp
-                ypv = yp
-                xp = gsx // 32 * 5.3
-                yp = gsy // 18 * 6.5
-                voceMarcata = 2
-                usauno = False
-            schermo.blit(puntatorevecchio, (xpv, ypv))
-            messaggio("x" + str(numeroOggettiAcquistati), grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 50)
-            if oggetton == 11:
-                schermo.blit(scorriSuGiuBloccato, (gsx // 32 * 8.5, gsy // 18 * 4.3))
-                if dati[133] == 1:
-                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 1] * numeroOggettiAcquistati),
-                              grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
-                elif dati[133] >= 2:
-                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 2] * numeroOggettiAcquistati),
-                              grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
-                else:
-                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi,
-                              gsx // 32 * 1, gsy // 18 * 5.3, 50)
-            else:
-                schermo.blit(scorriSuGiu, (gsx // 32 * 8.5, gsy // 18 * 4.3))
-                messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi,
-                          gsx // 32 * 1, gsy // 18 * 5.3, 50)
-            messaggio("Conferma", grigiochi, gsx // 32 * 2, gsy // 18 * 6.5, 50)
-            messaggio("Annulla", grigiochi, gsx // 32 * 6, gsy // 18 * 6.5, 50)
-
-        messaggio("Acquista oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-        messaggio("Oggetti acquistabili", grigiochi, gsx // 32 * 11.5, gsy // 18 * 4.8, 40)
-        messaggio("Costo", grigiochi, gsx // 32 * 16.5, gsy // 18 * 4.8, 40)
-        messaggio("Posseduti", grigiochi, gsx // 32 * 18.5, gsy // 18 * 4.8, 40)
-        pygame.draw.line(schermo, grigiochi, (int(gpx * 11), int(gpy * 5.5)), (int(gpx * 21), int(gpy * 5.5)), 1)
-
-        messaggio("Freccia", grigiochi, gsx // 32 * 11.5, gsy // 18 * 6.2, 40)
-        messaggio(str(costoOggetti[0]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 6.2, 40)
-        messaggio("x%i" % dati[132], grigiochi, gsx // 32 * 19, gsy // 18 * 6.2, 40)
-        if oggetton == 0:
-            messaggio("Freccia:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-            messaggio("Usate per attaccare i nemici a distanza", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        if imgOggetti[0] != sconosciutoOggetto:
-            messaggio("Pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
-            messaggio(str(costoOggetti[1]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 7.1, 40)
-            if dati[31] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
-            else:
-                messaggio("x%i" % dati[31], grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
-            if oggetton == 1:
-                messaggio("Pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
-        if imgOggetti[1] != sconosciutoOggetto:
-            messaggio("Caricabatterie", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
-            messaggio(str(costoOggetti[2]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8, 40)
-            if dati[32] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
-            else:
-                messaggio("x%i" % dati[32], grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
-            if oggetton == 2:
-                messaggio("Caricabatterie:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
-        if imgOggetti[2] != sconosciutoOggetto:
-            messaggio("Medicina", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
-            messaggio(str(costoOggetti[3]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8.9, 40)
-            if dati[33] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
-            else:
-                messaggio("x%i" % dati[33], grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
-            if oggetton == 3:
-                messaggio("Medicina:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
-        if imgOggetti[3] != sconosciutoOggetto:
-            messaggio("Super pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
-            messaggio(str(costoOggetti[4]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 9.8, 40)
-            if dati[34] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
-            else:
-                messaggio("x%i" % dati[34], grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
-            if oggetton == 4:
-                messaggio("Super pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
-        if imgOggetti[4] != sconosciutoOggetto:
-            messaggio("Carica plus", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
-            messaggio(str(costoOggetti[5]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 10.7, 40)
-            if dati[35] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
-            else:
-                messaggio("x%i" % dati[35], grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
-            if oggetton == 5:
-                messaggio("Carica plus:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
-        if imgOggetti[5] != sconosciutoOggetto:
-            messaggio("Bomba", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
-            messaggio(str(costoOggetti[6]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 11.6, 40)
-            if dati[36] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
-            else:
-                messaggio("x%i" % dati[36], grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
-            if oggetton == 6:
-                messaggio("Bomba:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Infligge un po' di danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5,
-                          gsy // 18 * 12.5, 35)
-                messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
-        if imgOggetti[6] != sconosciutoOggetto:
-            messaggio("Bomba velenosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
-            messaggio(str(costoOggetti[7]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 12.5, 40)
-            if dati[37] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
-            else:
-                messaggio("x%i" % dati[37], grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
-            if oggetton == 7:
-                messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Infligge avvelenamento al nemico su cui viene", grigiochi, gsx // 32 * 22.5,
-                          gsy // 18 * 12.5, 35)
-                messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
-        if imgOggetti[7] != sconosciutoOggetto:
-            messaggio("Esca", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
-            messaggio(str(costoOggetti[8]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 13.4, 40)
-            if dati[38] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
-            else:
-                messaggio("x%i" % dati[38], grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
-            if oggetton == 8:
-                messaggio("Esca:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio(u"Distrae i nemici finché non viene distrutta. È", grigiochi, gsx // 32 * 22.5,
-                          gsy // 18 * 12.5, 35)
-                messaggio("possibile riprenderla passandoci sopra", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
-        if imgOggetti[8] != sconosciutoOggetto:
-            messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
-            messaggio(str(costoOggetti[9]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 14.3, 40)
-            if dati[39] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
-            else:
-                messaggio("x%i" % dati[39], grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
-            if oggetton == 9:
-                messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio(u"Dimezza la velocità del nemico su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5,
-                          35)
-                messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
-        if imgOggetti[9] != sconosciutoOggetto:
-            messaggio("Bomba potenziata", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
-            messaggio(str(costoOggetti[10]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 15.2, 40)
-            if dati[40] < 0:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
-            else:
-                messaggio("x%i" % dati[40], grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
-            if oggetton == 10:
-                messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Infligge molti danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5,
-                          35)
-                messaggio("lanciata in un vasto raggio", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-        else:
-            messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
-        messaggio("Faretra", grigiochi, gsx // 32 * 11.5, gsy // 18 * 16.1, 40)
-        if dati[133] == 0:
-            messaggio(str(costoOggetti[11]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
-        if dati[133] == 1:
-            messaggio(str(costoOggetti[12]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
-        if dati[133] >= 2:
-            messaggio(str(costoOggetti[13]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
-        if dati[133] == 3:
-            messaggio("x1", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
-        else:
-            messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
-        if oggetton == 11:
-            messaggio("Faretra:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-            messaggio(u"Permette di trasportare più frecce", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-            messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
-
-        schermo.blit(puntatore, (xp, yp))
-        if usa == 0:
-            pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))),
-                             (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
-        else:
-            pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))),
-                             (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
-        pygame.display.update()
-
     while not risposta:
-        if not canaleSoundCanzone.get_busy():
-            canaleSoundCanzone.play(c27)
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(GlobalVarG2.c27)
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
@@ -6170,38 +5942,38 @@ def menuMercante(dati):
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
-                    canaleSoundPuntatore.play(selind)
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     numeroOggettiAcquistati = 1
                     moneteInsufficienti = False
                     inventarioPieno = False
                     tastoTrovato = True
                     voceMarcata = 0
                     if usa != 0:
-                        xp = gsx // 32 * 10.5
+                        xp = GlobalVarG2.gsx // 32 * 10.5
                         if usa == -1:
-                            yp = gsy // 18 * 6.1
+                            yp = GlobalVarG2.gsy // 18 * 6.1
                         if usa == 1:
-                            yp = gsy // 18 * 7
+                            yp = GlobalVarG2.gsy // 18 * 7
                         if usa == 2:
-                            yp = gsy // 18 * 7.9
+                            yp = GlobalVarG2.gsy // 18 * 7.9
                         if usa == 3:
-                            yp = gsy // 18 * 8.8
+                            yp = GlobalVarG2.gsy // 18 * 8.8
                         if usa == 4:
-                            yp = gsy // 18 * 9.7
+                            yp = GlobalVarG2.gsy // 18 * 9.7
                         if usa == 5:
-                            yp = gsy // 18 * 10.6
+                            yp = GlobalVarG2.gsy // 18 * 10.6
                         if usa == 6:
-                            yp = gsy // 18 * 11.5
+                            yp = GlobalVarG2.gsy // 18 * 11.5
                         if usa == 7:
-                            yp = gsy // 18 * 12.4
+                            yp = GlobalVarG2.gsy // 18 * 12.4
                         if usa == 8:
-                            yp = gsy // 18 * 13.3
+                            yp = GlobalVarG2.gsy // 18 * 13.3
                         if usa == 9:
-                            yp = gsy // 18 * 14.2
+                            yp = GlobalVarG2.gsy // 18 * 14.2
                         if usa == 10:
-                            yp = gsy // 18 * 15.1
+                            yp = GlobalVarG2.gsy // 18 * 15.1
                         if usa == 11:
-                            yp = gsy // 18 * 16
+                            yp = GlobalVarG2.gsy // 18 * 16
                         usa = 0
                     else:
                         risposta = True
@@ -6233,130 +6005,130 @@ def menuMercante(dati):
 
                     # usa?
                     if voceMarcata == 1:
-                        if 1 <= oggetton <= 10 and costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
-                            canaleSoundInterazioni.play(rumoreAcquisto)
-                            dati[131] -= costoOggetti[oggetton] * numeroOggettiAcquistati
+                        if 0 <= oggetton <= 10 and GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                            GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.rumoreAcquisto)
+                            dati[131] -= GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
-                            xp = gsx // 32 * 10.5
+                            xp = GlobalVarG2.gsx // 32 * 10.5
                             # freccia
                             if usa == -1:
                                 dati[132] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 6.1
+                                yp = GlobalVarG2.gsy // 18 * 6.1
                             # pozione
                             if usa == 1:
                                 dati[31] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 7
+                                yp = GlobalVarG2.gsy // 18 * 7
                             # carica batt
                             if usa == 2:
                                 dati[32] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 7.9
+                                yp = GlobalVarG2.gsy // 18 * 7.9
                             # antidoto
                             if usa == 3:
                                 dati[33] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 8.8
+                                yp = GlobalVarG2.gsy // 18 * 8.8
                             # super pozione
                             if usa == 4:
                                 dati[34] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 9.7
+                                yp = GlobalVarG2.gsy // 18 * 9.7
                             # carica migliorato
                             if usa == 5:
                                 dati[35] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 10.6
+                                yp = GlobalVarG2.gsy // 18 * 10.6
                             # bomba
                             if usa == 6:
                                 dati[36] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 11.5
+                                yp = GlobalVarG2.gsy // 18 * 11.5
                             # bomba veleno
                             if usa == 7:
                                 dati[37] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 12.4
+                                yp = GlobalVarG2.gsy // 18 * 12.4
                             # esca
                             if usa == 8:
                                 dati[38] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 13.3
+                                yp = GlobalVarG2.gsy // 18 * 13.3
                             # bomba appiccicosa
                             if usa == 9:
                                 dati[39] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 14.2
+                                yp = GlobalVarG2.gsy // 18 * 14.2
                             # bomba potenziata
                             if usa == 10:
                                 dati[40] += numeroOggettiAcquistati
-                                yp = gsy // 18 * 15.1
+                                yp = GlobalVarG2.gsy // 18 * 15.1
                             usa = 0
                             usadue = False
                         elif oggetton == 11:
-                            if dati[133] == 0 and costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
-                                canaleSoundInterazioni.play(rumoreAcquisto)
-                                dati[131] -= costoOggetti[oggetton] * numeroOggettiAcquistati
+                            if dati[133] == 0 and GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                                GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.rumoreAcquisto)
+                                dati[131] -= GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati
                                 voceMarcata = 0
-                                xp = gsx // 32 * 10.5
+                                xp = GlobalVarG2.gsx // 32 * 10.5
                                 # faretra
                                 if usa == 10:
                                     dati[40] += numeroOggettiAcquistati
-                                    yp = gsy // 18 * 15.1
+                                    yp = GlobalVarG2.gsy // 18 * 15.1
                                 usa = 0
                                 usadue = False
-                            elif dati[133] == 1 and costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
-                                canaleSoundInterazioni.play(rumoreAcquisto)
-                                dati[131] -= costoOggetti[oggetton + 1] * numeroOggettiAcquistati
+                            elif dati[133] == 1 and GlobalVarG2.costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
+                                GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.rumoreAcquisto)
+                                dati[131] -= GlobalVarG2.costoOggetti[oggetton + 1] * numeroOggettiAcquistati
                                 voceMarcata = 0
-                                xp = gsx // 32 * 10.5
+                                xp = GlobalVarG2.gsx // 32 * 10.5
                                 # faretra
                                 if usa == 10:
                                     dati[40] += numeroOggettiAcquistati
-                                    yp = gsy // 18 * 15.1
+                                    yp = GlobalVarG2.gsy // 18 * 15.1
                                 usa = 0
                                 usadue = False
-                            elif dati[133] == 2 and costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
-                                canaleSoundInterazioni.play(rumoreAcquisto)
-                                dati[131] -= costoOggetti[oggetton + 2] * numeroOggettiAcquistati
+                            elif dati[133] == 2 and GlobalVarG2.costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
+                                GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.rumoreAcquisto)
+                                dati[131] -= GlobalVarG2.costoOggetti[oggetton + 2] * numeroOggettiAcquistati
                                 voceMarcata = 0
-                                xp = gsx // 32 * 10.5
+                                xp = GlobalVarG2.gsx // 32 * 10.5
                                 # faretra
                                 if usa == 10:
                                     dati[40] += numeroOggettiAcquistati
-                                    yp = gsy // 18 * 15.1
+                                    yp = GlobalVarG2.gsy // 18 * 15.1
                                 usa = 0
                                 usadue = False
                             else:
-                                canaleSoundPuntatore.play(selimp)
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                                 moneteInsufficienti = True
                                 usadue = False
                         else:
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             moneteInsufficienti = True
                             usadue = False
                     elif voceMarcata == 2:
-                        canaleSoundPuntatore.play(selind)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         voceMarcata = 0
                         numeroOggettiAcquistati = 1
                         moneteInsufficienti = False
                         inventarioPieno = False
-                        xp = gsx // 32 * 10.5
+                        xp = GlobalVarG2.gsx // 32 * 10.5
                         if usa == -1:
-                            yp = gsy // 18 * 6.1
+                            yp = GlobalVarG2.gsy // 18 * 6.1
                         if usa == 1:
-                            yp = gsy // 18 * 7
+                            yp = GlobalVarG2.gsy // 18 * 7
                         if usa == 2:
-                            yp = gsy // 18 * 7.9
+                            yp = GlobalVarG2.gsy // 18 * 7.9
                         if usa == 3:
-                            yp = gsy // 18 * 8.8
+                            yp = GlobalVarG2.gsy // 18 * 8.8
                         if usa == 4:
-                            yp = gsy // 18 * 9.7
+                            yp = GlobalVarG2.gsy // 18 * 9.7
                         if usa == 5:
-                            yp = gsy // 18 * 10.6
+                            yp = GlobalVarG2.gsy // 18 * 10.6
                         if usa == 6:
-                            yp = gsy // 18 * 11.5
+                            yp = GlobalVarG2.gsy // 18 * 11.5
                         if usa == 7:
-                            yp = gsy // 18 * 12.4
+                            yp = GlobalVarG2.gsy // 18 * 12.4
                         if usa == 8:
-                            yp = gsy // 18 * 13.3
+                            yp = GlobalVarG2.gsy // 18 * 13.3
                         if usa == 9:
-                            yp = gsy // 18 * 14.2
+                            yp = GlobalVarG2.gsy // 18 * 14.2
                         if usa == 10:
-                            yp = gsy // 18 * 15.1
+                            yp = GlobalVarG2.gsy // 18 * 15.1
                         if usa == 11:
-                            yp = gsy // 18 * 16
+                            yp = GlobalVarG2.gsy // 18 * 16
                         usa = 0
                         usadue = False
 
@@ -6366,131 +6138,132 @@ def menuMercante(dati):
                             numeroOggettiAcquistati = 1
                             if oggetton == 1:
                                 if imgOggetti[0] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 1
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 2:
                                 if imgOggetti[1] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 2
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 3:
                                 if imgOggetti[2] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 3
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 4:
                                 if imgOggetti[3] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 4
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 5:
                                 if imgOggetti[4] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 5
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 6:
                                 if imgOggetti[5] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 6
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 7:
                                 if imgOggetti[6] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 7
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 8:
                                 if imgOggetti[7] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 8
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 9:
                                 if imgOggetti[8] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 9
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             if oggetton == 10:
                                 if imgOggetti[9] != sconosciutoOggetto:
-                                    canaleSoundPuntatore.play(selezione)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                                     usa = 10
                                     usauno = True
                                 else:
-                                    canaleSoundPuntatore.play(selimp)
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         elif oggetton == 0 and dati[132] < maxFrecce:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             usa = -1
                             usauno = True
                         elif oggetton == 11 and dati[133] != 3:
-                            canaleSoundPuntatore.play(selezione)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             usa = 11
                             usauno = True
                         else:
                             inventarioPieno = True
-                            canaleSoundPuntatore.play(selimp)
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0):
+        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+            primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
                 if voceMarcata == 0:
                     if oggetton != 0:
-                        canaleSoundPuntatore.play(spostapun)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         oggetton = oggetton - 1
-                        yp = yp - gsy // 18 * 0.9
+                        yp = yp - GlobalVarG2.gsy // 18 * 0.9
                     elif oggetton == 0:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 16
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 16
                         oggetton = 11
                 elif voceMarcata != 0:
                     if oggetton != 11:
-                        canaleSoundPuntatore.play(spostapun)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         if 1 <= oggetton <= 10 and numeroOggettiAcquistati + dati[30 + oggetton] >= 99:
                             numeroOggettiAcquistati = 1
                         elif oggetton == 0 and numeroOggettiAcquistati + dati[132] < maxFrecce:
-                            numeroOggettiAcquistati = 1
-                        else:
                             numeroOggettiAcquistati += 1
+                        else:
+                            numeroOggettiAcquistati = 1
                     else:
-                        canaleSoundPuntatore.play(selimp)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         numeroOggettiAcquistati = 1
             if tastop == pygame.K_a and voceMarcata != 0:
                 if voceMarcata == 2:
                     voceMarcata -= 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp - gsx // 32 * 4
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp - GlobalVarG2.gsx // 32 * 4
             if tastop == pygame.K_s:
                 if voceMarcata == 0:
                     if oggetton != 11:
-                        canaleSoundPuntatore.play(spostapun)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         oggetton = oggetton + 1
-                        yp = yp + gsy // 18 * 0.9
+                        yp = yp + GlobalVarG2.gsy // 18 * 0.9
                     elif oggetton == 11:
-                        canaleSoundPuntatore.play(spostapun)
-                        yp = gsy // 18 * 6.1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        yp = GlobalVarG2.gsy // 18 * 6.1
                         oggetton = 0
                 elif voceMarcata != 0:
                     if oggetton != 11:
-                        canaleSoundPuntatore.play(spostapun)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         if 1 <= oggetton <= 10 and numeroOggettiAcquistati == 1:
                             numeroOggettiAcquistati = 99 - dati[30 + oggetton]
                         elif oggetton == 0 and numeroOggettiAcquistati == 1:
@@ -6498,13 +6271,13 @@ def menuMercante(dati):
                         else:
                             numeroOggettiAcquistati -= 1
                     else:
-                        canaleSoundPuntatore.play(selimp)
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         numeroOggettiAcquistati = 1
             if tastop == pygame.K_d and voceMarcata != 0:
                 if voceMarcata == 1:
                     voceMarcata += 1
-                    canaleSoundPuntatore.play(spostapun)
-                    xp = xp + gsx // 32 * 4
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = xp + GlobalVarG2.gsx // 32 * 4
 
             maxFrecce = 1
             if dati[133] == 1:
@@ -6514,40 +6287,40 @@ def menuMercante(dati):
             elif dati[133] == 3:
                 maxFrecce = 60
 
-            schermo.fill(grigioscu)
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(schermo, grigio, (gsx // 32 * 10.5, gsy // 18 * 4, gsx // 32 * 11, gsy // 18 * 13.5))
-            schermo.blit(sfondoTriangolinoAltoSinistra, (gsx // 32 * 10.5, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoAltoDestra, (gsx // 32 * 20.5, gsy // 18 * 4))
-            schermo.blit(sfondoTriangolinoBassoDestra, (gsx // 32 * 20.5, gsy // 18 * 16.5))
-            schermo.blit(sfondoTriangolinoBassoSinistra, (gsx // 32 * 10.5, gsy // 18 * 16.5))
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 13.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 16.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 16.5))
 
-            schermo.blit(sacchettoDenaroMercante, (gsx // 32 * 22, gsy // 18 * 14))
-            messaggio("Monete: " + str(dati[131]), grigiochi, gsx // 32 * 26, gsy // 18 * 15.8, 50)
+            GlobalVarG2.schermo.blit(GlobalVarG2.sacchettoDenaroMercante, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 14))
+            messaggio("Monete: " + str(dati[131]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 15.8, 50)
 
-            schermo.blit(mercanteGraf, (gsx // 32 * 0, gsy // 18 * 8.5))
-            schermo.blit(sfondoDialogoMercante, (gsx // 32 * 0.5, gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.mercanteGraf, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 8.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialogoMercante, (GlobalVarG2.gsx // 32 * 0.5, GlobalVarG2.gsy // 18 * 4))
             if moneteInsufficienti:
-                messaggio("Non hai abbastanza monete!", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
-            elif inventarioPieno:
-                messaggio("Non puoi prenderne altri...", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
-            elif usa == 0:
-                messaggio("Prendi quello che ti serve", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+                messaggio("Non hai abbastanza monete!", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 2.1, GlobalVarG2.gsy // 18 * 6.1, 40)
+            if inventarioPieno:
+                messaggio("Non puoi prenderne altri...", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 2.4, GlobalVarG2.gsy // 18 * 5.3, 40)
+            if usa == 0:
+                messaggio("Prendi quello che ti serve", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.5, 50)
             else:
-                messaggio("Quanti te ne servono?", grigiochi, gsx // 32 * 1, gsy // 18 * 4.5, 50)
+                messaggio("Quanti te ne servono?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.5, 50)
 
-            messaggio("Q: torna indietro", grigiochi, gsx // 32 * 25, gsy // 18 * 1, 50)
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
             if 1 <= oggetton <= 10:
-                schermo.blit(imgOggetti[oggetton - 1], (gsx // 32 * 23, gsy // 18 * 3))
+                GlobalVarG2.schermo.blit(imgOggetti[oggetton - 1], (GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3))
             elif oggetton == 0:
-                schermo.blit(frecciaMenu, (gsx // 32 * 23, gsy // 18 * 3))
+                GlobalVarG2.schermo.blit(GlobalVarG2.frecciaMenu, (GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3))
             elif oggetton == 11:
                 if dati[133] == 0:
-                    schermo.blit(faretra1Menu, (gsx // 32 * 23, gsy // 18 * 3))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.faretra1Menu, (GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3))
                 elif dati[133] == 1:
-                    schermo.blit(faretra2Menu, (gsx // 32 * 23, gsy // 18 * 3))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.faretra2Menu, (GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3))
                 else:
-                    schermo.blit(faretra3Menu, (gsx // 32 * 23, gsy // 18 * 3))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.faretra3Menu, (GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 3))
 
             # menu conferma
             if usa != 0:
@@ -6555,204 +6328,592 @@ def menuMercante(dati):
                 if usauno:
                     xpv = xp
                     ypv = yp
-                    xp = gsx // 32 * 5.3
-                    yp = gsy // 18 * 6.5
+                    xp = GlobalVarG2.gsx // 32 * 5.3
+                    yp = GlobalVarG2.gsy // 18 * 6.9
                     voceMarcata = 2
                     usauno = False
-                schermo.blit(puntatorevecchio, (xpv, ypv))
-                messaggio("x" + str(numeroOggettiAcquistati), grigiochi, gsx // 32 * 7.5, gsy // 18 * 4.5, 50)
+                GlobalVarG2.schermo.blit(puntatorevecchio, (xpv, ypv))
+                messaggio("x" + str(numeroOggettiAcquistati), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 7.5, GlobalVarG2.gsy // 18 * 4.5, 50)
                 if oggetton == 11:
-                    schermo.blit(scorriSuGiuBloccato, (gsx // 32 * 8.5, gsy // 18 * 4.3))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.scorriSuGiuBloccato, (GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * 4.3))
                     if dati[133] == 1:
-                        messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 1] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                        messaggio("(Monete necessarie: %i)" % (GlobalVarG2.costoOggetti[oggetton + 1] * numeroOggettiAcquistati), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 5.3, 50)
                     elif dati[133] >= 2:
-                        messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton + 2] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                        messaggio("(Monete necessarie: %i)" % (GlobalVarG2.costoOggetti[oggetton + 2] * numeroOggettiAcquistati), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 5.3, 50)
                     else:
-                        messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
+                        messaggio("(Monete necessarie: %i)" % (GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 5.3, 50)
                 else:
-                    schermo.blit(scorriSuGiu, (gsx // 32 * 8.5, gsy // 18 * 4.3))
-                    messaggio("(Monete necessarie: %i)" % (costoOggetti[oggetton] * numeroOggettiAcquistati), grigiochi, gsx // 32 * 1, gsy // 18 * 5.3, 50)
-                messaggio("Conferma", grigiochi, gsx // 32 * 2, gsy // 18 * 6.5, 50)
-                messaggio("Annulla", grigiochi, gsx // 32 * 6, gsy // 18 * 6.5, 50)
+                    GlobalVarG2.schermo.blit(GlobalVarG2.scorriSuGiu, (GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * 4.3))
+                    messaggio("(Monete necessarie: %i)" % (GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 5.3, 50)
+                messaggio("Conferma", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.9, 50)
+                messaggio("Annulla", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 6, GlobalVarG2.gsy // 18 * 6.9, 50)
 
-            messaggio("Acquista oggetti", grigiochi, gsx // 32 * 2, gsy // 18 * 1, 150)
-            messaggio("Oggetti acquistabili", grigiochi, gsx // 32 * 11.5, gsy // 18 * 4.8, 40)
-            messaggio("Costo", grigiochi, gsx // 32 * 16.5, gsy // 18 * 4.8, 40)
-            messaggio("Posseduti", grigiochi, gsx // 32 * 18.5, gsy // 18 * 4.8, 40)
-            pygame.draw.line(schermo, grigiochi, (int(gpx * 11), int(gpy * 5.5)), (int(gpx * 21), int(gpy * 5.5)), 1)
+            messaggio("Acquista oggetti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+            messaggio("Oggetti acquistabili", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 4.8, 40)
+            messaggio("Costo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.5, GlobalVarG2.gsy // 18 * 4.8, 40)
+            messaggio("Posseduti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 4.8, 40)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigiochi, (int(GlobalVarG2.gpx * 11), int(GlobalVarG2.gpy * 5.5)), (int(GlobalVarG2.gpx * 21), int(GlobalVarG2.gpy * 5.5)), 1)
 
-            messaggio("Freccia", grigiochi, gsx // 32 * 11.5, gsy // 18 * 6.2, 40)
-            messaggio(str(costoOggetti[0]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 6.2, 40)
-            messaggio("x%i" % dati[132], grigiochi, gsx // 32 * 19, gsy // 18 * 6.2, 40)
+            messaggio("Freccia", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 6.2, 40)
+            messaggio(str(GlobalVarG2.costoOggetti[0]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 6.2, 40)
+            messaggio("x%i" % dati[132], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 6.2, 40)
             if oggetton == 0:
-                messaggio("Freccia:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio("Usate per attaccare i nemici a distanza", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                messaggio("Freccia:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                messaggio("Usate per attaccare i nemici a distanza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             if imgOggetti[0] != sconosciutoOggetto:
-                messaggio("Pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
-                messaggio(str(costoOggetti[1]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 7.1, 40)
+                messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 7.1, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[1]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 7.1, 40)
                 if dati[31] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 7.1, 40)
                 else:
-                    messaggio("x%i" % dati[31], grigiochi, gsx // 32 * 19, gsy // 18 * 7.1, 40)
+                    messaggio("x%i" % dati[31], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 7.1, 40)
                 if oggetton == 1:
-                    messaggio("Pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 100 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 100 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 7.1, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 7.1, 40)
             if imgOggetti[1] != sconosciutoOggetto:
-                messaggio("Caricabatterie", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
-                messaggio(str(costoOggetti[2]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8, 40)
+                messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[2]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 8, 40)
                 if dati[32] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 8, 40)
                 else:
-                    messaggio("x%i" % dati[32], grigiochi, gsx // 32 * 19, gsy // 18 * 8, 40)
+                    messaggio("x%i" % dati[32], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 8, 40)
                 if oggetton == 2:
-                    messaggio("Caricabatterie:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 250 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Caricabatterie:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 250 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8, 40)
             if imgOggetti[2] != sconosciutoOggetto:
-                messaggio("Medicina", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
-                messaggio(str(costoOggetti[3]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 8.9, 40)
+                messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8.9, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[3]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 8.9, 40)
                 if dati[33] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 8.9, 40)
                 else:
-                    messaggio("x%i" % dati[33], grigiochi, gsx // 32 * 19, gsy // 18 * 8.9, 40)
+                    messaggio("x%i" % dati[33], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 8.9, 40)
                 if oggetton == 3:
-                    messaggio("Medicina:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Cura avvelenamento a Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Medicina:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Cura avvelenamento a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 8.9, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8.9, 40)
             if imgOggetti[3] != sconosciutoOggetto:
-                messaggio("Super pozione", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
-                messaggio(str(costoOggetti[4]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 9.8, 40)
+                messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 9.8, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[4]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 9.8, 40)
                 if dati[34] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 9.8, 40)
                 else:
-                    messaggio("x%i" % dati[34], grigiochi, gsx // 32 * 19, gsy // 18 * 9.8, 40)
+                    messaggio("x%i" % dati[34], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 9.8, 40)
                 if oggetton == 4:
-                    messaggio("Super pozione:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 300 pv di Rallo", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Super pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 300 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 9.8, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 9.8, 40)
             if imgOggetti[4] != sconosciutoOggetto:
-                messaggio("Carica plus", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
-                messaggio(str(costoOggetti[5]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 10.7, 40)
+                messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 10.7, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[5]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 10.7, 40)
                 if dati[35] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 10.7, 40)
                 else:
-                    messaggio("x%i" % dati[35], grigiochi, gsx // 32 * 19, gsy // 18 * 10.7, 40)
+                    messaggio("x%i" % dati[35], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 10.7, 40)
                 if oggetton == 5:
-                    messaggio("Carica plus:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 600 pe di Colco", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Carica plus:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Recupera 600 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 10.7, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 10.7, 40)
             if imgOggetti[5] != sconosciutoOggetto:
-                messaggio("Bomba", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
-                messaggio(str(costoOggetti[6]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 11.6, 40)
+                messaggio("Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 11.6, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[6]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 11.6, 40)
                 if dati[36] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 11.6, 40)
                 else:
-                    messaggio("x%i" % dati[36], grigiochi, gsx // 32 * 19, gsy // 18 * 11.6, 40)
+                    messaggio("x%i" % dati[36], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 11.6, 40)
                 if oggetton == 6:
-                    messaggio("Bomba:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Infligge un po' di danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Bomba:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Infligge un po' di danni ai nemici su cui viene", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 11.6, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 11.6, 40)
             if imgOggetti[6] != sconosciutoOggetto:
-                messaggio("Bomba velenosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
-                messaggio(str(costoOggetti[7]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 12.5, 40)
+                messaggio("Bomba velenosa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 12.5, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[7]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 12.5, 40)
                 if dati[37] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 12.5, 40)
                 else:
-                    messaggio("x%i" % dati[37], grigiochi, gsx // 32 * 19, gsy // 18 * 12.5, 40)
+                    messaggio("x%i" % dati[37], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 12.5, 40)
                 if oggetton == 7:
-                    messaggio("Bomba velenosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Infligge avvelenamento al nemico su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Bomba velenosa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Infligge avvelenamento al nemico su cui viene", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 12.5, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 12.5, 40)
             if imgOggetti[7] != sconosciutoOggetto:
-                messaggio("Esca", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
-                messaggio(str(costoOggetti[8]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 13.4, 40)
+                messaggio("Esca", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 13.4, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[8]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 13.4, 40)
                 if dati[38] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 13.4, 40)
                 else:
-                    messaggio("x%i" % dati[38], grigiochi, gsx // 32 * 19, gsy // 18 * 13.4, 40)
+                    messaggio("x%i" % dati[38], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 13.4, 40)
                 if oggetton == 8:
-                    messaggio("Esca:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio(u"Distrae i nemici finché non viene distrutta. È", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("possibile riprenderla passandoci sopra", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Esca:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio(u"Distrae i nemici finché non viene distrutta. È", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("possibile riprenderla passandoci sopra", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 13.4, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 13.4, 40)
             if imgOggetti[8] != sconosciutoOggetto:
-                messaggio("Bomba appiccicosa", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
-                messaggio(str(costoOggetti[9]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 14.3, 40)
+                messaggio("Bomba appiccicosa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 14.3, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[9]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 14.3, 40)
                 if dati[39] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 14.3, 40)
                 else:
-                    messaggio("x%i" % dati[39], grigiochi, gsx // 32 * 19, gsy // 18 * 14.3, 40)
+                    messaggio("x%i" % dati[39], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 14.3, 40)
                 if oggetton == 9:
-                    messaggio("Bomba appiccicosa:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio(u"Dimezza la velocità del nemico su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("lanciata", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Bomba appiccicosa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio(u"Dimezza la velocità del nemico su cui viene", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("lanciata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 14.3, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 14.3, 40)
             if imgOggetti[9] != sconosciutoOggetto:
-                messaggio("Bomba potenziata", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
-                messaggio(str(costoOggetti[10]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 15.2, 40)
+                messaggio("Bomba potenziata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 15.2, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[10]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 15.2, 40)
                 if dati[40] < 0:
-                    messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
+                    messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 15.2, 40)
                 else:
-                    messaggio("x%i" % dati[40], grigiochi, gsx // 32 * 19, gsy // 18 * 15.2, 40)
+                    messaggio("x%i" % dati[40], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 15.2, 40)
                 if oggetton == 10:
-                    messaggio("Bomba potenziata:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                    messaggio("Infligge molti danni ai nemici su cui viene", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                    messaggio("lanciata in un vasto raggio", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                    messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                    messaggio("Bomba potenziata:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Infligge molti danni ai nemici su cui viene", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                    messaggio("lanciata in un vasto raggio", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
             else:
-                messaggio("---", grigiochi, gsx // 32 * 11.5, gsy // 18 * 15.2, 40)
-            messaggio("Faretra", grigiochi, gsx // 32 * 11.5, gsy // 18 * 16.1, 40)
+                messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 15.2, 40)
+            messaggio("Faretra", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 16.1, 40)
             if dati[133] == 0:
-                messaggio(str(costoOggetti[11]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[11]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 16.1, 40)
             if dati[133] == 1:
-                messaggio(str(costoOggetti[12]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[12]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 16.1, 40)
             if dati[133] >= 2:
-                messaggio(str(costoOggetti[13]), grigiochi, gsx // 32 * 16.8, gsy // 18 * 16.1, 40)
+                messaggio(str(GlobalVarG2.costoOggetti[13]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 16.1, 40)
             if dati[133] == 3:
-                messaggio("x1", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
+                messaggio("x1", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 16.1, 40)
             else:
-                messaggio("x0", grigiochi, gsx // 32 * 19, gsy // 18 * 16.1, 40)
+                messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 16.1, 40)
             if oggetton == 11:
-                messaggio("Faretra:", grigiochi, gsx // 32 * 22.5, gsy // 18 * 11.5, 60)
-                messaggio(u"Permette di trasportare più frecce", grigiochi, gsx // 32 * 22.5, gsy // 18 * 12.5, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13, 35)
-                messaggio("", grigiochi, gsx // 32 * 22.5, gsy // 18 * 13.5, 35)
+                messaggio("Faretra:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                messaggio(u"Permette di trasportare più frecce", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
+                messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
 
-            schermo.blit(puntatore, (xp, yp))
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             if usa == 0:
-                pygame.draw.line(schermo, grigioscu, ((xp + (int(gpx // 1.5))), yp + (int(gpy * 0.7))), (xp + (int(gpx * 9.5)), yp + (int(gpy * 0.7))), 2)
+                pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xp + (int(GlobalVarG2.gpx // 1.5))), yp + (int(GlobalVarG2.gpy * 0.7))), (xp + (int(GlobalVarG2.gpx * 9.5)), yp + (int(GlobalVarG2.gpy * 0.7))), 2)
             else:
-                pygame.draw.line(schermo, grigioscu, ((xpv + (int(gpx // 1.5))), ypv + (int(gpy * 0.7))), (xpv + (int(gpx * 9.5)), ypv + (int(gpy * 0.7))), 2)
+                pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xpv + (int(GlobalVarG2.gpx // 1.5))), ypv + (int(GlobalVarG2.gpy * 0.7))), (xpv + (int(GlobalVarG2.gpx * 9.5)), ypv + (int(GlobalVarG2.gpy * 0.7))), 2)
             pygame.display.update()
 
-        clockMenu.tick(fpsMenu)
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
 
+    GlobalVarG2.canaleSoundCanzone.stop()
     return dati
+
+
+def menuImpostazioni(canzone, settaRisoluzione):
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    xp = GlobalVarG2.gsx // 32 * 1
+    yp = GlobalVarG2.gsy // 18 * 5.2
+    risposta = False
+    voceMarcata = 1
+    primoFrame = True
+
+    linguaTemp = GlobalVarG2.linguaImpostata
+    volumeEffettiTemp = GlobalVarG2.volumeEffetti * 10
+    volumeCanzoniTemp = GlobalVarG2.volumeCanzoni * 10
+    gsxTemp = GlobalVarG2.gsx
+    gsyTemp = GlobalVarG2.gsy
+    schermoInteroTemp = GlobalVarG2.schermoIntero
+
+    tastop = 0
+    tastotempfps = 5
+
+    while not risposta:
+        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
+
+        # rallenta per i 20 fps
+        if tastotempfps != 0 and tastop != 0:
+            tastotempfps = tastotempfps - 1
+        elif tastotempfps == 0:
+            tastotempfps = 2
+
+        primoMovimento = False
+        tastoTrovato = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                tastoTrovato = True
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN and not tastoTrovato:
+                tastotempfps = 5
+                if event.key == pygame.K_q and not tastoTrovato:
+                    tastoTrovato = True
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    risposta = True
+
+                if event.key == pygame.K_s and not tastoTrovato:
+                    tastop = event.key
+                    primoMovimento = True
+                    tastoTrovato = True
+                if event.key == pygame.K_w and not tastoTrovato:
+                    tastop = event.key
+                    primoMovimento = True
+                    tastoTrovato = True
+                if event.key == pygame.K_d and not tastoTrovato:
+                    tastop = event.key
+                    primoMovimento = True
+                    tastoTrovato = True
+                if event.key == pygame.K_a and not tastoTrovato:
+                    tastop = event.key
+                    primoMovimento = True
+                    tastoTrovato = True
+
+                if event.key == pygame.K_SPACE and not tastoTrovato:
+                    tastop = event.key
+                    tastoTrovato = True
+                    # quando clicchi spazio puoi modificare l'opzone selezionata
+                    if voceMarcata == 6:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        GlobalVarG2.linguaImpostata = linguaTemp
+                        GlobalVarG2.volumeEffetti = volumeEffettiTemp / 10 * 1.0
+                        GlobalVarG2.volumeCanzoni = volumeCanzoniTemp / 10 * 1.0
+                        GlobalVarG2.initVolumeSounds()
+                        if GlobalVarG2.gsx != gsxTemp or GlobalVarG2.gsy != gsyTemp or GlobalVarG2.schermoIntero != schermoInteroTemp:
+                            GlobalVarG2.schermoIntero = schermoInteroTemp
+                            GlobalVarG2.gsx = gsxTemp
+                            GlobalVarG2.gsy = gsyTemp
+                            GlobalVarG2.gpx = GlobalVarG2.gsx // 32
+                            GlobalVarG2.gpy = GlobalVarG2.gsy // 18
+                            if GlobalVarG2.schermoIntero:
+                                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
+                                GlobalVarG2.schermo = pygame.display.set_mode((GlobalVarG2.gsx, GlobalVarG2.gsy), opzioni_schermo)
+                            else:
+                                GlobalVarG2.schermo = pygame.display.set_mode((GlobalVarG2.gsx, GlobalVarG2.gsy))
+                            GlobalVarG2.loadImg()
+                        # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
+                        scrivi = open("Impostazioni/Impostazioni.txt", "w")
+                        if GlobalVarG2.linguaImpostata == "italiano":
+                            scrivi.write("0_")
+                        elif GlobalVarG2.linguaImpostata == "inglese":
+                            scrivi.write("1_")
+                        scrivi.write(str(int(GlobalVarG2.volumeEffetti * 10)) + "_")
+                        scrivi.write(str(int(GlobalVarG2.volumeCanzoni * 10)) + "_")
+                        if GlobalVarG2.schermoIntero:
+                            scrivi.write("1_")
+                        else:
+                            scrivi.write("0_")
+                        scrivi.write(str(GlobalVarG2.gsx) + "_")
+                        scrivi.write(str(GlobalVarG2.gsy) + "_")
+                        scrivi.close()
+                        primoFrame = True
+                    elif voceMarcata == 7:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                        risposta = True
+            if event.type == pygame.KEYUP and tastop == event.key:
+                tastop = 0
+
+        if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+            if primoFrame:
+                puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+                xp = GlobalVarG2.gsx // 32 * 1
+                yp = GlobalVarG2.gsy // 18 * 5.2
+                if voceMarcata == 6:
+                    xp = GlobalVarG2.gsx // 32 * 9
+                    yp = GlobalVarG2.gsy // 18 * 14.7
+                primoFrame = False
+            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+                tastotempfps = 2
+            if tastop == pygame.K_w:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                if voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
+                    voceMarcata -= 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = yp - GlobalVarG2.gsy // 18 * 1.7
+                    xp = GlobalVarG2.gsx // 32 * 1
+                elif voceMarcata == 6:
+                    voceMarcata -= 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 11.9
+                    xp = GlobalVarG2.gsx // 32 * 1
+                elif voceMarcata == 7:
+                    voceMarcata -= 2
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 11.9
+                    xp = GlobalVarG2.gsx // 32 * 1
+                elif voceMarcata == 1:
+                    voceMarcata += 5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 14.7
+                    xp = GlobalVarG2.gsx // 32 * 9
+            if tastop == pygame.K_a:
+                if voceMarcata == 1:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    if linguaTemp == "italiano":
+                        linguaTemp = "inglese"
+                    elif linguaTemp == "inglese":
+                        linguaTemp = "italiano"
+                elif voceMarcata == 2:
+                    if volumeEffettiTemp != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeEffettiTemp -= 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 3:
+                    if volumeCanzoniTemp != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeCanzoniTemp -= 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 4:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if gsxTemp == 800 and gsyTemp == 450:
+                            gsxTemp = GlobalVarG2.maxGsx
+                            gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1024 and gsyTemp == 576:
+                            gsxTemp = 800
+                            gsyTemp = 450
+                        elif gsxTemp == 1280 and gsyTemp == 720:
+                            gsxTemp = 1024
+                            gsyTemp = 576
+                        elif gsxTemp == 1920 and gsyTemp == 1080:
+                            gsxTemp = 1280
+                            gsyTemp = 720
+                        elif gsxTemp == GlobalVarG2.maxGsx and gsyTemp == GlobalVarG2.maxGsy:
+                            if GlobalVarG2.maxGsx > 1920 and GlobalVarG2.maxGsy > 1080:
+                                gsxTemp = 1920
+                                gsyTemp = 1080
+                            elif GlobalVarG2.maxGsx > 1280 and GlobalVarG2.maxGsy > 720:
+                                gsxTemp = 1280
+                                gsyTemp = 720
+                            elif GlobalVarG2.maxGsx > 1024 and GlobalVarG2.maxGsy > 576:
+                                gsxTemp = 1024
+                                gsyTemp = 576
+                            elif GlobalVarG2.maxGsx > 800 and GlobalVarG2.maxGsy > 450:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 5:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if schermoInteroTemp:
+                            schermoInteroTemp = False
+                        else:
+                            schermoInteroTemp = True
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 6:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    voceMarcata += 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 17
+                elif voceMarcata == 7:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    voceMarcata -= 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 9
+            if tastop == pygame.K_s:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4:
+                    voceMarcata += 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = yp + GlobalVarG2.gsy // 18 * 1.7
+                elif voceMarcata == 5:
+                    voceMarcata += 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 14.7
+                    xp = GlobalVarG2.gsx // 32 * 9
+                elif voceMarcata == 6:
+                    voceMarcata -= 5
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 5.2
+                    xp = GlobalVarG2.gsx // 32 * 1
+                elif voceMarcata == 7:
+                    voceMarcata -= 6
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gsy // 18 * 5.2
+                    xp = GlobalVarG2.gsx // 32 * 1
+            if tastop == pygame.K_d:
+                if voceMarcata == 1:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    if linguaTemp == "italiano":
+                        linguaTemp = "inglese"
+                    elif linguaTemp == "inglese":
+                        linguaTemp = "italiano"
+                elif voceMarcata == 2:
+                    if volumeEffettiTemp != 10:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeEffettiTemp += 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 3:
+                    if volumeCanzoniTemp != 10:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeCanzoniTemp += 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 4:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if gsxTemp == 800 and gsyTemp == 450:
+                            if GlobalVarG2.maxGsx > 1024 and GlobalVarG2.maxGsy > 576:
+                                gsxTemp = 1024
+                                gsyTemp = 576
+                            else:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1024 and gsyTemp == 576:
+                            if GlobalVarG2.maxGsx > 1280 and GlobalVarG2.maxGsy > 720:
+                                gsxTemp = 1280
+                                gsyTemp = 720
+                            elif GlobalVarG2.maxGsx == 1024 and GlobalVarG2.maxGsy == 576:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                            else:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1280 and gsyTemp == 720:
+                            if GlobalVarG2.maxGsx > 1920 and GlobalVarG2.maxGsy > 1080:
+                                gsxTemp = 1920
+                                gsyTemp = 1080
+                            elif GlobalVarG2.maxGsx == 1280 and GlobalVarG2.maxGsy == 720:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                            else:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1920 and gsyTemp == 1080:
+                            if GlobalVarG2.maxGsx > 1920 and GlobalVarG2.maxGsy > 1080:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                            else:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                        elif gsxTemp == GlobalVarG2.maxGsx and gsyTemp == GlobalVarG2.maxGsy:
+                            if GlobalVarG2.maxGsx > 800 and GlobalVarG2.maxGsy > 450:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 5:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if schermoInteroTemp:
+                            schermoInteroTemp = False
+                        else:
+                            schermoInteroTemp = True
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 6:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    voceMarcata += 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 17
+                elif voceMarcata == 7:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    voceMarcata -= 1
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    xp = GlobalVarG2.gsx // 32 * 9
+            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+            # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
+            pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 30, GlobalVarG2.gsy // 18 * 12.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 30, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 30, GlobalVarG2.gsy // 18 * 15.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 15.5))
+
+            messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+            messaggio("Lingua", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 70)
+            if linguaTemp == "italiano":
+                messaggio("Italiano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 5.1, 60)
+            if linguaTemp == "inglese":
+                messaggio("English", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 5.1, 60)
+            if voceMarcata == 1:
+                GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistra, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 5))
+                GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestra, (GlobalVarG2.gsx // 32 * 19.2, GlobalVarG2.gsy // 18 * 5))
+            messaggio("Volume effetti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.7, 70)
+            messaggio(str(int(volumeEffettiTemp)), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 6.8, 60)
+            if voceMarcata == 2:
+                if volumeEffettiTemp != 0:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistra, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 6.7))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistraBloccato, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 6.7))
+                if volumeEffettiTemp != 10:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestra, (GlobalVarG2.gsx // 32 * 17.1, GlobalVarG2.gsy // 18 * 6.7))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestraBloccato, (GlobalVarG2.gsx // 32 * 17.1, GlobalVarG2.gsy // 18 * 6.7))
+            messaggio("Volume canzoni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.4, 70)
+            messaggio(str(int(volumeCanzoniTemp)), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 8.5, 60)
+            if voceMarcata == 3:
+                if volumeCanzoniTemp != 0:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistra, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 8.4))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistraBloccato, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 8.4))
+                if volumeCanzoniTemp != 10:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestra, (GlobalVarG2.gsx // 32 * 17.1, GlobalVarG2.gsy // 18 * 8.4))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestraBloccato, (GlobalVarG2.gsx // 32 * 17.1, GlobalVarG2.gsy // 18 * 8.4))
+            if settaRisoluzione:
+                messaggio("Risoluzione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.1, 70)
+                messaggio(str(gsxTemp) + "x" + str(gsyTemp), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 10.2, 60)
+                if voceMarcata == 4:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistra, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 10.1))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestra, (GlobalVarG2.gsx // 32 * 19.9, GlobalVarG2.gsy // 18 * 10.1))
+                messaggio("Schermo intero", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.7, 70)
+                if schermoInteroTemp:
+                    messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 11.8, 60)
+                else:
+                    messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 11.8, 60)
+                if voceMarcata == 5:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistra, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 11.7))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestra, (GlobalVarG2.gsx // 32 * 17.2, GlobalVarG2.gsy // 18 * 11.7))
+            else:
+                messaggio("Risoluzione", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 10.1, 70)
+                messaggio(str(gsxTemp) + "x" + str(gsyTemp), GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 10.2, 60)
+                if voceMarcata == 4:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistraBloccato, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 10.1))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestraBloccato, (GlobalVarG2.gsx // 32 * 19.9, GlobalVarG2.gsy // 18 * 10.1))
+                messaggio("Schermo intero", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 11.7, 70)
+                if schermoInteroTemp:
+                    messaggio("Si", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 11.8, 60)
+                else:
+                    messaggio("No", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 11.8, 60)
+                if voceMarcata == 5:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniSinistraBloccato, (GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 11.7))
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatoreImpostazioniDestraBloccato, (GlobalVarG2.gsx // 32 * 17.2, GlobalVarG2.gsy // 18 * 11.7))
+
+            messaggio("Conferma", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 14.5, 70)
+            messaggio("Indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 70)
+
+            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
+            if voceMarcata != 6 and voceMarcata != 7:
+                pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xp + (int(GlobalVarG2.gpx // 1.5))), yp + (int(GlobalVarG2.gpy * 1))), (xp + (int(GlobalVarG2.gpx * 29)), yp + (int(GlobalVarG2.gpy * 1))), 2)
+
+            pygame.display.update()
+
+        GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
