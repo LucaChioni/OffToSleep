@@ -88,6 +88,7 @@ def getVitaTotRallo(livello, guanti):
 
 
 def guardaVideo(path, audio=0):
+    GlobalVarG2.configuraCursore(False)
     GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
     pygame.display.update()
     listaImg = []
@@ -105,10 +106,11 @@ def guardaVideo(path, audio=0):
             GlobalVarG2.schermo.blit(listaImg[i - 10], (0, 0))
             pygame.display.update()
             for event in pygame.event.get():
+                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN:
+                if event.type == pygame.KEYDOWN or sinistroMouse or centraleMouse or destroMouse:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     if audio != 0:
                         GlobalVarG2.canaleSoundCanzone.stop()

@@ -49,12 +49,13 @@ clockFadeToBlack = pygame.time.Clock()
 fpsAnimazioni = 30
 fpsInquadra = 20
 fpsVideo = 12
-fpsMenu = 20
+fpsMenu = 30
 fpsFadeToBlack = 30
 
 # colori
 nero = (0, 0, 0)
 grigioscu = (50, 50, 50)
+grigioscurino = (70, 70, 70)
 grigio = (80, 80, 80)
 grigiochi = (230, 230, 230)
 bianco = (255, 255, 255)
@@ -63,6 +64,7 @@ verde = (130, 255, 0)
 verdescu = (0, 120, 0)
 blu = (0, 0, 255)
 rossoScuro = (120, 80, 80)
+rossoScuroPiuScuro = (100, 70, 70)
 
 linguaImpostata = "italiano"
 
@@ -908,6 +910,9 @@ costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1,
 dannoTecniche = [40, 30, 0, 30, 20, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
 
 
+pygame.mouse.set_visible(False)
+mouseVisibile = False
+
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
 leggi = open("Impostazioni/Impostazioni.txt", "r")
 leggifile = leggi.read()
@@ -949,3 +954,69 @@ if erroreFileImpostazioni:
     print "Errore nella lettura del file di configurazione delle impostazioni"
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
 leggi.close()
+
+# freccetta (sized 24x24)
+global mouseBloccato
+def configuraCursore(bloccato):
+    if not bloccato:
+        strings = (
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "       XXX              ",
+            "       XXXXX            ",
+            "       XX..XXX          ",
+            "       XX....XXX        ",
+            "        XX.....XXX      ",
+            "        XX.......XXX    ",
+            "        XX........XX    ",
+            "        XX......XXX     ",
+            "         XX...XXX       ",
+            "         XX..XX         ",
+            "         XX.XX          ",
+            "         XXXX           ",
+            "          XX            "
+        )
+    else:
+        strings = (
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "       ...              ",
+            "       .....            ",
+            "       ..XX...          ",
+            "       ..XXXX...        ",
+            "        ..XXXXX...      ",
+            "        ..XXXXXXX...    ",
+            "        ..XXXXXXXX..    ",
+            "        ..XXXXXX...     ",
+            "         ..XXX...       ",
+            "         ..XX..         ",
+            "         ..X..          ",
+            "         ....           ",
+            "          ..            "
+        )
+    cursore, mask = pygame.cursors.compile(strings, black='X', white='.', xor='o')
+    cursor_sizer = ((24, 24), (7, 11), cursore, mask)
+    pygame.mouse.set_cursor(*cursor_sizer)
+    global mouseBloccato
+    mouseBloccato = bloccato
+configuraCursore(False)
+pygame.mouse.set_visible(True)
+mouseVisibile = True

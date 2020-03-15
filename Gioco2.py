@@ -9,10 +9,6 @@ from PersonaggioObj import *
 from FadeToBlackClass import *
 
 
-# freccetta invisibile
-pygame.mouse.set_visible(False)
-
-
 def gameloop():
     inizio = True
     while True:
@@ -541,7 +537,7 @@ def gameloop():
                 pygame.quit()
                 quit()
 
-            if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti and not tastoTrovato and not startf:
                 # movimanti
                 tastop = event.key
                 # movimenti personaggio
@@ -643,7 +639,7 @@ def gameloop():
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     nemicoInquadrato = False
                     caricaTutto = True
-                if event.key == pygame.K_LSHIFT and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                if (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoTeleColco)
                     tastoTrovato = True
                     nx = 0
@@ -656,7 +652,7 @@ def gameloop():
                         ultimoObbiettivoColco.append(x)
                         ultimoObbiettivoColco.append(y)
                         chiamarob = True
-                if event.key == pygame.K_x and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                if (event.key == pygame.K_3 or event.key == pygame.K_KP3) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selObbiettivo)
                     listaNemiciVisti = []
                     for nemico in listaNemici:
@@ -697,7 +693,7 @@ def gameloop():
                         else:
                             nemicoInquadrato = "Colco"
                     caricaTutto = True
-                if event.key == pygame.K_z and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                if (event.key == pygame.K_2 or event.key == pygame.K_KP2) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selObbiettivo)
                     listaNemiciVisti = []
                     for nemico in listaNemici:
@@ -831,7 +827,8 @@ def gameloop():
             dati[3] = y
             if not apriocchio:
                 dati, inizio, attacco = start(dati, nmost, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, apriocchio)
-                uscitoDaMenu = 2
+                if attacco == 0:
+                    uscitoDaMenu = 2
             else:
                 dati, attacco, sposta, animaOggetto, npers = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry)
                 # cambiare posizione dopo l'uso di caricabatterie
@@ -963,7 +960,7 @@ def gameloop():
         # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
         attaccoDiRallo = []
         if attacco != 0:
-            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi)
+            sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf)
             tastop = 0
             # tolgo una freccia se uso l'attacco a distanza
             if attaccoADistanza:

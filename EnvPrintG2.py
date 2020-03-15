@@ -372,7 +372,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -572,13 +572,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 quit()
             if event.type == pygame.KEYDOWN:
                 # esci
-                if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_q:
                     risposta = True
                     sposta = False
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                # esci e apri il menu
+                if event.key == pygame.K_ESCAPE:
+                    risposta = True
+                    sposta = False
+                    startf = True
 
                 # attiva / disattiva il gambit
-                if event.key == pygame.K_LSHIFT:
+                if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
                     GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoTeleColco)
                     if chiamarob:
                         chiamarob = False
@@ -590,7 +595,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         chiamarob = True
 
                 # scorrere il puntatore sui nemici / GlobalVarG2.esche / Colco
-                if event.key == pygame.K_x:
+                if event.key == pygame.K_3 or event.key == pygame.K_KP3:
                     nemicoInquadratoTemp = False
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
                     # seleziono i nemici / GlobalVarG2.esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
@@ -662,7 +667,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         else:
                             xp = rx
                             yp = ry
-                if event.key == pygame.K_z:
+                if event.key == pygame.K_2 or event.key == pygame.K_KP2:
                     nemicoInquadratoTemp = False
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
                     # seleziono i nemici / GlobalVarG2.esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
@@ -789,8 +794,13 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         infliggidanno = False
                         statom = 0
                         raggio = 0
-                        # interagisci con personaggi
-                        if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)):
+                        suPersonaggio = False
+                        for personaggio in listaPersonaggi:
+                            if xp == personaggio.x and yp == personaggio.y:
+                                suPersonaggio = True
+                                break
+                        # interagisci con personaggi attacco = 1
+                        if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and suPersonaggio:
                             interagisciConPersonaggio = True
                             risposta = True
                             if xp == x + GlobalVarG2.gpx and yp == y:
@@ -1863,4 +1873,4 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         pygame.event.pump()
         GlobalVarG2.clockAttacco.tick(GlobalVarG2.fpsInquadra)
 
-    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio
+    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf
