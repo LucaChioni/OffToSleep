@@ -15,6 +15,7 @@ def equip(dati, canzone):
     risposta = False
     voceMarcata = 1
     primoFrame = True
+    aggiornaInterfacciaPerMouse = False
 
     tastop = 0
     tastotempfps = 5
@@ -69,17 +70,239 @@ def equip(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 4.5:
+                if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 1
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 6.8
+                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 2
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 8.8
+                elif GlobalVarG2.gsy // 18 * 10 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 3
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 10.8
+                elif GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 4
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 12.8
+                elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 5
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 14.8
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            elif GlobalVarG2.gsx // 32 * 4.5 <= xMouse <= GlobalVarG2.gsx // 32 * 8:
+                if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 6
+                    xp = GlobalVarG2.gsx // 32 * 4.5
+                    yp = GlobalVarG2.gsy // 18 * 6.8
+                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 7
+                    xp = GlobalVarG2.gsx // 32 * 4.5
+                    yp = GlobalVarG2.gsy // 18 * 8.8
+                elif GlobalVarG2.gsy // 18 * 10 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 8
+                    xp = GlobalVarG2.gsx // 32 * 4.5
+                    yp = GlobalVarG2.gsy // 18 * 10.8
+                elif GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 9
+                    xp = GlobalVarG2.gsx // 32 * 4.5
+                    yp = GlobalVarG2.gsy // 18 * 12.8
+                elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 10
+                    xp = GlobalVarG2.gsx // 32 * 4.5
+                    yp = GlobalVarG2.gsy // 18 * 14.8
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            elif GlobalVarG2.gsx // 32 * 8 <= xMouse <= GlobalVarG2.gsx // 32 * 11.5:
+                if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 11
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 6.8
+                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 12
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 8.8
+                elif GlobalVarG2.gsy // 18 * 10 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 13
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 10.8
+                elif GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 14
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 12.8
+                elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 15
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 14.8
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            elif GlobalVarG2.gsx // 32 * 11.5 <= xMouse <= GlobalVarG2.gsx // 32 * 15:
+                if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 16
+                    xp = GlobalVarG2.gsx // 32 * 11.5
+                    yp = GlobalVarG2.gsy // 18 * 6.8
+                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 17
+                    xp = GlobalVarG2.gsx // 32 * 11.5
+                    yp = GlobalVarG2.gsy // 18 * 8.8
+                elif GlobalVarG2.gsy // 18 * 10 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 18
+                    xp = GlobalVarG2.gsx // 32 * 11.5
+                    yp = GlobalVarG2.gsy // 18 * 10.8
+                elif GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 19
+                    xp = GlobalVarG2.gsx // 32 * 11.5
+                    yp = GlobalVarG2.gsy // 18 * 12.8
+                elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 20
+                    xp = GlobalVarG2.gsx // 32 * 11.5
+                    yp = GlobalVarG2.gsy // 18 * 14.8
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            elif GlobalVarG2.gsx // 32 * 15 <= xMouse <= GlobalVarG2.gsx // 32 * 18.5:
+                if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 21
+                    xp = GlobalVarG2.gsx // 32 * 15
+                    yp = GlobalVarG2.gsy // 18 * 6.8
+                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 22
+                    xp = GlobalVarG2.gsx // 32 * 15
+                    yp = GlobalVarG2.gsy // 18 * 8.8
+                elif GlobalVarG2.gsy // 18 * 10 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 23
+                    xp = GlobalVarG2.gsx // 32 * 15
+                    yp = GlobalVarG2.gsy // 18 * 10.8
+                elif GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 24
+                    xp = GlobalVarG2.gsx // 32 * 15
+                    yp = GlobalVarG2.gsy // 18 * 12.8
+                elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 25
+                    xp = GlobalVarG2.gsx // 32 * 15
+                    yp = GlobalVarG2.gsy // 18 * 14.8
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            elif GlobalVarG2.gsx // 32 * 18.5 <= xMouse <= GlobalVarG2.gsx // 32 * 22:
+                if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 26
+                    xp = GlobalVarG2.gsx // 32 * 18.5
+                    yp = GlobalVarG2.gsy // 18 * 6.8
+                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 27
+                    xp = GlobalVarG2.gsx // 32 * 18.5
+                    yp = GlobalVarG2.gsy // 18 * 8.8
+                elif GlobalVarG2.gsy // 18 * 10 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 28
+                    xp = GlobalVarG2.gsx // 32 * 18.5
+                    yp = GlobalVarG2.gsy // 18 * 10.8
+                elif GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 29
+                    xp = GlobalVarG2.gsx // 32 * 18.5
+                    yp = GlobalVarG2.gsy // 18 * 12.8
+                elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 30
+                    xp = GlobalVarG2.gsx // 32 * 18.5
+                    yp = GlobalVarG2.gsy // 18 * 14.8
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            else:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
@@ -98,204 +321,219 @@ def equip(dati, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    tastoTrovato = True
-                    carim = True
-                    # progresso-stanza-x-y-liv-pv-spada-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
-                    # spade
-                    if voceMarcata == 1:
-                        if dati[41] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[6] = 0
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 2:
-                        if dati[42] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[6] = 1
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 3:
-                        if dati[43] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[6] = 2
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 4:
-                        if dati[44] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[6] = 3
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 5:
-                        if dati[45] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[6] = 4
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    # spade
-                    if voceMarcata == 6:
-                        if dati[46] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[128] = 0
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 7:
-                        if dati[47] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[128] = 1
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 8:
-                        if dati[48] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[128] = 2
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 9:
-                        if dati[49] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[128] = 3
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 10:
-                        if dati[50] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[128] = 4
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    # armature
-                    if voceMarcata == 11:
-                        if dati[51] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[8] = 0
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 12:
-                        if dati[52] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[8] = 1
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 13:
-                        if dati[53] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[8] = 2
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 14:
-                        if dati[54] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[8] = 3
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 15:
-                        if dati[55] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[8] = 4
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    # scudi
-                    if voceMarcata == 16:
-                        if dati[56] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[7] = 0
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 17:
-                        if dati[57] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[7] = 1
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 18:
-                        if dati[58] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[7] = 2
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 19:
-                        if dati[59] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[7] = 3
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 20:
-                        if dati[60] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[7] = 4
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    # guanti
-                    if voceMarcata == 21:
-                        if dati[61] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[129] = 0
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 22:
-                        if dati[62] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[129] = 1
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 23:
-                        if dati[63] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[129] = 2
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 24:
-                        if dati[64] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[129] = 3
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 25:
-                        if dati[65] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[129] = 4
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    # collane
-                    if voceMarcata == 26:
-                        if dati[66] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[130] = 0
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 27:
-                        if dati[67] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[130] = 1
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 28:
-                        if dati[68] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[130] = 2
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 29:
-                        if dati[69] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[130] = 3
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                    if voceMarcata == 30:
-                        if dati[70] != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            dati[130] = 4
-                        else:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastoTrovato = True
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                risposta = True
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                tastop = "spazioOsinistroMouse"
+                tastoTrovato = True
+                carim = True
+                # progresso-stanza-x-y-liv-pv-spada-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                # spade
+                if voceMarcata == 1:
+                    if dati[41] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[6] = 0
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 2:
+                    if dati[42] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[6] = 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 3:
+                    if dati[43] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[6] = 2
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 4:
+                    if dati[44] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[6] = 3
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 5:
+                    if dati[45] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[6] = 4
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                # spade
+                if voceMarcata == 6:
+                    if dati[46] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[128] = 0
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 7:
+                    if dati[47] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[128] = 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 8:
+                    if dati[48] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[128] = 2
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 9:
+                    if dati[49] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[128] = 3
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 10:
+                    if dati[50] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[128] = 4
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                # armature
+                if voceMarcata == 11:
+                    if dati[51] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[8] = 0
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 12:
+                    if dati[52] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[8] = 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 13:
+                    if dati[53] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[8] = 2
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 14:
+                    if dati[54] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[8] = 3
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 15:
+                    if dati[55] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[8] = 4
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                # scudi
+                if voceMarcata == 16:
+                    if dati[56] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[7] = 0
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 17:
+                    if dati[57] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[7] = 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 18:
+                    if dati[58] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[7] = 2
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 19:
+                    if dati[59] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[7] = 3
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 20:
+                    if dati[60] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[7] = 4
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                # guanti
+                if voceMarcata == 21:
+                    if dati[61] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[129] = 0
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 22:
+                    if dati[62] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[129] = 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 23:
+                    if dati[63] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[129] = 2
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 24:
+                    if dati[64] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[129] = 3
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 25:
+                    if dati[65] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[129] = 4
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                # collane
+                if voceMarcata == 26:
+                    if dati[66] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[130] = 0
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 27:
+                    if dati[67] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[130] = 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 28:
+                    if dati[68] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[130] = 2
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 29:
+                    if dati[69] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[130] = 3
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                if voceMarcata == 30:
+                    if dati[70] != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        dati[130] = 4
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame:
+        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w):
                 tastotempfps = 2
             if tastop == pygame.K_s:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 5 or voceMarcata == 10 or voceMarcata == 15 or voceMarcata == 20 or voceMarcata == 25 or voceMarcata == 30:
                     voceMarcata -= 4
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -305,6 +543,8 @@ def equip(dati, canzone):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     yp += GlobalVarG2.gsy // 18 * 2
             if tastop == pygame.K_w:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1 or voceMarcata == 6 or voceMarcata == 11 or voceMarcata == 16 or voceMarcata == 21 or voceMarcata == 26:
                     voceMarcata += 4
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -314,6 +554,8 @@ def equip(dati, canzone):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     yp = yp - GlobalVarG2.gsy // 18 * 2
             if tastop == pygame.K_d:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 26 or voceMarcata == 27 or voceMarcata == 28 or voceMarcata == 29 or voceMarcata == 30:
                     voceMarcata -= 25
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -323,6 +565,8 @@ def equip(dati, canzone):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = xp + GlobalVarG2.gsx // 32 * 3.5
             if tastop == pygame.K_a:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
                     voceMarcata += 25
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -822,7 +1066,10 @@ def equip(dati, canzone):
             if dati[130] == 4:
                 GlobalVarG2.schermo.blit(puntatorevecchio, (GlobalVarG2.gsx // 32 * 18.5, GlobalVarG2.gsy // 18 * 14.8))
 
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
             GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
@@ -838,6 +1085,7 @@ def sceglicondiz(dati, condizione, canzone):
     risposta = False
     voceMarcata = 0
     primoFrame = True
+    aggiornaInterfacciaPerMouse = False
 
     tastop = 0
     tastotempfps = 5
@@ -852,24 +1100,175 @@ def sceglicondiz(dati, condizione, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 8:
+                if GlobalVarG2.gsy // 18 * 4.4 <= yMouse <= GlobalVarG2.gsy // 18 * 5.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 0
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 4.6
+                elif GlobalVarG2.gsy // 18 * 5.9 <= yMouse <= GlobalVarG2.gsy // 18 * 6.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 1
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 6.1
+                elif GlobalVarG2.gsy // 18 * 6.9 <= yMouse <= GlobalVarG2.gsy // 18 * 7.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 2
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 7.1
+                elif GlobalVarG2.gsy // 18 * 7.9 <= yMouse <= GlobalVarG2.gsy // 18 * 8.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 3
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 8.1
+                elif GlobalVarG2.gsy // 18 * 8.9 <= yMouse <= GlobalVarG2.gsy // 18 * 9.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 4
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 9.1
+                elif GlobalVarG2.gsy // 18 * 9.9 <= yMouse <= GlobalVarG2.gsy // 18 * 10.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 5
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 10.1
+                elif GlobalVarG2.gsy // 18 * 10.9 <= yMouse <= GlobalVarG2.gsy // 18 * 11.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 6
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 11.1
+                elif GlobalVarG2.gsy // 18 * 11.9 <= yMouse <= GlobalVarG2.gsy // 18 * 12.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 7
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 12.1
+                elif GlobalVarG2.gsy // 18 * 12.9 <= yMouse <= GlobalVarG2.gsy // 18 * 13.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 8
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 13.1
+                elif GlobalVarG2.gsy // 18 * 13.9 <= yMouse <= GlobalVarG2.gsy // 18 * 14.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 9
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 14.1
+                elif GlobalVarG2.gsy // 18 * 14.9 <= yMouse <= GlobalVarG2.gsy // 18 * 15.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 10
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 15.1
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            elif GlobalVarG2.gsx // 32 * 8 <= xMouse <= GlobalVarG2.gsx // 32 * 16:
+                if GlobalVarG2.gsy // 18 * 5.9 <= yMouse <= GlobalVarG2.gsy // 18 * 6.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 11
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 6.1
+                elif GlobalVarG2.gsy // 18 * 6.9 <= yMouse <= GlobalVarG2.gsy // 18 * 7.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 12
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 7.1
+                elif GlobalVarG2.gsy // 18 * 7.9 <= yMouse <= GlobalVarG2.gsy // 18 * 8.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 13
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 8.1
+                elif GlobalVarG2.gsy // 18 * 8.9 <= yMouse <= GlobalVarG2.gsy // 18 * 9.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 14
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 9.1
+                elif GlobalVarG2.gsy // 18 * 9.9 <= yMouse <= GlobalVarG2.gsy // 18 * 10.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 15
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 10.1
+                elif GlobalVarG2.gsy // 18 * 10.9 <= yMouse <= GlobalVarG2.gsy // 18 * 11.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 16
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 11.1
+                elif GlobalVarG2.gsy // 18 * 11.9 <= yMouse <= GlobalVarG2.gsy // 18 * 12.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 17
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 12.1
+                elif GlobalVarG2.gsy // 18 * 12.9 <= yMouse <= GlobalVarG2.gsy // 18 * 13.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 18
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 13.1
+                elif GlobalVarG2.gsy // 18 * 13.9 <= yMouse <= GlobalVarG2.gsy // 18 * 14.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 19
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 14.1
+                elif GlobalVarG2.gsy // 18 * 14.9 <= yMouse <= GlobalVarG2.gsy // 18 * 15.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 20
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 15.1
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            else:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
-
                 if event.key == pygame.K_s and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
@@ -882,33 +1281,47 @@ def sceglicondiz(dati, condizione, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastoTrovato = True
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                risposta = True
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                tastop = "spazioOsinistroMouse"
+                tastoTrovato = True
 
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    tastoTrovato = True
-
-                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)-condizioni(20)-gambit(20) // dimensione: 0-120
-                    i = 81
-                    c = 1
-                    while i <= 100:
-                        if voceMarcata == c:
-                            if dati[i] != 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                return c
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        i += 1
-                        c += 1
-                    if voceMarcata == 0:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                        return 0
+                # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)-condizioni(20)-gambit(20) // dimensione: 0-120
+                i = 81
+                c = 1
+                while i <= 100:
+                    if voceMarcata == c:
+                        if dati[i] != 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            return c
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    i += 1
+                    c += 1
+                if voceMarcata == 0:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    return 0
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
 
-        if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
@@ -929,6 +1342,8 @@ def sceglicondiz(dati, condizione, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         yp = GlobalVarG2.gsy // 18 * 15.1
             if tastop == pygame.K_a:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata != 0:
                     if 11 <= voceMarcata <= 20:
                         voceMarcata -= 10
@@ -939,6 +1354,8 @@ def sceglicondiz(dati, condizione, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         xp = GlobalVarG2.gsx // 32 * 8
             if tastop == pygame.K_s:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 0:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -959,6 +1376,8 @@ def sceglicondiz(dati, condizione, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         yp = yp + GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_d:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata != 0:
                     if 1 <= voceMarcata <= 10:
                         voceMarcata += 10
@@ -1184,7 +1603,10 @@ def sceglicondiz(dati, condizione, canzone):
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
 
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
             # puntatore vecchio
             i = 1
@@ -1219,6 +1641,7 @@ def sceglitecn(dati, tecnica, canzone):
     risposta = False
     voceMarcata = 0
     primoFrame = True
+    aggiornaInterfacciaPerMouse = False
 
     tastop = 0
     tastotempfps = 5
@@ -1233,24 +1656,175 @@ def sceglitecn(dati, tecnica, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 8:
+                if GlobalVarG2.gsy // 18 * 4.4 <= yMouse <= GlobalVarG2.gsy // 18 * 5.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 0
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 4.6
+                elif GlobalVarG2.gsy // 18 * 5.9 <= yMouse <= GlobalVarG2.gsy // 18 * 6.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 1
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 6.1
+                elif GlobalVarG2.gsy // 18 * 6.9 <= yMouse <= GlobalVarG2.gsy // 18 * 7.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 2
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 7.1
+                elif GlobalVarG2.gsy // 18 * 7.9 <= yMouse <= GlobalVarG2.gsy // 18 * 8.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 3
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 8.1
+                elif GlobalVarG2.gsy // 18 * 8.9 <= yMouse <= GlobalVarG2.gsy // 18 * 9.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 4
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 9.1
+                elif GlobalVarG2.gsy // 18 * 9.9 <= yMouse <= GlobalVarG2.gsy // 18 * 10.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 5
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 10.1
+                elif GlobalVarG2.gsy // 18 * 10.9 <= yMouse <= GlobalVarG2.gsy // 18 * 11.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 6
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 11.1
+                elif GlobalVarG2.gsy // 18 * 11.9 <= yMouse <= GlobalVarG2.gsy // 18 * 12.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 7
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 12.1
+                elif GlobalVarG2.gsy // 18 * 12.9 <= yMouse <= GlobalVarG2.gsy // 18 * 13.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 8
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 13.1
+                elif GlobalVarG2.gsy // 18 * 13.9 <= yMouse <= GlobalVarG2.gsy // 18 * 14.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 9
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 14.1
+                elif GlobalVarG2.gsy // 18 * 14.9 <= yMouse <= GlobalVarG2.gsy // 18 * 15.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 10
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 15.1
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            elif GlobalVarG2.gsx // 32 * 8 <= xMouse <= GlobalVarG2.gsx // 32 * 16:
+                if GlobalVarG2.gsy // 18 * 5.9 <= yMouse <= GlobalVarG2.gsy // 18 * 6.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 11
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 6.1
+                elif GlobalVarG2.gsy // 18 * 6.9 <= yMouse <= GlobalVarG2.gsy // 18 * 7.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 12
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 7.1
+                elif GlobalVarG2.gsy // 18 * 7.9 <= yMouse <= GlobalVarG2.gsy // 18 * 8.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 13
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 8.1
+                elif GlobalVarG2.gsy // 18 * 8.9 <= yMouse <= GlobalVarG2.gsy // 18 * 9.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 14
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 9.1
+                elif GlobalVarG2.gsy // 18 * 9.9 <= yMouse <= GlobalVarG2.gsy // 18 * 10.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 15
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 10.1
+                elif GlobalVarG2.gsy // 18 * 10.9 <= yMouse <= GlobalVarG2.gsy // 18 * 11.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 16
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 11.1
+                elif GlobalVarG2.gsy // 18 * 11.9 <= yMouse <= GlobalVarG2.gsy // 18 * 12.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 17
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 12.1
+                elif GlobalVarG2.gsy // 18 * 12.9 <= yMouse <= GlobalVarG2.gsy // 18 * 13.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 18
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 13.1
+                elif GlobalVarG2.gsy // 18 * 13.9 <= yMouse <= GlobalVarG2.gsy // 18 * 14.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 19
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 14.1
+                elif GlobalVarG2.gsy // 18 * 14.9 <= yMouse <= GlobalVarG2.gsy // 18 * 15.9:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 20
+                    xp = GlobalVarG2.gsx // 32 * 8
+                    yp = GlobalVarG2.gsy // 18 * 15.1
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            else:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
-
                 if event.key == pygame.K_s and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
@@ -1263,35 +1837,48 @@ def sceglitecn(dati, tecnica, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    tastoTrovato = True
-
-                    i = 11
-                    c = 1
-                    while i <= 30:
-                        if voceMarcata == c:
-                            if dati[i] != 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                tecnica = c
-                                risposta = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                            break
-                        i += 1
-                        c += 1
-                    if voceMarcata == 0:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                        tecnica = 0
-                        risposta = True
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastoTrovato = True
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                risposta = True
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                tastop = "spazioOsinistroMouse"
+                tastoTrovato = True
+                i = 11
+                c = 1
+                while i <= 30:
+                    if voceMarcata == c:
+                        if dati[i] != 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            tecnica = c
+                            risposta = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                        break
+                    i += 1
+                    c += 1
+                if voceMarcata == 0:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    tecnica = 0
+                    risposta = True
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
 
-        if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
@@ -1312,6 +1899,8 @@ def sceglitecn(dati, tecnica, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         yp = yp - GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_a:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata != 0:
                     if 11 <= voceMarcata <= 20:
                         voceMarcata -= 10
@@ -1322,6 +1911,8 @@ def sceglitecn(dati, tecnica, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         xp = GlobalVarG2.gsx // 32 * 8
             if tastop == pygame.K_s:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 0:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1342,6 +1933,8 @@ def sceglitecn(dati, tecnica, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         yp = yp + GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_d:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata != 0:
                     if 1 <= voceMarcata <= 10:
                         voceMarcata += 10
@@ -1587,7 +2180,10 @@ def sceglitecn(dati, tecnica, canzone):
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15, 40)
 
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
             # puntatore vecchio
             i = 1
@@ -1629,8 +2225,9 @@ def equiprobo(dati, canzone):
     vxpGambit = xp
     vypGambit = yp
     voceMarcata = 1
-    voceGambitMarcata = 11
+    voceGambitMarcata = 0
     primoFrame = True
+    aggiornaInterfacciaPerMouse = False
 
     tastop = 0
     tastotempfps = 5
@@ -1653,17 +2250,455 @@ def equiprobo(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if not riordinamento and GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 6 and GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 1
+                xp = GlobalVarG2.gsx // 32 * 1
+                yp = GlobalVarG2.gsy // 18 * 6.8
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 6 and GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 2
+                xp = GlobalVarG2.gsx // 32 * 1
+                yp = GlobalVarG2.gsy // 18 * 8.8
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 6 and GlobalVarG2.gsy // 18 * 10 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 3
+                xp = GlobalVarG2.gsx // 32 * 1
+                yp = GlobalVarG2.gsy // 18 * 10.8
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 6 and GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 4
+                xp = GlobalVarG2.gsx // 32 * 1
+                yp = GlobalVarG2.gsy // 18 * 12.8
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 6 and GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 5
+                xp = GlobalVarG2.gsx // 32 * 1
+                yp = GlobalVarG2.gsy // 18 * 14.8
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 5.7 <= yMouse <= GlobalVarG2.gsy // 18 * 6.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 6
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 6
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 6.7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 7
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 7
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 7.7 <= yMouse <= GlobalVarG2.gsy // 18 * 8.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 8
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 8
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 8.7 <= yMouse <= GlobalVarG2.gsy // 18 * 9.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 9
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 9
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 9.7 <= yMouse <= GlobalVarG2.gsy // 18 * 10.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 10
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 10
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 10.7 <= yMouse <= GlobalVarG2.gsy // 18 * 11.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 11
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 11
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 11.7 <= yMouse <= GlobalVarG2.gsy // 18 * 12.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 12
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 12
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 12.7 <= yMouse <= GlobalVarG2.gsy // 18 * 13.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 13
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 13
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 13.7 <= yMouse <= GlobalVarG2.gsy // 18 * 14.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 14
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 14
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif GlobalVarG2.gsx // 32 * 7 <= xMouse <= GlobalVarG2.gsx // 32 * 10 and GlobalVarG2.gsy // 18 * 14.7 <= yMouse <= GlobalVarG2.gsy // 18 * 15.8:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 15
+                xp = GlobalVarG2.gsx // 32 * 7
+                yp = GlobalVarG2.gsy // 18 * 15
+                if riordinamento:
+                    if voceMarcata > voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i <= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i + 1]
+                            dati[111 + i] = dati[111 + i + 1]
+                            i += 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+                    elif voceMarcata < voceMarcataVecchia:
+                        condizioneSelezionata = dati[101 + voceMarcataVecchia - 6]
+                        azioneSelezionata = dati[111 + voceMarcataVecchia - 6]
+                        i = voceMarcataVecchia - 6
+                        while i >= voceMarcata - 6:
+                            dati[101 + i] = dati[101 + i - 1]
+                            dati[111 + i] = dati[111 + i - 1]
+                            i -= 1
+                        dati[101 + voceMarcata - 6] = condizioneSelezionata
+                        dati[111 + voceMarcata - 6] = azioneSelezionata
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 5.7 <= yMouse <= GlobalVarG2.gsy // 18 * 6.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 16
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 6
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 6.7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 17
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 7
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 7.7 <= yMouse <= GlobalVarG2.gsy // 18 * 8.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 18
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 8
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 8.7 <= yMouse <= GlobalVarG2.gsy // 18 * 9.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 19
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 9
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 9.7 <= yMouse <= GlobalVarG2.gsy // 18 * 10.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 20
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 10
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 10.7 <= yMouse <= GlobalVarG2.gsy // 18 * 11.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 21
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 11
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 11.7 <= yMouse <= GlobalVarG2.gsy // 18 * 12.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 22
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 12
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 12.7 <= yMouse <= GlobalVarG2.gsy // 18 * 13.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 23
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 13
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 13.7 <= yMouse <= GlobalVarG2.gsy // 18 * 14.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 24
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 14
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 10 <= xMouse <= GlobalVarG2.gsx // 32 * 16.5 and GlobalVarG2.gsy // 18 * 14.7 <= yMouse <= GlobalVarG2.gsy // 18 * 15.8:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 25
+                xp = GlobalVarG2.gsx // 32 * 10
+                yp = GlobalVarG2.gsy // 18 * 15
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 5.7 <= yMouse <= GlobalVarG2.gsy // 18 * 6.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 26
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 6
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 6.7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 27
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 7
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 7.7 <= yMouse <= GlobalVarG2.gsy // 18 * 8.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 28
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 8
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 8.7 <= yMouse <= GlobalVarG2.gsy // 18 * 9.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 29
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 9
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 9.7 <= yMouse <= GlobalVarG2.gsy // 18 * 10.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 30
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 10
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 10.7 <= yMouse <= GlobalVarG2.gsy // 18 * 11.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 31
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 11
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 11.7 <= yMouse <= GlobalVarG2.gsy // 18 * 12.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 32
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 12
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 12.7 <= yMouse <= GlobalVarG2.gsy // 18 * 13.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 33
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 13
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 13.7 <= yMouse <= GlobalVarG2.gsy // 18 * 14.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 34
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 14
+            elif not riordinamento and GlobalVarG2.gsx // 32 * 16.5 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 14.7 <= yMouse <= GlobalVarG2.gsy // 18 * 15.8:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 35
+                xp = GlobalVarG2.gsx // 32 * 16.5
+                yp = GlobalVarG2.gsy // 18 * 15
+            else:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
@@ -1686,103 +2721,123 @@ def equiprobo(dati, canzone):
                 if event.key == pygame.K_a and not riordinamento and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-                if event.key == pygame.K_SPACE:
-                    tastoTrovato = True
-                    # riordina
-                    if riordinamento:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                        riordinamento = False
-                    else:
-                        # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
-                        # armrob
-                        if voceMarcata == 1:
-                            if dati[71] != 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                dati[9] = 0
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if voceMarcata == 2:
-                            if dati[72] != 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                dati[9] = 1
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if voceMarcata == 3:
-                            if dati[73] != 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                dati[9] = 2
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if voceMarcata == 4:
-                            if dati[74] != 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                dati[9] = 3
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if voceMarcata == 5:
-                            if dati[75] != 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                dati[9] = 4
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-
-                        # riordina
-                        if 6 <= voceMarcata <= 15:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastop = "spazioOmouse"
+                tastoTrovato = True
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                if not riordinamento:
+                    risposta = True
+                else:
+                    riordinamento = False
+                    annullaRiordinamento = True
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                tastop = "spazioOmouse"
+                tastoTrovato = True
+                # riordina
+                if riordinamento:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    riordinamento = False
+                else:
+                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                    # armrob
+                    if voceMarcata == 1:
+                        if dati[71] != 0:
                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            riordinamento = True
-                            datiPrimaDiRiordinamento = list(dati)
-                            vxpGambit = xp
-                            vypGambit = yp
-                            voceGambitMarcata = voceMarcata
+                            dati[9] = 0
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if voceMarcata == 2:
+                        if dati[72] != 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            dati[9] = 1
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if voceMarcata == 3:
+                        if dati[73] != 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            dati[9] = 2
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if voceMarcata == 4:
+                        if dati[74] != 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            dati[9] = 3
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if voceMarcata == 5:
+                        if dati[75] != 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            dati[9] = 4
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
 
-                        # condizioni
-                        i = 101
-                        c = 16
-                        while i <= 110:
-                            if voceMarcata == c:
-                                if dati[i] != -1:
-                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                    dati[i] = sceglicondiz(dati, dati[i], canzone)
-                                else:
-                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                            i += 1
-                            c += 1
+                    # riordina
+                    if 6 <= voceMarcata <= 15:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        riordinamento = True
+                        datiPrimaDiRiordinamento = list(dati)
+                        vxpGambit = xp
+                        vypGambit = yp
+                        voceGambitMarcata = voceMarcata
 
-                        # tecniche
-                        i = 111
-                        c = 26
-                        while i <= 120:
-                            if voceMarcata == c:
-                                if dati[i] != -1:
-                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                    dati[i] = sceglitecn(dati, dati[i], canzone)
-                                else:
-                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                            i += 1
-                            c += 1
+                    # condizioni
+                    i = 101
+                    c = 16
+                    while i <= 110:
+                        if voceMarcata == c:
+                            if dati[i] != -1:
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                                dati[i] = sceglicondiz(dati, dati[i], canzone)
+                            else:
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                        i += 1
+                        c += 1
+
+                    # tecniche
+                    i = 111
+                    c = 26
+                    while i <= 120:
+                        if voceMarcata == c:
+                            if dati[i] != -1:
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                                dati[i] = sceglitecn(dati, dati[i], canzone)
+                            else:
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                        i += 1
+                        c += 1
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if riordinamento:
                     if voceMarcata != 6:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1819,6 +2874,8 @@ def equiprobo(dati, canzone):
                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                             yp = yp - GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_a and not riordinamento:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if 1 <= voceMarcata <= 5:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if voceMarcata == 1:
@@ -1879,6 +2936,8 @@ def equiprobo(dati, canzone):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = GlobalVarG2.gsx // 32 * 10
             if tastop == pygame.K_s:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if riordinamento:
                     if voceMarcata != 15:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1915,6 +2974,8 @@ def equiprobo(dati, canzone):
                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                             yp = yp + GlobalVarG2.gsy // 18 * 1
             if tastop == pygame.K_d and not riordinamento:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if 1 <= voceMarcata <= 5:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if voceMarcata == 1:
@@ -1995,7 +3056,8 @@ def equiprobo(dati, canzone):
                 voceMarcata = voceGambitMarcata
 
             if riordinamento:
-                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigiochi, (xp, yp - (GlobalVarG2.gpy // 4), GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 1))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (xp, yp - (GlobalVarG2.gpy // 4), GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 1))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (vxpGambit, vypGambit - (GlobalVarG2.gpy // 4), GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 1))
 
             messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
 
@@ -2012,15 +3074,9 @@ def equiprobo(dati, canzone):
             i = 1
             while i <= 10:
                 if i == 10:
-                    if riordinamento and voceMarcata == i + 5:
-                        messaggio(str(i), GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 8.3, GlobalVarG2.gsy // 18 * (i + 5), 50)
-                    else:
-                        messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.3, GlobalVarG2.gsy // 18 * (i + 5), 50)
+                    messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.3, GlobalVarG2.gsy // 18 * (i + 5), 50)
                 else:
-                    if riordinamento and voceMarcata == i + 5:
-                        messaggio(str(i), GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * (i + 5), 50)
-                    else:
-                        messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * (i + 5), 50)
+                    messaggio(str(i), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * (i + 5), 50)
                 i += 1
             messaggio("Condizione...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4.5, 60)
             c = 6.1
@@ -2028,110 +3084,47 @@ def equiprobo(dati, canzone):
                 if dati[i] == -1:
                     messaggio("---", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("---", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con pv < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con pv < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con pv < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Rallo con veleno", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco surriscaldato", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Colco surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Colco surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco con pe < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Colco con pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco con pe < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Colco con pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Colco con pe < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Colco con pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Colco con pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Sempre a Rallo", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Sempre a Colco", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Sempre a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Sempre a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico a caso", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Nemico a caso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico vicino", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Nemico vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico lontano", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Nemico lontano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Nemico lontano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con pv < 80%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Nemico con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con pv < 50%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Nemico con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con pv < 30%", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Nemico con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Nemico con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Nemico con meno pv", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Nemico con meno pv", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Nemico con meno pv", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Numero di nemici > 1", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Numero di nemici > 1", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 1", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Numero di nemici > 4", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Numero di nemici > 4", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 4", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    if riordinamento and voceMarcata == i - 95:
-                        messaggio("Numero di nemici > 7", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Numero di nemici > 7", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Numero di nemici > 7", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 c += 1
             messaggio("...Tecnica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * 4.5, 60)
             c = 6.1
@@ -2139,113 +3132,53 @@ def equiprobo(dati, canzone):
                 if dati[i] == -1:
                     messaggio("---", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 0:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("---", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Scossa", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Scossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Scossa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Cura", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Cura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Cura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Antidoto", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Antidoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Antidoto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Freccia elettrica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Freccia elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Tempesta elettrica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Tempesta elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Raffreddamento", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Raffreddamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Raffreddamento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Auto-ricarica", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Auto-ricarica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Cura +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Cura +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Cura +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Scossa +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Scossa +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Scossa +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Freccia elettrica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Freccia elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Freccia elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 11:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Velocizza", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Velocizza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Velocizza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 12:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Carica attacco", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Carica attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Carica attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 13:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Carica difesa", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Carica difesa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Carica difesa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 14:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Efficienza", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Efficienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Efficienza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 15:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Tempesta elettrica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Tempesta elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 16:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Cura ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Cura ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Cura ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 17:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Auto-ricarica +", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Auto-ricarica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Auto-ricarica +", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 18:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Scossa ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Scossa ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Scossa ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 19:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Freccia Elettrica ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Freccia Elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Freccia Elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 20:
-                    if riordinamento and voceMarcata == i - 105:
-                        messaggio("Tempesta elettrica ++", GlobalVarG2.grigio, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
-                    else:
-                        messaggio("Tempesta elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Tempesta elettrica ++", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17.5, GlobalVarG2.gsy // 18 * c, 40)
                 c = c + 1
 
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
 
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
@@ -2391,6 +3324,7 @@ def oggetti(dati, canzone):
     oggetton = 1
     voceMarcata = 0
     primoFrame = True
+    aggiornaInterfacciaPerMouse = False
 
     tastop = 0
     tastotempfps = 5
@@ -2413,17 +3347,121 @@ def oggetti(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        oggettonVecchio = oggetton
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if usa != 0:
+                if GlobalVarG2.gsy // 18 * 14.5 <= yMouse <= GlobalVarG2.gsy // 18 * 16.5:
+                    if GlobalVarG2.gsx // 32 * 11 <= xMouse <= GlobalVarG2.gsx // 32 * 15:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 1
+                        xp = GlobalVarG2.gsx // 32 * 12
+                        yp = GlobalVarG2.gsy // 18 * 15.1
+                    elif GlobalVarG2.gsx // 32 * 15 <= xMouse <= GlobalVarG2.gsx // 32 * 19:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 2
+                        xp = GlobalVarG2.gsx // 32 * 15
+                        yp = GlobalVarG2.gsy // 18 * 15.1
+                    else:
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            else:
+                if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 11:
+                    if GlobalVarG2.gsy // 18 * 4.7 <= yMouse <= GlobalVarG2.gsy // 18 * 5.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 1
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 5
+                    elif GlobalVarG2.gsy // 18 * 5.7 <= yMouse <= GlobalVarG2.gsy // 18 * 6.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 2
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 6
+                    elif GlobalVarG2.gsy // 18 * 6.7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 3
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 7
+                    elif GlobalVarG2.gsy // 18 * 7.7 <= yMouse <= GlobalVarG2.gsy // 18 * 8.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 4
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 8
+                    elif GlobalVarG2.gsy // 18 * 8.7 <= yMouse <= GlobalVarG2.gsy // 18 * 9.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 5
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 9
+                    elif GlobalVarG2.gsy // 18 * 10.7 <= yMouse <= GlobalVarG2.gsy // 18 * 11.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 6
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 11
+                    elif GlobalVarG2.gsy // 18 * 11.7 <= yMouse <= GlobalVarG2.gsy // 18 * 12.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 7
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 12
+                    elif GlobalVarG2.gsy // 18 * 12.7 <= yMouse <= GlobalVarG2.gsy // 18 * 13.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 8
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 13
+                    elif GlobalVarG2.gsy // 18 * 13.7 <= yMouse <= GlobalVarG2.gsy // 18 * 14.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 9
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 14
+                    elif GlobalVarG2.gsy // 18 * 14.7 <= yMouse <= GlobalVarG2.gsy // 18 * 15.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        oggetton = 10
+                        xp = GlobalVarG2.gsx // 32 * 1
+                        yp = GlobalVarG2.gsy // 18 * 15
+                    else:
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            if (voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton) and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata and oggettonVecchio == oggetton:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
@@ -2468,177 +3506,219 @@ def oggetti(dati, canzone):
                 if event.key == pygame.K_d and voceMarcata != 0 and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    tastoTrovato = True
-                    usadue = True
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastop = "spazioOmouse"
+                tastoTrovato = True
+                voceMarcata = 0
+                if usa != 0:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    if usa == 1:
+                        yp = GlobalVarG2.gsy // 18 * 5
+                    if usa == 2:
+                        yp = GlobalVarG2.gsy // 18 * 6
+                    if usa == 3:
+                        yp = GlobalVarG2.gsy // 18 * 7
+                    if usa == 4:
+                        yp = GlobalVarG2.gsy // 18 * 8
+                    if usa == 5:
+                        yp = GlobalVarG2.gsy // 18 * 9
+                    if usa == 6:
+                        yp = GlobalVarG2.gsy // 18 * 11
+                    if usa == 7:
+                        yp = GlobalVarG2.gsy // 18 * 12
+                    if usa == 8:
+                        yp = GlobalVarG2.gsy // 18 * 13
+                    if usa == 9:
+                        yp = GlobalVarG2.gsy // 18 * 14
+                    if usa == 10:
+                        yp = GlobalVarG2.gsy // 18 * 15
+                    usa = 0
+                else:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    risposta = True
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                tastop = "spazioOmouse"
+                tastoTrovato = True
+                usadue = True
 
-                    # usa?
-                    if voceMarcata == 1:
-                        voceMarcata = 0
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                        xp = GlobalVarG2.gsx // 32 * 1
-                        # pozione
-                        if usa == 1:
-                            dati[5] = dati[5] + 100
-                            if dati[5] > pvtot:
-                                dati[5] = pvtot
-                            dati[31] = dati[31] - 1
-                            yp = GlobalVarG2.gsy // 18 * 5
-                        # carica batt
-                        if usa == 2:
-                            dati[10] = dati[10] + 250
-                            if dati[10] > entot:
-                                dati[10] = entot
-                            dati[32] = dati[32] - 1
-                            yp = GlobalVarG2.gsy // 18 * 6
-                        # antidoto
-                        if usa == 3:
-                            dati[121] = 0
-                            dati[33] = dati[33] - 1
-                            yp = GlobalVarG2.gsy // 18 * 7
-                        # super pozione
-                        if usa == 4:
-                            dati[5] = dati[5] + 300
-                            if dati[5] > pvtot:
-                                dati[5] = pvtot
-                            dati[34] = dati[34] - 1
-                            yp = GlobalVarG2.gsy // 18 * 8
-                        # carica migliorato
-                        if usa == 5:
-                            dati[10] = dati[10] + 600
-                            if dati[10] > entot:
-                                dati[10] = entot
-                            dati[35] = dati[35] - 1
-                            yp = GlobalVarG2.gsy // 18 * 9
-                        # bomba
-                        if usa == 6:
-                            attacco = 2
-                            yp = GlobalVarG2.gsy // 18 * 11
-                        # bomba veleno
-                        if usa == 7:
-                            attacco = 3
-                            yp = GlobalVarG2.gsy // 18 * 12
-                        # esca
-                        if usa == 8:
-                            attacco = 4
-                            yp = GlobalVarG2.gsy // 18 * 13
-                        # bomba appiccicosa
-                        if usa == 9:
-                            attacco = 5
-                            yp = GlobalVarG2.gsy // 18 * 14
-                        # bomba potenziata
-                        if usa == 10:
-                            attacco = 6
-                            yp = GlobalVarG2.gsy // 18 * 15
-                        usa = 0
-                        usadue = False
-                    elif voceMarcata == 2:
-                        voceMarcata = 0
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
-                        xp = GlobalVarG2.gsx // 32 * 1
-                        if usa == 1:
-                            yp = GlobalVarG2.gsy // 18 * 5
-                        if usa == 2:
-                            yp = GlobalVarG2.gsy // 18 * 6
-                        if usa == 3:
-                            yp = GlobalVarG2.gsy // 18 * 7
-                        if usa == 4:
-                            yp = GlobalVarG2.gsy // 18 * 8
-                        if usa == 5:
-                            yp = GlobalVarG2.gsy // 18 * 9
-                        if usa == 6:
-                            yp = GlobalVarG2.gsy // 18 * 11
-                        if usa == 7:
-                            yp = GlobalVarG2.gsy // 18 * 12
-                        if usa == 8:
-                            yp = GlobalVarG2.gsy // 18 * 13
-                        if usa == 9:
-                            yp = GlobalVarG2.gsy // 18 * 14
-                        if usa == 10:
-                            yp = GlobalVarG2.gsy // 18 * 15
-                        usa = 0
-                        usadue = False
+                # usa?
+                if voceMarcata == 1:
+                    voceMarcata = 0
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    # pozione
+                    if usa == 1:
+                        dati[5] = dati[5] + 100
+                        if dati[5] > pvtot:
+                            dati[5] = pvtot
+                        dati[31] = dati[31] - 1
+                        yp = GlobalVarG2.gsy // 18 * 5
+                    # carica batt
+                    if usa == 2:
+                        dati[10] = dati[10] + 250
+                        if dati[10] > entot:
+                            dati[10] = entot
+                        dati[32] = dati[32] - 1
+                        yp = GlobalVarG2.gsy // 18 * 6
+                    # antidoto
+                    if usa == 3:
+                        dati[121] = 0
+                        dati[33] = dati[33] - 1
+                        yp = GlobalVarG2.gsy // 18 * 7
+                    # super pozione
+                    if usa == 4:
+                        dati[5] = dati[5] + 300
+                        if dati[5] > pvtot:
+                            dati[5] = pvtot
+                        dati[34] = dati[34] - 1
+                        yp = GlobalVarG2.gsy // 18 * 8
+                    # carica migliorato
+                    if usa == 5:
+                        dati[10] = dati[10] + 600
+                        if dati[10] > entot:
+                            dati[10] = entot
+                        dati[35] = dati[35] - 1
+                        yp = GlobalVarG2.gsy // 18 * 9
+                    # bomba
+                    if usa == 6:
+                        attacco = 2
+                        yp = GlobalVarG2.gsy // 18 * 11
+                    # bomba veleno
+                    if usa == 7:
+                        attacco = 3
+                        yp = GlobalVarG2.gsy // 18 * 12
+                    # esca
+                    if usa == 8:
+                        attacco = 4
+                        yp = GlobalVarG2.gsy // 18 * 13
+                    # bomba appiccicosa
+                    if usa == 9:
+                        attacco = 5
+                        yp = GlobalVarG2.gsy // 18 * 14
+                    # bomba potenziata
+                    if usa == 10:
+                        attacco = 6
+                        yp = GlobalVarG2.gsy // 18 * 15
+                    usa = 0
+                    usadue = False
+                elif voceMarcata == 2:
+                    voceMarcata = 0
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    if usa == 1:
+                        yp = GlobalVarG2.gsy // 18 * 5
+                    if usa == 2:
+                        yp = GlobalVarG2.gsy // 18 * 6
+                    if usa == 3:
+                        yp = GlobalVarG2.gsy // 18 * 7
+                    if usa == 4:
+                        yp = GlobalVarG2.gsy // 18 * 8
+                    if usa == 5:
+                        yp = GlobalVarG2.gsy // 18 * 9
+                    if usa == 6:
+                        yp = GlobalVarG2.gsy // 18 * 11
+                    if usa == 7:
+                        yp = GlobalVarG2.gsy // 18 * 12
+                    if usa == 8:
+                        yp = GlobalVarG2.gsy // 18 * 13
+                    if usa == 9:
+                        yp = GlobalVarG2.gsy // 18 * 14
+                    if usa == 10:
+                        yp = GlobalVarG2.gsy // 18 * 15
+                    usa = 0
+                    usadue = False
 
-                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
-                    if usadue:
-                        if oggetton == 1:
-                            if dati[31] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 1
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 2:
-                            if dati[32] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 2
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 3:
-                            if dati[33] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 3
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 4:
-                            if dati[34] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 4
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 5:
-                            if dati[35] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 5
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 6:
-                            if dati[36] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 6
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 7:
-                            if dati[37] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 7
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 8:
-                            if dati[38] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 8
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 9:
-                            if dati[39] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 9
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-                        if oggetton == 10:
-                            if dati[40] > 0:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                                usa = 10
-                                usauno = True
-                            else:
-                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                if usadue:
+                    if oggetton == 1:
+                        if dati[31] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 1
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 2:
+                        if dati[32] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 2
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 3:
+                        if dati[33] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 3
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 4:
+                        if dati[34] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 4
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 5:
+                        if dati[35] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 5
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 6:
+                        if dati[36] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 6
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 7:
+                        if dati[37] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 7
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 8:
+                        if dati[38] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 8
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 9:
+                        if dati[39] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 9
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if oggetton == 10:
+                        if dati[40] > 0:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            usa = 10
+                            usauno = True
+                        else:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w and voceMarcata == 0:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if oggetton != 1 and oggetton != 6:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     oggetton = oggetton - 1
@@ -2652,11 +3732,15 @@ def oggetti(dati, canzone):
                     yp = GlobalVarG2.gsy // 18 * 15
                     oggetton = 10
             if tastop == pygame.K_a and voceMarcata != 0:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = xp - GlobalVarG2.gsx // 32 * 3
             if tastop == pygame.K_s and voceMarcata == 0:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if oggetton != 10 and oggetton != 5:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     oggetton = oggetton + 1
@@ -2670,6 +3754,8 @@ def oggetti(dati, canzone):
                     yp = GlobalVarG2.gsy // 18 * 5
                     oggetton = 1
             if tastop == pygame.K_d and voceMarcata != 0:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -2846,7 +3932,10 @@ def oggetti(dati, canzone):
             if attacco != 0:
                 risposta = True
 
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
             GlobalVarG2.schermo.blit(imgOggetti[oggetton - 1], (GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 3))
             GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             if usa == 0:

@@ -8,6 +8,8 @@ def menu():
     fermavideo = guardaVideo('Video/videoinizio')
     # attesa dopo video
     if not fermavideo:
+        if GlobalVarG2.mouseBloccato:
+            GlobalVarG2.configuraCursore(False)
         GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         messaggio("Premi un tasto per continuare...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
         pygame.display.update()
@@ -49,7 +51,7 @@ def menu():
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -59,41 +61,44 @@ def menu():
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if GlobalVarG2.gsx // 32 * 4 <= xMouse <= GlobalVarG2.gsx // 32 * 12:
-                if GlobalVarG2.gsy // 18 * 3 <= yMouse <= GlobalVarG2.gsy // 18 * 4.5:
-                    GlobalVarG2.configuraCursore(False)
+            if GlobalVarG2.gsx // 32 * 2.5 <= xMouse <= GlobalVarG2.gsx // 32 * 12.5:
+                if GlobalVarG2.gsy // 18 * 2.5 <= yMouse <= GlobalVarG2.gsy // 18 * 5:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 1
                     xp = GlobalVarG2.gsx // 32 * 3
                     yp = GlobalVarG2.gsy // 18 * 3.5
-                elif GlobalVarG2.gsy // 18 * 5.5 <= yMouse <= GlobalVarG2.gsy // 18 * 7:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 5 <= yMouse <= GlobalVarG2.gsy // 18 * 7.5:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 2
                     xp = GlobalVarG2.gsx // 32 * 3
                     yp = GlobalVarG2.gsy // 18 * 6
-                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 9.5:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 7.5 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 3
                     xp = GlobalVarG2.gsx // 32 * 3
                     yp = GlobalVarG2.gsy // 18 * 8.5
-                elif GlobalVarG2.gsy // 18 * 13 <= yMouse <= GlobalVarG2.gsy // 18 * 14.5:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 12.5 <= yMouse <= GlobalVarG2.gsy // 18 * 15:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 4
                     xp = GlobalVarG2.gsx // 32 * 3
                     yp = GlobalVarG2.gsy // 18 * 13.5
                 else:
-                    GlobalVarG2.configuraCursore(True)
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
             else:
-                GlobalVarG2.configuraCursore(True)
-            if voceMarcataVecchia != voceMarcata:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            if sinistroMouse or centraleMouse or destroMouse:
-                pygame.mouse.set_visible(True)
-                GlobalVarG2.mouseVisibile = True
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -156,22 +161,37 @@ def menu():
                         dati.pop(len(dati) - 1)
                         if len(dati) == 0:
                             print "Slot vuoto"
+                            aggiornaSchermata = True
                             indietro = False
-                            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
-                            robograsalva = pygame.transform.scale(GlobalVarG2.robograff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-                            GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 3, -GlobalVarG2.gpy * 5))
-                            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
-                            messaggio("Slot di salvataggio vuoto...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
-                            pygame.display.update()
                             while not indietro:
+                                xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+                                if xMouseVecchio != 0 or yMouseVecchio != 0:
+                                    aggiornaSchermata = True
+                                    pygame.mouse.set_visible(True)
+                                    GlobalVarG2.mouseVisibile = True
                                 for event in pygame.event.get():
+                                    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                                     if event.type == pygame.QUIT:
                                         pygame.quit()
                                         quit()
                                     if event.type == pygame.KEYDOWN:
-                                        if event.key == pygame.K_q:
-                                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
-                                            indietro = True
+                                        aggiornaSchermata = True
+                                        pygame.mouse.set_visible(False)
+                                        GlobalVarG2.mouseVisibile = False
+                                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or destroMouse:
+                                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                                        indietro = True
+                                if aggiornaSchermata:
+                                    aggiornaSchermata = False
+                                    GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+                                    robograsalva = pygame.transform.scale(GlobalVarG2.robograff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                                    GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 3, -GlobalVarG2.gpy * 5))
+                                    if GlobalVarG2.mouseVisibile:
+                                        messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+                                    else:
+                                        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+                                    messaggio("Slot di salvataggio vuoto...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
+                                    pygame.display.update()
                         else:
                             errore = False
                             if len(dati) != lunghezzadati:
@@ -203,22 +223,37 @@ def menu():
                                     return dati, porteini, portefin, cofaniini, cofanifin
                             if len(dati) != lunghezzadati or errore:
                                 print "Dati corrotti: " + str(len(dati))
+                                aggiornaSchermata = True
                                 indietro = False
-                                GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
-                                robograsalva = pygame.transform.scale(GlobalVarG2.robograffff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-                                GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 15, -GlobalVarG2.gpy * 3))
-                                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
-                                messaggio("I dati sono corrotti...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
-                                pygame.display.update()
                                 while not indietro:
+                                    xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+                                    if xMouseVecchio != 0 or yMouseVecchio != 0:
+                                        aggiornaSchermata = True
+                                        pygame.mouse.set_visible(True)
+                                        GlobalVarG2.mouseVisibile = True
                                     for event in pygame.event.get():
+                                        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                                         if event.type == pygame.QUIT:
                                             pygame.quit()
                                             quit()
                                         if event.type == pygame.KEYDOWN:
-                                            if event.key == pygame.K_q:
-                                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
-                                                indietro = True
+                                            aggiornaSchermata = True
+                                            pygame.mouse.set_visible(False)
+                                            GlobalVarG2.mouseVisibile = False
+                                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or destroMouse:
+                                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                                            indietro = True
+                                    if aggiornaSchermata:
+                                        aggiornaSchermata = False
+                                        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+                                        robograsalva = pygame.transform.scale(GlobalVarG2.robograffff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                                        GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 15, -GlobalVarG2.gpy * 3))
+                                        if GlobalVarG2.mouseVisibile:
+                                            messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+                                        else:
+                                            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+                                        messaggio("I dati sono corrotti...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
+                                        pygame.display.update()
                         leggi.close()
 
                 # Impostazioni
@@ -232,6 +267,9 @@ def menu():
                     quit()
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
@@ -240,10 +278,14 @@ def menu():
         if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata:
             if primoFrame:
                 puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
-                xp = GlobalVarG2.gsx // 32 * 3
-                yp = GlobalVarG2.gsy // 18 * 3.5
+                if voceMarcata == 1:
+                    yp = GlobalVarG2.gsy // 18 * 3.5
+                if voceMarcata == 2:
+                    yp = GlobalVarG2.gsy // 18 * 6
                 if voceMarcata == 3:
                     yp = GlobalVarG2.gsy // 18 * 8.5
+                if voceMarcata == 4:
+                    yp = GlobalVarG2.gsy // 18 * 13.5
                 primoFrame = False
             if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
                 tastotempfps = 2
@@ -353,7 +395,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -364,66 +406,74 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if GlobalVarG2.gsx // 32 * 2 <= xMouse <= GlobalVarG2.gsx // 32 * 10:
-                if GlobalVarG2.gsy // 18 * 5 <= yMouse <= GlobalVarG2.gsy // 18 * 5.6:
-                    GlobalVarG2.configuraCursore(False)
+            if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 11:
+                if GlobalVarG2.gsy // 18 * 4.8 <= yMouse <= GlobalVarG2.gsy // 18 * 5.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 1
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 5
-                elif GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 6.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 5.8 <= yMouse <= GlobalVarG2.gsy // 18 * 6.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 2
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 6
-                elif GlobalVarG2.gsy // 18 * 7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 6.8 <= yMouse <= GlobalVarG2.gsy // 18 * 7.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 3
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 7
-                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 8.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 7.8 <= yMouse <= GlobalVarG2.gsy // 18 * 8.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 4
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 8
-                elif GlobalVarG2.gsy // 18 * 9 <= yMouse <= GlobalVarG2.gsy // 18 * 9.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 8.8 <= yMouse <= GlobalVarG2.gsy // 18 * 9.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 5
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 9
-                elif GlobalVarG2.gsy // 18 * 12 <= yMouse <= GlobalVarG2.gsy // 18 * 12.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 11.8 <= yMouse <= GlobalVarG2.gsy // 18 * 12.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 6
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 12
-                elif GlobalVarG2.gsy // 18 * 13 <= yMouse <= GlobalVarG2.gsy // 18 * 13.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 12.8 <= yMouse <= GlobalVarG2.gsy // 18 * 13.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 7
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 13
-                elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 14.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 13.8 <= yMouse <= GlobalVarG2.gsy // 18 * 14.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 8
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 14
-                elif GlobalVarG2.gsy // 18 * 15 <= yMouse <= GlobalVarG2.gsy // 18 * 15.6:
-                    GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 14.8 <= yMouse <= GlobalVarG2.gsy // 18 * 15.8:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                     voceMarcata = 9
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 15
                 else:
-                    GlobalVarG2.configuraCursore(True)
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
             else:
-                GlobalVarG2.configuraCursore(True)
-            if voceMarcataVecchia != voceMarcata:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            if sinistroMouse or centraleMouse or destroMouse:
-                pygame.mouse.set_visible(True)
-                GlobalVarG2.mouseVisibile = True
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -495,6 +545,9 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     conferma = 2
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
@@ -565,7 +618,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             messaggio("Torna al menu principale", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
             messaggio("Torna a Windows", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
             if GlobalVarG2.mouseVisibile:
-                messaggio("Taso destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
             else:
                 messaggio("Esc / Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 1, 50)
             if carim:
@@ -666,7 +719,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -680,72 +733,88 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
             if difensivi:
                 if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 7 and GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
                     mouseInquadraFreccia = True
-                    GlobalVarG2.configuraCursore(False)
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                 elif GlobalVarG2.gsy // 18 * 5 <= yMouse <= GlobalVarG2.gsy // 18 * 6:
                     if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 2:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 1
                         xp = GlobalVarG2.gsx // 32 * 1
                         yp = GlobalVarG2.gsy // 18 * 5
                     elif GlobalVarG2.gsx // 32 * 2 <= xMouse <= GlobalVarG2.gsx // 32 * 3:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 2
                         xp = GlobalVarG2.gsx // 32 * 2
                         yp = GlobalVarG2.gsy // 18 * 5
                     elif GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 3
                         xp = GlobalVarG2.gsx // 32 * 3
                         yp = GlobalVarG2.gsy // 18 * 5
                     elif GlobalVarG2.gsx // 32 * 4 <= xMouse <= GlobalVarG2.gsx // 32 * 5:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 4
                         xp = GlobalVarG2.gsx // 32 * 4
                         yp = GlobalVarG2.gsy // 18 * 5
                     elif GlobalVarG2.gsx // 32 * 5 <= xMouse <= GlobalVarG2.gsx // 32 * 6:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 5
                         xp = GlobalVarG2.gsx // 32 * 5
                         yp = GlobalVarG2.gsy // 18 * 5
                     else:
-                        GlobalVarG2.configuraCursore(True)
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
                 else:
-                    GlobalVarG2.configuraCursore(True)
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
             elif offensivi:
                 if GlobalVarG2.gsy // 18 * 4.5 <= yMouse <= GlobalVarG2.gsy // 18 * 5.5 and GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
                     mouseInquadraFreccia = True
-                    GlobalVarG2.configuraCursore(False)
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                 elif GlobalVarG2.gsy // 18 * 5.5 <= yMouse <= GlobalVarG2.gsy // 18 * 6.5:
                     if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 2:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 1
                         xp = GlobalVarG2.gsx // 32 * 1
                         yp = GlobalVarG2.gsy // 18 * 5.5
                     elif GlobalVarG2.gsx // 32 * 2 <= xMouse <= GlobalVarG2.gsx // 32 * 3:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 2
                         xp = GlobalVarG2.gsx // 32 * 2
                         yp = GlobalVarG2.gsy // 18 * 5.5
                     elif GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 3
                         xp = GlobalVarG2.gsx // 32 * 3
                         yp = GlobalVarG2.gsy // 18 * 5.5
                     elif GlobalVarG2.gsx // 32 * 4 <= xMouse <= GlobalVarG2.gsx // 32 * 5:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 4
                         xp = GlobalVarG2.gsx // 32 * 4
                         yp = GlobalVarG2.gsy // 18 * 5.5
                     elif GlobalVarG2.gsx // 32 * 5 <= xMouse <= GlobalVarG2.gsx // 32 * 6:
-                        GlobalVarG2.configuraCursore(False)
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 5
                         xp = GlobalVarG2.gsx // 32 * 5
                         yp = GlobalVarG2.gsy // 18 * 5.5
                     else:
-                        GlobalVarG2.configuraCursore(True)
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
                 else:
-                    GlobalVarG2.configuraCursore(True)
-            if voceMarcataVecchia != voceMarcata:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
@@ -1061,7 +1130,7 @@ def menuMercante(dati):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
 
         oggettonVecchio = oggetton
@@ -1076,94 +1145,114 @@ def menuMercante(dati):
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
             if voceMarcata == 0:
-                if GlobalVarG2.gsx // 32 * 11.5 <= xMouse <= GlobalVarG2.gsx // 32 * 20.5:
-                    if GlobalVarG2.gsy // 18 * 6.1 <= yMouse <= GlobalVarG2.gsy // 18 * 6.7:
-                        GlobalVarG2.configuraCursore(False)
+                if GlobalVarG2.gsx // 32 * 10.5 <= xMouse <= GlobalVarG2.gsx // 32 * 21.5:
+                    if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 6.8:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 0
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 6.1
-                    elif GlobalVarG2.gsy // 18 * 7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.6:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 6.8 <= yMouse <= GlobalVarG2.gsy // 18 * 7.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 1
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 7
-                    elif GlobalVarG2.gsy // 18 * 7.9 <= yMouse <= GlobalVarG2.gsy // 18 * 8.5:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 7.7 <= yMouse <= GlobalVarG2.gsy // 18 * 8.6:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 2
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 7.9
-                    elif GlobalVarG2.gsy // 18 * 8.8 <= yMouse <= GlobalVarG2.gsy // 18 * 9.4:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 8.6 <= yMouse <= GlobalVarG2.gsy // 18 * 9.5:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 3
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 8.8
-                    elif GlobalVarG2.gsy // 18 * 9.7 <= yMouse <= GlobalVarG2.gsy // 18 * 10.3:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 9.5 <= yMouse <= GlobalVarG2.gsy // 18 * 10.4:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 4
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 9.7
-                    elif GlobalVarG2.gsy // 18 * 10.6 <= yMouse <= GlobalVarG2.gsy // 18 * 11.2:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 10.4 <= yMouse <= GlobalVarG2.gsy // 18 * 11.3:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 5
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 10.6
-                    elif GlobalVarG2.gsy // 18 * 11.5 <= yMouse <= GlobalVarG2.gsy // 18 * 12.1:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 11.3 <= yMouse <= GlobalVarG2.gsy // 18 * 12.2:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 6
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 11.5
-                    elif GlobalVarG2.gsy // 18 * 12.4 <= yMouse <= GlobalVarG2.gsy // 18 * 13:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 12.2 <= yMouse <= GlobalVarG2.gsy // 18 * 13.1:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 7
                         xp = GlobalVarG2.gsx // 32 * 10.5
                         yp = GlobalVarG2.gsy // 18 * 12.4
-                    elif GlobalVarG2.gsy // 18 * 13.3 <= yMouse <= GlobalVarG2.gsy // 18 * 13.9:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsy // 18 * 13.1 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 8
                         xp = GlobalVarG2.gsx // 32 * 10.5
-                        yp = GlobalVarG2.gsy // 18 * 13.2
-                    elif GlobalVarG2.gsy // 18 * 14.2 <= yMouse <= GlobalVarG2.gsy // 18 * 14.8:
-                        GlobalVarG2.configuraCursore(False)
+                        yp = GlobalVarG2.gsy // 18 * 13.3
+                    elif GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 14.9:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 9
                         xp = GlobalVarG2.gsx // 32 * 10.5
-                        yp = GlobalVarG2.gsy // 18 * 14.1
-                    elif GlobalVarG2.gsy // 18 * 15.1 <= yMouse <= GlobalVarG2.gsy // 18 * 15.7:
-                        GlobalVarG2.configuraCursore(False)
+                        yp = GlobalVarG2.gsy // 18 * 14.2
+                    elif GlobalVarG2.gsy // 18 * 14.9 <= yMouse <= GlobalVarG2.gsy // 18 * 15.8:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 10
                         xp = GlobalVarG2.gsx // 32 * 10.5
-                        yp = GlobalVarG2.gsy // 18 * 15
-                    elif GlobalVarG2.gsy // 18 * 16 <= yMouse <= GlobalVarG2.gsy // 18 * 16.6:
-                        GlobalVarG2.configuraCursore(False)
+                        yp = GlobalVarG2.gsy // 18 * 15.1
+                    elif GlobalVarG2.gsy // 18 * 15.8 <= yMouse <= GlobalVarG2.gsy // 18 * 16.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         oggetton = 11
                         xp = GlobalVarG2.gsx // 32 * 10.5
-                        yp = GlobalVarG2.gsy // 18 * 15.9
+                        yp = GlobalVarG2.gsy // 18 * 16
                     else:
-                        GlobalVarG2.configuraCursore(True)
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
                 else:
-                    GlobalVarG2.configuraCursore(True)
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
             else:
                 if GlobalVarG2.gsy // 18 * 4.3 <= yMouse <= GlobalVarG2.gsy // 18 * 4.8 and GlobalVarG2.gsx // 32 * 8.5 <= xMouse <= GlobalVarG2.gsx // 32 * 9.5:
                     mouseInquadraFrecciaSu = True
-                    GlobalVarG2.configuraCursore(False)
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
                 elif GlobalVarG2.gsy // 18 * 4.8 <= yMouse <= GlobalVarG2.gsy // 18 * 5.3 and GlobalVarG2.gsx // 32 * 8.5 <= xMouse <= GlobalVarG2.gsx // 32 * 9.5:
                     mouseInquadraFrecciaGiu = True
-                    GlobalVarG2.configuraCursore(False)
-                elif GlobalVarG2.gsy // 18 * 6.8 <= yMouse <= GlobalVarG2.gsy // 18 * 7.4:
-                    if GlobalVarG2.gsx // 32 * 2 <= xMouse <= GlobalVarG2.gsx // 32 * 5:
+                    if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
+                elif GlobalVarG2.gsy // 18 * 6.6 <= yMouse <= GlobalVarG2.gsy // 18 * 7.6:
+                    if GlobalVarG2.gsx // 32 * 1.3 <= xMouse <= GlobalVarG2.gsx // 32 * 5.3:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 1
                         xp = GlobalVarG2.gsx // 32 * 1.3
                         yp = GlobalVarG2.gsy // 18 * 6.9
-                    elif GlobalVarG2.gsx // 32 * 6 <= xMouse <= GlobalVarG2.gsx // 32 * 8.5:
-                        GlobalVarG2.configuraCursore(False)
+                    elif GlobalVarG2.gsx // 32 * 5.3 <= xMouse <= GlobalVarG2.gsx // 32 * 9.2:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
                         voceMarcata = 2
                         xp = GlobalVarG2.gsx // 32 * 5.3
                         yp = GlobalVarG2.gsy // 18 * 6.9
                     else:
-                        GlobalVarG2.configuraCursore(True)
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
                 else:
-                    GlobalVarG2.configuraCursore(True)
-            if oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            if (oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata) and not primoFrame:
                 inventarioPieno = False
                 moneteInsufficienti = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1640,7 +1729,7 @@ def menuMercante(dati):
                 messaggio("Quanti te ne servono?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.5, 50)
 
             if GlobalVarG2.mouseVisibile:
-                messaggio("Taso destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
             else:
                 messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
             if 1 <= oggetton <= 10:

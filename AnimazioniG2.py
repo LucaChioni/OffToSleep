@@ -183,18 +183,28 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                 break
             i += 3
         if fineanimaz == 1:
+            if GlobalVarG2.mouseBloccato:
+                GlobalVarG2.configuraCursore(False)
             pygame.display.update()
             pygame.time.wait(500)
             risposta = False
             while not risposta:
+                deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+                if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(True)
+                    GlobalVarG2.mouseVisibile = True
                 for event in pygame.event.get():
+                    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
-                    if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         risposta = True
                         aumentoliv -= 1
+                    if event.type == pygame.KEYDOWN:
+                        pygame.mouse.set_visible(False)
+                        GlobalVarG2.mouseVisibile = False
 
         caricaTutto = True
         tastop = 0
@@ -1446,29 +1456,49 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 azioniPossibili.remove("aumentaLv")
 
     if tesoro != -1:
+        if GlobalVarG2.mouseBloccato:
+            GlobalVarG2.configuraCursore(False)
         pygame.display.update()
         risposta = False
         while not risposta:
+            deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             for event in pygame.event.get():
+                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     risposta = True
+                if event.type == pygame.KEYDOWN:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
         caricaTutto = True
         tesoro = -1
     if denaroRaccolto:
+        if GlobalVarG2.mouseBloccato:
+            GlobalVarG2.configuraCursore(False)
         pygame.display.update()
         risposta = False
         while not risposta:
+            deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             for event in pygame.event.get():
+                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     risposta = True
+                if event.type == pygame.KEYDOWN:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
         caricaTutto = True
         tastop = 0
 

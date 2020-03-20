@@ -14,6 +14,7 @@ def scegli_sal(cosa, lunghezzadati, canzone):
     tastop = 0
     tastotempfps = 5
 
+    aggiornaInterfacciaPerMouse = False
     risposta = False
     conferma = False
     primaconf = False
@@ -28,17 +29,79 @@ def scegli_sal(cosa, lunghezzadati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        salMarcatoVecchio = salMarcato
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if not conferma:
+                if GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 15.5:
+                    if GlobalVarG2.gsx // 32 * 5 <= xMouse <= GlobalVarG2.gsx // 32 * 12.3:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        salMarcato = 1
+                        xp = GlobalVarG2.gsx // 32 * 6.5
+                        yp = GlobalVarG2.gsy // 18 * 9.5
+                    elif GlobalVarG2.gsx // 32 * 12.3 <= xMouse <= GlobalVarG2.gsx // 32 * 19.7:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        salMarcato = 2
+                        xp = GlobalVarG2.gsx // 32 * 13.5
+                        yp = GlobalVarG2.gsy // 18 * 9.5
+                    elif GlobalVarG2.gsx // 32 * 19.7 <= xMouse <= GlobalVarG2.gsx // 32 * 27:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        salMarcato = 3
+                        xp = GlobalVarG2.gsx // 32 * 20.5
+                        yp = GlobalVarG2.gsy // 18 * 9.5
+                    else:
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            else:
+                if GlobalVarG2.gsy // 18 * 5.2 <= yMouse <= GlobalVarG2.gsy // 18 * 7:
+                    if GlobalVarG2.gsx // 32 * 18 <= xMouse <= GlobalVarG2.gsx // 32 * 22.5:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 1
+                        xp = GlobalVarG2.gsx // 32 * 19.5
+                        yp = GlobalVarG2.gsy // 18 * 5.7
+                    elif GlobalVarG2.gsx // 32 * 22.5 <= xMouse <= GlobalVarG2.gsx // 32 * 27:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 2
+                        xp = GlobalVarG2.gsx // 32 * 22.5
+                        yp = GlobalVarG2.gsy // 18 * 5.7
+                    else:
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            if (voceMarcataVecchia != voceMarcata or salMarcatoVecchio != salMarcato) and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata and salMarcatoVecchio == salMarcato:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
@@ -58,55 +121,79 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-                if (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT) and not tastoTrovato:
-                    tastoTrovato = True
-                    if conferma and (cosa == 1 or cosa == 2):
-                        xp = vxp
-                        yp = vyp
-                        conferma = False
-                    if cosa == 1:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
-                        cosa = 2
-                    elif cosa == 2:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
-                        cosa = 1
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    tastoTrovato = True
-                    if conferma:
-                        if voceMarcata == 1:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                            if cosa == 1 or cosa == 3:
-                                risposta = True
-                                return n
-                            else:
-                                leggi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
-                                leggi.close()
-                                xp = vxp
-                                yp = vyp
-                                conferma = False
-                        if voceMarcata == 2:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastop = "destroMouse"
+                tastoTrovato = True
+                if conferma:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    xp = vxp
+                    yp = vyp
+                    conferma = False
+                else:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    n = -1
+                    return n
+            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT)) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse):
+                tastop = "centraleMouse"
+                tastoTrovato = True
+                if conferma and (cosa == 1 or cosa == 2):
+                    xp = vxp
+                    yp = vyp
+                    conferma = False
+                if cosa == 1:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
+                    cosa = 2
+                elif cosa == 2:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
+                    cosa = 1
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                tastop = "spazioOsinistroMouse"
+                tastoTrovato = True
+                if conferma:
+                    if voceMarcata == 1:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        if cosa == 1 or cosa == 3:
+                            risposta = True
+                            return n
+                        else:
+                            leggi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
+                            leggi.close()
                             xp = vxp
                             yp = vyp
                             conferma = False
-                    else:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                        conferma = True
-                        primaconf = True
-                        n = salMarcato
+                    if voceMarcata == 2:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                        xp = vxp
+                        yp = vyp
+                        conferma = False
+                else:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    conferma = True
+                    primaconf = True
+                    n = salMarcato
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or tastop == pygame.K_LSHIFT or tastop == pygame.K_RSHIFT or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOsinistroMouse" or tastop == "centraleMouse" or tastop == "destroMouse" or tastop == pygame.K_LSHIFT or tastop == pygame.K_RSHIFT or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or salMarcatoVecchio != salMarcato or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_a or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_a:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if conferma:
                     if voceMarcata == 2:
                         voceMarcata -= 1
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        xp = GlobalVarG2.gsx // 32 * 19.3
+                        xp = GlobalVarG2.gsx // 32 * 19.5
                 else:
                     if salMarcato == 3:
                         salMarcato -= 1
@@ -121,11 +208,13 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         xp = GlobalVarG2.gsx // 32 * 20.5
             if tastop == pygame.K_d:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if conferma:
                     if voceMarcata == 1:
                         voceMarcata += 1
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        xp = GlobalVarG2.gsx // 32 * 22.3
+                        xp = GlobalVarG2.gsx // 32 * 22.5
                 else:
                     if salMarcato == 1:
                         salMarcato += 1
@@ -152,10 +241,16 @@ def scegli_sal(cosa, lunghezzadati, canzone):
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 15.5))
             if cosa == 1:
                 messaggio("Carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
-                messaggio("SHIFT: cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
+                if GlobalVarG2.mouseVisibile:
+                    messaggio("Tasto centrale: cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13, GlobalVarG2.gsy // 18 * 1, 50)
+                else:
+                    messaggio("SHIFT: cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
             if cosa == 2:
                 messaggio("Cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
-                messaggio("SHIFT: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
+                if GlobalVarG2.mouseVisibile:
+                    messaggio("Tasto centrale: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13, GlobalVarG2.gsy // 18 * 1, 50)
+                else:
+                    messaggio("SHIFT: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 1, 50)
             if cosa == 3:
                 messaggio("Salva partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 4.5, 120)
             if conferma:
@@ -176,7 +271,10 @@ def scegli_sal(cosa, lunghezzadati, canzone):
                 messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20.4, GlobalVarG2.gsy // 18 * 5.5, 70)
                 messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.4, GlobalVarG2.gsy // 18 * 5.5, 70)
                 GlobalVarG2.schermo.blit(puntatorevecchio, (vxp, vyp))
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
             GlobalVarG2.schermo.blit(GlobalVarG2.s1, (GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 8))
             GlobalVarG2.schermo.blit(GlobalVarG2.s2, (GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 8))
             GlobalVarG2.schermo.blit(GlobalVarG2.s3, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 8))
@@ -290,6 +388,7 @@ def chiediconferma(conferma, canzone):
     tastop = 0
     tastotempfps = 5
 
+    aggiornaInterfacciaPerMouse = False
     voceMarcata = 2
     primoFrame = True
     while True:
@@ -299,17 +398,51 @@ def chiediconferma(conferma, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if GlobalVarG2.gsy // 18 * 9 <= yMouse <= GlobalVarG2.gsy // 18 * 12:
+                if GlobalVarG2.gsx // 32 * 9.5 <= xMouse <= GlobalVarG2.gsx // 32 * 16:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 1
+                    xp = GlobalVarG2.gsx // 32 * 9.5
+                    yp = GlobalVarG2.gsy // 18 * 10.3
+                elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 22.5:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 2
+                    xp = GlobalVarG2.gsx // 32 * 17.5
+                    yp = GlobalVarG2.gsy // 18 * 10.3
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
+            else:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
@@ -322,31 +455,48 @@ def chiediconferma(conferma, canzone):
                 if event.key == pygame.K_d and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    tastoTrovato = True
-                    if voceMarcata == 1:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                        if conferma == 1:
-                            return True, True
-                        elif conferma == 2:
-                            pygame.quit()
-                            quit()
-                    elif voceMarcata == 2:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
-                        return False, False
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastoTrovato = True
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                return False, False
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                tastop = "spazioOsinistroMouse"
+                tastoTrovato = True
+                if voceMarcata == 1:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    if conferma == 1:
+                        return True, True
+                    elif conferma == 2:
+                        pygame.quit()
+                        quit()
+                elif voceMarcata == 2:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    return False, False
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
 
-        if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
+        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_a:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = GlobalVarG2.gsx // 32 * 9.5
             if tastop == pygame.K_d:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -358,7 +508,10 @@ def chiediconferma(conferma, canzone):
                 messaggio("Tornare a Windows?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 6.5, 120)
             messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 9.5, 120)
             messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 9.5, 120)
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
             GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
@@ -372,6 +525,8 @@ def menuImpostazioni(canzone, settaRisoluzione):
     risposta = False
     voceMarcata = 1
     primoFrame = True
+    aggiornaInterfacciaPerMouse = False
+    sinistroMousePremuto = False
 
     linguaTemp = GlobalVarG2.linguaImpostata
     volumeEffettiTemp = GlobalVarG2.volumeEffetti * 10
@@ -390,23 +545,115 @@ def menuImpostazioni(canzone, settaRisoluzione):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        cursoreSuFrecciaSinistra = False
+        cursoreSuFrecciaDestra = False
+        xMouse, yMouse = pygame.mouse.get_pos()
+        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
+            pygame.mouse.set_visible(True)
+            GlobalVarG2.mouseVisibile = True
+        if GlobalVarG2.mouseVisibile:
+            if GlobalVarG2.gsx // 32 * 8 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 13.5 <= yMouse <= GlobalVarG2.gsy // 18 * 16:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 6
+                xp = GlobalVarG2.gsx // 32 * 9
+                yp = GlobalVarG2.gsy // 18 * 14.7
+            elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 23 and GlobalVarG2.gsy // 18 * 14 <= yMouse <= GlobalVarG2.gsy // 18 * 17:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                voceMarcata = 7
+                xp = GlobalVarG2.gsx // 32 * 17
+                yp = GlobalVarG2.gsy // 18 * 14.7
+            elif GlobalVarG2.gsx // 32 * 15.2 <= xMouse <= GlobalVarG2.gsx // 32 * 15.7 and GlobalVarG2.gsy // 18 * 5 <= yMouse <= GlobalVarG2.gsy // 18 * 6:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaSinistra = True
+            elif GlobalVarG2.gsx // 32 * 19.2 <= xMouse <= GlobalVarG2.gsx // 32 * 19.7 and GlobalVarG2.gsy // 18 * 5 <= yMouse <= GlobalVarG2.gsy // 18 * 6:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaDestra = True
+            elif GlobalVarG2.gsx // 32 * 15.2 <= xMouse <= GlobalVarG2.gsx // 32 * 15.7 and GlobalVarG2.gsy // 18 * 6.7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaSinistra = True
+            elif GlobalVarG2.gsx // 32 * 17.1 <= xMouse <= GlobalVarG2.gsx // 32 * 17.6 and GlobalVarG2.gsy // 18 * 6.7 <= yMouse <= GlobalVarG2.gsy // 18 * 7.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaDestra = True
+            elif GlobalVarG2.gsx // 32 * 15.2 <= xMouse <= GlobalVarG2.gsx // 32 * 15.7 and GlobalVarG2.gsy // 18 * 8.4 <= yMouse <= GlobalVarG2.gsy // 18 * 9.4:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaSinistra = True
+            elif GlobalVarG2.gsx // 32 * 17.1 <= xMouse <= GlobalVarG2.gsx // 32 * 17.6 and GlobalVarG2.gsy // 18 * 8.4 <= yMouse <= GlobalVarG2.gsy // 18 * 9.4:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaDestra = True
+            elif GlobalVarG2.gsx // 32 * 15.2 <= xMouse <= GlobalVarG2.gsx // 32 * 15.7 and GlobalVarG2.gsy // 18 * 10.1 <= yMouse <= GlobalVarG2.gsy // 18 * 11.1:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaSinistra = True
+            elif GlobalVarG2.gsx // 32 * 19.9 <= xMouse <= GlobalVarG2.gsx // 32 * 20.4 and GlobalVarG2.gsy // 18 * 10.1 <= yMouse <= GlobalVarG2.gsy // 18 * 11.1:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaDestra = True
+            elif GlobalVarG2.gsx // 32 * 15.2 <= xMouse <= GlobalVarG2.gsx // 32 * 15.7 and GlobalVarG2.gsy // 18 * 11.7 <= yMouse <= GlobalVarG2.gsy // 18 * 12.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaSinistra = True
+            elif GlobalVarG2.gsx // 32 * 17.2 <= xMouse <= GlobalVarG2.gsx // 32 * 17.7 and GlobalVarG2.gsy // 18 * 11.7 <= yMouse <= GlobalVarG2.gsy // 18 * 12.7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                cursoreSuFrecciaDestra = True
+            else:
+                if not GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(True)
+            if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 31:
+                if GlobalVarG2.gsy // 18 * 4.7 <= yMouse <= GlobalVarG2.gsy // 18 * 6.3:
+                    voceMarcata = 1
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 5.2
+                elif GlobalVarG2.gsy // 18 * 6.3 <= yMouse <= GlobalVarG2.gsy // 18 * 8:
+                    voceMarcata = 2
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 6.9
+                elif GlobalVarG2.gsy // 18 * 8 <= yMouse <= GlobalVarG2.gsy // 18 * 9.7:
+                    voceMarcata = 3
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 8.6
+                elif GlobalVarG2.gsy // 18 * 9.7 <= yMouse <= GlobalVarG2.gsy // 18 * 11.4:
+                    voceMarcata = 4
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 10.3
+                elif GlobalVarG2.gsy // 18 * 11.4 <= yMouse <= GlobalVarG2.gsy // 18 * 13.1:
+                    voceMarcata = 5
+                    xp = GlobalVarG2.gsx // 32 * 1
+                    yp = GlobalVarG2.gsy // 18 * 12
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
                 quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato:
+            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     tastoTrovato = True
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
-
                 if event.key == pygame.K_s and not tastoTrovato:
                     tastop = event.key
                     primoMovimento = True
@@ -424,62 +671,78 @@ def menuImpostazioni(canzone, settaRisoluzione):
                     primoMovimento = True
                     tastoTrovato = True
 
-                if event.key == pygame.K_SPACE and not tastoTrovato:
-                    tastop = event.key
-                    tastoTrovato = True
-                    # quando clicchi spazio puoi modificare l'opzone selezionata
-                    if voceMarcata == 6:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                        GlobalVarG2.linguaImpostata = linguaTemp
-                        GlobalVarG2.volumeEffetti = volumeEffettiTemp / 10 * 1.0
-                        GlobalVarG2.volumeCanzoni = volumeCanzoniTemp / 10 * 1.0
-                        GlobalVarG2.initVolumeSounds()
-                        if GlobalVarG2.gsx != gsxTemp or GlobalVarG2.gsy != gsyTemp or GlobalVarG2.schermoIntero != schermoInteroTemp:
-                            GlobalVarG2.schermoIntero = schermoInteroTemp
-                            GlobalVarG2.gsx = gsxTemp
-                            GlobalVarG2.gsy = gsyTemp
-                            GlobalVarG2.gpx = GlobalVarG2.gsx // 32
-                            GlobalVarG2.gpy = GlobalVarG2.gsy // 18
-                            if GlobalVarG2.schermoIntero:
-                                opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
-                                GlobalVarG2.schermo = pygame.display.set_mode((GlobalVarG2.gsx, GlobalVarG2.gsy), opzioni_schermo)
-                            else:
-                                GlobalVarG2.schermo = pygame.display.set_mode((GlobalVarG2.gsx, GlobalVarG2.gsy))
-                            GlobalVarG2.loadImg()
-                        # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
-                        scrivi = open("Impostazioni/Impostazioni.txt", "w")
-                        if GlobalVarG2.linguaImpostata == "italiano":
-                            scrivi.write("0_")
-                        elif GlobalVarG2.linguaImpostata == "inglese":
-                            scrivi.write("1_")
-                        scrivi.write(str(int(GlobalVarG2.volumeEffetti * 10)) + "_")
-                        scrivi.write(str(int(GlobalVarG2.volumeCanzoni * 10)) + "_")
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+                tastoTrovato = True
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                risposta = True
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and (cursoreSuFrecciaSinistra or cursoreSuFrecciaDestra):
+                tastop = "spazioOsinistroMouse"
+                tastotempfps = 5
+                primoMovimento = True
+                tastoTrovato = True
+                sinistroMousePremuto = True
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and not (cursoreSuFrecciaSinistra or cursoreSuFrecciaDestra)):
+                tastop = "spazioOsinistroMouse"
+                tastotempfps = 5
+                primoMovimento = True
+                tastoTrovato = True
+                # quando clicchi spazio puoi modificare l'opzone selezionata
+                if voceMarcata == 6:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    GlobalVarG2.linguaImpostata = linguaTemp
+                    GlobalVarG2.volumeEffetti = volumeEffettiTemp / 10 * 1.0
+                    GlobalVarG2.volumeCanzoni = volumeCanzoniTemp / 10 * 1.0
+                    GlobalVarG2.initVolumeSounds()
+                    if GlobalVarG2.gsx != gsxTemp or GlobalVarG2.gsy != gsyTemp or GlobalVarG2.schermoIntero != schermoInteroTemp:
+                        GlobalVarG2.schermoIntero = schermoInteroTemp
+                        GlobalVarG2.gsx = gsxTemp
+                        GlobalVarG2.gsy = gsyTemp
+                        GlobalVarG2.gpx = GlobalVarG2.gsx // 32
+                        GlobalVarG2.gpy = GlobalVarG2.gsy // 18
                         if GlobalVarG2.schermoIntero:
-                            scrivi.write("1_")
+                            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
+                            GlobalVarG2.schermo = pygame.display.set_mode((GlobalVarG2.gsx, GlobalVarG2.gsy), opzioni_schermo)
                         else:
-                            scrivi.write("0_")
-                        scrivi.write(str(GlobalVarG2.gsx) + "_")
-                        scrivi.write(str(GlobalVarG2.gsy) + "_")
-                        scrivi.close()
-                        primoFrame = True
-                    elif voceMarcata == 7:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
-                        risposta = True
+                            GlobalVarG2.schermo = pygame.display.set_mode((GlobalVarG2.gsx, GlobalVarG2.gsy))
+                        GlobalVarG2.loadImg()
+                    # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
+                    scrivi = open("Impostazioni/Impostazioni.txt", "w")
+                    if GlobalVarG2.linguaImpostata == "italiano":
+                        scrivi.write("0_")
+                    elif GlobalVarG2.linguaImpostata == "inglese":
+                        scrivi.write("1_")
+                    scrivi.write(str(int(GlobalVarG2.volumeEffetti * 10)) + "_")
+                    scrivi.write(str(int(GlobalVarG2.volumeCanzoni * 10)) + "_")
+                    if GlobalVarG2.schermoIntero:
+                        scrivi.write("1_")
+                    else:
+                        scrivi.write("0_")
+                    scrivi.write(str(GlobalVarG2.gsx) + "_")
+                    scrivi.write(str(GlobalVarG2.gsy) + "_")
+                    scrivi.close()
+                    primoFrame = True
+                elif voceMarcata == 7:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    risposta = True
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
+                sinistroMousePremuto = False
 
-        if primoMovimento or tastop == pygame.K_SPACE or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame:
-            if primoFrame:
-                puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
-                xp = GlobalVarG2.gsx // 32 * 1
-                yp = GlobalVarG2.gsy // 18 * 5.2
-                if voceMarcata == 6:
-                    xp = GlobalVarG2.gsx // 32 * 9
-                    yp = GlobalVarG2.gsy // 18 * 14.7
-                primoFrame = False
+        if primoMovimento or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
+            primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                 if voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
                     voceMarcata -= 1
@@ -502,6 +765,8 @@ def menuImpostazioni(canzone, settaRisoluzione):
                     yp = GlobalVarG2.gsy // 18 * 14.7
                     xp = GlobalVarG2.gsx // 32 * 9
             if tastop == pygame.K_a:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if linguaTemp == "italiano":
@@ -570,6 +835,8 @@ def menuImpostazioni(canzone, settaRisoluzione):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = GlobalVarG2.gsx // 32 * 9
             if tastop == pygame.K_s:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                 if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4:
                     voceMarcata += 1
@@ -591,6 +858,8 @@ def menuImpostazioni(canzone, settaRisoluzione):
                     yp = GlobalVarG2.gsy // 18 * 5.2
                     xp = GlobalVarG2.gsx // 32 * 1
             if tastop == pygame.K_d:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     if linguaTemp == "italiano":
@@ -671,6 +940,136 @@ def menuImpostazioni(canzone, settaRisoluzione):
                     voceMarcata -= 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = GlobalVarG2.gsx // 32 * 9
+            if sinistroMousePremuto and cursoreSuFrecciaSinistra:
+                if voceMarcata == 1:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    if linguaTemp == "italiano":
+                        linguaTemp = "inglese"
+                    elif linguaTemp == "inglese":
+                        linguaTemp = "italiano"
+                elif voceMarcata == 2:
+                    if volumeEffettiTemp != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeEffettiTemp -= 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 3:
+                    if volumeCanzoniTemp != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeCanzoniTemp -= 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 4:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if gsxTemp == 800 and gsyTemp == 450:
+                            gsxTemp = GlobalVarG2.maxGsx
+                            gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1024 and gsyTemp == 576:
+                            gsxTemp = 800
+                            gsyTemp = 450
+                        elif gsxTemp == 1280 and gsyTemp == 720:
+                            gsxTemp = 1024
+                            gsyTemp = 576
+                        elif gsxTemp == 1920 and gsyTemp == 1080:
+                            gsxTemp = 1280
+                            gsyTemp = 720
+                        elif gsxTemp == GlobalVarG2.maxGsx and gsyTemp == GlobalVarG2.maxGsy:
+                            if GlobalVarG2.maxGsx > 1920 and GlobalVarG2.maxGsy > 1080:
+                                gsxTemp = 1920
+                                gsyTemp = 1080
+                            elif GlobalVarG2.maxGsx > 1280 and GlobalVarG2.maxGsy > 720:
+                                gsxTemp = 1280
+                                gsyTemp = 720
+                            elif GlobalVarG2.maxGsx > 1024 and GlobalVarG2.maxGsy > 576:
+                                gsxTemp = 1024
+                                gsyTemp = 576
+                            elif GlobalVarG2.maxGsx > 800 and GlobalVarG2.maxGsy > 450:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 5:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if schermoInteroTemp:
+                            schermoInteroTemp = False
+                        else:
+                            schermoInteroTemp = True
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMousePremuto and cursoreSuFrecciaDestra:
+                if voceMarcata == 1:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    if linguaTemp == "italiano":
+                        linguaTemp = "inglese"
+                    elif linguaTemp == "inglese":
+                        linguaTemp = "italiano"
+                elif voceMarcata == 2:
+                    if volumeEffettiTemp != 10:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeEffettiTemp += 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 3:
+                    if volumeCanzoniTemp != 10:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        volumeCanzoniTemp += 1
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 4:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if gsxTemp == 800 and gsyTemp == 450:
+                            if GlobalVarG2.maxGsx > 1024 and GlobalVarG2.maxGsy > 576:
+                                gsxTemp = 1024
+                                gsyTemp = 576
+                            else:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1024 and gsyTemp == 576:
+                            if GlobalVarG2.maxGsx > 1280 and GlobalVarG2.maxGsy > 720:
+                                gsxTemp = 1280
+                                gsyTemp = 720
+                            elif GlobalVarG2.maxGsx == 1024 and GlobalVarG2.maxGsy == 576:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                            else:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1280 and gsyTemp == 720:
+                            if GlobalVarG2.maxGsx > 1920 and GlobalVarG2.maxGsy > 1080:
+                                gsxTemp = 1920
+                                gsyTemp = 1080
+                            elif GlobalVarG2.maxGsx == 1280 and GlobalVarG2.maxGsy == 720:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                            else:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                        elif gsxTemp == 1920 and gsyTemp == 1080:
+                            if GlobalVarG2.maxGsx > 1920 and GlobalVarG2.maxGsy > 1080:
+                                gsxTemp = GlobalVarG2.maxGsx
+                                gsyTemp = GlobalVarG2.maxGsy
+                            else:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                        elif gsxTemp == GlobalVarG2.maxGsx and gsyTemp == GlobalVarG2.maxGsy:
+                            if GlobalVarG2.maxGsx > 800 and GlobalVarG2.maxGsy > 450:
+                                gsxTemp = 800
+                                gsyTemp = 450
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                elif voceMarcata == 5:
+                    if settaRisoluzione:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        if schermoInteroTemp:
+                            schermoInteroTemp = False
+                        else:
+                            schermoInteroTemp = True
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+
             GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
             # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
             pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 30, GlobalVarG2.gsy // 18 * 12.5))
@@ -742,7 +1141,12 @@ def menuImpostazioni(canzone, settaRisoluzione):
             messaggio("Conferma", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 14.5, 70)
             messaggio("Indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 70)
 
-            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
+            if GlobalVarG2.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5,
+                          GlobalVarG2.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25,
+                          GlobalVarG2.gsy // 18 * 1, 50)
             GlobalVarG2.schermo.blit(puntatore, (xp, yp))
             if voceMarcata != 6 and voceMarcata != 7:
                 pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, ((xp + (int(GlobalVarG2.gpx // 1.5))), yp + (int(GlobalVarG2.gpy * 1))), (xp + (int(GlobalVarG2.gpx * 29)), yp + (int(GlobalVarG2.gpy * 1))), 2)
@@ -778,7 +1182,7 @@ def menuDiario(progresso, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        elif tastotempfps == 0:
+        else:
             tastotempfps = 2
 
         primoMovimento = False
