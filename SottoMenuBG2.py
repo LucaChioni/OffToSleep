@@ -22,6 +22,8 @@ def scegli_sal(cosa, lunghezzadati, canzone):
     voceMarcata = 2
     primoFrame = True
     n = -1
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
     while not risposta:
         if not GlobalVarG2.canaleSoundCanzone.get_busy():
             GlobalVarG2.canaleSoundCanzone.play(canzone)
@@ -35,8 +37,8 @@ def scegli_sal(cosa, lunghezzadati, canzone):
         voceMarcataVecchia = voceMarcata
         salMarcatoVecchio = salMarcato
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
@@ -93,7 +95,19 @@ def scegli_sal(cosa, lunghezzadati, canzone):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -391,6 +405,8 @@ def chiediconferma(conferma, canzone):
     aggiornaInterfacciaPerMouse = False
     voceMarcata = 2
     primoFrame = True
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
     while True:
         if not GlobalVarG2.canaleSoundCanzone.get_busy():
             GlobalVarG2.canaleSoundCanzone.play(canzone)
@@ -403,8 +419,8 @@ def chiediconferma(conferma, canzone):
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
@@ -434,7 +450,19 @@ def chiediconferma(conferma, canzone):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -527,6 +555,7 @@ def menuImpostazioni(canzone, settaRisoluzione):
     primoFrame = True
     aggiornaInterfacciaPerMouse = False
     sinistroMousePremuto = False
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     linguaTemp = GlobalVarG2.linguaImpostata
     volumeEffettiTemp = GlobalVarG2.volumeEffetti * 10
@@ -552,8 +581,8 @@ def menuImpostazioni(canzone, settaRisoluzione):
         cursoreSuFrecciaSinistra = False
         cursoreSuFrecciaDestra = False
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
@@ -640,7 +669,19 @@ def menuImpostazioni(canzone, settaRisoluzione):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True

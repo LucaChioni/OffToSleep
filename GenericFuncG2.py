@@ -101,17 +101,30 @@ def guardaVideo(path, audio=0):
     if audio != 0:
         GlobalVarG2.canaleSoundCanzone.play(audio)
     # play video
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
     i = 0
     while i < len(listaImg) + 10:
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if i >= 10:
             GlobalVarG2.schermo.blit(listaImg[i - 10], (0, 0))
             pygame.display.update()
             for event in pygame.event.get():
+                sinistroMouseVecchio = sinistroMouse
+                centraleMouseVecchio = centraleMouse
+                destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                if not sinistroMouseVecchio and sinistroMouse:
+                    centraleMouse = False
+                    destroMouse = False
+                elif not centraleMouseVecchio and centraleMouse:
+                    sinistroMouse = False
+                    destroMouse = False
+                elif not destroMouseVecchio and destroMouse:
+                    sinistroMouse = False
+                    centraleMouse = False
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
@@ -202,6 +215,12 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
             stanza = 2
             cambiosta = True
             carim = True
+        elif ny == -GlobalVarG2.gpy and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 1 and not mostro and not robo:
+            ny = 0
+        elif nx == GlobalVarG2.gpx and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+        elif nx == -GlobalVarG2.gpx and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
         else:
             # bordi stanza
             if nx == -GlobalVarG2.gpx and x <= GlobalVarG2.gpx * 2:
@@ -245,6 +264,12 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
             stanza = 1
             cambiosta = True
             carim = True
+        elif ny == -GlobalVarG2.gpy and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 1 and not mostro and not robo:
+            ny = 0
+        elif nx == GlobalVarG2.gpx and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+        elif nx == -GlobalVarG2.gpx and x == GlobalVarG2.gsx // 32 * 6 and y == GlobalVarG2.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
         else:
             # bordi stanza
             if nx == -GlobalVarG2.gpx and x <= GlobalVarG2.gpx * 2:
@@ -1832,7 +1857,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
     return dati, tesoro
 
 
-def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
+def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste, escludiPorte=True):
     # contiene x e y delle caselle già esplorate
     caselleEsplorate = [x, y]
 
@@ -1845,7 +1870,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
     # caselle viste da rallo
     j = 0
     while j < len(caselleEsplorate):
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1863,7 +1888,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1881,7 +1906,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1899,7 +1924,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1931,7 +1956,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
         caselleEsplorate = [rx, ry]
         j = 0
         while j < len(caselleEsplorate):
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1949,7 +1974,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1967,7 +1992,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1985,7 +2010,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -2008,7 +2033,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste):
     return caseviste
 
 
-def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofanetti, vetnemici):
+def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofanetti, vetnemici, escludiPorte=True):
     # caselleEsplorate contiene x, y e valore delle caselle già esplorate (il valore serve per trovare il percorso più breve)
     valoreCasella = 0
     caselleEsplorate = [xPartenza, yPartenza, valoreCasella]
@@ -2033,7 +2058,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
         j = 0
         while j < len(caselleEsplorate):
             valoreCasella += 1
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2058,7 +2083,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2083,7 +2108,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2108,7 +2133,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                     caselleEsplorate.append(nx)
                     caselleEsplorate.append(ny)
                     caselleEsplorate.append(valoreCasella)
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
             if nx == xArrivo and ny == yArrivo:
                 caselleEsplorate.append(nx)
                 caselleEsplorate.append(ny)
@@ -2153,7 +2178,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                 yCasella3 = 0
                 xCasella4 = 0
                 yCasella4 = 0
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2169,7 +2194,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella1 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVarG2.gpy, numstanza, False, escludiPorte, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2185,7 +2210,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella2 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2201,7 +2226,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, numstanza, porte, cofane
                             yCasella3 = ny
                             break
                         i += 3
-                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, True, False, porte, cofanetti)
+                nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVarG2.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti)
                 k = 0
                 while k < len(vetnemici):
                     if nx == vetnemici[k] and ny == vetnemici[k + 1]:
@@ -2293,13 +2318,26 @@ def controllaMorteRallo(vitaRallo, inizio):
         messaggio("Sei morto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 13, 150)
         pygame.display.update()
         continua = False
+        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not continua:
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-            if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+            if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             for event in pygame.event.get():
+                sinistroMouseVecchio = sinistroMouse
+                centraleMouseVecchio = centraleMouse
+                destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                if not sinistroMouseVecchio and sinistroMouse:
+                    centraleMouse = False
+                    destroMouse = False
+                elif not centraleMouseVecchio and centraleMouse:
+                    sinistroMouse = False
+                    destroMouse = False
+                elif not destroMouseVecchio and destroMouse:
+                    sinistroMouse = False
+                    centraleMouse = False
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
@@ -2555,11 +2593,12 @@ def dialoga(y, avanzamentoStoria, personaggio):
     numeromessaggioAttuale = 0
     prosegui = True
     fineDialogo = False
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
     while not fineDialogo:
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
@@ -2621,7 +2660,19 @@ def dialoga(y, avanzamentoStoria, personaggio):
 
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -2778,13 +2829,26 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     messaggio("Hai ottenuto: " + oggettoRicevuto, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
     pygame.display.update()
     risposta = False
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
     while not risposta:
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()

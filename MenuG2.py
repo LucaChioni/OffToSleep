@@ -14,13 +14,26 @@ def menu():
         messaggio("Premi un tasto per continuare...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
         pygame.display.update()
         finevideo = True
+        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while finevideo:
             for event in pygame.event.get():
+                sinistroMouseVecchio = sinistroMouse
+                centraleMouseVecchio = centraleMouse
+                destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                if not sinistroMouseVecchio and sinistroMouse:
+                    centraleMouse = False
+                    destroMouse = False
+                elif not centraleMouseVecchio and centraleMouse:
+                    sinistroMouse = False
+                    destroMouse = False
+                elif not destroMouseVecchio and destroMouse:
+                    sinistroMouse = False
+                    centraleMouse = False
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN or sinistroMouse or centraleMouse or destroMouse:
+                if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse)):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     finevideo = False
 
@@ -30,6 +43,7 @@ def menu():
     primoFrame = True
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
     robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     tastop = 0
     tastotempfps = 5
@@ -56,8 +70,8 @@ def menu():
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-        if xMouseVecchio != 0 or yMouseVecchio != 0:
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        if deltaXMouse != 0 or deltaYMouse != 0:
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
@@ -98,7 +112,19 @@ def menu():
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -163,14 +189,27 @@ def menu():
                             print "Slot vuoto"
                             aggiornaSchermata = True
                             indietro = False
+                            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                             while not indietro:
-                                xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-                                if xMouseVecchio != 0 or yMouseVecchio != 0:
+                                deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+                                if deltaXMouse != 0 or deltaYMouse != 0:
                                     aggiornaSchermata = True
                                     pygame.mouse.set_visible(True)
                                     GlobalVarG2.mouseVisibile = True
                                 for event in pygame.event.get():
+                                    sinistroMouseVecchio = sinistroMouse
+                                    centraleMouseVecchio = centraleMouse
+                                    destroMouseVecchio = destroMouse
                                     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                                    if not sinistroMouseVecchio and sinistroMouse:
+                                        centraleMouse = False
+                                        destroMouse = False
+                                    elif not centraleMouseVecchio and centraleMouse:
+                                        sinistroMouse = False
+                                        destroMouse = False
+                                    elif not destroMouseVecchio and destroMouse:
+                                        sinistroMouse = False
+                                        centraleMouse = False
                                     if event.type == pygame.QUIT:
                                         pygame.quit()
                                         quit()
@@ -178,7 +217,7 @@ def menu():
                                         aggiornaSchermata = True
                                         pygame.mouse.set_visible(False)
                                         GlobalVarG2.mouseVisibile = False
-                                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or destroMouse:
+                                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (event.type == pygame.MOUSEBUTTONDOWN and destroMouse):
                                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                                         indietro = True
                                 if aggiornaSchermata:
@@ -225,14 +264,27 @@ def menu():
                                 print "Dati corrotti: " + str(len(dati))
                                 aggiornaSchermata = True
                                 indietro = False
+                                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
                                 while not indietro:
-                                    xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-                                    if xMouseVecchio != 0 or yMouseVecchio != 0:
+                                    deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+                                    if deltaXMouse != 0 or deltaYMouse != 0:
                                         aggiornaSchermata = True
                                         pygame.mouse.set_visible(True)
                                         GlobalVarG2.mouseVisibile = True
                                     for event in pygame.event.get():
+                                        sinistroMouseVecchio = sinistroMouse
+                                        centraleMouseVecchio = centraleMouse
+                                        destroMouseVecchio = destroMouse
                                         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                                        if not sinistroMouseVecchio and sinistroMouse:
+                                            centraleMouse = False
+                                            destroMouse = False
+                                        elif not centraleMouseVecchio and centraleMouse:
+                                            sinistroMouse = False
+                                            destroMouse = False
+                                        elif not destroMouseVecchio and destroMouse:
+                                            sinistroMouse = False
+                                            centraleMouse = False
                                         if event.type == pygame.QUIT:
                                             pygame.quit()
                                             quit()
@@ -240,7 +292,7 @@ def menu():
                                             aggiornaSchermata = True
                                             pygame.mouse.set_visible(False)
                                             GlobalVarG2.mouseVisibile = False
-                                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or destroMouse:
+                                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (event.type == pygame.MOUSEBUTTONDOWN and destroMouse):
                                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                                             indietro = True
                                     if aggiornaSchermata:
@@ -384,6 +436,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
     voceMarcata = 1
     primoFrame = True
     aggiornaInterfacciaPerMouse = False
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     tastop = 0
     tastotempfps = 5
@@ -400,8 +453,8 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
-        if xMouseVecchio != 0 or yMouseVecchio != 0 and not GlobalVarG2.mouseVisibile:
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
@@ -473,7 +526,19 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -495,7 +560,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 if event.key == pygame.K_w and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and (destroMouse or centraleMouse):
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 inizio = False
@@ -695,6 +760,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
     risposta = False
     voceMarcata = 1
     primoFrame = True
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     tastop = 0
     tastotempfps = 5
@@ -724,9 +790,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         mouseInquadraFreccia = False
-        if xMouseVecchio != 0 or yMouseVecchio != 0:
+        if deltaXMouse != 0 or deltaYMouse != 0:
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
@@ -820,7 +886,19 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -847,7 +925,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                 if event.key == pygame.K_s and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and (destroMouse or centraleMouse):
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 risposta = True
@@ -1102,6 +1180,7 @@ def menuMercante(dati):
     primoFrame = True
     mouseSinistroPremuto = False
     aggiornaInterfacciaPerMouse = False
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     maxFrecce = 1
     if dati[133] == 1:
@@ -1136,10 +1215,10 @@ def menuMercante(dati):
         oggettonVecchio = oggetton
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        xMouseVecchio, yMouseVecchio = pygame.mouse.get_rel()
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         mouseInquadraFrecciaSu = False
         mouseInquadraFrecciaGiu = False
-        if xMouseVecchio != 0 or yMouseVecchio != 0:
+        if deltaXMouse != 0 or deltaYMouse != 0:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
@@ -1260,7 +1339,19 @@ def menuMercante(dati):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True

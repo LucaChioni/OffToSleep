@@ -47,7 +47,7 @@ def animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, a
         disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazioneRallo, fineanimaz):
+def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazioneRallo, movimentoPerMouse, fineanimaz):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -65,7 +65,7 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers
             else:
                 animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
         # mentre non ci si sposta
-        elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+        elif attacco == 0 and not difesa and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or (tastop == "mouseSinistro" and movimentoPerMouse)):
             animazioneRallo = True
             if not GlobalVarG2.canaleSoundPassiRallo.get_busy():
                 GlobalVarG2.canaleSoundPassiRallo.play(GlobalVarG2.rumorecamminata)
@@ -148,7 +148,7 @@ def animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDif
     return animazioneRallo
 
 
-def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, carim, caricaTutto, tastop, animazioneRallo, fineanimaz):
+def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, carim, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, fineanimaz):
     if aumentoliv != 0 and not carim:
         liv -= aumentoliv
         animazioneRallo = True
@@ -188,13 +188,26 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
             pygame.display.update()
             pygame.time.wait(500)
             risposta = False
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
             while not risposta:
                 deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-                if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+                if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
                     pygame.mouse.set_visible(True)
                     GlobalVarG2.mouseVisibile = True
                 for event in pygame.event.get():
+                    sinistroMouseVecchio = sinistroMouse
+                    centraleMouseVecchio = centraleMouse
+                    destroMouseVecchio = destroMouse
                     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                    if not sinistroMouseVecchio and sinistroMouse:
+                        centraleMouse = False
+                        destroMouse = False
+                    elif not centraleMouseVecchio and centraleMouse:
+                        sinistroMouse = False
+                        destroMouse = False
+                    elif not destroMouseVecchio and destroMouse:
+                        sinistroMouse = False
+                        centraleMouse = False
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
@@ -207,8 +220,9 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                         GlobalVarG2.mouseVisibile = False
 
         caricaTutto = True
+        movimentoPerMouse = False
         tastop = 0
-    return animazioneRallo, caricaTutto, tastop, aumentoliv
+    return animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse
 
 
 def animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, avvele, azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz):
@@ -1243,7 +1257,7 @@ def animaPersonaggi(listaPersonaggi, caseviste):
             j += 3
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, movimentoPerMouse):
     schermo_prima_delle_animazioni = GlobalVarG2.schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemici", "attaccoNemici", "aumentaLv"]
@@ -1366,7 +1380,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "aumentaLv" in azioniDaEseguire:
                 # animazione aumento di livello
-                animazioneRallo, caricaTutto, tastop, aumentoliv = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, fineanimaz)
+                animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, fineanimaz)
 
             if "movimentoColcoNemici" in azioniDaEseguire:
                 # animazione camminata robo
@@ -1378,7 +1392,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], attacco, difesa, tastop, animazioneRallo, fineanimaz)
+                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], attacco, difesa, tastop, animazioneRallo, movimentoPerMouse, fineanimaz)
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco
@@ -1460,13 +1474,26 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             GlobalVarG2.configuraCursore(False)
         pygame.display.update()
         risposta = False
+        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not risposta:
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-            if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+            if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             for event in pygame.event.get():
+                sinistroMouseVecchio = sinistroMouse
+                centraleMouseVecchio = centraleMouse
+                destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                if not sinistroMouseVecchio and sinistroMouse:
+                    centraleMouse = False
+                    destroMouse = False
+                elif not centraleMouseVecchio and centraleMouse:
+                    sinistroMouse = False
+                    destroMouse = False
+                elif not destroMouseVecchio and destroMouse:
+                    sinistroMouse = False
+                    centraleMouse = False
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
@@ -1476,6 +1503,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 if event.type == pygame.KEYDOWN:
                     pygame.mouse.set_visible(False)
                     GlobalVarG2.mouseVisibile = False
+        movimentoPerMouse = False
         caricaTutto = True
         tesoro = -1
     if denaroRaccolto:
@@ -1483,13 +1511,26 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             GlobalVarG2.configuraCursore(False)
         pygame.display.update()
         risposta = False
+        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not risposta:
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-            if deltaXMouse != 0 or deltaYMouse != 0 and not GlobalVarG2.mouseVisibile:
+            if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             for event in pygame.event.get():
+                sinistroMouseVecchio = sinistroMouse
+                centraleMouseVecchio = centraleMouse
+                destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                if not sinistroMouseVecchio and sinistroMouse:
+                    centraleMouse = False
+                    destroMouse = False
+                elif not centraleMouseVecchio and centraleMouse:
+                    sinistroMouse = False
+                    destroMouse = False
+                elif not destroMouseVecchio and destroMouse:
+                    sinistroMouse = False
+                    centraleMouse = False
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
@@ -1499,7 +1540,8 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 if event.type == pygame.KEYDOWN:
                     pygame.mouse.set_visible(False)
                     GlobalVarG2.mouseVisibile = False
+        movimentoPerMouse = False
         caricaTutto = True
         tastop = 0
 
-    return primopasso, caricaTutto, tesoro, tastop
+    return primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse

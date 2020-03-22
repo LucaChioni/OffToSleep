@@ -505,20 +505,32 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         GlobalVarG2.schermo.blit(GlobalVarG2.difesapiu, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 17))
 
     # controllo caselle attaccabili
+    raggioDiLancio = 0
     caseattactot = 0
     if attacco == 1:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, -1)
     if attacco == 2:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVarG2.gpx * 6)
+        raggioDiLancio = 6
     if attacco == 3:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVarG2.gpx * 5)
+        raggioDiLancio = 5
     if attacco == 4:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVarG2.gpx * 6)
+        raggioDiLancio = 6
     if attacco == 5:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVarG2.gpx * 5)
+        raggioDiLancio = 5
     if attacco == 6:
         caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVarG2.gpx * 4)
+        raggioDiLancio = 4
 
+    listaNemiciVisti = []
+    for nemico in listaNemici:
+        if nemico.inCasellaVista:
+            listaNemiciVisti.append(nemico)
+
+    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
     tastotempfps = 2
     tastop = 0
     numTastiPremuti = 0
@@ -537,6 +549,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     attaccoADistanza = False
     sposta = False
     interagisciConPersonaggio = False
+    attaccoConfermato = False
     while not risposta:
         if xp != xvp or yp != yvp:
             appenaCaricato = False
@@ -566,11 +579,196 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if ((xvp / GlobalVarG2.gpx) + (yvp / GlobalVarG2.gpy)) % 2 == 1:
             GlobalVarG2.schermo.blit(sfondinob, (xvp, yvp))
 
+        inquadratoQualcosa = False
+        xMouse, yMouse = pygame.mouse.get_pos()
+        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        if deltaXMouse != 0 or deltaYMouse != 0:
+            if not GlobalVarG2.mouseVisibile:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
+            casellaTrovata = False
+            i = 0
+            while i < len(caseviste):
+                if caseviste[i] < xMouse < caseviste[i] + GlobalVarG2.gpx and caseviste[i + 1] < yMouse < caseviste[i + 1] + GlobalVarG2.gpy and caseviste[i + 2]:
+                    if xp != caseviste[i] or yp != caseviste[i + 1]:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                        xp = xMouse - (xMouse % GlobalVarG2.gpx)
+                        yp = yMouse - (yMouse % GlobalVarG2.gpy)
+                    casellaTrovata = True
+                    break
+                i += 3
+            if not casellaTrovata:
+                i = 0
+                while i < len(cofanetti):
+                    if cofanetti[i + 1] < xMouse < cofanetti[i + 1] + GlobalVarG2.gpx and cofanetti[i + 2] < yMouse < cofanetti[i + 2] + GlobalVarG2.gpy:
+                        if xp != cofanetti[i + 1] or yp != cofanetti[i + 2]:
+                            j = 0
+                            while j < len(caseviste):
+                                if ((cofanetti[i + 1] + GlobalVarG2.gpx == caseviste[j] and cofanetti[i + 2] == caseviste[j + 1]) or (cofanetti[i + 1] - GlobalVarG2.gpx == caseviste[j] and cofanetti[i + 2] == caseviste[j + 1]) or (cofanetti[i + 1] == caseviste[j] and cofanetti[i + 2] + GlobalVarG2.gpy == caseviste[j + 1]) or (cofanetti[i + 1] == caseviste[j] and cofanetti[i + 2] - GlobalVarG2.gpy == caseviste[j + 1])) and caseviste[j + 2]:
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                                    xp = xMouse - (xMouse % GlobalVarG2.gpx)
+                                    yp = yMouse - (yMouse % GlobalVarG2.gpy)
+                                    break
+                                j += 3
+                        casellaTrovata = True
+                        break
+                    i += 4
+            if not casellaTrovata:
+                i = 0
+                while i < len(porte):
+                    if porte[i + 1] < xMouse < porte[i + 1] + GlobalVarG2.gpx and porte[i + 2] < yMouse < porte[i + 2] + GlobalVarG2.gpy:
+                        if xp != porte[i + 1] or yp != porte[i + 2]:
+                            j = 0
+                            while j < len(caseviste):
+                                if ((porte[i + 1] + GlobalVarG2.gpx == caseviste[j] and porte[i + 2] == caseviste[j + 1]) or (porte[i + 1] - GlobalVarG2.gpx == caseviste[j] and porte[i + 2] == caseviste[j + 1]) or (porte[i + 1] == caseviste[j] and porte[i + 2] + GlobalVarG2.gpy == caseviste[j + 1]) or (porte[i + 1] == caseviste[j] and porte[i + 2] - GlobalVarG2.gpy == caseviste[j + 1])) and caseviste[j + 2]:
+                                    puntaPorta = True
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                                    xp = xMouse - (xMouse % GlobalVarG2.gpx)
+                                    yp = yMouse - (yMouse % GlobalVarG2.gpy)
+                                    break
+                                j += 3
+                        casellaTrovata = True
+                        break
+                    i += 4
+        if GlobalVarG2.mouseVisibile:
+            # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
+            if GlobalVarG2.gsy // 18 * 17 < yMouse < GlobalVarG2.gsy and GlobalVarG2.gsx // 32 * 0 < xMouse < GlobalVarG2.gsx // 32 * 6:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                inquadratoQualcosa = "start"
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or not nemicoInquadrato) and 0 < yMouse < GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 < xMouse < GlobalVarG2.gsx // 32 * 4:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                inquadratoQualcosa = "battaglia"
+            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and 0 < yMouse < GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 < xMouse < GlobalVarG2.gsx // 32 * 1:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                inquadratoQualcosa = "battaglia"
+            elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 < yMouse < GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 < xMouse < GlobalVarG2.gsx // 32 * 3:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                inquadratoQualcosa = "battaglia"
+            elif GlobalVarG2.gsy // 18 * 0 < yMouse < GlobalVarG2.gsy // 18 * 1.5 and GlobalVarG2.gsx // 32 * 28 < xMouse < GlobalVarG2.gsx // 32 * 30:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                inquadratoQualcosa = "telecolco"
+            elif y < yMouse < y + GlobalVarG2.gpy and x < xMouse < x + GlobalVarG2.gpx:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                inquadratoQualcosa = "Rallo"
+            elif ry < yMouse < ry + GlobalVarG2.gpy and rx < xMouse < rx + GlobalVarG2.gpx:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                inquadratoQualcosa = "Colco"
+            else:
+                if not inquadratoQualcosa:
+                    for personaggio in listaPersonaggi:
+                        if personaggio.x < xMouse < personaggio.x + GlobalVarG2.gpx and personaggio.y < yMouse < personaggio.y + GlobalVarG2.gpy:
+                            if (personaggio.x == x + GlobalVarG2.gpx and personaggio.y == y) or (personaggio.x == x - GlobalVarG2.gpx and personaggio.y == y) or (personaggio.x == x and personaggio.y == y + GlobalVarG2.gpy) or (personaggio.x == x and personaggio.y == y - GlobalVarG2.gpy):
+                                if GlobalVarG2.mouseBloccato:
+                                    GlobalVarG2.configuraCursore(False)
+                                inquadratoQualcosa = "personaggio"
+                            break
+                if not inquadratoQualcosa:
+                    i = 0
+                    while i < len(porte):
+                        if porte[i + 1] < xMouse < porte[i + 1] + GlobalVarG2.gpx and porte[i + 2] < yMouse < porte[i + 2] + GlobalVarG2.gpy:
+                            if (porte[i + 1] == x + GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalVarG2.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalVarG2.gpy):
+                                if GlobalVarG2.mouseBloccato:
+                                    GlobalVarG2.configuraCursore(False)
+                                inquadratoQualcosa = "porta"
+                            break
+                        i += 4
+                if not inquadratoQualcosa:
+                    i = 0
+                    while i < len(cofanetti):
+                        if cofanetti[i + 1] < xMouse < cofanetti[i + 1] + GlobalVarG2.gpx and cofanetti[i + 2] < yMouse < cofanetti[i + 2] + GlobalVarG2.gpy and not cofanetti[i + 3]:
+                            if ((cofanetti[i + 1] == x + GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x - GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVarG2.gpy) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVarG2.gpy)) and not cofanetti[i + 3]:
+                                if GlobalVarG2.mouseBloccato:
+                                    GlobalVarG2.configuraCursore(False)
+                                inquadratoQualcosa = "cofanetto"
+                            break
+                        i += 4
+                if not inquadratoQualcosa:
+                    for nemico in listaNemiciVisti:
+                        if nemico.x < xMouse < nemico.x + GlobalVarG2.gpx and nemico.y < yMouse < nemico.y + GlobalVarG2.gpy:
+                            if nemicoInquadrato and type(nemicoInquadrato) is not str and nemico.x == nemicoInquadrato.x and nemico.y == nemicoInquadrato.y:
+                                j = 0
+                                while j < len(caseattactot):
+                                    if caseattactot[j] == nemico.x and caseattactot[j + 1] == nemico.y:
+                                        if caseattactot[j + 2]:
+                                            if GlobalVarG2.mouseBloccato:
+                                                GlobalVarG2.configuraCursore(False)
+                                            inquadratoQualcosa = "nemico"
+                                        break
+                                    j += 3
+                            else:
+                                j = 0
+                                while j < len(caseviste):
+                                    if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y:
+                                        if caseviste[j + 2]:
+                                            if GlobalVarG2.mouseBloccato:
+                                                GlobalVarG2.configuraCursore(False)
+                                            inquadratoQualcosa = "nemico"
+                                        break
+                                    j += 3
+                            break
+                if not inquadratoQualcosa:
+                    i = 0
+                    while i < len(vitaesca):
+                        if vitaesca[i + 2] < xMouse < vitaesca[i + 2] + GlobalVarG2.gpx and vitaesca[i + 3] < yMouse < vitaesca[i + 3] + GlobalVarG2.gpy:
+                            if nemicoInquadrato and type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+                                idEscaInquadrata = int(nemicoInquadrato[4:])
+                                j = 0
+                                while j < len(vitaesca):
+                                    if idEscaInquadrata == vitaesca[j]:
+                                        if not (vitaesca[i + 2] == vitaesca[j + 2] and vitaesca[i + 3] == vitaesca[j + 3]):
+                                            if GlobalVarG2.mouseBloccato:
+                                                GlobalVarG2.configuraCursore(False)
+                                            inquadratoQualcosa = "esca"
+                                        break
+                                    j += 4
+                            else:
+                                if GlobalVarG2.mouseBloccato:
+                                    GlobalVarG2.configuraCursore(False)
+                                inquadratoQualcosa = "esca"
+                            break
+                        i += 4
+                if not inquadratoQualcosa and attacco > 1:
+                    if x - GlobalVarG2.gpx * raggioDiLancio <= xMouse <= x + GlobalVarG2.gpx + GlobalVarG2.gpx * raggioDiLancio and y - GlobalVarG2.gpy * raggioDiLancio <= yMouse <= y + GlobalVarG2.gpy + GlobalVarG2.gpy * raggioDiLancio:
+                        i = 0
+                        while i < len(caseattactot):
+                            if caseattactot[i] <= xMouse <= caseattactot[i] + GlobalVarG2.gpx and caseattactot[i + 1] <= yMouse <= caseattactot[i + 1] + GlobalVarG2.gpy and caseattactot[i + 2]:
+                                if GlobalVarG2.mouseBloccato:
+                                    GlobalVarG2.configuraCursore(False)
+                                inquadratoQualcosa = "casellaNelRaggio"
+                                break
+                            i += 3
+        if not inquadratoQualcosa:
+            if not GlobalVarG2.mouseBloccato:
+                GlobalVarG2.configuraCursore(True)
+
         for event in pygame.event.get():
+            sinistroMouseVecchio = sinistroMouse
+            centraleMouseVecchio = centraleMouse
+            destroMouseVecchio = destroMouse
+            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            if not sinistroMouseVecchio and sinistroMouse:
+                centraleMouse = False
+                destroMouse = False
+            elif not centraleMouseVecchio and centraleMouse:
+                sinistroMouse = False
+                destroMouse = False
+            elif not destroMouseVecchio and destroMouse:
+                sinistroMouse = False
+                centraleMouse = False
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN:
+                pygame.mouse.set_visible(False)
+                GlobalVarG2.mouseVisibile = False
                 # esci
                 if event.key == pygame.K_q:
                     risposta = True
@@ -791,334 +989,103 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if event.key == pygame.K_SPACE:
                     sposta = False
                     if attacco != 0:
-                        infliggidanno = False
-                        statom = 0
-                        raggio = 0
-                        suPersonaggio = False
-                        for personaggio in listaPersonaggi:
-                            if xp == personaggio.x and yp == personaggio.y:
-                                suPersonaggio = True
-                                break
-                        # interagisci con personaggi attacco = 1
-                        if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and suPersonaggio:
-                            interagisciConPersonaggio = True
-                            risposta = True
-                            if xp == x + GlobalVarG2.gpx and yp == y:
-                                npers = 1
-                            if xp == x - GlobalVarG2.gpx and yp == y:
-                                npers = 2
-                            if xp == x and yp == y + GlobalVarG2.gpy:
-                                npers = 4
-                            if xp == x and yp == y - GlobalVarG2.gpy:
-                                npers = 3
-                        # spingi Colco attacco = 1
-                        if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and (xp == rx and yp == ry):
-                            spingiColco = True
-                            sposta = True
-                            risposta = True
-                            if xp == x + GlobalVarG2.gpx and yp == y:
-                                npers = 1
-                            if xp == x - GlobalVarG2.gpx and yp == y:
-                                npers = 2
-                            if xp == x and yp == y + GlobalVarG2.gpy:
-                                npers = 4
-                            if xp == x and yp == y - GlobalVarG2.gpy:
-                                npers = 3
-                        # apri/chiudi porta attacco = 1
-                        elif attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and suPorta:
-                            apriChiudiPorta = [True, xp, yp]
-                            sposta = True
-                            risposta = True
-                            if xp == x + GlobalVarG2.gpx and yp == y:
-                                npers = 1
-                            if xp == x - GlobalVarG2.gpx and yp == y:
-                                npers = 2
-                            if xp == x and yp == y + GlobalVarG2.gpy:
-                                npers = 4
-                            if xp == x and yp == y - GlobalVarG2.gpy:
-                                npers = 3
-                        # apri cofanetto attacco = 1
-                        elif attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and suCofanetto:
-                            apriCofanetto = [True, xp, yp]
-                            sposta = True
-                            risposta = True
-                            if xp == x + GlobalVarG2.gpx and yp == y:
-                                npers = 1
-                            if xp == x - GlobalVarG2.gpx and yp == y:
-                                npers = 2
-                            if xp == x and yp == y + GlobalVarG2.gpy:
-                                npers = 4
-                            if xp == x and yp == y - GlobalVarG2.gpy:
-                                npers = 3
-                        # attacco ravvicinato attacco = 1
-                        elif attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)):
-                            infliggidanno = True
-                            danno = attVicino
-                            raggio = GlobalVarG2.gpx * 0
-                        # attacco lontano attacco = 1
-                        elif attacco == 1 and not ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy) or (xp == x and yp == y) or (xp == rx and yp == ry)) and numFrecce > 0:
-                            j = 0
-                            while j < len(caseattactot):
-                                if caseattactot[j] == xp and caseattactot[j + 1] == yp:
-                                    if caseattactot[j + 2]:
-                                        infliggidanno = True
-                                        danno = attLontano
-                                        raggio = GlobalVarG2.gpx * 0
-                                    break
-                                j += 3
-                        # difesa attacco = 1
-                        elif attacco == 1 and (xp == x and yp == y):
-                            difesa = 2
-                            risposta = True
-                        # bomba attacco = 2
-                        if attacco == 2 and (abs(x - xp) <= GlobalVarG2.gpx * 6 and abs(y - yp) <= GlobalVarG2.gpy * 6):
-                            # controllo caselle attaccabili
-                            continua = True
-                            # disegno le caselle attaccabili
-                            i = 0
-                            while i < len(caseattactot):
-                                if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                                    continua = False
-                                    break
-                                i = i + 3
-                            if continua:
-                                n = random.randint(1, 2)
-                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
-                                    if xp > x:
-                                        npers = 1
-                                    else:
-                                        npers = 2
-                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
-                                    if yp > y:
-                                        npers = 4
-                                    else:
-                                        npers = 3
-                                animaOggetto[0] = "bomba"
-                                animaOggetto[1] = xp
-                                animaOggetto[2] = yp
-                                attaccato = True
-                                infliggidanno = True
-                                danno = 10
-                                raggio = GlobalVarG2.gpx * 1
-                                sposta = True
-                                risposta = True
-                        # bomba veleno attacco = 3
-                        if attacco == 3 and (abs(x - xp) <= GlobalVarG2.gpx * 5 and abs(y - yp) <= GlobalVarG2.gpy * 5):
-                            # controllo caselle attaccabili
-                            continua = True
-                            # disegno le caselle attaccabili
-                            i = 0
-                            while i < len(caseattactot):
-                                if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                                    continua = False
-                                    break
-                                i = i + 3
-                            if continua:
-                                n = random.randint(1, 2)
-                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
-                                    if xp > x:
-                                        npers = 1
-                                    else:
-                                        npers = 2
-                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
-                                    if yp > y:
-                                        npers = 4
-                                    else:
-                                        npers = 3
-                                animaOggetto[0] = "bombaVeleno"
-                                animaOggetto[1] = xp
-                                animaOggetto[2] = yp
-                                attaccato = True
-                                infliggidanno = True
-                                danno = 20
-                                statom = 1
-                                raggio = GlobalVarG2.gpx * 0
-                                sposta = True
-                                risposta = True
-                        # esca attacco = 4
-                        if attacco == 4 and (abs(x - xp) <= GlobalVarG2.gpx * 6 and abs(y - yp) <= GlobalVarG2.gpy * 6):
-                            # controllo caselle attaccabili
-                            continua = True
-                            # disegno le caselle attaccabili
-                            i = 0
-                            while i < len(caseattactot):
-                                if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                                    continua = False
-                                    break
-                                i = i + 3
-                            if continua:
-                                # conferma lancio GlobalVarG2.esche
-                                confesca = True
-                                i = 0
-                                while i < len(vettoreDenaro):
-                                    if vettoreDenaro[i + 1] == xp and vettoreDenaro[i + 2] == yp:
-                                        confesca = False
-                                        break
-                                    i += 3
-                                i = 2
-                                while i < len(vitaesca):
-                                    if vitaesca[i] == xp and vitaesca[i + 1] == yp:
-                                        confesca = False
-                                        break
-                                    i = i + 4
-                                for nemico in listaNemici:
-                                    if nemico.x == xp and nemico.y == yp:
-                                        confesca = False
-                                        break
-                                if confesca:
-                                    n = random.randint(1, 2)
-                                    if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
-                                        if xp > x:
-                                            npers = 1
-                                        else:
-                                            npers = 2
-                                    elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
-                                        if yp > y:
-                                            npers = 4
-                                        else:
-                                            npers = 3
-                                    animaOggetto[0] = "esca"
-                                    animaOggetto[1] = xp
-                                    animaOggetto[2] = yp
-                                    attaccato = True
-                                    infliggidanno = True
-                                    danno = 0
-                                    raggio = 0
-                                    creaesca = True
-                                    sposta = True
-                                    risposta = True
-                        # bomba appiccicosa attacco = 5
-                        if attacco == 5 and (abs(x - xp) <= GlobalVarG2.gpx * 5 and abs(y - yp) <= GlobalVarG2.gpy * 5):
-                            # controllo caselle attaccabili
-                            continua = True
-                            # disegno le caselle attaccabili
-                            i = 0
-                            while i < len(caseattactot):
-                                if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                                    continua = False
-                                    break
-                                i = i + 3
-                            if continua:
-                                n = random.randint(1, 2)
-                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
-                                    if xp > x:
-                                        npers = 1
-                                    else:
-                                        npers = 2
-                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
-                                    if yp > y:
-                                        npers = 4
-                                    else:
-                                        npers = 3
-                                animaOggetto[0] = "bombaAppiccicosa"
-                                animaOggetto[1] = xp
-                                animaOggetto[2] = yp
-                                attaccato = True
-                                infliggidanno = True
-                                danno = 20
-                                statom = 2
-                                raggio = GlobalVarG2.gpx * 0
-                                sposta = True
-                                risposta = True
-                        # bomba potenziata attacco = 6
-                        if attacco == 6 and (abs(x - xp) <= GlobalVarG2.gpx * 4 and abs(y - yp) <= GlobalVarG2.gpy * 4):
-                            # controllo caselle attaccabili
-                            continua = True
-                            # disegno le caselle attaccabili
-                            i = 0
-                            while i < len(caseattactot):
-                                if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                                    continua = False
-                                    break
-                                i = i + 3
-                            if continua:
-                                n = random.randint(1, 2)
-                                if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
-                                    if xp > x:
-                                        npers = 1
-                                    else:
-                                        npers = 2
-                                elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
-                                    if yp > y:
-                                        npers = 4
-                                    else:
-                                        npers = 3
-                                animaOggetto[0] = "bombaPotenziata"
-                                animaOggetto[1] = xp
-                                animaOggetto[2] = yp
-                                attaccato = True
-                                infliggidanno = True
-                                danno = 200
-                                raggio = GlobalVarG2.gpx * 2
-                                sposta = True
-                                risposta = True
+                        attaccoConfermato = True
 
-                        nemicoColpito = False
-                        for nemico in listaNemici:
-                            if (((abs(nemico.x - xp) <= raggio and abs(nemico.y - yp) <= raggio) and attacco != 1) or ((xp == nemico.x and yp == nemico.y) and attacco == 1)) and infliggidanno:
-                                nemicoColpito = nemico
-                                if statom == 1:
-                                    nemico.avvelenato = True
-                                if statom == 2:
-                                    nemico.appiccicato = True
-                                nemico.danneggia(danno, "Rallo")
-                                # inquadro il nemico colpito se non sto usando un oggetto
-                                if attacco == 1:
-                                    nemicoInquadrato = nemico
-
-                                attaccoDiRallo.append(nemico)
-                                dannoApprossimato = danno - nemico.difesa
-                                if dannoApprossimato < 0:
-                                    dannoApprossimato = 0
-                                attaccoDiRallo.append(-dannoApprossimato)
-                                if attacco == 3:
-                                    attaccoDiRallo.append("avvelena")
-                                elif attacco == 5:
-                                    attaccoDiRallo.append("appiccica")
-                                else:
-                                    attaccoDiRallo.append("")
-
-                                sposta = True
-                                risposta = True
-
-                        # attacco da vicino
-                        if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and sposta and risposta and infliggidanno:
-                            attaccato = True
-                            if xp == x + GlobalVarG2.gpx and yp == y:
-                                npers = 1
-                            if xp == x - GlobalVarG2.gpx and yp == y:
-                                npers = 2
-                            if xp == x and yp == y + GlobalVarG2.gpy:
-                                npers = 4
-                            if xp == x and yp == y - GlobalVarG2.gpy:
-                                npers = 3
-                        # attacco con arco
-                        elif attacco == 1 and not ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and sposta and risposta and infliggidanno:
-                            attaccato = True
-                            attaccoADistanza = nemicoColpito
-                            if abs(x - xp) > abs(y - yp):
-                                if x < xp:
-                                    npers = 1
-                                if x > xp:
-                                    npers = 2
-                            if abs(y - yp) > abs(x - xp):
-                                if y < yp:
-                                    npers = 4
-                                if y > yp:
-                                    npers = 3
-                            if (abs(x - xp) == abs(y - yp)) and (x != xp) and (y != yp):
-                                c = random.randint(1, 2)
-                                if x < xp and c == 1:
-                                    npers = 1
-                                if x > xp and c == 1:
-                                    npers = 2
-                                if y < yp and c == 2:
-                                    npers = 4
-                                if y > yp and c == 2:
-                                    npers = 3
-
-                        if not risposta:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not startf:
+                tastop = "mouseDestro"
+                risposta = True
+                sposta = False
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not startf:
+                tastop = "mouseCentrale"
+                risposta = True
+                sposta = False
+                startf = True
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and not startf:
+                tastop = "mouseSinistro"
+                if inquadratoQualcosa == "start":
+                    startf = True
+                elif inquadratoQualcosa == "battaglia":
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    risposta = True
+                    sposta = False
+                elif inquadratoQualcosa == "telecolco":
+                    GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoTeleColco)
+                    if chiamarob:
+                        chiamarob = False
+                    else:
+                        ultimoObbiettivoColco = []
+                        ultimoObbiettivoColco.append("Telecomando")
+                        ultimoObbiettivoColco.append(x)
+                        ultimoObbiettivoColco.append(y)
+                        chiamarob = True
+                elif inquadratoQualcosa == "Rallo":
+                    difesa = 2
+                    risposta = True
+                elif inquadratoQualcosa == "Colco":
+                    spingiColco = True
+                    sposta = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                elif inquadratoQualcosa == "porta":
+                    apriChiudiPorta = [True, xp, yp]
+                    sposta = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                elif inquadratoQualcosa == "cofanetto":
+                    apriCofanetto = [True, xp, yp]
+                    sposta = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                elif inquadratoQualcosa == "personaggio":
+                    interagisciConPersonaggio = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                elif inquadratoQualcosa == "nemico":
+                    sposta = False
+                    if attacco != 0:
+                        attaccoConfermato = True
+                elif inquadratoQualcosa == "esca":
+                    sposta = False
+                    if attacco != 0:
+                        attaccoConfermato = True
+                elif inquadratoQualcosa == "casellaNelRaggio":
+                    sposta = False
+                    if attacco != 0:
+                        attaccoConfermato = True
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+            if sinistroMouse or centraleMouse or destroMouse:
+                pygame.mouse.set_visible(True)
+                GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP:
                 if tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d:
                     numTastiPremuti -= 1
@@ -1131,6 +1098,365 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     tastotempfps = 5
                     nxp = 0
                     nyp = 0
+            if event.type == pygame.MOUSEBUTTONUP:
+                tastop = 0
+
+        if attaccoConfermato:
+            attaccoConfermato = False
+            daInquadrare = False
+            if tastop == "mouseSinistro" and attacco == 1 and (inquadratoQualcosa == "nemico" or inquadratoQualcosa == "esca"):
+                if inquadratoQualcosa == "nemico" and not (nemicoInquadrato and type(nemicoInquadrato) is not str and xp == nemicoInquadrato.x and yp == nemicoInquadrato.y):
+                    for nemico in listaNemici:
+                        if xp == nemico.x and yp == nemico.y:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selObbiettivo)
+                            nemicoInquadrato = nemico
+                            daInquadrare = True
+                            break
+                if inquadratoQualcosa == "esca":
+                    if not (nemicoInquadrato and type(nemicoInquadrato) is str and nemicoInquadrato.startswith("esca")):
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selObbiettivo)
+                        nemicoInquadrato = "Esca" + str(vitaesca[i])
+                        daInquadrare = True
+                    else:
+                        idEscaInquadrata = int(nemicoInquadrato[4:])
+                        i = 0
+                        while i < len(vitaesca):
+                            if idEscaInquadrata == vitaesca[i]:
+                                if not (xp == vitaesca[i + 2] and yp == vitaesca[i + 3]):
+                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selObbiettivo)
+                                    nemicoInquadrato = "Esca" + str(vitaesca[i])
+                                    daInquadrare = True
+                                break
+                            i += 4
+            if not daInquadrare:
+                infliggidanno = False
+                statom = 0
+                raggio = 0
+                suPersonaggio = False
+                for personaggio in listaPersonaggi:
+                    if xp == personaggio.x and yp == personaggio.y:
+                        suPersonaggio = True
+                        break
+                # interagisci con personaggi attacco = 1
+                if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and suPersonaggio:
+                    interagisciConPersonaggio = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                # spingi Colco attacco = 1
+                if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and (xp == rx and yp == ry):
+                    spingiColco = True
+                    sposta = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                # apri/chiudi porta attacco = 1
+                elif attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and suPorta:
+                    apriChiudiPorta = [True, xp, yp]
+                    sposta = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                # apri cofanetto attacco = 1
+                elif attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and suCofanetto:
+                    apriCofanetto = [True, xp, yp]
+                    sposta = True
+                    risposta = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                # attacco ravvicinato attacco = 1
+                elif attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)):
+                    infliggidanno = True
+                    danno = attVicino
+                    raggio = GlobalVarG2.gpx * 0
+                # attacco lontano attacco = 1
+                elif attacco == 1 and not ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy) or (xp == x and yp == y) or (xp == rx and yp == ry)) and numFrecce > 0:
+                    j = 0
+                    while j < len(caseattactot):
+                        if caseattactot[j] == xp and caseattactot[j + 1] == yp:
+                            if caseattactot[j + 2]:
+                                infliggidanno = True
+                                danno = attLontano
+                                raggio = GlobalVarG2.gpx * 0
+                            break
+                        j += 3
+                # difesa attacco = 1
+                elif attacco == 1 and (xp == x and yp == y):
+                    difesa = 2
+                    risposta = True
+                # bomba attacco = 2
+                if attacco == 2 and (abs(x - xp) <= GlobalVarG2.gpx * 6 and abs(y - yp) <= GlobalVarG2.gpy * 6):
+                    # controllo caselle attaccabili
+                    continua = True
+                    # disegno le caselle attaccabili
+                    i = 0
+                    while i < len(caseattactot):
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                            continua = False
+                            break
+                        i = i + 3
+                    if continua:
+                        n = random.randint(1, 2)
+                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                            if xp > x:
+                                npers = 1
+                            else:
+                                npers = 2
+                        elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                            if yp > y:
+                                npers = 4
+                            else:
+                                npers = 3
+                        animaOggetto[0] = "bomba"
+                        animaOggetto[1] = xp
+                        animaOggetto[2] = yp
+                        attaccato = True
+                        infliggidanno = True
+                        danno = 10
+                        raggio = GlobalVarG2.gpx * 1
+                        sposta = True
+                        risposta = True
+                # bomba veleno attacco = 3
+                if attacco == 3 and (abs(x - xp) <= GlobalVarG2.gpx * 5 and abs(y - yp) <= GlobalVarG2.gpy * 5):
+                    # controllo caselle attaccabili
+                    continua = True
+                    # disegno le caselle attaccabili
+                    i = 0
+                    while i < len(caseattactot):
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                            continua = False
+                            break
+                        i = i + 3
+                    if continua:
+                        n = random.randint(1, 2)
+                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                            if xp > x:
+                                npers = 1
+                            else:
+                                npers = 2
+                        elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                            if yp > y:
+                                npers = 4
+                            else:
+                                npers = 3
+                        animaOggetto[0] = "bombaVeleno"
+                        animaOggetto[1] = xp
+                        animaOggetto[2] = yp
+                        attaccato = True
+                        infliggidanno = True
+                        danno = 20
+                        statom = 1
+                        raggio = GlobalVarG2.gpx * 0
+                        sposta = True
+                        risposta = True
+                # esca attacco = 4
+                if attacco == 4 and (abs(x - xp) <= GlobalVarG2.gpx * 6 and abs(y - yp) <= GlobalVarG2.gpy * 6):
+                    # controllo caselle attaccabili
+                    continua = True
+                    # disegno le caselle attaccabili
+                    i = 0
+                    while i < len(caseattactot):
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                            continua = False
+                            break
+                        i = i + 3
+                    if continua:
+                        # conferma lancio GlobalVarG2.esche
+                        confesca = True
+                        i = 0
+                        while i < len(vettoreDenaro):
+                            if vettoreDenaro[i + 1] == xp and vettoreDenaro[i + 2] == yp:
+                                confesca = False
+                                break
+                            i += 3
+                        i = 2
+                        while i < len(vitaesca):
+                            if vitaesca[i] == xp and vitaesca[i + 1] == yp:
+                                confesca = False
+                                break
+                            i = i + 4
+                        for nemico in listaNemici:
+                            if nemico.x == xp and nemico.y == yp:
+                                confesca = False
+                                break
+                        if confesca:
+                            n = random.randint(1, 2)
+                            if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                                if xp > x:
+                                    npers = 1
+                                else:
+                                    npers = 2
+                            elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                                if yp > y:
+                                    npers = 4
+                                else:
+                                    npers = 3
+                            animaOggetto[0] = "esca"
+                            animaOggetto[1] = xp
+                            animaOggetto[2] = yp
+                            attaccato = True
+                            infliggidanno = True
+                            danno = 0
+                            raggio = 0
+                            creaesca = True
+                            sposta = True
+                            risposta = True
+                # bomba appiccicosa attacco = 5
+                if attacco == 5 and (abs(x - xp) <= GlobalVarG2.gpx * 5 and abs(y - yp) <= GlobalVarG2.gpy * 5):
+                    # controllo caselle attaccabili
+                    continua = True
+                    # disegno le caselle attaccabili
+                    i = 0
+                    while i < len(caseattactot):
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                            continua = False
+                            break
+                        i = i + 3
+                    if continua:
+                        n = random.randint(1, 2)
+                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                            if xp > x:
+                                npers = 1
+                            else:
+                                npers = 2
+                        elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                            if yp > y:
+                                npers = 4
+                            else:
+                                npers = 3
+                        animaOggetto[0] = "bombaAppiccicosa"
+                        animaOggetto[1] = xp
+                        animaOggetto[2] = yp
+                        attaccato = True
+                        infliggidanno = True
+                        danno = 20
+                        statom = 2
+                        raggio = GlobalVarG2.gpx * 0
+                        sposta = True
+                        risposta = True
+                # bomba potenziata attacco = 6
+                if attacco == 6 and (abs(x - xp) <= GlobalVarG2.gpx * 4 and abs(y - yp) <= GlobalVarG2.gpy * 4):
+                    # controllo caselle attaccabili
+                    continua = True
+                    # disegno le caselle attaccabili
+                    i = 0
+                    while i < len(caseattactot):
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
+                            continua = False
+                            break
+                        i = i + 3
+                    if continua:
+                        n = random.randint(1, 2)
+                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                            if xp > x:
+                                npers = 1
+                            else:
+                                npers = 2
+                        elif abs(yp - y) > abs(xp - x) or (abs(xp - x) == abs(yp - y) and n == 2):
+                            if yp > y:
+                                npers = 4
+                            else:
+                                npers = 3
+                        animaOggetto[0] = "bombaPotenziata"
+                        animaOggetto[1] = xp
+                        animaOggetto[2] = yp
+                        attaccato = True
+                        infliggidanno = True
+                        danno = 200
+                        raggio = GlobalVarG2.gpx * 2
+                        sposta = True
+                        risposta = True
+
+                nemicoColpito = False
+                for nemico in listaNemici:
+                    if (((abs(nemico.x - xp) <= raggio and abs(nemico.y - yp) <= raggio) and attacco != 1) or ((xp == nemico.x and yp == nemico.y) and attacco == 1)) and infliggidanno:
+                        nemicoColpito = nemico
+                        if statom == 1:
+                            nemico.avvelenato = True
+                        if statom == 2:
+                            nemico.appiccicato = True
+                        nemico.danneggia(danno, "Rallo")
+                        # inquadro il nemico colpito se non sto usando un oggetto
+                        if attacco == 1:
+                            nemicoInquadrato = nemico
+
+                        attaccoDiRallo.append(nemico)
+                        dannoApprossimato = danno - nemico.difesa
+                        if dannoApprossimato < 0:
+                            dannoApprossimato = 0
+                        attaccoDiRallo.append(-dannoApprossimato)
+                        if attacco == 3:
+                            attaccoDiRallo.append("avvelena")
+                        elif attacco == 5:
+                            attaccoDiRallo.append("appiccica")
+                        else:
+                            attaccoDiRallo.append("")
+
+                        sposta = True
+                        risposta = True
+
+                # attacco da vicino
+                if attacco == 1 and ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and sposta and risposta and infliggidanno:
+                    attaccato = True
+                    if xp == x + GlobalVarG2.gpx and yp == y:
+                        npers = 1
+                    if xp == x - GlobalVarG2.gpx and yp == y:
+                        npers = 2
+                    if xp == x and yp == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if xp == x and yp == y - GlobalVarG2.gpy:
+                        npers = 3
+                # attacco con arco
+                elif attacco == 1 and not ((xp == x + GlobalVarG2.gpx and yp == y) or (xp == x - GlobalVarG2.gpx and yp == y) or (xp == x and yp == y + GlobalVarG2.gpy) or (xp == x and yp == y - GlobalVarG2.gpy)) and sposta and risposta and infliggidanno:
+                    attaccato = True
+                    attaccoADistanza = nemicoColpito
+                    if abs(x - xp) > abs(y - yp):
+                        if x < xp:
+                            npers = 1
+                        if x > xp:
+                            npers = 2
+                    if abs(y - yp) > abs(x - xp):
+                        if y < yp:
+                            npers = 4
+                        if y > yp:
+                            npers = 3
+                    if (abs(x - xp) == abs(y - yp)) and (x != xp) and (y != yp):
+                        c = random.randint(1, 2)
+                        if x < xp and c == 1:
+                            npers = 1
+                        if x > xp and c == 1:
+                            npers = 2
+                        if y < yp and c == 2:
+                            npers = 4
+                        if y > yp and c == 2:
+                            npers = 3
+
+                if not risposta:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
 
         if ricaricaschermo and not appenaCaricato:
             GlobalVarG2.schermo.blit(stanzaa, (0, 0))
@@ -1250,49 +1576,51 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 j = j + 3
             i = i + 4
 
-        # mettere il puntatore su porte
-        i = 0
-        while i < len(porte):
-            if porte[i + 1] == xp + nxp and porte[i + 2] == yp + nyp and not porte[i + 3]:
-                if nxp != 0 or nyp != 0:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
-                puntaPorta = True
-                xp = xp + nxp
-                yp = yp + nyp
-                nxp = 0
-                nyp = 0
-                break
-            i = i + 4
-        # mettere il puntatore su cofanetti
-        puntaCofanetto = False
-        i = 0
-        while i < len(cofanetti):
-            if cofanetti[i + 1] == xp + nxp and cofanetti[i + 2] == yp + nyp:
-                if nxp != 0 or nyp != 0:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
-                puntaCofanetto = True
-                xp = xp + nxp
-                yp = yp + nyp
-                break
-            i = i + 4
-        # movimento inquadra (ultimi 4 inutili)
-        if not puntaPorta and not puntaCofanetto:
-            xp, yp, stanza, inutile, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, True, False, porte, cofanetti)
-            if xp != xvp or yp != yvp:
-                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
-        # movimento inquadra quando si è sulle porte
-        if puntaPorta:
+        # movimenti del puntatore su porte e cofanetti quando si usa la tastiera
+        if not GlobalVarG2.mouseVisibile:
+            # mettere il puntatore su porte
             i = 0
-            while i < len(caseviste):
-                if caseviste[i] == xp + nxp and caseviste[i + 1] == yp + nyp:
-                    if caseviste[i + 2]:
-                        if nxp != 0 or nyp != 0:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
-                        xp = xp + nxp
-                        yp = yp + nyp
-                        puntaPorta = False
-                        break
-                i = i + 3
+            while i < len(porte):
+                if porte[i + 1] == xp + nxp and porte[i + 2] == yp + nyp and not porte[i + 3]:
+                    if nxp != 0 or nyp != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                    puntaPorta = True
+                    xp = xp + nxp
+                    yp = yp + nyp
+                    nxp = 0
+                    nyp = 0
+                    break
+                i = i + 4
+            # mettere il puntatore su cofanetti
+            puntaCofanetto = False
+            i = 0
+            while i < len(cofanetti):
+                if cofanetti[i + 1] == xp + nxp and cofanetti[i + 2] == yp + nyp:
+                    if nxp != 0 or nyp != 0:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                    puntaCofanetto = True
+                    xp = xp + nxp
+                    yp = yp + nyp
+                    break
+                i = i + 4
+            # movimento inquadra (ultimi 4 inutili)
+            if not puntaPorta and not puntaCofanetto:
+                xp, yp, stanza, inutile, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, True, False, porte, cofanetti)
+                if xp != xvp or yp != yvp:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+            # movimento inquadra quando si è sulle porte
+            if puntaPorta:
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i] == xp + nxp and caseviste[i + 1] == yp + nyp:
+                        if caseviste[i + 2]:
+                            if nxp != 0 or nyp != 0:
+                                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                            xp = xp + nxp
+                            yp = yp + nyp
+                            puntaPorta = False
+                            break
+                    i = i + 3
 
         # GlobalVarG2.esche: id, vita, xesca, yesca
         i = 0
