@@ -3,7 +3,18 @@
 from SottoMenuAG2 import *
 
 
-def menu():
+def menu(caricaSalvataggio):
+    # posizione porte e cofanetti nel vettore dati
+    porteini = 142
+    portefin = 169
+    cofaniini = portefin + 1
+    cofanifin = 193
+    lunghezzadati = cofanifin + 1
+
+    if caricaSalvataggio:
+        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+
     # video
     fermavideo = guardaVideo('Video/videoinizio')
     # attesa dopo video
@@ -34,29 +45,29 @@ def menu():
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse)):
+                    if event.type == pygame.KEYDOWN and GlobalVarG2.mouseVisibile:
+                        print "1"
+                        pygame.mouse.set_visible(False)
+                        GlobalVarG2.mouseVisibile = False
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     finevideo = False
 
-    xp = GlobalVarG2.gsx // 32 * 3
-    yp = GlobalVarG2.gsy // 18 * 3.5
+    xp = GlobalVarG2.gsx // 32 * 1.5
+    yp = GlobalVarG2.gsy // 18 * 2.5
     voceMarcata = 1
     primoFrame = True
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
     robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+    aggiornaInterfacciaPerMouse = False
+    mostraTutorial = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
 
     tastop = 0
     tastotempfps = 5
 
     # numero per la posizione di robo all'avvio
     c = random.randint(1, 4)
-
-    # posizione porte e cofanetti nel vettore dati
-    porteini = 134
-    portefin = 161
-    cofaniini = portefin + 1
-    cofanifin = 185
-    lunghezzadati = cofanifin + 1
 
     while True:
         if not GlobalVarG2.canaleSoundCanzone.get_busy():
@@ -71,41 +82,57 @@ def menu():
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        if deltaXMouse != 0 or deltaYMouse != 0:
+        suTutorial = False
+        suTogliTutorial = False
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
+            aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if GlobalVarG2.gsx // 32 * 2.5 <= xMouse <= GlobalVarG2.gsx // 32 * 12.5:
-                if GlobalVarG2.gsy // 18 * 2.5 <= yMouse <= GlobalVarG2.gsy // 18 * 5:
+            if not mostraTutorial:
+                if 0 <= xMouse <= GlobalVarG2.gsx // 32 * 7.5 and GlobalVarG2.gsy // 18 * 16.2 <= yMouse <= GlobalVarG2.gsy:
                     if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 1
-                    xp = GlobalVarG2.gsx // 32 * 3
-                    yp = GlobalVarG2.gsy // 18 * 3.5
-                elif GlobalVarG2.gsy // 18 * 5 <= yMouse <= GlobalVarG2.gsy // 18 * 7.5:
-                    if GlobalVarG2.mouseBloccato:
-                        GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 2
-                    xp = GlobalVarG2.gsx // 32 * 3
-                    yp = GlobalVarG2.gsy // 18 * 6
-                elif GlobalVarG2.gsy // 18 * 7.5 <= yMouse <= GlobalVarG2.gsy // 18 * 10:
-                    if GlobalVarG2.mouseBloccato:
-                        GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 3
-                    xp = GlobalVarG2.gsx // 32 * 3
-                    yp = GlobalVarG2.gsy // 18 * 8.5
-                elif GlobalVarG2.gsy // 18 * 12.5 <= yMouse <= GlobalVarG2.gsy // 18 * 15:
-                    if GlobalVarG2.mouseBloccato:
-                        GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 4
-                    xp = GlobalVarG2.gsx // 32 * 3
-                    yp = GlobalVarG2.gsy // 18 * 13.5
+                    suTutorial = True
+                elif 0 <= xMouse <= GlobalVarG2.gsx // 32 * 11:
+                    if GlobalVarG2.gsy // 18 * 1.5 <= yMouse <= GlobalVarG2.gsy // 18 * 4:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 1
+                        xp = GlobalVarG2.gsx // 32 * 1.5
+                        yp = GlobalVarG2.gsy // 18 * 2.5
+                    elif GlobalVarG2.gsy // 18 * 4 <= yMouse <= GlobalVarG2.gsy // 18 * 6.5:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 2
+                        xp = GlobalVarG2.gsx // 32 * 1.5
+                        yp = GlobalVarG2.gsy // 18 * 5
+                    elif GlobalVarG2.gsy // 18 * 6.5 <= yMouse <= GlobalVarG2.gsy // 18 * 9:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 3
+                        xp = GlobalVarG2.gsx // 32 * 1.5
+                        yp = GlobalVarG2.gsy // 18 * 7.5
+                    elif GlobalVarG2.gsy // 18 * 11.5 <= yMouse <= GlobalVarG2.gsy // 18 * 14:
+                        if GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(False)
+                        voceMarcata = 4
+                        xp = GlobalVarG2.gsx // 32 * 1.5
+                        yp = GlobalVarG2.gsy // 18 * 12.5
+                    else:
+                        if not GlobalVarG2.mouseBloccato:
+                            GlobalVarG2.configuraCursore(True)
                 else:
                     if not GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(True)
             else:
-                if not GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(True)
+                if GlobalVarG2.gsx // 32 * 21.5 <= xMouse <= GlobalVarG2.gsx and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 2:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    suTogliTutorial = True
+                else:
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
             if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
@@ -131,195 +158,115 @@ def menu():
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    aggiornaInterfacciaPerMouse = True
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
+                if event.key == pygame.K_q and not tastoTrovato and mostraTutorial:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    mostraTutorial = False
+                    tastoTrovato = True
                 if event.key == pygame.K_s and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
                 if event.key == pygame.K_w and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse):
+                tastoTrovato = True
+                tastop = "escOdestroMouse"
+                if event.type == pygame.KEYDOWN and GlobalVarG2.mouseVisibile:
+                    aggiornaInterfacciaPerMouse = True
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
+                if not mostraTutorial:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    mostraTutorial = True
+                else:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    mostraTutorial = False
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
                 tastoTrovato = True
                 tastop = "spazioOsinistroMouse"
-                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                if event.type == pygame.KEYDOWN and GlobalVarG2.mouseVisibile:
+                    aggiornaInterfacciaPerMouse = True
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
+                if suTutorial and event.type == pygame.MOUSEBUTTONDOWN:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    mostraTutorial = True
+                else:
+                    if not mostraTutorial:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        # nuova partita
+                        if voceMarcata == 1:
+                            x = GlobalVarG2.gsx // 32 * 6
+                            y = GlobalVarG2.gsy // 18 * 2
+                            rx = x
+                            ry = y
+                            # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
+                            # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
+                            # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob -
+                            # porte(142-?) - cofanetti(?-?) // dimensione: 0-142 + porte e cofanetti
+                            dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 220,# <- statistiche
+                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
+                                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
+                                    2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,# <- equpaggiamento
+                                    2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
+                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
+                                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
+                                    False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
+                                    rx, ry, -1, -1, -1, 0, 4, 3,# <- info aggiunte per poter salvare ovunque
+                                    2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
+                                    1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False,# <- cofanetti
+                                    ]
+                            datiNemici = []
+                            datiEsche = []
+                            datiMonete = []
+                            stanzeGiaVisitate = []
+                            ultimoObbiettivoColco = []
+                            obbiettivoCasualeColco = False
+                            GlobalVarG2.canaleSoundCanzone.stop()
+                            i = porteini
+                            while i <= portefin:
+                                dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                                dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
+                                i = i + 4
+                            i = cofaniini
+                            while i <= cofanifin:
+                                dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                                dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
+                                i = i + 4
+                            return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
 
-                # nuova partita
-                if voceMarcata == 1:
-                    x = GlobalVarG2.gsx // 32 * 6
-                    y = GlobalVarG2.gsy // 18 * 2
-                    # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
-                    # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra - porte(134-?) - cofanetti(?-?) // dimensione: 0-133 + porte e cofanetti
-                    dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 220,# <- statistiche
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
-                            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
-                            2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,# <- equpaggiamento
-                            2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
-                            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
-                            False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
-                            2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
-                            1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False]# <- cofanetti
-                    GlobalVarG2.canaleSoundCanzone.stop()
-                    i = porteini
-                    while i <= portefin:
-                        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-                        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-                        i = i + 4
-                    i = cofaniini
-                    while i <= cofanifin:
-                        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-                        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-                        i = i + 4
-                    return dati, porteini, portefin, cofaniini, cofanifin
+                        # carica partita
+                        if voceMarcata == 2:
+                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, GlobalVarG2.c11)
 
-                # carica partita
-                if voceMarcata == 2:
-                    n = scegli_sal(1, lunghezzadati, GlobalVarG2.c11)
+                            # lettura salvataggio
+                            if n != -1:
+                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+                                if dati:
+                                    return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
 
-                    # lettura salvataggio
-                    if n != -1:
-                        leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
-                        leggifile = leggi.read()
-                        dati = leggifile.split("_")
-                        dati.pop(len(dati) - 1)
-                        if len(dati) == 0:
-                            print "Slot vuoto"
-                            aggiornaSchermata = True
-                            indietro = False
-                            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                            while not indietro:
-                                deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-                                if deltaXMouse != 0 or deltaYMouse != 0:
-                                    aggiornaSchermata = True
-                                    pygame.mouse.set_visible(True)
-                                    GlobalVarG2.mouseVisibile = True
-                                for event in pygame.event.get():
-                                    sinistroMouseVecchio = sinistroMouse
-                                    centraleMouseVecchio = centraleMouse
-                                    destroMouseVecchio = destroMouse
-                                    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                                    if not sinistroMouseVecchio and sinistroMouse:
-                                        centraleMouse = False
-                                        destroMouse = False
-                                    elif not centraleMouseVecchio and centraleMouse:
-                                        sinistroMouse = False
-                                        destroMouse = False
-                                    elif not destroMouseVecchio and destroMouse:
-                                        sinistroMouse = False
-                                        centraleMouse = False
-                                    if event.type == pygame.QUIT:
-                                        pygame.quit()
-                                        quit()
-                                    if event.type == pygame.KEYDOWN:
-                                        aggiornaSchermata = True
-                                        pygame.mouse.set_visible(False)
-                                        GlobalVarG2.mouseVisibile = False
-                                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (event.type == pygame.MOUSEBUTTONDOWN and destroMouse):
-                                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
-                                        indietro = True
-                                if aggiornaSchermata:
-                                    aggiornaSchermata = False
-                                    GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
-                                    robograsalva = pygame.transform.scale(GlobalVarG2.robograff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-                                    GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 3, -GlobalVarG2.gpy * 5))
-                                    if GlobalVarG2.mouseVisibile:
-                                        messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
-                                    else:
-                                        messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
-                                    messaggio("Slot di salvataggio vuoto...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
-                                    pygame.display.update()
-                        else:
-                            errore = False
-                            if len(dati) != lunghezzadati:
-                                errore = True
-                            else:
-                                for i in range(0, len(dati)):
-                                    try:
-                                        dati[i] = int(dati[i])
-                                    except ValueError:
-                                        errore = True
-                                if not errore:
-                                    # conversione della posizione in pixel
-                                    dati[2] = dati[2] * GlobalVarG2.gpx
-                                    dati[3] = dati[3] * GlobalVarG2.gpy
-                                    i = porteini
-                                    while i <= portefin:
-                                        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-                                        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-                                        i = i + 4
-                                    i = cofaniini
-                                    while i <= cofanifin:
-                                        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-                                        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-                                        i = i + 4
+                        # Impostazioni
+                        if voceMarcata == 3:
+                            menuImpostazioni(GlobalVarG2.c11, True)
+                            primoFrame = True
 
-                                    print "Salvataggio: " + str(n)
-                                    leggi.close()
-                                    GlobalVarG2.canaleSoundCanzone.stop()
-                                    return dati, porteini, portefin, cofaniini, cofanifin
-                            if len(dati) != lunghezzadati or errore:
-                                print "Dati corrotti: " + str(len(dati))
-                                aggiornaSchermata = True
-                                indietro = False
-                                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                                while not indietro:
-                                    deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-                                    if deltaXMouse != 0 or deltaYMouse != 0:
-                                        aggiornaSchermata = True
-                                        pygame.mouse.set_visible(True)
-                                        GlobalVarG2.mouseVisibile = True
-                                    for event in pygame.event.get():
-                                        sinistroMouseVecchio = sinistroMouse
-                                        centraleMouseVecchio = centraleMouse
-                                        destroMouseVecchio = destroMouse
-                                        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                                        if not sinistroMouseVecchio and sinistroMouse:
-                                            centraleMouse = False
-                                            destroMouse = False
-                                        elif not centraleMouseVecchio and centraleMouse:
-                                            sinistroMouse = False
-                                            destroMouse = False
-                                        elif not destroMouseVecchio and destroMouse:
-                                            sinistroMouse = False
-                                            centraleMouse = False
-                                        if event.type == pygame.QUIT:
-                                            pygame.quit()
-                                            quit()
-                                        if event.type == pygame.KEYDOWN:
-                                            aggiornaSchermata = True
-                                            pygame.mouse.set_visible(False)
-                                            GlobalVarG2.mouseVisibile = False
-                                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (event.type == pygame.MOUSEBUTTONDOWN and destroMouse):
-                                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
-                                            indietro = True
-                                    if aggiornaSchermata:
-                                        aggiornaSchermata = False
-                                        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
-                                        robograsalva = pygame.transform.scale(GlobalVarG2.robograffff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-                                        GlobalVarG2.schermo.blit(robograsalva, (GlobalVarG2.gpx * 15, -GlobalVarG2.gpy * 3))
-                                        if GlobalVarG2.mouseVisibile:
-                                            messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
-                                        else:
-                                            messaggio("Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
-                                        messaggio("I dati sono corrotti...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 100)
-                                        pygame.display.update()
-                        leggi.close()
-
-                # Impostazioni
-                if voceMarcata == 3:
-                    menuImpostazioni(GlobalVarG2.c11, True)
-                    primoFrame = True
-
-                # esci dal gioco
-                if voceMarcata == 4:
-                    pygame.quit()
-                    quit()
+                        # esci dal gioco
+                        if voceMarcata == 4:
+                            pygame.quit()
+                            quit()
+                    elif suTogliTutorial and event.type == pygame.MOUSEBUTTONDOWN:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                        mostraTutorial = False
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if sinistroMouse or centraleMouse or destroMouse:
+            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
@@ -327,79 +274,181 @@ def menu():
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata:
+        if primoMovimento or tastop == "spazioOsinistroMouse" or tastop == "escOdestroMouse" or ((tastop == pygame.K_q) or (tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaInterfacciaPerMouse = False
             if primoFrame:
                 puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+                xp = GlobalVarG2.gsx // 32 * 1.5
                 if voceMarcata == 1:
-                    yp = GlobalVarG2.gsy // 18 * 3.5
+                    yp = GlobalVarG2.gsy // 18 * 2.5
                 if voceMarcata == 2:
-                    yp = GlobalVarG2.gsy // 18 * 6
+                    yp = GlobalVarG2.gsy // 18 * 5
                 if voceMarcata == 3:
-                    yp = GlobalVarG2.gsy // 18 * 8.5
+                    yp = GlobalVarG2.gsy // 18 * 7.5
                 if voceMarcata == 4:
-                    yp = GlobalVarG2.gsy // 18 * 13.5
+                    yp = GlobalVarG2.gsy // 18 * 12.5
                 primoFrame = False
             if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
                 tastotempfps = 2
-            if tastop == pygame.K_s:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
-                if voceMarcata != 4:
-                    if voceMarcata == 1:
+            if not mostraTutorial:
+                if tastop == pygame.K_s:
+                    if GlobalVarG2.mouseVisibile:
+                        pygame.mouse.set_visible(False)
+                        GlobalVarG2.mouseVisibile = False
+                    if voceMarcata != 4:
+                        if voceMarcata == 1:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 5
+                        elif voceMarcata == 2:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 7.5
+                        elif voceMarcata == 3:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 12.5
+                        voceMarcata += 1
+                    else:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = GlobalVarG2.gsy // 18 * 6
-                    elif voceMarcata == 2:
+                        yp = GlobalVarG2.gsy // 18 * 2.5
+                        voceMarcata -= 3
+                if tastop == pygame.K_w:
+                    if GlobalVarG2.mouseVisibile:
+                        pygame.mouse.set_visible(False)
+                        GlobalVarG2.mouseVisibile = False
+                    if voceMarcata != 1:
+                        if voceMarcata == 2:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 2.5
+                        elif voceMarcata == 3:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 5
+                        elif voceMarcata == 4:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                            yp = GlobalVarG2.gsy // 18 * 7.5
+                        voceMarcata -= 1
+                    else:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = GlobalVarG2.gsy // 18 * 8.5
-                    elif voceMarcata == 3:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = GlobalVarG2.gsy // 18 * 13.5
-                    voceMarcata += 1
+                        yp = GlobalVarG2.gsy // 18 * 12.5
+                        voceMarcata += 3
+                GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+                persomenuinizio = pygame.transform.scale(GlobalVarG2.persGrafInizio, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                if c == 1:
+                    robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                if c == 2:
+                    robomenuinizio = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                if c == 3:
+                    robomenuinizio = pygame.transform.scale(GlobalVarG2.robograff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                if c == 4:
+                    robomenuinizio = pygame.transform.scale(GlobalVarG2.robografff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                GlobalVarG2.schermo.blit(persomenuinizio, (GlobalVarG2.gpx * 15, 0))
+                GlobalVarG2.schermo.blit(robomenuinizio, (GlobalVarG2.gpx * 3, 0))
+                messaggio("Inizia", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 2, 90)
+                messaggio("Momenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 4.5, 90)
+                messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 7, 90)
+                messaggio("Esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 12, 90)
+
+                if GlobalVarG2.mouseVisibile:
+                    messaggio("Tasto destro: comandi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 16.8, 50)
                 else:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                    yp = GlobalVarG2.gsy // 18 * 3.5
-                    voceMarcata -= 3
-            if tastop == pygame.K_w:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
-                if voceMarcata != 1:
-                    if voceMarcata == 2:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = GlobalVarG2.gsy // 18 * 3.5
-                    elif voceMarcata == 3:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = GlobalVarG2.gsy // 18 * 6
-                    elif voceMarcata == 4:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = GlobalVarG2.gsy // 18 * 8.5
-                    voceMarcata -= 1
+                    messaggio("Esc: comandi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1.7, GlobalVarG2.gsy // 18 * 16.8, 50)
+
+                GlobalVarG2.schermo.blit(puntatore, (xp, yp))
+            else:
+                GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+                if GlobalVarG2.mouseVisibile:
+                    messaggio("Comandi mouse", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+
+                    messaggio("Mod. movimento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.2, 80)
+                    GlobalVarG2.schermo.blit(GlobalVarG2.tutorialMouse, (GlobalVarG2.gsx // 32 * 0.2, GlobalVarG2.gsy // 18 * 6))
+                    messaggio("Movimento (su casella libera) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 6.8, 35)
+                    messaggio("Interagisci (su casella interagibile) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 7.3, 35)
+                    messaggio("Attiva o disattiva Colco (su telecolco) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 7.8, 35)
+                    messaggio("Menu start (su stato personaggio) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 8.3, 35)
+                    messaggio(u"Modalità attacco (su stato nemico)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 8.8, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 9.8), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 9.8), 2)
+                    messaggio(u"Modalità attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 11.3, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 13.2), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 13.2), 2)
+                    messaggio("Menu start", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 14.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 10.5,  GlobalVarG2.gsy // 18 * 4), (GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 17), 2)
+
+                    messaggio("Mod. attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 4.2, 80)
+                    GlobalVarG2.schermo.blit(GlobalVarG2.tutorialMouse, (GlobalVarG2.gsx // 32 * 10.7, GlobalVarG2.gsy // 18 * 6))
+                    messaggio("Inquadra o attacca (su casella nemica) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 6.8, 35)
+                    messaggio("Interagisci (su casella interagibile) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 7.3, 35)
+                    messaggio("Attiva o disattiva Colco (su telecolco) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 7.8, 35)
+                    messaggio("Menu start (su stato personaggio) /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 8.3, 35)
+                    messaggio(u"Modalità movimento (su stato nemico)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 8.8, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 9.8), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 9.8), 2)
+                    messaggio(u"Modalità movimento /", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 11.1, 35)
+                    messaggio("Rimuovi selezione (su nemico inquadrato)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 11.6, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 13.2), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 13.2), 2)
+                    messaggio("Menu start", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 14.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21,  GlobalVarG2.gsy // 18 * 4), (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 17), 2)
+
+                    messaggio("Menu", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 4.2, 80)
+                    GlobalVarG2.schermo.blit(GlobalVarG2.tutorialMouse, (GlobalVarG2.gsx // 32 * 21.2, GlobalVarG2.gsy // 18 * 6))
+                    messaggio("Seleziona", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 7.8, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21.5,  GlobalVarG2.gsy // 18 * 9.8), (GlobalVarG2.gsx // 32 * 31, GlobalVarG2.gsy // 18 * 9.8), 2)
+                    messaggio("Indietro / Esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 11.3, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21.5,  GlobalVarG2.gsy // 18 * 13.2), (GlobalVarG2.gsx // 32 * 31, GlobalVarG2.gsy // 18 * 13.2), 2)
+                    messaggio("Cambia operazione (se consentito)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 24, GlobalVarG2.gsy // 18 * 14.7, 35)
                 else:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                    yp = GlobalVarG2.gsy // 18 * 13.5
-                    voceMarcata += 3
-            GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
-            persomenuinizio = pygame.transform.scale(GlobalVarG2.persGrafInizio, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-            if (c == 1):
-                robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-            if (c == 2):
-                robomenuinizio = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-            if (c == 3):
-                robomenuinizio = pygame.transform.scale(GlobalVarG2.robograff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-            if (c == 4):
-                robomenuinizio = pygame.transform.scale(GlobalVarG2.robografff, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
-            GlobalVarG2.schermo.blit(persomenuinizio, (GlobalVarG2.gpx * 15, 0))
-            GlobalVarG2.schermo.blit(robomenuinizio, (GlobalVarG2.gpx * 3, 0))
-            messaggio("Nuova partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 3, 90)
-            messaggio("Carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 5.5, 90)
-            messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 8, 90)
-            messaggio("Esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 13, 90)
-            GlobalVarG2.schermo.blit(puntatore, (xp, yp))
+                    messaggio("Comandi tastiera", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
+                    messaggio("Mod. movimento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.2, 80)
+                    GlobalVarG2.schermo.blit(GlobalVarG2.tutorialTastieraInGioco, (GlobalVarG2.gsx // 32 * 0.2, GlobalVarG2.gsy // 18 * 6))
+                    messaggio("Menu start", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4.2, GlobalVarG2.gsy // 18 * 6.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 7.3), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 7.3), 2)
+                    messaggio("Cambia bersaglio inquadrato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4.2, GlobalVarG2.gsy // 18 * 7.9, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 8.7), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 8.7), 2)
+                    messaggio("Deseleziona bersaglio", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4.2, GlobalVarG2.gsy // 18 * 9.3, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 10.1), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 10.1), 2)
+                    messaggio(u"Modalità attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4.2, GlobalVarG2.gsy // 18 * 10.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 11.5), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 11.5), 2)
+                    messaggio("Movimento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4.2, GlobalVarG2.gsy // 18 * 12.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 14), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 14), 2)
+                    messaggio("Attiva o disattiva Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4.2, GlobalVarG2.gsy // 18 * 14.6, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 0.5,  GlobalVarG2.gsy // 18 * 15.4), (GlobalVarG2.gsx // 32 * 10, GlobalVarG2.gsy // 18 * 15.4), 2)
+                    messaggio("Interagisci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 4.2, GlobalVarG2.gsy // 18 * 16, 35)
+
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 10.5,  GlobalVarG2.gsy // 18 * 4), (GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 17), 2)
+                    messaggio("Mod. attacco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 4.2, 80)
+                    GlobalVarG2.schermo.blit(GlobalVarG2.tutorialTastieraInGioco, (GlobalVarG2.gsx // 32 * 10.7, GlobalVarG2.gsy // 18 * 6))
+                    messaggio("Menu start", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 6.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 7.3), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 7.3), 2)
+                    messaggio("Punta sul prossimo bersaglio", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 7.9, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 8.7), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 8.7), 2)
+                    messaggio(u"Modalità movimento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 9.3, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 10.1), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 10.1), 2)
+                    messaggio("Inquadra bersaglio puntato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 10.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 11.5), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 11.5), 2)
+                    messaggio("Sposta puntatore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 12.7, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 14), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 14), 2)
+                    messaggio("Attiva o disattiva Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 14.6, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 11,  GlobalVarG2.gsy // 18 * 15.4), (GlobalVarG2.gsx // 32 * 20.5, GlobalVarG2.gsy // 18 * 15.4), 2)
+                    messaggio("Attacca / Interagisci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14.7, GlobalVarG2.gsy // 18 * 16, 35)
+
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21,  GlobalVarG2.gsy // 18 * 4), (GlobalVarG2.gsx // 32 * 21, GlobalVarG2.gsy // 18 * 17), 2)
+                    messaggio("Menu", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 4.2, 80)
+                    GlobalVarG2.schermo.blit(GlobalVarG2.tutorialTastieraInMenu, (GlobalVarG2.gsx // 32 * 21.2, GlobalVarG2.gsy // 18 * 6))
+                    messaggio("Esci (dove specificato)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25.2, GlobalVarG2.gsy // 18 * 8.1, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21.5,  GlobalVarG2.gsy // 18 * 8.7), (GlobalVarG2.gsx // 32 * 31, GlobalVarG2.gsy // 18 * 8.7), 2)
+                    messaggio("Indietro / Esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25.2, GlobalVarG2.gsy // 18 * 9.3, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21.5,  GlobalVarG2.gsy // 18 * 10.1), (GlobalVarG2.gsx // 32 * 31, GlobalVarG2.gsy // 18 * 10.1), 2)
+                    messaggio("Sposta puntatore", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25.2, GlobalVarG2.gsy // 18 * 11.3, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21.5,  GlobalVarG2.gsy // 18 * 12.6), (GlobalVarG2.gsx // 32 * 31, GlobalVarG2.gsy // 18 * 12.6), 2)
+                    messaggio("Cambia operazione (se consentito)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25.2, GlobalVarG2.gsy // 18 * 13.2, 35)
+                    pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 21.5,  GlobalVarG2.gsy // 18 * 14), (GlobalVarG2.gsx // 32 * 31, GlobalVarG2.gsy // 18 * 14), 2)
+                    messaggio("Seleziona", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25.2, GlobalVarG2.gsy // 18 * 14.6, 35)
+
+                if GlobalVarG2.mouseVisibile:
+                    messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+                else:
+                    messaggio("Esc / Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 1, 50)
             pygame.display.update()
 
         GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
 
 
-def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, apriocchio):
+def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco):
     sfondostastart = pygame.transform.scale(GlobalVarG2.sfondostax3, (GlobalVarG2.gpx * 4, GlobalVarG2.gpy))
     perssta = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
     robosta = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
@@ -436,6 +485,7 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
     voceMarcata = 1
     primoFrame = True
     aggiornaInterfacciaPerMouse = False
+    caricaSalvataggio = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     tastop = 0
@@ -454,12 +504,17 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        suTornaIndietro = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 11:
+            if GlobalVarG2.gsx // 32 * 19 <= xMouse <= GlobalVarG2.gsx and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 2:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                suTornaIndietro = True
+            elif GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 11:
                 if GlobalVarG2.gsy // 18 * 4.8 <= yMouse <= GlobalVarG2.gsy // 18 * 5.8:
                     if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
@@ -490,28 +545,22 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                     voceMarcata = 5
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 9
-                elif GlobalVarG2.gsy // 18 * 11.8 <= yMouse <= GlobalVarG2.gsy // 18 * 12.8:
-                    if GlobalVarG2.mouseBloccato:
-                        GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 6
-                    xp = GlobalVarG2.gsx // 32 * 1
-                    yp = GlobalVarG2.gsy // 18 * 12
                 elif GlobalVarG2.gsy // 18 * 12.8 <= yMouse <= GlobalVarG2.gsy // 18 * 13.8:
                     if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 7
+                    voceMarcata = 6
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 13
                 elif GlobalVarG2.gsy // 18 * 13.8 <= yMouse <= GlobalVarG2.gsy // 18 * 14.8:
                     if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 8
+                    voceMarcata = 7
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 14
                 elif GlobalVarG2.gsy // 18 * 14.8 <= yMouse <= GlobalVarG2.gsy // 18 * 15.8:
                     if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
-                    voceMarcata = 9
+                    voceMarcata = 8
                     xp = GlobalVarG2.gsx // 32 * 1
                     yp = GlobalVarG2.gsy // 18 * 15
                 else:
@@ -545,8 +594,10 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    aggiornaInterfacciaPerMouse = True
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
@@ -568,49 +619,50 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
                 tastoTrovato = True
                 tastop = "spazioOsinistroMouse"
-                if voceMarcata != 6 or (voceMarcata == 6 and nmost == -1):
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
-                else:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                 inizio = False
-                # oggetti
-                if voceMarcata == 1:
-                    dati, attacco = oggetti(dati, GlobalVarG2.c27)
-                    carim = True
-                # equip pers
-                if voceMarcata == 2:
-                    dati = equip(dati, GlobalVarG2.c27)
-                    carim = True
-                # equip robot
-                if voceMarcata == 3:
-                    dati = equiprobo(dati, GlobalVarG2.c27)
-                    carim = True
-                # mappa
-                if voceMarcata == 4:
-                    menuMappa(dati[0], GlobalVarG2.c27)
-                # diario
-                if voceMarcata == 5:
-                    menuDiario(dati[0], GlobalVarG2.c27)
-                # salva
-                if voceMarcata == 6:
-                    #if nmost == -1:
-                    n = scegli_sal(3, len(dati), GlobalVarG2.c27)
-                    if n != -1:
-                        salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti)
-                # impostazioni
-                if voceMarcata == 7:
-                    menuImpostazioni(GlobalVarG2.c27, False)
-                # menu
-                if voceMarcata == 8:
-                    GlobalVarG2.schermo.blit(puntatoreVecchio, (xp, yp))
-                    conferma = 1
-                # chiudi
-                if voceMarcata == 9:
-                    GlobalVarG2.schermo.blit(puntatoreVecchio, (xp, yp))
-                    conferma = 2
+                if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    risposta = True
+                else:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    # oggetti
+                    if voceMarcata == 1:
+                        dati, attacco = oggetti(dati, GlobalVarG2.c27)
+                        carim = True
+                    # equip pers
+                    if voceMarcata == 2:
+                        dati = equip(dati, GlobalVarG2.c27)
+                        carim = True
+                    # equip robot
+                    if voceMarcata == 3:
+                        dati = equiprobo(dati, GlobalVarG2.c27)
+                        carim = True
+                    # mappa
+                    if voceMarcata == 4:
+                        menuMappa(dati[0], GlobalVarG2.c27)
+                    # diario
+                    if voceMarcata == 5:
+                        menuDiario(dati, GlobalVarG2.c27)
+                    # salva
+                    if voceMarcata == 6:
+                        # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
+                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, GlobalVarG2.c27)
+                        if n != -1 and azioneFatta == 3:
+                            salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                        elif n != -1 and azioneFatta == 1:
+                            caricaSalvataggio = n
+                            risposta = True
+                    # impostazioni
+                    if voceMarcata == 7:
+                        menuImpostazioni(GlobalVarG2.c27, False)
+                    # chiudi
+                    if voceMarcata == 8:
+                        GlobalVarG2.schermo.blit(puntatoreVecchio, (xp, yp))
+                        conferma = 2
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if sinistroMouse or centraleMouse or destroMouse:
+            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
@@ -624,24 +676,26 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_s:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
-                if voceMarcata != 5 and voceMarcata != 9:
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
+                if voceMarcata != 5 and voceMarcata != 8:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     yp = yp + GlobalVarG2.gsy // 18 * 1
                     voceMarcata += 1
                 else:
                     if voceMarcata == 5:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = yp + GlobalVarG2.gsy // 18 * 3
+                        yp = yp + GlobalVarG2.gsy // 18 * 4
                         voceMarcata += 1
-                    elif voceMarcata == 9:
+                    elif voceMarcata == 8:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         yp = GlobalVarG2.gsy // 18 * 5
                         voceMarcata = 1
             if tastop == pygame.K_w:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 if voceMarcata != 6 and voceMarcata != 1:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     yp = yp - GlobalVarG2.gsy // 18 * 1
@@ -649,12 +703,12 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
                 else:
                     if voceMarcata == 6:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        yp = yp - GlobalVarG2.gsy // 18 * 3
+                        yp = yp - GlobalVarG2.gsy // 18 * 4
                         voceMarcata -= 1
                     elif voceMarcata == 1:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         yp = GlobalVarG2.gsy // 18 * 15
-                        voceMarcata = 9
+                        voceMarcata = 8
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
             # chiedere conferma per uscire
@@ -675,15 +729,11 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
             messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 50)
             messaggio("Mappa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 50)
             messaggio("Diario", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 50)
-            if nmost == -1:
-                messaggio("Salva", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 50)
-            else:
-                messaggio("Salva", GlobalVarG2.grigioscu, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 12, 50)
-            messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
-            messaggio("Torna al menu principale", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
-            messaggio("Torna a Windows", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
+            messaggio("Momenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
+            messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
+            messaggio("Esci dal gioco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
             if GlobalVarG2.mouseVisibile:
-                messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
+                messaggio("Tasto destro / centrale: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 1, 50)
             else:
                 messaggio("Esc / Q: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 1, 50)
             if carim:
@@ -744,12 +794,14 @@ def start(dati, nmost, porteini, portefin, cofaniini, cofanifin, porte, cofanett
 
         GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
     GlobalVarG2.canaleSoundCanzone.stop()
-    return dati, inizio, attacco
+    return dati, inizio, attacco, caricaSalvataggio
 
 
-def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
+def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, inizio, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco):
     xp = GlobalVarG2.gpx * 1
-    yp = GlobalVarG2.gpy * 5
+    yp = GlobalVarG2.gpy * 13.8
+    puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatorevecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
     sconosciutoOggetto = pygame.transform.scale(GlobalVarG2.sconosciutoOggettoMenu, (GlobalVarG2.gpx * 4, GlobalVarG2.gpy * 4))
     sconosciutoOggettoIco = pygame.transform.scale(GlobalVarG2.sconosciutoOggettoIcoMenu, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
@@ -759,6 +811,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
     disegnoOggetto = 0
     risposta = False
     voceMarcata = 1
+    voceMarcataOggetto = voceMarcata
     primoFrame = True
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
@@ -768,6 +821,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
     difensivi = True
     offensivi = False
     sposta = False
+    caricaSalvataggio = False
 
     oggetton = 1
     vettoreOggettiGraf = []
@@ -792,46 +846,63 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         mouseInquadraFreccia = False
-        if deltaXMouse != 0 or deltaYMouse != 0:
+        suTornaIndietro = False
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if difensivi:
-                if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 7 and GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
+            if GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and 0 <= xMouse <= GlobalVarG2.gsx // 32 * 3.8:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                xp = 0
+                yp = GlobalVarG2.gsy // 18 * 16.05
+                voceMarcata = -1
+            elif GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and GlobalVarG2.gsx // 32 * 3.8 <= xMouse <= GlobalVarG2.gsx // 32 * 6.8:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                xp = GlobalVarG2.gsx // 32 * 3.8
+                yp = GlobalVarG2.gsy // 18 * 16.05
+                voceMarcata = -2
+            elif GlobalVarG2.gsy // 18 * 17 <= yMouse <= GlobalVarG2.gsy and GlobalVarG2.gsx // 32 * 0 <= xMouse <= GlobalVarG2.gsx // 32 * 7:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                suTornaIndietro = True
+            elif difensivi:
+                if GlobalVarG2.gsy // 18 * 14.8 <= yMouse <= GlobalVarG2.gsy // 18 * 15.3 and GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
                     mouseInquadraFreccia = True
                     if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
-                elif GlobalVarG2.gsy // 18 * 5 <= yMouse <= GlobalVarG2.gsy // 18 * 6:
+                elif GlobalVarG2.gsy // 18 * 13.8 <= yMouse <= GlobalVarG2.gsy // 18 * 14.8:
                     if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 2:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 1
                         xp = GlobalVarG2.gsx // 32 * 1
-                        yp = GlobalVarG2.gsy // 18 * 5
+                        yp = GlobalVarG2.gsy // 18 * 13.8
                     elif GlobalVarG2.gsx // 32 * 2 <= xMouse <= GlobalVarG2.gsx // 32 * 3:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 2
                         xp = GlobalVarG2.gsx // 32 * 2
-                        yp = GlobalVarG2.gsy // 18 * 5
+                        yp = GlobalVarG2.gsy // 18 * 13.8
                     elif GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 3
                         xp = GlobalVarG2.gsx // 32 * 3
-                        yp = GlobalVarG2.gsy // 18 * 5
+                        yp = GlobalVarG2.gsy // 18 * 13.8
                     elif GlobalVarG2.gsx // 32 * 4 <= xMouse <= GlobalVarG2.gsx // 32 * 5:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 4
                         xp = GlobalVarG2.gsx // 32 * 4
-                        yp = GlobalVarG2.gsy // 18 * 5
+                        yp = GlobalVarG2.gsy // 18 * 13.8
                     elif GlobalVarG2.gsx // 32 * 5 <= xMouse <= GlobalVarG2.gsx // 32 * 6:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 5
                         xp = GlobalVarG2.gsx // 32 * 5
-                        yp = GlobalVarG2.gsy // 18 * 5
+                        yp = GlobalVarG2.gsy // 18 * 13.8
                     else:
                         if not GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(True)
@@ -839,41 +910,41 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                     if not GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(True)
             elif offensivi:
-                if GlobalVarG2.gsy // 18 * 4.5 <= yMouse <= GlobalVarG2.gsy // 18 * 5.5 and GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
+                if GlobalVarG2.gsy // 18 * 13.8 <= yMouse <= GlobalVarG2.gsy // 18 * 14.3 and GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
                     mouseInquadraFreccia = True
                     if GlobalVarG2.mouseBloccato:
                         GlobalVarG2.configuraCursore(False)
-                elif GlobalVarG2.gsy // 18 * 5.5 <= yMouse <= GlobalVarG2.gsy // 18 * 6.5:
+                elif GlobalVarG2.gsy // 18 * 14.3 <= yMouse <= GlobalVarG2.gsy // 18 * 15.3:
                     if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 2:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 1
                         xp = GlobalVarG2.gsx // 32 * 1
-                        yp = GlobalVarG2.gsy // 18 * 5.5
+                        yp = GlobalVarG2.gsy // 18 * 14.3
                     elif GlobalVarG2.gsx // 32 * 2 <= xMouse <= GlobalVarG2.gsx // 32 * 3:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 2
                         xp = GlobalVarG2.gsx // 32 * 2
-                        yp = GlobalVarG2.gsy // 18 * 5.5
+                        yp = GlobalVarG2.gsy // 18 * 14.3
                     elif GlobalVarG2.gsx // 32 * 3 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 3
                         xp = GlobalVarG2.gsx // 32 * 3
-                        yp = GlobalVarG2.gsy // 18 * 5.5
+                        yp = GlobalVarG2.gsy // 18 * 14.3
                     elif GlobalVarG2.gsx // 32 * 4 <= xMouse <= GlobalVarG2.gsx // 32 * 5:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 4
                         xp = GlobalVarG2.gsx // 32 * 4
-                        yp = GlobalVarG2.gsy // 18 * 5.5
+                        yp = GlobalVarG2.gsy // 18 * 14.3
                     elif GlobalVarG2.gsx // 32 * 5 <= xMouse <= GlobalVarG2.gsx // 32 * 6:
                         if GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(False)
                         voceMarcata = 5
                         xp = GlobalVarG2.gsx // 32 * 5
-                        yp = GlobalVarG2.gsy // 18 * 5.5
+                        yp = GlobalVarG2.gsy // 18 * 14.3
                     else:
                         if not GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(True)
@@ -905,8 +976,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
@@ -934,108 +1006,134 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                 tastop = "spazioOsinistroMouse"
                 if difensivi:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                    yp = (GlobalVarG2.gpy * 5) + (GlobalVarG2.gpy // 2)
+                    yp = GlobalVarG2.gpy * 14.3
                     difensivi = False
                     offensivi = True
                 elif offensivi:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                    yp = GlobalVarG2.gpy * 5
+                    yp = GlobalVarG2.gpy * 13.8
                     offensivi = False
                     difensivi = True
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and not mouseInquadraFreccia):
                 tastoTrovato = True
                 tastop = "spazioOsinistroMouse"
-                if difensivi:
-                    # pozione
-                    if voceMarcata == 1 and dati[31] > 0:
-                        animaOggetto[0] = "pozione"
-                        dati[5] = dati[5] + 100
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
-                        dati[31] = dati[31] - 1
-                        sposta = True
-                        risposta = True
-                    # carica batt
-                    if voceMarcata == 2 and dati[32] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVarG2.gpx:
-                        animaOggetto[0] = "caricaBatterie"
-                        dati[10] = dati[10] + 250
-                        if dati[10] > entot:
-                            dati[10] = entot
-                        dati[32] = dati[32] - 1
-                        # npers: 1=d, 2=a, 3=w, 4=s
-                        if x < rx:
-                            npers = 1
-                        elif x > rx:
-                            npers = 2
-                        elif y < ry:
-                            npers = 4
-                        elif y > ry:
-                            npers = 3
-                        sposta = True
-                        risposta = True
-                    # antidoto
-                    if voceMarcata == 3 and dati[33] > 0:
-                        animaOggetto[0] = "medicina"
-                        dati[121] = 0
-                        dati[33] = dati[33] - 1
-                        sposta = True
-                        risposta = True
-                    # super pozione
-                    if voceMarcata == 4 and dati[34] > 0:
-                        animaOggetto[0] = "superPozione"
-                        dati[5] = dati[5] + 300
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
-                        dati[34] = dati[34] - 1
-                        sposta = True
-                        risposta = True
-                    # carica migliorato
-                    if voceMarcata == 5 and dati[35] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVarG2.gpx:
-                        animaOggetto[0] = "caricaBatterieMigliorato"
-                        dati[10] = dati[10] + 600
-                        if dati[10] > entot:
-                            dati[10] = entot
-                        dati[35] = dati[35] - 1
-                        # npers: 1=d, 2=a, 3=w, 4=s
-                        if x < rx:
-                            npers = 1
-                        elif x > rx:
-                            npers = 2
-                        elif y < ry:
-                            npers = 4
-                        elif y > ry:
-                            npers = 3
-                        sposta = True
-                        risposta = True
-                elif offensivi:
-                    # bomba
-                    if voceMarcata == 1 and dati[36] > 0:
-                        attacco = 2
-                        risposta = True
-                    # bomba veleno
-                    if voceMarcata == 2 and dati[37] > 0:
-                        attacco = 3
-                        risposta = True
-                    # esca
-                    if voceMarcata == 3 and dati[38] > 0:
-                        attacco = 4
-                        risposta = True
-                    # bomba appiccicosa
-                    if voceMarcata == 4 and dati[39] > 0:
-                        attacco = 5
-                        risposta = True
-                    # bomba potenziata
-                    if voceMarcata == 5 and dati[40] > 0:
-                        attacco = 6
-                        risposta = True
-                if risposta:
-                    if offensivi:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                if suTornaIndietro:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    risposta = True
+                elif voceMarcata < 0:
+                    if voceMarcata == -1:
+                        GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
+                        schermo_temp = GlobalVarG2.schermo.copy()
+                        background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
+                        # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
+                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, False, True)
+                        if n == -1:
+                            GlobalVarG2.schermo.blit(background, (0, 0))
+                        elif n != -1 and azioneFatta == 3:
+                            salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                            GlobalVarG2.schermo.blit(background, (0, 0))
+                        elif n != -1 and azioneFatta == 1:
+                            caricaSalvataggio = n
+                            risposta = True
+                    elif voceMarcata == -2:
+                        GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
+                        schermo_temp = GlobalVarG2.schermo.copy()
+                        background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
+                        inizio, risposta = chiediconferma(2)
+                        if not inizio:
+                            GlobalVarG2.schermo.blit(background, (0, 0))
                 else:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
+                    if difensivi:
+                        # pozione
+                        if voceMarcata == 1 and dati[31] > 0:
+                            animaOggetto[0] = "pozione"
+                            dati[5] = dati[5] + 100
+                            if dati[5] > pvtot:
+                                dati[5] = pvtot
+                            dati[31] = dati[31] - 1
+                            sposta = True
+                            risposta = True
+                        # carica batt
+                        if voceMarcata == 2 and dati[32] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVarG2.gpx:
+                            animaOggetto[0] = "caricaBatterie"
+                            dati[10] = dati[10] + 250
+                            if dati[10] > entot:
+                                dati[10] = entot
+                            dati[32] = dati[32] - 1
+                            # npers: 1=d, 2=a, 3=w, 4=s
+                            if x < rx:
+                                npers = 1
+                            elif x > rx:
+                                npers = 2
+                            elif y < ry:
+                                npers = 4
+                            elif y > ry:
+                                npers = 3
+                            sposta = True
+                            risposta = True
+                        # antidoto
+                        if voceMarcata == 3 and dati[33] > 0:
+                            animaOggetto[0] = "medicina"
+                            dati[121] = 0
+                            dati[33] = dati[33] - 1
+                            sposta = True
+                            risposta = True
+                        # super pozione
+                        if voceMarcata == 4 and dati[34] > 0:
+                            animaOggetto[0] = "superPozione"
+                            dati[5] = dati[5] + 300
+                            if dati[5] > pvtot:
+                                dati[5] = pvtot
+                            dati[34] = dati[34] - 1
+                            sposta = True
+                            risposta = True
+                        # carica migliorato
+                        if voceMarcata == 5 and dati[35] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVarG2.gpx:
+                            animaOggetto[0] = "caricaBatterieMigliorato"
+                            dati[10] = dati[10] + 600
+                            if dati[10] > entot:
+                                dati[10] = entot
+                            dati[35] = dati[35] - 1
+                            # npers: 1=d, 2=a, 3=w, 4=s
+                            if x < rx:
+                                npers = 1
+                            elif x > rx:
+                                npers = 2
+                            elif y < ry:
+                                npers = 4
+                            elif y > ry:
+                                npers = 3
+                            sposta = True
+                            risposta = True
+                    elif offensivi:
+                        # bomba
+                        if voceMarcata == 1 and dati[36] > 0:
+                            attacco = 2
+                            risposta = True
+                        # bomba veleno
+                        if voceMarcata == 2 and dati[37] > 0:
+                            attacco = 3
+                            risposta = True
+                        # esca
+                        if voceMarcata == 3 and dati[38] > 0:
+                            attacco = 4
+                            risposta = True
+                        # bomba appiccicosa
+                        if voceMarcata == 4 and dati[39] > 0:
+                            attacco = 5
+                            risposta = True
+                        # bomba potenziata
+                        if voceMarcata == 5 and dati[40] > 0:
+                            attacco = 6
+                            risposta = True
+                    if risposta:
+                        if offensivi:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    else:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if sinistroMouse or centraleMouse or destroMouse:
+            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
@@ -1043,22 +1141,41 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata:
+        if not caricaSalvataggio and (primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata):
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
-                if offensivi:
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
+                if voceMarcata < 0:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                    yp = GlobalVarG2.gpy * 5
+                    offensivi = True
+                    difensivi = False
+                    if voceMarcata == -1:
+                        xp = GlobalVarG2.gpx * 1
+                        yp = GlobalVarG2.gpy * 14.3
+                        voceMarcata = 1
+                    elif voceMarcata == -2:
+                        xp = GlobalVarG2.gpx * 4
+                        yp = GlobalVarG2.gpy * 14.3
+                        voceMarcata = 4
+                elif offensivi:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    yp = GlobalVarG2.gpy * 13.8
                     offensivi = False
                     difensivi = True
             if tastop == pygame.K_a:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
-                if voceMarcata != 1:
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
+                if voceMarcata < 0:
+                    if voceMarcata == -2:
+                        voceMarcata += 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = 0
+                elif voceMarcata != 1:
                     voceMarcata -= 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = xp - GlobalVarG2.gpx
@@ -1067,17 +1184,34 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = GlobalVarG2.gpx * 5
             if tastop == pygame.K_s:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 if difensivi:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                    yp = (GlobalVarG2.gpy * 5) + (GlobalVarG2.gpy // 2)
+                    yp = GlobalVarG2.gpy * 14.3
                     difensivi = False
                     offensivi = True
+                elif voceMarcata >= 0:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                    if voceMarcata <= 3:
+                        xp = 0
+                        yp = GlobalVarG2.gsy // 18 * 16.05
+                        voceMarcata = -1
+                    elif voceMarcata >= 4:
+                        xp = GlobalVarG2.gsx // 32 * 3.8
+                        yp = GlobalVarG2.gsy // 18 * 16.05
+                        voceMarcata = -2
             if tastop == pygame.K_d:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
-                if voceMarcata != 5:
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
+                if voceMarcata < 0:
+                    if voceMarcata == -1:
+                        voceMarcata -= 1
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
+                        xp = GlobalVarG2.gsx // 32 * 3.8
+                elif voceMarcata != 5:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = xp + GlobalVarG2.gpx
@@ -1085,7 +1219,14 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                     voceMarcata -= 4
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = GlobalVarG2.gpx * 1
-            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoStartBattaglia, (0, 0))
+
+            if voceMarcata >= 0:
+                voceMarcataOggetto = voceMarcata
+
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoStartBattaglia, (0, GlobalVarG2.gsy // 18 * 8))
+            messaggio("Momenti", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 0.7), int(GlobalVarG2.gpy * 16.05), 45)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (int(GlobalVarG2.gpx * 3.8), int(GlobalVarG2.gpy * 15.8)), (int(GlobalVarG2.gpx * 3.8), int(GlobalVarG2.gpy * 16.8)), 2)
+            messaggio("Esci", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 4.5), int(GlobalVarG2.gpy * 16.05), 45)
             if difensivi:
                 if voceMarcata == 1:
                     disegnoOggetto = 0
@@ -1108,57 +1249,90 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry):
                     disegnoOggetto = 8
                 if voceMarcata == 5:
                     disegnoOggetto = 9
-            GlobalVarG2.schermo.blit(vettoreOggettiGraf[disegnoOggetto], (GlobalVarG2.gpx // 2, GlobalVarG2.gpy * 1))
+            GlobalVarG2.schermo.blit(vettoreOggettiGraf[disegnoOggetto], (GlobalVarG2.gpx // 2, GlobalVarG2.gpy * 9.7))
             if dati[disegnoOggetto + 31] <= 0:
-                GlobalVarG2.schermo.blit(GlobalVarG2.puntatOut, (xp, yp))
+                if voceMarcata < 0:
+                    GlobalVarG2.schermo.blit(puntatore, (xp, yp))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatOut, (xp, yp))
                 qta = 0
             elif (disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > GlobalVarG2.gpx:
-                GlobalVarG2.schermo.blit(GlobalVarG2.puntatOut, (xp, yp))
+                if voceMarcata < 0:
+                    GlobalVarG2.schermo.blit(puntatore, (xp, yp))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatOut, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
             else:
-                GlobalVarG2.schermo.blit(GlobalVarG2.puntatIn, (xp, yp))
+                if voceMarcata < 0:
+                    GlobalVarG2.schermo.blit(puntatore, (xp, yp))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.puntatIn, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
-            messaggio("x%i" % qta, GlobalVarG2.grigiochi, (GlobalVarG2.gpx * 4) + (GlobalVarG2.gpx // 2), GlobalVarG2.gpy * 3, 80)
+            messaggio("x%i" % qta, GlobalVarG2.grigiochi, (GlobalVarG2.gpx * 4) + (GlobalVarG2.gpx // 2), GlobalVarG2.gpy * 11.2, 80)
             disegnati = 0
             i = 0
             while i < 10:
                 if difensivi and (i == 0 or i == 1 or i == 2 or i == 3 or i == 4):
-                    GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), GlobalVarG2.gpy * 5))
+                    GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), GlobalVarG2.gpy * 13.8))
                     disegnati += 1
                 if offensivi and (i == 5 or i == 6 or i == 7 or i == 8 or i == 9):
-                    GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), (GlobalVarG2.gpy * 5) + (GlobalVarG2.gpy // 2)))
+                    GlobalVarG2.schermo.blit(vettoreOggettiIco[i], (GlobalVarG2.gpx * (disegnati + 1), (GlobalVarG2.gpy * 13.8) + (GlobalVarG2.gpy // 2)))
                     disegnati += 1
                 i += 1
             if difensivi:
-                if voceMarcata == 1:
-                    messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 2:
-                    messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 3:
-                    messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 4:
-                    messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 5:
-                    messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                GlobalVarG2.schermo.blit(GlobalVarG2.scorriGiu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 6))
+                if voceMarcata == 1 or voceMarcataOggetto == 1:
+                    messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 2 or voceMarcataOggetto == 2:
+                    messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 3 or voceMarcataOggetto == 3:
+                    messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 4 or voceMarcataOggetto == 4:
+                    messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 5 or voceMarcataOggetto == 5:
+                    messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                GlobalVarG2.schermo.blit(GlobalVarG2.scorriGiu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 14.8))
             if offensivi:
-                if voceMarcata == 1:
-                    messaggio("Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 2:
-                    messaggio("Bomba velenosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 3:
-                    messaggio("Esca", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 4:
-                    messaggio("Bomba appiccicosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                if voceMarcata == 5:
-                    messaggio("Bomba potenziata", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, GlobalVarG2.gpy // 3, 55)
-                GlobalVarG2.schermo.blit(GlobalVarG2.scorriSu, (GlobalVarG2.gpx * 3, (GlobalVarG2.gpy * 5) - (GlobalVarG2.gpy // 2)))
+                if voceMarcata == 1 or voceMarcataOggetto == 1:
+                    messaggio("Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 2 or voceMarcataOggetto == 2:
+                    messaggio("Bomba velenosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 3 or voceMarcataOggetto == 3:
+                    messaggio("Esca", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 4 or voceMarcataOggetto == 4:
+                    messaggio("Bomba appiccicosa", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                if voceMarcata == 5 or voceMarcataOggetto == 5:
+                    messaggio("Bomba potenziata", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                GlobalVarG2.schermo.blit(GlobalVarG2.scorriSu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 13.3))
+
+            # vita-status rallo
+            lungvitatot = int(((GlobalVarG2.gpx * pvtot) / float(4)) // 5)
+            lungvita = (lungvitatot * dati[5]) // pvtot
+            if lungvita < 0:
+                lungvita = 0
+            indvitapers = pygame.transform.scale(GlobalVarG2.indvita, (lungvitatot, GlobalVarG2.gpy // 4))
+            fineindvitapers = pygame.transform.scale(GlobalVarG2.fineindvita, (GlobalVarG2.gpx // 12, GlobalVarG2.gpy // 4))
+            vitaral = pygame.transform.scale(GlobalVarG2.vitapersonaggio, (lungvita, GlobalVarG2.gpy // 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoRallo, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
+            GlobalVarG2.schermo.blit(indvitapers, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy // 18 * 17) + (GlobalVarG2.gpy // 4 * 3)))
+            GlobalVarG2.schermo.blit(fineindvitapers, ((GlobalVarG2.gsx // 32 * 1) + lungvitatot, (GlobalVarG2.gsy // 18 * 17) + (GlobalVarG2.gpy // 4 * 3)))
+            GlobalVarG2.schermo.blit(vitaral, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy // 18 * 17) + (GlobalVarG2.gpy // 4 * 3)))
+            persbat = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+            GlobalVarG2.schermo.blit(persbat, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
+            GlobalVarG2.schermo.blit(GlobalVarG2.perssb, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
+            GlobalVarG2.schermo.blit(GlobalVarG2.imgNumFrecce, (int(GlobalVarG2.gsx // 32 * 1.2), GlobalVarG2.gsy // 18 * 17))
+            messaggio(" x" + str(dati[132]), GlobalVarG2.grigiochi, int(GlobalVarG2.gsx // 32 * 1.8), int(GlobalVarG2.gsy // 18 * 17.2), 40)
+            if dati[121]:
+                GlobalVarG2.schermo.blit(GlobalVarG2.avvelenato, (GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 17))
+            if dati[123] > 0:
+                GlobalVarG2.schermo.blit(GlobalVarG2.attaccopiu, (GlobalVarG2.gsx // 32 * 4, GlobalVarG2.gsy // 18 * 17))
+            if dati[124] > 0:
+                GlobalVarG2.schermo.blit(GlobalVarG2.difesapiu, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 17))
 
             if not risposta:
                 pygame.display.update()
 
         GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
-    return dati, attacco, sposta, animaOggetto, npers
+    return dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio
 
 
 def menuMercante(dati):
@@ -1218,12 +1392,17 @@ def menuMercante(dati):
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         mouseInquadraFrecciaSu = False
         mouseInquadraFrecciaGiu = False
-        if deltaXMouse != 0 or deltaYMouse != 0:
+        suTornaIndietro = False
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if voceMarcata == 0:
+            if GlobalVarG2.gsx // 32 * 21.5 <= xMouse <= GlobalVarG2.gsx and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 2:
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
+                suTornaIndietro = True
+            elif voceMarcata == 0:
                 if GlobalVarG2.gsx // 32 * 10.5 <= xMouse <= GlobalVarG2.gsx // 32 * 21.5:
                     if GlobalVarG2.gsy // 18 * 6 <= yMouse <= GlobalVarG2.gsy // 18 * 6.8:
                         if GlobalVarG2.mouseBloccato:
@@ -1358,8 +1537,10 @@ def menuMercante(dati):
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and oggettonVecchio == oggetton and voceMarcataVecchia == voceMarcata:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    aggiornaInterfacciaPerMouse = True
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 tastop = event.key
                 tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
@@ -1470,7 +1651,7 @@ def menuMercante(dati):
                 tastop = "spazioOsinistroMouse"
 
                 # confermaOggettoDaAcquistare?
-                if voceMarcata == 1:
+                if voceMarcata == 1 and not (event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro):
                     if 0 <= oggetton <= 10 and GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
                         GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.rumoreAcquisto)
                         dati[131] -= GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati
@@ -1564,7 +1745,7 @@ def menuMercante(dati):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         moneteInsufficienti = True
                         procediAllAcquisto = False
-                elif voceMarcata == 2:
+                elif voceMarcata == 2 or (voceMarcata == 1 and event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     voceMarcata = 0
                     numeroOggettiAcquistati = 1
@@ -1596,6 +1777,10 @@ def menuMercante(dati):
                     if confermaOggettoDaAcquistare == 11:
                         yp = GlobalVarG2.gsy // 18 * 16
                     confermaOggettoDaAcquistare = 0
+                    procediAllAcquisto = False
+                elif voceMarcata == 0 and event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    risposta = True
                     procediAllAcquisto = False
 
                 # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
@@ -1685,7 +1870,8 @@ def menuMercante(dati):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if sinistroMouse or centraleMouse or destroMouse:
+            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
@@ -1700,8 +1886,9 @@ def menuMercante(dati):
             if not primoMovimento and (tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 0:
                     if oggetton != 0:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1724,15 +1911,17 @@ def menuMercante(dati):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         numeroOggettiAcquistati = 1
             if tastop == pygame.K_a and voceMarcata != 0:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     xp = xp - GlobalVarG2.gsx // 32 * 4
             if tastop == pygame.K_s:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 0:
                     if oggetton != 11:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1755,8 +1944,9 @@ def menuMercante(dati):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                         numeroOggettiAcquistati = 1
             if tastop == pygame.K_d and voceMarcata != 0:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)

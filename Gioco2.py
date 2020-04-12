@@ -4,12 +4,12 @@ from MenuG2 import *
 from EnvPrintG2 import *
 from MovNemiciRobG2 import *
 from AnimazioniG2 import *
-from NemicoObj import *
 from PersonaggioObj import *
 from FadeToBlackClass import *
 
 
 def gameloop():
+    caricaSalvataggio = False
     inizio = True
     while True:
         if inizio:
@@ -21,15 +21,10 @@ def gameloop():
             rumoreAperturaPorte = 0
             rumoreChiusuraPorte = 0
             animaOggetto = [False, 0, 0]
-            ultimoObbiettivoColco = []
-            obbiettivoCasualeColco = False
             raffreddamento = False
             ricarica1 = False
             ricarica2 = False
             nemicoInquadrato = False
-            raffredda = -1
-            autoRic1 = -1
-            autoRic2 = -1
             spingiColco = False
             apriChiudiPorta = [False, 0, 0]
             apriCofanetto = [False, 0, 0]
@@ -51,17 +46,12 @@ def gameloop():
             xesca = 0
             yesca = 0
             creaesca = False
-            vitaesca = []
-            vettoreDenaro = []
             attacco = 0
             difesa = 0
-            # 1->d , 2->a , 3->w , 4->s
-            npers = 4
-            # 1->d , 2->a , 3->s , 4->w
-            nrob = 3
             nx = 0
             ny = 0
-            dati, porteini, portefin, cofaniini, cofanifin = menu()
+            dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco = menu(caricaSalvataggio)
+            caricaSalvataggio = False
             pers = GlobalVarG2.perss
             robot = GlobalVarG2.robos
             print (dati)
@@ -92,15 +82,21 @@ def gameloop():
             y = dati[3]
             vx = x
             vy = y
-            rx = x
-            ry = y
-            vrx = vx
-            vry = vy
+            # 1->d , 2->a , 3->w , 4->s
+            npers = dati[140]
+            rx = dati[134]
+            ry = dati[135]
+            vrx = rx
+            vry = ry
+            raffredda = dati[136]
+            autoRic1 = dati[137]
+            autoRic2 = dati[138]
+            # 1->d , 2->a , 3->s , 4->w
+            nrob = dati[141]
+            mosseRimasteRob = dati[139]
 
-            stanzeGiaVisitate = []
             listaPersonaggi = []
             listaNemici = []
-            listaNemiciTotali = []
 
             carim = True
             cambiosta = True
@@ -233,7 +229,8 @@ def gameloop():
                 portaOriz = pygame.image.load("Immagini/Paesaggi/PortaO%i.png" % dati[1])
                 portaOriz = pygame.transform.scale(portaOriz, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
-                mosseRimasteRob = 0
+                if not inizio:
+                    mosseRimasteRob = 0
                 nemicoInquadrato = False
                 stanza = dati[1]
                 # fermare la camminata dopo il cambio stanza
@@ -290,10 +287,11 @@ def gameloop():
                 casevistePorteIncluse = casevistePorteIncluse[:]
                 caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
 
-                # eliminare tutte le esche
-                vitaesca = []
-                # elimino tutti i sacchetti di denaro
-                vettoreDenaro = []
+                if not inizio:
+                    # eliminare tutte le esche
+                    vitaesca = []
+                    # elimino tutti i sacchetti di denaro
+                    vettoreDenaro = []
 
                 # cambiosta viene cambiato sopra !!!!!!!!!!!!
                 cambiosta = False
@@ -529,6 +527,12 @@ def gameloop():
             armrob = armrobs
             inizio = False
 
+        if nmost == -1:
+            listaNemiciTotali = []
+            stanzeGiaVisitate = []
+            ultimoObbiettivoColco = []
+            obbiettivoCasualeColco = False
+
         if tastop == 0:
             GlobalVarG2.canaleSoundPassiRallo.stop()
             nx = 0
@@ -558,7 +562,7 @@ def gameloop():
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif GlobalVarG2.gsy // 18 * 0 <= yMouse <= GlobalVarG2.gsy // 18 * 1.5 and GlobalVarG2.gsx // 32 * 28 <= xMouse <= GlobalVarG2.gsx // 32 * 30:
+            elif 0 <= yMouse <= GlobalVarG2.gsy // 18 * 1.5 and GlobalVarG2.gsx // 32 * 27.8 < xMouse <= GlobalVarG2.gsx // 32 * 30.2:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
@@ -602,7 +606,7 @@ def gameloop():
                             inquadratoQualcosa = "movimento:" + str(casevistePorteIncluse[i]) + ":" + str(casevistePorteIncluse[i + 1])
                             break
                         i += 3
-        if not inquadratoQualcosa:
+        if not inquadratoQualcosa and GlobalVarG2.mouseVisibile:
             GlobalVarG2.canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
@@ -638,8 +642,9 @@ def gameloop():
                 quit()
 
             if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti and not tastoTrovato and not startf:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 movimentoPerMouse = False
                 tastop = event.key
                 # movimenti personaggio
@@ -1131,6 +1136,79 @@ def gameloop():
                     posizPersonaggioInVettore = int(inquadratoQualcosaList[1])
                     personaggio = listaPersonaggi[posizPersonaggioInVettore]
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    # giro il Rallo verso il personaggio e viceversa
+                    if personaggio.x == x + GlobalVarG2.gpx and personaggio.y == y:
+                        npers = 1
+                    if personaggio.x == x - GlobalVarG2.gpx and personaggio.y == y:
+                        npers = 2
+                    if personaggio.x == x and personaggio.y == y + GlobalVarG2.gpy:
+                        npers = 4
+                    if personaggio.x == x and personaggio.y == y - GlobalVarG2.gpy:
+                        npers = 3
+                    if npers == 3:
+                        pers = GlobalVarG2.persw
+                        arma = armaw
+                        armaMov1 = armawMov1
+                        armaMov2 = armawMov2
+                        armaAttacco = armawAttacco
+                        armatura = armaturaw
+                        scudo = scudow
+                        arco = arcow
+                        faretra = faretraw
+                        arcoAttacco = arcowAttacco
+                        guanti = guantiw
+                        guantiMov1 = guantiwMov1
+                        guantiMov2 = guantiwMov2
+                        guantiAttacco = guantiwAttacco
+                        collana = collanaw
+                    if npers == 2:
+                        pers = GlobalVarG2.persa
+                        arma = armaa
+                        armaMov1 = armaaMov1
+                        armaMov2 = armaaMov2
+                        armaAttacco = armaaAttacco
+                        armatura = armaturaa
+                        scudo = scudoa
+                        arco = arcoa
+                        faretra = faretraa
+                        arcoAttacco = arcoaAttacco
+                        guanti = guantia
+                        guantiMov1 = guantiaMov1
+                        guantiMov2 = guantiaMov2
+                        guantiAttacco = guantiaAttacco
+                        collana = collanaa
+                    if npers == 4:
+                        pers = GlobalVarG2.perss
+                        arma = armas
+                        armaMov1 = armasMov1
+                        armaMov2 = armasMov2
+                        armaAttacco = armasAttacco
+                        armatura = armaturas
+                        scudo = scudos
+                        arco = arcos
+                        faretra = faretras
+                        arcoAttacco = arcosAttacco
+                        guanti = guantis
+                        guantiMov1 = guantisMov1
+                        guantiMov2 = guantisMov2
+                        guantiAttacco = guantisAttacco
+                        collana = collanas
+                    if npers == 1:
+                        pers = GlobalVarG2.persd
+                        arma = armad
+                        armaMov1 = armadMov1
+                        armaMov2 = armadMov2
+                        armaAttacco = armadAttacco
+                        armatura = armaturad
+                        scudo = scudod
+                        arco = arcod
+                        faretra = faretrad
+                        arcoAttacco = arcodAttacco
+                        guanti = guantid
+                        guantiMov1 = guantidMov1
+                        guantiMov2 = guantidMov2
+                        guantiAttacco = guantidAttacco
+                        collana = collanad
                     if npers == 1:
                         personaggio.girati("a")
                     elif npers == 2:
@@ -1146,7 +1224,7 @@ def gameloop():
                     movimentoPerMouse = True
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if sinistroMouse or centraleMouse or destroMouse:
+            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
 
@@ -1323,77 +1401,82 @@ def gameloop():
             dati[2] = x
             dati[3] = y
             if not apriocchio:
-                dati, inizio, attacco = start(dati, nmost, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, apriocchio)
+                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                if caricaSalvataggio:
+                    inizio = True
                 if attacco == 0:
                     uscitoDaMenu = 2
             else:
-                dati, attacco, sposta, animaOggetto, npers = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry)
-                # cambiare posizione dopo l'uso di caricabatterie
-                if npers == 3:
-                    pers = GlobalVarG2.persw
-                    arma = armaw
-                    armaMov1 = armawMov1
-                    armaMov2 = armawMov2
-                    armaAttacco = armawAttacco
-                    armatura = armaturaw
-                    scudo = scudow
-                    arco = arcow
-                    faretra = faretraw
-                    arcoAttacco = arcowAttacco
-                    guanti = guantiw
-                    guantiMov1 = guantiwMov1
-                    guantiMov2 = guantiwMov2
-                    guantiAttacco = guantiwAttacco
-                    collana = collanaw
-                if npers == 2:
-                    pers = GlobalVarG2.persa
-                    arma = armaa
-                    armaMov1 = armaaMov1
-                    armaMov2 = armaaMov2
-                    armaAttacco = armaaAttacco
-                    armatura = armaturaa
-                    scudo = scudoa
-                    arco = arcoa
-                    faretra = faretraa
-                    arcoAttacco = arcoaAttacco
-                    guanti = guantia
-                    guantiMov1 = guantiaMov1
-                    guantiMov2 = guantiaMov2
-                    guantiAttacco = guantiaAttacco
-                    collana = collanaa
-                if npers == 4:
-                    pers = GlobalVarG2.perss
-                    arma = armas
-                    armaMov1 = armasMov1
-                    armaMov2 = armasMov2
-                    armaAttacco = armasAttacco
-                    armatura = armaturas
-                    scudo = scudos
-                    arco = arcos
-                    faretra = faretras
-                    arcoAttacco = arcosAttacco
-                    guanti = guantis
-                    guantiMov1 = guantisMov1
-                    guantiMov2 = guantisMov2
-                    guantiAttacco = guantisAttacco
-                    collana = collanas
-                if npers == 1:
-                    pers = GlobalVarG2.persd
-                    arma = armad
-                    armaMov1 = armadMov1
-                    armaMov2 = armadMov2
-                    armaAttacco = armadAttacco
-                    armatura = armaturad
-                    scudo = scudod
-                    arco = arcod
-                    faretra = faretrad
-                    arcoAttacco = arcodAttacco
-                    guanti = guantid
-                    guantiMov1 = guantidMov1
-                    guantiMov2 = guantidMov2
-                    guantiAttacco = guantidAttacco
-                    collana = collanad
-                caricaTutto = True
+                dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, inizio, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                if caricaSalvataggio:
+                    inizio = True
+                else:
+                    # cambiare posizione dopo l'uso di caricabatterie
+                    if npers == 3:
+                        pers = GlobalVarG2.persw
+                        arma = armaw
+                        armaMov1 = armawMov1
+                        armaMov2 = armawMov2
+                        armaAttacco = armawAttacco
+                        armatura = armaturaw
+                        scudo = scudow
+                        arco = arcow
+                        faretra = faretraw
+                        arcoAttacco = arcowAttacco
+                        guanti = guantiw
+                        guantiMov1 = guantiwMov1
+                        guantiMov2 = guantiwMov2
+                        guantiAttacco = guantiwAttacco
+                        collana = collanaw
+                    if npers == 2:
+                        pers = GlobalVarG2.persa
+                        arma = armaa
+                        armaMov1 = armaaMov1
+                        armaMov2 = armaaMov2
+                        armaAttacco = armaaAttacco
+                        armatura = armaturaa
+                        scudo = scudoa
+                        arco = arcoa
+                        faretra = faretraa
+                        arcoAttacco = arcoaAttacco
+                        guanti = guantia
+                        guantiMov1 = guantiaMov1
+                        guantiMov2 = guantiaMov2
+                        guantiAttacco = guantiaAttacco
+                        collana = collanaa
+                    if npers == 4:
+                        pers = GlobalVarG2.perss
+                        arma = armas
+                        armaMov1 = armasMov1
+                        armaMov2 = armasMov2
+                        armaAttacco = armasAttacco
+                        armatura = armaturas
+                        scudo = scudos
+                        arco = arcos
+                        faretra = faretras
+                        arcoAttacco = arcosAttacco
+                        guanti = guantis
+                        guantiMov1 = guantisMov1
+                        guantiMov2 = guantisMov2
+                        guantiAttacco = guantisAttacco
+                        collana = collanas
+                    if npers == 1:
+                        pers = GlobalVarG2.persd
+                        arma = armad
+                        armaMov1 = armadMov1
+                        armaMov2 = armadMov2
+                        armaAttacco = armadAttacco
+                        armatura = armaturad
+                        scudo = scudod
+                        arco = arcod
+                        faretra = faretrad
+                        arcoAttacco = arcodAttacco
+                        guanti = guantid
+                        guantiMov1 = guantidMov1
+                        guantiMov2 = guantidMov2
+                        guantiAttacco = guantidAttacco
+                        collana = collanad
+                    caricaTutto = True
             carim = True
             startf = False
 

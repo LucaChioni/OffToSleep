@@ -72,9 +72,9 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
 
     # vista nemici
     if apriocchio:
-        GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+        GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
     else:
-        GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+        GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
 
     # chiave robo
     if chiamarob:
@@ -193,7 +193,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     GlobalVarG2.schermo.blit(persbat, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
     GlobalVarG2.schermo.blit(GlobalVarG2.perssb, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
     GlobalVarG2.schermo.blit(GlobalVarG2.imgNumFrecce, (int(GlobalVarG2.gsx // 32 * 1.2), GlobalVarG2.gsy // 18 * 17))
-    messaggio("x " + str(numFrecce), GlobalVarG2.grigiochi, int(GlobalVarG2.gsx // 32 * 1.8), int(GlobalVarG2.gsy // 18 * 17.2), 40)
+    messaggio(" x" + str(numFrecce), GlobalVarG2.grigiochi, int(GlobalVarG2.gsx // 32 * 1.8), int(GlobalVarG2.gsy // 18 * 17.2), 40)
     if avvele:
         GlobalVarG2.schermo.blit(GlobalVarG2.avvelenato, (GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 17))
     if attp > 0:
@@ -435,9 +435,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
     # vista nemici
     if apriocchio:
-        GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+        GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
     else:
-        GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+        GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
 
     # chiave robo
     if chiamarob:
@@ -550,6 +550,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     sposta = False
     interagisciConPersonaggio = False
     attaccoConfermato = False
+    primoFrame = True
     while not risposta:
         if xp != xvp or yp != yvp:
             appenaCaricato = False
@@ -582,7 +583,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        if deltaXMouse != 0 or deltaYMouse != 0:
+        cursoreSuSoggettoInquadrato = False
+        if deltaXMouse != 0 or deltaYMouse != 0 or (primoFrame and GlobalVarG2.mouseVisibile):
             if not GlobalVarG2.mouseVisibile:
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -591,7 +593,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             while i < len(caseviste):
                 if caseviste[i] < xMouse < caseviste[i] + GlobalVarG2.gpx and caseviste[i + 1] < yMouse < caseviste[i + 1] + GlobalVarG2.gpy and caseviste[i + 2]:
                     if xp != caseviste[i] or yp != caseviste[i + 1]:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                        if not primoFrame:
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
                         xp = xMouse - (xMouse % GlobalVarG2.gpx)
                         yp = yMouse - (yMouse % GlobalVarG2.gpy)
                     casellaTrovata = True
@@ -605,7 +608,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             j = 0
                             while j < len(caseviste):
                                 if ((cofanetti[i + 1] + GlobalVarG2.gpx == caseviste[j] and cofanetti[i + 2] == caseviste[j + 1]) or (cofanetti[i + 1] - GlobalVarG2.gpx == caseviste[j] and cofanetti[i + 2] == caseviste[j + 1]) or (cofanetti[i + 1] == caseviste[j] and cofanetti[i + 2] + GlobalVarG2.gpy == caseviste[j + 1]) or (cofanetti[i + 1] == caseviste[j] and cofanetti[i + 2] - GlobalVarG2.gpy == caseviste[j + 1])) and caseviste[j + 2]:
-                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                                    if not primoFrame:
+                                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
                                     xp = xMouse - (xMouse % GlobalVarG2.gpx)
                                     yp = yMouse - (yMouse % GlobalVarG2.gpy)
                                     break
@@ -622,7 +626,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             while j < len(caseviste):
                                 if ((porte[i + 1] + GlobalVarG2.gpx == caseviste[j] and porte[i + 2] == caseviste[j + 1]) or (porte[i + 1] - GlobalVarG2.gpx == caseviste[j] and porte[i + 2] == caseviste[j + 1]) or (porte[i + 1] == caseviste[j] and porte[i + 2] + GlobalVarG2.gpy == caseviste[j + 1]) or (porte[i + 1] == caseviste[j] and porte[i + 2] - GlobalVarG2.gpy == caseviste[j + 1])) and caseviste[j + 2]:
                                     puntaPorta = True
-                                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                                    if not primoFrame:
+                                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
                                     xp = xMouse - (xMouse % GlobalVarG2.gpx)
                                     yp = yMouse - (yMouse % GlobalVarG2.gpy)
                                     break
@@ -648,7 +653,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif GlobalVarG2.gsy // 18 * 0 < yMouse < GlobalVarG2.gsy // 18 * 1.5 and GlobalVarG2.gsx // 32 * 28 < xMouse < GlobalVarG2.gsx // 32 * 30:
+            elif 0 <= yMouse <= GlobalVarG2.gsy // 18 * 1.5 and GlobalVarG2.gsx // 32 * 27.8 < xMouse <= GlobalVarG2.gsx // 32 * 30.2:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
@@ -656,7 +661,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "Rallo"
-            elif ry < yMouse < ry + GlobalVarG2.gpy and rx < xMouse < rx + GlobalVarG2.gpx:
+            elif ry < yMouse < ry + GlobalVarG2.gpy and rx < xMouse < rx + GlobalVarG2.gpx and ((rx == x + GlobalVarG2.gpx and ry == y) or (rx == x - GlobalVarG2.gpx and ry == y) or (rx == x and ry == y + GlobalVarG2.gpy) or (rx == x and ry == y - GlobalVarG2.gpy)):
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "Colco"
@@ -693,10 +698,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     for nemico in listaNemiciVisti:
                         if nemico.x < xMouse < nemico.x + GlobalVarG2.gpx and nemico.y < yMouse < nemico.y + GlobalVarG2.gpy:
                             if nemicoInquadrato and type(nemicoInquadrato) is not str and nemico.x == nemicoInquadrato.x and nemico.y == nemicoInquadrato.y:
+                                cursoreSuSoggettoInquadrato = True
                                 j = 0
                                 while j < len(caseattactot):
                                     if caseattactot[j] == nemico.x and caseattactot[j + 1] == nemico.y:
-                                        if caseattactot[j + 2]:
+                                        if caseattactot[j + 2] and ((abs(nemico.x - x) <= GlobalVarG2.gpx and abs(nemico.y - y) <= GlobalVarG2.gpy and not abs(nemico.x - x) == abs(nemico.y - y)) or numFrecce > 0):
                                             if GlobalVarG2.mouseBloccato:
                                                 GlobalVarG2.configuraCursore(False)
                                             inquadratoQualcosa = "nemico"
@@ -719,15 +725,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         if vitaesca[i + 2] < xMouse < vitaesca[i + 2] + GlobalVarG2.gpx and vitaesca[i + 3] < yMouse < vitaesca[i + 3] + GlobalVarG2.gpy:
                             if nemicoInquadrato and type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
                                 idEscaInquadrata = int(nemicoInquadrato[4:])
-                                j = 0
-                                while j < len(vitaesca):
-                                    if idEscaInquadrata == vitaesca[j]:
-                                        if not (vitaesca[i + 2] == vitaesca[j + 2] and vitaesca[i + 3] == vitaesca[j + 3]):
-                                            if GlobalVarG2.mouseBloccato:
-                                                GlobalVarG2.configuraCursore(False)
-                                            inquadratoQualcosa = "esca"
-                                        break
-                                    j += 4
+                                if idEscaInquadrata != vitaesca[i]:
+                                    if GlobalVarG2.mouseBloccato:
+                                        GlobalVarG2.configuraCursore(False)
+                                    inquadratoQualcosa = "esca"
+                                else:
+                                    cursoreSuSoggettoInquadrato = True
                             else:
                                 if GlobalVarG2.mouseBloccato:
                                     GlobalVarG2.configuraCursore(False)
@@ -747,6 +750,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if not inquadratoQualcosa:
             if not GlobalVarG2.mouseBloccato:
                 GlobalVarG2.configuraCursore(True)
+        primoFrame = False
 
         for event in pygame.event.get():
             sinistroMouseVecchio = sinistroMouse
@@ -767,8 +771,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 # esci
                 if event.key == pygame.K_q:
                     risposta = True
@@ -993,9 +998,13 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
             if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not startf:
                 tastop = "mouseDestro"
-                risposta = True
                 sposta = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                if cursoreSuSoggettoInquadrato:
+                    nemicoInquadrato = False
+                    ricaricaschermo = True
+                else:
+                    risposta = True
             if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not startf:
                 tastop = "mouseCentrale"
                 risposta = True
@@ -1004,6 +1013,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and not startf:
                 tastop = "mouseSinistro"
                 if inquadratoQualcosa == "start":
+                    risposta = True
+                    sposta = False
                     startf = True
                 elif inquadratoQualcosa == "battaglia":
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
@@ -1083,7 +1094,8 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         attaccoConfermato = True
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if sinistroMouse or centraleMouse or destroMouse:
+            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP:
@@ -1490,9 +1502,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             GlobalVarG2.schermo.blit(GlobalVarG2.sfochiaveocchio, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 5), 0))
             # vista nemici
             if apriocchio:
-                GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+                GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
             else:
-                GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+                GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
             # chiave robo
             if chiamarob:
                 GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
@@ -1842,9 +1854,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         GlobalVarG2.schermo.blit(GlobalVarG2.sfochiaveocchio, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 5), 0))
         # vista nemici
         if apriocchio:
-            GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+            GlobalVarG2.schermo.blit(GlobalVarG2.occhioape, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
         else:
-            GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4 // 3), GlobalVarG2.gpy // 3))
+            GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
         # chiave robo
         if chiamarob:
             GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
@@ -1867,7 +1879,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         GlobalVarG2.schermo.blit(persbat, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
         GlobalVarG2.schermo.blit(GlobalVarG2.perssb, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
         GlobalVarG2.schermo.blit(GlobalVarG2.imgNumFrecce, (int(GlobalVarG2.gsx // 32 * 1.2), GlobalVarG2.gsy // 18 * 17))
-        messaggio("x " + str(numFrecce), GlobalVarG2.grigiochi, int(GlobalVarG2.gsx // 32 * 1.8), int(GlobalVarG2.gsy // 18 * 17.2), 40)
+        messaggio(" x" + str(numFrecce), GlobalVarG2.grigiochi, int(GlobalVarG2.gsx // 32 * 1.8), int(GlobalVarG2.gsy // 18 * 17.2), 40)
         if avvele:
             GlobalVarG2.schermo.blit(GlobalVarG2.avvelenato, (GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 17))
         if attp > 0:

@@ -130,8 +130,9 @@ def guardaVideo(path, audio=0):
                     quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse)):
                     if event.type == pygame.KEYDOWN:
-                        pygame.mouse.set_visible(False)
-                        GlobalVarG2.mouseVisibile = False
+                        if GlobalVarG2.mouseVisibile:
+                            pygame.mouse.set_visible(False)
+                            GlobalVarG2.mouseVisibile = False
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     if audio != 0:
                         GlobalVarG2.canaleSoundCanzone.stop()
@@ -142,51 +143,6 @@ def guardaVideo(path, audio=0):
     if audio != 0:
         GlobalVarG2.canaleSoundCanzone.stop()
     return False
-
-
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti):
-    scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
-    # conversione della posizione in caselle
-    dati[2] = dati[2] // GlobalVarG2.gpx
-    dati[3] = dati[3] // GlobalVarG2.gpy
-    i = porteini
-    while i <= portefin:
-        j = 0
-        while j < len(porte):
-            if dati[i] == porte[j] and dati[i + 1] == porte[j + 1] and dati[i + 2] == porte[j + 2]:
-                dati[i + 3] = porte[j + 3]
-            j = j + 4
-        dati[i + 1] = dati[i + 1] // GlobalVarG2.gpx
-        dati[i + 2] = dati[i + 2] // GlobalVarG2.gpy
-        i = i + 4
-    i = cofaniini
-    while i <= cofanifin:
-        j = 0
-        while j < len(cofanetti):
-            if dati[i] == cofanetti[j] and dati[i + 1] == cofanetti[j + 1] and dati[i + 2] == cofanetti[j + 2]:
-                dati[i + 3] = cofanetti[j + 3]
-            j = j + 4
-        dati[i + 1] = dati[i + 1] // GlobalVarG2.gpx
-        dati[i + 2] = dati[i + 2] // GlobalVarG2.gpy
-        i = i + 4
-
-    for i in range(0, len(dati)):
-        scrivi.write("%i_" % dati[i])
-    scrivi.close()
-
-    # conversione della posizione in pixel
-    dati[2] = dati[2] * GlobalVarG2.gpx
-    dati[3] = dati[3] * GlobalVarG2.gpy
-    i = porteini
-    while i <= portefin:
-        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-        i = i + 4
-    i = cofaniini
-    while i <= cofanifin:
-        dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-        dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-        i = i + 4
 
 
 def oggetto(x, y, dimx, dimy, px, py, nx, ny):
@@ -2343,8 +2299,9 @@ def controllaMorteRallo(vitaRallo, inizio):
                     quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse)):
                     if event.type == pygame.KEYDOWN:
-                        pygame.mouse.set_visible(False)
-                        GlobalVarG2.mouseVisibile = False
+                        if GlobalVarG2.mouseVisibile:
+                            pygame.mouse.set_visible(False)
+                            GlobalVarG2.mouseVisibile = False
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     continua = True
         inizio = True
@@ -2679,8 +2636,10 @@ def dialoga(y, avanzamentoStoria, personaggio):
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    aggiornaInterfacciaPerMouse = True
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
                 if event.key == pygame.K_q and not tastoTrovato:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     tastoTrovato = True
@@ -2739,7 +2698,8 @@ def dialoga(y, avanzamentoStoria, personaggio):
                     prosegui = True
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if sinistroMouse or centraleMouse or destroMouse:
+            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
         if (prosegui or aggiornaInterfacciaPerMouse) and not fineDialogo:
@@ -2751,10 +2711,6 @@ def dialoga(y, avanzamentoStoria, personaggio):
                 puntatoreSpostato = False
             if y > GlobalVarG2.gsy // 2:
                 GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSopra, (0, 0))
-                if GlobalVarG2.mouseVisibile:
-                    messaggio("Tasto destro: esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, GlobalVarG2.gsy // 18 * 1, 50)
-                else:
-                    messaggio("Q: esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 28, GlobalVarG2.gsy // 18 * 1, 50)
                 messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 4 // 5, 80)
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
                     messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
@@ -2783,10 +2739,6 @@ def dialoga(y, avanzamentoStoria, personaggio):
                         riga += GlobalVarG2.gpy * 4 // 5
             else:
                 GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSotto, (0, GlobalVarG2.gsy * 2 // 3))
-                if GlobalVarG2.mouseVisibile:
-                    messaggio("Tasto destro: esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 25, (GlobalVarG2.gsy * 2 // 3) + GlobalVarG2.gpy, 50)
-                else:
-                    messaggio("Q: esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 28, (GlobalVarG2.gsy * 2 // 3) + GlobalVarG2.gpy, 50)
                 messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
                     messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
@@ -2856,8 +2808,9 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                 risposta = True
             if event.type == pygame.KEYDOWN:
-                pygame.mouse.set_visible(False)
-                GlobalVarG2.mouseVisibile = False
+                if GlobalVarG2.mouseVisibile:
+                    pygame.mouse.set_visible(False)
+                    GlobalVarG2.mouseVisibile = False
 
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)

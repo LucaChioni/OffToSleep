@@ -216,8 +216,9 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                         risposta = True
                         aumentoliv -= 1
                     if event.type == pygame.KEYDOWN:
-                        pygame.mouse.set_visible(False)
-                        GlobalVarG2.mouseVisibile = False
+                        if GlobalVarG2.mouseVisibile:
+                            pygame.mouse.set_visible(False)
+                            GlobalVarG2.mouseVisibile = False
 
         caricaTutto = True
         movimentoPerMouse = False
@@ -1058,7 +1059,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
         GlobalVarG2.schermo.blit(persbat, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
         GlobalVarG2.schermo.blit(GlobalVarG2.perssb, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 17))
         GlobalVarG2.schermo.blit(GlobalVarG2.imgNumFrecce, (int(GlobalVarG2.gsx // 32 * 1.2), GlobalVarG2.gsy // 18 * 17))
-        messaggio("x " + str(dati[132]), GlobalVarG2.grigiochi, int(GlobalVarG2.gsx // 32 * 1.8), int(GlobalVarG2.gsy // 18 * 17.2), 40)
+        messaggio(" x" + str(dati[132]), GlobalVarG2.grigiochi, int(GlobalVarG2.gsx // 32 * 1.8), int(GlobalVarG2.gsy // 18 * 17.2), 40)
         if velenoRallo:
             GlobalVarG2.schermo.blit(GlobalVarG2.avvelenato, (GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 17))
         if attPRallo > 0:
@@ -1501,8 +1502,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     risposta = True
                 if event.type == pygame.KEYDOWN:
-                    pygame.mouse.set_visible(False)
-                    GlobalVarG2.mouseVisibile = False
+                    if GlobalVarG2.mouseVisibile:
+                        pygame.mouse.set_visible(False)
+                        GlobalVarG2.mouseVisibile = False
         movimentoPerMouse = False
         caricaTutto = True
         tesoro = -1
@@ -1538,8 +1540,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     risposta = True
                 if event.type == pygame.KEYDOWN:
-                    pygame.mouse.set_visible(False)
-                    GlobalVarG2.mouseVisibile = False
+                    if GlobalVarG2.mouseVisibile:
+                        pygame.mouse.set_visible(False)
+                        GlobalVarG2.mouseVisibile = False
         movimentoPerMouse = False
         caricaTutto = True
         tastop = 0

@@ -61,12 +61,15 @@ grigiochi = (230, 230, 230)
 bianco = (255, 255, 255)
 rosso = (255, 130, 0)
 verde = (130, 255, 0)
-verdescu = (0, 120, 0)
+verdeScuro = (80, 100, 80)
+verdeScuroPiuScuro = (70, 90, 70)
 blu = (0, 0, 255)
-rossoScuro = (120, 80, 80)
-rossoScuroPiuScuro = (100, 70, 70)
+bluScuro = (80, 80, 90)
+bluScuroPiuScuro = (70, 70, 80)
+rossoScuro = (100, 80, 80)
+rossoScuroPiuScuro = (90, 70, 70)
 
-linguaImpostata = "italiano"
+linguaImpostata = "inglese"
 
 # dichiaro le variabili globali della funzione loadImg
 global puntatore
@@ -232,6 +235,9 @@ global puntatoreImpostazioniDestra
 global puntatoreImpostazioniSinistra
 global puntatoreImpostazioniDestraBloccato
 global puntatoreImpostazioniSinistraBloccato
+global tutorialTastieraInGioco
+global tutorialTastieraInMenu
+global tutorialMouse
 
 def loadImg():
     global puntatore
@@ -397,6 +403,9 @@ def loadImg():
     global puntatoreImpostazioniSinistra
     global puntatoreImpostazioniDestraBloccato
     global puntatoreImpostazioniSinistraBloccato
+    global tutorialTastieraInGioco
+    global tutorialTastieraInMenu
+    global tutorialMouse
 
     # puntatore
     puntatoreorigi = pygame.image.load("Immagini/Puntatori/Puntatore.png")
@@ -549,7 +558,7 @@ def loadImg():
     sfondosta = pygame.image.load('Immagini/Status/SfondoEsche.png')
     sfondoEsche = pygame.transform.scale(sfondosta, (gpx, gpy))
     sfondoStartBattaglia = pygame.image.load('Immagini/Oggetti/SfondoStartBattaglia.png')
-    sfondoStartBattaglia = pygame.transform.scale(sfondoStartBattaglia, (gpx * 7, gpy * 7))
+    sfondoStartBattaglia = pygame.transform.scale(sfondoStartBattaglia, (gpx * 7, gpy * 10))
     sfondoStatAumentata = pygame.image.load('Immagini/Levelup/SfondoStatisticaAumentata.png')
     sfondoStatAumentata = pygame.transform.scale(sfondoStatAumentata, (gpx * 7, gpy * 7))
     sfondoTriangolinoAltoDestra = pygame.image.load('Immagini/DecorazioniMenu/TriangoloAltoDestra.png')
@@ -792,6 +801,14 @@ def loadImg():
     sfondoDialoghiSopra = pygame.transform.scale(sfondoDialoghiSopra, (gsx, gsy // 3))
     sfondoDialoghiSotto = pygame.image.load('Immagini/Dialoghi/SfondoSotto.png')
     sfondoDialoghiSotto = pygame.transform.scale(sfondoDialoghiSotto, (gsx, gsy // 3))
+
+    # img tutorial
+    tutorialTastieraInGioco = pygame.image.load('Immagini/Tutorial/TastieraInGioco.png')
+    tutorialTastieraInGioco = pygame.transform.scale(tutorialTastieraInGioco, (gsx // 32 * 7, gsy // 18 * 11))
+    tutorialTastieraInMenu = pygame.image.load('Immagini/Tutorial/TastieraInMenu.png')
+    tutorialTastieraInMenu = pygame.transform.scale(tutorialTastieraInMenu, (gsx // 32 * 7, gsy // 18 * 11))
+    tutorialMouse = pygame.image.load('Immagini/Tutorial/Mouse.png')
+    tutorialMouse = pygame.transform.scale(tutorialMouse, (gsx // 32 * 7, gsy // 18 * 11))
 
 loadImg()
 # img grafiche

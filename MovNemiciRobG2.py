@@ -1528,10 +1528,13 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                         if obbiettivoCasualeColco:
                             for nemico in nemiciVistiDaColco:
                                 if nemico.x == obbiettivoCasualeColco.x and nemico.y == obbiettivoCasualeColco.y:
-                                    nemicoBersaglio = nemico
+                                    nemicoBersaglio = obbiettivoCasualeColco
                                     break
-                        if not nemicoBersaglio and len(nemiciVistiDaColco) > 0:
+                        elif not nemicoBersaglio and len(nemiciVistiDaColco) > 0:
                             nemicoBersaglio = nemiciVistiDaColco[random.randint(0, (len(nemiciVistiDaColco) - 1))]
+                            obbiettivoCasualeColco = nemicoBersaglio
+                        else:
+                            obbiettivoCasualeColco = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabili, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi)
@@ -1543,6 +1546,8 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                                 ultimoObbiettivoColco.append(nemicoBersaglio.y)
                             else:
                                 ultimoObbiettivoColco = []
+                            if len(attaccoDiColco) > 0:
+                                obbiettivoCasualeColco = False
                     # nemico vicino
                     if dati[i] == 12:
                         distMin = False
