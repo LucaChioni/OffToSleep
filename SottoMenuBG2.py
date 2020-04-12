@@ -347,29 +347,29 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 15.5))
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoSinistra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 15.5))
             if cosa == 1:
-                messaggio("Recupera momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.2, GlobalVarG2.gsy // 18 * 4.3, 100)
+                messaggio("Carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.5, GlobalVarG2.gsy // 18 * 4.3, 100)
                 if GlobalVarG2.mouseVisibile:
-                    messaggio("Tasto centrale: cancella momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
+                    messaggio("Tasto centrale: cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
                 else:
-                    messaggio("SHIFT: cancella momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
+                    messaggio("SHIFT: cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
             if cosa == 2:
-                messaggio("Cancella momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.2, GlobalVarG2.gsy // 18 * 4.3, 100)
+                messaggio("Cancella partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.5, GlobalVarG2.gsy // 18 * 4.3, 100)
                 if possibileSalvare:
                     if GlobalVarG2.mouseVisibile:
-                        messaggio("Tasto centrale: fissa momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
+                        messaggio("Tasto centrale: salva partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
                     else:
-                        messaggio("SHIFT: fissa momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
+                        messaggio("SHIFT: salva partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
                 else:
                     if GlobalVarG2.mouseVisibile:
-                        messaggio("Tasto centrale: recupera momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
+                        messaggio("Tasto centrale: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
                     else:
-                        messaggio("SHIFT: recupera momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
+                        messaggio("SHIFT: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
             if cosa == 3:
-                messaggio("Fissa momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.2, GlobalVarG2.gsy // 18 * 4.3, 100)
+                messaggio("Salva partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.5, GlobalVarG2.gsy // 18 * 4.3, 100)
                 if GlobalVarG2.mouseVisibile:
-                    messaggio("Tasto centrale: recupera momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
+                    messaggio("Tasto centrale: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 12, GlobalVarG2.gsy // 18 * 1, 50)
                 else:
-                    messaggio("SHIFT: recupera momento", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
+                    messaggio("SHIFT: carica partita", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, GlobalVarG2.gsy // 18 * 1, 50)
             if conferma:
                 if primaconf:
                     vxp = xp

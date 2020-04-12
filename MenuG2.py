@@ -342,7 +342,7 @@ def menu(caricaSalvataggio):
                 GlobalVarG2.schermo.blit(persomenuinizio, (GlobalVarG2.gpx * 15, 0))
                 GlobalVarG2.schermo.blit(robomenuinizio, (GlobalVarG2.gpx * 3, 0))
                 messaggio("Inizia", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 2, 90)
-                messaggio("Momenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 4.5, 90)
+                messaggio("Salvataggi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 4.5, 90)
                 messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 7, 90)
                 messaggio("Esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 12, 90)
 
@@ -729,7 +729,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 50)
             messaggio("Mappa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 50)
             messaggio("Diario", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 50)
-            messaggio("Momenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
+            messaggio("Salvataggi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
             messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
             messaggio("Esci dal gioco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
             if GlobalVarG2.mouseVisibile:
@@ -1224,7 +1224,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                 voceMarcataOggetto = voceMarcata
 
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoStartBattaglia, (0, GlobalVarG2.gsy // 18 * 8))
-            messaggio("Momenti", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 0.7), int(GlobalVarG2.gpy * 16.05), 45)
+            messaggio("Salvataggi", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 0.7), int(GlobalVarG2.gpy * 16.05), 45)
             pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (int(GlobalVarG2.gpx * 3.8), int(GlobalVarG2.gpy * 15.8)), (int(GlobalVarG2.gpx * 3.8), int(GlobalVarG2.gpy * 16.8)), 2)
             messaggio("Esci", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 4.5), int(GlobalVarG2.gpy * 16.05), 45)
             if difensivi:
