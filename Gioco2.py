@@ -5,7 +5,6 @@ from EnvPrintG2 import *
 from MovNemiciRobG2 import *
 from AnimazioniG2 import *
 from PersonaggioObj import *
-from FadeToBlackClass import *
 
 
 def gameloop():
@@ -905,7 +904,7 @@ def gameloop():
                             elif npers == 4:
                                 personaggio.girati("w")
                             disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu)
-                            dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(y, dati[0], personaggio)
+                            dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(x, y, dati[0], personaggio)
                             caricaTutto = True
                 if event.key == pygame.K_ESCAPE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
@@ -1218,7 +1217,7 @@ def gameloop():
                     elif npers == 4:
                         personaggio.girati("w")
                     disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu)
-                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(y, dati[0], personaggio)
+                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(x, y, dati[0], personaggio)
                     caricaTutto = True
                 elif inquadratoQualcosa.startswith("movimento"):
                     movimentoPerMouse = True
@@ -1252,7 +1251,7 @@ def gameloop():
             dati[121] = False
             aumentoliv = 0
 
-        if inquadratoQualcosa and inquadratoQualcosa.startswith("movimento") and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not impossibileCliccarePulsanti and not startf:
+        if inquadratoQualcosa and (inquadratoQualcosa.startswith("movimento") or inquadratoQualcosa.startswith("personaggio")) and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not impossibileCliccarePulsanti and not startf:
             vetNemiciSoloConXeY = []
             if not (x == rx and y == ry):
                 vetNemiciSoloConXeY.append(rx)
@@ -1263,9 +1262,14 @@ def gameloop():
             for personaggio in listaPersonaggi:
                 vetNemiciSoloConXeY.append(personaggio.x)
                 vetNemiciSoloConXeY.append(personaggio.y)
-            inquadratoQualcosaList = inquadratoQualcosa.split(":")
-            xObbiettivo = int(inquadratoQualcosaList[1])
-            yObbiettivo = int(inquadratoQualcosaList[2])
+            if inquadratoQualcosa.startswith("movimento"):
+                inquadratoQualcosaList = inquadratoQualcosa.split(":")
+                xObbiettivo = int(inquadratoQualcosaList[1])
+                yObbiettivo = int(inquadratoQualcosaList[2])
+            elif inquadratoQualcosa.startswith("personaggio"):
+                inquadratoQualcosaList = inquadratoQualcosa.split(":")
+                xObbiettivo = listaPersonaggi[int(inquadratoQualcosaList[1])].x
+                yObbiettivo = listaPersonaggi[int(inquadratoQualcosaList[1])].y
             if x == xObbiettivo and y == yObbiettivo:
                 GlobalVarG2.canaleSoundPassiRallo.stop()
                 nx = 0
@@ -1702,7 +1706,7 @@ def gameloop():
                         personaggio.girati("w")
                     # aggiorno lo GlobalVarG2.schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
                     disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu)
-                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(y, dati[0], personaggio)
+                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(x, y, dati[0], personaggio)
                     caricaTutto = True
             interagisciConPersonaggio = False
         # menu mercante

@@ -53,12 +53,14 @@ class PersonaggioObj(object):
                 self.menuMercante = True
                 self.scelta = False
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("Ciao,")
                 dialogo.append("ecco la merce")
                 dialogo.append("")
                 dialogo.append("")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("Ecco la merceee")
                 dialogo.append("")
                 dialogo.append("")
@@ -70,13 +72,15 @@ class PersonaggioObj(object):
                 self.menuMercante = False
                 self.scelta = False
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("Ciao,")
                 dialogo.append(u"la merce è finita")
                 dialogo.append("")
                 dialogo.append("")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
-                dialogo.append(u"È finitaaa")
+                dialogo.append("tu")
+                dialogo.append(u"È finita?")
                 dialogo.append("")
                 dialogo.append("")
                 dialogo.append("")
@@ -87,6 +91,7 @@ class PersonaggioObj(object):
                 self.menuMercante = False
                 self.scelta = False
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("Vattene")
                 dialogo.append("")
                 dialogo.append("")
@@ -101,12 +106,14 @@ class PersonaggioObj(object):
                 self.menuMercante = False
                 self.scelta = 3
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("Ti sto per fare una domanda")
                 dialogo.append("")
                 dialogo.append("")
                 dialogo.append("")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("???DOMANDA???")
                 dialogo.append("Quanto fa 2+3?")
                 dialogo.append("Che schifo di domanda!")
@@ -115,6 +122,7 @@ class PersonaggioObj(object):
                 dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("!!!RISPOSTA!!!")
                 dialogo.append("Scusa...")
                 dialogo.append("Scusa, non mi interessano le carote")
@@ -122,6 +130,7 @@ class PersonaggioObj(object):
                 dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append(u"Ho compato tutto ciò che aveva il mercante")
                 dialogo.append("")
                 dialogo.append("")
@@ -133,7 +142,15 @@ class PersonaggioObj(object):
                 self.menuMercante = False
                 self.scelta = False
                 dialogo = []
+                dialogo.append("personaggio")
                 dialogo.append("Muhahahaha")
+                dialogo.append("")
+                dialogo.append("")
+                dialogo.append("")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Fai schifo")
                 dialogo.append("")
                 dialogo.append("")
                 dialogo.append("")

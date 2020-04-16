@@ -2,8 +2,8 @@
 
 import os
 import random
-import pygame
 import GlobalVarG2
+from FadeToBlackClass import *
 
 
 def messaggio(msg, colore, x, y, gr):
@@ -2268,9 +2268,22 @@ def controllaMorteRallo(vitaRallo, inizio):
         GlobalVarG2.canaleSoundPassiColco.stop()
         GlobalVarG2.canaleSoundPassiNemico.stop()
         GlobalVarG2.canaleSoundLvUp.stop()
-        GlobalVarG2.canaleSoundInterazioni.stop()
-        GlobalVarG2.canaleSoundAttacco.stop()
-        GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+        # GlobalVarG2.canaleSoundInterazioni.stop()
+        # GlobalVarG2.canaleSoundAttacco.stop()
+        pygame.time.wait(500)
+        GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.rumoreMorte)
+        sprites = pygame.sprite.Group(Fade(3))
+        schermoFadeToBlack = GlobalVarG2.schermo.copy()
+        i = 1
+        while i <= 46:
+            sprites.update()
+            GlobalVarG2.schermo.blit(schermoFadeToBlack, (0, 0))
+            sprites.draw(GlobalVarG2.schermo)
+            pygame.display.update()
+            GlobalVarG2.clockFadeToBlack.tick(GlobalVarG2.fpsFadeToBlack)
+            i += 1
+
+        # GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         messaggio("Sei morto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 13, 150)
         pygame.display.update()
         continua = False
@@ -2534,7 +2547,7 @@ def ottieniCondizione(dati, condizione):
     return dati, condizione
 
 
-def dialoga(y, avanzamentoStoria, personaggio):
+def dialoga(x, y, avanzamentoStoria, personaggio):
     if GlobalVarG2.canaleSoundPassiRallo.get_busy():
         GlobalVarG2.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
@@ -2543,6 +2556,7 @@ def dialoga(y, avanzamentoStoria, personaggio):
     voceMarcata = 1
     puntatoreSpostato = False
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    schermo_prima_del_dialogo = GlobalVarG2.schermo.copy()
 
     primoframe = True
     aggiornaInterfacciaPerMouse = False
@@ -2560,7 +2574,7 @@ def dialoga(y, avanzamentoStoria, personaggio):
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if numeromessaggioAttuale < len(personaggio.partiDialogo) and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+            if numeromessaggioAttuale < len(personaggio.partiDialogo) and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                 if y > GlobalVarG2.gsy // 2:
                     if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 3.1 <= yMouse <= GlobalVarG2.gsy // 18 * 4.2:
                         if GlobalVarG2.mouseBloccato:
@@ -2601,15 +2615,9 @@ def dialoga(y, avanzamentoStoria, personaggio):
                     else:
                         if not GlobalVarG2.mouseBloccato:
                             GlobalVarG2.configuraCursore(True)
-            elif y > GlobalVarG2.gsy // 2 and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 5.8 and GlobalVarG2.gsx // 32 * 0.4 <= xMouse <= GlobalVarG2.gsx // 32 * 31.6:
-                if GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(False)
-            elif y <= GlobalVarG2.gsy // 2 and GlobalVarG2.gsy // 18 * 12.2 <= yMouse <= GlobalVarG2.gsy and GlobalVarG2.gsx // 32 * 0.4 <= xMouse <= GlobalVarG2.gsx // 32 * 31.6:
-                if GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(False)
             else:
-                if not GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(True)
+                if GlobalVarG2.mouseBloccato:
+                    GlobalVarG2.configuraCursore(False)
             if voceMarcataVecchia != voceMarcata and not primoframe:
                 aggiornaInterfacciaPerMouse = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -2644,28 +2652,28 @@ def dialoga(y, avanzamentoStoria, personaggio):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     tastoTrovato = True
                     fineDialogo = True
-                if event.key == pygame.K_w and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                if event.key == pygame.K_w and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
                     prosegui = True
                     if voceMarcata != 1 and voceMarcata != 3:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata -= 1
-                if event.key == pygame.K_a and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                if event.key == pygame.K_a and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
                     prosegui = True
                     if voceMarcata != 1 and voceMarcata != 2:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata -= 2
-                if event.key == pygame.K_s and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                if event.key == pygame.K_s and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
                     prosegui = True
                     if voceMarcata != 2 and voceMarcata != 4:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata += 1
-                if event.key == pygame.K_d and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                if event.key == pygame.K_d and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
                     prosegui = True
@@ -2693,7 +2701,7 @@ def dialoga(y, avanzamentoStoria, personaggio):
                             menuMercante = personaggio.menuMercante
                     fineDialogo = True
                 else:
-                    if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
+                    if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                         sceltaEffettuata = voceMarcata
                     prosegui = True
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
@@ -2710,16 +2718,24 @@ def dialoga(y, avanzamentoStoria, personaggio):
                 numeromessaggioAttuale -= 1
                 puntatoreSpostato = False
             if y > GlobalVarG2.gsy // 2:
+                GlobalVarG2.schermo.blit(schermo_prima_del_dialogo, (0, 0))
                 GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSopra, (0, 0))
-                messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 4 // 5, 80)
-                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
-                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "???DOMANDA???":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
+                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
+                    messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 4 // 5, 80)
+                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
+                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (personaggio.x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 5.7), (personaggio.x + (GlobalVarG2.gpx // 2), personaggio.y + GlobalVarG2.gpy), 3)
+                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
+                    messaggio("Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 4 // 5, 80)
+                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
+                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 5.7), (x + (GlobalVarG2.gpx // 2), y + GlobalVarG2.gpy), 3)
+                if personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
+                elif personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
                     pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
                     pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
                     pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
@@ -2733,21 +2749,32 @@ def dialoga(y, avanzamentoStoria, personaggio):
                     if voceMarcata == 4:
                         GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2)))
                 else:
-                    riga = 0
+                    riga = -1
                     for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
-                        messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + riga, 50)
-                        riga += GlobalVarG2.gpy * 4 // 5
+                        if riga == -1:
+                            riga = 0
+                        else:
+                            messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + riga, 50)
+                            riga += GlobalVarG2.gpy * 4 // 5
             else:
+                GlobalVarG2.schermo.blit(schermo_prima_del_dialogo, (0, 0))
                 GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSotto, (0, GlobalVarG2.gsy * 2 // 3))
-                messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
-                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "!!!RISPOSTA!!!":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
-                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "???DOMANDA???":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
+                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
+                    messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
+                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
+                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (personaggio.x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 12.3), (personaggio.x + (GlobalVarG2.gpx // 2), personaggio.y + GlobalVarG2.gpy), 3)
+                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
+                    messaggio("Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
+                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
+                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 12.3), (x + (GlobalVarG2.gpx // 2), y + GlobalVarG2.gpy), 3)
+                if personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
+                elif personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
+                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
                     pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
                     pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
                     pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
@@ -2761,10 +2788,13 @@ def dialoga(y, avanzamentoStoria, personaggio):
                     if voceMarcata == 4:
                         GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2)))
                 else:
-                    riga = 0
+                    riga = -1
                     for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
-                        messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + riga, 50)
-                        riga += GlobalVarG2.gpy * 4 // 5
+                        if riga == -1:
+                            riga = 0
+                        else:
+                            messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + riga, 50)
+                            riga += GlobalVarG2.gpy * 4 // 5
             numeromessaggioAttuale += 1
             prosegui = False
             pygame.display.update()

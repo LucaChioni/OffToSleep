@@ -2,10 +2,16 @@
 
 import ctypes
 import pygame
-# i suoi vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
+import win32gui, win32con
+
+# hide the console
+# The_program_to_hide = win32gui.GetForegroundWindow()
+# win32gui.ShowWindow(The_program_to_hide, win32con.SW_HIDE)
+
+# i suoni vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
 pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
-#pygame.mixer.init(44100, -16, 1, 512)
-#pygame.mixer.init(22100, -16, 2, 64)
+# pygame.mixer.init(44100, -16, 1, 512)
+# pygame.mixer.init(22100, -16, 2, 64)
 pygame.init()
 
 # adattamento schermo
@@ -61,8 +67,8 @@ grigiochi = (230, 230, 230)
 bianco = (255, 255, 255)
 rosso = (255, 130, 0)
 verde = (130, 255, 0)
-verdeScuro = (80, 100, 80)
-verdeScuroPiuScuro = (70, 90, 70)
+verdeScuro = (80, 90, 80)
+verdeScuroPiuScuro = (70, 80, 70)
 blu = (0, 0, 255)
 bluScuro = (80, 80, 90)
 bluScuroPiuScuro = (70, 70, 80)
@@ -880,6 +886,7 @@ rumoreAttaccoArco = pygame.mixer.Sound("Audio/RumoriPersonaggio/AttaccoArco.wav"
 rumoreParata = pygame.mixer.Sound("Audio/RumoriPersonaggio/ParataConScudo.wav")
 rumorecamminata = pygame.mixer.Sound("Audio/RumoriPersonaggio/Camminata.wav")
 rumorelevelup = pygame.mixer.Sound("Audio/RumoriPersonaggio/Levelup.wav")
+rumoreMorte = pygame.mixer.Sound("Audio/RumoriPersonaggio/Morte.wav")
 
 # suoni apertura-chiusura cofanetti-porte
 suonoaperturacofanetti = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaCofanetto.wav")
@@ -925,7 +932,6 @@ c27 = pygame.mixer.Sound("Audio/Canzoni/Canzone27.wav")
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++]
 costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
 dannoTecniche = [40, 30, 0, 30, 20, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
-
 
 pygame.mouse.set_visible(False)
 mouseVisibile = False

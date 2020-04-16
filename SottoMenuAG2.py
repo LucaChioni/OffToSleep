@@ -1545,8 +1545,8 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[9], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Sempre a Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
-                    messaggio(u"è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
+                    messaggio("comporta un'alterazione di stato, viene eseguita solo se lo status", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"non è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
             if dati[90] > 0:
@@ -1555,8 +1555,8 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[10], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Sempre a Colco:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Esegue l'azione su Colco in continuazione (se la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio("comporta uno status alterativo, viene eseguita solo se lo status non", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
-                    messaggio(u"è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
+                    messaggio("comporta un'alterazione di stato, viene eseguita solo se lo status", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"non è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15.2, 40)
             if dati[91] > 0:
@@ -4134,7 +4134,7 @@ def oggetti(dati, canzone):
             if dati[5] < 0:
                 dati[5] = 0
             messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 4, 50)
-            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 5, 50)
+            messaggio("Status alterati: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 5, 50)
             persmen = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
             GlobalVarG2.schermo.blit(persmen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4))
             GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, (GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy // 8)))
@@ -4151,7 +4151,7 @@ def oggetti(dati, canzone):
             if dati[10] < 0:
                 dati[10] = 0
             messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 9, 50)
-            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 10, 50)
+            messaggio("Status alterati: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 10, 50)
             robomen = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
             GlobalVarG2.schermo.blit(robomen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 8))
             GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))

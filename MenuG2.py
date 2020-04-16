@@ -342,7 +342,7 @@ def menu(caricaSalvataggio):
                 GlobalVarG2.schermo.blit(persomenuinizio, (GlobalVarG2.gpx * 15, 0))
                 GlobalVarG2.schermo.blit(robomenuinizio, (GlobalVarG2.gpx * 3, 0))
                 messaggio("Inizia", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 2, 90)
-                messaggio("Salvataggi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 4.5, 90)
+                messaggio("Continua", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 4.5, 90)
                 messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 7, 90)
                 messaggio("Esci", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2.5, GlobalVarG2.gsy // 18 * 12, 90)
 
@@ -729,7 +729,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             messaggio("Setta Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 50)
             messaggio("Mappa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 50)
             messaggio("Diario", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 50)
-            messaggio("Salvataggi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
+            messaggio("Salva", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
             messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
             messaggio("Esci dal gioco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
             if GlobalVarG2.mouseVisibile:
@@ -754,7 +754,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 14, 50)
             else:
                 messaggio("Esp:  -- / --", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16, GlobalVarG2.gsy // 18 * 14, 50)
-            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 15, 50)
+            messaggio("Status alterati: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 15, 50)
             GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 13.5, (GlobalVarG2.gsy // 18 * 16) + (GlobalVarG2.gpy // 8)))
             if dati[121]:
                 GlobalVarG2.schermo.blit(avvelenatosta, (GlobalVarG2.gsx // 32 * 13.5, GlobalVarG2.gsy // 18 * 16))
@@ -766,7 +766,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             if dati[10] < 0:
                 dati[10] = 0
             messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 13, 50)
-            messaggio("Status alterativi: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 14, 50)
+            messaggio("Status alterati: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 14, 50)
             GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 23.5, (GlobalVarG2.gsy // 18 * 15) + (GlobalVarG2.gpy // 8)))
             if dati[122] > 0:
                 GlobalVarG2.schermo.blit(surriscaldatosta, (GlobalVarG2.gsx // 32 * 23.5, GlobalVarG2.gsy // 18 * 15))
@@ -851,16 +851,16 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and 0 <= xMouse <= GlobalVarG2.gsx // 32 * 3.8:
+            if GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and 0 <= xMouse <= GlobalVarG2.gsx // 32 * 3.3:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 xp = 0
                 yp = GlobalVarG2.gsy // 18 * 16.05
                 voceMarcata = -1
-            elif GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and GlobalVarG2.gsx // 32 * 3.8 <= xMouse <= GlobalVarG2.gsx // 32 * 6.8:
+            elif GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and GlobalVarG2.gsx // 32 * 3.3 <= xMouse <= GlobalVarG2.gsx // 32 * 6.8:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
-                xp = GlobalVarG2.gsx // 32 * 3.8
+                xp = GlobalVarG2.gsx // 32 * 3.3
                 yp = GlobalVarG2.gsy // 18 * 16.05
                 voceMarcata = -2
             elif GlobalVarG2.gsy // 18 * 17 <= yMouse <= GlobalVarG2.gsy and GlobalVarG2.gsx // 32 * 0 <= xMouse <= GlobalVarG2.gsx // 32 * 7:
@@ -1199,7 +1199,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                         yp = GlobalVarG2.gsy // 18 * 16.05
                         voceMarcata = -1
                     elif voceMarcata >= 4:
-                        xp = GlobalVarG2.gsx // 32 * 3.8
+                        xp = GlobalVarG2.gsx // 32 * 3.3
                         yp = GlobalVarG2.gsy // 18 * 16.05
                         voceMarcata = -2
             if tastop == pygame.K_d:
@@ -1210,7 +1210,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                     if voceMarcata == -1:
                         voceMarcata -= 1
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        xp = GlobalVarG2.gsx // 32 * 3.8
+                        xp = GlobalVarG2.gsx // 32 * 3.3
                 elif voceMarcata != 5:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1224,9 +1224,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                 voceMarcataOggetto = voceMarcata
 
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoStartBattaglia, (0, GlobalVarG2.gsy // 18 * 8))
-            messaggio("Salvataggi", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 0.7), int(GlobalVarG2.gpy * 16.05), 45)
-            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (int(GlobalVarG2.gpx * 3.8), int(GlobalVarG2.gpy * 15.8)), (int(GlobalVarG2.gpx * 3.8), int(GlobalVarG2.gpy * 16.8)), 2)
-            messaggio("Esci", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 4.5), int(GlobalVarG2.gpy * 16.05), 45)
+            messaggio("Salva", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 0.7), int(GlobalVarG2.gpy * 16.05), 45)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (int(GlobalVarG2.gpx * 3.3), int(GlobalVarG2.gpy * 15.8)), (int(GlobalVarG2.gpx * 3.3), int(GlobalVarG2.gpy * 16.8)), 2)
+            messaggio("Esci", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 4), int(GlobalVarG2.gpy * 16.05), 45)
             if difensivi:
                 if voceMarcata == 1:
                     disegnoOggetto = 0

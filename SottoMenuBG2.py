@@ -341,7 +341,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
             elif cosa == 1:
                 pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.bluScuro, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 9.5))
             else:
-                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 9.5))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.verdeScuro, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7, GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 9.5))
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 7))
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 7))
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoBassoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 15.5))
@@ -383,7 +383,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                 elif cosa == 1:
                     pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.bluScuroPiuScuro, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 3.5))
                 else:
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigioscurino, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 3.5))
+                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.verdeScuroPiuScuro, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 3.5))
                 GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 3.5))
                 GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoDestra, (GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 3.5))
                 messaggio("Confermi?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20.3, GlobalVarG2.gsy // 18 * 4.2, 70)

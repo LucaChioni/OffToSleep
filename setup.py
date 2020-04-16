@@ -1,8 +1,7 @@
-import cx_Freeze
-executables = [cx_Freeze.Executable("Gioco2.py")]
-cx_Freeze.setup(
+from cx_Freeze import setup, Executable
+setup(
     name="Gioco",
-    options={"buid_exe": {"packages": ["pygame", "ctypes", "os", "random"]}},
+    version="1.0",
     description="un gran gioco",
-    executables=executables
+    executables=[Executable("Gioco2.py")]
 )
