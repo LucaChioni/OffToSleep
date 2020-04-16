@@ -674,7 +674,7 @@ def menuImpostazioni(canzone, settaRisoluzione):
     tastotempfps = 5
 
     while not risposta:
-        if not GlobalVarG2.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVarG2.canaleSoundCanzone.get_busy():
             GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
