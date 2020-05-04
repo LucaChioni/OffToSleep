@@ -224,8 +224,7 @@ global vetAnimazioniTecniche
 global imgFrecciaEletttricaLanciata
 global imgFrecciaEletttricaLanciataP
 global imgFrecciaEletttricaLanciataPP
-global sfondoDialoghiSopra
-global sfondoDialoghiSotto
+global sfondoDialoghi
 global puntatoreorigi
 global puntatoreorigivecchio
 global avvelenatoo
@@ -392,8 +391,7 @@ def loadImg():
     global imgFrecciaEletttricaLanciata
     global imgFrecciaEletttricaLanciataP
     global imgFrecciaEletttricaLanciataPP
-    global sfondoDialoghiSopra
-    global sfondoDialoghiSotto
+    global sfondoDialoghi
     global puntatoreorigi
     global puntatoreorigivecchio
     global avvelenatoo
@@ -803,10 +801,8 @@ def loadImg():
     imgFrecciaEletttricaLanciataPP = pygame.transform.scale(imgFrecciaEletttricaLanciataPP, (gpx, gpy))
 
     # img sfondi dialoghi
-    sfondoDialoghiSopra = pygame.image.load('Immagini/Dialoghi/SfondoSopra.png')
-    sfondoDialoghiSopra = pygame.transform.scale(sfondoDialoghiSopra, (gsx, gsy // 3))
-    sfondoDialoghiSotto = pygame.image.load('Immagini/Dialoghi/SfondoSotto.png')
-    sfondoDialoghiSotto = pygame.transform.scale(sfondoDialoghiSotto, (gsx, gsy // 3))
+    sfondoDialoghi = pygame.image.load('Immagini/Dialoghi/SfondoSotto.png')
+    sfondoDialoghi = pygame.transform.scale(sfondoDialoghi, (gsx, gsy // 3))
 
     # img tutorial
     tutorialTastieraInGioco = pygame.image.load('Immagini/Tutorial/TastieraInGioco.png')
@@ -820,6 +816,7 @@ loadImg()
 # img grafiche
 persGrafMenu = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafMenu.png')
 persGrafInizio = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafInizio.png')
+persGrafDialogo = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafDialogo.png')
 robogra = pygame.image.load('Immagini/Disegnigraf/RobotGraf.png')
 robograf = pygame.image.load('Immagini/Disegnigraf/RobotGraf2.png')
 robograff = pygame.image.load('Immagini/Disegnigraf/RobotGraf3.png')

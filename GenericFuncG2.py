@@ -2547,7 +2547,7 @@ def ottieniCondizione(dati, condizione):
     return dati, condizione
 
 
-def dialoga(x, y, avanzamentoStoria, personaggio):
+def dialoga(avanzamentoStoria, personaggio):
     if GlobalVarG2.canaleSoundPassiRallo.get_busy():
         GlobalVarG2.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
@@ -2556,7 +2556,16 @@ def dialoga(x, y, avanzamentoStoria, personaggio):
     voceMarcata = 1
     puntatoreSpostato = False
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    imgPersDialogo = pygame.transform.scale(GlobalVarG2.persGrafDialogo, (GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 9))
+
+    GlobalVarG2.schermo.blit(imgPersDialogo, (GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 4))
+    GlobalVarG2.schermo.blit(personaggio.imgDialogo, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
     schermo_prima_del_dialogo = GlobalVarG2.schermo.copy()
+    background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
+    dark = pygame.Surface((GlobalVarG2.gsx, GlobalVarG2.gsy), flags=pygame.SRCALPHA)
+    dark.fill((0, 0, 0, 150))
+    background.blit(dark, (0, 0))
+    GlobalVarG2.schermo.blit(background, (0, 0))
 
     primoframe = True
     aggiornaInterfacciaPerMouse = False
@@ -2575,46 +2584,25 @@ def dialoga(x, y, avanzamentoStoria, personaggio):
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
             if numeromessaggioAttuale < len(personaggio.partiDialogo) and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
-                if y > GlobalVarG2.gsy // 2:
-                    if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 3.1 <= yMouse <= GlobalVarG2.gsy // 18 * 4.2:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 1
-                    elif GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 4.2 <= yMouse <= GlobalVarG2.gsy // 18 * 5.3:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 2
-                    elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 31 and GlobalVarG2.gsy // 18 * 3.1 <= yMouse <= GlobalVarG2.gsy // 18 * 4.2:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 3
-                    elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 31 and GlobalVarG2.gsy // 18 * 4.2 <= yMouse <= GlobalVarG2.gsy // 18 * 5.3:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 4
-                    else:
-                        if not GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(True)
+                if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 15.1 <= yMouse <= GlobalVarG2.gsy // 18 * 16.2:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 1
+                elif GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 16.2 <= yMouse <= GlobalVarG2.gsy // 18 * 17.3:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 2
+                elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 31 and GlobalVarG2.gsy // 18 * 15.1 <= yMouse <= GlobalVarG2.gsy // 18 * 16.2:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 3
+                elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 31 and GlobalVarG2.gsy // 18 * 16.2 <= yMouse <= GlobalVarG2.gsy // 18 * 17.3:
+                    if GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(False)
+                    voceMarcata = 4
                 else:
-                    if GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 15.1 <= yMouse <= GlobalVarG2.gsy // 18 * 16.2:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 1
-                    elif GlobalVarG2.gsx // 32 * 1 <= xMouse <= GlobalVarG2.gsx // 32 * 16 and GlobalVarG2.gsy // 18 * 16.2 <= yMouse <= GlobalVarG2.gsy // 18 * 17.3:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 2
-                    elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 31 and GlobalVarG2.gsy // 18 * 15.1 <= yMouse <= GlobalVarG2.gsy // 18 * 16.2:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 3
-                    elif GlobalVarG2.gsx // 32 * 16 <= xMouse <= GlobalVarG2.gsx // 32 * 31 and GlobalVarG2.gsy // 18 * 16.2 <= yMouse <= GlobalVarG2.gsy // 18 * 17.3:
-                        if GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(False)
-                        voceMarcata = 4
-                    else:
-                        if not GlobalVarG2.mouseBloccato:
-                            GlobalVarG2.configuraCursore(True)
+                    if not GlobalVarG2.mouseBloccato:
+                        GlobalVarG2.configuraCursore(True)
             else:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
@@ -2717,84 +2705,44 @@ def dialoga(x, y, avanzamentoStoria, personaggio):
             if puntatoreSpostato:
                 numeromessaggioAttuale -= 1
                 puntatoreSpostato = False
-            if y > GlobalVarG2.gsy // 2:
-                GlobalVarG2.schermo.blit(schermo_prima_del_dialogo, (0, 0))
-                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSopra, (0, 0))
-                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
-                    messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 4 // 5, 80)
-                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
-                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (personaggio.x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 5.7), (personaggio.x + (GlobalVarG2.gpx // 2), personaggio.y + GlobalVarG2.gpy), 3)
-                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
-                    messaggio("Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 4 // 5, 80)
-                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
-                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 5.7), (x + (GlobalVarG2.gpx // 2), y + GlobalVarG2.gpy), 3)
-                if personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
-                elif personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gpy * 7 // 3, 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), 50)
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    if voceMarcata == 1:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2)))
-                    if voceMarcata == 2:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2)))
-                    if voceMarcata == 3:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 1.2)))
-                    if voceMarcata == 4:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, (GlobalVarG2.gpy * 7 // 3) + int(GlobalVarG2.gpy * 2.2)))
-                else:
-                    riga = -1
-                    for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
-                        if riga == -1:
-                            riga = 0
-                        else:
-                            messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gpy * 7 // 3) + riga, 50)
-                            riga += GlobalVarG2.gpy * 4 // 5
+            GlobalVarG2.schermo.blit(background, (0, 0))
+            if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
+                GlobalVarG2.schermo.blit(personaggio.imgDialogo, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
+            if personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu" or personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
+                GlobalVarG2.schermo.blit(imgPersDialogo, (GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghi, (0, GlobalVarG2.gsy * 2 // 3))
+            if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
+                messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
+            elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
+                messaggio("Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
+            if personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
+                messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
+            elif personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
+                messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
+                messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
+                messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
+                messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
+                messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
+                if voceMarcata == 1:
+                    GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2)))
+                if voceMarcata == 2:
+                    GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2)))
+                if voceMarcata == 3:
+                    GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2)))
+                if voceMarcata == 4:
+                    GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2)))
             else:
-                GlobalVarG2.schermo.blit(schermo_prima_del_dialogo, (0, 0))
-                GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialoghiSotto, (0, GlobalVarG2.gsy * 2 // 3))
-                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
-                    messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
-                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
-                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (personaggio.x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 12.3), (personaggio.x + (GlobalVarG2.gpx // 2), personaggio.y + GlobalVarG2.gpy), 3)
-                elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
-                    messaggio("Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
-                    for xDialogo in range(-GlobalVarG2.gpx // 2, GlobalVarG2.gpx + 1):
-                        pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (x - (GlobalVarG2.gpx // 2) + xDialogo, GlobalVarG2.gsy // 18 * 12.3), (x + (GlobalVarG2.gpx // 2), y + GlobalVarG2.gpy), 3)
-                if personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
-                elif personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][2], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][3], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), 50)
-                    messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 17, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), 50)
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2), GlobalVarG2.gpx, GlobalVarG2.gpy))
-                    if voceMarcata == 1:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2)))
-                    if voceMarcata == 2:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2)))
-                    if voceMarcata == 3:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 1.2)))
-                    if voceMarcata == 4:
-                        GlobalVarG2.schermo.blit(puntatore, (GlobalVarG2.gsx // 32 * 16, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + int(GlobalVarG2.gpy * 2.2)))
-                else:
-                    riga = -1
-                    for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
-                        if riga == -1:
-                            riga = 0
-                        else:
-                            messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + riga, 50)
-                            riga += GlobalVarG2.gpy * 4 // 5
+                riga = -1
+                for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
+                    if riga == -1:
+                        riga = 0
+                    else:
+                        messaggio(frase, GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, ((GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3)) + riga, 50)
+                        riga += GlobalVarG2.gpy * 4 // 5
             numeromessaggioAttuale += 1
             prosegui = False
             pygame.display.update()

@@ -29,6 +29,9 @@ class PersonaggioObj(object):
         imgD = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png")
         self.imgD = pygame.transform.scale(imgD, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
+        imgDialogo = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png")
+        self.imgDialogo = pygame.transform.scale(imgDialogo, (GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 9))
+
     def girati(self, direzione):
         if direzione == "w":
             self.imgAttuale = self.imgW
@@ -41,7 +44,7 @@ class PersonaggioObj(object):
         self.direzione = direzione
 
     def aggiornaDialogo(self, avanzamentoStoria):
-        # se c'è una scelta la variabile self.scelta conterrà il numero corrispondente a quella giusta (se ce n'è più di una giusta, la variabile conterrà i nueri di queste una dopo l'altra (es. 12, 134))
+        # se c'è una scelta la variabile self.scelta conterrà il numero corrispondente a quella giusta (se ce n'è più di una giusta, la variabile conterrà i numeri di queste una dopo l'altra (es. 12, 134))
         # i dialoghi che iniziano con "???DOMANDA???" contengono 6 frasi in totale (ossia => "???DOMANDA???", la domanda posta, opzione 1, opzione 2, opzione 3, opzione 4)
         # i dialoghi che iniziano con "!!!RISPOSTA!!!" contengono 5 frasi in totale (ossia => "!!!RISPOSTA!!!", risposta opzione 1, risposta opzione 2, risposta opzione 3, risposta opzione 4)
         if self.tipo == "Mercante":
