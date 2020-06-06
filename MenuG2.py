@@ -797,7 +797,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
     return dati, inizio, attacco, caricaSalvataggio
 
 
-def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, inizio, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco):
+def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     xp = GlobalVarG2.gpx * 1
     yp = GlobalVarG2.gpy * 13.8
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
@@ -858,16 +858,16 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
             pygame.mouse.set_visible(True)
             GlobalVarG2.mouseVisibile = True
         if GlobalVarG2.mouseVisibile:
-            if GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and 0 <= xMouse <= GlobalVarG2.gsx // 32 * 4.3:
+            if GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and 0 <= xMouse <= GlobalVarG2.gsx // 32 * 3.5:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 xp = 0
                 yp = GlobalVarG2.gsy // 18 * 16.05
                 voceMarcata = -1
-            elif GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and GlobalVarG2.gsx // 32 * 4.3 <= xMouse <= GlobalVarG2.gsx // 32 * 6.8:
+            elif GlobalVarG2.gsy // 18 * 15.6 <= yMouse <= GlobalVarG2.gsy // 18 * 17 and GlobalVarG2.gsx // 32 * 3.5 <= xMouse <= GlobalVarG2.gsx // 32 * 6.8:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
-                xp = GlobalVarG2.gsx // 32 * 4.3
+                xp = GlobalVarG2.gsx // 32 * 3.5
                 yp = GlobalVarG2.gsy // 18 * 16.05
                 voceMarcata = -2
             elif GlobalVarG2.gsy // 18 * 17 <= yMouse <= GlobalVarG2.gsy and GlobalVarG2.gsx // 32 * 0 <= xMouse <= GlobalVarG2.gsx // 32 * 7:
@@ -1032,7 +1032,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                         GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
                         schermo_temp = GlobalVarG2.schermo.copy()
                         background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
-                        menuImpostazioni(False, False)
+                        menuMappa(dati[0], False)
                         GlobalVarG2.schermo.blit(background, (0, 0))
                     elif voceMarcata == -2:
                         GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
@@ -1157,9 +1157,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                         yp = GlobalVarG2.gpy * 14.3
                         voceMarcata = 1
                     elif voceMarcata == -2:
-                        xp = GlobalVarG2.gpx * 4
+                        xp = GlobalVarG2.gpx * 3
                         yp = GlobalVarG2.gpy * 14.3
-                        voceMarcata = 4
+                        voceMarcata = 3
                 elif offensivi:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                     yp = GlobalVarG2.gpy * 13.8
@@ -1193,12 +1193,12 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                     offensivi = True
                 elif voceMarcata >= 0:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                    if voceMarcata <= 3:
+                    if voceMarcata < 3:
                         xp = 0
                         yp = GlobalVarG2.gsy // 18 * 16.05
                         voceMarcata = -1
-                    elif voceMarcata >= 4:
-                        xp = GlobalVarG2.gsx // 32 * 4.3
+                    elif voceMarcata >= 3:
+                        xp = GlobalVarG2.gsx // 32 * 3.5
                         yp = GlobalVarG2.gsy // 18 * 16.05
                         voceMarcata = -2
             if tastop == pygame.K_d:
@@ -1209,7 +1209,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                     if voceMarcata == -1:
                         voceMarcata -= 1
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
-                        xp = GlobalVarG2.gsx // 32 * 4.3
+                        xp = GlobalVarG2.gsx // 32 * 3.5
                 elif voceMarcata != 5:
                     voceMarcata += 1
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
@@ -1223,9 +1223,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                 voceMarcataOggetto = voceMarcata
 
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoStartBattaglia, (0, GlobalVarG2.gsy // 18 * 8))
-            messaggio("Impostazioni", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 0.7), int(GlobalVarG2.gpy * 16.05), 45)
-            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (int(GlobalVarG2.gpx * 4.3), int(GlobalVarG2.gpy * 15.8)), (int(GlobalVarG2.gpx * 4.3), int(GlobalVarG2.gpy * 16.8)), 2)
-            messaggio("Esci", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 5), int(GlobalVarG2.gpy * 16.05), 45)
+            messaggio("Mappa", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 0.7), int(GlobalVarG2.gpy * 16.05), 45)
+            pygame.draw.line(GlobalVarG2.schermo, GlobalVarG2.grigioscu, (int(GlobalVarG2.gpx * 3.5), int(GlobalVarG2.gpy * 15.8)), (int(GlobalVarG2.gpx * 3.5), int(GlobalVarG2.gpy * 16.8)), 2)
+            messaggio("Esci", GlobalVarG2.grigiochi, int(GlobalVarG2.gpx * 4.2), int(GlobalVarG2.gpy * 16.05), 45)
             if difensivi:
                 if voceMarcata == 1:
                     disegnoOggetto = 0
@@ -1282,13 +1282,13 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, 
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
                     messaggio("Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
-                    messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                    messaggio("Alimentaz. 100gr", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
                     messaggio("Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
                 if voceMarcata == 4 or voceMarcataOggetto == 4:
                     messaggio("Super pozione", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
-                    messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
+                    messaggio("Alimentaz. 250gr", GlobalVarG2.grigiochi, GlobalVarG2.gpx // 3, int(GlobalVarG2.gpy * 8.9), 55)
                 GlobalVarG2.schermo.blit(GlobalVarG2.scorriGiu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 14.8))
             if offensivi:
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
@@ -1514,6 +1514,7 @@ def menuMercante(dati):
                 moneteInsufficienti = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
 
+        buttonUp = False
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
@@ -1875,11 +1876,13 @@ def menuMercante(dati):
                 GlobalVarG2.mouseVisibile = True
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
+                buttonUp = True
             if event.type == pygame.MOUSEBUTTONUP:
                 mouseSinistroPremuto = False
                 tastop = 0
+                buttonUp = True
 
-        if primoMovimento or tastop == pygame.K_q or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if primoMovimento or buttonUp or tastop == pygame.K_q or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
@@ -2002,11 +2005,11 @@ def menuMercante(dati):
             if moneteInsufficienti:
                 messaggio("Non hai abbastanza monete!", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 2.1, GlobalVarG2.gsy // 18 * 6.1, 40)
             if inventarioPieno:
-                messaggio("Non puoi prenderne altri...", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 2.4, GlobalVarG2.gsy // 18 * 5.3, 40)
+                messaggio("Non puoi prenderne altre...", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 2.4, GlobalVarG2.gsy // 18 * 5.3, 40)
             if confermaOggettoDaAcquistare == 0:
                 messaggio("Prendi quello che ti serve", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.5, 50)
             else:
-                messaggio("Quanti te ne servono?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.5, 50)
+                messaggio("Quante te ne servono?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4.5, 50)
 
             if GlobalVarG2.mouseVisibile:
                 messaggio("Tasto destro: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 1, 50)
@@ -2045,7 +2048,12 @@ def menuMercante(dati):
                     else:
                         messaggio("(Monete necessarie: %i)" % (GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 5.3, 50)
                 else:
-                    GlobalVarG2.schermo.blit(GlobalVarG2.scorriSuGiu, (GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * 4.3))
+                    if voceMarcata != 0 and oggetton != 11 and (tastop == pygame.K_w or (mouseSinistroPremuto and mouseInquadraFrecciaSu)):
+                        GlobalVarG2.schermo.blit(GlobalVarG2.scorriSuGiuBloccatoSu, (GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * 4.3))
+                    elif voceMarcata != 0 and oggetton != 11 and (tastop == pygame.K_s or (mouseSinistroPremuto and mouseInquadraFrecciaGiu)):
+                        GlobalVarG2.schermo.blit(GlobalVarG2.scorriSuGiuBloccatoGiu, (GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * 4.3))
+                    else:
+                        GlobalVarG2.schermo.blit(GlobalVarG2.scorriSuGiu, (GlobalVarG2.gsx // 32 * 8.5, GlobalVarG2.gsy // 18 * 4.3))
                     messaggio("(Monete necessarie: %i)" % (GlobalVarG2.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 5.3, 50)
                 messaggio("Conferma", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.9, 50)
                 messaggio("Annulla", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 6, GlobalVarG2.gsy // 18 * 6.9, 50)
@@ -2079,14 +2087,14 @@ def menuMercante(dati):
             else:
                 messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 7.1, 40)
             if imgOggetti[1] != sconosciutoOggetto:
-                messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8, 40)
+                messaggio("Alimentazione 100gr", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 8, 40)
                 messaggio(str(GlobalVarG2.costoOggetti[2]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 8, 40)
                 if dati[32] < 0:
                     messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 8, 40)
                 else:
                     messaggio("x%i" % dati[32], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 8, 40)
                 if oggetton == 2:
-                    messaggio("Caricabatterie:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Alimentazione 100gr:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
                     messaggio("Recupera 250 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)
@@ -2121,14 +2129,14 @@ def menuMercante(dati):
             else:
                 messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 9.8, 40)
             if imgOggetti[4] != sconosciutoOggetto:
-                messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 10.7, 40)
+                messaggio("Alimentazione 250gr", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11.5, GlobalVarG2.gsy // 18 * 10.7, 40)
                 messaggio(str(GlobalVarG2.costoOggetti[5]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 16.8, GlobalVarG2.gsy // 18 * 10.7, 40)
                 if dati[35] < 0:
                     messaggio("x0", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 10.7, 40)
                 else:
                     messaggio("x%i" % dati[35], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 10.7, 40)
                 if oggetton == 5:
-                    messaggio("Carica plus:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
+                    messaggio("Alimentazione 250gr:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 11.5, 60)
                     messaggio("Recupera 600 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 12.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 22.5, GlobalVarG2.gsy // 18 * 13.5, 35)

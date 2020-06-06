@@ -4035,10 +4035,10 @@ def oggetti(dati, canzone):
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5, 45)
             if dati[32] >= 0:
-                messaggio("Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 45)
+                messaggio("Alimentazione 100gr", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6, 45)
                 messaggio("x %i" % dati[32], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 6, 45)
                 if oggetton == 2:
-                    messaggio("Caricabatterie:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Alimentazione 100gr:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Recupera 250 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
@@ -4065,10 +4065,10 @@ def oggetti(dati, canzone):
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8, 45)
             if dati[35] >= 0:
-                messaggio("Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 45)
+                messaggio("Alimentazione 250gr", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 45)
                 messaggio("x %i" % dati[35], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 9, 45)
                 if oggetton == 5:
-                    messaggio("Carica plus:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Alimentazione 250gr:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Recupera 600 pe di Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)

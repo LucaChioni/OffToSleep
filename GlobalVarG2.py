@@ -135,6 +135,8 @@ global roboSurrisc
 global mercanteGraf
 global scorriSuGiu
 global scorriSuGiuBloccato
+global scorriSuGiuBloccatoGiu
+global scorriSuGiuBloccatoSu
 global sfondoDialogoMercante
 global faretra1Menu
 global faretra2Menu
@@ -302,6 +304,8 @@ def loadImg():
     global mercanteGraf
     global scorriSuGiu
     global scorriSuGiuBloccato
+    global scorriSuGiuBloccatoGiu
+    global scorriSuGiuBloccatoSu
     global sfondoDialogoMercante
     global faretra1Menu
     global faretra2Menu
@@ -534,12 +538,16 @@ def loadImg():
     roboSurrisc = pygame.transform.scale(roboSurrisc, (gpx, gpy))
 
     # img menu mercante
-    mercanteGraf = pygame.image.load('Immagini/Disegnigraf/Mercante.png')
+    mercanteGraf = pygame.image.load('Immagini/DecorazioniMenu/Mercante.png')
     mercanteGraf = pygame.transform.scale(mercanteGraf, (gpx * 12, gpy * 9))
     scorriSuGiu = pygame.image.load('Immagini/Puntatori/ScorriSuGiu.png')
     scorriSuGiu = pygame.transform.scale(scorriSuGiu, (gpx, gpy))
     scorriSuGiuBloccato = pygame.image.load('Immagini/Puntatori/ScorriSuGiuBloccato.png')
     scorriSuGiuBloccato = pygame.transform.scale(scorriSuGiuBloccato, (gpx, gpy))
+    scorriSuGiuBloccatoGiu = pygame.image.load('Immagini/Puntatori/ScorriSuGiuBloccatoGiu.png')
+    scorriSuGiuBloccatoGiu = pygame.transform.scale(scorriSuGiuBloccatoGiu, (gpx, gpy))
+    scorriSuGiuBloccatoSu = pygame.image.load('Immagini/Puntatori/ScorriSuGiuBloccatoSu.png')
+    scorriSuGiuBloccatoSu = pygame.transform.scale(scorriSuGiuBloccatoSu, (gpx, gpy))
     sfondoDialogoMercante = pygame.image.load('Immagini/DecorazioniMenu/SfondoDialogoMercante.png')
     sfondoDialogoMercante = pygame.transform.scale(sfondoDialogoMercante, (int(gpx * 9.5), int(gpy * 4.5)))
     faretra1Menu = pygame.image.load('Immagini/Oggetti/Faretra1Menu.png')
@@ -816,7 +824,7 @@ loadImg()
 # img grafiche
 persGrafMenu = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafMenu.png')
 persGrafInizio = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafInizio.png')
-persGrafDialogo = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafDialogo.png')
+persGrafDialogo = pygame.image.load('Immagini/DecorazioniMenu/PersonaggioGrafDialogo.png')
 robogra = pygame.image.load('Immagini/Disegnigraf/RobotGraf.png')
 robograf = pygame.image.load('Immagini/Disegnigraf/RobotGraf2.png')
 robograff = pygame.image.load('Immagini/Disegnigraf/RobotGraf3.png')
@@ -843,6 +851,22 @@ sfondoOggettoMenu = pygame.image.load("Immagini/EquipRallo/SfondoOggetto.png")
 sconosciutoEquipMenu = pygame.image.load("Immagini/Oggetti/SconosciutoEquip.png")
 sconosciutoOggettoMenu = pygame.image.load("Immagini/Oggetti/Sconosciuto.png")
 sconosciutoOggettoIcoMenu = pygame.image.load("Immagini/Oggetti/SconosciutoIco.png")
+# img mappe
+imgMappa1 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu1.png")
+imgMappa2 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu2.png")
+imgMappa3 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu3.png")
+imgMappa4 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu4.png")
+imgMappa5 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu5.png")
+imgMappa6 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu6.png")
+imgMappa7 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu7.png")
+imgMappa8 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu8.png")
+imgMappa9 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu9.png")
+imgMappa10 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu10.png")
+imgMappa11 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu11.png")
+imgMappa12 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu12.png")
+imgMappa13 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu13.png")
+imgMappa14 = pygame.image.load("Immagini/DecorazioniMenu/MappaMenu14.png")
+imgOmbreggiatoraContorniMappaMenu = pygame.image.load("Immagini/DecorazioniMenu/OmbreggiatoraContorniMappaMenu.png")
 
 # canali audio / volume (0-1)
 volumeCanzoni = 0.0
@@ -921,6 +945,9 @@ suonoUsoBombaVeleno = pygame.mixer.Sound("Audio/RumoriOggetti/BombaVeleno.wav")
 suonoUsoEsca = pygame.mixer.Sound("Audio/RumoriOggetti/Esca.wav")
 suonoUsoBombaAppiccicosa = pygame.mixer.Sound("Audio/RumoriOggetti/BombaAppiccicosa.wav")
 suonoUsoBombaPotenziata = pygame.mixer.Sound("Audio/RumoriOggetti/BombaPotenziata.wav")
+
+# suono mappa
+suonoAperturaMappa = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaMappa.wav")
 
 # suoni canzoni
 c11 = pygame.mixer.Sound("Audio/Canzoni/Canzone11.wav")

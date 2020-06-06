@@ -1411,7 +1411,7 @@ def gameloop():
                 if attacco == 0:
                     uscitoDaMenu = 2
             else:
-                dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, inizio, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio)
                 if caricaSalvataggio:
                     inizio = True
                 else:

@@ -665,13 +665,13 @@ def animaAperturaCofanetto(tesoro, x, y, npers, pers, avvele, armatura, arma, sc
         if tesoro == 31:
             messaggio("Hai trovato: Pozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
         if tesoro == 32:
-            messaggio("Hai trovato: Caricabatterie", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
+            messaggio("Hai trovato: Alimentazione 100gr", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
         if tesoro == 33:
             messaggio("Hai trovato: Medicina", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
         if tesoro == 34:
             messaggio("Hai trovato: Superpozione", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
         if tesoro == 35:
-            messaggio("Hai trovato: Carica plus", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
+            messaggio("Hai trovato: Alimentazione 250gr", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
         if tesoro == 36:
             messaggio("Hai trovato: Bomba", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
         if tesoro == 37:
