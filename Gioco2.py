@@ -210,7 +210,7 @@ def gameloop():
                 listaPersonaggi = []
                 personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4, "d", "Mercante", dati[0])
                 listaPersonaggi.append(personaggio)
-                personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 3, "a", "Tizio", dati[0])
+                personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 3, "a", "FiglioUfficiale", dati[0])
                 listaPersonaggi.append(personaggio)
 
             if cambiosta:

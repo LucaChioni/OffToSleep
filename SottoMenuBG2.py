@@ -600,6 +600,8 @@ def chiediconferma(conferma, canzone=False):
                         elif conferma == 2:
                             pygame.quit()
                             quit()
+                        elif conferma == 3:
+                            return False, True
                     elif voceMarcata == 2:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         return False, False
@@ -640,6 +642,8 @@ def chiediconferma(conferma, canzone=False):
                 messaggio(u"Tornare al menu principale?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 6.5, 120)
             elif conferma == 2:
                 messaggio("Uscire dal gioco?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.6, GlobalVarG2.gsy // 18 * 6.5, 120)
+            elif conferma == 3:
+                messaggio("Iniziare una nuova partita?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 5.4, GlobalVarG2.gsy // 18 * 6.5, 120)
             messaggio("Si", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 9.5, 120)
             messaggio("No", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 9.5, 120)
             if GlobalVarG2.mouseVisibile:

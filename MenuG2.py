@@ -57,6 +57,7 @@ def menu(caricaSalvataggio):
     voceMarcata = 1
     primoFrame = True
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
+    puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatorevecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
     robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
     aggiornaInterfacciaPerMouse = False
     mostraTutorial = False
@@ -69,9 +70,10 @@ def menu(caricaSalvataggio):
     # numero per la posizione di robo all'avvio
     c = random.randint(1, 4)
 
+    canzone = GlobalVarG2.c11
     while True:
         if not GlobalVarG2.canaleSoundCanzone.get_busy():
-            GlobalVarG2.canaleSoundCanzone.play(GlobalVarG2.c11)
+            GlobalVarG2.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
@@ -202,44 +204,52 @@ def menu(caricaSalvataggio):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         # nuova partita
                         if voceMarcata == 1:
-                            x = GlobalVarG2.gsx // 32 * 6
-                            y = GlobalVarG2.gsy // 18 * 2
-                            rx = x
-                            ry = y
-                            # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
-                            # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
-                            # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob -
-                            # porte(142-?) - cofanetti(?-?) // dimensione: 0-142 + porte e cofanetti
-                            dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 220,# <- statistiche
-                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
-                                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
-                                    2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,# <- equpaggiamento
-                                    2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
-                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
-                                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
-                                    False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
-                                    rx, ry, -1, -1, -1, 0, 4, 3,# <- info aggiunte per poter salvare ovunque
-                                    2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
-                                    1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False,# <- cofanetti
-                                    ]
-                            datiNemici = []
-                            datiEsche = []
-                            datiMonete = []
-                            stanzeGiaVisitate = []
-                            ultimoObbiettivoColco = []
-                            obbiettivoCasualeColco = False
-                            GlobalVarG2.canaleSoundCanzone.stop()
-                            i = porteini
-                            while i <= portefin:
-                                dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-                                dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-                                i = i + 4
-                            i = cofaniini
-                            while i <= cofanifin:
-                                dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
-                                dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
-                                i = i + 4
-                            return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
+                            schermo_temp = GlobalVarG2.schermo.copy()
+                            background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
+                            inutile, conferma = chiediconferma(3, canzone)
+                            if conferma:
+                                x = GlobalVarG2.gsx // 32 * 6
+                                y = GlobalVarG2.gsy // 18 * 2
+                                rx = x
+                                ry = y
+                                # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
+                                # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
+                                # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob -
+                                # porte(142-?) - cofanetti(?-?) // dimensione: 0-142 + porte e cofanetti
+                                dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 220,# <- statistiche
+                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
+                                        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
+                                        2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,# <- equpaggiamento
+                                        2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
+                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
+                                        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
+                                        False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
+                                        rx, ry, -1, -1, -1, 0, 4, 3,# <- info aggiunte per poter salvare ovunque
+                                        2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
+                                        1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False,# <- cofanetti
+                                        ]
+                                datiNemici = []
+                                datiEsche = []
+                                datiMonete = []
+                                stanzeGiaVisitate = []
+                                ultimoObbiettivoColco = []
+                                obbiettivoCasualeColco = False
+                                GlobalVarG2.canaleSoundCanzone.stop()
+                                i = porteini
+                                while i <= portefin:
+                                    dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                                    dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
+                                    i = i + 4
+                                i = cofaniini
+                                while i <= cofanifin:
+                                    dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
+                                    dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
+                                    i = i + 4
+                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+                            else:
+                                GlobalVarG2.schermo.blit(background, (0, 0))
 
                         # carica partita
                         if voceMarcata == 2:
@@ -258,8 +268,13 @@ def menu(caricaSalvataggio):
 
                         # esci dal gioco
                         if voceMarcata == 4:
-                            pygame.quit()
-                            quit()
+                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                            GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
+                            schermo_temp = GlobalVarG2.schermo.copy()
+                            background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
+                            inizio, inutile = chiediconferma(2, canzone)
+                            if not inizio:
+                                GlobalVarG2.schermo.blit(background, (0, 0))
                     elif suTogliTutorial and event.type == pygame.MOUSEBUTTONDOWN:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         mostraTutorial = False
@@ -330,7 +345,7 @@ def menu(caricaSalvataggio):
                         yp = GlobalVarG2.gsy // 18 * 12.5
                         voceMarcata += 3
                 GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
-                persomenuinizio = pygame.transform.scale(GlobalVarG2.persGrafInizio, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
+                persomenuinizio = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
                 if c == 1:
                     robomenuinizio = pygame.transform.scale(GlobalVarG2.robogra, (GlobalVarG2.gpx * 18, GlobalVarG2.gpy * 18))
                 if c == 2:
@@ -655,10 +670,10 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     # impostazioni
                     if voceMarcata == 7:
                         menuImpostazioni(GlobalVarG2.c27, False)
-                    # chiudi
+                    # menu principale
                     if voceMarcata == 8:
                         GlobalVarG2.schermo.blit(puntatoreVecchio, (xp, yp))
-                        conferma = 2
+                        conferma = 1
             elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
             if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
@@ -731,7 +746,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             messaggio("Diario", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9, 50)
             messaggio("Salva", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 50)
             messaggio("Impostazioni", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14, 50)
-            messaggio("Esci dal gioco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
+            messaggio("Menu principale", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 15, 50)
             if GlobalVarG2.mouseVisibile:
                 messaggio("Tasto destro / centrale: torna indietro", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 1, 50)
             else:
@@ -1029,16 +1044,18 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     risposta = True
                 elif voceMarcata < 0:
                     if voceMarcata == -1:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
                         schermo_temp = GlobalVarG2.schermo.copy()
                         background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
                         menuMappa(dati[0], False)
                         GlobalVarG2.schermo.blit(background, (0, 0))
                     elif voceMarcata == -2:
+                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         GlobalVarG2.schermo.blit(puntatorevecchio, (xp, yp))
                         schermo_temp = GlobalVarG2.schermo.copy()
                         background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVarG2.gsx, GlobalVarG2.gsy))
-                        inizio, risposta = chiediconferma(2)
+                        inizio, risposta = chiediconferma(1)
                         if not inizio:
                             GlobalVarG2.schermo.blit(background, (0, 0))
                 else:
@@ -2000,7 +2017,7 @@ def menuMercante(dati):
             GlobalVarG2.schermo.blit(GlobalVarG2.sacchettoDenaroMercante, (GlobalVarG2.gsx // 32 * 22, GlobalVarG2.gsy // 18 * 14))
             messaggio("Monete: " + str(dati[131]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 26, GlobalVarG2.gsy // 18 * 15.8, 50)
 
-            GlobalVarG2.schermo.blit(GlobalVarG2.mercanteGraf, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 8.5))
+            GlobalVarG2.schermo.blit(GlobalVarG2.mercanteGraf, (GlobalVarG2.gsx // 32 * (-0.6), GlobalVarG2.gsy // 18 * 8.5))
             GlobalVarG2.schermo.blit(GlobalVarG2.sfondoDialogoMercante, (GlobalVarG2.gsx // 32 * 0.5, GlobalVarG2.gsy // 18 * 4))
             if moneteInsufficienti:
                 messaggio("Non hai abbastanza monete!", GlobalVarG2.rosso, GlobalVarG2.gsx // 32 * 2.1, GlobalVarG2.gsy // 18 * 6.1, 40)

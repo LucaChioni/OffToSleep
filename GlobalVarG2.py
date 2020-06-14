@@ -538,7 +538,7 @@ def loadImg():
     roboSurrisc = pygame.transform.scale(roboSurrisc, (gpx, gpy))
 
     # img menu mercante
-    mercanteGraf = pygame.image.load('Immagini/DecorazioniMenu/Mercante.png')
+    mercanteGraf = pygame.image.load('Immagini/Personaggi/Mercante/MercanteDialogo.png')
     mercanteGraf = pygame.transform.scale(mercanteGraf, (gpx * 12, gpy * 9))
     scorriSuGiu = pygame.image.load('Immagini/Puntatori/ScorriSuGiu.png')
     scorriSuGiu = pygame.transform.scale(scorriSuGiu, (gpx, gpy))
@@ -823,7 +823,6 @@ def loadImg():
 loadImg()
 # img grafiche
 persGrafMenu = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafMenu.png')
-persGrafInizio = pygame.image.load('Immagini/Disegnigraf/PersonaggioGrafInizio.png')
 persGrafDialogo = pygame.image.load('Immagini/DecorazioniMenu/PersonaggioGrafDialogo.png')
 robogra = pygame.image.load('Immagini/Disegnigraf/RobotGraf.png')
 robograf = pygame.image.load('Immagini/Disegnigraf/RobotGraf2.png')
