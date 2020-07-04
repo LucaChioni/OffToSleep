@@ -523,10 +523,12 @@ def animaMorteNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz):
             if nemico.animaMorte:
                 nemico.animazioneFatta = True
                 animazioneNemici = True
-                if 5 <= fineanimaz <= 10:
-                    GlobalVarG2.schermo.blit(nemico.imgMorte1, (nemico.x, nemico.y))
-                if 1 < fineanimaz <= 5:
-                    GlobalVarG2.schermo.blit(nemico.imgMorte2, (nemico.x, nemico.y))
+                if fineanimaz > 0 and (fineanimaz % 4 == 0):
+                    GlobalVarG2.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+                    if nemico.statoInizioTurno[2]:
+                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
+                    if nemico.statoInizioTurno[1]:
+                        GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
     return animazioneNemici
 
 
