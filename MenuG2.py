@@ -12,8 +12,8 @@ def menu(caricaSalvataggio):
     lunghezzadati = cofanifin + 1
 
     if caricaSalvataggio:
-        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
-        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali
 
     # video
     fermavideo = guardaVideo('Video/videoinizio')
@@ -235,6 +235,7 @@ def menu(caricaSalvataggio):
                                 datiMonete = []
                                 stanzeGiaVisitate = []
                                 ultimoObbiettivoColco = []
+                                listaPersonaggiTotali = []
                                 obbiettivoCasualeColco = False
                                 GlobalVarG2.canaleSoundCanzone.stop()
                                 i = porteini
@@ -247,7 +248,7 @@ def menu(caricaSalvataggio):
                                     dati[i + 1] = dati[i + 1] * GlobalVarG2.gpx
                                     dati[i + 2] = dati[i + 2] * GlobalVarG2.gpy
                                     i = i + 4
-                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali
                             else:
                                 GlobalVarG2.schermo.blit(background, (0, 0))
 
@@ -257,9 +258,9 @@ def menu(caricaSalvataggio):
 
                             # lettura salvataggio
                             if n != -1:
-                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
                                 if dati:
-                                    return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+                                    return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali
 
                         # Impostazioni
                         if voceMarcata == 3:
@@ -463,7 +464,7 @@ def menu(caricaSalvataggio):
         GlobalVarG2.clockMenu.tick(GlobalVarG2.fpsMenu)
 
 
-def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco):
+def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali):
     sfondostastart = pygame.transform.scale(GlobalVarG2.sfondostax3, (GlobalVarG2.gpx * 4, GlobalVarG2.gpy))
     perssta = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
     robosta = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
@@ -663,7 +664,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
                         n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, GlobalVarG2.c27)
                         if n != -1 and azioneFatta == 3:
-                            salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                            salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali)
                         elif n != -1 and azioneFatta == 1:
                             caricaSalvataggio = n
                             risposta = True

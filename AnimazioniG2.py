@@ -387,7 +387,7 @@ def animaDanneggiamentoColco(rx, ry, nemicoAttaccante, cambiosta, fineanimaz):
 
 
 def animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, surriscalda, tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, fineanimaz):
-    if (not ("attaccoColco" in azioniDaEseguire and tecnicaUsata != "spostamento") and not ("movimentoColcoNemici" in azioniDaEseguire and tecnicaUsata == "spostamento")) or fineanimaz == 0:
+    if (not ("attaccoColco" in azioniDaEseguire and tecnicaUsata != "spostamento") and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and tecnicaUsata == "spostamento")) or fineanimaz == 0:
         if animazioneColcoFatta:
             x = rx
             y = ry
@@ -551,7 +551,7 @@ def animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDa
 def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
-            if nemico.inCasellaVista and not (("movimentoColcoNemici" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico)) and not (nemico.animaMorte and nemico.animazioneFatta) or (nemico.inCasellaVista and fineanimaz == 0 and not nemico.animaMorte):
+            if nemico.inCasellaVista and not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico)) and not (nemico.animaMorte and nemico.animazioneFatta) or (nemico.inCasellaVista and fineanimaz == 0 and not nemico.animaMorte):
                 if nemico.animazioneFatta:
                     GlobalVarG2.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
                     if nemico.statoInizioTurno[2]:
@@ -1250,20 +1250,50 @@ def disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca):
             i += 4
 
 
-def animaPersonaggi(listaPersonaggi, caseviste):
-    for personaggio in listaPersonaggi:
-        j = 0
-        while j < len(caseviste):
-            if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
-                GlobalVarG2.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
-                break
-            j += 3
+def animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz):
+    if not cambiosta:
+        for personaggio in listaPersonaggi:
+            if personaggio.inCasellaVista and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and personaggio.animaSpostamento) and not personaggio.animazioneFatta or (personaggio.inCasellaVista and fineanimaz == 0):
+                if personaggio.animazioneFatta:
+                    GlobalVarG2.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+                else:
+                    GlobalVarG2.schermo.blit(personaggio.imgAttuale, (personaggio.vx, personaggio.vy))
+
+
+def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta, fineanimaz):
+    if not cambiosta:
+        for personaggio in listaPersonaggi:
+            if personaggio.inCasellaVista and personaggio.animaSpostamento and (personaggio.x != personaggio.vx or personaggio.y != personaggio.vy):
+                personaggio.animazioneFatta = True
+                animazionePersonaggi = True
+                # rumorecamminataPersonaggi.play()
+                if personaggio.direzione == "d":
+                    if 5 < fineanimaz <= 10:
+                        GlobalVarG2.schermo.blit(personaggio.imgDMov1, (personaggio.x - (GlobalVarG2.gpx * fineanimaz // 10), personaggio.y))
+                    if 0 < fineanimaz <= 5:
+                        GlobalVarG2.schermo.blit(personaggio.imgDMov2, (personaggio.x - (GlobalVarG2.gpx * fineanimaz // 10), personaggio.y))
+                if personaggio.direzione == "a":
+                    if 5 < fineanimaz <= 10:
+                        GlobalVarG2.schermo.blit(personaggio.imgAMov1, (personaggio.x + (GlobalVarG2.gpx * fineanimaz // 10), personaggio.y))
+                    if 0 < fineanimaz <= 5:
+                        GlobalVarG2.schermo.blit(personaggio.imgAMov2, (personaggio.x + (GlobalVarG2.gpx * fineanimaz // 10), personaggio.y))
+                if personaggio.direzione == "w":
+                    if 5 < fineanimaz <= 10:
+                        GlobalVarG2.schermo.blit(personaggio.imgWMov1, (personaggio.x, personaggio.y + (GlobalVarG2.gpy * fineanimaz // 10)))
+                    if 0 < fineanimaz <= 5:
+                        GlobalVarG2.schermo.blit(personaggio.imgWMov2, (personaggio.x, personaggio.y + (GlobalVarG2.gpy * fineanimaz // 10)))
+                if personaggio.direzione == "s":
+                    if 5 < fineanimaz <= 10:
+                        GlobalVarG2.schermo.blit(personaggio.imgSMov1, (personaggio.x, personaggio.y - (GlobalVarG2.gpy * fineanimaz // 10)))
+                    if 0 < fineanimaz <= 5:
+                        GlobalVarG2.schermo.blit(personaggio.imgSMov2, (personaggio.x, personaggio.y - (GlobalVarG2.gpy * fineanimaz // 10)))
+    return animazionePersonaggi
 
 
 def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, movimentoPerMouse):
     schermo_prima_delle_animazioni = GlobalVarG2.schermo.copy()
 
-    azioniPossibili = ["attaccoColco", "movimentoColcoNemici", "attaccoNemici", "aumentaLv"]
+    azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
     azioniDaEseguire = []
     if sposta and (attacco == 1 or animaOggetto[0]):
         azioniDaEseguire.append("attaccoRallo")
@@ -1274,24 +1304,29 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         if nemico.animaSpostamento or nemico.animaMorte:
             spostamentoNemico = True
             break
-    if sposta and attacco == 0 and not animaOggetto[0] and not cambiosta and ((tecnicaUsata and tecnicaUsata == "spostamento") or spostamentoNemico) and not (tecnicaUsata and tecnicaUsata != "spostamento"):
+    spostamentoPersonaggio = False
+    for personaggio in listaPersonaggi:
+        if personaggio.animaSpostamento:
+            spostamentoPersonaggio = True
+            break
+    if sposta and attacco == 0 and not animaOggetto[0] and not cambiosta and ((tecnicaUsata and tecnicaUsata == "spostamento") or spostamentoNemico or spostamentoPersonaggio) and not (tecnicaUsata and tecnicaUsata != "spostamento"):
         azioniPossibili.remove("attaccoColco")
-        azioniPossibili.remove("movimentoColcoNemici")
-        azioniDaEseguire.append("movimentoColcoNemici")
+        azioniPossibili.remove("movimentoColcoNemiciPersonaggi")
+        azioniDaEseguire.append("movimentoColcoNemiciPersonaggi")
     elif not sposta and not cambiosta:
         if tecnicaUsata and tecnicaUsata != "spostamento":
             azioniDaEseguire.append("attaccoColco")
             azioniPossibili.remove("attaccoColco")
         else:
             azioniPossibili.remove("attaccoColco")
-            azioniPossibili.remove("movimentoColcoNemici")
+            azioniPossibili.remove("movimentoColcoNemiciPersonaggi")
             spostamentoNemico = False
             for nemico in listaNemici:
                 if nemico.animaSpostamento or nemico.animaMorte:
                     spostamentoNemico = True
                     break
             if spostamentoNemico or (tecnicaUsata and tecnicaUsata == "spostamento"):
-                azioniDaEseguire.append("movimentoColcoNemici")
+                azioniDaEseguire.append("movimentoColcoNemiciPersonaggi")
             else:
                 attaccoNemico = False
                 for nemico in listaNemici:
@@ -1309,6 +1344,8 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
     animazioneColcoFatta = False
     for nemico in listaNemici:
         nemico.animazioneFatta = False
+    for personaggio in listaPersonaggi:
+        personaggio.animazioneFatta = False
     while len(azioniDaEseguire) > 0:
         # viene fatto un ciclo in più alla fine (senza clock) per ripulire le immagini delle animazioni rimaste (altrimenti le ultime non verrebbero cancellate)
         nemicoAttaccante = False
@@ -1322,6 +1359,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animazioneRallo = False
             animazioneColco = False
             animazioneNemici = False
+            animazionePersonaggi = False
             # ridisegnare il quadratino dove sono i personaggi
             if cambiosta:
                 if fineanimaz == 10:
@@ -1350,13 +1388,20 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                         if ((nemico.x / GlobalVarG2.gpx) + (nemico.y / GlobalVarG2.gpy)) % 2 == 1:
                             GlobalVarG2.schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
                             GlobalVarG2.schermo.blit(sfondinob, (nemico.x, nemico.y))
+                for personaggio in listaPersonaggi:
+                    if personaggio.inCasellaVista:
+                        if ((personaggio.x / GlobalVarG2.gpx) + (personaggio.y / GlobalVarG2.gpy)) % 2 == 0:
+                            GlobalVarG2.schermo.blit(sfondinob, (personaggio.vx, personaggio.vy))
+                            GlobalVarG2.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
+                        if ((personaggio.x / GlobalVarG2.gpx) + (personaggio.y / GlobalVarG2.gpy)) % 2 == 1:
+                            GlobalVarG2.schermo.blit(sfondinoa, (personaggio.vx, personaggio.vy))
+                            GlobalVarG2.schermo.blit(sfondinob, (personaggio.x, personaggio.y))
 
             # disegno le GlobalVarG2.esche e il denaro
             animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob, azioniDaEseguire, animaOggetto)
             animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob)
             animaCofanetti(cofanetti, caseviste, sfondinoc)
             animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc)
-            animaPersonaggi(listaPersonaggi, caseviste)
 
             statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv)
 
@@ -1372,6 +1417,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             # disegna personaggi se ci sono animazioni ma non loro
             animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, statoColcoInizioTurno[1], tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, fineanimaz)
             animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, fineanimaz)
+            animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz)
             if not cambiosta:
                 animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, statoRalloInizioTurno[1], azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz)
 
@@ -1385,11 +1431,13 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 # animazione aumento di livello
                 animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, fineanimaz)
 
-            if "movimentoColcoNemici" in azioniDaEseguire:
+            if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo
                 animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
                 # animazione camminata mostri
                 animazioneNemici = animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
+                # animazione camminata personaggi
+                animazionePersonaggi = animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta, fineanimaz)
                 # animazione morte nemici
                 animazioneNemici = animaMorteNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
 
@@ -1435,7 +1483,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animazioneColcoFatta = True
 
             pygame.event.pump()
-            if (animazioneNemici or animazioneRallo or animazioneColco) and fineanimaz > 0:
+            if (animazioneNemici or animazioneRallo or animazioneColco or animazionePersonaggi) and fineanimaz > 0:
                 pygame.display.update()
                 GlobalVarG2.clockAnimazioni.tick(GlobalVarG2.fpsAnimazioni)
                 # print (GlobalVarG2.clockAnimazioni.get_fps())
@@ -1454,12 +1502,17 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     if nemico.animaSpostamento or nemico.animaMorte:
                         spostamentoNemico = True
                         break
-                if (spostamentoNemico or tecnicaUsata == "spostamento") and "movimentoColcoNemici" in azioniPossibili:
-                    azioniDaEseguire.append("movimentoColcoNemici")
-                    azioniPossibili.remove("movimentoColcoNemici")
+                spostamentoPersonaggio = False
+                for personaggio in listaPersonaggi:
+                    if personaggio.animaSpostamento:
+                        spostamentoPersonaggio = True
+                        break
+                if (spostamentoNemico or tecnicaUsata == "spostamento" or spostamentoPersonaggio) and "movimentoColcoNemiciPersonaggi" in azioniPossibili:
+                    azioniDaEseguire.append("movimentoColcoNemiciPersonaggi")
+                    azioniPossibili.remove("movimentoColcoNemiciPersonaggi")
                 else:
-                    if "movimentoColcoNemici" in azioniPossibili:
-                        azioniPossibili.remove("movimentoColcoNemici")
+                    if "movimentoColcoNemiciPersonaggi" in azioniPossibili:
+                        azioniPossibili.remove("movimentoColcoNemiciPersonaggi")
                     attaccoNemico = False
                     for nemico in listaNemici:
                         if not nemico.animazioneFatta and nemico.animaAttacco:

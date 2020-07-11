@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from NemicoObj import *
+from PersonaggioObj import *
 
 
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco):
+def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVarG2.gpx
     dati[3] = dati[3] // GlobalVarG2.gpy
@@ -51,6 +52,12 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         scrivi.write("%i_" % nemico.yObbiettivo)
         scrivi.write("%i_" % nemico.xPosizioneUltimoBersaglio)
         scrivi.write("%i_" % nemico.yPosizioneUltimoBersaglio)
+        scrivi.write("%i_" % nemico.numeroMovimento)
+        scrivi.write("%i_" % nemico.triggerato)
+        scrivi.write("[_")
+        for direzione in nemico.percorso:
+            scrivi.write("%s_" % direzione)
+        scrivi.write("]_")
     scrivi.write("\n")
     i = 0
     while i < len(vitaesca):
@@ -64,7 +71,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
     while i < len(vettoreDenaro):
         scrivi.write("%i_" % vettoreDenaro[i])
         scrivi.write("%i_" % (vettoreDenaro[i + 1] // GlobalVarG2.gpx))
-        scrivi.write("%i_" % (vettoreDenaro[i + 2] // GlobalVarG2.gpx))
+        scrivi.write("%i_" % (vettoreDenaro[i + 2] // GlobalVarG2.gpy))
         i += 3
     scrivi.write("\n")
     i = 0
@@ -82,6 +89,19 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         scrivi.write("%i_" % obbiettivoCasualeColco.stanzaDiAppartenenza)
         scrivi.write("%i_" % obbiettivoCasualeColco.x)
         scrivi.write("%i_" % obbiettivoCasualeColco.y)
+    scrivi.write("\n")
+    for personaggio in listaPersonaggiTotali:
+        scrivi.write("%i_" % (personaggio.x // GlobalVarG2.gpx))
+        scrivi.write("%i_" % (personaggio.y // GlobalVarG2.gpy))
+        scrivi.write("%s_" % personaggio.direzione)
+        scrivi.write("%s_" % personaggio.tipo)
+        scrivi.write("%i_" % personaggio.stanzaDiAppartenenza)
+        scrivi.write("%i_" % personaggio.avanzamentoStoria)
+        scrivi.write("[_")
+        for direzione in personaggio.percorso:
+            scrivi.write("%s_" % direzione)
+        scrivi.write("]_")
+        scrivi.write("%i_" % personaggio.numeroMovimento)
     scrivi.close()
 
     # conversione della posizione in pixel
@@ -112,13 +132,14 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
     listaEsche = []
     listaMonete = []
     stanzeGiaVisitate = []
+    listaPersonaggiTotali = []
 
     leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
     leggifile = leggi.read()
     leggi.close()
     datiTotali = leggifile.split("\n")
     if not (len(datiTotali) == 1 and datiTotali[0] == ""):
-        if len(datiTotali) == 7:
+        if len(datiTotali) == 8:
             dati = datiTotali[0].split("_")
             dati.pop(len(dati) - 1)
             if len(dati) == 0 or len(dati) != lunghezzadati:
@@ -148,13 +169,32 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                         i = i + 4
             datiNemici = datiTotali[1].split("_")
             datiNemici.pop(len(datiNemici) - 1)
-            if len(datiNemici) % 13 != 0:
+            try:
+                i = 0
+                while i < len(datiNemici):
+                    j = i + 15 + 1
+                    while j < len(datiNemici):
+                        if datiNemici[j] == "]":
+                            datiNemici.pop(j)
+                            datiNemici.pop(i + 15)
+                            percorsoNemico = []
+                            k = i + 15
+                            while k < j - 1:
+                                percorsoNemico.append(datiNemici.pop(i + 15))
+                                k += 1
+                            datiNemici.insert(i + 15, percorsoNemico)
+                            break
+                        j += 1
+                    i += 16
+            except ValueError:
+                errore = True
+            if len(datiNemici) % 16 != 0:
                 errore = True
             else:
                 i = 0
                 while i < len(datiNemici):
                     try:
-                        nemico = NemicoObj(GlobalVarG2.gsx // 32 * int(datiNemici[i + 2]), GlobalVarG2.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]))
+                        nemico = NemicoObj(GlobalVarG2.gsx // 32 * int(datiNemici[i + 2]), GlobalVarG2.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 15], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])))
                         nemico.vita = int(datiNemici[i + 4])
                         nemico.avvelenato = bool(int(datiNemici[i + 5]))
                         nemico.appiccicato = bool(int(datiNemici[i + 6]))
@@ -167,7 +207,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                     except ValueError:
                         errore = True
                         break
-                    i += 13
+                    i += 16
             listaEsche = datiTotali[2].split("_")
             listaEsche.pop(len(listaEsche) - 1)
             if len(listaEsche) % 4 != 0:
@@ -193,8 +233,8 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                 while i < len(listaMonete):
                     try:
                         listaMonete[i] = int(listaMonete[i])
-                        listaMonete[i + 1] = int(GlobalVarG2.gpx * listaMonete[i + 1])
-                        listaMonete[i + 2] = int(GlobalVarG2.gpy * listaMonete[i + 2])
+                        listaMonete[i + 1] = int(GlobalVarG2.gpx * int(listaMonete[i + 1]))
+                        listaMonete[i + 2] = int(GlobalVarG2.gpy * int(listaMonete[i + 2]))
                     except ValueError:
                         errore = True
                         break
@@ -217,18 +257,51 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                     ultimoObbiettivoColco[1] = int(ultimoObbiettivoColco[1])
                 except ValueError:
                     errore = True
-            obbiettivoCasualeColco = datiTotali[6].split("_")
-            obbiettivoCasualeColco.pop(len(obbiettivoCasualeColco) - 1)
-            if len(obbiettivoCasualeColco) > 0:
+            obbiettivoCasualeColcoVet = datiTotali[6].split("_")
+            obbiettivoCasualeColcoVet.pop(len(obbiettivoCasualeColcoVet) - 1)
+            if len(obbiettivoCasualeColcoVet) > 0:
                 try:
                     for nemico in listaNemiciTotali:
-                        if nemico.stanzaDiAppartenenza == int(obbiettivoCasualeColco[0]) and nemico.x == int(obbiettivoCasualeColco[1]) and nemico.y == int(obbiettivoCasualeColco[2]):
+                        if nemico.stanzaDiAppartenenza == int(obbiettivoCasualeColcoVet[0]) and nemico.x == int(obbiettivoCasualeColcoVet[1]) and nemico.y == int(obbiettivoCasualeColcoVet[2]):
                             obbiettivoCasualeColco = nemico
                             break
                 except ValueError:
                     errore = True
             else:
                 obbiettivoCasualeColco = False
+            datiPersonaggi = datiTotali[7].split("_")
+            datiPersonaggi.pop(len(datiPersonaggi) - 1)
+            try:
+                i = 0
+                while i < len(datiPersonaggi):
+                    j = i + 6 + 1
+                    while j < len(datiPersonaggi):
+                        if datiPersonaggi[j] == "]":
+                            datiPersonaggi.pop(j)
+                            datiPersonaggi.pop(i + 6)
+                            percorsoPersonaggio = []
+                            k = i + 6
+                            while k < j - 1:
+                                percorsoPersonaggio.append(datiPersonaggi.pop(i + 6))
+                                k += 1
+                            datiPersonaggi.insert(i + 6, percorsoPersonaggio)
+                            break
+                        j += 1
+                    i += 8
+            except ValueError:
+                errore = True
+            if len(datiPersonaggi) % 8 != 0:
+                errore = True
+            else:
+                i = 0
+                while i < len(datiPersonaggi):
+                    try:
+                        personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * int(datiPersonaggi[i]), GlobalVarG2.gsy // 18 * int(datiPersonaggi[i + 1]), datiPersonaggi[i + 2], datiPersonaggi[i + 3], int(datiPersonaggi[i + 4]), int(datiPersonaggi[i + 5]), datiPersonaggi[i + 6], int(datiPersonaggi[i + 7]))
+                        listaPersonaggiTotali.append(personaggio)
+                    except ValueError:
+                        errore = True
+                        break
+                    i += 8
         else:
             errore = True
         if errore:
@@ -377,11 +450,11 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
         if mostraErrori:
             print "Salvataggio: " + str(n)
             GlobalVarG2.canaleSoundCanzone.stop()
-            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali
         else:
             return dati, tipoErrore
     else:
         if mostraErrori:
-            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali
         else:
             return False, tipoErrore

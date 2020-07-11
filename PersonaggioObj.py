@@ -5,15 +5,23 @@ from GenericFuncG2 import *
 
 class PersonaggioObj(object):
 
-    def __init__(self, x, y, direzione, tipo, avanzamentoStoria):
+    def __init__(self, x, y, direzione, tipo, stanza, avanzamentoStoria, percorso, numeroMovimento=0):
         self.x = x
         self.y = y
+        self.vx = x
+        self.vy = y
 
         self.tipo = tipo
+        self.stanzaDiAppartenenza = stanza
         self.oggettoDato = False
         self.avanzamentoStoria = False
         self.menuMercante = False
         self.scelta = False
+        self.percorso = percorso
+        self.numeroMovimento = numeroMovimento
+        self.inCasellaVista = False
+        self.animaSpostamento = False
+        self.animazioneFatta = False
 
         self.caricaImg()
         self.girati(direzione)
@@ -28,6 +36,23 @@ class PersonaggioObj(object):
         self.imgS = pygame.transform.scale(imgS, (GlobalVarG2.gpx, GlobalVarG2.gpy))
         imgD = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png")
         self.imgD = pygame.transform.scale(imgD, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+
+        imgWMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png")
+        self.imgWMov1 = pygame.transform.scale(imgWMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        imgWMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png")
+        self.imgWMov2 = pygame.transform.scale(imgWMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        imgAMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png")
+        self.imgAMov1 = pygame.transform.scale(imgAMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        imgAMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png")
+        self.imgAMov2 = pygame.transform.scale(imgAMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        imgSMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png")
+        self.imgSMov1 = pygame.transform.scale(imgSMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        imgSMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png")
+        self.imgSMov2 = pygame.transform.scale(imgSMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        imgDMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png")
+        self.imgDMov1 = pygame.transform.scale(imgDMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        imgDMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png")
+        self.imgDMov2 = pygame.transform.scale(imgDMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
         imgDialogo = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png")
         self.imgDialogo = pygame.transform.scale(imgDialogo, (GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 9))
@@ -158,3 +183,44 @@ class PersonaggioObj(object):
                 dialogo.append("")
                 dialogo.append("")
                 self.partiDialogo.append(dialogo)
+
+    def spostati(self, x, y, rx, ry, listaNemici):
+        self.vx = self.x
+        self.vy = self.y
+        self.animaSpostamento = True
+        movimentoAnnullato = False
+
+        if len(self.percorso) > 0:
+            direzione = self.percorso[self.numeroMovimento]
+            self.girati(direzione)
+        else:
+            direzione = ""
+        if direzione == "w":
+            self.y -= GlobalVarG2.gpy
+        elif direzione == "a":
+            self.x -= GlobalVarG2.gpx
+        elif direzione == "s":
+            self.y += GlobalVarG2.gpy
+        elif direzione == "d":
+            self.x += GlobalVarG2.gpx
+        else:
+            self.animaSpostamento = False
+
+        for nemico in listaNemici:
+            if self.x == nemico.x and self.y == nemico.y:
+                self.x = self.vx
+                self.y = self.vy
+                self.animaSpostamento = False
+                movimentoAnnullato = True
+                break
+        if (self.x == x and self.y == y) or (self.x == rx and self.y == ry):
+            self.x = self.vx
+            self.y = self.vy
+            self.animaSpostamento = False
+            movimentoAnnullato = True
+
+        if not movimentoAnnullato:
+            if self.numeroMovimento < len(self.percorso) - 1:
+                self.numeroMovimento += 1
+            else:
+                self.numeroMovimento = 0

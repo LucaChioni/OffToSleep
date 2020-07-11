@@ -5,7 +5,7 @@ from GenericFuncG2 import *
 
 class NemicoObj(object):
 
-    def __init__(self, x, y, direzione, tipo, stanza):
+    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False):
         self.x = x
         self.y = y
         self.vx = x
@@ -16,6 +16,9 @@ class NemicoObj(object):
         self.stanzaDiAppartenenza = stanza
         self.morto = False
         self.inCasellaVista = False
+        self.triggerato = triggerato
+        self.percorso = percorso
+        self.numeroMovimento = numeroMovimento
         self.xObbiettivo = False
         self.yObbiettivo = False
         self.xPosizioneUltimoBersaglio = False
@@ -136,6 +139,7 @@ class NemicoObj(object):
         self.imgDanneggiamentoColco = pygame.transform.scale(imgDanneggiamentoColco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
     def girati(self, direzione):
+        self.imgAttuale = self.imgS
         if direzione == "w":
             self.imgAttuale = self.imgW
         elif direzione == "a":

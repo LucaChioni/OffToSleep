@@ -244,7 +244,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         if voceMarcata == 1:
                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             if cosa == 1:
-                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, background)
+                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, background)
                                 if dati:
                                     return n, cosa
                                 else:

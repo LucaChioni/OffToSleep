@@ -16,6 +16,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     carim = False
 
     if vistoRallo or vistoRob or vistoesca:
+        nemico.triggerato = True
         # andare verso il sacchetto di denaro
         if nemico.xObbiettivo == xDenaro and nemico.yObbiettivo == yDenaro:
             vetNemiciSoloConXeY = []
@@ -399,6 +400,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     attacca = True
                     sposta = False
     elif vistoDenaro:
+        nemico.triggerato = True
         nemico.xObbiettivo = xDenaro
         nemico.yObbiettivo = yDenaro
         vetNemiciSoloConXeY = []
@@ -465,6 +467,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             nemico.xObbiettivo = False
             nemico.yObbiettivo = False
     elif nemico.xPosizioneUltimoBersaglio and nemico.yPosizioneUltimoBersaglio:
+        nemico.triggerato = True
         if (nemico.xPosizioneUltimoBersaglio == nemico.x + GlobalVarG2.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x - GlobalVarG2.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y + GlobalVarG2.gpy) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y - GlobalVarG2.gpy):
             if nemico.xPosizioneUltimoBersaglio == nemico.x + GlobalVarG2.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y:
                 nmos = 1
@@ -506,12 +509,52 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 nemico.yPosizioneUltimoBersaglio = False
                 nemico.xObbiettivo = False
                 nemico.yObbiettivo = False
-                nmos = random.randint(1, 4)
+                if nemico.triggerato:
+                    nmos = random.randint(1, 4)
+                else:
+                    if len(nemico.percorso) > 0:
+                        direzione = nemico.percorso[nemico.numeroMovimento]
+                    else:
+                        direzione = ""
+                    if direzione == "w":
+                        nmos = 4
+                    elif direzione == "a":
+                        nmos = 2
+                    elif direzione == "s":
+                        nmos = 3
+                    elif direzione == "d":
+                        nmos = 1
+                    else:
+                        nmos = 0
+                    if nemico.numeroMovimento < len(nemico.percorso) - 1:
+                        nemico.numeroMovimento += 1
+                    else:
+                        nemico.numeroMovimento = 0
                 sposta = True
     else:
         nemico.xObbiettivo = False
         nemico.yObbiettivo = False
-        nmos = random.randint(1, 4)
+        if nemico.triggerato:
+            nmos = random.randint(1, 4)
+        else:
+            if len(nemico.percorso) > 0:
+                direzione = nemico.percorso[nemico.numeroMovimento]
+            else:
+                direzione = ""
+            if direzione == "w":
+                nmos = 4
+            elif direzione == "a":
+                nmos = 2
+            elif direzione == "s":
+                nmos = 3
+            elif direzione == "d":
+                nmos = 1
+            else:
+                nmos = 0
+            if nemico.numeroMovimento < len(nemico.percorso) - 1:
+                nemico.numeroMovimento += 1
+            else:
+                nemico.numeroMovimento = 0
         sposta = True
 
     # spostamento

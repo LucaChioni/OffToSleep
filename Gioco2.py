@@ -49,7 +49,7 @@ def gameloop():
             difesa = 0
             nx = 0
             ny = 0
-            dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco = menu(caricaSalvataggio)
+            dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali = menu(caricaSalvataggio)
             caricaSalvataggio = False
             pers = GlobalVarG2.perss
             robot = GlobalVarG2.robos
@@ -149,20 +149,24 @@ def gameloop():
 
                 listaNemici = []
                 if not dati[1] in stanzeGiaVisitate:
-                    stanzeGiaVisitate.append(dati[1])
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 29, GlobalVarG2.gsy // 18 * 15, "w", "Orco", dati[1])
+                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 29, GlobalVarG2.gsy // 18 * 15, "w", "Orco", dati[1], percorsoNemico)
                     listaNemiciTotali.append(nemico)
                     listaNemici.append(nemico)
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 3, "a", "Orco", dati[1])
+                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 3, "a", "Orco", dati[1], percorsoNemico)
                     listaNemiciTotali.append(nemico)
                     listaNemici.append(nemico)
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 7, "s", "Pipistrello", dati[1])
+                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 7, "s", "Pipistrello", dati[1], percorsoNemico)
                     listaNemiciTotali.append(nemico)
                     listaNemici.append(nemico)
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 14, "d", "Orco", dati[1])
+                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 14, "d", "Orco", dati[1], percorsoNemico)
                     listaNemiciTotali.append(nemico)
                     listaNemici.append(nemico)
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4, "s", "Pipistrello", dati[1])
+                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4, "s", "Pipistrello", dati[1], percorsoNemico)
                     listaNemiciTotali.append(nemico)
                     listaNemici.append(nemico)
                 else:
@@ -172,6 +176,18 @@ def gameloop():
                 nmost = len(listaNemici)
 
                 listaPersonaggi = []
+                if not dati[1] in stanzeGiaVisitate:
+                    percorsoPersonaggio = ["w", "a", "a", "s", "d", "d"]
+                    personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4, "d", "Mercante", dati[1], dati[0], percorsoPersonaggio)
+                    listaPersonaggiTotali.append(personaggio)
+                    listaPersonaggi.append(personaggio)
+                else:
+                    for personaggio in listaPersonaggiTotali:
+                        if personaggio.stanzaDiAppartenenza == dati[1]:
+                            listaPersonaggi.append(personaggio)
+
+                if not dati[1] in stanzeGiaVisitate:
+                    stanzeGiaVisitate.append(dati[1])
 
             if dati[1] == 2 and cambiosta:
                 # rumore porte
@@ -197,8 +213,8 @@ def gameloop():
 
                 listaNemici = []
                 if not dati[1] in stanzeGiaVisitate:
-                    stanzeGiaVisitate.append(dati[1])
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 29, GlobalVarG2.gsy // 18 * 15, "w", "Orco", dati[1])
+                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 29, GlobalVarG2.gsy // 18 * 15, "w", "Orco", dati[1], percorsoNemico)
                     listaNemiciTotali.append(nemico)
                     listaNemici.append(nemico)
                 else:
@@ -208,10 +224,22 @@ def gameloop():
                 nmost = len(listaNemici)
 
                 listaPersonaggi = []
-                personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4, "d", "Mercante", dati[0])
-                listaPersonaggi.append(personaggio)
-                personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 3, "a", "FiglioUfficiale", dati[0])
-                listaPersonaggi.append(personaggio)
+                if not dati[1] in stanzeGiaVisitate:
+                    percorsoPersonaggio = ["w", "", "d", "s", "a"]
+                    personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4, "d", "Mercante", dati[1], dati[0], percorsoPersonaggio)
+                    listaPersonaggi.append(personaggio)
+                    listaPersonaggiTotali.append(personaggio)
+                    percorsoPersonaggio = []
+                    personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 3, "a", "FiglioUfficiale", dati[1], dati[0], percorsoPersonaggio)
+                    listaPersonaggi.append(personaggio)
+                    listaPersonaggiTotali.append(personaggio)
+                else:
+                    for personaggio in listaPersonaggiTotali:
+                        if personaggio.stanzaDiAppartenenza == dati[1]:
+                            listaPersonaggi.append(personaggio)
+
+                if not dati[1] in stanzeGiaVisitate:
+                    stanzeGiaVisitate.append(dati[1])
 
             if cambiosta:
                 # stanza
@@ -1404,8 +1432,10 @@ def gameloop():
             GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.selsta)
             dati[2] = x
             dati[3] = y
+            dati[134] = rx
+            dati[135] = ry
             if not apriocchio:
-                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali)
                 if caricaSalvataggio:
                     inizio = True
                 if attacco == 0:
@@ -1962,6 +1992,20 @@ def gameloop():
                         vettoreDenaro.append(nemico.y)
                     nemico.morto = True
                     nemico.animaMorte = True
+
+        # movimento personaggi che sono in una casella vista
+        if sposta:
+            for personaggio in listaPersonaggi:
+                # controllo se il personaggio è in una casella vista
+                personaggio.inCasellaVista = False
+                i = 0
+                while i < len(caseviste):
+                    if caseviste[i + 2] and caseviste[i] == personaggio.x and caseviste[i + 1] == personaggio.y:
+                        personaggio.inCasellaVista = True
+                        break
+                    i += 3
+                if personaggio.inCasellaVista:
+                    personaggio.spostati(x, y, rx, ry, listaNemici)
 
         # aumentare di livello
         if not carim and not inizio:

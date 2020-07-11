@@ -47,7 +47,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     GlobalVarG2.schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
             i += 3
 
-    # disegnare casella sopra la vecchia posizione dei personaggi e mostri
+    # disegnare casella sopra la vecchia posizione dei personaggi, mostri e personaggi
     if ((vx / GlobalVarG2.gpx) + (vy / GlobalVarG2.gpy)) % 2 == 0:
         GlobalVarG2.schermo.blit(sfondinoa, (vx, vy))
     if ((vx / GlobalVarG2.gpx) + (vy / GlobalVarG2.gpy)) % 2 == 1:
@@ -64,6 +64,15 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     GlobalVarG2.schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
                 if ((nemico.vx / GlobalVarG2.gpx) + (nemico.vy / GlobalVarG2.gpy)) % 2 == 1:
                     GlobalVarG2.schermo.blit(sfondinob, (nemico.vx, nemico.vy))
+        j += 3
+    j = 0
+    while j < len(caseviste):
+        for personaggio in listaPersonaggi:
+            if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
+                if ((personaggio.vx / GlobalVarG2.gpx) + (personaggio.vy / GlobalVarG2.gpy)) % 2 == 0:
+                    GlobalVarG2.schermo.blit(sfondinoa, (personaggio.vx, personaggio.vy))
+                if ((personaggio.vx / GlobalVarG2.gpx) + (personaggio.vy / GlobalVarG2.gpy)) % 2 == 1:
+                    GlobalVarG2.schermo.blit(sfondinob, (personaggio.vx, personaggio.vy))
         j += 3
 
     # backbround occhio/chiave
