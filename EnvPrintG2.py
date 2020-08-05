@@ -3,7 +3,7 @@
 from GenericFuncG2 import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, avanzamentoStoria):
     if caricaTutto:
         GlobalVarG2.schermo.blit(imgSfondoStanza, (0, 0))
         # porte
@@ -85,10 +85,11 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
 
     # chiave robo
-    if chiamarob:
-        GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
-    else:
-        GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+    if avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco:
+        if chiamarob:
+            GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+        else:
+            GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
 
     # GlobalVarG2.esche: id, vita, xesca, yesca
     i = 0
@@ -210,7 +211,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalVarG2.schermo.blit(GlobalVarG2.difesapiu, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 17))
 
     # disegno la vita del mostro / Colco / esca selezionato
-    if nemicoInquadrato == "Colco" or not nemicoInquadrato:
+    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco):
         lungentot = int(((GlobalVarG2.gpx * entot) / float(4)) // 15)
         lungen = int(((GlobalVarG2.gpx * enrob) / float(4)) // 15)
         if lungen < 0:
@@ -341,10 +342,10 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         for nemico in listaNemici:
             if not nemico.morto and caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
                 GlobalVarG2.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
-                if nemico.appiccicato:
-                    GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                 if nemico.avvelenato:
                     GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
+                if nemico.appiccicato:
+                    GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
         j = j + 3
 
     # disegno img GlobalVarG2.puntatoreInquadraNemici
@@ -380,7 +381,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -448,10 +449,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
 
     # chiave robo
-    if chiamarob:
-        GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
-    else:
-        GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+    if avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco:
+        if chiamarob:
+            GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+        else:
+            GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
     # porte
     i = 0
     while i < len(porte):
@@ -649,7 +651,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or not nemicoInquadrato) and 0 < yMouse < GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 < xMouse < GlobalVarG2.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco)) and 0 < yMouse < GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 < xMouse < GlobalVarG2.gsx // 32 * 4:
                 if GlobalVarG2.mouseBloccato:
                     GlobalVarG2.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -683,26 +685,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 inquadratoQualcosa = "personaggio"
                             break
                 if not inquadratoQualcosa:
-                    i = 0
-                    while i < len(porte):
-                        if porte[i + 1] < xMouse < porte[i + 1] + GlobalVarG2.gpx and porte[i + 2] < yMouse < porte[i + 2] + GlobalVarG2.gpy:
-                            if (porte[i + 1] == x + GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalVarG2.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalVarG2.gpy):
-                                if GlobalVarG2.mouseBloccato:
-                                    GlobalVarG2.configuraCursore(False)
-                                inquadratoQualcosa = "porta"
-                            break
-                        i += 4
-                if not inquadratoQualcosa:
-                    i = 0
-                    while i < len(cofanetti):
-                        if cofanetti[i + 1] < xMouse < cofanetti[i + 1] + GlobalVarG2.gpx and cofanetti[i + 2] < yMouse < cofanetti[i + 2] + GlobalVarG2.gpy and not cofanetti[i + 3]:
-                            if ((cofanetti[i + 1] == x + GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x - GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVarG2.gpy) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVarG2.gpy)) and not cofanetti[i + 3]:
-                                if GlobalVarG2.mouseBloccato:
-                                    GlobalVarG2.configuraCursore(False)
-                                inquadratoQualcosa = "cofanetto"
-                            break
-                        i += 4
-                if not inquadratoQualcosa:
                     for nemico in listaNemiciVisti:
                         if nemico.x < xMouse < nemico.x + GlobalVarG2.gpx and nemico.y < yMouse < nemico.y + GlobalVarG2.gpy:
                             if nemicoInquadrato and type(nemicoInquadrato) is not str and nemico.x == nemicoInquadrato.x and nemico.y == nemicoInquadrato.y:
@@ -727,6 +709,26 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                         break
                                     j += 3
                             break
+                if not inquadratoQualcosa:
+                    i = 0
+                    while i < len(porte):
+                        if porte[i + 1] < xMouse < porte[i + 1] + GlobalVarG2.gpx and porte[i + 2] < yMouse < porte[i + 2] + GlobalVarG2.gpy:
+                            if (porte[i + 1] == x + GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalVarG2.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalVarG2.gpy):
+                                if GlobalVarG2.mouseBloccato:
+                                    GlobalVarG2.configuraCursore(False)
+                                inquadratoQualcosa = "porta"
+                            break
+                        i += 4
+                if not inquadratoQualcosa:
+                    i = 0
+                    while i < len(cofanetti):
+                        if cofanetti[i + 1] < xMouse < cofanetti[i + 1] + GlobalVarG2.gpx and cofanetti[i + 2] < yMouse < cofanetti[i + 2] + GlobalVarG2.gpy and not cofanetti[i + 3]:
+                            if ((cofanetti[i + 1] == x + GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x - GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVarG2.gpy) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVarG2.gpy)) and not cofanetti[i + 3]:
+                                if GlobalVarG2.mouseBloccato:
+                                    GlobalVarG2.configuraCursore(False)
+                                inquadratoQualcosa = "cofanetto"
+                            break
+                        i += 4
                 if not inquadratoQualcosa:
                     i = 0
                     while i < len(vitaesca):
@@ -765,6 +767,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -1004,7 +1009,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     if attacco != 0:
                         attaccoConfermato = True
 
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not startf:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto and not startf:
                 tastop = "mouseDestro"
                 sposta = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
@@ -1013,12 +1018,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     ricaricaschermo = True
                 else:
                     risposta = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not startf:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not rotellaConCentralePremuto and not startf:
                 tastop = "mouseCentrale"
                 risposta = True
                 sposta = False
                 startf = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and not startf:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato and not startf:
                 tastop = "mouseSinistro"
                 if inquadratoQualcosa == "start":
                     risposta = True
@@ -1100,9 +1105,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     sposta = False
                     if attacco != 0:
                         attaccoConfermato = True
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -1514,10 +1519,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             else:
                 GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
             # chiave robo
-            if chiamarob:
-                GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
-            else:
-                GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+            if avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco:
+                if chiamarob:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+                else:
+                    GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
             # disegno le caselle viste
             i = 0
             while i < len(caseviste):
@@ -1729,10 +1735,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             for nemico in listaNemici:
                 if caseviste[j] == nemico.x and caseviste[j + 1] == nemico.y and caseviste[j + 2]:
                     GlobalVarG2.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
-                    if nemico.appiccicato:
-                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                     if nemico.avvelenato:
                         GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
+                    if nemico.appiccicato:
+                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                     break
             j = j + 3
 
@@ -1866,10 +1872,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         else:
             GlobalVarG2.schermo.blit(GlobalVarG2.occhiochiu, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 1.4), GlobalVarG2.gpy * 0.3))
         # chiave robo
-        if chiamarob:
-            GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
-        else:
-            GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+        if avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco:
+            if chiamarob:
+                GlobalVarG2.schermo.blit(GlobalVarG2.chiaveroboacc, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
+            else:
+                GlobalVarG2.schermo.blit(GlobalVarG2.chiaverobospe, (GlobalVarG2.gsx - (GlobalVarG2.gpx * 4), 0))
 
         # vita-status rallo
         lungvitatot = int(((GlobalVarG2.gpx * pvtot) / float(4)) // 5)
@@ -2038,7 +2045,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if effp > 0:
                 GlobalVarG2.schermo.blit(GlobalVarG2.efficienzapiu, ((GlobalVarG2.gpx * 3) + (GlobalVarG2.gpx // 8), GlobalVarG2.gpy // 4))
         # vita colco selezionato
-        if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca:
+        if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco:
             if enrob > 0:
                 # controllo caselle attaccabili
                 vistaRobo = GlobalVarG2.gpx * 8
@@ -2179,7 +2186,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     break
                 i += 4
         # altrimenti mostro solo la vita di colco
-        elif not puntandoSuUnNemicoOColcoOEsca:
+        elif not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalVarG2.avanzamentoStoriaIncontroColco:
             lungentot = int(((GlobalVarG2.gpx * entot) / float(4)) // 15)
             lungen = int(((GlobalVarG2.gpx * enrob) / float(4)) // 15)
             if lungen < 0:

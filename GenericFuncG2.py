@@ -116,6 +116,9 @@ def guardaVideo(path, audio=0):
                 centraleMouseVecchio = centraleMouse
                 destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                rotellaConCentralePremuto = False
+                if centraleMouseVecchio and centraleMouse:
+                    rotellaConCentralePremuto = True
                 if not sinistroMouseVecchio and sinistroMouse:
                     centraleMouse = False
                     destroMouse = False
@@ -125,10 +128,11 @@ def guardaVideo(path, audio=0):
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse)):
+                if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
                     if event.type == pygame.KEYDOWN:
                         if GlobalVarG2.mouseVisibile:
                             pygame.mouse.set_visible(False)
@@ -164,6 +168,10 @@ def oggetto(x, y, dimx, dimy, px, py, nx, ny):
 
 def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti):
     cambiosta = False
+
+    if x < 0 or y < 0 or x >= GlobalVarG2.gsx or y >= GlobalVarG2.gsy:
+        return x, y, stanza, carim, cambiosta
+
     # prima stanza
     if (stanza == 1) and ((nx != 0) or (ny != 0)) and not cambiosta:
         # porte
@@ -2298,6 +2306,9 @@ def controllaMorteRallo(vitaRallo, inizio):
                 centraleMouseVecchio = centraleMouse
                 destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                rotellaConCentralePremuto = False
+                if centraleMouseVecchio and centraleMouse:
+                    rotellaConCentralePremuto = True
                 if not sinistroMouseVecchio and sinistroMouse:
                     centraleMouse = False
                     destroMouse = False
@@ -2307,10 +2318,11 @@ def controllaMorteRallo(vitaRallo, inizio):
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse)):
+                if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
                     if event.type == pygame.KEYDOWN:
                         if GlobalVarG2.mouseVisibile:
                             pygame.mouse.set_visible(False)
@@ -2431,6 +2443,7 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
                 GlobalVarG2.schermo.blit(arma, (x, y - GlobalVarG2.gpy))
             else:
                 GlobalVarG2.schermo.blit(arma, (x, y))
+            GlobalVarG2.schermo.blit(scudo, (x, y))
             if attaccoRavvicinato:
                 GlobalVarG2.schermo.blit(GlobalVarG2.perswmbAttacco, (x, y))
             elif inMovimento:
@@ -2441,7 +2454,6 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
             else:
                 GlobalVarG2.schermo.blit(GlobalVarG2.perswb, (x, y))
             GlobalVarG2.schermo.blit(guanti, (x, y))
-            GlobalVarG2.schermo.blit(scudo, (x, y))
             if inMovimento:
                 GlobalVarG2.schermo.blit(GlobalVarG2.perswm, (x, y))
             else:
@@ -2556,7 +2568,12 @@ def dialoga(avanzamentoStoria, personaggio):
     voceMarcata = 1
     puntatoreSpostato = False
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
-    imgPersDialogo = pygame.transform.scale(GlobalVarG2.persGrafDialogo, (GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 9))
+    if avanzamentoStoria < GlobalVarG2.avanzamentoStoriaCambioPersonaggio:
+        imgPersDialogo = pygame.transform.scale(GlobalVarG2.imgDialogoFraMaggiore, (GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 9))
+        nomePersonaggio = "Sam"
+    else:
+        imgPersDialogo = pygame.transform.scale(GlobalVarG2.imgDialogoSara, (GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 9))
+        nomePersonaggio = "Sara"
 
     GlobalVarG2.schermo.blit(imgPersDialogo, (GlobalVarG2.gsx // 32 * 19, GlobalVarG2.gsy // 18 * 4))
     GlobalVarG2.schermo.blit(personaggio.imgDialogo, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
@@ -2617,6 +2634,9 @@ def dialoga(avanzamentoStoria, personaggio):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -2668,12 +2688,12 @@ def dialoga(avanzamentoStoria, personaggio):
                     if voceMarcata != 3 and voceMarcata != 4:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostapun)
                         voceMarcata += 2
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 aggiornaInterfacciaPerMouse = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 tastoTrovato = True
                 fineDialogo = True
-            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 aggiornaInterfacciaPerMouse = False
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                 tastoTrovato = True
@@ -2692,9 +2712,9 @@ def dialoga(avanzamentoStoria, personaggio):
                     if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                         sceltaEffettuata = voceMarcata
                     prosegui = True
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -2714,7 +2734,7 @@ def dialoga(avanzamentoStoria, personaggio):
             if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
                 messaggio(personaggio.nome + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
             elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
-                messaggio("Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
+                messaggio(nomePersonaggio + ":", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 4 // 5), 80)
             if personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                 messaggio(personaggio.partiDialogo[numeromessaggioAttuale][sceltaEffettuata + 1], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 1, (GlobalVarG2.gsy * 2 // 3) + (GlobalVarG2.gpy * 7 // 3), 50)
             elif personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
@@ -2770,6 +2790,9 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -2779,16 +2802,72 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse):
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                 risposta = True
             if event.type == pygame.KEYDOWN:
                 if GlobalVarG2.mouseVisibile:
                     pygame.mouse.set_visible(False)
                     GlobalVarG2.mouseVisibile = False
+
+
+def cambiaProtagonista(nome):
+    persw = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio4.png')
+    GlobalVarG2.persw = pygame.transform.scale(persw, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perswb = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio4b.png')
+    GlobalVarG2.perswb = pygame.transform.scale(perswb, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persa = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio3.png')
+    GlobalVarG2.persa = pygame.transform.scale(persa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persab = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio3b.png')
+    GlobalVarG2.persab = pygame.transform.scale(persab, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    GlobalVarG2.perso = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio1.png')
+    GlobalVarG2.perss = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persob = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio1b.png')
+    GlobalVarG2.perssb = pygame.transform.scale(persob, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persd = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio2.png')
+    GlobalVarG2.persd = pygame.transform.scale(persd, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persdb = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio2b.png')
+    GlobalVarG2.persdb = pygame.transform.scale(persdb, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perssm = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio1mov.png')
+    GlobalVarG2.perssm = pygame.transform.scale(perssm, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perssmb1 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio1movb1.png')
+    GlobalVarG2.perssmb1 = pygame.transform.scale(perssmb1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perssmb2 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio1movb2.png')
+    GlobalVarG2.perssmb2 = pygame.transform.scale(perssmb2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persdm = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio2mov.png')
+    GlobalVarG2.persdm = pygame.transform.scale(persdm, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persdmb1 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio2movb1.png')
+    GlobalVarG2.persdmb1 = pygame.transform.scale(persdmb1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persdmb2 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio2movb2.png')
+    GlobalVarG2.persdmb2 = pygame.transform.scale(persdmb2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persam = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio3mov.png')
+    GlobalVarG2.persam = pygame.transform.scale(persam, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persamb1 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio3movb1.png')
+    GlobalVarG2.persamb1 = pygame.transform.scale(persamb1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persamb2 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio3movb2.png')
+    GlobalVarG2.persamb2 = pygame.transform.scale(persamb2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perswm = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio4mov.png')
+    GlobalVarG2.perswm = pygame.transform.scale(perswm, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perswmb1 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio4movb1.png')
+    GlobalVarG2.perswmb1 = pygame.transform.scale(perswmb1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perswmb2 = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio4movb2.png')
+    GlobalVarG2.perswmb2 = pygame.transform.scale(perswmb2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perswmbAttacco = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio4movbAttacco.png')
+    GlobalVarG2.perswmbAttacco = pygame.transform.scale(perswmbAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persambAttacco = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio3movbAttacco.png')
+    GlobalVarG2.persambAttacco = pygame.transform.scale(persambAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    perssmbAttacco = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio1movbAttacco.png')
+    GlobalVarG2.perssmbAttacco = pygame.transform.scale(perssmbAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persdmbAttacco = pygame.image.load('Immagini/Personaggi/' + nome + '/Personaggio2movbAttacco.png')
+    GlobalVarG2.persdmbAttacco = pygame.transform.scale(persdmbAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persmbDifesa = pygame.image.load('Immagini/Personaggi/' + nome + '/PersonaggiomovbDifesa.png')
+    GlobalVarG2.persmbDifesa = pygame.transform.scale(persmbDifesa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+    persAvvele = pygame.image.load('Immagini/Personaggi/' + nome + '/PersonaggioAvvelenato.png')
+    GlobalVarG2.persAvvele = pygame.transform.scale(persAvvele, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
 
 """# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)

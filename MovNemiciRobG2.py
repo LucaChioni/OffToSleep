@@ -990,7 +990,6 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if ry > nemicoBersaglio.y and c == 2:
                         nrob = 4
         elif mostroVisto and not azioneEseguita:
-            azioneEseguita = True
             # rimuovo Rallo dagli ostacoli se è nella stessa casella di Colco
             if rx == x and ry == y:
                 i = 0
@@ -1004,6 +1003,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             if percorsoTrovato and percorsoTrovato != "arrivato":
                 if len(percorsoTrovato) >= 4:
                     if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
+                        azioneEseguita = True
                         if percorsoTrovato[len(percorsoTrovato) - 4] > rx:
                             nrob = 1
                         if percorsoTrovato[len(percorsoTrovato) - 4] < rx:
@@ -1305,8 +1305,8 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         if ry > y and c == 2:
                             nrob = 4
             if not (ralloAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) and not (ralloVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
-                azioneEseguita = True
                 if abs(rx - x) == GlobalVarG2.gpx and abs(ry - y) == GlobalVarG2.gpy and ((vx == rx + GlobalVarG2.gpx and vy == ry) or (vx == rx - GlobalVarG2.gpx and vy == ry) or (vx == rx and vy == ry + GlobalVarG2.gpy) or (vx == rx and vy == ry - GlobalVarG2.gpy)):
+                    azioneEseguita = True
                     if vx == rx + GlobalVarG2.gpx and vy == ry:
                         nrob = 1
                     elif vx == rx - GlobalVarG2.gpx and vy == ry:
@@ -1321,6 +1321,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     if percorsoTrovato and percorsoTrovato != "arrivato":
                         if len(percorsoTrovato) >= 4:
                             if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
+                                azioneEseguita = True
                                 if percorsoTrovato[len(percorsoTrovato) - 4] > rx:
                                     nrob = 1
                                 if percorsoTrovato[len(percorsoTrovato) - 4] < rx:
@@ -1491,6 +1492,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
             if percorsoTrovato and percorsoTrovato != "arrivato":
                 if len(percorsoTrovato) >= 4:
                     if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
+                        azioneEseguita = True
                         if percorsoTrovato[len(percorsoTrovato) - 4] > rx:
                             nrob = 1
                         if percorsoTrovato[len(percorsoTrovato) - 4] < rx:
@@ -1500,7 +1502,6 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                         if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                             nrob = 4
                         sposta = True
-                        azioneEseguita = True
         if azioneEseguita and sposta:
             tecnicaUsata = "spostamento"
             ultimoObbiettivoColco = []
@@ -1896,6 +1897,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                 if percorsoTrovato and percorsoTrovato != "arrivato":
                     if len(percorsoTrovato) >= 4:
                         if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
+                            azioneEseguita = True
                             if percorsoTrovato[len(percorsoTrovato) - 4] > rx:
                                 nrob = 1
                             if percorsoTrovato[len(percorsoTrovato) - 4] < rx:
@@ -1905,7 +1907,6 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                             if percorsoTrovato[len(percorsoTrovato) - 3] < ry:
                                 nrob = 4
                             sposta = True
-                            azioneEseguita = True
             if azioneEseguita and sposta:
                 tecnicaUsata = "spostamento"
             else:

@@ -199,6 +199,9 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                     centraleMouseVecchio = centraleMouse
                     destroMouseVecchio = destroMouse
                     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                    rotellaConCentralePremuto = False
+                    if centraleMouseVecchio and centraleMouse:
+                        rotellaConCentralePremuto = True
                     if not sinistroMouseVecchio and sinistroMouse:
                         centraleMouse = False
                         destroMouse = False
@@ -208,12 +211,14 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                     elif not destroMouseVecchio and destroMouse:
                         sinistroMouse = False
                         centraleMouse = False
+
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
-                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse):
+                    if aumentoliv != 0 and ((event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto)):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         risposta = True
+                        print aumentoliv
                         aumentoliv -= 1
                     if event.type == pygame.KEYDOWN:
                         if GlobalVarG2.mouseVisibile:
@@ -442,55 +447,55 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
                 if nemico.direzione == "d":
                     if 5 < fineanimaz <= 10:
                         GlobalVarG2.schermo.blit(nemico.imgDMov1, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                     if 0 < fineanimaz <= 5:
                         GlobalVarG2.schermo.blit(nemico.imgDMov2, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x - (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                 if nemico.direzione == "a":
                     if 5 < fineanimaz <= 10:
                         GlobalVarG2.schermo.blit(nemico.imgAMov1, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                     if 0 < fineanimaz <= 5:
                         GlobalVarG2.schermo.blit(nemico.imgAMov2, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x + (GlobalVarG2.gpx * fineanimaz // 10), nemico.y))
                 if nemico.direzione == "w":
                     if 5 < fineanimaz <= 10:
                         GlobalVarG2.schermo.blit(nemico.imgWMov1, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
                     if 0 < fineanimaz <= 5:
                         GlobalVarG2.schermo.blit(nemico.imgWMov2, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y + (GlobalVarG2.gpy * fineanimaz // 10)))
                 if nemico.direzione == "s":
                     if 5 < fineanimaz <= 10:
                         GlobalVarG2.schermo.blit(nemico.imgSMov1, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
                     if 0 < fineanimaz <= 5:
                         GlobalVarG2.schermo.blit(nemico.imgSMov2, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
-                        if nemico.statoInizioTurno[2]:
-                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
                         if nemico.statoInizioTurno[1]:
                             GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y - (GlobalVarG2.gpy * fineanimaz // 10)))
     return animazioneNemici
 
 
@@ -510,10 +515,10 @@ def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz):
                 GlobalVarG2.schermo.blit(nemicoAttaccante.imgAttaccoS, (nemicoAttaccante.x, nemicoAttaccante.y))
             if nemicoAttaccante.direzione == "d":
                 GlobalVarG2.schermo.blit(nemicoAttaccante.imgAttaccoD, (nemicoAttaccante.x, nemicoAttaccante.y))
-            if nemicoAttaccante.statoInizioTurno[2]:
-                GlobalVarG2.schermo.blit(nemicoAttaccante.imgAppiccicato, (nemicoAttaccante.x, nemicoAttaccante.y))
             if nemicoAttaccante.statoInizioTurno[1]:
                 GlobalVarG2.schermo.blit(nemicoAttaccante.imgAvvelenamento, (nemicoAttaccante.x, nemicoAttaccante.y))
+            if nemicoAttaccante.statoInizioTurno[2]:
+                GlobalVarG2.schermo.blit(nemicoAttaccante.imgAppiccicato, (nemicoAttaccante.x, nemicoAttaccante.y))
     return animazioneNemici
 
 
@@ -525,10 +530,10 @@ def animaMorteNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz):
                 animazioneNemici = True
                 if fineanimaz > 0 and (fineanimaz % 4 == 0):
                     GlobalVarG2.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
-                    if nemico.statoInizioTurno[2]:
-                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                     if nemico.statoInizioTurno[1]:
                         GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
+                    if nemico.statoInizioTurno[2]:
+                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
     return animazioneNemici
 
 
@@ -541,10 +546,10 @@ def animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDa
                     GlobalVarG2.schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.vx, nemico.vy))
                 if attaccante == "Colco":
                     GlobalVarG2.schermo.blit(nemico.imgDanneggiamentoColco, (nemico.vx, nemico.vy))
-                if nemico.statoInizioTurno[2]:
-                    GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
                 if nemico.statoInizioTurno[1]:
                     GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
+                if nemico.statoInizioTurno[2]:
+                    GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
     return animazioneNemici
 
 
@@ -554,16 +559,16 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
             if nemico.inCasellaVista and not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico)) and not (nemico.animaMorte and nemico.animazioneFatta) or (nemico.inCasellaVista and fineanimaz == 0 and not nemico.animaMorte):
                 if nemico.animazioneFatta:
                     GlobalVarG2.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
-                    if nemico.statoInizioTurno[2]:
-                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                     if nemico.statoInizioTurno[1]:
                         GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
+                    if nemico.statoInizioTurno[2]:
+                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
                 else:
                     GlobalVarG2.schermo.blit(nemico.imgAttuale, (nemico.vx, nemico.vy))
-                    if nemico.statoInizioTurno[2]:
-                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
                     if nemico.statoInizioTurno[1]:
                         GlobalVarG2.schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
+                    if nemico.statoInizioTurno[2]:
+                        GlobalVarG2.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
 
 
 def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob, azioniDaEseguire, animaOggetto):
@@ -1070,7 +1075,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
             GlobalVarG2.schermo.blit(GlobalVarG2.difesapiu, (GlobalVarG2.gsx // 32 * 5, GlobalVarG2.gsy // 18 * 17))
 
         # disegno la vita del Colco / esca / mostro selezionato
-        if nemicoInquadrato == "Colco" or not nemicoInquadrato:
+        if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco):
             if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Colco":
                 statoColcoInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
                 if nemicoAttaccante.bersaglioColpito[2] == "surriscalda":
@@ -1541,6 +1546,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 centraleMouseVecchio = centraleMouse
                 destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                rotellaConCentralePremuto = False
+                if centraleMouseVecchio and centraleMouse:
+                    rotellaConCentralePremuto = True
                 if not sinistroMouseVecchio and sinistroMouse:
                     centraleMouse = False
                     destroMouse = False
@@ -1550,10 +1558,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse):
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     risposta = True
                 if event.type == pygame.KEYDOWN:
@@ -1579,6 +1588,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 centraleMouseVecchio = centraleMouse
                 destroMouseVecchio = destroMouse
                 sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                rotellaConCentralePremuto = False
+                if centraleMouseVecchio and centraleMouse:
+                    rotellaConCentralePremuto = True
                 if not sinistroMouseVecchio and sinistroMouse:
                     centraleMouse = False
                     destroMouse = False
@@ -1588,10 +1600,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-                if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse):
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                     risposta = True
                 if event.type == pygame.KEYDOWN:

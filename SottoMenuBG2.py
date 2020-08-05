@@ -132,6 +132,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -170,7 +173,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastop = "destroMouse"
                 tastoTrovato = True
                 if conferma:
@@ -182,30 +185,26 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     n = -1
                     return n, cosa
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT)) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse):
+            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT)) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not rotellaConCentralePremuto):
                 tastop = "centraleMouse"
+                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
                 tastoTrovato = True
                 xp = vxp
                 yp = vyp
                 conferma = False
                 if possibileSalvare:
                     if cosa == 1:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                         cosa = 2
                     elif cosa == 2:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                         cosa = 3
                     elif cosa == 3:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                         cosa = 1
                 else:
                     if cosa == 1:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                         cosa = 2
                     elif cosa == 2:
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                         cosa = 1
-            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOsinistroMouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -219,32 +218,28 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         n = -1
                         return n, cosa
                 elif event.type == pygame.MOUSEBUTTONDOWN and suCambiaOperazione:
+                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
                     xp = vxp
                     yp = vyp
                     conferma = False
                     if possibileSalvare:
                         if cosa == 1:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                             cosa = 2
                         elif cosa == 2:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                             cosa = 3
                         elif cosa == 3:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                             cosa = 1
                     else:
                         if cosa == 1:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                             cosa = 2
                         elif cosa == 2:
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selsta)
                             cosa = 1
                 else:
                     if conferma:
                         if voceMarcata == 1:
                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                             if cosa == 1:
-                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, background)
+                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, background)
                                 if dati:
                                     return n, cosa
                                 else:
@@ -269,9 +264,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         conferma = True
                         primaconf = True
                         n = salMarcato
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -412,7 +407,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                 else:
                     if contasalva == 1:
                         if not errore:
-                            persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            if dati[0] < GlobalVarG2.avanzamentoStoriaCambioPersonaggio:
+                                perso = pygame.image.load('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                            else:
+                                perso = pygame.image.load('Immagini/Personaggi/Sara/Personaggio1.png')
+                            persalva = pygame.transform.scale(perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
@@ -433,7 +432,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                             messaggio("Slot corrotto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 6.8, GlobalVarG2.gsy // 18 * 11, 60)
                     elif contasalva == 2:
                         if not errore:
-                            persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            if dati[0] < GlobalVarG2.avanzamentoStoriaCambioPersonaggio:
+                                perso = pygame.image.load('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                            else:
+                                perso = pygame.image.load('Immagini/Personaggi/Sara/Personaggio1.png')
+                            persalva = pygame.transform.scale(perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
@@ -454,7 +457,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                             messaggio("Slot corrotto", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 13.8, GlobalVarG2.gsy // 18 * 11, 60)
                     elif contasalva == 3:
                         if not errore:
-                            persalva = pygame.transform.scale(GlobalVarG2.perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                            if dati[0] < GlobalVarG2.avanzamentoStoriaCambioPersonaggio:
+                                perso = pygame.image.load('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                            else:
+                                perso = pygame.image.load('Immagini/Personaggi/Sara/Personaggio1.png')
+                            persalva = pygame.transform.scale(perso, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             persSalvaBraccia = pygame.transform.scale(GlobalVarG2.persob, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             spasalva = pygame.transform.scale(GlobalVarG2.vetImgSpadePixellate[dati[6]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
                             arcsalva = pygame.transform.scale(GlobalVarG2.vetImgArchiPixellate[dati[128]], (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
@@ -551,6 +558,9 @@ def chiediconferma(conferma, canzone=False):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -582,11 +592,11 @@ def chiediconferma(conferma, canzone=False):
                 if event.key == pygame.K_d and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 return False, False
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOsinistroMouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -605,9 +615,9 @@ def chiediconferma(conferma, canzone=False):
                     elif voceMarcata == 2:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         return False, False
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -789,6 +799,9 @@ def menuImpostazioni(canzone, settaRisoluzione):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -830,17 +843,17 @@ def menuImpostazioni(canzone, settaRisoluzione):
                     primoMovimento = True
                     tastoTrovato = True
 
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 risposta = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and (cursoreSuFrecciaSinistra or cursoreSuFrecciaDestra):
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato and (cursoreSuFrecciaSinistra or cursoreSuFrecciaDestra):
                 tastop = "spazioOsinistroMouse"
                 tastotempfps = 5
                 primoMovimento = True
                 tastoTrovato = True
                 sinistroMousePremuto = True
-            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato and not (cursoreSuFrecciaSinistra or cursoreSuFrecciaDestra)):
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato and not (cursoreSuFrecciaSinistra or cursoreSuFrecciaDestra)):
                 tastop = "spazioOsinistroMouse"
                 tastotempfps = 5
                 primoMovimento = True
@@ -890,9 +903,9 @@ def menuImpostazioni(canzone, settaRisoluzione):
                     elif voceMarcata == 7:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         risposta = True
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -1362,7 +1375,7 @@ def menuImpostazioni(canzone, settaRisoluzione):
 def menuMappa(progresso, canzone):
     puntatore = pygame.transform.scale(GlobalVarG2.puntatoreorigi, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
     puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
-    imgOmbreggiatoraContorniMappaMenu = pygame.transform.scale(GlobalVarG2.imgOmbreggiatoraContorniMappaMenu, (GlobalVarG2.gsx, GlobalVarG2.gsy))
+    imgOmbreggiaturaContorniMappaMenu = pygame.transform.scale(GlobalVarG2.imgOmbreggiaturaContorniMappaMenu, (GlobalVarG2.gsx, GlobalVarG2.gsy))
     xp = GlobalVarG2.gsx // 32 * 1
     yp = GlobalVarG2.gsy // 18 * 4.5
     risposta = False
@@ -1551,6 +1564,9 @@ def menuMappa(progresso, canzone):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -1583,14 +1599,14 @@ def menuMappa(progresso, canzone):
                     primoMovimento = True
                     tastoTrovato = True
 
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 if voceMarcataSottoMenu:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     voceMarcataSottoMenu = False
                 else:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE or event.key == pygame.K_d)) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE or event.key == pygame.K_d)) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOsinistroMouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -1600,7 +1616,7 @@ def menuMappa(progresso, canzone):
                     else:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         risposta = True
-                elif not voceMarcataSottoMenu or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+                elif not voceMarcataSottoMenu or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                     luogoMarcato = ""
                     if voceMarcata == 1:
                         luogoMarcato = "Casa"
@@ -1636,9 +1652,9 @@ def menuMappa(progresso, canzone):
                         voceMarcataSottoMenu = True
                     else:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -1722,7 +1738,7 @@ def menuMappa(progresso, canzone):
                     GlobalVarG2.schermo.blit(imgMappa, (GlobalVarG2.gsx // 32 * (7), GlobalVarG2.gsy // 18 * (-6)))
                 if voceMarcata == 14:
                     GlobalVarG2.schermo.blit(imgMappa, (GlobalVarG2.gsx // 32 * (-1.5), GlobalVarG2.gsy // 18 * (-18.5)))
-                GlobalVarG2.schermo.blit(imgOmbreggiatoraContorniMappaMenu, (0, 0))
+                GlobalVarG2.schermo.blit(imgOmbreggiaturaContorniMappaMenu, (0, 0))
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 pygame.draw.rect(GlobalVarG2.schermo, GlobalVarG2.grigio, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.5))
                 GlobalVarG2.schermo.blit(GlobalVarG2.sfondoTriangolinoAltoSinistra, (GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 4))
@@ -1740,29 +1756,29 @@ def menuMappa(progresso, canzone):
                     messaggio("da un mio vecchio antenato e, da", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
                     messaggio(u"allora, è sempre stata abitata dalle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
                     messaggio("varie generazioni della mia famiglia.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
-                    messaggio(u"Secondo il babbo io sarò il prossimo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
-                    messaggio("proprietario e l'idea non mi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
-                    messaggio("entusiasma affatto: non voglio fare", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
-                    messaggio("il contadino per tutta la vita come", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio(u"lui! È un lavoro monotono, faticoso e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
-                    messaggio("anche instabile a causa delle enormi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
-                    messaggio("imposte dello stato e della spietata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
-                    messaggio("concorrenza.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
+                    messaggio(u"Secondo il babbo io sarò la prossima", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
+                    messaggio("proprietaria e l'idea non mi entu-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
+                    messaggio("siasma affatto: non voglio fare questo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
+                    messaggio("lavoro per tutta la vita come lui!", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
+                    messaggio(u"È monotono, faticoso e anche insta-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio("bile a causa delle enormi imposte del-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
+                    messaggio("lo stato e della spietata concorrenza.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 2:
                     messaggio(u"Città", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 5, 70)
                     messaggio("Da quando ne ho sentito parlare per", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
                     messaggio("la prima volta, ho sempre avuto il", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
-                    messaggio("desiderio di viverci. Da quello che ho", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
-                    messaggio(u"sentito, lì a tutti è concesso di poter", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
-                    messaggio(u"scegliere quale attività svolgere per", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
-                    messaggio(u"sopravvivere: non necessariamente", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
-                    messaggio(u"tutti devono coltivare o cacciare dato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
-                    messaggio(u"che, con il sistema che è stato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
-                    messaggio("organizzato, poche persone sono", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio("capaci di produrre per tutte le altre.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
-                    messaggio("Quest'ultime possono quindi dedicarsi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
-                    messaggio(u"ad altre attività come musica, teatro,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
-                    messaggio(u"studio, sport e chissà cos'altro.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
+                    messaggio("desiderio di viverci. Da quello che so,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
+                    messaggio(u"lì a tutti è concesso scegliere quale", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
+                    messaggio("mansione svolgere nella vita. Questo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
+                    messaggio(u"è diventato possibile grazie ai nuovi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
+                    messaggio("strumenti di produzione che hanno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
+                    messaggio("reso possibile un sistema in cui poche", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
+                    messaggio("persone riescono a produrre abbastan-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
+                    messaggio("za anche per tutte le altre. La parte di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio(u"popolazione \"impoduttiva\" può quindi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
+                    messaggio(u"dedicarsi ad altre attività come musica,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
+                    messaggio(u"teatro, studio, sport e chissà cos'altro.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 3:
                     messaggio("Avamposto di Rod", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 5, 70)
                     messaggio("Una piccola baracca che Rod esalta", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
@@ -1772,49 +1788,49 @@ def menuMappa(progresso, canzone):
                     messaggio("a suo dire, un luogo strategicamente", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("fondamentale per la sopravvivenza", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
                     messaggio("dell'intero ecosistema cittadino.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
-                    messaggio(u"Rod mi è sempre sembrato un po'", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
-                    messaggio("strano, ma, tutti i suoi pensieri e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio("ragionamenti mi sembrano ponderati", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
-                    messaggio("e coerenti... mi domando cosa", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
-                    messaggio("nasconda quella baracca...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
+                    messaggio(u"Rod non ispira molta fiducia ma", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
+                    messaggio("tutti i suoi pensieri e ragionamenti", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
+                    messaggio("mi sono sempre sembranti almeno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio("sensati e coerenti... mi domando", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
+                    messaggio("cosa nasconda quella baracca...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 4:
                     messaggio("Castello", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 5, 70)
                     messaggio(u"La più grande struttura che abbia", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
                     messaggio("mai visto fino ad ora.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
-                    messaggio(u"È un castello composto da un", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
-                    messaggio("centinaio di stanze abitato dal", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
-                    messaggio("maestro del bibliotecario e dai", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
-                    messaggio("suoi numerosi servitori.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
+                    messaggio(u"È un castello composto da un centi-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
+                    messaggio("naio di stanze abitato dall'amico del", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
+                    messaggio("bibliotecario e dai suoi numerosi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
+                    messaggio("servitori.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
                     messaggio(u"Il vasto terreno su cui è stato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
                     messaggio("costruito, comprende anche l'intero", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
                     messaggio(u"labirinto che è stato appositamente", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
                     messaggio("elaborato per tenere lontani i", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
                     messaggio("visitatori indesiderati. Il silenzio", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
                     messaggio("e il comportamento dei servi creano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
-                    messaggio("un'atmosfera un po' malinconica...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
+                    messaggio("un'atmosfera molto cupa...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 5:
                     messaggio("Palazzo di Rod", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 5, 70)
                     messaggio("La villa in cui dimora Rod.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
-                    messaggio("Risulta essere quasi sempre vuota e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
-                    messaggio(u"silenziosa dato che lui è sempre", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
-                    messaggio("fuori per lavoro o ricerche (mi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
-                    messaggio("domando ancora cosa stia", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
+                    messaggio("Risulta essere quasi sempre vuota", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
+                    messaggio(u"e silenziosa dato che lui è costante-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
+                    messaggio("mente fuori per lavoro o ricerche", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
+                    messaggio("(mi domando ancora cosa stia", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("ricercando...).", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
                     messaggio("Il posto ricorda vagamente il", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
                     messaggio("castello di Norm ma in miniatura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
                     messaggio("e con un passaggio montano al", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio("posto del labirinto.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
+                    messaggio("posto del labirinto per scoraggiare", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio("l'avvicinamento di viaggiatori", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
+                    messaggio("sconosciuti.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 6:
                     messaggio("Vulcano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 5, 70)
-                    messaggio("Un vulcano sommerso nelle ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
+                    messaggio("Un vulcano sommerso nelle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
                     messaggio(u"montagne a ovest della città.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
                     messaggio(u"È simile ad una montagna ma più", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
-                    messaggio("grande e con un cratere sulla cima,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
-                    messaggio("dalla quale, a detta di Rod,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
+                    messaggio("grande e con un cratere sulla cima", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
+                    messaggio("dal quale, a detta di Rod,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("fuoriesce del vapore incandescente.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
                     messaggio(u"Chissà cosa c'è lì dentro...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
@@ -1831,7 +1847,7 @@ def menuMappa(progresso, canzone):
                     messaggio(u"è presente tutto ciò che serve,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
                     messaggio("ossia un calcolatore di eventi,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("che si estende anche sotto il", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
-                    messaggio("terreno, e alcuni altri calcolatori", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
+                    messaggio("terreno, e diversi altri calcolatori", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
                     messaggio("che credo servano per gestire", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
                     messaggio("i sistemi di alimentazione e", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
                     messaggio("raffreddamento.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
@@ -1840,16 +1856,16 @@ def menuMappa(progresso, canzone):
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 8:
                     messaggio("Foresta cadetta", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 5, 70)
-                    messaggio("La foresta che mi ha sempre separato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
-                    messaggio(u"dalla città... non mi è mai stato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
-                    messaggio(u"concesso attraversarla perchè", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
-                    messaggio("entrambi i miei genitori la ritenevano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
-                    messaggio("troppo pericolosa per me.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
+                    messaggio("La foresta che mi ha sempre sepa-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
+                    messaggio(u"rata dalla città... non mi è mai stato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
+                    messaggio(u"concesso attraversarla perchè entram-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
+                    messaggio("bi i miei genitori la ritenevano troppo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
+                    messaggio("pericolosa per me.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("Il nome deriva dal fatto che viene", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
                     messaggio("utilizzata come terreno di prova per", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
-                    messaggio("selezionare, tra i giovani ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
-                    messaggio(u"appartenenti alla nobiltà, i futuri", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio("ufficiali dell'esercito.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio("selezionare, tra i giovani apparte-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
+                    messaggio(u"nenti alla nobiltà, i futuri ufficiali", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
+                    messaggio("dell'esercito.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
@@ -1876,11 +1892,11 @@ def menuMappa(progresso, canzone):
                     messaggio("suo interno prive di punti di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
                     messaggio("riferimento.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("Rod mi ha fornito una mappa che", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
-                    messaggio("mostra nel dettaglio la sua", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
-                    messaggio("struttura sconsigliandomi di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
-                    messaggio(u"procedere: è molto probabile non", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio("riuscire ad uscirne se non si ha", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
-                    messaggio("un buon senso dell'orientamento.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
+                    messaggio("mostra nel dettaglio la sua struttura", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
+                    messaggio("sconsigliandomi di procedere:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
+                    messaggio(u"è molto probabile non riuscire ad", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
+                    messaggio("uscirne se non si ha un buon senso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio("dell'orientamento.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 11:
@@ -1890,8 +1906,8 @@ def menuMappa(progresso, canzone):
                     messaggio(u"In città nessuno sembrava sapere di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
                     messaggio("questo varco apparte Rod che lo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
                     messaggio("utilizza per raggiungere il proprio", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
-                    messaggio("palazzo in mezzo alle montagne da", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
-                    messaggio(u"più di vent'anni.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
+                    messaggio(u"palazzo da più di vent'anni.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
@@ -1900,16 +1916,16 @@ def menuMappa(progresso, canzone):
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
                 if voceMarcata == 12:
                     messaggio("Caverna", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 5, 70)
-                    messaggio("Una caverna in mezzo alle montagne", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
-                    messaggio("che conduce ad un vulcano.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
+                    messaggio("Una caverna in mezzo alle monta-", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 6.5, 45)
+                    messaggio("gne che conduce ad un vulcano.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.2, 45)
                     messaggio("All'interno vivono degli animali", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 7.9, 45)
                     messaggio("simili a Colco ma aggressivi.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 8.6, 45)
                     messaggio(u"Rod è solito avventurarsi in quel", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("posto per recuperare alimentazioni.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
                     messaggio(u"Non mi spiego perché abbia deciso", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
-                    messaggio(u"di vivere così vicino a quel posto...", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
-                    messaggio("forse per controllare gli accessi", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio("alla caverna?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio(u"di viverci così vicino... forse ne è", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
+                    messaggio(u"geloso e ne vuole controllare gli", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
+                    messaggio("accessi?", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
@@ -1937,10 +1953,10 @@ def menuMappa(progresso, canzone):
                     messaggio("Nonostante le pareti del tunnel siano", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 9.3, 45)
                     messaggio("fatte di un materiale trasparente", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10, 45)
                     messaggio("simile al vetro, non si riesce ad", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 10.7, 45)
-                    messaggio("ammirare chiaramente il fondale del", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
+                    messaggio("osservare chiaramente il fondale del", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 11.4, 45)
                     messaggio("bacino a causa delle sostanze con cui", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.1, 45)
-                    messaggio(u"questo è stato contaminato.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
+                    messaggio(u"questo è stato contaminato circa 50", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 12.8, 45)
+                    messaggio("anni fa.", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 13.5, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.2, 45)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 10.5, GlobalVarG2.gsy // 18 * 14.9, 45)
 
@@ -2213,7 +2229,7 @@ def menuDiario(dati, canzone):
 
             messaggio("Diario", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 1, 150)
             messaggio("Oggetti speciali", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 5.5, 55)
-            messaggio("Personaggi incontrati", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 55)
+            messaggio("Persone incontrate", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7, 55)
             messaggio("Nemici incontrati", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.5, 55)
             messaggio("Guida mouse", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13, 55)
             messaggio("Guida tatiera", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.5, 55)

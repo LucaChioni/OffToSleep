@@ -111,9 +111,9 @@ class NemicoObj(object):
         imgDMov2 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dMov2.png")
         self.imgDMov2 = pygame.transform.scale(imgDMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
-        imgAvvelenamento = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "Avvele.png")
+        imgAvvelenamento = pygame.image.load("Immagini/Nemici/NemicoAvvelenato.png")
         self.imgAvvelenamento = pygame.transform.scale(imgAvvelenamento, (GlobalVarG2.gpx, GlobalVarG2.gpy))
-        imgAppiccicato = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "Appicc.png")
+        imgAppiccicato = pygame.image.load("Immagini/Nemici/NemicoAppiccicato.png")
         self.imgAppiccicato = pygame.transform.scale(imgAppiccicato, (GlobalVarG2.gpx, GlobalVarG2.gpy))
 
         imgAttaccoW = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wAttacco.png")

@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali):
+def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVarG2.gpx
     dati[3] = dati[3] // GlobalVarG2.gpy
@@ -79,17 +79,6 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         scrivi.write("%i_" % stanzeGiaVisitate[i])
         i += 1
     scrivi.write("\n")
-    if ultimoObbiettivoColco and ultimoObbiettivoColco[0] == "Telecomando":
-        scrivi.write("%s_" % ultimoObbiettivoColco[0])
-    elif ultimoObbiettivoColco and len(ultimoObbiettivoColco) > 0:
-        scrivi.write("%i_" % ultimoObbiettivoColco[0])
-        scrivi.write("%i_" % ultimoObbiettivoColco[1])
-    scrivi.write("\n")
-    if obbiettivoCasualeColco:
-        scrivi.write("%i_" % obbiettivoCasualeColco.stanzaDiAppartenenza)
-        scrivi.write("%i_" % obbiettivoCasualeColco.x)
-        scrivi.write("%i_" % obbiettivoCasualeColco.y)
-    scrivi.write("\n")
     for personaggio in listaPersonaggiTotali:
         scrivi.write("%i_" % (personaggio.x // GlobalVarG2.gpx))
         scrivi.write("%i_" % (personaggio.y // GlobalVarG2.gpy))
@@ -102,6 +91,15 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
             scrivi.write("%s_" % direzione)
         scrivi.write("]_")
         scrivi.write("%i_" % personaggio.numeroMovimento)
+    scrivi.close()
+
+    # critta il salvataggio
+    leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
+    contenutoFile = leggi.read()
+    leggi.close()
+    encoded_text = contenutoFile.encode('base64')
+    scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
+    scrivi.write(encoded_text)
     scrivi.close()
 
     # conversione della posizione in pixel
@@ -126,8 +124,6 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
     tipoErrore = 0
 
     dati = []
-    ultimoObbiettivoColco = []
-    obbiettivoCasualeColco = False
     listaNemiciTotali = []
     listaEsche = []
     listaMonete = []
@@ -135,11 +131,15 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
     listaPersonaggiTotali = []
 
     leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
-    leggifile = leggi.read()
+    contenutoFile = leggi.read()
     leggi.close()
-    datiTotali = leggifile.split("\n")
+
+    # decritta il salvataggio
+    contenutoFile = contenutoFile.decode('base64')
+
+    datiTotali = contenutoFile.split("\n")
     if not (len(datiTotali) == 1 and datiTotali[0] == ""):
-        if len(datiTotali) == 8:
+        if len(datiTotali) == 6:
             dati = datiTotali[0].split("_")
             dati.pop(len(dati) - 1)
             if len(dati) == 0 or len(dati) != lunghezzadati:
@@ -249,27 +249,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                     errore = True
                     break
                 i += 1
-            ultimoObbiettivoColco = datiTotali[5].split("_")
-            ultimoObbiettivoColco.pop(len(ultimoObbiettivoColco) - 1)
-            if len(ultimoObbiettivoColco) > 0 and ultimoObbiettivoColco[0] != "Telecomando":
-                try:
-                    ultimoObbiettivoColco[0] = int(ultimoObbiettivoColco[0])
-                    ultimoObbiettivoColco[1] = int(ultimoObbiettivoColco[1])
-                except ValueError:
-                    errore = True
-            obbiettivoCasualeColcoVet = datiTotali[6].split("_")
-            obbiettivoCasualeColcoVet.pop(len(obbiettivoCasualeColcoVet) - 1)
-            if len(obbiettivoCasualeColcoVet) > 0:
-                try:
-                    for nemico in listaNemiciTotali:
-                        if nemico.stanzaDiAppartenenza == int(obbiettivoCasualeColcoVet[0]) and nemico.x == int(obbiettivoCasualeColcoVet[1]) and nemico.y == int(obbiettivoCasualeColcoVet[2]):
-                            obbiettivoCasualeColco = nemico
-                            break
-                except ValueError:
-                    errore = True
-            else:
-                obbiettivoCasualeColco = False
-            datiPersonaggi = datiTotali[7].split("_")
+            datiPersonaggi = datiTotali[5].split("_")
             datiPersonaggi.pop(len(datiPersonaggi) - 1)
             try:
                 i = 0
@@ -330,6 +310,9 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                         centraleMouseVecchio = centraleMouse
                         destroMouseVecchio = destroMouse
                         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                        rotellaConCentralePremuto = False
+                        if centraleMouseVecchio and centraleMouse:
+                            rotellaConCentralePremuto = True
                         if not sinistroMouseVecchio and sinistroMouse:
                             centraleMouse = False
                             destroMouse = False
@@ -339,6 +322,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                         elif not destroMouseVecchio and destroMouse:
                             sinistroMouse = False
                             centraleMouse = False
+
                         if event.type == pygame.QUIT:
                             pygame.quit()
                             quit()
@@ -347,10 +331,10 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                             if GlobalVarG2.mouseVisibile:
                                 pygame.mouse.set_visible(False)
                                 GlobalVarG2.mouseVisibile = False
-                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVarG2.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVarG2.mouseBloccato and sinistroMouse))):
+                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVarG2.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVarG2.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                             indietro = True
-                        if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+                        if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                             aggiornaSchermata = True
                             pygame.mouse.set_visible(True)
                             GlobalVarG2.mouseVisibile = True
@@ -397,6 +381,9 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                     centraleMouseVecchio = centraleMouse
                     destroMouseVecchio = destroMouse
                     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                    rotellaConCentralePremuto = False
+                    if centraleMouseVecchio and centraleMouse:
+                        rotellaConCentralePremuto = True
                     if not sinistroMouseVecchio and sinistroMouse:
                         centraleMouse = False
                         destroMouse = False
@@ -406,6 +393,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                     elif not destroMouseVecchio and destroMouse:
                         sinistroMouse = False
                         centraleMouse = False
+
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
@@ -414,12 +402,10 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                         if GlobalVarG2.mouseVisibile:
                             pygame.mouse.set_visible(False)
                             GlobalVarG2.mouseVisibile = False
-                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVarG2.mouseVisibile and (
-                            (event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (
-                            event.type == pygame.MOUSEBUTTONDOWN and not GlobalVarG2.mouseBloccato and sinistroMouse))):
+                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVarG2.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVarG2.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                         indietro = True
-                    if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+                    if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                         aggiornaSchermata = True
                         pygame.mouse.set_visible(True)
                         GlobalVarG2.mouseVisibile = True
@@ -450,11 +436,11 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
         if mostraErrori:
             print "Salvataggio: " + str(n)
             GlobalVarG2.canaleSoundCanzone.stop()
-            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali
+            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali
         else:
             return dati, tipoErrore
     else:
         if mostraErrori:
-            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggiTotali
+            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali
         else:
             return False, tipoErrore

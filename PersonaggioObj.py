@@ -66,7 +66,9 @@ class PersonaggioObj(object):
             self.imgAttuale = self.imgS
         elif direzione == "d":
             self.imgAttuale = self.imgD
-        self.direzione = direzione
+
+        if direzione != "":
+            self.direzione = direzione
 
     def aggiornaDialogo(self, avanzamentoStoria):
         # se c'è una scelta la variabile self.scelta conterrà il numero corrispondente a quella giusta (se ce n'è più di una giusta, la variabile conterrà i numeri di queste una dopo l'altra (es. 12, 134))
@@ -77,7 +79,7 @@ class PersonaggioObj(object):
             self.nome = "Bob"
             if avanzamentoStoria == 0:
                 self.oggettoDato = False
-                self.avanzamentoStoria = False
+                self.avanzamentoStoria = True
                 self.menuMercante = True
                 self.scelta = False
                 dialogo = []

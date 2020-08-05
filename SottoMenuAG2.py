@@ -304,6 +304,9 @@ def equip(dati, canzone):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -341,11 +344,11 @@ def equip(dati, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOsinistroMouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -540,9 +543,9 @@ def equip(dati, canzone):
                             dati[130] = 4
                         else:
                             GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -1293,6 +1296,9 @@ def sceglicondiz(dati, condizione, canzone):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -1330,11 +1336,11 @@ def sceglicondiz(dati, condizione, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOsinistroMouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -1356,9 +1362,9 @@ def sceglicondiz(dati, condizione, canzone):
                     if voceMarcata == 0:
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         return 0
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -1460,41 +1466,41 @@ def sceglicondiz(dati, condizione, canzone):
                 messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                 messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             if dati[81] > 0:
-                messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
+                messaggio("Sara con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
                 if voceMarcata == 1:
                     GlobalVarG2.schermo.blit(scecond[1], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
-                    messaggio("Rallo con pv < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo quando ha pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Sara con pv < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Sara quando ha pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 6.2, 40)
             if dati[82] > 0:
-                messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
+                messaggio("Sara con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
                 if voceMarcata == 2:
                     GlobalVarG2.schermo.blit(scecond[2], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
-                    messaggio("Rallo con pv < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo quando ha pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Sara con pv < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Sara quando ha pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 7.2, 40)
             if dati[83] > 0:
-                messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
+                messaggio("Sara con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
                 if voceMarcata == 3:
                     GlobalVarG2.schermo.blit(scecond[3], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
-                    messaggio("Rallo con pv < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo quando ha pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Sara con pv < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Sara quando ha pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 8.2, 40)
             if dati[84] > 0:
-                messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
+                messaggio("Sara con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 9.2, 40)
                 if voceMarcata == 4:
                     GlobalVarG2.schermo.blit(scecond[4], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
-                    messaggio("Rallo con veleno:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Rallo quando è avvelenato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Sara con veleno:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Sara quando è avvelenato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -1540,11 +1546,11 @@ def sceglicondiz(dati, condizione, canzone):
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 13.2, 40)
             if dati[89] > 0:
-                messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
+                messaggio("Sempre a Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 14.2, 40)
                 if voceMarcata == 9:
                     GlobalVarG2.schermo.blit(scecond[9], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
-                    messaggio("Sempre a Rallo:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Rallo in continuazione (se la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Sempre a Sara:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Sara in continuazione (se la tecnica associata", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("comporta un'alterazione di stato, viene eseguita solo se lo status", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio(u"non è attivo)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -1574,7 +1580,7 @@ def sceglicondiz(dati, condizione, canzone):
                 if voceMarcata == 12:
                     GlobalVarG2.schermo.blit(scecond[12], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Nemico vicino:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione sul nemico più vicino a Colco nel raggio di 2 caselle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"Esegue l'azione sul nemico più vicino nel raggio di 2 caselle", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -1585,7 +1591,7 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[13], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Nemico lontano:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio("vicino a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 8.2, 40)
@@ -1595,7 +1601,7 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[14], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Nemico con pv < 80%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Esegue l'azione su un nemico con pv < 80% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"esegue l'azione su quello più vicino)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 9.2, 40)
@@ -1605,7 +1611,7 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[15], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Nemico con pv < 50%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Esegue l'azione su un nemico con pv < 50% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"esegue l'azione su quello più vicino)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 10.2, 40)
@@ -1615,7 +1621,7 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[16], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Nemico con pv < 30%:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Esegue l'azione su un nemico con pv < 30% (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"esegue l'azione su quello più vicino)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 11.2, 40)
@@ -1625,7 +1631,7 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[17], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Nemico con meno pv:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Esegue l'azione sul nemico con meno pv (in caso di molteplici bersagli,", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio(u"esegue l'azione su quello più vicino a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio(u"esegue l'azione su quello più vicino)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 12.2, 40)
@@ -1635,8 +1641,8 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[18], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Numero di nemici > 1:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
-                    messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 13.2, 40)
             if dati[99] > 0:
@@ -1645,8 +1651,8 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[19], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Numero di nemici > 4:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
-                    messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 14.2, 40)
             if dati[100] > 0:
@@ -1655,8 +1661,8 @@ def sceglicondiz(dati, condizione, canzone):
                     GlobalVarG2.schermo.blit(scecond[20], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Numero di nemici > 7:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
-                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
-                    messaggio("a Colco)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
+                    messaggio(u"tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
+                    messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
                 messaggio("???", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9, GlobalVarG2.gsy // 18 * 15.2, 40)
 
@@ -1877,6 +1883,9 @@ def sceglitecn(dati, tecnica, canzone):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -1914,11 +1923,11 @@ def sceglitecn(dati, tecnica, canzone):
                 if event.key == pygame.K_a and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                 risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOsinistroMouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -1942,9 +1951,9 @@ def sceglitecn(dati, tecnica, canzone):
                         GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
                         tecnica = 0
                         risposta = True
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -2062,7 +2071,7 @@ def sceglitecn(dati, tecnica, canzone):
                     GlobalVarG2.schermo.blit(scetecn[2], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Cura:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[1]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
-                    messaggio("Recupera un po' di pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Recupera un po' di pv di Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -2073,7 +2082,7 @@ def sceglitecn(dati, tecnica, canzone):
                     GlobalVarG2.schermo.blit(scetecn[3], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Antidoto:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[2]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
-                    messaggio("Cura avvelenamento a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Cura avvelenamento a Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -2128,7 +2137,7 @@ def sceglitecn(dati, tecnica, canzone):
                     GlobalVarG2.schermo.blit(scetecn[8], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Cura +:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[7]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
-                    messaggio("recupera molti pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("recupera molti pv di Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -2172,7 +2181,7 @@ def sceglitecn(dati, tecnica, canzone):
                     GlobalVarG2.schermo.blit(scetecn[12], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Carica attacco:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[11]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
-                    messaggio("Incrementa l'attacco di Rallo per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Incrementa l'attacco di Sara per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -2183,7 +2192,7 @@ def sceglitecn(dati, tecnica, canzone):
                     GlobalVarG2.schermo.blit(scetecn[13], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Carica difesa:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[12]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
-                    messaggio("Incrementa la difesa di Rallo per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Incrementa la difesa di Sara per 10 turni (non ha effetto sui nemici)", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -2216,7 +2225,7 @@ def sceglitecn(dati, tecnica, canzone):
                     GlobalVarG2.schermo.blit(scetecn[16], (GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 4))
                     messaggio("Cura ++:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVarG2.costoTecniche[15]), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 27.5, GlobalVarG2.gsy // 18 * 13.8, 45)
-                    messaggio(u"Recupera un enorme quantità dei pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio(u"Recupera un enorme quantità dei pv di Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 18, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -2845,6 +2854,9 @@ def equiprobo(dati, canzone):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -2886,7 +2898,7 @@ def equiprobo(dati, canzone):
                 if event.key == pygame.K_a and not riordinamento and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastop = "spazioOmouse"
                 tastoTrovato = True
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
@@ -2895,7 +2907,7 @@ def equiprobo(dati, canzone):
                 else:
                     riordinamento = False
                     annullaRiordinamento = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOmouse"
                 tastoTrovato = True
                 # riordina
@@ -2994,9 +3006,9 @@ def equiprobo(dati, canzone):
                                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
                             i += 1
                             c += 1
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -3265,13 +3277,13 @@ def equiprobo(dati, canzone):
                 if dati[i] == 0:
                     messaggio("---", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 1:
-                    messaggio("Rallo con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Sara con pv < 80%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 2:
-                    messaggio("Rallo con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Sara con pv < 50%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 3:
-                    messaggio("Rallo con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Sara con pv < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 4:
-                    messaggio("Rallo con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Sara con veleno", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 5:
                     messaggio("Colco surriscaldato", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 6:
@@ -3281,7 +3293,7 @@ def equiprobo(dati, canzone):
                 if dati[i] == 8:
                     messaggio("Colco con pe < 30%", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 9:
-                    messaggio("Sempre a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
+                    messaggio("Sempre a Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 10:
                     messaggio("Sempre a Colco", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * c, 40)
                 if dati[i] == 11:
@@ -3492,6 +3504,10 @@ def oggetti(dati, canzone):
     puntatorevecchio = pygame.transform.scale(GlobalVarG2.puntatoreorigivecchio, (GlobalVarG2.gpx // 2, GlobalVarG2.gpy // 2))
     sfondostastart = pygame.transform.scale(GlobalVarG2.sfondostax3, (GlobalVarG2.gpx * 4, GlobalVarG2.gpy))
     sconosciutoOggetto = pygame.transform.scale(GlobalVarG2.sconosciutoOggettoMenu, (GlobalVarG2.gpx * 10, GlobalVarG2.gpy * 10))
+    if dati[0] < GlobalVarG2.avanzamentoStoriaCambioPersonaggio:
+        perssta = pygame.transform.scale(GlobalVarG2.imgFraMaggioreMenuOggetti, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+    else:
+        perssta = pygame.transform.scale(GlobalVarG2.imgSaraMenuOggetti, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
     xp = GlobalVarG2.gsx // 32 * 1
     yp = GlobalVarG2.gsy // 18 * 5
     xpv = xp
@@ -3646,6 +3662,9 @@ def oggetti(dati, canzone):
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            rotellaConCentralePremuto = False
+            if centraleMouseVecchio and centraleMouse:
+                rotellaConCentralePremuto = True
             if not sinistroMouseVecchio and sinistroMouse:
                 centraleMouse = False
                 destroMouse = False
@@ -3709,7 +3728,7 @@ def oggetti(dati, canzone):
                 if event.key == pygame.K_d and voceMarcata != 0 and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse:
+            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
                 tastop = "spazioOmouse"
                 tastoTrovato = True
                 voceMarcata = 0
@@ -3740,7 +3759,7 @@ def oggetti(dati, canzone):
                 else:
                     GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
                     risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not GlobalVarG2.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato):
                 tastop = "spazioOmouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -3932,9 +3951,9 @@ def oggetti(dati, canzone):
                                 usauno = True
                             else:
                                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and GlobalVarG2.mouseBloccato:
+            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato:
                 GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not GlobalVarG2.mouseVisibile:
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVarG2.mouseVisibile = True
@@ -4029,7 +4048,7 @@ def oggetti(dati, canzone):
                 messaggio("x %i" % dati[31], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 5, 45)
                 if oggetton == 1:
                     messaggio("Pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 100 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Recupera 100 pv di Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -4049,7 +4068,7 @@ def oggetti(dati, canzone):
                 messaggio("x %i" % dati[33], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 7, 45)
                 if oggetton == 3:
                     messaggio("Medicina:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio("Cura avvelenamento a Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Cura avvelenamento a Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -4059,7 +4078,7 @@ def oggetti(dati, canzone):
                 messaggio("x %i" % dati[34], GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 9.3, GlobalVarG2.gsy // 18 * 8, 45)
                 if oggetton == 4:
                     messaggio("Super pozione:", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 300 pv di Rallo", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
+                    messaggio("Recupera 300 pv di Sara", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 14.5, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15, 35)
                     messaggio("", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 20, GlobalVarG2.gsy // 18 * 15.5, 35)
             else:
@@ -4135,8 +4154,7 @@ def oggetti(dati, canzone):
                 dati[5] = 0
             messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 4, 50)
             messaggio("Status alterati: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 5, 50)
-            persmen = pygame.transform.scale(GlobalVarG2.persGrafMenu, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
-            GlobalVarG2.schermo.blit(persmen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4))
+            GlobalVarG2.schermo.blit(perssta, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 4))
             GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, (GlobalVarG2.gsy // 18 * 6) + (GlobalVarG2.gpy // 8)))
             if dati[121]:
                 avvelenato = pygame.transform.scale(GlobalVarG2.avvelenatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
@@ -4147,23 +4165,25 @@ def oggetti(dati, canzone):
             if dati[124] > 0:
                 difesapiu = pygame.transform.scale(GlobalVarG2.difesapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
                 GlobalVarG2.schermo.blit(difesapiu, ((GlobalVarG2.gsx // 32 * 14) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 6))
+
             # vita-status robo
-            if dati[10] < 0:
-                dati[10] = 0
-            messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 9, 50)
-            messaggio("Status alterati: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 10, 50)
-            robomen = pygame.transform.scale(GlobalVarG2.robograf, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
-            GlobalVarG2.schermo.blit(robomen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 8))
-            GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
-            if dati[122] > 0:
-                surriscaldato = pygame.transform.scale(GlobalVarG2.surriscaldatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
-                GlobalVarG2.schermo.blit(surriscaldato, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
-            if dati[125] > 0:
-                velocitapiu = pygame.transform.scale(GlobalVarG2.velocitapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
-                GlobalVarG2.schermo.blit(velocitapiu, ((GlobalVarG2.gsx // 32 * 14) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
-            if dati[126] > 0:
-                efficienzapiu = pygame.transform.scale(GlobalVarG2.efficienzapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
-                GlobalVarG2.schermo.blit(efficienzapiu, ((GlobalVarG2.gsx // 32 * 14) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
+            if dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco:
+                if dati[10] < 0:
+                    dati[10] = 0
+                messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 9, 50)
+                messaggio("Status alterati: ", GlobalVarG2.grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 10, 50)
+                robomen = pygame.transform.scale(GlobalVarG2.roboo, (GlobalVarG2.gpx * 3, GlobalVarG2.gpy * 3))
+                GlobalVarG2.schermo.blit(robomen, (GlobalVarG2.gsx // 32 * 11, GlobalVarG2.gsy // 18 * 8.5))
+                GlobalVarG2.schermo.blit(sfondostastart, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
+                if dati[122] > 0:
+                    surriscaldato = pygame.transform.scale(GlobalVarG2.surriscaldatoo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    GlobalVarG2.schermo.blit(surriscaldato, (GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 11))
+                if dati[125] > 0:
+                    velocitapiu = pygame.transform.scale(GlobalVarG2.velocitapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    GlobalVarG2.schermo.blit(velocitapiu, ((GlobalVarG2.gsx // 32 * 14) + (2 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
+                if dati[126] > 0:
+                    efficienzapiu = pygame.transform.scale(GlobalVarG2.efficienzapiuo, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                    GlobalVarG2.schermo.blit(efficienzapiu, ((GlobalVarG2.gsx // 32 * 14) + (4 * GlobalVarG2.gpx // 4 * 3), GlobalVarG2.gsy // 18 * 11))
 
             if attacco != 0:
                 risposta = True
