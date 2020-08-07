@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from GenericFuncG2 import *
+from GenericFuncA import *
 
 
 def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, porte, cofanetti, vetNemici, vistoRallo, vistoRob, vistoesca, escabersaglio, vistoDenaro, xDenaro, yDenaro, attrobo, listaPersonaggi):
@@ -70,7 +70,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                     if nemico.y > nemico.yObbiettivo and c == 2:
                         nmos = 4
                     sposta = True
-            if abs(nemico.xObbiettivo - nemico.x) == GlobalVarG2.gpx and abs(nemico.yObbiettivo - nemico.y) == 0:
+            if abs(nemico.xObbiettivo - nemico.x) == GlobalVar.gpx and abs(nemico.yObbiettivo - nemico.y) == 0:
                 if nemico.x < nemico.xObbiettivo:
                     nmos = 1
                 if nemico.x > nemico.xObbiettivo:
@@ -78,7 +78,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 sposta = True
                 nemico.xObbiettivo = False
                 nemico.yObbiettivo = False
-            if abs(nemico.yObbiettivo - nemico.y) == GlobalVarG2.gpy and abs(nemico.xObbiettivo - nemico.x) == 0:
+            if abs(nemico.yObbiettivo - nemico.y) == GlobalVar.gpy and abs(nemico.xObbiettivo - nemico.x) == 0:
                 if nemico.y < nemico.yObbiettivo:
                     nmos = 3
                 if nemico.y > nemico.yObbiettivo:
@@ -89,7 +89,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
 
         # nemici che attaccano da vicino
         elif not nemico.attaccaDaLontano:
-            if (nemico.xObbiettivo == nemico.x + GlobalVarG2.gpx and nemico.yObbiettivo == nemico.y) or (nemico.xObbiettivo == nemico.x - GlobalVarG2.gpx and nemico.yObbiettivo == nemico.y) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y + GlobalVarG2.gpy) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y - GlobalVarG2.gpy) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y):
+            if (nemico.xObbiettivo == nemico.x + GlobalVar.gpx and nemico.yObbiettivo == nemico.y) or (nemico.xObbiettivo == nemico.x - GlobalVar.gpx and nemico.yObbiettivo == nemico.y) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y + GlobalVar.gpy) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y - GlobalVar.gpy) or (nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y):
                 if vistoesca:
                     danno = nemico.attacco
                     if danno < 0:
@@ -132,13 +132,13 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                         print ("attacco vicino", nemico.tipo, "a rallo", danno)
                         dati[5] = dati[5] - danno
                 nmos = 0
-                if nemico.xObbiettivo == nemico.x + GlobalVarG2.gpx and nemico.yObbiettivo == nemico.y:
+                if nemico.xObbiettivo == nemico.x + GlobalVar.gpx and nemico.yObbiettivo == nemico.y:
                     nmos = 1
-                if nemico.xObbiettivo == nemico.x - GlobalVarG2.gpx and nemico.yObbiettivo == nemico.y:
+                if nemico.xObbiettivo == nemico.x - GlobalVar.gpx and nemico.yObbiettivo == nemico.y:
                     nmos = 2
-                if nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y + GlobalVarG2.gpy:
+                if nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y + GlobalVar.gpy:
                     nmos = 3
-                if nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y - GlobalVarG2.gpy:
+                if nemico.xObbiettivo == nemico.x and nemico.yObbiettivo == nemico.y - GlobalVar.gpy:
                     nmos = 4
                 attacca = True
                 sposta = False
@@ -232,25 +232,25 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 attacca = True
                 sposta = False
             else:
-                if (x == nemico.x + GlobalVarG2.gpx and y == nemico.y) or (x == nemico.x - GlobalVarG2.gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + GlobalVarG2.gpy) or (x == nemico.x and y == nemico.y - GlobalVarG2.gpy) or (rx == nemico.x + GlobalVarG2.gpx and ry == nemico.y) or (rx == nemico.x - GlobalVarG2.gpx and ry == nemico.y) or (rx == nemico.x and ry == nemico.y + GlobalVarG2.gpy) or (rx == nemico.x and ry == nemico.y - GlobalVarG2.gpy):
+                if (x == nemico.x + GlobalVar.gpx and y == nemico.y) or (x == nemico.x - GlobalVar.gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + GlobalVar.gpy) or (x == nemico.x and y == nemico.y - GlobalVar.gpy) or (rx == nemico.x + GlobalVar.gpx and ry == nemico.y) or (rx == nemico.x - GlobalVar.gpx and ry == nemico.y) or (rx == nemico.x and ry == nemico.y + GlobalVar.gpy) or (rx == nemico.x and ry == nemico.y - GlobalVar.gpy):
                     # nmos: 1=d, 2=a, 3=s, 4=w
                     xRalloVicino = 0
                     yRalloVicino = 0
                     xColcoVicino = 0
                     yColcoVicino = 0
                     casellaDaControllarePrima = 0
-                    if (x == nemico.x + GlobalVarG2.gpx and y == nemico.y) or (x == nemico.x - GlobalVarG2.gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + GlobalVarG2.gpy) or (x == nemico.x and y == nemico.y - GlobalVarG2.gpy):
+                    if (x == nemico.x + GlobalVar.gpx and y == nemico.y) or (x == nemico.x - GlobalVar.gpx and y == nemico.y) or (x == nemico.x and y == nemico.y + GlobalVar.gpy) or (x == nemico.x and y == nemico.y - GlobalVar.gpy):
                         xRalloVicino = x
                         yRalloVicino = y
-                    if (rx == nemico.x + GlobalVarG2.gpx and ry == nemico.y) or (rx == nemico.x - GlobalVarG2.gpx and ry == nemico.y) or (rx == nemico.x and ry == nemico.y + GlobalVarG2.gpy) or (rx == nemico.x and ry == nemico.y - GlobalVarG2.gpy):
+                    if (rx == nemico.x + GlobalVar.gpx and ry == nemico.y) or (rx == nemico.x - GlobalVar.gpx and ry == nemico.y) or (rx == nemico.x and ry == nemico.y + GlobalVar.gpy) or (rx == nemico.x and ry == nemico.y - GlobalVar.gpy):
                         xColcoVicino = rx
                         yColcoVicino = ry
                     if xRalloVicino != 0 and yRalloVicino != 0 and xColcoVicino != 0 and yColcoVicino != 0:
                         casellaTrovata = False
-                        nmxProbabile = GlobalVarG2.gpx
+                        nmxProbabile = GlobalVar.gpx
                         nmyProbabile = 0
                         mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
-                        if not ((x == mxProbabile + GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile - GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile - GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile)):
+                        if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
                                     nmos = 1
@@ -259,10 +259,10 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                                 nmos = 1
                                 sposta = True
                                 casellaTrovata = True
-                        nmxProbabile = -GlobalVarG2.gpx
+                        nmxProbabile = -GlobalVar.gpx
                         nmyProbabile = 0
                         mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
-                        if not ((x == mxProbabile + GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile - GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile - GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile)):
+                        if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
                                     nmos = 2
@@ -272,9 +272,9 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                                 sposta = True
                                 casellaTrovata = True
                         nmxProbabile = 0
-                        nmyProbabile = GlobalVarG2.gpy
+                        nmyProbabile = GlobalVar.gpy
                         mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
-                        if not ((x == mxProbabile + GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile - GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile - GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile)):
+                        if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
                                     nmos = 3
@@ -284,9 +284,9 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                                 sposta = True
                                 casellaTrovata = True
                         nmxProbabile = 0
-                        nmyProbabile = -GlobalVarG2.gpy
+                        nmyProbabile = -GlobalVar.gpy
                         mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
-                        if not ((x == mxProbabile + GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile - GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile - GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile)):
+                        if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
                                     nmos = 4
@@ -296,22 +296,22 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                                 sposta = True
                     else:
                         if xRalloVicino != 0 and yRalloVicino != 0:
-                            if nemico.x - GlobalVarG2.gpx == xRalloVicino and nemico.y == yRalloVicino:
+                            if nemico.x - GlobalVar.gpx == xRalloVicino and nemico.y == yRalloVicino:
                                 casellaDaControllarePrima = 1
-                            elif nemico.x + GlobalVarG2.gpx == xRalloVicino and nemico.y == yRalloVicino:
+                            elif nemico.x + GlobalVar.gpx == xRalloVicino and nemico.y == yRalloVicino:
                                 casellaDaControllarePrima = 2
-                            elif nemico.x == xRalloVicino and nemico.y - GlobalVarG2.gpy == yRalloVicino:
+                            elif nemico.x == xRalloVicino and nemico.y - GlobalVar.gpy == yRalloVicino:
                                 casellaDaControllarePrima = 3
-                            elif nemico.x == xRalloVicino and nemico.y + GlobalVarG2.gpy == yRalloVicino:
+                            elif nemico.x == xRalloVicino and nemico.y + GlobalVar.gpy == yRalloVicino:
                                 casellaDaControllarePrima = 4
                         elif xColcoVicino != 0 and yColcoVicino != 0:
-                            if nemico.x - GlobalVarG2.gpx == xColcoVicino and nemico.y == yColcoVicino:
+                            if nemico.x - GlobalVar.gpx == xColcoVicino and nemico.y == yColcoVicino:
                                 casellaDaControllarePrima = 1
-                            elif nemico.x + GlobalVarG2.gpx == xColcoVicino and nemico.y == yColcoVicino:
+                            elif nemico.x + GlobalVar.gpx == xColcoVicino and nemico.y == yColcoVicino:
                                 casellaDaControllarePrima = 2
-                            elif nemico.x == xColcoVicino and nemico.y - GlobalVarG2.gpy == yColcoVicino:
+                            elif nemico.x == xColcoVicino and nemico.y - GlobalVar.gpy == yColcoVicino:
                                 casellaDaControllarePrima = 3
-                            elif nemico.x == xColcoVicino and nemico.y + GlobalVarG2.gpy == yColcoVicino:
+                            elif nemico.x == xColcoVicino and nemico.y + GlobalVar.gpy == yColcoVicino:
                                 casellaDaControllarePrima = 4
 
                         ordineCaselleDaControllare = []
@@ -327,19 +327,19 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                             nmxProbabile = 0
                             nmyProbabile = 0
                             if i == 1:
-                                nmxProbabile = GlobalVarG2.gpx
+                                nmxProbabile = GlobalVar.gpx
                                 nmyProbabile = 0
                             elif i == 2:
-                                nmxProbabile = -GlobalVarG2.gpx
+                                nmxProbabile = -GlobalVar.gpx
                                 nmyProbabile = 0
                             elif i == 3:
                                 nmxProbabile = 0
-                                nmyProbabile = GlobalVarG2.gpy
+                                nmyProbabile = GlobalVar.gpy
                             elif i == 4:
                                 nmxProbabile = 0
-                                nmyProbabile = -GlobalVarG2.gpy
+                                nmyProbabile = -GlobalVar.gpy
                             mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
-                            if not ((x == mxProbabile + GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile - GlobalVarG2.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile - GlobalVarG2.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVarG2.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVarG2.gpy) or (rx == mxProbabile and ry == myProbabile)):
+                            if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                                 nmos = i
                                 sposta = True
                                 break
@@ -450,7 +450,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 if nemico.y > nemico.yObbiettivo and c == 2:
                     nmos = 4
                 sposta = True
-        if abs(nemico.xObbiettivo - nemico.x) == GlobalVarG2.gpx and abs(nemico.yObbiettivo - nemico.y) == 0:
+        if abs(nemico.xObbiettivo - nemico.x) == GlobalVar.gpx and abs(nemico.yObbiettivo - nemico.y) == 0:
             if nemico.x < nemico.xObbiettivo:
                 nmos = 1
             if nemico.x > nemico.xObbiettivo:
@@ -458,7 +458,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             sposta = True
             nemico.xObbiettivo = False
             nemico.yObbiettivo = False
-        if abs(nemico.yObbiettivo - nemico.y) == GlobalVarG2.gpy and abs(nemico.xObbiettivo - nemico.x) == 0:
+        if abs(nemico.yObbiettivo - nemico.y) == GlobalVar.gpy and abs(nemico.xObbiettivo - nemico.x) == 0:
             if nemico.y < nemico.yObbiettivo:
                 nmos = 3
             if nemico.y > nemico.yObbiettivo:
@@ -468,14 +468,14 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             nemico.yObbiettivo = False
     elif nemico.xPosizioneUltimoBersaglio and nemico.yPosizioneUltimoBersaglio:
         nemico.triggerato = True
-        if (nemico.xPosizioneUltimoBersaglio == nemico.x + GlobalVarG2.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x - GlobalVarG2.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y + GlobalVarG2.gpy) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y - GlobalVarG2.gpy):
-            if nemico.xPosizioneUltimoBersaglio == nemico.x + GlobalVarG2.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y:
+        if (nemico.xPosizioneUltimoBersaglio == nemico.x + GlobalVar.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x - GlobalVar.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y + GlobalVar.gpy) or (nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y - GlobalVar.gpy):
+            if nemico.xPosizioneUltimoBersaglio == nemico.x + GlobalVar.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y:
                 nmos = 1
-            if nemico.xPosizioneUltimoBersaglio == nemico.x - GlobalVarG2.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y:
+            if nemico.xPosizioneUltimoBersaglio == nemico.x - GlobalVar.gpx and nemico.yPosizioneUltimoBersaglio == nemico.y:
                 nmos = 2
-            if nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y + GlobalVarG2.gpy:
+            if nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y + GlobalVar.gpy:
                 nmos = 3
-            if nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y - GlobalVarG2.gpy:
+            if nemico.xPosizioneUltimoBersaglio == nemico.x and nemico.yPosizioneUltimoBersaglio == nemico.y - GlobalVar.gpy:
                 nmos = 4
             nemico.xObbiettivo = False
             nemico.yObbiettivo = False
@@ -561,54 +561,54 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
     if sposta:
         # 1=d, 2=a, 3=s, 4=w
         if nmos == 1:
-            if nemico.x + GlobalVarG2.gpx == nemico.xObbiettivo and nemico.y == nemico.yObbiettivo:
+            if nemico.x + GlobalVar.gpx == nemico.xObbiettivo and nemico.y == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
-                nmx = GlobalVarG2.gpx
+                nmx = GlobalVar.gpx
                 nmy = 0
             i = 2
             while i <= len(vitaesca):
-                if nemico.x + GlobalVarG2.gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
+                if nemico.x + GlobalVar.gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
         if nmos == 2:
-            if nemico.x - GlobalVarG2.gpx == nemico.xObbiettivo and nemico.y == nemico.yObbiettivo:
+            if nemico.x - GlobalVar.gpx == nemico.xObbiettivo and nemico.y == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
-                nmx = -GlobalVarG2.gpx
+                nmx = -GlobalVar.gpx
                 nmy = 0
             i = 2
             while i <= len(vitaesca):
-                if nemico.x - GlobalVarG2.gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
+                if nemico.x - GlobalVar.gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
         if nmos == 3:
-            if nemico.x == nemico.xObbiettivo and nemico.y + GlobalVarG2.gpy == nemico.yObbiettivo:
+            if nemico.x == nemico.xObbiettivo and nemico.y + GlobalVar.gpy == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
                 nmx = 0
-                nmy = GlobalVarG2.gpy
+                nmy = GlobalVar.gpy
             i = 2
             while i <= len(vitaesca):
-                if nemico.x == vitaesca[i] and nemico.y + GlobalVarG2.gpy == vitaesca[i + 1]:
+                if nemico.x == vitaesca[i] and nemico.y + GlobalVar.gpy == vitaesca[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
         if nmos == 4:
-            if nemico.x == nemico.xObbiettivo and nemico.y - GlobalVarG2.gpy == nemico.yObbiettivo:
+            if nemico.x == nemico.xObbiettivo and nemico.y - GlobalVar.gpy == nemico.yObbiettivo:
                 nmx = 0
                 nmy = 0
             else:
                 nmx = 0
-                nmy = -GlobalVarG2.gpy
+                nmy = -GlobalVar.gpy
             i = 2
             while i <= len(vitaesca):
-                if nemico.x == vitaesca[i] and nemico.y - GlobalVarG2.gpy == vitaesca[i + 1]:
+                if nemico.x == vitaesca[i] and nemico.y - GlobalVar.gpy == vitaesca[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
@@ -628,9 +628,9 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
 def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, stanza, porte, cofanetti, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi):
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
     if dati[126] > 0:
-        costoTecnicaUsata = GlobalVarG2.costoTecniche[azione - 1] // 2
+        costoTecnicaUsata = GlobalVar.costoTecniche[azione - 1] // 2
     else:
-        costoTecnicaUsata = GlobalVarG2.costoTecniche[azione - 1]
+        costoTecnicaUsata = GlobalVar.costoTecniche[azione - 1]
     raffreddamento = False
     ricarica1 = False
     ricarica2 = False
@@ -667,11 +667,11 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             attaccoDiColco.append("")
         # velocizza
         if azione == 11 and dati[10] >= costoTecnicaUsata and dati[122] <= 0:
-            dati[125] = GlobalVarG2.dannoTecniche[azione - 1]
+            dati[125] = GlobalVar.dannoTecniche[azione - 1]
             attaccoDiColco.append("velocizza")
         # efficienza
         if azione == 14 and dati[10] >= costoTecnicaUsata and dati[122] <= 0:
-            dati[126] = GlobalVarG2.dannoTecniche[azione - 1]
+            dati[126] = GlobalVar.dannoTecniche[azione - 1]
             attaccoDiColco.append("efficienza")
         # ricarica+
         if azione == 17 and dati[10] >= costoTecnicaUsata:
@@ -691,7 +691,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             i += 3
         mostroAccanto = False
         mostroVisto = True
-        if (rx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx + GlobalVarG2.gpx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx - GlobalVarG2.gpx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx == nemicoBersaglio.x and ry + GlobalVarG2.gpy == nemicoBersaglio.y) or (rx == nemicoBersaglio.x and ry - GlobalVarG2.gpy == nemicoBersaglio.y):
+        if (rx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx + GlobalVar.gpx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx - GlobalVar.gpx == nemicoBersaglio.x and ry == nemicoBersaglio.y) or (rx == nemicoBersaglio.x and ry + GlobalVar.gpy == nemicoBersaglio.y) or (rx == nemicoBersaglio.x and ry - GlobalVar.gpy == nemicoBersaglio.y):
             mostroAccanto = True
             mostroVisto = True
         if mostroAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18):
@@ -703,7 +703,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 dati[10] -= costoTecnicaUsata
             # scossa
             if azione == 1 and dati[10] >= costoTecnicaUsata:
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
                 if nemicoBersaglio:
@@ -716,11 +716,11 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append("")
             # cura
             if azione == 2 and dati[10] >= costoTecnicaUsata:
-                nemicoBersaglio.vita += GlobalVarG2.dannoTecniche[azione - 1]
+                nemicoBersaglio.vita += GlobalVar.dannoTecniche[azione - 1]
                 if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
                     nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
                 attaccoDiColco.append(nemicoBersaglio)
-                attaccoDiColco.append(GlobalVarG2.dannoTecniche[azione - 1])
+                attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
                 attaccoDiColco.append("")
             # antidoto
             if azione == 3 and dati[10] >= costoTecnicaUsata:
@@ -730,15 +730,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append("antidoto")
             # cura+
             if azione == 8 and dati[10] >= costoTecnicaUsata:
-                nemicoBersaglio.vita += GlobalVarG2.dannoTecniche[azione - 1]
+                nemicoBersaglio.vita += GlobalVar.dannoTecniche[azione - 1]
                 if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
                     nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
                 attaccoDiColco.append(nemicoBersaglio)
-                attaccoDiColco.append(GlobalVarG2.dannoTecniche[azione - 1])
+                attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
                 attaccoDiColco.append("")
             # scossa+
             if azione == 9 and dati[10] >= costoTecnicaUsata:
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
                 if nemicoBersaglio:
@@ -761,15 +761,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append("")
             # cura++
             if azione == 16 and dati[10] >= costoTecnicaUsata:
-                nemicoBersaglio.vita += GlobalVarG2.dannoTecniche[azione - 1]
+                nemicoBersaglio.vita += GlobalVar.dannoTecniche[azione - 1]
                 if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
                     nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
                 attaccoDiColco.append(nemicoBersaglio)
-                attaccoDiColco.append(GlobalVarG2.dannoTecniche[azione - 1])
+                attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
                 attaccoDiColco.append("")
             # scossa++
             if azione == 18 and dati[10] >= costoTecnicaUsata:
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
                 if nemicoBersaglio:
@@ -813,7 +813,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             # freccia
             if azione == 4 and dati[10] >= costoTecnicaUsata:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
                 if nemicoBersaglio:
@@ -829,7 +829,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             if azione == 5 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -841,7 +841,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
@@ -865,7 +865,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             # freccia+
             if azione == 10 and dati[10] >= costoTecnicaUsata:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
                 if nemicoBersaglio:
@@ -881,7 +881,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             if azione == 15 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -893,7 +893,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
@@ -917,7 +917,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             # freccia++
             if azione == 19 and dati[10] >= costoTecnicaUsata:
                 listaNemiciAttaccatiADistanzaRobo.append(nemicoBersaglio)
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 if danno < 0:
                     danno = 0
                 if nemicoBersaglio:
@@ -933,7 +933,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             if azione == 20 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -945,7 +945,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
@@ -1017,7 +1017,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
     else:
         ralloAccanto = False
         ralloVisto = False
-        if (rx == x and ry == y) or (rx + GlobalVarG2.gpx == x and ry == y) or (rx - GlobalVarG2.gpx == x and ry == y) or (rx == x and ry + GlobalVarG2.gpy == y) or (rx == x and ry - GlobalVarG2.gpy == y):
+        if (rx == x and ry == y) or (rx + GlobalVar.gpx == x and ry == y) or (rx - GlobalVar.gpx == x and ry == y) or (rx == x and ry + GlobalVar.gpy == y) or (rx == x and ry - GlobalVar.gpy == y):
             ralloAccanto = True
             ralloVisto = True
         else:
@@ -1038,7 +1038,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dati[10] -= costoTecnicaUsata
                     # scossa
                     if azione == 1 and dati[10] >= costoTecnicaUsata:
-                        danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                        danno = GlobalVar.dannoTecniche[azione - 1] - dif
                         if danno < 0:
                             danno = 0
                         dati[5] -= danno
@@ -1052,11 +1052,11 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("")
                     # cura
                     if azione == 2 and dati[10] >= costoTecnicaUsata:
-                        dati[5] += GlobalVarG2.dannoTecniche[azione - 1]
+                        dati[5] += GlobalVar.dannoTecniche[azione - 1]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
                         attaccoDiColco.append("Rallo")
-                        attaccoDiColco.append(GlobalVarG2.dannoTecniche[azione - 1])
+                        attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
                         attaccoDiColco.append("")
                     # antidoto
                     if azione == 3 and dati[10] >= costoTecnicaUsata:
@@ -1066,15 +1066,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("antidoto")
                     # cura+
                     if azione == 8 and dati[10] >= costoTecnicaUsata:
-                        dati[5] += GlobalVarG2.dannoTecniche[azione - 1]
+                        dati[5] += GlobalVar.dannoTecniche[azione - 1]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
                         attaccoDiColco.append("Rallo")
-                        attaccoDiColco.append(GlobalVarG2.dannoTecniche[azione - 1])
+                        attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
                         attaccoDiColco.append("")
                     # scossa+
                     if azione == 9 and dati[10] >= costoTecnicaUsata:
-                        danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                        danno = GlobalVar.dannoTecniche[azione - 1] - dif
                         if danno < 0:
                             danno = 0
                         dati[5] -= danno
@@ -1088,27 +1088,27 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("")
                     # attP
                     if azione == 12 and dati[10] >= costoTecnicaUsata and dati[123] <= 0:
-                        dati[123] = GlobalVarG2.dannoTecniche[azione - 1]
+                        dati[123] = GlobalVar.dannoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(0)
                         attaccoDiColco.append("attP")
                     # difP
                     if azione == 13 and dati[10] >= costoTecnicaUsata and dati[124] <= 0:
-                        dati[124] = GlobalVarG2.dannoTecniche[azione - 1]
+                        dati[124] = GlobalVar.dannoTecniche[azione - 1]
                         attaccoDiColco.append("Rallo")
                         attaccoDiColco.append(0)
                         attaccoDiColco.append("difP")
                     # cura++
                     if azione == 16 and dati[10] >= costoTecnicaUsata:
-                        dati[5] += GlobalVarG2.dannoTecniche[azione - 1]
+                        dati[5] += GlobalVar.dannoTecniche[azione - 1]
                         if dati[5] > pvtot:
                             dati[5] = pvtot
                         attaccoDiColco.append("Rallo")
-                        attaccoDiColco.append(GlobalVarG2.dannoTecniche[azione - 1])
+                        attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
                         attaccoDiColco.append("")
                     # scossa++
                     if azione == 18 and dati[10] >= costoTecnicaUsata:
-                        danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                        danno = GlobalVar.dannoTecniche[azione - 1] - dif
                         if danno < 0:
                             danno = 0
                         dati[5] -= danno
@@ -1153,7 +1153,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 # freccia
                 if azione == 4 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1168,7 +1168,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 # tempesta
                 if azione == 5 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1180,7 +1180,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1]
+                    danno = GlobalVar.dannoTecniche[azione - 1]
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
                         nemico.danneggia(danno, "Colco")
@@ -1196,7 +1196,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 # freccia+
                 if azione == 10 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1211,7 +1211,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 # tempesta+
                 if azione == 15 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1223,7 +1223,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1]
+                    danno = GlobalVar.dannoTecniche[azione - 1]
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
                         nemico.danneggia(danno, "Colco")
@@ -1240,7 +1240,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 # freccia++
                 if azione == 19 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1255,7 +1255,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 # tempesta++
                 if azione == 20 and dati[10] >= costoTecnicaUsata:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1267,7 +1267,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1]
+                    danno = GlobalVar.dannoTecniche[azione - 1]
                     for nemico in nemiciVistiDaColco:
                         listaNemiciAttaccatiADistanzaRobo.append(nemico)
                         nemico.danneggia(danno, "Colco")
@@ -1305,15 +1305,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         if ry > y and c == 2:
                             nrob = 4
             if not (ralloAccanto and (azione == 1 or azione == 2 or azione == 3 or azione == 8 or azione == 9 or azione == 12 or azione == 13 or azione == 16 or azione == 18)) and not (ralloVisto and (azione == 4 or azione == 5 or azione == 10 or azione == 15 or azione == 19 or azione == 20)):
-                if abs(rx - x) == GlobalVarG2.gpx and abs(ry - y) == GlobalVarG2.gpy and ((vx == rx + GlobalVarG2.gpx and vy == ry) or (vx == rx - GlobalVarG2.gpx and vy == ry) or (vx == rx and vy == ry + GlobalVarG2.gpy) or (vx == rx and vy == ry - GlobalVarG2.gpy)):
+                if abs(rx - x) == GlobalVar.gpx and abs(ry - y) == GlobalVar.gpy and ((vx == rx + GlobalVar.gpx and vy == ry) or (vx == rx - GlobalVar.gpx and vy == ry) or (vx == rx and vy == ry + GlobalVar.gpy) or (vx == rx and vy == ry - GlobalVar.gpy)):
                     azioneEseguita = True
-                    if vx == rx + GlobalVarG2.gpx and vy == ry:
+                    if vx == rx + GlobalVar.gpx and vy == ry:
                         nrob = 1
-                    elif vx == rx - GlobalVarG2.gpx and vy == ry:
+                    elif vx == rx - GlobalVar.gpx and vy == ry:
                         nrob = 2
-                    elif vy == ry + GlobalVarG2.gpy and vx == rx:
+                    elif vy == ry + GlobalVar.gpy and vx == rx:
                         nrob = 3
-                    elif vy == ry - GlobalVarG2.gpy and vx == rx:
+                    elif vy == ry - GlobalVar.gpy and vx == rx:
                         nrob = 4
                     sposta = True
                 else:
@@ -1346,7 +1346,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             if azione == 5 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1358,7 +1358,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
@@ -1376,7 +1376,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             if azione == 15 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1388,7 +1388,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
@@ -1406,7 +1406,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             if azione == 20 and dati[10] >= costoTecnicaUsata:
                 if ralloVisto:
                     listaNemiciAttaccatiADistanzaRobo.append("Rallo")
-                    danno = GlobalVarG2.dannoTecniche[azione - 1] - dif
+                    danno = GlobalVar.dannoTecniche[azione - 1] - dif
                     if danno < 0:
                         danno = 0
                     dati[5] -= danno
@@ -1418,7 +1418,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         dannoEffettivo = 0
                     attaccoDiColco.append(-dannoEffettivo)
                     attaccoDiColco.append("")
-                danno = GlobalVarG2.dannoTecniche[azione - 1]
+                danno = GlobalVar.dannoTecniche[azione - 1]
                 for nemico in nemiciVistiDaColco:
                     listaNemiciAttaccatiADistanzaRobo.append(nemico)
                     nemico.danneggia(danno, "Colco")
@@ -1451,7 +1451,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
 
     # trova i nemici visti
     nemiciVistiDaColco = []
-    vistaRobo = GlobalVarG2.gpx * 8
+    vistaRobo = GlobalVar.gpx * 8
     caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
     k = 0
     while k < len(caselleAttaccabili):
@@ -1469,14 +1469,14 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
     # movimento robot
     if chiamarob:
         azioneEseguita = False
-        if abs(rx - x) == GlobalVarG2.gpx and abs(ry - y) == GlobalVarG2.gpy and ((vx == rx + GlobalVarG2.gpx and vy == ry) or (vx == rx - GlobalVarG2.gpx and vy == ry) or (vx == rx and vy == ry + GlobalVarG2.gpy) or (vx == rx and vy == ry - GlobalVarG2.gpy)):
-            if vx == rx + GlobalVarG2.gpx and vy == ry:
+        if abs(rx - x) == GlobalVar.gpx and abs(ry - y) == GlobalVar.gpy and ((vx == rx + GlobalVar.gpx and vy == ry) or (vx == rx - GlobalVar.gpx and vy == ry) or (vx == rx and vy == ry + GlobalVar.gpy) or (vx == rx and vy == ry - GlobalVar.gpy)):
+            if vx == rx + GlobalVar.gpx and vy == ry:
                 nrob = 1
-            elif vx == rx - GlobalVarG2.gpx and vy == ry:
+            elif vx == rx - GlobalVar.gpx and vy == ry:
                 nrob = 2
-            elif vy == ry + GlobalVarG2.gpy and vx == rx:
+            elif vy == ry + GlobalVar.gpy and vx == rx:
                 nrob = 3
-            elif vy == ry - GlobalVarG2.gpy and vx == rx:
+            elif vy == ry - GlobalVar.gpy and vx == rx:
                 nrob = 4
             sposta = True
             azioneEseguita = True
@@ -1522,7 +1522,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
         azioneEseguita = False
         i = 101
         while i <= 110 and not azioneEseguita:
-            if dati[i] != 0 and dati[i + 10] != 0 and dati[10] >= GlobalVarG2.costoTecniche[dati[i + 10] - 1]:
+            if dati[i] != 0 and dati[i + 10] != 0 and dati[10] >= GlobalVar.costoTecniche[dati[i + 10] - 1]:
                 # azioni su alleati
                 # pv rallo < 80
                 if dati[i] == 1:
@@ -1597,7 +1597,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                         distMin = False
                         primoMostro = True
                         for nemico in nemiciVistiDaColco:
-                            if abs(nemico.x - rx) <= (GlobalVarG2.gpx * 2) and abs(nemico.y - ry) <= (GlobalVarG2.gpy * 2):
+                            if abs(nemico.x - rx) <= (GlobalVar.gpx * 2) and abs(nemico.y - ry) <= (GlobalVar.gpy * 2):
                                 if primoMostro:
                                     distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
                                     nemicoBersaglio = nemico
@@ -1621,7 +1621,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                         distMin = False
                         primoMostro = True
                         for nemico in nemiciVistiDaColco:
-                            if abs(nemico.x - rx) >= (GlobalVarG2.gpx * 3) or abs(nemico.y - ry) >= (GlobalVarG2.gpy * 3):
+                            if abs(nemico.x - rx) >= (GlobalVar.gpx * 3) or abs(nemico.y - ry) >= (GlobalVar.gpy * 3):
                                 if primoMostro:
                                     distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
                                     nemicoBersaglio = nemico
@@ -1875,20 +1875,20 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                     vetNemiciSoloConXeY.append(personaggio.x)
                     vetNemiciSoloConXeY.append(personaggio.y)
 
-            if (abs(rx - ultimoObbiettivoColco[1]) == GlobalVarG2.gpx and abs(ry - ultimoObbiettivoColco[2]) == 0) or (abs(rx - ultimoObbiettivoColco[1]) == 0 and abs(ry - ultimoObbiettivoColco[2]) == GlobalVarG2.gpy):
+            if (abs(rx - ultimoObbiettivoColco[1]) == GlobalVar.gpx and abs(ry - ultimoObbiettivoColco[2]) == 0) or (abs(rx - ultimoObbiettivoColco[1]) == 0 and abs(ry - ultimoObbiettivoColco[2]) == GlobalVar.gpy):
                 posizioneOstacolata = False
                 for nemico in listaNemici:
                     if ultimoObbiettivoColco[1] == nemico.x and ultimoObbiettivoColco[2] == nemico.y:
                         posizioneOstacolata = True
                         break
                 if not posizioneOstacolata:
-                    if rx + GlobalVarG2.gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
+                    if rx + GlobalVar.gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
                         nrob = 1
-                    if rx - GlobalVarG2.gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
+                    if rx - GlobalVar.gpx == ultimoObbiettivoColco[1] and ry == ultimoObbiettivoColco[2]:
                         nrob = 2
-                    if rx == ultimoObbiettivoColco[1] and ry + GlobalVarG2.gpy == ultimoObbiettivoColco[2]:
+                    if rx == ultimoObbiettivoColco[1] and ry + GlobalVar.gpy == ultimoObbiettivoColco[2]:
                         nrob = 3
-                    if rx == ultimoObbiettivoColco[1] and ry - GlobalVarG2.gpy == ultimoObbiettivoColco[2]:
+                    if rx == ultimoObbiettivoColco[1] and ry - GlobalVar.gpy == ultimoObbiettivoColco[2]:
                         nrob = 4
                     sposta = True
                     azioneEseguita = True
@@ -1920,37 +1920,37 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
     # spostamento
     if sposta:
         if nrob == 1:
-            if rx + GlobalVarG2.gpx == x and ry == y:
+            if rx + GlobalVar.gpx == x and ry == y:
                 nrx = 0
                 nry = 0
                 nrob = 0
             else:
-                nrx = GlobalVarG2.gpx
+                nrx = GlobalVar.gpx
                 nry = 0
         if nrob == 2:
-            if rx - GlobalVarG2.gpx == x and ry == y:
+            if rx - GlobalVar.gpx == x and ry == y:
                 nrx = 0
                 nry = 0
                 nrob = 0
             else:
-                nrx = -GlobalVarG2.gpx
+                nrx = -GlobalVar.gpx
                 nry = 0
         if nrob == 3:
-            if rx == x and ry + GlobalVarG2.gpy == y:
+            if rx == x and ry + GlobalVar.gpy == y:
                 nrx = 0
                 nry = 0
                 nrob = 0
             else:
                 nrx = 0
-                nry = GlobalVarG2.gpy
+                nry = GlobalVar.gpy
         if nrob == 4:
-            if rx == x and ry - GlobalVarG2.gpy == y:
+            if rx == x and ry - GlobalVar.gpy == y:
                 nrx = 0
                 nry = 0
                 nrob = 0
             else:
                 nrx = 0
-                nry = -GlobalVarG2.gpy
+                nry = -GlobalVar.gpy
 
     # alcuni sono inutili!!!
     rx, ry, stanza, carim, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, False, robo, porte, cofanetti)

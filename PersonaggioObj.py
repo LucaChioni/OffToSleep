@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from GenericFuncG2 import *
+from GenericFuncA import *
 
 
 class PersonaggioObj(object):
@@ -29,33 +29,33 @@ class PersonaggioObj(object):
 
     def caricaImg(self):
         imgW = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png")
-        self.imgW = pygame.transform.scale(imgW, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgW = pygame.transform.scale(imgW, (GlobalVar.gpx, GlobalVar.gpy))
         imgA = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png")
-        self.imgA = pygame.transform.scale(imgA, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgA = pygame.transform.scale(imgA, (GlobalVar.gpx, GlobalVar.gpy))
         imgS = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png")
-        self.imgS = pygame.transform.scale(imgS, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgS = pygame.transform.scale(imgS, (GlobalVar.gpx, GlobalVar.gpy))
         imgD = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png")
-        self.imgD = pygame.transform.scale(imgD, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgD = pygame.transform.scale(imgD, (GlobalVar.gpx, GlobalVar.gpy))
 
         imgWMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png")
-        self.imgWMov1 = pygame.transform.scale(imgWMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgWMov1 = pygame.transform.scale(imgWMov1, (GlobalVar.gpx, GlobalVar.gpy))
         imgWMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png")
-        self.imgWMov2 = pygame.transform.scale(imgWMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgWMov2 = pygame.transform.scale(imgWMov2, (GlobalVar.gpx, GlobalVar.gpy))
         imgAMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png")
-        self.imgAMov1 = pygame.transform.scale(imgAMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgAMov1 = pygame.transform.scale(imgAMov1, (GlobalVar.gpx, GlobalVar.gpy))
         imgAMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png")
-        self.imgAMov2 = pygame.transform.scale(imgAMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgAMov2 = pygame.transform.scale(imgAMov2, (GlobalVar.gpx, GlobalVar.gpy))
         imgSMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png")
-        self.imgSMov1 = pygame.transform.scale(imgSMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgSMov1 = pygame.transform.scale(imgSMov1, (GlobalVar.gpx, GlobalVar.gpy))
         imgSMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png")
-        self.imgSMov2 = pygame.transform.scale(imgSMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgSMov2 = pygame.transform.scale(imgSMov2, (GlobalVar.gpx, GlobalVar.gpy))
         imgDMov1 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png")
-        self.imgDMov1 = pygame.transform.scale(imgDMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgDMov1 = pygame.transform.scale(imgDMov1, (GlobalVar.gpx, GlobalVar.gpy))
         imgDMov2 = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png")
-        self.imgDMov2 = pygame.transform.scale(imgDMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+        self.imgDMov2 = pygame.transform.scale(imgDMov2, (GlobalVar.gpx, GlobalVar.gpy))
 
         imgDialogo = pygame.image.load("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png")
-        self.imgDialogo = pygame.transform.scale(imgDialogo, (GlobalVarG2.gpx * 12, GlobalVarG2.gpy * 9))
+        self.imgDialogo = pygame.transform.scale(imgDialogo, (GlobalVar.gpx * 12, GlobalVar.gpy * 9))
 
     def girati(self, direzione):
         if direzione == "w":
@@ -198,13 +198,13 @@ class PersonaggioObj(object):
         else:
             direzione = ""
         if direzione == "w":
-            self.y -= GlobalVarG2.gpy
+            self.y -= GlobalVar.gpy
         elif direzione == "a":
-            self.x -= GlobalVarG2.gpx
+            self.x -= GlobalVar.gpx
         elif direzione == "s":
-            self.y += GlobalVarG2.gpy
+            self.y += GlobalVar.gpy
         elif direzione == "d":
-            self.x += GlobalVarG2.gpx
+            self.x += GlobalVar.gpx
         else:
             self.animaSpostamento = False
 

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from MenuG2 import *
-from EnvPrintG2 import *
-from MovNemiciRobG2 import *
-from AnimazioniG2 import *
+from Menu import *
+from EnvPrint import *
+from MovNemiciRob import *
+from Animazioni import *
 from PersonaggioObj import *
+from GenericFuncB import *
 
 
 def gameloop():
@@ -53,7 +54,7 @@ def gameloop():
             obbiettivoCasualeColco = False
             dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali = menu(caricaSalvataggio)
             # controlla se devi cambiare personaggio giocabile
-            if dati[0] < GlobalVarG2.avanzamentoStoriaCambioPersonaggio:
+            if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
                 personaggioDaUsare = "FratelloMaggiore"
                 cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
@@ -62,8 +63,8 @@ def gameloop():
                 cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
             caricaSalvataggio = False
-            pers = GlobalVarG2.perss
-            robot = GlobalVarG2.robos
+            pers = GlobalVar.perss
+            robot = GlobalVar.robos
             print (dati)
 
             # creare vettore porte -> porte[stanza, x, y, True/False, ...]
@@ -115,7 +116,7 @@ def gameloop():
         # caricare gli oggetti
         if carim:
             # aggiorno le img del personaggio giocabile
-            if dati[0] < GlobalVarG2.avanzamentoStoriaCambioPersonaggio:
+            if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
                 personaggioDaUsare = "FratelloMaggiore"
             else:
                 personaggioDaUsare = "Sara"
@@ -126,40 +127,40 @@ def gameloop():
 
             if cambiosta:
                 sprites = pygame.sprite.Group(Fade(0))
-                schermoFadeToBlack = GlobalVarG2.schermo.copy()
+                schermoFadeToBlack = GlobalVar.schermo.copy()
                 i = 0
                 while i <= 6:
                     sprites.update()
-                    GlobalVarG2.schermo.blit(schermoFadeToBlack, (0, 0))
-                    sprites.draw(GlobalVarG2.schermo)
+                    GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+                    sprites.draw(GlobalVar.schermo)
                     pygame.display.update()
-                    GlobalVarG2.clockFadeToBlack.tick(GlobalVarG2.fpsFadeToBlack)
+                    GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
                     i += 1
 
-            if pers == GlobalVarG2.persw:
+            if pers == GlobalVar.persw:
                 agg = 1
-            if pers == GlobalVarG2.persa:
+            if pers == GlobalVar.persa:
                 agg = 2
-            if pers == GlobalVarG2.perss:
+            if pers == GlobalVar.perss:
                 agg = 3
-            if pers == GlobalVarG2.persd:
+            if pers == GlobalVar.persd:
                 agg = 4
 
             # mostri - personaggi
             if dati[1] == 1 and cambiosta:
                 # rumore porte
-                rumoreAperturaPorte = GlobalVarG2.suonoaperturaporte1
-                rumoreChiusuraPorte = GlobalVarG2.suonochiusuraporte1
+                rumoreAperturaPorte = GlobalVar.suonoaperturaporte1
+                rumoreChiusuraPorte = GlobalVar.suonochiusuraporte1
 
                 # posizione personaggio e robot al cambio stanza
                 if not inizio:
                     if stanzaVecchia == 2:
                         npers = 4
                         nrob = 3
-                        x = GlobalVarG2.gsx // 32 * 6
-                        y = GlobalVarG2.gsy // 18 * 2
-                        pers = GlobalVarG2.perss
-                        robot = GlobalVarG2.robos
+                        x = GlobalVar.gsx // 32 * 6
+                        y = GlobalVar.gsy // 18 * 2
+                        pers = GlobalVar.perss
+                        robot = GlobalVar.robos
                         agg = 3
                     vx = x
                     vy = y
@@ -168,62 +169,20 @@ def gameloop():
                     vrx = x
                     vry = y
 
-                listaNemici = []
-                if not dati[1] in stanzeGiaVisitate:
-                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 29, GlobalVarG2.gsy // 18 * 15, "w", "Orco", dati[1], percorsoNemico)
-                    listaNemiciTotali.append(nemico)
-                    listaNemici.append(nemico)
-                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 3, GlobalVarG2.gsy // 18 * 3, "a", "Orco", dati[1], percorsoNemico)
-                    listaNemiciTotali.append(nemico)
-                    listaNemici.append(nemico)
-                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 7, "s", "Pipistrello", dati[1], percorsoNemico)
-                    listaNemiciTotali.append(nemico)
-                    listaNemici.append(nemico)
-                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 15, GlobalVarG2.gsy // 18 * 14, "d", "Orco", dati[1], percorsoNemico)
-                    listaNemiciTotali.append(nemico)
-                    listaNemici.append(nemico)
-                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 23, GlobalVarG2.gsy // 18 * 4, "s", "Pipistrello", dati[1], percorsoNemico)
-                    listaNemiciTotali.append(nemico)
-                    listaNemici.append(nemico)
-                else:
-                    for nemico in listaNemiciTotali:
-                        if nemico.stanzaDiAppartenenza == dati[1]:
-                            listaNemici.append(nemico)
-                nmost = len(listaNemici)
-
-                listaPersonaggi = []
-                if not dati[1] in stanzeGiaVisitate:
-                    percorsoPersonaggio = ["w", "a", "a", "s", "d", "d"]
-                    personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4, "d", "Mercante", dati[1], dati[0], percorsoPersonaggio)
-                    listaPersonaggiTotali.append(personaggio)
-                    listaPersonaggi.append(personaggio)
-                else:
-                    for personaggio in listaPersonaggiTotali:
-                        if personaggio.stanzaDiAppartenenza == dati[1]:
-                            listaPersonaggi.append(personaggio)
-
-                if not dati[1] in stanzeGiaVisitate:
-                    stanzeGiaVisitate.append(dati[1])
-
             if dati[1] == 2 and cambiosta:
                 # rumore porte
-                rumoreAperturaPorte = GlobalVarG2.suonoaperturaporte2
-                rumoreChiusuraPorte = GlobalVarG2.suonochiusuraporte2
+                rumoreAperturaPorte = GlobalVar.suonoaperturaporte2
+                rumoreChiusuraPorte = GlobalVar.suonochiusuraporte2
 
                 # posizione personaggio e robot al cambio stanza
                 if not inizio:
                     if stanzaVecchia == 1:
                         npers = 4
                         nrob = 3
-                        x = GlobalVarG2.gsx // 32 * 6
-                        y = GlobalVarG2.gsy // 18 * 2
-                        pers = GlobalVarG2.perss
-                        robot = GlobalVarG2.robos
+                        x = GlobalVar.gsx // 32 * 6
+                        y = GlobalVar.gsy // 18 * 2
+                        pers = GlobalVar.perss
+                        robot = GlobalVar.robos
                         agg = 3
                     vx = x
                     vy = y
@@ -232,50 +191,22 @@ def gameloop():
                     vrx = x
                     vry = y
 
-                listaNemici = []
-                if not dati[1] in stanzeGiaVisitate:
-                    percorsoNemico = ["w", "a", "a", "s", "d", "d"]
-                    nemico = NemicoObj(GlobalVarG2.gsx // 32 * 29, GlobalVarG2.gsy // 18 * 15, "w", "Orco", dati[1], percorsoNemico)
-                    listaNemiciTotali.append(nemico)
-                    listaNemici.append(nemico)
-                else:
-                    for nemico in listaNemiciTotali:
-                        if nemico.stanzaDiAppartenenza == dati[1]:
-                            listaNemici.append(nemico)
-                nmost = len(listaNemici)
-
-                listaPersonaggi = []
-                if not dati[1] in stanzeGiaVisitate:
-                    percorsoPersonaggio = ["w", "", "d", "s", "a"]
-                    personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 2, GlobalVarG2.gsy // 18 * 4, "d", "Mercante", dati[1], dati[0], percorsoPersonaggio)
-                    listaPersonaggi.append(personaggio)
-                    listaPersonaggiTotali.append(personaggio)
-                    percorsoPersonaggio = []
-                    personaggio = PersonaggioObj(GlobalVarG2.gsx // 32 * 8, GlobalVarG2.gsy // 18 * 3, "a", "Alieno1", dati[1], dati[0], percorsoPersonaggio)
-                    listaPersonaggi.append(personaggio)
-                    listaPersonaggiTotali.append(personaggio)
-                else:
-                    for personaggio in listaPersonaggiTotali:
-                        if personaggio.stanzaDiAppartenenza == dati[1]:
-                            listaPersonaggi.append(personaggio)
-
-                if not dati[1] in stanzeGiaVisitate:
-                    stanzeGiaVisitate.append(dati[1])
-
             if cambiosta:
+                nmost, listaNemici, listaPersonaggi, listaNemiciTotali, listaPersonaggiTotali = caricaNemiciNellaStanza(dati[0], dati[1], stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali)
+
                 # stanza
                 imgSfondoStanza = pygame.image.load("Immagini/Paesaggi/Stanza%ia.png" % dati[1]).convert()
-                imgSfondoStanza = pygame.transform.scale(imgSfondoStanza, (GlobalVarG2.gsx, GlobalVarG2.gsy))
+                imgSfondoStanza = pygame.transform.scale(imgSfondoStanza, (GlobalVar.gsx, GlobalVar.gsy))
                 sfondinoa = pygame.image.load("Immagini/Paesaggi/Sfondino%ia.png" % dati[1]).convert()
-                sfondinoa = pygame.transform.scale(sfondinoa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                sfondinoa = pygame.transform.scale(sfondinoa, (GlobalVar.gpx, GlobalVar.gpy))
                 sfondinob = pygame.image.load("Immagini/Paesaggi/Sfondino%ib.png" % dati[1]).convert()
-                sfondinob = pygame.transform.scale(sfondinob, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                sfondinob = pygame.transform.scale(sfondinob, (GlobalVar.gpx, GlobalVar.gpy))
                 sfondinoc = pygame.image.load("Immagini/Paesaggi/Sfondino%ic.png" % dati[1]).convert()
-                sfondinoc = pygame.transform.scale(sfondinoc, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                sfondinoc = pygame.transform.scale(sfondinoc, (GlobalVar.gpx, GlobalVar.gpy))
                 portaVert = pygame.image.load("Immagini/Paesaggi/PortaV%i.png" % dati[1])
-                portaVert = pygame.transform.scale(portaVert, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                portaVert = pygame.transform.scale(portaVert, (GlobalVar.gpx, GlobalVar.gpy))
                 portaOriz = pygame.image.load("Immagini/Paesaggi/PortaO%i.png" % dati[1])
-                portaOriz = pygame.transform.scale(portaOriz, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                portaOriz = pygame.transform.scale(portaOriz, (GlobalVar.gpx, GlobalVar.gpy))
 
                 if not inizio:
                     mosseRimasteRob = 0
@@ -325,8 +256,8 @@ def gameloop():
                 while n <= 29:
                     m = 0
                     while m <= 15:
-                        caseviste.append(GlobalVarG2.gpx + (GlobalVarG2.gpx * n))
-                        caseviste.append(GlobalVarG2.gpy + (GlobalVarG2.gpy * m))
+                        caseviste.append(GlobalVar.gpx + (GlobalVar.gpx * n))
+                        caseviste.append(GlobalVar.gpy + (GlobalVar.gpy * m))
                         caseviste.append(False)
                         m = m + 1
                     n = n + 1
@@ -349,136 +280,136 @@ def gameloop():
             if not cambiosta:
                 # arma
                 armaw = pygame.image.load("Immagini/EquipSara/Spade/Spada%iw.png" % dati[6])
-                armaw = pygame.transform.scale(armaw, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaw = pygame.transform.scale(armaw, (GlobalVar.gpx, GlobalVar.gpy))
                 armawMov1 = pygame.image.load("Immagini/EquipSara/Spade/Spada%iwMov1.png" % dati[6])
-                armawMov1 = pygame.transform.scale(armawMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armawMov1 = pygame.transform.scale(armawMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 armawMov2 = pygame.image.load("Immagini/EquipSara/Spade/Spada%iwMov2.png" % dati[6])
-                armawMov2 = pygame.transform.scale(armawMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armawMov2 = pygame.transform.scale(armawMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 armaa = pygame.image.load("Immagini/EquipSara/Spade/Spada%ia.png" % dati[6])
-                armaa = pygame.transform.scale(armaa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaa = pygame.transform.scale(armaa, (GlobalVar.gpx, GlobalVar.gpy))
                 armaaMov1 = pygame.image.load("Immagini/EquipSara/Spade/Spada%iaMov1.png" % dati[6])
-                armaaMov1 = pygame.transform.scale(armaaMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaaMov1 = pygame.transform.scale(armaaMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 armaaMov2 = pygame.image.load("Immagini/EquipSara/Spade/Spada%iaMov2.png" % dati[6])
-                armaaMov2 = pygame.transform.scale(armaaMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaaMov2 = pygame.transform.scale(armaaMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 armas = pygame.image.load("Immagini/EquipSara/Spade/Spada%is.png" % dati[6])
-                armas = pygame.transform.scale(armas, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armas = pygame.transform.scale(armas, (GlobalVar.gpx, GlobalVar.gpy))
                 armasMov1 = pygame.image.load("Immagini/EquipSara/Spade/Spada%isMov1.png" % dati[6])
-                armasMov1 = pygame.transform.scale(armasMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armasMov1 = pygame.transform.scale(armasMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 armasMov2 = pygame.image.load("Immagini/EquipSara/Spade/Spada%isMov2.png" % dati[6])
-                armasMov2 = pygame.transform.scale(armasMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armasMov2 = pygame.transform.scale(armasMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 armad = pygame.image.load("Immagini/EquipSara/Spade/Spada%id.png" % dati[6])
-                armad = pygame.transform.scale(armad, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armad = pygame.transform.scale(armad, (GlobalVar.gpx, GlobalVar.gpy))
                 armadMov1 = pygame.image.load("Immagini/EquipSara/Spade/Spada%idMov1.png" % dati[6])
-                armadMov1 = pygame.transform.scale(armadMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armadMov1 = pygame.transform.scale(armadMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 armadMov2 = pygame.image.load("Immagini/EquipSara/Spade/Spada%idMov2.png" % dati[6])
-                armadMov2 = pygame.transform.scale(armadMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armadMov2 = pygame.transform.scale(armadMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 armasAttacco = pygame.image.load("Immagini/EquipSara/Spade/Spada%isAttacco.png" % dati[6])
-                armasAttacco = pygame.transform.scale(armasAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy * 2))
+                armasAttacco = pygame.transform.scale(armasAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
                 armaaAttacco = pygame.image.load("Immagini/EquipSara/Spade/Spada%iaAttacco.png" % dati[6])
-                armaaAttacco = pygame.transform.scale(armaaAttacco, (GlobalVarG2.gpx * 2, GlobalVarG2.gpy))
+                armaaAttacco = pygame.transform.scale(armaaAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
                 armadAttacco = pygame.image.load("Immagini/EquipSara/Spade/Spada%idAttacco.png" % dati[6])
-                armadAttacco = pygame.transform.scale(armadAttacco, (GlobalVarG2.gpx * 2, GlobalVarG2.gpy))
+                armadAttacco = pygame.transform.scale(armadAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
                 armawAttacco = pygame.image.load("Immagini/EquipSara/Spade/Spada%iwAttacco.png" % dati[6])
-                armawAttacco = pygame.transform.scale(armawAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy * 2))
+                armawAttacco = pygame.transform.scale(armawAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
                 # arco
                 arcow = pygame.image.load("Immagini/EquipSara/Archi/Arco%iw.png" % dati[128])
-                arcow = pygame.transform.scale(arcow, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                arcow = pygame.transform.scale(arcow, (GlobalVar.gpx, GlobalVar.gpy))
                 arcoa = pygame.image.load("Immagini/EquipSara/Archi/Arco%ia.png" % dati[128])
-                arcoa = pygame.transform.scale(arcoa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                arcoa = pygame.transform.scale(arcoa, (GlobalVar.gpx, GlobalVar.gpy))
                 arcos = pygame.image.load("Immagini/EquipSara/Archi/Arco%is.png" % dati[128])
-                arcos = pygame.transform.scale(arcos, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                arcos = pygame.transform.scale(arcos, (GlobalVar.gpx, GlobalVar.gpy))
                 arcod = pygame.image.load("Immagini/EquipSara/Archi/Arco%id.png" % dati[128])
-                arcod = pygame.transform.scale(arcod, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                arcod = pygame.transform.scale(arcod, (GlobalVar.gpx, GlobalVar.gpy))
                 arcosAttacco = pygame.image.load("Immagini/EquipSara/Archi/Arco%isAttacco.png" % dati[128])
-                arcosAttacco = pygame.transform.scale(arcosAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy * 2))
+                arcosAttacco = pygame.transform.scale(arcosAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
                 arcoaAttacco = pygame.image.load("Immagini/EquipSara/Archi/Arco%iaAttacco.png" % dati[128])
-                arcoaAttacco = pygame.transform.scale(arcoaAttacco, (GlobalVarG2.gpx * 2, GlobalVarG2.gpy))
+                arcoaAttacco = pygame.transform.scale(arcoaAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
                 arcodAttacco = pygame.image.load("Immagini/EquipSara/Archi/Arco%idAttacco.png" % dati[128])
-                arcodAttacco = pygame.transform.scale(arcodAttacco, (GlobalVarG2.gpx * 2, GlobalVarG2.gpy))
+                arcodAttacco = pygame.transform.scale(arcodAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
                 arcowAttacco = pygame.image.load("Immagini/EquipSara/Archi/Arco%iwAttacco.png" % dati[128])
-                arcowAttacco = pygame.transform.scale(arcowAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy * 2))
+                arcowAttacco = pygame.transform.scale(arcowAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
                 # faretra
                 faretraw = pygame.image.load("Immagini/EquipSara/Faretre/Faretra%iw.png" % dati[133])
-                faretraw = pygame.transform.scale(faretraw, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                faretraw = pygame.transform.scale(faretraw, (GlobalVar.gpx, GlobalVar.gpy))
                 faretraa = pygame.image.load("Immagini/EquipSara/Faretre/Faretra%ia.png" % dati[133])
-                faretraa = pygame.transform.scale(faretraa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                faretraa = pygame.transform.scale(faretraa, (GlobalVar.gpx, GlobalVar.gpy))
                 faretras = pygame.image.load("Immagini/EquipSara/Faretre/Faretra%is.png" % dati[133])
-                faretras = pygame.transform.scale(faretras, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                faretras = pygame.transform.scale(faretras, (GlobalVar.gpx, GlobalVar.gpy))
                 faretrad = pygame.image.load("Immagini/EquipSara/Faretre/Faretra%id.png" % dati[133])
-                faretrad = pygame.transform.scale(faretrad, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                faretrad = pygame.transform.scale(faretrad, (GlobalVar.gpx, GlobalVar.gpy))
                 # armatura
                 armaturaw = pygame.image.load("Immagini/EquipSara/Armature/Armatura%iw.png" % dati[8])
-                armaturaw = pygame.transform.scale(armaturaw, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaturaw = pygame.transform.scale(armaturaw, (GlobalVar.gpx, GlobalVar.gpy))
                 armaturaa = pygame.image.load("Immagini/EquipSara/Armature/Armatura%ia.png" % dati[8])
-                armaturaa = pygame.transform.scale(armaturaa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaturaa = pygame.transform.scale(armaturaa, (GlobalVar.gpx, GlobalVar.gpy))
                 armaturas = pygame.image.load("Immagini/EquipSara/Armature/Armatura%is.png" % dati[8])
-                armaturas = pygame.transform.scale(armaturas, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaturas = pygame.transform.scale(armaturas, (GlobalVar.gpx, GlobalVar.gpy))
                 armaturad = pygame.image.load("Immagini/EquipSara/Armature/Armatura%id.png" % dati[8])
-                armaturad = pygame.transform.scale(armaturad, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armaturad = pygame.transform.scale(armaturad, (GlobalVar.gpx, GlobalVar.gpy))
                 # scudo
                 scudow = pygame.image.load("Immagini/EquipSara/Scudi/Scudo%iw.png" % dati[7])
-                scudow = pygame.transform.scale(scudow, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                scudow = pygame.transform.scale(scudow, (GlobalVar.gpx, GlobalVar.gpy))
                 scudoa = pygame.image.load("Immagini/EquipSara/Scudi/Scudo%ia.png" % dati[7])
-                scudoa = pygame.transform.scale(scudoa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                scudoa = pygame.transform.scale(scudoa, (GlobalVar.gpx, GlobalVar.gpy))
                 scudos = pygame.image.load("Immagini/EquipSara/Scudi/Scudo%is.png" % dati[7])
-                scudos = pygame.transform.scale(scudos, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                scudos = pygame.transform.scale(scudos, (GlobalVar.gpx, GlobalVar.gpy))
                 scudod = pygame.image.load("Immagini/EquipSara/Scudi/Scudo%id.png" % dati[7])
-                scudod = pygame.transform.scale(scudod, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                scudod = pygame.transform.scale(scudod, (GlobalVar.gpx, GlobalVar.gpy))
                 scudoDifesa = pygame.image.load("Immagini/EquipSara/Scudi/Scudo%iDifesa.png" % dati[7])
-                scudoDifesa = pygame.transform.scale(scudoDifesa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                scudoDifesa = pygame.transform.scale(scudoDifesa, (GlobalVar.gpx, GlobalVar.gpy))
                 # guanti
                 guantiw = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iw.png" % dati[129])
-                guantiw = pygame.transform.scale(guantiw, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiw = pygame.transform.scale(guantiw, (GlobalVar.gpx, GlobalVar.gpy))
                 guantiwMov1 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iwMov1.png" % dati[129])
-                guantiwMov1 = pygame.transform.scale(guantiwMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiwMov1 = pygame.transform.scale(guantiwMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 guantiwMov2 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iwMov2.png" % dati[129])
-                guantiwMov2 = pygame.transform.scale(guantiwMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiwMov2 = pygame.transform.scale(guantiwMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 guantia = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%ia.png" % dati[129])
-                guantia = pygame.transform.scale(guantia, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantia = pygame.transform.scale(guantia, (GlobalVar.gpx, GlobalVar.gpy))
                 guantiaMov1 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iaMov1.png" % dati[129])
-                guantiaMov1 = pygame.transform.scale(guantiaMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiaMov1 = pygame.transform.scale(guantiaMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 guantiaMov2 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iaMov2.png" % dati[129])
-                guantiaMov2 = pygame.transform.scale(guantiaMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiaMov2 = pygame.transform.scale(guantiaMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 guantis = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%is.png" % dati[129])
-                guantis = pygame.transform.scale(guantis, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantis = pygame.transform.scale(guantis, (GlobalVar.gpx, GlobalVar.gpy))
                 guantisMov1 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%isMov1.png" % dati[129])
-                guantisMov1 = pygame.transform.scale(guantisMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantisMov1 = pygame.transform.scale(guantisMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 guantisMov2 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%isMov2.png" % dati[129])
-                guantisMov2 = pygame.transform.scale(guantisMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantisMov2 = pygame.transform.scale(guantisMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 guantid = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%id.png" % dati[129])
-                guantid = pygame.transform.scale(guantid, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantid = pygame.transform.scale(guantid, (GlobalVar.gpx, GlobalVar.gpy))
                 guantidMov1 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%idMov1.png" % dati[129])
-                guantidMov1 = pygame.transform.scale(guantidMov1, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantidMov1 = pygame.transform.scale(guantidMov1, (GlobalVar.gpx, GlobalVar.gpy))
                 guantidMov2 = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%idMov2.png" % dati[129])
-                guantidMov2 = pygame.transform.scale(guantidMov2, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantidMov2 = pygame.transform.scale(guantidMov2, (GlobalVar.gpx, GlobalVar.gpy))
                 guantisAttacco = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%isAttacco.png" % dati[129])
-                guantisAttacco = pygame.transform.scale(guantisAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantisAttacco = pygame.transform.scale(guantisAttacco, (GlobalVar.gpx, GlobalVar.gpy))
                 guantiaAttacco = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iaAttacco.png" % dati[129])
-                guantiaAttacco = pygame.transform.scale(guantiaAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiaAttacco = pygame.transform.scale(guantiaAttacco, (GlobalVar.gpx, GlobalVar.gpy))
                 guantidAttacco = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%idAttacco.png" % dati[129])
-                guantidAttacco = pygame.transform.scale(guantidAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantidAttacco = pygame.transform.scale(guantidAttacco, (GlobalVar.gpx, GlobalVar.gpy))
                 guantiwAttacco = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iwAttacco.png" % dati[129])
-                guantiwAttacco = pygame.transform.scale(guantiwAttacco, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiwAttacco = pygame.transform.scale(guantiwAttacco, (GlobalVar.gpx, GlobalVar.gpy))
                 guantiDifesa = pygame.image.load("Immagini/EquipSara/Guanti/Guanti%iDifesa.png" % dati[129])
-                guantiDifesa = pygame.transform.scale(guantiDifesa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                guantiDifesa = pygame.transform.scale(guantiDifesa, (GlobalVar.gpx, GlobalVar.gpy))
                 # collana
                 collanaw = pygame.image.load("Immagini/EquipSara/Collane/Collana%iw.png" % dati[130])
-                collanaw = pygame.transform.scale(collanaw, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                collanaw = pygame.transform.scale(collanaw, (GlobalVar.gpx, GlobalVar.gpy))
                 collanaa = pygame.image.load("Immagini/EquipSara/Collane/Collana%ia.png" % dati[130])
-                collanaa = pygame.transform.scale(collanaa, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                collanaa = pygame.transform.scale(collanaa, (GlobalVar.gpx, GlobalVar.gpy))
                 collanas = pygame.image.load("Immagini/EquipSara/Collane/Collana%is.png" % dati[130])
-                collanas = pygame.transform.scale(collanas, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                collanas = pygame.transform.scale(collanas, (GlobalVar.gpx, GlobalVar.gpy))
                 collanad = pygame.image.load("Immagini/EquipSara/Collane/Collana%id.png" % dati[130])
-                collanad = pygame.transform.scale(collanad, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                collanad = pygame.transform.scale(collanad, (GlobalVar.gpx, GlobalVar.gpy))
                 # armatura robot
                 armrobw = pygame.image.load("Immagini/EquipRobo/Batteria%iw.png" % dati[9])
-                armrobw = pygame.transform.scale(armrobw, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armrobw = pygame.transform.scale(armrobw, (GlobalVar.gpx, GlobalVar.gpy))
                 armroba = pygame.image.load("Immagini/EquipRobo/Batteria%ia.png" % dati[9])
-                armroba = pygame.transform.scale(armroba, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armroba = pygame.transform.scale(armroba, (GlobalVar.gpx, GlobalVar.gpy))
                 armrobs = pygame.image.load("Immagini/EquipRobo/Batteria%is.png" % dati[9])
-                armrobs = pygame.transform.scale(armrobs, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armrobs = pygame.transform.scale(armrobs, (GlobalVar.gpx, GlobalVar.gpy))
                 armrobd = pygame.image.load("Immagini/EquipRobo/Batteria%id.png" % dati[9])
-                armrobd = pygame.transform.scale(armrobd, (GlobalVarG2.gpx, GlobalVarG2.gpy))
+                armrobd = pygame.transform.scale(armrobd, (GlobalVar.gpx, GlobalVar.gpy))
             if agg == 1:
                 arma = armaw
                 armaMov1 = armawMov1
@@ -541,16 +472,16 @@ def gameloop():
                 collana = collanad
             if nrob != 0:
                 if nrob == 1:
-                    robot = GlobalVarG2.robod
+                    robot = GlobalVar.robod
                     armrob = armrobd
                 if nrob == 2:
-                    robot = GlobalVarG2.roboa
+                    robot = GlobalVar.roboa
                     armrob = armroba
                 if nrob == 3:
-                    robot = GlobalVarG2.robos
+                    robot = GlobalVar.robos
                     armrob = armrobs
                 if nrob == 4:
-                    robot = GlobalVarG2.robow
+                    robot = GlobalVar.robow
                     armrob = armrobw
 
             caricaTutto = True
@@ -571,7 +502,7 @@ def gameloop():
             guantiMov2 = guantisMov2
             guantiAttacco = guantisAttacco
             collana = collanas
-            robot = GlobalVarG2.robos
+            robot = GlobalVar.robos
             armrob = armrobs
             inizio = False
 
@@ -582,84 +513,84 @@ def gameloop():
             obbiettivoCasualeColco = False
 
         if tastop == 0:
-            GlobalVarG2.canaleSoundPassiRallo.stop()
+            GlobalVar.canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
 
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVarG2.mouseVisibile:
+        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             pygame.mouse.set_visible(True)
-            GlobalVarG2.mouseVisibile = True
-        if GlobalVarG2.mouseVisibile:
+            GlobalVar.mouseVisibile = True
+        if GlobalVar.mouseVisibile:
             # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / personaggio / porta / cofanetto / casella vista
-            if GlobalVarG2.gsy // 18 * 17 <= yMouse <= GlobalVarG2.gsy and GlobalVarG2.gsx // 32 * 0 <= xMouse <= GlobalVarG2.gsx // 32 * 6:
-                if GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(False)
+            if GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 6:
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco)) and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 <= xMouse <= GlobalVarG2.gsx // 32 * 4:
-                if GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(False)
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco)) and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 4:
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 <= xMouse <= GlobalVarG2.gsx // 32 * 1:
-                if GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(False)
+            elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 1:
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 1 and GlobalVarG2.gsx // 32 * 0 <= xMouse <= GlobalVarG2.gsx // 32 * 3:
-                if GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(False)
+            elif nemicoInquadrato and not type(nemicoInquadrato) is str and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 3:
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and 0 <= yMouse <= GlobalVarG2.gsy // 18 * 1.5 and GlobalVarG2.gsx // 32 * 27.8 < xMouse <= GlobalVarG2.gsx // 32 * 30.2:
-                if GlobalVarG2.mouseBloccato:
-                    GlobalVarG2.configuraCursore(False)
+            elif dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and 0 <= yMouse <= GlobalVar.gsy // 18 * 1.5 and GlobalVar.gsx // 32 * 27.8 < xMouse <= GlobalVar.gsx // 32 * 30.2:
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
             else:
                 if not inquadratoQualcosa:
                     i = 0
                     for personaggio in listaPersonaggi:
-                        if personaggio.x <= xMouse <= personaggio.x + GlobalVarG2.gpx and personaggio.y <= yMouse <= personaggio.y + GlobalVarG2.gpy:
-                            if (personaggio.x == x + GlobalVarG2.gpx and personaggio.y == y) or (personaggio.x == x - GlobalVarG2.gpx and personaggio.y == y) or (personaggio.x == x and personaggio.y == y + GlobalVarG2.gpy) or (personaggio.x == x and personaggio.y == y - GlobalVarG2.gpy):
-                                if GlobalVarG2.mouseBloccato:
-                                    GlobalVarG2.configuraCursore(False)
+                        if personaggio.x <= xMouse <= personaggio.x + GlobalVar.gpx and personaggio.y <= yMouse <= personaggio.y + GlobalVar.gpy:
+                            if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy):
+                                if GlobalVar.mouseBloccato:
+                                    GlobalVar.configuraCursore(False)
                                 inquadratoQualcosa = "personaggio:" + str(i)
                             break
                         i += 1
                 if not inquadratoQualcosa:
                     i = 0
                     while i < len(porte):
-                        if porte[i + 1] <= xMouse <= porte[i + 1] + GlobalVarG2.gpx and porte[i + 2] <= yMouse <= porte[i + 2] + GlobalVarG2.gpy and not porte[i + 3]:
-                            if ((porte[i + 1] == x + GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalVarG2.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalVarG2.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalVarG2.gpy)) and not porte[i + 3]:
-                                if GlobalVarG2.mouseBloccato:
-                                    GlobalVarG2.configuraCursore(False)
+                        if porte[i + 1] <= xMouse <= porte[i + 1] + GlobalVar.gpx and porte[i + 2] <= yMouse <= porte[i + 2] + GlobalVar.gpy and not porte[i + 3]:
+                            if ((porte[i + 1] == x + GlobalVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalVar.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalVar.gpy)) and not porte[i + 3]:
+                                if GlobalVar.mouseBloccato:
+                                    GlobalVar.configuraCursore(False)
                                 inquadratoQualcosa = "porta:" + str(i)
                             break
                         i += 4
                 if not inquadratoQualcosa:
                     i = 0
                     while i < len(cofanetti):
-                        if cofanetti[i + 1] <= xMouse <= cofanetti[i + 1] + GlobalVarG2.gpx and cofanetti[i + 2] <= yMouse <= cofanetti[i + 2] + GlobalVarG2.gpy and not cofanetti[i + 3]:
-                            if ((cofanetti[i + 1] == x + GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x - GlobalVarG2.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVarG2.gpy) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVarG2.gpy)) and not cofanetti[i + 3]:
-                                if GlobalVarG2.mouseBloccato:
-                                    GlobalVarG2.configuraCursore(False)
+                        if cofanetti[i + 1] <= xMouse <= cofanetti[i + 1] + GlobalVar.gpx and cofanetti[i + 2] <= yMouse <= cofanetti[i + 2] + GlobalVar.gpy and not cofanetti[i + 3]:
+                            if ((cofanetti[i + 1] == x + GlobalVar.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x - GlobalVar.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVar.gpy) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVar.gpy)) and not cofanetti[i + 3]:
+                                if GlobalVar.mouseBloccato:
+                                    GlobalVar.configuraCursore(False)
                                 inquadratoQualcosa = "cofanetto:" + str(i)
                             break
                         i += 4
                 if not inquadratoQualcosa:
                     i = 0
                     while i < len(casevistePorteIncluse):
-                        if casevistePorteIncluse[i] <= xMouse <= casevistePorteIncluse[i] + GlobalVarG2.gpx and casevistePorteIncluse[i + 1] <= yMouse <= casevistePorteIncluse[i + 1] + GlobalVarG2.gpy and casevistePorteIncluse[i + 2]:
-                            if GlobalVarG2.mouseBloccato:
-                                GlobalVarG2.configuraCursore(False)
+                        if casevistePorteIncluse[i] <= xMouse <= casevistePorteIncluse[i] + GlobalVar.gpx and casevistePorteIncluse[i + 1] <= yMouse <= casevistePorteIncluse[i + 1] + GlobalVar.gpy and casevistePorteIncluse[i + 2]:
+                            if GlobalVar.mouseBloccato:
+                                GlobalVar.configuraCursore(False)
                             inquadratoQualcosa = "movimento:" + str(casevistePorteIncluse[i]) + ":" + str(casevistePorteIncluse[i + 1])
                             break
                         i += 3
-        if not inquadratoQualcosa and GlobalVarG2.mouseVisibile:
-            GlobalVarG2.canaleSoundPassiRallo.stop()
+        if not inquadratoQualcosa and GlobalVar.mouseVisibile:
+            GlobalVar.canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
-            if not GlobalVarG2.mouseBloccato:
-                GlobalVarG2.configuraCursore(True)
+            if not GlobalVar.mouseBloccato:
+                GlobalVar.configuraCursore(True)
 
         # controllo se ci sono nemici in movimento per decidere se fare altre animazioni o no
         nemiciInMovimento = False
@@ -693,16 +624,16 @@ def gameloop():
                 quit()
 
             if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti and not tastoTrovato and not startf:
-                if GlobalVarG2.mouseVisibile:
+                if GlobalVar.mouseVisibile:
                     pygame.mouse.set_visible(False)
-                    GlobalVarG2.mouseVisibile = False
+                    GlobalVar.mouseVisibile = False
                 movimentoPerMouse = False
                 tastop = event.key
                 # movimenti personaggio
                 if event.key == pygame.K_w and not tastoTrovato:
                     tastoTrovato = True
                     npers = 3
-                    pers = GlobalVarG2.persw
+                    pers = GlobalVar.persw
                     arma = armaw
                     armaMov1 = armawMov1
                     armaMov2 = armawMov2
@@ -717,12 +648,12 @@ def gameloop():
                     guantiMov2 = guantiwMov2
                     guantiAttacco = guantiwAttacco
                     collana = collanaw
-                    ny = -GlobalVarG2.gpy
+                    ny = -GlobalVar.gpy
                     nx = 0
                 if event.key == pygame.K_a and not tastoTrovato:
                     tastoTrovato = True
                     npers = 2
-                    pers = GlobalVarG2.persa
+                    pers = GlobalVar.persa
                     arma = armaa
                     armaMov1 = armaaMov1
                     armaMov2 = armaaMov2
@@ -737,12 +668,12 @@ def gameloop():
                     guantiMov2 = guantiaMov2
                     guantiAttacco = guantiaAttacco
                     collana = collanaa
-                    nx = -GlobalVarG2.gpx
+                    nx = -GlobalVar.gpx
                     ny = 0
                 if event.key == pygame.K_s and not tastoTrovato:
                     tastoTrovato = True
                     npers = 4
-                    pers = GlobalVarG2.perss
+                    pers = GlobalVar.perss
                     arma = armas
                     armaMov1 = armasMov1
                     armaMov2 = armasMov2
@@ -757,12 +688,12 @@ def gameloop():
                     guantiMov2 = guantisMov2
                     guantiAttacco = guantisAttacco
                     collana = collanas
-                    ny = GlobalVarG2.gpy
+                    ny = GlobalVar.gpy
                     nx = 0
                 if event.key == pygame.K_d and not tastoTrovato:
                     tastoTrovato = True
                     npers = 1
-                    pers = GlobalVarG2.persd
+                    pers = GlobalVar.persd
                     arma = armad
                     armaMov1 = armadMov1
                     armaMov2 = armadMov2
@@ -777,24 +708,24 @@ def gameloop():
                     guantiMov2 = guantidMov2
                     guantiAttacco = guantidAttacco
                     collana = collanad
-                    nx = GlobalVarG2.gpx
+                    nx = GlobalVar.gpx
                     ny = 0
 
                 if event.key == pygame.K_e and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
                     tastoTrovato = True
                     nx = 0
                     ny = 0
                     attacco = 1
                 if event.key == pygame.K_q and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento and nemicoInquadrato:
                     tastoTrovato = True
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selind)
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     nx = 0
                     ny = 0
                     nemicoInquadrato = False
                     caricaTutto = True
                 if (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
-                    GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoTeleColco)
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
                     tastoTrovato = True
                     nx = 0
                     ny = 0
@@ -807,7 +738,7 @@ def gameloop():
                         ultimoObbiettivoColco.append(y)
                         chiamarob = True
                 if (event.key == pygame.K_3 or event.key == pygame.K_KP3) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selObbiettivo)
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
                     nx = 0
                     ny = 0
                     listaNemiciVisti = []
@@ -850,7 +781,7 @@ def gameloop():
                             nemicoInquadrato = "Colco"
                     caricaTutto = True
                 if (event.key == pygame.K_2 or event.key == pygame.K_KP2) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selObbiettivo)
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
                     nx = 0
                     ny = 0
                     listaNemiciVisti = []
@@ -899,14 +830,14 @@ def gameloop():
                     # apertura porte
                     k = 0
                     while k < len(porte):
-                        if porte[k] == dati[1] and ((porte[k + 1] == x + GlobalVarG2.gpx and porte[k + 2] == y and npers == 1) or (
-                                porte[k + 1] == x - GlobalVarG2.gpx and porte[k + 2] == y and npers == 2) or (
+                        if porte[k] == dati[1] and ((porte[k + 1] == x + GlobalVar.gpx and porte[k + 2] == y and npers == 1) or (
+                                porte[k + 1] == x - GlobalVar.gpx and porte[k + 2] == y and npers == 2) or (
                                                             porte[k + 1] == x and porte[
-                                                        k + 2] == y + GlobalVarG2.gpy and npers == 4) or (
+                                                        k + 2] == y + GlobalVar.gpy and npers == 4) or (
                                                             porte[k + 1] == x and porte[
-                                                        k + 2] == y - GlobalVarG2.gpy and npers == 3)) and not porte[k + 3]:
+                                                        k + 2] == y - GlobalVar.gpy and npers == 3)) and not porte[k + 3]:
                             sposta = True
-                            GlobalVarG2.canaleSoundInterazioni.play(rumoreAperturaPorte)
+                            GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
                             # scoprire caselle viste
                             casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste, False)
@@ -925,12 +856,12 @@ def gameloop():
                     i = 0
                     while i < len(cofanetti):
                         if cofanetti[i] == dati[1] and (
-                                (cofanetti[i + 1] == x + GlobalVarG2.gpx and cofanetti[i + 2] == y and npers == 1) or (
-                                cofanetti[i + 1] == x - GlobalVarG2.gpx and cofanetti[i + 2] == y and npers == 2) or (
-                                        cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVarG2.gpy and npers == 4) or (
-                                        cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVarG2.gpy and npers == 3)) and not \
+                                (cofanetti[i + 1] == x + GlobalVar.gpx and cofanetti[i + 2] == y and npers == 1) or (
+                                cofanetti[i + 1] == x - GlobalVar.gpx and cofanetti[i + 2] == y and npers == 2) or (
+                                        cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVar.gpy and npers == 4) or (
+                                        cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVar.gpy and npers == 3)) and not \
                         cofanetti[i + 3]:
-                            GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoaperturacofanetti)
+                            GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
                             sposta = True
                             dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
                             cofanetti[i + 3] = True
@@ -945,8 +876,8 @@ def gameloop():
                         i = i + 4
                     # interazioni con altri personaggi
                     for personaggio in listaPersonaggi:
-                        if (personaggio.x == x + GlobalVarG2.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVarG2.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVarG2.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVarG2.gpy and npers == 3):
-                            GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                        if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy and npers == 3):
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                             if npers == 1:
                                 personaggio.girati("a")
                             elif npers == 2:
@@ -964,22 +895,22 @@ def gameloop():
                     ny = 0
                     startf = True
 
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not rotellaConCentralePremuto and not impossibileCliccarePulsanti and not startf and mosseRimasteRob <= 0 and not nemiciInMovimento:
+            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not rotellaConCentralePremuto and not impossibileCliccarePulsanti and not startf and mosseRimasteRob <= 0 and not nemiciInMovimento:
                 movimentoPerMouse = False
                 tastop = "mouseCentrale"
                 tastoTrovato = True
                 nx = 0
                 ny = 0
                 startf = True
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto and not impossibileCliccarePulsanti and not startf and mosseRimasteRob <= 0 and not nemiciInMovimento:
+            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto and not impossibileCliccarePulsanti and not startf and mosseRimasteRob <= 0 and not nemiciInMovimento:
                 movimentoPerMouse = False
                 tastop = "mouseDestro"
                 tastoTrovato = True
-                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
                 nx = 0
                 ny = 0
                 attacco = 1
-            if GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVarG2.mouseBloccato and not impossibileCliccarePulsanti and not startf and mosseRimasteRob <= 0 and not nemiciInMovimento:
+            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato and not impossibileCliccarePulsanti and not startf and mosseRimasteRob <= 0 and not nemiciInMovimento:
                 tastop = "mouseSinistro"
                 tastoTrovato = True
                 nx = 0
@@ -989,11 +920,11 @@ def gameloop():
                     startf = True
                 elif inquadratoQualcosa == "battaglia":
                     movimentoPerMouse = False
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.spostaPunBattaglia)
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
                     attacco = 1
                 elif inquadratoQualcosa == "telecolco":
                     movimentoPerMouse = False
-                    GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoTeleColco)
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
                     if chiamarob:
                         chiamarob = False
                     else:
@@ -1007,7 +938,7 @@ def gameloop():
                     inquadratoQualcosaList = inquadratoQualcosa.split(":")
                     posizPortaInVettore = int(inquadratoQualcosaList[1])
                     sposta = True
-                    GlobalVarG2.canaleSoundInterazioni.play(rumoreAperturaPorte)
+                    GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                     porte[posizPortaInVettore + 3] = True
                     # scoprire caselle viste
                     casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste, False)
@@ -1021,16 +952,16 @@ def gameloop():
                             tutteporte[j + 3] = True
                         j += 4
                     # giro il pers verso la porta
-                    if porte[posizPortaInVettore + 1] == x + GlobalVarG2.gpx and porte[posizPortaInVettore + 2] == y:
+                    if porte[posizPortaInVettore + 1] == x + GlobalVar.gpx and porte[posizPortaInVettore + 2] == y:
                         npers = 1
-                    if porte[posizPortaInVettore + 1] == x - GlobalVarG2.gpx and porte[posizPortaInVettore + 2] == y:
+                    if porte[posizPortaInVettore + 1] == x - GlobalVar.gpx and porte[posizPortaInVettore + 2] == y:
                         npers = 2
-                    if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y + GlobalVarG2.gpy:
+                    if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y + GlobalVar.gpy:
                         npers = 4
-                    if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y - GlobalVarG2.gpy:
+                    if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y - GlobalVar.gpy:
                         npers = 3
                     if npers == 3:
-                        pers = GlobalVarG2.persw
+                        pers = GlobalVar.persw
                         arma = armaw
                         armaMov1 = armawMov1
                         armaMov2 = armawMov2
@@ -1046,7 +977,7 @@ def gameloop():
                         guantiAttacco = guantiwAttacco
                         collana = collanaw
                     if npers == 2:
-                        pers = GlobalVarG2.persa
+                        pers = GlobalVar.persa
                         arma = armaa
                         armaMov1 = armaaMov1
                         armaMov2 = armaaMov2
@@ -1062,7 +993,7 @@ def gameloop():
                         guantiAttacco = guantiaAttacco
                         collana = collanaa
                     if npers == 4:
-                        pers = GlobalVarG2.perss
+                        pers = GlobalVar.perss
                         arma = armas
                         armaMov1 = armasMov1
                         armaMov2 = armasMov2
@@ -1078,7 +1009,7 @@ def gameloop():
                         guantiAttacco = guantisAttacco
                         collana = collanas
                     if npers == 1:
-                        pers = GlobalVarG2.persd
+                        pers = GlobalVar.persd
                         arma = armad
                         armaMov1 = armadMov1
                         armaMov2 = armadMov2
@@ -1098,7 +1029,7 @@ def gameloop():
                     inquadratoQualcosaList = inquadratoQualcosa.split(":")
                     posizCofanettoInVettore = int(inquadratoQualcosaList[1])
                     sposta = True
-                    GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoaperturacofanetti)
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
                     dati, tesoro = aperturacofanetto(cofanetti[posizCofanettoInVettore], cofanetti[posizCofanettoInVettore + 1], cofanetti[posizCofanettoInVettore + 2], dati)
                     cofanetti[posizCofanettoInVettore + 3] = True
                     caricaTutto = True
@@ -1109,16 +1040,16 @@ def gameloop():
                             tutticofanetti[j + 3] = True
                         j += 4
                     # giro il pers verso il cofanetto
-                    if cofanetti[posizCofanettoInVettore + 1] == x + GlobalVarG2.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
+                    if cofanetti[posizCofanettoInVettore + 1] == x + GlobalVar.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
                         npers = 1
-                    if cofanetti[posizCofanettoInVettore + 1] == x - GlobalVarG2.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
+                    if cofanetti[posizCofanettoInVettore + 1] == x - GlobalVar.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
                         npers = 2
-                    if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y + GlobalVarG2.gpy:
+                    if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y + GlobalVar.gpy:
                         npers = 4
-                    if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y - GlobalVarG2.gpy:
+                    if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y - GlobalVar.gpy:
                         npers = 3
                     if npers == 3:
-                        pers = GlobalVarG2.persw
+                        pers = GlobalVar.persw
                         arma = armaw
                         armaMov1 = armawMov1
                         armaMov2 = armawMov2
@@ -1134,7 +1065,7 @@ def gameloop():
                         guantiAttacco = guantiwAttacco
                         collana = collanaw
                     if npers == 2:
-                        pers = GlobalVarG2.persa
+                        pers = GlobalVar.persa
                         arma = armaa
                         armaMov1 = armaaMov1
                         armaMov2 = armaaMov2
@@ -1150,7 +1081,7 @@ def gameloop():
                         guantiAttacco = guantiaAttacco
                         collana = collanaa
                     if npers == 4:
-                        pers = GlobalVarG2.perss
+                        pers = GlobalVar.perss
                         arma = armas
                         armaMov1 = armasMov1
                         armaMov2 = armasMov2
@@ -1166,7 +1097,7 @@ def gameloop():
                         guantiAttacco = guantisAttacco
                         collana = collanas
                     if npers == 1:
-                        pers = GlobalVarG2.persd
+                        pers = GlobalVar.persd
                         arma = armad
                         armaMov1 = armadMov1
                         armaMov2 = armadMov2
@@ -1186,18 +1117,18 @@ def gameloop():
                     inquadratoQualcosaList = inquadratoQualcosa.split(":")
                     posizPersonaggioInVettore = int(inquadratoQualcosaList[1])
                     personaggio = listaPersonaggi[posizPersonaggioInVettore]
-                    GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     # giro Rallo verso il personaggio e viceversa
-                    if personaggio.x == x + GlobalVarG2.gpx and personaggio.y == y:
+                    if personaggio.x == x + GlobalVar.gpx and personaggio.y == y:
                         npers = 1
-                    if personaggio.x == x - GlobalVarG2.gpx and personaggio.y == y:
+                    if personaggio.x == x - GlobalVar.gpx and personaggio.y == y:
                         npers = 2
-                    if personaggio.x == x and personaggio.y == y + GlobalVarG2.gpy:
+                    if personaggio.x == x and personaggio.y == y + GlobalVar.gpy:
                         npers = 4
-                    if personaggio.x == x and personaggio.y == y - GlobalVarG2.gpy:
+                    if personaggio.x == x and personaggio.y == y - GlobalVar.gpy:
                         npers = 3
                     if npers == 3:
-                        pers = GlobalVarG2.persw
+                        pers = GlobalVar.persw
                         arma = armaw
                         armaMov1 = armawMov1
                         armaMov2 = armawMov2
@@ -1213,7 +1144,7 @@ def gameloop():
                         guantiAttacco = guantiwAttacco
                         collana = collanaw
                     if npers == 2:
-                        pers = GlobalVarG2.persa
+                        pers = GlobalVar.persa
                         arma = armaa
                         armaMov1 = armaaMov1
                         armaMov2 = armaaMov2
@@ -1229,7 +1160,7 @@ def gameloop():
                         guantiAttacco = guantiaAttacco
                         collana = collanaa
                     if npers == 4:
-                        pers = GlobalVarG2.perss
+                        pers = GlobalVar.perss
                         arma = armas
                         armaMov1 = armasMov1
                         armaMov2 = armasMov2
@@ -1245,7 +1176,7 @@ def gameloop():
                         guantiAttacco = guantisAttacco
                         collana = collanas
                     if npers == 1:
-                        pers = GlobalVarG2.persd
+                        pers = GlobalVar.persd
                         arma = armad
                         armaMov1 = armadMov1
                         armaMov2 = armadMov2
@@ -1273,21 +1204,21 @@ def gameloop():
                     caricaTutto = True
                 elif inquadratoQualcosa.startswith("movimento"):
                     movimentoPerMouse = True
-            elif GlobalVarG2.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVarG2.mouseBloccato and mosseRimasteRob <= 0 and not nemiciInMovimento:
-                GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVarG2.mouseVisibile:
+            elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato and mosseRimasteRob <= 0 and not nemiciInMovimento:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
                 pygame.mouse.set_visible(True)
-                GlobalVarG2.mouseVisibile = True
+                GlobalVar.mouseVisibile = True
 
             if event.type == pygame.KEYUP:
                 if tastop == event.key:
-                    GlobalVarG2.canaleSoundPassiRallo.stop()
+                    GlobalVar.canaleSoundPassiRallo.stop()
                     nx = 0
                     ny = 0
                     tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 movimentoPerMouse = False
-                GlobalVarG2.canaleSoundPassiRallo.stop()
+                GlobalVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0
                 tastop = 0
@@ -1323,7 +1254,7 @@ def gameloop():
                 xObbiettivo = listaPersonaggi[int(inquadratoQualcosaList[1])].x
                 yObbiettivo = listaPersonaggi[int(inquadratoQualcosaList[1])].y
             if x == xObbiettivo and y == yObbiettivo:
-                GlobalVarG2.canaleSoundPassiRallo.stop()
+                GlobalVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0
             else:
@@ -1364,13 +1295,13 @@ def gameloop():
                         if y > yObbiettivo and c == 2:
                             npers = 3
                         sposta = True
-                if abs(xObbiettivo - x) == GlobalVarG2.gpx and abs(yObbiettivo - y) == 0:
+                if abs(xObbiettivo - x) == GlobalVar.gpx and abs(yObbiettivo - y) == 0:
                     if x < xObbiettivo:
                         npers = 1
                     if x > xObbiettivo:
                         npers = 2
                     sposta = True
-                elif abs(yObbiettivo - y) == GlobalVarG2.gpy and abs(xObbiettivo - x) == 0:
+                elif abs(yObbiettivo - y) == GlobalVar.gpy and abs(xObbiettivo - x) == 0:
                     if y < yObbiettivo:
                         npers = 4
                     if y > yObbiettivo:
@@ -1378,9 +1309,9 @@ def gameloop():
                     sposta = True
                 # cambiare posizione
                 if npers == 3:
-                    ny = -GlobalVarG2.gpy
+                    ny = -GlobalVar.gpy
                     nx = 0
-                    pers = GlobalVarG2.persw
+                    pers = GlobalVar.persw
                     arma = armaw
                     armaMov1 = armawMov1
                     armaMov2 = armawMov2
@@ -1397,8 +1328,8 @@ def gameloop():
                     collana = collanaw
                 if npers == 2:
                     ny = 0
-                    nx = -GlobalVarG2.gpx
-                    pers = GlobalVarG2.persa
+                    nx = -GlobalVar.gpx
+                    pers = GlobalVar.persa
                     arma = armaa
                     armaMov1 = armaaMov1
                     armaMov2 = armaaMov2
@@ -1414,9 +1345,9 @@ def gameloop():
                     guantiAttacco = guantiaAttacco
                     collana = collanaa
                 if npers == 4:
-                    ny = GlobalVarG2.gpy
+                    ny = GlobalVar.gpy
                     nx = 0
-                    pers = GlobalVarG2.perss
+                    pers = GlobalVar.perss
                     arma = armas
                     armaMov1 = armasMov1
                     armaMov2 = armasMov2
@@ -1433,8 +1364,8 @@ def gameloop():
                     collana = collanas
                 if npers == 1:
                     ny = 0
-                    nx = GlobalVarG2.gpx
-                    pers = GlobalVarG2.persd
+                    nx = GlobalVar.gpx
+                    pers = GlobalVar.persd
                     arma = armad
                     armaMov1 = armadMov1
                     armaMov2 = armadMov2
@@ -1452,8 +1383,8 @@ def gameloop():
 
         # menu start
         if startf and attacco != 1:
-            GlobalVarG2.canaleSoundPassiRallo.stop()
-            GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.selsta)
+            GlobalVar.canaleSoundPassiRallo.stop()
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selsta)
             dati[2] = x
             dati[3] = y
             dati[134] = rx
@@ -1471,7 +1402,7 @@ def gameloop():
                 else:
                     # cambiare posizione dopo l'uso di caricabatterie
                     if npers == 3:
-                        pers = GlobalVarG2.persw
+                        pers = GlobalVar.persw
                         arma = armaw
                         armaMov1 = armawMov1
                         armaMov2 = armawMov2
@@ -1487,7 +1418,7 @@ def gameloop():
                         guantiAttacco = guantiwAttacco
                         collana = collanaw
                     if npers == 2:
-                        pers = GlobalVarG2.persa
+                        pers = GlobalVar.persa
                         arma = armaa
                         armaMov1 = armaaMov1
                         armaMov2 = armaaMov2
@@ -1503,7 +1434,7 @@ def gameloop():
                         guantiAttacco = guantiaAttacco
                         collana = collanaa
                     if npers == 4:
-                        pers = GlobalVarG2.perss
+                        pers = GlobalVar.perss
                         arma = armas
                         armaMov1 = armasMov1
                         armaMov2 = armasMov2
@@ -1519,7 +1450,7 @@ def gameloop():
                         guantiAttacco = guantisAttacco
                         collana = collanas
                     if npers == 1:
-                        pers = GlobalVarG2.persd
+                        pers = GlobalVar.persd
                         arma = armad
                         armaMov1 = armadMov1
                         armaMov2 = armadMov2
@@ -1592,7 +1523,7 @@ def gameloop():
             # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
             attaccoDiRallo = []
             if attacco != 0:
-                GlobalVarG2.canaleSoundPassiRallo.stop()
+                GlobalVar.canaleSoundPassiRallo.stop()
                 sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0])
                 tastop = 0
                 # tolgo una freccia se uso l'attacco a distanza
@@ -1601,7 +1532,7 @@ def gameloop():
                 caricaTutto = True
                 # cambiare posizione dopo l'attacco
                 if npers == 3:
-                    pers = GlobalVarG2.persw
+                    pers = GlobalVar.persw
                     arma = armaw
                     armaMov1 = armawMov1
                     armaMov2 = armawMov2
@@ -1617,7 +1548,7 @@ def gameloop():
                     guantiAttacco = guantiwAttacco
                     collana = collanaw
                 if npers == 2:
-                    pers = GlobalVarG2.persa
+                    pers = GlobalVar.persa
                     arma = armaa
                     armaMov1 = armaaMov1
                     armaMov2 = armaaMov2
@@ -1633,7 +1564,7 @@ def gameloop():
                     guantiAttacco = guantiaAttacco
                     collana = collanaa
                 if npers == 4:
-                    pers = GlobalVarG2.perss
+                    pers = GlobalVar.perss
                     arma = armas
                     armaMov1 = armasMov1
                     armaMov2 = armasMov2
@@ -1649,7 +1580,7 @@ def gameloop():
                     guantiAttacco = guantisAttacco
                     collana = collanas
                 if npers == 1:
-                    pers = GlobalVarG2.persd
+                    pers = GlobalVar.persd
                     arma = armad
                     armaMov1 = armadMov1
                     armaMov2 = armadMov2
@@ -1713,10 +1644,10 @@ def gameloop():
                 while k < len(porte):
                     if porte[k] == dati[1] and porte[k + 1] == apriChiudiPorta[1] and porte[k + 2] == apriChiudiPorta[2]:
                         if porte[k + 3]:
-                            GlobalVarG2.canaleSoundInterazioni.play(rumoreChiusuraPorte)
+                            GlobalVar.canaleSoundInterazioni.play(rumoreChiusuraPorte)
                             porte[k + 3] = False
                         else:
-                            GlobalVarG2.canaleSoundInterazioni.play(rumoreAperturaPorte)
+                            GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
                         # scoprire caselle viste
                         casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste, False)
@@ -1754,8 +1685,8 @@ def gameloop():
             # interazioni con altri personaggi
             if interagisciConPersonaggio:
                 for personaggio in listaPersonaggi:
-                    if (personaggio.x == x + GlobalVarG2.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVarG2.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVarG2.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVarG2.gpy and npers == 3):
-                        GlobalVarG2.canaleSoundPuntatore.play(GlobalVarG2.selezione)
+                    if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy and npers == 3):
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                         if npers == 1:
                             personaggio.girati("a")
                         elif npers == 2:
@@ -1779,7 +1710,7 @@ def gameloop():
                 i = 0
                 while i < len(cofanetti):
                     if cofanetti[i] == dati[1] and cofanetti[i + 1] == apriCofanetto[1] and cofanetti[i + 2] == apriCofanetto[2] and not cofanetti[i + 3]:
-                        GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoaperturacofanetti)
+                        GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
                         dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
                         cofanetti[i + 3] = True
                         # aggiornare vettore tutticofanetti
@@ -1820,10 +1751,10 @@ def gameloop():
             while i < len(vitaesca):
                 cancellata = False
                 if vitaesca[i] <= 0:
-                    if ((vitaesca[i + 1] / GlobalVarG2.gpx) + (vitaesca[i + 2] / GlobalVarG2.gpy)) % 2 == 0:
-                        GlobalVarG2.schermo.blit(sfondinoa, (vitaesca[i + 1], vitaesca[i + 2]))
-                    if ((vitaesca[i + 1] / GlobalVarG2.gpx) + (vitaesca[i + 2] / GlobalVarG2.gpy)) % 2 == 1:
-                        GlobalVarG2.schermo.blit(sfondinob, (vitaesca[i + 1], vitaesca[i + 2]))
+                    if ((vitaesca[i + 1] / GlobalVar.gpx) + (vitaesca[i + 2] / GlobalVar.gpy)) % 2 == 0:
+                        GlobalVar.schermo.blit(sfondinoa, (vitaesca[i + 1], vitaesca[i + 2]))
+                    if ((vitaesca[i + 1] / GlobalVar.gpx) + (vitaesca[i + 2] / GlobalVar.gpy)) % 2 == 1:
+                        GlobalVar.schermo.blit(sfondinob, (vitaesca[i + 1], vitaesca[i + 2]))
                     # tolgo la GlobalVarG2.selezione dell'esca morta
                     if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vitaesca[i - 1]:
                         nemicoInquadrato = False
@@ -1839,7 +1770,7 @@ def gameloop():
             i = 1
             while i < len(vitaesca):
                 if vitaesca[i + 1] == x and vitaesca[i + 2] == y:
-                    GlobalVarG2.canaleSoundInterazioni.play(GlobalVarG2.suonoRaccoltaEsca)
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoRaccoltaEsca)
                     # tolgo la GlobalVarG2.selezione dell'esca ripresa
                     if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vitaesca[i - 1]:
                         nemicoInquadrato = False
@@ -1859,23 +1790,23 @@ def gameloop():
                 i += 4
 
             # movimento-azioni robo
-            if dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and rx == GlobalVarG2.gsx and ry == GlobalVarG2.gsy:
+            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and rx == GlobalVar.gsx and ry == GlobalVar.gsy:
                 rx = x
                 ry = y
                 vrx = rx
                 vry = ry
             azioneRobEseguita = False
-            if dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and dati[122] > 0:
+            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and dati[122] > 0:
                 # se surriscaldato toglie vel+ e efficienza
                 dati[125] = 0
                 dati[126] = 0
-            if dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and sposta and mosseRimasteRob == 0 and not morterob:
+            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and sposta and mosseRimasteRob == 0 and not morterob:
                 if dati[125] > 0:
                     mosseRimasteRob = 2
                 else:
                     mosseRimasteRob = 1
             # effetto di surriscalda / raffreddamento / auto-ricarica / auto-ricarica+
-            if dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and sposta:
+            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and sposta:
                 # surriscalda
                 if dati[122] > 0:
                     dati[122] = dati[122] - 1
@@ -1899,7 +1830,7 @@ def gameloop():
                     ricarica1 = False
                     autoRic1 -= 1
                 if autoRic1 == 0:
-                    dati[10] += GlobalVarG2.dannoTecniche[6]
+                    dati[10] += GlobalVar.dannoTecniche[6]
                     if dati[10] > entot:
                         dati[10] = entot
                     dati[122] = 10
@@ -1908,7 +1839,7 @@ def gameloop():
                     ricarica2 = False
                     autoRic2 -= 1
                 if autoRic2 == 0:
-                    dati[10] += GlobalVarG2.dannoTecniche[16]
+                    dati[10] += GlobalVar.dannoTecniche[16]
                     if dati[10] > entot:
                         dati[10] = entot
                     dati[122] = 10
@@ -1916,7 +1847,7 @@ def gameloop():
             # attaccoDiColco [obbiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perchè deve rimanere per più turni)]
             attaccoDiColco = []
             tecnicaUsata = False
-            if dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and mosseRimasteRob > 0 and not morterob and not cambiosta:
+            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and mosseRimasteRob > 0 and not morterob and not cambiosta:
                 vrx = rx
                 vry = ry
 
@@ -1947,25 +1878,25 @@ def gameloop():
                     azioneRobEseguita = False
                 if nrob != 0:
                     if nrob == 1:
-                        robot = GlobalVarG2.robod
+                        robot = GlobalVar.robod
                         armrob = armrobd
                     if nrob == 2:
-                        robot = GlobalVarG2.roboa
+                        robot = GlobalVar.roboa
                         armrob = armroba
                     if nrob == 3:
-                        robot = GlobalVarG2.robos
+                        robot = GlobalVar.robos
                         armrob = armrobs
                     if nrob == 4:
-                        robot = GlobalVarG2.robow
+                        robot = GlobalVar.robow
                         armrob = armrobw
-            elif dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and sposta and mosseRimasteRob < 0 and not morterob:
+            elif dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and sposta and mosseRimasteRob < 0 and not morterob:
                 mosseRimasteRob += 1
-            if dati[0] >= GlobalVarG2.avanzamentoStoriaIncontroColco and morterob:
-                robot = GlobalVarG2.robomo
-                armrob = GlobalVarG2.armrobmo
-            if dati[0] < GlobalVarG2.avanzamentoStoriaIncontroColco:
-                rx = GlobalVarG2.gsx
-                ry = GlobalVarG2.gsy
+            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and morterob:
+                robot = GlobalVar.robomo
+                armrob = GlobalVar.armrobmo
+            if dati[0] < GlobalVar.avanzamentoStoriaIncontroColco:
+                rx = GlobalVar.gsx
+                ry = GlobalVar.gsy
                 vrx = rx
                 vry = ry
 
@@ -2142,39 +2073,3 @@ def gameloop():
             sposta = False
 
 gameloop()
-
-'''pygame.draw.rect(GlobalVarG2.schermo, grigioscu, (GlobalVarG2.gsx // 32 * 0, GlobalVarG2.gsy // 18 * 0, GlobalVarG2.gpx * 16, GlobalVarG2.gpy * 3))
-                    messaggio("Aumento Lv: Pv +", grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
-                    messaggio("Aumento Lv: Attacco +", grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
-                    messaggio("Aumento Lv: Difesa +", grigiochi, GlobalVarG2.gsx // 32 * 1, GlobalVarG2.gsy // 18 * 1, 60)
-                    pygame.display.update()
-                    pygame.time.wait(500)
-                    risposta = False
-                    while not risposta:
-                        for event in pygame.event.get():
-                            if event.type == pygame.QUIT:
-                                pygame.quit()
-                                quit()
-                            if event.type == pygame.KEYDOWN:
-                                if event.key == pygame.K_SPACE:
-                                    GlobalVarG2.selezione.play()
-                                    risposta = True
-                    caricaini = True
-                    tesoro = -1'''
-
-'''if esc:
-    GlobalVarG2.schermo.fill(grigioscu)
-    messaggio("Fine", grigiochi, GlobalVarG2.gsx // 32 * 14, GlobalVarG2.gsy // 18 * 8, 150)
-    pygame.display.update()
-    pygame.time.wait(500)
-    pygame.quit()
-    quit()'''
-'''# linea(dove,colore,inizio,fine,spessore)
-pygame.draw.line(GlobalVarG2.schermo, verde, (0, 0), (GlobalVarG2.gsx, GlobalVarG2.gsy), 10)
-# cerchio(dove,colore,centro,raggio,spessore)
-pygame.draw.circle(GlobalVarG2.schermo, blu, (300, 100), 5)
-# rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-pygame.draw.rect(GlobalVarG2.schermo, rosso, (200, 100, 30, 40), 5)'''
-'''# canzone
-c1 = pygame.mixer.Sound("Audio/Canzone11.wav")
-c1.play(-1))'''
