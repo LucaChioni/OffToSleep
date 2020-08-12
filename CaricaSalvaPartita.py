@@ -345,8 +345,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                             pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
                         else:
                             GlobalVar.schermo.fill(GlobalVar.grigioscu)
-                        robograsalva = pygame.transform.scale(GlobalVar.robograffff, (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
-                        GlobalVar.schermo.blit(robograsalva, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
+                        GlobalVar.schermo.blit(GlobalVar.robograf4, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
                         pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
                         if GlobalVar.mouseVisibile:
                             messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
@@ -413,24 +412,16 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                     aggiornaSchermata = False
                     if background:
                         GlobalVar.schermo.blit(background, (0, 0))
-                        pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (
-                            GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6,
-                            GlobalVar.gsy // 18 * 13.6))
+                        pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
                     else:
                         GlobalVar.schermo.fill(GlobalVar.grigioscu)
-                    robograsalva = pygame.transform.scale(GlobalVar.robograff,
-                                                          (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
-                    GlobalVar.schermo.blit(robograsalva, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
-                    pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5),
-                                     (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
+                    GlobalVar.schermo.blit(GlobalVar.robograf2, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
+                    pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
                     if GlobalVar.mouseVisibile:
-                        messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5,
-                                  GlobalVar.gsy // 18 * 1, 50)
+                        messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
                     else:
-                        messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25,
-                                  GlobalVar.gsy // 18 * 1, 50)
-                    messaggio("Slot di memoria vuoto...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5,
-                              GlobalVar.gsy // 18 * 14, 100)
+                        messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
+                    messaggio("Slot di memoria vuoto...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 14, 100)
                     pygame.display.update()
     if not errore:
         if mostraErrori:

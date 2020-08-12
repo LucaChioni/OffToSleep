@@ -9,7 +9,23 @@ def caricaNemiciNellaStanza(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
     if not stanza in stanzeGiaVisitate:
         if stanza == 1:
             percorsoNemico = ["w", "a", "a", "s", "d", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 3, "a", "SerpeVerde", stanza, percorsoNemico)
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 3, "a", "Falco", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 4, "a", "SerpeArancio", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 7, "a", "Scorpione", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 6, "a", "RagnoNero", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["w", "a", "a", "s", "d", "d"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 3, "a", "GufoMarrone", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
             percorsoNemico = ["w", "a", "a", "s", "d", "d"]

@@ -191,15 +191,14 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
         lungvita = 0
-    indvitapers = pygame.transform.scale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-    fineindvitapers = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-    vitaral = pygame.transform.scale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
+    indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+    vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
     GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
     GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
     GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-    persbat = pygame.transform.scale(GlobalVar.perso, (GlobalVar.gpx, GlobalVar.gpy))
-    GlobalVar.schermo.blit(persbat, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
     messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
@@ -216,15 +215,14 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         lungen = int(((GlobalVar.gpx * enrob) / float(4)) // 15)
         if lungen < 0:
             lungen = 0
-        indvitarob = pygame.transform.scale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-        fineindvitarob = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-        vitarob = pygame.transform.scale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
+        indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
+        fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
         GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
         GlobalVar.schermo.blit(fineindvitarob, (GlobalVar.gpx + lungentot, 0))
         GlobalVar.schermo.blit(vitarob, (GlobalVar.gpx, 0))
-        robobat = pygame.transform.scale(GlobalVar.roboo, (GlobalVar.gpx, GlobalVar.gpy))
-        GlobalVar.schermo.blit(robobat, (0, 0))
+        GlobalVar.schermo.blit(GlobalVar.robos, (0, 0))
         if surrisc > 0:
             GlobalVar.schermo.blit(GlobalVar.surriscaldato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
         if velp > 0:
@@ -251,9 +249,9 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     lungvita = 0
                 GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
                 GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
-                indvitamost = pygame.transform.scale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                fineindvitamost = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-                vitaesche = pygame.transform.scale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
+                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                 GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + int(((GlobalVar.gpx * 1000) / float(4)) // 15), 0))
                 GlobalVar.schermo.blit(vitaesche, (GlobalVar.gpx, 0))
@@ -274,64 +272,64 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         if nemicoAppiccicato:
             GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(nemicoInquadrato.imgS, (0, 0))
-        fineindvitamost = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
         if pvmtot > 1500:
-            indvitamost = pygame.transform.scale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+            indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
             lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
             GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
             if pvm > 15000:
                 pvm = 1500
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico9
             elif pvm > 13500:
                 pvm -= 13500
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico9
             elif pvm > 12000:
                 pvm -= 12000
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico8
             elif pvm > 10500:
                 pvm -= 10500
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico7
             elif pvm > 9000:
                 pvm -= 9000
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico6
             elif pvm > 7500:
                 pvm -= 7500
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico5
             elif pvm > 6000:
                 pvm -= 6000
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico4
             elif pvm > 4500:
                 pvm -= 4500
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico3
             elif pvm > 3000:
                 pvm -= 3000
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico2
             elif pvm > 1500:
                 pvm -= 1500
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico1
             else:
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico0
         else:
             lungvitatot = int(((GlobalVar.gpx * pvmtot) / float(4)) // 15)
-            indvitamost = pygame.transform.scale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+            indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
-            vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
+            vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
             vitanemico = GlobalVar.vitanemico0
         lungvita = int(((GlobalVar.gpx * pvm) / float(4)) // 15)
         if lungvita < 0:
             lungvita = 0
-        vitanem = pygame.transform.scale(vitanemico, (lungvita, GlobalVar.gpy // 4))
+        vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
         GlobalVar.schermo.blit(vitanemsucc, (GlobalVar.gpx, 0))
         GlobalVar.schermo.blit(vitanem, (GlobalVar.gpx, 0))
@@ -495,15 +493,14 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
         lungvita = 0
-    indvitapers = pygame.transform.scale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-    fineindvitapers = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-    vitaral = pygame.transform.scale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
+    indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+    vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
     GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
     GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
     GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-    persbat = pygame.transform.scale(GlobalVar.perso, (GlobalVar.gpx, GlobalVar.gpy))
-    GlobalVar.schermo.blit(persbat, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (GlobalVar.gsx // 32 * 1.2, GlobalVar.gsy // 18 * 17))
     messaggio("x " + str(numFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 17.2, 40)
@@ -647,11 +644,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     i += 4
         if GlobalVar.mouseVisibile:
             # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
-            if GlobalVar.gsy // 18 * 17 < yMouse < GlobalVar.gsy and GlobalVar.gsx // 32 * 0 < xMouse < GlobalVar.gsx // 32 * 6:
+            if GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 6:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco)) and 0 < yMouse < GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 < xMouse < GlobalVar.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco)) and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 4:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -1536,17 +1533,39 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             ricaricaschermo = False
             appenaCaricato = True
 
-        # disegno la casella sotto i nemici e Colco
+        # disegno la casella sotto i nemici, personaggi, esche, Colco e Rallo
         for nemico in listaNemici:
             if nemico.inCasellaVista:
                 if ((nemico.x / GlobalVar.gpx) + (nemico.y / GlobalVar.gpy)) % 2 == 0:
                     GlobalVar.schermo.blit(sfondinoa, (nemico.x, nemico.y))
                 if ((nemico.x / GlobalVar.gpx) + (nemico.y / GlobalVar.gpy)) % 2 == 1:
                     GlobalVar.schermo.blit(sfondinob, (nemico.x, nemico.y))
+        for personaggio in listaPersonaggi:
+            if personaggio.inCasellaVista:
+                if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 0:
+                    GlobalVar.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
+                if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 1:
+                    GlobalVar.schermo.blit(sfondinob, (personaggio.x, personaggio.y))
+        i = 0
+        while i < len(vitaesca):
+            j = 0
+            while j < len(caseviste):
+                if ((caseviste[j] == vitaesca[i + 2] - GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - GlobalVar.gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + GlobalVar.gpy)) and caseviste[j + 2]:
+                    if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 0:
+                        GlobalVar.schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
+                    if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 1:
+                        GlobalVar.schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
+                    break
+                j += 3
+            i += 4
         if ((rx / GlobalVar.gpx) + (ry / GlobalVar.gpy)) % 2 == 0:
             GlobalVar.schermo.blit(sfondinoa, (rx, ry))
         if ((rx / GlobalVar.gpx) + (ry / GlobalVar.gpy)) % 2 == 1:
             GlobalVar.schermo.blit(sfondinob, (rx, ry))
+        if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 0:
+            GlobalVar.schermo.blit(sfondinoa, (x, y))
+        if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
+            GlobalVar.schermo.blit(sfondinob, (x, y))
 
         # disegno le caselle attaccabili
         i = 0
@@ -1654,10 +1673,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             j = 0
             while j < len(caseviste):
                 if ((caseviste[j] == vitaesca[i + 2] - GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - GlobalVar.gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + GlobalVar.gpy)) and caseviste[j + 2]:
-                    if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 0:
-                        GlobalVar.schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
-                    if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 1:
-                        GlobalVar.schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
                     GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
                     break
                 j += 3
@@ -1883,15 +1898,14 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         lungvita = (lungvitatot * pv) // pvtot
         if lungvita < 0:
             lungvita = 0
-        indvitapers = pygame.transform.scale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-        fineindvitapers = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-        vitaral = pygame.transform.scale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
+        indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+        fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
         GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
         GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
         GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-        persbat = pygame.transform.scale(GlobalVar.perso, (GlobalVar.gpx, GlobalVar.gpy))
-        GlobalVar.schermo.blit(persbat, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+        GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
         GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
         GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
         messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
@@ -1913,9 +1927,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     lungvita = 0
                 GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
                 GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
-                indvitamost = pygame.transform.scale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                fineindvitamost = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-                vitaesche = pygame.transform.scale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
+                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                 GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + int(((GlobalVar.gpx * 1000) / float(4)) // 15), 0))
                 GlobalVar.schermo.blit(vitaesche, (GlobalVar.gpx, 0))
@@ -1946,64 +1960,64 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if nemico.appiccicato:
                     GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(nemico.imgS, (0, 0))
-                fineindvitamost = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
                 if pvmtot > 1500:
-                    indvitamost = pygame.transform.scale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
                     GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
                     if pvm > 15000:
                         pvm = 1500
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico9
                     elif pvm > 13500:
                         pvm -= 13500
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico9
                     elif pvm > 12000:
                         pvm -= 12000
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico8
                     elif pvm > 10500:
                         pvm -= 10500
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico7
                     elif pvm > 9000:
                         pvm -= 9000
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico6
                     elif pvm > 7500:
                         pvm -= 7500
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico5
                     elif pvm > 6000:
                         pvm -= 6000
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico4
                     elif pvm > 4500:
                         pvm -= 4500
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico3
                     elif pvm > 3000:
                         pvm -= 3000
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico2
                     elif pvm > 1500:
                         pvm -= 1500
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico1
                     else:
-                        vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                        vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                         vitanemico = GlobalVar.vitanemico0
                 else:
                     lungvitatot = int(((GlobalVar.gpx * pvmtot) / float(4)) // 15)
-                    indvitamost = pygame.transform.scale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+                    indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
                     GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico0
                 lungvita = int(((GlobalVar.gpx * pvm) / float(4)) // 15)
                 if lungvita < 0:
                     lungvita = 0
-                vitanem = pygame.transform.scale(vitanemico, (lungvita, GlobalVar.gpy // 4))
+                vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                 GlobalVar.schermo.blit(vitanemsucc, (GlobalVar.gpx, 0))
                 GlobalVar.schermo.blit(vitanem, (GlobalVar.gpx, 0))
@@ -2014,7 +2028,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             puntandoSuUnNemicoOColcoOEsca = True
             if enrob > 0:
                 # controllo caselle attaccabili
-                vistaRobo = GlobalVar.gpx * 8
+                vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
                 caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
                 # disegno le caselle attaccabili
                 i = 0
@@ -2022,22 +2036,21 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
                         GlobalVar.schermo.blit(GlobalVar.caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
                     i = i + 3
-                campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabileRobo, ((vistaRobo * 2) + GlobalVar.gpx, (vistaRobo * 2) + GlobalVar.gpy))
+                campoattaccabile3 = GlobalVar.campoattaccabileRobo
                 GlobalVar.schermo.blit(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
                 ricaricaschermo = True
             lungentot = int(((GlobalVar.gpx * entot) / float(4)) // 15)
             lungen = int(((GlobalVar.gpx * enrob) / float(4)) // 15)
             if lungen < 0:
                 lungen = 0
-            indvitarob = pygame.transform.scale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-            fineindvitarob = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-            vitarob = pygame.transform.scale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
+            indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
+            fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
             GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
             GlobalVar.schermo.blit(fineindvitarob, (GlobalVar.gpx + lungentot, 0))
             GlobalVar.schermo.blit(vitarob, (GlobalVar.gpx, 0))
-            robobat = pygame.transform.scale(GlobalVar.roboo, (GlobalVar.gpx, GlobalVar.gpy))
-            GlobalVar.schermo.blit(robobat, (0, 0))
+            GlobalVar.schermo.blit(GlobalVar.robos, (0, 0))
             if surrisc > 0:
                 GlobalVar.schermo.blit(GlobalVar.surriscaldato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
             if velp > 0:
@@ -2048,7 +2061,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco:
             if enrob > 0:
                 # controllo caselle attaccabili
-                vistaRobo = GlobalVar.gpx * 8
+                vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
                 caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
                 # disegno le caselle attaccabili
                 i = 0
@@ -2056,21 +2069,20 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
                         GlobalVar.schermo.blit(GlobalVar.caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
                     i = i + 3
-                campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabileRobo, ((vistaRobo * 2) + GlobalVar.gpx, (vistaRobo * 2) + GlobalVar.gpy))
+                campoattaccabile3 = GlobalVar.campoattaccabileRobo
                 GlobalVar.schermo.blit(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
             lungentot = int(((GlobalVar.gpx * entot) / float(4)) // 15)
             lungen = int(((GlobalVar.gpx * enrob) / float(4)) // 15)
             if lungen < 0:
                 lungen = 0
-            indvitarob = pygame.transform.scale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-            fineindvitarob = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-            vitarob = pygame.transform.scale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
+            indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
+            fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
             GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
             GlobalVar.schermo.blit(fineindvitarob, (GlobalVar.gpx + lungentot, 0))
             GlobalVar.schermo.blit(vitarob, (GlobalVar.gpx, 0))
-            robobat = pygame.transform.scale(GlobalVar.roboo, (GlobalVar.gpx, GlobalVar.gpy))
-            GlobalVar.schermo.blit(robobat, (0, 0))
+            GlobalVar.schermo.blit(GlobalVar.robos, (0, 0))
             if surrisc > 0:
                 GlobalVar.schermo.blit(GlobalVar.surriscaldato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
             if velp > 0:
@@ -2105,64 +2117,64 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if nemicoInquadrato.appiccicato:
                 GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(nemicoInquadrato.imgS, (0, 0))
-            fineindvitamost = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
             if pvmtot > 1500:
-                indvitamost = pygame.transform.scale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
                 GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
                 if pvm > 15000:
                     pvm = 1500
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico9
                 elif pvm > 13500:
                     pvm -= 13500
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico9
                 elif pvm > 12000:
                     pvm -= 12000
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico8
                 elif pvm > 10500:
                     pvm -= 10500
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico7
                 elif pvm > 9000:
                     pvm -= 9000
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico6
                 elif pvm > 7500:
                     pvm -= 7500
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico5
                 elif pvm > 6000:
                     pvm -= 6000
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico4
                 elif pvm > 4500:
                     pvm -= 4500
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico3
                 elif pvm > 3000:
                     pvm -= 3000
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico2
                 elif pvm > 1500:
                     pvm -= 1500
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico1
                 else:
-                    vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     vitanemico = GlobalVar.vitanemico0
             else:
                 lungvitatot = int(((GlobalVar.gpx * pvmtot) / float(4)) // 15)
-                indvitamost = pygame.transform.scale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
-                vitanemsucc = pygame.transform.scale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
                 vitanemico = GlobalVar.vitanemico0
             lungvita = int(((GlobalVar.gpx * pvm) / float(4)) // 15)
             if lungvita < 0:
                 lungvita = 0
-            vitanem = pygame.transform.scale(vitanemico, (lungvita, GlobalVar.gpy // 4))
+            vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
             GlobalVar.schermo.blit(vitanemsucc, (GlobalVar.gpx, 0))
             GlobalVar.schermo.blit(vitanem, (GlobalVar.gpx, 0))
@@ -2177,9 +2189,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         lungvita = 0
                     GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
                     GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
-                    indvitamost = pygame.transform.scale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                    fineindvitamost = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-                    vitaesche = pygame.transform.scale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
+                    indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
+                    fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                    vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
                     GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                     GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + int(((GlobalVar.gpx * 1000) / float(4)) // 15), 0))
                     GlobalVar.schermo.blit(vitaesche, (GlobalVar.gpx, 0))
@@ -2191,15 +2203,14 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             lungen = int(((GlobalVar.gpx * enrob) / float(4)) // 15)
             if lungen < 0:
                 lungen = 0
-            indvitarob = pygame.transform.scale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-            fineindvitarob = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-            vitarob = pygame.transform.scale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
+            indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
+            fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
             GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
             GlobalVar.schermo.blit(fineindvitarob, (GlobalVar.gpx + lungentot, 0))
             GlobalVar.schermo.blit(vitarob, (GlobalVar.gpx, 0))
-            robobat = pygame.transform.scale(GlobalVar.roboo, (GlobalVar.gpx, GlobalVar.gpy))
-            GlobalVar.schermo.blit(robobat, (0, 0))
+            GlobalVar.schermo.blit(GlobalVar.robos, (0, 0))
             if surrisc > 0:
                 GlobalVar.schermo.blit(GlobalVar.surriscaldato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
             if velp > 0:

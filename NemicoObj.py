@@ -151,6 +151,94 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+        if self.tipo == "SerpeArancio":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+        if self.tipo == "Scorpione":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+        if self.tipo == "RagnoNero":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+        if self.tipo == "RagnoRosso":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+        if self.tipo == "GufoMarrone":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+        if self.tipo == "GufoBianco":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+        if self.tipo == "Falco":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+        if self.tipo == "Aquila":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
         self.vita = vitaTotale
         self.vitaTotale = vitaTotale
         self.esp = esp
@@ -164,58 +252,58 @@ class NemicoObj(object):
         self.difesa = difesa
 
     def caricaImg(self):
-        imgW = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "w.png")
-        self.imgW = pygame.transform.scale(imgW, (GlobalVar.gpx, GlobalVar.gpy))
-        imgA = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "a.png")
-        self.imgA = pygame.transform.scale(imgA, (GlobalVar.gpx, GlobalVar.gpy))
-        imgS = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "s.png")
-        self.imgS = pygame.transform.scale(imgS, (GlobalVar.gpx, GlobalVar.gpy))
-        imgD = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "d.png")
-        self.imgD = pygame.transform.scale(imgD, (GlobalVar.gpx, GlobalVar.gpy))
+        imgW = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "w.png")
+        self.imgW = pygame.transform.smoothscale(imgW, (GlobalVar.gpx, GlobalVar.gpy))
+        imgA = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "a.png")
+        self.imgA = pygame.transform.smoothscale(imgA, (GlobalVar.gpx, GlobalVar.gpy))
+        imgS = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "s.png")
+        self.imgS = pygame.transform.smoothscale(imgS, (GlobalVar.gpx, GlobalVar.gpy))
+        imgD = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "d.png")
+        self.imgD = pygame.transform.smoothscale(imgD, (GlobalVar.gpx, GlobalVar.gpy))
 
-        imgWMov1 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wMov1.png")
-        self.imgWMov1 = pygame.transform.scale(imgWMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgWMov2 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wMov2.png")
-        self.imgWMov2 = pygame.transform.scale(imgWMov2, (GlobalVar.gpx, GlobalVar.gpy))
-        imgAMov1 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aMov1.png")
-        self.imgAMov1 = pygame.transform.scale(imgAMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgAMov2 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aMov2.png")
-        self.imgAMov2 = pygame.transform.scale(imgAMov2, (GlobalVar.gpx, GlobalVar.gpy))
-        imgSMov1 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sMov1.png")
-        self.imgSMov1 = pygame.transform.scale(imgSMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgSMov2 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sMov2.png")
-        self.imgSMov2 = pygame.transform.scale(imgSMov2, (GlobalVar.gpx, GlobalVar.gpy))
-        imgDMov1 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dMov1.png")
-        self.imgDMov1 = pygame.transform.scale(imgDMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgDMov2 = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dMov2.png")
-        self.imgDMov2 = pygame.transform.scale(imgDMov2, (GlobalVar.gpx, GlobalVar.gpy))
+        imgWMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wMov1.png")
+        self.imgWMov1 = pygame.transform.smoothscale(imgWMov1, (GlobalVar.gpx, GlobalVar.gpy))
+        imgWMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wMov2.png")
+        self.imgWMov2 = pygame.transform.smoothscale(imgWMov2, (GlobalVar.gpx, GlobalVar.gpy))
+        imgAMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aMov1.png")
+        self.imgAMov1 = pygame.transform.smoothscale(imgAMov1, (GlobalVar.gpx, GlobalVar.gpy))
+        imgAMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aMov2.png")
+        self.imgAMov2 = pygame.transform.smoothscale(imgAMov2, (GlobalVar.gpx, GlobalVar.gpy))
+        imgSMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sMov1.png")
+        self.imgSMov1 = pygame.transform.smoothscale(imgSMov1, (GlobalVar.gpx, GlobalVar.gpy))
+        imgSMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sMov2.png")
+        self.imgSMov2 = pygame.transform.smoothscale(imgSMov2, (GlobalVar.gpx, GlobalVar.gpy))
+        imgDMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dMov1.png")
+        self.imgDMov1 = pygame.transform.smoothscale(imgDMov1, (GlobalVar.gpx, GlobalVar.gpy))
+        imgDMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dMov2.png")
+        self.imgDMov2 = pygame.transform.smoothscale(imgDMov2, (GlobalVar.gpx, GlobalVar.gpy))
 
-        imgAvvelenamento = pygame.image.load("Immagini/Nemici/NemicoAvvelenato.png")
-        self.imgAvvelenamento = pygame.transform.scale(imgAvvelenamento, (GlobalVar.gpx, GlobalVar.gpy))
-        imgAppiccicato = pygame.image.load("Immagini/Nemici/NemicoAppiccicato.png")
-        self.imgAppiccicato = pygame.transform.scale(imgAppiccicato, (GlobalVar.gpx, GlobalVar.gpy))
+        imgAvvelenamento = GlobalVar.loadImage("Immagini/Nemici/NemicoAvvelenato.png")
+        self.imgAvvelenamento = pygame.transform.smoothscale(imgAvvelenamento, (GlobalVar.gpx, GlobalVar.gpy))
+        imgAppiccicato = GlobalVar.loadImage("Immagini/Nemici/NemicoAppiccicato.png")
+        self.imgAppiccicato = pygame.transform.smoothscale(imgAppiccicato, (GlobalVar.gpx, GlobalVar.gpy))
 
-        imgAttaccoW = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wAttacco.png")
-        self.imgAttaccoW = pygame.transform.scale(imgAttaccoW, (GlobalVar.gpx, GlobalVar.gpy * 2))
-        imgAttaccoA = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aAttacco.png")
-        self.imgAttaccoA = pygame.transform.scale(imgAttaccoA, (GlobalVar.gpx * 2, GlobalVar.gpy))
-        imgAttaccoS = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sAttacco.png")
-        self.imgAttaccoS = pygame.transform.scale(imgAttaccoS, (GlobalVar.gpx, GlobalVar.gpy * 2))
-        imgAttaccoD = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dAttacco.png")
-        self.imgAttaccoD = pygame.transform.scale(imgAttaccoD, (GlobalVar.gpx * 2, GlobalVar.gpy))
+        imgAttaccoW = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wAttacco.png")
+        self.imgAttaccoW = pygame.transform.smoothscale(imgAttaccoW, (GlobalVar.gpx, GlobalVar.gpy * 2))
+        imgAttaccoA = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aAttacco.png")
+        self.imgAttaccoA = pygame.transform.smoothscale(imgAttaccoA, (GlobalVar.gpx * 2, GlobalVar.gpy))
+        imgAttaccoS = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sAttacco.png")
+        self.imgAttaccoS = pygame.transform.smoothscale(imgAttaccoS, (GlobalVar.gpx, GlobalVar.gpy * 2))
+        imgAttaccoD = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dAttacco.png")
+        self.imgAttaccoD = pygame.transform.smoothscale(imgAttaccoD, (GlobalVar.gpx * 2, GlobalVar.gpy))
         if self.attaccaDaLontano:
-            imgOggettoLanciato = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "OggettoLanciato.png")
-            self.imgOggettoLanciato = pygame.transform.scale(imgOggettoLanciato, (GlobalVar.gpx, GlobalVar.gpy))
-            imgDanneggiamentoOggettoLanciato = pygame.image.load("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "DanneggiamentoOggettoLanciato.png")
-            self.imgDanneggiamentoOggettoLanciato = pygame.transform.scale(imgDanneggiamentoOggettoLanciato, (GlobalVar.gpx, GlobalVar.gpy))
+            imgOggettoLanciato = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "OggettoLanciato.png")
+            self.imgOggettoLanciato = pygame.transform.smoothscale(imgOggettoLanciato, (GlobalVar.gpx, GlobalVar.gpy))
+            imgDanneggiamentoOggettoLanciato = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "DanneggiamentoOggettoLanciato.png")
+            self.imgDanneggiamentoOggettoLanciato = pygame.transform.smoothscale(imgDanneggiamentoOggettoLanciato, (GlobalVar.gpx, GlobalVar.gpy))
         else:
             self.imgOggettoLanciato = 0
             self.imgDanneggiamentoOggettoLanciato = 0
 
-        imgDanneggiamentoRallo = pygame.image.load("Immagini/Nemici/DannoRallo.png")
-        self.imgDanneggiamentoRallo = pygame.transform.scale(imgDanneggiamentoRallo, (GlobalVar.gpx, GlobalVar.gpy))
-        imgDanneggiamentoColco = pygame.image.load("Immagini/Nemici/DannoColco.png")
-        self.imgDanneggiamentoColco = pygame.transform.scale(imgDanneggiamentoColco, (GlobalVar.gpx, GlobalVar.gpy))
+        imgDanneggiamentoRallo = GlobalVar.loadImage("Immagini/Nemici/DannoRallo.png")
+        self.imgDanneggiamentoRallo = pygame.transform.smoothscale(imgDanneggiamentoRallo, (GlobalVar.gpx, GlobalVar.gpy))
+        imgDanneggiamentoColco = GlobalVar.loadImage("Immagini/Nemici/DannoColco.png")
+        self.imgDanneggiamentoColco = pygame.transform.smoothscale(imgDanneggiamentoColco, (GlobalVar.gpx, GlobalVar.gpy))
 
     def girati(self, direzione):
         self.imgAttuale = self.imgS

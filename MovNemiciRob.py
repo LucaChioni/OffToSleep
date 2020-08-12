@@ -1451,7 +1451,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
 
     # trova i nemici visti
     nemiciVistiDaColco = []
-    vistaRobo = GlobalVar.gpx * 8
+    vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
     caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
     k = 0
     while k < len(caselleAttaccabili):

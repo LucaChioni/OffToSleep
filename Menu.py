@@ -50,7 +50,6 @@ def menu(caricaSalvataggio):
                     quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
                     if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
-                        print "1"
                         pygame.mouse.set_visible(False)
                         GlobalVar.mouseVisibile = False
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
@@ -60,9 +59,10 @@ def menu(caricaSalvataggio):
     yp = GlobalVar.gsy // 18 * 2.5
     voceMarcata = 1
     primoFrame = True
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatorevecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    robomenuinizio = pygame.transform.scale(GlobalVar.robogra, (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
+    aggiornaSchermo = False
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
+    robomenuinizio = GlobalVar.robograf0
     aggiornaInterfacciaPerMouse = False
     mostraTutorial = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
@@ -290,15 +290,20 @@ def menu(caricaSalvataggio):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or tastop == "escOdestroMouse" or ((tastop == pygame.K_q) or (tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or tastop == "escOdestroMouse" or ((tastop == pygame.K_q) or (tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             if primoFrame:
-                puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+                puntatore = GlobalVar.puntatore
                 xp = GlobalVar.gsx // 32 * 1.5
                 if voceMarcata == 1:
                     yp = GlobalVar.gsy // 18 * 2.5
@@ -351,15 +356,15 @@ def menu(caricaSalvataggio):
                         yp = GlobalVar.gsy // 18 * 12.5
                         voceMarcata += 3
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
-                persomenuinizio = pygame.transform.scale(GlobalVar.persGrafMenu, (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
+                persomenuinizio = GlobalVar.persGrafMenu
                 if c == 1:
-                    robomenuinizio = pygame.transform.scale(GlobalVar.robogra, (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
+                    robomenuinizio = GlobalVar.robograf0
                 if c == 2:
-                    robomenuinizio = pygame.transform.scale(GlobalVar.robograf, (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
+                    robomenuinizio = GlobalVar.robograf1
                 if c == 3:
-                    robomenuinizio = pygame.transform.scale(GlobalVar.robograff, (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
+                    robomenuinizio = GlobalVar.robograf2
                 if c == 4:
-                    robomenuinizio = pygame.transform.scale(GlobalVar.robografff, (GlobalVar.gpx * 18, GlobalVar.gpy * 18))
+                    robomenuinizio = GlobalVar.robograf3
                 GlobalVar.schermo.blit(persomenuinizio, (GlobalVar.gpx * 15, 0))
                 GlobalVar.schermo.blit(robomenuinizio, (GlobalVar.gpx * 3, 0))
                 messaggio("Inizia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 2, 90)
@@ -470,20 +475,20 @@ def menu(caricaSalvataggio):
 
 
 def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali):
-    sfondostastart = pygame.transform.scale(GlobalVar.sfondostax3, (GlobalVar.gpx * 4, GlobalVar.gpy))
+    sfondostastart = GlobalVar.sfondostax3
     if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
-        perssta = pygame.transform.scale(GlobalVar.fraMaggioreGrafMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
+        perssta = GlobalVar.fraMaggioreGrafMenu
     else:
-        perssta = pygame.transform.scale(GlobalVar.saraGrafMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
-    robosta = pygame.transform.scale(GlobalVar.robograf, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatoreVecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    avvelenatosta = pygame.transform.scale(GlobalVar.avvelenatoo, (GlobalVar.gpx, GlobalVar.gpy))
-    surriscaldatosta = pygame.transform.scale(GlobalVar.surriscaldatoo, (GlobalVar.gpx, GlobalVar.gpy))
-    attaccopiusta = pygame.transform.scale(GlobalVar.attaccopiuo, (GlobalVar.gpx, GlobalVar.gpy))
-    difesapiusta = pygame.transform.scale(GlobalVar.difesapiuo, (GlobalVar.gpx, GlobalVar.gpy))
-    velocitapiusta = pygame.transform.scale(GlobalVar.velocitapiuo, (GlobalVar.gpx, GlobalVar.gpy))
-    efficienzapiusta = pygame.transform.scale(GlobalVar.efficienzapiuo, (GlobalVar.gpx, GlobalVar.gpy))
+        perssta = GlobalVar.saraGrafMenu
+    robosta = GlobalVar.robograf1b
+    puntatore = GlobalVar.puntatore
+    puntatoreVecchio = GlobalVar.puntatorevecchio
+    avvelenatosta = pygame.transform.smoothscale(GlobalVar.avvelenatoo, (GlobalVar.gpx, GlobalVar.gpy))
+    surriscaldatosta = pygame.transform.smoothscale(GlobalVar.surriscaldatoo, (GlobalVar.gpx, GlobalVar.gpy))
+    attaccopiusta = pygame.transform.smoothscale(GlobalVar.attaccopiuo, (GlobalVar.gpx, GlobalVar.gpy))
+    difesapiusta = pygame.transform.smoothscale(GlobalVar.difesapiuo, (GlobalVar.gpx, GlobalVar.gpy))
+    velocitapiusta = pygame.transform.smoothscale(GlobalVar.velocitapiuo, (GlobalVar.gpx, GlobalVar.gpy))
+    efficienzapiusta = pygame.transform.smoothscale(GlobalVar.efficienzapiuo, (GlobalVar.gpx, GlobalVar.gpy))
     if dati[133] == 0:
         faretraFrecceStart = GlobalVar.faretraFrecceStart0
         maxFrecce = 1
@@ -508,6 +513,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
     inizio = False
     voceMarcata = 1
     primoFrame = True
+    aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     caricaSalvataggio = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
@@ -692,13 +698,18 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
@@ -783,11 +794,9 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 1, 50)
             if carim:
                 if dati[10] <= 0:
-                    robosta = GlobalVar.robograff
-                    robosta = pygame.transform.scale(robosta, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
+                    robosta = GlobalVar.robograf2b
                 else:
-                    robosta = GlobalVar.robograf
-                    robosta = pygame.transform.scale(robosta, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
+                    robosta = GlobalVar.robograf1b
                 carim = False
 
             # vita-status personaggio
@@ -847,8 +856,8 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
 def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     xp = GlobalVar.gpx * 1
     yp = GlobalVar.gpy * 13.8
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatorevecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
     sconosciutoOggetto = pygame.transform.scale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 4, GlobalVar.gpy * 4))
     sconosciutoOggettoIco = pygame.transform.scale(GlobalVar.sconosciutoOggettoIcoMenu, (GlobalVar.gpx, GlobalVar.gpy))
 
@@ -867,6 +876,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     voceMarcata = 1
     voceMarcataOggetto = voceMarcata
     primoFrame = True
+    aggiornaSchermo = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     tastop = 0
@@ -1187,13 +1197,18 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if not caricaSalvataggio and (primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata):
+        if not caricaSalvataggio and (aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata):
             primoFrame = False
+            aggiornaSchermo = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
@@ -1360,15 +1375,14 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             lungvita = (lungvitatot * dati[5]) // pvtot
             if lungvita < 0:
                 lungvita = 0
-            indvitapers = pygame.transform.scale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-            fineindvitapers = pygame.transform.scale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-            vitaral = pygame.transform.scale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
+            indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+            fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
             GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
             GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
             GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-            persbat = pygame.transform.scale(GlobalVar.perso, (GlobalVar.gpx, GlobalVar.gpy))
-            GlobalVar.schermo.blit(persbat, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+            GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
             GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
             GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
             messaggio(" x" + str(dati[132]), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
@@ -1387,8 +1401,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
 
 
 def menuMercante(dati):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
     sconosciutoOggetto = pygame.transform.scale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
     xp = GlobalVar.gsx // 32 * 10.5
     yp = GlobalVar.gsy // 18 * 6.1
@@ -1403,6 +1417,7 @@ def menuMercante(dati):
     moneteInsufficienti = False
     inventarioPieno = False
     primoFrame = True
+    aggiornaSchermo = False
     mouseSinistroPremuto = False
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
@@ -1932,6 +1947,10 @@ def menuMercante(dati):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
                 buttonUp = True
@@ -1940,8 +1959,9 @@ def menuMercante(dati):
                 tastop = 0
                 buttonUp = True
 
-        if primoMovimento or buttonUp or tastop == pygame.K_q or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or buttonUp or tastop == pygame.K_q or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
@@ -2070,7 +2090,7 @@ def menuMercante(dati):
             GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroMercante, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14))
             messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.8, 50)
 
-            GlobalVar.schermo.blit(GlobalVar.mercanteGraf, (GlobalVar.gsx // 32 * (-0.6), GlobalVar.gsy // 18 * 8.5))
+            GlobalVar.schermo.blit(GlobalVar.mercanteMenu, (GlobalVar.gsx // 32 * (-0.6), GlobalVar.gsy // 18 * 8.5))
             GlobalVar.schermo.blit(GlobalVar.sfondoDialogoMercante, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4))
             if moneteInsufficienti:
                 messaggio("Non hai abbastanza monete!", GlobalVar.rosso, GlobalVar.gsx // 32 * 2.1, GlobalVar.gsy // 18 * 6.1, 40)

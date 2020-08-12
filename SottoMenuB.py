@@ -4,8 +4,8 @@ from CaricaSalvaPartita import *
 
 
 def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone=False, background=False):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 6.5
     yp = GlobalVar.gsy // 18 * 9.5
     vxp = xp
@@ -32,6 +32,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
     salMarcato = 1
     voceMarcata = 2
     primoFrame = True
+    aggiornaSchermo = False
     n = -1
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
@@ -270,12 +271,17 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOsinistroMouse" or tastop == "centraleMouse" or tastop == "destroMouse" or tastop == pygame.K_LSHIFT or tastop == pygame.K_RSHIFT or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or salMarcatoVecchio != salMarcato or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == "spazioOsinistroMouse" or tastop == "centraleMouse" or tastop == "destroMouse" or tastop == pygame.K_LSHIFT or tastop == pygame.K_RSHIFT or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or salMarcatoVecchio != salMarcato or aggiornaInterfacciaPerMouse:
+            aggiornaSchermo = False
             aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_a or tastop == pygame.K_d):
@@ -408,17 +414,17 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                     if contasalva == 1:
                         if not errore:
                             if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
-                                perso = pygame.image.load('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                                perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
                             else:
-                                perso = pygame.image.load('Immagini/Personaggi/Sara/Personaggio1.png')
-                            persalva = pygame.transform.scale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            persSalvaBraccia = pygame.transform.scale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            spasalva = pygame.transform.scale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            arcsalva = pygame.transform.scale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            armsalva = pygame.transform.scale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            scusalva = pygame.transform.scale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            guasalva = pygame.transform.scale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            colsalva = pygame.transform.scale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                                perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
+                            persalva = pygame.transform.smoothscale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            persSalvaBraccia = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            spasalva = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            arcsalva = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            armsalva = pygame.transform.smoothscale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            scusalva = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            guasalva = pygame.transform.smoothscale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            colsalva = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                             messaggio("Livello: " + str(dati[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 7.1, GlobalVar.gsy // 18 * 11, 60)
                             GlobalVar.schermo.blit(arcsalva, (GlobalVar.gpx * 7.6, GlobalVar.gpy * 12))
                             GlobalVar.schermo.blit(persalva, (GlobalVar.gpx * 7.6, GlobalVar.gpy * 12))
@@ -433,17 +439,17 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                     elif contasalva == 2:
                         if not errore:
                             if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
-                                perso = pygame.image.load('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                                perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
                             else:
-                                perso = pygame.image.load('Immagini/Personaggi/Sara/Personaggio1.png')
-                            persalva = pygame.transform.scale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            persSalvaBraccia = pygame.transform.scale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            spasalva = pygame.transform.scale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            arcsalva = pygame.transform.scale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            armsalva = pygame.transform.scale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            scusalva = pygame.transform.scale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            guasalva = pygame.transform.scale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            colsalva = pygame.transform.scale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                                perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
+                            persalva = pygame.transform.smoothscale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            persSalvaBraccia = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            spasalva = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            arcsalva = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            armsalva = pygame.transform.smoothscale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            scusalva = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            guasalva = pygame.transform.smoothscale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            colsalva = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                             messaggio("Livello: " + str(dati[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.1, GlobalVar.gsy // 18 * 11, 60)
                             GlobalVar.schermo.blit(arcsalva, (GlobalVar.gpx * 14.6, GlobalVar.gpy * 12))
                             GlobalVar.schermo.blit(persalva, (GlobalVar.gpx * 14.6, GlobalVar.gpy * 12))
@@ -458,17 +464,17 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                     elif contasalva == 3:
                         if not errore:
                             if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
-                                perso = pygame.image.load('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                                perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
                             else:
-                                perso = pygame.image.load('Immagini/Personaggi/Sara/Personaggio1.png')
-                            persalva = pygame.transform.scale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            persSalvaBraccia = pygame.transform.scale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            spasalva = pygame.transform.scale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            arcsalva = pygame.transform.scale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            armsalva = pygame.transform.scale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            scusalva = pygame.transform.scale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            guasalva = pygame.transform.scale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                            colsalva = pygame.transform.scale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                                perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
+                            persalva = pygame.transform.smoothscale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            persSalvaBraccia = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            spasalva = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            arcsalva = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            armsalva = pygame.transform.smoothscale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            scusalva = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            guasalva = pygame.transform.smoothscale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                            colsalva = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                             messaggio("Livello: " + str(dati[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21.1, GlobalVar.gsy // 18 * 11, 60)
                             GlobalVar.schermo.blit(arcsalva, (GlobalVar.gpx * 21.6, GlobalVar.gpy * 12))
                             GlobalVar.schermo.blit(persalva, (GlobalVar.gpx * 21.6, GlobalVar.gpy * 12))
@@ -489,7 +495,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
 
 
 def chiediconferma(conferma, canzone=False):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
     xp = GlobalVar.gsx // 32 * 17.5
     yp = GlobalVar.gsy // 18 * 10.3
     schermo_temp = GlobalVar.schermo.copy()
@@ -504,6 +510,7 @@ def chiediconferma(conferma, canzone=False):
     aggiornaInterfacciaPerMouse = False
     voceMarcata = 2
     primoFrame = True
+    aggiornaSchermo = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     while True:
@@ -621,12 +628,17 @@ def chiediconferma(conferma, canzone=False):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaSchermo = False
             aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
@@ -667,12 +679,13 @@ def chiediconferma(conferma, canzone=False):
 
 
 def menuImpostazioni(canzone, settaRisoluzione):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 5.2
     risposta = False
     voceMarcata = 1
     primoFrame = True
+    aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     sinistroMousePremuto = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
@@ -880,7 +893,7 @@ def menuImpostazioni(canzone, settaRisoluzione):
                                 GlobalVar.schermo = pygame.display.set_mode((GlobalVar.gsx, GlobalVar.gsy), opzioni_schermo)
                             else:
                                 GlobalVar.schermo = pygame.display.set_mode((GlobalVar.gsx, GlobalVar.gsy))
-                            GlobalVar.loadImg()
+                            GlobalVar.loadImgs()
                         # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
                         scrivi = open("Impostazioni/Impostazioni.txt", "w")
                         if GlobalVar.linguaImpostata == "italiano":
@@ -896,7 +909,7 @@ def menuImpostazioni(canzone, settaRisoluzione):
                         scrivi.write(str(GlobalVar.gsx) + "_")
                         scrivi.write(str(GlobalVar.gsy) + "_")
                         scrivi.close()
-                        puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+                        puntatore = GlobalVar.puntatore
                         yp = GlobalVar.gsy // 18 * 14.7
                         xp = GlobalVar.gsx // 32 * 9
                         primoFrame = True
@@ -909,6 +922,10 @@ def menuImpostazioni(canzone, settaRisoluzione):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
                 buttonUp = True
@@ -917,7 +934,8 @@ def menuImpostazioni(canzone, settaRisoluzione):
                 sinistroMousePremuto = False
                 buttonUp = True
 
-        if primoMovimento or buttonUp or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or buttonUp or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaSchermo = False
             aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
@@ -1373,16 +1391,18 @@ def menuImpostazioni(canzone, settaRisoluzione):
 
 
 def menuMappa(progresso, canzone):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    imgOmbreggiaturaContorniMappaMenu = pygame.transform.scale(GlobalVar.imgOmbreggiaturaContorniMappaMenu, (GlobalVar.gsx, GlobalVar.gsy))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
+    imgOmbreggiaturaContorniMappaMenu = GlobalVar.imgOmbreggiaturaContorniMappaMenu
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 4.5
     risposta = False
     voceMarcata = 1
     voceMarcataSottoMenu = False
     primoFrame = True
-
+    aggiornaSchermo = False
+    grandezzaScritteDescrizioni = 43
+    grandezzaScritteNormali = 45
 
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
@@ -1438,6 +1458,8 @@ def menuMappa(progresso, canzone):
         if progresso >= 0:
             postiSbloccati["Laboratorio"] = True
             imgMappaOrig = GlobalVar.imgMappa14
+    imgMappaA = pygame.transform.scale(imgMappaOrig, (GlobalVar.gpx * 22, GlobalVar.gpy * 15))
+    imgMappaB = pygame.transform.scale(imgMappaOrig, (GlobalVar.gpx * 50, GlobalVar.gpy * 35))
 
     GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoAperturaMappa)
     while not risposta:
@@ -1599,14 +1621,15 @@ def menuMappa(progresso, canzone):
                     primoMovimento = True
                     tastoTrovato = True
 
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
+            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto and not tastoTrovato:
+                tastop = "destroMouse"
                 if voceMarcataSottoMenu:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     voceMarcataSottoMenu = False
                 else:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     risposta = True
-            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE or event.key == pygame.K_d)) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
+            if (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE or event.key == pygame.K_d)) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato) and not tastoTrovato:
                 tastop = "spazioOsinistroMouse"
                 tastoTrovato = True
                 if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
@@ -1659,10 +1682,16 @@ def menuMappa(progresso, canzone):
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
 
-            if event.type == pygame.KEYUP and tastop == event.key:
+            if tastop != 0:
+                aggiornaSchermo = True
+
+            if event.type == pygame.KEYUP and (tastop == event.key or tastop == "spazioOsinistroMouse" or tastop == "destroMouse"):
+                tastop = 0
+            if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or tastop == pygame.K_q or tastop == pygame.K_SPACE or tastop == pygame.K_a or tastop == pygame.K_d or ((tastop == pygame.K_w or tastop == pygame.K_s) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or tastop == "destroMouse" or tastop == pygame.K_q or tastop == pygame.K_SPACE or tastop == pygame.K_a or tastop == pygame.K_d or ((tastop == pygame.K_w or tastop == pygame.K_s) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+            aggiornaSchermo = False
             aggiornaInterfacciaPerMouse = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_s):
@@ -1700,7 +1729,7 @@ def menuMappa(progresso, canzone):
 
             GlobalVar.schermo.fill(GlobalVar.grigioscu)
             if not voceMarcataSottoMenu:
-                imgMappa = pygame.transform.scale(imgMappaOrig, (GlobalVar.gpx * 22, GlobalVar.gpy * 15))
+                imgMappa = imgMappaA
                 GlobalVar.schermo.blit(imgMappa, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 2.5))
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 12.5))
@@ -1709,7 +1738,7 @@ def menuMappa(progresso, canzone):
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 15.5))
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 15.5))
             else:
-                imgMappa = pygame.transform.scale(imgMappaOrig, (GlobalVar.gpx * 50, GlobalVar.gpy * 35))
+                imgMappa = imgMappaB
                 if voceMarcata == 1:
                     GlobalVar.schermo.blit(imgMappa, (GlobalVar.gsx // 32 * (-16), GlobalVar.gsy // 18 * 1))
                 if voceMarcata == 2:
@@ -1751,272 +1780,272 @@ def menuMappa(progresso, canzone):
                 GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
                 if voceMarcata == 1:
                     messaggio("Casa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio(u"È l'abitazione in cui ho vissuto con la", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio(u"mia famiglia fin'ora. È stata costruita", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("da un mio vecchio antenato e, da", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio(u"allora, è sempre stata abitata dalle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("varie generazioni della mia famiglia.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio(u"Secondo il babbo io sarò la prossima", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("proprietaria e l'idea non mi entu-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("siasma affatto: non voglio fare questo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("lavoro per tutta la vita come lui!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio(u"È monotono, faticoso e anche insta-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("bile a causa delle enormi imposte del-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("lo stato e della spietata concorrenza.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio(u"È l'abitazione in cui ho vissuto con la", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio(u"mia famiglia fin'ora. È stata costruita", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("da un mio vecchio antenato e, da", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio(u"allora, è sempre stata abitata dalle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("varie generazioni della mia famiglia.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio(u"Secondo il babbo Sam sarà il prossimo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("proprietario e l'idea non lo entu-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("siasma affatto: mi ha detto di non", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("voler fare questo lavoro per tutta la", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio(u"vita come lui. Dice che è monotono,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("faticoso e anche instabile a causa delle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("enormi imposte dello stato e della", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("spietata concorrenza.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 2:
                     messaggio(u"Città", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Da quando ne ho sentito parlare per", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("la prima volta, ho sempre avuto il", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("desiderio di viverci. Da quello che so,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio(u"lì a tutti è concesso scegliere quale", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("mansione svolgere nella vita. Questo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio(u"è diventato possibile grazie ai nuovi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("strumenti di produzione che hanno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("reso possibile un sistema in cui poche", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("persone riescono a produrre abbastan-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("za anche per tutte le altre. La parte di", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio(u"popolazione \"impoduttiva\" può quindi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio(u"dedicarsi ad altre attività come musica,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio(u"teatro, studio, sport e chissà cos'altro.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Da quando ne ho sentito parlare per", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("la prima volta, ho sempre avuto il", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("desiderio di viverci. Da quello che so,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio(u"lì a tutti è concesso scegliere quale", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("mansione svolgere nella vita. Questo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio(u"è diventato possibile grazie ai nuovi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("strumenti di produzione che hanno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("reso possibile un sistema in cui poche", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("persone riescono a produrre abbastan-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("za anche per tutte le altre. La parte di", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio(u"popolazione \"impoduttiva\" può quindi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio(u"dedicarsi ad altre attività come musica,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio(u"teatro, studio, sport e chissà cos'altro.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 3:
                     messaggio("Avamposto di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Una piccola baracca che Rod esalta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("in maniera esagerata definendola", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("\"avamposto\".", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio(u"Quella non è la sua abitazione ma,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("a suo dire, un luogo strategicamente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("fondamentale per la sopravvivenza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("dell'intero ecosistema cittadino.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio(u"Rod non ispira molta fiducia ma", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("tutti i suoi pensieri e ragionamenti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("mi sono sempre sembranti almeno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("sensati e coerenti... mi domando", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("cosa nasconda quella baracca...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Una piccola baracca che Rod esalta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("in maniera esagerata definendola", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("\"avamposto\".", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio(u"Quella non è la sua abitazione ma,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("a suo dire, un luogo strategicamente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("fondamentale per la sopravvivenza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("dell'intero ecosistema cittadino.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio(u"Rod non ispira molta fiducia ma", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("tutti i suoi pensieri e ragionamenti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("mi sono sempre sembranti almeno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("sensati e coerenti... mi domando", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("cosa nasconda quella baracca...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 4:
                     messaggio("Castello", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio(u"La più grande struttura che abbia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("mai visto fino ad ora.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio(u"È un castello composto da un centi-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("naio di stanze abitato dall'amico del", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("bibliotecario e dai suoi numerosi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("servitori.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio(u"Il vasto terreno su cui è stato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("costruito, comprende anche l'intero", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio(u"labirinto che è stato appositamente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("elaborato per tenere lontani i", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("visitatori indesiderati. Il silenzio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("e il comportamento dei servi creano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("un'atmosfera molto cupa...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio(u"La più grande struttura che abbia mai", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("visto fino ad ora.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio(u"È un castello composto da un centi-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("naio di stanze abitato dall'amico del", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("bibliotecario e dai suoi numerosi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("servitori.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio(u"Il vasto terreno su cui è stato costruito", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("comprende anche l'intero labirinto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio(u"che è stato appositamente elaborato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("per tenere lontani i visitatori indesi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("derati. Il silenzio e il comportamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("dei servi creano un'atmosfera molto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("cupa...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 5:
                     messaggio("Palazzo di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("La villa in cui dimora Rod.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("Risulta essere quasi sempre vuota", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio(u"e silenziosa dato che lui è costante-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("mente fuori per lavoro o ricerche", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("(mi domando ancora cosa stia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("ricercando...).", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("Il posto ricorda vagamente il", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("castello di Norm ma in miniatura", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("e con un passaggio montano al", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("posto del labirinto per scoraggiare", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("l'avvicinamento di viaggiatori", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("sconosciuti.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("La villa in cui dimora Rod.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("Risulta essere quasi sempre vuota", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio(u"e silenziosa dato che lui è costante-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("mente fuori per lavoro o ricerche", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("(mi domando ancora che cosa stia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("ricercando...).", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("Il posto ricorda vagamente il castel-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("lo di Norm ma in miniatura e con", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("un passaggio montano al posto del", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("labirinto per scoraggiare l'avvicina-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("mento di viaggiatori sconosciuti.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 6:
                     messaggio("Vulcano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Un vulcano sommerso nelle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio(u"montagne a ovest della città.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio(u"È simile ad una montagna ma più", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("grande e con un cratere sulla cima", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("dal quale, a detta di Rod,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("fuoriesce del vapore incandescente.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio(u"Chissà cosa c'è lì dentro...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Un vulcano sommerso nelle monta-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio(u"gne a ovest della città.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio(u"È simile ad una montagna ma più", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("grande e con un cratere sulla cima", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("dal quale, a detta di Rod, fuoriesce", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("del vapore incandescente.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio(u"Chissà cosa c'è lì dentro...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 7:
                     messaggio("Laboratorio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Il laboratorio in cui Norm svolge", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("le sue ricerche.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio(u"È molto piccolo ma al suo interno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio(u"è presente tutto ciò che serve,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("ossia un calcolatore di eventi,", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("che si estende anche sotto il", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("terreno, e diversi altri calcolatori", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("che credo servano per gestire", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("i sistemi di alimentazione e", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("raffreddamento.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Il laboratorio in cui Norm svolge le", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("sue ricerche.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio(u"È molto piccolo ma al suo interno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio(u"è presente tutto ciò che serve, ossia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("un calcolatore di eventi, che si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("estende anche sotto il terreno, e", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("diversi altri calcolatori che credo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("servano per gestire i sistemi di", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("alimentazione e raffreddamento.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 8:
                     messaggio("Foresta cadetta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("La foresta che mi ha sempre sepa-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio(u"rata dalla città... non mi è mai stato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio(u"concesso attraversarla perchè entram-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("bi i miei genitori la ritenevano troppo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("pericolosa per me.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("Il nome deriva dal fatto che viene", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("utilizzata come terreno di prova per", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("selezionare, tra i giovani apparte-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio(u"nenti alla nobiltà, i futuri ufficiali", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("dell'esercito.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("La foresta che mi ha sempre sepa-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio(u"rata dalla città... non mi è mai stato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio(u"concesso attraversarla perchè entram-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("bi i miei genitori la ritenevano troppo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("pericolosa per me.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("Il nome deriva dal fatto che viene", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("utilizzata come terreno di prova per", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("selezionare, tra i giovani apparte-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio(u"nenti alla nobiltà, i futuri ufficiali", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("dell'esercito.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 9:
                     messaggio("Selva arida", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio(u"Denominata in questo modo perchè", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("un tempo fitta e intricata ed ora", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("composta soltanto da secchi abusti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("e funghi.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("Le ragioni di questo suo decadimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("non sono note agli abitanti locali", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("ma, diversi libri della biblioteca", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio(u"in città, sostenevano che ciò fosse", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("dovuto ad un cambiamento climatico", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("avvenuto circa 50 anni fa... strano...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio(u"Rod è solito attraversarla per", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("tornare al suo avamposto.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio(u"Denominata in questo modo perchè", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("un tempo fitta e intricata ed ora", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("composta soltanto da secchi abusti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("e funghi.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("Le ragioni di questo suo decadimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("non sono note agli abitanti locali", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("ma, diversi libri della biblioteca in", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio(u"città, sostenevano che ciò fosse dovu-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("to ad un cambiamento climatico", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("avvenuto circa 50 anni fa... strano...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio(u"Rod è solito attraversarla per torna-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("re al suo avamposto.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 10:
                     messaggio("Labirinto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Un enorme terreno estremamente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("complicato da superare a causa delle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("innumerevoli strade percorribili al", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("suo interno prive di punti di", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("riferimento.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("Rod mi ha fornito una mappa che", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("mostra nel dettaglio la sua struttura", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("sconsigliandomi di procedere:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio(u"è molto probabile non riuscire ad", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("uscirne se non si ha un buon senso", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("dell'orientamento.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Un enorme terreno estremamente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("complicato da superare a causa delle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("innumerevoli strade percorribili al", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("suo interno prive di punti di riferi-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("mento.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("Rod mi ha fornito una mappa che", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("mostra nel dettaglio la sua struttura", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("sconsigliandomi di procedere:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio(u"è molto probabile non riuscire ad", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("uscirne se non si ha un buon senso", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("dell'orientamento.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 11:
                     messaggio("Passo montano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Un passaggio tra le alture a ovest", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio(u"della città.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio(u"In città nessuno sembrava sapere di", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("questo varco apparte Rod che lo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("utilizza per raggiungere il proprio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio(u"palazzo da più di vent'anni.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Un passaggio tra le alture a ovest", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio(u"della città.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio(u"In città nessuno sembrava sapere", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("di questo varco apparte Rod che lo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("utilizza per raggiungere il proprio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio(u"palazzo da più di vent'anni.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 12:
                     messaggio("Caverna", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Una caverna in mezzo alle monta-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("gne che conduce ad un vulcano.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("All'interno vivono degli animali", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("simili a Colco ma aggressivi.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio(u"Rod è solito avventurarsi in quel", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("posto per recuperare alimentazioni.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio(u"Non mi spiego perché abbia deciso", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio(u"di viverci così vicino... forse ne è", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio(u"geloso e ne vuole controllare gli", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("accessi?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Una caverna in mezzo alle monta-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("gne che conduce ad un vulcano.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("All'interno vivono degli animali", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("simili a Colco ma aggressivi.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio(u"Rod è solito avventurarsi in quel", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("posto per recuperare alimentazioni.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio(u"Non mi spiego perché abbia deciso", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio(u"di viverci così vicino... forse ne è", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio(u"geloso e ne vuole controllare gli", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("accessi?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 13:
                     messaggio("Tunnel di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio(u"È un passaggio sicuro e veloce tra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("il palazzo di Rod e il suo avamposto.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("Rod lo utilizzava per trasportare", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("direttamente le alimentazioni dalla", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("caverna al castello di Norm.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("Adesso capisco l'importanza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("\"strategica\" di questi luoghi.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio(u"È un passaggio sicuro e veloce tra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("il palazzo di Rod e il suo avamposto.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("Rod lo utilizzava per trasportare", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("direttamente le alimentazioni dalla", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("caverna al castello di Norm.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("Adesso capisco l'importanza \"strate", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("gica\" di questi luoghi.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
                 if voceMarcata == 14:
                     messaggio("Tunnel subacqueo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                    messaggio("Un passaggio segreto nei sotterranei", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, 45)
-                    messaggio("del castello di Norm che porta al", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, 45)
-                    messaggio("suo laboratorio principale sul fondo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, 45)
-                    messaggio("del lago.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, 45)
-                    messaggio("Nonostante le pareti del tunnel siano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, 45)
-                    messaggio("fatte di un materiale trasparente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, 45)
-                    messaggio("simile al vetro, non si riesce ad", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, 45)
-                    messaggio("osservare chiaramente il fondale del", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, 45)
-                    messaggio("bacino a causa delle sostanze con cui", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, 45)
-                    messaggio(u"questo è stato contaminato circa 50", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, 45)
-                    messaggio("anni fa.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, 45)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, 45)
+                    messaggio("Un passaggio segreto nei sotterranei", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni)
+                    messaggio("del castello di Norm che porta al", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.2, grandezzaScritteDescrizioni)
+                    messaggio("suo laboratorio principale sul fondo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 7.9, grandezzaScritteDescrizioni)
+                    messaggio("del lago.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 8.6, grandezzaScritteDescrizioni)
+                    messaggio("Nonostante le pareti del tunnel siano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 9.3, grandezzaScritteDescrizioni)
+                    messaggio("fatte di un materiale trasparente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10, grandezzaScritteDescrizioni)
+                    messaggio("simile al vetro, non si riesce ad osser-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 10.7, grandezzaScritteDescrizioni)
+                    messaggio("vare chiaramente il fondale del baci-", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 11.4, grandezzaScritteDescrizioni)
+                    messaggio("no a causa delle sostanze con cui", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.1, grandezzaScritteDescrizioni)
+                    messaggio(u"questo è stato contaminato circa 50", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 12.8, grandezzaScritteDescrizioni)
+                    messaggio("anni fa.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 13.5, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.2, grandezzaScritteDescrizioni)
+                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 14.9, grandezzaScritteDescrizioni)
 
             messaggio("Mappa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
             if postiSbloccati["Casa"]:
-                messaggio("Casa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.5, 45)
+                messaggio("Casa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.5, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.5, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.5, grandezzaScritteNormali)
             if postiSbloccati["Città"]:
-                messaggio(u"Città", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5.3, 45)
+                messaggio(u"Città", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5.3, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5.3, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5.3, grandezzaScritteNormali)
             if postiSbloccati["Avamposto di Rod"]:
-                messaggio("Avamposto di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.1, 45)
+                messaggio("Avamposto di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.1, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.1, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.1, grandezzaScritteNormali)
             if postiSbloccati["Castello"]:
-                messaggio("Castello", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.9, 45)
+                messaggio("Castello", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.9, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.9, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.9, grandezzaScritteNormali)
             if postiSbloccati["Palazzo di Rod"]:
-                messaggio("Palazzo di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.7, 45)
+                messaggio("Palazzo di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.7, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.7, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.7, grandezzaScritteNormali)
             if postiSbloccati["Vulcano"]:
-                messaggio("Vulcano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.5, 45)
+                messaggio("Vulcano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.5, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.5, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.5, grandezzaScritteNormali)
             if postiSbloccati["Laboratorio"]:
-                messaggio("Laboratorio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.3, 45)
+                messaggio("Laboratorio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.3, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.3, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.3, grandezzaScritteNormali)
             if postiSbloccati["Foresta cadetta"]:
-                messaggio("Foresta cadetta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.7, 45)
+                messaggio("Foresta cadetta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.7, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.7, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.7, grandezzaScritteNormali)
             if postiSbloccati["Selva arida"]:
-                messaggio("Selva arida", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.5, 45)
+                messaggio("Selva arida", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.5, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.5, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.5, grandezzaScritteNormali)
             if postiSbloccati["Labirinto"]:
-                messaggio("Labirinto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.3, 45)
+                messaggio("Labirinto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.3, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.3, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.3, grandezzaScritteNormali)
             if postiSbloccati["Passo montano"]:
-                messaggio("Passo montano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.1, 45)
+                messaggio("Passo montano", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.1, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.1, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.1, grandezzaScritteNormali)
             if postiSbloccati["Caverna"]:
-                messaggio("Caverna", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.9, 45)
+                messaggio("Caverna", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.9, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.9, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.9, grandezzaScritteNormali)
             if postiSbloccati["Tunnel di Rod"]:
-                messaggio("Tunnel di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.7, 45)
+                messaggio("Tunnel di Rod", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.7, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.7, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.7, grandezzaScritteNormali)
             if postiSbloccati["Tunnel subacqueo"]:
-                messaggio("Tunnel subacqueo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.5, 45)
+                messaggio("Tunnel subacqueo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.5, grandezzaScritteNormali)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.5, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.5, grandezzaScritteNormali)
 
             messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
             if not voceMarcataSottoMenu:
@@ -2028,8 +2057,8 @@ def menuMappa(progresso, canzone):
 
 
 def menuDiario(dati, canzone):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 5.6
     xpv = xp
@@ -2038,6 +2067,7 @@ def menuDiario(dati, canzone):
     voceMarcata = 1
     voceMarcataSottoMenu = 0
     primoFrame = True
+    aggiornaSchermo = False
 
     tastop = 0
     tastotempfps = 5
@@ -2088,10 +2118,15 @@ def menuDiario(dati, canzone):
                         if voceMarcata == 4 or voceMarcata == 5:
                             xp = GlobalVar.gsx // 32 * 10
                             yp = GlobalVar.gsy // 18 * 8
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or tastop == pygame.K_a or tastop == pygame.K_d or ((tastop == pygame.K_w or tastop == pygame.K_s) and tastotempfps == 0) or primoFrame:
+        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == pygame.K_SPACE or tastop == pygame.K_a or tastop == pygame.K_d or ((tastop == pygame.K_w or tastop == pygame.K_s) and tastotempfps == 0) or primoFrame:
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_s):
                 tastotempfps = 2

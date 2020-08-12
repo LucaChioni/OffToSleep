@@ -4,17 +4,18 @@ from SottoMenuB import *
 
 
 def equip(dati, canzone):
-    perssta = pygame.transform.scale(GlobalVar.perso, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    persstab = pygame.transform.scale(GlobalVar.persob, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    sfondoOggetto = pygame.transform.scale(GlobalVar.sfondoOggettoMenu, (int(GlobalVar.gpx * 2), int(GlobalVar.gpy * 2)))
-    sconosciutoEquip = pygame.transform.scale(GlobalVar.sconosciutoEquipMenu, (int(GlobalVar.gpx * 2), int(GlobalVar.gpy * 2)))
+    perssta = pygame.transform.smoothscale(GlobalVar.perso, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    persstab = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
+    sfondoOggetto = GlobalVar.sfondoOggettoMenu
+    sconosciutoEquip = GlobalVar.sconosciutoEquipMenu
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 6.8
     risposta = False
     voceMarcata = 1
     primoFrame = True
+    aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
@@ -22,12 +23,12 @@ def equip(dati, canzone):
     tastotempfps = 5
 
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-    spada = pygame.transform.scale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    arco = pygame.transform.scale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    scudo = pygame.transform.scale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    armatura = pygame.transform.scale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    guanti = pygame.transform.scale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    collana = pygame.transform.scale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    spada = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    arco = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    scudo = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    armatura = pygame.transform.smoothscale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    guanti = pygame.transform.smoothscale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    collana = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
     carim = False
 
     vetImgSpade = []
@@ -549,13 +550,18 @@ def equip(dati, canzone):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w):
                 tastotempfps = 2
@@ -622,12 +628,12 @@ def equip(dati, canzone):
             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 18.5, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), (GlobalVar.gsx // 32 * 18.5, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), GlobalVar.gpx // 30)
 
             if carim:
-                spada = pygame.transform.scale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                arco = pygame.transform.scale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                scudo = pygame.transform.scale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                armatura = pygame.transform.scale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                guanti = pygame.transform.scale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                collana = pygame.transform.scale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                spada = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                arco = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                scudo = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                armatura = pygame.transform.smoothscale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                guanti = pygame.transform.smoothscale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                collana = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
                 carim = False
             messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
             messaggio("Armi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.6, GlobalVar.gsy // 18 * 4.3, 60)
@@ -1110,13 +1116,14 @@ def equip(dati, canzone):
 
 
 def sceglicondiz(dati, condizione, canzone):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
     primoFrame = True
+    aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
@@ -1368,13 +1375,18 @@ def sceglicondiz(dati, condizione, canzone):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
@@ -1697,13 +1709,14 @@ def sceglicondiz(dati, condizione, canzone):
 
 
 def sceglitecn(dati, tecnica, canzone):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
     primoFrame = True
+    aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
@@ -1957,13 +1970,18 @@ def sceglitecn(dati, tecnica, canzone):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
@@ -2306,11 +2324,11 @@ def sceglitecn(dati, tecnica, canzone):
 
 
 def equiprobo(dati, canzone):
-    robosta = pygame.transform.scale(GlobalVar.roboo, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    sfondoOggetto = pygame.transform.scale(GlobalVar.sfondoOggettoMenu, (int(GlobalVar.gpx * 2), int(GlobalVar.gpy * 2)))
-    sconosciutoEquip = pygame.transform.scale(GlobalVar.sconosciutoEquipMenu, (int(GlobalVar.gpx * 2), int(GlobalVar.gpy * 2)))
+    robosta = pygame.transform.smoothscale(GlobalVar.roboo, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
+    sfondoOggetto = GlobalVar.sfondoOggettoMenu
+    sconosciutoEquip = GlobalVar.sconosciutoEquipMenu
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 6.8
     risposta = False
@@ -2322,6 +2340,7 @@ def equiprobo(dati, canzone):
     voceMarcata = 1
     voceGambitMarcata = 0
     primoFrame = True
+    aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
@@ -3012,13 +3031,18 @@ def equiprobo(dati, canzone):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
@@ -3500,14 +3524,14 @@ def equiprobo(dati, canzone):
 
 
 def oggetti(dati, canzone):
-    puntatore = pygame.transform.scale(GlobalVar.puntatoreorigi, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    puntatorevecchio = pygame.transform.scale(GlobalVar.puntatoreorigivecchio, (GlobalVar.gpx // 2, GlobalVar.gpy // 2))
-    sfondostastart = pygame.transform.scale(GlobalVar.sfondostax3, (GlobalVar.gpx * 4, GlobalVar.gpy))
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
+    sfondostastart = GlobalVar.sfondostax3
     sconosciutoOggetto = pygame.transform.scale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
     if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
-        perssta = pygame.transform.scale(GlobalVar.imgFraMaggioreMenuOggetti, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+        perssta = GlobalVar.imgFraMaggioreMenuOggetti
     else:
-        perssta = pygame.transform.scale(GlobalVar.imgSaraMenuOggetti, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+        perssta = GlobalVar.imgSaraMenuOggetti
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 5
     xpv = xp
@@ -3519,6 +3543,7 @@ def oggetti(dati, canzone):
     oggetton = 1
     voceMarcata = 0
     primoFrame = True
+    aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
@@ -3957,13 +3982,18 @@ def oggetti(dati, canzone):
                 aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
+
+            if tastop != 0:
+                aggiornaSchermo = True
+
             if event.type == pygame.KEYUP and tastop == event.key:
                 tastop = 0
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerMouse:
+        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
+            aggiornaSchermo = False
             primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
@@ -4157,13 +4187,13 @@ def oggetti(dati, canzone):
             GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 4))
             GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 14, (GlobalVar.gsy // 18 * 6) + (GlobalVar.gpy // 8)))
             if dati[121]:
-                avvelenato = pygame.transform.scale(GlobalVar.avvelenatoo, (GlobalVar.gpx, GlobalVar.gpy))
+                avvelenato = pygame.transform.smoothscale(GlobalVar.avvelenatoo, (GlobalVar.gpx, GlobalVar.gpy))
                 GlobalVar.schermo.blit(avvelenato, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 6))
             if dati[123] > 0:
-                attaccopiu = pygame.transform.scale(GlobalVar.attaccopiuo, (GlobalVar.gpx, GlobalVar.gpy))
+                attaccopiu = pygame.transform.smoothscale(GlobalVar.attaccopiuo, (GlobalVar.gpx, GlobalVar.gpy))
                 GlobalVar.schermo.blit(attaccopiu, ((GlobalVar.gsx // 32 * 14) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 6))
             if dati[124] > 0:
-                difesapiu = pygame.transform.scale(GlobalVar.difesapiuo, (GlobalVar.gpx, GlobalVar.gpy))
+                difesapiu = pygame.transform.smoothscale(GlobalVar.difesapiuo, (GlobalVar.gpx, GlobalVar.gpy))
                 GlobalVar.schermo.blit(difesapiu, ((GlobalVar.gsx // 32 * 14) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 6))
 
             # vita-status robo
@@ -4172,17 +4202,17 @@ def oggetti(dati, canzone):
                     dati[10] = 0
                 messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, 50)
                 messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 10, 50)
-                robomen = pygame.transform.scale(GlobalVar.roboo, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                robomen = pygame.transform.smoothscale(GlobalVar.roboo, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                 GlobalVar.schermo.blit(robomen, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 8.5))
                 GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11))
                 if dati[122] > 0:
-                    surriscaldato = pygame.transform.scale(GlobalVar.surriscaldatoo, (GlobalVar.gpx, GlobalVar.gpy))
+                    surriscaldato = pygame.transform.smoothscale(GlobalVar.surriscaldatoo, (GlobalVar.gpx, GlobalVar.gpy))
                     GlobalVar.schermo.blit(surriscaldato, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11))
                 if dati[125] > 0:
-                    velocitapiu = pygame.transform.scale(GlobalVar.velocitapiuo, (GlobalVar.gpx, GlobalVar.gpy))
+                    velocitapiu = pygame.transform.smoothscale(GlobalVar.velocitapiuo, (GlobalVar.gpx, GlobalVar.gpy))
                     GlobalVar.schermo.blit(velocitapiu, ((GlobalVar.gsx // 32 * 14) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 11))
                 if dati[126] > 0:
-                    efficienzapiu = pygame.transform.scale(GlobalVar.efficienzapiuo, (GlobalVar.gpx, GlobalVar.gpy))
+                    efficienzapiu = pygame.transform.smoothscale(GlobalVar.efficienzapiuo, (GlobalVar.gpx, GlobalVar.gpy))
                     GlobalVar.schermo.blit(efficienzapiu, ((GlobalVar.gsx // 32 * 14) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 11))
 
             if attacco != 0:
