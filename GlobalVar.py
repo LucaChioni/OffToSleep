@@ -9,7 +9,7 @@ import win32gui, win32con
 # win32gui.ShowWindow(The_program_to_hide, win32con.SW_HIDE)
 
 # i suoni vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
-pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
+pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 # pygame.mixer.init(44100, -16, 1, 512)
 # pygame.mixer.init(22100, -16, 2, 64)
 pygame.init()
@@ -293,6 +293,7 @@ global imgMappa12
 global imgMappa13
 global imgMappa14
 global imgOmbreggiaturaContorniMappaMenu
+global dictionaryImgNemici
 
 def loadImgs():
     global puntatore
@@ -510,6 +511,7 @@ def loadImgs():
     global imgMappa13
     global imgMappa14
     global imgOmbreggiaturaContorniMappaMenu
+    global dictionaryImgNemici
 
     # puntatore
     puntatoreorigi = loadImage("Immagini/Puntatori/Puntatore.png")
@@ -986,6 +988,81 @@ def loadImgs():
     imgOmbreggiaturaContorniMappaMenu = loadImage("Immagini/DecorazioniMenu/OmbreggiaturaContorniMappaMenu.png")
     imgOmbreggiaturaContorniMappaMenu = pygame.transform.scale(imgOmbreggiaturaContorniMappaMenu, (gsx, gsy))
 
+    # img nemici
+    vettoreNomiNemici = ["Orco", "Pipistrello", "TartarugaVerde", "TartarugaMarrone", "Cinghiale", "LupoGrigio", "LupoNero", "LupoBianco", "SerpeVerde", "SerpeArancio", "Scorpione", "RagnoNero", "RagnoRosso", "ServoSpada", "ServoArco", "ServoLancia", "GufoMarrone", "GufoBianco", "Falco", "Aquila", "Struzzo", "Casuario", "RoboLeggero", "RoboVolante", "RoboPesante", "RoboPesanteVolante", "RoboTorre"]
+    dictionaryImgNemici = {}
+    for nomeNemico in vettoreNomiNemici:
+        dictionaryImgPosizioni = {}
+
+        imgW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "w.png")
+        imgW = pygame.transform.smoothscale(imgW, (gpx, gpy))
+        dictionaryImgPosizioni["imgW"] = imgW
+        imgA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "a.png")
+        imgA = pygame.transform.smoothscale(imgA, (gpx, gpy))
+        dictionaryImgPosizioni["imgA"] = imgA
+        imgS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "s.png")
+        imgS = pygame.transform.smoothscale(imgS, (gpx, gpy))
+        dictionaryImgPosizioni["imgS"] = imgS
+        imgD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "d.png")
+        imgD = pygame.transform.smoothscale(imgD, (gpx, gpy))
+        dictionaryImgPosizioni["imgD"] = imgD
+        imgWMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov1.png")
+        imgWMov1 = pygame.transform.smoothscale(imgWMov1, (gpx, gpy))
+        dictionaryImgPosizioni["imgWMov1"] = imgWMov1
+        imgWMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov2.png")
+        imgWMov2 = pygame.transform.smoothscale(imgWMov2, (gpx, gpy))
+        dictionaryImgPosizioni["imgWMov2"] = imgWMov2
+        imgAMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov1.png")
+        imgAMov1 = pygame.transform.smoothscale(imgAMov1, (gpx, gpy))
+        dictionaryImgPosizioni["imgAMov1"] = imgAMov1
+        imgAMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov2.png")
+        imgAMov2 = pygame.transform.smoothscale(imgAMov2, (gpx, gpy))
+        dictionaryImgPosizioni["imgAMov2"] = imgAMov2
+        imgSMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov1.png")
+        imgSMov1 = pygame.transform.smoothscale(imgSMov1, (gpx, gpy))
+        dictionaryImgPosizioni["imgSMov1"] = imgSMov1
+        imgSMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov2.png")
+        imgSMov2 = pygame.transform.smoothscale(imgSMov2, (gpx, gpy))
+        dictionaryImgPosizioni["imgSMov2"] = imgSMov2
+        imgDMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov1.png")
+        imgDMov1 = pygame.transform.smoothscale(imgDMov1, (gpx, gpy))
+        dictionaryImgPosizioni["imgDMov1"] = imgDMov1
+        imgDMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov2.png")
+        imgDMov2 = pygame.transform.smoothscale(imgDMov2, (gpx, gpy))
+        dictionaryImgPosizioni["imgDMov2"] = imgDMov2
+        imgAvvelenamento = loadImage("Immagini/Nemici/NemicoAvvelenato.png")
+        imgAvvelenamento = pygame.transform.smoothscale(imgAvvelenamento, (gpx, gpy))
+        dictionaryImgPosizioni["imgAvvelenamento"] = imgAvvelenamento
+        imgAppiccicato = loadImage("Immagini/Nemici/NemicoAppiccicato.png")
+        imgAppiccicato = pygame.transform.smoothscale(imgAppiccicato, (gpx, gpy))
+        dictionaryImgPosizioni["imgAppiccicato"] = imgAppiccicato
+        imgAttaccoW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wAttacco.png")
+        imgAttaccoW = pygame.transform.smoothscale(imgAttaccoW, (gpx, gpy * 2))
+        dictionaryImgPosizioni["imgAttaccoW"] = imgAttaccoW
+        imgAttaccoA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aAttacco.png")
+        imgAttaccoA = pygame.transform.smoothscale(imgAttaccoA, (gpx * 2, gpy))
+        dictionaryImgPosizioni["imgAttaccoA"] = imgAttaccoA
+        imgAttaccoS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sAttacco.png")
+        imgAttaccoS = pygame.transform.smoothscale(imgAttaccoS, (gpx, gpy * 2))
+        dictionaryImgPosizioni["imgAttaccoS"] = imgAttaccoS
+        imgAttaccoD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dAttacco.png")
+        imgAttaccoD = pygame.transform.smoothscale(imgAttaccoD, (gpx * 2, gpy))
+        dictionaryImgPosizioni["imgAttaccoD"] = imgAttaccoD
+        imgOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/OggettoLanciato.png")
+        imgOggettoLanciato = pygame.transform.smoothscale(imgOggettoLanciato, (gpx, gpy))
+        dictionaryImgPosizioni["imgOggettoLanciato"] = imgOggettoLanciato
+        imgDanneggiamentoOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/DanneggiamentoOggettoLanciato.png")
+        imgDanneggiamentoOggettoLanciato = pygame.transform.smoothscale(imgDanneggiamentoOggettoLanciato, (gpx, gpy))
+        dictionaryImgPosizioni["imgDanneggiamentoOggettoLanciato"] = imgDanneggiamentoOggettoLanciato
+        imgDanneggiamentoRalloNemico = loadImage("Immagini/Nemici/DannoRallo.png")
+        imgDanneggiamentoRalloNemico = pygame.transform.smoothscale(imgDanneggiamentoRalloNemico, (gpx, gpy))
+        dictionaryImgPosizioni["imgDanneggiamentoRalloNemico"] = imgDanneggiamentoRalloNemico
+        imgDanneggiamentoColcoNemico = loadImage("Immagini/Nemici/DannoColco.png")
+        imgDanneggiamentoColcoNemico = pygame.transform.smoothscale(imgDanneggiamentoColcoNemico, (gpx, gpy))
+        dictionaryImgPosizioni["imgDanneggiamentoColcoNemico"] = imgDanneggiamentoColcoNemico
+
+        dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
+
 loadImgs()
 
 # canali audio / volume (0-1)
@@ -996,7 +1073,7 @@ canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundPuntatore = pygame.mixer.Channel(1)
 canaleSoundPassiRallo = pygame.mixer.Channel(2)
 canaleSoundPassiColco = pygame.mixer.Channel(3)
-canaleSoundPassiNemico = pygame.mixer.Channel(4)
+canaleSoundPassiNemiciPersonaggi = pygame.mixer.Channel(4)
 canaleSoundLvUp = pygame.mixer.Channel(5)
 canaleSoundInterazioni = pygame.mixer.Channel(6)
 canaleSoundAttacco = pygame.mixer.Channel(7)
@@ -1005,7 +1082,7 @@ def initVolumeSounds():
     canaleSoundPuntatore.set_volume(volumeEffetti)
     canaleSoundPassiRallo.set_volume(volumeEffetti)
     canaleSoundPassiColco.set_volume(volumeEffetti)
-    canaleSoundPassiNemico.set_volume(volumeEffetti)
+    canaleSoundPassiNemiciPersonaggi.set_volume(volumeEffetti)
     canaleSoundLvUp.set_volume(volumeEffetti)
     canaleSoundInterazioni.set_volume(volumeEffetti)
     canaleSoundAttacco.set_volume(volumeEffetti)
@@ -1065,6 +1142,11 @@ suonoUsoBombaVeleno = pygame.mixer.Sound("Audio/RumoriOggetti/BombaVeleno.wav")
 suonoUsoEsca = pygame.mixer.Sound("Audio/RumoriOggetti/Esca.wav")
 suonoUsoBombaAppiccicosa = pygame.mixer.Sound("Audio/RumoriOggetti/BombaAppiccicosa.wav")
 suonoUsoBombaPotenziata = pygame.mixer.Sound("Audio/RumoriOggetti/BombaPotenziata.wav")
+
+# suoni nemici
+rumoreMovimentoNemiciPersonaggi = pygame.mixer.Sound("Audio/RumoriNemici/MovimentoNemiciPersonaggi.wav")
+rumoreAttaccoNemico = pygame.mixer.Sound("Audio/RumoriNemici/AttaccoVicinoNemico.wav")
+rumoreLancioOggettoNemico = pygame.mixer.Sound("Audio/RumoriNemici/AttaccoLontanoNemico.wav")
 
 # suono mappa
 suonoAperturaMappa = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaMappa.wav")

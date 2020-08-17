@@ -2274,7 +2274,7 @@ def controllaMorteRallo(vitaRallo, inizio):
         GlobalVar.canaleSoundPuntatore.stop()
         GlobalVar.canaleSoundPassiRallo.stop()
         GlobalVar.canaleSoundPassiColco.stop()
-        GlobalVar.canaleSoundPassiNemico.stop()
+        GlobalVar.canaleSoundPassiNemiciPersonaggi.stop()
         GlobalVar.canaleSoundLvUp.stop()
         # GlobalVarG2.canaleSoundInterazioni.stop()
         # GlobalVarG2.canaleSoundAttacco.stop()
@@ -2567,7 +2567,7 @@ def ottieniCondizione(dati, condizione):
     return dati, condizione
 
 
-def dialoga(avanzamentoStoria, personaggio):
+def dialoga(avanzamentoStoria, personaggio, canzone):
     if GlobalVar.canaleSoundPassiRallo.get_busy():
         GlobalVar.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
@@ -2599,7 +2599,12 @@ def dialoga(avanzamentoStoria, personaggio):
     prosegui = True
     fineDialogo = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
     while not fineDialogo:
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+            GlobalVar.canaleSoundCanzone.play(canzone)
+
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
@@ -2774,10 +2779,12 @@ def dialoga(avanzamentoStoria, personaggio):
             numeromessaggioAttuale += 1
             prosegui = False
             pygame.display.update()
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+
     return avanzamentoStoria, oggettoRicevuto, menuMercante
 
 
-def animaOggettoSpecialeRicevuto(oggettoRicevuto):
+def animaOggettoSpecialeRicevuto(oggettoRicevuto, canzone):
     if GlobalVar.canaleSoundPassiRallo.get_busy():
         GlobalVar.canaleSoundPassiRallo.stop()
     if GlobalVar.mouseBloccato:
@@ -2789,6 +2796,8 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     risposta = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
     while not risposta:
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+            GlobalVar.canaleSoundCanzone.play(canzone)
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             pygame.mouse.set_visible(True)

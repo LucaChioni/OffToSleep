@@ -66,7 +66,7 @@ def equip(dati, canzone):
         i += 1
 
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
@@ -1134,7 +1134,7 @@ def sceglicondiz(dati, condizione, canzone):
     scecond = GlobalVar.vetImgCondizioniMenu
 
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
@@ -1727,7 +1727,7 @@ def sceglitecn(dati, tecnica, canzone):
     scetecn = GlobalVar.vetImgTecnicheMenu
 
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
@@ -2359,7 +2359,7 @@ def equiprobo(dati, canzone):
         i += 1
 
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
@@ -3562,7 +3562,7 @@ def oggetti(dati, canzone):
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps

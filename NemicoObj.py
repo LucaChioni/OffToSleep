@@ -52,28 +52,32 @@ class NemicoObj(object):
         surriscaldante = False
         denaro = 0
         difesa = 0
+        avvelenabile = True
         if self.tipo == "Orco":
-            vitaTotale = 3000
-            esp = 10
-            raggioVisivo = GlobalVar.gpx * 4
+            vitaTotale = 20
+            esp = 0
+            raggioVisivo = GlobalVar.gpx * 3
             velocita = -1
-            attacco = 50
+            attacco = 20
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             denaro = random.randint(3, 7)
             difesa = 2
+            avvelenabile = True
         if self.tipo == "Pipistrello":
-            vitaTotale = 20
-            esp = 5
-            raggioVisivo = GlobalVar.gpx * 6
-            velocita = 1
-            attacco = 20
+            vitaTotale = 13
+            esp = 0
+            raggioVisivo = GlobalVar.gpx * 5
+            velocita = 0
+            attacco = 15
             attaccaDaLontano = True
             velenoso = True
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 0
+            avvelenabile = False
+
         if self.tipo == "TartarugaVerde":
             vitaTotale = 20
             esp = 5
@@ -85,6 +89,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 5
+            avvelenabile = True
         if self.tipo == "TartarugaMarrone":
             vitaTotale = 20
             esp = 5
@@ -96,6 +101,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 5
+            avvelenabile = True
         if self.tipo == "Cinghiale":
             vitaTotale = 20
             esp = 5
@@ -107,6 +113,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 5
+            avvelenabile = True
         if self.tipo == "LupoGrigio":
             vitaTotale = 20
             esp = 5
@@ -118,6 +125,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 5
+            avvelenabile = True
         if self.tipo == "LupoNero":
             vitaTotale = 20
             esp = 5
@@ -129,6 +137,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 5
+            avvelenabile = True
         if self.tipo == "LupoBianco":
             vitaTotale = 20
             esp = 5
@@ -140,6 +149,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
         if self.tipo == "SerpeVerde":
             vitaTotale = 20
             esp = 5
@@ -151,6 +161,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
         if self.tipo == "SerpeArancio":
             vitaTotale = 20
             esp = 5
@@ -162,6 +173,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = False
         if self.tipo == "Scorpione":
             vitaTotale = 20
             esp = 5
@@ -173,6 +185,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = False
         if self.tipo == "RagnoNero":
             vitaTotale = 20
             esp = 5
@@ -184,7 +197,20 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
         if self.tipo == "RagnoRosso":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = True
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = False
+        if self.tipo == "ServoSpada":
             vitaTotale = 20
             esp = 5
             raggioVisivo = GlobalVar.gpx * 2
@@ -195,6 +221,31 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
+        if self.tipo == "ServoArco":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = True
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = True
+        if self.tipo == "ServoLancia":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = True
         if self.tipo == "GufoMarrone":
             vitaTotale = 20
             esp = 5
@@ -206,6 +257,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
         if self.tipo == "GufoBianco":
             vitaTotale = 20
             esp = 5
@@ -217,6 +269,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
         if self.tipo == "Falco":
             vitaTotale = 20
             esp = 5
@@ -228,6 +281,7 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
         if self.tipo == "Aquila":
             vitaTotale = 20
             esp = 5
@@ -239,6 +293,91 @@ class NemicoObj(object):
             surriscaldante = False
             denaro = random.randint(0, 3)
             difesa = 1
+            avvelenabile = True
+        if self.tipo == "Struzzo":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = True
+        if self.tipo == "Casuario":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = False
+        if self.tipo == "RoboLeggero":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = True
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = False
+        if self.tipo == "RoboVolante":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = True
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = False
+        if self.tipo == "RoboPesante":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = True
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = False
+        if self.tipo == "RoboPesanteVolante":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = True
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = False
+        if self.tipo == "RoboTorre":
+            vitaTotale = 20
+            esp = 5
+            raggioVisivo = GlobalVar.gpx * 2
+            velocita = -2
+            attacco = 20
+            attaccaDaLontano = True
+            velenoso = False
+            surriscaldante = False
+            denaro = random.randint(0, 3)
+            difesa = 1
+            avvelenabile = False
         self.vita = vitaTotale
         self.vitaTotale = vitaTotale
         self.esp = esp
@@ -250,60 +389,39 @@ class NemicoObj(object):
         self.surriscaldante = surriscaldante
         self.denaro = denaro
         self.difesa = difesa
+        self.avvelenabile = avvelenabile
 
     def caricaImg(self):
-        imgW = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "w.png")
-        self.imgW = pygame.transform.smoothscale(imgW, (GlobalVar.gpx, GlobalVar.gpy))
-        imgA = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "a.png")
-        self.imgA = pygame.transform.smoothscale(imgA, (GlobalVar.gpx, GlobalVar.gpy))
-        imgS = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "s.png")
-        self.imgS = pygame.transform.smoothscale(imgS, (GlobalVar.gpx, GlobalVar.gpy))
-        imgD = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "d.png")
-        self.imgD = pygame.transform.smoothscale(imgD, (GlobalVar.gpx, GlobalVar.gpy))
+        self.imgW = GlobalVar.dictionaryImgNemici[self.tipo]["imgW"]
+        self.imgA = GlobalVar.dictionaryImgNemici[self.tipo]["imgA"]
+        self.imgS = GlobalVar.dictionaryImgNemici[self.tipo]["imgS"]
+        self.imgD = GlobalVar.dictionaryImgNemici[self.tipo]["imgD"]
 
-        imgWMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wMov1.png")
-        self.imgWMov1 = pygame.transform.smoothscale(imgWMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgWMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wMov2.png")
-        self.imgWMov2 = pygame.transform.smoothscale(imgWMov2, (GlobalVar.gpx, GlobalVar.gpy))
-        imgAMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aMov1.png")
-        self.imgAMov1 = pygame.transform.smoothscale(imgAMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgAMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aMov2.png")
-        self.imgAMov2 = pygame.transform.smoothscale(imgAMov2, (GlobalVar.gpx, GlobalVar.gpy))
-        imgSMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sMov1.png")
-        self.imgSMov1 = pygame.transform.smoothscale(imgSMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgSMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sMov2.png")
-        self.imgSMov2 = pygame.transform.smoothscale(imgSMov2, (GlobalVar.gpx, GlobalVar.gpy))
-        imgDMov1 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dMov1.png")
-        self.imgDMov1 = pygame.transform.smoothscale(imgDMov1, (GlobalVar.gpx, GlobalVar.gpy))
-        imgDMov2 = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dMov2.png")
-        self.imgDMov2 = pygame.transform.smoothscale(imgDMov2, (GlobalVar.gpx, GlobalVar.gpy))
+        self.imgWMov1 = GlobalVar.dictionaryImgNemici[self.tipo]["imgWMov1"]
+        self.imgWMov2 = GlobalVar.dictionaryImgNemici[self.tipo]["imgWMov2"]
+        self.imgAMov1 = GlobalVar.dictionaryImgNemici[self.tipo]["imgAMov1"]
+        self.imgAMov2 = GlobalVar.dictionaryImgNemici[self.tipo]["imgAMov2"]
+        self.imgSMov1 = GlobalVar.dictionaryImgNemici[self.tipo]["imgSMov1"]
+        self.imgSMov2 = GlobalVar.dictionaryImgNemici[self.tipo]["imgSMov2"]
+        self.imgDMov1 = GlobalVar.dictionaryImgNemici[self.tipo]["imgDMov1"]
+        self.imgDMov2 = GlobalVar.dictionaryImgNemici[self.tipo]["imgDMov2"]
 
-        imgAvvelenamento = GlobalVar.loadImage("Immagini/Nemici/NemicoAvvelenato.png")
-        self.imgAvvelenamento = pygame.transform.smoothscale(imgAvvelenamento, (GlobalVar.gpx, GlobalVar.gpy))
-        imgAppiccicato = GlobalVar.loadImage("Immagini/Nemici/NemicoAppiccicato.png")
-        self.imgAppiccicato = pygame.transform.smoothscale(imgAppiccicato, (GlobalVar.gpx, GlobalVar.gpy))
+        self.imgAvvelenamento = GlobalVar.dictionaryImgNemici[self.tipo]["imgAvvelenamento"]
+        self.imgAppiccicato = GlobalVar.dictionaryImgNemici[self.tipo]["imgAppiccicato"]
 
-        imgAttaccoW = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "wAttacco.png")
-        self.imgAttaccoW = pygame.transform.smoothscale(imgAttaccoW, (GlobalVar.gpx, GlobalVar.gpy * 2))
-        imgAttaccoA = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "aAttacco.png")
-        self.imgAttaccoA = pygame.transform.smoothscale(imgAttaccoA, (GlobalVar.gpx * 2, GlobalVar.gpy))
-        imgAttaccoS = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "sAttacco.png")
-        self.imgAttaccoS = pygame.transform.smoothscale(imgAttaccoS, (GlobalVar.gpx, GlobalVar.gpy * 2))
-        imgAttaccoD = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "dAttacco.png")
-        self.imgAttaccoD = pygame.transform.smoothscale(imgAttaccoD, (GlobalVar.gpx * 2, GlobalVar.gpy))
+        self.imgAttaccoW = GlobalVar.dictionaryImgNemici[self.tipo]["imgAttaccoW"]
+        self.imgAttaccoA = GlobalVar.dictionaryImgNemici[self.tipo]["imgAttaccoA"]
+        self.imgAttaccoS = GlobalVar.dictionaryImgNemici[self.tipo]["imgAttaccoS"]
+        self.imgAttaccoD = GlobalVar.dictionaryImgNemici[self.tipo]["imgAttaccoD"]
         if self.attaccaDaLontano:
-            imgOggettoLanciato = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "OggettoLanciato.png")
-            self.imgOggettoLanciato = pygame.transform.smoothscale(imgOggettoLanciato, (GlobalVar.gpx, GlobalVar.gpy))
-            imgDanneggiamentoOggettoLanciato = GlobalVar.loadImage("Immagini/Nemici/" + self.tipo + "/" + self.tipo + "DanneggiamentoOggettoLanciato.png")
-            self.imgDanneggiamentoOggettoLanciato = pygame.transform.smoothscale(imgDanneggiamentoOggettoLanciato, (GlobalVar.gpx, GlobalVar.gpy))
+            self.imgOggettoLanciato = GlobalVar.dictionaryImgNemici[self.tipo]["imgOggettoLanciato"]
+            self.imgDanneggiamentoOggettoLanciato = GlobalVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoOggettoLanciato"]
         else:
             self.imgOggettoLanciato = 0
             self.imgDanneggiamentoOggettoLanciato = 0
 
-        imgDanneggiamentoRallo = GlobalVar.loadImage("Immagini/Nemici/DannoRallo.png")
-        self.imgDanneggiamentoRallo = pygame.transform.smoothscale(imgDanneggiamentoRallo, (GlobalVar.gpx, GlobalVar.gpy))
-        imgDanneggiamentoColco = GlobalVar.loadImage("Immagini/Nemici/DannoColco.png")
-        self.imgDanneggiamentoColco = pygame.transform.smoothscale(imgDanneggiamentoColco, (GlobalVar.gpx, GlobalVar.gpy))
+        self.imgDanneggiamentoRallo = GlobalVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoRalloNemico"]
+        self.imgDanneggiamentoColco = GlobalVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoColcoNemico"]
 
     def girati(self, direzione):
         self.imgAttuale = self.imgS

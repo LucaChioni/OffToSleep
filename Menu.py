@@ -4,6 +4,9 @@ from SottoMenuA import *
 
 
 def menu(caricaSalvataggio):
+    GlobalVar.canaleSoundCanzone.stop()
+    canzone = False
+
     # posizione porte e cofanetti nel vettore dati
     porteini = 142
     portefin = 169
@@ -12,7 +15,7 @@ def menu(caricaSalvataggio):
     lunghezzadati = cofanifin + 1
 
     if caricaSalvataggio:
-        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
         return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali
 
     # video
@@ -75,8 +78,9 @@ def menu(caricaSalvataggio):
     c = random.randint(1, 4)
 
     canzone = GlobalVar.c11
+    GlobalVar.canaleSoundCanzone.play(canzone)
     while True:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
@@ -259,17 +263,17 @@ def menu(caricaSalvataggio):
 
                         # carica partita
                         if voceMarcata == 2:
-                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, GlobalVar.c11)
+                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
 
                             # lettura salvataggio
                             if n != -1:
-                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
                                 if dati:
                                     return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali
 
                         # Impostazioni
                         if voceMarcata == 3:
-                            menuImpostazioni(GlobalVar.c11, True)
+                            menuImpostazioni(canzone, True, False)
                             primoFrame = True
 
                         # esci dal gioco
@@ -474,7 +478,7 @@ def menu(caricaSalvataggio):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali):
+def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, canzone):
     sfondostastart = GlobalVar.sfondostax3
     if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
         perssta = GlobalVar.fraMaggioreGrafMenu
@@ -521,9 +525,10 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
     tastop = 0
     tastotempfps = 5
 
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(GlobalVar.c27)
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+            GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
@@ -660,26 +665,26 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     # oggetti
                     if voceMarcata == 1:
-                        dati, attacco = oggetti(dati, GlobalVar.c27)
+                        dati, attacco = oggetti(dati, canzone)
                         carim = True
                     # equip pers
                     if voceMarcata == 2:
-                        dati = equip(dati, GlobalVar.c27)
+                        dati = equip(dati, canzone)
                         carim = True
                     # equip robot
                     if voceMarcata == 3:
-                        dati = equiprobo(dati, GlobalVar.c27)
+                        dati = equiprobo(dati, canzone)
                         carim = True
                     # mappa
                     if voceMarcata == 4:
-                        menuMappa(dati[0], GlobalVar.c27)
+                        menuMappa(dati[0], canzone)
                     # diario
                     if voceMarcata == 5:
-                        menuDiario(dati, GlobalVar.c27)
+                        menuDiario(dati, canzone)
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, GlobalVar.c27)
+                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, canzone)
                         if n != -1 and azioneFatta == 3:
                             salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali)
                         elif n != -1 and azioneFatta == 1:
@@ -687,7 +692,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                             risposta = True
                     # impostazioni
                     if voceMarcata == 7:
-                        menuImpostazioni(GlobalVar.c27, False)
+                        menuImpostazioni(canzone, False, True)
                     # menu principale
                     if voceMarcata == 8:
                         GlobalVar.schermo.blit(puntatoreVecchio, (xp, yp))
@@ -767,7 +772,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
 
             # chiedere conferma per uscire
             if conferma != 0:
-                inizio, risposta = chiediconferma(conferma, GlobalVar.c27)
+                inizio, risposta = chiediconferma(conferma, canzone)
                 conferma = 0
 
             GlobalVar.schermo.fill(GlobalVar.grigioscu)
@@ -849,11 +854,11 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
-    GlobalVar.canaleSoundCanzone.stop()
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
     return dati, inizio, attacco, caricaSalvataggio
 
 
-def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
+def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
     xp = GlobalVar.gpx * 1
     yp = GlobalVar.gpy * 13.8
     puntatore = GlobalVar.puntatore
@@ -899,7 +904,11 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             vettoreOggettiIco.append(sconosciutoOggettoIco)
         oggetton += 1
 
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
     while not risposta:
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+            GlobalVar.canaleSoundCanzone.play(canzone)
+
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -1397,10 +1406,11 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 pygame.display.update()
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
     return dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio
 
 
-def menuMercante(dati):
+def menuMercante(dati, canzone):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     sconosciutoOggetto = pygame.transform.scale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
@@ -1442,9 +1452,10 @@ def menuMercante(dati):
             imgOggetti.append(sconosciutoOggetto)
         i += 1
 
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(GlobalVar.c27)
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+            GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
@@ -2090,7 +2101,7 @@ def menuMercante(dati):
             GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroMercante, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14))
             messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.8, 50)
 
-            GlobalVar.schermo.blit(GlobalVar.mercanteMenu, (GlobalVar.gsx // 32 * (-0.6), GlobalVar.gsy // 18 * 8.5))
+            GlobalVar.schermo.blit(GlobalVar.mercanteMenu, (GlobalVar.gsx // 32 * (-1), GlobalVar.gsy // 18 * 8))
             GlobalVar.schermo.blit(GlobalVar.sfondoDialogoMercante, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4))
             if moneteInsufficienti:
                 messaggio("Non hai abbastanza monete!", GlobalVar.rosso, GlobalVar.gsx // 32 * 2.1, GlobalVar.gsy // 18 * 6.1, 40)
@@ -2328,5 +2339,5 @@ def menuMercante(dati):
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
-    GlobalVar.canaleSoundCanzone.stop()
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
     return dati

@@ -119,7 +119,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         i = i + 4
 
 
-def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, background=False, mostraErrori=True):
+def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, background=False, mostraErrori=True):
     errore = False
     tipoErrore = 0
 
@@ -135,10 +135,15 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
     leggi.close()
 
     # decritta il salvataggio
-    contenutoFile = contenutoFile.decode('base64')
+    datiTotali = [""]
+    try:
+        contenutoFile = contenutoFile.decode('base64')
+        datiTotali = contenutoFile.split("\n")
+    except Exception:
+        errore = True
+        tipoErrore = 2
 
-    datiTotali = contenutoFile.split("\n")
-    if not (len(datiTotali) == 1 and datiTotali[0] == ""):
+    if not errore and not (len(datiTotali) == 1 and datiTotali[0] == ""):
         if len(datiTotali) == 6:
             dati = datiTotali[0].split("_")
             dati.pop(len(dati) - 1)
@@ -284,145 +289,150 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ba
                     i += 8
         else:
             errore = True
-        if errore:
             tipoErrore = 2
-            if mostraErrori:
-                print "Dati corrotti"
-                aggiornaSchermata = True
-                indietro = False
-                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                while not indietro:
-                    xMouse, yMouse = pygame.mouse.get_pos()
-                    deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-                    if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-                        aggiornaSchermata = True
-                        pygame.mouse.set_visible(True)
-                        GlobalVar.mouseVisibile = True
-                    if GlobalVar.mouseVisibile:
-                        if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
-                            if GlobalVar.mouseBloccato:
-                                GlobalVar.configuraCursore(False)
-                        else:
-                            if not GlobalVar.mouseBloccato:
-                                GlobalVar.configuraCursore(True)
-                    for event in pygame.event.get():
-                        sinistroMouseVecchio = sinistroMouse
-                        centraleMouseVecchio = centraleMouse
-                        destroMouseVecchio = destroMouse
-                        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                        rotellaConCentralePremuto = False
-                        if centraleMouseVecchio and centraleMouse:
-                            rotellaConCentralePremuto = True
-                        if not sinistroMouseVecchio and sinistroMouse:
-                            centraleMouse = False
-                            destroMouse = False
-                        elif not centraleMouseVecchio and centraleMouse:
-                            sinistroMouse = False
-                            destroMouse = False
-                        elif not destroMouseVecchio and destroMouse:
-                            sinistroMouse = False
-                            centraleMouse = False
-
-                        if event.type == pygame.QUIT:
-                            pygame.quit()
-                            quit()
-                        if event.type == pygame.KEYDOWN:
-                            aggiornaSchermata = True
-                            if GlobalVar.mouseVisibile:
-                                pygame.mouse.set_visible(False)
-                                GlobalVar.mouseVisibile = False
-                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                            indietro = True
-                        if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                            aggiornaSchermata = True
-                            pygame.mouse.set_visible(True)
-                            GlobalVar.mouseVisibile = True
-                    if aggiornaSchermata:
-                        aggiornaSchermata = False
-                        if background:
-                            GlobalVar.schermo.blit(background, (0, 0))
-                            pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
-                        else:
-                            GlobalVar.schermo.fill(GlobalVar.grigioscu)
-                        GlobalVar.schermo.blit(GlobalVar.robograf4, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
-                        pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
-                        if GlobalVar.mouseVisibile:
-                            messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
-                        else:
-                            messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
-                        messaggio("Slot di memoria danneggiato...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.2, GlobalVar.gsy // 18 * 14, 100)
-                        pygame.display.update()
-    else:
+    elif not errore and len(datiTotali) == 1 and datiTotali[0] == "":
         errore = True
         tipoErrore = 1
-        if mostraErrori:
-            print "Slot vuoto"
-            aggiornaSchermata = True
-            indietro = False
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            while not indietro:
-                xMouse, yMouse = pygame.mouse.get_pos()
-                deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-                if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
+
+    if errore and tipoErrore == 1 and mostraErrori:
+        print "Slot vuoto"
+        aggiornaSchermata = True
+        indietro = False
+        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+        while not indietro:
+            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+                GlobalVar.canaleSoundCanzone.play(canzone)
+            xMouse, yMouse = pygame.mouse.get_pos()
+            deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
+                aggiornaSchermata = True
+                pygame.mouse.set_visible(True)
+                GlobalVar.mouseVisibile = True
+            if GlobalVar.mouseVisibile:
+                if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
+                    if GlobalVar.mouseBloccato:
+                        GlobalVar.configuraCursore(False)
+                else:
+                    if not GlobalVar.mouseBloccato:
+                        GlobalVar.configuraCursore(True)
+            for event in pygame.event.get():
+                sinistroMouseVecchio = sinistroMouse
+                centraleMouseVecchio = centraleMouse
+                destroMouseVecchio = destroMouse
+                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                rotellaConCentralePremuto = False
+                if centraleMouseVecchio and centraleMouse:
+                    rotellaConCentralePremuto = True
+                if not sinistroMouseVecchio and sinistroMouse:
+                    centraleMouse = False
+                    destroMouse = False
+                elif not centraleMouseVecchio and centraleMouse:
+                    sinistroMouse = False
+                    destroMouse = False
+                elif not destroMouseVecchio and destroMouse:
+                    sinistroMouse = False
+                    centraleMouse = False
+
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    aggiornaSchermata = True
+                    if GlobalVar.mouseVisibile:
+                        pygame.mouse.set_visible(False)
+                        GlobalVar.mouseVisibile = False
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                    indietro = True
+                if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
                     aggiornaSchermata = True
                     pygame.mouse.set_visible(True)
                     GlobalVar.mouseVisibile = True
+            if aggiornaSchermata:
+                aggiornaSchermata = False
+                if background:
+                    GlobalVar.schermo.blit(background, (0, 0))
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
+                else:
+                    GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                GlobalVar.schermo.blit(GlobalVar.robograf2, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
                 if GlobalVar.mouseVisibile:
-                    if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
-                    else:
-                        if not GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(True)
-                for event in pygame.event.get():
-                    sinistroMouseVecchio = sinistroMouse
-                    centraleMouseVecchio = centraleMouse
-                    destroMouseVecchio = destroMouse
-                    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                    rotellaConCentralePremuto = False
-                    if centraleMouseVecchio and centraleMouse:
-                        rotellaConCentralePremuto = True
-                    if not sinistroMouseVecchio and sinistroMouse:
-                        centraleMouse = False
-                        destroMouse = False
-                    elif not centraleMouseVecchio and centraleMouse:
-                        sinistroMouse = False
-                        destroMouse = False
-                    elif not destroMouseVecchio and destroMouse:
-                        sinistroMouse = False
-                        centraleMouse = False
+                    messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+                else:
+                    messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
+                messaggio("Slot di memoria vuoto...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 14, 100)
+                pygame.display.update()
+    if errore and tipoErrore == 2 and mostraErrori:
+        print "Dati corrotti"
+        aggiornaSchermata = True
+        indietro = False
+        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+        while not indietro:
+            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+                GlobalVar.canaleSoundCanzone.play(canzone)
+            xMouse, yMouse = pygame.mouse.get_pos()
+            deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
+                aggiornaSchermata = True
+                pygame.mouse.set_visible(True)
+                GlobalVar.mouseVisibile = True
+            if GlobalVar.mouseVisibile:
+                if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
+                    if GlobalVar.mouseBloccato:
+                        GlobalVar.configuraCursore(False)
+                else:
+                    if not GlobalVar.mouseBloccato:
+                        GlobalVar.configuraCursore(True)
+            for event in pygame.event.get():
+                sinistroMouseVecchio = sinistroMouse
+                centraleMouseVecchio = centraleMouse
+                destroMouseVecchio = destroMouse
+                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+                rotellaConCentralePremuto = False
+                if centraleMouseVecchio and centraleMouse:
+                    rotellaConCentralePremuto = True
+                if not sinistroMouseVecchio and sinistroMouse:
+                    centraleMouse = False
+                    destroMouse = False
+                elif not centraleMouseVecchio and centraleMouse:
+                    sinistroMouse = False
+                    destroMouse = False
+                elif not destroMouseVecchio and destroMouse:
+                    sinistroMouse = False
+                    centraleMouse = False
 
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
-                    if event.type == pygame.KEYDOWN:
-                        aggiornaSchermata = True
-                        if GlobalVar.mouseVisibile:
-                            pygame.mouse.set_visible(False)
-                            GlobalVar.mouseVisibile = False
-                    if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                        indietro = True
-                    if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                        aggiornaSchermata = True
-                        pygame.mouse.set_visible(True)
-                        GlobalVar.mouseVisibile = True
-                if aggiornaSchermata:
-                    aggiornaSchermata = False
-                    if background:
-                        GlobalVar.schermo.blit(background, (0, 0))
-                        pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
-                    else:
-                        GlobalVar.schermo.fill(GlobalVar.grigioscu)
-                    GlobalVar.schermo.blit(GlobalVar.robograf2, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
-                    pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    aggiornaSchermata = True
                     if GlobalVar.mouseVisibile:
-                        messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
-                    else:
-                        messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
-                    messaggio("Slot di memoria vuoto...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 14, 100)
-                    pygame.display.update()
+                        pygame.mouse.set_visible(False)
+                        GlobalVar.mouseVisibile = False
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                    indietro = True
+                if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
+                    aggiornaSchermata = True
+                    pygame.mouse.set_visible(True)
+                    GlobalVar.mouseVisibile = True
+            if aggiornaSchermata:
+                aggiornaSchermata = False
+                if background:
+                    GlobalVar.schermo.blit(background, (0, 0))
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
+                else:
+                    GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                GlobalVar.schermo.blit(GlobalVar.robograf4, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
+                if GlobalVar.mouseVisibile:
+                    messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+                else:
+                    messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
+                messaggio("Slot di memoria danneggiato...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.2, GlobalVar.gsy // 18 * 14, 100)
+                pygame.display.update()
+
     if not errore:
         if mostraErrori:
             print "Salvataggio: " + str(n)

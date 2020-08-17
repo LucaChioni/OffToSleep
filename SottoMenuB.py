@@ -240,7 +240,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         if voceMarcata == 1:
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                             if cosa == 1:
-                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, background)
+                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, background)
                                 if dati:
                                     return n, cosa
                                 else:
@@ -402,7 +402,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
             # lettura salvataggi per riconoscerli
             contasalva = 1
             while contasalva <= 3:
-                dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False, False)
+                dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False, False)
                 if errore == 1:
                     if contasalva == 1:
                         messaggio("Slot vuoto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 7.25, GlobalVar.gsy // 18 * 11, 60)
@@ -678,7 +678,7 @@ def chiediconferma(conferma, canzone=False):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def menuImpostazioni(canzone, settaRisoluzione):
+def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
     puntatore = GlobalVar.puntatore
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 5.2
@@ -882,6 +882,8 @@ def menuImpostazioni(canzone, settaRisoluzione):
                         GlobalVar.volumeEffetti = volumeEffettiTemp / 10 * 1.0
                         GlobalVar.volumeCanzoni = volumeCanzoniTemp / 10 * 1.0
                         GlobalVar.initVolumeSounds()
+                        if dimezzaVolumeCanzone:
+                            GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
                         if GlobalVar.gsx != gsxTemp or GlobalVar.gsy != gsyTemp or GlobalVar.schermoIntero != schermoInteroTemp:
                             GlobalVar.schermoIntero = schermoInteroTemp
                             GlobalVar.gsx = gsxTemp
@@ -2073,7 +2075,7 @@ def menuDiario(dati, canzone):
     tastotempfps = 5
 
     while not risposta:
-        if not GlobalVar.canaleSoundCanzone.get_busy():
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
 
         # rallenta per i 30 fps

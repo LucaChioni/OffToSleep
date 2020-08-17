@@ -379,7 +379,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, canzone):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -558,7 +558,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     interagisciConPersonaggio = False
     attaccoConfermato = False
     primoFrame = True
+
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
     while not risposta:
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+            GlobalVar.canaleSoundCanzone.play(canzone)
+
         if xp != xvp or yp != yvp:
             appenaCaricato = False
         xvp = xp
@@ -1417,7 +1422,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 for nemico in listaNemici:
                     if (((abs(nemico.x - xp) <= raggio and abs(nemico.y - yp) <= raggio) and attacco != 1) or ((xp == nemico.x and yp == nemico.y) and attacco == 1)) and infliggidanno:
                         nemicoColpito = nemico
-                        if statom == 1:
+                        if statom == 1 and nemico.avvelenabile:
                             nemico.avvelenato = True
                         if statom == 2:
                             nemico.appiccicato = True
@@ -2238,5 +2243,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             attacco = 0
         pygame.event.pump()
         GlobalVar.clockAttacco.tick(GlobalVar.fpsInquadra)
+    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
 
     return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf

@@ -147,6 +147,8 @@ def gameloop():
 
             # mostri - personaggi
             if dati[1] == 1 and cambiosta:
+                canzone = GlobalVar.c27
+
                 # rumore porte
                 rumoreAperturaPorte = GlobalVar.suonoaperturaporte1
                 rumoreChiusuraPorte = GlobalVar.suonochiusuraporte1
@@ -169,6 +171,8 @@ def gameloop():
                     vry = y
 
             if dati[1] == 2 and cambiosta:
+                canzone = GlobalVar.c11
+
                 # rumore porte
                 rumoreAperturaPorte = GlobalVar.suonoaperturaporte2
                 rumoreChiusuraPorte = GlobalVar.suonochiusuraporte2
@@ -191,20 +195,30 @@ def gameloop():
                     vry = y
 
             if cambiosta:
+                i = GlobalVar.volumeCanzoni
+                while i > 0:
+                    GlobalVar.canaleSoundCanzone.set_volume(i)
+                    i = i - (GlobalVar.volumeCanzoni / 10)
+                    pygame.time.wait(30)
+                GlobalVar.canaleSoundCanzone.stop()
+                GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+                if canzone:
+                    GlobalVar.canaleSoundCanzone.play(canzone)
+
                 nmost, listaNemici, listaPersonaggi, listaNemiciTotali, listaPersonaggiTotali = caricaNemiciNellaStanza(dati[0], dati[1], stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali)
 
                 # stanza
-                imgSfondoStanza = GlobalVar.loadImage("Immagini/Paesaggi/Stanza%ia.png" % dati[1], True)
+                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Stanza" + str(dati[1]) + ".png", True)
                 imgSfondoStanza = pygame.transform.smoothscale(imgSfondoStanza, (GlobalVar.gsx, GlobalVar.gsy))
-                sfondinoa = GlobalVar.loadImage("Immagini/Paesaggi/Sfondino%ia.png" % dati[1], True)
+                sfondinoa = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Sfondino" + str(dati[1]) + "a.png", True)
                 sfondinoa = pygame.transform.smoothscale(sfondinoa, (GlobalVar.gpx, GlobalVar.gpy))
-                sfondinob = GlobalVar.loadImage("Immagini/Paesaggi/Sfondino%ib.png" % dati[1], True)
+                sfondinob = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Sfondino" + str(dati[1]) + "b.png", True)
                 sfondinob = pygame.transform.smoothscale(sfondinob, (GlobalVar.gpx, GlobalVar.gpy))
-                sfondinoc = GlobalVar.loadImage("Immagini/Paesaggi/Sfondino%ic.png" % dati[1], True)
+                sfondinoc = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Sfondino" + str(dati[1]) + "c.png", True)
                 sfondinoc = pygame.transform.smoothscale(sfondinoc, (GlobalVar.gpx, GlobalVar.gpy))
-                portaVert = GlobalVar.loadImage("Immagini/Paesaggi/PortaV%i.png" % dati[1])
+                portaVert = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaV" + str(dati[1]) + ".png")
                 portaVert = pygame.transform.smoothscale(portaVert, (GlobalVar.gpx, GlobalVar.gpy))
-                portaOriz = GlobalVar.loadImage("Immagini/Paesaggi/PortaO%i.png" % dati[1])
+                portaOriz = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaO" + str(dati[1]) + ".png")
                 portaOriz = pygame.transform.smoothscale(portaOriz, (GlobalVar.gpx, GlobalVar.gpy))
 
                 if not inizio:
@@ -515,6 +529,9 @@ def gameloop():
             GlobalVar.canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
+
+        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+            GlobalVar.canaleSoundCanzone.play(canzone)
 
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
@@ -886,7 +903,7 @@ def gameloop():
                             elif npers == 4:
                                 personaggio.girati("w")
                             disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, dati[0])
-                            dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
+                            dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio, canzone)
                             caricaTutto = True
                 if event.key == pygame.K_ESCAPE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
@@ -1199,7 +1216,7 @@ def gameloop():
                     elif npers == 4:
                         personaggio.girati("w")
                     disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, dati[0])
-                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
+                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio, canzone)
                     caricaTutto = True
                 elif inquadratoQualcosa.startswith("movimento"):
                     movimentoPerMouse = True
@@ -1389,13 +1406,13 @@ def gameloop():
             dati[134] = rx
             dati[135] = ry
             if not apriocchio:
-                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali)
+                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, canzone)
                 if caricaSalvataggio:
                     inizio = True
                 if attacco == 0:
                     uscitoDaMenu = 2
             else:
-                dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio)
+                dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone)
                 if caricaSalvataggio:
                     inizio = True
                 else:
@@ -1493,7 +1510,7 @@ def gameloop():
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, dati[0])
-                animaOggettoSpecialeRicevuto(oggettoRicevuto)
+                animaOggettoSpecialeRicevuto(oggettoRicevuto, canzone)
                 oggettoRicevuto = False
                 caricaTutto = True
 
@@ -1523,7 +1540,7 @@ def gameloop():
             attaccoDiRallo = []
             if attacco != 0:
                 GlobalVar.canaleSoundPassiRallo.stop()
-                sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0])
+                sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], canzone)
                 tastop = 0
                 # tolgo una freccia se uso l'attacco a distanza
                 if attaccoADistanza:
@@ -1696,12 +1713,12 @@ def gameloop():
                             personaggio.girati("w")
                         # aggiorno lo GlobalVarG2.schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
                         disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, dati[0])
-                        dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
+                        dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio, canzone)
                         caricaTutto = True
                 interagisciConPersonaggio = False
             # menu mercante
             if visualizzaMenuMercante:
-                dati = menuMercante(dati)
+                dati = menuMercante(dati, canzone)
                 visualizzaMenuMercante = False
                 uscitoDaMenu = 1
             # apertura cofanetti
@@ -2009,7 +2026,7 @@ def gameloop():
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, dati[0])
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, movimentoPerMouse)
+                primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, movimentoPerMouse, canzone)
             if not carim:
                 pvtot = getVitaTotRallo(dati[4], dati[129])
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu, dati[0])

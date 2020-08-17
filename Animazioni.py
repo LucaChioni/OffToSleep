@@ -130,25 +130,26 @@ def animaAttaccoRallo(avanzamentoStoria, sposta, x, y, npers, pers, arma, scudo,
 
 
 def animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, avvele, difesa, animazioneRallo, nemicoAttaccante, fineanimaz):
-    if nemicoAttaccante and nemicoAttaccante.ralloParato and fineanimaz == 10:
+    if nemicoAttaccante and nemicoAttaccante.ralloParato and fineanimaz == 4:
+        GlobalVar.canaleSoundAttacco.stop()
         GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreParata)
     if fineanimaz != 0 and (difesa != 0 or (nemicoAttaccante and nemicoAttaccante.ralloParato)):
-            animazioneRallo = True
-            GlobalVar.schermo.blit(arcoS, (x, y))
-            GlobalVar.schermo.blit(faretraS, (x, y))
-            GlobalVar.schermo.blit(GlobalVar.perss, (x, y))
-            if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armaturaS, (x, y))
-            GlobalVar.schermo.blit(collanaS, (x, y))
-            GlobalVar.schermo.blit(GlobalVar.persmbDifesa, (x, y))
-            GlobalVar.schermo.blit(armaS, (x, y))
-            GlobalVar.schermo.blit(guantiDifesa, (x, y))
-            GlobalVar.schermo.blit(scudoDifesa, (x, y))
+        animazioneRallo = True
+        GlobalVar.schermo.blit(arcoS, (x, y))
+        GlobalVar.schermo.blit(faretraS, (x, y))
+        GlobalVar.schermo.blit(GlobalVar.perss, (x, y))
+        if avvele:
+            GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
+        GlobalVar.schermo.blit(armaturaS, (x, y))
+        GlobalVar.schermo.blit(collanaS, (x, y))
+        GlobalVar.schermo.blit(GlobalVar.persmbDifesa, (x, y))
+        GlobalVar.schermo.blit(armaS, (x, y))
+        GlobalVar.schermo.blit(guantiDifesa, (x, y))
+        GlobalVar.schermo.blit(scudoDifesa, (x, y))
     return animazioneRallo
 
 
-def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, carim, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, fineanimaz):
+def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, carim, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, canzone, fineanimaz):
     if aumentoliv != 0 and not carim:
         liv -= aumentoliv
         animazioneRallo = True
@@ -190,6 +191,8 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
             risposta = False
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
             while not risposta:
+                if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+                    GlobalVar.canaleSoundCanzone.play(canzone)
                 deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
                 if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                     pygame.mouse.set_visible(True)
@@ -218,7 +221,6 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
                     if aumentoliv != 0 and ((event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto)):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                         risposta = True
-                        print aumentoliv
                         aumentoliv -= 1
                     if event.type == pygame.KEYDOWN:
                         if GlobalVar.mouseVisibile:
@@ -441,6 +443,8 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
     if not cambiosta:
         for nemico in listaNemici:
             if nemico.animaSpostamento and not nemico.morto and (nemico.x != nemico.vx or nemico.y != nemico.vy):
+                if not GlobalVar.canaleSoundPassiNemiciPersonaggi.get_busy() and fineanimaz > 6:
+                    GlobalVar.canaleSoundPassiNemiciPersonaggi.play(GlobalVar.rumoreMovimentoNemiciPersonaggi)
                 nemico.animazioneFatta = True
                 animazioneNemici = True
                 # rumorecamminataNemico.play()
@@ -505,8 +509,13 @@ def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz):
             if fineanimaz == 1:
                 nemicoAttaccante.animazioneFatta = True
             animazioneNemici = True
-            # if fineanimaz == 10 and not GlobalVarG2.canaleSoundAttacco.get_busy():
-            #     GlobalVarG2.canaleSoundAttacco.play(rumoreattacco)
+            if fineanimaz == 10:
+                if nemicoAttaccante.attaccaDaLontano:
+                    GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreLancioOggettoNemico)
+                else:
+                    GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreAttaccoNemico)
+            if fineanimaz == 5 and nemicoAttaccante.attaccaDaLontano:
+                GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreAttaccoNemico)
             if nemicoAttaccante.direzione == "w":
                 GlobalVar.schermo.blit(nemicoAttaccante.imgAttaccoW, (nemicoAttaccante.x, nemicoAttaccante.y - GlobalVar.gpy))
             if nemicoAttaccante.direzione == "a":
@@ -1269,7 +1278,8 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
             if personaggio.inCasellaVista and personaggio.animaSpostamento and (personaggio.x != personaggio.vx or personaggio.y != personaggio.vy):
                 personaggio.animazioneFatta = True
                 animazionePersonaggi = True
-                # rumorecamminataPersonaggi.play()
+                if not GlobalVar.canaleSoundPassiNemiciPersonaggi.get_busy() and fineanimaz > 6:
+                    GlobalVar.canaleSoundPassiNemiciPersonaggi.play(GlobalVar.rumoreMovimentoNemiciPersonaggi)
                 if personaggio.direzione == "d":
                     if 5 < fineanimaz <= 10:
                         GlobalVar.schermo.blit(personaggio.imgDMov1, (personaggio.x - (GlobalVar.gpx * fineanimaz // 10), personaggio.y))
@@ -1293,7 +1303,7 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
     return animazionePersonaggi
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, movimentoPerMouse):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, movimentoPerMouse, canzone):
     schermo_prima_delle_animazioni = GlobalVar.schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
@@ -1432,7 +1442,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "aumentaLv" in azioniDaEseguire:
                 # animazione aumento di livello
-                animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse = animaLvUp(dati[0], x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, fineanimaz)
+                animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse = animaLvUp(dati[0], x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, carim, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, canzone, fineanimaz)
 
             if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo
@@ -1535,6 +1545,8 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         risposta = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not risposta:
+            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+                GlobalVar.canaleSoundCanzone.play(canzone)
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                 pygame.mouse.set_visible(True)
@@ -1577,6 +1589,8 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         risposta = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not risposta:
+            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
+                GlobalVar.canaleSoundCanzone.play(canzone)
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                 pygame.mouse.set_visible(True)
