@@ -3001,8 +3001,6 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     tastoTrovato = True
                     fineDialogo = True
-                    if (personaggio.nome == "Tutorial" or personaggio.nome == "Nessuno") and personaggio.avanzaStoria:
-                        avanzamentoStoria += 1
                 if event.key == pygame.K_w and not tastoTrovato and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                     tastoTrovato = True
                     puntatoreSpostato = True
@@ -3036,8 +3034,6 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                 tastoTrovato = True
                 fineDialogo = True
-                if (personaggio.nome == "Tutorial" or personaggio.nome == "Nessuno") and personaggio.avanzaStoria:
-                    avanzamentoStoria += 1
             elif (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
                 aggiornaInterfacciaPerMouse = False
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
