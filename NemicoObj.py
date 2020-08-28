@@ -62,19 +62,19 @@ class NemicoObj(object):
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
-            denaro = random.randint(3, 7)
+            denaro = 0
             difesa = 2
             avvelenabile = True
         if self.tipo == "Pipistrello":
             vitaTotale = 13
             esp = 0
-            raggioVisivo = GlobalVar.gpx * 5
+            raggioVisivo = GlobalVar.gpx * 4
             velocita = 0
             attacco = 15
             attaccaDaLontano = True
             velenoso = True
             surriscaldante = False
-            denaro = random.randint(0, 3)
+            denaro = 0
             difesa = 0
             avvelenabile = False
 
@@ -444,10 +444,10 @@ class NemicoObj(object):
         if self.vita < 0:
             self.vita = 0
 
-    def aggiornaVista(self, x, y, rx, ry, stanza, porte, cofanetti, dati):
+    def aggiornaVista(self, x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, dati):
         vistoRallo = False
         vistoRob = False
-        caseattactot = trovacasattaccabili(self.x, self.y, stanza, porte, cofanetti, self.raggioVisivo)
+        caseattactot = trovacasattaccabili(self.x, self.y, stanza, porte, cofanetti, listaPersonaggi, self.raggioVisivo)
         if abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(caseattactot):
@@ -456,6 +456,8 @@ class NemicoObj(object):
                         vistoRallo = False
                     else:
                         vistoRallo = True
+                        self.xPosizioneUltimoBersaglio = x
+                        self.yPosizioneUltimoBersaglio = y
                     break
                 j = j + 3
         if abs(rx - self.x) <= self.raggioVisivo and abs(ry - self.y) <= self.raggioVisivo and dati[10] > 0:
@@ -466,6 +468,8 @@ class NemicoObj(object):
                         vistoRob = False
                     else:
                         vistoRob = True
+                        self.xPosizioneUltimoBersaglio = rx
+                        self.yPosizioneUltimoBersaglio = ry
                     break
                 j = j + 3
         if vistoRallo or vistoRob:
@@ -491,7 +495,7 @@ class NemicoObj(object):
             elif self.velocita < 0:
                 self.mosseRimaste = self.mosseRimaste - 1 + self.velocita
 
-    def settaObbiettivo(self, x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo):
+    def settaObbiettivo(self, x, y, rx, ry, dati, stanza, porte, cofanetti, listaPersonaggi, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo):
         vistoRallo = False
         vistoRob = False
         vistoesca = False
@@ -500,7 +504,7 @@ class NemicoObj(object):
         xDenaro = 0
         yDenaro = 0
 
-        caseattactot = trovacasattaccabili(self.x, self.y, stanza, porte, cofanetti, self.raggioVisivo)
+        caseattactot = trovacasattaccabili(self.x, self.y, stanza, porte, cofanetti, listaPersonaggi, self.raggioVisivo)
 
         distminx = 0
         distminy = 0

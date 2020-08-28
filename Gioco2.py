@@ -12,6 +12,9 @@ def gameloop():
     inizio = True
     while True:
         if inizio:
+            impossibileAprirePorta = False
+            canzoneCambiata = False
+            canzone = False
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
             movimentoPerMouse = False
             stanzaCambiata = False
@@ -36,7 +39,6 @@ def gameloop():
             apriocchio = False
             sposta = False
             nmost = 0
-            agg = 0
             tastop = 0
             startf = False
             aumentoliv = 0
@@ -53,7 +55,7 @@ def gameloop():
             obbiettivoCasualeColco = False
             dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali = menu(caricaSalvataggio)
             # controlla se devi cambiare personaggio giocabile
-            if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
+            if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 personaggioDaUsare = "FratelloMaggiore"
                 cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
@@ -115,16 +117,17 @@ def gameloop():
         # caricare gli oggetti
         if carim:
             # aggiorno le img del personaggio giocabile
-            if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
+            if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 personaggioDaUsare = "FratelloMaggiore"
             else:
                 personaggioDaUsare = "Sara"
             if personaggioDaUsare != personaggioUsato:
                 cambiaProtagonista(personaggioDaUsare)
                 personaggioUsato = personaggioDaUsare
-                agg = 3
+                npers = 4
 
             if cambiosta:
+                movimentoPerMouse = False
                 sprites = pygame.sprite.Group(Fade(0))
                 schermoFadeToBlack = GlobalVar.schermo.copy()
                 i = 0
@@ -136,89 +139,53 @@ def gameloop():
                     GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
                     i += 1
 
-            if pers == GlobalVar.persw:
-                agg = 1
-            if pers == GlobalVar.persa:
-                agg = 2
-            if pers == GlobalVar.perss:
-                agg = 3
-            if pers == GlobalVar.persd:
-                agg = 4
+                canzoneCambiata = False
+                # mi posiziono e setto canzone e rumore porte
+                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone = settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata,dati[1], stanzaVecchia, canzone, inizio)
+                vx = x
+                vy = y
+                rx = x
+                ry = y
+                vrx = x
+                vry = y
 
-            # mostri - personaggi
-            if dati[1] == 1 and cambiosta:
-                canzone = GlobalVar.c27
+                # npers: 1=d, 2=a, 3=w, 4=s
+                # nrob: 1=d, 2=a, 3=s, 4=w
+                if npers == 1:
+                    nrob = 1
+                if npers == 2:
+                    nrob = 2
+                if npers == 3:
+                    nrob = 4
+                if npers == 4:
+                    nrob = 3
 
-                # rumore porte
-                rumoreAperturaPorte = GlobalVar.suonoaperturaporte1
-                rumoreChiusuraPorte = GlobalVar.suonochiusuraporte1
+                if canzoneCambiata:
+                    i = GlobalVar.volumeCanzoni
+                    while i > 0:
+                        GlobalVar.canaleSoundCanzone.set_volume(i)
+                        i = i - (GlobalVar.volumeCanzoni / 10)
+                        pygame.time.wait(30)
+                    GlobalVar.canaleSoundCanzone.stop()
+                    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+                    if canzone:
+                        GlobalVar.canaleSoundCanzone.play(canzone)
 
-                # posizione personaggio e robot al cambio stanza
-                if not inizio:
-                    if stanzaVecchia == 2:
-                        npers = 4
-                        nrob = 3
-                        x = GlobalVar.gsx // 32 * 6
-                        y = GlobalVar.gsy // 18 * 2
-                        pers = GlobalVar.perss
-                        robot = GlobalVar.robos
-                        agg = 3
-                    vx = x
-                    vy = y
-                    rx = x
-                    ry = y
-                    vrx = x
-                    vry = y
-
-            if dati[1] == 2 and cambiosta:
-                canzone = GlobalVar.c11
-
-                # rumore porte
-                rumoreAperturaPorte = GlobalVar.suonoaperturaporte2
-                rumoreChiusuraPorte = GlobalVar.suonochiusuraporte2
-
-                # posizione personaggio e robot al cambio stanza
-                if not inizio:
-                    if stanzaVecchia == 1:
-                        npers = 4
-                        nrob = 3
-                        x = GlobalVar.gsx // 32 * 6
-                        y = GlobalVar.gsy // 18 * 2
-                        pers = GlobalVar.perss
-                        robot = GlobalVar.robos
-                        agg = 3
-                    vx = x
-                    vy = y
-                    rx = x
-                    ry = y
-                    vrx = x
-                    vry = y
-
-            if cambiosta:
-                i = GlobalVar.volumeCanzoni
-                while i > 0:
-                    GlobalVar.canaleSoundCanzone.set_volume(i)
-                    i = i - (GlobalVar.volumeCanzoni / 10)
-                    pygame.time.wait(30)
-                GlobalVar.canaleSoundCanzone.stop()
-                GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-                if canzone:
-                    GlobalVar.canaleSoundCanzone.play(canzone)
-
-                nmost, listaNemici, listaPersonaggi, listaNemiciTotali, listaPersonaggiTotali = caricaNemiciNellaStanza(dati[0], dati[1], stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali)
+                # carico nemici e personaggi nella stanza
+                nmost, listaNemici, listaPersonaggi, listaNemiciTotali, listaPersonaggiTotali = caricaNemiciEPersonaggi(dati[0], dati[1], stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali)
 
                 # stanza
-                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Stanza" + str(dati[1]) + ".png", True)
+                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Stanza.png", True)
                 imgSfondoStanza = pygame.transform.smoothscale(imgSfondoStanza, (GlobalVar.gsx, GlobalVar.gsy))
-                sfondinoa = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Sfondino" + str(dati[1]) + "a.png", True)
+                sfondinoa = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/SfondinoA.png", True)
                 sfondinoa = pygame.transform.smoothscale(sfondinoa, (GlobalVar.gpx, GlobalVar.gpy))
-                sfondinob = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Sfondino" + str(dati[1]) + "b.png", True)
+                sfondinob = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/SfondinoB.png", True)
                 sfondinob = pygame.transform.smoothscale(sfondinob, (GlobalVar.gpx, GlobalVar.gpy))
-                sfondinoc = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Sfondino" + str(dati[1]) + "c.png", True)
+                sfondinoc = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/SfondinoC.png", True)
                 sfondinoc = pygame.transform.smoothscale(sfondinoc, (GlobalVar.gpx, GlobalVar.gpy))
-                portaVert = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaV" + str(dati[1]) + ".png")
+                portaVert = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png")
                 portaVert = pygame.transform.smoothscale(portaVert, (GlobalVar.gpx, GlobalVar.gpy))
-                portaOriz = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaO" + str(dati[1]) + ".png")
+                portaOriz = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png")
                 portaOriz = pygame.transform.smoothscale(portaOriz, (GlobalVar.gpx, GlobalVar.gpy))
 
                 if not inizio:
@@ -275,9 +242,9 @@ def gameloop():
                         m = m + 1
                     n = n + 1
                 # scoprire caselle viste
-                casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste, False)
+                casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste, False)
                 casevistePorteIncluse = casevistePorteIncluse[:]
-                caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
+                caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste)
 
                 if not inizio:
                     # eliminare tutte le esche
@@ -423,7 +390,8 @@ def gameloop():
                 armrobs = pygame.transform.smoothscale(armrobs, (GlobalVar.gpx, GlobalVar.gpy))
                 armrobd = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%id.png" % dati[9])
                 armrobd = pygame.transform.smoothscale(armrobd, (GlobalVar.gpx, GlobalVar.gpy))
-            if agg == 1:
+            if npers == 3:
+                pers = GlobalVar.persw
                 arma = armaw
                 armaMov1 = armawMov1
                 armaMov2 = armawMov2
@@ -438,7 +406,8 @@ def gameloop():
                 guantiMov2 = guantiwMov2
                 guantiAttacco = guantiwAttacco
                 collana = collanaw
-            if agg == 2:
+            if npers == 2:
+                pers = GlobalVar.persa
                 arma = armaa
                 armaMov1 = armaaMov1
                 armaMov2 = armaaMov2
@@ -453,7 +422,8 @@ def gameloop():
                 guantiMov2 = guantiaMov2
                 guantiAttacco = guantiaAttacco
                 collana = collanaa
-            if agg == 3:
+            if npers == 4:
+                pers = GlobalVar.perss
                 arma = armas
                 armaMov1 = armasMov1
                 armaMov2 = armasMov2
@@ -468,7 +438,8 @@ def gameloop():
                 guantiMov2 = guantisMov2
                 guantiAttacco = guantisAttacco
                 collana = collanas
-            if agg == 4:
+            if npers == 1:
+                pers = GlobalVar.persd
                 arma = armad
                 armaMov1 = armadMov1
                 armaMov2 = armadMov2
@@ -545,7 +516,7 @@ def gameloop():
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco)) and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"])) and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 4:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -557,7 +528,7 @@ def gameloop():
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and 0 <= yMouse <= GlobalVar.gsy // 18 * 1.5 and GlobalVar.gsx // 32 * 27.8 < xMouse <= GlobalVar.gsx // 32 * 30.2:
+            elif dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and 0 <= yMouse <= GlobalVar.gsy // 18 * 1.5 and GlobalVar.gsx // 32 * 27.8 < xMouse <= GlobalVar.gsx // 32 * 30.2:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
@@ -846,27 +817,27 @@ def gameloop():
                     # apertura porte
                     k = 0
                     while k < len(porte):
-                        if porte[k] == dati[1] and ((porte[k + 1] == x + GlobalVar.gpx and porte[k + 2] == y and npers == 1) or (
-                                porte[k + 1] == x - GlobalVar.gpx and porte[k + 2] == y and npers == 2) or (
-                                                            porte[k + 1] == x and porte[
-                                                        k + 2] == y + GlobalVar.gpy and npers == 4) or (
-                                                            porte[k + 1] == x and porte[
-                                                        k + 2] == y - GlobalVar.gpy and npers == 3)) and not porte[k + 3]:
-                            sposta = True
-                            GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
-                            porte[k + 3] = True
-                            # scoprire caselle viste
-                            casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste, False)
-                            casevistePorteIncluse = casevistePorteIncluse[:]
-                            caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
-                            caricaTutto = True
-                            # aggiornare vettore tutteporte
-                            j = 0
-                            while j < len(tutteporte):
-                                if tutteporte[j] == porte[k] and tutteporte[j + 1] == porte[k + 1] and tutteporte[
-                                    j + 2] == porte[k + 2]:
-                                    tutteporte[j + 3] = True
-                                j = j + 4
+                        if porte[k] == dati[1] and not porte[k + 3] and ((porte[k + 1] == x + GlobalVar.gpx and porte[k + 2] == y and npers == 1) or (porte[k + 1] == x - GlobalVar.gpx and porte[k + 2] == y and npers == 2) or (porte[k + 1] == x and porte[k + 2] == y + GlobalVar.gpy and npers == 4) or (porte[k + 1] == x and porte[k + 2] == y - GlobalVar.gpy and npers == 3)):
+                            if possibileAprirePorta(dati[1], porte[k + 1], porte[k + 2], dati[0]):
+                                sposta = True
+                                GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
+                                porte[k + 3] = True
+                                # scoprire caselle viste
+                                casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste, False)
+                                casevistePorteIncluse = casevistePorteIncluse[:]
+                                caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste)
+                                caricaTutto = True
+                                # aggiornare vettore tutteporte
+                                j = 0
+                                while j < len(tutteporte):
+                                    if tutteporte[j] == porte[k] and tutteporte[j + 1] == porte[k + 1] and tutteporte[j + 2] == porte[k + 2]:
+                                        tutteporte[j + 3] = True
+                                        break
+                                    j = j + 4
+                            else:
+                                caricaTutto = True
+                                impossibileAprirePorta = True
+                            break
                         k = k + 4
                     # apertura cofanetti
                     i = 0
@@ -879,7 +850,7 @@ def gameloop():
                         cofanetti[i + 3]:
                             GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
                             sposta = True
-                            dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
+                            dati, tesoro, dati[0] = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
                             cofanetti[i + 3] = True
                             caricaTutto = True
                             # aggiornare vettore tutticofanetti
@@ -953,20 +924,25 @@ def gameloop():
                     movimentoPerMouse = False
                     inquadratoQualcosaList = inquadratoQualcosa.split(":")
                     posizPortaInVettore = int(inquadratoQualcosaList[1])
-                    sposta = True
-                    GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
-                    porte[posizPortaInVettore + 3] = True
-                    # scoprire caselle viste
-                    casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste, False)
-                    casevistePorteIncluse = casevistePorteIncluse[:]
-                    caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
-                    caricaTutto = True
-                    # aggiornare vettore tutteporte
-                    j = 0
-                    while j < len(tutteporte):
-                        if tutteporte[j] == porte[posizPortaInVettore] and tutteporte[j + 1] == porte[posizPortaInVettore + 1] and tutteporte[j + 2] == porte[posizPortaInVettore + 2]:
-                            tutteporte[j + 3] = True
-                        j += 4
+                    if possibileAprirePorta(dati[1], porte[posizPortaInVettore + 1], porte[posizPortaInVettore + 2], dati[0]):
+                        sposta = True
+                        GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
+                        porte[posizPortaInVettore + 3] = True
+                        # scoprire caselle viste
+                        casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste, False)
+                        casevistePorteIncluse = casevistePorteIncluse[:]
+                        caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste)
+                        caricaTutto = True
+                        # aggiornare vettore tutteporte
+                        j = 0
+                        while j < len(tutteporte):
+                            if tutteporte[j] == porte[posizPortaInVettore] and tutteporte[j + 1] == porte[posizPortaInVettore + 1] and tutteporte[j + 2] == porte[posizPortaInVettore + 2]:
+                                tutteporte[j + 3] = True
+                                break
+                            j += 4
+                    else:
+                        impossibileAprirePorta = True
+                        caricaTutto = True
                     # giro il pers verso la porta
                     if porte[posizPortaInVettore + 1] == x + GlobalVar.gpx and porte[posizPortaInVettore + 2] == y:
                         npers = 1
@@ -1046,7 +1022,7 @@ def gameloop():
                     posizCofanettoInVettore = int(inquadratoQualcosaList[1])
                     sposta = True
                     GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
-                    dati, tesoro = aperturacofanetto(cofanetti[posizCofanettoInVettore], cofanetti[posizCofanettoInVettore + 1], cofanetti[posizCofanettoInVettore + 2], dati)
+                    dati, tesoro, dati[0] = aperturacofanetto(cofanetti[posizCofanettoInVettore], cofanetti[posizCofanettoInVettore + 1], cofanetti[posizCofanettoInVettore + 2], dati)
                     cofanetti[posizCofanettoInVettore + 3] = True
                     caricaTutto = True
                     # aggiornare vettore tutticofanetti
@@ -1274,7 +1250,7 @@ def gameloop():
                 nx = 0
                 ny = 0
             else:
-                percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, dati[1], porte, cofanetti, vetNemiciSoloConXeY, False)
+                percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, dati[1], porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY, False)
                 if percorsoTrovato:
                     if len(percorsoTrovato) >= 4:
                         if percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y:
@@ -1520,7 +1496,7 @@ def gameloop():
                 vy = y
                 sposta = True
                 stanzaVecchia = dati[1]
-                x, y, dati[1], carim, cambiosta = muri_porte(x, y, nx, ny, dati[1], carim, False, False, porte, cofanetti)
+                x, y, dati[1], carim, cambiosta = muri_porte(x, y, nx, ny, dati[1], carim, False, False, porte, cofanetti, listaPersonaggi)
 
                 sovrapposto = False
                 for nemico in listaNemici:
@@ -1542,6 +1518,12 @@ def gameloop():
                 GlobalVar.canaleSoundPassiRallo.stop()
                 sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], canzone)
                 tastop = 0
+                # cancello apertura porta se non si può aprire
+                if apriChiudiPorta[0] and not possibileAprirePorta(dati[1], apriChiudiPorta[1], apriChiudiPorta[2], dati[0]):
+                    apriChiudiPorta = [False, 0, 0]
+                    caricaTutto = True
+                    sposta = False
+                    impossibileAprirePorta = True
                 # tolgo una freccia se uso l'attacco a distanza
                 if attaccoADistanza:
                     dati[132] -= 1
@@ -1646,7 +1628,7 @@ def gameloop():
                 dati[124] = dati[124] - 1
             # veleno
             if dati[121] and sposta:
-                dati[5] = dati[5] - 5
+                dati[5] = dati[5] - 2
                 if dati[5] < 0:
                     dati[5] = 0
             # effetto collana rigenerante
@@ -1666,15 +1648,17 @@ def gameloop():
                             GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
                         # scoprire caselle viste
-                        casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste, False)
+                        casevistePorteIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste, False)
                         casevistePorteIncluse = casevistePorteIncluse[:]
-                        caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
+                        caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, caseviste)
                         # aggiornare vettore tutteporte
                         j = 0
                         while j < len(tutteporte):
                             if tutteporte[j] == porte[k] and tutteporte[j + 1] == porte[k + 1] and tutteporte[j + 2] == porte[k + 2]:
                                 tutteporte[j + 3] = porte[k + 3]
+                                break
                             j = j + 4
+                        break
                     k = k + 4
                 apriChiudiPorta = [False, 0, 0]
                 # controllo se devo deselezionare il nemico/esca inquadrato
@@ -1727,7 +1711,7 @@ def gameloop():
                 while i < len(cofanetti):
                     if cofanetti[i] == dati[1] and cofanetti[i + 1] == apriCofanetto[1] and cofanetti[i + 2] == apriCofanetto[2] and not cofanetti[i + 3]:
                         GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
-                        dati, tesoro = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
+                        dati, tesoro, dati[0] = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
                         cofanetti[i + 3] = True
                         # aggiornare vettore tutticofanetti
                         j = 0
@@ -1746,6 +1730,17 @@ def gameloop():
                 rx = xProv
                 ry = yProv
                 spingiColco = False
+
+            # impedisce di andare avanti quando si vuole andare in una zona non ancora sbloccata
+            if cambiosta and nonPuoiProcedere(dati[0], x, y, stanzaVecchia, dati[1], canzone):
+                cambiosta = False
+                dati[1] = stanzaVecchia
+                x = vx
+                y = vy
+                sposta = False
+                caricaTutto = True
+                movimentoPerMouse = False
+                tastop = 0
 
             # esche prima del turno
             eschePrimaDelTurno = []
@@ -1806,23 +1801,23 @@ def gameloop():
                 i += 4
 
             # movimento-azioni robo
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and rx == GlobalVar.gsx and ry == GlobalVar.gsy:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and rx == GlobalVar.gsx and ry == GlobalVar.gsy:
                 rx = x
                 ry = y
                 vrx = rx
                 vry = ry
             azioneRobEseguita = False
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and dati[122] > 0:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and dati[122] > 0:
                 # se surriscaldato toglie vel+ e efficienza
                 dati[125] = 0
                 dati[126] = 0
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and sposta and mosseRimasteRob == 0 and not morterob:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and sposta and mosseRimasteRob == 0 and not morterob:
                 if dati[125] > 0:
                     mosseRimasteRob = 2
                 else:
                     mosseRimasteRob = 1
             # effetto di surriscalda / raffreddamento / auto-ricarica / auto-ricarica+
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and sposta:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and sposta:
                 # surriscalda
                 if dati[122] > 0:
                     dati[122] = dati[122] - 1
@@ -1863,7 +1858,7 @@ def gameloop():
             # attaccoDiColco [obbiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perchè deve rimanere per più turni)]
             attaccoDiColco = []
             tecnicaUsata = False
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and mosseRimasteRob > 0 and not morterob and not cambiosta:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and mosseRimasteRob > 0 and not morterob and not cambiosta:
                 vrx = rx
                 vry = ry
 
@@ -1905,12 +1900,12 @@ def gameloop():
                     if nrob == 4:
                         robot = GlobalVar.robow
                         armrob = armrobw
-            elif dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and sposta and mosseRimasteRob < 0 and not morterob:
+            elif dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and sposta and mosseRimasteRob < 0 and not morterob:
                 mosseRimasteRob += 1
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and morterob:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and morterob:
                 robot = GlobalVar.robomo
                 armrob = GlobalVar.armrobmo
-            if dati[0] < GlobalVar.avanzamentoStoriaIncontroColco:
+            if dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                 rx = GlobalVar.gsx
                 ry = GlobalVar.gsy
                 vrx = rx
@@ -1936,7 +1931,7 @@ def gameloop():
                         i += 3
                     if nemico.vita > 0 and incasevista:
                         # trovo l'obbiettivo
-                        nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo = nemico.settaObbiettivo(x, y, rx, ry, dati, stanza, porte, cofanetti, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
+                        nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo = nemico.settaObbiettivo(x, y, rx, ry, dati, stanza, porte, cofanetti, listaPersonaggi, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
                         if sposta and nemico.mosseRimaste == 0:
                             nemico.resettaMosseRimaste()
                         if nemico.mosseRimaste > 0:
@@ -1963,6 +1958,11 @@ def gameloop():
                                 nemico.x = nemico.vx
                                 nemico.y = nemico.vy
                                 nemico.animaSpostamento = False
+                            if nemico.animaSpostamento:
+                                if nemico.numeroMovimento < len(nemico.percorso) - 1:
+                                    nemico.numeroMovimento += 1
+                                else:
+                                    nemico.numeroMovimento = 0
                             nemico.compiMossa()
                         elif sposta and nemico.mosseRimaste < 0:
                             nemico.mosseRimaste += 1
@@ -2013,11 +2013,10 @@ def gameloop():
                         nemico.inCasellaVista = True
                         break
                     i += 3
-                if (abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo):
-                    if nemico.vita > 0 and nemico.inCasellaVista:
-                        nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, dati)
-                        if nemico.visto:
-                            apriocchio = True
+                if nemico.vita > 0 and nemico.inCasellaVista and ((abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo)):
+                    nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, listaPersonaggi, dati)
+                    if nemico.visto:
+                        apriocchio = True
 
             # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
             if caricaTutto:
@@ -2033,6 +2032,11 @@ def gameloop():
 
             if aumentoliv == 0:
                 caricaTutto = False
+
+            # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
+            if not carim:
+                dati[0], cambiosta, dati[1], carim, caricaTutto, tastop, movimentoPerMouse = gestisciEventiStoria(dati[0], dati[1], x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, canzone)
+                impossibileAprirePorta = False
 
             # cancella definitivamente i mostri morti e resetta vx/vy/anima
             i = len(listaNemici) - 1
@@ -2054,9 +2058,11 @@ def gameloop():
                     listaNemiciTotali.remove(nemico)
                 i -= 1
 
-            # aggiorna i dialoghi di tutti i personaggi in base all'avanzamento nella storia
+            # aggiorna i dialoghi e le img di tutti i personaggi / oggetti in base all'avanzamento nella storia
             for personaggio in listaPersonaggi:
                 personaggio.aggiornaDialogo(dati[0])
+                if personaggio.mantieniSempreASchermo:
+                    personaggio.aggiornaImgOggetto(dati[0])
 
             # prendere il denaro da terra
             i = 0

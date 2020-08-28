@@ -413,7 +413,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                 else:
                     if contasalva == 1:
                         if not errore:
-                            if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
+                            if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                                 perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
                             else:
                                 perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
@@ -438,7 +438,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                             messaggio("Slot corrotto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.8, GlobalVar.gsy // 18 * 11, 60)
                     elif contasalva == 2:
                         if not errore:
-                            if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
+                            if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                                 perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
                             else:
                                 perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
@@ -463,7 +463,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                             messaggio("Slot corrotto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.8, GlobalVar.gsy // 18 * 11, 60)
                     elif contasalva == 3:
                         if not errore:
-                            if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
+                            if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                                 perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
                             else:
                                 perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
@@ -2196,24 +2196,24 @@ def menuDiario(dati, canzone):
                             messaggio("Movimento (su casella libera) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 5.6, 35)
                             messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 6.1, 35)
                             messaggio("Attiva o disattiva Colco (su telecolco) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 6.6, 35)
-                            messaggio("Menu start (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7.1, 35)
+                            messaggio("Menu (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7.1, 35)
                             messaggio(u"Modalità attacco (su stato nemico)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7.6, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 8.6), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 8.6), 2)
                             messaggio(u"Modalità attacco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 10.1, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 12), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 12), 2)
-                            messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13.5, 35)
+                            messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13.5, 35)
                         if voceMarcataSottoMenu == 2:
                             GlobalVar.schermo.blit(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 20.2, GlobalVar.gsy // 18 * 4.8))
                             messaggio("Inquadra o attacca (su casella nemica) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 5.6, 35)
                             messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 6.1, 35)
                             messaggio("Attiva o disattiva Colco (su telecolco) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 6.6, 35)
-                            messaggio("Menu start (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7.1, 35)
+                            messaggio("Menu (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7.1, 35)
                             messaggio(u"Modalità movimento (su stato nemico)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7.6, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 8.6), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 8.6), 2)
                             messaggio(u"Modalità movimento /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 9.9, 35)
                             messaggio("Rimuovi selezione (su nemico inquadrato)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 10.4, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 12), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 12), 2)
-                            messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13.5, 35)
+                            messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13.5, 35)
                         if voceMarcataSottoMenu == 3:
                             GlobalVar.schermo.blit(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 20.2, GlobalVar.gsy // 18 * 4.8))
                             messaggio("Seleziona", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 6.6, 35)
@@ -2224,7 +2224,7 @@ def menuDiario(dati, canzone):
                     if voceMarcata == 5:
                         if voceMarcataSottoMenu == 1:
                             GlobalVar.schermo.blit(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 20.2, GlobalVar.gsy // 18 * 4.8))
-                            messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 5.5, 35)
+                            messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 5.5, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 6.1), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 6.1), 2)
                             messaggio("Cambia bersaglio inquadrato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 6.7, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 7.5), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 7.5), 2)
@@ -2239,7 +2239,7 @@ def menuDiario(dati, canzone):
                             messaggio("Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 14.8, 35)
                         if voceMarcataSottoMenu == 2:
                             GlobalVar.schermo.blit(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 20.2, GlobalVar.gsy // 18 * 4.8))
-                            messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 5.5, 35)
+                            messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 5.5, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 6.1), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 6.1), 2)
                             messaggio("Punta sul prossimo bersaglio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 6.7, 35)
                             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 7.5), (GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 7.5), 2)

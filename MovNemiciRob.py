@@ -33,7 +33,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             for personaggio in listaPersonaggi:
                 vetNemiciSoloConXeY.append(personaggio.x)
                 vetNemiciSoloConXeY.append(personaggio.y)
-            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
             if percorsoTrovato:
                 if len(percorsoTrovato) >= 4:
                     if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
@@ -159,7 +159,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 for personaggio in listaPersonaggi:
                     vetNemiciSoloConXeY.append(personaggio.x)
                     vetNemiciSoloConXeY.append(personaggio.y)
-                percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+                percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
                 if percorsoTrovato:
                     if len(percorsoTrovato) >= 4:
                         if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
@@ -249,7 +249,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                         casellaTrovata = False
                         nmxProbabile = GlobalVar.gpx
                         nmyProbabile = 0
-                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti, listaPersonaggi)
                         if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
@@ -261,7 +261,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                                 casellaTrovata = True
                         nmxProbabile = -GlobalVar.gpx
                         nmyProbabile = 0
-                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti, listaPersonaggi)
                         if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
@@ -273,7 +273,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                                 casellaTrovata = True
                         nmxProbabile = 0
                         nmyProbabile = GlobalVar.gpy
-                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti, listaPersonaggi)
                         if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
@@ -285,7 +285,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                                 casellaTrovata = True
                         nmxProbabile = 0
                         nmyProbabile = -GlobalVar.gpy
-                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                        mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti, listaPersonaggi)
                         if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                             if casellaTrovata:
                                 if random.randint(0, 1) == 0:
@@ -338,7 +338,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                             elif i == 4:
                                 nmxProbabile = 0
                                 nmyProbabile = -GlobalVar.gpy
-                            mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti)
+                            mxProbabile, myProbabile, inutile, inutile, inutile = muri_porte(nemico.x, nemico.y, nmxProbabile, nmyProbabile, stanza, carim, True, False, porte, cofanetti, listaPersonaggi)
                             if not ((x == mxProbabile + GlobalVar.gpx and y == myProbabile) or (x == mxProbabile - GlobalVar.gpx and y == myProbabile) or (x == mxProbabile and y == myProbabile + GlobalVar.gpy) or (x == mxProbabile and y == myProbabile - GlobalVar.gpy) or (x == mxProbabile and y == myProbabile) or (rx == mxProbabile + GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile - GlobalVar.gpx and ry == myProbabile) or (rx == mxProbabile and ry == myProbabile + GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile - GlobalVar.gpy) or (rx == mxProbabile and ry == myProbabile)):
                                 nmos = i
                                 sposta = True
@@ -413,7 +413,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
         for personaggio in listaPersonaggi:
             vetNemiciSoloConXeY.append(personaggio.x)
             vetNemiciSoloConXeY.append(personaggio.y)
-        percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+        percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xObbiettivo, nemico.yObbiettivo, stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
         if percorsoTrovato:
             if len(percorsoTrovato) >= 4:
                 if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
@@ -491,7 +491,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
             for personaggio in listaPersonaggi:
                 vetNemiciSoloConXeY.append(personaggio.x)
                 vetNemiciSoloConXeY.append(personaggio.y)
-            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xPosizioneUltimoBersaglio, nemico.yPosizioneUltimoBersaglio, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+            percorsoTrovato = pathFinding(nemico.x, nemico.y, nemico.xPosizioneUltimoBersaglio, nemico.yPosizioneUltimoBersaglio, stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
             if percorsoTrovato and not percorsoTrovato == "arrivato":
                 if len(percorsoTrovato) >= 4:
                     if percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y:
@@ -526,10 +526,6 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                         nmos = 1
                     else:
                         nmos = 0
-                    if nemico.numeroMovimento < len(nemico.percorso) - 1:
-                        nemico.numeroMovimento += 1
-                    else:
-                        nemico.numeroMovimento = 0
                 sposta = True
     else:
         nemico.xObbiettivo = False
@@ -551,10 +547,6 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 nmos = 1
             else:
                 nmos = 0
-            if nemico.numeroMovimento < len(nemico.percorso) - 1:
-                nemico.numeroMovimento += 1
-            else:
-                nemico.numeroMovimento = 0
         sposta = True
 
     # spostamento
@@ -614,7 +606,7 @@ def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, por
                 i = i + 4
 
     # alcuni sono inutili!!!
-    nemico.x, nemico.y, stanza, carim, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, True, False, porte, cofanetti)
+    nemico.x, nemico.y, stanza, carim, cambiosta = muri_porte(nemico.x, nemico.y, nmx, nmy, stanza, carim, True, False, porte, cofanetti, listaPersonaggi)
 
     if sposta and (nemico.x != nemico.vx or nemico.y != nemico.vy):
         nemico.animaSpostamento = True
@@ -999,7 +991,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         del vetNemiciSoloConXeY[i]
                         break
                     i += 2
-            percorsoTrovato = pathFinding(rx, ry, nemicoBersaglio.x, nemicoBersaglio.y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+            percorsoTrovato = pathFinding(rx, ry, nemicoBersaglio.x, nemicoBersaglio.y, stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
             if percorsoTrovato and percorsoTrovato != "arrivato":
                 if len(percorsoTrovato) >= 4:
                     if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
@@ -1317,7 +1309,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         nrob = 4
                     sposta = True
                 else:
-                    percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+                    percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
                     if percorsoTrovato and percorsoTrovato != "arrivato":
                         if len(percorsoTrovato) >= 4:
                             if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
@@ -1452,7 +1444,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
     # trova i nemici visti
     nemiciVistiDaColco = []
     vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
-    caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
+    caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, listaPersonaggi, vistaRobo)
     k = 0
     while k < len(caselleAttaccabili):
         if caselleAttaccabili[k + 2]:
@@ -1488,7 +1480,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
             for personaggio in listaPersonaggi:
                 vetNemiciSoloConXeY.append(personaggio.x)
                 vetNemiciSoloConXeY.append(personaggio.y)
-            percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, vetNemiciSoloConXeY)
+            percorsoTrovato = pathFinding(rx, ry, x, y, stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
             if percorsoTrovato and percorsoTrovato != "arrivato":
                 if len(percorsoTrovato) >= 4:
                     if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
@@ -1893,7 +1885,7 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                     sposta = True
                     azioneEseguita = True
             else:
-                percorsoTrovato = pathFinding(rx, ry, ultimoObbiettivoColco[1], ultimoObbiettivoColco[2], stanza, porte, cofanetti, vetNemiciSoloConXeY)
+                percorsoTrovato = pathFinding(rx, ry, ultimoObbiettivoColco[1], ultimoObbiettivoColco[2], stanza, porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY)
                 if percorsoTrovato and percorsoTrovato != "arrivato":
                     if len(percorsoTrovato) >= 4:
                         if percorsoTrovato[len(percorsoTrovato) - 4] != rx or percorsoTrovato[len(percorsoTrovato) - 3] != ry:
@@ -1953,5 +1945,5 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
                 nry = -GlobalVar.gpy
 
     # alcuni sono inutili!!!
-    rx, ry, stanza, carim, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, False, robo, porte, cofanetti)
+    rx, ry, stanza, carim, cambiosta = muri_porte(rx, ry, nrx, nry, stanza, carim, False, robo, porte, cofanetti, listaPersonaggi)
     return rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco

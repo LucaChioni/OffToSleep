@@ -12,7 +12,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             if not porte[i + 3]:
                 vmurx = porte[i + 1]
                 vmury = porte[i + 2]
-                murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, numStanza, False, False, False, porte, cofanetti)
+                murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, numStanza, False, False, False, porte, cofanetti, listaPersonaggi)
                 GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
                 if vmurx == murx and vmury == mury:
                     GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -68,7 +68,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     j = 0
     while j < len(caseviste):
         for personaggio in listaPersonaggi:
-            if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
+            if (caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]) or personaggio.mantieniSempreASchermo:
                 if ((personaggio.vx / GlobalVar.gpx) + (personaggio.vy / GlobalVar.gpy)) % 2 == 0:
                     GlobalVar.schermo.blit(sfondinoa, (personaggio.vx, personaggio.vy))
                 if ((personaggio.vx / GlobalVar.gpx) + (personaggio.vy / GlobalVar.gpy)) % 2 == 1:
@@ -85,7 +85,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
 
     # chiave robo
-    if avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco:
+    if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
         if chiamarob:
             GlobalVar.schermo.blit(GlobalVar.chiaveroboacc, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
         else:
@@ -177,7 +177,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     for personaggio in listaPersonaggi:
         j = 0
         while j < len(caseviste):
-            if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
+            if (caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]) or personaggio.mantieniSempreASchermo:
                 if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 0:
                     GlobalVar.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
                 if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 1:
@@ -210,7 +210,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
 
     # disegno la vita del mostro / Colco / esca selezionato
-    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco):
+    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]):
         lungentot = int(((GlobalVar.gpx * entot) / float(4)) // 15)
         lungen = int(((GlobalVar.gpx * enrob) / float(4)) // 15)
         if lungen < 0:
@@ -447,7 +447,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
 
     # chiave robo
-    if avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco:
+    if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
         if chiamarob:
             GlobalVar.schermo.blit(GlobalVar.chiaveroboacc, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
         else:
@@ -458,7 +458,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if not porte[i + 3]:
             vmurx = porte[i + 1]
             vmury = porte[i + 2]
-            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti)
+            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti, listaPersonaggi)
             GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
             if vmurx == murx and vmury == mury:
                 GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -515,21 +515,21 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     raggioDiLancio = 0
     caseattactot = 0
     if attacco == 1:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, -1)
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, -1)
     if attacco == 2:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVar.gpx * 6)
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 6)
         raggioDiLancio = 6
     if attacco == 3:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVar.gpx * 5)
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 5)
         raggioDiLancio = 5
     if attacco == 4:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVar.gpx * 6)
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 6)
         raggioDiLancio = 6
     if attacco == 5:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVar.gpx * 5)
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 5)
         raggioDiLancio = 5
     if attacco == 6:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, GlobalVar.gpx * 4)
+        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 4)
         raggioDiLancio = 4
 
     listaNemiciVisti = []
@@ -552,6 +552,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     spingiColco = False
     puntaPorta = False
     puntaCofanetto = False
+    puntaPersonaggioOggetto = False
     attaccato = False
     attaccoADistanza = False
     sposta = False
@@ -647,13 +648,28 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         casellaTrovata = True
                         break
                     i += 4
+            if not casellaTrovata:
+                for personaggioOggetto in listaPersonaggi:
+                    if personaggioOggetto.mantieniSempreASchermo and personaggioOggetto.x < xMouse < personaggioOggetto.x + GlobalVar.gpx and personaggioOggetto.y < yMouse < personaggioOggetto.y + GlobalVar.gpy:
+                        if xp != personaggioOggetto.x or yp != personaggioOggetto.y:
+                            j = 0
+                            while j < len(caseviste):
+                                if ((personaggioOggetto.x + GlobalVar.gpx == caseviste[j] and personaggioOggetto.y == caseviste[j + 1]) or (personaggioOggetto.x - GlobalVar.gpx == caseviste[j] and personaggioOggetto.y == caseviste[j + 1]) or (personaggioOggetto.x == caseviste[j] and personaggioOggetto.y + GlobalVar.gpy == caseviste[j + 1]) or (personaggioOggetto.x == caseviste[j] and personaggioOggetto.y - GlobalVar.gpy == caseviste[j + 1])) and caseviste[j + 2]:
+                                    if not primoFrame:
+                                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                                    xp = xMouse - (xMouse % GlobalVar.gpx)
+                                    yp = yMouse - (yMouse % GlobalVar.gpy)
+                                    break
+                                j += 3
+                        casellaTrovata = True
+                        break
         if GlobalVar.mouseVisibile:
             # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
             if GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 6:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco)) and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"])) and 0 <= yMouse <= GlobalVar.gsy // 18 * 1 and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 4:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -1263,7 +1279,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         animaOggetto[2] = yp
                         attaccato = True
                         infliggidanno = True
-                        danno = 10
+                        danno = GlobalVar.dannoOggetti[0]
                         raggio = GlobalVar.gpx * 1
                         sposta = True
                         risposta = True
@@ -1295,7 +1311,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         animaOggetto[2] = yp
                         attaccato = True
                         infliggidanno = True
-                        danno = 20
+                        danno = GlobalVar.dannoOggetti[1]
                         statom = 1
                         raggio = GlobalVar.gpx * 0
                         sposta = True
@@ -1347,7 +1363,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             animaOggetto[2] = yp
                             attaccato = True
                             infliggidanno = True
-                            danno = 0
+                            danno = GlobalVar.dannoOggetti[2]
                             raggio = 0
                             creaesca = True
                             sposta = True
@@ -1380,7 +1396,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         animaOggetto[2] = yp
                         attaccato = True
                         infliggidanno = True
-                        danno = 20
+                        danno = GlobalVar.dannoOggetti[3]
                         statom = 2
                         raggio = GlobalVar.gpx * 0
                         sposta = True
@@ -1413,7 +1429,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         animaOggetto[2] = yp
                         attaccato = True
                         infliggidanno = True
-                        danno = 200
+                        danno = GlobalVar.dannoOggetti[4]
                         raggio = GlobalVar.gpx * 2
                         sposta = True
                         risposta = True
@@ -1493,7 +1509,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if not porte[i + 3]:
                     vmurx = porte[i + 1]
                     vmury = porte[i + 2]
-                    murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti)
+                    murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti, listaPersonaggi)
                     GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
                     if vmurx == murx and vmury == mury:
                         GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -1521,7 +1537,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             else:
                 GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
             # chiave robo
-            if avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco:
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                 if chiamarob:
                     GlobalVar.schermo.blit(GlobalVar.chiaveroboacc, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
                 else:
@@ -1546,7 +1562,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if ((nemico.x / GlobalVar.gpx) + (nemico.y / GlobalVar.gpy)) % 2 == 1:
                     GlobalVar.schermo.blit(sfondinob, (nemico.x, nemico.y))
         for personaggio in listaPersonaggi:
-            if personaggio.inCasellaVista:
+            if personaggio.inCasellaVista or personaggio.mantieniSempreASchermo:
                 if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 0:
                     GlobalVar.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
                 if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 1:
@@ -1571,6 +1587,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             GlobalVar.schermo.blit(sfondinoa, (x, y))
         if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
             GlobalVar.schermo.blit(sfondinob, (x, y))
+
+        # disegno tutti i personaggi-oggetto
+        for personaggio in listaPersonaggi:
+            if personaggio.mantieniSempreASchermo:
+                GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
         # disegno le caselle attaccabili
         i = 0
@@ -1601,7 +1622,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if not porte[i + 3]:
                 vmurx = porte[i + 1]
                 vmury = porte[i + 2]
-                murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti)
+                murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti, listaPersonaggi)
                 GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
                 if vmurx == murx and vmury == mury:
                     GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -1653,9 +1674,19 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     yp = yp + nyp
                     break
                 i = i + 4
+            # mettere il puntatore sui personaggi-oggetti
+            puntaPersonaggioOggetto = False
+            for personaggioOggetto in listaPersonaggi:
+                if personaggioOggetto.x == xp + nxp and personaggioOggetto.y == yp + nyp:
+                    if nxp != 0 or nyp != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                    puntaPersonaggioOggetto = True
+                    xp = xp + nxp
+                    yp = yp + nyp
+                    break
             # movimento inquadra (ultimi 4 inutili)
-            if not puntaPorta and not puntaCofanetto:
-                xp, yp, stanza, inutile, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, True, False, porte, cofanetti)
+            if not puntaPorta and not puntaCofanetto and not puntaPersonaggioOggetto:
+                xp, yp, stanza, inutile, cambiosta = muri_porte(xp, yp, nxp, nyp, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
                 if xp != xvp or yp != yvp:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
             # movimento inquadra quando si è sulle porte
@@ -1737,14 +1768,16 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             GlobalVar.schermo.blit(armrob, (rx, ry))
 
         # personaggio
-        if not risposta:
-            disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
         # disegno tutti i personaggi
         for personaggio in listaPersonaggi:
             j = 0
             while j < len(caseviste):
-                if caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
+                if personaggio.mantieniSempreASchermo and ((caseviste[j] == personaggio.x - GlobalVar.gpx and caseviste[j + 1] == personaggio.y) or (caseviste[j] == personaggio.x + GlobalVar.gpx and caseviste[j + 1] == personaggio.y) or (caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y - GlobalVar.gpy) or (caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y + GlobalVar.gpy)) and caseviste[j + 2]:
+                    GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+                    break
+                elif caseviste[j] == personaggio.x and caseviste[j + 1] == personaggio.y and caseviste[j + 2]:
                     GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
                     break
                 j += 3
@@ -1892,7 +1925,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         else:
             GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
         # chiave robo
-        if avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
             if chiamarob:
                 GlobalVar.schermo.blit(GlobalVar.chiaveroboacc, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
             else:
@@ -1950,7 +1983,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 pvmtot = nemico.vitaTotale
                 raggiovista = nemico.raggioVisivo
                 # controllo caselle attaccabili
-                caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, nemico.raggioVisivo)
+                caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, listaPersonaggi, nemico.raggioVisivo)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotMostri):
@@ -2034,7 +2067,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if enrob > 0:
                 # controllo caselle attaccabili
                 vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
-                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
+                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, listaPersonaggi, vistaRobo)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
@@ -2063,11 +2096,11 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if effp > 0:
                 GlobalVar.schermo.blit(GlobalVar.efficienzapiu, ((GlobalVar.gpx * 3) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
         # vita colco selezionato
-        if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco:
+        if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
             if enrob > 0:
                 # controllo caselle attaccabili
                 vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
-                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, vistaRobo)
+                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, listaPersonaggi, vistaRobo)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
@@ -2102,7 +2135,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             pvmtot = nemicoInquadrato.vitaTotale
             raggiovista = nemicoInquadrato.raggioVisivo
             # controllo caselle attaccabili
-            caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, nemicoInquadrato.raggioVisivo)
+            caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, listaPersonaggi, nemicoInquadrato.raggioVisivo)
             # disegno le caselle attaccabili
             i = 0
             while i < len(caseattactotMostri):
@@ -2203,7 +2236,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     break
                 i += 4
         # altrimenti mostro solo la vita di colco
-        elif not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalVar.avanzamentoStoriaIncontroColco:
+        elif not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
             lungentot = int(((GlobalVar.gpx * entot) / float(4)) // 15)
             lungen = int(((GlobalVar.gpx * enrob) / float(4)) // 15)
             if lungen < 0:

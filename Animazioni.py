@@ -72,8 +72,8 @@ def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cam
             if primopasso:
                 primopasso = False
             animaCamminataRalloFermo(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
-        # quando si apre una porta
-        elif difesa == 0:
+        # quando si apre una porta o un cofanetto
+        elif difesa == 0 and fineanimaz > 0:
             animazioneRallo = True
             disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     elif GlobalVar.canaleSoundPassiRallo.get_busy():
@@ -535,6 +535,8 @@ def animaMorteNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
             if nemico.animaMorte:
+                if not GlobalVar.canaleSoundInterazioni.get_busy() and fineanimaz == 5:
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreMorteNemico)
                 nemico.animazioneFatta = True
                 animazioneNemici = True
                 if fineanimaz > 0 and (fineanimaz % 4 == 0):
@@ -640,14 +642,14 @@ def animaCofanetti(cofanetti, caseviste, sfondinoc):
         i += 4
 
 
-def animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc):
+def animaPorte(porte, cofanetti, listaPersonaggi, numStanza, portaOriz, portaVert, sfondinoc):
     # porte[stanza, x, y, True / False, ...]
     i = 0
     while i < len(porte):
         if not porte[i + 3]:
             vmurx = porte[i + 1]
             vmury = porte[i + 2]
-            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, numStanza, False, False, False, porte, cofanetti)
+            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, numStanza, False, False, False, porte, cofanetti, listaPersonaggi)
             GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
             if vmurx == murx and vmury == mury:
                 GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
@@ -656,10 +658,9 @@ def animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc):
         i = i + 4
 
 
-def animaAperturaCofanetto(avanzamentoStoria, tesoro, x, y, npers, pers, avvele, armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, animazioneRallo):
+def animaAperturaCofanetto(tesoro, x, y, npers, sfondinoc, animazioneRallo):
     if tesoro != -1:
         animazioneRallo = True
-        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         if npers == 1:
             GlobalVar.schermo.blit(sfondinoc, (x + GlobalVar.gpx, y))
             GlobalVar.schermo.blit(GlobalVar.cofaniaper, (x + GlobalVar.gpx, y))
@@ -1083,7 +1084,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
             GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
 
         # disegno la vita del Colco / esca / mostro selezionato
-        if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco):
+        if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]):
             if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Colco":
                 statoColcoInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
                 if nemicoAttaccante.bersaglioColpito[2] == "surriscalda":
@@ -1265,7 +1266,7 @@ def disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca):
 def animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz):
     if not cambiosta:
         for personaggio in listaPersonaggi:
-            if personaggio.inCasellaVista and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and personaggio.animaSpostamento) and not personaggio.animazioneFatta or (personaggio.inCasellaVista and fineanimaz == 0):
+            if (personaggio.inCasellaVista or personaggio.mantieniSempreASchermo) and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and personaggio.animaSpostamento) and not personaggio.animazioneFatta or (personaggio.inCasellaVista and fineanimaz == 0):
                 if personaggio.animazioneFatta:
                     GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
                 else:
@@ -1402,7 +1403,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                             GlobalVar.schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
                             GlobalVar.schermo.blit(sfondinob, (nemico.x, nemico.y))
                 for personaggio in listaPersonaggi:
-                    if personaggio.inCasellaVista:
+                    if personaggio.inCasellaVista or personaggio.mantieniSempreASchermo:
                         if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 0:
                             GlobalVar.schermo.blit(sfondinob, (personaggio.vx, personaggio.vy))
                             GlobalVar.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
@@ -1414,7 +1415,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob, azioniDaEseguire, animaOggetto)
             animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob)
             animaCofanetti(cofanetti, caseviste, sfondinoc)
-            animaPorte(porte, cofanetti, numStanza, portaOriz, portaVert, sfondinoc)
+            animaPorte(porte, cofanetti, listaPersonaggi, numStanza, portaOriz, portaVert, sfondinoc)
 
             statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv)
 
@@ -1483,7 +1484,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco")
 
             # animazione apertura cofanetto
-            animazioneRallo = animaAperturaCofanetto(dati[0], tesoro, x, y, npers, pers, statoRalloInizioTurno[1], armatura, arma, scudo, collana, arco, faretra, guanti, sfondinoc, animazioneRallo)
+            animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, sfondinoc, animazioneRallo)
             # anima raccolta denaro
             denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, dati[130], fineanimaz)
 

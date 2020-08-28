@@ -85,7 +85,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         scrivi.write("%s_" % personaggio.direzione)
         scrivi.write("%s_" % personaggio.tipo)
         scrivi.write("%i_" % personaggio.stanzaDiAppartenenza)
-        scrivi.write("%i_" % personaggio.avanzamentoStoria)
+        scrivi.write("%i_" % personaggio.avanzaStoria)
         scrivi.write("[_")
         for direzione in personaggio.percorso:
             scrivi.write("%s_" % direzione)
@@ -94,13 +94,13 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
     scrivi.close()
 
     # critta il salvataggio
-    leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
-    contenutoFile = leggi.read()
-    leggi.close()
-    encoded_text = contenutoFile.encode('base64')
-    scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
-    scrivi.write(encoded_text)
-    scrivi.close()
+    # leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
+    # contenutoFile = leggi.read()
+    # leggi.close()
+    # encoded_text = contenutoFile.encode('base64')
+    # scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
+    # scrivi.write(encoded_text)
+    # scrivi.close()
 
     # conversione della posizione in pixel
     dati[2] = dati[2] * GlobalVar.gpx
@@ -137,7 +137,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
     # decritta il salvataggio
     datiTotali = [""]
     try:
-        contenutoFile = contenutoFile.decode('base64')
+        # contenutoFile = contenutoFile.decode('base64')
         datiTotali = contenutoFile.split("\n")
     except Exception:
         errore = True
@@ -289,6 +289,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                     i += 8
         else:
             errore = True
+        if errore:
             tipoErrore = 2
     elif not errore and len(datiTotali) == 1 and datiTotali[0] == "":
         errore = True

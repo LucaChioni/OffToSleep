@@ -3528,7 +3528,7 @@ def oggetti(dati, canzone):
     puntatorevecchio = GlobalVar.puntatorevecchio
     sfondostastart = GlobalVar.sfondostax3
     sconosciutoOggetto = pygame.transform.scale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
-    if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
+    if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.imgFraMaggioreMenuOggetti
     else:
         perssta = GlobalVar.imgSaraMenuOggetti
@@ -4197,7 +4197,7 @@ def oggetti(dati, canzone):
                 GlobalVar.schermo.blit(difesapiu, ((GlobalVar.gsx // 32 * 14) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 6))
 
             # vita-status robo
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                 if dati[10] < 0:
                     dati[10] = 0
                 messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, 50)

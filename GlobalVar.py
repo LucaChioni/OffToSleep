@@ -205,7 +205,6 @@ global vetImgOggettiMenu
 global vetImgOggettiMercante
 global vetImgOggettiStart
 global vetIcoOggettiMenu
-global costoOggetti
 global vetImgSpadePixellate
 global vetImgArchiPixellate
 global vetImgArmaturePixellate
@@ -423,7 +422,6 @@ def loadImgs():
     global vetImgOggettiMercante
     global vetImgOggettiStart
     global vetIcoOggettiMenu
-    global costoOggetti
     global vetImgSpadePixellate
     global vetImgArchiPixellate
     global vetImgArmaturePixellate
@@ -813,8 +811,6 @@ def loadImgs():
         vetImgOggettiStart.append(pygame.transform.scale(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale), (gpx * 4, gpy * 4)))
         vetIcoOggettiMenu.append(pygame.transform.smoothscale(loadImage("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale), (gpx, gpy)))
         contatoreGlobale += 1
-    # costo oggetti => costoOggetti[frecce, faretra1, faretra2, faretra3, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata]
-    costoOggetti = [1, 5, 5, 7, 20, 20, 10, 15, 30, 50, 50, 10, 50, 250]
 
     # img equipaggiamento pixellato
     vetImgSpadePixellate = []
@@ -1108,11 +1104,13 @@ rumoreMorte = pygame.mixer.Sound("Audio/RumoriPersonaggio/Morte.wav")
 
 # suoni apertura-chiusura cofanetti-porte
 suonoaperturacofanetti = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaCofanetto.wav")
+suonoaperturaporteSogno = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPortaForesta.wav")
+suonochiusuraporteSogno = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPortaForesta.wav")
 suonoaperturaporte1 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta1.wav")
-suonoaperturaporte2 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta2.wav")
-suonoaperturaporte3 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta3.wav")
 suonochiusuraporte1 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta1.wav")
+suonoaperturaporte2 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta2.wav")
 suonochiusuraporte2 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta2.wav")
+suonoaperturaporte3 = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaPorta3.wav")
 suonochiusuraporte3 = pygame.mixer.Sound("Audio/RumoriAmbiente/ChiusuraPorta3.wav")
 
 # souno raccolta esca - monete
@@ -1147,20 +1145,33 @@ suonoUsoBombaPotenziata = pygame.mixer.Sound("Audio/RumoriOggetti/BombaPotenziat
 rumoreMovimentoNemiciPersonaggi = pygame.mixer.Sound("Audio/RumoriNemici/MovimentoNemiciPersonaggi.wav")
 rumoreAttaccoNemico = pygame.mixer.Sound("Audio/RumoriNemici/AttaccoVicinoNemico.wav")
 rumoreLancioOggettoNemico = pygame.mixer.Sound("Audio/RumoriNemici/AttaccoLontanoNemico.wav")
+rumoreMorteNemico = pygame.mixer.Sound("Audio/RumoriNemici/MorteNemico.wav")
 
 # suono mappa
 suonoAperturaMappa = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaMappa.wav")
 
 # suoni canzoni
-c11 = pygame.mixer.Sound("Audio/Canzoni/Canzone11.wav")
-c27 = pygame.mixer.Sound("Audio/Canzoni/Canzone27.wav")
+canzoneMenuPrincipale = pygame.mixer.Sound("Audio/Canzoni/Canzone11.wav")
+canzoneSogno = pygame.mixer.Sound("Audio/Canzoni/Canzone27.wav")
+canzoneCasa = pygame.mixer.Sound("Audio/Canzoni/Canzone24.wav")
 
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++]
 costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
 dannoTecniche = [40, 30, 0, 30, 20, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
 
-avanzamentoStoriaCambioPersonaggio = 1
-avanzamentoStoriaIncontroColco = 2
+# costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
+costoOggetti = [1, 5, 5, 7, 20, 20, 10, 15, 30, 50, 50, 10, 50, 250]
+# danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
+dannoOggetti = [100, 50, 0, 20, 500]
+
+# dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
+dictAvanzamentoStoria = definisciAvanzamentiStoria()
+# dichiaro il dictionary che contiene le stanze associate a un nome che le descrive
+dictStanze = definisciStanze()
+
+# dichiaro i vettori di porte e cofanetti
+initVetPorteGlobale = definisciPorte(dictStanze)
+initVetCofanettiGlobale = definisciCofanetti(dictStanze)
 
 vistaRobo = 8
 

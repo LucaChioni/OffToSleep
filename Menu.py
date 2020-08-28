@@ -7,12 +7,37 @@ def menu(caricaSalvataggio):
     GlobalVar.canaleSoundCanzone.stop()
     canzone = False
 
+    # per aggiungere porte e cofanetti => aggiungi "numStanza, x, y, False"
+    xInizialie = 0
+    yInizialie = 0
+    rxInizialie = 0
+    ryInizialie = 0
+    # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
+    # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
+    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob -
+    # porte(142-?) - cofanetti(?-?) // dimensione: 0-141 (=> 142 variabili) + porte e cofanetti
+    datiIniziali = [0, 1, xInizialie, yInizialie, 1, 55, 0, 0, 0, 0, 220,  # <- statistiche
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
+        2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, # <- equpaggiamento
+        2, 0, 0, 0, 0, -1, -1, -1, -1, -1,  # <- batterie (sono utilizzati solo i primi 5)
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- condizioni
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- gambit
+        False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- altre statistiche
+        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3,  # <- info aggiunte per poter salvare ovunque
+        ]
+
     # posizione porte e cofanetti nel vettore dati
-    porteini = 142
-    portefin = 169
+    vetPorte = GlobalVar.initVetPorteGlobale
+    vetCofanetti = GlobalVar.initVetCofanettiGlobale
+
+    porteini = len(datiIniziali)
+    portefin = len(datiIniziali) + len(vetPorte) - 1
     cofaniini = portefin + 1
-    cofanifin = 193
-    lunghezzadati = cofanifin + 1
+    cofanifin = len(datiIniziali) + len(vetPorte) + len(vetCofanetti) - 1
+    datiIniziali += vetPorte
+    datiIniziali += vetCofanetti
+    lunghezzadati = len(datiIniziali)
 
     if caricaSalvataggio:
         dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
@@ -77,7 +102,7 @@ def menu(caricaSalvataggio):
     # numero per la posizione di robo all'avvio
     c = random.randint(1, 4)
 
-    canzone = GlobalVar.c11
+    canzone = GlobalVar.canzoneMenuPrincipale
     GlobalVar.canaleSoundCanzone.play(canzone)
     while True:
         if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
@@ -221,26 +246,15 @@ def menu(caricaSalvataggio):
                             background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
                             inutile, conferma = chiediconferma(3, canzone)
                             if conferma:
-                                x = GlobalVar.gsx // 32 * 6
-                                y = GlobalVar.gsy // 18 * 2
-                                rx = x
-                                ry = y
-                                # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
-                                # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
-                                # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob -
-                                # porte(142-?) - cofanetti(?-?) // dimensione: 0-142 + porte e cofanetti
-                                dati = [0, 1, x, y, 1, 55, 0, 0, 0, 0, 220,# <- statistiche
-                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- tecniche
-                                        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- oggetti
-                                        2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,# <- equpaggiamento
-                                        2, 0, 0, 0, 0, -1, -1, -1, -1, -1,# <- batterie (sono utilizzati solo i primi 5)
-                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- condizioni
-                                        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,# <- gambit
-                                        False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,# <- altre statistiche
-                                        rx, ry, -1, -1, -1, 0, 4, 3,# <- info aggiunte per poter salvare ovunque
-                                        2, 3, 7, False, 2, 7, 12, False, 2, 12, 11, False, 2, 15, 9, False, 2, 15, 3, False, 2, 23, 5, False, 2, 23, 12, False,# <- porte
-                                        1, 3, 7, False, 1, 7, 12, False, 1, 12, 11, False, 2, 3, 5, False, 2, 5, 10, False, 2, 10, 9, False# <- cofanetti
-                                        ]
+                                dati = datiIniziali
+                                xInizialie = GlobalVar.gsx // 32 * 15
+                                yInizialie = GlobalVar.gsy // 18 * 7
+                                rxInizialie = xInizialie
+                                ryInizialie = yInizialie
+                                dati[2] = xInizialie
+                                dati[3] = yInizialie
+                                dati[134] = rxInizialie
+                                dati[135] = ryInizialie
                                 datiNemici = []
                                 datiEsche = []
                                 datiMonete = []
@@ -392,12 +406,12 @@ def menu(caricaSalvataggio):
                     messaggio("Movimento (su casella libera) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 6.8, 35)
                     messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 7.3, 35)
                     messaggio("Attiva o disattiva Colco (su telecolco) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 7.8, 35)
-                    messaggio("Menu start (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 8.3, 35)
+                    messaggio("Menu (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 8.3, 35)
                     messaggio(u"Modalità attacco (su stato nemico)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 8.8, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 9.8), (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 9.8), 2)
                     messaggio(u"Modalità attacco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 11.3, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 13.2), (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 13.2), 2)
-                    messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 14.7, 35)
+                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 14.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 17), 2)
 
                     messaggio("Mod. attacco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 4.2, 80)
@@ -405,13 +419,13 @@ def menu(caricaSalvataggio):
                     messaggio("Inquadra o attacca (su casella nemica) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 6.8, 35)
                     messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 7.3, 35)
                     messaggio("Attiva o disattiva Colco (su telecolco) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 7.8, 35)
-                    messaggio("Menu start (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 8.3, 35)
+                    messaggio("Menu (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 8.3, 35)
                     messaggio(u"Modalità movimento (su stato nemico)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 8.8, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 9.8), (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 9.8), 2)
                     messaggio(u"Modalità movimento /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 11.1, 35)
                     messaggio("Rimuovi selezione (su nemico inquadrato)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 11.6, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13.2), (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 13.2), 2)
-                    messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 14.7, 35)
+                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 14.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 17), 2)
 
                     messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 4.2, 80)
@@ -425,7 +439,7 @@ def menu(caricaSalvataggio):
                     messaggio("Comandi tastiera", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
                     messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.2, 80)
                     GlobalVar.schermo.blit(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 0.2, GlobalVar.gsy // 18 * 6))
-                    messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.2, GlobalVar.gsy // 18 * 6.7, 35)
+                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.2, GlobalVar.gsy // 18 * 6.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 7.3), (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 7.3), 2)
                     messaggio("Cambia bersaglio inquadrato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.2, GlobalVar.gsy // 18 * 7.9, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 8.7), (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8.7), 2)
@@ -442,7 +456,7 @@ def menu(caricaSalvataggio):
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 17), 2)
                     messaggio("Mod. attacco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 4.2, 80)
                     GlobalVar.schermo.blit(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 6))
-                    messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.7, GlobalVar.gsy // 18 * 6.7, 35)
+                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.7, GlobalVar.gsy // 18 * 6.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 7.3), (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 7.3), 2)
                     messaggio("Punta sul prossimo bersaglio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.7, GlobalVar.gsy // 18 * 7.9, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 8.7), (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 8.7), 2)
@@ -480,7 +494,7 @@ def menu(caricaSalvataggio):
 
 def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, canzone):
     sfondostastart = GlobalVar.sfondostax3
-    if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio:
+    if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
     else:
         perssta = GlobalVar.saraGrafMenu
@@ -562,19 +576,19 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     voceMarcata = 2
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 6
-                elif dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco and GlobalVar.gsy // 18 * 6.8 <= yMouse <= GlobalVar.gsy // 18 * 7.8:
+                elif dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and GlobalVar.gsy // 18 * 6.8 <= yMouse <= GlobalVar.gsy // 18 * 7.8:
                     if GlobalVar.mouseBloccato:
                         GlobalVar.configuraCursore(False)
                     voceMarcata = 3
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 7
-                elif dati[0] >= GlobalVar.avanzamentoStoriaCambioPersonaggio and GlobalVar.gsy // 18 * 7.8 <= yMouse <= GlobalVar.gsy // 18 * 8.8:
+                elif dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalVar.gsy // 18 * 7.8 <= yMouse <= GlobalVar.gsy // 18 * 8.8:
                     if GlobalVar.mouseBloccato:
                         GlobalVar.configuraCursore(False)
                     voceMarcata = 4
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 8
-                elif dati[0] >= GlobalVar.avanzamentoStoriaCambioPersonaggio and GlobalVar.gsy // 18 * 8.8 <= yMouse <= GlobalVar.gsy // 18 * 9.8:
+                elif dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalVar.gsy // 18 * 8.8 <= yMouse <= GlobalVar.gsy // 18 * 9.8:
                     if GlobalVar.mouseBloccato:
                         GlobalVar.configuraCursore(False)
                     voceMarcata = 5
@@ -722,11 +736,11 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 if GlobalVar.mouseVisibile:
                     pygame.mouse.set_visible(False)
                     GlobalVar.mouseVisibile = False
-                if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio and voceMarcata == 2:
+                if dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 2:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp + GlobalVar.gsy // 18 * 7
                     voceMarcata += 4
-                elif dati[0] < GlobalVar.avanzamentoStoriaIncontroColco and voceMarcata == 2:
+                elif dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 2:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp + GlobalVar.gsy // 18 * 2
                     voceMarcata += 2
@@ -747,11 +761,11 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 if GlobalVar.mouseVisibile:
                     pygame.mouse.set_visible(False)
                     GlobalVar.mouseVisibile = False
-                if dati[0] < GlobalVar.avanzamentoStoriaCambioPersonaggio and voceMarcata == 6:
+                if dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 6:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp - GlobalVar.gsy // 18 * 7
                     voceMarcata -= 4
-                elif dati[0] < GlobalVar.avanzamentoStoriaIncontroColco and voceMarcata == 4:
+                elif dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 4:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp - GlobalVar.gsy // 18 * 2
                     voceMarcata -= 2
@@ -782,12 +796,12 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 15.5))
             GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 15.5))
-            messaggio("Menu start", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+            messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
             messaggio("Oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 50)
             messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 50)
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                 messaggio("Setta Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
-            if dati[0] >= GlobalVar.avanzamentoStoriaCambioPersonaggio:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                 messaggio("Mappa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 50)
                 messaggio("Diario", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 50)
             messaggio("Salva", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, 50)
@@ -823,7 +837,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 GlobalVar.schermo.blit(difesapiusta, ((GlobalVar.gsx // 32 * 13.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 16))
             GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 2))
 
-            if dati[0] >= GlobalVar.avanzamentoStoriaIncontroColco:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                 # vita-status robo
                 if dati[10] < 0:
                     dati[10] = 0
@@ -924,7 +938,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
             pygame.mouse.set_visible(True)
             GlobalVar.mouseVisibile = True
         if GlobalVar.mouseVisibile:
-            if GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and 0 <= xMouse <= GlobalVar.gsx // 32 * 3.5:
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and 0 <= xMouse <= GlobalVar.gsx // 32 * 3.5:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 xp = 0
@@ -1246,7 +1260,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                     pygame.mouse.set_visible(False)
                     GlobalVar.mouseVisibile = False
                 if voceMarcata < 0:
-                    if voceMarcata == -2:
+                    if voceMarcata == -2 and dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                         voceMarcata += 1
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = 0
@@ -1269,11 +1283,11 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                     offensivi = True
                 elif voceMarcata >= 0:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    if voceMarcata < 3:
+                    if voceMarcata < 3 and dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                         xp = 0
                         yp = GlobalVar.gsy // 18 * 16.05
                         voceMarcata = -1
-                    elif voceMarcata >= 3:
+                    else:
                         xp = GlobalVar.gsx // 32 * 3.5
                         yp = GlobalVar.gsy // 18 * 16.05
                         voceMarcata = -2
@@ -1299,7 +1313,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                 voceMarcataOggetto = voceMarcata
 
             GlobalVar.schermo.blit(GlobalVar.sfondoStartBattaglia, (0, GlobalVar.gsy // 18 * 8))
-            messaggio("Mappa", GlobalVar.grigiochi, int(GlobalVar.gpx * 0.7), int(GlobalVar.gpy * 16.05), 45)
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+                messaggio("Mappa", GlobalVar.grigiochi, int(GlobalVar.gpx * 0.7), int(GlobalVar.gpy * 16.05), 45)
             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 3.5), int(GlobalVar.gpy * 15.8)), (int(GlobalVar.gpx * 3.5), int(GlobalVar.gpy * 16.8)), 2)
             messaggio("Esci", GlobalVar.grigiochi, int(GlobalVar.gpx * 4.2), int(GlobalVar.gpy * 16.05), 45)
             if difensivi:
@@ -1356,27 +1371,57 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                 i += 1
             if difensivi:
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
-                    messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[31] >= 0:
+                        messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
-                    messaggio("Alimentaz. 100gr", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[32] >= 0:
+                        messaggio("Alimentaz. 100gr", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
-                    messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[33] >= 0:
+                        messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 4 or voceMarcataOggetto == 4:
-                    messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[34] >= 0:
+                        messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
-                    messaggio("Alimentaz. 250gr", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[35] >= 0:
+                        messaggio("Alimentaz. 250gr", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 GlobalVar.schermo.blit(GlobalVar.scorriGiu, (GlobalVar.gpx * 3, GlobalVar.gpy * 14.8))
             if offensivi:
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
-                    messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[36] >= 0:
+                        messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
-                    messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[37] >= 0:
+                        messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
-                    messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[38] >= 0:
+                        messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 4 or voceMarcataOggetto == 4:
-                    messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[39] >= 0:
+                        messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
-                    messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    if dati[40] >= 0:
+                        messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                    else:
+                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
                 GlobalVar.schermo.blit(GlobalVar.scorriSu, (GlobalVar.gpx * 3, GlobalVar.gpy * 13.3))
 
             # vita-status rallo
