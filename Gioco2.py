@@ -468,6 +468,9 @@ def gameloop():
                     robot = GlobalVar.robow
                     armrob = armrobw
 
+            # aggiorno inCasellaVista di nemici e personaggi
+            listaNemici, listaPersonaggi = aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
+
             caricaTutto = True
             carim = False
 
@@ -834,6 +837,8 @@ def gameloop():
                                         tutteporte[j + 3] = True
                                         break
                                     j = j + 4
+                                # aggiorno inCasellaVista di nemici e personaggi
+                                listaNemici, listaPersonaggi = aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
                             else:
                                 caricaTutto = True
                                 impossibileAprirePorta = True
@@ -893,10 +898,15 @@ def gameloop():
                 movimentoPerMouse = False
                 tastop = "mouseDestro"
                 tastoTrovato = True
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
                 nx = 0
                 ny = 0
-                attacco = 1
+                if inquadratoQualcosa == "battaglia" and nemicoInquadrato:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                    nemicoInquadrato = False
+                    caricaTutto = True
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                    attacco = 1
             if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato and not impossibileCliccarePulsanti and not startf and mosseRimasteRob <= 0 and not nemiciInMovimento:
                 tastop = "mouseSinistro"
                 tastoTrovato = True
@@ -940,6 +950,8 @@ def gameloop():
                                 tutteporte[j + 3] = True
                                 break
                             j += 4
+                        # aggiorno inCasellaVista di nemici e personaggi
+                        listaNemici, listaPersonaggi = aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
                     else:
                         impossibileAprirePorta = True
                         caricaTutto = True
@@ -1235,8 +1247,9 @@ def gameloop():
                 vetNemiciSoloConXeY.append(nemico.x)
                 vetNemiciSoloConXeY.append(nemico.y)
             for personaggio in listaPersonaggi:
-                vetNemiciSoloConXeY.append(personaggio.x)
-                vetNemiciSoloConXeY.append(personaggio.y)
+                if not personaggio.mantieniSempreASchermo:
+                    vetNemiciSoloConXeY.append(personaggio.x)
+                    vetNemiciSoloConXeY.append(personaggio.y)
             if inquadratoQualcosa.startswith("movimento"):
                 inquadratoQualcosaList = inquadratoQualcosa.split(":")
                 xObbiettivo = int(inquadratoQualcosaList[1])
@@ -1250,7 +1263,7 @@ def gameloop():
                 nx = 0
                 ny = 0
             else:
-                percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, dati[1], porte, cofanetti, listaPersonaggi, vetNemiciSoloConXeY, False)
+                percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, vetNemiciSoloConXeY, casevistePorteIncluse)
                 if percorsoTrovato:
                     if len(percorsoTrovato) >= 4:
                         if percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y:
@@ -1658,6 +1671,8 @@ def gameloop():
                                 tutteporte[j + 3] = porte[k + 3]
                                 break
                             j = j + 4
+                        # aggiorno inCasellaVista di nemici e personaggi
+                        listaNemici, listaPersonaggi = aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
                         break
                     k = k + 4
                 apriChiudiPorta = [False, 0, 0]
@@ -1864,7 +1879,7 @@ def gameloop():
 
                 # movimento - gambit
                 if raffredda < 0 and autoRic1 < 0 and autoRic2 < 0:
-                    rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi)
+                    rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneRobEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco = movrobo(x, y, vx, vy, rx, ry, dati[1], chiamarob, dati, porte, cofanetti, listaNemici, nmost, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste)
 
                 if dati[122] > 0 or raffreddamento or ricarica1 or ricarica2:
                     mosseRimasteRob -= 2
@@ -1922,14 +1937,7 @@ def gameloop():
                         vetDatiNemici.append(nemicoTemp.vitaTotale)
                     if nemico.avvelenato and sposta:
                         nemico.vita -= 3
-                    incasevista = False
-                    i = 0
-                    while i < len(caseviste):
-                        if caseviste[i + 2] and caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
-                            incasevista = True
-                            break
-                        i += 3
-                    if nemico.vita > 0 and incasevista:
+                    if nemico.vita > 0 and nemico.inCasellaVista:
                         # trovo l'obbiettivo
                         nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo = nemico.settaObbiettivo(x, y, rx, ry, dati, stanza, porte, cofanetti, listaPersonaggi, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
                         if sposta and nemico.mosseRimaste == 0:
@@ -1937,7 +1945,7 @@ def gameloop():
                         if nemico.mosseRimaste > 0:
                             nemico.vx = nemico.x
                             nemico.vy = nemico.y
-                            nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo, listaPersonaggi)
+                            nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo, listaPersonaggi, caseviste)
                             if direzioneMostro == 1:
                                 nemico.girati("d")
                             elif direzioneMostro == 2:
@@ -1983,15 +1991,7 @@ def gameloop():
             # movimento personaggi che sono in una casella vista
             if sposta:
                 for personaggio in listaPersonaggi:
-                    # controllo se il personaggio è in una casella vista
-                    personaggio.inCasellaVista = False
-                    i = 0
-                    while i < len(caseviste):
-                        if caseviste[i + 2] and caseviste[i] == personaggio.x and caseviste[i + 1] == personaggio.y:
-                            personaggio.inCasellaVista = True
-                            break
-                        i += 3
-                    if personaggio.inCasellaVista:
+                    if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo:
                         personaggio.spostati(x, y, rx, ry, listaNemici)
 
             # aumentare di livello
@@ -2003,16 +2003,9 @@ def gameloop():
                     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
                     impossibileCliccarePulsanti = True
 
-            # aggiorna vista dei mostri e metti l'occhio se ti vedono + aggiorna nemico.inCasellaVista
+            # aggiorna vista dei mostri e metti l'occhio se ti vedono
             apriocchio = False
             for nemico in listaNemici:
-                nemico.inCasellaVista = False
-                i = 0
-                while i < len(caseviste):
-                    if caseviste[i + 2] and caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
-                        nemico.inCasellaVista = True
-                        break
-                    i += 3
                 if nemico.vita > 0 and nemico.inCasellaVista and ((abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo)):
                     nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, listaPersonaggi, dati)
                     if nemico.visto:

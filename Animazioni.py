@@ -16,7 +16,7 @@ def animaCamminataRalloCambiosta(avanzamentoStoria, npers, x, y, scudo, armatura
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
 
 
 def animaCamminataRalloSpostato(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
@@ -31,20 +31,20 @@ def animaCamminataRalloSpostato(avanzamentoStoria, npers, x, y, scudo, armatura,
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
     elif 0 < fineanimaz <= 5:
         frame = 2
-        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
 def animaCamminataRalloFermo(avanzamentoStoria, npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
     pers = False
     if 5 < fineanimaz <= 10:
         frame = 1
-        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
     elif 0 < fineanimaz <= 5:
         frame = 2
-        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
+        disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
 def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, tastop, animazioneRallo, movimentoPerMouse, fineanimaz):
@@ -75,7 +75,7 @@ def animaCamminataRallo(avanzamentoStoria, sposta, x, y, vx, vy, primopasso, cam
         # quando si apre una porta o un cofanetto
         elif difesa == 0 and fineanimaz > 0:
             animazioneRallo = True
-            disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+            disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     elif GlobalVar.canaleSoundPassiRallo.get_busy():
         GlobalVar.canaleSoundPassiRallo.stop()
     return animazioneRallo, primopasso
@@ -90,19 +90,19 @@ def animaAttaccoRallo(avanzamentoStoria, sposta, x, y, npers, pers, arma, scudo,
                     GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreLancioFreccia)
                 elif fineanimaz == 5:
                     GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreAttaccoArco)
-                disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
+                disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arcoAttacco, faretra, guantiAttacco, False, False, False, True)
             else:
                 if fineanimaz == 10:
                     GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreAttaccoSpada)
-                disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
+                disegnaRallo(npers, x, y, avvele, pers, armaAttacco, armatura, scudo, collana, arco, faretra, guantiAttacco, False, False, True)
         elif animaOggetto[0]:
             animazioneRallo = True
             if animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
-                disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
             if animaOggetto[0] == "pozione" or animaOggetto[0] == "superPozione":
                 if fineanimaz == 10:
                     GlobalVar.canaleSoundAttacco.play(GlobalVar.suonoUsoPozione)
-                disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
                 if fineanimaz > 5:
                     GlobalVar.schermo.blit(GlobalVar.imgAnimaPozione1, (x, y))
                 else:
@@ -110,7 +110,7 @@ def animaAttaccoRallo(avanzamentoStoria, sposta, x, y, npers, pers, arma, scudo,
             elif animaOggetto[0] == "medicina":
                 if fineanimaz == 10:
                     GlobalVar.canaleSoundAttacco.play(GlobalVar.suonoUsoMedicina)
-                disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
                 if fineanimaz > 5:
                     GlobalVar.schermo.blit(GlobalVar.imgAnimaMedicina1, (x, y))
                 else:
@@ -125,7 +125,7 @@ def animaAttaccoRallo(avanzamentoStoria, sposta, x, y, npers, pers, arma, scudo,
                 GlobalVar.schermo.blit(armrobS, (vrx, vry))
                 GlobalVar.schermo.blit(GlobalVar.robos, (vrx, vry))
                 GlobalVar.schermo.blit(GlobalVar.imgAnimaCaricabatterie, (vrx, vry))
-                disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+                disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     return animazioneRallo
 
 
@@ -156,7 +156,7 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
         if fineanimaz == 10:
             GlobalVar.canaleSoundLvUp.play(GlobalVar.rumorelevelup)
         avvele = False
-        disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         if 5 <= fineanimaz <= 10:
             GlobalVar.schermo.blit(GlobalVar.saliliv2, (x, y))
         if 1 < fineanimaz <= 5:
@@ -236,9 +236,9 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
 def animaRalloFermo(avanzamentoStoria, x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, avvele, azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz):
     if (not "attaccoRallo" in azioniDaEseguire and not "movimentoRallo" in azioniDaEseguire and not (nemicoAttaccante and nemicoAttaccante.ralloParato) and difesa == 0) or fineanimaz == 0:
         if animazioneRalloFatta:
-            disegnaRallo(avanzamentoStoria, npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+            disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         else:
-            disegnaRallo(avanzamentoStoria, npers, vx, vy, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+            disegnaRallo(npers, vx, vy, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
 
 def animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, surriscalda, cambiosta, animazioneColco, fineanimaz):
@@ -1266,7 +1266,7 @@ def disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca):
 def animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz):
     if not cambiosta:
         for personaggio in listaPersonaggi:
-            if (personaggio.inCasellaVista or personaggio.mantieniSempreASchermo) and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and personaggio.animaSpostamento) and not personaggio.animazioneFatta or (personaggio.inCasellaVista and fineanimaz == 0):
+            if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and personaggio.animaSpostamento) and not personaggio.animazioneFatta or (personaggio.inCasellaVista and fineanimaz == 0):
                 if personaggio.animazioneFatta:
                     GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
                 else:
@@ -1276,7 +1276,7 @@ def animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanima
 def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta, fineanimaz):
     if not cambiosta:
         for personaggio in listaPersonaggi:
-            if personaggio.inCasellaVista and personaggio.animaSpostamento and (personaggio.x != personaggio.vx or personaggio.y != personaggio.vy):
+            if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo and personaggio.animaSpostamento and (personaggio.x != personaggio.vx or personaggio.y != personaggio.vy):
                 personaggio.animazioneFatta = True
                 animazionePersonaggi = True
                 if not GlobalVar.canaleSoundPassiNemiciPersonaggi.get_busy() and fineanimaz > 6:
@@ -1403,7 +1403,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                             GlobalVar.schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
                             GlobalVar.schermo.blit(sfondinob, (nemico.x, nemico.y))
                 for personaggio in listaPersonaggi:
-                    if personaggio.inCasellaVista or personaggio.mantieniSempreASchermo:
+                    if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo:
                         if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 0:
                             GlobalVar.schermo.blit(sfondinob, (personaggio.vx, personaggio.vy))
                             GlobalVar.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
@@ -1497,7 +1497,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animazioneColcoFatta = True
 
             pygame.event.pump()
-            if (animazioneNemici or animazioneRallo or animazioneColco or animazionePersonaggi) and fineanimaz > 0:
+            if (animazioneNemici or animazioneRallo or animazioneColco or animazionePersonaggi) and fineanimaz >= 0:
                 pygame.display.update()
                 GlobalVar.clockAnimazioni.tick(GlobalVar.fpsAnimazioni)
                 # print (GlobalVarG2.clockAnimazioni.get_fps())

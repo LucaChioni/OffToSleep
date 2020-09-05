@@ -121,7 +121,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
     if not stanza in stanzeGiaVisitate:
         if stanza == GlobalVar.dictStanze["casaSamSara1"]:
             percorsoPersonaggio = []
-            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 13, "a", "OggettoSaraDormiente", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 13, "a", "OggettoLettoSara", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = []
@@ -146,6 +146,82 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
             listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = []
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, "w", "OggettoComodinoSara", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 15, "w", "OggettoFinestraA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 15, "w", "OggettoFinestraB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 12, "d", "OggettoLettoSam", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 3, "s", "OggettoDocciaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 3, "s", "OggettoDocciaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 2, "s", "OggettoDocciaC", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, "d", "OggettoGabinettoA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 3, "d", "OggettoGabinettoB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, "d", "OggettoGabinettoC", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, "s", "OggettoCaminoA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 4, "s", "OggettoCaminoB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4, "s", "OggettoCaminoC", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 5, "s", "OggettoCaminoD", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, "s", "OggettoCaminoE", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 6, "s", "OggettoCaminoF", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 6, "s", "OggettoCaminoG", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, "s", "OggettoScaffaleCucinaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, "s", "OggettoScaffaleCucinaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, "s", "OggettoScaffaleCucinaC", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
     else:
@@ -198,7 +274,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, x, y, cambiosta, carim, cari
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamSara1"]:
         pygame.time.wait(1000)
-        personaggio = PersonaggioObj(False, False, False, "OggettoSaraDormiente", stanza, avanzamentoStoria, False)
+        personaggio = PersonaggioObj(False, False, False, "OggettoLettoSara", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara1"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:

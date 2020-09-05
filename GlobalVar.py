@@ -1142,10 +1142,10 @@ suonoUsoBombaAppiccicosa = pygame.mixer.Sound("Audio/RumoriOggetti/BombaAppiccic
 suonoUsoBombaPotenziata = pygame.mixer.Sound("Audio/RumoriOggetti/BombaPotenziata.wav")
 
 # suoni nemici
-rumoreMovimentoNemiciPersonaggi = pygame.mixer.Sound("Audio/RumoriNemici/MovimentoNemiciPersonaggi.wav")
-rumoreAttaccoNemico = pygame.mixer.Sound("Audio/RumoriNemici/AttaccoVicinoNemico.wav")
-rumoreLancioOggettoNemico = pygame.mixer.Sound("Audio/RumoriNemici/AttaccoLontanoNemico.wav")
-rumoreMorteNemico = pygame.mixer.Sound("Audio/RumoriNemici/MorteNemico.wav")
+rumoreMovimentoNemiciPersonaggi = pygame.mixer.Sound("Audio/RumoriNemiciPersonaggi/MovimentoNemiciPersonaggi.wav")
+rumoreAttaccoNemico = pygame.mixer.Sound("Audio/RumoriNemiciPersonaggi/AttaccoVicinoNemico.wav")
+rumoreLancioOggettoNemico = pygame.mixer.Sound("Audio/RumoriNemiciPersonaggi/AttaccoLontanoNemico.wav")
+rumoreMorteNemico = pygame.mixer.Sound("Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
 
 # suono mappa
 suonoAperturaMappa = pygame.mixer.Sound("Audio/RumoriAmbiente/AperturaMappa.wav")
