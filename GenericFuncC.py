@@ -73,6 +73,10 @@ def definisciStanze():
     dictStanze["casaSamSara1"] = i
     i += 1
     dictStanze["casaSamSara2"] = i
+    i += 1
+    dictStanze["casaSamSara3"] = i
+    i += 1
+    dictStanze["casaSamSara4"] = i
 
     return dictStanze
 

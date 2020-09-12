@@ -85,7 +85,7 @@ class PersonaggioObj(object):
             self.imgOggetto.append(img)
             i += 1
         imgDialogo = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo + ".png")
-        self.imgDialogo = pygame.transform.smoothscale(imgDialogo, (GlobalVar.gpx * 12, GlobalVar.gpy * 9))
+        self.imgDialogo = pygame.transform.smoothscale(imgDialogo, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
 
     def aggiornaImgOggetto(self, avanzamentoStoria):
         numImgAttuale = 0
@@ -126,7 +126,7 @@ class PersonaggioObj(object):
         self.imgDMov2 = pygame.transform.smoothscale(imgDMov2, (GlobalVar.gpx, GlobalVar.gpy))
 
         imgDialogo = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png")
-        self.imgDialogo = pygame.transform.smoothscale(imgDialogo, (GlobalVar.gpx * 12, GlobalVar.gpy * 9))
+        self.imgDialogo = pygame.transform.smoothscale(imgDialogo, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
 
     def girati(self, direzione):
         if direzione == "w":
@@ -453,6 +453,8 @@ class PersonaggioObj(object):
                 dialogo.append("")
                 dialogo.append("")
                 self.partiDialogo.append(dialogo)
+
+        # casa Sam e Sara
         if self.tipo == "OggettoLettoSara":
             self.partiDialogo = []
             self.nome = "Sara"
@@ -925,6 +927,47 @@ class PersonaggioObj(object):
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append("Non ho bisogno di cibo, non ho fame")
+                dialogo.append("")
+                dialogo.append("")
+                dialogo.append("")
+                self.partiDialogo.append(dialogo)
+        if self.tipo == "CaneCasa":
+            self.partiDialogo = []
+            self.nome = "Agglomerato"
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ciao Agglo, cosa stai cercando in questi cespugli?")
+                dialogo.append("")
+                dialogo.append("")
+                dialogo.append("")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Deve aver fiutato un gatto o uno scoiattolo...")
+                dialogo.append("")
+                dialogo.append("")
+                dialogo.append("")
+                self.partiDialogo.append(dialogo)
+            else:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ehi Agglo, hai vito Sam andare da quella parte?")
+                dialogo.append("")
+                dialogo.append("")
+                dialogo.append("")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("... Mmmh...")
                 dialogo.append("")
                 dialogo.append("")
                 dialogo.append("")

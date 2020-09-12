@@ -5,8 +5,8 @@ from GenericFuncC import *
 import win32gui, win32con
 
 # hide the console
-# The_program_to_hide = win32gui.GetForegroundWindow()
-# win32gui.ShowWindow(The_program_to_hide, win32con.SW_HIDE)
+# programToHide = win32gui.GetForegroundWindow()
+# win32gui.ShowWindow(programToHide, win32con.SW_HIDE)
 
 # i suoni vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
 pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)

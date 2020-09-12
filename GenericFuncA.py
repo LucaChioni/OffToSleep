@@ -12,8 +12,19 @@ def messaggio(msg, colore, x, y, gr):
     y = y - (GlobalVar.gpy // 8)
     carattere = "Gentium Book Basic"
     font = pygame.font.SysFont(carattere, gr)
-    testo = font.render(msg, True, colore)
-    GlobalVar.schermo.blit(testo, (x, y))
+
+    # per mettere parti in italic: "testo normale <italic>-italic-testo in italic<italic> testo normale"
+    vetMsg = msg.split("<italic>")
+    for text in vetMsg:
+        if text.startswith("-italic-"):
+            font.set_italic(True)
+            text = text.replace("-italic-", "")
+        else:
+            font.set_italic(False)
+        testo = font.render(text, True, colore)
+        GlobalVar.schermo.blit(testo, (x, y))
+        dimX, dimY = font.size(text)
+        x += dimX
 
 
 def getStatistiche(dati, difesa=0):
@@ -178,13 +189,7 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             stanza = GlobalVar.dictStanze["sognoSara2"]
             cambiosta = True
             carim = True
-        elif ny == +GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
             nx = 0
             ny = 0
         # bordi stanza
@@ -223,26 +228,14 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             stanza = GlobalVar.dictStanze["sognoSara1"]
             cambiosta = True
             carim = True
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 7 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 7 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 7 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 7 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
             nx = 0
             ny = 0
         elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 29 and y == GlobalVar.gsy // 18 * 3 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["sognoSara3"]
             cambiosta = True
             carim = True
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 30 and y == GlobalVar.gsy // 18 * 3 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 30 and y == GlobalVar.gsy // 18 * 3 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 30 and y == GlobalVar.gsy // 18 * 3 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 30 and y == GlobalVar.gsy // 18 * 3 and not mostro and not robo:
             nx = 0
             ny = 0
         # bordi stanza
@@ -323,26 +316,14 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             stanza = GlobalVar.dictStanze["sognoSara2"]
             cambiosta = True
             carim = True
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 1 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 1 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 1 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 1 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
             nx = 0
             ny = 0
         elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 2 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["sognoSara4"]
             cambiosta = True
             carim = True
-        elif ny == -GlobalVar.gpy and y == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
             nx = 0
             ny = 0
         # bordi stanza
@@ -429,13 +410,7 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             stanza = GlobalVar.dictStanze["sognoSara3"]
             cambiosta = True
             carim = True
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
             nx = 0
             ny = 0
         # bordi stanza
@@ -474,26 +449,14 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             stanza = GlobalVar.dictStanze["casaSamSara2"]
             cambiosta = True
             carim = True
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
             nx = 0
             ny = 0
         elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["casaSamSara2"]
             cambiosta = True
             carim = True
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
-            nx = 0
-            ny = 0
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
             nx = 0
             ny = 0
         # bordi stanza
@@ -659,6 +622,230 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+            nx = 0
+            ny = 0
+    if (stanza == GlobalVar.dictStanze["casaSamSara2"]) and ((nx != 0) or (ny != 0)) and not cambiosta:
+        # porte
+        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 2 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara1"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 2 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara1"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 2 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara3"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 2 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara3"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 2 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara3"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 2 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara3"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara4"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara4"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara4"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara4"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara4"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara4"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        # bordi stanza
+        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+            nx = 0
+            ny = 0
+        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+            nx = 0
+            ny = 0
+        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+            nx = 0
+            ny = 0
+        # controllo muri-oggetti
+        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+    if (stanza == GlobalVar.dictStanze["casaSamSara3"]) and ((nx != 0) or (ny != 0)) and not cambiosta:
+        # porte
+        if ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara2"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara2"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara2"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+            stanza = GlobalVar.dictStanze["casaSamSara2"]
+            cambiosta = True
+            carim = True
+        elif x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+            nx = 0
+            ny = 0
+        # bordi stanza
+        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+            nx = 0
+            ny = 0
+        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+            nx = 0
+            ny = 0
+        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+            nx = 0
+            ny = 0
+        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+            nx = 0
+            ny = 0
+        # controllo muri-oggetti
+        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 28, GlobalVar.gpy * 1, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 6, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
 
@@ -2492,7 +2679,7 @@ def controllaMorteRallo(vitaRallo, inizio):
         sprites = pygame.sprite.Group(Fade(3))
         schermoFadeToBlack = GlobalVar.schermo.copy()
         i = 1
-        while i <= 46:
+        while i <= 35:
             sprites.update()
             GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
             sprites.draw(GlobalVar.schermo)
@@ -2778,16 +2965,16 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
     puntatoreSpostato = False
     puntatore = GlobalVar.puntatore
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        imgPersDialogo = pygame.transform.smoothscale(GlobalVar.imgDialogoFraMaggiore, (GlobalVar.gpx * 12, GlobalVar.gpy * 9))
+        imgPersDialogo = pygame.transform.smoothscale(GlobalVar.imgDialogoFraMaggiore, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
         nomePersonaggio = "Sam"
     else:
-        imgPersDialogo = pygame.transform.smoothscale(GlobalVar.imgDialogoSara, (GlobalVar.gpx * 12, GlobalVar.gpy * 9))
+        imgPersDialogo = pygame.transform.smoothscale(GlobalVar.imgDialogoSara, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
         nomePersonaggio = "Sara"
 
     if personaggio.nome != "Tutorial":
-        GlobalVar.schermo.blit(imgPersDialogo, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4))
+        GlobalVar.schermo.blit(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))
     if personaggio.nome != "Tutorial" and personaggio.nome != "Nessuno":
-        GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4))
+        GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
     schermo_prima_del_dialogo = GlobalVar.schermo.copy()
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
     dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
@@ -2944,9 +3131,9 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
             GlobalVar.schermo.blit(background, (0, 0))
             if personaggio.nome != "Tutorial":
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio" and personaggio.nome != "Nessuno":
-                    GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4))
+                    GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu" or personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
-                    GlobalVar.schermo.blit(imgPersDialogo, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4))
+                    GlobalVar.schermo.blit(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))
             GlobalVar.schermo.blit(GlobalVar.sfondoDialoghi, (0, GlobalVar.gsy * 2 // 3))
             if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
                 messaggio(personaggio.nome + ":", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, (GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 4 // 5), 80)
