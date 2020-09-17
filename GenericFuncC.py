@@ -53,6 +53,26 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["trovatoMappaDiario"] = i
     i += 1
     dictAvanzamentoStoria["incontratoColco"] = i
+    i += 1
+    dictAvanzamentoStoria["mercantePozione"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteAlimantaz"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteMedicina"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteSuperPoz"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteAlimMiglio"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteBomba"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteBomVele"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteEsca"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteBomAppi"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteBomPote"] = i
 
     return dictAvanzamentoStoria
 

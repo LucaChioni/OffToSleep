@@ -6,25 +6,49 @@ import GlobalVar
 from FadeToBlackClass import *
 
 
-def messaggio(msg, colore, x, y, gr):
+def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1):
     gr = gr - 10
     gr = GlobalVar.gpx * gr // 60
     y = y - (GlobalVar.gpy // 8)
     carattere = "Gentium Book Basic"
     font = pygame.font.SysFont(carattere, gr)
+    coloreOrig = colore
+    xOrig = x
 
-    # per mettere parti in italic: "testo normale <italic>-italic-testo in italic<italic> testo normale"
-    vetMsg = msg.split("<italic>")
+    # per mettere parti in italic, bold o colorate: "Premi <*>#bold#un<*> <*>#italic#tasto<*> per <*>#color#100,0,0#continuare<*>..."
+    vetMsg = msg.split("<*>")
     for text in vetMsg:
-        if text.startswith("-italic-"):
+        colore = coloreOrig
+        font.set_italic(False)
+        font.set_bold(False)
+        if text.startswith("#italic#"):
+            text = text.replace("#italic#", "")
             font.set_italic(True)
-            text = text.replace("-italic-", "")
-        else:
-            font.set_italic(False)
-        testo = font.render(text, True, colore)
-        GlobalVar.schermo.blit(testo, (x, y))
-        dimX, dimY = font.size(text)
-        x += dimX
+        elif text.startswith("#bold#"):
+            text = text.replace("#bold#", "")
+            font.set_bold(True)
+        elif text.startswith("#color#"):
+            text = text.replace("#color#", "")
+            coloreRgb = text.split("#")[0]
+            text = text.split("#")[1]
+            colore = (int(coloreRgb.split(",")[0]), int(coloreRgb.split(",")[1]), int(coloreRgb.split(",")[2]))
+        vetParole = text.split(" ")
+        for parola in vetParole:
+            if parola != "":
+                if parola == "<br>":
+                    x = xOrig
+                    y += spazioTraLeRighe
+                else:
+                    testo = font.render(parola, True, colore)
+                    dimX, dimY = font.size(parola + " ")
+                    if largezzaFoglio != -1 and x + dimX > xOrig + largezzaFoglio:
+                        x = xOrig
+                        if spazioTraLeRighe != 1:
+                            y += spazioTraLeRighe
+                        else:
+                            y += dimY
+                    GlobalVar.schermo.blit(testo, (x, y))
+                    x += dimX
 
 
 def getStatistiche(dati, difesa=0):
@@ -106,8 +130,8 @@ def guardaVideo(path, audio=0):
     listaImg = []
     # load all the images
     for i in os.listdir(path):
-        img = GlobalVar.loadImage(path + '/' + i, True)
-        img = pygame.transform.scale(img, (GlobalVar.gsx, GlobalVar.gsy))
+        img = pygame.image.load(path + '/' + i).convert()
+        img = pygame.transform.smoothscale(img, (GlobalVar.gsx, GlobalVar.gsy))
         listaImg.append(img)
     if audio != 0:
         GlobalVar.canaleSoundCanzone.play(audio)
@@ -549,7 +573,7 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
         elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
@@ -562,6 +586,9 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
@@ -589,6 +616,9 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+            nx = 0
+            ny = 0
+        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
@@ -2982,6 +3012,9 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
     background.blit(dark, (0, 0))
     GlobalVar.schermo.blit(background, (0, 0))
 
+    schermo_prima_del_dialogo = GlobalVar.schermo.copy()
+    background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalVar.gsy // 18 * 3.5, GlobalVar.gsx, GlobalVar.gsy // 18 * 14.5))
+
     primoframe = True
     aggiornaInterfacciaPerMouse = False
     numeroMessaggiTotali = len(personaggio.partiDialogo)
@@ -3128,7 +3161,7 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
             if puntatoreSpostato:
                 numeromessaggioAttuale -= 1
                 puntatoreSpostato = False
-            GlobalVar.schermo.blit(background, (0, 0))
+            GlobalVar.schermo.blit(background, (0, GlobalVar.gsy // 18 * 3.5))
             if personaggio.nome != "Tutorial":
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio" and personaggio.nome != "Nessuno":
                     GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
@@ -3160,13 +3193,7 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
                 if voceMarcata == 4:
                     GlobalVar.schermo.blit(puntatore, (GlobalVar.gsx // 32 * 16, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2)))
             else:
-                riga = -1
-                for frase in personaggio.partiDialogo[numeromessaggioAttuale]:
-                    if riga == -1:
-                        riga = 0
-                    else:
-                        messaggio(frase, GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + riga, 50)
-                        riga += GlobalVar.gpy * 4 // 5
+                messaggio(personaggio.partiDialogo[numeromessaggioAttuale][1], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, (GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3), 50, GlobalVar.gpx * 30, GlobalVar.gpy * 4 // 5)
             numeromessaggioAttuale += 1
             prosegui = False
             pygame.display.update()

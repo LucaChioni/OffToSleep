@@ -525,7 +525,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             listaNemiciVisti.append(nemico)
 
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    tastotempfps = 2
+    tastotempfps = 4
     tastop = 0
     numTastiPremuti = 0
     danno = 0
@@ -757,6 +757,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         primoFrame = False
 
         for event in pygame.event.get():
+            tastotempfps = 4
             sinistroMouseVecchio = sinistroMouse
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
@@ -1112,7 +1113,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     numTastiPremuti = 0
                 if numTastiPremuti == 0:
                     tastop = 0
-                    tastotempfps = 5
                     nxp = 0
                     nyp = 0
             if event.type == pygame.MOUSEBUTTONUP:
@@ -1748,7 +1748,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         for personaggio in listaPersonaggi:
             if (personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista) or personaggio.inCasellaVista:
                 GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
-                break
 
         # disegnare i mostri
         for nemico in listaNemici:

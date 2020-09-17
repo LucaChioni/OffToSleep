@@ -1285,18 +1285,19 @@ def gameloop():
                         if y > yObbiettivo:
                             npers = 3
                         sposta = True
-                    percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, vetNemiciSoloConXeY, casevistePorteIncluse)
-                    if percorsoTrovato:
-                        if len(percorsoTrovato) >= 4 and percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y:
-                            if percorsoTrovato[len(percorsoTrovato) - 4] > x:
-                                npers = 1
-                            if percorsoTrovato[len(percorsoTrovato) - 4] < x:
-                                npers = 2
-                            if percorsoTrovato[len(percorsoTrovato) - 3] > y:
-                                npers = 4
-                            if percorsoTrovato[len(percorsoTrovato) - 3] < y:
-                                npers = 3
-                            sposta = True
+                    else:
+                        percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, vetNemiciSoloConXeY, casevistePorteIncluse)
+                        if percorsoTrovato:
+                            if len(percorsoTrovato) >= 4 and percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y:
+                                if percorsoTrovato[len(percorsoTrovato) - 4] > x:
+                                    npers = 1
+                                if percorsoTrovato[len(percorsoTrovato) - 4] < x:
+                                    npers = 2
+                                if percorsoTrovato[len(percorsoTrovato) - 3] > y:
+                                    npers = 4
+                                if percorsoTrovato[len(percorsoTrovato) - 3] < y:
+                                    npers = 3
+                                sposta = True
                     # cambiare posizione
                     if sposta:
                         if npers == 3:

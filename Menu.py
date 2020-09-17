@@ -174,6 +174,7 @@ def menu(caricaSalvataggio):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            tastotempfps = 5
             sinistroMouseVecchio = sinistroMouse
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
@@ -201,11 +202,11 @@ def menu(caricaSalvataggio):
                     pygame.mouse.set_visible(False)
                     GlobalVar.mouseVisibile = False
                 tastop = event.key
-                tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato and mostraTutorial:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     mostraTutorial = False
                     tastoTrovato = True
+                    primoFrame = True
                 if event.key == pygame.K_s and not tastoTrovato:
                     primoMovimento = True
                     tastoTrovato = True
@@ -222,9 +223,11 @@ def menu(caricaSalvataggio):
                 if not mostraTutorial:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     mostraTutorial = True
+                    primoFrame = True
                 else:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     mostraTutorial = False
+                    primoFrame = True
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
                 tastoTrovato = True
                 tastop = "spazioOsinistroMouse"
@@ -284,6 +287,7 @@ def menu(caricaSalvataggio):
                                 dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
                                 if dati:
                                     return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali
+                            primoFrame = True
 
                         # Impostazioni
                         if voceMarcata == 3:
@@ -302,6 +306,7 @@ def menu(caricaSalvataggio):
                     elif suTogliTutorial and event.type == pygame.MOUSEBUTTONDOWN:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                         mostraTutorial = False
+                        primoFrame = True
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
@@ -320,18 +325,6 @@ def menu(caricaSalvataggio):
         if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or tastop == "escOdestroMouse" or ((tastop == pygame.K_q) or (tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
             aggiornaSchermo = False
-            if primoFrame:
-                puntatore = GlobalVar.puntatore
-                xp = GlobalVar.gsx // 32 * 1.5
-                if voceMarcata == 1:
-                    yp = GlobalVar.gsy // 18 * 2.5
-                if voceMarcata == 2:
-                    yp = GlobalVar.gsy // 18 * 5
-                if voceMarcata == 3:
-                    yp = GlobalVar.gsy // 18 * 7.5
-                if voceMarcata == 4:
-                    yp = GlobalVar.gsy // 18 * 12.5
-                primoFrame = False
             if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
                 tastotempfps = 2
             if not mostraTutorial:
@@ -373,7 +366,6 @@ def menu(caricaSalvataggio):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = GlobalVar.gsy // 18 * 12.5
                         voceMarcata += 3
-                GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 persomenuinizio = GlobalVar.persGrafMenu
                 if c == 1:
                     robomenuinizio = GlobalVar.robograf0
@@ -383,12 +375,30 @@ def menu(caricaSalvataggio):
                     robomenuinizio = GlobalVar.robograf2
                 if c == 4:
                     robomenuinizio = GlobalVar.robograf3
-                GlobalVar.schermo.blit(persomenuinizio, (GlobalVar.gpx * 15, 0))
-                GlobalVar.schermo.blit(robomenuinizio, (GlobalVar.gpx * 3, 0))
-                messaggio("Inizia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 2, 90)
-                messaggio("Continua", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 4.5, 90)
-                messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 7, 90)
-                messaggio("Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 12, 90)
+
+                # per ottimizzare
+                if primoFrame:
+                    puntatore = GlobalVar.puntatore
+                    xp = GlobalVar.gsx // 32 * 1.5
+                    if voceMarcata == 1:
+                        yp = GlobalVar.gsy // 18 * 2.5
+                    if voceMarcata == 2:
+                        yp = GlobalVar.gsy // 18 * 5
+                    if voceMarcata == 3:
+                        yp = GlobalVar.gsy // 18 * 7.5
+                    if voceMarcata == 4:
+                        yp = GlobalVar.gsy // 18 * 12.5
+                    GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                    GlobalVar.schermo.blit(persomenuinizio, (GlobalVar.gpx * 15, 0))
+                    GlobalVar.schermo.blit(robomenuinizio, (GlobalVar.gpx * 3, 0))
+                    messaggio("Inizia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 2, 90)
+                    messaggio("Continua", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 4.5, 90)
+                    messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 7, 90)
+                    messaggio("Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 12, 90)
+                    primoFrame = False
+                else:
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (0, 0, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy))
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (0, GlobalVar.gsy // 18 * 16.5, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2))
 
                 if GlobalVar.mouseVisibile:
                     messaggio("Tasto destro: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 16.8, 50)
@@ -397,6 +407,8 @@ def menu(caricaSalvataggio):
 
                 GlobalVar.schermo.blit(puntatore, (xp, yp))
             else:
+                if primoFrame:
+                    primoFrame = False
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 if GlobalVar.mouseVisibile:
                     messaggio("Comandi mouse", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
@@ -624,6 +636,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            tastotempfps = 5
             sinistroMouseVecchio = sinistroMouse
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
@@ -651,7 +664,6 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     pygame.mouse.set_visible(False)
                     GlobalVar.mouseVisibile = False
                 tastop = event.key
-                tastotempfps = 5
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
                     tastoTrovato = True
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -677,6 +689,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     risposta = True
                 else:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                    primoFrame = True
                     # oggetti
                     if voceMarcata == 1:
                         dati, attacco = oggetti(dati, canzone)
@@ -729,7 +742,6 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
         if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
             aggiornaSchermo = False
-            primoFrame = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_s:
@@ -789,83 +801,89 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 inizio, risposta = chiediconferma(conferma, canzone)
                 conferma = 0
 
-            GlobalVar.schermo.fill(GlobalVar.grigioscu)
-            # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12.5))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 15.5))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 15.5))
-            messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
-            messaggio("Oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 50)
-            messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 50)
-            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-                messaggio("Setta Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
-            if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
-                messaggio("Mappa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 50)
-                messaggio("Diario", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 50)
-            messaggio("Salva", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, 50)
-            messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, 50)
-            messaggio("Menu principale", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, 50)
+            if primoFrame:
+                GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12.5))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 15.5))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 15.5))
+                messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+                messaggio("Oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 50)
+                messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 50)
+                if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                    messaggio("Setta Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
+                if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+                    messaggio("Mappa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 50)
+                    messaggio("Diario", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 50)
+                messaggio("Salva", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, 50)
+                messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, 50)
+                messaggio("Menu principale", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, 50)
+                if carim:
+                    if dati[10] <= 0:
+                        robosta = GlobalVar.robograf2b
+                    else:
+                        robosta = GlobalVar.robograf1b
+                    carim = False
+
+                # vita-status personaggio
+                if dati[5] < 0:
+                    dati[5] = 0
+                messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 13, 50)
+                messaggio("Lv:  " + str(dati[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 14, 50)
+                if dati[4] < 100:
+                    messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, 50)
+                else:
+                    messaggio("Esp:  -- / --", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, 50)
+                messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 15, 50)
+                GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 13.5, (GlobalVar.gsy // 18 * 16) + (GlobalVar.gpy // 8)))
+                if dati[121]:
+                    GlobalVar.schermo.blit(avvelenatosta, (GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 16))
+                if dati[123] > 0:
+                    GlobalVar.schermo.blit(attaccopiusta, ((GlobalVar.gsx // 32 * 13.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 16))
+                if dati[124] > 0:
+                    GlobalVar.schermo.blit(difesapiusta, ((GlobalVar.gsx // 32 * 13.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 16))
+                GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 2))
+
+                if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                    # vita-status robo
+                    if dati[10] < 0:
+                        dati[10] = 0
+                    messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 13, 50)
+                    messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 14, 50)
+                    GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 23.5, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 8)))
+                    if dati[122] > 0:
+                        GlobalVar.schermo.blit(surriscaldatosta, (GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 15))
+                    if dati[125] > 0:
+                        GlobalVar.schermo.blit(velocitapiusta, ((GlobalVar.gsx // 32 * 23.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15))
+                    if dati[126] > 0:
+                        GlobalVar.schermo.blit(efficienzapiusta, ((GlobalVar.gsx // 32 * 23.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15))
+                    GlobalVar.schermo.blit(robosta, (GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 2))
+
+                if attacco != 0:
+                    risposta = True
+
+                if faretraFrecceStart != 0:
+                    GlobalVar.schermo.blit(faretraFrecceStart, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 2.5))
+                    messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 6, 50)
+                GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroStart, (GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 2.5))
+                messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 6, 50)
+            else:
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 11.5))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 19, 0, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 2))
+
             if GlobalVar.mouseVisibile:
                 messaggio("Tasto destro / centrale: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 1, 50)
             else:
                 messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 1, 50)
-            if carim:
-                if dati[10] <= 0:
-                    robosta = GlobalVar.robograf2b
-                else:
-                    robosta = GlobalVar.robograf1b
-                carim = False
-
-            # vita-status personaggio
-            if dati[5] < 0:
-                dati[5] = 0
-            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 13, 50)
-            messaggio("Lv:  " + str(dati[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 14, 50)
-            if dati[4] < 100:
-                messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, 50)
-            else:
-                messaggio("Esp:  -- / --", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, 50)
-            messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 15, 50)
-            GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 13.5, (GlobalVar.gsy // 18 * 16) + (GlobalVar.gpy // 8)))
-            if dati[121]:
-                GlobalVar.schermo.blit(avvelenatosta, (GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 16))
-            if dati[123] > 0:
-                GlobalVar.schermo.blit(attaccopiusta, ((GlobalVar.gsx // 32 * 13.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 16))
-            if dati[124] > 0:
-                GlobalVar.schermo.blit(difesapiusta, ((GlobalVar.gsx // 32 * 13.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 16))
-            GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 2))
-
-            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-                # vita-status robo
-                if dati[10] < 0:
-                    dati[10] = 0
-                messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 13, 50)
-                messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 14, 50)
-                GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 23.5, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 8)))
-                if dati[122] > 0:
-                    GlobalVar.schermo.blit(surriscaldatosta, (GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 15))
-                if dati[125] > 0:
-                    GlobalVar.schermo.blit(velocitapiusta, ((GlobalVar.gsx // 32 * 23.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15))
-                if dati[126] > 0:
-                    GlobalVar.schermo.blit(efficienzapiusta, ((GlobalVar.gsx // 32 * 23.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15))
-                GlobalVar.schermo.blit(robosta, (GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 2))
-
-            if attacco != 0:
-                risposta = True
-
-            if faretraFrecceStart != 0:
-                GlobalVar.schermo.blit(faretraFrecceStart, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 2.5))
-                messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 6, 50)
-            GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroStart, (GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 2.5))
-            messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 6, 50)
 
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             if not risposta:
                 pygame.display.update()
             else:
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
+            primoFrame = False
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
@@ -877,8 +895,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
     yp = GlobalVar.gpy * 13.8
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
-    sconosciutoOggetto = pygame.transform.scale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 4, GlobalVar.gpy * 4))
-    sconosciutoOggettoIco = pygame.transform.scale(GlobalVar.sconosciutoOggettoIcoMenu, (GlobalVar.gpx, GlobalVar.gpy))
+    sconosciutoOggetto = pygame.transform.smoothscale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 4, GlobalVar.gpy * 4))
+    sconosciutoOggettoIco = pygame.transform.smoothscale(GlobalVar.sconosciutoOggettoIcoMenu, (GlobalVar.gpx, GlobalVar.gpy))
 
     schermo_temp = GlobalVar.schermo.copy()
     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
@@ -1044,6 +1062,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            tastotempfps = 5
             sinistroMouseVecchio = sinistroMouse
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
@@ -1070,7 +1089,6 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                     pygame.mouse.set_visible(False)
                     GlobalVar.mouseVisibile = False
                 tastop = event.key
-                tastotempfps = 5
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
                     tastoTrovato = True
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -1458,7 +1476,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
 def menuMercante(dati, canzone):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
-    sconosciutoOggetto = pygame.transform.scale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
+    sconosciutoOggetto = pygame.transform.smoothscale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
     xp = GlobalVar.gsx // 32 * 10.5
     yp = GlobalVar.gsy // 18 * 6.1
     xpv = xp
@@ -1491,7 +1509,7 @@ def menuMercante(dati, canzone):
     imgOggetti = []
     i = 1
     while i <= 10:
-        if (i == 1 and dati[0] > -1) or (i == 2 and dati[0] > -1) or (i == 3 and dati[0] > -1) or (i == 4 and dati[0] > -1) or (i == 5 and dati[0] > -1) or (i == 6 and dati[0] > -1) or (i == 7 and dati[0] > -1) or (i == 8 and dati[0] > -1) or (i == 9 and dati[0] > -1) or (i == 10 and dati[0] > -1):
+        if (i == 1 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercantePozione"]) or (i == 2 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteAlimantaz"]) or (i == 3 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteMedicina"]) or (i == 4 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteSuperPoz"]) or (i == 5 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteAlimMiglio"]) or (i == 6 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomba"]) or (i == 7 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomVele"]) or (i == 8 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteEsca"]) or (i == 9 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomAppi"]) or (i == 10 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomPote"]):
             imgOggetti.append(GlobalVar.vetImgOggettiMercante[i - 1])
         else:
             imgOggetti.append(sconosciutoOggetto)
@@ -1641,6 +1659,7 @@ def menuMercante(dati, canzone):
         primoMovimento = False
         tastoTrovato = False
         for event in pygame.event.get():
+            tastotempfps = 5
             sinistroMouseVecchio = sinistroMouse
             centraleMouseVecchio = centraleMouse
             destroMouseVecchio = destroMouse
@@ -1668,7 +1687,6 @@ def menuMercante(dati, canzone):
                     pygame.mouse.set_visible(False)
                     GlobalVar.mouseVisibile = False
                 tastop = event.key
-                tastotempfps = 5
                 if event.key == pygame.K_q and not tastoTrovato:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     numeroOggettiAcquistati = 1
@@ -1762,15 +1780,15 @@ def menuMercante(dati, canzone):
                 else:
                     risposta = True
             if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato and (mouseInquadraFrecciaSu or mouseInquadraFrecciaGiu):
+                moneteInsufficienti = False
+                inventarioPieno = False
                 tastoTrovato = True
-                tastotempfps = 5
                 primoMovimento = True
                 tastop = "spazioOsinistroMouse"
                 mouseSinistroPremuto = True
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato and not (mouseInquadraFrecciaSu or mouseInquadraFrecciaGiu)):
                 moneteInsufficienti = False
                 inventarioPieno = False
-                tastotempfps = 5
                 primoMovimento = True
                 tastoTrovato = True
                 procediAllAcquisto = True
@@ -1836,9 +1854,9 @@ def menuMercante(dati, canzone):
                             voceMarcata = 0
                             xp = GlobalVar.gsx // 32 * 10.5
                             # faretra
-                            if confermaOggettoDaAcquistare == 10:
-                                dati[40] += numeroOggettiAcquistati
-                                yp = GlobalVar.gsy // 18 * 15.1
+                            if confermaOggettoDaAcquistare == 11:
+                                dati[133] += numeroOggettiAcquistati
+                                yp = GlobalVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
                         elif dati[133] == 1 and GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
@@ -1847,9 +1865,9 @@ def menuMercante(dati, canzone):
                             voceMarcata = 0
                             xp = GlobalVar.gsx // 32 * 10.5
                             # faretra
-                            if confermaOggettoDaAcquistare == 10:
-                                dati[40] += numeroOggettiAcquistati
-                                yp = GlobalVar.gsy // 18 * 15.1
+                            if confermaOggettoDaAcquistare == 11:
+                                dati[133] += numeroOggettiAcquistati
+                                yp = GlobalVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
                         elif dati[133] == 2 and GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
@@ -1858,9 +1876,9 @@ def menuMercante(dati, canzone):
                             voceMarcata = 0
                             xp = GlobalVar.gsx // 32 * 10.5
                             # faretra
-                            if confermaOggettoDaAcquistare == 10:
-                                dati[40] += numeroOggettiAcquistati
-                                yp = GlobalVar.gsy // 18 * 15.1
+                            if confermaOggettoDaAcquistare == 11:
+                                dati[133] += numeroOggettiAcquistati
+                                yp = GlobalVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
                         else:
@@ -2018,7 +2036,6 @@ def menuMercante(dati, canzone):
         if aggiornaSchermo or primoMovimento or buttonUp or tastop == pygame.K_q or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
             aggiornaSchermo = False
-            primoFrame = False
             if not primoMovimento and (tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
                 tastotempfps = 2
             if tastop == pygame.K_w:
@@ -2135,18 +2152,28 @@ def menuMercante(dati, canzone):
             elif dati[133] == 3:
                 maxFrecce = 60
 
-            GlobalVar.schermo.fill(GlobalVar.grigioscu)
-            # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-            pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13.5))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 4))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 16.5))
-            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 16.5))
+            if primoFrame:
+                GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13.5))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 4))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 16.5))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 16.5))
 
-            GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroMercante, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14))
-            messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.8, 50)
+                GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroMercante, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14))
+                GlobalVar.schermo.blit(GlobalVar.mercanteMenu, (GlobalVar.gsx // 32 * (-1), GlobalVar.gsy // 18 * 8))
 
-            GlobalVar.schermo.blit(GlobalVar.mercanteMenu, (GlobalVar.gsx // 32 * (-1), GlobalVar.gsy // 18 * 8))
+                messaggio("Acquista oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+                messaggio("Oggetti acquistabili", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 4.8, 40)
+                messaggio("Costo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.5, GlobalVar.gsy // 18 * 4.8, 40)
+                messaggio("Posseduti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18.5, GlobalVar.gsy // 18 * 4.8, 40)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 11), int(GlobalVar.gpy * 5.5)), (int(GlobalVar.gpx * 21), int(GlobalVar.gpy * 5.5)), 1)
+            else:
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 21, 0, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2.5))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.1, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 11))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 9.5, GlobalVar.gsy // 18 * 11))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.5, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 1))
+
             GlobalVar.schermo.blit(GlobalVar.sfondoDialogoMercante, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4))
             if moneteInsufficienti:
                 messaggio("Non hai abbastanza monete!", GlobalVar.rosso, GlobalVar.gsx // 32 * 2.1, GlobalVar.gsy // 18 * 6.1, 40)
@@ -2156,22 +2183,6 @@ def menuMercante(dati, canzone):
                 messaggio("Prendi quello che ti serve", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, 50)
             else:
                 messaggio("Quante te ne servono?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, 50)
-
-            if GlobalVar.mouseVisibile:
-                messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
-            else:
-                messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
-            if 1 <= oggetton <= 10:
-                GlobalVar.schermo.blit(imgOggetti[oggetton - 1], (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-            elif oggetton == 0:
-                GlobalVar.schermo.blit(GlobalVar.frecciaMenu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-            elif oggetton == 11:
-                if dati[133] == 0:
-                    GlobalVar.schermo.blit(GlobalVar.faretra1Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-                elif dati[133] == 1:
-                    GlobalVar.schermo.blit(GlobalVar.faretra2Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-                else:
-                    GlobalVar.schermo.blit(GlobalVar.faretra3Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
 
             # menu conferma
             if confermaOggettoDaAcquistare != 0:
@@ -2184,40 +2195,61 @@ def menuMercante(dati, canzone):
                     voceMarcata = 2
                     usauno = False
                 GlobalVar.schermo.blit(puntatorevecchio, (xpv, ypv))
-                messaggio("x" + str(numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 7.5, GlobalVar.gsy // 18 * 4.5, 50)
+                messaggio("x" + str(numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 7.5,
+                          GlobalVar.gsy // 18 * 4.5, 50)
                 if oggetton == 11:
-                    GlobalVar.schermo.blit(GlobalVar.scorriSuGiuBloccato, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
+                    GlobalVar.schermo.blit(GlobalVar.scorriSuGiuBloccato,
+                                           (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
                     if dati[133] == 1:
-                        messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
+                        messaggio("(Monete necessarie: %i)" % (
+                                    GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati),
+                                  GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
                     elif dati[133] >= 2:
-                        messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
+                        messaggio("(Monete necessarie: %i)" % (
+                                    GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati),
+                                  GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
                     else:
-                        messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
+                        messaggio(
+                            "(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati),
+                            GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
                 else:
-                    if voceMarcata != 0 and oggetton != 11 and (tastop == pygame.K_w or (mouseSinistroPremuto and mouseInquadraFrecciaSu)):
-                        GlobalVar.schermo.blit(GlobalVar.scorriSuGiuBloccatoSu, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
-                    elif voceMarcata != 0 and oggetton != 11 and (tastop == pygame.K_s or (mouseSinistroPremuto and mouseInquadraFrecciaGiu)):
-                        GlobalVar.schermo.blit(GlobalVar.scorriSuGiuBloccatoGiu, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
+                    if voceMarcata != 0 and oggetton != 11 and (
+                            tastop == pygame.K_w or (mouseSinistroPremuto and mouseInquadraFrecciaSu)):
+                        GlobalVar.schermo.blit(GlobalVar.scorriSuGiuBloccatoSu,
+                                               (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
+                    elif voceMarcata != 0 and oggetton != 11 and (
+                            tastop == pygame.K_s or (mouseSinistroPremuto and mouseInquadraFrecciaGiu)):
+                        GlobalVar.schermo.blit(GlobalVar.scorriSuGiuBloccatoGiu,
+                                               (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
                     else:
-                        GlobalVar.schermo.blit(GlobalVar.scorriSuGiu, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
-                    messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
+                        GlobalVar.schermo.blit(GlobalVar.scorriSuGiu,
+                                               (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
+                    messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati),
+                              GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
                 messaggio("Conferma", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.9, 50)
                 messaggio("Annulla", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 6.9, 50)
 
-            messaggio("Acquista oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
-            messaggio("Oggetti acquistabili", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 4.8, 40)
-            messaggio("Costo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.5, GlobalVar.gsy // 18 * 4.8, 40)
-            messaggio("Posseduti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18.5, GlobalVar.gsy // 18 * 4.8, 40)
-            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 11), int(GlobalVar.gpy * 5.5)), (int(GlobalVar.gpx * 21), int(GlobalVar.gpy * 5.5)), 1)
+            if 1 <= oggetton <= 10:
+                GlobalVar.schermo.blit(imgOggetti[oggetton - 1], (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+            elif oggetton == 0:
+                GlobalVar.schermo.blit(GlobalVar.frecciaMenu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+            elif oggetton == 11:
+                if dati[133] == 0:
+                    GlobalVar.schermo.blit(GlobalVar.faretra1Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                elif dati[133] == 1:
+                    GlobalVar.schermo.blit(GlobalVar.faretra2Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                else:
+                    GlobalVar.schermo.blit(GlobalVar.faretra3Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
 
+            messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.8, 50)
             messaggio("Freccia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 6.2, 40)
             messaggio(str(GlobalVar.costoOggetti[0]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.8, GlobalVar.gsy // 18 * 6.2, 40)
             messaggio("x%i" % dati[132], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 6.2, 40)
+            larghezzaTestoDescrizioni = GlobalVar.gpx * 8.5
+            spazioTraLeRigheTestoDescrizione = GlobalVar.gpy // 2
             if oggetton == 0:
                 messaggio("Freccia:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                messaggio("Usate per attaccare i nemici a distanza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                messaggio("Usate per attaccare i nemici a distanza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if imgOggetti[0] != sconosciutoOggetto:
                 messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
                 messaggio(str(GlobalVar.costoOggetti[1]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.8, GlobalVar.gsy // 18 * 7.1, 40)
@@ -2227,9 +2259,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[31], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 7.1, 40)
                 if oggetton == 1:
                     messaggio("Pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 100 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Recupera 100 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
             if imgOggetti[1] != sconosciutoOggetto:
@@ -2241,9 +2271,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[32], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 8, 40)
                 if oggetton == 2:
                     messaggio("Alimentazione 100gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 250 pe di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Recupera 250 pe di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8, 40)
             if imgOggetti[2] != sconosciutoOggetto:
@@ -2255,9 +2283,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[33], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 8.9, 40)
                 if oggetton == 3:
                     messaggio("Medicina:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Cura avvelenamento a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Cura avvelenamento a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8.9, 40)
             if imgOggetti[3] != sconosciutoOggetto:
@@ -2269,9 +2295,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[34], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 9.8, 40)
                 if oggetton == 4:
                     messaggio("Super pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 300 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Recupera 300 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 9.8, 40)
             if imgOggetti[4] != sconosciutoOggetto:
@@ -2283,9 +2307,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[35], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 10.7, 40)
                 if oggetton == 5:
                     messaggio("Alimentazione 250gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Recupera 600 pe di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Recupera 600 pe di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 10.7, 40)
             if imgOggetti[5] != sconosciutoOggetto:
@@ -2297,9 +2319,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[36], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 11.6, 40)
                 if oggetton == 6:
                     messaggio("Bomba:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Infligge un po' di danni ai nemici su cui viene", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 11.6, 40)
             if imgOggetti[6] != sconosciutoOggetto:
@@ -2311,9 +2331,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[37], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 12.5, 40)
                 if oggetton == 7:
                     messaggio("Bomba velenosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Infligge avvelenamento al nemico su cui viene", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Infligge avvelenamento al nemico su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 12.5, 40)
             if imgOggetti[7] != sconosciutoOggetto:
@@ -2325,9 +2343,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[38], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 13.4, 40)
                 if oggetton == 8:
                     messaggio("Esca:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio(u"Distrae i nemici finché non viene distrutta. È", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("possibile riprenderla passandoci sopra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio(u"Distrae i nemici finché non viene distrutta. È possibile riprenderla passandoci sopra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 13.4, 40)
             if imgOggetti[8] != sconosciutoOggetto:
@@ -2339,9 +2355,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[39], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 14.3, 40)
                 if oggetton == 9:
                     messaggio("Bomba appiccicosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio(u"Dimezza la velocità del nemico su cui viene", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 14.3, 40)
             if imgOggetti[9] != sconosciutoOggetto:
@@ -2353,9 +2367,7 @@ def menuMercante(dati, canzone):
                     messaggio("x%i" % dati[40], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 15.2, 40)
                 if oggetton == 10:
                     messaggio("Bomba potenziata:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Infligge molti danni ai nemici su cui viene", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                    messaggio("lanciata in un vasto raggio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                    messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                    messaggio("Infligge molti danni ai nemici su cui viene lanciata in un vasto raggio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 15.2, 40)
             messaggio("Faretra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 16.1, 40)
@@ -2371,15 +2383,20 @@ def menuMercante(dati, canzone):
                 messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 16.1, 40)
             if oggetton == 11:
                 messaggio("Faretra:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                messaggio(u"Permette di trasportare più frecce", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35)
-                messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13, 35)
-                messaggio("", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 13.5, 35)
+                messaggio(u"Permette di trasportare più frecce", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+
+            if GlobalVar.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
 
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             if confermaOggettoDaAcquistare == 0:
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx // 1.5))), yp + (int(GlobalVar.gpy * 0.7))), (xp + (int(GlobalVar.gpx * 9.5)), yp + (int(GlobalVar.gpy * 0.7))), 2)
             else:
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx // 1.5))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 9.5)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
+            primoFrame = False
+
             pygame.display.update()
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
