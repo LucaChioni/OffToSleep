@@ -1437,7 +1437,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def menuMappa(progresso, canzone):
+def menuMappa(avanzamentoStoria, canzone):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     imgOmbreggiaturaContorniMappaMenu = GlobalVar.imgOmbreggiaturaContorniMappaMenu
@@ -1458,49 +1458,50 @@ def menuMappa(progresso, canzone):
     # carico la mappa a seconda dell'avanzamento
     imgMappaOrig = GlobalVar.imgMappa1
     postiSbloccati = {"Casa": False, "Città": False, "Avamposto di Rod": False, "Castello": False, "Palazzo di Rod": False, "Vulcano": False, "Laboratorio": False, "Foresta cadetta": False, "Selva arida": False, "Labirinto": False, "Passo montano": False, "Caverna": False, "Tunnel di Rod": False, "Tunnel subacqueo": False}
-    if progresso >= 0:
-        postiSbloccati["Casa"] = True
-        imgMappaOrig = GlobalVar.imgMappa1
-        if progresso >= 0:
+    if avanzamentoStoria >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaCasa"]:
+            postiSbloccati["Casa"] = True
+            imgMappaOrig = GlobalVar.imgMappa1
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaForestaCadetta"]:
             postiSbloccati["Foresta cadetta"] = True
             imgMappaOrig = GlobalVar.imgMappa2
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaCittà"]:
             postiSbloccati["Città"] = True
             imgMappaOrig = GlobalVar.imgMappa3
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaSelvaArida"]:
             postiSbloccati["Selva arida"] = True
             imgMappaOrig = GlobalVar.imgMappa4
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaAvampostoDiRod"]:
             postiSbloccati["Avamposto di Rod"] = True
             imgMappaOrig = GlobalVar.imgMappa5
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaLabirinto"]:
             postiSbloccati["Labirinto"] = True
             imgMappaOrig = GlobalVar.imgMappa6
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaCastello"]:
             postiSbloccati["Castello"] = True
             imgMappaOrig = GlobalVar.imgMappa7
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaPassoMontano"]:
             postiSbloccati["Passo montano"] = True
             imgMappaOrig = GlobalVar.imgMappa8
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaPalazzoDiRod"]:
             postiSbloccati["Palazzo di Rod"] = True
             imgMappaOrig = GlobalVar.imgMappa9
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaCaverna"]:
             postiSbloccati["Caverna"] = True
             imgMappaOrig = GlobalVar.imgMappa10
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaVulcano"]:
             postiSbloccati["Vulcano"] = True
             imgMappaOrig = GlobalVar.imgMappa10
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaTunnelDiRod1"]:
             postiSbloccati["Tunnel di Rod"] = True# <- il tunnel di Rod è diviso in due parti
             imgMappaOrig = GlobalVar.imgMappa11
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaTunnelDiRod2"]:
             postiSbloccati["Tunnel di Rod"] = True
             imgMappaOrig = GlobalVar.imgMappa12
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaTunnelSubacqueo"]:
             postiSbloccati["Tunnel subacqueo"] = True
             imgMappaOrig = GlobalVar.imgMappa13
-        if progresso >= 0:
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["mappaLaboratorio"]:
             postiSbloccati["Laboratorio"] = True
             imgMappaOrig = GlobalVar.imgMappa14
     imgMappaA = pygame.transform.smoothscale(imgMappaOrig, (GlobalVar.gpx * 22, GlobalVar.gpy * 15))

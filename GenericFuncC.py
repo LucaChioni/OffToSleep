@@ -51,8 +51,10 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["secondoCambioPersonaggio"] = i
     i += 1
     dictAvanzamentoStoria["trovatoMappaDiario"] = i
+    dictAvanzamentoStoria["mappaCasa"] = i
     i += 1
     dictAvanzamentoStoria["incontratoColco"] = i
+
     i += 1
     dictAvanzamentoStoria["mercantePozione"] = i
     i += 1
@@ -73,6 +75,35 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["mercanteBomAppi"] = i
     i += 1
     dictAvanzamentoStoria["mercanteBomPote"] = i
+
+    i += 1
+    dictAvanzamentoStoria["mappaForestaCadetta"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaCittà"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaSelvaArida"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaAvampostoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaPassoMontano"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaPalazzoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaCaverna"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaVulcano"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaTunnelDiRod1"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaTunnelDiRod2"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaTunnelSubacqueo"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaLaboratorio"] = i
 
     return dictAvanzamentoStoria
 
