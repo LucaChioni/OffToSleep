@@ -3,6 +3,7 @@
 import ctypes
 from GenericFuncC import *
 # import win32gui, win32con
+# import subprocess
 
 # hide the console
 # programToHide = win32gui.GetForegroundWindow()
@@ -14,10 +15,15 @@ pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 # pygame.mixer.init(22100, -16, 2, 64)
 pygame.init()
 
-# adattamento schermo
+# adattamento schermo (la parte commentata è per linux)
 ctypes.windll.user32.SetProcessDPIAware()
 gsx = ctypes.windll.user32.GetSystemMetrics(0)
 gsy = ctypes.windll.user32.GetSystemMetrics(1)
+#output = subprocess.Popen('xrandr | grep "\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
+#resolution = output.split()[0].split(b'x')
+#gsx = int(resolution[0])
+#gsy = int(resolution[1])
+
 opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
 print (gsx, gsy)
 if gsx % 32 != 0 or gsy % 18 != 0:

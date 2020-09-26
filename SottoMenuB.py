@@ -492,7 +492,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.verdeScuroPiuScuro, (GlobalVar.gsx // 32 * 18, (GlobalVar.gsy // 18 * 7) - 1), (GlobalVar.gsx // 32 * 27, (GlobalVar.gsy // 18 * 7) - 1), 1)
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 3.5))
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 3.5))
-                messaggio("Confermi?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20.3, GlobalVar.gsy // 18 * 4.2, 70)
+                messaggio("Confermi?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20.4, GlobalVar.gsy // 18 * 4.2, 70)
                 messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20.4, GlobalVar.gsy // 18 * 5.5, 70)
                 messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.4, GlobalVar.gsy // 18 * 5.5, 70)
                 GlobalVar.schermo.blit(puntatorevecchio, (vxp, vyp))
@@ -702,11 +702,11 @@ def chiediconferma(conferma, canzone=False):
             if primoFrame:
                 GlobalVar.schermo.blit(background, (0, 0))
                 if conferma == 1:
-                    messaggio(u"Tornare al menu principale?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 6.5, 120)
+                    messaggio(u"Tornare al menu principale?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.8, GlobalVar.gsy // 18 * 6.5, 120)
                 elif conferma == 2:
-                    messaggio("Uscire dal gioco?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.6, GlobalVar.gsy // 18 * 6.5, 120)
+                    messaggio("Uscire dal gioco?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.9, GlobalVar.gsy // 18 * 6.5, 120)
                 elif conferma == 3:
-                    messaggio("Iniziare una nuova partita?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.4, GlobalVar.gsy // 18 * 6.5, 120)
+                    messaggio("Iniziare una nuova partita?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.2, GlobalVar.gsy // 18 * 6.5, 120)
             else:
                 GlobalVar.schermo.blit(backgroundUpdate1, (GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 9))
                 GlobalVar.schermo.blit(backgroundUpdate2, (GlobalVar.gsx // 32 * 21, 0))
@@ -810,7 +810,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalVar.gsx // 32 * 19.9 <= xMouse <= GlobalVar.gsx // 32 * 20.4 and GlobalVar.gsy // 18 * 10.1 <= yMouse <= GlobalVar.gsy // 18 * 11.1:
+            elif GlobalVar.gsx // 32 * 20.5 <= xMouse <= GlobalVar.gsx // 32 * 21 and GlobalVar.gsy // 18 * 10.1 <= yMouse <= GlobalVar.gsy // 18 * 11.1:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
@@ -1392,9 +1392,9 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniSinistra, (GlobalVar.gsx // 32 * 14.7, GlobalVar.gsy // 18 * 10.1))
                     if tastop == pygame.K_d or (sinistroMousePremuto and cursoreSuFrecciaDestra):
-                        GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 19.9, GlobalVar.gsy // 18 * 10.1))
+                        GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 10.1))
                     else:
-                        GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 19.9, GlobalVar.gsy // 18 * 10.1))
+                        GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 10.1))
                 if schermoInteroTemp:
                     messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 11.8, 60)
                 else:
@@ -1413,7 +1413,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
                 messaggio(str(gsxTemp) + "x" + str(gsyTemp), GlobalVar.grigioscu, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10.2, 60)
                 if voceMarcata == 4:
                     GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniSinistraBloccato, (GlobalVar.gsx // 32 * 14.7, GlobalVar.gsy // 18 * 10.1))
-                    GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 19.9, GlobalVar.gsy // 18 * 10.1))
+                    GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 10.1))
                 messaggio("Schermo intero", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.7, 70)
                 if schermoInteroTemp:
                     messaggio("Si", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 11.8, 60)

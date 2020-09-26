@@ -624,26 +624,26 @@ def equip(dati, canzone):
 
                 messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
                 messaggio("Armi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.6, GlobalVar.gsy // 18 * 4.3, 60)
-                messaggio("Spade", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5.3, 50)
+                messaggio("Spade", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.9, GlobalVar.gsy // 18 * 5.3, 50)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 1.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgSpade[i], (GlobalVar.gsx // 32 * 1.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Archi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 5.3, 50)
+                messaggio("Archi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.4, GlobalVar.gsy // 18 * 5.3, 50)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 5.2, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgArchi[i], (GlobalVar.gsx // 32 * 5.2, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Protezioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.6, GlobalVar.gsy // 18 * 4.3, 60)
-                messaggio("Armature", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.4, GlobalVar.gsy // 18 * 5.3, 50)
+                messaggio("Protezioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.7, GlobalVar.gsy // 18 * 4.3, 60)
+                messaggio("Armature", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.45, GlobalVar.gsy // 18 * 5.3, 50)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 8.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgArmature[i], (GlobalVar.gsx // 32 * 8.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Scudi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 12.5, GlobalVar.gsy // 18 * 5.3, 50)
+                messaggio("Scudi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 12.4, GlobalVar.gsy // 18 * 5.3, 50)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 12.2, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
@@ -3955,7 +3955,7 @@ def oggetti(dati, canzone):
                     voceMarcata = 2
                     usauno = False
                 GlobalVar.schermo.blit(puntatorevecchio, (xpv, ypv))
-                messaggio("Usare?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.2, GlobalVar.gsy // 18 * 13, 90)
+                messaggio("Usare?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.3, GlobalVar.gsy // 18 * 13, 90)
                 messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.3, GlobalVar.gsy // 18 * 14.9, 70)
                 messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 14.9, 70)
 

@@ -53,6 +53,7 @@ class NemicoObj(object):
         denaro = 0
         difesa = 0
         avvelenabile = True
+
         if self.tipo == "Orco":
             vitaTotale = 20
             esp = 0
@@ -150,6 +151,7 @@ class NemicoObj(object):
             denaro = random.randint(0, 3)
             difesa = 1
             avvelenabile = True
+
         if self.tipo == "SerpeVerde":
             vitaTotale = 20
             esp = 5
@@ -210,6 +212,7 @@ class NemicoObj(object):
             denaro = random.randint(0, 3)
             difesa = 1
             avvelenabile = False
+
         if self.tipo == "ServoSpada":
             vitaTotale = 20
             esp = 5
@@ -246,6 +249,7 @@ class NemicoObj(object):
             denaro = random.randint(0, 3)
             difesa = 1
             avvelenabile = True
+
         if self.tipo == "GufoMarrone":
             vitaTotale = 20
             esp = 5
@@ -318,6 +322,7 @@ class NemicoObj(object):
             denaro = random.randint(0, 3)
             difesa = 1
             avvelenabile = False
+
         if self.tipo == "RoboLeggero":
             vitaTotale = 20
             esp = 5
@@ -354,6 +359,7 @@ class NemicoObj(object):
             denaro = random.randint(0, 3)
             difesa = 1
             avvelenabile = False
+
         if self.tipo == "RoboPesanteVolante":
             vitaTotale = 20
             esp = 5
@@ -378,6 +384,7 @@ class NemicoObj(object):
             denaro = random.randint(0, 3)
             difesa = 1
             avvelenabile = False
+
         self.vita = vitaTotale
         self.vitaTotale = vitaTotale
         self.esp = esp

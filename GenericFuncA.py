@@ -10,7 +10,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1):
     gr = gr - 10
     gr = GlobalVar.gpx * gr // 60
     y = y - (GlobalVar.gpy // 8)
-    carattere = "Gentium Book Basic"
+    carattere = "Liberation Serif"
     font = pygame.font.SysFont(carattere, gr)
     coloreOrig = colore
     xOrig = x

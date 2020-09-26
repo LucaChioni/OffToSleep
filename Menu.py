@@ -1476,7 +1476,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
 def menuMercante(dati, canzone):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
-    sconosciutoOggetto = pygame.transform.smoothscale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
+    sconosciutoOggetto = pygame.transform.smoothscale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 8, GlobalVar.gpy * 8))
     xp = GlobalVar.gsx // 32 * 10.5
     yp = GlobalVar.gsy // 18 * 6.1
     xpv = xp
