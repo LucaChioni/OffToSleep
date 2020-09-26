@@ -296,7 +296,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
         tipoErrore = 1
 
     if errore and tipoErrore == 1 and mostraErrori:
-        print "Slot vuoto"
+        print ("Slot vuoto")
         aggiornaSchermata = True
         indietro = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
@@ -365,7 +365,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                 messaggio("Slot di memoria vuoto...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 14, 100)
                 pygame.display.update()
     if errore and tipoErrore == 2 and mostraErrori:
-        print "Dati corrotti"
+        print ("Dati corrotti")
         aggiornaSchermata = True
         indietro = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
@@ -436,7 +436,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
 
     if not errore:
         if mostraErrori:
-            print "Salvataggio: " + str(n)
+            print ("Salvataggio: " + str(n))
             GlobalVar.canaleSoundCanzone.stop()
             return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali
         else:

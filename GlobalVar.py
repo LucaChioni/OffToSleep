@@ -1223,7 +1223,7 @@ if len(datiFileImpostazioni) == 6:
 else:
     erroreFileImpostazioni = True
 if erroreFileImpostazioni:
-    print "Errore nella lettura del file di configurazione delle impostazioni"
+    print ("Errore nella lettura del file di configurazione delle impostazioni")
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
 leggi.close()
 
