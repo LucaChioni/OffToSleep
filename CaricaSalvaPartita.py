@@ -31,7 +31,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         dati[i + 2] = dati[i + 2] // GlobalVar.gpy
         i = i + 4
 
-    scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
+    scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
     for i in range(0, len(dati)):
         scrivi.write("%i_" % dati[i])
     scrivi.write("\n")
@@ -94,11 +94,11 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
     scrivi.close()
 
     # critta il salvataggio
-    # leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
+    # leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
     # contenutoFile = leggi.read()
     # leggi.close()
     # encoded_text = contenutoFile.encode('base64')
-    # scrivi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
+    # scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
     # scrivi.write(encoded_text)
     # scrivi.close()
 
@@ -130,7 +130,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
     stanzeGiaVisitate = []
     listaPersonaggiTotali = []
 
-    leggi = open("Salvataggi/Salvataggio%i.txt" % n, "r")
+    leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
     contenutoFile = leggi.read()
     leggi.close()
 

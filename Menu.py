@@ -111,7 +111,7 @@ def menu(caricaSalvataggio):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -559,7 +559,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -944,7 +944,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -1523,7 +1523,7 @@ def menuMercante(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         oggettonVecchio = oggetton

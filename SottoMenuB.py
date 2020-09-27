@@ -48,7 +48,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -257,7 +257,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 primoFrame = True
                                 return n, cosa
                             elif cosa == 2:
-                                leggi = open("Salvataggi/Salvataggio%i.txt" % n, "w")
+                                leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
                                 leggi.close()
                                 xp = vxp
                                 yp = vyp
@@ -380,9 +380,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         if contasalva == 1:
                             if not errore:
                                 if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                                    perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                                    perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', True)
                                 else:
-                                    perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
+                                    perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png', True)
                                 persalva = pygame.transform.smoothscale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                                 persSalvaBraccia = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                                 spasalva = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
@@ -405,9 +405,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         elif contasalva == 2:
                             if not errore:
                                 if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                                    perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                                    perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', True)
                                 else:
-                                    perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
+                                    perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png', True)
                                 persalva = pygame.transform.smoothscale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                                 persSalvaBraccia = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                                 spasalva = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
@@ -430,9 +430,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         elif contasalva == 3:
                             if not errore:
                                 if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                                    perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png')
+                                    perso = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', True)
                                 else:
-                                    perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png')
+                                    perso = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png', True)
                                 persalva = pygame.transform.smoothscale(perso, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                                 persSalvaBraccia = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
                                 spasalva = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
@@ -561,7 +561,7 @@ def chiediconferma(conferma, canzone=False):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -752,7 +752,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -940,7 +940,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
                                 GlobalVar.schermo = pygame.display.set_mode((GlobalVar.gsx, GlobalVar.gsy))
                             GlobalVar.loadImgs()
                         # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
-                        scrivi = open("Impostazioni/Impostazioni.txt", "w")
+                        scrivi = GlobalVar.loadFile("Impostazioni/Impostazioni.txt", "w")
                         if GlobalVar.linguaImpostata == "italiano":
                             scrivi.write("0_")
                         elif GlobalVar.linguaImpostata == "inglese":
@@ -1515,7 +1515,7 @@ def menuMappa(avanzamentoStoria, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -1977,7 +1977,7 @@ def menuDiario(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         primoMovimento = False

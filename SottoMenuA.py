@@ -72,7 +72,7 @@ def equip(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -1095,7 +1095,7 @@ def sceglicondiz(dati, condizione, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -1654,7 +1654,7 @@ def sceglitecn(dati, tecnica, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -2252,7 +2252,7 @@ def equiprobo(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
@@ -3449,7 +3449,7 @@ def oggetti(dati, canzone):
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
-        else:
+        elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
