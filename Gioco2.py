@@ -611,7 +611,7 @@ def gameloop():
 
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
 
             if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti and not tastoTrovato and not startf:
                 if GlobalVar.mouseVisibile:

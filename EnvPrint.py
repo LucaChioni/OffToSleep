@@ -777,7 +777,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN:
                 tastop = event.key
 

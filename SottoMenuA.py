@@ -322,7 +322,7 @@ def equip(dati, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -1275,7 +1275,7 @@ def sceglicondiz(dati, condizione, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -1834,7 +1834,7 @@ def sceglitecn(dati, tecnica, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -2777,7 +2777,7 @@ def equiprobo(dati, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -3585,7 +3585,7 @@ def oggetti(dati, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata and oggettonVecchio == oggetton:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True

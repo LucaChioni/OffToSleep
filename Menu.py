@@ -75,7 +75,7 @@ def menu(caricaSalvataggio):
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    GlobalVar.quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
                     if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
                         pygame.mouse.set_visible(False)
@@ -195,7 +195,7 @@ def menu(caricaSalvataggio):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -657,7 +657,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -1083,7 +1083,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     pygame.mouse.set_visible(False)
@@ -1680,7 +1680,7 @@ def menuMercante(dati, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and oggettonVecchio == oggetton and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True

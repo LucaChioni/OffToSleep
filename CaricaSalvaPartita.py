@@ -336,7 +336,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    GlobalVar.quit()
                 if event.type == pygame.KEYDOWN:
                     aggiornaSchermata = True
                     if GlobalVar.mouseVisibile:
@@ -405,7 +405,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    GlobalVar.quit()
                 if event.type == pygame.KEYDOWN:
                     aggiornaSchermata = True
                     if GlobalVar.mouseVisibile:

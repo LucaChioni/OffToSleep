@@ -166,7 +166,7 @@ def guardaVideo(path, audio=0):
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    GlobalVar.quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
                     if event.type == pygame.KEYDOWN:
                         if GlobalVar.mouseVisibile:
@@ -2747,7 +2747,7 @@ def controllaMorteRallo(vitaRallo, inizio):
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    GlobalVar.quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
                     if event.type == pygame.KEYDOWN:
                         if GlobalVar.mouseVisibile:
@@ -3086,7 +3086,7 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -3240,7 +3240,7 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto, canzone):
 
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                 risposta = True

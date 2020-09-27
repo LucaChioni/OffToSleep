@@ -217,7 +217,7 @@ def animaLvUp(avanzamentoStoria, x, y, npers, pers, arma, armatura, scudo, colla
 
                     if event.type == pygame.QUIT:
                         pygame.quit()
-                        quit()
+                        GlobalVar.quit()
                     if aumentoliv != 0 and ((event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto)):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                         risposta = True
@@ -1572,7 +1572,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    GlobalVar.quit()
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     risposta = True
@@ -1616,7 +1616,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    GlobalVar.quit()
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     risposta = True

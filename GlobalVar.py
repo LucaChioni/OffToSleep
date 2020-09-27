@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import pygame
 import os
+import sys
+import pygame
 from GenericFuncC import *
 
 
@@ -43,6 +44,7 @@ if sistemaOperativo == "Windows":
     gsx = ctypes.windll.user32.GetSystemMetrics(0)
     gsy = ctypes.windll.user32.GetSystemMetrics(1)
 elif sistemaOperativo == "Linux":
+    # libreria da importare per far funzionare l'eseguibile di linux
     import encodings
     import subprocess
     output = subprocess.Popen('xrandr | grep "\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
@@ -72,6 +74,9 @@ maxGsy = gsy
 # dimensione personaggio
 gpx = gsx // 32
 gpy = gsy // 18
+
+def quit():
+    sys.exit()
 
 def loadImage(path, aumentaRisoluzione, convert=False):
     if convert:

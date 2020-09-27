@@ -155,7 +155,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata and salMarcatoVecchio == salMarcato:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -623,7 +623,7 @@ def chiediconferma(conferma, canzone=False):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -657,7 +657,7 @@ def chiediconferma(conferma, canzone=False):
                             return True, True
                         elif conferma == 2:
                             pygame.quit()
-                            quit()
+                            GlobalVar.quit()
                         elif conferma == 3:
                             return False, True
                     elif voceMarcata == 2:
@@ -874,7 +874,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
@@ -1649,7 +1649,7 @@ def menuMappa(avanzamentoStoria, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 tastop = event.key
                 if (event.key == pygame.K_q or event.key == pygame.K_a) and not tastoTrovato:
@@ -1987,7 +1987,7 @@ def menuDiario(dati, canzone):
             if event.type == pygame.QUIT:
                 tastoTrovato = True
                 pygame.quit()
-                quit()
+                GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato:
                 tastop = event.key
                 if (event.key == pygame.K_q or event.key == pygame.K_a) and not tastoTrovato:
