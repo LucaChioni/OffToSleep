@@ -21,6 +21,14 @@ if eseguibile:
         import win32gui, win32con
         programToHide = win32gui.GetForegroundWindow()
         win32gui.ShowWindow(programToHide, win32con.SW_HIDE)
+    if sistemaOperativo == "Linux":
+        vetGamePath = gamePath.split("/")
+        vetGamePath.pop(len(vetGamePath) - 1)
+        vetGamePath.pop(len(vetGamePath) - 1)
+        vetGamePath.pop(len(vetGamePath) - 1)
+        gamePath = ""
+        for dir in vetGamePath:
+            gamePath += dir + "/"
 
 # i suoni vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
 pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
@@ -35,6 +43,7 @@ if sistemaOperativo == "Windows":
     gsx = ctypes.windll.user32.GetSystemMetrics(0)
     gsy = ctypes.windll.user32.GetSystemMetrics(1)
 elif sistemaOperativo == "Linux":
+    import encodings
     import subprocess
     output = subprocess.Popen('xrandr | grep "\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
     resolution = output.split()[0].split(b'x')
