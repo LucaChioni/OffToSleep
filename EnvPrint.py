@@ -1575,19 +1575,19 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             i = i + 3
         # visualizza campo attaccabile se sto usando un oggetto
         if attacco == 2:
-            campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 13, GlobalVar.gpy * 13))
+            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 13, GlobalVar.gpy * 13))
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 6), y - (GlobalVar.gpy * 6)))
         if attacco == 3:
-            campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 11, GlobalVar.gpy * 11))
+            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 11, GlobalVar.gpy * 11))
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 5), y - (GlobalVar.gpy * 5)))
         if attacco == 4:
-            campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 13, GlobalVar.gpy * 13))
+            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 13, GlobalVar.gpy * 13))
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 6), y - (GlobalVar.gpy * 6)))
         if attacco == 5:
-            campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 11, GlobalVar.gpy * 11))
+            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 11, GlobalVar.gpy * 11))
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 5), y - (GlobalVar.gpy * 5)))
         if attacco == 6:
-            campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 9, GlobalVar.gpy * 9))
+            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 9, GlobalVar.gpy * 9))
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 4), y - (GlobalVar.gpy * 4)))
 
         # disegna porte
@@ -1953,7 +1953,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     if not caseattactotMostri[i + 2] and (caseattactotMostri[i] <= mx + raggiovista and caseattactotMostri[i + 1] <= my + raggiovista and caseattactotMostri[i] >= mx - raggiovista and caseattactotMostri[i + 1] >= my - raggiovista and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my)):
                         GlobalVar.schermo.blit(GlobalVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
                     i = i + 3
-                campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabilemostro, ((raggiovista * 2) + GlobalVar.gpx, (raggiovista * 2) + GlobalVar.gpy))
+                campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabilemostro, ((raggiovista * 2) + GlobalVar.gpx, (raggiovista * 2) + GlobalVar.gpy))
                 GlobalVar.schermo.blit(campoattaccabile3, (mx - raggiovista, my - raggiovista))
                 GlobalVar.schermo.blit(GlobalVar.sfondoMostro, (0, 0))
                 if nemico.avvelenato:
@@ -2109,8 +2109,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my)):
                     GlobalVar.schermo.blit(GlobalVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
                 i = i + 3
-            campoattaccabile3 = pygame.transform.scale(GlobalVar.campoattaccabilemostro,
-                                                       ((raggiovista * 2) + GlobalVar.gpx, (raggiovista * 2) + GlobalVar.gpy))
+            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabilemostro, ((raggiovista * 2) + GlobalVar.gpx, (raggiovista * 2) + GlobalVar.gpy))
             GlobalVar.schermo.blit(campoattaccabile3, (mx - raggiovista, my - raggiovista))
             GlobalVar.schermo.blit(GlobalVar.sfondoMostro, (0, 0))
             if nemicoInquadrato.avvelenato:

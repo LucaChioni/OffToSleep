@@ -752,7 +752,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp + GlobalVar.gsy // 18 * 7
                     voceMarcata += 4
-                elif dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 2:
+                elif dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 2:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp + GlobalVar.gsy // 18 * 2
                     voceMarcata += 2
