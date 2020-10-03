@@ -1916,20 +1916,20 @@ def gameloop():
             # movimento-azioni mostri
             if nmost > 0 and not cambiosta:
                 for nemico in listaNemici:
-                    vetDatiNemici = []
-                    for nemicoTemp in listaNemici:
-                        vetDatiNemici.append(nemicoTemp.vita)
-                        vetDatiNemici.append(nemicoTemp.x)
-                        vetDatiNemici.append(nemicoTemp.y)
-                        vetDatiNemici.append(nemicoTemp.vitaTotale)
                     if nemico.avvelenato and sposta:
                         nemico.vita -= 3
                     if nemico.vita > 0 and nemico.inCasellaVista:
-                        # trovo l'obbiettivo
-                        nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo = nemico.settaObbiettivo(x, y, rx, ry, dati, stanza, porte, cofanetti, listaPersonaggi, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
                         if sposta and nemico.mosseRimaste == 0:
                             nemico.resettaMosseRimaste()
                         if nemico.mosseRimaste > 0:
+                            vetDatiNemici = []
+                            for nemicoTemp in listaNemici:
+                                vetDatiNemici.append(nemicoTemp.vita)
+                                vetDatiNemici.append(nemicoTemp.x)
+                                vetDatiNemici.append(nemicoTemp.y)
+                                vetDatiNemici.append(nemicoTemp.vitaTotale)
+                            # trovo l'obbiettivo
+                            nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo = nemico.settaObbiettivo(x, y, rx, ry, dati, stanza, porte, cofanetti, listaPersonaggi, vettoreDenaro, vitaesca, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
                             nemico.vx = nemico.x
                             nemico.vy = nemico.y
                             nemico, direzioneMostro, dati, vitaesca = movmostro(x, y, rx, ry, nemico, dati[1], dif, difro, par, dati, vitaesca, porte, cofanetti, vetDatiNemici, nemicoVistoRallo, nemicoVistoRob, nemicoVistoesca, nemicoEscabersaglio, nemicoVistoDenaro, nemicoXDenaro, nemicoYDenaro, attrobo, listaPersonaggi, caseviste)

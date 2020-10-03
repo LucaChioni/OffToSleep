@@ -1442,23 +1442,10 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
     listaNemiciAttaccatiADistanzaRobo = []
     tecnicaUsata = False
     attaccoDiColco = []
+    nemiciVistiDaColco = []
 
     # burocrazia
     carim = False
-
-    # trova i nemici visti
-    nemiciVistiDaColco = []
-    vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
-    caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, listaPersonaggi, vistaRobo)
-    k = 0
-    while k < len(caselleAttaccabili):
-        if caselleAttaccabili[k + 2]:
-            for nemico in listaNemici:
-                if caselleAttaccabili[k] == nemico.x and caselleAttaccabili[k + 1] == nemico.y and nemico.vita > 0:
-                    listaNemici.remove(nemico)
-                    nemiciVistiDaColco.append(nemico)
-                    break
-        k += 3
 
     # vetDatiNemici = [vita, x, y, vitaTot, stato]
     nrob = 0
@@ -1510,6 +1497,19 @@ def movrobo(x, y, vx, vy, rx, ry, stanza, chiamarob, dati, porte, cofanetti, lis
             ultimoObbiettivoColco = []
     else:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
+
+        # trova i nemici visti
+        vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
+        caselleAttaccabili = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, listaPersonaggi, vistaRobo)
+        k = 0
+        while k < len(caselleAttaccabili):
+            if caselleAttaccabili[k + 2]:
+                for nemico in listaNemici:
+                    if caselleAttaccabili[k] == nemico.x and caselleAttaccabili[k + 1] == nemico.y and nemico.vita > 0:
+                        listaNemici.remove(nemico)
+                        nemiciVistiDaColco.append(nemico)
+                        break
+            k += 3
 
         # dati: tecniche(11-30) / condizioni(81-100) / gambit(101-120) / pvRallo(5) / veleno(121) / attP(123) / difP(124) / peColco(10) / surriscalda(122) / velP(125) / efficienza(126)
         # in gambit: prime 10 -> condizioni, ultime 10 -> tecniche
