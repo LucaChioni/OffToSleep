@@ -184,21 +184,15 @@ def guardaVideo(path, audio=0):
     return False
 
 
-def oggetto(x, y, dimx, dimy, px, py, nx, ny):
-    a = x
-    b = y
-    dimx = dimx + x
-    dimy = dimy + y
-    while x < dimx:
-        if (ny == -GlobalVar.gpy and py == dimy and px == x) or (ny == GlobalVar.gpy and py == y - GlobalVar.gpy and px == x):
+def oggetto(xInizio, yInizio, dimx, dimy, px, py, nx, ny):
+    xFine = xInizio + dimx - GlobalVar.gpx
+    yFine = yInizio + dimy - GlobalVar.gpy
+    if xInizio <= px <= xFine:
+        if (ny == -GlobalVar.gpy and py == yFine + GlobalVar.gpy) or (ny == GlobalVar.gpy and py == yInizio - GlobalVar.gpy):
             return True
-        x = x + GlobalVar.gpx
-    x = a
-    y = b
-    while y < dimy:
-        if (nx == -GlobalVar.gpx and px == dimx and py == y) or (nx == GlobalVar.gpx and px == x - GlobalVar.gpx and py == y):
+    if yInizio <= py <= yFine:
+        if (nx == -GlobalVar.gpx and px == xFine + GlobalVar.gpx) or (nx == GlobalVar.gpx and px == xInizio - GlobalVar.gpx):
             return True
-        y = y + GlobalVar.gpy
 
 
 def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, listaPersonaggi):
@@ -973,7 +967,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                     i = i + 3
             m = m + 1
         n = n + 1
-    #  caseattacbassodestra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in basso a destra
+    # caseattacbassodestra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in basso a destra
     caseattacbassodestra = []
     # riempio caseattacbassodestra come se tutto il campo in basso a destra fosse libero
     n = 0
@@ -1152,7 +1146,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                     i = i + 3
             m = m + 1
         n = n + 1
-    #  caseattacbassosinistra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in basso a sinistra
+    # caseattacbassosinistra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in basso a sinistra
     caseattacbassosinistra = []
     # riempio caseattacbassosinistra come se tutto il campo in basso a sinistra fosse libero
     n = 0
