@@ -29,7 +29,7 @@ class PersonaggioObj(object):
         if self.tipo != "Tutorial" and self.tipo != "Nessuno":
             if self.tipo.startswith("Oggetto"):
                 self.mantieniSempreASchermo = True
-                self.caricaImgOggetto(avanzamentoStoria)
+                self.caricaImgOggetto()
                 self.aggiornaImgOggetto(avanzamentoStoria)
             else:
                 self.mantieniSempreASchermo = False
@@ -38,54 +38,68 @@ class PersonaggioObj(object):
 
         self.aggiornaDialogo(avanzamentoStoria)
 
-    def caricaImgOggetto(self, avanzamentoStoria):
+    def caricaImgOggetto(self):
         self.imgOggetto = []
+        self.imgOggettoDialogo = []
         numImg = 1
-        nomeImgDialogo = "Vuota"
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoLettoSara":
             numImg = 1
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                nomeImgDialogo = "SaraDormienteDialogo"
-            else:
-                nomeImgDialogo = "Vuota"
+            numImgDialogo = 3
+            nomeImgDialogo = ["SaraDormienteDialogo1", "SaraDormienteDialogo2", "Vuota"]
         if self.tipo == "OggettoLavandinoCucina":
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoLavandinoBagno":
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo.startswith("OggettoScaffaleBicchieri"):
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoComodinoSara":
             numImg = 3
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo.startswith("OggettoFinestra"):
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoLettoSam":
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo.startswith("OggettoDoccia"):
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo.startswith("OggettoGabinetto"):
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo.startswith("OggettoCamino"):
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo.startswith("OggettoScaffaleCucina"):
             numImg = 1
-            nomeImgDialogo = "Vuota"
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         i = 1
         while i <= numImg:
             img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", True)
             img = pygame.transform.smoothscale(img, (GlobalVar.gpx, GlobalVar.gpy))
             self.imgOggetto.append(img)
             i += 1
-        imgDialogo = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo + ".png", False)
-        self.imgDialogo = pygame.transform.smoothscale(imgDialogo, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
+        i = 0
+        while i < numImgDialogo:
+            img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", False)
+            img = pygame.transform.smoothscale(img, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
+            self.imgOggettoDialogo.append(img)
+            i += 1
 
     def aggiornaImgOggetto(self, avanzamentoStoria):
         numImgAttuale = 0
@@ -97,6 +111,16 @@ class PersonaggioObj(object):
         self.imgA = self.imgAttuale
         self.imgS = self.imgAttuale
         self.imgD = self.imgAttuale
+
+        numImgAttualeDialogo = 0
+        if self.tipo == "OggettoLettoSara":
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
+                numImgAttualeDialogo = 0
+            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                numImgAttualeDialogo = 1
+            else:
+                numImgAttualeDialogo = 2
+        self.imgDialogo = self.imgOggettoDialogo[numImgAttualeDialogo]
 
     def caricaImgPersonaggio(self):
         imgW = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", True)
@@ -453,7 +477,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Si, sto andando")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["OttenutoBicchiere"]:
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -470,7 +494,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("Mmh...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["OttenutoBicchiereAcqua"]:
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -517,7 +541,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Devo prendere un bicchiere prima")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["OttenutoBicchiere"]:
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
                 self.oggettoDato = "Bicchiere con acqua"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -577,7 +601,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoComodinoSara":
             self.partiDialogo = []
             self.nome = "OggettoComodinoSara"
-            if avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["OttenutoBicchiereAcqua"]:
+            if avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -724,7 +748,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoScaffaleCucina"):
             self.partiDialogo = []
             self.nome = "OggettoScaffaleCucina"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["OttenutoBicchiere"]:
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False

@@ -972,7 +972,7 @@ def loadImgs():
     tutorialMouse = pygame.transform.smoothscale(tutorialMouse, (gsx // 32 * 7, gsy // 18 * 11))
 
     # img grafiche / dialoghi
-    persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RalloGrafMenu.png', False)
+    persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucaGrafMenu.png', False)
     persGrafMenu = pygame.transform.smoothscale(persGrafMenu, (gpx * 18, gpy * 18))
     saraGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenu.png', False)
     saraGrafMenu = pygame.transform.smoothscale(saraGrafMenu, (gpx * 10, gpy * 10))

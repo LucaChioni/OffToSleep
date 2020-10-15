@@ -29,9 +29,9 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["tutorialChiusuraPorte"] = i
     i += 1
-    dictAvanzamentoStoria["OttenutoBicchiere"] = i
+    dictAvanzamentoStoria["ottenutoBicchiere"] = i
     i += 1
-    dictAvanzamentoStoria["OttenutoBicchiereAcqua"] = i
+    dictAvanzamentoStoria["ottenutoBicchiereAcqua"] = i
     i += 1
     dictAvanzamentoStoria["dialogoCasaSamSara2"] = i
 
