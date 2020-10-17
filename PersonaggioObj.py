@@ -341,7 +341,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"È possibile richiudere le porte che sono già state aperte utilizzando la modalità interazione.")
+                dialogo.append(u"È possibile richiudere le porte utilizzando la modalità interazione.")
                 self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False
@@ -454,7 +454,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Si, si... mi porteresti un bicchiere d'acqua quando torni?")
+                dialogo.append("Si, si... mi porti un bicchiere d'acqua quando torni?")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

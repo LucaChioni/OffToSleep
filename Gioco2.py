@@ -575,7 +575,11 @@ def gameloop():
                             inquadratoQualcosa = "movimento:" + str(casevistePorteIncluse[i]) + ":" + str(casevistePorteIncluse[i + 1])
                             break
                         i += 3
-        if not inquadratoQualcosa and GlobalVar.mouseVisibile:
+        if inquadratoQualcosa and not inquadratoQualcosa.startswith("movimento"):
+            GlobalVar.canaleSoundPassiRallo.stop()
+            nx = 0
+            ny = 0
+        elif not inquadratoQualcosa and GlobalVar.mouseVisibile:
             GlobalVar.canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
@@ -1243,7 +1247,7 @@ def gameloop():
             dati[121] = False
             aumentoliv = 0
 
-        if inquadratoQualcosa and (inquadratoQualcosa.startswith("movimento") or inquadratoQualcosa.startswith("personaggio")) and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not impossibileCliccarePulsanti and not startf:
+        if inquadratoQualcosa and inquadratoQualcosa.startswith("movimento") and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not impossibileCliccarePulsanti and not startf:
             vetNemiciSoloConXeY = []
             if not (x == rx and y == ry):
                 vetNemiciSoloConXeY.append(rx)
@@ -1254,124 +1258,113 @@ def gameloop():
             for personaggio in listaPersonaggi:
                 vetNemiciSoloConXeY.append(personaggio.x)
                 vetNemiciSoloConXeY.append(personaggio.y)
-            xObbiettivo = False
-            yObbiettivo = False
-            if inquadratoQualcosa.startswith("movimento"):
-                inquadratoQualcosaList = inquadratoQualcosa.split(":")
-                xObbiettivo = int(inquadratoQualcosaList[1])
-                yObbiettivo = int(inquadratoQualcosaList[2])
-            if xObbiettivo and yObbiettivo:
-                bloccato = False
-                i = 0
-                while i < len(vetNemiciSoloConXeY):
-                    if xObbiettivo == vetNemiciSoloConXeY[i] and yObbiettivo == vetNemiciSoloConXeY[i + 1]:
-                        bloccato = True
-                        break
-                    i += 2
-                if bloccato or (x == xObbiettivo and y == yObbiettivo):
-                    GlobalVar.canaleSoundPassiRallo.stop()
-                    nx = 0
-                    ny = 0
+            inquadratoQualcosaList = inquadratoQualcosa.split(":")
+            xObbiettivo = int(inquadratoQualcosaList[1])
+            yObbiettivo = int(inquadratoQualcosaList[2])
+            if x == xObbiettivo and y == yObbiettivo:
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+            else:
+                if abs(xObbiettivo - x) == GlobalVar.gpx and abs(yObbiettivo - y) == 0:
+                    if x < xObbiettivo:
+                        npers = 1
+                    if x > xObbiettivo:
+                        npers = 2
+                    sposta = True
+                elif abs(yObbiettivo - y) == GlobalVar.gpy and abs(xObbiettivo - x) == 0:
+                    if y < yObbiettivo:
+                        npers = 4
+                    if y > yObbiettivo:
+                        npers = 3
+                    sposta = True
                 else:
-                    if abs(xObbiettivo - x) == GlobalVar.gpx and abs(yObbiettivo - y) == 0:
-                        if x < xObbiettivo:
-                            npers = 1
-                        if x > xObbiettivo:
-                            npers = 2
-                        sposta = True
-                    elif abs(yObbiettivo - y) == GlobalVar.gpy and abs(xObbiettivo - x) == 0:
-                        if y < yObbiettivo:
-                            npers = 4
-                        if y > yObbiettivo:
-                            npers = 3
-                        sposta = True
-                    else:
-                        percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, vetNemiciSoloConXeY, casevistePorteIncluse)
-                        if percorsoTrovato:
-                            if len(percorsoTrovato) >= 4 and percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y:
-                                if percorsoTrovato[len(percorsoTrovato) - 4] > x:
-                                    npers = 1
-                                if percorsoTrovato[len(percorsoTrovato) - 4] < x:
-                                    npers = 2
-                                if percorsoTrovato[len(percorsoTrovato) - 3] > y:
-                                    npers = 4
-                                if percorsoTrovato[len(percorsoTrovato) - 3] < y:
-                                    npers = 3
-                                sposta = True
-                    # cambiare posizione
-                    if sposta:
-                        if npers == 3:
-                            ny = -GlobalVar.gpy
-                            nx = 0
-                            pers = GlobalVar.persw
-                            arma = armaw
-                            armaMov1 = armawMov1
-                            armaMov2 = armawMov2
-                            armaAttacco = armawAttacco
-                            armatura = armaturaw
-                            scudo = scudow
-                            arco = arcow
-                            faretra = faretraw
-                            arcoAttacco = arcowAttacco
-                            guanti = guantiw
-                            guantiMov1 = guantiwMov1
-                            guantiMov2 = guantiwMov2
-                            guantiAttacco = guantiwAttacco
-                            collana = collanaw
-                        if npers == 2:
-                            ny = 0
-                            nx = -GlobalVar.gpx
-                            pers = GlobalVar.persa
-                            arma = armaa
-                            armaMov1 = armaaMov1
-                            armaMov2 = armaaMov2
-                            armaAttacco = armaaAttacco
-                            armatura = armaturaa
-                            scudo = scudoa
-                            arco = arcoa
-                            faretra = faretraa
-                            arcoAttacco = arcoaAttacco
-                            guanti = guantia
-                            guantiMov1 = guantiaMov1
-                            guantiMov2 = guantiaMov2
-                            guantiAttacco = guantiaAttacco
-                            collana = collanaa
-                        if npers == 4:
-                            ny = GlobalVar.gpy
-                            nx = 0
-                            pers = GlobalVar.perss
-                            arma = armas
-                            armaMov1 = armasMov1
-                            armaMov2 = armasMov2
-                            armaAttacco = armasAttacco
-                            armatura = armaturas
-                            scudo = scudos
-                            arco = arcos
-                            faretra = faretras
-                            arcoAttacco = arcosAttacco
-                            guanti = guantis
-                            guantiMov1 = guantisMov1
-                            guantiMov2 = guantisMov2
-                            guantiAttacco = guantisAttacco
-                            collana = collanas
-                        if npers == 1:
-                            ny = 0
-                            nx = GlobalVar.gpx
-                            pers = GlobalVar.persd
-                            arma = armad
-                            armaMov1 = armadMov1
-                            armaMov2 = armadMov2
-                            armaAttacco = armadAttacco
-                            armatura = armaturad
-                            scudo = scudod
-                            arco = arcod
-                            faretra = faretrad
-                            arcoAttacco = arcodAttacco
-                            guanti = guantid
-                            guantiMov1 = guantidMov1
-                            guantiMov2 = guantidMov2
-                            guantiAttacco = guantidAttacco
-                            collana = collanad
+                    percorsoTrovato = pathFinding(x, y, xObbiettivo, yObbiettivo, vetNemiciSoloConXeY, casevistePorteIncluse)
+                    if percorsoTrovato:
+                        if len(percorsoTrovato) >= 4 and percorsoTrovato[len(percorsoTrovato) - 4] != x or percorsoTrovato[len(percorsoTrovato) - 3] != y:
+                            if percorsoTrovato[len(percorsoTrovato) - 4] > x:
+                                npers = 1
+                            if percorsoTrovato[len(percorsoTrovato) - 4] < x:
+                                npers = 2
+                            if percorsoTrovato[len(percorsoTrovato) - 3] > y:
+                                npers = 4
+                            if percorsoTrovato[len(percorsoTrovato) - 3] < y:
+                                npers = 3
+                            sposta = True
+                # cambiare posizione
+                if sposta:
+                    if npers == 3:
+                        ny = -GlobalVar.gpy
+                        nx = 0
+                        pers = GlobalVar.persw
+                        arma = armaw
+                        armaMov1 = armawMov1
+                        armaMov2 = armawMov2
+                        armaAttacco = armawAttacco
+                        armatura = armaturaw
+                        scudo = scudow
+                        arco = arcow
+                        faretra = faretraw
+                        arcoAttacco = arcowAttacco
+                        guanti = guantiw
+                        guantiMov1 = guantiwMov1
+                        guantiMov2 = guantiwMov2
+                        guantiAttacco = guantiwAttacco
+                        collana = collanaw
+                    if npers == 2:
+                        ny = 0
+                        nx = -GlobalVar.gpx
+                        pers = GlobalVar.persa
+                        arma = armaa
+                        armaMov1 = armaaMov1
+                        armaMov2 = armaaMov2
+                        armaAttacco = armaaAttacco
+                        armatura = armaturaa
+                        scudo = scudoa
+                        arco = arcoa
+                        faretra = faretraa
+                        arcoAttacco = arcoaAttacco
+                        guanti = guantia
+                        guantiMov1 = guantiaMov1
+                        guantiMov2 = guantiaMov2
+                        guantiAttacco = guantiaAttacco
+                        collana = collanaa
+                    if npers == 4:
+                        ny = GlobalVar.gpy
+                        nx = 0
+                        pers = GlobalVar.perss
+                        arma = armas
+                        armaMov1 = armasMov1
+                        armaMov2 = armasMov2
+                        armaAttacco = armasAttacco
+                        armatura = armaturas
+                        scudo = scudos
+                        arco = arcos
+                        faretra = faretras
+                        arcoAttacco = arcosAttacco
+                        guanti = guantis
+                        guantiMov1 = guantisMov1
+                        guantiMov2 = guantisMov2
+                        guantiAttacco = guantisAttacco
+                        collana = collanas
+                    if npers == 1:
+                        ny = 0
+                        nx = GlobalVar.gpx
+                        pers = GlobalVar.persd
+                        arma = armad
+                        armaMov1 = armadMov1
+                        armaMov2 = armadMov2
+                        armaAttacco = armadAttacco
+                        armatura = armaturad
+                        scudo = scudod
+                        arco = arcod
+                        faretra = faretrad
+                        arcoAttacco = arcodAttacco
+                        guanti = guantid
+                        guantiMov1 = guantidMov1
+                        guantiMov2 = guantidMov2
+                        guantiAttacco = guantidAttacco
+                        collana = collanad
 
         # menu start
         if startf and attacco != 1:
@@ -1982,13 +1975,12 @@ def gameloop():
                         personaggio.spostati(x, y, rx, ry, listaNemici)
 
             # aumentare di livello
-            if not carim:
-                while dati[127] >= esptot and dati[4] < 100:
-                    dati[4] += 1
-                    dati[127] -= esptot
-                    aumentoliv += 1
-                    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
-                    impossibileCliccarePulsanti = True
+            while dati[127] >= esptot and dati[4] < 100:
+                dati[4] += 1
+                dati[127] -= esptot
+                aumentoliv += 1
+                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
+                impossibileCliccarePulsanti = True
 
             # aggiorna vista dei mostri e metti l'occhio se ti vedono
             apriocchio = False

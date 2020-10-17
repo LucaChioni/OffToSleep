@@ -166,16 +166,12 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
             nemico = NemicoObj(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 8, "s", "Pipistrello", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "s", "s", "s", "a", "a", "s", "a", "w", "w", "w", "w", "d"]
+            percorsoNemico = ["d", "d", "s", "s", "s", "d", "a", "a", "a", "s", "a", "w", "w", "w", "w", "d"]
             nemico = NemicoObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 5, "d", "Pipistrello", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
             percorsoNemico = ["w", "a", "s", "a", "d", "d"]
             nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 10, "w", "Orco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "a", "s", "a", "d", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 10, "w", "RoboTorre", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
     else:
@@ -294,10 +290,6 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
         if stanza == GlobalVar.dictStanze["casaSamSara2"]:
             percorsoPersonaggio = ["d", "d", "s", "s", "d", "s", "s", "s", "a", "a", "w", "w", "a", "s", "a", "a", "a", "w", "w", "w", "d", "d", "w", "d"]
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 6, "d", "CaneCasa", stanza, avanzamentoStoria, percorsoPersonaggio)
-            listaPersonaggi.append(personaggio)
-            listaPersonaggiTotali.append(personaggio)
-            percorsoPersonaggio = []
-            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 10, "d", "CaneCasa", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
     else:

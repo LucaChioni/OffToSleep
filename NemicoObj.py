@@ -56,7 +56,7 @@ class NemicoObj(object):
 
         if self.tipo == "Orco":
             vitaTotale = 20
-            esp = 0
+            esp = 1
             raggioVisivo = GlobalVar.gpx * 3
             velocita = -1
             attacco = 20
@@ -68,8 +68,8 @@ class NemicoObj(object):
             avvelenabile = True
         if self.tipo == "Pipistrello":
             vitaTotale = 13
-            esp = 0
-            raggioVisivo = GlobalVar.gpx * 4
+            esp = 2
+            raggioVisivo = GlobalVar.gpx * 3
             velocita = 0
             attacco = 15
             attaccaDaLontano = True
