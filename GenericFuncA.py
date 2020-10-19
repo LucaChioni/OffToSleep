@@ -695,46 +695,46 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
         elif x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 1 and not mostro and not robo:
             nx = 0
             ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 10 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["casaSamSara4"]
             cambiosta = True
             carim = True
-        elif x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
             nx = 0
             ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 10 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["casaSamSara4"]
             cambiosta = True
             carim = True
-        elif x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
             nx = 0
             ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 10 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["casaSamSara4"]
             cambiosta = True
             carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
             nx = 0
             ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 10 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["casaSamSara4"]
             cambiosta = True
             carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
             nx = 0
             ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 10 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["casaSamSara4"]
             cambiosta = True
             carim = True
-        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
             nx = 0
             ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 15 and not mostro and not robo:
+        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 10 and not mostro and not robo:
             stanza = GlobalVar.dictStanze["casaSamSara4"]
             cambiosta = True
             carim = True
-        elif x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 16 and not mostro and not robo:
+        elif x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 11 and not mostro and not robo:
             nx = 0
             ny = 0
         # bordi stanza
@@ -758,31 +758,16 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
         elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
@@ -791,19 +776,13 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
         elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 28, GlobalVar.gpy * 1, x, y, nx, ny):
             nx = 0
             ny = 0
     if (stanza == GlobalVar.dictStanze["casaSamSara3"]) and ((nx != 0) or (ny != 0)) and not cambiosta:
@@ -2330,6 +2309,47 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
             else:
                 j += 3
         i += 3
+
+    # aggiungo le caselle dei bordi
+    i = 0
+    while i < 32:
+        if raggio == -1 or (raggio != -1 and (GlobalVar.gpx * i <= x + raggio and 0 <= y + raggio) and (GlobalVar.gpx * i >= x - raggio and 0 >= y - raggio)):
+            caseattactot.append(GlobalVar.gpx * i)
+            caseattactot.append(0)
+            caseattactot.append(False)
+        if raggio == -1 or (raggio != -1 and (GlobalVar.gpx * i <= x + raggio and GlobalVar.gpy <= y + raggio) and (GlobalVar.gpx * i >= x - raggio and GlobalVar.gpy >= y - raggio)):
+            caseattactot.append(GlobalVar.gpx * i)
+            caseattactot.append(GlobalVar.gpy)
+            caseattactot.append(False)
+        if raggio == -1 or (raggio != -1 and (GlobalVar.gpx * i <= x + raggio and GlobalVar.gpy * 16 <= y + raggio) and (GlobalVar.gpx * i >= x - raggio and GlobalVar.gpy * 16 >= y - raggio)):
+            caseattactot.append(GlobalVar.gpx * i)
+            caseattactot.append(GlobalVar.gpy * 16)
+            caseattactot.append(False)
+        if raggio == -1 or (raggio != -1 and (GlobalVar.gpx * i <= x + raggio and GlobalVar.gpy * 17 <= y + raggio) and (GlobalVar.gpx * i >= x - raggio and GlobalVar.gpy * 17 >= y - raggio)):
+            caseattactot.append(GlobalVar.gpx * i)
+            caseattactot.append(GlobalVar.gpy * 17)
+            caseattactot.append(False)
+        i += 1
+    i = 2
+    while i < 16:
+        if raggio == -1 or (raggio != -1 and (0 <= x + raggio and GlobalVar.gpy * i <= y + raggio) and (0 >= x - raggio and GlobalVar.gpy * i >= y - raggio)):
+            caseattactot.append(0)
+            caseattactot.append(GlobalVar.gpy * i)
+            caseattactot.append(False)
+        if raggio == -1 or (raggio != -1 and (GlobalVar.gpx <= x + raggio and GlobalVar.gpy * i <= y + raggio) and (GlobalVar.gpx >= x - raggio and GlobalVar.gpy * i >= y - raggio)):
+            caseattactot.append(GlobalVar.gpx)
+            caseattactot.append(GlobalVar.gpy * i)
+            caseattactot.append(False)
+        if raggio == -1 or (raggio != -1 and (GlobalVar.gpx * 30 <= x + raggio and GlobalVar.gpy * i <= y + raggio) and (GlobalVar.gpx * 30 >= x - raggio and GlobalVar.gpy * i >= y - raggio)):
+            caseattactot.append(GlobalVar.gpx * 30)
+            caseattactot.append(GlobalVar.gpy * i)
+            caseattactot.append(False)
+        if raggio == -1 or (raggio != -1 and (GlobalVar.gpx * 31 <= x + raggio and GlobalVar.gpy * i <= y + raggio) and (GlobalVar.gpx * 31 >= x - raggio and GlobalVar.gpy * i >= y - raggio)):
+            caseattactot.append(GlobalVar.gpx * 31)
+            caseattactot.append(GlobalVar.gpy * i)
+            caseattactot.append(False)
+        i += 1
+
     return caseattactot
 
 

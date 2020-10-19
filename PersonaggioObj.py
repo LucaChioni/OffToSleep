@@ -88,6 +88,10 @@ class PersonaggioObj(object):
             numImg = 1
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
+        if self.tipo.startswith("OggettoCancellettoCasa"):
+            numImg = 1
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         i = 1
         while i <= numImg:
             img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", True)
@@ -774,6 +778,27 @@ class PersonaggioObj(object):
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append("Non ho bisogno di cibo, non ho fame")
+                self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoCancellettoCasa"):
+            self.partiDialogo = []
+            self.nome = "OggettoCancellettoCasa"
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Non voglio andare nei campi adesso")
+                self.partiDialogo.append(dialogo)
+            else:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Non credo che Sam sia andato nei campi a quest'ora")
                 self.partiDialogo.append(dialogo)
         if self.tipo == "CaneCasa":
             self.partiDialogo = []
