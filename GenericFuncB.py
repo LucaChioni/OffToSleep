@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata,stanza, stanzaVecchia, canzone, inizio):
+def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, stanza, stanzaVecchia, canzone, inizio):
     # npers: 1=d, 2=a, 3=w, 4=s
     if stanza == GlobalVar.dictStanze["sognoSara1"]:
         if canzone != GlobalVar.canzoneSogno:
@@ -213,8 +213,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone
 
 
-def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali):
-    if stanza in GlobalVar.vetStanzePacifiche:
+def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali):
+    if stanza in GlobalVar.vetStanzePacifiche and stanzaVecchia not in GlobalVar.vetStanzePacifiche:
         listaNemiciTotali = []
         listaPersonaggiTotali = []
         stanzeGiaVisitate = []
@@ -530,6 +530,10 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, x, y, cambiosta, carim, cari
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara1"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(False, False, False, "Tutorial", False, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara2"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
+        personaggio = PersonaggioObj(False, False, False, "Nessuno", False, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         caricaTutto = True
 
