@@ -11,8 +11,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
         # rumore porte
-        rumoreAperturaPorte = GlobalVar.suonoaperturaporteSogno
-        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteSogno
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalVar.dictStanze["sognoSara2"]:
@@ -24,8 +24,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
         # rumore porte
-        rumoreAperturaPorte = GlobalVar.suonoaperturaporteSogno
-        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteSogno
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalVar.dictStanze["sognoSara1"]:
@@ -41,8 +41,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
         # rumore porte
-        rumoreAperturaPorte = GlobalVar.suonoaperturaporteSogno
-        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteSogno
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalVar.dictStanze["sognoSara2"]:
@@ -58,8 +58,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
         # rumore porte
-        rumoreAperturaPorte = GlobalVar.suonoaperturaporteSogno
-        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteSogno
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalVar.dictStanze["sognoSara3"]:
@@ -71,8 +71,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
         # rumore porte
-        rumoreAperturaPorte = GlobalVar.suonoaperturaporte1
-        rumoreChiusuraPorte = GlobalVar.suonochiusuraporte1
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalVar.dictStanze["sognoSara4"]:
@@ -92,8 +92,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
         # rumore porte
-        rumoreAperturaPorte = GlobalVar.suonoaperturaporte1
-        rumoreChiusuraPorte = GlobalVar.suonochiusuraporte1
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalVar.dictStanze["casaSamSara1"]:
@@ -118,13 +118,27 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if x == GlobalVar.gsx // 32 * 28:
                     x = GlobalVar.gsx // 32 * 28
                     y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara4"]:
+                npers = 3
+                if x == GlobalVar.gsx // 32 * 14:
+                    x = GlobalVar.gsx // 32 * 14
+                    y = GlobalVar.gsy // 18 * 15
+                if x == GlobalVar.gsx // 32 * 15:
+                    x = GlobalVar.gsx // 32 * 15
+                    y = GlobalVar.gsy // 18 * 15
+                if x == GlobalVar.gsx // 32 * 16:
+                    x = GlobalVar.gsx // 32 * 16
+                    y = GlobalVar.gsy // 18 * 15
+                if x == GlobalVar.gsx // 32 * 17:
+                    x = GlobalVar.gsx // 32 * 17
+                    y = GlobalVar.gsy // 18 * 15
     if stanza == GlobalVar.dictStanze["casaSamSara3"]:
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
         # rumore porte
-        rumoreAperturaPorte = GlobalVar.suonoaperturaporte1
-        rumoreChiusuraPorte = GlobalVar.suonochiusuraporte1
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalVar.dictStanze["casaSamSara2"]:
@@ -141,11 +155,70 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if x == GlobalVar.gsx // 32 * 28:
                     x = GlobalVar.gsx // 32 * 28
                     y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["casaSamSara4"]:
+        if canzone != GlobalVar.canzoneCasa:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneCasa
+        # rumore porte
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara2"]:
+                npers = 4
+                if x == GlobalVar.gsx // 32 * 13:
+                    x = GlobalVar.gsx // 32 * 14
+                    y = GlobalVar.gsy // 18 * 2
+                if x == GlobalVar.gsx // 32 * 14:
+                    x = GlobalVar.gsx // 32 * 14
+                    y = GlobalVar.gsy // 18 * 2
+                if x == GlobalVar.gsx // 32 * 15:
+                    x = GlobalVar.gsx // 32 * 15
+                    y = GlobalVar.gsy // 18 * 2
+                if x == GlobalVar.gsx // 32 * 16:
+                    x = GlobalVar.gsx // 32 * 16
+                    y = GlobalVar.gsy // 18 * 2
+                if x == GlobalVar.gsx // 32 * 17:
+                    x = GlobalVar.gsx // 32 * 17
+                    y = GlobalVar.gsy // 18 * 2
+                if x == GlobalVar.gsx // 32 * 18:
+                    x = GlobalVar.gsx // 32 * 17
+                    y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta1"]:
+                npers = 3
+                if x == GlobalVar.gsx // 32 * 15:
+                    x = GlobalVar.gsx // 32 * 15
+                    y = GlobalVar.gsy // 18 * 15
+                if x == GlobalVar.gsx // 32 * 16:
+                    x = GlobalVar.gsx // 32 * 16
+                    y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["forestaCadetta1"]:
+        if canzone != GlobalVar.canzoneForesta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneForesta
+        # rumore porte
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara4"]:
+                npers = 4
+                if x == GlobalVar.gsx // 32 * 15:
+                    x = GlobalVar.gsx // 32 * 15
+                    y = GlobalVar.gsy // 18 * 2
+                if x == GlobalVar.gsx // 32 * 16:
+                    x = GlobalVar.gsx // 32 * 16
+                    y = GlobalVar.gsy // 18 * 2
 
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone
 
 
 def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali):
+    if stanza in GlobalVar.vetStanzePacifiche:
+        listaNemiciTotali = []
+        listaPersonaggiTotali = []
+        stanzeGiaVisitate = []
+
     listaNemici = []
     if not stanza in stanzeGiaVisitate:
         if stanza == GlobalVar.dictStanze["sognoSara2"]:
@@ -172,6 +245,55 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
             listaNemici.append(nemico)
             percorsoNemico = ["w", "a", "s", "a", "d", "d"]
             nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 10, "w", "Orco", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+        if stanza == GlobalVar.dictStanze["forestaCadetta1"]:
+            percorsoNemico = ["s", "s", "a", "a", "a", "w", "w", "w", "d", "d", "d", "s"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, "s", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["s", "s", "d", "d", "d", "d", "w", "w", "w", "w", "a", "a", "s", "s", "a", "a"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, "a", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["a", "a", "s", "s", "d", "d", "w", "d", "d", "w", "w", "a", "a", "s"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 4, "s", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["w", "d", "d", "s", "s", "a", "a", "w"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 10, "w", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["a", "a", "s", "s", "d", "d", "d", "w", "w", "a"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 12, "a", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["s", "s", "w", "w"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 11, "w", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["w", "w", "s", "s"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 13, "s", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["d", "d", "a", "a", "a", "a", "d", "d"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12, "d", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["a", "s", "s", "d", "d", "d", "w", "w", "a", "w", "w", "a", "s", "s"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 13, "s", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["d", "d", "s", "a", "a", "a", "a", "w", "d", "d"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 9, "d", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["d", "d", "w", "w", "a", "a", "a", "s", "s", "d"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 5, "d", "TartarugaVerde", stanza, percorsoNemico)
+            listaNemiciTotali.append(nemico)
+            listaNemici.append(nemico)
+            percorsoNemico = ["w", "s", "s", "w"]
+            nemico = NemicoObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
     else:
@@ -293,7 +415,64 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = []
-            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 3, "d", "OggettoCancellettoCasa", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 3, "d", "OggettoCancellettoCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 3, "a", "OggettoCancellettoCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+        if stanza == GlobalVar.dictStanze["casaSamSara3"]:
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, "s", "OggettoCancellettoCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 10, "a", "OggettoCanaleCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 11, "a", "OggettoCanaleCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 12, "a", "OggettoCanaleCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13, "a", "OggettoCanaleCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 14, "a", "OggettoCanaleCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 15, "a", "OggettoCanaleCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 10, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 11, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 13, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 14, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 15, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
     else:
@@ -304,7 +483,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzeGiaVisitate, listaN
     if not stanza in stanzeGiaVisitate:
         stanzeGiaVisitate.append(stanza)
 
-    return nmost, listaNemici, listaPersonaggi, listaNemiciTotali, listaPersonaggiTotali
+    return nmost, listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali
 
 
 def gestisciEventiStoria(avanzamentoStoria, stanza, x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, canzone):

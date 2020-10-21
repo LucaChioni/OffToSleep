@@ -172,7 +172,7 @@ def gameloop():
                         GlobalVar.canaleSoundCanzone.play(canzone)
 
                 # carico nemici e personaggi nella stanza
-                nmost, listaNemici, listaPersonaggi, listaNemiciTotali, listaPersonaggiTotali = caricaNemiciEPersonaggi(dati[0], dati[1], stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali)
+                nmost, listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali = caricaNemiciEPersonaggi(dati[0], dati[1], stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali)
 
                 # stanza
                 imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Stanza.png", True, convert=True)
@@ -252,7 +252,6 @@ def gameloop():
                     # elimino tutti i sacchetti di denaro
                     vettoreDenaro = []
 
-                # cambiosta viene cambiato sopra !!!!!!!!!!!!
                 cambiosta = False
                 stanzaCambiata = True
                 impossibileCliccarePulsanti = True
@@ -732,7 +731,7 @@ def gameloop():
                         ultimoObbiettivoColco.append(y)
                         chiamarob = True
                 if (event.key == pygame.K_3 or event.key == pygame.K_KP3) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
+                    tastoTrovato = True
                     nx = 0
                     ny = 0
                     listaNemiciVisti = []
@@ -751,31 +750,10 @@ def gameloop():
                                 listaEscheViste.append(vitaesca[i + 3])
                             j += 3
                         i += 4
-                    tastoTrovato = True
-                    if not nemicoInquadrato:
-                        nemicoInquadrato = "Colco"
-                    elif type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
-                        if len(listaNemiciVisti) > 0:
-                            nemicoInquadrato = listaNemiciVisti[0]
-                        elif len(listaEscheViste) > 0:
-                            nemicoInquadrato = "Esca" + str(listaEscheViste[0])
-                        else:
-                            nemicoInquadrato = "Colco"
-                    elif not type(nemicoInquadrato) is str and nemicoInquadrato:
-                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadrato) < len(listaNemiciVisti) - 1:
-                            nemicoInquadrato = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadrato) + 1]
-                        elif len(listaEscheViste) > 0:
-                            nemicoInquadrato = "Esca" + str(listaEscheViste[0])
-                        else:
-                            nemicoInquadrato = "Colco"
-                    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
-                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadrato[4:])) + 3 < len(listaEscheViste) - 1:
-                            nemicoInquadrato = "Esca" + str(listaEscheViste[listaEscheViste.index(int(nemicoInquadrato[4:])) + 4])
-                        else:
-                            nemicoInquadrato = "Colco"
+                    nemicoInquadrato = scorriObbiettiviInquadrati(dati[0], nemicoInquadrato, listaNemiciVisti, listaEscheViste, True)
                     caricaTutto = True
                 if (event.key == pygame.K_2 or event.key == pygame.K_KP2) and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
+                    tastoTrovato = True
                     nx = 0
                     ny = 0
                     listaNemiciVisti = []
@@ -794,28 +772,7 @@ def gameloop():
                                 listaEscheViste.append(vitaesca[i + 3])
                             j += 3
                         i += 4
-                    tastoTrovato = True
-                    if not nemicoInquadrato:
-                        nemicoInquadrato = "Colco"
-                    elif type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
-                        if len(listaEscheViste) > 0:
-                            nemicoInquadrato = "Esca" + str(listaEscheViste[len(listaEscheViste) - 4])
-                        elif len(listaNemiciVisti) > 0:
-                            nemicoInquadrato = listaNemiciVisti[len(listaNemiciVisti) - 1]
-                        else:
-                            nemicoInquadrato = "Colco"
-                    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
-                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadrato[4:])) != 0:
-                            nemicoInquadrato = "Esca" + str(listaEscheViste[listaEscheViste.index(int(nemicoInquadrato[4:])) - 4])
-                        elif len(listaNemiciVisti) > 0:
-                            nemicoInquadrato = listaNemiciVisti[len(listaNemiciVisti) - 1]
-                        else:
-                            nemicoInquadrato = "Colco"
-                    elif not type(nemicoInquadrato) is str and nemicoInquadrato:
-                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadrato) != 0:
-                            nemicoInquadrato = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadrato) - 1]
-                        else:
-                            nemicoInquadrato = "Colco"
+                    nemicoInquadrato = scorriObbiettiviInquadrati(dati[0], nemicoInquadrato, listaNemiciVisti, listaEscheViste, False)
                     caricaTutto = True
                 if event.key == pygame.K_SPACE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
@@ -1261,7 +1218,14 @@ def gameloop():
             inquadratoQualcosaList = inquadratoQualcosa.split(":")
             xObbiettivo = int(inquadratoQualcosaList[1])
             yObbiettivo = int(inquadratoQualcosaList[2])
-            if x == xObbiettivo and y == yObbiettivo:
+            bloccato = False
+            i = 0
+            while i < len(vetNemiciSoloConXeY):
+                if xObbiettivo == vetNemiciSoloConXeY[i] and yObbiettivo == vetNemiciSoloConXeY[i + 1]:
+                    bloccato = True
+                    break
+                i += 2
+            if bloccato or (x == xObbiettivo and y == yObbiettivo):
                 GlobalVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0

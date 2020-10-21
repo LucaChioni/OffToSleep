@@ -795,7 +795,7 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, fineanimaz):
             if collana == 4:
                 denaroTrovato += vettoreDenaro[i]
             GlobalVar.schermo.blit(GlobalVar.sfocontcof, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 0))
-            messaggio("Denaro trovato: " + str(denaroTrovato), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+            messaggio("Monete trovate: " + str(denaroTrovato), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
             denaroRaccolto = True
             break
         i += 3

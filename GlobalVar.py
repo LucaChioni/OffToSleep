@@ -1160,10 +1160,10 @@ rumoreMorte = loadSound("Audio/RumoriPersonaggio/Morte.wav")
 
 # suoni apertura-chiusura cofanetti-porte
 suonoaperturacofanetti = loadSound("Audio/RumoriAmbiente/AperturaCofanetto.wav")
-suonoaperturaporteSogno = loadSound("Audio/RumoriAmbiente/AperturaPortaForesta.wav")
-suonochiusuraporteSogno = loadSound("Audio/RumoriAmbiente/ChiusuraPortaForesta.wav")
-suonoaperturaporte1 = loadSound("Audio/RumoriAmbiente/AperturaPorta1.wav")
-suonochiusuraporte1 = loadSound("Audio/RumoriAmbiente/ChiusuraPorta1.wav")
+suonoaperturaporteForesta = loadSound("Audio/RumoriAmbiente/AperturaPortaForesta.wav")
+suonochiusuraporteForesta = loadSound("Audio/RumoriAmbiente/ChiusuraPortaForesta.wav")
+suonoaperturaporteCasa = loadSound("Audio/RumoriAmbiente/AperturaPorta1.wav")
+suonochiusuraporteCasa = loadSound("Audio/RumoriAmbiente/ChiusuraPorta1.wav")
 suonoaperturaporte2 = loadSound("Audio/RumoriAmbiente/AperturaPorta2.wav")
 suonochiusuraporte2 = loadSound("Audio/RumoriAmbiente/ChiusuraPorta2.wav")
 suonoaperturaporte3 = loadSound("Audio/RumoriAmbiente/AperturaPorta3.wav")
@@ -1210,6 +1210,7 @@ suonoAperturaMappa = loadSound("Audio/RumoriAmbiente/AperturaMappa.wav")
 canzoneMenuPrincipale = loadSound("Audio/Canzoni/Canzone11.wav")
 canzoneSogno = loadSound("Audio/Canzoni/Canzone27.wav")
 canzoneCasa = loadSound("Audio/Canzoni/Canzone24.wav")
+canzoneForesta = loadSound("Audio/Canzoni/Canzone27.wav")
 
 # dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++]
 costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
@@ -1223,7 +1224,7 @@ dannoOggetti = [100, 50, 0, 20, 500]
 # dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
 dictAvanzamentoStoria = definisciAvanzamentiStoria()
 # dichiaro il dictionary che contiene le stanze associate a un nome che le descrive
-dictStanze = definisciStanze()
+dictStanze, vetStanzePacifiche = definisciStanze()
 
 # dichiaro i vettori di porte e cofanetti
 initVetPorteGlobale = definisciPorte(dictStanze)

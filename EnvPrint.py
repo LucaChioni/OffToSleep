@@ -810,8 +810,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # scorrere il puntatore sui nemici / GlobalVarG2.esche / Colco
                 if event.key == pygame.K_3 or event.key == pygame.K_KP3:
                     nemicoInquadratoTemp = False
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                    # seleziono i nemici / GlobalVarG2.esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
+                    # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
                     listaNemiciVisti = []
                     for nemico in listaNemici:
                         if nemico.inCasellaVista:
@@ -834,56 +833,26 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         i += 4
                     if rx == xp and ry == yp:
                         nemicoInquadratoTemp = "Colco"
+                    nemicoInquadratoTemp = scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, True)
 
                     if not nemicoInquadratoTemp:
-                        if type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
-                            xp = rx
-                            yp = ry
-                        elif not type(nemicoInquadrato) is str and nemicoInquadrato:
-                            xp = nemicoInquadrato.x
-                            yp = nemicoInquadrato.y
-                        elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
-                            i = 0
-                            while i < len(vitaesca):
-                                if nemicoInquadratoTemp[4:] == vitaesca[i]:
-                                    xp = vitaesca[i + 2]
-                                    yp = vitaesca[i + 3]
-                                    break
-                                i += 4
-                        else:
-                            xp = rx
-                            yp = ry
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                     elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
-                        if len(listaNemiciVisti) > 0:
-                            xp = listaNemiciVisti[0].x
-                            yp = listaNemiciVisti[0].y
-                        elif len(listaEscheViste) > 0:
-                            xp = listaEscheViste[2]
-                            yp = listaEscheViste[3]
-                        else:
-                            xp = rx
-                            yp = ry
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                        xp = rx
+                        yp = ry
                     elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
-                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadratoTemp) < len(listaNemiciVisti) - 1:
-                            xp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) + 1].x
-                            yp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) + 1].y
-                        elif len(listaEscheViste) > 0:
-                            xp = listaEscheViste[2]
-                            yp = listaEscheViste[3]
-                        else:
-                            xp = rx
-                            yp = ry
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                        xp = nemicoInquadratoTemp.x
+                        yp = nemicoInquadratoTemp.y
                     elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
-                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3 < len(listaEscheViste) - 1:
-                            xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 4 + 2]
-                            yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 4 + 3]
-                        else:
-                            xp = rx
-                            yp = ry
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                        xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 2]
+                        yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3]
                 if event.key == pygame.K_2 or event.key == pygame.K_KP2:
                     nemicoInquadratoTemp = False
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                    # seleziono i nemici / GlobalVarG2.esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
+                    # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
                     listaNemiciVisti = []
                     for nemico in listaNemici:
                         if nemico.inCasellaVista:
@@ -906,52 +875,22 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         i += 4
                     if rx == xp and ry == yp:
                         nemicoInquadratoTemp = "Colco"
+                    nemicoInquadratoTemp = scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, False)
 
                     if not nemicoInquadratoTemp:
-                        if type(nemicoInquadrato) is str and nemicoInquadrato == "Colco":
-                            xp = rx
-                            yp = ry
-                        elif not type(nemicoInquadrato) is str and nemicoInquadrato:
-                            xp = nemicoInquadrato.x
-                            yp = nemicoInquadrato.y
-                        elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
-                            i = 0
-                            while i < len(vitaesca):
-                                if nemicoInquadratoTemp[4:] == vitaesca[i]:
-                                    xp = vitaesca[i + 2]
-                                    yp = vitaesca[i + 3]
-                                    break
-                                i += 4
-                        else:
-                            xp = rx
-                            yp = ry
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                     elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
-                        if len(listaEscheViste) > 0:
-                            xp = listaEscheViste[len(listaEscheViste) - 4 + 2]
-                            yp = listaEscheViste[len(listaEscheViste) - 4 + 3]
-                        elif len(listaNemiciVisti) > 0:
-                            xp = listaNemiciVisti[len(listaNemiciVisti) - 1].x
-                            yp = listaNemiciVisti[len(listaNemiciVisti) - 1].y
-                        else:
-                            xp = rx
-                            yp = ry
-                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
-                        if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadratoTemp[4:])) != 0:
-                            xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) - 4 + 2]
-                            yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) - 4 + 3]
-                        elif len(listaNemiciVisti) > 0:
-                            xp = listaNemiciVisti[len(listaNemiciVisti) - 1].x
-                            yp = listaNemiciVisti[len(listaNemiciVisti) - 1].y
-                        else:
-                            xp = rx
-                            yp = ry
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                        xp = rx
+                        yp = ry
                     elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
-                        if len(listaNemiciVisti) > 0 and listaNemiciVisti.index(nemicoInquadratoTemp) != 0:
-                            xp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) - 1].x
-                            yp = listaNemiciVisti[listaNemiciVisti.index(nemicoInquadratoTemp) - 1].y
-                        else:
-                            xp = rx
-                            yp = ry
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                        xp = nemicoInquadratoTemp.x
+                        yp = nemicoInquadratoTemp.y
+                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                        xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 2]
+                        yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3]
 
                 if event.key == pygame.K_e:
                     selezioneAvvenuta = False

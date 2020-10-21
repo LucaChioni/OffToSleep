@@ -92,6 +92,10 @@ class PersonaggioObj(object):
             numImg = 1
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
+        if self.tipo.startswith("OggettoCanaleCasa"):
+            numImg = 1
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         i = 1
         while i <= numImg:
             img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", True)
@@ -828,6 +832,31 @@ class PersonaggioObj(object):
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append("... Mmmh...")
+                self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoCanaleCasa"):
+            self.partiDialogo = []
+            self.nome = "OggettoCanaleCasa"
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È il canale che abbiamo costruito per portare l'acqua del fiume nelle fontane in casa")
+                self.partiDialogo.append(dialogo)
+            else:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Qua dentro scorre l'acqua del fiume")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Così possiamo utilizzarla direttamente in casa")
                 self.partiDialogo.append(dialogo)
 
     def spostati(self, x, y, rx, ry, listaNemici):
