@@ -127,6 +127,8 @@ def definisciStanze():
     dictStanze["forestaCadetta1"] = i
     i += 1
     dictStanze["forestaCadetta2"] = i
+    i += 1
+    dictStanze["forestaCadetta3"] = i
 
     return dictStanze, vetStanzePacifiche
 
@@ -146,6 +148,11 @@ def definisciPorte(dictStanze):
     stanza = dictStanze["forestaCadetta1"]
     vetPorte += [stanza, 6, 7, False]
     vetPorte += [stanza, 19, 12, False]
+
+    stanza = dictStanze["forestaCadetta2"]
+    vetPorte += [stanza, 22, 9, False]
+    vetPorte += [stanza, 22, 2, False]
+    vetPorte += [stanza, 13, 10, False]
 
     return vetPorte
 
@@ -171,11 +178,15 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["forestaCadetta1"]
     vetCofanetti += [stanza, 8, 2, False]
-    vetCofanetti += [stanza, 4, 8, False]
     vetCofanetti += [stanza, 4, 15, False]
-    vetCofanetti += [stanza, 9, 8, False]
     vetCofanetti += [stanza, 14, 8, False]
     vetCofanetti += [stanza, 16, 14, False]
     vetCofanetti += [stanza, 27, 2, False]
+
+    stanza = dictStanze["forestaCadetta2"]
+    vetCofanetti += [stanza, 18, 14, False]
+    vetCofanetti += [stanza, 11, 2, False]
+    vetCofanetti += [stanza, 5, 9, False]
+    vetCofanetti += [stanza, 5, 14, False]
 
     return vetCofanetti

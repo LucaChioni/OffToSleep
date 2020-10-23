@@ -4,7 +4,7 @@ from Menu import *
 from EnvPrint import *
 from MovNemiciRob import *
 from Animazioni import *
-from GenericFuncB import *
+from SetNemiciPersonaggiEventi import *
 
 
 def gameloop():

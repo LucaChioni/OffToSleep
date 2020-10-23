@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from GenericFuncA import *
+from GenericFunc import *
 import math
 
 

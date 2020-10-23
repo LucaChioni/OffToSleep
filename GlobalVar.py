@@ -3,7 +3,7 @@
 import os
 import sys
 import pygame
-from GenericFuncC import *
+from SetAvanzamentiStanzePorteCofanetti import *
 
 
 sistemaOperativo = "Windows"

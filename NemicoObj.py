@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from GenericFuncA import *
+from GenericFunc import *
 
 
 class NemicoObj(object):
@@ -93,9 +93,9 @@ class NemicoObj(object):
             esp = 5
         if self.tipo == "TartarugaMarrone":
             vitaTotale = 60
-            attacco = 55
+            attacco = 45
             difesa = 15
-            velocita = -2
+            velocita = -1
             raggioVisivo = GlobalVar.gpx * 3
             attaccaDaLontano = False
             velenoso = False

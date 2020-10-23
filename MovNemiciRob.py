@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from GenericFuncA import *
+from GenericFunc import *
 
 
 def movmostro(x, y, rx, ry, nemico, stanza, dif, difro, par, dati, vitaesca, porte, cofanetti, vetNemici, vistoRallo, vistoRob, vistoesca, escabersaglio, vistoDenaro, xDenaro, yDenaro, attrobo, listaPersonaggi, caseviste):
