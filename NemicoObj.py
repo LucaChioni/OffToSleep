@@ -81,7 +81,7 @@ class NemicoObj(object):
 
         if self.tipo == "TartarugaVerde":
             vitaTotale = 40
-            attacco = 45
+            attacco = 40
             difesa = 5
             velocita = -2
             raggioVisivo = GlobalVar.gpx * 2
@@ -93,8 +93,8 @@ class NemicoObj(object):
             esp = 5
         if self.tipo == "TartarugaMarrone":
             vitaTotale = 60
-            attacco = 45
-            difesa = 15
+            attacco = 40
+            difesa = 10
             velocita = -1
             raggioVisivo = GlobalVar.gpx * 3
             attaccaDaLontano = False
@@ -129,8 +129,8 @@ class NemicoObj(object):
             esp = 5
         if self.tipo == "LupoNero":
             vitaTotale = 80
-            attacco = 55
-            difesa = 3
+            attacco = 60
+            difesa = 5
             velocita = 0
             raggioVisivo = GlobalVar.gpx * 5
             attaccaDaLontano = False

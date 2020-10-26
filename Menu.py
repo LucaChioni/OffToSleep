@@ -1156,7 +1156,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                             sposta = True
                             risposta = True
                         # carica batt
-                        if voceMarcata == 2 and dati[32] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVar.gpx:
+                        if voceMarcata == 2 and dati[32] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalVar.gpx:
                             animaOggetto[0] = "caricaBatterie"
                             dati[10] = dati[10] + 250
                             if dati[10] > entot:
@@ -1190,7 +1190,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                             sposta = True
                             risposta = True
                         # carica migliorato
-                        if voceMarcata == 5 and dati[35] > 0 and (abs(x - rx) + abs(y - ry)) <= GlobalVar.gpx:
+                        if voceMarcata == 5 and dati[35] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalVar.gpx:
                             animaOggetto[0] = "caricaBatterieMigliorato"
                             dati[10] = dati[10] + 600
                             if dati[10] > entot:

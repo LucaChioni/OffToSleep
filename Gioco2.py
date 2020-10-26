@@ -142,23 +142,23 @@ def gameloop():
                 canzoneCambiata = False
                 # mi posiziono e setto canzone e rumore porte
                 x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone = settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata,dati[1], stanzaVecchia, canzone, inizio)
-                vx = x
-                vy = y
-                rx = x
-                ry = y
-                vrx = x
-                vry = y
-
-                # npers: 1=d, 2=a, 3=w, 4=s
-                # nrob: 1=d, 2=a, 3=s, 4=w
-                if npers == 1:
-                    nrob = 1
-                if npers == 2:
-                    nrob = 2
-                if npers == 3:
-                    nrob = 4
-                if npers == 4:
-                    nrob = 3
+                if not inizio:
+                    vx = x
+                    vy = y
+                    rx = x
+                    ry = y
+                    vrx = x
+                    vry = y
+                    # npers: 1=d, 2=a, 3=w, 4=s
+                    # nrob: 1=d, 2=a, 3=s, 4=w
+                    if npers == 1:
+                        nrob = 1
+                    if npers == 2:
+                        nrob = 2
+                    if npers == 3:
+                        nrob = 4
+                    if npers == 4:
+                        nrob = 3
 
                 if canzoneCambiata:
                     i = GlobalVar.volumeCanzoni
@@ -488,8 +488,9 @@ def gameloop():
             guantiMov2 = guantisMov2
             guantiAttacco = guantisAttacco
             collana = collanas
-            robot = GlobalVar.robos
-            armrob = armrobs
+            if nrob == 0:
+                robot = GlobalVar.robos
+                armrob = armrobs
             inizio = False
 
         if nmost == -1:
@@ -1336,8 +1337,14 @@ def gameloop():
             GlobalVar.canaleSoundInterazioni.play(GlobalVar.selsta)
             dati[2] = x
             dati[3] = y
+            dati[140] = npers
             dati[134] = rx
             dati[135] = ry
+            dati[141] = nrob
+            dati[139] = mosseRimasteRob
+            dati[136] = raffredda
+            dati[137] = autoRic1
+            dati[138] = autoRic2
             if not apriocchio:
                 dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, canzone)
                 if caricaSalvataggio:

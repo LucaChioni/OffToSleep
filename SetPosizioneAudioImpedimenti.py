@@ -229,6 +229,40 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = 3
                 x = GlobalVar.gsx // 32 * 12
                 y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["forestaCadetta3"]:
+        if canzone != GlobalVar.canzoneForesta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneForesta
+        # rumore porte
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta2"]:
+                npers = 4
+                x = GlobalVar.gsx // 32 * 9
+                y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta4"]:
+                npers = 3
+                x = GlobalVar.gsx // 32 * 23
+                y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["forestaCadetta4"]:
+        if canzone != GlobalVar.canzoneForesta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneForesta
+        # rumore porte
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta3"]:
+                npers = 4
+                x = GlobalVar.gsx // 32 * 26
+                y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"]:
+                npers = 3
+                x = GlobalVar.gsx // 32 * 19
+                y = GlobalVar.gsy // 18 * 15
 
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone
 

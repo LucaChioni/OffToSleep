@@ -351,6 +351,19 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"È possibile richiudere le porte utilizzando la modalità interazione.")
                 self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ingressoForestaCadetta"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni e di recuperare qualche pv.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Usala anche fuori dal combattimento per evitare di sprecare pozioni!")
+                self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False
                 self.avanzaStoria = False
@@ -433,6 +446,19 @@ class PersonaggioObj(object):
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"Bene, dall'altra parte della foresta c'è la città")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialDifesa"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Uff, non mi sono mai spinto fino a questo punto...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Dovrei essere quasi dall'altra parte")
                 self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False

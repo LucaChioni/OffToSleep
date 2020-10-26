@@ -3701,9 +3701,7 @@ def oggetti(dati, canzone):
                     usadue = True
                     # usa?
                     if voceMarcata == 1:
-                        voceMarcata = 0
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                        xp = GlobalVar.gsx // 32 * 1
+                        usadue = False
                         # pozione
                         if usa == 1:
                             dati[5] = dati[5] + 100
@@ -3712,7 +3710,7 @@ def oggetti(dati, canzone):
                             dati[31] = dati[31] - 1
                             yp = GlobalVar.gsy // 18 * 5
                         # carica batt
-                        if usa == 2:
+                        if usa == 2 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                             dati[10] = dati[10] + 250
                             if dati[10] > entot:
                                 dati[10] = entot
@@ -3731,7 +3729,7 @@ def oggetti(dati, canzone):
                             dati[34] = dati[34] - 1
                             yp = GlobalVar.gsy // 18 * 8
                         # carica migliorato
-                        if usa == 5:
+                        if usa == 5 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                             dati[10] = dati[10] + 600
                             if dati[10] > entot:
                                 dati[10] = entot
@@ -3757,8 +3755,13 @@ def oggetti(dati, canzone):
                         if usa == 10:
                             attacco = 6
                             yp = GlobalVar.gsy // 18 * 15
-                        usa = 0
-                        usadue = False
+                        if (usa == 2 or usa == 5) and dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            xp = GlobalVar.gsx // 32 * 1
+                            voceMarcata = 0
+                            usa = 0
                     elif voceMarcata == 2:
                         voceMarcata = 0
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
