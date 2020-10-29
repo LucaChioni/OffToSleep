@@ -1206,6 +1206,8 @@ def gameloop():
             aumentoliv = 0
 
         if inquadratoQualcosa and inquadratoQualcosa.startswith("movimento") and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not impossibileCliccarePulsanti and not startf:
+            nx = 0
+            ny = 0
             vetNemiciSoloConXeY = []
             if not (x == rx and y == ry):
                 vetNemiciSoloConXeY.append(rx)
@@ -1226,11 +1228,7 @@ def gameloop():
                     bloccato = True
                     break
                 i += 2
-            if bloccato or (x == xObbiettivo and y == yObbiettivo):
-                GlobalVar.canaleSoundPassiRallo.stop()
-                nx = 0
-                ny = 0
-            else:
+            if not bloccato and not (x == xObbiettivo and y == yObbiettivo):
                 if abs(xObbiettivo - x) == GlobalVar.gpx and abs(yObbiettivo - y) == 0:
                     if x < xObbiettivo:
                         npers = 1
@@ -1330,6 +1328,8 @@ def gameloop():
                         guantiMov2 = guantidMov2
                         guantiAttacco = guantidAttacco
                         collana = collanad
+            if nx == 0 and ny == 0:
+                GlobalVar.canaleSoundPassiRallo.stop()
 
         # menu start
         if startf and attacco != 1:
@@ -1877,6 +1877,14 @@ def gameloop():
                 vrx = rx
                 vry = ry
 
+            # aggiorna vista dei mostri e metti l'occhio se ti vedono
+            apriocchio = False
+            for nemico in listaNemici:
+                if nemico.vita > 0 and nemico.inCasellaVista and ((abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo)):
+                    nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, listaPersonaggi, dati)
+                    if nemico.visto:
+                        apriocchio = True
+
             # movimento-azioni mostri
             if nmost > 0 and not cambiosta:
                 for nemico in listaNemici:
@@ -1953,14 +1961,6 @@ def gameloop():
                 esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
                 impossibileCliccarePulsanti = True
 
-            # aggiorna vista dei mostri e metti l'occhio se ti vedono
-            apriocchio = False
-            for nemico in listaNemici:
-                if nemico.vita > 0 and nemico.inCasellaVista and ((abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo)):
-                    nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, listaPersonaggi, dati)
-                    if nemico.visto:
-                        apriocchio = True
-
             # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
             if caricaTutto:
                 if aumentoliv != 0:
@@ -1968,7 +1968,7 @@ def gameloop():
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, dati[0])
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, movimentoPerMouse, canzone)
+                primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, carim, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, stanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, apriocchio, movimentoPerMouse, canzone)
             if not carim:
                 pvtot = getVitaTotRallo(dati[4], dati[129])
                 disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, sfondinoa, sfondinob, sfondinoc, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu, dati[0])

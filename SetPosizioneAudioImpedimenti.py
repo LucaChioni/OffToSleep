@@ -263,6 +263,40 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = 3
                 x = GlobalVar.gsx // 32 * 19
                 y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+        if canzone != GlobalVar.canzoneForesta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneForesta
+        # rumore porte
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta4"]:
+                npers = 4
+                x = GlobalVar.gsx // 32 * 16
+                y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta6"]:
+                npers = 2
+                x = GlobalVar.gsx // 32 * 29
+                y = GlobalVar.gsy // 18 * 8
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta7"]:
+                npers = 3
+                x = GlobalVar.gsx // 32 * 15
+                y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["forestaCadetta6"]:
+        if canzone != GlobalVar.canzoneForesta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneForesta
+        # rumore porte
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"]:
+                npers = 1
+                x = GlobalVar.gsx // 32 * 2
+                y = GlobalVar.gsy // 18 * 14
 
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone
 
@@ -274,6 +308,14 @@ def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione,
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         nonProcedere = True
     if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara2"] and stanzaVecchia == GlobalVar.dictStanze["casaSamSara1"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamSara2"]:
+        personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        nonProcedere = True
+    if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["incontroFiglioUfficiale"] and stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"] and stanzaDestinazione == GlobalVar.dictStanze["forestaCadetta6"]:
+        personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        nonProcedere = True
+    if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"] and stanzaDestinazione == GlobalVar.dictStanze["forestaCadetta7"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         nonProcedere = True

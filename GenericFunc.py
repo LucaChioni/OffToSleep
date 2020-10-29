@@ -2304,6 +2304,9 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
                             oggettoRicevuto = personaggio.oggettoDato
                         if personaggio.menuMercante:
                             menuMercante = personaggio.menuMercante
+                    if personaggio.cambiaImg:
+                        personaggio.imgCambiata += 1
+                        personaggio.cambiaImg = False
                     fineDialogo = True
                 else:
                     if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":

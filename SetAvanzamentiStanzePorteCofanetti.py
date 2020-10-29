@@ -37,12 +37,29 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["ingressoForestaCadetta"] = i
     i += 1
+    dictAvanzamentoStoria["tutorialCampoVisivo"] = i
+    i += 1
     dictAvanzamentoStoria["tutorialDifesa"] = i
     i += 1
     dictAvanzamentoStoria["quartaStanzaForestaCadetta"] = i
+    i += 1
+    dictAvanzamentoStoria["quintaStanzaForestaCadetta"] = i
+    i += 1
+    dictAvanzamentoStoria["incontroFiglioUfficiale"] = i
+    i += 1
+    dictAvanzamentoStoria["trovatoLegna1"] = i
+    i += 1
+    dictAvanzamentoStoria["trovatoLegna2"] = i
+    i += 1
+    dictAvanzamentoStoria["trovatoLegna3"] = i
+    i += 1
+    dictAvanzamentoStoria["legnaDepositata"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioNotteForestaCadetta"] = i
+    i += 1
+    dictAvanzamentoStoria["secondoCambioPersonaggio"] = i
 
     i += 100
-    dictAvanzamentoStoria["secondoCambioPersonaggio"] = i
     i += 1
     dictAvanzamentoStoria["trovatoMappaDiario"] = i
     dictAvanzamentoStoria["mappaCasa"] = i
@@ -137,6 +154,10 @@ def definisciStanze():
     dictStanze["forestaCadetta4"] = i
     i += 1
     dictStanze["forestaCadetta5"] = i
+    i += 1
+    dictStanze["forestaCadetta6"] = i
+    i += 1
+    dictStanze["forestaCadetta7"] = i
 
     return dictStanze, vetStanzePacifiche
 
@@ -172,6 +193,13 @@ def definisciPorte(dictStanze):
     vetPorte += [stanza, 15, 10, False]
     vetPorte += [stanza, 18, 14, False]
     vetPorte += [stanza, 21, 14, False]
+
+    stanza = dictStanze["forestaCadetta6"]
+    vetPorte += [stanza, 7, 12, False]
+    vetPorte += [stanza, 9, 6, False]
+    vetPorte += [stanza, 13, 7, False]
+    vetPorte += [stanza, 22, 10, False]
+    vetPorte += [stanza, 26, 9, False]
 
     return vetPorte
 
@@ -217,5 +245,9 @@ def definisciCofanetti(dictStanze):
     stanza = dictStanze["forestaCadetta4"]
     vetCofanetti += [stanza, 29, 9, False]
     vetCofanetti += [stanza, 10, 2, False]
+
+    stanza = dictStanze["forestaCadetta6"]
+    vetCofanetti += [stanza, 12, 2, False]
+    vetCofanetti += [stanza, 21, 2, False]
 
     return vetCofanetti

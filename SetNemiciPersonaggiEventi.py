@@ -38,225 +38,396 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
         if stanza == GlobalVar.dictStanze["forestaCadetta1"]:
-            percorsoNemico = ["s", "s", "a", "a", "a", "w", "w", "w", "d", "d", "d", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, "s", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "s", "d", "d", "d", "d", "w", "w", "w", "w", "a", "a", "s", "s", "a", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, "a", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "a", "s", "s", "d", "d", "w", "d", "d", "w", "w", "a", "a", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 4, "s", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "d", "d", "s", "s", "a", "a", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 10, "w", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "a", "s", "s", "d", "d", "d", "w", "w", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 12, "a", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "s", "w", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 11, "w", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "w", "s", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 13, "s", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "a", "a", "a", "a", "d", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12, "d", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "s", "s", "d", "d", "d", "w", "w", "a", "w", "w", "a", "s", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 13, "s", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "s", "a", "a", "a", "a", "w", "d", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 9, "d", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "w", "w", "a", "a", "a", "s", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 5, "d", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "s", "s", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                percorsoNemico = ["s", "s", "a", "a", "a", "w", "w", "w", "d", "d", "d", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "s", "s", "d", "d", "w", "d", "d", "w", "w", "a", "a", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 4, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "s", "s", "d", "d", "d", "w", "w", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 12, "a", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 11, "w", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "s", "a", "a", "a", "a", "w", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 9, "d", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "s", "s", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+            else:
+                percorsoNemico = ["s", "s", "a", "a", "a", "w", "w", "w", "d", "d", "d", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "d", "d", "d", "d", "w", "w", "w", "w", "a", "a", "s", "s", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, "a", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "s", "s", "d", "d", "w", "d", "d", "w", "w", "a", "a", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 4, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "d", "d", "s", "s", "a", "a", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 10, "w", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "s", "s", "d", "d", "d", "w", "w", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 12, "a", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 11, "w", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "w", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 13, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "a", "a", "a", "a", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12, "d", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "s", "s", "d", "d", "d", "w", "w", "a", "w", "w", "a", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 13, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "s", "a", "a", "a", "a", "w", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 9, "d", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "w", "w", "a", "a", "a", "s", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 5, "d", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "s", "s", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
         if stanza == GlobalVar.dictStanze["forestaCadetta2"]:
-            percorsoNemico = ["a", "w", "d", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 12, "s", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "s", "s", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, "w", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "w", "a", "a", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 15, "d", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "w", "w", "d", "s", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13, "s", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "d", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14, "d", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "w", "w", "a", "a", "s", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, "d", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "w", "w", "w", "a", "s", "s", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, "s", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "w", "d", "d", "s", "s", "s", "s", "w", "w", "a", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 4, "a", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "w", "d", "d", "s", "s", "a", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 3, "w", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "w", "d", "s", "s", "s", "a", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 5, "w", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "a", "a", "a", "d", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, "d", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "d", "d", "w", "w", "a", "a", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 3, "s", "TartarugaVerde", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "d", "d", "d", "a", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 10, "a", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "d", "s", "s", "a", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 8, "w", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "d", "w", "w", "a", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 12, "s", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                percorsoNemico = ["w", "s", "s", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 14, "w", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "d", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14, "d", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "w", "w", "w", "a", "s", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "d", "d", "s", "s", "a", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 3, "w", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "d", "d", "w", "w", "a", "a", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 3, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "d", "s", "s", "a", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 8, "w", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+            else:
+                percorsoNemico = ["a", "w", "d", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 12, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "s", "s", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 14, "w", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "w", "a", "a", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 15, "d", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "w", "d", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13, "s", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "d", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14, "d", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "w", "w", "a", "a", "s", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, "d", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "w", "w", "w", "a", "s", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "w", "d", "d", "s", "s", "s", "s", "w", "w", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 4, "a", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "d", "d", "s", "s", "a", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 3, "w", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "w", "d", "s", "s", "s", "a", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 5, "w", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "a", "a", "a", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, "d", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "d", "d", "w", "w", "a", "a", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 3, "s", "TartarugaVerde", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "d", "d", "d", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 10, "a", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "d", "s", "s", "a", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 8, "w", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "d", "w", "w", "a", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 12, "s", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
         if stanza == GlobalVar.dictStanze["forestaCadetta3"]:
-            percorsoNemico = ["a", "w", "w", "d", "d", "s", "s", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 6, "a", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "w", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 5, "d", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "w", "w", "d", "s", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 7, "s", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "a", "d", "d", "d", "d", "a", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 7, "a", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "d", "w", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, "s", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "w", "w", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, "s", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "w", "a", "a", "a", "s", "s", "s", "w", "w", "w", "d", "d", "d", "s", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4, "s", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "w", "w", "w", "a", "a", "a", "s", "s", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, "d", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "a", "d", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11, "d", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "w", "d", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 11, "s", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "a", "a", "a", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 13, "d", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "d", "d", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 12, "s", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "d", "a", "a", "a", "a", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 14, "d", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "a", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 14, "a", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "a", "w", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 11, "d", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "w", "w", "w", "a", "a", "s", "s", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 13, "d", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                percorsoNemico = ["a", "w", "w", "d", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 7, "s", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "w", "w", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, "s", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "w", "w", "w", "a", "a", "a", "s", "s", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, "d", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "a", "a", "a", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 13, "d", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "d", "d", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 12, "s", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "w", "w", "w", "a", "a", "s", "s", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 13, "d", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+            else:
+                percorsoNemico = ["a", "w", "w", "d", "d", "s", "s", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 6, "a", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 5, "d", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "w", "d", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 7, "s", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "d", "d", "d", "d", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 7, "a", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "d", "w", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, "s", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "w", "w", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, "s", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "w", "a", "a", "a", "s", "s", "s", "w", "w", "w", "d", "d", "d", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4, "s", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "w", "w", "w", "a", "a", "a", "s", "s", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, "d", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11, "d", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "d", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 11, "s", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "a", "a", "a", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 13, "d", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "d", "d", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 12, "s", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "d", "a", "a", "a", "a", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 14, "d", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 14, "a", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "a", "w", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 11, "d", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "w", "w", "w", "a", "a", "s", "s", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 13, "d", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
         if stanza == GlobalVar.dictStanze["forestaCadetta4"]:
-            percorsoNemico = ["d", "w", "w", "d", "d", "s", "s", "s", "s", "a", "a", "a", "w", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 6, "w", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "a", "a", "a", "d", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 6, "d", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 4, "s", "TartarugaMarrone", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "w", "d", "d", "s", "s"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4, "s", "LupoGrigio", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "d", "w", "w", "w", "a", "a", "a", "s", "a", "s", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 5, "d", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "a", "a", "s", "s", "d", "d", "w", "d", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, "w", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["w", "d", "d", "d", "s", "s", "a", "a", "w", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 7, "a", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "a", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 11, "a", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "s", "s", "w", "w", "a"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 9, "a", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["d", "d", "d", "w", "w", "w", "w", "a", "a", "a", "a", "a", "a", "a", "s", "s", "s", "s", "s", "d", "d", "d", "d", "w"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 12, "w", "LupoNero", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
-            percorsoNemico = ["a", "w", "d", "w", "s", "a", "s", "d"]
-            nemico = NemicoObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 11, "d", "LupoBianco", stanza, percorsoNemico)
-            listaNemiciTotali.append(nemico)
-            listaNemici.append(nemico)
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                percorsoNemico = ["d", "w", "w", "d", "d", "s", "s", "s", "s", "a", "a", "a", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 6, "w", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "w", "d", "d", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4, "s", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "a", "s", "s", "d", "d", "w", "d", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, "w", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "d", "d", "d", "s", "s", "a", "a", "w", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 7, "a", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "d", "w", "w", "w", "w", "a", "a", "a", "a", "a", "a", "a", "s", "s", "s", "s", "s", "d", "d", "d", "d", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 12, "w", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+            else:
+                percorsoNemico = ["d", "w", "w", "d", "d", "s", "s", "s", "s", "a", "a", "a", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 6, "w", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "a", "a", "a", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 6, "d", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 4, "s", "TartarugaMarrone", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "a", "a", "a", "w", "w", "d", "w", "d", "d", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4, "s", "LupoGrigio", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "d", "w", "w", "w", "a", "a", "a", "s", "a", "s", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 5, "d", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "a", "a", "s", "s", "d", "d", "w", "d", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, "w", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "d", "d", "d", "s", "s", "a", "a", "w", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 7, "a", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 11, "a", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "s", "s", "w", "w", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 9, "a", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "d", "w", "w", "w", "w", "a", "a", "a", "a", "a", "a", "a", "s", "s", "s", "s", "s", "d", "d", "d", "d", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 12, "w", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "d", "w", "s", "a", "s", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 11, "d", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+        if stanza == GlobalVar.dictStanze["forestaCadetta6"]:
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                percorsoNemico = ["d", "d", "d", "d", "s", "s", "a", "a", "s", "a", "a", "a", "a", "a", "w", "w", "w", "d", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 7, "d", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "s", "a", "s", "s", "d", "d", "d", "s", "d", "d", "d", "w", "w", "w", "a", "a", "w", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 11, "a", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "w", "d", "d", "d", "d", "s", "s", "a", "s", "s", "a", "a", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, "w", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "s", "a", "a", "a", "w", "w", "w", "w", "s", "s", "s", "s", "d", "d", "d", "w", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 12, "w", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "s", "d", "d", "w", "w", "w", "a", "a", "a", "a", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 4, "s", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "d", "d", "w", "d", "w", "w", "w", "a", "a", "a", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 13, "s", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+            else:
+                percorsoNemico = ["a", "a", "w", "w", "w", "d", "d", "d", "d", "d", "d", "d", "s", "s", "a", "a", "s", "a", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 10, "a", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "d", "d", "s", "s", "a", "a", "s", "a", "a", "a", "a", "a", "w", "w", "w", "d", "d", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 7, "d", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "s", "a", "s", "s", "d", "d", "d", "s", "d", "d", "d", "w", "w", "w", "a", "a", "w", "a", "a"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 11, "a", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "s", "d", "d", "d", "w", "w", "w", "a", "w", "a", "a", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 9, "s", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["a", "w", "w", "d", "d", "d", "d", "s", "s", "a", "s", "s", "a", "a", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, "w", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "d", "d", "d", "d", "w", "w", "a", "a", "a", "a", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 6, "s", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "s", "a", "a", "a", "w", "w", "w", "w", "s", "s", "s", "s", "d", "d", "d", "w", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 12, "w", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["d", "d", "s", "d", "d", "w", "w", "w", "a", "a", "a", "a", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 4, "s", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "a", "a", "s", "d", "d", "w", "w", "w"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 10, "w", "LupoBianco", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["s", "s", "d", "d", "w", "d", "w", "w", "w", "a", "a", "a", "s", "s"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 13, "s", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
+                percorsoNemico = ["w", "d", "d", "s", "s", "a", "a", "a", "s", "w", "w", "d"]
+                nemico = NemicoObj(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 6, "d", "LupoNero", stanza, percorsoNemico)
+                listaNemiciTotali.append(nemico)
+                listaNemici.append(nemico)
     else:
         for nemico in listaNemiciTotali:
             if nemico.stanzaDiAppartenenza == stanza:
@@ -436,6 +607,40 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 15, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
+        if stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 7, "s", "OggettoSiepe", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 9, "s", "OggettoFuoco", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 10, "s", "OggettoMucchioLegna", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 9, "s", "OggettoCibo", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 10, "a", "FiglioUfficiale", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+        if stanza == GlobalVar.dictStanze["forestaCadetta6"]:
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4, "s", "OggettoLegna", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 8, "s", "OggettoLegna", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = []
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 15, "s", "OggettoLegna", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
     else:
         for personaggio in listaPersonaggiTotali:
             if personaggio.stanzaDiAppartenenza == stanza:
@@ -494,14 +699,22 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, x, y, cambiosta, carim, cari
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara2"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
+        personaggio = PersonaggioObj(False, False, False, "Tutorial", False, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ingressoForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
         personaggio = PersonaggioObj(False, False, False, "Nessuno", False, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ingressoForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta2"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialCampoVisivo"] and stanza == GlobalVar.dictStanze["forestaCadetta2"]:
         personaggio = PersonaggioObj(False, False, False, "Tutorial", False, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialDifesa"] and stanza == GlobalVar.dictStanze["forestaCadetta4"]:
+        personaggio = PersonaggioObj(False, False, False, "Nessuno", False, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["quartaStanzaForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         personaggio = PersonaggioObj(False, False, False, "Nessuno", False, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         caricaTutto = True
