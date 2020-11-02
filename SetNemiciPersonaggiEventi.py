@@ -4,7 +4,7 @@ from NemicoObj import *
 from SetPosizioneAudioImpedimenti import *
 
 def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali):
-    if stanza in GlobalVar.vetStanzePacifiche and stanzaVecchia not in GlobalVar.vetStanzePacifiche:
+    if stanza in GlobalVar.vetStanzePacifiche and stanzaVecchia not in GlobalVar.vetStanzePacifiche and stanzaVecchia != 0:
         listaNemiciTotali = []
         listaPersonaggiTotali = []
         stanzeGiaVisitate = []
@@ -304,10 +304,6 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
                 nemico = NemicoObj(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, "w", "LupoBianco", stanza, percorsoNemico)
                 listaNemiciTotali.append(nemico)
                 listaNemici.append(nemico)
-                percorsoNemico = ["w", "d", "d", "d", "s", "s", "a", "a", "w", "a"]
-                nemico = NemicoObj(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 7, "a", "LupoBianco", stanza, percorsoNemico)
-                listaNemiciTotali.append(nemico)
-                listaNemici.append(nemico)
                 percorsoNemico = ["d", "d", "d", "w", "w", "w", "w", "a", "a", "a", "a", "a", "a", "a", "s", "s", "s", "s", "s", "d", "d", "d", "d", "w"]
                 nemico = NemicoObj(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 12, "w", "LupoNero", stanza, percorsoNemico)
                 listaNemiciTotali.append(nemico)
@@ -432,7 +428,6 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
         for nemico in listaNemiciTotali:
             if nemico.stanzaDiAppartenenza == stanza:
                 listaNemici.append(nemico)
-    nmost = len(listaNemici)
 
     listaPersonaggi = []
     if not stanza in stanzeGiaVisitate:
@@ -649,10 +644,10 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
     if not stanza in stanzeGiaVisitate:
         stanzeGiaVisitate.append(stanza)
 
-    return nmost, listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali
+    return listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali
 
 
-def gestisciEventiStoria(avanzamentoStoria, stanza, x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, canzone):
+def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte, canzone):
     if impossibileAprirePorta:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
@@ -718,8 +713,91 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, x, y, cambiosta, carim, cari
         personaggio = PersonaggioObj(False, False, False, "Nessuno", False, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
         caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["legnaReportataMichael"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+        avanzamentoStoria += 1
+        stanza = GlobalVar.dictStanze["forestaCadetta5"]
+        cambiosta = True
+        carim = True
+        caricaTutto = True
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "FiglioUfficiale":
+                personaggio.x = GlobalVar.gpx * 17
+                personaggio.y = GlobalVar.gpy * 8
+                personaggio.vx = personaggio.x
+                personaggio.vy = personaggio.y
+                personaggio.girati("s")
+                break
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioNotteForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+        pygame.time.wait(1000)
+        personaggio = PersonaggioObj(x, y, False, "FiglioUfficiale", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["fineUltimoDialogoSam"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+        percorsoNemico = ["w", "w"]
+        nemico = NemicoObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12, "w", "Cinghiale", stanza, percorsoNemico)
+        nemico.mosseRimaste = 3
+        listaNemiciTotali.append(nemico)
+        listaNemici.append(nemico)
+        npers = 4
+        personaggio = PersonaggioObj(x, y, False, "OggettoCinghiale", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        carim = True
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["attaccoCinghiale"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+        nemicoArrivato = False
+        for nemico in listaNemici:
+            if nemico.tipo == "Cinghiale" and nemico.mosseRimaste == 0:
+                nemicoArrivato = True
+                break
+        if nemicoArrivato:
+            GlobalVar.schermo.fill(GlobalVar.nero)
+            pygame.display.update()
+            i = 0
+            while i < len(tutteporte):
+                if tutteporte[i] == GlobalVar.dictStanze["casaSamSara1"] and tutteporte[i + 1] == GlobalVar.gpx * 6 and tutteporte[i + 2] == GlobalVar.gpx * 9:
+                    tutteporte[i + 3] = False
+                    break
+                i += 4
+            # 1-10 => oggetti / 11 => frecce / 12 => collana / 13 => monete
+            oggettiRimastiASam = [dati[31], dati[32], dati[33], dati[34], dati[35], dati[36], dati[37], dati[38], dati[39], dati[40], dati[132], dati[62], dati[131]]
+            dati[31] = 2
+            if dati[32] > 0:
+                dati[32] = 0
+            if dati[33] > 0:
+                dati[33] = 0
+            if dati[34] > 0:
+                dati[34] = 0
+            if dati[35] > 0:
+                dati[35] = 0
+            if dati[36] > 0:
+                dati[36] = 0
+            if dati[37] > 0:
+                dati[37] = 0
+            if dati[38] > 0:
+                dati[38] = 0
+            if dati[39] > 0:
+                dati[39] = 0
+            if dati[40] > 0:
+                dati[40] = 0
+            dati[132] = 0
+            dati[62] = 0
+            pygame.time.wait(1000)
+            avanzamentoStoria += 1
+            stanza = GlobalVar.dictStanze["casaSamSara1"]
+            cambiosta = True
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamSara1"]:
+        pygame.time.wait(1000)
+        personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamSara1"]:
+        personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        caricaTutto = True
 
     if caricaTutto:
         movimentoPerMouse = False
         tastop = 0
-    return avanzamentoStoria, cambiosta, stanza, carim, caricaTutto, tastop, movimentoPerMouse
+    return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, tastop, movimentoPerMouse, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte

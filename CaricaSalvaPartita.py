@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali):
+def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVar.gpx
     dati[3] = dati[3] // GlobalVar.gpy
@@ -91,6 +91,10 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
             scrivi.write("%s_" % direzione)
         scrivi.write("]_")
         scrivi.write("%i_" % personaggio.numeroMovimento)
+        scrivi.write("%i_" % personaggio.imgCambiata)
+    scrivi.write("\n")
+    for oggetto in oggettiRimastiASam:
+        scrivi.write("%i_" % oggetto)
     scrivi.close()
 
     # critta il salvataggio
@@ -129,6 +133,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
     listaMonete = []
     stanzeGiaVisitate = []
     listaPersonaggiTotali = []
+    oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
     contenutoFile = leggi.read()
@@ -144,7 +149,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
         tipoErrore = 2
 
     if not errore and not (len(datiTotali) == 1 and datiTotali[0] == ""):
-        if len(datiTotali) == 6:
+        if len(datiTotali) == 7:
             dati = datiTotali[0].split("_")
             dati.pop(len(dati) - 1)
             if len(dati) == 0 or len(dati) != lunghezzadati:
@@ -272,21 +277,32 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                             datiPersonaggi.insert(i + 6, percorsoPersonaggio)
                             break
                         j += 1
-                    i += 8
+                    i += 9
             except ValueError:
                 errore = True
-            if len(datiPersonaggi) % 8 != 0:
+            if len(datiPersonaggi) % 9 != 0:
                 errore = True
             else:
                 i = 0
                 while i < len(datiPersonaggi):
                     try:
-                        personaggio = PersonaggioObj(GlobalVar.gsx // 32 * int(datiPersonaggi[i]), GlobalVar.gsy // 18 * int(datiPersonaggi[i + 1]), datiPersonaggi[i + 2], datiPersonaggi[i + 3], int(datiPersonaggi[i + 4]), int(datiPersonaggi[i + 5]), datiPersonaggi[i + 6], int(datiPersonaggi[i + 7]))
+                        personaggio = PersonaggioObj(GlobalVar.gsx // 32 * int(datiPersonaggi[i]), GlobalVar.gsy // 18 * int(datiPersonaggi[i + 1]), datiPersonaggi[i + 2], datiPersonaggi[i + 3], int(datiPersonaggi[i + 4]), int(datiPersonaggi[i + 5]), datiPersonaggi[i + 6], int(datiPersonaggi[i + 7]), int(datiPersonaggi[i + 8]))
                         listaPersonaggiTotali.append(personaggio)
                     except ValueError:
                         errore = True
                         break
-                    i += 8
+                    i += 9
+            oggettiRimastiASam = datiTotali[6].split("_")
+            oggettiRimastiASam.pop(len(oggettiRimastiASam) - 1)
+            if len(oggettiRimastiASam) != 13:
+                errore = True
+            else:
+                for i in range(0, len(oggettiRimastiASam)):
+                    try:
+                        oggettiRimastiASam[i] = int(oggettiRimastiASam[i])
+                    except ValueError:
+                        errore = True
+                        break
         else:
             errore = True
         if errore:
@@ -438,11 +454,11 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
         if mostraErrori:
             print ("Salvataggio: " + str(n))
             GlobalVar.canaleSoundCanzone.stop()
-            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali
+            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
         else:
             return dati, tipoErrore
     else:
         if mostraErrori:
-            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali
+            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
         else:
             return False, tipoErrore

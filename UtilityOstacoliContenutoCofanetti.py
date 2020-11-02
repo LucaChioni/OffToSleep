@@ -16,16 +16,12 @@ def oggetto(xInizio, yInizio, dimx, dimy, px, py, nx, ny):
 
 def ottieniMonete(dati, moneteOttenute):
     moneteTot = dati[131] + moneteOttenute
-    # effetto portafortuna
-    if dati[130] == 4:
-        moneteTot += moneteOttenute
     if moneteTot > 9999:
         moneteTot = 9999
     return moneteTot
 
 
-def ottieniFrecce(dati, frecceOttenute):
-    FrecceTot = dati[132] + frecceOttenute
+def ottieniFrecce(dati, frecceOttenute, tesoro):
     if dati[133] == 0:
         maxFrecce = 1
     elif dati[133] == 1:
@@ -36,9 +32,12 @@ def ottieniFrecce(dati, frecceOttenute):
         maxFrecce = 60
     else:
         maxFrecce = 0
-    if FrecceTot > maxFrecce:
-        FrecceTot = maxFrecce
-    return FrecceTot
+    if dati[132] == maxFrecce:
+        tesoro = -tesoro
+    frecceTot = dati[132] + frecceOttenute
+    if frecceTot > maxFrecce:
+        frecceTot = maxFrecce
+    return frecceTot, tesoro
 
 
 def ottieniOggetto(dati, numOggetto, qta):
@@ -48,7 +47,7 @@ def ottieniOggetto(dati, numOggetto, qta):
     elif dati[numOggetto] < 99:
         dati[numOggetto] += qta
     else:
-        numOggetto = -2
+        numOggetto = -numOggetto
     if dati[numOggetto] > 99:
         dati[numOggetto] = 99
     return dati, numOggetto

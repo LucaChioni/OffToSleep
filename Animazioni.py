@@ -677,106 +677,128 @@ def animaAperturaCofanetto(tesoro, x, y, npers, sfondinoc, animazioneRallo):
         if tesoro == -2:
             messaggio("Hai trovato: Niente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
         # 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(5) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
-        if tesoro >= 11 and tesoro <= 30:
+        elif tesoro >= 11 and tesoro <= 30:
             messaggio("Hai trovato: Una nuova tecnica", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 31:
+        elif tesoro == 31:
             messaggio("Hai trovato: Pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 32:
+        elif tesoro == -31:
+            messaggio(u"Hai già troppe Pozioni!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 32:
             messaggio("Hai trovato: Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 33:
+        elif tesoro == -32:
+            messaggio(u"Hai già troppe Alimentazioni 100gr!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 33:
             messaggio("Hai trovato: Medicina", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 34:
+        elif tesoro == -33:
+            messaggio(u"Hai già troppe Medicine!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 34:
             messaggio("Hai trovato: Superpozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 35:
+        elif tesoro == -34:
+            messaggio(u"Hai già troppe Superpozioni!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 35:
             messaggio("Hai trovato: Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 36:
+        elif tesoro == -35:
+            messaggio(u"Hai già troppe Alimentazioni 250gr!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 36:
             messaggio("Hai trovato: Bomba", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 37:
+        elif tesoro == -36:
+            messaggio(u"Hai già troppe Bombe!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 37:
             messaggio("Hai trovato: Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 38:
+        elif tesoro == -37:
+            messaggio(u"Hai già troppe Bombe velenose!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 38:
             messaggio("Hai trovato: Esca", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 39:
+        elif tesoro == -38:
+            messaggio(u"Hai già troppe Esche!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 39:
             messaggio("Hai trovato: Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 40:
+        elif tesoro == -39:
+            messaggio(u"Hai già troppe Bombe appiccicose!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 40:
             messaggio("Hai trovato: Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 41:
+        elif tesoro == -40:
+            messaggio(u"Hai già troppe Bombe potenziate!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 41:
             messaggio("Hai trovato: Niente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 42:
+        elif tesoro == 42:
             messaggio("Hai trovato: Spada di ferro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 43:
+        elif tesoro == 43:
             messaggio("Hai trovato: Spadone d'acciaio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 44:
+        elif tesoro == 44:
             messaggio("Hai trovato: Lykother", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 45:
+        elif tesoro == 45:
             messaggio("Hai trovato: Mendaxritas", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 46:
+        elif tesoro == 46:
             messaggio("Hai trovato: Niente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 47:
+        elif tesoro == 47:
             messaggio("Hai trovato: Arco di legno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 48:
+        elif tesoro == 48:
             messaggio("Hai trovato: Arco di ferro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 49:
+        elif tesoro == 49:
             messaggio("Hai trovato: Arco di precisione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 50:
+        elif tesoro == 50:
             messaggio("Hai trovato: Accipiter", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 51:
+        elif tesoro == 51:
             messaggio("Hai trovato: Niente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 52:
+        elif tesoro == 52:
             messaggio("Hai trovato: Armatura di pelle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 53:
+        elif tesoro == 53:
             messaggio("Hai trovato: Armatura d'acciaio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 54:
+        elif tesoro == 54:
             messaggio("Hai trovato: Lykodes", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 55:
+        elif tesoro == 55:
             messaggio("Hai trovato: Loriquam", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 56:
+        elif tesoro == 56:
             messaggio("Hai trovato: Niente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 57:
+        elif tesoro == 57:
             messaggio("Hai trovato: Scudo di pelle", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 58:
+        elif tesoro == 58:
             messaggio("Hai trovato: Scudo d'acciaio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 59:
+        elif tesoro == 59:
             messaggio("Hai trovato: Lykethmos", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 60:
+        elif tesoro == 60:
             messaggio("Hai trovato: Clipequam", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 61:
+        elif tesoro == 61:
             messaggio("Hai trovato: Niente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 62:
+        elif tesoro == 62:
             messaggio("Hai trovato: Guanti vitali", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 63:
+        elif tesoro == 63:
             messaggio("Hai trovato: Guanti difensivi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 64:
+        elif tesoro == 64:
             messaggio("Hai trovato: Guanti offensivi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 65:
+        elif tesoro == 65:
             messaggio("Hai trovato: Guanti confortevoli", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 66:
+        elif tesoro == 66:
             messaggio("Hai trovato: Niente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 67:
+        elif tesoro == 67:
             messaggio("Hai trovato: Collana medicinale", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 68:
+        elif tesoro == 68:
             messaggio("Hai trovato: Collana rigenerante", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 69:
+        elif tesoro == 69:
             messaggio("Hai trovato: Apprendimaschera", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 70:
+        elif tesoro == 70:
             messaggio("Hai trovato: Portafortuna", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 71:
+        elif tesoro == 71:
             messaggio("Hai trovato: Batteria piccola", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 72:
+        elif tesoro == 72:
             messaggio("Hai trovato: Batteria discreta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 73:
+        elif tesoro == 73:
             messaggio("Hai trovato: Batteria capiente", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 74:
+        elif tesoro == 74:
             messaggio("Hai trovato: Batteria enorme", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 75:
+        elif tesoro == 75:
             messaggio("Hai trovato: Batteria illimitata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro >= 81 and tesoro <= 100:
+        elif tesoro >= 81 and tesoro <= 100:
             messaggio("Hai trovato: Una nuova condizione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro >= 101 and tesoro <= 120:
+        elif tesoro >= 101 and tesoro <= 120:
             messaggio("Hai trovato: Cella di memoria", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 131:
+        elif tesoro == 131:
             messaggio("Hai trovato: 50 monete", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-        if tesoro == 132:
-            messaggio("Hai trovato: 5 frecce", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == 132:
+            messaggio("Hai trovato: 1 freccia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
+        elif tesoro == -132:
+            messaggio(u"Hai già troppe frecce!", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
 
     return animazioneRallo
 
@@ -791,9 +813,6 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, collana, fineanimaz):
             if GlobalVar.canaleSoundPassiRallo.get_busy():
                 GlobalVar.canaleSoundPassiRallo.stop()
             denaroTrovato = vettoreDenaro[i]
-            # effetto portafortuna
-            if collana == 4:
-                denaroTrovato += vettoreDenaro[i]
             GlobalVar.schermo.blit(GlobalVar.sfocontcof, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 0))
             messaggio("Monete trovate: " + str(denaroTrovato), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
             denaroRaccolto = True

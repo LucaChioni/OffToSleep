@@ -86,6 +86,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if x == GlobalVar.gsx // 32 * 17:
                     x = GlobalVar.gsx // 32 * 17
                     y = GlobalVar.gsy // 18 * 15
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"]:
+                npers = 4
+                x = GlobalVar.gsx // 32 * 4
+                y = GlobalVar.gsy // 18 * 14
     if stanza == GlobalVar.dictStanze["casaSamSara2"]:
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
@@ -276,6 +280,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = 4
                 x = GlobalVar.gsx // 32 * 16
                 y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"]:
+                npers = 1
+                x = GlobalVar.gsx // 32 * 16
+                y = GlobalVar.gsy // 18 * 9
             if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta6"]:
                 npers = 2
                 x = GlobalVar.gsx // 32 * 29
@@ -325,5 +333,7 @@ def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione,
 def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
     procedi = True
     if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and xPorta == GlobalVar.gpx * 25 and yPorta == GlobalVar.gpy * 3:
+        procedi = False
+    if GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["tutorialMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and xPorta == GlobalVar.gpx * 6 and yPorta == GlobalVar.gpy * 9:
         procedi = False
     return procedi

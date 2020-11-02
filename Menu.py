@@ -40,8 +40,8 @@ def menu(caricaSalvataggio):
     lunghezzadati = len(datiIniziali)
 
     if caricaSalvataggio:
-        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
-        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali
+        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
+        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
 
     # video
     fermavideo = guardaVideo('Video/videoinizio')
@@ -263,6 +263,7 @@ def menu(caricaSalvataggio):
                                 datiMonete = []
                                 stanzeGiaVisitate = []
                                 listaPersonaggiTotali = []
+                                oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                                 GlobalVar.canaleSoundCanzone.stop()
                                 i = porteini
                                 while i <= portefin:
@@ -274,7 +275,7 @@ def menu(caricaSalvataggio):
                                     dati[i + 1] = dati[i + 1] * GlobalVar.gpx
                                     dati[i + 2] = dati[i + 2] * GlobalVar.gpy
                                     i = i + 4
-                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali
+                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
                             else:
                                 GlobalVar.schermo.blit(background, (0, 0))
 
@@ -284,9 +285,9 @@ def menu(caricaSalvataggio):
 
                             # lettura salvataggio
                             if n != -1:
-                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
+                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
                                 if dati:
-                                    return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali
+                                    return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
                             primoFrame = True
 
                         # Impostazioni
@@ -504,7 +505,7 @@ def menu(caricaSalvataggio):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, canzone):
+def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, canzone):
     sfondostastart = GlobalVar.sfondostax3
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
@@ -713,7 +714,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
                         n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, canzone)
                         if n != -1 and azioneFatta == 3:
-                            salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali)
+                            salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam)
                         elif n != -1 and azioneFatta == 1:
                             caricaSalvataggio = n
                             risposta = True

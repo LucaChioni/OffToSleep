@@ -837,13 +837,13 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
         elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 5, GlobalVar.gpy * 3, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 3, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 9, GlobalVar.gpy * 2, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 8, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
@@ -852,7 +852,7 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
         elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
             nx = 0
             ny = 0
         elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
@@ -1683,6 +1683,8 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
 
 def aperturacofanetto(stanza, cx, cy, dati):
     avanzamentoStoria = dati[0]
+    numFrecceOttenute = 1
+    numMoneteOttenute = 50
 
     tesoro = -1
     # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
@@ -1740,6 +1742,57 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if cx == GlobalVar.gpx * 29 and cy == GlobalVar.gpy * 14:
             tesoro = 47
             avanzamentoStoria += 1
+    if stanza == GlobalVar.dictStanze["casaSamSara3"]:
+        # ottieni pozione
+        if cx == GlobalVar.gpx * 21 and cy == GlobalVar.gpy * 10:
+            tesoro = 31
+    if stanza == GlobalVar.dictStanze["forestaCadetta1"]:
+        # ottieni pozione
+        if cx == GlobalVar.gpx * 27 and cy == GlobalVar.gpy * 2:
+            tesoro = 31
+        # ottieni pozione
+        if cx == GlobalVar.gpx * 4 and cy == GlobalVar.gpy * 15:
+            tesoro = 31
+        # ottieni freccia
+        if cx == GlobalVar.gpx * 8 and cy == GlobalVar.gpy * 2:
+            tesoro = 132
+    if stanza == GlobalVar.dictStanze["forestaCadetta2"]:
+        # ottieni bomba
+        if cx == GlobalVar.gpx * 18 and cy == GlobalVar.gpy * 14:
+            tesoro = 36
+        # ottieni pozione
+        if cx == GlobalVar.gpx * 11 and cy == GlobalVar.gpy * 2:
+            tesoro = 31
+        # ottieni esca
+        if cx == GlobalVar.gpx * 5 and cy == GlobalVar.gpy * 9:
+            tesoro = 38
+        # ottieni freccia
+        if cx == GlobalVar.gpx * 5 and cy == GlobalVar.gpy * 14:
+            tesoro = 132
+    if stanza == GlobalVar.dictStanze["forestaCadetta3"]:
+        # ottieni pozione
+        if cx == GlobalVar.gpx * 20 and cy == GlobalVar.gpy * 2:
+            tesoro = 31
+        # ottieni guanti vitali
+        if cx == GlobalVar.gpx * 5 and cy == GlobalVar.gpy * 13:
+            tesoro = 62
+        # ottieni esca
+        if cx == GlobalVar.gpx * 21 and cy == GlobalVar.gpy * 9:
+            tesoro = 38
+    if stanza == GlobalVar.dictStanze["forestaCadetta4"]:
+        # ottieni pozione
+        if cx == GlobalVar.gpx * 29 and cy == GlobalVar.gpy * 9:
+            tesoro = 31
+        # ottieni bomba
+        if cx == GlobalVar.gpx * 10 and cy == GlobalVar.gpy * 2:
+            tesoro = 36
+    if stanza == GlobalVar.dictStanze["forestaCadetta6"]:
+        # ottieni freccia
+        if cx == GlobalVar.gpx * 12 and cy == GlobalVar.gpy * 2:
+            tesoro = 132
+        # ottieni esca
+        if cx == GlobalVar.gpx * 21 and cy == GlobalVar.gpy * 2:
+            tesoro = 38
 
     # assegna oggetto ottenuto
     if tesoro != -1 and tesoro != -2:
@@ -1754,9 +1807,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
         elif tesoro >= 101 and tesoro <= 120:
             dati = ottieniCellaDiMemoria(dati, tesoro)
         elif tesoro == 131:
-            dati[tesoro] = ottieniMonete(dati, 50)
+            dati[tesoro] = ottieniMonete(dati, numMoneteOttenute)
         elif tesoro == 132:
-            dati[tesoro] = ottieniFrecce(dati, 5)
+            dati[tesoro], tesoro = ottieniFrecce(dati, numFrecceOttenute, tesoro)
         else:
             tesoro = -2
     return dati, tesoro, avanzamentoStoria
