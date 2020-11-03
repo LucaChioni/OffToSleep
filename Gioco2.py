@@ -178,7 +178,8 @@ def gameloop():
                 stanzaVecchia = dati[1]
 
                 # stanza
-                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/Stanza.png", True, convert=True)
+                nomeStanza = settaNomeStanza(dati[0], dati[1])
+                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", True, convert=True)
                 imgSfondoStanza = pygame.transform.smoothscale(imgSfondoStanza, (GlobalVar.gsx, GlobalVar.gsy))
                 sfondinoa = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/SfondinoA.png", True, convert=True)
                 sfondinoa = pygame.transform.smoothscale(sfondinoa, (GlobalVar.gpx, GlobalVar.gpy))
@@ -1578,14 +1579,13 @@ def gameloop():
             # gestione difesa
             if sposta:
                 difesa = 0
-            if difesa != 0 and not sposta:
-                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
-                if difesa == 2:
-                    difesa = 1
-                    sposta = True
-                    dati[5] = dati[5] + 3
-                    if dati[5] > pvtot:
-                        dati[5] = pvtot
+            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
+            if difesa == 2 and not sposta:
+                difesa = 1
+                sposta = True
+                dati[5] = dati[5] + 3
+                if dati[5] > pvtot:
+                    dati[5] = pvtot
             # gestione att+ e dif+
             if dati[123] > 0 and sposta:
                 dati[123] = dati[123] - 1

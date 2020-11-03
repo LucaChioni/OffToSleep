@@ -71,6 +71,25 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["mappaCasa"] = i
     i += 1
     dictAvanzamentoStoria["tutorialMappaDiario"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoIndicazioniArmaturaNonno"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] = i
+    i += 1
+    dictAvanzamentoStoria["trovataChiaveRipostiglio"] = i
+    i += 1
+    dictAvanzamentoStoria["armaturaNonno1"] = i
+    i += 1
+    dictAvanzamentoStoria["armaturaNonno2"] = i
+    i += 1
+    dictAvanzamentoStoria["armaturaNonno3"] = i
+    i += 1
+    dictAvanzamentoStoria["armaturaNonno4"] = i
+    i += 1
+    dictAvanzamentoStoria["armaturaNonnoCompletata"] = i
+    i += 1
+    dictAvanzamentoStoria["ingressoForestaCadettaSara"] = i
+    dictAvanzamentoStoria["mappaForestaCadetta"] = i
 
     i += 100
     i += 1
@@ -97,8 +116,6 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["mercanteBomPote"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mappaForestaCadetta"] = i
     i += 1
     dictAvanzamentoStoria["mappaCittà"] = i
     i += 1
