@@ -452,10 +452,11 @@ class NemicoObj(object):
         if self.vita < 0:
             self.vita = 0
 
-    def aggiornaVista(self, x, y, rx, ry, stanza, porte, cofanetti, listaPersonaggi, dati):
+    def aggiornaVista(self, x, y, rx, ry, dati, caseviste, aggiornaCaselleAttaccabili):
         vistoRallo = False
         vistoRob = False
-        self.caseattactot = trovacasattaccabili(self.x, self.y, stanza, porte, cofanetti, listaPersonaggi, self.raggioVisivo)
+        if aggiornaCaselleAttaccabili:
+            self.caseattactot = trovacasattaccabili(self.x, self.y, self.raggioVisivo, caseviste)
         if abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(self.caseattactot):

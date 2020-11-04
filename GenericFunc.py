@@ -184,7 +184,7 @@ def guardaVideo(path, audio=0):
     return False
 
 
-def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio):
+def trovacasattaccabili(x, y, raggio, caseviste):
     if raggio == -1:
         rangeXSinistra = (x // GlobalVar.gpx) - 2
         rangeXDestra = (GlobalVar.gsx // GlobalVar.gpx) - (x // GlobalVar.gpx) - 3
@@ -204,46 +204,21 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
         if (y // GlobalVar.gpy) + rangeYBasso > 16:
             rangeYBasso = (GlobalVar.gsy // GlobalVar.gpy) - (y // GlobalVar.gpy) - 3
 
+    # il vettore caseattac contiene solo le caselle nel raggio visivo
+    caseattac = []
+    i = 0
+    while i < len(caseviste):
+        if caseviste[i] <= x + (rangeXDestra * GlobalVar.gpx) and caseviste[i] >= x - (rangeXSinistra * GlobalVar.gpx) and caseviste[i + 1] <= y + (rangeYBasso * GlobalVar.gpy) and caseviste[i + 1] >= y - (rangeYAlto * GlobalVar.gpy):
+            caseattac.append(caseviste[i])
+            caseattac.append(caseviste[i + 1])
+            caseattac.append(caseviste[i + 2])
+        i += 3
+
     margineDiErrore = 1
     base1 = 0
     base2 = 0
     altezza = 0
 
-    # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in basso a destra
-    caseattac = []
-    n = 0
-    while n < rangeXDestra:
-        m = 1
-        while m <= rangeYBasso:
-            murx = x + (GlobalVar.gpx * n)
-            mury = y + (GlobalVar.gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, GlobalVar.gpx, 0, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if murx != nmurx:
-                caseattac.append(nmurx)
-                caseattac.append(nmury)
-                caseattac.append(True)
-            else:
-                caseattac.append(nmurx + GlobalVar.gpx)
-                caseattac.append(nmury)
-                caseattac.append(False)
-            m = m + 1
-        n = n + 1
-    n = 0
-    while n < rangeYBasso:
-        m = 1
-        while m <= rangeXDestra:
-            murx = x + (GlobalVar.gpx * m)
-            mury = y + (GlobalVar.gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, GlobalVar.gpy, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if mury == nmury:
-                i = 0
-                while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury + GlobalVar.gpy:
-                        caseattac[i + 2] = False
-                        break
-                    i = i + 3
-            m = m + 1
-        n = n + 1
     # caseattacbassodestra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in basso a destra
     caseattacbassodestra = []
     # riempio caseattacbassodestra come se tutto il campo in basso a destra fosse libero
@@ -260,7 +235,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacbassodestra[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] > x and caseattac[i] <= x + (rangeXDestra * GlobalVar.gpx) and caseattac[i + 1] > y and caseattac[i + 1] <= y + (rangeYBasso * GlobalVar.gpy) and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -388,41 +363,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                 j += 3
         i += 3
 
-    # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in basso a sinistra
-    caseattac = []
-    n = 0
-    while n < rangeXSinistra:
-        m = 1
-        while m <= rangeYBasso:
-            murx = x - (GlobalVar.gpx * n)
-            mury = y + (GlobalVar.gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -GlobalVar.gpx, 0, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if murx != nmurx:
-                caseattac.append(nmurx)
-                caseattac.append(nmury)
-                caseattac.append(True)
-            else:
-                caseattac.append(nmurx - GlobalVar.gpx)
-                caseattac.append(nmury)
-                caseattac.append(False)
-            m = m + 1
-        n = n + 1
-    n = 0
-    while n < rangeYBasso:
-        m = 1
-        while m <= rangeXSinistra:
-            murx = x - (GlobalVar.gpx * m)
-            mury = y + (GlobalVar.gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, GlobalVar.gpy, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if mury == nmury:
-                i = 0
-                while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury + GlobalVar.gpy:
-                        caseattac[i + 2] = False
-                        break
-                    i = i + 3
-            m = m + 1
-        n = n + 1
     # caseattacbassosinistra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in basso a sinistra
     caseattacbassosinistra = []
     # riempio caseattacbassosinistra come se tutto il campo in basso a sinistra fosse libero
@@ -439,7 +379,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacbassosinistra[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] < x and caseattac[i] >= x - (rangeXSinistra * GlobalVar.gpx) and caseattac[i + 1] > y and caseattac[i + 1] <= y + (rangeYBasso * GlobalVar.gpy) and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -567,41 +507,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                 j += 3
         i += 3
 
-    # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in alto a sinistra
-    caseattac = []
-    n = 0
-    while n < rangeXSinistra:
-        m = 1
-        while m <= rangeYAlto:
-            murx = x - (GlobalVar.gpx * n)
-            mury = y - (GlobalVar.gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -GlobalVar.gpx, 0, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if murx != nmurx:
-                caseattac.append(nmurx)
-                caseattac.append(nmury)
-                caseattac.append(True)
-            else:
-                caseattac.append(nmurx - GlobalVar.gpx)
-                caseattac.append(nmury)
-                caseattac.append(False)
-            m = m + 1
-        n = n + 1
-    n = 0
-    while n < rangeYAlto:
-        m = 1
-        while m <= rangeXSinistra:
-            murx = x - (GlobalVar.gpx * m)
-            mury = y - (GlobalVar.gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -GlobalVar.gpy, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if mury == nmury:
-                i = 0
-                while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury - GlobalVar.gpy:
-                        caseattac[i + 2] = False
-                        break
-                    i = i + 3
-            m = m + 1
-        n = n + 1
     # caseattacaltosinistra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in alto a sinistra
     caseattacaltosinistra = []
     # riempio caseattacaltosinistra come se tutto il campo in alto a sinistra fosse libero
@@ -618,7 +523,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacaltosinistra[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] < x and caseattac[i] >= x - (rangeXSinistra * GlobalVar.gpx) and caseattac[i + 1] < y and caseattac[i + 1] >= y - (rangeYAlto * GlobalVar.gpy) and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -746,41 +651,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                 j += 3
         i += 3
 
-    # caseattac[x, y, flag, ... ] -> per trovare gli ostacoli in alto a destra
-    caseattac = []
-    n = 0
-    while n < rangeXDestra:
-        m = 1
-        while m <= rangeYAlto:
-            murx = x + (GlobalVar.gpx * n)
-            mury = y - (GlobalVar.gpy * m)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, GlobalVar.gpx, 0, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if murx != nmurx:
-                caseattac.append(nmurx)
-                caseattac.append(nmury)
-                caseattac.append(True)
-            else:
-                caseattac.append(nmurx + GlobalVar.gpx)
-                caseattac.append(nmury)
-                caseattac.append(False)
-            m = m + 1
-        n = n + 1
-    n = 0
-    while n < rangeYAlto:
-        m = 1
-        while m <= rangeXDestra:
-            murx = x + (GlobalVar.gpx * m)
-            mury = y - (GlobalVar.gpy * n)
-            nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -GlobalVar.gpy, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-            if mury == nmury:
-                i = 0
-                while i < len(caseattac):
-                    if caseattac[i] == nmurx and caseattac[i + 1] == nmury - GlobalVar.gpy:
-                        caseattac[i + 2] = False
-                        break
-                    i = i + 3
-            m = m + 1
-        n = n + 1
     # caseattacaltodestra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli in alto a destra
     caseattacaltodestra = []
     # riempio caseattacaltodestra come se tutto il campo in alto a destra fosse libero
@@ -797,7 +667,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacaltodestra[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] > x and caseattac[i] <= x + (rangeXDestra * GlobalVar.gpx) and caseattac[i + 1] < y and caseattac[i + 1] >= y - (rangeYAlto * GlobalVar.gpy) and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -925,22 +795,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                 j += 3
         i += 3
 
-    # caselle a destra del personaggio
-    caseattac = []
-    n = 0
-    while n <= rangeXDestra:
-        murx = x + (GlobalVar.gpx * n)
-        mury = y
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, GlobalVar.gpx, 0, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-        if murx != nmurx:
-            caseattac.append(nmurx)
-            caseattac.append(nmury)
-            caseattac.append(True)
-        else:
-            caseattac.append(nmurx + GlobalVar.gpx)
-            caseattac.append(nmury)
-            caseattac.append(False)
-        n += 1
     # caseattacdestra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a destra
     caseattacdestra = []
     # riempio caseattacdestra come se tutto il campo a destra fosse libero
@@ -963,7 +817,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacdestra[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] > x and caseattac[i] <= x + (rangeXDestra * GlobalVar.gpx) and caseattac[i + 1] == y and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -1091,22 +945,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                 j += 3
         i += 3
 
-    # caselle a sinistra del personaggio
-    caseattac = []
-    n = 0
-    while n <= rangeXSinistra:
-        murx = x - (GlobalVar.gpx * n)
-        mury = y
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, -GlobalVar.gpx, 0, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-        if murx != nmurx:
-            caseattac.append(nmurx)
-            caseattac.append(nmury)
-            caseattac.append(True)
-        else:
-            caseattac.append(nmurx - GlobalVar.gpx)
-            caseattac.append(nmury)
-            caseattac.append(False)
-        n += 1
     # caseattacsinistra[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a sinistra
     caseattacsinistra = []
     # riempio caseattacsinistra come se tutto il campo a sinistra fosse libero
@@ -1129,7 +967,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacsinistra[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] < x and caseattac[i] >= x - (rangeXSinistra * GlobalVar.gpx) and caseattac[i + 1] == y and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -1257,22 +1095,6 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                 j += 3
         i += 3
 
-    # caselle sopra il personaggio
-    caseattac = []
-    n = 0
-    while n <= rangeYAlto:
-        murx = x
-        mury = y - (GlobalVar.gpy * n)
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, -GlobalVar.gpy, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-        if mury != nmury:
-            caseattac.append(nmurx)
-            caseattac.append(nmury)
-            caseattac.append(True)
-        else:
-            caseattac.append(nmurx)
-            caseattac.append(nmury - GlobalVar.gpy)
-            caseattac.append(False)
-        n += 1
     # caseattacalto[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli sopra
     caseattacalto = []
     # riempio caseattacalto come se tutto il campo sopra fosse libero
@@ -1295,7 +1117,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacalto[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] == x and caseattac[i + 1] < y and caseattac[i + 1] >= y - (rangeYAlto * GlobalVar.gpy) and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -1423,25 +1245,9 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
                 j += 3
         i += 3
 
-    # caselle sotto il personaggio
-    caseattac = []
-    n = 0
-    while n <= rangeYBasso:
-        murx = x
-        mury = y + (GlobalVar.gpy * n)
-        nmurx, nmury, stanza, carim, cambiosta = muri_porte(murx, mury, 0, GlobalVar.gpy, stanza, False, True, False, porte, cofanetti, listaPersonaggi)
-        if mury != nmury:
-            caseattac.append(nmurx)
-            caseattac.append(nmury)
-            caseattac.append(True)
-        else:
-            caseattac.append(nmurx)
-            caseattac.append(nmury + GlobalVar.gpy)
-            caseattac.append(False)
-        n += 1
-    # caseattacbasso[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli a destra
+    # caseattacbasso[x, y, flag, ... ] -> per definire la visibilita' ridotta dagli ostacoli sotto
     caseattacbasso = []
-    # riempio caseattacbasso come se tutto il campo a destra fosse libero
+    # riempio caseattacbasso come se tutto il campo sotto fosse libero
     n = 0
     while n <= rangeYBasso:
         m = 0
@@ -1461,7 +1267,7 @@ def trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, raggio)
     caseattacbasso[2] = False
     i = 0
     while i < len(caseattac):
-        if not caseattac[i + 2]:
+        if caseattac[i] == x and caseattac[i + 1] > y and caseattac[i + 1] <= y + (rangeYBasso * GlobalVar.gpy) and not caseattac[i + 2]:
             # la prima retta va dal personaggio all'angolo in alto a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -1739,8 +1545,9 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
     incasevista = False
     i = 0
     while i < len(caseviste):
-        if caseviste[i + 2] and caseviste[i] == rx and caseviste[i + 1] == ry:
-            incasevista = True
+        if caseviste[i] == rx and caseviste[i + 1] == ry:
+            if caseviste[i + 2]:
+                incasevista = True
             break
         i = i + 3
     if not incasevista:
@@ -1840,40 +1647,54 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, vetOstacoli, caseviste):
     if xPartenza == xArrivo and yPartenza == yArrivo and not impossibileRaggiungere:
         percorsoTrovato = "arrivato"
     elif not impossibileRaggiungere:
+        caselleLibere = []
+        i = 0
+        while i < len(caseviste):
+            if caseviste[i + 2]:
+                ostacolato = False
+                k = 0
+                while k < len(vetOstacoli):
+                    if caseviste[i] == vetOstacoli[k] and caseviste[i + 1] == vetOstacoli[k + 1]:
+                        ostacolato = True
+                        break
+                    k += 2
+                if not ostacolato and not (caseviste[i] == xPartenza and caseviste[i + 1] == yPartenza):
+                    caselleLibere.append(caseviste[i])
+                    caselleLibere.append(caseviste[i + 1])
+            i += 3
+
         arrivato = False
+        countCaselleDiPartenza = 1
+        countCaselleFeudo = 0
+        countCaselleDiPartenzaEsaminate = 0
         j = 0
         while j < len(caselleEsplorate) and not arrivato:
-            valoreCasella += 1
             caselleAccantoTrovate = 0
+            if countCaselleFeudo == 0:
+                valoreCasella += 1
 
             i = 0
-            while i < len(caseviste) and caselleAccantoTrovate < 4:
-                ostacolato = False
-                if (caseviste[i] == caselleEsplorate[j] + GlobalVar.gpx and caseviste[i + 1] == caselleEsplorate[j + 1]) or (caseviste[i] == caselleEsplorate[j] - GlobalVar.gpx and caseviste[i + 1] == caselleEsplorate[j + 1]) or (caseviste[i] == caselleEsplorate[j] and caseviste[i + 1] == caselleEsplorate[j + 1] + GlobalVar.gpy) or (caseviste[i] == caselleEsplorate[j] and caseviste[i + 1] == caselleEsplorate[j + 1] - GlobalVar.gpy):
+            while i < len(caselleLibere) and caselleAccantoTrovate < 4:
+                casellaCancellata = False
+                if (caselleLibere[i] == caselleEsplorate[j] + GlobalVar.gpx and caselleLibere[i + 1] == caselleEsplorate[j + 1]) or (caselleLibere[i] == caselleEsplorate[j] - GlobalVar.gpx and caselleLibere[i + 1] == caselleEsplorate[j + 1]) or (caselleLibere[i] == caselleEsplorate[j] and caselleLibere[i + 1] == caselleEsplorate[j + 1] + GlobalVar.gpy) or (caselleLibere[i] == caselleEsplorate[j] and caselleLibere[i + 1] == caselleEsplorate[j + 1] - GlobalVar.gpy):
                     caselleAccantoTrovate += 1
-                    if caseviste[i + 2]:
-                        k = 0
-                        while k < len(vetOstacoli):
-                            if caseviste[i] == vetOstacoli[k] and caseviste[i + 1] == vetOstacoli[k + 1]:
-                                ostacolato = True
-                                break
-                            k += 2
-                        if not ostacolato:
-                            giaVisitata = False
-                            k = len(caselleEsplorate) - 3
-                            while k >= 0:
-                                if caselleEsplorate[k] == caseviste[i] and caselleEsplorate[k + 1] == caseviste[i + 1]:
-                                    giaVisitata = True
-                                    break
-                                k -= 3
-                            if not giaVisitata:
-                                caselleEsplorate.append(caseviste[i])
-                                caselleEsplorate.append(caseviste[i + 1])
-                                caselleEsplorate.append(valoreCasella)
-                                if caseviste[i] == xArrivo and caseviste[i + 1] == yArrivo:
-                                    arrivato = True
-                                    break
-                i += 3
+                    caselleEsplorate.append(caselleLibere[i])
+                    caselleEsplorate.append(caselleLibere[i + 1])
+                    caselleEsplorate.append(valoreCasella)
+                    if caselleLibere[i] == xArrivo and caselleLibere[i + 1] == yArrivo:
+                        arrivato = True
+                        break
+                    casellaCancellata = True
+                    del caselleLibere[i + 1]
+                    del caselleLibere[i]
+                if not casellaCancellata:
+                    i += 2
+            countCaselleFeudo += caselleAccantoTrovate
+            countCaselleDiPartenzaEsaminate += 1
+            if countCaselleDiPartenza == countCaselleDiPartenzaEsaminate:
+                countCaselleDiPartenza = countCaselleFeudo
+                countCaselleDiPartenzaEsaminate = 0
+                countCaselleFeudo = 0
             j += 3
 
         if arrivato:
@@ -1903,7 +1724,7 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, vetOstacoli, caseviste):
                             xCasellaMin = valoriCaselleAccanto[i]
                             yCasellaMin = valoriCaselleAccanto[i + 1]
                             valCasellaMin = valoriCaselleAccanto[i + 2]
-                        elif valoriCaselleAccanto[i + 2] == valCasellaMin and random.randint(0, 1) == 0:
+                        elif valoriCaselleAccanto[i + 2] == valCasellaMin and ((abs(xPartenza - xArrivo) > abs(yPartenza - yArrivo) and abs(xArrivo - valoriCaselleAccanto[i]) < abs(xArrivo - xCasellaMin)) or (abs(yPartenza - yArrivo) > abs(xPartenza - xArrivo) and abs(yArrivo - valoriCaselleAccanto[i + 1]) < abs(yArrivo - yCasellaMin)) or (abs(yPartenza - yArrivo) == abs(xPartenza - xArrivo) and random.randint(0, 1) == 0)):
                             xCasellaMin = valoriCaselleAccanto[i]
                             yCasellaMin = valoriCaselleAccanto[i + 1]
                             valCasellaMin = valoriCaselleAccanto[i + 2]

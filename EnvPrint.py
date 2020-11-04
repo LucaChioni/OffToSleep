@@ -502,21 +502,21 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     raggioDiLancio = 0
     caseattactot = 0
     if attacco == 1:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, -1)
+        caseattactot = trovacasattaccabili(x, y, -1, caseviste)
     if attacco == 2:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 6)
+        caseattactot = trovacasattaccabili(x, y, GlobalVar.gpx * 6, caseviste)
         raggioDiLancio = 6
     if attacco == 3:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 5)
+        caseattactot = trovacasattaccabili(x, y, GlobalVar.gpx * 5, caseviste)
         raggioDiLancio = 5
     if attacco == 4:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 6)
+        caseattactot = trovacasattaccabili(x, y, GlobalVar.gpx * 6, caseviste)
         raggioDiLancio = 6
     if attacco == 5:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 5)
+        caseattactot = trovacasattaccabili(x, y, GlobalVar.gpx * 5, caseviste)
         raggioDiLancio = 5
     if attacco == 6:
-        caseattactot = trovacasattaccabili(x, y, stanza, porte, cofanetti, listaPersonaggi, GlobalVar.gpx * 4)
+        caseattactot = trovacasattaccabili(x, y, GlobalVar.gpx * 4, caseviste)
         raggioDiLancio = 4
 
     listaNemiciVisti = []
@@ -1848,7 +1848,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 pvmtot = nemico.vitaTotale
                 raggiovista = nemico.raggioVisivo
                 # controllo caselle attaccabili
-                caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, listaPersonaggi, nemico.raggioVisivo)
+                caseattactotMostri = trovacasattaccabili(mx, my, nemico.raggioVisivo, caseviste)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotMostri):
@@ -1932,7 +1932,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if enrob > 0:
                 # controllo caselle attaccabili
                 vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
-                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, listaPersonaggi, vistaRobo)
+                caseattactotRobo = trovacasattaccabili(rx, ry, vistaRobo, caseviste)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
@@ -1965,7 +1965,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if enrob > 0:
                 # controllo caselle attaccabili
                 vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
-                caseattactotRobo = trovacasattaccabili(rx, ry, stanza, porte, cofanetti, listaPersonaggi, vistaRobo)
+                caseattactotRobo = trovacasattaccabili(rx, ry, vistaRobo, caseviste)
                 # disegno le caselle attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
@@ -2000,7 +2000,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             pvmtot = nemicoInquadrato.vitaTotale
             raggiovista = nemicoInquadrato.raggioVisivo
             # controllo caselle attaccabili
-            caseattactotMostri = trovacasattaccabili(mx, my, stanza, porte, cofanetti, listaPersonaggi, nemicoInquadrato.raggioVisivo)
+            caseattactotMostri = trovacasattaccabili(mx, my, nemicoInquadrato.raggioVisivo, caseviste)
             # disegno le caselle attaccabili
             i = 0
             while i < len(caseattactotMostri):

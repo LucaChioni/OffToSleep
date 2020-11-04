@@ -256,6 +256,11 @@ def gameloop():
                     # elimino tutti i sacchetti di denaro
                     vettoreDenaro = []
 
+                # faccio il primo aggiornamento delle caselle attaccabili dei nemici (lo faccio perché queste caselle non vengono aggiornate finché il nemico non si sposta almeno una volta)
+                for nemico in listaNemici:
+                    if nemico.vita > 0 and nemico.inCasellaVista:
+                        nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+
                 cambiosta = False
                 stanzaCambiata = True
                 impossibileCliccarePulsanti = True
@@ -1885,7 +1890,7 @@ def gameloop():
             for nemico in listaNemici:
                 if nemico.vita > 0 and nemico.inCasellaVista:
                     nemico.aggiornaBersaglioAttacchiDistanti(x, y, rx, ry, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
-                    nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, listaPersonaggi, dati)
+                    nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, False)
                     if nemico.visto:
                         apriocchio = True
 
@@ -1935,7 +1940,7 @@ def gameloop():
                                 else:
                                     nemico.numeroMovimento = 0
                             if (nemico.vx != nemico.x or nemico.vy != nemico.y) and ((abs(x - nemico.x) <= nemico.raggioVisivo and abs(y - nemico.y) <= nemico.raggioVisivo) or (abs(rx - nemico.x) <= nemico.raggioVisivo and abs(ry - nemico.y) <= nemico.raggioVisivo)):
-                                nemico.aggiornaVista(x, y, rx, ry, dati[1], porte, cofanetti, listaPersonaggi, dati)
+                                nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
                             nemico.compiMossa()
                         elif sposta and nemico.mosseRimaste < 0:
                             nemico.mosseRimaste += 1

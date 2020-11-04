@@ -947,7 +947,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Non tengo niente di interessante qui.")
+                dialogo.append("Non tengo niente di utile qui.")
                 self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False
