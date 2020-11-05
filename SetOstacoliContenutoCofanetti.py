@@ -1666,13 +1666,6 @@ def muri_porte(x, y, nx, ny, stanza, carim, mostro, robo, porte, cofanetti, list
                 ny = 0
                 break
             i = i + 4
-    # controllo gli oggetti nella lista delle persone
-    if nx != 0 or ny != 0:
-        for persona in listaPersonaggi:
-            if persona.mantieniSempreASchermo and oggetto(persona.x, persona.y, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-                nx = 0
-                ny = 0
-                break
 
     # movimento personaggio
     x = x + nx

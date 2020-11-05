@@ -123,7 +123,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         i = i + 4
 
 
-def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, background=False, mostraErrori=True):
+def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, mostraErrori=True):
     errore = False
     tipoErrore = 0
 
@@ -367,11 +367,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                     GlobalVar.mouseVisibile = True
             if aggiornaSchermata:
                 aggiornaSchermata = False
-                if background:
-                    GlobalVar.schermo.blit(background, (0, 0))
-                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
-                else:
-                    GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 GlobalVar.schermo.blit(GlobalVar.robograf2, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
                 if GlobalVar.mouseVisibile:
@@ -436,11 +432,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                     GlobalVar.mouseVisibile = True
             if aggiornaSchermata:
                 aggiornaSchermata = False
-                if background:
-                    GlobalVar.schermo.blit(background, (0, 0))
-                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
-                else:
-                    GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 GlobalVar.schermo.blit(GlobalVar.robograf4, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
                 if GlobalVar.mouseVisibile:

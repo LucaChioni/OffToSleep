@@ -2295,8 +2295,9 @@ def aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPerso
         nemico.inCasellaVista = False
         i = 0
         while i < len(caseviste):
-            if caseviste[i + 2] and caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
-                nemico.inCasellaVista = True
+            if caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
+                if caseviste[i + 2]:
+                    nemico.inCasellaVista = True
                 break
             i += 3
 
@@ -2305,21 +2306,19 @@ def aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPerso
             personaggio.inCasellaVista = False
             i = 0
             while i < len(caseviste):
-                if caseviste[i + 2] and caseviste[i] == personaggio.x and caseviste[i + 1] == personaggio.y:
-                    personaggio.inCasellaVista = True
+                if caseviste[i] == personaggio.x and caseviste[i + 1] == personaggio.y:
+                    if caseviste[i + 2]:
+                        personaggio.inCasellaVista = True
                     break
                 i += 3
         else:
             personaggio.vicinoACasellaVista = False
             i = 0
             while i < len(caseviste):
-                if ((personaggio.x + GlobalVar.gpx == caseviste[i] and personaggio.y == caseviste[i + 1]) or (
-                        personaggio.x - GlobalVar.gpx == caseviste[i] and personaggio.y == caseviste[i + 1]) or (
-                            personaggio.x == caseviste[i] and personaggio.y + GlobalVar.gpy == caseviste[i + 1]) or (
-                            personaggio.x == caseviste[i] and personaggio.y - GlobalVar.gpy == caseviste[i + 1])) and \
-                        caseviste[i + 2]:
-                    personaggio.vicinoACasellaVista = True
-                    break
+                if (personaggio.x + GlobalVar.gpx == caseviste[i] and personaggio.y == caseviste[i + 1]) or (personaggio.x - GlobalVar.gpx == caseviste[i] and personaggio.y == caseviste[i + 1]) or (personaggio.x == caseviste[i] and personaggio.y + GlobalVar.gpy == caseviste[i + 1]) or (personaggio.x == caseviste[i] and personaggio.y - GlobalVar.gpy == caseviste[i + 1]):
+                    if caseviste[i + 2]:
+                        personaggio.vicinoACasellaVista = True
+                        break
                 i += 3
 
     return listaNemici, listaPersonaggi

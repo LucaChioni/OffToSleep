@@ -3,7 +3,7 @@
 from CaricaSalvaPartita import *
 
 
-def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone=False, background=False):
+def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 6.5
@@ -14,18 +14,6 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
         cosa = 3
     else:
         cosa = 1
-
-    backgroundUpdate = False
-    if background:
-        schermo_temp = GlobalVar.schermo.copy()
-        background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
-        dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
-        dark.fill((0, 0, 0, 210))
-        background.blit(dark, (0, 0))
-        GlobalVar.schermo.blit(background, (0, 0))
-
-        schermo_temp = GlobalVar.schermo.copy()
-        backgroundUpdate = schermo_temp.subsurface(pygame.Rect(GlobalVar.gsx // 32 * 10, 0, GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 2.5))
 
     tastop = 0
     tastotempfps = 5
@@ -40,6 +28,17 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
     aggiornaSchermo = False
     n = -1
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+
+    # carico solo all'inizio i salvataggi
+    contasalva = 1
+    vetDatiSalvataggi = []
+    while contasalva <= 3:
+        dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False)
+        vetTempDati = []
+        vetTempDati.append(dati)
+        vetTempDati.append(errore)
+        vetDatiSalvataggi.append(vetTempDati)
+        contasalva += 1
 
     while not risposta:
         if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
@@ -245,7 +244,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         if voceMarcata == 1:
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                             if cosa == 1:
-                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, background)
+                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
                                 if dati:
                                     return n, cosa
                                 else:
@@ -339,11 +338,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         xp = GlobalVar.gsx // 32 * 6.5
 
             if primoFrame or tastop == "centraleMouse" or tastop == pygame.K_LSHIFT or tastop == pygame.K_RSHIFT or (tastop == "spazioOsinistroMouse" and suCambiaOperazione):
-                if background:
-                    GlobalVar.schermo.blit(background, (0, 0))
-                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.7, GlobalVar.gsy // 18 * 3.2, GlobalVar.gsx // 32 * 22.6, GlobalVar.gsy // 18 * 13.6))
-                else:
-                    GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 if cosa == 2:
                     pygame.draw.rect(GlobalVar.schermo, GlobalVar.rossoScuro, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 9.5))
@@ -365,10 +360,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                 if cosa == 3:
                     messaggio("Salva partita", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.3, 100)
 
-                # lettura salvataggi per riconoscerli
                 contasalva = 1
-                while contasalva <= 3:
-                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False, False)
+                while contasalva <= len(vetDatiSalvataggi):
+                    vetTemp = vetDatiSalvataggi[contasalva - 1]
+                    dati = vetTemp[0]
+                    errore = vetTemp[1]
                     if errore == 1:
                         if contasalva == 1:
                             messaggio("Slot vuoto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 7.25, GlobalVar.gsy // 18 * 11, 60)
@@ -452,12 +448,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 GlobalVar.schermo.blit(scusalva, (GlobalVar.gpx * 21.6, GlobalVar.gpy * 12))
                             else:
                                 messaggio("Slot corrotto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20.8, GlobalVar.gsy // 18 * 11, 60)
-                    contasalva = contasalva + 1
+                    contasalva += 1
             else:
-                if background:
-                    GlobalVar.schermo.blit(backgroundUpdate, (GlobalVar.gsx // 32 * 10, 0))
-                else:
-                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 10, 0, GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 2.5))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 10, 0, GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 2.5))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 3.5, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 3.5))
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 18, (GlobalVar.gsy // 18 * 7) - 1), (GlobalVar.gsx // 32 * 27, (GlobalVar.gsy // 18 * 7) - 1), 1)
                 if cosa == 2:

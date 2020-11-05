@@ -2239,7 +2239,7 @@ def equiprobo(dati, canzone):
     vetIcoBatterie = []
     i = 0
     while i < 5:
-        if dati[41 + i] > 0:
+        if dati[71 + i] > 0:
             vetIcoBatterie.append(GlobalVar.vetIcoBatterieMenu[i])
         else:
             vetIcoBatterie.append(sconosciutoEquip)

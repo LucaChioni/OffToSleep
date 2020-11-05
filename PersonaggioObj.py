@@ -425,7 +425,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"In modalità interazione le caselle che sono fuori dal tuo campo visivo vengono contrassegnate con una crocetta grigia.")
+                dialogo.append(u"In modalità interazione le caselle fuori dal tuo campo visivo vengono oscurate.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

@@ -424,47 +424,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         puntatogg = GlobalVar.puntatBoP
 
     GlobalVar.schermo.blit(stanzaa, (0, 0))
-    # backbround occhio/chiave
-    GlobalVar.schermo.blit(GlobalVar.sfochiaveocchio, (GlobalVar.gsx - (GlobalVar.gpx * 5), 0))
-
-    # vista nemici
-    if apriocchio:
-        GlobalVar.schermo.blit(GlobalVar.occhioape, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
-    else:
-        GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
-
-    # chiave robo
-    if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-        if chiamarob:
-            GlobalVar.schermo.blit(GlobalVar.chiaveroboacc, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
-        else:
-            GlobalVar.schermo.blit(GlobalVar.chiaverobospe, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
-    # porte
-    i = 0
-    while i < len(porte):
-        if not porte[i + 3]:
-            vmurx = porte[i + 1]
-            vmury = porte[i + 2]
-            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti, listaPersonaggi)
-            GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
-            if vmurx == murx and vmury == mury:
-                GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
-            else:
-                GlobalVar.schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
-        i = i + 4
-    # cofanetti
-    i = 0
-    while i < len(cofanetti):
-        j = 0
-        while j < len(caseviste):
-            if ((caseviste[j] == cofanetti[i + 1] - GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                GlobalVar.schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
-                if cofanetti[i + 3]:
-                    GlobalVar.schermo.blit(GlobalVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                else:
-                    GlobalVar.schermo.blit(GlobalVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-            j = j + 3
-        i = i + 4
     # disegno le caselle viste
     i = 0
     while i < len(caseviste):
@@ -475,32 +434,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 GlobalVar.schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
         i += 3
 
-    # vita-status personaggio
-    lungvitatot = int(((GlobalVar.gpx * pvtot) / float(4)) // 5)
-    lungvita = (lungvitatot * pv) // pvtot
-    if lungvita < 0:
-        lungvita = 0
-    indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-    vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
-    GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-    GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-    GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-    GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-    GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-    GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-    GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (GlobalVar.gsx // 32 * 1.2, GlobalVar.gsy // 18 * 17))
-    messaggio("x " + str(numFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 17.2, 40)
-    if avvele:
-        GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
-    if attp > 0:
-        GlobalVar.schermo.blit(GlobalVar.attaccopiu, (GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 17))
-    if difp > 0:
-        GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
-
     # controllo caselle attaccabili
     raggioDiLancio = 0
-    caseattactot = 0
+    caseattactot = []
     if attacco == 1:
         caseattactot = trovacasattaccabili(x, y, -1, caseviste)
     if attacco == 2:
@@ -524,6 +460,180 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if nemico.inCasellaVista:
             listaNemiciVisti.append(nemico)
 
+    # disegna porte
+    i = 0
+    while i < len(porte):
+        if not porte[i + 3]:
+            vmurx = porte[i + 1]
+            vmury = porte[i + 2]
+            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti, listaPersonaggi)
+            GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
+            if vmurx == murx and vmury == mury:
+                GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+            else:
+                GlobalVar.schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+        i = i + 4
+    # disegna cofanetti
+    i = 0
+    while i < len(cofanetti):
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == cofanetti[i + 1] - GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
+                GlobalVar.schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
+                if cofanetti[i + 3]:
+                    GlobalVar.schermo.blit(GlobalVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
+                else:
+                    GlobalVar.schermo.blit(GlobalVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
+            j = j + 3
+        i = i + 4
+
+    # esche: id, vita, xesca, yesca
+    i = 0
+    while i < len(vitaesca):
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == vitaesca[i + 2] - GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - GlobalVar.gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + GlobalVar.gpy)) and caseviste[j + 2]:
+                GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                break
+            j += 3
+        i += 4
+
+    # denaro: qta, x, y
+    i = 0
+    while i < len(vettoreDenaro):
+        j = 0
+        while j < len(caseviste):
+            if ((caseviste[j] == vettoreDenaro[i + 1] - GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - GlobalVar.gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
+                if ((vettoreDenaro[i + 1] / GlobalVar.gpx) + (vettoreDenaro[i + 2] / GlobalVar.gpy)) % 2 == 0:
+                    GlobalVar.schermo.blit(sfondinoa, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                if ((vettoreDenaro[i + 1] / GlobalVar.gpx) + (vettoreDenaro[i + 2] / GlobalVar.gpy)) % 2 == 1:
+                    GlobalVar.schermo.blit(sfondinob, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                GlobalVar.schermo.blit(GlobalVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                break
+            j += 3
+        i += 3
+
+    # robo (anche in caso di raffreddamento e autoricarica)
+    if raffredda > 0:
+        GlobalVar.schermo.blit(armrobS, (rx, ry))
+        GlobalVar.schermo.blit(GlobalVar.robos, (rx, ry))
+        imgAnimazione = 0
+        i = 0
+        while i < len(GlobalVar.vetAnimazioniTecniche):
+            if GlobalVar.vetAnimazioniTecniche[i] == "raffred":
+                imgAnimazione = GlobalVar.vetAnimazioniTecniche[i + 1][0]
+                break
+            i += 2
+        GlobalVar.schermo.blit(imgAnimazione, (rx, ry))
+    elif autoRic1 > 0:
+        GlobalVar.schermo.blit(GlobalVar.robomo, (rx, ry))
+        imgAnimazione = 0
+        i = 0
+        while i < len(GlobalVar.vetAnimazioniTecniche):
+            if GlobalVar.vetAnimazioniTecniche[i] == "ricarica":
+                imgAnimazione = GlobalVar.vetAnimazioniTecniche[i + 1][0]
+                break
+            i += 2
+        GlobalVar.schermo.blit(imgAnimazione, (rx, ry))
+    elif autoRic2 > 0:
+        GlobalVar.schermo.blit(GlobalVar.robomo, (rx, ry))
+        imgAnimazione = 0
+        i = 0
+        while i < len(GlobalVar.vetAnimazioniTecniche):
+            if GlobalVar.vetAnimazioniTecniche[i] == "ricarica+":
+                imgAnimazione = GlobalVar.vetAnimazioniTecniche[i + 1][0]
+                break
+            i += 2
+        GlobalVar.schermo.blit(imgAnimazione, (rx, ry))
+    else:
+        GlobalVar.schermo.blit(robot, (rx, ry))
+        if surrisc > 0:
+            GlobalVar.schermo.blit(GlobalVar.roboSurrisc, (rx, ry))
+        GlobalVar.schermo.blit(armrob, (rx, ry))
+
+    # personaggio
+    disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+
+    # disegnare i mostri
+    for nemico in listaNemici:
+        if nemico.inCasellaVista:
+            GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+            if nemico.avvelenato:
+                GlobalVar.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
+            if nemico.appiccicato:
+                GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
+
+    # disegno tutti i personaggi
+    for personaggio in listaPersonaggi:
+        if (personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista) or personaggio.inCasellaVista:
+            GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+
+    # disegno le caselle non attaccabili (prima cerco gli oggetti che hanno accanto una casellaAttaccabile per non oscurarli)
+    vetCaselleDaNonOscurare = []
+    i = 0
+    while i < len(caseattactot):
+        if caseattactot[i + 2] or (caseattactot[i] == x and caseattactot[i + 1] == y):
+            j = 0
+            while j < len(porte):
+                if not porte[j + 3]:
+                    if (caseattactot[i] == porte[j + 1] - GlobalVar.gpx and caseattactot[i + 1] == porte[j + 2]) or (caseattactot[i] == porte[j + 1] + GlobalVar.gpx and caseattactot[i + 1] == porte[j + 2]) or (caseattactot[i] == porte[j + 1] and caseattactot[i + 1] == porte[j + 2] - GlobalVar.gpy) or (caseattactot[i] == porte[j + 1] and caseattactot[i + 1] == porte[j + 2] + GlobalVar.gpy):
+                        vetCaselleDaNonOscurare.append(porte[j + 1])
+                        vetCaselleDaNonOscurare.append(porte[j + 2])
+                        break
+                j += 4
+            j = 0
+            while j < len(cofanetti):
+                if (caseattactot[i] == cofanetti[j + 1] - GlobalVar.gpx and caseattactot[i + 1] == cofanetti[j + 2]) or (caseattactot[i] == cofanetti[j + 1] + GlobalVar.gpx and caseattactot[i + 1] == cofanetti[j + 2]) or (caseattactot[i] == cofanetti[j + 1] and caseattactot[i + 1] == cofanetti[j + 2] - GlobalVar.gpy) or (caseattactot[i] == cofanetti[j + 1] and caseattactot[i + 1] == cofanetti[j + 2] + GlobalVar.gpy):
+                    vetCaselleDaNonOscurare.append(cofanetti[j + 1])
+                    vetCaselleDaNonOscurare.append(cofanetti[j + 2])
+                    break
+                j += 4
+            for personaggio in listaPersonaggi:
+                if personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista:
+                    if (caseattactot[i] == personaggio.x - GlobalVar.gpx and caseattactot[i + 1] == personaggio.y) or (caseattactot[i] == personaggio.x + GlobalVar.gpx and caseattactot[i + 1] == personaggio.y) or (caseattactot[i] == personaggio.x and caseattactot[i + 1] == personaggio.y - GlobalVar.gpy) or (caseattactot[i] == personaggio.x and caseattactot[i + 1] == personaggio.y + GlobalVar.gpy):
+                        vetCaselleDaNonOscurare.append(personaggio.x)
+                        vetCaselleDaNonOscurare.append(personaggio.y)
+                        break
+        i += 3
+    i = 0
+    while i < len(caseattactot):
+        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+            casellaDaOscurare = True
+            j = 0
+            while j < len(vetCaselleDaNonOscurare):
+                if caseattactot[i] == vetCaselleDaNonOscurare[j] and caseattactot[i + 1] == vetCaselleDaNonOscurare[j + 1]:
+                    casellaDaOscurare = False
+                    break
+                j += 2
+            if casellaDaOscurare:
+                GlobalVar.schermo.blit(GlobalVar.caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
+        i += 3
+
+    # vita-status rallo
+    lungvitatot = int(((GlobalVar.gpx * pvtot) / float(4)) // 5)
+    lungvita = (lungvitatot * pv) // pvtot
+    if lungvita < 0:
+        lungvita = 0
+    indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+    vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
+    GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
+    GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
+    GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
+    GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
+    messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
+    if avvele:
+        GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
+    if attp > 0:
+        GlobalVar.schermo.blit(GlobalVar.attaccopiu, (GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 17))
+    if difp > 0:
+        GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
+
+    schermoOriginale = GlobalVar.schermo.copy()
+
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
     tastotempfps = 4
     tastop = 0
@@ -538,16 +648,13 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     apriCofanetto = [False, 0, 0]
     spingiColco = False
     puntaPorta = False
-    puntaCofanetto = False
-    puntaPersonaggioOggetto = False
     attaccato = False
     attaccoADistanza = False
     sposta = False
     interagisciConPersonaggio = False
-    attaccoConfermato = False
+    interazioneConfermata = False
     primoFrame = True
 
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
     while not risposta:
         if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
             GlobalVar.canaleSoundCanzone.play(canzone)
@@ -575,15 +682,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             xvp = xp
             yvp = yp
 
-        if ((xvp / GlobalVar.gpx) + (yvp / GlobalVar.gpy)) % 2 == 0:
-            GlobalVar.schermo.blit(sfondinoa, (xvp, yvp))
-        if ((xvp / GlobalVar.gpx) + (yvp / GlobalVar.gpy)) % 2 == 1:
-            GlobalVar.schermo.blit(sfondinob, (xvp, yvp))
-
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        cursoreSuSoggettoInquadrato = False
         if deltaXMouse != 0 or deltaYMouse != 0 or (primoFrame and GlobalVar.mouseVisibile):
             if not GlobalVar.mouseVisibile:
                 pygame.mouse.set_visible(True)
@@ -688,7 +789,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     for nemico in listaNemiciVisti:
                         if nemico.x < xMouse < nemico.x + GlobalVar.gpx and nemico.y < yMouse < nemico.y + GlobalVar.gpy:
                             if nemicoInquadrato and type(nemicoInquadrato) is not str and nemico.x == nemicoInquadrato.x and nemico.y == nemicoInquadrato.y:
-                                cursoreSuSoggettoInquadrato = True
                                 j = 0
                                 while j < len(caseattactot):
                                     if caseattactot[j] == nemico.x and caseattactot[j + 1] == nemico.y:
@@ -733,8 +833,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                     if GlobalVar.mouseBloccato:
                                         GlobalVar.configuraCursore(False)
                                     inquadratoQualcosa = "esca"
-                                else:
-                                    cursoreSuSoggettoInquadrato = True
                             else:
                                 if GlobalVar.mouseBloccato:
                                     GlobalVar.configuraCursore(False)
@@ -787,12 +885,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # esci
                 if event.key == pygame.K_q:
                     risposta = True
-                    sposta = False
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                 # esci e apri il menu
                 if event.key == pygame.K_ESCAPE:
                     risposta = True
-                    sposta = False
                     startf = True
 
                 # attiva / disattiva il gambit
@@ -941,30 +1037,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     nyp = 0
                 # attacco
                 if event.key == pygame.K_SPACE:
-                    sposta = False
-                    if attacco != 0:
-                        attaccoConfermato = True
+                    interazioneConfermata = True
 
             if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto and not startf:
                 tastop = "mouseDestro"
-                sposta = False
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                 risposta = True
             if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not rotellaConCentralePremuto and not startf:
                 tastop = "mouseCentrale"
                 risposta = True
-                sposta = False
                 startf = True
             if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato and not startf:
                 tastop = "mouseSinistro"
                 if inquadratoQualcosa == "start":
                     risposta = True
-                    sposta = False
                     startf = True
                 elif inquadratoQualcosa == "battaglia":
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     risposta = True
-                    sposta = False
                 elif inquadratoQualcosa == "telecolco":
                     GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
                     if chiamarob:
@@ -976,71 +1066,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         ultimoObbiettivoColco.append(y)
                         chiamarob = True
                 elif inquadratoQualcosa == "Rallo":
-                    difesa = 2
-                    risposta = True
+                    interazioneConfermata = True
                 elif inquadratoQualcosa == "Colco":
-                    spingiColco = True
-                    sposta = True
-                    risposta = True
-                    if xp == x + GlobalVar.gpx and yp == y:
-                        npers = 1
-                    if xp == x - GlobalVar.gpx and yp == y:
-                        npers = 2
-                    if xp == x and yp == y + GlobalVar.gpy:
-                        npers = 4
-                    if xp == x and yp == y - GlobalVar.gpy:
-                        npers = 3
+                    interazioneConfermata = True
                 elif inquadratoQualcosa == "porta":
-                    apriChiudiPorta = [True, xp, yp]
-                    sposta = True
-                    risposta = True
-                    if xp == x + GlobalVar.gpx and yp == y:
-                        npers = 1
-                    if xp == x - GlobalVar.gpx and yp == y:
-                        npers = 2
-                    if xp == x and yp == y + GlobalVar.gpy:
-                        npers = 4
-                    if xp == x and yp == y - GlobalVar.gpy:
-                        npers = 3
+                    interazioneConfermata = True
                 elif inquadratoQualcosa == "cofanetto":
-                    apriCofanetto = [True, xp, yp]
-                    sposta = True
-                    risposta = True
-                    if xp == x + GlobalVar.gpx and yp == y:
-                        npers = 1
-                    if xp == x - GlobalVar.gpx and yp == y:
-                        npers = 2
-                    if xp == x and yp == y + GlobalVar.gpy:
-                        npers = 4
-                    if xp == x and yp == y - GlobalVar.gpy:
-                        npers = 3
+                    interazioneConfermata = True
                 elif inquadratoQualcosa == "personaggio":
-                    interagisciConPersonaggio = True
-                    risposta = True
-                    if xp == x + GlobalVar.gpx and yp == y:
-                        npers = 1
-                    if xp == x - GlobalVar.gpx and yp == y:
-                        npers = 2
-                    if xp == x and yp == y + GlobalVar.gpy:
-                        npers = 4
-                    if xp == x and yp == y - GlobalVar.gpy:
-                        npers = 3
+                    interazioneConfermata = True
                 elif inquadratoQualcosa == "nemico":
-                    sposta = False
-                    if attacco != 0:
-                        attaccoConfermato = True
+                    interazioneConfermata = True
                 elif inquadratoQualcosa == "esca":
-                    sposta = False
-                    if attacco != 0:
-                        attaccoConfermato = True
+                    interazioneConfermata = True
                 elif inquadratoQualcosa == "casellaNelRaggio":
-                    sposta = False
-                    if attacco != 0:
-                        attaccoConfermato = True
+                    interazioneConfermata = True
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
                 pygame.mouse.set_visible(True)
                 GlobalVar.mouseVisibile = True
             if event.type == pygame.KEYUP:
@@ -1057,10 +1100,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if attaccoConfermato:
-            attaccoConfermato = False
+        if interazioneConfermata:
+            interazioneConfermata = False
             daInquadrare = False
-            if tastop == "mouseSinistro" and attacco == 1 and (inquadratoQualcosa == "nemico" or inquadratoQualcosa == "esca"):
+            if tastop == "mouseSinistro" and (inquadratoQualcosa == "nemico" or inquadratoQualcosa == "esca"):
                 if inquadratoQualcosa == "nemico" and not (nemicoInquadrato and type(nemicoInquadrato) is not str and xp == nemicoInquadrato.x and yp == nemicoInquadrato.y):
                     for nemico in listaNemici:
                         if xp == nemico.x and yp == nemico.y:
@@ -1168,16 +1211,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if attacco == 2 and (abs(x - xp) <= GlobalVar.gpx * 6 and abs(y - yp) <= GlobalVar.gpy * 6):
                     # controllo caselle attaccabili
                     continua = True
-                    # disegno le caselle attaccabili
                     i = 0
                     while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                            continua = False
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                                continua = False
                             break
-                        i = i + 3
+                        i += 3
                     if continua:
                         n = random.randint(1, 2)
-                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                        if abs(xp - x) == abs(yp - y) == 0:
+                            npers = 3
+                        elif abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
                             if xp > x:
                                 npers = 1
                             else:
@@ -1200,16 +1245,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if attacco == 3 and (abs(x - xp) <= GlobalVar.gpx * 5 and abs(y - yp) <= GlobalVar.gpy * 5):
                     # controllo caselle attaccabili
                     continua = True
-                    # disegno le caselle attaccabili
                     i = 0
                     while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                            continua = False
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                                continua = False
                             break
-                        i = i + 3
+                        i += 3
                     if continua:
                         n = random.randint(1, 2)
-                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                        if abs(xp - x) == abs(yp - y) == 0:
+                            npers = 3
+                        elif abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
                             if xp > x:
                                 npers = 1
                             else:
@@ -1233,13 +1280,13 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if attacco == 4 and (abs(x - xp) <= GlobalVar.gpx * 6 and abs(y - yp) <= GlobalVar.gpy * 6):
                     # controllo caselle attaccabili
                     continua = True
-                    # disegno le caselle attaccabili
                     i = 0
                     while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                            continua = False
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                                continua = False
                             break
-                        i = i + 3
+                        i += 3
                     if continua:
                         # conferma lancio GlobalVarG2.esche
                         confesca = True
@@ -1261,7 +1308,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                 break
                         if confesca:
                             n = random.randint(1, 2)
-                            if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                            if abs(xp - x) == abs(yp - y) == 0:
+                                npers = 3
+                            elif abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
                                 if xp > x:
                                     npers = 1
                                 else:
@@ -1285,16 +1334,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if attacco == 5 and (abs(x - xp) <= GlobalVar.gpx * 5 and abs(y - yp) <= GlobalVar.gpy * 5):
                     # controllo caselle attaccabili
                     continua = True
-                    # disegno le caselle attaccabili
                     i = 0
                     while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                            continua = False
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                                continua = False
                             break
-                        i = i + 3
+                        i += 3
                     if continua:
                         n = random.randint(1, 2)
-                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                        if abs(xp - x) == abs(yp - y) == 0:
+                            npers = 3
+                        elif abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
                             if xp > x:
                                 npers = 1
                             else:
@@ -1318,16 +1369,18 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if attacco == 6 and (abs(x - xp) <= GlobalVar.gpx * 4 and abs(y - yp) <= GlobalVar.gpy * 4):
                     # controllo caselle attaccabili
                     continua = True
-                    # disegno le caselle attaccabili
                     i = 0
                     while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                            continua = False
+                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                                continua = False
                             break
-                        i = i + 3
+                        i += 3
                     if continua:
                         n = random.randint(1, 2)
-                        if abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
+                        if abs(xp - x) == abs(yp - y) == 0:
+                            npers = 3
+                        elif abs(xp - x) > abs(yp - y) or (abs(xp - x) == abs(yp - y) and n == 1):
                             if xp > x:
                                 npers = 1
                             else:
@@ -1415,103 +1468,12 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
 
         if ricaricaschermo and not appenaCaricato:
-            GlobalVar.schermo.blit(stanzaa, (0, 0))
-            # porte
-            i = 0
-            while i < len(porte):
-                if not porte[i + 3]:
-                    vmurx = porte[i + 1]
-                    vmury = porte[i + 2]
-                    murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti, listaPersonaggi)
-                    GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
-                    if vmurx == murx and vmury == mury:
-                        GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
-                    else:
-                        GlobalVar.schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
-                i = i + 4
-            # cofanetti
-            i = 0
-            while i < len(cofanetti):
-                j = 0
-                while j < len(caseviste):
-                    if ((caseviste[j] == cofanetti[i + 1] - GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                        GlobalVar.schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
-                        if cofanetti[i + 3]:
-                            GlobalVar.schermo.blit(GlobalVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                        else:
-                            GlobalVar.schermo.blit(GlobalVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-                    j = j + 3
-                i = i + 4
-            # background occhio/chiave
-            GlobalVar.schermo.blit(GlobalVar.sfochiaveocchio, (GlobalVar.gsx - (GlobalVar.gpx * 5), 0))
-            # vista nemici
-            if apriocchio:
-                GlobalVar.schermo.blit(GlobalVar.occhioape, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
-            else:
-                GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
-            # chiave robo
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-                if chiamarob:
-                    GlobalVar.schermo.blit(GlobalVar.chiaveroboacc, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
-                else:
-                    GlobalVar.schermo.blit(GlobalVar.chiaverobospe, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
-            # disegno le caselle viste
-            i = 0
-            while i < len(caseviste):
-                if caseviste[i + 2]:
-                    if ((caseviste[i] / GlobalVar.gpx) + (caseviste[i + 1] / GlobalVar.gpy)) % 2 == 0:
-                        GlobalVar.schermo.blit(sfondinoa, (caseviste[i], caseviste[i + 1]))
-                    if ((caseviste[i] / GlobalVar.gpx) + (caseviste[i + 1] / GlobalVar.gpy)) % 2 == 1:
-                        GlobalVar.schermo.blit(sfondinob, (caseviste[i], caseviste[i + 1]))
-                i += 3
+            GlobalVar.schermo.blit(schermoOriginale, (0, 0))
             ricaricaschermo = False
             appenaCaricato = True
 
-        # disegno la casella sotto i nemici, personaggi, esche, Colco e Rallo
-        for nemico in listaNemici:
-            if nemico.inCasellaVista:
-                if ((nemico.x / GlobalVar.gpx) + (nemico.y / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.schermo.blit(sfondinoa, (nemico.x, nemico.y))
-                if ((nemico.x / GlobalVar.gpx) + (nemico.y / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.schermo.blit(sfondinob, (nemico.x, nemico.y))
-        for personaggio in listaPersonaggi:
-            if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo:
-                if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
-                if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.schermo.blit(sfondinob, (personaggio.x, personaggio.y))
-        i = 0
-        while i < len(vitaesca):
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == vitaesca[i + 2] - GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - GlobalVar.gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + GlobalVar.gpy)) and caseviste[j + 2]:
-                    if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 0:
-                        GlobalVar.schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
-                    if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 1:
-                        GlobalVar.schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
-                    break
-                j += 3
-            i += 4
-        if ((rx / GlobalVar.gpx) + (ry / GlobalVar.gpy)) % 2 == 0:
-            GlobalVar.schermo.blit(sfondinoa, (rx, ry))
-        if ((rx / GlobalVar.gpx) + (ry / GlobalVar.gpy)) % 2 == 1:
-            GlobalVar.schermo.blit(sfondinob, (rx, ry))
-        if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 0:
-            GlobalVar.schermo.blit(sfondinoa, (x, y))
-        if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
-            GlobalVar.schermo.blit(sfondinob, (x, y))
-
-        # disegno tutti i personaggi-oggetto
-        for personaggio in listaPersonaggi:
-            if personaggio.mantieniSempreASchermo:
-                GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
-
-        # disegno le caselle attaccabili
-        i = 0
-        while i < len(caseattactot):
-            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
-                GlobalVar.schermo.blit(GlobalVar.caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
-            i = i + 3
+        background = schermoOriginale.subsurface(pygame.Rect(xvp, yvp, GlobalVar.gpx, GlobalVar.gpy))
+        GlobalVar.schermo.blit(background, (xvp, yvp))
         # visualizza campo attaccabile se sto usando un oggetto
         if attacco == 2:
             campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 13, GlobalVar.gpy * 13))
@@ -1528,37 +1490,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if attacco == 6:
             campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 9, GlobalVar.gpy * 9))
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 4), y - (GlobalVar.gpy * 4)))
-
-        # disegna porte
-        i = 0
-        while i < len(porte):
-            if not porte[i + 3]:
-                vmurx = porte[i + 1]
-                vmury = porte[i + 2]
-                murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, stanza, False, False, False, porte, cofanetti, listaPersonaggi)
-                GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
-                if vmurx == murx and vmury == mury:
-                    GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
-                else:
-                    GlobalVar.schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
-            i = i + 4
-        # disegna cofanetti
-        i = 0
-        while i < len(cofanetti):
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == cofanetti[i + 1] - GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
-                        caseviste[j] == cofanetti[i + 1] + GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (
-                            caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalVar.gpy) or (
-                            caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalVar.gpy)) and \
-                        caseviste[j + 2]:
-                    GlobalVar.schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
-                    if cofanetti[i + 3]:
-                        GlobalVar.schermo.blit(GlobalVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                    else:
-                        GlobalVar.schermo.blit(GlobalVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-                j = j + 3
-            i = i + 4
 
         # movimenti del puntatore su porte e cofanetti quando si usa la tastiera
         if not GlobalVar.mouseVisibile:
@@ -1615,87 +1546,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                             puntaPorta = False
                             break
                     i = i + 3
-
-        # GlobalVarG2.esche: id, vita, xesca, yesca
-        i = 0
-        while i < len(vitaesca):
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == vitaesca[i + 2] - GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] + GlobalVar.gpx and caseviste[j + 1] == vitaesca[i + 3]) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] - GlobalVar.gpy) or (caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] + GlobalVar.gpy)) and caseviste[j + 2]:
-                    GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
-                    break
-                j += 3
-            i += 4
-
-        # denaro: qta, x, y
-        i = 0
-        while i < len(vettoreDenaro):
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == vettoreDenaro[i + 1] - GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - GlobalVar.gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                    if ((vettoreDenaro[i + 1] / GlobalVar.gpx) + (vettoreDenaro[i + 2] / GlobalVar.gpy)) % 2 == 0:
-                        GlobalVar.schermo.blit(sfondinoa, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
-                    if ((vettoreDenaro[i + 1] / GlobalVar.gpx) + (vettoreDenaro[i + 2] / GlobalVar.gpy)) % 2 == 1:
-                        GlobalVar.schermo.blit(sfondinob, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
-                    GlobalVar.schermo.blit(GlobalVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
-                    break
-                j += 3
-            i += 3
-
-        # robo (anche in caso di raffreddamento e autoricarica)
-        if raffredda > 0:
-            GlobalVar.schermo.blit(armrobS, (rx, ry))
-            GlobalVar.schermo.blit(GlobalVar.robos, (rx, ry))
-            imgAnimazione = 0
-            i = 0
-            while i < len(GlobalVar.vetAnimazioniTecniche):
-                if GlobalVar.vetAnimazioniTecniche[i] == "raffred":
-                    imgAnimazione = GlobalVar.vetAnimazioniTecniche[i + 1][0]
-                    break
-                i += 2
-            GlobalVar.schermo.blit(imgAnimazione, (rx, ry))
-        elif autoRic1 > 0:
-            GlobalVar.schermo.blit(GlobalVar.robomo, (rx, ry))
-            imgAnimazione = 0
-            i = 0
-            while i < len(GlobalVar.vetAnimazioniTecniche):
-                if GlobalVar.vetAnimazioniTecniche[i] == "ricarica":
-                    imgAnimazione = GlobalVar.vetAnimazioniTecniche[i + 1][0]
-                    break
-                i += 2
-            GlobalVar.schermo.blit(imgAnimazione, (rx, ry))
-        elif autoRic2 > 0:
-            GlobalVar.schermo.blit(GlobalVar.robomo, (rx, ry))
-            imgAnimazione = 0
-            i = 0
-            while i < len(GlobalVar.vetAnimazioniTecniche):
-                if GlobalVar.vetAnimazioniTecniche[i] == "ricarica+":
-                    imgAnimazione = GlobalVar.vetAnimazioniTecniche[i + 1][0]
-                    break
-                i += 2
-            GlobalVar.schermo.blit(imgAnimazione, (rx, ry))
-        else:
-            GlobalVar.schermo.blit(robot, (rx, ry))
-            if surrisc > 0:
-                GlobalVar.schermo.blit(GlobalVar.roboSurrisc, (rx, ry))
-            GlobalVar.schermo.blit(armrob, (rx, ry))
-
-        # personaggio
-        disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
-
-        # disegno tutti i personaggi
-        for personaggio in listaPersonaggi:
-            if (personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista) or personaggio.inCasellaVista:
-                GlobalVar.schermo.blit(personaggio.imgAttuale, (personaggio.x, personaggio.y))
-
-        # disegnare i mostri
-        for nemico in listaNemici:
-            if nemico.inCasellaVista:
-                GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
-                if nemico.avvelenato:
-                    GlobalVar.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
-                if nemico.appiccicato:
-                    GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
 
         # puntatore
         if attacco == 1:
@@ -1758,8 +1608,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 puntat = GlobalVar.puntatIn
                 i = 0
                 while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                        puntat = GlobalVar.puntatOut
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                            puntat = GlobalVar.puntatOut
+                        break
                     i = i + 3
             else:
                 puntat = GlobalVar.puntatOut
@@ -1768,8 +1620,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 puntat = GlobalVar.puntatIn
                 i = 0
                 while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                        puntat = GlobalVar.puntatOut
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                            puntat = GlobalVar.puntatOut
+                        break
                     i = i + 3
             else:
                 puntat = GlobalVar.puntatOut
@@ -1778,8 +1632,9 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 puntat = GlobalVar.puntatIn
                 i = 0
                 while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                        puntat = GlobalVar.puntatOut
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                            puntat = GlobalVar.puntatOut
                         break
                     i = i + 3
                 i = 0
@@ -1795,8 +1650,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 puntat = GlobalVar.puntatIn
                 i = 0
                 while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                        puntat = GlobalVar.puntatOut
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                            puntat = GlobalVar.puntatOut
+                        break
                     i = i + 3
             else:
                 puntat = GlobalVar.puntatOut
@@ -1805,19 +1662,16 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 puntat = GlobalVar.puntatIn
                 i = 0
                 while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp and not caseattactot[i + 2]:
-                        puntat = GlobalVar.puntatOut
+                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
+                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                            puntat = GlobalVar.puntatOut
+                        break
                     i = i + 3
             else:
                 puntat = GlobalVar.puntatOut
         GlobalVar.schermo.blit(puntat, (xp, yp))
         if puntatogg != 0:
             GlobalVar.schermo.blit(puntatogg, (xp, yp))
-        if risposta:
-            if ((xp / GlobalVar.gpx) + (yp / GlobalVar.gpy)) % 2 == 0:
-                GlobalVar.schermo.blit(sfondinoa, (xp, yp))
-            if ((xp / GlobalVar.gpx) + (yp / GlobalVar.gpy)) % 2 == 1:
-                GlobalVar.schermo.blit(sfondinob, (xp, yp))
 
         puntandoSuUnNemicoOColcoOEsca = False
         # disegna vita GlobalVarG2.esche
@@ -1849,7 +1703,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 raggiovista = nemico.raggioVisivo
                 # controllo caselle attaccabili
                 caseattactotMostri = trovacasattaccabili(mx, my, nemico.raggioVisivo, caseviste)
-                # disegno le caselle attaccabili
+                # disegno le caselle non attaccabili
                 i = 0
                 while i < len(caseattactotMostri):
                     if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
@@ -1933,7 +1787,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # controllo caselle attaccabili
                 vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
                 caseattactotRobo = trovacasattaccabili(rx, ry, vistaRobo, caseviste)
-                # disegno le caselle attaccabili
+                # disegno le caselle non attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
                     if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
@@ -1966,7 +1820,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 # controllo caselle attaccabili
                 vistaRobo = GlobalVar.gpx * GlobalVar.vistaRobo
                 caseattactotRobo = trovacasattaccabili(rx, ry, vistaRobo, caseviste)
-                # disegno le caselle attaccabili
+                # disegno le caselle non attaccabili
                 i = 0
                 while i < len(caseattactotRobo):
                     if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
@@ -2001,7 +1855,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             raggiovista = nemicoInquadrato.raggioVisivo
             # controllo caselle attaccabili
             caseattactotMostri = trovacasattaccabili(mx, my, nemicoInquadrato.raggioVisivo, caseviste)
-            # disegno le caselle attaccabili
+            # disegno le caselle non attaccabili
             i = 0
             while i < len(caseattactotMostri):
                 if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
@@ -2116,29 +1970,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             if effp > 0:
                 GlobalVar.schermo.blit(GlobalVar.efficienzapiu, ((GlobalVar.gpx * 3) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
 
-        # vita-status rallo
-        lungvitatot = int(((GlobalVar.gpx * pvtot) / float(4)) // 5)
-        lungvita = (lungvitatot * pv) // pvtot
-        if lungvita < 0:
-            lungvita = 0
-        indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-        fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-        vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
-        GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-        GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-        GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-        GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-        GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-        GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-        GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
-        messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
-        if avvele:
-            GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
-        if attp > 0:
-            GlobalVar.schermo.blit(GlobalVar.attaccopiu, (GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 17))
-        if difp > 0:
-            GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
-
         # background occhio/chiave
         GlobalVar.schermo.blit(GlobalVar.sfochiaveocchio, (GlobalVar.gsx - (GlobalVar.gpx * 5), 0))
         # vista nemici
@@ -2173,6 +2004,5 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             attacco = 0
         pygame.event.pump()
         GlobalVar.clockAttacco.tick(GlobalVar.fpsInquadra)
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
 
     return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf
