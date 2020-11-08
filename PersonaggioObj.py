@@ -34,7 +34,7 @@ class PersonaggioObj(object):
             if self.tipo.startswith("Oggetto"):
                 self.mantieniSempreASchermo = True
                 self.caricaImgOggetto()
-                self.aggiornaImgOggetto(avanzamentoStoria)
+                self.aggiornaImgOggetto(avanzamentoStoria, True)
             else:
                 self.mantieniSempreASchermo = False
                 self.caricaImgPersonaggio()
@@ -157,7 +157,9 @@ class PersonaggioObj(object):
             self.imgOggettoDialogo.append(img)
             i += 1
 
-    def aggiornaImgOggetto(self, avanzamentoStoria):
+    def aggiornaImgOggetto(self, avanzamentoStoria, primoCaricamento=False):
+        refreshSchermo = False
+
         numImgAttuale = 0
         if self.tipo == "OggettoComodinoSara":
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara2"]:
@@ -181,11 +183,14 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoLegna":
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["trovatoLegna3"] or self.imgCambiata == 1:
                 numImgAttuale = 1
-        self.imgAttuale = self.imgOggetto[numImgAttuale]
-        self.imgW = self.imgAttuale
-        self.imgA = self.imgAttuale
-        self.imgS = self.imgAttuale
-        self.imgD = self.imgAttuale
+
+        if primoCaricamento or self.imgAttuale != self.imgOggetto[numImgAttuale]:
+            refreshSchermo = True
+            self.imgAttuale = self.imgOggetto[numImgAttuale]
+            self.imgW = self.imgAttuale
+            self.imgA = self.imgAttuale
+            self.imgS = self.imgAttuale
+            self.imgD = self.imgAttuale
 
         numImgAttualeDialogo = 0
         if self.tipo == "OggettoLettoSara":
@@ -196,6 +201,9 @@ class PersonaggioObj(object):
             else:
                 numImgAttualeDialogo = 2
         self.imgDialogo = self.imgOggettoDialogo[numImgAttualeDialogo]
+
+        if not primoCaricamento:
+            return refreshSchermo
 
     def caricaImgPersonaggio(self):
         imgW = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", True)
@@ -1713,7 +1721,7 @@ class PersonaggioObj(object):
             dialogo.append("<*>#italic#GRUNT GRUNT!!!<*>")
             self.partiDialogo.append(dialogo)
 
-    def spostati(self, x, y, rx, ry, listaNemici):
+    def spostati(self, x, y, rx, ry, listaNemici, caseviste):
         self.vx = self.x
         self.vy = self.y
         self.animaSpostamento = True
@@ -1747,6 +1755,16 @@ class PersonaggioObj(object):
             self.y = self.vy
             self.animaSpostamento = False
             movimentoAnnullato = True
+        i = 0
+        while i < len(caseviste):
+            if caseviste[i] == self.x and caseviste[i + 1] == self.y:
+                if not caseviste[i + 2]:
+                    self.x = self.vx
+                    self.y = self.vy
+                    self.animaSpostamento = False
+                    movimentoAnnullato = True
+                break
+            i += 3
 
         if not movimentoAnnullato:
             if self.numeroMovimento < len(self.percorso) - 1:

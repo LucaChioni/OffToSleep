@@ -1454,7 +1454,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
     return caseattactot
 
 
-def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonaggi, caseviste, escludiPorte=True):
+def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, caseviste, escludiPorte=True):
     # contiene x e y delle caselle già esplorate
     caselleEsplorate = [x, y]
 
@@ -1467,7 +1467,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
     # caselle viste da rallo
     j = 0
     while j < len(caselleEsplorate):
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1485,7 +1485,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1503,7 +1503,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1521,7 +1521,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+        nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1554,7 +1554,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
         caselleEsplorate = [rx, ry]
         j = 0
         while j < len(caselleEsplorate):
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1572,7 +1572,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1590,7 +1590,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1608,7 +1608,7 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, listaPersonagg
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, escludiPorte, False, porte, cofanetti, listaPersonaggi)
+            nx, ny, stanza, carim, cambiosta = muri_porte(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1753,9 +1753,10 @@ def controllaMorteRallo(vitaRallo, inizio):
         GlobalVar.canaleSoundPassiRallo.stop()
         GlobalVar.canaleSoundPassiColco.stop()
         GlobalVar.canaleSoundPassiNemiciPersonaggi.stop()
+        GlobalVar.canaleSoundMorteNemici.stop()
         GlobalVar.canaleSoundLvUp.stop()
-        # GlobalVarG2.canaleSoundInterazioni.stop()
-        # GlobalVarG2.canaleSoundAttacco.stop()
+        GlobalVar.canaleSoundInterazioni.stop()
+        GlobalVar.canaleSoundAttacco.stop()
         pygame.time.wait(500)
         GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreMorte)
         sprites = pygame.sprite.Group(Fade(3))
@@ -2431,6 +2432,76 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
     else:
         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
     return nemicoInquadrato
+
+
+def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti):
+    # fai vedere caselle viste
+    # caseviste[x, y, flag, ... ] -> riempito come se non vedessi niente
+    caseviste = []
+    n = 0
+    while n <= 29:
+        m = 0
+        while m <= 15:
+            caseviste.append(GlobalVar.gpx + (GlobalVar.gpx * n))
+            caseviste.append(GlobalVar.gpy + (GlobalVar.gpy * m))
+            caseviste.append(False)
+            m = m + 1
+        n = n + 1
+    # scoprire caselle viste
+    caseviste = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste)
+    # casevisteEntrateIncluse include anche le entrate della stanza
+    casevisteEntrateIncluse = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, caseviste[:], False)
+    # casellePercorribili include solo le caselle su cui si può camminare
+    casellePercorribili = scopriCaselleViste(x, y, rx, ry, stanza, [], [], caseviste[:])
+    i = 0
+    while i < len(casellePercorribili):
+        if not casellePercorribili[i + 2]:
+            del casellePercorribili[i + 2]
+            del casellePercorribili[i + 1]
+            del casellePercorribili[i]
+        else:
+            i += 3
+    i = 0
+    while i < len(caseviste):
+        j = 0
+        while j < len(casellePercorribili):
+            if caseviste[i] == casellePercorribili[j] and caseviste[i + 1] == casellePercorribili[j + 1]:
+                if not caseviste[i + 2]:
+                    casellePercorribili[j + 2] = False
+                break
+            j += 3
+        i += 3
+    # scopro le caselle delle porte vicine a una casella vista
+    vetPorteViste = []
+    i = 0
+    while i < len(porte):
+        if not porte[i + 3]:
+            j = 0
+            while j < len(casellePercorribili):
+                if casellePercorribili[j + 2] and ((porte[i + 1] == casellePercorribili[j] + GlobalVar.gpx and porte[i + 2] == casellePercorribili[j + 1]) or (porte[i + 1] == casellePercorribili[j] - GlobalVar.gpx and porte[i + 2] == casellePercorribili[j + 1]) or (porte[i + 1] == casellePercorribili[j] and porte[i + 2] == casellePercorribili[j + 1] + GlobalVar.gpy) or (porte[i + 1] == casellePercorribili[j] and porte[i + 2] == casellePercorribili[j + 1] - GlobalVar.gpy)):
+                    vetPorteViste.append(porte[i + 1])
+                    vetPorteViste.append(porte[i + 2])
+                    break
+                j += 3
+        i += 4
+    i = 0
+    while i < len(casellePercorribili):
+        j = 0
+        while j < len(vetPorteViste):
+            if casellePercorribili[i] == vetPorteViste[j] and casellePercorribili[i + 1] == vetPorteViste[j + 1]:
+                casellePercorribili[i + 2] = True
+                break
+            j += 2
+        i += 3
+
+    return caseviste, casevisteEntrateIncluse, casellePercorribili
+
+
+def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y, casellaChiara, casellaScura):
+    if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 0:
+        GlobalVar.schermo.blit(casellaChiara, (x, y))
+    if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
+        GlobalVar.schermo.blit(casellaScura, (x, y))
 
 
 '''# linea(dove,colore,inizio,fine,spessore)

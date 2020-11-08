@@ -81,7 +81,7 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers
     return animazioneRallo, primopasso
 
 
-def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, vrx, vry, armrobS, sfondinoa, sfondinob, animazioneRallo, attaccoADistanza, animaOggetto, fineanimaz):
+def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, vrx, vry, armrobS, casellaChiara, casellaScura, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz):
     if sposta and fineanimaz != 0:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
@@ -118,10 +118,13 @@ def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana,
             elif animaOggetto[0] == "caricaBatterie" or animaOggetto[0] == "caricaBatterieMigliorato":
                 if fineanimaz == 10:
                     GlobalVar.canaleSoundAttacco.play(GlobalVar.suonoUsoCaricabatterie)
-                if ((vrx / GlobalVar.gpx) + (vry / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.schermo.blit(sfondinoa, (vrx, vry))
-                if ((vrx / GlobalVar.gpx) + (vry / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.schermo.blit(sfondinob, (vrx, vry))
+                i = 0
+                while i < len(vettoreImgCaselle):
+                    if vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
+                        GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                        break
+                    i += 3
                 GlobalVar.schermo.blit(armrobS, (vrx, vry))
                 GlobalVar.schermo.blit(GlobalVar.robos, (vrx, vry))
                 GlobalVar.schermo.blit(GlobalVar.imgAnimaCaricabatterie, (vrx, vry))
@@ -241,8 +244,8 @@ def animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, fare
             disegnaRallo(npers, vx, vy, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
 
-def animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, surriscalda, cambiosta, animazioneColco, fineanimaz):
-    if (rx != vrx or ry != vry) and not cambiosta:
+def animaCamminataRobo(nrob, rx, ry, vrx, vry, vitaRobo, armrob, surriscalda, cambiosta, animazioneColco, fineanimaz):
+    if (rx != vrx or ry != vry) and not cambiosta and vitaRobo > 0:
         animazioneColco = True
         if nrob != 0 and fineanimaz == 10:
             GlobalVar.canaleSoundPassiColco.play(GlobalVar.rumoreCamminataColco)
@@ -388,9 +391,14 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
     return animazioneColco
 
 
-def animaDanneggiamentoColco(rx, ry, nemicoAttaccante, cambiosta, fineanimaz):
+def animaDanneggiamentoColco(rx, ry, robot, armrob, surriscalda, nemicoAttaccante, cambiosta, fineanimaz):
     if nemicoAttaccante.bersaglioColpito[0] == "Colco" and not cambiosta and fineanimaz != 0:
         GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoColco, (rx, ry))
+        if nemicoAttaccante.bersaglioColpito[3]:
+            robot = GlobalVar.robomo
+            armrob = GlobalVar.armrobmo
+            surriscalda = 0
+    return robot, armrob, surriscalda
 
 
 def animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, surriscalda, tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, fineanimaz):
@@ -531,43 +539,40 @@ def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz):
     return animazioneNemici
 
 
-def animaMorteNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz):
+def animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, attaccante, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
-            if nemico.animaMorte:
-                if not GlobalVar.canaleSoundInterazioni.get_busy() and fineanimaz == 5:
-                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreMorteNemico)
-                nemico.animazioneFatta = True
+            if (len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Rallo" and "attaccoRallo" in azioniDaEseguire) or (len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Colco" and "attaccoColco" in azioniDaEseguire):
                 animazioneNemici = True
-                if fineanimaz > 0 and (fineanimaz % 4 == 0):
-                    GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
+
+                if nemico.animaMorte and nemico.animaDanneggiamento[1]:
+                    if not GlobalVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 5:
+                        GlobalVar.canaleSoundMorteNemici.play(GlobalVar.rumoreMorteNemico)
+                    nemico.animazioneFatta = True
+                    if fineanimaz > 0 and (fineanimaz % 4 == 0):
+                        GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.vx, nemico.vy))
+                        if nemico.statoInizioTurno[1]:
+                            GlobalVar.schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
+                        if nemico.statoInizioTurno[2]:
+                            GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
+                else:
+                    GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.vx, nemico.vy))
                     if nemico.statoInizioTurno[1]:
-                        GlobalVar.schermo.blit(nemico.imgAvvelenamento, (nemico.x, nemico.y))
+                        GlobalVar.schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
                     if nemico.statoInizioTurno[2]:
-                        GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.x, nemico.y))
-    return animazioneNemici
+                        GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
 
-
-def animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, attaccante):
-    if not cambiosta:
-        for nemico in listaNemici:
-            if (nemico.animaDanneggiamento == "Rallo" and "attaccoRallo" in azioniDaEseguire) or (nemico.animaDanneggiamento == "Colco" and "attaccoColco" in azioniDaEseguire):
-                animazioneNemici = True
                 if attaccante == "Rallo":
                     GlobalVar.schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.vx, nemico.vy))
                 if attaccante == "Colco":
                     GlobalVar.schermo.blit(nemico.imgDanneggiamentoColco, (nemico.vx, nemico.vy))
-                if nemico.statoInizioTurno[1]:
-                    GlobalVar.schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
-                if nemico.statoInizioTurno[2]:
-                    GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
     return animazioneNemici
 
 
 def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
-            if nemico.inCasellaVista and not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico)) and not (nemico.animaMorte and nemico.animazioneFatta) or (nemico.inCasellaVista and fineanimaz == 0 and not nemico.animaMorte):
+            if nemico.inCasellaVista and ((not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico) or ("attaccoRallo" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Rallo") or ("attaccoColco" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Colco")) and not (nemico.animaMorte and nemico.animazioneFatta)) or (fineanimaz == 0 and not nemico.animaMorte)):
                 if nemico.animazioneFatta:
                     GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
                     if nemico.statoInizioTurno[1]:
@@ -582,57 +587,103 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
                         GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
 
 
-def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob, azioniDaEseguire, animaOggetto):
+def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata):
     if not "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
-        if ((animaOggetto[1] / GlobalVar.gpx) + (animaOggetto[2] / GlobalVar.gpy)) % 2 == 0:
-            GlobalVar.schermo.blit(sfondinoa, (animaOggetto[1], animaOggetto[2]))
-        if ((animaOggetto[1] / GlobalVar.gpx) + (animaOggetto[2] / GlobalVar.gpy)) % 2 == 1:
-            GlobalVar.schermo.blit(sfondinob, (animaOggetto[1], animaOggetto[2]))
+        c = 0
+        while c < len(vettoreImgCaselle):
+            if animaOggetto[1] == vettoreImgCaselle[c] and animaOggetto[2] == vettoreImgCaselle[c + 1]:
+                GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
+                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                break
+            c += 3
         GlobalVar.schermo.blit(GlobalVar.vetIcoOggettiMenu[7], (animaOggetto[1], animaOggetto[2]))
     i = 0
     while i < len(vitaesca):
-        j = 0
-        while j < len(caseviste):
-            if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
-                k = 0
-                while k < len(eschePrimaDelTurno):
-                    if eschePrimaDelTurno[k] == vitaesca[i]:
-                        if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 0:
-                            GlobalVar.schermo.blit(sfondinoa, (vitaesca[i + 2], vitaesca[i + 3]))
-                        if ((vitaesca[i + 2] / GlobalVar.gpx) + (vitaesca[i + 3] / GlobalVar.gpy)) % 2 == 1:
-                            GlobalVar.schermo.blit(sfondinob, (vitaesca[i + 2], vitaesca[i + 3]))
-                        GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
+        contatore = 0
+        while contatore < len(morteEscheAnimata):
+            if morteEscheAnimata[contatore] == vitaesca[i] and not morteEscheAnimata[contatore + 1]:
+                j = 0
+                while j < len(caseviste):
+                    if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
+                        k = 0
+                        while k < len(eschePrimaDelTurno):
+                            if eschePrimaDelTurno[k] == vitaesca[i]:
+                                c = 0
+                                while c < len(vettoreImgCaselle):
+                                    if vitaesca[i + 2] == vettoreImgCaselle[c] and vitaesca[i + 3] == vettoreImgCaselle[c + 1]:
+                                        GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
+                                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                                        break
+                                    c += 3
+                                GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                                break
+                            k += 1
                         break
-                    k += 1
+                    j += 3
                 break
-            j += 3
+            contatore += 2
         i += 4
 
 
-def animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob):
+def animaMorteEsche(vitaesca, eschePrimaDelTurno, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, morteEscheAnimata, fineanimaz):
+    if len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0].startswith("Esca"):
+        numEsca = int(nemicoAttaccante.bersaglioColpito[0].replace("Esca", ""))
+        i = 0
+        while i < len(eschePrimaDelTurno):
+            if numEsca == eschePrimaDelTurno[i] and nemicoAttaccante.bersaglioColpito[3]:
+                k = 0
+                while k < len(vitaesca):
+                    if eschePrimaDelTurno[i] == vitaesca[k]:
+                        if not GlobalVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 5:
+                            GlobalVar.canaleSoundMorteNemici.play(GlobalVar.rumoreMorteNemico)
+                        c = 0
+                        while c < len(vettoreImgCaselle):
+                            if vitaesca[k + 2] == vettoreImgCaselle[c] and vitaesca[k + 3] == vettoreImgCaselle[c + 1]:
+                                GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                                break
+                            c += 3
+                        if fineanimaz > 0 and fineanimaz % 4 == 0:
+                            GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[k + 2], vitaesca[k + 3]))
+                        j = 0
+                        while j < len(morteEscheAnimata):
+                            if vitaesca[k] == morteEscheAnimata[j]:
+                                morteEscheAnimata[j + 1] = True
+                                break
+                            j += 2
+                        break
+                    k += 4
+                break
+            i += 1
+    return morteEscheAnimata
+
+
+def animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreImgCaselle):
     i = 0
     while i < len(vettoreDenaro):
         j = 0
         while j < len(caseviste):
             if ((caseviste[j] == vettoreDenaro[i + 1] - GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - GlobalVar.gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                if ((vettoreDenaro[i + 1] / GlobalVar.gpx) + (vettoreDenaro[i + 2] / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.schermo.blit(sfondinoa, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
-                if ((vettoreDenaro[i + 1] / GlobalVar.gpx) + (vettoreDenaro[i + 2] / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.schermo.blit(sfondinob, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+                c = 0
+                while c < len(vettoreImgCaselle):
+                    if vettoreDenaro[i + 1] == vettoreImgCaselle[c] and vettoreDenaro[i + 2] == vettoreImgCaselle[c + 1]:
+                        GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
+                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                        break
+                    c += 3
                 GlobalVar.schermo.blit(GlobalVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
                 break
             j += 3
         i += 3
 
 
-def animaCofanetti(cofanetti, caseviste, sfondinoc):
+def animaCofanetti(cofanetti, caseviste):
     # cofanetti[stanza, x, y, True / False, ...]
     i = 0
     while i < len(cofanetti):
         j = 0
         while j < len(caseviste):
             if ((caseviste[j] == cofanetti[i + 1] - GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                GlobalVar.schermo.blit(sfondinoc, (cofanetti[i + 1], cofanetti[i + 2]))
                 if cofanetti[i + 3]:
                     GlobalVar.schermo.blit(GlobalVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
                 else:
@@ -642,36 +693,33 @@ def animaCofanetti(cofanetti, caseviste, sfondinoc):
         i += 4
 
 
-def animaPorte(porte, cofanetti, listaPersonaggi, numStanza, portaOriz, portaVert, sfondinoc):
+def animaPorte(porte, caseviste, portaOriz, portaVert):
     # porte[stanza, x, y, True / False, ...]
     i = 0
     while i < len(porte):
         if not porte[i + 3]:
-            vmurx = porte[i + 1]
-            vmury = porte[i + 2]
-            murx, mury, inutile, inutile, inutile = muri_porte(vmurx, vmury, GlobalVar.gpx, 0, numStanza, False, False, False, porte, cofanetti, listaPersonaggi)
-            GlobalVar.schermo.blit(sfondinoc, (porte[i + 1], porte[i + 2]))
-            if vmurx == murx and vmury == mury:
-                GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
-            else:
-                GlobalVar.schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+            j = 0
+            while j < len(caseviste):
+                if ((caseviste[j] == porte[i + 1] - GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
+                    if (caseviste[j] == porte[i + 1] - GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]):
+                        GlobalVar.schermo.blit(portaVert, (porte[i + 1], porte[i + 2]))
+                    else:
+                        GlobalVar.schermo.blit(portaOriz, (porte[i + 1], porte[i + 2]))
+                    break
+                j += 3
         i = i + 4
 
 
-def animaAperturaCofanetto(tesoro, x, y, npers, sfondinoc, animazioneRallo):
+def animaAperturaCofanetto(tesoro, x, y, npers, animazioneRallo):
     if tesoro != -1:
         animazioneRallo = True
         if npers == 1:
-            GlobalVar.schermo.blit(sfondinoc, (x + GlobalVar.gpx, y))
             GlobalVar.schermo.blit(GlobalVar.cofaniaper, (x + GlobalVar.gpx, y))
         if npers == 2:
-            GlobalVar.schermo.blit(sfondinoc, (x - GlobalVar.gpx, y))
             GlobalVar.schermo.blit(GlobalVar.cofaniaper, (x - GlobalVar.gpx, y))
         if npers == 3:
-            GlobalVar.schermo.blit(sfondinoc, (x, y - GlobalVar.gpy))
             GlobalVar.schermo.blit(GlobalVar.cofaniaper, (x, y - GlobalVar.gpy))
         if npers == 4:
-            GlobalVar.schermo.blit(sfondinoc, (x, y + GlobalVar.gpy))
             GlobalVar.schermo.blit(GlobalVar.cofaniaper, (x, y + GlobalVar.gpy))
         GlobalVar.schermo.blit(GlobalVar.sfocontcof, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 0))
         if tesoro == -2:
@@ -863,9 +911,9 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
     if "attaccoNemici" in azioniDaEseguire and nemicoAttaccante:
         if nemicoAttaccante.attaccaDaLontano and nemicoAttaccante.animaAttacco and not nemicoAttaccante.morto:
             xInizioRetta = nemicoAttaccante.x
-            xFineRetta = nemicoAttaccante.xObbiettivo
+            xFineRetta = nemicoAttaccante.obbiettivo[1]
             yInizioRetta = nemicoAttaccante.y
-            yFineRetta = nemicoAttaccante.yObbiettivo
+            yFineRetta = nemicoAttaccante.obbiettivo[2]
             if fineanimaz > 5:
                 if fineanimaz != 10:
                     GlobalVar.schermo.blit(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - GlobalVar.gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpy))
@@ -1036,9 +1084,9 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
     if "attaccoNemici" in azioniDaEseguire and nemicoAttaccante:
         if nemicoAttaccante.attaccaDaLontano and nemicoAttaccante.animaAttacco and not nemicoAttaccante.morto:
             xInizioRetta = nemicoAttaccante.x
-            xFineRetta = nemicoAttaccante.xObbiettivo
+            xFineRetta = nemicoAttaccante.obbiettivo[1]
             yInizioRetta = nemicoAttaccante.y
-            yFineRetta = nemicoAttaccante.yObbiettivo
+            yFineRetta = nemicoAttaccante.obbiettivo[2]
             deltaXRetta = xFineRetta - xInizioRetta
             deltaYRetta = yFineRetta - yInizioRetta
             angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
@@ -1323,7 +1371,7 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
     return animazionePersonaggi
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, sfondinoa, sfondinob, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, sfondinoc, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, apriocchio, movimentoPerMouse, canzone):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, apriocchio, movimentoPerMouse, vettoreImgCaselle, canzone):
     schermo_prima_delle_animazioni = GlobalVar.schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
@@ -1378,6 +1426,13 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
     else:
         GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
 
+    morteEscheAnimata = []
+    i = 0
+    while i < len(eschePrimaDelTurno):
+        morteEscheAnimata.append(eschePrimaDelTurno[i])
+        morteEscheAnimata.append(False)
+        i += 4
+
     denaroRaccolto = False
     animazioneRalloFatta = False
     animazioneColcoFatta = False
@@ -1402,45 +1457,51 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             # ridisegnare il quadratino dove sono i personaggi
             if cambiosta:
                 if fineanimaz == 10:
-                    if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 0:
-                        GlobalVar.schermo.blit(sfondinob, (vx, vy))
-                    if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
-                        GlobalVar.schermo.blit(sfondinoa, (vx, vy))
+                    i = 0
+                    while i < len(vettoreImgCaselle):
+                        if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
+                            GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                            disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            break
+                        i += 3
             else:
-                if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.schermo.blit(sfondinob, (vx, vy))
-                    GlobalVar.schermo.blit(sfondinoa, (x, y))
-                if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.schermo.blit(sfondinoa, (vx, vy))
-                    GlobalVar.schermo.blit(sfondinob, (x, y))
-                if ((rx / GlobalVar.gpx) + (ry / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.schermo.blit(sfondinob, (vrx, vry))
-                    GlobalVar.schermo.blit(sfondinoa, (rx, ry))
-                if ((rx / GlobalVar.gpx) + (ry / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.schermo.blit(sfondinoa, (vrx, vry))
-                    GlobalVar.schermo.blit(sfondinob, (rx, ry))
-                for nemico in listaNemici:
-                    if nemico.inCasellaVista:
-                        if ((nemico.x / GlobalVar.gpx) + (nemico.y / GlobalVar.gpy)) % 2 == 0:
-                            GlobalVar.schermo.blit(sfondinob, (nemico.vx, nemico.vy))
-                            GlobalVar.schermo.blit(sfondinoa, (nemico.x, nemico.y))
-                        if ((nemico.x / GlobalVar.gpx) + (nemico.y / GlobalVar.gpy)) % 2 == 1:
-                            GlobalVar.schermo.blit(sfondinoa, (nemico.vx, nemico.vy))
-                            GlobalVar.schermo.blit(sfondinob, (nemico.x, nemico.y))
-                for personaggio in listaPersonaggi:
-                    if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo:
-                        if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 0:
-                            GlobalVar.schermo.blit(sfondinob, (personaggio.vx, personaggio.vy))
-                            GlobalVar.schermo.blit(sfondinoa, (personaggio.x, personaggio.y))
-                        if ((personaggio.x / GlobalVar.gpx) + (personaggio.y / GlobalVar.gpy)) % 2 == 1:
-                            GlobalVar.schermo.blit(sfondinoa, (personaggio.vx, personaggio.vy))
-                            GlobalVar.schermo.blit(sfondinob, (personaggio.x, personaggio.y))
+                i = 0
+                while i < len(vettoreImgCaselle):
+                    if x == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]:
+                        GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                    if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
+                        GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                    if rx == vettoreImgCaselle[i] and ry == vettoreImgCaselle[i + 1]:
+                        GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                    if vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
+                        GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                    for nemico in listaNemici:
+                        if nemico.inCasellaVista:
+                            if nemico.x == vettoreImgCaselle[i] and nemico.y == vettoreImgCaselle[i + 1]:
+                                GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            if nemico.vx == vettoreImgCaselle[i] and nemico.vy == vettoreImgCaselle[i + 1]:
+                                GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                    for personaggio in listaPersonaggi:
+                        if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo:
+                            if personaggio.x == vettoreImgCaselle[i] and personaggio.y == vettoreImgCaselle[i + 1]:
+                                GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            if personaggio.vx == vettoreImgCaselle[i] and personaggio.vy == vettoreImgCaselle[i + 1]:
+                                GlobalVar.schermo.blit(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                    i += 3
 
-            # disegno le GlobalVarG2.esche e il denaro
-            animaEsche(vitaesca, eschePrimaDelTurno, caseviste, sfondinoa, sfondinob, azioniDaEseguire, animaOggetto)
-            animaDenaro(vettoreDenaro, caseviste, sfondinoa, sfondinob)
-            animaCofanetti(cofanetti, caseviste, sfondinoc)
-            animaPorte(porte, cofanetti, listaPersonaggi, numStanza, portaOriz, portaVert, sfondinoc)
+            # disegno: esche, denaro, cofanetti e porte
+            animaEsche(vitaesca, eschePrimaDelTurno, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata)
+            animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreImgCaselle)
+            animaCofanetti(cofanetti, caseviste)
+            animaPorte(porte, caseviste, portaOriz, portaVert)
 
             statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv)
 
@@ -1472,13 +1533,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo
-                animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
+                animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, dati[10], armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
                 # animazione camminata mostri
                 animazioneNemici = animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
                 # animazione camminata personaggi
                 animazionePersonaggi = animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta, fineanimaz)
-                # animazione morte nemici
-                animazioneNemici = animaMorteNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
@@ -1486,7 +1545,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco
-                animaDanneggiamentoColco(rx, ry, nemicoAttaccante, cambiosta, fineanimaz)
+                robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, cambiosta, fineanimaz)
+                # animazione morte esche
+                morteEscheAnimata = animaMorteEsche(vitaesca, eschePrimaDelTurno, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, morteEscheAnimata, fineanimaz)
 
                 # animazione attacco nemici
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz)
@@ -1494,11 +1555,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "attaccoRallo" in azioniDaEseguire:
                 # animazione attacco Rallo
-                animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, sfondinoa, sfondinob, animazioneRallo, attaccoADistanza, animaOggetto, fineanimaz)
+                animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, casellaChiara, casellaScura, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz)
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
 
                 # animazione danneggiamento dei nemici
-                animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo")
+                animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo", fineanimaz)
 
             if "attaccoColco" in azioniDaEseguire:
                 # animazione attacco Colco
@@ -1506,14 +1567,14 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, fineanimaz)
 
                 # animazione danneggiamento dei nemici
-                animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco")
+                animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", fineanimaz)
 
             # animazione apertura cofanetto
-            animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, sfondinoc, animazioneRallo)
+            animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, animazioneRallo)
             # anima raccolta denaro
             denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, fineanimaz)
 
-            # disegno img GlobalVarG2.puntatoreInquadraNemici
+            # disegno img puntatoreInquadraNemici
             disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vitaesca)
 
             if animazioneRallo:
@@ -1653,4 +1714,4 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         caricaTutto = True
         tastop = 0
 
-    return primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse
+    return primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse, robot, armrob, statoColcoInizioTurno[1]

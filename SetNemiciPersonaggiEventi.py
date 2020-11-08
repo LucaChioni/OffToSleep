@@ -647,7 +647,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
                 listaPersonaggiTotali.append(personaggio)
         if stanza == GlobalVar.dictStanze["forestaCadetta5"]:
             if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                percorsoPersonaggio = []
+                percorsoPersonaggio = ["a"]
                 personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 10, "a", "FiglioUfficiale", stanza, avanzamentoStoria, percorsoPersonaggio)
                 listaPersonaggi.append(personaggio)
                 listaPersonaggiTotali.append(personaggio)

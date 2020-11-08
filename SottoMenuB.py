@@ -3,7 +3,7 @@
 from CaricaSalvaPartita import *
 
 
-def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone):
+def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, canzone):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 6.5
@@ -253,11 +253,35 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                     yp = vyp
                                 primoFrame = True
                             elif cosa == 3:
+                                salvataggio(n, datiAttuali, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali)
+                                # ricarico i salvataggi
+                                contasalva = 1
+                                vetDatiSalvataggi = []
+                                while contasalva <= 3:
+                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin,
+                                                                 cofaniini, cofanifin, canzone, False)
+                                    vetTempDati = []
+                                    vetTempDati.append(dati)
+                                    vetTempDati.append(errore)
+                                    vetDatiSalvataggi.append(vetTempDati)
+                                    contasalva += 1
+                                xp = vxp
+                                yp = vyp
+                                conferma = False
                                 primoFrame = True
-                                return n, cosa
                             elif cosa == 2:
                                 leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
                                 leggi.close()
+                                # ricarico i salvataggi
+                                contasalva = 1
+                                vetDatiSalvataggi = []
+                                while contasalva <= 3:
+                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False)
+                                    vetTempDati = []
+                                    vetTempDati.append(dati)
+                                    vetTempDati.append(errore)
+                                    vetDatiSalvataggi.append(vetTempDati)
+                                    contasalva += 1
                                 xp = vxp
                                 yp = vyp
                                 conferma = False

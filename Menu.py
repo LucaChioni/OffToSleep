@@ -16,7 +16,7 @@ def menu(caricaSalvataggio):
     # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
     # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob -
     # porte(142-?) - cofanetti(?-?) // dimensione: 0-141 (=> 142 variabili) + porte e cofanetti
-    datiIniziali = [0, 1, xInizialie, yInizialie, 1, 55, 0, 0, 0, 0, 220,  # <- statistiche
+    datiIniziali = [0, 1, xInizialie, yInizialie, 1, 55, 0, 0, 0, 0, 0,  # <- statistiche
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
         2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0,  # <- equpaggiamento
@@ -281,7 +281,7 @@ def menu(caricaSalvataggio):
 
                         # carica partita
                         if voceMarcata == 2:
-                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
+                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, [], [], [], [], [], [], [], [], [], canzone)
 
                             # lettura salvataggio
                             if n != -1:
@@ -712,10 +712,8 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, canzone)
-                        if n != -1 and azioneFatta == 3:
-                            salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam)
-                        elif n != -1 and azioneFatta == 1:
+                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vitaesca, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, canzone)
+                        if n != -1 and azioneFatta == 1:
                             caricaSalvataggio = n
                             risposta = True
                     # impostazioni
