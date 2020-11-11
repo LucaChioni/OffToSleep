@@ -133,7 +133,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
     listaMonete = []
     stanzeGiaVisitate = []
     listaPersonaggiTotali = []
-    oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    oggettiRimastiASam = []
 
     leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
     contenutoFile = leggi.read()
@@ -150,14 +150,14 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
 
     if not errore and not (len(datiTotali) == 1 and datiTotali[0] == ""):
         if len(datiTotali) == 7:
-            dati = datiTotali[0].split("_")
-            dati.pop(len(dati) - 1)
-            if len(dati) == 0 or len(dati) != lunghezzadati:
+            datiStringa = datiTotali[0].split("_")
+            datiStringa.pop(len(datiStringa) - 1)
+            if len(datiStringa) == 0 or len(datiStringa) != lunghezzadati:
                 errore = True
             else:
-                for i in range(0, len(dati)):
+                for i in range(0, len(datiStringa)):
                     try:
-                        dati[i] = int(dati[i])
+                        dati.append(int(datiStringa[i]))
                     except ValueError:
                         errore = True
                         break
@@ -218,43 +218,43 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                         errore = True
                         break
                     i += 16
-            listaEsche = datiTotali[2].split("_")
-            listaEsche.pop(len(listaEsche) - 1)
-            if len(listaEsche) % 4 != 0:
+            listaEscheStringa = datiTotali[2].split("_")
+            listaEscheStringa.pop(len(listaEscheStringa) - 1)
+            if len(listaEscheStringa) % 4 != 0:
                 errore = True
             else:
                 i = 0
-                while i < len(listaEsche):
+                while i < len(listaEscheStringa):
                     try:
-                        listaEsche[i] = int(listaEsche[i])
-                        listaEsche[i + 1] = int(listaEsche[i + 1])
-                        listaEsche[i + 2] = int(GlobalVar.gpx * listaEsche[i + 2])
-                        listaEsche[i + 3] = int(GlobalVar.gpy * listaEsche[i + 3])
+                        listaEsche.append(int(listaEscheStringa[i]))
+                        listaEsche.append(int(listaEscheStringa[i + 1]))
+                        listaEsche.append(GlobalVar.gpx * int(listaEscheStringa[i + 2]))
+                        listaEsche.append(GlobalVar.gpy * int(listaEscheStringa[i + 3]))
                     except ValueError:
                         errore = True
                         break
                     i += 4
-            listaMonete = datiTotali[3].split("_")
-            listaMonete.pop(len(listaMonete) - 1)
-            if len(listaMonete) % 3 != 0:
+            listaMoneteStringa = datiTotali[3].split("_")
+            listaMoneteStringa.pop(len(listaMoneteStringa) - 1)
+            if len(listaMoneteStringa) % 3 != 0:
                 errore = True
             else:
                 i = 0
-                while i < len(listaMonete):
+                while i < len(listaMoneteStringa):
                     try:
-                        listaMonete[i] = int(listaMonete[i])
-                        listaMonete[i + 1] = int(GlobalVar.gpx * int(listaMonete[i + 1]))
-                        listaMonete[i + 2] = int(GlobalVar.gpy * int(listaMonete[i + 2]))
+                        listaMonete.append(int(listaMoneteStringa[i]))
+                        listaMonete.append(GlobalVar.gpx * int(listaMoneteStringa[i + 1]))
+                        listaMonete.append(GlobalVar.gpy * int(listaMoneteStringa[i + 2]))
                     except ValueError:
                         errore = True
                         break
                     i += 3
-            stanzeGiaVisitate = datiTotali[4].split("_")
-            stanzeGiaVisitate.pop(len(stanzeGiaVisitate) - 1)
+            stanzeGiaVisitateStringa = datiTotali[4].split("_")
+            stanzeGiaVisitateStringa.pop(len(stanzeGiaVisitateStringa) - 1)
             i = 0
-            while i < len(stanzeGiaVisitate):
+            while i < len(stanzeGiaVisitateStringa):
                 try:
-                    stanzeGiaVisitate[i] = int(stanzeGiaVisitate[i])
+                    stanzeGiaVisitate.append(int(stanzeGiaVisitateStringa[i]))
                 except ValueError:
                     errore = True
                     break
@@ -292,14 +292,14 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                         errore = True
                         break
                     i += 9
-            oggettiRimastiASam = datiTotali[6].split("_")
-            oggettiRimastiASam.pop(len(oggettiRimastiASam) - 1)
-            if len(oggettiRimastiASam) != 13:
+            oggettiRimastiASamStringa = datiTotali[6].split("_")
+            oggettiRimastiASamStringa.pop(len(oggettiRimastiASamStringa) - 1)
+            if len(oggettiRimastiASamStringa) != 13:
                 errore = True
             else:
-                for i in range(0, len(oggettiRimastiASam)):
+                for i in range(0, len(oggettiRimastiASamStringa)):
                     try:
-                        oggettiRimastiASam[i] = int(oggettiRimastiASam[i])
+                        oggettiRimastiASam.append(int(oggettiRimastiASamStringa[i]))
                     except ValueError:
                         errore = True
                         break
@@ -444,7 +444,6 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
 
     if not errore:
         if mostraErrori:
-            print ("Salvataggio: " + str(n))
             GlobalVar.canaleSoundCanzone.stop()
             return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
         else:

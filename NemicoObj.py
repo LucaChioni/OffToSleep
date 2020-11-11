@@ -445,8 +445,7 @@ class NemicoObj(object):
         self.direzione = direzione
 
     def danneggia(self, danno, attaccante):
-        # il vettore "animaDanneggiamento" contiene nome dell'attaccante e un booleano che indica se il colto è stato mortale o no
-        self.animaDanneggiamento = []
+        # il vettore "animaDanneggiamento" contiene nome dell'attaccante e un booleano che indica se il colpo è stato mortale o no
         self.animaDanneggiamento.append(attaccante)
         danno -= self.difesa
         if danno < 0:
@@ -493,13 +492,13 @@ class NemicoObj(object):
             self.visto = False
 
     def aggiornaBersaglioAttacchiDistanti(self, x, y, rx, ry, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo):
-        if self.obbiettivo[0] != "":
+        if self.obbiettivo[0] == "":
             if attaccoADistanza and self.x == attaccoADistanza.x and self.y == attaccoADistanza.y:
                 self.xPosizioneUltimoBersaglio = x
                 self.yPosizioneUltimoBersaglio = y
             elif listaNemiciAttaccatiADistanzaRobo:
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
-                    if self.x == nemico.x and self.y == nemico.y:
+                    if type(nemico) is not str and self.x == nemico.x and self.y == nemico.y:
                         self.xPosizioneUltimoBersaglio = rx
                         self.yPosizioneUltimoBersaglio = ry
                         break
@@ -539,7 +538,7 @@ class NemicoObj(object):
             escaTrovata = False
             i = 0
             while i < len(vitaesca):
-                if self.obbiettivo[1] == vitaesca[i + 2] and self.obbiettivo[2] == vitaesca[i + 3]:
+                if self.obbiettivo[1] == vitaesca[i + 2] and self.obbiettivo[2] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
                     self.obbiettivo[0] = "Esca"
                     self.obbiettivo[3] = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
                     escaTrovata = True
@@ -598,15 +597,15 @@ class NemicoObj(object):
                 vetNemiciSoloConXeY.append(personaggio.x)
                 vetNemiciSoloConXeY.append(personaggio.y)
 
-        # se l'obbiettivo precedente è un'esca che esiste ancora e che puoi ancora raggiungere non cambi bersaglio (corregge il caso in cui il nemico vede te o colco e non più l'esca => fa avanti e indietro di continuo)
+        # se l'obbiettivo precedente è un'esca che esiste ancora, che puoi ancora raggiungere me che non vedi più non cambi bersaglio a meno che non vedi un'altra esca (corregge il caso in cui il nemico vede te o colco e non più l'esca => fa avanti e indietro di continuo)
         escaVecchiaAncoraRaggiungibilie = False
         if self.obbiettivo[0] == "Esca":
             j = 0
             while j < len(self.caseattactot):
                 i = 0
                 while i < len(vitaesca):
-                    if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3]:
-                        if not self.caseattactot[j + 2]:
+                    if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                        if not self.caseattactot[j + 2] and self.obbiettivo[1] == self.caseattactot[j] and self.obbiettivo[2] == self.caseattactot[j + 1]:
                             # nel caso c'è l'esca aggiungo rallo e colco agli ostacoli
                             vetNemiciSoloConXeY.append(x)
                             vetNemiciSoloConXeY.append(y)
@@ -619,107 +618,106 @@ class NemicoObj(object):
                         break
                     i += 4
                 j += 3
-        if not escaVecchiaAncoraRaggiungibilie:
-            # tolgo rallo e colco dagli ostacoli nel caso fossero stati aggiunti durante la ricerca dell'esca vecchia
-            i = 0
-            while i < len(vetNemiciSoloConXeY):
-                if vetNemiciSoloConXeY[i] == x and vetNemiciSoloConXeY[i + 1] == y:
-                    del vetNemiciSoloConXeY[i + 1]
-                    del vetNemiciSoloConXeY[i]
-                elif vetNemiciSoloConXeY[i] == rx and vetNemiciSoloConXeY[i + 1] == ry:
-                    del vetNemiciSoloConXeY[i + 1]
-                    del vetNemiciSoloConXeY[i]
-                else:
-                    i += 2
-            # se l'obbiettivo precedente è in una casella vicina, non si è spostato e è prioritario rispetto a tutte le cose che vedi => non cerchi altri obbiettivi
-            inutileCalcolareObbiettivo = False
-            if self.obbiettivo[0] != "" and ((self.obbiettivo[1] == self.x + GlobalVar.gpx and self.obbiettivo[2] == self.y) or (self.obbiettivo[1] == self.x - GlobalVar.gpx and self.obbiettivo[2] == self.y) or (self.obbiettivo[1] == self.x and self.obbiettivo[2] == self.y + GlobalVar.gpy) or (self.obbiettivo[1] == self.x and self.obbiettivo[2] == self.y - GlobalVar.gpy)):
-                if self.obbiettivo[0] == "Esca":
-                    # controllo se esiste ancora l'obbiettivo precedente
-                    i = 0
-                    while i < len(vitaesca):
-                        if self.obbiettivo[1] == vitaesca[i + 2] and self.obbiettivo[2] == vitaesca[i + 3]:
-                            inutileCalcolareObbiettivo = True
-                            break
-                        i += 4
-                elif self.obbiettivo[0] == "Colco" or self.obbiettivo[0] == "Rallo":
-                    # controllo se esiste ancora l'obbiettivo precedente
-                    if self.obbiettivo[0] == "Rallo" and self.obbiettivo[1] == x and self.obbiettivo[2] == y and dati[5] > 0:
+        # tolgo rallo e colco dagli ostacoli nel caso fossero stati aggiunti durante la ricerca dell'esca vecchia
+        i = 0
+        while i < len(vetNemiciSoloConXeY):
+            if vetNemiciSoloConXeY[i] == x and vetNemiciSoloConXeY[i + 1] == y:
+                del vetNemiciSoloConXeY[i + 1]
+                del vetNemiciSoloConXeY[i]
+            elif vetNemiciSoloConXeY[i] == rx and vetNemiciSoloConXeY[i + 1] == ry and dati[10] > 0:
+                del vetNemiciSoloConXeY[i + 1]
+                del vetNemiciSoloConXeY[i]
+            else:
+                i += 2
+        # se l'obbiettivo precedente è in una casella vicina, non si è spostato e è prioritario rispetto a tutte le cose che vedi => non cerchi altri obbiettivi
+        inutileCalcolareObbiettivo = False
+        if self.obbiettivo[0] != "" and ((self.obbiettivo[1] == self.x + GlobalVar.gpx and self.obbiettivo[2] == self.y) or (self.obbiettivo[1] == self.x - GlobalVar.gpx and self.obbiettivo[2] == self.y) or (self.obbiettivo[1] == self.x and self.obbiettivo[2] == self.y + GlobalVar.gpy) or (self.obbiettivo[1] == self.x and self.obbiettivo[2] == self.y - GlobalVar.gpy)):
+            if self.obbiettivo[0] == "Esca":
+                # controllo se esiste ancora l'obbiettivo precedente
+                i = 0
+                while i < len(vitaesca):
+                    if self.obbiettivo[1] == vitaesca[i + 2] and self.obbiettivo[2] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
                         inutileCalcolareObbiettivo = True
-                    if self.obbiettivo[0] == "Colco" and self.obbiettivo[1] == rx and self.obbiettivo[2] == ry and dati[10] > 0:
-                        inutileCalcolareObbiettivo = True
-                    # controllo se ci sono altri obbiettivi (esche)
-                    j = 0
-                    while j < len(self.caseattactot):
-                        i = 0
-                        while i < len(vitaesca):
-                            if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3]:
-                                if self.caseattactot[j + 2]:
-                                    inutileCalcolareObbiettivo = False
-                                    break
-                            i += 4
-                        j += 3
-                elif self.obbiettivo[0] == "Monete":
-                    # controllo se esiste ancora l'obbiettivo precedente
-                    i = 0
-                    while i < len(vettoreDenaro):
-                        if self.obbiettivo[1] == vettoreDenaro[i + 1] and self.obbiettivo[2] == vettoreDenaro[i + 2]:
-                            inutileCalcolareObbiettivo = True
-                            break
-                        i += 3
-                    # controllo se ci sono altri obbiettivi (esche, rallo o colco)
-                    j = 0
-                    while j < len(self.caseattactot):
-                        i = 0
-                        while i < len(vitaesca):
-                            if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3]:
-                                if self.caseattactot[j + 2]:
-                                    inutileCalcolareObbiettivo = False
-                                    break
-                            i += 4
-                        j += 3
-                    if self.visto:
-                        inutileCalcolareObbiettivo = False
-            if not inutileCalcolareObbiettivo:
-                self.obbiettivo = ["", 0, 0, []]
-
-                # cerco il bersaglio più vicino dando priorità a esche, poi colco-rallo, poi monete (se il nemico attacca da lontano non cerco il path più breve)
+                        break
+                    i += 4
+            elif self.obbiettivo[0] == "Colco" or self.obbiettivo[0] == "Rallo":
+                # controllo se esiste ancora l'obbiettivo precedente
+                if self.obbiettivo[0] == "Rallo" and self.obbiettivo[1] == x and self.obbiettivo[2] == y and dati[5] > 0:
+                    inutileCalcolareObbiettivo = True
+                if self.obbiettivo[0] == "Colco" and self.obbiettivo[1] == rx and self.obbiettivo[2] == ry and dati[10] > 0:
+                    inutileCalcolareObbiettivo = True
+                # controllo se ci sono altri obbiettivi (esche)
                 j = 0
                 while j < len(self.caseattactot):
                     i = 0
                     while i < len(vitaesca):
-                        if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3]:
+                        if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
                             if self.caseattactot[j + 2]:
-                                if primaesca:
-                                    # nel caso vede un'esca aggiungo rallo e colco agli ostacoli
-                                    vetNemiciSoloConXeY.append(x)
-                                    vetNemiciSoloConXeY.append(y)
-                                    vetNemiciSoloConXeY.append(rx)
-                                    vetNemiciSoloConXeY.append(ry)
-                                    if not self.attaccaDaLontano:
-                                        pathPerEsca = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
-                                        if pathPerEsca and len(pathPerEsca) > 0:
-                                            distanzaDaEsca = len(pathPerEsca) / 2
+                                inutileCalcolareObbiettivo = False
+                                break
+                        i += 4
+                    j += 3
+            elif self.obbiettivo[0] == "Monete":
+                # controllo se esiste ancora l'obbiettivo precedente
+                i = 0
+                while i < len(vettoreDenaro):
+                    if self.obbiettivo[1] == vettoreDenaro[i + 1] and self.obbiettivo[2] == vettoreDenaro[i + 2]:
+                        inutileCalcolareObbiettivo = True
+                        break
+                    i += 3
+                # controllo se ci sono altri obbiettivi (esche, rallo o colco)
+                j = 0
+                while j < len(self.caseattactot):
+                    i = 0
+                    while i < len(vitaesca):
+                        if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                            if self.caseattactot[j + 2]:
+                                inutileCalcolareObbiettivo = False
+                                break
+                        i += 4
+                    j += 3
+                if self.visto:
+                    inutileCalcolareObbiettivo = False
+        if not inutileCalcolareObbiettivo:
+            # cerco il bersaglio più vicino dando priorità a esche, poi colco-rallo, poi monete (se il nemico attacca da lontano non cerco il path più breve)
+            j = 0
+            while j < len(self.caseattactot):
+                i = 0
+                while i < len(vitaesca):
+                    if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                        if self.caseattactot[j + 2]:
+                            if primaesca:
+                                # nel caso vede un'esca aggiungo rallo e colco agli ostacoli
+                                vetNemiciSoloConXeY.append(x)
+                                vetNemiciSoloConXeY.append(y)
+                                vetNemiciSoloConXeY.append(rx)
+                                vetNemiciSoloConXeY.append(ry)
+                                if not self.attaccaDaLontano:
+                                    pathPerEsca = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
+                                    if pathPerEsca and len(pathPerEsca) > 0:
+                                        distanzaDaEsca = len(pathPerEsca) / 2
+                                distMinXEsca = vitaesca[i + 2]
+                                distMinYEsca = vitaesca[i + 3]
+                                escabersaglio = i
+                                vistoesca = True
+                                primaesca = False
+                            else:
+                                pathPerEscaTemp = False
+                                if not self.attaccaDaLontano:
+                                    pathPerEscaTemp = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
+                                if (pathPerEscaTemp and (len(pathPerEscaTemp) < distanzaDaEsca or distanzaDaEsca == -1)) or (((not pathPerEscaTemp and distanzaDaEsca == -1) or not self.attaccaDaLontano) and abs(vitaesca[i + 2] - self.x) + abs(vitaesca[i + 3] - self.y) < abs(distMinXEsca - self.x) + abs(distMinYEsca - self.y)):
+                                    if pathPerEscaTemp and len(pathPerEscaTemp) > 0:
+                                        pathPerEsca = pathPerEscaTemp
+                                        distanzaDaEsca = len(pathPerEsca) / 2
                                     distMinXEsca = vitaesca[i + 2]
                                     distMinYEsca = vitaesca[i + 3]
                                     escabersaglio = i
-                                    vistoesca = True
-                                    primaesca = False
-                                else:
-                                    pathPerEscaTemp = False
-                                    if not self.attaccaDaLontano:
-                                        pathPerEscaTemp = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
-                                    if (pathPerEscaTemp and (len(pathPerEscaTemp) < distanzaDaEsca or distanzaDaEsca == -1)) or (((not pathPerEscaTemp and distanzaDaEsca == -1) or not self.attaccaDaLontano) and abs(vitaesca[i + 2] - self.x) + abs(vitaesca[i + 3] - self.y) < abs(distMinXEsca - self.x) + abs(distMinYEsca - self.y)):
-                                        if pathPerEscaTemp and len(pathPerEscaTemp) > 0:
-                                            pathPerEsca = pathPerEscaTemp
-                                            distanzaDaEsca = len(pathPerEsca) / 2
-                                        distMinXEsca = vitaesca[i + 2]
-                                        distMinYEsca = vitaesca[i + 3]
-                                        escabersaglio = i
-                            break
-                        i += 4
-                    j += 3
-                if not vistoesca or (vistoesca and distanzaDaEsca != -1 and not self.attaccaDaLontano):
+                        break
+                    i += 4
+                j += 3
+            if not escaVecchiaAncoraRaggiungibilie:
+                self.obbiettivo = ["", 0, 0, []]
+                if not vistoesca or (vistoesca and distanzaDaEsca == -1 and not self.attaccaDaLontano):
                     # nel caso abbia visto un'esca devo togliere rallo e colco dagli ostacoli
                     if vistoesca:
                         i = 0
@@ -727,7 +725,7 @@ class NemicoObj(object):
                             if vetNemiciSoloConXeY[i] == x and vetNemiciSoloConXeY[i + 1] == y:
                                 del vetNemiciSoloConXeY[i + 1]
                                 del vetNemiciSoloConXeY[i]
-                            elif vetNemiciSoloConXeY[i] == rx and vetNemiciSoloConXeY[i + 1] == ry:
+                            elif vetNemiciSoloConXeY[i] == rx and vetNemiciSoloConXeY[i + 1] == ry and dati[10] > 0:
                                 del vetNemiciSoloConXeY[i + 1]
                                 del vetNemiciSoloConXeY[i]
                             else:
@@ -750,7 +748,7 @@ class NemicoObj(object):
                                         distanzaDaColco = len(pathPerColco) / 2
                                 vistoRob = True
                         j += 3
-                if (not vistoesca or (vistoesca and distanzaDaEsca != -1 and not self.attaccaDaLontano)) and (not vistoRallo or (vistoRallo and distanzaDaRallo != -1 and not self.attaccaDaLontano)) and (not vistoRob or (vistoRob and distanzaDaColco != -1 and not self.attaccaDaLontano)):
+                if (not vistoesca or (vistoesca and distanzaDaEsca == -1 and not self.attaccaDaLontano)) and (not vistoRallo or (vistoRallo and distanzaDaRallo == -1 and not self.attaccaDaLontano)) and (not vistoRob or (vistoRob and distanzaDaColco == -1 and not self.attaccaDaLontano)):
                     j = 0
                     while j < len(self.caseattactot):
                         i = 0
@@ -784,15 +782,15 @@ class NemicoObj(object):
                             i += 3
                         j += 3
 
-                if vistoRallo or vistoRob or vistoesca or vistoDenaro:
-                    if vistoesca:
-                        self.obbiettivo = ["Esca", vitaesca[escabersaglio + 2], vitaesca[escabersaglio + 3], pathPerEsca]
-                    elif vistoDenaro and not (vistoRallo and distanzaDaRallo != -1) and not (vistoRob and distanzaDaColco != -1):
-                        self.obbiettivo = ["Monete", xDenaro, yDenaro, pathPerDenaro]
-                    elif vistoRob and (not vistoRallo or distanzaDaColco <= distanzaDaRallo or distanzaDaRallo == -1):
-                        self.obbiettivo = ["Colco", rx, ry, pathPerColco]
-                    elif vistoRallo:
-                        self.obbiettivo = ["Rallo", x, y, pathPerRallo]
+            if vistoRallo or vistoRob or vistoesca or vistoDenaro:
+                if vistoesca and (distanzaDaEsca != -1 or self.attaccaDaLontano):
+                    self.obbiettivo = ["Esca", vitaesca[escabersaglio + 2], vitaesca[escabersaglio + 3], pathPerEsca]
+                elif vistoDenaro and not (vistoRallo and distanzaDaRallo != -1) and not (vistoRob and distanzaDaColco != -1):
+                    self.obbiettivo = ["Monete", xDenaro, yDenaro, pathPerDenaro]
+                elif vistoRob and (not vistoRallo or distanzaDaColco <= distanzaDaRallo or distanzaDaRallo == -1):
+                    self.obbiettivo = ["Colco", rx, ry, pathPerColco]
+                elif vistoRallo:
+                    self.obbiettivo = ["Rallo", x, y, pathPerRallo]
 
         if self.obbiettivo[0] != "":
             self.xPosizioneUltimoBersaglio = self.obbiettivo[1]
@@ -817,5 +815,3 @@ class NemicoObj(object):
                             self.yPosizioneUltimoBersaglio = False
                         break
                     i += 4
-
-        return escabersaglio

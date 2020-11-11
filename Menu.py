@@ -14,8 +14,8 @@ def menu(caricaSalvataggio):
     ryInizialie = 0
     # progresso - stanza - x - y - liv - pv - spada - scudo - armatura - armrob - energiarob - tecniche(20) - oggetti(10) - equipaggiamento(30) - batterie(10) - condizioni(20) - gambit(20) -
     # veleno - surriscalda - attp - difp - velp(x2) - efficienza - esperienza - arco - guanti - collana - monete - frecce - faretra -
-    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob -
-    # porte(142-?) - cofanetti(?-?) // dimensione: 0-141 (=> 142 variabili) + porte e cofanetti
+    # rx - ry - raffredda - autoRic1 - autoRic2 - mosseRimasteRob - npers - nrob - chiaverob
+    # porte(143-?) - cofanetti(?-?) // dimensione: 0-142 (=> 143 variabili) + porte e cofanetti
     datiIniziali = [0, 1, xInizialie, yInizialie, 1, 55, 0, 0, 0, 0, 0,  # <- statistiche
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- tecniche
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- oggetti
@@ -24,7 +24,7 @@ def menu(caricaSalvataggio):
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- condizioni
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  # <- gambit
         False, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # <- altre statistiche
-        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3,  # <- info aggiunte per poter salvare ovunque
+        rxInizialie, ryInizialie, -1, -1, -1, 0, 4, 3, False  # <- info aggiunte per poter salvare ovunque
         ]
 
     # posizione porte e cofanetti nel vettore dati
@@ -41,6 +41,7 @@ def menu(caricaSalvataggio):
 
     if caricaSalvataggio:
         dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
+        print ("Salvataggio: " + str(caricaSalvataggio))
         return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
 
     # video
@@ -287,6 +288,7 @@ def menu(caricaSalvataggio):
                             if n != -1:
                                 dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
                                 if dati:
+                                    print ("Salvataggio: " + str(n))
                                     return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
                             primoFrame = True
 
@@ -1456,7 +1458,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
             GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
             GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
             GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
-            messaggio(" x" + str(dati[132]), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
+            messaggio(" x" + str(dati[132]), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.3), 40)
             if dati[121]:
                 GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
             if dati[123] > 0:

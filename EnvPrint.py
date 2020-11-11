@@ -3,7 +3,7 @@
 from GenericFunc import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, eschePrimaDelTurno, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, avanzamentoStoria):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, numStanza, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, avanzamentoStoria):
     if caricaTutto:
         GlobalVar.schermo.blit(imgSfondoStanza, (0, 0))
         # salvo la lista di cofanetti vicini a ceselle viste per non mettergli la casella oscurata
@@ -115,20 +115,15 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         while j < len(caseviste):
             if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
                 if primaDiAnima:
-                    k = 0
-                    while k < len(eschePrimaDelTurno):
-                        if eschePrimaDelTurno[k] == vitaesca[i]:
-                            c = 0
-                            while c < len(vettoreImgCaselle):
-                                if vitaesca[i + 2] == vettoreImgCaselle[c] and vitaesca[i + 3] == vettoreImgCaselle[c + 1]:
-                                    GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                                    disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-                                    break
-                                c += 3
-                            GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                    c = 0
+                    while c < len(vettoreImgCaselle):
+                        if vitaesca[i + 2] == vettoreImgCaselle[c] and vitaesca[i + 3] == vettoreImgCaselle[c + 1]:
+                            GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
+                            disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
                             break
-                        k += 1
-                else:
+                        c += 3
+                    GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                elif vitaesca[i + 1] > 0:
                     c = 0
                     while c < len(vettoreImgCaselle):
                         if vitaesca[i + 2] == vettoreImgCaselle[c] and vitaesca[i + 3] == vettoreImgCaselle[c + 1]:
@@ -242,7 +237,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
-    messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
+    messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.3), 40)
     if avvele:
         GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
     if attp > 0:
@@ -687,7 +682,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
-    messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
+    messaggio(" x" + str(numFrecce), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.3), 40)
     if avvele:
         GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
     if attp > 0:
@@ -717,6 +712,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     interagisciConPersonaggio = False
     interazioneConfermata = False
     primoFrame = True
+    vecchiaCasellaInquadrata = [False, 0, 0]
 
     while not risposta:
         if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
@@ -1177,14 +1173,19 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                 if inquadratoQualcosa == "esca":
                     if not (nemicoInquadrato and type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca")):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
-                        nemicoInquadrato = "Esca" + str(vitaesca[i])
+                        i = 0
+                        while i < len(vitaesca):
+                            if xp == vitaesca[i + 2] and yp == vitaesca[i + 3]:
+                                nemicoInquadrato = "Esca" + str(vitaesca[i])
+                                break
+                            i += 4
                         daInquadrare = True
                     else:
                         idEscaInquadrata = int(nemicoInquadrato[4:])
                         i = 0
                         while i < len(vitaesca):
-                            if idEscaInquadrata == vitaesca[i]:
-                                if not (xp == vitaesca[i + 2] and yp == vitaesca[i + 3]):
+                            if xp == vitaesca[i + 2] and yp == vitaesca[i + 3]:
+                                if not idEscaInquadrata == vitaesca[i]:
                                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
                                     nemicoInquadrato = "Esca" + str(vitaesca[i])
                                     daInquadrare = True
@@ -2053,17 +2054,26 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
             else:
                 GlobalVar.schermo.blit(GlobalVar.chiaverobospe, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
 
-        # disegno img GlobalVarG2.puntatoreInquadraNemici
+        # disegno img puntatoreInquadraNemici
         if nemicoInquadrato == "Colco":
+            if vecchiaCasellaInquadrata[0] and (vecchiaCasellaInquadrata[1] != rx or vecchiaCasellaInquadrata[2] != ry):
+                GlobalVar.schermo.blit(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
             GlobalVar.schermo.blit(GlobalVar.puntatoreInquadraNemici, (rx, ry))
+            vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(rx, ry, GlobalVar.gpx, GlobalVar.gpy)), rx, ry]
         elif not type(nemicoInquadrato) is str and nemicoInquadrato:
+            if vecchiaCasellaInquadrata[0] and (vecchiaCasellaInquadrata[1] != nemicoInquadrato.x or vecchiaCasellaInquadrata[2] != nemicoInquadrato.y):
+                GlobalVar.schermo.blit(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
             GlobalVar.schermo.blit(GlobalVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
+            vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(nemicoInquadrato.x, nemicoInquadrato.y, GlobalVar.gpx, GlobalVar.gpy)), nemicoInquadrato.x, nemicoInquadrato.y]
         elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
             idEscaInquadrata = int(nemicoInquadrato[4:])
             i = 0
             while i < len(vitaesca):
                 if idEscaInquadrata == vitaesca[i]:
+                    if vecchiaCasellaInquadrata[0] and (vecchiaCasellaInquadrata[1] != vitaesca[i + 2] or vecchiaCasellaInquadrata[2] != vitaesca[i + 3]):
+                        GlobalVar.schermo.blit(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
                     GlobalVar.schermo.blit(GlobalVar.puntatoreInquadraNemici, (vitaesca[i + 2], vitaesca[i + 3]))
+                    vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(vitaesca[i + 2], vitaesca[i + 3], GlobalVar.gpx, GlobalVar.gpy)), vitaesca[i + 2], vitaesca[i + 3]]
                     break
                 i += 4
 

@@ -136,7 +136,7 @@ def animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDif
     if nemicoAttaccante and nemicoAttaccante.ralloParato and fineanimaz == 4:
         GlobalVar.canaleSoundAttacco.stop()
         GlobalVar.canaleSoundAttacco.play(GlobalVar.rumoreParata)
-    if fineanimaz != 0 and (difesa != 0 or (nemicoAttaccante and nemicoAttaccante.ralloParato)):
+    if difesa != 0 or (nemicoAttaccante and nemicoAttaccante.ralloParato):
         animazioneRallo = True
         GlobalVar.schermo.blit(arcoS, (x, y))
         GlobalVar.schermo.blit(faretraS, (x, y))
@@ -236,16 +236,21 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
     return animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse
 
 
+def animaDanneggiamentoRallo(x, y, attaccoDiColco, azioniDaEseguire, fineanimaz):
+    if "attaccoColco" in azioniDaEseguire and "Rallo" in attaccoDiColco and fineanimaz <= 5:
+        GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaColco, (x, y))
+
+
 def animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, avvele, azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz):
-    if (not "attaccoRallo" in azioniDaEseguire and not "movimentoRallo" in azioniDaEseguire and not (nemicoAttaccante and nemicoAttaccante.ralloParato) and difesa == 0) or fineanimaz == 0:
+    if (not "attaccoRallo" in azioniDaEseguire and not "movimentoRallo" in azioniDaEseguire and not (nemicoAttaccante and nemicoAttaccante.ralloParato) and difesa == 0) or (fineanimaz == 0 and difesa == 0):
         if animazioneRalloFatta:
             disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
         else:
             disegnaRallo(npers, vx, vy, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
 
-def animaCamminataRobo(nrob, rx, ry, vrx, vry, vitaRobo, armrob, surriscalda, cambiosta, animazioneColco, fineanimaz):
-    if (rx != vrx or ry != vry) and not cambiosta and vitaRobo > 0:
+def animaCamminataRobo(nrob, rx, ry, vrx, vry, robot, armrob, surriscalda, cambiosta, animazioneColco, fineanimaz):
+    if (rx != vrx or ry != vry) and not cambiosta and robot != GlobalVar.robomo:
         animazioneColco = True
         if nrob != 0 and fineanimaz == 10:
             GlobalVar.canaleSoundPassiColco.play(GlobalVar.rumoreCamminataColco)
@@ -384,9 +389,9 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
             GlobalVar.schermo.blit(robot, (rx, ry))
             GlobalVar.schermo.blit(armrob, (rx, ry))
             if 7 < fineanimaz <= 10:
-                GlobalVar.schermo.blit(imgAnimazione1, (rx - (GlobalVar.gpx * 8), ry - (GlobalVar.gpx * 8)))
+                GlobalVar.schermo.blit(imgAnimazione1, (rx - (GlobalVar.gpx * 6), ry - (GlobalVar.gpx * 6)))
             if 0 < fineanimaz <= 7:
-                GlobalVar.schermo.blit(imgAnimazione2, (rx - (GlobalVar.gpx * 8), ry - (GlobalVar.gpx * 8)))
+                GlobalVar.schermo.blit(imgAnimazione2, (rx - (GlobalVar.gpx * 6), ry - (GlobalVar.gpx * 6)))
 
     return animazioneColco
 
@@ -403,7 +408,7 @@ def animaDanneggiamentoColco(rx, ry, robot, armrob, surriscalda, nemicoAttaccant
 
 def animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, surriscalda, tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, fineanimaz):
     if (not ("attaccoColco" in azioniDaEseguire and tecnicaUsata != "spostamento") and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and tecnicaUsata == "spostamento")) or fineanimaz == 0:
-        if animazioneColcoFatta:
+        if animazioneColcoFatta or robot == GlobalVar.robomo:
             x = rx
             y = ry
         else:
@@ -539,17 +544,25 @@ def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz):
     return animazioneNemici
 
 
-def animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, attaccante, fineanimaz):
+def animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, attaccante, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
-            if (len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Rallo" and "attaccoRallo" in azioniDaEseguire) or (len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Colco" and "attaccoColco" in azioniDaEseguire):
+            if (len(nemico.animaDanneggiamento) > 0 and "Rallo" in nemico.animaDanneggiamento and "attaccoRallo" in azioniDaEseguire) or (len(nemico.animaDanneggiamento) > 0 and "Colco" in nemico.animaDanneggiamento and "attaccoColco" in azioniDaEseguire):
                 animazioneNemici = True
 
-                if nemico.animaMorte and nemico.animaDanneggiamento[1]:
+                nemicoUccisoDallAttualeAttacante = False
+                i = 0
+                while i < len(nemico.animaDanneggiamento):
+                    if "attaccoRallo" in azioniDaEseguire and nemico.animaDanneggiamento[i] == "Rallo":
+                        nemicoUccisoDallAttualeAttacante = nemico.animaDanneggiamento[i + 1]
+                    if "attaccoColco" in azioniDaEseguire and nemico.animaDanneggiamento[i] == "Colco":
+                        nemicoUccisoDallAttualeAttacante = nemico.animaDanneggiamento[i + 1]
+                    i += 2
+                if nemico.animaMorte and nemicoUccisoDallAttualeAttacante:
                     if not GlobalVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 5:
                         GlobalVar.canaleSoundMorteNemici.play(GlobalVar.rumoreMorteNemico)
                     nemico.animazioneFatta = True
-                    if fineanimaz > 0 and (fineanimaz % 4 == 0):
+                    if fineanimaz > 5 or (0 < fineanimaz <= 5 and fineanimaz % 4 == 0):
                         GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.vx, nemico.vy))
                         if nemico.statoInizioTurno[1]:
                             GlobalVar.schermo.blit(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
@@ -563,8 +576,12 @@ def animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDa
                         GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
 
                 if attaccante == "Rallo":
-                    GlobalVar.schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.vx, nemico.vy))
-                if attaccante == "Colco":
+                    if attaccoADistanza or animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
+                        if fineanimaz <= 5:
+                            GlobalVar.schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.vx, nemico.vy))
+                    else:
+                        GlobalVar.schermo.blit(nemico.imgDanneggiamentoRallo, (nemico.vx, nemico.vy))
+                if attaccante == "Colco" and fineanimaz <= 5:
                     GlobalVar.schermo.blit(nemico.imgDanneggiamentoColco, (nemico.vx, nemico.vy))
     return animazioneNemici
 
@@ -572,7 +589,7 @@ def animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDa
 def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
-            if nemico.inCasellaVista and ((not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico) or ("attaccoRallo" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Rallo") or ("attaccoColco" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and nemico.animaDanneggiamento[0] == "Colco")) and not (nemico.animaMorte and nemico.animazioneFatta)) or (fineanimaz == 0 and not nemico.animaMorte)):
+            if nemico.inCasellaVista and ((not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico) or ("attaccoRallo" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Rallo" in nemico.animaDanneggiamento) or ("attaccoColco" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Colco" in nemico.animaDanneggiamento)) and not (nemico.animaMorte and nemico.animazioneFatta)) or (fineanimaz == 0 and not nemico.animaMorte)):
                 if nemico.animazioneFatta:
                     GlobalVar.schermo.blit(nemico.imgAttuale, (nemico.x, nemico.y))
                     if nemico.statoInizioTurno[1]:
@@ -587,8 +604,16 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
                         GlobalVar.schermo.blit(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
 
 
-def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata):
-    if not "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
+def animaEsche(vitaesca, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata):
+    if "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
+        c = 0
+        while c < len(vettoreImgCaselle):
+            if animaOggetto[1] == vettoreImgCaselle[c] and animaOggetto[2] == vettoreImgCaselle[c + 1]:
+                GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
+                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                break
+            c += 3
+    elif not "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
         c = 0
         while c < len(vettoreImgCaselle):
             if animaOggetto[1] == vettoreImgCaselle[c] and animaOggetto[2] == vettoreImgCaselle[c + 1]:
@@ -599,15 +624,14 @@ def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, casellaChiara, casellaSc
         GlobalVar.schermo.blit(GlobalVar.vetIcoOggettiMenu[7], (animaOggetto[1], animaOggetto[2]))
     i = 0
     while i < len(vitaesca):
-        contatore = 0
-        while contatore < len(morteEscheAnimata):
-            if morteEscheAnimata[contatore] == vitaesca[i] and not morteEscheAnimata[contatore + 1]:
-                j = 0
-                while j < len(caseviste):
-                    if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3] and caseviste[j + 2]:
-                        k = 0
-                        while k < len(eschePrimaDelTurno):
-                            if eschePrimaDelTurno[k] == vitaesca[i]:
+        if not (animaOggetto[0] == "esca" and animaOggetto[1] == vitaesca[i + 2] and animaOggetto[2] == vitaesca[i + 3]):
+            contatore = 0
+            while contatore < len(morteEscheAnimata):
+                if morteEscheAnimata[contatore] == vitaesca[i] and not morteEscheAnimata[contatore + 1]:
+                    j = 0
+                    while j < len(caseviste):
+                        if caseviste[j] == vitaesca[i + 2] and caseviste[j + 1] == vitaesca[i + 3]:
+                            if caseviste[j + 2]:
                                 c = 0
                                 while c < len(vettoreImgCaselle):
                                     if vitaesca[i + 2] == vettoreImgCaselle[c] and vitaesca[i + 3] == vettoreImgCaselle[c + 1]:
@@ -616,45 +640,57 @@ def animaEsche(vitaesca, eschePrimaDelTurno, caseviste, casellaChiara, casellaSc
                                         break
                                     c += 3
                                 GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
-                                break
-                            k += 1
-                        break
-                    j += 3
-                break
-            contatore += 2
+                            break
+                        j += 3
+                    break
+                contatore += 2
         i += 4
 
 
-def animaMorteEsche(vitaesca, eschePrimaDelTurno, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, morteEscheAnimata, fineanimaz):
-    if len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0].startswith("Esca"):
-        numEsca = int(nemicoAttaccante.bersaglioColpito[0].replace("Esca", ""))
+def animaMorteEsche(vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, morteEscheAnimata, azioniDaEseguire, fineanimaz):
+    escheMorte = []
+    if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0:
         i = 0
-        while i < len(eschePrimaDelTurno):
-            if numEsca == eschePrimaDelTurno[i] and nemicoAttaccante.bersaglioColpito[3]:
-                k = 0
-                while k < len(vitaesca):
-                    if eschePrimaDelTurno[i] == vitaesca[k]:
-                        if not GlobalVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 5:
-                            GlobalVar.canaleSoundMorteNemici.play(GlobalVar.rumoreMorteNemico)
-                        c = 0
-                        while c < len(vettoreImgCaselle):
-                            if vitaesca[k + 2] == vettoreImgCaselle[c] and vitaesca[k + 3] == vettoreImgCaselle[c + 1]:
-                                GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-                                break
-                            c += 3
-                        if fineanimaz > 0 and fineanimaz % 4 == 0:
-                            GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[k + 2], vitaesca[k + 3]))
-                        j = 0
-                        while j < len(morteEscheAnimata):
-                            if vitaesca[k] == morteEscheAnimata[j]:
-                                morteEscheAnimata[j + 1] = True
-                                break
-                            j += 2
+        while i < len(vitaesca):
+            k = 0
+            while k < len(attaccoDiColco):
+                if type(attaccoDiColco[k]) is str and attaccoDiColco[k].startswith("Esca") and int(attaccoDiColco[k].split(":")[1]) == vitaesca[i]:
+                    if fineanimaz <= 5:
+                        GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaColco, (vitaesca[i + 2], vitaesca[i + 3]))
+                    numEsca = int(attaccoDiColco[k].split(":")[1])
+                    if attaccoDiColco[k + 2] == "morte":
+                        escheMorte.append(numEsca)
+                    break
+                k += 3
+            i += 4
+    elif "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0].startswith("Esca"):
+        numEsca = int(nemicoAttaccante.bersaglioColpito[0].replace("Esca", ""))
+        if nemicoAttaccante.bersaglioColpito[3]:
+            escheMorte.append(numEsca)
+
+    if len(escheMorte) > 0:
+        i = 0
+        while i < len(vitaesca):
+            if vitaesca[i] in escheMorte:
+                if not GlobalVar.canaleSoundMorteNemici.get_busy() and fineanimaz == 5:
+                    GlobalVar.canaleSoundMorteNemici.play(GlobalVar.rumoreMorteNemico)
+                c = 0
+                while c < len(vettoreImgCaselle):
+                    if vitaesca[i + 2] == vettoreImgCaselle[c] and vitaesca[i + 3] == vettoreImgCaselle[c + 1]:
+                        GlobalVar.schermo.blit(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
+                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
                         break
-                    k += 4
-                break
-            i += 1
+                    c += 3
+                if fineanimaz > 5 or (0 < fineanimaz <= 5 and fineanimaz % 4 == 0):
+                    GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                j = 0
+                while j < len(morteEscheAnimata):
+                    if vitaesca[i] == morteEscheAnimata[j]:
+                        morteEscheAnimata[j + 1] = True
+                        break
+                    j += 2
+            i += 4
+
     return morteEscheAnimata
 
 
@@ -896,9 +932,13 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
     # disegno il terreno sotto le frecce elettriche lanciate da Colco
     if "attaccoColco" in azioniDaEseguire and listaNemiciAttaccatiADistanzaRobo and len(listaNemiciAttaccatiADistanzaRobo) == 1 and tecnicaUsata.startswith("freccia") and not cambiosta:
         xInizioRetta = rx
-        xFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vx
         yInizioRetta = ry
-        yFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vy
+        if listaNemiciAttaccatiADistanzaRobo[0] == "Rallo":
+            xFineRetta = x
+            yFineRetta = y
+        else:
+            xFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vx
+            yFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vy
         global quadrettoSottoLaFrecciaElettrica
         if fineanimaz > 5:
             if fineanimaz != 10:
@@ -1063,9 +1103,13 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
     # disegno le frecce elettriche lanciate da Colco
     if "attaccoColco" in azioniDaEseguire and listaNemiciAttaccatiADistanzaRobo and len(listaNemiciAttaccatiADistanzaRobo) == 1 and tecnicaUsata.startswith("freccia") and not cambiosta:
         xInizioRetta = rx
-        xFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vx
         yInizioRetta = ry
-        yFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vy
+        if listaNemiciAttaccatiADistanzaRobo[0] == "Rallo":
+            xFineRetta = x
+            yFineRetta = y
+        else:
+            xFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vx
+            yFineRetta = listaNemiciAttaccatiADistanzaRobo[0].vy
         deltaXRetta = xFineRetta - xInizioRetta
         deltaYRetta = yFineRetta - yInizioRetta
         angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
@@ -1098,219 +1142,239 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
                 GlobalVar.schermo.blit(nemicoAttaccante.imgDanneggiamentoOggettoLanciato, (xFineRetta, yFineRetta))
 
 
-def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv):
-    if fineanimaz == 5:
-        esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
+def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv, apriocchio, chiamarob):
+    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
-        # vita-status personaggio (statoRalloInizioTurno[pv, veleno, attP, difP])
-        if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Rallo":
-            statoRalloInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
-            if nemicoAttaccante.bersaglioColpito[2] == "avvelena":
-                statoRalloInizioTurno[1] = True
-        if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Rallo" in attaccoDiColco:
+    # vita-status personaggio (statoRalloInizioTurno[pv, veleno, attP, difP])
+    if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Rallo" and fineanimaz == 5:
+        statoRalloInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
+        if nemicoAttaccante.bersaglioColpito[2] == "avvelena":
+            statoRalloInizioTurno[1] = True
+    if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Rallo" in attaccoDiColco and fineanimaz == 5:
+        i = 0
+        while i < len(attaccoDiColco):
+            if attaccoDiColco[i] == "Rallo":
+                statoRalloInizioTurno[0] += attaccoDiColco[i + 1]
+                if attaccoDiColco[i + 2] == "antidoto":
+                    statoRalloInizioTurno[1] = False
+                if attaccoDiColco[i + 2] == "attP":
+                    statoRalloInizioTurno[2] = 10
+                if attaccoDiColco[i + 2] == "difP":
+                    statoRalloInizioTurno[3] = 10
+                break
+            i += 3
+    pvRallo = statoRalloInizioTurno[0]
+    velenoRallo = statoRalloInizioTurno[1]
+    attPRallo = statoRalloInizioTurno[2]
+    difPRallo = statoRalloInizioTurno[3]
+    if aumentoliv != 0:
+        pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
+        pvRallo = pvtot
+        velenoRallo = False
+    lungvitatot = int(((GlobalVar.gpx * pvtot) / float(4)) // 5)
+    lungvita = (lungvitatot * pvRallo) // pvtot
+    if lungvita < 0:
+        lungvita = 0
+    indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+    vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
+    GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
+    GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
+    GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
+    GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
+    GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
+    messaggio(" x" + str(dati[132]), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.3), 40)
+    if velenoRallo:
+        GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
+    if attPRallo > 0:
+        GlobalVar.schermo.blit(GlobalVar.attaccopiu, (GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 17))
+    if difPRallo > 0:
+        GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
+
+    # disegno la vita del Colco / esca / mostro selezionato
+    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]):
+        if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Colco" and fineanimaz == 5:
+            statoColcoInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
+            if nemicoAttaccante.bersaglioColpito[2] == "surriscalda":
+                statoColcoInizioTurno[1] = 15
+        if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Colco" in attaccoDiColco and fineanimaz == 5:
             i = 0
             while i < len(attaccoDiColco):
-                if attaccoDiColco[i] == "Rallo":
-                    statoRalloInizioTurno[0] += attaccoDiColco[i + 1]
-                    if attaccoDiColco[i + 2] == "antidoto":
-                        statoRalloInizioTurno[1] = False
-                    if attaccoDiColco[i + 2] == "attP":
-                        statoRalloInizioTurno[2] = 10
-                    if attaccoDiColco[i + 2] == "difP":
-                        statoRalloInizioTurno[3] = 10
+                if attaccoDiColco[i] == "Colco":
+                    statoColcoInizioTurno[0] += attaccoDiColco[i + 1]
+                    if attaccoDiColco[i + 2] == "velocizza":
+                        statoColcoInizioTurno[2] = 15
+                    if attaccoDiColco[i + 2] == "efficienza":
+                        statoColcoInizioTurno[3] = 15
+                i += 3
+        pvColco = statoColcoInizioTurno[0]
+        surriscaldaColco = statoColcoInizioTurno[1]
+        velPColco = statoColcoInizioTurno[2]
+        effPColco = statoColcoInizioTurno[3]
+        lungentot = int(((GlobalVar.gpx * entot) / float(4)) // 15)
+        lungen = int(((GlobalVar.gpx * pvColco) / float(4)) // 15)
+        if lungen < 0:
+            lungen = 0
+        indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
+        fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
+        GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
+        GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
+        GlobalVar.schermo.blit(fineindvitarob, (GlobalVar.gpx + lungentot, 0))
+        GlobalVar.schermo.blit(vitarob, (GlobalVar.gpx, 0))
+        GlobalVar.schermo.blit(GlobalVar.robos, (0, 0))
+        if surriscaldaColco > 0:
+            GlobalVar.schermo.blit(GlobalVar.surriscaldato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
+        if velPColco > 0:
+            GlobalVar.schermo.blit(GlobalVar.velocitapiu, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
+        if effPColco > 0:
+            GlobalVar.schermo.blit(GlobalVar.efficienzapiu, ((GlobalVar.gpx * 3) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
+
+    if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+        idEscaInquadrata = int(nemicoInquadrato[4:])
+        i = 0
+        while i < len(vitaesca):
+            if idEscaInquadrata == vitaesca[i]:
+                idEscaInizioturno = 0
+                j = 0
+                while j < len(statoEscheInizioTurno):
+                    if statoEscheInizioTurno[j] == nemicoInquadrato:
+                        idEscaInizioturno = j
+                        break
+                    j += 2
+                if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0].startswith("Esca") and nemicoAttaccante.bersaglioColpito[0] == nemicoInquadrato and fineanimaz == 5:
+                    statoEscheInizioTurno[idEscaInizioturno + 1] += nemicoAttaccante.bersaglioColpito[1]
+                if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and fineanimaz == 5:
+                    k = 0
+                    while k < len(attaccoDiColco):
+                        if type(attaccoDiColco[k]) is str and attaccoDiColco[k].startswith("Esca") and int(attaccoDiColco[k].split(":")[1]) == vitaesca[i]:
+                            statoEscheInizioTurno[idEscaInizioturno + 1] += attaccoDiColco[k + 1]
+                            break
+                        k += 3
+                pvEsca = statoEscheInizioTurno[idEscaInizioturno + 1]
+                lungvita = int(((GlobalVar.gpx * pvEsca) / float(4)) // 15)
+                if lungvita < 0:
+                    lungvita = 0
+                GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
+                GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
+                indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
+                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
+                GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
+                GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + (int(((GlobalVar.gpx * 1000) / float(4)) // 15)), 0))
+                GlobalVar.schermo.blit(vitaesche, (GlobalVar.gpx, 0))
+                break
+            i += 4
+
+    for nemico in listaNemici:
+        if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and nemico in attaccoDiRallo and fineanimaz == 5:
+            i = 0
+            while i < len(attaccoDiRallo):
+                if attaccoDiRallo[i] == nemico:
+                    nemico.statoInizioTurno[0] += attaccoDiRallo[i + 1]
+                    if attaccoDiRallo[i + 2] == "avvelena":
+                        nemico.statoInizioTurno[1] = True
+                    if attaccoDiRallo[i + 2] == "appiccica":
+                        nemico.statoInizioTurno[2] = True
                     break
                 i += 3
-        pvRallo = statoRalloInizioTurno[0]
-        velenoRallo = statoRalloInizioTurno[1]
-        attPRallo = statoRalloInizioTurno[2]
-        difPRallo = statoRalloInizioTurno[3]
-        if aumentoliv != 0:
-            pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
-            pvRallo = pvtot
-            velenoRallo = False
-        lungvitatot = int(((GlobalVar.gpx * pvtot) / float(4)) // 5)
-        lungvita = (lungvitatot * pvRallo) // pvtot
+        if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and nemico in attaccoDiColco and fineanimaz == 5:
+            i = 0
+            while i < len(attaccoDiColco):
+                if attaccoDiColco[i] == nemico:
+                    nemico.statoInizioTurno[0] += attaccoDiColco[i + 1]
+                    if attaccoDiColco[i + 2] == "antidoto":
+                        nemico.statoInizioTurno[1] = False
+                    break
+                i += 3
+    if nemicoInquadrato and not type(nemicoInquadrato) is str:
+        pvm = nemicoInquadrato.statoInizioTurno[0]
+        nemicoAvvelenato = nemicoInquadrato.statoInizioTurno[1]
+        nemicoAppiccicato = nemicoInquadrato.statoInizioTurno[2]
+        pvmtot = nemicoInquadrato.vitaTotale
+        GlobalVar.schermo.blit(GlobalVar.sfondoMostro, (0, 0))
+        if nemicoAvvelenato:
+            GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
+        if nemicoAppiccicato:
+            GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
+        GlobalVar.schermo.blit(nemicoInquadrato.imgS, (0, 0))
+        fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        if pvmtot > 1500:
+            indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+            lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
+            GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
+            if pvm > 15000:
+                pvm = 1500
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico9
+            elif pvm > 13500:
+                pvm -= 13500
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico9
+            elif pvm > 12000:
+                pvm -= 12000
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico8
+            elif pvm > 10500:
+                pvm -= 10500
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico7
+            elif pvm > 9000:
+                pvm -= 9000
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico6
+            elif pvm > 7500:
+                pvm -= 7500
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico5
+            elif pvm > 6000:
+                pvm -= 6000
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico4
+            elif pvm > 4500:
+                pvm -= 4500
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico3
+            elif pvm > 3000:
+                pvm -= 3000
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico2
+            elif pvm > 1500:
+                pvm -= 1500
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico1
+            else:
+                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
+                vitanemico = GlobalVar.vitanemico0
+        else:
+            lungvitatot = int(((GlobalVar.gpx * pvmtot) / float(4)) // 15)
+            indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
+            GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
+            vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
+            vitanemico = GlobalVar.vitanemico0
+        lungvita = int(((GlobalVar.gpx * pvm) / float(4)) // 15)
         if lungvita < 0:
             lungvita = 0
-        indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-        fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-        vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
-        GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-        GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-        GlobalVar.schermo.blit(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-        GlobalVar.schermo.blit(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-        GlobalVar.schermo.blit(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-        GlobalVar.schermo.blit(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-        GlobalVar.schermo.blit(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
-        messaggio(" x" + str(dati[132]), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.2), 40)
-        if velenoRallo:
-            GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
-        if attPRallo > 0:
-            GlobalVar.schermo.blit(GlobalVar.attaccopiu, (GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 17))
-        if difPRallo > 0:
-            GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
+        vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalVar.gpy // 4))
+        GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
+        GlobalVar.schermo.blit(vitanemsucc, (GlobalVar.gpx, 0))
+        GlobalVar.schermo.blit(vitanem, (GlobalVar.gpx, 0))
 
-        # disegno la vita del Colco / esca / mostro selezionato
-        if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]):
-            if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Colco":
-                statoColcoInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
-                if nemicoAttaccante.bersaglioColpito[2] == "surriscalda":
-                    statoColcoInizioTurno[1] = 15
-            if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and "Colco" in attaccoDiColco:
-                i = 0
-                while i < len(attaccoDiColco):
-                    if attaccoDiColco[i] == "Colco":
-                        statoColcoInizioTurno[0] += attaccoDiColco[i + 1]
-                        if attaccoDiColco[i + 2] == "velocizza":
-                            statoColcoInizioTurno[2] = 15
-                        if attaccoDiColco[i + 2] == "efficienza":
-                            statoColcoInizioTurno[3] = 15
-                    i += 3
-            pvColco = statoColcoInizioTurno[0]
-            surriscaldaColco = statoColcoInizioTurno[1]
-            velPColco = statoColcoInizioTurno[2]
-            effPColco = statoColcoInizioTurno[3]
-            lungentot = int(((GlobalVar.gpx * entot) / float(4)) // 15)
-            lungen = int(((GlobalVar.gpx * pvColco) / float(4)) // 15)
-            if lungen < 0:
-                lungen = 0
-            indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-            fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-            vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
-            GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
-            GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
-            GlobalVar.schermo.blit(fineindvitarob, (GlobalVar.gpx + lungentot, 0))
-            GlobalVar.schermo.blit(vitarob, (GlobalVar.gpx, 0))
-            GlobalVar.schermo.blit(GlobalVar.robos, (0, 0))
-            if surriscaldaColco > 0:
-                GlobalVar.schermo.blit(GlobalVar.surriscaldato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
-            if velPColco > 0:
-                GlobalVar.schermo.blit(GlobalVar.velocitapiu, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
-            if effPColco > 0:
-                GlobalVar.schermo.blit(GlobalVar.efficienzapiu, ((GlobalVar.gpx * 3) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
-
-        if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
-            idEscaInquadrata = int(nemicoInquadrato[4:])
-            i = 0
-            while i < len(vitaesca):
-                if idEscaInquadrata == vitaesca[i]:
-                    idEscaInizioturno = 0
-                    j = 0
-                    while j < len(statoEscheInizioTurno):
-                        if statoEscheInizioTurno[j] == nemicoInquadrato:
-                            idEscaInizioturno = j
-                            break
-                        j += 2
-                    if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0].startswith("Esca") and nemicoAttaccante.bersaglioColpito[0] == nemicoInquadrato:
-                        statoEscheInizioTurno[idEscaInizioturno + 1] += nemicoAttaccante.bersaglioColpito[1]
-                    pvEsca = statoEscheInizioTurno[idEscaInizioturno + 1]
-                    lungvita = int(((GlobalVar.gpx * pvEsca) / float(4)) // 15)
-                    if lungvita < 0:
-                        lungvita = 0
-                    GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
-                    GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
-                    indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                    fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-                    vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
-                    GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
-                    GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + (int(((GlobalVar.gpx * 1000) / float(4)) // 15)), 0))
-                    GlobalVar.schermo.blit(vitaesche, (GlobalVar.gpx, 0))
-                    break
-                i += 4
-
-        for nemico in listaNemici:
-            if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and nemico in attaccoDiRallo:
-                i = 0
-                while i < len(attaccoDiRallo):
-                    if attaccoDiRallo[i] == nemico:
-                        nemico.statoInizioTurno[0] += attaccoDiRallo[i + 1]
-                        if attaccoDiRallo[i + 2] == "avvelena":
-                            nemico.statoInizioTurno[1] = True
-                        if attaccoDiRallo[i + 2] == "appiccica":
-                            nemico.statoInizioTurno[2] = True
-                        break
-                    i += 3
-            if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0 and nemico in attaccoDiColco:
-                i = 0
-                while i < len(attaccoDiColco):
-                    if attaccoDiColco[i] == nemico:
-                        nemico.statoInizioTurno[0] += attaccoDiColco[i + 1]
-                        if attaccoDiColco[i + 2] == "antidoto":
-                            nemico.statoInizioTurno[1] = False
-                        break
-                    i += 3
-        if nemicoInquadrato and not type(nemicoInquadrato) is str:
-            pvm = nemicoInquadrato.statoInizioTurno[0]
-            nemicoAvvelenato = nemicoInquadrato.statoInizioTurno[1]
-            nemicoAppiccicato = nemicoInquadrato.statoInizioTurno[2]
-            pvmtot = nemicoInquadrato.vitaTotale
-            GlobalVar.schermo.blit(GlobalVar.sfondoMostro, (0, 0))
-            if nemicoAvvelenato:
-                GlobalVar.schermo.blit(GlobalVar.avvelenato, (GlobalVar.gpx + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
-            if nemicoAppiccicato:
-                GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
-            GlobalVar.schermo.blit(nemicoInquadrato.imgS, (0, 0))
-            fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
-            if pvmtot > 1500:
-                indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
-                GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
-                if pvm > 15000:
-                    pvm = 1500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico9
-                elif pvm > 13500:
-                    pvm -= 13500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico8, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico9
-                elif pvm > 12000:
-                    pvm -= 12000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico7, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico8
-                elif pvm > 10500:
-                    pvm -= 10500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico6, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico7
-                elif pvm > 9000:
-                    pvm -= 9000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico5, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico6
-                elif pvm > 7500:
-                    pvm -= 7500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico4, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico5
-                elif pvm > 6000:
-                    pvm -= 6000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico3, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico4
-                elif pvm > 4500:
-                    pvm -= 4500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico2, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico3
-                elif pvm > 3000:
-                    pvm -= 3000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico1, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico2
-                elif pvm > 1500:
-                    pvm -= 1500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico0, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico1
-                else:
-                    vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
-                    vitanemico = GlobalVar.vitanemico0
-            else:
-                lungvitatot = int(((GlobalVar.gpx * pvmtot) / float(4)) // 15)
-                indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-                GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + lungvitatot, 0))
-                vitanemsucc = pygame.transform.smoothscale(GlobalVar.vitanemico00, (lungvitatot, GlobalVar.gpy // 4))
-                vitanemico = GlobalVar.vitanemico0
-            lungvita = int(((GlobalVar.gpx * pvm) / float(4)) // 15)
-            if lungvita < 0:
-                lungvita = 0
-            vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalVar.gpy // 4))
-            GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
-            GlobalVar.schermo.blit(vitanemsucc, (GlobalVar.gpx, 0))
-            GlobalVar.schermo.blit(vitanem, (GlobalVar.gpx, 0))
+    # backbround occhio/chiave
+    GlobalVar.schermo.blit(GlobalVar.sfochiaveocchio, (GlobalVar.gsx - (GlobalVar.gpx * 5), 0))
+    # vista nemici
+    if apriocchio:
+        GlobalVar.schermo.blit(GlobalVar.occhioape, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
+    else:
+        GlobalVar.schermo.blit(GlobalVar.occhiochiu, (GlobalVar.gsx - (GlobalVar.gpx * 1.4), GlobalVar.gpy * 0.3))
+    # chiave robo
+    if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+        if chiamarob:
+            GlobalVar.schermo.blit(GlobalVar.chiaveroboacc, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
+        else:
+            GlobalVar.schermo.blit(GlobalVar.chiaverobospe, (GlobalVar.gsx - (GlobalVar.gpx * 4), 0))
 
     return statoRalloInizioTurno, statoColcoInizioTurno
 
@@ -1371,7 +1435,7 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
     return animazionePersonaggi
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, numStanza, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, eschePrimaDelTurno, listaPersonaggi, apriocchio, movimentoPerMouse, vettoreImgCaselle, canzone):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, canzone):
     schermo_prima_delle_animazioni = GlobalVar.schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
@@ -1428,8 +1492,8 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
     morteEscheAnimata = []
     i = 0
-    while i < len(eschePrimaDelTurno):
-        morteEscheAnimata.append(eschePrimaDelTurno[i])
+    while i < len(vitaesca):
+        morteEscheAnimata.append(vitaesca[i])
         morteEscheAnimata.append(False)
         i += 4
 
@@ -1498,12 +1562,10 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     i += 3
 
             # disegno: esche, denaro, cofanetti e porte
-            animaEsche(vitaesca, eschePrimaDelTurno, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata)
+            animaEsche(vitaesca, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata)
             animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreImgCaselle)
             animaCofanetti(cofanetti, caseviste)
             animaPorte(porte, caseviste, portaOriz, portaVert)
-
-            statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv)
 
             if fineanimaz == 10:
                 schermo_prima_delle_animazioni = GlobalVar.schermo.copy()
@@ -1533,7 +1595,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo
-                animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, dati[10], armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
+                animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, robot, armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
                 # animazione camminata mostri
                 animazioneNemici = animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
                 # animazione camminata personaggi
@@ -1547,7 +1609,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 # animazione danneggiamento Colco
                 robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, cambiosta, fineanimaz)
                 # animazione morte esche
-                morteEscheAnimata = animaMorteEsche(vitaesca, eschePrimaDelTurno, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, morteEscheAnimata, fineanimaz)
+                morteEscheAnimata = animaMorteEsche(vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
                 # animazione attacco nemici
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz)
@@ -1559,7 +1621,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
 
                 # animazione danneggiamento dei nemici
-                animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo", fineanimaz)
+                animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo", fineanimaz)
 
             if "attaccoColco" in azioniDaEseguire:
                 # animazione attacco Colco
@@ -1567,7 +1629,13 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, fineanimaz)
 
                 # animazione danneggiamento dei nemici
-                animazioneNemici = animaDanneggiamentoNemici(listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", fineanimaz)
+                animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", fineanimaz)
+                # animazione morte esche
+                morteEscheAnimata = animaMorteEsche(vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, morteEscheAnimata, azioniDaEseguire, fineanimaz)
+                # animazione danneggiamento Rallo
+                animaDanneggiamentoRallo(x, y, attaccoDiColco, azioniDaEseguire, fineanimaz)
+
+            statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv, apriocchio, chiamarob)
 
             # animazione apertura cofanetto
             animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, animazioneRallo)

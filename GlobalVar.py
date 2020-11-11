@@ -53,20 +53,20 @@ elif sistemaOperativo == "Linux":
     gsy = int(resolution[1])
 
 opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
-print (gsx, gsy)
+print ("Origine", gsx, gsy)
 if gsx % 32 != 0 or gsy % 18 != 0:
     while gsx % 32 != 0:
         gsx = gsx - 1
     while gsy % 18 != 0:
         gsy = gsy - 1
 if gsx // 16 < gsy // 9:
-    print("altezza piu grande")
+    print ("Altezza piu grande")
     gsy = gsx * 9 // 16
 elif gsx // 16 > gsy // 9:
-    print("larghezza piu grande")
+    print ("Larghezza piu grande")
     gsx = gsy * 16 // 9
 schermoIntero = True
-print (gsx, gsy)
+print ("Modificato", gsx, gsy)
 
 maxGsx = gsx
 maxGsy = gsy
@@ -204,7 +204,6 @@ global sfondoColco
 global sfondoMostro
 global sfondoEsche
 global sfondoStartBattaglia
-global sfondoStatAumentata
 global sfondoTriangolinoAltoDestra
 global sfondoTriangolinoAltoSinistra
 global sfondoTriangolinoBassoDestra
@@ -349,6 +348,8 @@ global imgMappa13
 global imgMappa14
 global imgOmbreggiaturaContorniMappaMenu
 global dictionaryImgNemici
+global imgDanneggiamentoCausaRallo
+global imgDanneggiamentoCausaColco
 
 def loadImgs():
     global puntatore
@@ -421,7 +422,6 @@ def loadImgs():
     global sfondoMostro
     global sfondoEsche
     global sfondoStartBattaglia
-    global sfondoStatAumentata
     global sfondoTriangolinoAltoDestra
     global sfondoTriangolinoAltoSinistra
     global sfondoTriangolinoBassoDestra
@@ -566,6 +566,8 @@ def loadImgs():
     global imgMappa14
     global imgOmbreggiaturaContorniMappaMenu
     global dictionaryImgNemici
+    global imgDanneggiamentoCausaRallo
+    global imgDanneggiamentoCausaColco
 
     # puntatore
     puntatoreorigi = loadImage("Immagini/Puntatori/Puntatore.png", True)
@@ -689,6 +691,12 @@ def loadImgs():
     roboSurrisc = loadImage('Immagini/Personaggi/Colco/RobotSurriscaldato.png', True)
     roboSurrisc = pygame.transform.smoothscale(roboSurrisc, (gpx, gpy))
 
+    # img danneggiamento personaggio e Colco
+    imgDanneggiamentoCausaRallo = loadImage("Immagini/Nemici/DannoRallo.png", True)
+    imgDanneggiamentoCausaRallo = pygame.transform.smoothscale(imgDanneggiamentoCausaRallo, (gpx, gpy))
+    imgDanneggiamentoCausaColco = loadImage("Immagini/Nemici/DannoColco.png", True)
+    imgDanneggiamentoCausaColco = pygame.transform.smoothscale(imgDanneggiamentoCausaColco, (gpx, gpy))
+
     # img menu mercante
     mercanteMenu = loadImage('Immagini/Personaggi/Mercante/MercanteDialogo.png', True)
     mercanteMenu = pygame.transform.smoothscale(mercanteMenu, (gpx * 12, gpy * 9))
@@ -724,8 +732,6 @@ def loadImgs():
     sfondoEsche = pygame.transform.smoothscale(sfondosta, (gpx, gpy))
     sfondoStartBattaglia = loadImage('Immagini/Oggetti/SfondoStartBattaglia.png', True)
     sfondoStartBattaglia = pygame.transform.smoothscale(sfondoStartBattaglia, (gpx * 7, gpy * 10))
-    sfondoStatAumentata = loadImage('Immagini/Levelup/SfondoStatisticaAumentata.png', True)
-    sfondoStatAumentata = pygame.transform.smoothscale(sfondoStatAumentata, (gpx * 7, gpy * 7))
     sfondoTriangolinoAltoDestra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoDestra.png', True)
     sfondoTriangolinoAltoDestra = pygame.transform.smoothscale(sfondoTriangolinoAltoDestra, (gpx, gpy))
     sfondoTriangolinoAltoSinistra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', True)
@@ -947,8 +953,8 @@ def loadImgs():
         elif contatoreGlobale.startswith("tempesta"):
             img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale, True)
             img2 = loadImage("Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale, True)
-            img1 = pygame.transform.smoothscale(img1, (gpx * 17, gpy * 17))
-            img2 = pygame.transform.smoothscale(img2, (gpx * 17, gpy * 17))
+            img1 = pygame.transform.smoothscale(img1, (gpx * 13, gpy * 13))
+            img2 = pygame.transform.smoothscale(img2, (gpx * 13, gpy * 13))
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
         vetAnimazioniTecniche.append(vetAnimaImgTecniche)

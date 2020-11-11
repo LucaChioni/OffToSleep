@@ -258,8 +258,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 contasalva = 1
                                 vetDatiSalvataggi = []
                                 while contasalva <= 3:
-                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin,
-                                                                 cofaniini, cofanifin, canzone, False)
+                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False)
                                     vetTempDati = []
                                     vetTempDati.append(dati)
                                     vetTempDati.append(errore)
