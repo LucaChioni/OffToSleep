@@ -493,7 +493,7 @@ class NemicoObj(object):
 
     def aggiornaBersaglioAttacchiDistanti(self, x, y, rx, ry, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo):
         if self.obbiettivo[0] == "":
-            if attaccoADistanza and self.x == attaccoADistanza.x and self.y == attaccoADistanza.y:
+            if attaccoADistanza and type(attaccoADistanza) is not str and self.x == attaccoADistanza.x and self.y == attaccoADistanza.y:
                 self.xPosizioneUltimoBersaglio = x
                 self.yPosizioneUltimoBersaglio = y
             elif listaNemiciAttaccatiADistanzaRobo:

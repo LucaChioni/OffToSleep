@@ -647,8 +647,24 @@ def animaEsche(vitaesca, caseviste, casellaChiara, casellaScura, azioniDaEseguir
         i += 4
 
 
-def animaMorteEsche(vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, morteEscheAnimata, azioniDaEseguire, fineanimaz):
+def animaMorteEsche(x, y, vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz):
     escheMorte = []
+    if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0:
+        i = 0
+        while i < len(vitaesca):
+            k = 0
+            while k < len(attaccoDiRallo):
+                if type(attaccoDiRallo[k]) is str and attaccoDiRallo[k].startswith("Esca") and int(attaccoDiRallo[k].split(":")[1]) == vitaesca[i]:
+                    if (abs(x - vitaesca[i + 2]) == GlobalVar.gpx and abs(y - vitaesca[i + 3]) == 0) or (abs(x - vitaesca[i + 2]) == 0 and abs(y - vitaesca[i + 3]) == GlobalVar.gpy):
+                        GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaRallo, (vitaesca[i + 2], vitaesca[i + 3]))
+                    elif fineanimaz <= 5:
+                        GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaRallo, (vitaesca[i + 2], vitaesca[i + 3]))
+                    numEsca = int(attaccoDiRallo[k].split(":")[1])
+                    if attaccoDiRallo[k + 2] == "morte":
+                        escheMorte.append(numEsca)
+                    break
+                k += 3
+            i += 4
     if "attaccoColco" in azioniDaEseguire and len(attaccoDiColco) > 0:
         i = 0
         while i < len(vitaesca):
@@ -683,6 +699,13 @@ def animaMorteEsche(vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, ne
                     c += 3
                 if fineanimaz > 5 or (0 < fineanimaz <= 5 and fineanimaz % 4 == 0):
                     GlobalVar.schermo.blit(GlobalVar.esche, (vitaesca[i + 2], vitaesca[i + 3]))
+                if "attaccoRallo" in azioniDaEseguire:
+                    if (abs(x - vitaesca[i + 2]) == GlobalVar.gpx and abs(y - vitaesca[i + 3]) == 0) or (abs(x - vitaesca[i + 2]) == 0 and abs(y - vitaesca[i + 3]) == GlobalVar.gpy):
+                        GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaRallo, (vitaesca[i + 2], vitaesca[i + 3]))
+                    elif fineanimaz <= 5:
+                        GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaRallo, (vitaesca[i + 2], vitaesca[i + 3]))
+                if "attaccoColco" in azioniDaEseguire:
+                    GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaColco, (vitaesca[i + 2], vitaesca[i + 3]))
                 j = 0
                 while j < len(morteEscheAnimata):
                     if vitaesca[i] == morteEscheAnimata[j]:
@@ -905,7 +928,7 @@ def animaRaccoltaDenaro(x, y, vettoreDenaro, fineanimaz):
     return denaroRaccolto
 
 
-def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz):
+def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, vitaesca, fineanimaz):
     # disegno il terreno sotto le frecce lanciate da Rallo
     if "attaccoRallo" in azioniDaEseguire and (attaccoADistanza or animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata") and not cambiosta:
         xInizioRetta = x
@@ -914,8 +937,20 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
             xFineRetta = animaOggetto[1]
             yFineRetta = animaOggetto[2]
         else:
-            xFineRetta = attaccoADistanza.vx
-            yFineRetta = attaccoADistanza.vy
+            if type(attaccoADistanza) is str and attaccoADistanza.startswith("Esca"):
+                idEsca = int(attaccoADistanza.split(":")[1])
+                xFineRetta = 0
+                yFineRetta = 0
+                i = 0
+                while i < len(vitaesca):
+                    if vitaesca[i] == idEsca:
+                        xFineRetta = vitaesca[i + 2]
+                        yFineRetta = vitaesca[i + 3]
+                        break
+                    i += 4
+            else:
+                xFineRetta = attaccoADistanza.vx
+                yFineRetta = attaccoADistanza.vy
         global quadrettoSottoLaFreccia
         global quadrettoSottoEsplosione
         if fineanimaz > 5:
@@ -1047,7 +1082,7 @@ def disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, te
                 GlobalVar.schermo.blit(nemicoAttaccante.quadrettoSottoArma, (xAttaccoNemico, yAttaccoNemico))
 
 
-def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz):
+def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, vitaesca, fineanimaz):
     # disegno le frecce e gli oggetti lanciati da Rallo
     if "attaccoRallo" in azioniDaEseguire and (attaccoADistanza or animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata") and not cambiosta:
         xInizioRetta = x
@@ -1069,8 +1104,20 @@ def animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemic
             elif animaOggetto[0] == "bombaPotenziata":
                 imgFrecciaLanciata_temp = GlobalVar.vetIcoOggettiMenu[9]
         else:
-            xFineRetta = attaccoADistanza.vx
-            yFineRetta = attaccoADistanza.vy
+            if type(attaccoADistanza) is str and attaccoADistanza.startswith("Esca"):
+                idEsca = int(attaccoADistanza.split(":")[1])
+                xFineRetta = 0
+                yFineRetta = 0
+                i = 0
+                while i < len(vitaesca):
+                    if vitaesca[i] == idEsca:
+                        xFineRetta = vitaesca[i + 2]
+                        yFineRetta = vitaesca[i + 3]
+                        break
+                    i += 4
+            else:
+                xFineRetta = attaccoADistanza.vx
+                yFineRetta = attaccoADistanza.vy
             deltaXRetta = xFineRetta - xInizioRetta
             deltaYRetta = yFineRetta - yInizioRetta
             angoloInRadianti = -math.atan2(deltaYRetta, deltaXRetta)
@@ -1251,6 +1298,13 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
                     while k < len(attaccoDiColco):
                         if type(attaccoDiColco[k]) is str and attaccoDiColco[k].startswith("Esca") and int(attaccoDiColco[k].split(":")[1]) == vitaesca[i]:
                             statoEscheInizioTurno[idEscaInizioturno + 1] += attaccoDiColco[k + 1]
+                            break
+                        k += 3
+                if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and fineanimaz == 5:
+                    k = 0
+                    while k < len(attaccoDiRallo):
+                        if type(attaccoDiRallo[k]) is str and attaccoDiRallo[k].startswith("Esca") and int(attaccoDiRallo[k].split(":")[1]) == vitaesca[i]:
+                            statoEscheInizioTurno[idEscaInizioturno + 1] += attaccoDiRallo[k + 1]
                             break
                         k += 3
                 pvEsca = statoEscheInizioTurno[idEscaInizioturno + 1]
@@ -1569,7 +1623,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if fineanimaz == 10:
                 schermo_prima_delle_animazioni = GlobalVar.schermo.copy()
-            eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
+            eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, vitaesca, fineanimaz)
             disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
 
             if cambiosta:
@@ -1609,29 +1663,33 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 # animazione danneggiamento Colco
                 robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, cambiosta, fineanimaz)
                 # animazione morte esche
-                morteEscheAnimata = animaMorteEsche(vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, morteEscheAnimata, azioniDaEseguire, fineanimaz)
+                morteEscheAnimata = animaMorteEsche(x, y, vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
                 # animazione attacco nemici
-                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, fineanimaz)
+                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, vitaesca, fineanimaz)
                 animazioneNemici = animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz)
 
             if "attaccoRallo" in azioniDaEseguire:
+                # animazione morte esche
+                morteEscheAnimata = animaMorteEsche(x, y, vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
+
                 # animazione attacco Rallo
                 animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, casellaChiara, casellaScura, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz)
-                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
+                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, vitaesca, fineanimaz)
 
                 # animazione danneggiamento dei nemici
                 animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo", fineanimaz)
 
             if "attaccoColco" in azioniDaEseguire:
+                # animazione morte esche
+                morteEscheAnimata = animaMorteEsche(x, y, vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
+
                 # animazione attacco Colco
-                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, fineanimaz)
+                animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, vitaesca, fineanimaz)
                 animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, fineanimaz)
 
                 # animazione danneggiamento dei nemici
                 animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", fineanimaz)
-                # animazione morte esche
-                morteEscheAnimata = animaMorteEsche(vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, morteEscheAnimata, azioniDaEseguire, fineanimaz)
                 # animazione danneggiamento Rallo
                 animaDanneggiamentoRallo(x, y, attaccoDiColco, azioniDaEseguire, fineanimaz)
 

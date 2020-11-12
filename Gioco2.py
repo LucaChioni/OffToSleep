@@ -41,7 +41,6 @@ def gameloop():
             startf = False
             aumentoliv = 0
             primopasso = True
-            contaesca = 0
             xesca = 0
             yesca = 0
             creaesca = False
@@ -1478,6 +1477,12 @@ def gameloop():
             statoColcoInizioTurno.append(dati[122])
             statoColcoInizioTurno.append(dati[125])
             statoColcoInizioTurno.append(dati[126])
+            statoEscheInizioTurno = []
+            i = 0
+            while i < len(vitaesca):
+                statoEscheInizioTurno.append("Esca" + str(vitaesca[i]))
+                statoEscheInizioTurno.append(vitaesca[i + 1])
+                i += 4
 
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
@@ -1624,7 +1629,7 @@ def gameloop():
             # veleno
             if dati[121] and sposta and dati[5] > 0:
                 dati[5] = dati[5] - 2
-                if dati[5] < 0:
+                if dati[5] <= 0:
                     dati[5] = 1
             # effetto collana rigenerante
             if dati[130] == 2 and sposta:
@@ -1759,7 +1764,9 @@ def gameloop():
 
             # lancio esche
             if creaesca:
-                contaesca = contaesca + 1
+                contaesca = 0
+                if len(vitaesca) > 0:
+                    contaesca = vitaesca[len(vitaesca) - 4] + 1
                 # id, vita, xesca, yesca
                 vitaesca.append(contaesca)
                 vitaesca.append(1000)
@@ -1780,13 +1787,12 @@ def gameloop():
                     del vitaesca[i]
                     del vitaesca[i - 1]
                     dati[38] += 1
-                i = i + 4
-            # statoEscheInizioTurno["Esca"+id1, pv1, "Esca"+id2, pv2, ...]
-            statoEscheInizioTurno = []
+                i += 4
             i = 0
             while i < len(vitaesca):
-                statoEscheInizioTurno.append("Esca" + str(vitaesca[i]))
-                statoEscheInizioTurno.append(vitaesca[i + 1])
+                if not vitaesca[i + 1] in statoEscheInizioTurno:
+                    statoEscheInizioTurno.append("Esca" + str(vitaesca[i]))
+                    statoEscheInizioTurno.append(vitaesca[i + 1])
                 i += 4
 
             # movimento-azioni robo

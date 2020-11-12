@@ -801,7 +801,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 while i < len(caseviste):
                     k = 0
                     while k < len(vitaesca):
-                        if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                             if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                 listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                 vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -869,7 +869,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 while i < len(caseviste):
                     k = 0
                     while k < len(vitaesca):
-                        if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                             if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                 listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                 vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -937,7 +937,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 while i < len(caseviste):
                     k = 0
                     while k < len(vitaesca):
-                        if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                             if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                 listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                 vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -1188,7 +1188,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     while i < len(caseviste):
                         k = 0
                         while k < len(vitaesca):
-                            if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                            if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                                 if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                     listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                     vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -1252,7 +1252,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     while i < len(caseviste):
                         k = 0
                         while k < len(vitaesca):
-                            if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                            if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                                 if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                     listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                     vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -1316,7 +1316,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     while i < len(caseviste):
                         k = 0
                         while k < len(vitaesca):
-                            if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                            if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                                 if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                     listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                     vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -1427,7 +1427,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 while i < len(caseviste):
                     k = 0
                     while k < len(vitaesca):
-                        if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                             if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                 listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                 vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -1477,7 +1477,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 while i < len(caseviste):
                     k = 0
                     while k < len(vitaesca):
-                        if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                             if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                 listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                 vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
@@ -1527,7 +1527,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 while i < len(caseviste):
                     k = 0
                     while k < len(vitaesca):
-                        if caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
+                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
                             if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
                                 listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
                                 vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]

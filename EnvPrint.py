@@ -888,7 +888,17 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         if vitaesca[i + 2] < xMouse < vitaesca[i + 2] + GlobalVar.gpx and vitaesca[i + 3] < yMouse < vitaesca[i + 3] + GlobalVar.gpy:
                             if nemicoInquadrato and type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
                                 idEscaInquadrata = int(nemicoInquadrato[4:])
-                                if idEscaInquadrata != vitaesca[i]:
+                                if idEscaInquadrata == vitaesca[i]:
+                                    j = 0
+                                    while j < len(caseattactot):
+                                        if caseattactot[j] == vitaesca[i + 2] and caseattactot[j + 1] == vitaesca[i + 3]:
+                                            if caseattactot[j + 2] and ((abs(vitaesca[i + 2] - x) <= GlobalVar.gpx and abs(vitaesca[i + 3] - y) <= GlobalVar.gpy and not abs(vitaesca[i + 2] - x) == abs(vitaesca[i + 3] - y)) or numFrecce > 0):
+                                                if GlobalVar.mouseBloccato:
+                                                    GlobalVar.configuraCursore(False)
+                                                inquadratoQualcosa = "esca"
+                                            break
+                                        j += 3
+                                else:
                                     if GlobalVar.mouseBloccato:
                                         GlobalVar.configuraCursore(False)
                                     inquadratoQualcosa = "esca"
@@ -1466,7 +1476,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
                 nemicoColpito = False
                 for nemico in listaNemici:
-                    if (((abs(nemico.x - xp) <= raggio and abs(nemico.y - yp) <= raggio) and attacco != 1) or ((xp == nemico.x and yp == nemico.y) and attacco == 1)) and infliggidanno:
+                    if infliggidanno and (((abs(nemico.x - xp) <= raggio and abs(nemico.y - yp) <= raggio) and attacco != 1) or ((xp == nemico.x and yp == nemico.y) and attacco == 1)):
                         nemicoColpito = nemico
                         if statom == 1 and nemico.avvelenabile:
                             nemico.avvelenato = True
@@ -1491,6 +1501,28 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
                         sposta = True
                         risposta = True
+                if not nemicoColpito:
+                    i = 0
+                    while i < len(vitaesca):
+                        if infliggidanno and vitaesca[i + 1] > 0 and (((abs(vitaesca[i + 2] - xp) <= raggio and abs(vitaesca[i + 3] - yp) <= raggio) and attacco != 1) or ((xp == vitaesca[i + 2] and yp == vitaesca[i + 3]) and attacco == 1)):
+                            nemicoColpito = "Esca:" + str(vitaesca[i])
+                            vitaesca[i + 1] -= danno
+                            if vitaesca[i + 1] < 0:
+                                vitaesca[i + 1] = 0
+                            # inquadro l'esca colpito se non sto usando un oggetto
+                            if attacco == 1:
+                                nemicoInquadrato = "Esca" + str(vitaesca[i])
+
+                            attaccoDiRallo.append(nemicoColpito)
+                            attaccoDiRallo.append(-danno)
+                            if vitaesca[i + 1] == 0:
+                                attaccoDiRallo.append("morte")
+                            else:
+                                attaccoDiRallo.append("")
+
+                            sposta = True
+                            risposta = True
+                        i += 4
 
                 # attacco da vicino
                 if attacco == 1 and ((xp == x + GlobalVar.gpx and yp == y) or (xp == x - GlobalVar.gpx and yp == y) or (xp == x and yp == y + GlobalVar.gpy) or (xp == x and yp == y - GlobalVar.gpy)) and sposta and risposta and infliggidanno:
@@ -1663,6 +1695,24 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                     break
                                 j += 3
                         break
+                i = 0
+                while i < len(vitaesca):
+                    if xp == vitaesca[i + 2] and yp == vitaesca[i + 3]:
+                        suPorta = False
+                        suCofanetto = False
+                        if (xp == x + GlobalVar.gpx and yp == y) or (xp == x - GlobalVar.gpx and yp == y) or (xp == x and yp == y + GlobalVar.gpy) or (xp == x and yp == y - GlobalVar.gpy):
+                            puntatogg = puntatogg2
+                        else:
+                            puntatogg = puntatogg6
+                            j = 0
+                            while j < len(caseattactot):
+                                if caseattactot[j] == vitaesca[i + 2] and caseattactot[j + 1] == vitaesca[i + 3]:
+                                    if caseattactot[j + 2]:
+                                        nemicoInCampoVisivoArco = True
+                                    break
+                                j += 3
+                        break
+                    i += 4
                 for personaggio in listaPersonaggi:
                     if xp == personaggio.x and yp == personaggio.y:
                         suPorta = False
