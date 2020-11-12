@@ -3,1669 +3,1434 @@
 from UtilityOstacoliContenutoCofanetti import *
 
 
-def muri_porte(x, y, nx, ny, stanza, carim, escludiPorte, porte, cofanetti):
+def getEntrateStanze(stanza):
+    entrateStanza = []
+
+    if stanza == GlobalVar.dictStanze["sognoSara1"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["sognoSara2"]])
+    elif stanza == GlobalVar.dictStanze["sognoSara2"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["sognoSara1"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 3, +GlobalVar.gpx, 0, GlobalVar.dictStanze["sognoSara3"]])
+    elif stanza == GlobalVar.dictStanze["sognoSara3"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, -GlobalVar.gpx, 0, GlobalVar.dictStanze["sognoSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["sognoSara4"]])
+    elif stanza == GlobalVar.dictStanze["sognoSara4"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["sognoSara3"]])
+    elif stanza == GlobalVar.dictStanze["casaSamSara1"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+    elif stanza == GlobalVar.dictStanze["casaSamSara2"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara1"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara1"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+    elif stanza == GlobalVar.dictStanze["casaSamSara3"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+    elif stanza == GlobalVar.dictStanze["casaSamSara4"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta1"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta1"]])
+    elif stanza == GlobalVar.dictStanze["forestaCadetta1"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamSara4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, -GlobalVar.gpx, 0, GlobalVar.dictStanze["forestaCadetta2"]])
+    elif stanza == GlobalVar.dictStanze["forestaCadetta2"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 14, +GlobalVar.gpx, 0, GlobalVar.dictStanze["forestaCadetta1"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta3"]])
+    elif stanza == GlobalVar.dictStanze["forestaCadetta3"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta4"]])
+    elif stanza == GlobalVar.dictStanze["forestaCadetta4"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta5"]])
+    elif stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 8, +GlobalVar.gpx, 0, GlobalVar.dictStanze["forestaCadetta6"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta7"]])
+    elif stanza == GlobalVar.dictStanze["forestaCadetta6"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, -GlobalVar.gpx, 0, GlobalVar.dictStanze["forestaCadetta5"]])
+
+    return entrateStanza
+
+
+def controlloOstacoli(x, y, nx, ny, stanza, carim, escludiPorte, porte, cofanetti):
     cambiosta = False
 
     if x < 0 or y < 0 or x >= GlobalVar.gsx or y >= GlobalVar.gsy:
         return x, y, stanza, carim, cambiosta
 
-    if (stanza == GlobalVar.dictStanze["sognoSara1"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == +GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["sognoSara2"]
+    entrateStanza = getEntrateStanze(stanza)
+    andandoVersoUscitaStanza = False
+    i = 0
+    while i < len(entrateStanza):
+        if x == entrateStanza[i] and y == entrateStanza[i + 1] and nx == entrateStanza[i + 2] and ny == entrateStanza[i + 3] and not escludiPorte:
+            stanza = entrateStanza[i + 4]
             cambiosta = True
             carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
+            andandoVersoUscitaStanza = True
+        elif x == entrateStanza[i] + entrateStanza[i + 2] and y == entrateStanza[i + 1] + entrateStanza[i + 3] and not escludiPorte:
             nx = 0
             ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 9, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["sognoSara2"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 7 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["sognoSara1"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 7 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 29 and y == GlobalVar.gsy // 18 * 3 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["sognoSara3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 30 and y == GlobalVar.gsy // 18 * 3 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 9, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 6, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 7, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 11, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 7, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["sognoSara3"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 2 and y == GlobalVar.gsy // 18 * 11 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["sognoSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 1 and y == GlobalVar.gsy // 18 * 11 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["sognoSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 8, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["sognoSara4"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["sognoSara3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["casaSamSara1"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 6, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 5, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 7, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 5, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["casaSamSara2"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara1"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara1"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 13 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 18 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 11, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 11, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["casaSamSara3"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 3 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 4 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 27 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 28 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 28, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["casaSamSara4"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 14 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 17 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta1"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta1"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 10, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 10, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["forestaCadetta1"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["casaSamSara4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 2 and y == GlobalVar.gsy // 18 * 4 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 1 and y == GlobalVar.gsy // 18 * 4 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 9, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 6, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 5, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 3, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 8, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 5, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 9, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["forestaCadetta2"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 29 and y == GlobalVar.gsy // 18 * 14 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta1"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 30 and y == GlobalVar.gsy // 18 * 14 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 12 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 12 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 14, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 6, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["forestaCadetta3"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 9 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta2"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 9 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 23 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 23 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 9, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 6, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 5, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["forestaCadetta4"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 26 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta3"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 26 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 19 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta5"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 19 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 6, GlobalVar.gpy * 14, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 6, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 4, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["forestaCadetta5"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if ny == -GlobalVar.gpy and x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 2 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta4"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 16 and y == GlobalVar.gsy // 18 * 1 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x == GlobalVar.gsx // 32 * 29 and y == GlobalVar.gsy // 18 * 8 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta6"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 30 and y == GlobalVar.gsy // 18 * 8 and not escludiPorte:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 15 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta7"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 15 and y == GlobalVar.gsy // 18 * 16 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 13, GlobalVar.gpy * 14, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 8, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 13, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 12, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 10, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 9, GlobalVar.gpy * 6, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-    if (stanza == GlobalVar.dictStanze["forestaCadetta6"]) and (nx != 0 or ny != 0) and not cambiosta:
-        # porte
-        if nx == -GlobalVar.gpx and x == GlobalVar.gsx // 32 * 2 and y == GlobalVar.gsy // 18 * 14 and not escludiPorte:
-            stanza = GlobalVar.dictStanze["forestaCadetta5"]
-            cambiosta = True
-            carim = True
-        elif x == GlobalVar.gsx // 32 * 1 and y == GlobalVar.gsy // 18 * 14 and not escludiPorte:
-            nx = 0
-            ny = 0
-        # bordi stanza
-        elif nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
-            nx = 0
-            ny = 0
-        elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
-            nx = 0
-            ny = 0
-        elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
-            nx = 0
-            ny = 0
-        elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
-            nx = 0
-            ny = 0
-        # controllo muri-oggetti
-        # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 5, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 7, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 4, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 3, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
-        elif oggetto(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-            nx = 0
-            ny = 0
+            andandoVersoUscitaStanza = True
+        i += 5
 
-    # controllo se le porte sono chiuse o aperte
-    if nx != 0 or ny != 0:
-        i = 0
-        while i < len(porte):
-            if not porte[i + 3]:
-                if oggetto(porte[i + 1], porte[i + 2], GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+    if not andandoVersoUscitaStanza:
+        if (stanza == GlobalVar.dictStanze["sognoSara1"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 9, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["sognoSara2"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 9, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 6, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 7, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 11, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 7, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["sognoSara3"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 8, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["sognoSara4"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["casaSamSara1"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 5, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 6, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 5, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 7, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 5, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["casaSamSara2"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 11, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 11, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["casaSamSara3"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 28, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["casaSamSara4"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 10, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 5, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 10, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["forestaCadetta1"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 9, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 6, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 5, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 3, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 8, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 5, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 9, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["forestaCadetta2"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 14, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 6, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 3, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["forestaCadetta3"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 9, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 6, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 5, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["forestaCadetta4"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 6, GlobalVar.gpy * 14, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 6, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 4, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 3, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["forestaCadetta5"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 13, GlobalVar.gpy * 14, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 8, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 13, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 12, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 10, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 9, GlobalVar.gpy * 6, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+        if (stanza == GlobalVar.dictStanze["forestaCadetta6"]) and (nx != 0 or ny != 0) and not cambiosta:
+            # bordi stanza
+            if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
+                nx = 0
+                ny = 0
+            elif nx == GlobalVar.gpx and x >= GlobalVar.gsx - (GlobalVar.gpx * 3):
+                nx = 0
+                ny = 0
+            elif ny == -GlobalVar.gpy and y <= GlobalVar.gpy * 2:
+                nx = 0
+                ny = 0
+            elif ny == GlobalVar.gpy and y >= GlobalVar.gsy - (GlobalVar.gpy * 3):
+                nx = 0
+                ny = 0
+            # controllo muri-oggetti
+            # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 5, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 4, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 7, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 4, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 2, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 4, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 13, GlobalVar.gpx * 4, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 3, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 11, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 5, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 2, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 7, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 3, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 2, GlobalVar.gpy * 4, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 3, GlobalVar.gpx * 1, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 8, GlobalVar.gpx * 3, GlobalVar.gpy * 3, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 14, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 6, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif oggetto(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 15, GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
+
+        # controllo se le porte sono chiuse o aperte
+        if nx != 0 or ny != 0:
+            i = 0
+            while i < len(porte):
+                if not porte[i + 3]:
+                    if oggetto(porte[i + 1], porte[i + 2], GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
+                        nx = 0
+                        ny = 0
+                        break
+                i = i + 4
+        # controllo cofanetti
+        if nx != 0 or ny != 0:
+            i = 0
+            while i < len(cofanetti):
+                if oggetto(cofanetti[i + 1], cofanetti[i + 2], GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
                     nx = 0
                     ny = 0
                     break
-            i = i + 4
-    # controllo cofanetti
-    if nx != 0 or ny != 0:
-        i = 0
-        while i < len(cofanetti):
-            if oggetto(cofanetti[i + 1], cofanetti[i + 2], GlobalVar.gpx * 1, GlobalVar.gpy * 1, x, y, nx, ny):
-                nx = 0
-                ny = 0
-                break
-            i = i + 4
+                i = i + 4
 
     # movimento personaggio
     x = x + nx

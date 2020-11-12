@@ -1172,7 +1172,7 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         if interazioneConfermata:
             interazioneConfermata = False
             daInquadrare = False
-            if tastop == "mouseSinistro" and (inquadratoQualcosa == "nemico" or inquadratoQualcosa == "esca"):
+            if tastop == "mouseSinistro" and (inquadratoQualcosa == "nemico" or inquadratoQualcosa == "esca" or inquadratoQualcosa == "Colco"):
                 if inquadratoQualcosa == "nemico" and not (nemicoInquadrato and type(nemicoInquadrato) is not str and xp == nemicoInquadrato.x and yp == nemicoInquadrato.y):
                     for nemico in listaNemici:
                         if xp == nemico.x and yp == nemico.y:
@@ -1201,6 +1201,10 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                                     daInquadrare = True
                                 break
                             i += 4
+                if inquadratoQualcosa == "Colco" and not (type(nemicoInquadrato) is str and nemicoInquadrato == "Colco"):
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
+                    nemicoInquadrato = "Colco"
+                    daInquadrare = True
             if not daInquadrare:
                 infliggidanno = False
                 statom = 0

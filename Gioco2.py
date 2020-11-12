@@ -1497,7 +1497,7 @@ def gameloop():
                 vy = y
                 sposta = True
                 stanzaVecchia = dati[1]
-                x, y, dati[1], carim, cambiosta = muri_porte(x, y, nx, ny, dati[1], carim, False, porte, cofanetti)
+                x, y, dati[1], carim, cambiosta = controlloOstacoli(x, y, nx, ny, dati[1], carim, False, porte, cofanetti)
 
                 sovrapposto = False
                 for nemico in listaNemici:
