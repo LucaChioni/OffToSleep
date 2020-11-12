@@ -54,6 +54,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         scrivi.write("%i_" % nemico.yPosizioneUltimoBersaglio)
         scrivi.write("%i_" % nemico.numeroMovimento)
         scrivi.write("%i_" % nemico.triggerato)
+        scrivi.write("%i_" % nemico.denaro)
         scrivi.write("[_")
         for direzione in nemico.percorso:
             scrivi.write("%s_" % direzione)
@@ -182,29 +183,29 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
             try:
                 i = 0
                 while i < len(datiNemici):
-                    j = i + 15 + 1
+                    j = i + 16 + 1
                     while j < len(datiNemici):
                         if datiNemici[j] == "]":
                             datiNemici.pop(j)
-                            datiNemici.pop(i + 15)
+                            datiNemici.pop(i + 16)
                             percorsoNemico = []
-                            k = i + 15
+                            k = i + 16
                             while k < j - 1:
-                                percorsoNemico.append(datiNemici.pop(i + 15))
+                                percorsoNemico.append(datiNemici.pop(i + 16))
                                 k += 1
-                            datiNemici.insert(i + 15, percorsoNemico)
+                            datiNemici.insert(i + 16, percorsoNemico)
                             break
                         j += 1
-                    i += 16
+                    i += 17
             except ValueError:
                 errore = True
-            if len(datiNemici) % 16 != 0:
+            if len(datiNemici) % 17 != 0:
                 errore = True
             else:
                 i = 0
                 while i < len(datiNemici):
                     try:
-                        nemico = NemicoObj(GlobalVar.gsx // 32 * int(datiNemici[i + 2]), GlobalVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 15], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])))
+                        nemico = NemicoObj(GlobalVar.gsx // 32 * int(datiNemici[i + 2]), GlobalVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 16], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])), int(datiNemici[i + 15]))
                         nemico.vita = int(datiNemici[i + 4])
                         nemico.avvelenato = bool(int(datiNemici[i + 5]))
                         nemico.appiccicato = bool(int(datiNemici[i + 6]))
@@ -217,7 +218,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
                     except ValueError:
                         errore = True
                         break
-                    i += 16
+                    i += 17
             listaEscheStringa = datiTotali[2].split("_")
             listaEscheStringa.pop(len(listaEscheStringa) - 1)
             if len(listaEscheStringa) % 4 != 0:

@@ -5,7 +5,7 @@ from GenericFunc import *
 
 class NemicoObj(object):
 
-    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False):
+    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False, monetePossedute=-1):
         self.x = x
         self.y = y
         self.vx = x
@@ -39,11 +39,11 @@ class NemicoObj(object):
         self.animazioneFatta = False
         self.tipo = tipo
 
-        self.inizializzaStatistiche()
+        self.inizializzaStatistiche(monetePossedute)
         self.caricaImg()
         self.girati(direzione)
 
-    def inizializzaStatistiche(self):
+    def inizializzaStatistiche(self, monetePossedute):
         vitaTotale = 0
         esp = 0
         raggioVisivo = 0
@@ -396,7 +396,10 @@ class NemicoObj(object):
         self.attaccaDaLontano = attaccaDaLontano
         self.velenoso = velenoso
         self.surriscaldante = surriscaldante
-        self.denaro = denaro
+        if monetePossedute != -1:
+            self.denaro = monetePossedute
+        else:
+            self.denaro = denaro
         self.difesa = difesa
         self.avvelenabile = avvelenabile
 
