@@ -15,6 +15,7 @@ def gameloop():
             refreshSchermo = True
             impossibileAprirePorta = False
             canzone = False
+            sottofondoAmbientale = False
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
             movimentoPerMouse = False
             stanzaCambiata = False
@@ -140,8 +141,9 @@ def gameloop():
                     i += 1
 
                 canzoneCambiata = False
-                # mi posiziono e setto canzone e rumore porte
-                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone = settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata,dati[1], stanzaVecchia, canzone, inizio)
+                sottofondoAmbientaleCambiato = False
+                # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
+                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale = settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, sottofondoAmbientale, inizio)
                 if not inizio:
                     vx = x
                     vy = y
@@ -161,16 +163,27 @@ def gameloop():
                         if npers == 4:
                             nrob = 3
 
-                if canzoneCambiata:
+                if canzoneCambiata or sottofondoAmbientaleCambiato:
                     i = GlobalVar.volumeCanzoni
-                    while i > 0:
-                        GlobalVar.canaleSoundCanzone.set_volume(i)
-                        i = i - (GlobalVar.volumeCanzoni / 10)
+                    j = GlobalVar.volumeEffetti
+                    while i > 0 and j > 0:
+                        if canzoneCambiata:
+                            GlobalVar.canaleSoundCanzone.set_volume(i)
+                        if sottofondoAmbientaleCambiato:
+                            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                        i -= GlobalVar.volumeCanzoni / 10
+                        j -= GlobalVar.volumeEffetti / 10
                         pygame.time.wait(30)
-                    GlobalVar.canaleSoundCanzone.stop()
-                    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-                    if canzone:
-                        GlobalVar.canaleSoundCanzone.play(canzone)
+                    if canzoneCambiata:
+                        GlobalVar.canaleSoundCanzone.stop()
+                        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+                    if sottofondoAmbientaleCambiato:
+                        GlobalVar.canaleSoundSottofondoAmbientale.stop()
+                        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+                    if canzone and canzoneCambiata:
+                        GlobalVar.canaleSoundCanzone.play(canzone, -1)
+                    if sottofondoAmbientale and sottofondoAmbientaleCambiato:
+                        GlobalVar.canaleSoundSottofondoAmbientale.play(sottofondoAmbientale, -1)
 
                 # resetto obbiettivo Colco
                 ultimoObbiettivoColco = []
@@ -517,9 +530,6 @@ def gameloop():
             nx = 0
             ny = 0
 
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
@@ -861,7 +871,7 @@ def gameloop():
                             elif npers == 4:
                                 personaggio.girati("w")
                             disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
-                            dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio, canzone)
+                            dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
                             caricaTutto = True
                 if event.key == pygame.K_ESCAPE and not tastoTrovato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                     tastoTrovato = True
@@ -1194,7 +1204,7 @@ def gameloop():
                     elif npers == 4:
                         personaggio.girati("w")
                     disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
-                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio, canzone)
+                    dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
                     caricaTutto = True
                 elif inquadratoQualcosa.startswith("movimento"):
                     movimentoPerMouse = True
@@ -1377,82 +1387,79 @@ def gameloop():
             dati[137] = autoRic1
             dati[138] = autoRic2
             if not apriocchio:
-                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, canzone)
+                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam)
                 if caricaSalvataggio:
                     inizio = True
                 if attacco == 0:
                     uscitoDaMenu = 2
             else:
-                dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone)
-                if caricaSalvataggio:
-                    inizio = True
-                else:
-                    # cambiare posizione dopo l'uso di caricabatterie
-                    if npers == 3:
-                        pers = GlobalVar.persw
-                        arma = armaw
-                        armaMov1 = armawMov1
-                        armaMov2 = armawMov2
-                        armaAttacco = armawAttacco
-                        armatura = armaturaw
-                        scudo = scudow
-                        arco = arcow
-                        faretra = faretraw
-                        arcoAttacco = arcowAttacco
-                        guanti = guantiw
-                        guantiMov1 = guantiwMov1
-                        guantiMov2 = guantiwMov2
-                        guantiAttacco = guantiwAttacco
-                        collana = collanaw
-                    if npers == 2:
-                        pers = GlobalVar.persa
-                        arma = armaa
-                        armaMov1 = armaaMov1
-                        armaMov2 = armaaMov2
-                        armaAttacco = armaaAttacco
-                        armatura = armaturaa
-                        scudo = scudoa
-                        arco = arcoa
-                        faretra = faretraa
-                        arcoAttacco = arcoaAttacco
-                        guanti = guantia
-                        guantiMov1 = guantiaMov1
-                        guantiMov2 = guantiaMov2
-                        guantiAttacco = guantiaAttacco
-                        collana = collanaa
-                    if npers == 4:
-                        pers = GlobalVar.perss
-                        arma = armas
-                        armaMov1 = armasMov1
-                        armaMov2 = armasMov2
-                        armaAttacco = armasAttacco
-                        armatura = armaturas
-                        scudo = scudos
-                        arco = arcos
-                        faretra = faretras
-                        arcoAttacco = arcosAttacco
-                        guanti = guantis
-                        guantiMov1 = guantisMov1
-                        guantiMov2 = guantisMov2
-                        guantiAttacco = guantisAttacco
-                        collana = collanas
-                    if npers == 1:
-                        pers = GlobalVar.persd
-                        arma = armad
-                        armaMov1 = armadMov1
-                        armaMov2 = armadMov2
-                        armaAttacco = armadAttacco
-                        armatura = armaturad
-                        scudo = scudod
-                        arco = arcod
-                        faretra = faretrad
-                        arcoAttacco = arcodAttacco
-                        guanti = guantid
-                        guantiMov1 = guantidMov1
-                        guantiMov2 = guantidMov2
-                        guantiAttacco = guantidAttacco
-                        collana = collanad
-                    caricaTutto = True
+                dati, attacco, sposta, animaOggetto, npers, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio)
+                # cambiare posizione dopo l'uso di caricabatterie
+                if npers == 3:
+                    pers = GlobalVar.persw
+                    arma = armaw
+                    armaMov1 = armawMov1
+                    armaMov2 = armawMov2
+                    armaAttacco = armawAttacco
+                    armatura = armaturaw
+                    scudo = scudow
+                    arco = arcow
+                    faretra = faretraw
+                    arcoAttacco = arcowAttacco
+                    guanti = guantiw
+                    guantiMov1 = guantiwMov1
+                    guantiMov2 = guantiwMov2
+                    guantiAttacco = guantiwAttacco
+                    collana = collanaw
+                if npers == 2:
+                    pers = GlobalVar.persa
+                    arma = armaa
+                    armaMov1 = armaaMov1
+                    armaMov2 = armaaMov2
+                    armaAttacco = armaaAttacco
+                    armatura = armaturaa
+                    scudo = scudoa
+                    arco = arcoa
+                    faretra = faretraa
+                    arcoAttacco = arcoaAttacco
+                    guanti = guantia
+                    guantiMov1 = guantiaMov1
+                    guantiMov2 = guantiaMov2
+                    guantiAttacco = guantiaAttacco
+                    collana = collanaa
+                if npers == 4:
+                    pers = GlobalVar.perss
+                    arma = armas
+                    armaMov1 = armasMov1
+                    armaMov2 = armasMov2
+                    armaAttacco = armasAttacco
+                    armatura = armaturas
+                    scudo = scudos
+                    arco = arcos
+                    faretra = faretras
+                    arcoAttacco = arcosAttacco
+                    guanti = guantis
+                    guantiMov1 = guantisMov1
+                    guantiMov2 = guantisMov2
+                    guantiAttacco = guantisAttacco
+                    collana = collanas
+                if npers == 1:
+                    pers = GlobalVar.persd
+                    arma = armad
+                    armaMov1 = armadMov1
+                    armaMov2 = armadMov2
+                    armaAttacco = armadAttacco
+                    armatura = armaturad
+                    scudo = scudod
+                    arco = arcod
+                    faretra = faretrad
+                    arcoAttacco = arcodAttacco
+                    guanti = guantid
+                    guantiMov1 = guantidMov1
+                    guantiMov2 = guantidMov2
+                    guantiAttacco = guantidAttacco
+                    collana = collanad
+                caricaTutto = True
             carim = True
             startf = False
 
@@ -1487,7 +1494,7 @@ def gameloop():
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
-                animaOggettoSpecialeRicevuto(oggettoRicevuto, canzone)
+                animaOggettoSpecialeRicevuto(oggettoRicevuto)
                 oggettoRicevuto = False
                 caricaTutto = True
 
@@ -1517,7 +1524,7 @@ def gameloop():
             attaccoDiRallo = []
             if attacco != 0:
                 GlobalVar.canaleSoundPassiRallo.stop()
-                sposta, creaesca, xesca, yesca, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], imgSfondoStanza, dati[1], casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, canzone)
+                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac = attacca(x, y, npers, nrob, rx, ry, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac)
                 refreshSchermo = True
                 caricaTutto = True
                 tastop = 0
@@ -1704,12 +1711,12 @@ def gameloop():
                             personaggio.girati("w")
                         # aggiorno lo GlobalVarG2.schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
                         disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
-                        dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio, canzone)
+                        dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
                         caricaTutto = True
                 interagisciConPersonaggio = False
             # menu mercante
             if visualizzaMenuMercante:
-                dati = menuMercante(dati, canzone)
+                dati = menuMercante(dati)
                 visualizzaMenuMercante = False
                 uscitoDaMenu = 1
             # apertura cofanetti
@@ -1752,7 +1759,7 @@ def gameloop():
                 ultimoObbiettivoColco.append(y)
 
             # impedisce di andare avanti quando si vuole andare in una zona non ancora sbloccata
-            if cambiosta and nonPuoiProcedere(dati[0], x, y, stanzaVecchia, dati[1], canzone):
+            if cambiosta and nonPuoiProcedere(dati[0], x, y, stanzaVecchia, dati[1]):
                 cambiosta = False
                 dati[1] = stanzaVecchia
                 x = vx
@@ -2005,7 +2012,7 @@ def gameloop():
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, stanza, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
                 caricaTutto = False
             if azioneRobEseguita or nemiciInMovimento or sposta:
-                primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse, robot, armrob, dati[122] = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, canzone)
+                primopasso, caricaTutto, tesoro, tastop, movimentoPerMouse, robot, armrob, dati[122] = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, tastop, tesoro, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle)
             if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta):
                 refreshSchermo = False
                 apriocchio = False
@@ -2018,7 +2025,7 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, tastop, movimentoPerMouse, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte = gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte, canzone)
+                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, tastop, movimentoPerMouse, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte = gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte)
                 impossibileAprirePorta = False
 
             # cancella definitivamente i mostri morti e resetta vx/vy/anima
@@ -2092,5 +2099,37 @@ def gameloop():
             stanzaCambiata = False
             uscitoDaMenu -= 1
             sposta = False
+
+        if inizio:
+            sprites = pygame.sprite.Group(Fade(0))
+            schermoFadeToBlack = GlobalVar.schermo.copy()
+            i = 0
+            while i <= 6:
+                sprites.update()
+                GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+                sprites.draw(GlobalVar.schermo)
+                pygame.display.update()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
+            GlobalVar.canaleSoundPuntatore.stop()
+            GlobalVar.canaleSoundPassiRallo.stop()
+            GlobalVar.canaleSoundPassiColco.stop()
+            GlobalVar.canaleSoundPassiNemiciPersonaggi.stop()
+            GlobalVar.canaleSoundMorteNemici.stop()
+            GlobalVar.canaleSoundLvUp.stop()
+            GlobalVar.canaleSoundInterazioni.stop()
+            GlobalVar.canaleSoundAttacco.stop()
+            i = GlobalVar.volumeCanzoni / 2
+            j = GlobalVar.volumeEffetti / 2
+            while i > 0 and j > 0:
+                GlobalVar.canaleSoundCanzone.set_volume(i)
+                GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                i -= GlobalVar.volumeCanzoni / 10
+                j -= GlobalVar.volumeEffetti / 10
+                pygame.time.wait(30)
+            GlobalVar.canaleSoundCanzone.stop()
+            GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+            GlobalVar.canaleSoundSottofondoAmbientale.stop()
+            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
 gameloop()

@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import os
 from SottoMenuA import *
 
 
 def menu(caricaSalvataggio):
-    GlobalVar.canaleSoundCanzone.stop()
-    canzone = False
-
     # per aggiungere porte e cofanetti => aggiungi "numStanza, x, y, False"
     xInizialie = 0
     yInizialie = 0
@@ -40,49 +38,19 @@ def menu(caricaSalvataggio):
     lunghezzadati = len(datiIniziali)
 
     if caricaSalvataggio:
-        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
+        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
         print ("Salvataggio: " + str(caricaSalvataggio))
         return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
 
     # video
-    fermavideo = guardaVideo('Video/videoinizio')
-    # attesa dopo video
-    if not fermavideo:
-        if GlobalVar.mouseBloccato:
-            GlobalVar.configuraCursore(False)
-        GlobalVar.schermo.fill(GlobalVar.grigioscu)
-        messaggio("Premi un tasto per continuare...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 13, 100)
-        pygame.display.update()
-        finevideo = True
-        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-        while finevideo:
-            for event in pygame.event.get():
-                sinistroMouseVecchio = sinistroMouse
-                centraleMouseVecchio = centraleMouse
-                destroMouseVecchio = destroMouse
-                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                rotellaConCentralePremuto = False
-                if centraleMouseVecchio and centraleMouse:
-                    rotellaConCentralePremuto = True
-                if not sinistroMouseVecchio and sinistroMouse:
-                    centraleMouse = False
-                    destroMouse = False
-                elif not centraleMouseVecchio and centraleMouse:
-                    sinistroMouse = False
-                    destroMouse = False
-                elif not destroMouseVecchio and destroMouse:
-                    sinistroMouse = False
-                    centraleMouse = False
-
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    GlobalVar.quit()
-                if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
-                    if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
-                        pygame.mouse.set_visible(False)
-                        GlobalVar.mouseVisibile = False
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                    finevideo = False
+    listaImgVideo = []
+    # load all the images
+    for i in os.listdir(GlobalVar.gamePath + "Video/VideoInizio"):
+        img = GlobalVar.loadImage("Video/VideoInizio" + '/' + i, False, convert=True)
+        img = pygame.transform.smoothscale(img, (GlobalVar.gsx, GlobalVar.gsy))
+        listaImgVideo.append(img)
+    guardaVideo(listaImgVideo, GlobalVar.audioSottofondoVideoIniziale, True)
+    illuminaSchermoDopoVideo = True
 
     xp = GlobalVar.gsx // 32 * 1.5
     yp = GlobalVar.gsy // 18 * 2.5
@@ -104,11 +72,8 @@ def menu(caricaSalvataggio):
     c = random.randint(1, 4)
 
     canzone = GlobalVar.canzoneMenuPrincipale
-    GlobalVar.canaleSoundCanzone.play(canzone)
+    GlobalVar.canaleSoundCanzone.play(canzone, -1)
     while True:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -248,7 +213,7 @@ def menu(caricaSalvataggio):
                             GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
                             schermo_temp = GlobalVar.schermo.copy()
                             background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
-                            inutile, conferma = chiediconferma(3, canzone)
+                            inutile, conferma = chiediconferma(3)
                             if conferma:
                                 dati = datiIniziali
                                 xInizialie = GlobalVar.gsx // 32 * 15
@@ -265,7 +230,6 @@ def menu(caricaSalvataggio):
                                 stanzeGiaVisitate = []
                                 listaPersonaggiTotali = []
                                 oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                                GlobalVar.canaleSoundCanzone.stop()
                                 i = porteini
                                 while i <= portefin:
                                     dati[i + 1] = dati[i + 1] * GlobalVar.gpx
@@ -282,11 +246,11 @@ def menu(caricaSalvataggio):
 
                         # carica partita
                         if voceMarcata == 2:
-                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, [], [], [], [], [], [], [], [], [], canzone)
+                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, [], [], [], [], [], [], [], [], [])
 
                             # lettura salvataggio
                             if n != -1:
-                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
+                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
                                 if dati:
                                     print ("Salvataggio: " + str(n))
                                     return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
@@ -294,7 +258,7 @@ def menu(caricaSalvataggio):
 
                         # Impostazioni
                         if voceMarcata == 3:
-                            menuImpostazioni(canzone, True, False)
+                            menuImpostazioni(True, False)
                             primoFrame = True
 
                         # esci dal gioco
@@ -303,7 +267,7 @@ def menu(caricaSalvataggio):
                             GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
                             schermo_temp = GlobalVar.schermo.copy()
                             background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
-                            inizio, inutile = chiediconferma(2, canzone)
+                            inizio, inutile = chiediconferma(2)
                             if not inizio:
                                 GlobalVar.schermo.blit(background, (0, 0))
                     elif suTogliTutorial and event.type == pygame.MOUSEBUTTONDOWN:
@@ -504,10 +468,23 @@ def menu(caricaSalvataggio):
                     messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 1, 50)
             pygame.display.update()
 
-        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+        if illuminaSchermoDopoVideo:
+            illuminaSchermoDopoVideo = False
+            sprites = pygame.sprite.Group(Fade(2))
+            schermoFadeToBlack = GlobalVar.schermo.copy()
+            i = 0
+            while i <= 6:
+                sprites.update()
+                GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+                sprites.draw(GlobalVar.schermo)
+                pygame.display.update()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
+        else:
+            GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, canzone):
+def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam):
     sfondostastart = GlobalVar.sfondostax3
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
@@ -555,10 +532,8 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
     tastotempfps = 5
 
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -695,32 +670,32 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     primoFrame = True
                     # oggetti
                     if voceMarcata == 1:
-                        dati, attacco = oggetti(dati, canzone)
+                        dati, attacco = oggetti(dati)
                         carim = True
                     # equip pers
                     if voceMarcata == 2:
-                        dati = equip(dati, canzone)
+                        dati = equip(dati)
                         carim = True
                     # equip robot
                     if voceMarcata == 3:
-                        dati = equiprobo(dati, canzone)
+                        dati = equiprobo(dati)
                         carim = True
                     # mappa
                     if voceMarcata == 4:
-                        menuMappa(dati[0], canzone)
+                        menuMappa(dati[0])
                     # diario
                     if voceMarcata == 5:
-                        menuDiario(dati, canzone)
+                        menuDiario(dati)
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vitaesca, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, canzone)
+                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vitaesca, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam)
                         if n != -1 and azioneFatta == 1:
                             caricaSalvataggio = n
                             risposta = True
                     # impostazioni
                     if voceMarcata == 7:
-                        menuImpostazioni(canzone, False, True)
+                        menuImpostazioni(False, True)
                     # menu principale
                     if voceMarcata == 8:
                         GlobalVar.schermo.blit(puntatoreVecchio, (xp, yp))
@@ -799,8 +774,8 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
 
             # chiedere conferma per uscire
             if conferma != 0:
-                inizio, risposta = chiediconferma(conferma, canzone)
-                conferma = 0
+                inizio, risposta = chiediconferma(conferma)
+                break
 
             if primoFrame:
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
@@ -887,11 +862,13 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             primoFrame = False
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+    if not inizio and not caricaSalvataggio:
+        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
     return dati, inizio, attacco, caricaSalvataggio
 
 
-def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
+def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     xp = GlobalVar.gpx * 1
     yp = GlobalVar.gpy * 13.8
     puntatore = GlobalVar.puntatore
@@ -923,7 +900,6 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
     difensivi = True
     offensivi = False
     sposta = False
-    caricaSalvataggio = False
 
     oggetton = 1
     vettoreOggettiGraf = []
@@ -938,10 +914,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
         oggetton += 1
 
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -1135,7 +1109,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
                         GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
                         schermo_temp = GlobalVar.schermo.copy()
                         background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
-                        menuMappa(dati[0], False)
+                        menuMappa(dati[0])
                         GlobalVar.schermo.blit(background, (0, 0))
                     elif voceMarcata == -2:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
@@ -1248,7 +1222,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if not caricaSalvataggio and (aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata):
+        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata:
             primoFrame = False
             aggiornaSchermo = False
             if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
@@ -1471,10 +1445,11 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, canzone):
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-    return dati, attacco, sposta, animaOggetto, npers, caricaSalvataggio, inizio
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+    return dati, attacco, sposta, animaOggetto, npers, inizio
 
 
-def menuMercante(dati, canzone):
+def menuMercante(dati):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     sconosciutoOggetto = pygame.transform.smoothscale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 8, GlobalVar.gpy * 8))
@@ -1517,10 +1492,8 @@ def menuMercante(dati, canzone):
         i += 1
 
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -2403,4 +2376,5 @@ def menuMercante(dati, canzone):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
     return dati

@@ -124,7 +124,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         i = i + 4
 
 
-def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, mostraErrori=True):
+def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mostraErrori=True):
     errore = False
     tipoErrore = 0
 
@@ -318,8 +318,6 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
         indietro = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not indietro:
-            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-                GlobalVar.canaleSoundCanzone.play(canzone)
             xMouse, yMouse = pygame.mouse.get_pos()
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
@@ -383,8 +381,6 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
         indietro = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not indietro:
-            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-                GlobalVar.canaleSoundCanzone.play(canzone)
             xMouse, yMouse = pygame.mouse.get_pos()
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
@@ -445,7 +441,6 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, ca
 
     if not errore:
         if mostraErrori:
-            GlobalVar.canaleSoundCanzone.stop()
             return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
         else:
             return dati, tipoErrore

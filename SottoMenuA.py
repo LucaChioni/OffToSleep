@@ -3,7 +3,7 @@
 from SottoMenuB import *
 
 
-def equip(dati, canzone):
+def equip(dati):
     perssta = pygame.transform.smoothscale(GlobalVar.perso, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
     persstab = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
     puntatore = GlobalVar.puntatore
@@ -66,9 +66,6 @@ def equip(dati, canzone):
         i += 1
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -1070,7 +1067,7 @@ def equip(dati, canzone):
     return dati
 
 
-def sceglicondiz(dati, condizione, canzone):
+def sceglicondiz(dati, condizione):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 1
@@ -1089,9 +1086,6 @@ def sceglicondiz(dati, condizione, canzone):
     scecond = GlobalVar.vetImgCondizioniMenu
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -1629,7 +1623,7 @@ def sceglicondiz(dati, condizione, canzone):
     return condizione
 
 
-def sceglitecn(dati, tecnica, canzone):
+def sceglitecn(dati, tecnica):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 1
@@ -1648,9 +1642,6 @@ def sceglitecn(dati, tecnica, canzone):
     scetecn = GlobalVar.vetImgTecnicheMenu
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -2210,7 +2201,7 @@ def sceglitecn(dati, tecnica, canzone):
     return tecnica
 
 
-def equiprobo(dati, canzone):
+def equiprobo(dati):
     robosta = pygame.transform.smoothscale(GlobalVar.roboo, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
@@ -2246,9 +2237,6 @@ def equiprobo(dati, canzone):
         i += 1
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -2895,7 +2883,7 @@ def equiprobo(dati, canzone):
                                 primoFrame = True
                                 if dati[i] != -1:
                                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                    dati[i] = sceglicondiz(dati, dati[i], canzone)
+                                    dati[i] = sceglicondiz(dati, dati[i])
                                 else:
                                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                             i += 1
@@ -2909,7 +2897,7 @@ def equiprobo(dati, canzone):
                                 primoFrame = True
                                 if dati[i] != -1:
                                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                    dati[i] = sceglitecn(dati, dati[i], canzone)
+                                    dati[i] = sceglitecn(dati, dati[i])
                                 else:
                                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                             i += 1
@@ -3404,7 +3392,7 @@ def equiprobo(dati, canzone):
     return dati
 
 
-def oggetti(dati, canzone):
+def oggetti(dati):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     sfondostastart = GlobalVar.sfondostax3
@@ -3443,9 +3431,6 @@ def oggetti(dati, canzone):
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1

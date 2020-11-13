@@ -403,7 +403,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             pygame.display.update()
 
 
-def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, stanzaa, stanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, canzone):
+def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vitaesca, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -715,9 +715,6 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
     vecchiaCasellaInquadrata = [False, 0, 0]
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         if xp != xvp or yp != yvp:
             appenaCaricato = False
         xvp = xp
@@ -1479,6 +1476,46 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
                         risposta = True
 
                 nemicoColpito = False
+                if infliggidanno and attacco != 1 and (abs(x - xp) <= raggio and abs(y - yp) <= raggio):
+                    attaccoDiRallo.append("Rallo")
+                    dannoEffettivo = danno - difRallo
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiRallo.append(-dannoEffettivo)
+                    pv -= dannoEffettivo
+                    if pv <= 0:
+                        pv = 0
+                        attaccoDiRallo.append("morte")
+                    else:
+                        if attacco == 3 and not numCollanaIndossata == 1:
+                            avvele = True
+                            attaccoDiRallo.append("avvelena")
+                        elif attacco == 5:
+                            attaccoDiRallo.append("appiccica")
+                        else:
+                            attaccoDiRallo.append("")
+
+                    sposta = True
+                    risposta = True
+                if infliggidanno and attacco != 1 and (abs(rx - xp) <= raggio and abs(ry - yp) <= raggio):
+                    # inquadro il nemico colpito se non sto usando un oggetto
+                    if attacco == 1:
+                        nemicoInquadrato = "Colco"
+                    attaccoDiRallo.append("Colco")
+                    dannoEffettivo = danno - difro
+                    if dannoEffettivo < 0:
+                        dannoEffettivo = 0
+                    attaccoDiRallo.append(-dannoEffettivo)
+                    enrobVecchia = enrob
+                    enrob -= dannoEffettivo
+                    if enrob <= 0 and enrobVecchia > 0:
+                        enrob = 0
+                        attaccoDiRallo.append("morte")
+                    else:
+                        attaccoDiRallo.append("")
+
+                    sposta = True
+                    risposta = True
                 for nemico in listaNemici:
                     if infliggidanno and (((abs(nemico.x - xp) <= raggio and abs(nemico.y - yp) <= raggio) and attacco != 1) or ((xp == nemico.x and yp == nemico.y) and attacco == 1)):
                         nemicoColpito = nemico
@@ -1505,28 +1542,27 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
 
                         sposta = True
                         risposta = True
-                if not nemicoColpito:
-                    i = 0
-                    while i < len(vitaesca):
-                        if infliggidanno and vitaesca[i + 1] > 0 and (((abs(vitaesca[i + 2] - xp) <= raggio and abs(vitaesca[i + 3] - yp) <= raggio) and attacco != 1) or ((xp == vitaesca[i + 2] and yp == vitaesca[i + 3]) and attacco == 1)):
-                            nemicoColpito = "Esca:" + str(vitaesca[i])
-                            vitaesca[i + 1] -= danno
-                            if vitaesca[i + 1] < 0:
-                                vitaesca[i + 1] = 0
-                            # inquadro l'esca colpito se non sto usando un oggetto
-                            if attacco == 1:
-                                nemicoInquadrato = "Esca" + str(vitaesca[i])
+                i = 0
+                while i < len(vitaesca):
+                    if infliggidanno and vitaesca[i + 1] > 0 and (((abs(vitaesca[i + 2] - xp) <= raggio and abs(vitaesca[i + 3] - yp) <= raggio) and attacco != 1) or ((xp == vitaesca[i + 2] and yp == vitaesca[i + 3]) and attacco == 1)):
+                        nemicoColpito = "Esca:" + str(vitaesca[i])
+                        vitaesca[i + 1] -= danno
+                        if vitaesca[i + 1] < 0:
+                            vitaesca[i + 1] = 0
+                        # inquadro l'esca colpita se non sto usando un oggetto
+                        if attacco == 1:
+                            nemicoInquadrato = "Esca" + str(vitaesca[i])
 
-                            attaccoDiRallo.append(nemicoColpito)
-                            attaccoDiRallo.append(-danno)
-                            if vitaesca[i + 1] == 0:
-                                attaccoDiRallo.append("morte")
-                            else:
-                                attaccoDiRallo.append("")
+                        attaccoDiRallo.append(nemicoColpito)
+                        attaccoDiRallo.append(-danno)
+                        if vitaesca[i + 1] == 0:
+                            attaccoDiRallo.append("morte")
+                        else:
+                            attaccoDiRallo.append("")
 
-                            sposta = True
-                            risposta = True
-                        i += 4
+                        sposta = True
+                        risposta = True
+                    i += 4
 
                 # attacco da vicino
                 if attacco == 1 and ((xp == x + GlobalVar.gpx and yp == y) or (xp == x - GlobalVar.gpx and yp == y) or (xp == x and yp == y + GlobalVar.gpy) or (xp == x and yp == y - GlobalVar.gpy)) and sposta and risposta and infliggidanno:
@@ -2138,4 +2174,4 @@ def attacca(x, y, npers, nrob, rx, ry, pers, pv, pvtot, avvele, attp, difp, enro
         pygame.event.pump()
         GlobalVar.clockAttacco.tick(GlobalVar.fpsInquadra)
 
-    return sposta, creaesca, xp, yp, npers, nrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac
+    return sposta, creaesca, xp, yp, npers, nrob, pv, avvele, enrob, difesa, apriChiudiPorta, apriCofanetto, spingiColco, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac

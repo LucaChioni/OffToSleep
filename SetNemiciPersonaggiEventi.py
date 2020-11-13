@@ -691,39 +691,39 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
     return listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali
 
 
-def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte, canzone):
+def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, carim, caricaTutto, tastop, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte):
     if impossibileAprirePorta:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
 
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizio"] and stanza == GlobalVar.dictStanze["sognoSara1"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoSognoSara1"] and stanza == GlobalVar.dictStanze["sognoSara1"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["aperturaPrimoCofanetto"] and stanza == GlobalVar.dictStanze["sognoSara1"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialUtilizzoOggetti"] and stanza == GlobalVar.dictStanze["sognoSara2"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialBattaglia"] and stanza == GlobalVar.dictStanze["sognoSara3"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialOggettiBattaglia"] and stanza == GlobalVar.dictStanze["sognoSara3"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoSognoSara2"] and stanza == GlobalVar.dictStanze["sognoSara4"] and x == GlobalVar.gpx * 15 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         stanza = GlobalVar.dictStanze["casaSamSara1"]
         cambiosta = True
         carim = True
@@ -731,31 +731,31 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamSara1"]:
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "OggettoLettoSara", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara1"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara2"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ingressoForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialCampoVisivo"] and stanza == GlobalVar.dictStanze["forestaCadetta2"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialDifesa"] and stanza == GlobalVar.dictStanze["forestaCadetta4"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["quartaStanzaForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["legnaReportataMichael"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         avanzamentoStoria += 1
@@ -774,7 +774,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioNotteForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "FiglioUfficiale", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["fineUltimoDialogoSam"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         percorsoNemico = ["w", "w"]
@@ -784,7 +784,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
         listaNemici.append(nemico)
         npers = 4
         personaggio = PersonaggioObj(x, y, False, "OggettoCinghiale", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["attaccoCinghiale"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
@@ -834,23 +834,23 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamSara1"]:
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamSara1"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["armaturaNonno4"] and stanza == GlobalVar.dictStanze["casaSamSara1"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["armaturaNonnoCompletata"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
 
 

@@ -152,7 +152,7 @@ def animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDif
     return animazioneRallo
 
 
-def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, canzone, fineanimaz):
+def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, liv, aumentoliv, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, fineanimaz):
     if aumentoliv != 0:
         liv -= aumentoliv
         animazioneRallo = True
@@ -194,8 +194,6 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
             risposta = False
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
             while not risposta:
-                if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-                    GlobalVar.canaleSoundCanzone.play(canzone)
                 deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
                 if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                     pygame.mouse.set_visible(True)
@@ -236,7 +234,13 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
     return animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse
 
 
-def animaDanneggiamentoRallo(x, y, attaccoDiColco, azioniDaEseguire, fineanimaz):
+def animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, azioniDaEseguire, fineanimaz):
+    if "attaccoRallo" in azioniDaEseguire and "Rallo" in attaccoDiRallo and fineanimaz <= 5:
+        i = 0
+        while i < len(attaccoDiRallo):
+            if attaccoDiRallo[i] == "Rallo":
+                GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaRallo, (x, y))
+            i += 3
     if "attaccoColco" in azioniDaEseguire and "Rallo" in attaccoDiColco and fineanimaz <= 5:
         GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaColco, (x, y))
 
@@ -396,13 +400,25 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
     return animazioneColco
 
 
-def animaDanneggiamentoColco(rx, ry, robot, armrob, surriscalda, nemicoAttaccante, cambiosta, fineanimaz):
-    if nemicoAttaccante.bersaglioColpito[0] == "Colco" and not cambiosta and fineanimaz != 0:
-        GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoColco, (rx, ry))
-        if nemicoAttaccante.bersaglioColpito[3]:
-            robot = GlobalVar.robomo
-            armrob = GlobalVar.armrobmo
-            surriscalda = 0
+def animaDanneggiamentoColco(rx, ry, robot, armrob, surriscalda, nemicoAttaccante, attaccoDiRallo, cambiosta, azioniDaEseguire, fineanimaz):
+    if not cambiosta and fineanimaz != 0:
+        if "attaccoRallo" in azioniDaEseguire and "Colco" in attaccoDiRallo and fineanimaz <= 5:
+            i = 0
+            while i < len(attaccoDiRallo):
+                if attaccoDiRallo[i] == "Colco":
+                    GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoColco, (rx, ry))
+                    GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoCausaRallo, (rx, ry))
+                    if attaccoDiRallo[i + 2]:
+                        robot = GlobalVar.robomo
+                        armrob = GlobalVar.armrobmo
+                        surriscalda = 0
+                i += 3
+        elif "attaccoNemici" in azioniDaEseguire and nemicoAttaccante.bersaglioColpito[0] == "Colco":
+            GlobalVar.schermo.blit(GlobalVar.imgDanneggiamentoColco, (rx, ry))
+            if nemicoAttaccante.bersaglioColpito[3]:
+                robot = GlobalVar.robomo
+                armrob = GlobalVar.armrobmo
+                surriscalda = 0
     return robot, armrob, surriscalda
 
 
@@ -1193,6 +1209,14 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
     # vita-status personaggio (statoRalloInizioTurno[pv, veleno, attP, difP])
+    if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and "Rallo" in attaccoDiRallo and fineanimaz == 5:
+        i = 0
+        while i < len(attaccoDiRallo):
+            if attaccoDiRallo[i] == "Rallo":
+                statoRalloInizioTurno[0] += attaccoDiRallo[i + 1]
+                if attaccoDiRallo[i + 2] == "avvelena":
+                    statoRalloInizioTurno[1] = True
+            i += 3
     if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Rallo" and fineanimaz == 5:
         statoRalloInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
         if nemicoAttaccante.bersaglioColpito[2] == "avvelena":
@@ -1242,6 +1266,12 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azi
 
     # disegno la vita del Colco / esca / mostro selezionato
     if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]):
+        if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and "Colco" in attaccoDiRallo and fineanimaz == 5:
+            i = 0
+            while i < len(attaccoDiRallo):
+                if attaccoDiRallo[i] == "Colco":
+                    statoColcoInizioTurno[0] += attaccoDiRallo[i + 1]
+                i += 3
         if "attaccoNemici" in azioniDaEseguire and len(nemicoAttaccante.bersaglioColpito) > 0 and nemicoAttaccante.bersaglioColpito[0] == "Colco" and fineanimaz == 5:
             statoColcoInizioTurno[0] += nemicoAttaccante.bersaglioColpito[1]
             if nemicoAttaccante.bersaglioColpito[2] == "surriscalda":
@@ -1489,7 +1519,7 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
     return animazionePersonaggi
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, canzone):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, tastop, tesoro, aumentoliv, caricaTutto, listaNemici, vitaesca, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle):
     schermo_prima_delle_animazioni = GlobalVar.schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
@@ -1645,7 +1675,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "aumentaLv" in azioniDaEseguire:
                 # animazione aumento di livello
-                animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, canzone, fineanimaz)
+                animazioneRallo, caricaTutto, tastop, aumentoliv, movimentoPerMouse = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, caricaTutto, tastop, animazioneRallo, movimentoPerMouse, fineanimaz)
 
             if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo
@@ -1661,7 +1691,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco
-                robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, cambiosta, fineanimaz)
+                robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, attaccoDiRallo, cambiosta, azioniDaEseguire, fineanimaz)
                 # animazione morte esche
                 morteEscheAnimata = animaMorteEsche(x, y, vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
@@ -1670,11 +1700,16 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animazioneNemici = animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz)
 
             if "attaccoRallo" in azioniDaEseguire:
+                # animazione danneggiamento Colco
+                robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, attaccoDiRallo, cambiosta, azioniDaEseguire, fineanimaz)
                 # animazione morte esche
                 morteEscheAnimata = animaMorteEsche(x, y, vitaesca, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
                 # animazione attacco Rallo
                 animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, casellaChiara, casellaScura, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz)
+                # animazione danneggiamento Rallo
+                animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, azioniDaEseguire, fineanimaz)
+                # animazione oggetto lanciato
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, vitaesca, fineanimaz)
 
                 # animazione danneggiamento dei nemici
@@ -1691,7 +1726,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 # animazione danneggiamento dei nemici
                 animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", fineanimaz)
                 # animazione danneggiamento Rallo
-                animaDanneggiamentoRallo(x, y, attaccoDiColco, azioniDaEseguire, fineanimaz)
+                animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, azioniDaEseguire, fineanimaz)
 
             statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vitaesca, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv, apriocchio, chiamarob)
 
@@ -1758,8 +1793,6 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         risposta = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not risposta:
-            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-                GlobalVar.canaleSoundCanzone.play(canzone)
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                 pygame.mouse.set_visible(True)
@@ -1802,8 +1835,6 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         risposta = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
         while not risposta:
-            if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-                GlobalVar.canaleSoundCanzone.play(canzone)
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                 pygame.mouse.set_visible(True)

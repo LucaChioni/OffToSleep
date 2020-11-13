@@ -1126,7 +1126,7 @@ loadImgs()
 # canali audio / volume (0-1)
 volumeCanzoni = 0.0
 volumeEffetti = 0.0
-pygame.mixer.set_num_channels(9)
+pygame.mixer.set_num_channels(10)
 canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundPuntatore = pygame.mixer.Channel(1)
 canaleSoundPassiRallo = pygame.mixer.Channel(2)
@@ -1136,6 +1136,7 @@ canaleSoundMorteNemici = pygame.mixer.Channel(5)
 canaleSoundLvUp = pygame.mixer.Channel(6)
 canaleSoundInterazioni = pygame.mixer.Channel(7)
 canaleSoundAttacco = pygame.mixer.Channel(8)
+canaleSoundSottofondoAmbientale = pygame.mixer.Channel(9)
 def initVolumeSounds():
     canaleSoundCanzone.set_volume(volumeCanzoni)
     canaleSoundPuntatore.set_volume(volumeEffetti)
@@ -1146,6 +1147,7 @@ def initVolumeSounds():
     canaleSoundLvUp.set_volume(volumeEffetti)
     canaleSoundInterazioni.set_volume(volumeEffetti)
     canaleSoundAttacco.set_volume(volumeEffetti)
+    canaleSoundSottofondoAmbientale.set_volume(volumeEffetti)
 initVolumeSounds()
 
 # suoni puntatore
@@ -1209,6 +1211,13 @@ rumoreMorteNemico = loadSound("Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
 
 # suono mappa
 suonoAperturaMappa = loadSound("Audio/RumoriAmbiente/AperturaMappa.wav")
+
+# suoni sottofondi ambientali
+audioSottofondoVideoIniziale = loadSound("Video/AudioVideoInizio.wav")
+audioAmbienteSogno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/Sogno.wav")
+audioAmbienteCasaInterno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/CasaInterno.wav")
+audioAmbienteCasaEsterno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/CasaEsterno.wav")
+audioAmbienteForesta = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/Foresta.wav")
 
 # suoni canzoni
 canzoneMenuPrincipale = loadSound("Audio/Canzoni/Canzone11.wav")

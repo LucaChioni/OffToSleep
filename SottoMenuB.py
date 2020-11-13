@@ -3,7 +3,7 @@
 from CaricaSalvaPartita import *
 
 
-def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, canzone):
+def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 6.5
@@ -33,7 +33,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
     contasalva = 1
     vetDatiSalvataggi = []
     while contasalva <= 3:
-        dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False)
+        dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False)
         vetTempDati = []
         vetTempDati.append(dati)
         vetTempDati.append(errore)
@@ -41,9 +41,6 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
         contasalva += 1
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -244,7 +241,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                         if voceMarcata == 1:
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                             if cosa == 1:
-                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone)
+                                dati, listaNemiciTotali, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
                                 if dati:
                                     return n, cosa
                                 else:
@@ -258,7 +255,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 contasalva = 1
                                 vetDatiSalvataggi = []
                                 while contasalva <= 3:
-                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False)
+                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False)
                                     vetTempDati = []
                                     vetTempDati.append(dati)
                                     vetTempDati.append(errore)
@@ -275,7 +272,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 contasalva = 1
                                 vetDatiSalvataggi = []
                                 while contasalva <= 3:
-                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, canzone, False)
+                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False)
                                     vetTempDati = []
                                     vetTempDati.append(dati)
                                     vetTempDati.append(errore)
@@ -546,7 +543,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def chiediconferma(conferma, canzone=False):
+def chiediconferma(conferma):
     puntatore = GlobalVar.puntatore
     xp = GlobalVar.gsx // 32 * 17.5
     yp = GlobalVar.gsy // 18 * 10.3
@@ -571,9 +568,6 @@ def chiediconferma(conferma, canzone=False):
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     while True:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -739,7 +733,7 @@ def chiediconferma(conferma, canzone=False):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
+def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
     puntatore = GlobalVar.puntatore
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 5.2
@@ -762,9 +756,6 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
     tastotempfps = 5
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -943,6 +934,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
                         GlobalVar.initVolumeSounds()
                         if dimezzaVolumeCanzone:
                             GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
+                            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
                         if GlobalVar.gsx != gsxTemp or GlobalVar.gsy != gsyTemp or GlobalVar.schermoIntero != schermoInteroTemp:
                             GlobalVar.schermoIntero = schermoInteroTemp
                             GlobalVar.gsx = gsxTemp
@@ -1453,7 +1445,7 @@ def menuImpostazioni(canzone, settaRisoluzione, dimezzaVolumeCanzone):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def menuMappa(avanzamentoStoria, canzone):
+def menuMappa(avanzamentoStoria):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     imgOmbreggiaturaContorniMappaMenu = GlobalVar.imgOmbreggiaturaContorniMappaMenu
@@ -1525,9 +1517,6 @@ def menuMappa(avanzamentoStoria, canzone):
 
     GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoAperturaMappa)
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1
@@ -1970,7 +1959,7 @@ def menuMappa(avanzamentoStoria, canzone):
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def menuDiario(dati, canzone):
+def menuDiario(dati):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 1
@@ -1987,9 +1976,6 @@ def menuDiario(dati, canzone):
     tastotempfps = 5
 
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
             tastotempfps = tastotempfps - 1

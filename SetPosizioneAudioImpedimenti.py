@@ -3,12 +3,15 @@
 from PersonaggioObj import *
 
 
-def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, stanza, stanzaVecchia, canzone, inizio):
+def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio):
     # npers: 1=d, 2=a, 3=w, 4=s
     if stanza == GlobalVar.dictStanze["sognoSara1"]:
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
+        if sottofondoAmbientale != GlobalVar.audioAmbienteSogno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -22,6 +25,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
+        if sottofondoAmbientale != GlobalVar.audioAmbienteSogno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -39,6 +45,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
+        if sottofondoAmbientale != GlobalVar.audioAmbienteSogno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -56,6 +65,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
+        if sottofondoAmbientale != GlobalVar.audioAmbienteSogno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -69,6 +81,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
+        if sottofondoAmbientale != GlobalVar.audioAmbienteCasaInterno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteCasaInterno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
@@ -94,6 +109,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
+        if sottofondoAmbientale != GlobalVar.audioAmbienteCasaEsterno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteCasaEsterno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
@@ -139,6 +157,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
+        if sottofondoAmbientale != GlobalVar.audioAmbienteCasaEsterno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteCasaEsterno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
@@ -162,6 +183,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
+        if sottofondoAmbientale != GlobalVar.audioAmbienteCasaEsterno:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteCasaEsterno
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
@@ -199,6 +223,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneForesta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteForesta:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -220,6 +247,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneForesta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteForesta:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -237,6 +267,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneForesta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteForesta:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -254,6 +287,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneForesta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteForesta:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -271,6 +307,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneForesta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteForesta:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -296,6 +335,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneForesta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteForesta:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
@@ -306,34 +348,34 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalVar.gsx // 32 * 2
                 y = GlobalVar.gsy // 18 * 14
 
-    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, canzone
+    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale
 
 
-def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione, canzone):
+def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione):
     nonProcedere = False
     if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["tutorialUtilizzoOggetti"] and stanzaVecchia == GlobalVar.dictStanze["sognoSara1"] and stanzaDestinazione == GlobalVar.dictStanze["sognoSara2"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
     elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara2"] and stanzaVecchia == GlobalVar.dictStanze["casaSamSara1"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamSara2"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
     elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["incontroFiglioUfficiale"] and stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"] and stanzaDestinazione == GlobalVar.dictStanze["forestaCadetta6"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
     elif GlobalVar.dictAvanzamentoStoria["trovatoLegna1"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["legnaDepositata"] and stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"] and stanzaDestinazione == GlobalVar.dictStanze["forestaCadetta4"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
     elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"] and stanzaDestinazione == GlobalVar.dictStanze["forestaCadetta7"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
     elif GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["armaturaNonnoCompletata"] and stanzaVecchia == GlobalVar.dictStanze["casaSamSara1"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamSara2"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
-        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio, canzone)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
     return nonProcedere
 

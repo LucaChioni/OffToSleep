@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 import random
 from FadeToBlackClass import *
 from SetOstacoliContenutoCofanetti import *
@@ -122,29 +121,25 @@ def getVitaTotRallo(livello, guanti):
     return pvtot
 
 
-def guardaVideo(path, audio=0):
+def guardaVideo(listaImg, audio, loop):
     if GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(False)
     GlobalVar.schermo.fill(GlobalVar.grigioscu)
     pygame.display.update()
-    listaImg = []
-    # load all the images
-    for i in os.listdir(GlobalVar.gamePath + path):
-        img = GlobalVar.loadImage(path + '/' + i, False, convert=True)
-        img = pygame.transform.smoothscale(img, (GlobalVar.gsx, GlobalVar.gsy))
-        listaImg.append(img)
-    if audio != 0:
-        GlobalVar.canaleSoundCanzone.play(audio)
     # play video
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    countdownInizioVideo = 10
+    continua = False
     i = 0
-    while i < len(listaImg) + 10:
+    while i < len(listaImg) and not continua:
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             pygame.mouse.set_visible(True)
             GlobalVar.mouseVisibile = True
-        if i >= 10:
-            GlobalVar.schermo.blit(listaImg[i - 10], (0, 0))
+        if countdownInizioVideo == 0:
+            if i == 0:
+                GlobalVar.canaleSoundSottofondoAmbientale.play(audio)
+            GlobalVar.schermo.blit(listaImg[i], (0, 0))
             pygame.display.update()
             for event in pygame.event.get():
                 sinistroMouseVecchio = sinistroMouse
@@ -173,15 +168,34 @@ def guardaVideo(path, audio=0):
                             pygame.mouse.set_visible(False)
                             GlobalVar.mouseVisibile = False
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                    if audio != 0:
-                        GlobalVar.canaleSoundCanzone.stop()
-                    return True
+                    continua = True
         pygame.event.pump()
         GlobalVar.clockVideo.tick(GlobalVar.fpsVideo)
+        if countdownInizioVideo > 0:
+            countdownInizioVideo -= 1
+        else:
+            i += 1
+            if loop and i == len(listaImg):
+                i = 0
+
+    # oscura lo schermo
+    sprites = pygame.sprite.Group(Fade(0))
+    schermoFadeToBlack = GlobalVar.schermo.copy()
+    i = 0
+    while i <= 6:
+        sprites.update()
+        GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+        sprites.draw(GlobalVar.schermo)
+        pygame.display.update()
+        GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
         i += 1
-    if audio != 0:
-        GlobalVar.canaleSoundCanzone.stop()
-    return False
+    i = GlobalVar.volumeEffetti
+    while i > 0:
+        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(i)
+        i -= GlobalVar.volumeEffetti / 10
+        pygame.time.wait(30)
+    GlobalVar.canaleSoundSottofondoAmbientale.stop()
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
 
 def trovacasattaccabili(x, y, raggio, caseviste):
@@ -1844,7 +1858,6 @@ def controllaMorteRallo(vitaRallo, inizio):
     if vitaRallo <= 0:
         if GlobalVar.mouseBloccato:
             GlobalVar.configuraCursore(False)
-        GlobalVar.canaleSoundCanzone.stop()
         GlobalVar.canaleSoundPuntatore.stop()
         GlobalVar.canaleSoundPassiRallo.stop()
         GlobalVar.canaleSoundPassiColco.stop()
@@ -1853,7 +1866,19 @@ def controllaMorteRallo(vitaRallo, inizio):
         GlobalVar.canaleSoundLvUp.stop()
         GlobalVar.canaleSoundInterazioni.stop()
         GlobalVar.canaleSoundAttacco.stop()
-        pygame.time.wait(500)
+        i = GlobalVar.volumeCanzoni
+        j = GlobalVar.volumeEffetti
+        while i > 0 and j > 0:
+            GlobalVar.canaleSoundCanzone.set_volume(i)
+            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
+            i -= GlobalVar.volumeCanzoni / 10
+            j -= GlobalVar.volumeEffetti / 10
+            pygame.time.wait(30)
+        GlobalVar.canaleSoundCanzone.stop()
+        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+        GlobalVar.canaleSoundSottofondoAmbientale.stop()
+        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+
         GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreMorte)
         sprites = pygame.sprite.Group(Fade(3))
         schermoFadeToBlack = GlobalVar.schermo.copy()
@@ -2064,7 +2089,7 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
             GlobalVar.schermo.blit(scudo, (x, y))
 
 
-def dialoga(avanzamentoStoria, personaggio, canzone):
+def dialoga(avanzamentoStoria, personaggio):
     if GlobalVar.canaleSoundPassiRallo.get_busy():
         GlobalVar.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
@@ -2103,10 +2128,8 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
     while not fineDialogo:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
-
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
@@ -2280,11 +2303,12 @@ def dialoga(avanzamentoStoria, personaggio, canzone):
             prosegui = False
             pygame.display.update()
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
     return avanzamentoStoria, oggettoRicevuto, menuMercante
 
 
-def animaOggettoSpecialeRicevuto(oggettoRicevuto, canzone):
+def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     if GlobalVar.canaleSoundPassiRallo.get_busy():
         GlobalVar.canaleSoundPassiRallo.stop()
     if GlobalVar.mouseBloccato:
@@ -2296,8 +2320,6 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto, canzone):
     risposta = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
     while not risposta:
-        if canzone and not GlobalVar.canaleSoundCanzone.get_busy():
-            GlobalVar.canaleSoundCanzone.play(canzone)
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             pygame.mouse.set_visible(True)
