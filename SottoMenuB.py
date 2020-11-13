@@ -3,6 +3,18 @@
 from CaricaSalvaPartita import *
 
 
+def ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin):
+    contasalva = 1
+    GlobalVar.vetDatiSalvataggi = []
+    while contasalva <= 3:
+        dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False)
+        vetTempDati = []
+        vetTempDati.append(dati)
+        vetTempDati.append(errore)
+        GlobalVar.vetDatiSalvataggi.append(vetTempDati)
+        contasalva += 1
+
+
 def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
@@ -28,17 +40,6 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
     aggiornaSchermo = False
     n = -1
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-
-    # carico solo all'inizio i salvataggi
-    contasalva = 1
-    vetDatiSalvataggi = []
-    while contasalva <= 3:
-        dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False)
-        vetTempDati = []
-        vetTempDati.append(dati)
-        vetTempDati.append(errore)
-        vetDatiSalvataggi.append(vetTempDati)
-        contasalva += 1
 
     while not risposta:
         # rallenta per i 30 fps
@@ -252,15 +253,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                             elif cosa == 3:
                                 salvataggio(n, datiAttuali, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali)
                                 # ricarico i salvataggi
-                                contasalva = 1
-                                vetDatiSalvataggi = []
-                                while contasalva <= 3:
-                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False)
-                                    vetTempDati = []
-                                    vetTempDati.append(dati)
-                                    vetTempDati.append(errore)
-                                    vetDatiSalvataggi.append(vetTempDati)
-                                    contasalva += 1
+                                ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
                                 xp = vxp
                                 yp = vyp
                                 conferma = False
@@ -270,14 +263,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 leggi.close()
                                 # ricarico i salvataggi
                                 contasalva = 1
-                                vetDatiSalvataggi = []
-                                while contasalva <= 3:
-                                    dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False)
-                                    vetTempDati = []
-                                    vetTempDati.append(dati)
-                                    vetTempDati.append(errore)
-                                    vetDatiSalvataggi.append(vetTempDati)
-                                    contasalva += 1
+                                ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
                                 xp = vxp
                                 yp = vyp
                                 conferma = False
@@ -381,8 +367,8 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                     messaggio("Salva partita", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.3, 100)
 
                 contasalva = 1
-                while contasalva <= len(vetDatiSalvataggi):
-                    vetTemp = vetDatiSalvataggi[contasalva - 1]
+                while contasalva <= len(GlobalVar.vetDatiSalvataggi):
+                    vetTemp = GlobalVar.vetDatiSalvataggi[contasalva - 1]
                     dati = vetTemp[0]
                     errore = vetTemp[1]
                     if errore == 1:

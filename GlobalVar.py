@@ -133,6 +133,9 @@ rossoScuroPiuScuro = (90, 70, 70)
 
 linguaImpostata = "inglese"
 
+# vettore che conterrà tutti i dati dei salvataggi
+vetDatiSalvataggi = []
+
 # dichiaro le variabili globali della funzione loadImgs
 global puntatore
 global puntatorevecchio

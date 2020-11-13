@@ -1436,7 +1436,7 @@ def sceglicondiz(dati, condizione):
                 if voceMarcata == 1:
                     GlobalVar.schermo.blit(scecond[1], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sara con pv < 80%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Sara quando ha pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Esegue l'azione su Sara se la vede e ha pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 40)
             if dati[82] > 0:
@@ -1444,7 +1444,7 @@ def sceglicondiz(dati, condizione):
                 if voceMarcata == 2:
                     GlobalVar.schermo.blit(scecond[2], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sara con pv < 50%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Sara quando ha pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Esegue l'azione su Sara se la vede e ha pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.2, 40)
             if dati[83] > 0:
@@ -1452,7 +1452,7 @@ def sceglicondiz(dati, condizione):
                 if voceMarcata == 3:
                     GlobalVar.schermo.blit(scecond[3], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sara con pv < 30%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Sara quando ha pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Esegue l'azione su Sara se la vede e ha pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.2, 40)
             if dati[84] > 0:
@@ -1460,7 +1460,7 @@ def sceglicondiz(dati, condizione):
                 if voceMarcata == 4:
                     GlobalVar.schermo.blit(scecond[4], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sara con veleno:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Sara quando è avvelenato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio(u"Esegue l'azione su Sara se la vede ed è avvelenata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.2, 40)
             if dati[85] > 0:
@@ -1500,7 +1500,7 @@ def sceglicondiz(dati, condizione):
                 if voceMarcata == 9:
                     GlobalVar.schermo.blit(scecond[9], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sempre a Sara:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Sara in continuazione (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio(u"Esegue l'azione su Sara in continuazione quando la vede (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.2, 40)
             if dati[90] > 0:

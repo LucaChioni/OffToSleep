@@ -462,34 +462,28 @@ class NemicoObj(object):
 
     def aggiornaVista(self, x, y, rx, ry, dati, caseviste, aggiornaCaselleAttaccabili):
         vistoRallo = False
-        vistoRob = False
         if aggiornaCaselleAttaccabili:
             self.caseattactot = trovacasattaccabili(self.x, self.y, self.raggioVisivo, caseviste)
         if abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(self.caseattactot):
                 if self.caseattactot[j] == x and self.caseattactot[j + 1] == y:
-                    if not self.caseattactot[j + 2]:
-                        vistoRallo = False
-                    else:
+                    if self.caseattactot[j + 2]:
                         vistoRallo = True
                         self.xPosizioneUltimoBersaglio = x
                         self.yPosizioneUltimoBersaglio = y
                     break
-                j = j + 3
+                j += 3
         if abs(rx - self.x) <= self.raggioVisivo and abs(ry - self.y) <= self.raggioVisivo and dati[10] > 0:
             j = 0
             while j < len(self.caseattactot):
                 if self.caseattactot[j] == rx and self.caseattactot[j + 1] == ry:
-                    if not self.caseattactot[j + 2]:
-                        vistoRob = False
-                    else:
-                        vistoRob = True
+                    if self.caseattactot[j + 2]:
                         self.xPosizioneUltimoBersaglio = rx
                         self.yPosizioneUltimoBersaglio = ry
                     break
-                j = j + 3
-        if vistoRallo or vistoRob:
+                j += 3
+        if vistoRallo:
             self.visto = True
         else:
             self.visto = False
@@ -678,9 +672,15 @@ class NemicoObj(object):
                                 inutileCalcolareObbiettivo = False
                                 break
                         i += 4
+                    if not vistoRallo and abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
+                        if self.caseattactot[j] == x and self.caseattactot[j + 1] == y and self.caseattactot[j + 2]:
+                            inutileCalcolareObbiettivo = False
+                            break
+                    if not vistoRob and abs(rx - self.x) <= self.raggioVisivo and abs(ry - self.y) <= self.raggioVisivo and dati[10] > 0:
+                        if self.caseattactot[j] == rx and self.caseattactot[j + 1] == ry and self.caseattactot[j + 2]:
+                            inutileCalcolareObbiettivo = False
+                            break
                     j += 3
-                if self.visto:
-                    inutileCalcolareObbiettivo = False
         if not inutileCalcolareObbiettivo:
             # cerco il bersaglio più vicino dando priorità a esche, poi colco-rallo, poi monete (se il nemico attacca da lontano non cerco il path più breve)
             j = 0

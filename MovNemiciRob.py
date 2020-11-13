@@ -1586,6 +1586,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
     tecnicaUsata = False
     attaccoDiColco = []
     nemiciVistiDaColco = []
+    ralloVisto = False
+    vrx = rx
+    vry = ry
 
     # vetDatiNemici = [vita, x, y, vitaTot, stato]
     nrob = 0
@@ -1631,10 +1634,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 print ("Percorso Colco verso telecolco non trovato")
         if azioneEseguita and sposta:
             tecnicaUsata = "spostamento"
-            ultimoObbiettivoColco = []
-            ultimoObbiettivoColco.append("Telecomando")
-            ultimoObbiettivoColco.append(x)
-            ultimoObbiettivoColco.append(y)
+            ultimoObbiettivoColco = ["Telecomando", x, y]
         else:
             ultimoObbiettivoColco = []
     else:
@@ -1656,7 +1656,6 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         pathToRallo = pathFinding(rx, ry, x, y, vetNemiciSoloConXeY, caseviste)
         # trovo i nemici/Rallo visti
         listaNemiciTotali = listaNemici[:]
-        ralloVisto = False
         k = 0
         while k < len(caselleAttaccabiliColco):
             if caselleAttaccabiliColco[k + 2]:
@@ -1690,52 +1689,68 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 # pv rallo < 80
                 if dati[i] == 1:
                     if dati[5] < pvtot / float(100) * 80 and dati[5] >= 0:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and pathToRallo):
+                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
                             azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Rallo", x, y]
                 # pv rallo < 50
                 if dati[i] == 2:
                     if dati[5] < pvtot / float(100) * 50 and dati[5] > 0:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and pathToRallo):
+                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
                             azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Rallo", x, y]
                 # pv rallo < 30
                 if dati[i] == 3:
                     if dati[5] < pvtot / float(100) * 30 and dati[5] > 0:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and pathToRallo):
+                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
                             azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Rallo", x, y]
                 # rallo avvelenato
                 if dati[i] == 4:
                     if dati[121]:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and pathToRallo):
+                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
                             azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Rallo", x, y]
                 # colco surriscaldato
                 if dati[i] == 5:
                     if dati[122] > 0:
                         azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                        if azioneEseguita:
+                            ultimoObbiettivoColco = []
                 # pe colco < 80
                 if dati[i] == 6:
                     if dati[10] < entot / float(100) * 80 and dati[10] > 0:
                         azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                        if azioneEseguita:
+                            ultimoObbiettivoColco = []
                 # pe colco < 50
                 if dati[i] == 7:
                     if dati[10] < entot / float(100) * 50 and dati[10] > 0:
                         azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                        if azioneEseguita:
+                            ultimoObbiettivoColco = []
                 # pe colco < 30
                 if dati[i] == 8:
                     if dati[10] < entot / float(100) * 30 and dati[10] > 0:
                         azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                        if azioneEseguita:
+                            ultimoObbiettivoColco = []
                 # sempre rallo
                 if dati[i] == 9 and not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0):
                     if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and pathToRallo):
+                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
                             azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Rallo", x, y]
                 # sempre colco
                 if dati[i] == 10 and not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
                     if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
                         azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-
-                # nel caso in cui viene fatta un'azione su un target amico resetto ultimoObbiettivoColco
-                if azioneEseguita:
-                    ultimoObbiettivoColco = []
+                        if azioneEseguita:
+                            ultimoObbiettivoColco = []
 
                 # azioni su nemici
                 if len(listaNemici) > 0 and len(nemiciVistiDaColco) > 0:
@@ -1766,11 +1781,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                             if len(attaccoDiColco) > 0:
@@ -1809,11 +1821,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # nemico lontano
@@ -1850,11 +1859,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # nemico pv < 80
@@ -1891,11 +1897,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # nemico pv < 50
@@ -1932,11 +1935,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # nemico pv < 30
@@ -1973,11 +1973,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # nemico con meno pv
@@ -2019,11 +2016,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # numero nemici > 1
@@ -2059,11 +2053,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # numero nemici > 4
@@ -2099,11 +2090,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
                     # numero nemici > 7
@@ -2139,15 +2127,12 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemiciVistiDaColco.remove(nemicoBersaglio)
                             azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            ultimoObbiettivoColco = []
                             if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco.append("Nemico")
-                                ultimoObbiettivoColco.append(nemicoBersaglio.x)
-                                ultimoObbiettivoColco.append(nemicoBersaglio.y)
+                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
                             else:
                                 ultimoObbiettivoColco = []
 
-                    # nel caso in cui viene fatta un'azione e non c'è un target specificao resetto ultimoObbiettivoColco
+                    # nel caso in cui viene fatta un'azione e non c'è un target specifico resetto ultimoObbiettivoColco
                     if azioneEseguita and not nemicoBersaglio:
                         ultimoObbiettivoColco = []
                 # tecniche = scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++
@@ -2321,4 +2306,16 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 ry += nry
             break
         i += 3
+
+    # aggiorno l'obbiettivo se sta cercando Rallo (potrebbe vederlo prima che si muova di nuovo nel prossimo turno)
+    if len(ultimoObbiettivoColco) > 0 and ultimoObbiettivoColco[0] == "Rallo" and not ralloVisto and not (rx == vrx and ry == vry):
+        # non segno caselleAttaccabiliColco come aggiornato perché si devono ancora muovere i nemici
+        caselleAttaccabiliColco = trovacasattaccabili(rx, ry, GlobalVar.vistaRobo * GlobalVar.gpx, caseviste)
+        k = 0
+        while k < len(caselleAttaccabiliColco):
+            if caselleAttaccabiliColco[k + 2]:
+                if caselleAttaccabiliColco[k] == x and caselleAttaccabiliColco[k + 1] == y:
+                    ultimoObbiettivoColco = ["Rallo", x, y]
+            k += 3
+
     return rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vitaesca

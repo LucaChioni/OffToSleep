@@ -42,6 +42,9 @@ def menu(caricaSalvataggio):
         print ("Salvataggio: " + str(caricaSalvataggio))
         return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
 
+    # carico subito tutti i dati salvati
+    ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+
     # video
     listaImgVideo = []
     # load all the images
