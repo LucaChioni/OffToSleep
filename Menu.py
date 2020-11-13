@@ -38,9 +38,9 @@ def menu(caricaSalvataggio):
     lunghezzadati = len(datiIniziali)
 
     if caricaSalvataggio:
-        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
         print ("Salvataggio: " + str(caricaSalvataggio))
-        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
+        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     # carico subito tutti i dati salvati
     ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
@@ -233,6 +233,8 @@ def menu(caricaSalvataggio):
                                 stanzeGiaVisitate = []
                                 listaPersonaggiTotali = []
                                 oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                                ultimoObbiettivoColco = []
+                                obbiettivoCasualeColco = False
                                 i = porteini
                                 while i <= portefin:
                                     dati[i + 1] = dati[i + 1] * GlobalVar.gpx
@@ -243,20 +245,20 @@ def menu(caricaSalvataggio):
                                     dati[i + 1] = dati[i + 1] * GlobalVar.gpx
                                     dati[i + 2] = dati[i + 2] * GlobalVar.gpy
                                     i = i + 4
-                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
+                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
                             else:
                                 GlobalVar.schermo.blit(background, (0, 0))
 
                         # carica partita
                         if voceMarcata == 2:
-                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, [], [], [], [], [], [], [], [], [])
+                            n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, [], [], [], [], [], [], [], [], [], [], False)
 
                             # lettura salvataggio
                             if n != -1:
-                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
                                 if dati:
                                     print ("Salvataggio: " + str(n))
-                                    return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
+                                    return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
                             primoFrame = True
 
                         # Impostazioni
@@ -488,7 +490,7 @@ def menu(caricaSalvataggio):
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam):
+def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
     sfondostastart = GlobalVar.sfondostax3
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
@@ -530,6 +532,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
     aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
     caricaSalvataggio = False
+    aperturaSettaColcoNonRiuscita = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     tastop = 0
@@ -670,40 +673,45 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     risposta = True
                 else:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                    primoFrame = True
-                    # oggetti
-                    if voceMarcata == 1:
-                        dati, attacco = oggetti(dati)
-                        carim = True
-                    # equip pers
-                    if voceMarcata == 2:
-                        dati = equip(dati)
-                        carim = True
-                    # equip robot
-                    if voceMarcata == 3:
-                        dati = equiprobo(dati)
-                        carim = True
-                    # mappa
-                    if voceMarcata == 4:
-                        menuMappa(dati[0])
-                    # diario
-                    if voceMarcata == 5:
-                        menuDiario(dati)
-                    # salva
-                    if voceMarcata == 6:
-                        # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vitaesca, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam)
-                        if n != -1 and azioneFatta == 1:
-                            caricaSalvataggio = n
-                            risposta = True
-                    # impostazioni
-                    if voceMarcata == 7:
-                        menuImpostazioni(False, True)
-                    # menu principale
-                    if voceMarcata == 8:
-                        GlobalVar.schermo.blit(puntatoreVecchio, (xp, yp))
-                        conferma = 1
+                    # non far cliccare su "Setta Colco" se Colco non è in una casella vista
+                    if voceMarcata == 3 and not colcoInCasellaVista:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                        aperturaSettaColcoNonRiuscita = True
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        primoFrame = True
+                        # oggetti
+                        if voceMarcata == 1:
+                            dati, attacco = oggetti(dati, colcoInCasellaVista)
+                            carim = True
+                        # equip pers
+                        if voceMarcata == 2:
+                            dati = equip(dati)
+                            carim = True
+                        # equip robot
+                        if voceMarcata == 3:
+                            dati = equiprobo(dati)
+                            carim = True
+                        # mappa
+                        if voceMarcata == 4:
+                            menuMappa(dati[0])
+                        # diario
+                        if voceMarcata == 5:
+                            menuDiario(dati)
+                        # salva
+                        if voceMarcata == 6:
+                            # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
+                            n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vitaesca, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                            if n != -1 and azioneFatta == 1:
+                                caricaSalvataggio = n
+                                risposta = True
+                        # impostazioni
+                        if voceMarcata == 7:
+                            menuImpostazioni(False, True)
+                        # menu principale
+                        if voceMarcata == 8:
+                            GlobalVar.schermo.blit(puntatoreVecchio, (xp, yp))
+                            conferma = 1
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
@@ -779,7 +787,10 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             # chiedere conferma per uscire
             if conferma != 0:
                 inizio, risposta = chiediconferma(conferma)
-                break
+                if inizio:
+                    break
+                else:
+                    conferma = 0
 
             if primoFrame:
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
@@ -793,7 +804,10 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 messaggio("Oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 50)
                 messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 50)
                 if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-                    messaggio("Setta Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
+                    if colcoInCasellaVista:
+                        messaggio("Setta Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
+                    else:
+                        messaggio("Setta Colco", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
                 if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                     messaggio("Mappa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 50)
                     messaggio("Diario", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 50)
@@ -850,6 +864,12 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroStart, (GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 2.5))
                 messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 6, 50)
             else:
+                if aperturaSettaColcoNonRiuscita:
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 0.6))
+                    messaggio(u"Colco è irraggiungibile!", GlobalVar.rosso, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7.1, 40)
+                    aperturaSettaColcoNonRiuscita = False
+                elif voceMarcataVecchia != voceMarcata:
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 0.6))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 11.5))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 19, 0, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 2))
 

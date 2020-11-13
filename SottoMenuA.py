@@ -3392,7 +3392,7 @@ def equiprobo(dati):
     return dati
 
 
-def oggetti(dati):
+def oggetti(dati, colcoInCasellaVista):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     sfondostastart = GlobalVar.sfondostax3
@@ -3414,6 +3414,7 @@ def oggetti(dati):
     primoFrame = True
     aggiornaSchermo = False
     aggiornaInterfacciaPerMouse = False
+    impossibileUsareCaricaBatt = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
     tastop = 0
@@ -3695,7 +3696,7 @@ def oggetti(dati):
                             dati[31] = dati[31] - 1
                             yp = GlobalVar.gsy // 18 * 5
                         # carica batt
-                        if usa == 2 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                        if usa == 2:
                             dati[10] = dati[10] + 250
                             if dati[10] > entot:
                                 dati[10] = entot
@@ -3714,7 +3715,7 @@ def oggetti(dati):
                             dati[34] = dati[34] - 1
                             yp = GlobalVar.gsy // 18 * 8
                         # carica migliorato
-                        if usa == 5 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                        if usa == 5:
                             dati[10] = dati[10] + 600
                             if dati[10] > entot:
                                 dati[10] = entot
@@ -3783,12 +3784,14 @@ def oggetti(dati):
                             else:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                         if oggetton == 2:
-                            if dati[32] > 0:
+                            if dati[32] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                                 usa = 2
                                 usauno = True
                             else:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                                if not dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
+                                    impossibileUsareCaricaBatt = True
                         if oggetton == 3:
                             if dati[33] > 0:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
@@ -3804,12 +3807,14 @@ def oggetti(dati):
                             else:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                         if oggetton == 5:
-                            if dati[35] > 0:
+                            if dati[35] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                                 usa = 5
                                 usauno = True
                             else:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                                if not dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
+                                    impossibileUsareCaricaBatt = True
                         if oggetton == 6:
                             if dati[36] > 0:
                                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
@@ -3928,6 +3933,13 @@ def oggetti(dati):
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 11.5))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 19.5, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 14))
+                if impossibileUsareCaricaBatt:
+                    messaggio(u"Colco è irraggiungibile!", GlobalVar.rosso, GlobalVar.gsx // 32 * 12.2, GlobalVar.gsy // 18 * 15, 50)
+                    if oggettonVecchio != oggetton:
+                        impossibileUsareCaricaBatt = False
+                        pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14))
+                else:
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14))
 
             # menu conferma
             if usa != 0:
@@ -3959,7 +3971,10 @@ def oggetti(dati):
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 45)
             if dati[32] >= 0:
-                messaggio("Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 45)
+                if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                    messaggio("Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 45)
+                else:
+                    messaggio("Alimentazione 100gr", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 45)
                 messaggio("x %i" % dati[32], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 6, 45)
                 if oggetton == 2:
                     messaggio("Alimentazione 100gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
@@ -3983,7 +3998,10 @@ def oggetti(dati):
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 45)
             if dati[35] >= 0:
-                messaggio("Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 45)
+                if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                    messaggio("Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 45)
+                else:
+                    messaggio("Alimentazione 250gr", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 45)
                 messaggio("x %i" % dati[35], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 9, 45)
                 if oggetton == 5:
                     messaggio("Alimentazione 250gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)

@@ -390,15 +390,15 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Davanti a te c'è un nemico!")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Per vedere le sue informazioni passa alla modalità interazione (premi il tasto E della tastiera o il tasto destro del mouse) e inquadralo.")
+                dialogo.append(u"Davanti a te c'è un nemico. Per vedere le sue informazioni passa alla modalità interazione (premi il tasto E della tastiera o il tasto destro del mouse) e inquadralo.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
                 dialogo.append("Una volta inquadrato puoi selezionarlo e attaccarlo premendo SPAZIO o il tasto sinistro del mouse (dato che al momento non hai freccie, puoi attaccarlo solo da vicino).")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo Esc o il tasto centrale del mouse, viene aperto un menu rapido che permette di compiere meno operazioni ripetto al menu \"normale\".")
                 self.partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialBattaglia"]:
                 self.oggettoDato = False

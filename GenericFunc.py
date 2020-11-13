@@ -1569,7 +1569,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                 incasevista = True
             break
         i = i + 3
-    if not incasevista:
+    if not incasevista and GlobalVar.gsx // 32 * 2 <= rx <= GlobalVar.gsx // 32 * 29 and GlobalVar.gsy // 18 * 2 <= ry <= GlobalVar.gsy // 18 * 15:
         caselleEsplorate = [rx, ry]
         j = 0
         while j < len(caselleEsplorate):
@@ -2555,6 +2555,8 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
 def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti):
     # scoprire caselle viste
     caseviste = scopriCaselleViste(x, y, rx, ry, [], stanza, porte, cofanetti)
+    # scoprire caselle viste solo da Rallo
+    casevisteDaRallo = scopriCaselleViste(x, y, -1, -1, [], stanza, porte, cofanetti)
     # casevisteEntrateIncluse include anche le entrate della stanza
     casevisteEntrateIncluse = scopriCaselleViste(x, y, rx, ry, [], stanza, porte, cofanetti, False)
     # casellePercorribili include solo le caselle su cui si può camminare
@@ -2602,7 +2604,7 @@ def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti):
             j += 2
         i += 3
 
-    return caseviste, casevisteEntrateIncluse, casellePercorribili
+    return caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili
 
 
 def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y, casellaChiara, casellaScura):

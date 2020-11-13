@@ -49,9 +49,7 @@ def gameloop():
             difesa = 0
             nx = 0
             ny = 0
-            ultimoObbiettivoColco = []
-            obbiettivoCasualeColco = False
-            dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam = menu(caricaSalvataggio)
+            dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = menu(caricaSalvataggio)
             # controlla se devi cambiare personaggio giocabile
             if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 personaggioDaUsare = "FratelloMaggiore"
@@ -186,8 +184,9 @@ def gameloop():
                         GlobalVar.canaleSoundSottofondoAmbientale.play(sottofondoAmbientale, -1)
 
                 # resetto obbiettivo Colco
-                ultimoObbiettivoColco = []
-                obbiettivoCasualeColco = False
+                if not inizio:
+                    ultimoObbiettivoColco = []
+                    obbiettivoCasualeColco = False
 
                 # carico nemici e personaggi nella stanza
                 listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali = caricaNemiciEPersonaggi(dati[0], dati[1], stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali)
@@ -249,7 +248,7 @@ def gameloop():
                         porte.append(tutteporte[i + 3])
                     i = i + 4
 
-                caseviste, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
+                caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
 
                 GlobalVar.schermo.blit(imgSfondoStanza, (0, 0))
                 schermoOriginale = GlobalVar.schermo.copy()
@@ -811,7 +810,7 @@ def gameloop():
                                 sposta = True
                                 GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                                 porte[k + 3] = True
-                                caseviste, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
+                                caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
                                 caricaTutto = True
                                 # aggiornare vettore tutteporte
                                 j = 0
@@ -931,7 +930,7 @@ def gameloop():
                         sposta = True
                         GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                         porte[posizPortaInVettore + 3] = True
-                        caseviste, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
+                        caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
                         caricaTutto = True
                         # aggiornare vettore tutteporte
                         j = 0
@@ -1386,8 +1385,20 @@ def gameloop():
             dati[136] = raffredda
             dati[137] = autoRic1
             dati[138] = autoRic2
-            if not apriocchio:
-                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam)
+            # se c'è un nemico in caselleViste di Rallo => apri il menu di battaglia
+            nemicoInCasellaVista = False
+            colcoInCasellaVista = False
+            i = 0
+            while i < len(casevisteDaRallo):
+                for nemico in listaNemici:
+                    if nemico.x == casevisteDaRallo[i] and nemico.y == casevisteDaRallo[i + 1] and casevisteDaRallo[i + 2]:
+                        nemicoInCasellaVista = True
+                        break
+                if rx == casevisteDaRallo[i] and ry == casevisteDaRallo[i + 1] and casevisteDaRallo[i + 2]:
+                    colcoInCasellaVista = True
+                i += 3
+            if not nemicoInCasellaVista:
+                dati, inizio, attacco, caricaSalvataggio = start(dati, porteini, portefin, cofaniini, cofanifin, tutteporte, tutticofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista)
                 if caricaSalvataggio:
                     inizio = True
                 if attacco == 0:
@@ -1654,7 +1665,7 @@ def gameloop():
                         else:
                             GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
-                        caseviste, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
+                        caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
                         # aggiornare vettore tutteporte
                         j = 0
                         while j < len(tutteporte):

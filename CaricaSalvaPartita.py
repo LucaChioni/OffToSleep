@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam):
+def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVar.gpx
     dati[3] = dati[3] // GlobalVar.gpy
@@ -48,10 +48,10 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         else:
             scrivi.write("0_")
         scrivi.write("%s_" % nemico.direzione)
-        scrivi.write("%i_" % nemico.obbiettivo[1])
-        scrivi.write("%i_" % nemico.obbiettivo[2])
-        scrivi.write("%i_" % nemico.xPosizioneUltimoBersaglio)
-        scrivi.write("%i_" % nemico.yPosizioneUltimoBersaglio)
+        scrivi.write("%i_" % (nemico.obbiettivo[1] // GlobalVar.gpx))
+        scrivi.write("%i_" % (nemico.obbiettivo[2] // GlobalVar.gpy))
+        scrivi.write("%i_" % (nemico.xPosizioneUltimoBersaglio // GlobalVar.gpx))
+        scrivi.write("%i_" % (nemico.yPosizioneUltimoBersaglio // GlobalVar.gpy))
         scrivi.write("%i_" % nemico.numeroMovimento)
         scrivi.write("%i_" % nemico.triggerato)
         scrivi.write("%i_" % nemico.denaro)
@@ -96,6 +96,25 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
     scrivi.write("\n")
     for oggetto in oggettiRimastiASam:
         scrivi.write("%i_" % oggetto)
+    scrivi.write("\n")
+    if len(ultimoObbiettivoColco) > 0:
+        scrivi.write("%s_" % ultimoObbiettivoColco[0])
+        scrivi.write("%i_" % (ultimoObbiettivoColco[1] // GlobalVar.gpx))
+        scrivi.write("%i_" % (ultimoObbiettivoColco[2] // GlobalVar.gpy))
+    else:
+        scrivi.write("_")
+        scrivi.write("-1_")
+        scrivi.write("-1_")
+    scrivi.write("\n")
+    if obbiettivoCasualeColco:
+        scrivi.write("%i_" % obbiettivoCasualeColco.stanzaDiAppartenenza)
+        scrivi.write("%i_" % (obbiettivoCasualeColco.x // GlobalVar.gpx))
+        scrivi.write("%i_" % (obbiettivoCasualeColco.y // GlobalVar.gpy))
+    else:
+        scrivi.write("-1_")
+        scrivi.write("-1_")
+        scrivi.write("-1_")
+
     scrivi.close()
 
     # critta il salvataggio
@@ -135,6 +154,8 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
     stanzeGiaVisitate = []
     listaPersonaggiTotali = []
     oggettiRimastiASam = []
+    ultimoObbiettivoColco = []
+    obbiettivoCasualeColco = False
 
     leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
     contenutoFile = leggi.read()
@@ -150,7 +171,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
         tipoErrore = 2
 
     if not errore and not (len(datiTotali) == 1 and datiTotali[0] == ""):
-        if len(datiTotali) == 7:
+        if len(datiTotali) == 9:
             datiStringa = datiTotali[0].split("_")
             datiStringa.pop(len(datiStringa) - 1)
             if len(datiStringa) == 0 or len(datiStringa) != lunghezzadati:
@@ -210,10 +231,10 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                         nemico.avvelenato = bool(int(datiNemici[i + 5]))
                         nemico.appiccicato = bool(int(datiNemici[i + 6]))
                         nemico.mosseRimaste = int(datiNemici[i + 7])
-                        nemico.obbiettivo[1] = int(datiNemici[i + 9])
-                        nemico.obbiettivo[2] = int(datiNemici[i + 10])
-                        nemico.xPosizioneUltimoBersaglio = int(datiNemici[i + 11])
-                        nemico.yPosizioneUltimoBersaglio = int(datiNemici[i + 12])
+                        nemico.obbiettivo[1] = int(datiNemici[i + 9]) * GlobalVar.gpx
+                        nemico.obbiettivo[2] = int(datiNemici[i + 10]) * GlobalVar.gpy
+                        nemico.xPosizioneUltimoBersaglio = int(datiNemici[i + 11]) * GlobalVar.gpx
+                        nemico.yPosizioneUltimoBersaglio = int(datiNemici[i + 12]) * GlobalVar.gpy
                         listaNemiciTotali.append(nemico)
                     except ValueError:
                         errore = True
@@ -304,6 +325,25 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                     except ValueError:
                         errore = True
                         break
+            ultimoObbiettivoColcoStringa = datiTotali[7].split("_")
+            ultimoObbiettivoColcoStringa.pop(len(ultimoObbiettivoColcoStringa) - 1)
+            if len(ultimoObbiettivoColcoStringa) != 3:
+                errore = True
+            else:
+                if ultimoObbiettivoColcoStringa[0] != "":
+                    ultimoObbiettivoColco.append(ultimoObbiettivoColcoStringa[0])
+                    ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[1]) * GlobalVar.gpx)
+                    ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[2]) * GlobalVar.gpx)
+            obbiettivoCasualeColcoStringa = datiTotali[8].split("_")
+            obbiettivoCasualeColcoStringa.pop(len(obbiettivoCasualeColcoStringa) - 1)
+            if len(obbiettivoCasualeColcoStringa) != 3:
+                errore = True
+            else:
+                if obbiettivoCasualeColcoStringa[0] != "-1" and obbiettivoCasualeColcoStringa[1] != "-1" and obbiettivoCasualeColcoStringa[2] != "-1":
+                    for nemico in listaNemiciTotali:
+                        if nemico.stanzaDiAppartenenza == int(obbiettivoCasualeColcoStringa[0]) and nemico.x == int(obbiettivoCasualeColcoStringa[1] * GlobalVar.gpx) and nemico.y == int(obbiettivoCasualeColcoStringa[2] * GlobalVar.gpy):
+                            obbiettivoCasualeColco = nemico
+                            break
         else:
             errore = True
         if errore:
@@ -441,11 +481,11 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
 
     if not errore:
         if mostraErrori:
-            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
+            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return dati, tipoErrore
     else:
         if mostraErrori:
-            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam
+            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return False, tipoErrore
