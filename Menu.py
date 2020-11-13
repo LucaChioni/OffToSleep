@@ -466,7 +466,8 @@ def menu(caricaSalvataggio):
                     messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
                 else:
                     messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 1, 50)
-            pygame.display.update()
+            if not illuminaSchermoDopoVideo:
+                pygame.display.update()
 
         if illuminaSchermoDopoVideo:
             illuminaSchermoDopoVideo = False
