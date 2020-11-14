@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import copy
 from Menu import *
 from EnvPrint import *
 from MovNemiciRob import *
@@ -10,6 +11,7 @@ from SetNemiciPersonaggiEventi import *
 def gameloop():
     caricaSalvataggio = False
     inizio = True
+    gameover = False
     while True:
         if inizio:
             refreshSchermo = True
@@ -49,7 +51,10 @@ def gameloop():
             difesa = 0
             nx = 0
             ny = 0
-            dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = menu(caricaSalvataggio)
+
+            print ("Salvataggio: " + str(GlobalVar.numSalvataggioCaricato))
+            dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = menu(caricaSalvataggio, gameover)
+            gameover = False
             # controlla se devi cambiare personaggio giocabile
             if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 personaggioDaUsare = "FratelloMaggiore"
@@ -499,6 +504,20 @@ def gameloop():
                     nemico.settaObbiettivoDalSalvataggio(x, y, rx, ry, vitaesca, vettoreDenaro, listaNemici, listaPersonaggi, dati, caseviste)
                 if nemico.vita > 0 and nemico.inCasellaVista:
                     nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+
+            if dati[1] in GlobalVar.vetStanzePacifiche:
+                dati[2] = x
+                dati[3] = y
+                dati[140] = npers
+                dati[134] = rx
+                dati[135] = ry
+                dati[141] = nrob
+                dati[142] = chiamarob
+                dati[139] = mosseRimasteRob
+                dati[136] = raffredda
+                dati[137] = autoRic1
+                dati[138] = autoRic2
+                GlobalVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], listaNemiciTotali[:], vitaesca[:], vettoreDenaro[:], stanzeGiaVisitate[:], listaPersonaggiTotali[:], oggettiRimastiASam[:], ultimoObbiettivoColco[:], copy.copy(obbiettivoCasualeColco)]
 
             caricaTutto = True
             carim = False
@@ -1475,7 +1494,7 @@ def gameloop():
             startf = False
 
         # morte tua e di robo
-        inizio = controllaMorteRallo(dati[5], inizio)
+        inizio, gameover = controllaMorteRallo(dati[5], inizio, gameover)
         morterob, dati, mosseRimasteRob = controllaMorteColco(dati, mosseRimasteRob)
 
         if not inizio:

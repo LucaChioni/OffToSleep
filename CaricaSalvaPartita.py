@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco):
+def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVar.gpx
     dati[3] = dati[3] // GlobalVar.gpy
@@ -31,7 +31,10 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         dati[i + 2] = dati[i + 2] // GlobalVar.gpy
         i = i + 4
 
-    scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+    if salvaGameOver:
+        scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover.txt" % n, "w")
+    else:
+        scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
     for i in range(0, len(dati)):
         scrivi.write("%i_" % dati[i])
     scrivi.write("\n")
@@ -143,7 +146,7 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         i = i + 4
 
 
-def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mostraErrori=True):
+def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mostraErrori, caricaGameOver):
     errore = False
     tipoErrore = 0
 
@@ -157,7 +160,10 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
     ultimoObbiettivoColco = []
     obbiettivoCasualeColco = False
 
-    leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
+    if caricaGameOver:
+        leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover.txt" % n, "r")
+    else:
+        leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
     contenutoFile = leggi.read()
     leggi.close()
 

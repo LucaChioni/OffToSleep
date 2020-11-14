@@ -153,6 +153,7 @@ def definisciStanze():
     # la key del dictionary descrive la stanza
     i = 1
     dictStanze["sognoSara1"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["sognoSara2"] = i
     i += 1

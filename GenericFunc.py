@@ -1854,8 +1854,9 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, vetOstacoli, caseviste):
         return percorsoTrovato
 
 
-def controllaMorteRallo(vitaRallo, inizio):
+def controllaMorteRallo(vitaRallo, inizio, gameover):
     if vitaRallo <= 0:
+        gameover = True
         if GlobalVar.mouseBloccato:
             GlobalVar.configuraCursore(False)
         GlobalVar.canaleSoundPuntatore.stop()
@@ -1930,7 +1931,8 @@ def controllaMorteRallo(vitaRallo, inizio):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     continua = True
         inizio = True
-    return inizio
+
+    return inizio, gameover
 
 
 def controllaMorteColco(dati, mosseRimasteRob):

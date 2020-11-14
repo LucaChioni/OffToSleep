@@ -135,6 +135,9 @@ linguaImpostata = "inglese"
 
 # vettore che conterrà tutti i dati dei salvataggi
 vetDatiSalvataggi = []
+# vettore che conterrà i dati di salvataggio del file gameover
+vetDatiSalvataggioGameOver = []
+numSalvataggioCaricato = 0
 
 # dichiaro le variabili globali della funzione loadImgs
 global puntatore

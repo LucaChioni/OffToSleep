@@ -4,7 +4,7 @@ import os
 from SottoMenuA import *
 
 
-def menu(caricaSalvataggio):
+def menu(caricaSalvataggio, gameover):
     # per aggiungere porte e cofanetti => aggiungi "numStanza, x, y, False"
     xInizialie = 0
     yInizialie = 0
@@ -37,9 +37,39 @@ def menu(caricaSalvataggio):
     datiIniziali += vetCofanetti
     lunghezzadati = len(datiIniziali)
 
+    if gameover:
+        dati = GlobalVar.vetDatiSalvataggioGameOver[0]
+        listaNemiciTotali = GlobalVar.vetDatiSalvataggioGameOver[3]
+        listaEsche = GlobalVar.vetDatiSalvataggioGameOver[4]
+        listaMonete = GlobalVar.vetDatiSalvataggioGameOver[5]
+        stanzeGiaVisitate = GlobalVar.vetDatiSalvataggioGameOver[6]
+        listaPersonaggiTotali = GlobalVar.vetDatiSalvataggioGameOver[7]
+        oggettiRimastiASam = GlobalVar.vetDatiSalvataggioGameOver[8]
+        ultimoObbiettivoColco = GlobalVar.vetDatiSalvataggioGameOver[9]
+        obbiettivoCasualeColco = GlobalVar.vetDatiSalvataggioGameOver[10]
+        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+
     if caricaSalvataggio:
-        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
-        print ("Salvataggio: " + str(caricaSalvataggio))
+        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
+        datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
+        tutteporteGameover = []
+        i = porteini
+        while i <= portefin:
+            tutteporteGameover.append(datiGameover[i])
+            tutteporteGameover.append(datiGameover[i + 1])
+            tutteporteGameover.append(datiGameover[i + 2])
+            tutteporteGameover.append(datiGameover[i + 3])
+            i += 4
+        tutticofanettiGameover = []
+        i = cofaniini
+        while i <= cofanifin:
+            tutticofanettiGameover.append(datiGameover[i])
+            tutticofanettiGameover.append(datiGameover[i + 1])
+            tutticofanettiGameover.append(datiGameover[i + 2])
+            tutticofanettiGameover.append(datiGameover[i + 3])
+            i += 4
+        GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
+        GlobalVar.numSalvataggioCaricato = caricaSalvataggio
         return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     # carico subito tutti i dati salvati
@@ -255,9 +285,27 @@ def menu(caricaSalvataggio):
 
                             # lettura salvataggio
                             if n != -1:
-                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+                                dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
+                                datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
+                                tutteporteGameover = []
+                                i = porteini
+                                while i <= portefin:
+                                    tutteporteGameover.append(datiGameover[i])
+                                    tutteporteGameover.append(datiGameover[i + 1])
+                                    tutteporteGameover.append(datiGameover[i + 2])
+                                    tutteporteGameover.append(datiGameover[i + 3])
+                                    i += 4
+                                tutticofanettiGameover = []
+                                i = cofaniini
+                                while i <= cofanifin:
+                                    tutticofanettiGameover.append(datiGameover[i])
+                                    tutticofanettiGameover.append(datiGameover[i + 1])
+                                    tutticofanettiGameover.append(datiGameover[i + 2])
+                                    tutticofanettiGameover.append(datiGameover[i + 3])
+                                    i += 4
+                                GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
                                 if dati:
-                                    print ("Salvataggio: " + str(n))
+                                    GlobalVar.numSalvataggioCaricato = n
                                     return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
                             primoFrame = True
 
