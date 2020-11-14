@@ -275,6 +275,7 @@ def menu(caricaSalvataggio, gameover):
                                     dati[i + 1] = dati[i + 1] * GlobalVar.gpx
                                     dati[i + 2] = dati[i + 2] * GlobalVar.gpy
                                     i = i + 4
+                                GlobalVar.numSalvataggioCaricato = 0
                                 return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
                             else:
                                 GlobalVar.schermo.blit(background, (0, 0))

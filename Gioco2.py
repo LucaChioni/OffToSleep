@@ -52,8 +52,8 @@ def gameloop():
             nx = 0
             ny = 0
 
-            print ("Salvataggio: " + str(GlobalVar.numSalvataggioCaricato))
             dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = menu(caricaSalvataggio, gameover)
+            print ("Salvataggio: " + str(GlobalVar.numSalvataggioCaricato))
             gameover = False
             # controlla se devi cambiare personaggio giocabile
             if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
