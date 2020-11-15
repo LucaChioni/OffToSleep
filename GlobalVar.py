@@ -144,12 +144,13 @@ global puntatore
 global puntatorevecchio
 global puntatIn
 global puntatOut
+global puntatSfo
 global puntatDif
 global puntatAtt
 global puntatArc
 global puntatPor
 global puntatCof
-global puntatSpinta
+global puntatAnalisi
 global puntatBom
 global puntatBoV
 global puntatEsc
@@ -362,12 +363,13 @@ def loadImgs():
     global puntatorevecchio
     global puntatIn
     global puntatOut
+    global puntatSfo
     global puntatDif
     global puntatAtt
     global puntatArc
     global puntatPor
     global puntatCof
-    global puntatSpinta
+    global puntatAnalisi
     global puntatBom
     global puntatBoV
     global puntatEsc
@@ -584,6 +586,8 @@ def loadImgs():
     puntatIn = pygame.transform.smoothscale(puntatIn, (gpx, gpy))
     puntatOut = loadImage('Immagini/Puntatori/InquadraCVout.png', True)
     puntatOut = pygame.transform.smoothscale(puntatOut, (gpx, gpy))
+    puntatSfo = loadImage('Immagini/Oggetti/sfondoOggettoLanciato.png', True)
+    puntatSfo = pygame.transform.smoothscale(puntatSfo, (gpx, gpy))
     puntatDif = loadImage('Immagini/Oggetti/Difesa.png', True)
     puntatDif = pygame.transform.smoothscale(puntatDif, (gpx, gpy))
     puntatAtt = loadImage('Immagini/Oggetti/Attacco.png', True)
@@ -594,8 +598,8 @@ def loadImgs():
     puntatPor = pygame.transform.smoothscale(puntatPor, (gpx, gpy))
     puntatCof = loadImage('Immagini/Oggetti/ApriCofanetto.png', True)
     puntatCof = pygame.transform.smoothscale(puntatCof, (gpx, gpy))
-    puntatSpinta = loadImage('Immagini/Oggetti/SpingiColco.png', True)
-    puntatSpinta = pygame.transform.smoothscale(puntatSpinta, (gpx, gpy))
+    puntatAnalisi = loadImage('Immagini/Oggetti/AnalizzaColco.png', True)
+    puntatAnalisi = pygame.transform.smoothscale(puntatAnalisi, (gpx, gpy))
     puntatBom = loadImage('Immagini/Oggetti/Oggetto6Ico.png', True)
     puntatBom = pygame.transform.smoothscale(puntatBom, (gpx, gpy))
     puntatBoV = loadImage('Immagini/Oggetti/Oggetto7Ico.png', True)

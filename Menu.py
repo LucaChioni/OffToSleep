@@ -539,7 +539,7 @@ def menu(caricaSalvataggio, gameover):
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
+def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
     sfondostastart = GlobalVar.sfondostax3
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
@@ -750,7 +750,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         # salva
                         if voceMarcata == 6:
                             # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                            n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vitaesca, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                            n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco)
                             if n != -1 and azioneFatta == 1:
                                 caricaSalvataggio = n
                                 risposta = True
@@ -873,45 +873,45 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 # vita-status personaggio
                 if dati[5] < 0:
                     dati[5] = 0
-                messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 13, 50)
-                messaggio("Lv:  " + str(dati[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 14, 50)
+                messaggio("Lv:  " + str(dati[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 12.8, 50)
                 if dati[4] < 100:
-                    messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, 50)
+                    messaggio("Esp:  " + str(dati[127]) + " / " + str(esptot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12.8, 50)
                 else:
-                    messaggio("Esp:  -- / --", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 14, 50)
-                messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 15, 50)
-                GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 13.5, (GlobalVar.gsy // 18 * 16) + (GlobalVar.gpy // 8)))
+                    messaggio("Esp:  -- / --", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12.8, 50)
+                messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 13.6, 50)
+                messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 14.4, 50)
+                GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 13.5, (GlobalVar.gsy // 18 * 15.2) + (GlobalVar.gpy // 8)))
                 if dati[121]:
-                    GlobalVar.schermo.blit(avvelenatosta, (GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 16))
+                    GlobalVar.schermo.blit(avvelenatosta, (GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 15.2))
                 if dati[123] > 0:
-                    GlobalVar.schermo.blit(attaccopiusta, ((GlobalVar.gsx // 32 * 13.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 16))
+                    GlobalVar.schermo.blit(attaccopiusta, ((GlobalVar.gsx // 32 * 13.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15.2))
                 if dati[124] > 0:
-                    GlobalVar.schermo.blit(difesapiusta, ((GlobalVar.gsx // 32 * 13.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 16))
-                GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 2))
+                    GlobalVar.schermo.blit(difesapiusta, ((GlobalVar.gsx // 32 * 13.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15.2))
+                GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 2.3))
 
                 if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                     # vita-status robo
                     if dati[10] < 0:
                         dati[10] = 0
-                    messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 13, 50)
-                    messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 14, 50)
-                    GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 23.5, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 8)))
+                    messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 13.6, 50)
+                    messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 14.4, 50)
+                    GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 23.5, (GlobalVar.gsy // 18 * 15.2) + (GlobalVar.gpy // 8)))
                     if dati[122] > 0:
-                        GlobalVar.schermo.blit(surriscaldatosta, (GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 15))
+                        GlobalVar.schermo.blit(surriscaldatosta, (GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 15.2))
                     if dati[125] > 0:
-                        GlobalVar.schermo.blit(velocitapiusta, ((GlobalVar.gsx // 32 * 23.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15))
+                        GlobalVar.schermo.blit(velocitapiusta, ((GlobalVar.gsx // 32 * 23.5) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15.2))
                     if dati[126] > 0:
-                        GlobalVar.schermo.blit(efficienzapiusta, ((GlobalVar.gsx // 32 * 23.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15))
-                    GlobalVar.schermo.blit(robosta, (GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 2))
+                        GlobalVar.schermo.blit(efficienzapiusta, ((GlobalVar.gsx // 32 * 23.5) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15.2))
+                    GlobalVar.schermo.blit(robosta, (GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 2.3))
 
                 if attacco != 0:
                     risposta = True
 
                 if faretraFrecceStart != 0:
-                    GlobalVar.schermo.blit(faretraFrecceStart, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 2.5))
-                    messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 6, 50)
-                GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroStart, (GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 2.5))
-                messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 6, 50)
+                    GlobalVar.schermo.blit(faretraFrecceStart, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 2.7))
+                    messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 6.2, 50)
+                GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroStart, (GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 2.7))
+                messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 6.2, 50)
             else:
                 if aperturaSettaColcoNonRiuscita:
                     pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 0.6))

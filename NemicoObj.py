@@ -518,7 +518,7 @@ class NemicoObj(object):
             elif self.velocita < 0:
                 self.mosseRimaste = self.mosseRimaste - 1 + self.velocita
 
-    def settaObbiettivoDalSalvataggio(self, x, y, rx, ry, vitaesca, vettoreDenaro, listaNemici, listaPersonaggi, dati, caseviste):
+    def settaObbiettivoDalSalvataggio(self, x, y, rx, ry, vettoreEsche, vettoreDenaro, listaNemici, listaPersonaggi, dati, caseviste):
         if self.obbiettivo[1] != 0 and self.obbiettivo[2] != 0:
             vetNemiciSoloConXeY = []
             if dati[10] <= 0:
@@ -534,10 +534,10 @@ class NemicoObj(object):
                     vetNemiciSoloConXeY.append(personaggio.y)
             escaTrovata = False
             i = 0
-            while i < len(vitaesca):
-                if self.obbiettivo[1] == vitaesca[i + 2] and self.obbiettivo[2] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+            while i < len(vettoreEsche):
+                if self.obbiettivo[1] == vettoreEsche[i + 2] and self.obbiettivo[2] == vettoreEsche[i + 3] and vettoreEsche[i + 1] > 0:
                     self.obbiettivo[0] = "Esca"
-                    self.obbiettivo[3] = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
+                    self.obbiettivo[3] = pathFinding(self.x, self.y, vettoreEsche[i + 2], vettoreEsche[i + 3], vetNemiciSoloConXeY, caseviste)
                     escaTrovata = True
                     break
                 i += 4
@@ -557,7 +557,7 @@ class NemicoObj(object):
                             break
                         i += 3
 
-    def settaObbiettivo(self, x, y, rx, ry, dati, vettoreDenaro, vitaesca, listaPersonaggi, listaNemici, porte, caseviste):
+    def settaObbiettivo(self, x, y, rx, ry, dati, vettoreDenaro, vettoreEsche, listaPersonaggi, listaNemici, porte, caseviste):
         vistoRallo = False
         vistoRob = False
         vistoesca = False
@@ -600,17 +600,17 @@ class NemicoObj(object):
             j = 0
             while j < len(self.caseattactot):
                 i = 0
-                while i < len(vitaesca):
-                    if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                while i < len(vettoreEsche):
+                    if self.caseattactot[j] == vettoreEsche[i + 2] and self.caseattactot[j + 1] == vettoreEsche[i + 3] and vettoreEsche[i + 1] > 0:
                         if not self.caseattactot[j + 2] and self.obbiettivo[1] == self.caseattactot[j] and self.obbiettivo[2] == self.caseattactot[j + 1]:
                             # nel caso c'è l'esca aggiungo rallo e colco agli ostacoli
                             vetNemiciSoloConXeY.append(x)
                             vetNemiciSoloConXeY.append(y)
                             vetNemiciSoloConXeY.append(rx)
                             vetNemiciSoloConXeY.append(ry)
-                            pathPerEscaVecchia = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
+                            pathPerEscaVecchia = pathFinding(self.x, self.y, vettoreEsche[i + 2], vettoreEsche[i + 3], vetNemiciSoloConXeY, caseviste)
                             if pathPerEscaVecchia:
-                                self.obbiettivo = ["Esca", vitaesca[i + 2], vitaesca[i + 3], pathPerEscaVecchia]
+                                self.obbiettivo = ["Esca", vettoreEsche[i + 2], vettoreEsche[i + 3], pathPerEscaVecchia]
                                 escaVecchiaAncoraRaggiungibilie = True
                         break
                     i += 4
@@ -632,8 +632,8 @@ class NemicoObj(object):
             if self.obbiettivo[0] == "Esca":
                 # controllo se esiste ancora l'obbiettivo precedente
                 i = 0
-                while i < len(vitaesca):
-                    if self.obbiettivo[1] == vitaesca[i + 2] and self.obbiettivo[2] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                while i < len(vettoreEsche):
+                    if self.obbiettivo[1] == vettoreEsche[i + 2] and self.obbiettivo[2] == vettoreEsche[i + 3] and vettoreEsche[i + 1] > 0:
                         inutileCalcolareObbiettivo = True
                         break
                     i += 4
@@ -647,8 +647,8 @@ class NemicoObj(object):
                 j = 0
                 while j < len(self.caseattactot):
                     i = 0
-                    while i < len(vitaesca):
-                        if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                    while i < len(vettoreEsche):
+                        if self.caseattactot[j] == vettoreEsche[i + 2] and self.caseattactot[j + 1] == vettoreEsche[i + 3] and vettoreEsche[i + 1] > 0:
                             if self.caseattactot[j + 2]:
                                 inutileCalcolareObbiettivo = False
                                 break
@@ -666,8 +666,8 @@ class NemicoObj(object):
                 j = 0
                 while j < len(self.caseattactot):
                     i = 0
-                    while i < len(vitaesca):
-                        if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                    while i < len(vettoreEsche):
+                        if self.caseattactot[j] == vettoreEsche[i + 2] and self.caseattactot[j + 1] == vettoreEsche[i + 3] and vettoreEsche[i + 1] > 0:
                             if self.caseattactot[j + 2]:
                                 inutileCalcolareObbiettivo = False
                                 break
@@ -686,8 +686,8 @@ class NemicoObj(object):
             j = 0
             while j < len(self.caseattactot):
                 i = 0
-                while i < len(vitaesca):
-                    if self.caseattactot[j] == vitaesca[i + 2] and self.caseattactot[j + 1] == vitaesca[i + 3] and vitaesca[i + 1] > 0:
+                while i < len(vettoreEsche):
+                    if self.caseattactot[j] == vettoreEsche[i + 2] and self.caseattactot[j + 1] == vettoreEsche[i + 3] and vettoreEsche[i + 1] > 0:
                         if self.caseattactot[j + 2]:
                             if primaesca:
                                 # nel caso vede un'esca aggiungo rallo e colco agli ostacoli
@@ -696,24 +696,24 @@ class NemicoObj(object):
                                 vetNemiciSoloConXeY.append(rx)
                                 vetNemiciSoloConXeY.append(ry)
                                 if not self.attaccaDaLontano:
-                                    pathPerEsca = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
+                                    pathPerEsca = pathFinding(self.x, self.y, vettoreEsche[i + 2], vettoreEsche[i + 3], vetNemiciSoloConXeY, caseviste)
                                     if pathPerEsca and len(pathPerEsca) > 0:
                                         distanzaDaEsca = len(pathPerEsca) / 2
-                                distMinXEsca = vitaesca[i + 2]
-                                distMinYEsca = vitaesca[i + 3]
+                                distMinXEsca = vettoreEsche[i + 2]
+                                distMinYEsca = vettoreEsche[i + 3]
                                 escabersaglio = i
                                 vistoesca = True
                                 primaesca = False
                             else:
                                 pathPerEscaTemp = False
                                 if not self.attaccaDaLontano:
-                                    pathPerEscaTemp = pathFinding(self.x, self.y, vitaesca[i + 2], vitaesca[i + 3], vetNemiciSoloConXeY, caseviste)
-                                if (pathPerEscaTemp and (len(pathPerEscaTemp) < distanzaDaEsca or distanzaDaEsca == -1)) or (((not pathPerEscaTemp and distanzaDaEsca == -1) or not self.attaccaDaLontano) and abs(vitaesca[i + 2] - self.x) + abs(vitaesca[i + 3] - self.y) < abs(distMinXEsca - self.x) + abs(distMinYEsca - self.y)):
+                                    pathPerEscaTemp = pathFinding(self.x, self.y, vettoreEsche[i + 2], vettoreEsche[i + 3], vetNemiciSoloConXeY, caseviste)
+                                if (pathPerEscaTemp and (len(pathPerEscaTemp) < distanzaDaEsca or distanzaDaEsca == -1)) or (((not pathPerEscaTemp and distanzaDaEsca == -1) or not self.attaccaDaLontano) and abs(vettoreEsche[i + 2] - self.x) + abs(vettoreEsche[i + 3] - self.y) < abs(distMinXEsca - self.x) + abs(distMinYEsca - self.y)):
                                     if pathPerEscaTemp and len(pathPerEscaTemp) > 0:
                                         pathPerEsca = pathPerEscaTemp
                                         distanzaDaEsca = len(pathPerEsca) / 2
-                                    distMinXEsca = vitaesca[i + 2]
-                                    distMinYEsca = vitaesca[i + 3]
+                                    distMinXEsca = vettoreEsche[i + 2]
+                                    distMinYEsca = vettoreEsche[i + 3]
                                     escabersaglio = i
                         break
                     i += 4
@@ -787,7 +787,7 @@ class NemicoObj(object):
 
             if vistoRallo or vistoRob or vistoesca or vistoDenaro:
                 if vistoesca and (distanzaDaEsca != -1 or self.attaccaDaLontano):
-                    self.obbiettivo = ["Esca", vitaesca[escabersaglio + 2], vitaesca[escabersaglio + 3], pathPerEsca]
+                    self.obbiettivo = ["Esca", vettoreEsche[escabersaglio + 2], vettoreEsche[escabersaglio + 3], pathPerEsca]
                 elif vistoDenaro and not (vistoRallo and distanzaDaRallo != -1) and not (vistoRob and distanzaDaColco != -1):
                     self.obbiettivo = ["Monete", xDenaro, yDenaro, pathPerDenaro]
                 elif vistoRob and (not vistoRallo or distanzaDaColco <= distanzaDaRallo or distanzaDaRallo == -1):

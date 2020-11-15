@@ -2085,7 +2085,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[11], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Velocizza:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[10]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno. Dopo 15 turni provoca surriscaldamento (applicata sempre su Colco)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno. Provoca surriscaldamento dopo 15 turni dall'esecuzione (applicata sempre su Colco)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 6.2, 40)
             if dati[22] > 0:

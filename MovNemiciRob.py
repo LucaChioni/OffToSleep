@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import copy
 from GenericFunc import *
 
 
-def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, listaPersonaggi, caseviste):
+def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemici, listaPersonaggi, caseviste):
     sposta = False
     attacca = False
     nmos = 0
@@ -23,21 +24,21 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, 
                         danno = 0
                     escabersaglio = -1
                     i = 0
-                    while i < len(vitaesca):
-                        if nemico.obbiettivo[1] == vitaesca[i + 2] and nemico.obbiettivo[2] == vitaesca[i + 3]:
+                    while i < len(vettoreEsche):
+                        if nemico.obbiettivo[1] == vettoreEsche[i + 2] and nemico.obbiettivo[2] == vettoreEsche[i + 3]:
                             escabersaglio = i
                             break
                         i += 4
                     if escabersaglio != -1:
-                        nemico.bersaglioColpito.append("Esca" + str(vitaesca[escabersaglio]))
+                        nemico.bersaglioColpito.append("Esca" + str(vettoreEsche[escabersaglio]))
                         nemico.bersaglioColpito.append(-danno)
                         nemico.bersaglioColpito.append("")
-                        if vitaesca[escabersaglio + 1] - danno <= 0:
+                        if vettoreEsche[escabersaglio + 1] - danno <= 0:
                             nemico.bersaglioColpito.append(True)
                         else:
                             nemico.bersaglioColpito.append(False)
                         print ("attacco vicino", nemico.tipo, "a esca", danno)
-                        vitaesca[escabersaglio + 1] = vitaesca[escabersaglio + 1] - danno
+                        vettoreEsche[escabersaglio + 1] = vettoreEsche[escabersaglio + 1] - danno
                 elif nemico.obbiettivo[0] == "Colco":
                     danno = nemico.attacco - difro
                     if danno < 0:
@@ -133,21 +134,21 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, 
                     danno = 0
                 escabersaglio = -1
                 i = 0
-                while i < len(vitaesca):
-                    if nemico.obbiettivo[1] == vitaesca[i + 2] and nemico.obbiettivo[2] == vitaesca[i + 3]:
+                while i < len(vettoreEsche):
+                    if nemico.obbiettivo[1] == vettoreEsche[i + 2] and nemico.obbiettivo[2] == vettoreEsche[i + 3]:
                         escabersaglio = i
                         break
                     i += 4
                 if escabersaglio != -1:
-                    nemico.bersaglioColpito.append("Esca" + str(vitaesca[escabersaglio]))
+                    nemico.bersaglioColpito.append("Esca" + str(vettoreEsche[escabersaglio]))
                     nemico.bersaglioColpito.append(-danno)
                     nemico.bersaglioColpito.append("")
-                    if vitaesca[escabersaglio + 1] - danno <= 0:
+                    if vettoreEsche[escabersaglio + 1] - danno <= 0:
                         nemico.bersaglioColpito.append(True)
                     else:
                         nemico.bersaglioColpito.append(False)
                     print ("attacco lontano", nemico.tipo, "a esca", danno)
-                    vitaesca[escabersaglio + 1] = vitaesca[escabersaglio + 1] - danno
+                    vettoreEsche[escabersaglio + 1] = vettoreEsche[escabersaglio + 1] - danno
                 nmos = 0
                 if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
                     if nemico.x < nemico.obbiettivo[1]:
@@ -526,8 +527,8 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, 
                 nmx = GlobalVar.gpx
                 nmy = 0
             i = 2
-            while i <= len(vitaesca):
-                if nemico.x + GlobalVar.gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
+            while i <= len(vettoreEsche):
+                if nemico.x + GlobalVar.gpx == vettoreEsche[i] and nemico.y == vettoreEsche[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
@@ -539,8 +540,8 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, 
                 nmx = -GlobalVar.gpx
                 nmy = 0
             i = 2
-            while i <= len(vitaesca):
-                if nemico.x - GlobalVar.gpx == vitaesca[i] and nemico.y == vitaesca[i + 1]:
+            while i <= len(vettoreEsche):
+                if nemico.x - GlobalVar.gpx == vettoreEsche[i] and nemico.y == vettoreEsche[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
@@ -552,8 +553,8 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, 
                 nmx = 0
                 nmy = GlobalVar.gpy
             i = 2
-            while i <= len(vitaesca):
-                if nemico.x == vitaesca[i] and nemico.y + GlobalVar.gpy == vitaesca[i + 1]:
+            while i <= len(vettoreEsche):
+                if nemico.x == vettoreEsche[i] and nemico.y + GlobalVar.gpy == vettoreEsche[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
@@ -565,8 +566,8 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, 
                 nmx = 0
                 nmy = -GlobalVar.gpy
             i = 2
-            while i <= len(vitaesca):
-                if nemico.x == vitaesca[i] and nemico.y - GlobalVar.gpy == vitaesca[i + 1]:
+            while i <= len(vettoreEsche):
+                if nemico.x == vettoreEsche[i] and nemico.y - GlobalVar.gpy == vettoreEsche[i + 1]:
                     nmx = 0
                     nmy = 0
                 i = i + 4
@@ -584,10 +585,10 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vitaesca, vetNemici, 
         nemico.animaSpostamento = True
     if attacca:
         nemico.animaAttacco = True
-    return nemico, nmos, dati, vitaesca
+    return nemico, nmos, dati, vettoreEsche
 
 
-def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico):
+def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco, dati, caselleVisteDaColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico):
     esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
     if dati[126] > 0:
         costoTecnicaUsata = GlobalVar.costoTecniche[azione - 1] // 2
@@ -641,9 +642,9 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
             ricarica2 = True
             attaccoDiColco.append("")
         if not suAlleato:
-            return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici
+            return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici
         else:
-            return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici
+            return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici
     elif not suAlleato:
         mostroAccanto = False
         mostroVisto = True
@@ -672,11 +673,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append("")
             # cura
             if azione == 2 and azioneEseguita:
-                nemicoBersaglio.vita += GlobalVar.dannoTecniche[azione - 1]
-                if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
-                    nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
+                pvGuadagnati = GlobalVar.dannoTecniche[azione - 1]
+                if pvGuadagnati + nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
+                    pvGuadagnati = nemicoBersaglio.vitaTotale - nemicoBersaglio.vita
+                nemicoBersaglio.vita += pvGuadagnati
                 attaccoDiColco.append(nemicoBersaglio)
-                attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
+                attaccoDiColco.append(pvGuadagnati)
                 attaccoDiColco.append("")
             # antidoto
             if azione == 3 and azioneEseguita:
@@ -686,11 +688,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append("antidoto")
             # cura+
             if azione == 8 and azioneEseguita:
-                nemicoBersaglio.vita += GlobalVar.dannoTecniche[azione - 1]
-                if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
-                    nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
+                pvGuadagnati = GlobalVar.dannoTecniche[azione - 1]
+                if pvGuadagnati + nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
+                    pvGuadagnati = nemicoBersaglio.vitaTotale - nemicoBersaglio.vita
+                nemicoBersaglio.vita += pvGuadagnati
                 attaccoDiColco.append(nemicoBersaglio)
-                attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
+                attaccoDiColco.append(pvGuadagnati)
                 attaccoDiColco.append("")
             # scossa+
             if azione == 9 and azioneEseguita:
@@ -717,11 +720,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 attaccoDiColco.append("")
             # cura++
             if azione == 16 and azioneEseguita:
-                nemicoBersaglio.vita += GlobalVar.dannoTecniche[azione - 1]
-                if nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
-                    nemicoBersaglio.vita = nemicoBersaglio.vitaTotale
+                pvGuadagnati = GlobalVar.dannoTecniche[azione - 1]
+                if pvGuadagnati + nemicoBersaglio.vita > nemicoBersaglio.vitaTotale:
+                    pvGuadagnati = nemicoBersaglio.vitaTotale - nemicoBersaglio.vita
+                nemicoBersaglio.vita += pvGuadagnati
                 attaccoDiColco.append(nemicoBersaglio)
-                attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
+                attaccoDiColco.append(pvGuadagnati)
                 attaccoDiColco.append("")
             # scossa++
             if azione == 18 and azioneEseguita:
@@ -800,15 +804,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 i = 0
                 while i < len(caseviste):
                     k = 0
-                    while k < len(vitaesca):
-                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                            if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                    while k < len(vettoreEsche):
+                        if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                            if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                 attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                if vitaesca[k + 1] <= 0:
-                                    vitaesca[k + 1] = 0
+                                if vettoreEsche[k + 1] <= 0:
+                                    vettoreEsche[k + 1] = 0
                                     attaccoDiColco.append("morte")
                                 else:
                                     attaccoDiColco.append("")
@@ -868,15 +872,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 i = 0
                 while i < len(caseviste):
                     k = 0
-                    while k < len(vitaesca):
-                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                            if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                    while k < len(vettoreEsche):
+                        if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                            if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                 attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                if vitaesca[k + 1] <= 0:
-                                    vitaesca[k + 1] = 0
+                                if vettoreEsche[k + 1] <= 0:
+                                    vettoreEsche[k + 1] = 0
                                     attaccoDiColco.append("morte")
                                 else:
                                     attaccoDiColco.append("")
@@ -936,15 +940,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 i = 0
                 while i < len(caseviste):
                     k = 0
-                    while k < len(vitaesca):
-                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                            if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                    while k < len(vettoreEsche):
+                        if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                            if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                 attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                if vitaesca[k + 1] <= 0:
-                                    vitaesca[k + 1] = 0
+                                if vettoreEsche[k + 1] <= 0:
+                                    vettoreEsche[k + 1] = 0
                                     attaccoDiColco.append("morte")
                                 else:
                                     attaccoDiColco.append("")
@@ -1017,7 +1021,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 sposta = True
             else:
                 print ("Percorso Colco verso obbiettivo 1 non trovato")
-        return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici
+        return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici
     else:
         ralloAccanto = False
         ralloVisto = False
@@ -1056,11 +1060,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("")
                     # cura
                     if azione == 2 and azioneEseguita:
-                        dati[5] += GlobalVar.dannoTecniche[azione - 1]
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
+                        pvGuadagnati = GlobalVar.dannoTecniche[azione - 1]
+                        if pvGuadagnati + dati[5] > pvtot:
+                            pvGuadagnati = pvtot - dati[5]
+                        dati[5] += pvGuadagnati
                         attaccoDiColco.append("Rallo")
-                        attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
+                        attaccoDiColco.append(pvGuadagnati)
                         attaccoDiColco.append("")
                     # antidoto
                     if azione == 3 and azioneEseguita:
@@ -1070,11 +1075,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("antidoto")
                     # cura+
                     if azione == 8 and azioneEseguita:
-                        dati[5] += GlobalVar.dannoTecniche[azione - 1]
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
+                        pvGuadagnati = GlobalVar.dannoTecniche[azione - 1]
+                        if pvGuadagnati + dati[5] > pvtot:
+                            pvGuadagnati = pvtot - dati[5]
+                        dati[5] += pvGuadagnati
                         attaccoDiColco.append("Rallo")
-                        attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
+                        attaccoDiColco.append(pvGuadagnati)
                         attaccoDiColco.append("")
                     # scossa+
                     if azione == 9 and azioneEseguita:
@@ -1104,11 +1110,12 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         attaccoDiColco.append("difP")
                     # cura++
                     if azione == 16 and azioneEseguita:
-                        dati[5] += GlobalVar.dannoTecniche[azione - 1]
-                        if dati[5] > pvtot:
-                            dati[5] = pvtot
+                        pvGuadagnati = GlobalVar.dannoTecniche[azione - 1]
+                        if pvGuadagnati + dati[5] > pvtot:
+                            pvGuadagnati = pvtot - dati[5]
+                        dati[5] += pvGuadagnati
                         attaccoDiColco.append("Rallo")
-                        attaccoDiColco.append(GlobalVar.dannoTecniche[azione - 1])
+                        attaccoDiColco.append(pvGuadagnati)
                         attaccoDiColco.append("")
                     # scossa++
                     if azione == 18 and azioneEseguita:
@@ -1187,15 +1194,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     i = 0
                     while i < len(caseviste):
                         k = 0
-                        while k < len(vitaesca):
-                            if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                                if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                    listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                    vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                    attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                        while k < len(vettoreEsche):
+                            if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                                if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                    listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                    vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                    attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                     attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                    if vitaesca[k + 1] <= 0:
-                                        vitaesca[k + 1] = 0
+                                    if vettoreEsche[k + 1] <= 0:
+                                        vettoreEsche[k + 1] = 0
                                         attaccoDiColco.append("morte")
                                     else:
                                         attaccoDiColco.append("")
@@ -1251,15 +1258,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     i = 0
                     while i < len(caseviste):
                         k = 0
-                        while k < len(vitaesca):
-                            if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                                if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                    listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                    vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                    attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                        while k < len(vettoreEsche):
+                            if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                                if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                    listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                    vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                    attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                     attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                    if vitaesca[k + 1] <= 0:
-                                        vitaesca[k + 1] = 0
+                                    if vettoreEsche[k + 1] <= 0:
+                                        vettoreEsche[k + 1] = 0
                                         attaccoDiColco.append("morte")
                                     else:
                                         attaccoDiColco.append("")
@@ -1315,15 +1322,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     i = 0
                     while i < len(caseviste):
                         k = 0
-                        while k < len(vitaesca):
-                            if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                                if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                    listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                    vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                    attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                        while k < len(vettoreEsche):
+                            if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                                if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                    listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                    vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                    attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                     attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                    if vitaesca[k + 1] <= 0:
-                                        vitaesca[k + 1] = 0
+                                    if vettoreEsche[k + 1] <= 0:
+                                        vettoreEsche[k + 1] = 0
                                         attaccoDiColco.append("morte")
                                     else:
                                         attaccoDiColco.append("")
@@ -1426,15 +1433,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 i = 0
                 while i < len(caseviste):
                     k = 0
-                    while k < len(vitaesca):
-                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                            if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                    while k < len(vettoreEsche):
+                        if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                            if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                 attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                if vitaesca[k + 1] <= 0:
-                                    vitaesca[k + 1] = 0
+                                if vettoreEsche[k + 1] <= 0:
+                                    vettoreEsche[k + 1] = 0
                                     attaccoDiColco.append("morte")
                                 else:
                                     attaccoDiColco.append("")
@@ -1476,15 +1483,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 i = 0
                 while i < len(caseviste):
                     k = 0
-                    while k < len(vitaesca):
-                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                            if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                    while k < len(vettoreEsche):
+                        if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                            if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                 attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                if vitaesca[k + 1] <= 0:
-                                    vitaesca[k + 1] = 0
+                                if vettoreEsche[k + 1] <= 0:
+                                    vettoreEsche[k + 1] = 0
                                     attaccoDiColco.append("morte")
                                 else:
                                     attaccoDiColco.append("")
@@ -1526,15 +1533,15 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                 i = 0
                 while i < len(caseviste):
                     k = 0
-                    while k < len(vitaesca):
-                        if vitaesca[k + 1] > 0 and caseviste[i] == vitaesca[k + 2] and caseviste[i + 1] == vitaesca[k + 3]:
-                            if caseviste[i + 2] and abs(rx - vitaesca[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vitaesca[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
-                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vitaesca[k]))
-                                vitaesca[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
-                                attaccoDiColco.append("Esca:" + str(vitaesca[k]))
+                    while k < len(vettoreEsche):
+                        if vettoreEsche[k + 1] > 0 and caseviste[i] == vettoreEsche[k + 2] and caseviste[i + 1] == vettoreEsche[k + 3]:
+                            if caseviste[i + 2] and abs(rx - vettoreEsche[k + 2]) <= GlobalVar.vistaRobo * GlobalVar.gpx and abs(ry - vettoreEsche[k + 3]) <= GlobalVar.vistaRobo * GlobalVar.gpy:
+                                listaNemiciAttaccatiADistanzaRobo.append("Esca:" + str(vettoreEsche[k]))
+                                vettoreEsche[k + 1] -= GlobalVar.dannoTecniche[azione - 1]
+                                attaccoDiColco.append("Esca:" + str(vettoreEsche[k]))
                                 attaccoDiColco.append(-GlobalVar.dannoTecniche[azione - 1])
-                                if vitaesca[k + 1] <= 0:
-                                    vitaesca[k + 1] = 0
+                                if vettoreEsche[k + 1] <= 0:
+                                    vettoreEsche[k + 1] = 0
                                     attaccoDiColco.append("morte")
                                 else:
                                     attaccoDiColco.append("")
@@ -1557,7 +1564,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
-        return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici
+        return azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici
 
 
 def creaVetOstacoliPerColco(x, y, listaNemici, listaPersonaggi, xNemicoDaEscludere, yNemicoDaEscludere):
@@ -1576,7 +1583,7 @@ def creaVetOstacoliPerColco(x, y, listaNemici, listaPersonaggi, xNemicoDaEsclude
     return vetNemiciSoloConXeY
 
 
-def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vitaesca):
+def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, analizzaColco):
     nrx = 0
     nry = 0
     raffreddamento = False
@@ -1590,11 +1597,16 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
     vrx = rx
     vry = ry
 
+    # vettorePrevisione contiene tutte le azioni possibili con il relativo motivo per cui non è stato possibile eseguirle
+    vettorePrevisione = [["telecolco", ""], [1, ""], [2, ""], [3, ""], [4, ""], [5, ""], [6, ""], [7, ""], [8, ""], [9, ""], [10, ""], ["ultimoObbiettivo", ""]]
+    previsionePosizioneObbiettivo = []
+
     # vetDatiNemici = [vita, x, y, vitaTot, stato]
     nrob = 0
     sposta = False
     # movimento robot
     if chiamarob:
+        previsionePosizioneObbiettivo.append([x, y])
         azioneEseguita = False
         if (vx == rx + GlobalVar.gpx and vy == ry) or (vx == rx - GlobalVar.gpx and vy == ry) or (vx == rx and vy == ry + GlobalVar.gpy) or (vx == rx and vy == ry - GlobalVar.gpy):
             if not (x == vx and y == vy):
@@ -1638,6 +1650,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         else:
             ultimoObbiettivoColco = []
     else:
+        vettorePrevisione[0][1] = "TeleColco spento"
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
         if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
@@ -1655,7 +1668,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 vetNemiciSoloConXeY.append(personaggio.y)
         pathToRallo = pathFinding(rx, ry, x, y, vetNemiciSoloConXeY, caseviste)
         # trovo i nemici/Rallo visti
-        listaNemiciTotali = listaNemici[:]
+        listaNemiciTotali = copy.deepcopy(listaNemici)
         k = 0
         while k < len(caselleAttaccabiliColco):
             if caselleAttaccabiliColco[k + 2]:
@@ -1677,83 +1690,139 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         azioneEseguita = False
         i = 101
         while i <= 110 and not azioneEseguita:
-            if dati[i] != 0 and dati[i + 10] != 0 and dati[10] >= GlobalVar.costoTecniche[dati[i + 10] - 1]:
-                pathToNemico = []
-                # tecnicaRavvicinata è True quando la tecnica può essere usata solo accanto al bersaglio, altrimenti è False
-                if dati[i + 10] == 1 or dati[i + 10] == 2 or dati[i + 10] == 3 or dati[i + 10] == 8 or dati[i + 10] == 9 or dati[i + 10] == 12 or dati[i + 10] == 13 or dati[i + 10] == 16 or dati[i + 10] == 18:
-                    tecnicaRavvicinata = True
-                else:
-                    tecnicaRavvicinata = False
+            if dati[126] > 0:
+                costoTecnicaUsata = GlobalVar.costoTecniche[dati[i + 10] - 1] // 2
+            else:
+                costoTecnicaUsata = GlobalVar.costoTecniche[dati[i + 10] - 1]
+            rigaGambitAttuale = i - 100
+            if dati[i] == 0 or dati[i + 10] == 0:
+                vettorePrevisione[rigaGambitAttuale][1] = "Settaggio incompleto"
+            elif dati[10] > costoTecnicaUsata:
+                if not (dati[122] > 0 and (dati[i + 10] == 11 or dati[i + 10] == 14)):
+                    pathToNemico = []
+                    # tecnicaRavvicinata è True quando la tecnica può essere usata solo accanto al bersaglio, altrimenti è False
+                    if dati[i + 10] == 1 or dati[i + 10] == 2 or dati[i + 10] == 3 or dati[i + 10] == 8 or dati[i + 10] == 9 or dati[i + 10] == 12 or dati[i + 10] == 13 or dati[i + 10] == 16 or dati[i + 10] == 18:
+                        tecnicaRavvicinata = True
+                    else:
+                        tecnicaRavvicinata = False
+                    if dati[i + 10] == 5 or dati[i + 10] == 15 or dati[i + 10] == 20:
+                        tecnicaABersaglioSingolo = False
+                    else:
+                        tecnicaABersaglioSingolo = True
 
-                # azioni su alleati
-                # pv rallo < 80
-                if dati[i] == 1:
-                    if dati[5] < pvtot / float(100) * 80 and dati[5] >= 0:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
-                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                    # azioni su alleati
+                    # pv rallo < 80
+                    if dati[i] == 1:
+                        if dati[5] < pvtot / float(100) * 80 and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             if azioneEseguita:
                                 ultimoObbiettivoColco = ["Rallo", x, y]
-                # pv rallo < 50
-                if dati[i] == 2:
-                    if dati[5] < pvtot / float(100) * 50 and dati[5] > 0:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
-                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        elif not dati[5] < pvtot / float(100) * 80:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                        elif not ralloVisto:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                    # pv rallo < 50
+                    if dati[i] == 2:
+                        if dati[5] < pvtot / float(100) * 50 and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             if azioneEseguita:
                                 ultimoObbiettivoColco = ["Rallo", x, y]
-                # pv rallo < 30
-                if dati[i] == 3:
-                    if dati[5] < pvtot / float(100) * 30 and dati[5] > 0:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
-                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        elif not dati[5] < pvtot / float(100) * 50:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                        elif not ralloVisto:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                    # pv rallo < 30
+                    if dati[i] == 3:
+                        if dati[5] < pvtot / float(100) * 30 and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             if azioneEseguita:
                                 ultimoObbiettivoColco = ["Rallo", x, y]
-                # rallo avvelenato
-                if dati[i] == 4:
-                    if dati[121]:
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
-                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        elif not dati[5] < pvtot / float(100) * 30:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                        elif not ralloVisto:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                    # rallo avvelenato
+                    if dati[i] == 4:
+                        if dati[121] and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             if azioneEseguita:
                                 ultimoObbiettivoColco = ["Rallo", x, y]
-                # colco surriscaldato
-                if dati[i] == 5:
-                    if dati[122] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                        if azioneEseguita:
-                            ultimoObbiettivoColco = []
-                # pe colco < 80
-                if dati[i] == 6:
-                    if dati[10] < entot / float(100) * 80 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                        if azioneEseguita:
-                            ultimoObbiettivoColco = []
-                # pe colco < 50
-                if dati[i] == 7:
-                    if dati[10] < entot / float(100) * 50 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                        if azioneEseguita:
-                            ultimoObbiettivoColco = []
-                # pe colco < 30
-                if dati[i] == 8:
-                    if dati[10] < entot / float(100) * 30 and dati[10] > 0:
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                        if azioneEseguita:
-                            ultimoObbiettivoColco = []
-                # sempre rallo
-                if dati[i] == 9 and not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0):
-                    if (dati[i + 10] != 12 and dati[i + 10] != 13) or (dati[i + 10] == 12 and dati[123] == 0) or (dati[i + 10] == 13 and dati[124] == 0):
-                        if (not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo):
-                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        elif not dati[121]:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                        elif not ralloVisto:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                    # colco surriscaldato
+                    if dati[i] == 5:
+                        if dati[122] > 0:
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Colco", rx, ry]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                    # pe colco < 80
+                    if dati[i] == 6:
+                        if dati[10] < entot / float(100) * 80:
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Colco", rx, ry]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                    # pe colco < 50
+                    if dati[i] == 7:
+                        if dati[10] < entot / float(100) * 50:
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Colco", rx, ry]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                    # pe colco < 30
+                    if dati[i] == 8:
+                        if dati[10] < entot / float(100) * 30:
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Colco", rx, ry]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                    # sempre rallo
+                    if dati[i] == 9:
+                        if not (dati[i + 10] == 12 and dati[123] > 0) and not (dati[i + 10] == 13 and dati[124] > 0) and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 1, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             if azioneEseguita:
                                 ultimoObbiettivoColco = ["Rallo", x, y]
-                # sempre colco
-                if dati[i] == 10 and not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
-                    if (dati[i + 10] != 11 and dati[i + 10] != 14) or (dati[i + 10] == 11 and dati[125] == 0) or (dati[i + 10] == 14 and dati[126] == 0):
-                        azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                        if azioneEseguita:
-                            ultimoObbiettivoColco = []
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        elif (dati[i + 10] == 12 and dati[123] > 0) or (dati[i + 10] == 13 and dati[124] > 0):
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
+                        elif not ralloVisto:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                    # sempre colco
+                    if dati[i] == 10:
+                        if not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
+                            azioneEseguita, nrob, sposta, dati, nemiciVistiDaColco, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, False, dati[i + 10], 2, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            if azioneEseguita:
+                                ultimoObbiettivoColco = ["Colco", rx, ry]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
 
-                # azioni su nemici
-                if len(listaNemici) > 0 and len(nemiciVistiDaColco) > 0:
+                    # azioni su nemici
                     nemicoBersaglio = False
                     # nemico a caso
                     if dati[i] == 11:
@@ -1761,6 +1830,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         if obbiettivoCasualeColco:
                             nemicoBersaglio = obbiettivoCasualeColco
                         elif not nemicoBersaglio and len(nemiciVistiDaColco) > 0:
+                            # non uso il deepcopy perché mi serve che gli oggetti siano gli stessi
                             listaNemiciProvvisoria = nemiciVistiDaColco[:]
                             trovatoNemicoCasuale = False
                             while len(listaNemiciProvvisoria) > 0 and not trovatoNemicoCasuale:
@@ -1779,14 +1849,17 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             obbiettivoCasualeColco = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
+                            if nemicoBersaglio.vita > 0 or analizzaColco:
                                 ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                             else:
                                 ultimoObbiettivoColco = []
                             if len(attaccoDiColco) > 0:
                                 obbiettivoCasualeColco = False
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico vicino
                     if dati[i] == 12:
                         distMin = False
@@ -1809,7 +1882,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                     if tecnicaRavvicinata:
                                         vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
                                         pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
                                         if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
                                             pathToNemico = pathToNemicoTemp
                                             distanzaDaNemico = len(pathToNemico) / 2
@@ -1819,12 +1892,18 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemicoBersaglio = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
+                            if nemicoBersaglio.vita > 0 or analizzaColco:
                                 ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                             else:
                                 ultimoObbiettivoColco = []
+                        else:
+                            if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            else:
+                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico lontano
                     if dati[i] == 13:
                         distMin = False
@@ -1847,7 +1926,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                     if tecnicaRavvicinata:
                                         vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
                                         pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
                                         if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
                                             pathToNemico = pathToNemicoTemp
                                             distanzaDaNemico = len(pathToNemico) / 2
@@ -1857,12 +1936,18 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemicoBersaglio = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
+                            if nemicoBersaglio.vita > 0 or analizzaColco:
                                 ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                             else:
                                 ultimoObbiettivoColco = []
+                        else:
+                            if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            else:
+                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico pv < 80
                     if dati[i] == 14:
                         distMin = False
@@ -1885,7 +1970,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                     if tecnicaRavvicinata:
                                         vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
                                         pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
                                         if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
                                             pathToNemico = pathToNemicoTemp
                                             distanzaDaNemico = len(pathToNemico) / 2
@@ -1895,12 +1980,18 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemicoBersaglio = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
+                            if nemicoBersaglio.vita > 0 or analizzaColco:
                                 ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                             else:
                                 ultimoObbiettivoColco = []
+                        else:
+                            if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            else:
+                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico pv < 50
                     if dati[i] == 15:
                         distMin = False
@@ -1923,7 +2014,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                     if tecnicaRavvicinata:
                                         vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
                                         pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
                                         if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
                                             pathToNemico = pathToNemicoTemp
                                             distanzaDaNemico = len(pathToNemico) / 2
@@ -1933,12 +2024,18 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemicoBersaglio = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
+                            if nemicoBersaglio.vita > 0 or analizzaColco:
                                 ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                             else:
                                 ultimoObbiettivoColco = []
+                        else:
+                            if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            else:
+                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico pv < 30
                     if dati[i] == 16:
                         distMin = False
@@ -1961,7 +2058,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                     if tecnicaRavvicinata:
                                         vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
                                         pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
                                         if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
                                             pathToNemico = pathToNemicoTemp
                                             distanzaDaNemico = len(pathToNemico) / 2
@@ -1971,12 +2068,18 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemicoBersaglio = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
+                            if nemicoBersaglio.vita > 0 or analizzaColco:
                                 ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                             else:
                                 ultimoObbiettivoColco = []
+                        else:
+                            if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            else:
+                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico con meno pv
                     if dati[i] == 17:
                         distMin = False
@@ -2000,7 +2103,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 if tecnicaRavvicinata:
                                     vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
                                     pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                if nemico.vita < pvMin or (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and (nemico.vita == pvMin and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin)):
+                                if nemico.vita < pvMin or (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and (nemico.vita == pvMin and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin)):
                                     if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
                                         pathToNemico = pathToNemicoTemp
                                         distanzaDaNemico = len(pathToNemico) / 2
@@ -2014,171 +2117,210 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                             nemicoBersaglio = False
                         if nemicoBersaglio:
                             nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
+                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
                             nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
+                            if nemicoBersaglio.vita > 0 or analizzaColco:
                                 ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                             else:
                                 ultimoObbiettivoColco = []
+                        else:
+                            if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            else:
+                                vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # numero nemici > 1
-                    if dati[i] == 18 and len(nemiciVistiDaColco) > 1:
-                        distMin = False
-                        distanzaDaNemico = -1
-                        pathToNemico = []
-                        primoMostro = True
-                        for nemico in nemiciVistiDaColco:
-                            if primoMostro:
-                                if tecnicaRavvicinata:
-                                    vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
-                                    pathToNemico = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if pathToNemico and len(pathToNemico) > 0:
-                                        distanzaDaNemico = len(pathToNemico) / 2
-                                distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
-                                nemicoBersaglio = nemico
-                                primoMostro = False
-                            else:
-                                pathToNemicoTemp = False
-                                if tecnicaRavvicinata:
-                                    vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
-                                    pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
-                                    if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
-                                        pathToNemico = pathToNemicoTemp
-                                        distanzaDaNemico = len(pathToNemico) / 2
+                    if dati[i] == 18:
+                        if len(nemiciVistiDaColco) > 1:
+                            distMin = False
+                            distanzaDaNemico = -1
+                            pathToNemico = []
+                            primoMostro = True
+                            for nemico in nemiciVistiDaColco:
+                                if not tecnicaABersaglioSingolo:
+                                    previsionePosizioneObbiettivo.append([nemico.x, nemico.y])
+                                if primoMostro:
+                                    if tecnicaRavvicinata:
+                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
+                                        pathToNemico = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
+                                        if pathToNemico and len(pathToNemico) > 0:
+                                            distanzaDaNemico = len(pathToNemico) / 2
                                     distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
                                     nemicoBersaglio = nemico
-                        if tecnicaRavvicinata and not pathToNemico:
-                            nemicoBersaglio = False
-                        if nemicoBersaglio:
-                            nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                            nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                    primoMostro = False
+                                else:
+                                    pathToNemicoTemp = False
+                                    if tecnicaRavvicinata:
+                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
+                                        pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                        if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
+                                            pathToNemico = pathToNemicoTemp
+                                            distanzaDaNemico = len(pathToNemico) / 2
+                                        distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
+                                        nemicoBersaglio = nemico
+                            if tecnicaRavvicinata and not pathToNemico:
+                                nemicoBersaglio = False
+                            if nemicoBersaglio:
+                                if tecnicaABersaglioSingolo:
+                                    previsionePosizioneObbiettivo.append([nemicoBersaglio.x, nemicoBersaglio.y])
+                                nemiciVistiDaColco.remove(nemicoBersaglio)
+                                azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                                nemiciVistiDaColco.append(nemicoBersaglio)
+                                if nemicoBersaglio.vita > 0 or analizzaColco:
+                                    ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                else:
+                                    ultimoObbiettivoColco = []
                             else:
-                                ultimoObbiettivoColco = []
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # numero nemici > 4
-                    if dati[i] == 19 and len(nemiciVistiDaColco) > 4:
-                        distMin = False
-                        distanzaDaNemico = -1
-                        pathToNemico = []
-                        primoMostro = True
-                        for nemico in nemiciVistiDaColco:
-                            if primoMostro:
-                                if tecnicaRavvicinata:
-                                    vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
-                                    pathToNemico = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if pathToNemico and len(pathToNemico) > 0:
-                                        distanzaDaNemico = len(pathToNemico) / 2
-                                distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
-                                nemicoBersaglio = nemico
-                                primoMostro = False
-                            else:
-                                pathToNemicoTemp = False
-                                if tecnicaRavvicinata:
-                                    vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
-                                    pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
-                                    if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
-                                        pathToNemico = pathToNemicoTemp
-                                        distanzaDaNemico = len(pathToNemico) / 2
+                    if dati[i] == 19:
+                        if len(nemiciVistiDaColco) > 4:
+                            distMin = False
+                            distanzaDaNemico = -1
+                            pathToNemico = []
+                            primoMostro = True
+                            for nemico in nemiciVistiDaColco:
+                                if not tecnicaABersaglioSingolo:
+                                    previsionePosizioneObbiettivo.append([nemico.x, nemico.y])
+                                if primoMostro:
+                                    if tecnicaRavvicinata:
+                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
+                                        pathToNemico = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
+                                        if pathToNemico and len(pathToNemico) > 0:
+                                            distanzaDaNemico = len(pathToNemico) / 2
                                     distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
                                     nemicoBersaglio = nemico
-                        if tecnicaRavvicinata and not pathToNemico:
-                            nemicoBersaglio = False
-                        if nemicoBersaglio:
-                            nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                            nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                    primoMostro = False
+                                else:
+                                    pathToNemicoTemp = False
+                                    if tecnicaRavvicinata:
+                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
+                                        pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                        if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
+                                            pathToNemico = pathToNemicoTemp
+                                            distanzaDaNemico = len(pathToNemico) / 2
+                                        distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
+                                        nemicoBersaglio = nemico
+                            if tecnicaRavvicinata and not pathToNemico:
+                                nemicoBersaglio = False
+                            if nemicoBersaglio:
+                                if tecnicaABersaglioSingolo:
+                                    previsionePosizioneObbiettivo.append([nemicoBersaglio.x, nemicoBersaglio.y])
+                                nemiciVistiDaColco.remove(nemicoBersaglio)
+                                azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                                nemiciVistiDaColco.append(nemicoBersaglio)
+                                if nemicoBersaglio.vita > 0 or analizzaColco:
+                                    ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                else:
+                                    ultimoObbiettivoColco = []
                             else:
-                                ultimoObbiettivoColco = []
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # numero nemici > 7
-                    if dati[i] == 20 and len(nemiciVistiDaColco) > 7:
-                        distMin = False
-                        distanzaDaNemico = -1
-                        pathToNemico = []
-                        primoMostro = True
-                        for nemico in nemiciVistiDaColco:
-                            if primoMostro:
-                                if tecnicaRavvicinata:
-                                    vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
-                                    pathToNemico = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                    if pathToNemico and len(pathToNemico) > 0:
-                                        distanzaDaNemico = len(pathToNemico) / 2
-                                distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
-                                nemicoBersaglio = nemico
-                                primoMostro = False
-                            else:
-                                pathToNemicoTemp = False
-                                if tecnicaRavvicinata:
-                                    vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
-                                    pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
-                                if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
-                                    if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
-                                        pathToNemico = pathToNemicoTemp
-                                        distanzaDaNemico = len(pathToNemico) / 2
+                    if dati[i] == 20:
+                        if len(nemiciVistiDaColco) > 7:
+                            distMin = False
+                            distanzaDaNemico = -1
+                            pathToNemico = []
+                            primoMostro = True
+                            for nemico in nemiciVistiDaColco:
+                                if not tecnicaABersaglioSingolo:
+                                    previsionePosizioneObbiettivo.append([nemico.x, nemico.y])
+                                if primoMostro:
+                                    if tecnicaRavvicinata:
+                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
+                                        pathToNemico = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
+                                        if pathToNemico and len(pathToNemico) > 0:
+                                            distanzaDaNemico = len(pathToNemico) / 2
                                     distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
                                     nemicoBersaglio = nemico
-                        if tecnicaRavvicinata and not pathToNemico:
-                            nemicoBersaglio = False
-                        if nemicoBersaglio:
-                            nemiciVistiDaColco.remove(nemicoBersaglio)
-                            azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vitaesca, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vitaesca, listaNemici, caseviste, pathToRallo, pathToNemico)
-                            nemiciVistiDaColco.append(nemicoBersaglio)
-                            if nemicoBersaglio.vita > 0:
-                                ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                    primoMostro = False
+                                else:
+                                    pathToNemicoTemp = False
+                                    if tecnicaRavvicinata:
+                                        vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemico.x, nemico.y)
+                                        pathToNemicoTemp = pathFinding(rx, ry, nemico.x, nemico.y, vetNemiciSoloConXeY, caseviste)
+                                    if (tecnicaRavvicinata and pathToNemicoTemp and (len(pathToNemicoTemp) / 2 < distanzaDaNemico or distanzaDaNemico == -1)) or (((tecnicaRavvicinata and not pathToNemicoTemp and distanzaDaNemico == -1) or not tecnicaRavvicinata) and abs(nemico.x - rx) + abs(nemico.y - ry) < distMin):
+                                        if pathToNemicoTemp and len(pathToNemicoTemp) > 0:
+                                            pathToNemico = pathToNemicoTemp
+                                            distanzaDaNemico = len(pathToNemico) / 2
+                                        distMin = abs(nemico.x - rx) + abs(nemico.y - ry)
+                                        nemicoBersaglio = nemico
+                            if tecnicaRavvicinata and not pathToNemico:
+                                nemicoBersaglio = False
+                            if nemicoBersaglio:
+                                if tecnicaABersaglioSingolo:
+                                    previsionePosizioneObbiettivo.append([nemicoBersaglio.x, nemicoBersaglio.y])
+                                nemiciVistiDaColco.remove(nemicoBersaglio)
+                                azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici = eseguiAzione(rx, ry, nemicoBersaglio, dati[i + 10], False, nemiciVistiDaColco, dati, caselleAttaccabiliColco, difesa, vx, vy, x, y, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, listaPersonaggi, vettoreEsche, listaNemici, caseviste, pathToRallo, pathToNemico)
+                                nemiciVistiDaColco.append(nemicoBersaglio)
+                                if nemicoBersaglio.vita > 0 or analizzaColco:
+                                    ultimoObbiettivoColco = ["Nemico", nemicoBersaglio.x, nemicoBersaglio.y]
+                                else:
+                                    ultimoObbiettivoColco = []
                             else:
-                                ultimoObbiettivoColco = []
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                        else:
+                            vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
 
                     # nel caso in cui viene fatta un'azione e non c'è un target specifico resetto ultimoObbiettivoColco
-                    if azioneEseguita and not nemicoBersaglio:
+                    if azioneEseguita and dati[i] >= 11 and not nemicoBersaglio:
                         ultimoObbiettivoColco = []
-                # tecniche = scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++
-                if azioneEseguita and sposta:
-                    tecnicaUsata = "spostamento"
-                elif azioneEseguita:
-                    if dati[i + 10] == 1:
-                        tecnicaUsata = "scossa"
-                    if dati[i + 10] == 2:
-                        tecnicaUsata = "cura"
-                    if dati[i + 10] == 3:
-                        tecnicaUsata = "antidoto"
-                    if dati[i + 10] == 4:
-                        tecnicaUsata = "freccia"
-                    if dati[i + 10] == 5:
-                        tecnicaUsata = "tempesta"
-                    if dati[i + 10] == 6:
-                        tecnicaUsata = "raffred"
-                    if dati[i + 10] == 7:
-                        tecnicaUsata = "ricarica"
-                    if dati[i + 10] == 8:
-                        tecnicaUsata = "cura+"
-                    if dati[i + 10] == 9:
-                        tecnicaUsata = "scossa+"
-                    if dati[i + 10] == 10:
-                        tecnicaUsata = "freccia+"
-                    if dati[i + 10] == 11:
-                        tecnicaUsata = "velocizza"
-                    if dati[i + 10] == 12:
-                        tecnicaUsata = "attP"
-                    if dati[i + 10] == 13:
-                        tecnicaUsata = "difP"
-                    if dati[i + 10] == 14:
-                        tecnicaUsata = "efficienza"
-                    if dati[i + 10] == 15:
-                        tecnicaUsata = "tempesta+"
-                    if dati[i + 10] == 16:
-                        tecnicaUsata = "cura++"
-                    if dati[i + 10] == 17:
-                        tecnicaUsata = "ricarica+"
-                    if dati[i + 10] == 18:
-                        tecnicaUsata = "scossa++"
-                    if dati[i + 10] == 19:
-                        tecnicaUsata = "freccia++"
-                    if dati[i + 10] == 20:
-                        tecnicaUsata = "tempesta++"
+
+                    # tecniche = scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++
+                    if azioneEseguita and sposta:
+                        tecnicaUsata = "spostamento"
+                    elif azioneEseguita:
+                        if dati[i + 10] == 1:
+                            tecnicaUsata = "scossa"
+                        if dati[i + 10] == 2:
+                            tecnicaUsata = "cura"
+                        if dati[i + 10] == 3:
+                            tecnicaUsata = "antidoto"
+                        if dati[i + 10] == 4:
+                            tecnicaUsata = "freccia"
+                        if dati[i + 10] == 5:
+                            tecnicaUsata = "tempesta"
+                        if dati[i + 10] == 6:
+                            tecnicaUsata = "raffred"
+                        if dati[i + 10] == 7:
+                            tecnicaUsata = "ricarica"
+                        if dati[i + 10] == 8:
+                            tecnicaUsata = "cura+"
+                        if dati[i + 10] == 9:
+                            tecnicaUsata = "scossa+"
+                        if dati[i + 10] == 10:
+                            tecnicaUsata = "freccia+"
+                        if dati[i + 10] == 11:
+                            tecnicaUsata = "velocizza"
+                        if dati[i + 10] == 12:
+                            tecnicaUsata = "attP"
+                        if dati[i + 10] == 13:
+                            tecnicaUsata = "difP"
+                        if dati[i + 10] == 14:
+                            tecnicaUsata = "efficienza"
+                        if dati[i + 10] == 15:
+                            tecnicaUsata = "tempesta+"
+                        if dati[i + 10] == 16:
+                            tecnicaUsata = "cura++"
+                        if dati[i + 10] == 17:
+                            tecnicaUsata = "ricarica+"
+                        if dati[i + 10] == 18:
+                            tecnicaUsata = "scossa++"
+                        if dati[i + 10] == 19:
+                            tecnicaUsata = "freccia++"
+                        if dati[i + 10] == 20:
+                            tecnicaUsata = "tempesta++"
+                else:
+                    vettorePrevisione[rigaGambitAttuale][1] = "Tecnica inutilizzabile con surriscaldamento"
+            else:
+                vettorePrevisione[rigaGambitAttuale][1] = "Energia insufficiente"
+
             i += 1
 
         if not azioneEseguita and len(ultimoObbiettivoColco) > 0:
@@ -2235,7 +2377,6 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         nrob = 3
                     if rx == ultimoObbiettivoColco[1] and ry - GlobalVar.gpy == ultimoObbiettivoColco[2]:
                         nrob = 4
-                    ultimoObbiettivoColco = []
                     sposta = True
                     azioneEseguita = True
             elif not (ultimoObbiettivoColco[1] == rx and ultimoObbiettivoColco[2] == ry):
@@ -2256,7 +2397,12 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             else:
                 ultimoObbiettivoColco = []
             if azioneEseguita and sposta:
+                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                 tecnicaUsata = "spostamento"
+            else:
+                vettorePrevisione[11][1] = "Obbiettivo irraggiungibile"
+        elif not azioneEseguita:
+            vettorePrevisione[11][1] = "Nessun obbiettivo in memoria"
 
     for nemico in nemiciVistiDaColco:
         listaNemici.append(nemico)
@@ -2297,6 +2443,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             else:
                 nrx = 0
                 nry = -GlobalVar.gpy
+    if len(ultimoObbiettivoColco) > 0 and rx + nrx == ultimoObbiettivoColco[1] and ry + nry == ultimoObbiettivoColco[2]:
+        ultimoObbiettivoColco = []
 
     i = 0
     while i < len(caseviste):
@@ -2318,4 +2466,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     ultimoObbiettivoColco = ["Rallo", x, y]
             k += 3
 
-    return rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vitaesca
+    if analizzaColco:
+        return vettorePrevisione, previsionePosizioneObbiettivo
+    else:
+        return rx, ry, nrob, dati, listaNemici, raffreddamento, ricarica1, ricarica2, azioneEseguita, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, attaccoDiColco, ultimoObbiettivoColco, obbiettivoCasualeColco, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche

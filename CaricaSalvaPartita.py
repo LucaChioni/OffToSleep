@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vitaesca, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
+def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVar.gpx
     dati[3] = dati[3] // GlobalVar.gpy
@@ -64,11 +64,11 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
         scrivi.write("]_")
     scrivi.write("\n")
     i = 0
-    while i < len(vitaesca):
-        scrivi.write("%i_" % vitaesca[i])
-        scrivi.write("%i_" % vitaesca[i + 1])
-        scrivi.write("%i_" % (vitaesca[i + 2] // GlobalVar.gpx))
-        scrivi.write("%i_" % (vitaesca[i + 3] // GlobalVar.gpy))
+    while i < len(vettoreEsche):
+        scrivi.write("%i_" % vettoreEsche[i])
+        scrivi.write("%i_" % vettoreEsche[i + 1])
+        scrivi.write("%i_" % (vettoreEsche[i + 2] // GlobalVar.gpx))
+        scrivi.write("%i_" % (vettoreEsche[i + 3] // GlobalVar.gpy))
         i += 4
     scrivi.write("\n")
     i = 0

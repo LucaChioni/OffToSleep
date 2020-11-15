@@ -5,7 +5,10 @@ from FadeToBlackClass import *
 from SetOstacoliContenutoCofanetti import *
 
 
-def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1):
+def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False):
+    x = int(x)
+    y = int(y)
+
     gr = gr - 10
     gr = GlobalVar.gpx * gr // 60
     y = y - (GlobalVar.gpy // 8)
@@ -15,39 +18,44 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1):
     xOrig = x
 
     # per mettere parti in italic, bold o colorate: "Premi <*>#bold#un<*> <*>#italic#tasto<*> per <*>#color#100,0,0#continuare<*>..."
-    vetMsg = msg.split("<*>")
-    for text in vetMsg:
-        colore = coloreOrig
-        font.set_italic(False)
-        font.set_bold(False)
-        if text.startswith("#italic#"):
-            text = text.replace("#italic#", "")
-            font.set_italic(True)
-        elif text.startswith("#bold#"):
-            text = text.replace("#bold#", "")
-            font.set_bold(True)
-        elif text.startswith("#color#"):
-            text = text.replace("#color#", "")
-            coloreRgb = text.split("#")[0]
-            text = text.split("#")[1]
-            colore = (int(coloreRgb.split(",")[0]), int(coloreRgb.split(",")[1]), int(coloreRgb.split(",")[2]))
-        vetParole = text.split(" ")
-        for parola in vetParole:
-            if parola != "":
-                if parola == "<br>":
-                    x = xOrig
-                    y += spazioTraLeRighe
-                else:
-                    testo = font.render(parola, True, colore)
-                    dimX, dimY = font.size(parola + " ")
-                    if largezzaFoglio != -1 and x + dimX > xOrig + largezzaFoglio:
+    if not daDestra:
+        vetMsg = msg.split("<*>")
+        for text in vetMsg:
+            colore = coloreOrig
+            font.set_italic(False)
+            font.set_bold(False)
+            if text.startswith("#italic#"):
+                text = text.replace("#italic#", "")
+                font.set_italic(True)
+            elif text.startswith("#bold#"):
+                text = text.replace("#bold#", "")
+                font.set_bold(True)
+            elif text.startswith("#color#"):
+                text = text.replace("#color#", "")
+                coloreRgb = text.split("#")[0]
+                text = text.split("#")[1]
+                colore = (int(coloreRgb.split(",")[0]), int(coloreRgb.split(",")[1]), int(coloreRgb.split(",")[2]))
+            vetParole = text.split(" ")
+            for parola in vetParole:
+                if parola != "":
+                    if parola == "<br>":
                         x = xOrig
-                        if spazioTraLeRighe != 1:
-                            y += spazioTraLeRighe
-                        else:
-                            y += dimY
-                    GlobalVar.schermo.blit(testo, (x, y))
-                    x += dimX
+                        y += spazioTraLeRighe
+                    else:
+                        testo = font.render(parola, True, colore)
+                        dimX, dimY = font.size(parola + " ")
+                        if largezzaFoglio != -1 and x + dimX > xOrig + largezzaFoglio:
+                            x = xOrig
+                            if spazioTraLeRighe != 1:
+                                y += spazioTraLeRighe
+                            else:
+                                y += dimY
+                        GlobalVar.schermo.blit(testo, (x, y))
+                        x += dimX
+    else:
+        testo = font.render(msg, True, colore)
+        dimX, dimY = font.size(msg)
+        GlobalVar.schermo.blit(testo, (x - dimX, y))
 
 
 def getStatistiche(dati, difesa=0):
@@ -1410,20 +1418,6 @@ def trovacasattaccabili(x, y, raggio, caseviste):
         i += 3
 
     caseattactot = caseattacaltodestra + caseattacaltosinistra + caseattacbassodestra + caseattacbassosinistra + caseattacdestra + caseattacsinistra + caseattacalto + caseattacbasso
-    # tolgo le caselle duplicate
-    i = 0
-    while i < len(caseattactot):
-        j = i + 3
-        while j < len(caseattactot):
-            if caseattactot[i] == caseattactot[j] and caseattactot[i + 1] == caseattactot[j + 1]:
-                if not caseattactot[i + 2] or not caseattactot[j + 2]:
-                    caseattactot[i + 2] = False
-                del caseattactot[j + 2]
-                del caseattactot[j + 1]
-                del caseattactot[j]
-            else:
-                j += 3
-        i += 3
 
     # aggiungo le caselle dei bordi
     i = 0
@@ -1464,6 +1458,21 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             caseattactot.append(GlobalVar.gpy * i)
             caseattactot.append(False)
         i += 1
+
+    # tolgo le caselle duplicate
+    i = 0
+    while i < len(caseattactot):
+        j = i + 3
+        while j < len(caseattactot):
+            if caseattactot[i] == caseattactot[j] and caseattactot[i + 1] == caseattactot[j + 1]:
+                if not caseattactot[i + 2] or not caseattactot[j + 2]:
+                    caseattactot[i + 2] = False
+                del caseattactot[j + 2]
+                del caseattactot[j + 1]
+                del caseattactot[j]
+            else:
+                j += 3
+        i += 3
 
     return caseattactot
 
