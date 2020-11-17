@@ -956,6 +956,9 @@ def loadImgs():
             img2 = pygame.transform.smoothscale(img2, (gpx * 2, gpy))
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
+            imgSelf = loadImage("Immagini/AnimazioniTecniche/%sAnimaSelf.png" % contatoreGlobale, True)
+            imgSelf = pygame.transform.smoothscale(imgSelf, (gpx, gpy))
+            vetAnimaImgTecniche.append(imgSelf)
         elif contatoreGlobale.startswith("ricarica") or contatoreGlobale == "raffred" or contatoreGlobale == "velocizza" or contatoreGlobale == "efficienza":
             img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale, True)
             img1 = pygame.transform.smoothscale(img1, (gpx, gpy))
@@ -1362,6 +1365,16 @@ def configuraCursore(bloccato):
     pygame.mouse.set_cursor(*cursor_sizer)
     global mouseBloccato
     mouseBloccato = bloccato
+def setCursoreVisibile(visibile):
+    global mouseVisibile
+    mouseVisibile = visibile
+    if visibile:
+        pygame.mouse.set_visible(True)
+        pygame.mouse.set_pos(gsx // 2, gsy // 2)
+    else:
+        pygame.mouse.set_pos(0, 0)
+        pygame.mouse.set_visible(False)
+        pygame.mouse.set_visible(False)
 configuraCursore(False)
 pygame.mouse.set_visible(True)
 mouseVisibile = True

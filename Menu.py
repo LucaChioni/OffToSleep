@@ -96,7 +96,7 @@ def menu(caricaSalvataggio, gameover):
     aggiornaInterfacciaPerMouse = False
     mostraTutorial = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+    mostraMouse = 2
 
     tastop = 0
     tastotempfps = 5
@@ -109,7 +109,7 @@ def menu(caricaSalvataggio, gameover):
     while True:
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
-            tastotempfps = tastotempfps - 1
+            tastotempfps -= 1
         elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
@@ -118,10 +118,17 @@ def menu(caricaSalvataggio, gameover):
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         suTutorial = False
         suTogliTutorial = False
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if not mostraTutorial:
                 if 0 <= xMouse <= GlobalVar.gsx // 32 * 7.5 and GlobalVar.gsy // 18 * 16.2 <= yMouse <= GlobalVar.gsy:
@@ -190,6 +197,9 @@ def menu(caricaSalvataggio, gameover):
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -198,8 +208,7 @@ def menu(caricaSalvataggio, gameover):
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 tastop = event.key
                 if event.key == pygame.K_q and not tastoTrovato and mostraTutorial:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -217,8 +226,7 @@ def menu(caricaSalvataggio, gameover):
                 tastop = "escOdestroMouse"
                 if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if not mostraTutorial:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     mostraTutorial = True
@@ -232,8 +240,7 @@ def menu(caricaSalvataggio, gameover):
                 tastop = "spazioOsinistroMouse"
                 if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if suTutorial and event.type == pygame.MOUSEBUTTONDOWN:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     mostraTutorial = True
@@ -286,6 +293,16 @@ def menu(caricaSalvataggio, gameover):
 
                             # lettura salvataggio
                             if n != -1:
+                                sprites = pygame.sprite.Group(Fade(0))
+                                schermoFadeToBlack = GlobalVar.schermo.copy()
+                                i = 0
+                                while i <= 6:
+                                    sprites.update()
+                                    GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+                                    sprites.draw(GlobalVar.schermo)
+                                    pygame.display.update()
+                                    GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                                    i += 1
                                 dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
                                 datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
                                 tutteporteGameover = []
@@ -330,10 +347,6 @@ def menu(caricaSalvataggio, gameover):
                         primoFrame = True
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
 
             if tastop != 0:
                 aggiornaSchermo = True
@@ -346,13 +359,10 @@ def menu(caricaSalvataggio, gameover):
         if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or tastop == "escOdestroMouse" or ((tastop == pygame.K_q) or (tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
             aggiornaSchermo = False
-            if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
-                tastotempfps = 2
             if not mostraTutorial:
-                if tastop == pygame.K_s:
+                if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
                     if GlobalVar.mouseVisibile:
-                        pygame.mouse.set_visible(False)
-                        GlobalVar.mouseVisibile = False
+                        GlobalVar.setCursoreVisibile(False)
                     if voceMarcata != 4:
                         if voceMarcata == 1:
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -368,10 +378,9 @@ def menu(caricaSalvataggio, gameover):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = GlobalVar.gsy // 18 * 2.5
                         voceMarcata -= 3
-                if tastop == pygame.K_w:
+                if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
                     if GlobalVar.mouseVisibile:
-                        pygame.mouse.set_visible(False)
-                        GlobalVar.mouseVisibile = False
+                        GlobalVar.setCursoreVisibile(False)
                     if voceMarcata != 1:
                         if voceMarcata == 2:
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -387,6 +396,9 @@ def menu(caricaSalvataggio, gameover):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = GlobalVar.gsy // 18 * 12.5
                         voceMarcata += 3
+                if not primoMovimento and (tastop == pygame.K_s or tastop == pygame.K_w):
+                    tastotempfps = 2
+
                 persomenuinizio = GlobalVar.persGrafMenu
                 if c == 1:
                     robomenuinizio = GlobalVar.robograf0
@@ -583,6 +595,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
     caricaSalvataggio = False
     aperturaSettaColcoNonRiuscita = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
 
     tastop = 0
     tastotempfps = 5
@@ -592,7 +605,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
-            tastotempfps = tastotempfps - 1
+            tastotempfps -= 1
         elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
@@ -600,10 +613,17 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         suTornaIndietro = False
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if GlobalVar.gsx // 32 * 19 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                 if GlobalVar.mouseBloccato:
@@ -687,6 +707,9 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -695,8 +718,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 tastop = event.key
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
                     tastoTrovato = True
@@ -752,6 +774,16 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                             # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
                             n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco)
                             if n != -1 and azioneFatta == 1:
+                                sprites = pygame.sprite.Group(Fade(0))
+                                schermoFadeToBlack = GlobalVar.schermo.copy()
+                                i = 0
+                                while i <= 6:
+                                    sprites.update()
+                                    GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+                                    sprites.draw(GlobalVar.schermo)
+                                    pygame.display.update()
+                                    GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                                    i += 1
                                 caricaSalvataggio = n
                                 risposta = True
                         # impostazioni
@@ -763,10 +795,6 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                             conferma = 1
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
 
             if tastop != 0:
                 aggiornaSchermo = True
@@ -779,12 +807,9 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
         if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
             aggiornaSchermo = False
-            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
-            if tastop == pygame.K_s:
+            if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 2:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp + GlobalVar.gsy // 18 * 7
@@ -806,10 +831,9 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = GlobalVar.gsy // 18 * 5
                         voceMarcata = 1
-            if tastop == pygame.K_w:
+            if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 6:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp - GlobalVar.gsy // 18 * 7
@@ -831,6 +855,8 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = GlobalVar.gsy // 18 * 15
                         voceMarcata = 8
+            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+                tastotempfps = 2
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
 
             # chiedere conferma per uscire
@@ -966,6 +992,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     primoFrame = True
     aggiornaSchermo = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
 
     tastop = 0
     tastotempfps = 5
@@ -991,7 +1018,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
-            tastotempfps = tastotempfps - 1
+            tastotempfps -= 1
         elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
@@ -1000,9 +1027,16 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         mouseInquadraFreccia = False
         suTornaIndietro = False
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and 0 <= xMouse <= GlobalVar.gsx // 32 * 3.5:
                 if GlobalVar.mouseBloccato:
@@ -1127,6 +1161,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -1134,8 +1170,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 GlobalVar.quit()
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 tastop = event.key
                 if (event.key == pygame.K_q or event.key == pygame.K_ESCAPE) and not tastoTrovato:
                     tastoTrovato = True
@@ -1283,9 +1318,6 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
 
             if tastop != 0:
                 aggiornaSchermo = True
@@ -1295,15 +1327,12 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             if event.type == pygame.MOUSEBUTTONUP:
                 tastop = 0
 
-        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata:
+        if not inizio and (aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata):
             primoFrame = False
             aggiornaSchermo = False
-            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
-            if tastop == pygame.K_w:
+            if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if voceMarcata < 0:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     offensivi = True
@@ -1321,10 +1350,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     yp = GlobalVar.gpy * 13.8
                     offensivi = False
                     difensivi = True
-            if tastop == pygame.K_a:
+            if tastop == pygame.K_a and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if voceMarcata < 0:
                     if voceMarcata == -2 and dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                         voceMarcata += 1
@@ -1338,10 +1366,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     voceMarcata += 4
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = GlobalVar.gpx * 5
-            if tastop == pygame.K_s:
+            if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if difensivi:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = GlobalVar.gpy * 14.3
@@ -1357,10 +1384,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         xp = GlobalVar.gsx // 32 * 3.5
                         yp = GlobalVar.gsy // 18 * 16.05
                         voceMarcata = -2
-            if tastop == pygame.K_d:
+            if tastop == pygame.K_d and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if voceMarcata < 0:
                     if voceMarcata == -1:
                         voceMarcata -= 1
@@ -1374,6 +1400,8 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     voceMarcata -= 4
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = GlobalVar.gpx * 1
+            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+                tastotempfps = 2
 
             if voceMarcata >= 0:
                 voceMarcataOggetto = voceMarcata
@@ -1517,8 +1545,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 pygame.display.update()
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+    if not inizio:
+        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
     return dati, attacco, sposta, animaOggetto, npers, inizio
 
 
@@ -1543,6 +1572,7 @@ def menuMercante(dati):
     mouseSinistroPremuto = False
     aggiornaInterfacciaPerMouse = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
 
     maxFrecce = 1
     if dati[133] == 1:
@@ -1569,7 +1599,7 @@ def menuMercante(dati):
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and tastop != 0:
-            tastotempfps = tastotempfps - 1
+            tastotempfps -= 1
         elif tastotempfps == 0 and tastop != 0:
             tastotempfps = 2
 
@@ -1580,10 +1610,17 @@ def menuMercante(dati):
         mouseInquadraFrecciaSu = False
         mouseInquadraFrecciaGiu = False
         suTornaIndietro = False
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                 if GlobalVar.mouseBloccato:
@@ -1723,6 +1760,9 @@ def menuMercante(dati):
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -1731,8 +1771,7 @@ def menuMercante(dati):
             if event.type == pygame.KEYDOWN and not tastoTrovato and oggettonVecchio == oggetton and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 tastop = event.key
                 if event.key == pygame.K_q and not tastoTrovato:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -2064,10 +2103,6 @@ def menuMercante(dati):
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
 
             if tastop != 0:
                 aggiornaSchermo = True
@@ -2083,12 +2118,9 @@ def menuMercante(dati):
         if aggiornaSchermo or primoMovimento or buttonUp or tastop == pygame.K_q or ((tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
             aggiornaInterfacciaPerMouse = False
             aggiornaSchermo = False
-            if not primoMovimento and (tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
-                tastotempfps = 2
-            if tastop == pygame.K_w:
+            if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if voceMarcata == 0:
                     if oggetton != 0:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -2113,18 +2145,16 @@ def menuMercante(dati):
                     else:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                         numeroOggettiAcquistati = 1
-            if tastop == pygame.K_a and voceMarcata != 0:
+            if tastop == pygame.K_a and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = xp - GlobalVar.gsx // 32 * 4
-            if tastop == pygame.K_s:
+            if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if voceMarcata == 0:
                     if oggetton != 11:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -2149,10 +2179,9 @@ def menuMercante(dati):
                     else:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                         numeroOggettiAcquistati = 1
-            if tastop == pygame.K_d and voceMarcata != 0:
+            if tastop == pygame.K_d and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -2190,6 +2219,8 @@ def menuMercante(dati):
                         else:
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                             numeroOggettiAcquistati = 1
+            if not primoMovimento and (tastop == "spazioOsinistroMouse" or tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+                tastotempfps = 2
 
             maxFrecce = 1
             if dati[133] == 1:

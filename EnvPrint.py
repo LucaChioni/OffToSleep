@@ -593,11 +593,19 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         GlobalVar.configuraCursore(True)
     risposta = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
     while not risposta:
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         for event in pygame.event.get():
             sinistroMouseVecchio = sinistroMouse
             centraleMouseVecchio = centraleMouse
@@ -615,6 +623,8 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -626,17 +636,13 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
                 else:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
             if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN:
                 if destroMouse and not rotellaConCentralePremuto:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     risposta = True
                 else:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
 
 
 def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob):
@@ -1079,6 +1085,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     schermoOriginale = GlobalVar.schermo.copy()
 
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
     tastotempfps = 4
     tastop = 0
     numTastiPremuti = 0
@@ -1108,7 +1115,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and tastop != 0:
-            tastotempfps = tastotempfps - 1
+            tastotempfps -= 1
             nxp = 0
             nyp = 0
         if tastotempfps == 0 and tastop != 0:
@@ -1127,10 +1134,15 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        mouseDaSpostare = False
         if deltaXMouse != 0 or deltaYMouse != 0 or (primoFrame and GlobalVar.mouseVisibile) or (analisiDiColcoEffettuata and GlobalVar.mouseVisibile):
             if not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
+                if mostraMouse == 0:
+                    GlobalVar.setCursoreVisibile(True)
+                    mostraMouse = 2
+                else:
+                    mostraMouse -= 1
+                    mouseDaSpostare = True
             casellaTrovata = False
             i = 0
             while i < len(caseviste):
@@ -1188,6 +1200,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             yp = yMouse - (yMouse % GlobalVar.gpy)
                         casellaTrovata = True
                         break
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
             if GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 6:
@@ -1324,6 +1338,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -1332,8 +1348,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 tastop = event.key
 
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 # esci
                 if event.key == pygame.K_q:
                     risposta = True
@@ -1535,9 +1550,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     interazioneConfermata = True
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
             if event.type == pygame.KEYUP:
                 if tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d:
                     numTastiPremuti -= 1

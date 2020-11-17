@@ -10,6 +10,7 @@ def gameloop():
     caricaSalvataggio = False
     inizio = True
     gameover = False
+    mostraMouse = 2
     while True:
         if inizio:
             refreshSchermo = True
@@ -130,16 +131,17 @@ def gameloop():
 
             if cambiosta:
                 movimentoPerMouse = False
-                sprites = pygame.sprite.Group(Fade(0))
-                schermoFadeToBlack = GlobalVar.schermo.copy()
-                i = 0
-                while i <= 6:
-                    sprites.update()
-                    GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                    sprites.draw(GlobalVar.schermo)
-                    pygame.display.update()
-                    GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                    i += 1
+                if not inizio:
+                    sprites = pygame.sprite.Group(Fade(0))
+                    schermoFadeToBlack = GlobalVar.schermo.copy()
+                    i = 0
+                    while i <= 6:
+                        sprites.update()
+                        GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+                        sprites.draw(GlobalVar.schermo)
+                        pygame.display.update()
+                        GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                        i += 1
 
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
@@ -548,9 +550,16 @@ def gameloop():
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / personaggio / porta / cofanetto / casella vista
             if GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 6:
@@ -650,6 +659,8 @@ def gameloop():
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -657,8 +668,7 @@ def gameloop():
 
             if event.type == pygame.KEYDOWN and not impossibileCliccarePulsanti and not tastoTrovato and not startf:
                 if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 movimentoPerMouse = False
                 tastop = event.key
                 # movimenti personaggio
@@ -1225,9 +1235,6 @@ def gameloop():
                     movimentoPerMouse = True
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato and mosseRimasteRob <= 0 and not nemiciInMovimento:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
 
             if event.type == pygame.KEYUP:
                 if tastop == event.key:
@@ -2125,16 +2132,17 @@ def gameloop():
             sposta = False
 
         if inizio:
-            sprites = pygame.sprite.Group(Fade(0))
-            schermoFadeToBlack = GlobalVar.schermo.copy()
-            i = 0
-            while i <= 6:
-                sprites.update()
-                GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                sprites.draw(GlobalVar.schermo)
-                pygame.display.update()
-                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                i += 1
+            if not caricaSalvataggio:
+                sprites = pygame.sprite.Group(Fade(0))
+                schermoFadeToBlack = GlobalVar.schermo.copy()
+                i = 0
+                while i <= 6:
+                    sprites.update()
+                    GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+                    sprites.draw(GlobalVar.schermo)
+                    pygame.display.update()
+                    GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                    i += 1
             GlobalVar.canaleSoundPuntatore.stop()
             GlobalVar.canaleSoundPassiRallo.stop()
             GlobalVar.canaleSoundPassiColco.stop()

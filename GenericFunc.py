@@ -136,14 +136,22 @@ def guardaVideo(listaImg, audio, loop):
     pygame.display.update()
     # play video
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
     countdownInizioVideo = 10
     continua = False
     i = 0
     while i < len(listaImg) and not continua:
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if countdownInizioVideo == 0:
             if i == 0:
                 GlobalVar.canaleSoundSottofondoAmbientale.play(audio)
@@ -166,15 +174,15 @@ def guardaVideo(listaImg, audio, loop):
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+                if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(False)
+                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(True)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     GlobalVar.quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
-                    if event.type == pygame.KEYDOWN:
-                        if GlobalVar.mouseVisibile:
-                            pygame.mouse.set_visible(False)
-                            GlobalVar.mouseVisibile = False
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     continua = True
         pygame.event.pump()
@@ -1906,11 +1914,19 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
         pygame.display.update()
         continua = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+        mostraMouse = 2
         while not continua:
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            mouseDaSpostare = False
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
+                if mostraMouse == 0:
+                    GlobalVar.setCursoreVisibile(True)
+                    mostraMouse = 2
+                else:
+                    mostraMouse -= 1
+                    mouseDaSpostare = True
+            if mostraMouse == 1 and not mouseDaSpostare:
+                mostraMouse = 2
             for event in pygame.event.get():
                 sinistroMouseVecchio = sinistroMouse
                 centraleMouseVecchio = centraleMouse
@@ -1928,15 +1944,15 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+                if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(False)
+                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(True)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     GlobalVar.quit()
                 if event.type == pygame.KEYDOWN or (event.type == pygame.MOUSEBUTTONDOWN and (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto):
-                    if event.type == pygame.KEYDOWN:
-                        if GlobalVar.mouseVisibile:
-                            pygame.mouse.set_visible(False)
-                            GlobalVar.mouseVisibile = False
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     continua = True
         inizio = True
@@ -2137,6 +2153,7 @@ def dialoga(avanzamentoStoria, personaggio):
     prosegui = True
     fineDialogo = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
 
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
     GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
@@ -2144,10 +2161,17 @@ def dialoga(avanzamentoStoria, personaggio):
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
             aggiornaInterfacciaPerMouse = True
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if numeromessaggioAttuale < len(personaggio.partiDialogo) and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
                 if GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 15.1 <= yMouse <= GlobalVar.gsy // 18 * 16.2:
@@ -2195,6 +2219,9 @@ def dialoga(avanzamentoStoria, personaggio):
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                aggiornaInterfacciaPerMouse = True
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 tastoTrovato = True
@@ -2203,8 +2230,7 @@ def dialoga(avanzamentoStoria, personaggio):
             if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
                 if GlobalVar.mouseVisibile:
                     aggiornaInterfacciaPerMouse = True
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
+                    GlobalVar.setCursoreVisibile(False)
                 if event.key == pygame.K_q and not tastoTrovato:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     tastoTrovato = True
@@ -2266,10 +2292,6 @@ def dialoga(avanzamentoStoria, personaggio):
                     prosegui = True
             elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
         if (prosegui or aggiornaInterfacciaPerMouse) and not fineDialogo:
             if aggiornaInterfacciaPerMouse and numeromessaggioAttuale != 0:
                 numeromessaggioAttuale -= 1
@@ -2330,11 +2352,19 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     pygame.display.update()
     risposta = False
     sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+    mostraMouse = 2
     while not risposta:
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+        mouseDaSpostare = False
         if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            pygame.mouse.set_visible(True)
-            GlobalVar.mouseVisibile = True
+            if mostraMouse == 0:
+                GlobalVar.setCursoreVisibile(True)
+                mostraMouse = 2
+            else:
+                mostraMouse -= 1
+                mouseDaSpostare = True
+        if mostraMouse == 1 and not mouseDaSpostare:
+            mostraMouse = 2
         for event in pygame.event.get():
             sinistroMouseVecchio = sinistroMouse
             centraleMouseVecchio = centraleMouse
@@ -2352,6 +2382,10 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
             elif not destroMouseVecchio and destroMouse:
                 sinistroMouse = False
                 centraleMouse = False
+            if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
+                GlobalVar.setCursoreVisibile(False)
+            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                GlobalVar.setCursoreVisibile(True)
 
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -2359,10 +2393,6 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                 risposta = True
-            if event.type == pygame.KEYDOWN:
-                if GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(False)
-                    GlobalVar.mouseVisibile = False
 
 
 def cambiaProtagonista(nome):

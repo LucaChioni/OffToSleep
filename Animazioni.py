@@ -193,11 +193,19 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
             pygame.time.wait(500)
             risposta = False
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+            mostraMouse = 2
             while not risposta:
                 deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+                mouseDaSpostare = False
                 if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-                    pygame.mouse.set_visible(True)
-                    GlobalVar.mouseVisibile = True
+                    if mostraMouse == 0:
+                        GlobalVar.setCursoreVisibile(True)
+                        mostraMouse = 2
+                    else:
+                        mostraMouse -= 1
+                        mouseDaSpostare = True
+                if mostraMouse == 1 and not mouseDaSpostare:
+                    mostraMouse = 2
                 for event in pygame.event.get():
                     sinistroMouseVecchio = sinistroMouse
                     centraleMouseVecchio = centraleMouse
@@ -215,6 +223,10 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                     elif not destroMouseVecchio and destroMouse:
                         sinistroMouse = False
                         centraleMouse = False
+                    if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
+                        GlobalVar.setCursoreVisibile(False)
+                    if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                        GlobalVar.setCursoreVisibile(True)
 
                     if event.type == pygame.QUIT:
                         pygame.quit()
@@ -223,10 +235,6 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                         risposta = True
                         aumentoliv -= 1
-                    if event.type == pygame.KEYDOWN:
-                        if GlobalVar.mouseVisibile:
-                            pygame.mouse.set_visible(False)
-                            GlobalVar.mouseVisibile = False
 
         caricaTutto = True
         movimentoPerMouse = False
@@ -307,10 +315,11 @@ def animaCamminataRobo(nrob, rx, ry, vrx, vry, robot, armrob, surriscalda, cambi
     return animazioneColco
 
 
-def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, fineanimaz):
+def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, surriscalda, fineanimaz):
     if not cambiosta and fineanimaz != 0:
         animazioneColco = True
 
+        imgAnimazioneSelf = 0
         imgAnimazione1w = 0
         imgAnimazione2w = 0
         imgAnimazione1a = 0
@@ -335,6 +344,7 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
                     imgAnimazione2s = GlobalVar.vetAnimazioniTecniche[i + 1][5]
                     imgAnimazione1d = GlobalVar.vetAnimazioniTecniche[i + 1][6]
                     imgAnimazione2d = GlobalVar.vetAnimazioniTecniche[i + 1][7]
+                    imgAnimazioneSelf = GlobalVar.vetAnimazioniTecniche[i + 1][8]
                 elif tecnicaUsata.startswith("tempesta"):
                     imgAnimazione1 = GlobalVar.vetAnimazioniTecniche[i + 1][0]
                     imgAnimazione2 = GlobalVar.vetAnimazioniTecniche[i + 1][1]
@@ -363,9 +373,13 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
 
         if tecnicaUsata.startswith("scossa") or tecnicaUsata.startswith("freccia") or tecnicaUsata.startswith("cura") or tecnicaUsata == "antidoto" or tecnicaUsata == "attP" or tecnicaUsata == "difP":
             GlobalVar.schermo.blit(robot, (rx, ry))
+            if surriscalda > 0:
+                GlobalVar.schermo.blit(GlobalVar.roboSurrisc, (rx, ry))
             GlobalVar.schermo.blit(armrob, (rx, ry))
             # nrob => 1=d, 2=a, 3=s, 4=w
             if 7 < fineanimaz <= 10:
+                if nrob == 0:
+                    GlobalVar.schermo.blit(imgAnimazioneSelf, (rx, ry))
                 if nrob == 1:
                     GlobalVar.schermo.blit(imgAnimazione1d, (rx, ry))
                 if nrob == 2:
@@ -375,6 +389,8 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
                 if nrob == 4:
                     GlobalVar.schermo.blit(imgAnimazione1w, (rx, ry - GlobalVar.gpy))
             if 0 < fineanimaz <= 7:
+                if nrob == 0:
+                    GlobalVar.schermo.blit(imgAnimazioneSelf, (rx, ry))
                 if nrob == 1:
                     GlobalVar.schermo.blit(imgAnimazione2d, (rx, ry))
                 if nrob == 2:
@@ -392,6 +408,8 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
             GlobalVar.schermo.blit(imgAnimazione, (rx, ry))
         if tecnicaUsata.startswith("tempesta"):
             GlobalVar.schermo.blit(robot, (rx, ry))
+            if surriscalda > 0:
+                GlobalVar.schermo.blit(GlobalVar.roboSurrisc, (rx, ry))
             GlobalVar.schermo.blit(armrob, (rx, ry))
             if 7 < fineanimaz <= 10:
                 GlobalVar.schermo.blit(imgAnimazione1, (rx - (GlobalVar.gpx * 6), ry - (GlobalVar.gpx * 6)))
@@ -1722,7 +1740,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
                 # animazione attacco Colco
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)
-                animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, fineanimaz)
+                animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, statoColcoInizioTurno[1], fineanimaz)
 
                 # animazione danneggiamento dei nemici
                 animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", fineanimaz)
@@ -1793,11 +1811,19 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         pygame.display.update()
         risposta = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+        mostraMouse = 2
         while not risposta:
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            mouseDaSpostare = False
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
+                if mostraMouse == 0:
+                    GlobalVar.setCursoreVisibile(True)
+                    mostraMouse = 2
+                else:
+                    mostraMouse -= 1
+                    mouseDaSpostare = True
+            if mostraMouse == 1 and not mouseDaSpostare:
+                mostraMouse = 2
             for event in pygame.event.get():
                 sinistroMouseVecchio = sinistroMouse
                 centraleMouseVecchio = centraleMouse
@@ -1815,6 +1841,10 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+                if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(False)
+                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(True)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -1822,10 +1852,6 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     risposta = True
-                if event.type == pygame.KEYDOWN:
-                    if GlobalVar.mouseVisibile:
-                        pygame.mouse.set_visible(False)
-                        GlobalVar.mouseVisibile = False
         movimentoPerMouse = False
         caricaTutto = True
         tesoro = -1
@@ -1835,11 +1861,19 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         pygame.display.update()
         risposta = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+        mostraMouse = 2
         while not risposta:
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            mouseDaSpostare = False
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
+                if mostraMouse == 0:
+                    GlobalVar.setCursoreVisibile(True)
+                    mostraMouse = 2
+                else:
+                    mostraMouse -= 1
+                    mouseDaSpostare = True
+            if mostraMouse == 1 and not mouseDaSpostare:
+                mostraMouse = 2
             for event in pygame.event.get():
                 sinistroMouseVecchio = sinistroMouse
                 centraleMouseVecchio = centraleMouse
@@ -1857,6 +1891,10 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+                if event.type == pygame.KEYDOWN and GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(False)
+                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                    GlobalVar.setCursoreVisibile(True)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -1864,10 +1902,6 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     risposta = True
-                if event.type == pygame.KEYDOWN:
-                    if GlobalVar.mouseVisibile:
-                        pygame.mouse.set_visible(False)
-                        GlobalVar.mouseVisibile = False
         movimentoPerMouse = False
         caricaTutto = True
         tastop = 0

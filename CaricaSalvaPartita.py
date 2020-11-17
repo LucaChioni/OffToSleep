@@ -363,13 +363,21 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
         aggiornaSchermata = True
         indietro = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+        mostraMouse = 2
         while not indietro:
             xMouse, yMouse = pygame.mouse.get_pos()
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            mouseDaSpostare = False
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                 aggiornaSchermata = True
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
+                if mostraMouse == 0:
+                    GlobalVar.setCursoreVisibile(True)
+                    mostraMouse = 2
+                else:
+                    mostraMouse -= 1
+                    mouseDaSpostare = True
+            if mostraMouse == 1 and not mouseDaSpostare:
+                mostraMouse = 2
             if GlobalVar.mouseVisibile:
                 if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                     if GlobalVar.mouseBloccato:
@@ -394,6 +402,9 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                    aggiornaSchermata = True
+                    GlobalVar.setCursoreVisibile(True)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -401,15 +412,10 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 if event.type == pygame.KEYDOWN:
                     aggiornaSchermata = True
                     if GlobalVar.mouseVisibile:
-                        pygame.mouse.set_visible(False)
-                        GlobalVar.mouseVisibile = False
+                        GlobalVar.setCursoreVisibile(False)
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     indietro = True
-                if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                    aggiornaSchermata = True
-                    pygame.mouse.set_visible(True)
-                    GlobalVar.mouseVisibile = True
             if aggiornaSchermata:
                 aggiornaSchermata = False
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
@@ -426,13 +432,21 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
         aggiornaSchermata = True
         indietro = False
         sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
+        mostraMouse = 2
         while not indietro:
             xMouse, yMouse = pygame.mouse.get_pos()
             deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
+            mouseDaSpostare = False
             if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
                 aggiornaSchermata = True
-                pygame.mouse.set_visible(True)
-                GlobalVar.mouseVisibile = True
+                if mostraMouse == 0:
+                    GlobalVar.setCursoreVisibile(True)
+                    mostraMouse = 2
+                else:
+                    mostraMouse -= 1
+                    mouseDaSpostare = True
+            if mostraMouse == 1 and not mouseDaSpostare:
+                mostraMouse = 2
             if GlobalVar.mouseVisibile:
                 if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                     if GlobalVar.mouseBloccato:
@@ -457,6 +471,9 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 elif not destroMouseVecchio and destroMouse:
                     sinistroMouse = False
                     centraleMouse = False
+                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
+                    aggiornaSchermata = True
+                    GlobalVar.setCursoreVisibile(True)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -464,15 +481,10 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 if event.type == pygame.KEYDOWN:
                     aggiornaSchermata = True
                     if GlobalVar.mouseVisibile:
-                        pygame.mouse.set_visible(False)
-                        GlobalVar.mouseVisibile = False
+                        GlobalVar.setCursoreVisibile(False)
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     indietro = True
-                if (sinistroMouse or centraleMouse or destroMouse) and not rotellaConCentralePremuto and not GlobalVar.mouseVisibile:
-                    aggiornaSchermata = True
-                    pygame.mouse.set_visible(True)
-                    GlobalVar.mouseVisibile = True
             if aggiornaSchermata:
                 aggiornaSchermata = False
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
