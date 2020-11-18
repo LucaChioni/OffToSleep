@@ -1376,5 +1376,15 @@ def setCursoreVisibile(visibile):
         pygame.mouse.set_visible(False)
         pygame.mouse.set_visible(False)
 configuraCursore(False)
-pygame.mouse.set_visible(True)
-mouseVisibile = True
+pygame.mouse.set_visible(False)
+mouseVisibile = False
+
+pygame.joystick.init()
+joystick_count = pygame.joystick.get_count()
+joystick = False
+if joystick_count > 0:
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
+configTastiPad = [0, 1, 2, 3, 4, 5, 7]
+configAnalogicoPad = [0, 1]
+usandoIlController = False

@@ -361,23 +361,11 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
     if errore and tipoErrore == 1 and mostraErrori:
         print ("Slot vuoto")
         aggiornaSchermata = True
+        bottoneDown = False
+        aggiornaInterfacciaPerCambioInput = True
         indietro = False
-        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-        mostraMouse = 2
         while not indietro:
             xMouse, yMouse = pygame.mouse.get_pos()
-            deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-            mouseDaSpostare = False
-            if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-                aggiornaSchermata = True
-                if mostraMouse == 0:
-                    GlobalVar.setCursoreVisibile(True)
-                    mostraMouse = 2
-                else:
-                    mostraMouse -= 1
-                    mouseDaSpostare = True
-            if mostraMouse == 1 and not mouseDaSpostare:
-                mostraMouse = 2
             if GlobalVar.mouseVisibile:
                 if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                     if GlobalVar.mouseBloccato:
@@ -385,44 +373,24 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 else:
                     if not GlobalVar.mouseBloccato:
                         GlobalVar.configuraCursore(True)
-            for event in pygame.event.get():
-                sinistroMouseVecchio = sinistroMouse
-                centraleMouseVecchio = centraleMouse
-                destroMouseVecchio = destroMouse
-                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                rotellaConCentralePremuto = False
-                if centraleMouseVecchio and centraleMouse:
-                    rotellaConCentralePremuto = True
-                if not sinistroMouseVecchio and sinistroMouse:
-                    centraleMouse = False
-                    destroMouse = False
-                elif not centraleMouseVecchio and centraleMouse:
-                    sinistroMouse = False
-                    destroMouse = False
-                elif not destroMouseVecchio and destroMouse:
-                    sinistroMouse = False
-                    centraleMouse = False
-                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                    aggiornaSchermata = True
-                    GlobalVar.setCursoreVisibile(True)
 
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    GlobalVar.quit()
-                if event.type == pygame.KEYDOWN:
-                    aggiornaSchermata = True
-                    if GlobalVar.mouseVisibile:
-                        GlobalVar.setCursoreVisibile(False)
-                if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    indietro = True
-            if aggiornaSchermata:
+            # gestione degli input
+            bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+            if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCerchio":
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                aggiornaSchermata = True
+                indietro = True
+                bottoneDown = False
+            if aggiornaSchermata or aggiornaInterfacciaPerCambioInput:
                 aggiornaSchermata = False
+                aggiornaInterfacciaPerCambioInput = False
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 GlobalVar.schermo.blit(GlobalVar.robograf2, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
                 if GlobalVar.mouseVisibile:
                     messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+                elif GlobalVar.usandoIlController:
+                    messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
                 else:
                     messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
                 messaggio("Slot di memoria vuoto...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 14, 100)
@@ -430,23 +398,11 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
     if errore and tipoErrore == 2 and mostraErrori:
         print ("Dati corrotti")
         aggiornaSchermata = True
+        bottoneDown = False
+        aggiornaInterfacciaPerCambioInput = True
         indietro = False
-        sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-        mostraMouse = 2
         while not indietro:
             xMouse, yMouse = pygame.mouse.get_pos()
-            deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-            mouseDaSpostare = False
-            if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-                aggiornaSchermata = True
-                if mostraMouse == 0:
-                    GlobalVar.setCursoreVisibile(True)
-                    mostraMouse = 2
-                else:
-                    mostraMouse -= 1
-                    mouseDaSpostare = True
-            if mostraMouse == 1 and not mouseDaSpostare:
-                mostraMouse = 2
             if GlobalVar.mouseVisibile:
                 if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                     if GlobalVar.mouseBloccato:
@@ -454,44 +410,24 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 else:
                     if not GlobalVar.mouseBloccato:
                         GlobalVar.configuraCursore(True)
-            for event in pygame.event.get():
-                sinistroMouseVecchio = sinistroMouse
-                centraleMouseVecchio = centraleMouse
-                destroMouseVecchio = destroMouse
-                sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-                rotellaConCentralePremuto = False
-                if centraleMouseVecchio and centraleMouse:
-                    rotellaConCentralePremuto = True
-                if not sinistroMouseVecchio and sinistroMouse:
-                    centraleMouse = False
-                    destroMouse = False
-                elif not centraleMouseVecchio and centraleMouse:
-                    sinistroMouse = False
-                    destroMouse = False
-                elif not destroMouseVecchio and destroMouse:
-                    sinistroMouse = False
-                    centraleMouse = False
-                if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                    aggiornaSchermata = True
-                    GlobalVar.setCursoreVisibile(True)
 
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    GlobalVar.quit()
-                if event.type == pygame.KEYDOWN:
-                    aggiornaSchermata = True
-                    if GlobalVar.mouseVisibile:
-                        GlobalVar.setCursoreVisibile(False)
-                if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or (GlobalVar.mouseVisibile and ((event.type == pygame.MOUSEBUTTONDOWN and destroMouse) or (event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseBloccato and sinistroMouse)) and not rotellaConCentralePremuto):
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    indietro = True
-            if aggiornaSchermata:
+            # gestione degli input
+            bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+            if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCerchio":
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                aggiornaSchermata = True
+                indietro = True
+                bottoneDown = False
+            if aggiornaSchermata or aggiornaInterfacciaPerCambioInput:
                 aggiornaSchermata = False
+                aggiornaInterfacciaPerCambioInput = False
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 GlobalVar.schermo.blit(GlobalVar.robograf4, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
                 if GlobalVar.mouseVisibile:
                     messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+                elif GlobalVar.usandoIlController:
+                    messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
                 else:
                     messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
                 messaggio("Slot di memoria danneggiato...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.2, GlobalVar.gsy // 18 * 14, 100)

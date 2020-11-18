@@ -592,57 +592,17 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
     if not GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(True)
     risposta = False
-    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    mostraMouse = 2
+    bottoneDown = False
     while not risposta:
-        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        mouseDaSpostare = False
-        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            if mostraMouse == 0:
-                GlobalVar.setCursoreVisibile(True)
-                mostraMouse = 2
-            else:
-                mostraMouse -= 1
-                mouseDaSpostare = True
-        if mostraMouse == 1 and not mouseDaSpostare:
-            mostraMouse = 2
-        for event in pygame.event.get():
-            sinistroMouseVecchio = sinistroMouse
-            centraleMouseVecchio = centraleMouse
-            destroMouseVecchio = destroMouse
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            rotellaConCentralePremuto = False
-            if centraleMouseVecchio and centraleMouse:
-                rotellaConCentralePremuto = True
-            if not sinistroMouseVecchio and sinistroMouse:
-                centraleMouse = False
-                destroMouse = False
-            elif not centraleMouseVecchio and centraleMouse:
-                sinistroMouse = False
-                destroMouse = False
-            elif not destroMouseVecchio and destroMouse:
-                sinistroMouse = False
-                centraleMouse = False
-            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                GlobalVar.setCursoreVisibile(True)
-
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                GlobalVar.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    risposta = True
-                else:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN:
-                if destroMouse and not rotellaConCentralePremuto:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    risposta = True
-                else:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+        # gestione degli input
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, False)
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            risposta = True
+            bottoneDown = False
+        elif bottoneDown == "mouseSinistro":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
 
 
 def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob):
@@ -1084,11 +1044,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
     schermoOriginale = GlobalVar.schermo.copy()
 
-    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    mostraMouse = 2
-    tastotempfps = 4
-    tastop = 0
-    numTastiPremuti = 0
+    tastotempfps = 5
     danno = 0
     creaesca = False
     ricaricaschermo = False
@@ -1107,42 +1063,17 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     primoFrame = True
     vecchiaCasellaInquadrata = [False, 0, 0]
 
+    bottoneDown = 0
     while not risposta:
         if xp != xvp or yp != yvp:
             appenaCaricato = False
         xvp = xp
         yvp = yp
 
-        # rallenta per i 20 fps
-        if tastotempfps != 0 and tastop != 0:
-            tastotempfps -= 1
-            nxp = 0
-            nyp = 0
-        if tastotempfps == 0 and tastop != 0:
-            if tastop == pygame.K_w:
-                nyp = -GlobalVar.gpy
-            if tastop == pygame.K_a:
-                nxp = -GlobalVar.gpx
-            if tastop == pygame.K_s:
-                nyp = GlobalVar.gpy
-            if tastop == pygame.K_d:
-                nxp = GlobalVar.gpx
-            tastotempfps = 2
-            xvp = xp
-            yvp = yp
-
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        mouseDaSpostare = False
         if deltaXMouse != 0 or deltaYMouse != 0 or (primoFrame and GlobalVar.mouseVisibile) or (analisiDiColcoEffettuata and GlobalVar.mouseVisibile):
-            if not GlobalVar.mouseVisibile:
-                if mostraMouse == 0:
-                    GlobalVar.setCursoreVisibile(True)
-                    mostraMouse = 2
-                else:
-                    mostraMouse -= 1
-                    mouseDaSpostare = True
             casellaTrovata = False
             i = 0
             while i < len(caseviste):
@@ -1200,8 +1131,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             yp = yMouse - (yMouse % GlobalVar.gpy)
                         casellaTrovata = True
                         break
-        if mostraMouse == 1 and not mouseDaSpostare:
-            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
             if GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 6:
@@ -1320,202 +1249,170 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalVar.configuraCursore(True)
         primoFrame = False
 
-        for event in pygame.event.get():
-            tastotempfps = 4
-            sinistroMouseVecchio = sinistroMouse
-            centraleMouseVecchio = centraleMouse
-            destroMouseVecchio = destroMouse
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            rotellaConCentralePremuto = False
-            if centraleMouseVecchio and centraleMouse:
-                rotellaConCentralePremuto = True
-            if not sinistroMouseVecchio and sinistroMouse:
-                centraleMouse = False
-                destroMouse = False
-            elif not centraleMouseVecchio and centraleMouse:
-                sinistroMouse = False
-                destroMouse = False
-            elif not destroMouseVecchio and destroMouse:
-                sinistroMouse = False
-                centraleMouse = False
-            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                GlobalVar.setCursoreVisibile(True)
+        # gestione degli input
+        bottoneDownVecchio = bottoneDown
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, False)
+        if bottoneDownVecchio != bottoneDown:
+            nxp = 0
+            nyp = 0
+            tastotempfps = 5
+        # esci
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            risposta = True
+            bottoneDown = False
+        # esci e apri il menu
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            risposta = True
+            startf = True
+            bottoneDown = False
+        # attiva / disattiva il gambit
+        if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo"):
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
+            if chiamarob:
+                chiamarob = False
+            else:
+                ultimoObbiettivoColco = []
+                ultimoObbiettivoColco.append("Telecomando")
+                ultimoObbiettivoColco.append(x)
+                ultimoObbiettivoColco.append(y)
+                chiamarob = True
+            bottoneDown = False
+        # scorrere il puntatore sui nemici / esche / Colco
+        if bottoneDown == pygame.K_3 or bottoneDown == pygame.K_KP3 or bottoneDown == "padR1":
+            nemicoInquadratoTemp = False
+            # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
+            listaNemiciVisti = []
+            for nemico in listaNemici:
+                if nemico.inCasellaVista:
+                    listaNemiciVisti.append(nemico)
+                    if nemico.x == xp and nemico.y == yp:
+                        nemicoInquadratoTemp = nemico
+            listaEscheViste = []
+            i = 0
+            while i < len(vettoreEsche):
+                j = 0
+                while j < len(caseviste):
+                    if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
+                        listaEscheViste.append(vettoreEsche[i])
+                        listaEscheViste.append(vettoreEsche[i + 1])
+                        listaEscheViste.append(vettoreEsche[i + 2])
+                        listaEscheViste.append(vettoreEsche[i + 3])
+                        if vettoreEsche[i + 2] == xp and vettoreEsche[i + 3] == yp:
+                            nemicoInquadratoTemp = "Esca" + str(vettoreEsche[i])
+                    j += 3
+                i += 4
+            if rx == xp and ry == yp:
+                nemicoInquadratoTemp = "Colco"
+            nemicoInquadratoTemp = scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, True)
 
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                GlobalVar.quit()
-            if event.type == pygame.KEYDOWN:
-                tastop = event.key
+            if not nemicoInquadratoTemp:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                xp = rx
+                yp = ry
+            elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                xp = nemicoInquadratoTemp.x
+                yp = nemicoInquadratoTemp.y
+            elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 2]
+                yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3]
+            bottoneDown = False
+        if bottoneDown == pygame.K_2 or bottoneDown == pygame.K_KP2 or bottoneDown == "padL1":
+            nemicoInquadratoTemp = False
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+            # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
+            listaNemiciVisti = []
+            for nemico in listaNemici:
+                if nemico.inCasellaVista:
+                    listaNemiciVisti.append(nemico)
+                    if nemico.x == xp and nemico.y == yp:
+                        nemicoInquadratoTemp = nemico
+            listaEscheViste = []
+            i = 0
+            while i < len(vettoreEsche):
+                j = 0
+                while j < len(caseviste):
+                    if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
+                        listaEscheViste.append(vettoreEsche[i])
+                        listaEscheViste.append(vettoreEsche[i + 1])
+                        listaEscheViste.append(vettoreEsche[i + 2])
+                        listaEscheViste.append(vettoreEsche[i + 3])
+                        if vettoreEsche[i + 2] == xp and vettoreEsche[i + 3] == yp:
+                            nemicoInquadratoTemp = "Esca" + str(vettoreEsche[i])
+                    j += 3
+                i += 4
+            if rx == xp and ry == yp:
+                nemicoInquadratoTemp = "Colco"
+            nemicoInquadratoTemp = scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, False)
 
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
-                # esci
-                if event.key == pygame.K_q:
-                    risposta = True
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                # esci e apri il menu
-                if event.key == pygame.K_ESCAPE:
-                    risposta = True
-                    startf = True
-
-                # attiva / disattiva il gambit
-                if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
-                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
-                    if chiamarob:
-                        chiamarob = False
-                    else:
-                        ultimoObbiettivoColco = []
-                        ultimoObbiettivoColco.append("Telecomando")
-                        ultimoObbiettivoColco.append(x)
-                        ultimoObbiettivoColco.append(y)
-                        chiamarob = True
-
-                # scorrere il puntatore sui nemici / GlobalVarG2.esche / Colco
-                if event.key == pygame.K_3 or event.key == pygame.K_KP3:
-                    nemicoInquadratoTemp = False
-                    # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
-                    listaNemiciVisti = []
-                    for nemico in listaNemici:
-                        if nemico.inCasellaVista:
-                            listaNemiciVisti.append(nemico)
-                            if nemico.x == xp and nemico.y == yp:
-                                nemicoInquadratoTemp = nemico
-                    listaEscheViste = []
-                    i = 0
-                    while i < len(vettoreEsche):
-                        j = 0
-                        while j < len(caseviste):
-                            if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
-                                listaEscheViste.append(vettoreEsche[i])
-                                listaEscheViste.append(vettoreEsche[i + 1])
-                                listaEscheViste.append(vettoreEsche[i + 2])
-                                listaEscheViste.append(vettoreEsche[i + 3])
-                                if vettoreEsche[i + 2] == xp and vettoreEsche[i + 3] == yp:
-                                    nemicoInquadratoTemp = "Esca" + str(vettoreEsche[i])
-                            j += 3
-                        i += 4
-                    if rx == xp and ry == yp:
-                        nemicoInquadratoTemp = "Colco"
-                    nemicoInquadratoTemp = scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, True)
-
-                    if not nemicoInquadratoTemp:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                        xp = rx
-                        yp = ry
-                    elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                        xp = nemicoInquadratoTemp.x
-                        yp = nemicoInquadratoTemp.y
-                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                        xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 2]
-                        yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3]
-                if event.key == pygame.K_2 or event.key == pygame.K_KP2:
-                    nemicoInquadratoTemp = False
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                    # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
-                    listaNemiciVisti = []
-                    for nemico in listaNemici:
-                        if nemico.inCasellaVista:
-                            listaNemiciVisti.append(nemico)
-                            if nemico.x == xp and nemico.y == yp:
-                                nemicoInquadratoTemp = nemico
-                    listaEscheViste = []
-                    i = 0
-                    while i < len(vettoreEsche):
-                        j = 0
-                        while j < len(caseviste):
-                            if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
-                                listaEscheViste.append(vettoreEsche[i])
-                                listaEscheViste.append(vettoreEsche[i + 1])
-                                listaEscheViste.append(vettoreEsche[i + 2])
-                                listaEscheViste.append(vettoreEsche[i + 3])
-                                if vettoreEsche[i + 2] == xp and vettoreEsche[i + 3] == yp:
-                                    nemicoInquadratoTemp = "Esca" + str(vettoreEsche[i])
-                            j += 3
-                        i += 4
-                    if rx == xp and ry == yp:
-                        nemicoInquadratoTemp = "Colco"
-                    nemicoInquadratoTemp = scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, False)
-
-                    if not nemicoInquadratoTemp:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                        xp = rx
-                        yp = ry
-                    elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                        xp = nemicoInquadratoTemp.x
-                        yp = nemicoInquadratoTemp.y
-                    elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                        xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 2]
-                        yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3]
-
-                if event.key == pygame.K_e:
-                    selezioneAvvenuta = False
-                    if xp == rx and yp == ry:
+            if not nemicoInquadratoTemp:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp == "Colco":
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                xp = rx
+                yp = ry
+            elif not type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                xp = nemicoInquadratoTemp.x
+                yp = nemicoInquadratoTemp.y
+            elif type(nemicoInquadratoTemp) is str and nemicoInquadratoTemp.startswith("Esca"):
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
+                xp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 2]
+                yp = listaEscheViste[listaEscheViste.index(int(nemicoInquadratoTemp[4:])) + 3]
+            bottoneDown = False
+        # inquadra bersaglio
+        if bottoneDown == pygame.K_e or bottoneDown == "padQuadrato":
+            selezioneAvvenuta = False
+            if xp == rx and yp == ry:
+                selezioneAvvenuta = True
+                nemicoInquadrato = "Colco"
+            else:
+                i = 0
+                while i < len(vettoreEsche):
+                    if xp == vettoreEsche[i + 2] and yp == vettoreEsche[i + 3]:
+                        nemicoInquadrato = "Esca" + str(vettoreEsche[i])
                         selezioneAvvenuta = True
-                        nemicoInquadrato = "Colco"
-                    else:
-                        i = 0
-                        while i < len(vettoreEsche):
-                            if xp == vettoreEsche[i + 2] and yp == vettoreEsche[i + 3]:
-                                nemicoInquadrato = "Esca" + str(vettoreEsche[i])
-                                selezioneAvvenuta = True
-                            i += 4
-                        if not selezioneAvvenuta:
-                            for nemico in listaNemici:
-                                if xp == nemico.x and yp == nemico.y:
-                                    nemicoInquadrato = nemico
-                                    selezioneAvvenuta = True
-                    if selezioneAvvenuta:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
-                    else:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-
-                # movimento puntatore
-                if event.key == pygame.K_w:
-                    suPorta = False
-                    suCofanetto = False
-                    numTastiPremuti += 1
-                    nyp = -GlobalVar.gpy
-                    nxp = 0
-                if event.key == pygame.K_a:
-                    suPorta = False
-                    suCofanetto = False
-                    numTastiPremuti += 1
-                    nxp = -GlobalVar.gpx
-                    nyp = 0
-                if event.key == pygame.K_s:
-                    suPorta = False
-                    suCofanetto = False
-                    numTastiPremuti += 1
-                    nyp = GlobalVar.gpy
-                    nxp = 0
-                if event.key == pygame.K_d:
-                    suPorta = False
-                    suCofanetto = False
-                    numTastiPremuti += 1
-                    nxp = GlobalVar.gpx
-                    nyp = 0
-                # attacco
-                if event.key == pygame.K_SPACE:
-                    interazioneConfermata = True
-
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto and not startf:
-                tastop = "mouseDestro"
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                risposta = True
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and centraleMouse and not rotellaConCentralePremuto and not startf:
-                tastop = "mouseCentrale"
-                risposta = True
-                startf = True
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato and not startf:
-                tastop = "mouseSinistro"
+                    i += 4
+                if not selezioneAvvenuta:
+                    for nemico in listaNemici:
+                        if xp == nemico.x and yp == nemico.y:
+                            nemicoInquadrato = nemico
+                            selezioneAvvenuta = True
+            if selezioneAvvenuta:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
+            else:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
+        # movimento puntatore
+        if bottoneDown == pygame.K_w or bottoneDown == "padSu":
+            suPorta = False
+            suCofanetto = False
+            nyp = -GlobalVar.gpy
+            nxp = 0
+        if bottoneDown == pygame.K_a or bottoneDown == "padSinistra":
+            suPorta = False
+            suCofanetto = False
+            nxp = -GlobalVar.gpx
+            nyp = 0
+        if bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+            suPorta = False
+            suCofanetto = False
+            nyp = GlobalVar.gpy
+            nxp = 0
+        if bottoneDown == pygame.K_d or bottoneDown == "padDestra":
+            suPorta = False
+            suCofanetto = False
+            nxp = GlobalVar.gpx
+            nyp = 0
+        # interagisci
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+            if bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
+                interazioneConfermata = True
+            elif bottoneDown == "mouseSinistro":
                 if inquadratoQualcosa == "start":
                     risposta = True
                     startf = True
@@ -1548,27 +1445,33 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     interazioneConfermata = True
                 elif inquadratoQualcosa == "casellaNelRaggio":
                     interazioneConfermata = True
-            elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if event.type == pygame.KEYUP:
-                if tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d:
-                    numTastiPremuti -= 1
-                    if event.key == tastop:
-                        numTastiPremuti = 0
-                else:
-                    numTastiPremuti = 0
-                if numTastiPremuti == 0:
-                    tastop = 0
-                    nxp = 0
-                    nyp = 0
-            if event.type == pygame.MOUSEBUTTONUP:
-                tastop = 0
+            bottoneDown = False
+        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
+
+        # rallenta per i 20 fps
+        if tastotempfps != 0 and bottoneDown:
+            if tastotempfps != 5:
+                nxp = 0
+                nyp = 0
+            tastotempfps -= 1
+        if tastotempfps == 0 and bottoneDown:
+            if bottoneDown == pygame.K_w or bottoneDown == "padSu":
+                nyp = -GlobalVar.gpy
+            if bottoneDown == pygame.K_a or bottoneDown == "padSinistra":
+                nxp = -GlobalVar.gpx
+            if bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+                nyp = GlobalVar.gpy
+            if bottoneDown == pygame.K_d or bottoneDown == "padDestra":
+                nxp = GlobalVar.gpx
+            tastotempfps = 2
 
         analisiDiColcoEffettuata = False
         if interazioneConfermata:
             interazioneConfermata = False
             daInquadrare = False
-            if tastop == "mouseSinistro" and (inquadratoQualcosa == "nemico" or inquadratoQualcosa == "esca" or inquadratoQualcosa == "Colco"):
+            if bottoneDown == "mouseSinistro" and (inquadratoQualcosa == "nemico" or inquadratoQualcosa == "esca" or inquadratoQualcosa == "Colco"):
                 if inquadratoQualcosa == "nemico" and not (nemicoInquadrato and type(nemicoInquadrato) is not str and xp == nemicoInquadrato.x and yp == nemicoInquadrato.y):
                     for nemico in listaNemici:
                         if xp == nemico.x and yp == nemico.y:

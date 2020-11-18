@@ -14,16 +14,13 @@ def equip(dati):
     yp = GlobalVar.gsy // 18 * 6.8
     risposta = False
     voceMarcata = 1
-    primoFrame = True
     aggiornaSchermo = False
-    aggiornaInterfacciaPerMouse = False
-    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    mostraMouse = 2
 
-    tastop = 0
+    aggiornaInterfacciaPerCambioInput = True
+    primoFrame = True
+    bottoneDown = False
     tastotempfps = 5
 
-    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
     spada = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
     arco = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
     scudo = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
@@ -68,26 +65,14 @@ def equip(dati):
 
     while not risposta:
         # rallenta per i 30 fps
-        if tastotempfps != 0 and tastop != 0:
+        if tastotempfps != 0 and bottoneDown:
             tastotempfps -= 1
-        elif tastotempfps == 0 and tastop != 0:
+        elif tastotempfps == 0 and bottoneDown:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         suTornaIndietro = False
-        mouseDaSpostare = False
-        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            aggiornaInterfacciaPerMouse = True
-            if mostraMouse == 0:
-                GlobalVar.setCursoreVisibile(True)
-                mostraMouse = 2
-            else:
-                mostraMouse -= 1
-                mouseDaSpostare = True
-        if mostraMouse == 1 and not mouseDaSpostare:
-            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                 if GlobalVar.mouseBloccato:
@@ -303,271 +288,223 @@ def equip(dati):
             if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
 
+        # gestione degli input
         primoMovimento = False
-        tastoTrovato = False
-        for event in pygame.event.get():
+        bottoneDownVecchio = bottoneDown
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        if bottoneDownVecchio != bottoneDown:
+            primoMovimento = True
             tastotempfps = 5
-            sinistroMouseVecchio = sinistroMouse
-            centraleMouseVecchio = centraleMouse
-            destroMouseVecchio = destroMouse
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            rotellaConCentralePremuto = False
-            if centraleMouseVecchio and centraleMouse:
-                rotellaConCentralePremuto = True
-            if not sinistroMouseVecchio and sinistroMouse:
-                centraleMouse = False
-                destroMouse = False
-            elif not centraleMouseVecchio and centraleMouse:
-                sinistroMouse = False
-                destroMouse = False
-            elif not destroMouseVecchio and destroMouse:
-                sinistroMouse = False
-                centraleMouse = False
-            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                GlobalVar.setCursoreVisibile(True)
-
-            if event.type == pygame.QUIT:
-                tastoTrovato = True
-                pygame.quit()
-                GlobalVar.quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                if GlobalVar.mouseVisibile:
-                    aggiornaInterfacciaPerMouse = True
-                    GlobalVar.setCursoreVisibile(False)
-                tastop = event.key
-                if event.key == pygame.K_q and not tastoTrovato:
-                    tastoTrovato = True
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    risposta = True
-                if event.key == pygame.K_s and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_w and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_d and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_a and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
-                tastoTrovato = True
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            risposta = True
+            bottoneDown = False
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+            if bottoneDown == "mouseSinistro" and suTornaIndietro:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                 risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
-                tastop = "spazioOsinistroMouse"
-                tastoTrovato = True
-                if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    risposta = True
-                else:
-                    carim = True
-                    # progresso-stanza-x-y-liv-pv-spada-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
-                    # spade
-                    if voceMarcata == 1:
-                        if dati[41] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[6] = 0
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 2:
-                        if dati[42] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[6] = 1
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 3:
-                        if dati[43] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[6] = 2
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 4:
-                        if dati[44] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[6] = 3
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 5:
-                        if dati[45] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[6] = 4
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    # spade
-                    if voceMarcata == 6:
-                        if dati[46] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[128] = 0
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 7:
-                        if dati[47] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[128] = 1
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 8:
-                        if dati[48] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[128] = 2
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 9:
-                        if dati[49] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[128] = 3
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 10:
-                        if dati[50] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[128] = 4
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    # armature
-                    if voceMarcata == 11:
-                        if dati[51] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[8] = 0
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 12:
-                        if dati[52] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[8] = 1
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 13:
-                        if dati[53] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[8] = 2
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 14:
-                        if dati[54] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[8] = 3
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 15:
-                        if dati[55] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[8] = 4
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    # scudi
-                    if voceMarcata == 16:
-                        if dati[56] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[7] = 0
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 17:
-                        if dati[57] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[7] = 1
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 18:
-                        if dati[58] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[7] = 2
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 19:
-                        if dati[59] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[7] = 3
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 20:
-                        if dati[60] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[7] = 4
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    # guanti
-                    if voceMarcata == 21:
-                        if dati[61] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[129] = 0
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 22:
-                        if dati[62] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[129] = 1
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 23:
-                        if dati[63] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[129] = 2
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 24:
-                        if dati[64] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[129] = 3
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 25:
-                        if dati[65] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[129] = 4
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    # collane
-                    if voceMarcata == 26:
-                        if dati[66] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[130] = 0
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 27:
-                        if dati[67] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[130] = 1
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 28:
-                        if dati[68] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[130] = 2
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 29:
-                        if dati[69] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[130] = 3
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                    if voceMarcata == 30:
-                        if dati[70] != 0:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            dati[130] = 4
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            else:
+                carim = True
+                # progresso-stanza-x-y-liv-pv-spada-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                # spade
+                if voceMarcata == 1:
+                    if dati[41] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[6] = 0
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 2:
+                    if dati[42] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[6] = 1
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 3:
+                    if dati[43] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[6] = 2
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 4:
+                    if dati[44] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[6] = 3
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 5:
+                    if dati[45] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[6] = 4
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # spade
+                if voceMarcata == 6:
+                    if dati[46] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[128] = 0
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 7:
+                    if dati[47] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[128] = 1
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 8:
+                    if dati[48] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[128] = 2
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 9:
+                    if dati[49] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[128] = 3
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 10:
+                    if dati[50] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[128] = 4
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # armature
+                if voceMarcata == 11:
+                    if dati[51] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[8] = 0
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 12:
+                    if dati[52] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[8] = 1
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 13:
+                    if dati[53] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[8] = 2
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 14:
+                    if dati[54] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[8] = 3
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 15:
+                    if dati[55] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[8] = 4
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # scudi
+                if voceMarcata == 16:
+                    if dati[56] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[7] = 0
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 17:
+                    if dati[57] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[7] = 1
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 18:
+                    if dati[58] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[7] = 2
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 19:
+                    if dati[59] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[7] = 3
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 20:
+                    if dati[60] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[7] = 4
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # guanti
+                if voceMarcata == 21:
+                    if dati[61] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[129] = 0
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 22:
+                    if dati[62] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[129] = 1
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 23:
+                    if dati[63] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[129] = 2
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 24:
+                    if dati[64] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[129] = 3
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 25:
+                    if dati[65] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[129] = 4
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # collane
+                if voceMarcata == 26:
+                    if dati[66] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[130] = 0
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 27:
+                    if dati[67] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[130] = 1
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 28:
+                    if dati[68] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[130] = 2
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 29:
+                    if dati[69] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[130] = 3
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                if voceMarcata == 30:
+                    if dati[70] != 0:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        dati[130] = 4
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
+        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
 
-            if tastop != 0:
-                aggiornaSchermo = True
+        tastoMovimentoPremuto = False
+        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+            tastoMovimentoPremuto = True
 
-            if event.type == pygame.KEYUP and tastop == event.key:
-                tastop = 0
-            if event.type == pygame.MOUSEBUTTONUP:
-                tastop = 0
-
-        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
-            aggiornaInterfacciaPerMouse = False
+        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+            aggiornaInterfacciaPerCambioInput = False
             aggiornaSchermo = False
-            if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 5 or voceMarcata == 10 or voceMarcata == 15 or voceMarcata == 20 or voceMarcata == 25 or voceMarcata == 30:
                     voceMarcata -= 4
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -576,9 +513,7 @@ def equip(dati):
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp += GlobalVar.gsy // 18 * 2
-            if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 6 or voceMarcata == 11 or voceMarcata == 16 or voceMarcata == 21 or voceMarcata == 26:
                     voceMarcata += 4
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -587,9 +522,7 @@ def equip(dati):
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = yp - GlobalVar.gsy // 18 * 2
-            if tastop == pygame.K_d and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 26 or voceMarcata == 27 or voceMarcata == 28 or voceMarcata == 29 or voceMarcata == 30:
                     voceMarcata -= 25
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -598,9 +531,7 @@ def equip(dati):
                     voceMarcata += 5
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = xp + GlobalVar.gsx // 32 * 3.5
-            if tastop == pygame.K_a and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
                     voceMarcata += 25
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -609,7 +540,7 @@ def equip(dati):
                     voceMarcata -= 5
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = xp - GlobalVar.gsx // 32 * 3.5
-            if not primoMovimento and (tastop == pygame.K_d or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_w):
+            if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
             if primoFrame:
@@ -1058,6 +989,8 @@ def equip(dati):
 
             if GlobalVar.mouseVisibile:
                 messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+            elif GlobalVar.usandoIlController:
+                messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
             else:
                 messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
             GlobalVar.schermo.blit(puntatore, (xp, yp))
@@ -1076,13 +1009,11 @@ def sceglicondiz(dati, condizione):
     yp = GlobalVar.gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
-    primoFrame = True
     aggiornaSchermo = False
-    aggiornaInterfacciaPerMouse = False
-    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    mostraMouse = 2
 
-    tastop = 0
+    aggiornaInterfacciaPerCambioInput = True
+    primoFrame = True
+    bottoneDown = False
     tastotempfps = 5
 
     # carico le scenette
@@ -1090,26 +1021,14 @@ def sceglicondiz(dati, condizione):
 
     while not risposta:
         # rallenta per i 30 fps
-        if tastotempfps != 0 and tastop != 0:
+        if tastotempfps != 0 and bottoneDown:
             tastotempfps -= 1
-        elif tastotempfps == 0 and tastop != 0:
+        elif tastotempfps == 0 and bottoneDown:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         suTornaIndietro = False
-        mouseDaSpostare = False
-        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            aggiornaInterfacciaPerMouse = True
-            if mostraMouse == 0:
-                GlobalVar.setCursoreVisibile(True)
-                mostraMouse = 2
-            else:
-                mostraMouse -= 1
-                mouseDaSpostare = True
-        if mostraMouse == 1 and not mouseDaSpostare:
-            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                 if GlobalVar.mouseBloccato:
@@ -1255,98 +1174,50 @@ def sceglicondiz(dati, condizione):
             if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
 
+        # gestione degli input
         primoMovimento = False
-        tastoTrovato = False
-        for event in pygame.event.get():
+        bottoneDownVecchio = bottoneDown
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        if bottoneDownVecchio != bottoneDown:
+            primoMovimento = True
             tastotempfps = 5
-            sinistroMouseVecchio = sinistroMouse
-            centraleMouseVecchio = centraleMouse
-            destroMouseVecchio = destroMouse
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            rotellaConCentralePremuto = False
-            if centraleMouseVecchio and centraleMouse:
-                rotellaConCentralePremuto = True
-            if not sinistroMouseVecchio and sinistroMouse:
-                centraleMouse = False
-                destroMouse = False
-            elif not centraleMouseVecchio and centraleMouse:
-                sinistroMouse = False
-                destroMouse = False
-            elif not destroMouseVecchio and destroMouse:
-                sinistroMouse = False
-                centraleMouse = False
-            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                GlobalVar.setCursoreVisibile(True)
-
-            if event.type == pygame.QUIT:
-                tastoTrovato = True
-                pygame.quit()
-                GlobalVar.quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                if GlobalVar.mouseVisibile:
-                    aggiornaInterfacciaPerMouse = True
-                    GlobalVar.setCursoreVisibile(False)
-                tastop = event.key
-                if event.key == pygame.K_q and not tastoTrovato:
-                    tastoTrovato = True
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    risposta = True
-                if event.key == pygame.K_s and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_w and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_d and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_a and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
-                tastoTrovato = True
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            risposta = True
+            bottoneDown = False
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+            if bottoneDown == "mouseSinistro" and suTornaIndietro:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                 risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
-                tastop = "spazioOsinistroMouse"
-                tastoTrovato = True
-                if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    risposta = True
-                else:
-                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)-condizioni(20)-gambit(20) // dimensione: 0-120
-                    i = 81
-                    c = 1
-                    while i <= 100:
-                        if voceMarcata == c:
-                            if dati[i] != 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                return c
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        i += 1
-                        c += 1
-                    if voceMarcata == 0:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                        return 0
-            elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            else:
+                # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)-condizioni(20)-gambit(20) // dimensione: 0-120
+                i = 81
+                c = 1
+                while i <= 100:
+                    if voceMarcata == c:
+                        if dati[i] != 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            return c
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    i += 1
+                    c += 1
+                if voceMarcata == 0:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                    return 0
+            bottoneDown = False
+        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
 
-            if tastop != 0:
-                aggiornaSchermo = True
+        tastoMovimentoPremuto = False
+        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+            tastoMovimentoPremuto = True
 
-            if event.type == pygame.KEYUP and tastop == event.key:
-                tastop = 0
-            if event.type == pygame.MOUSEBUTTONUP:
-                tastop = 0
-
-        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
-            aggiornaInterfacciaPerMouse = False
+        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+            aggiornaInterfacciaPerCambioInput = False
             aggiornaSchermo = False
-            if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
@@ -1366,9 +1237,7 @@ def sceglicondiz(dati, condizione):
                         voceMarcata += 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = GlobalVar.gsy // 18 * 15.1
-            if tastop == pygame.K_a and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata != 0:
                     if 11 <= voceMarcata <= 20:
                         voceMarcata -= 10
@@ -1378,9 +1247,7 @@ def sceglicondiz(dati, condizione):
                         voceMarcata += 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 8
-            if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -1400,9 +1267,7 @@ def sceglicondiz(dati, condizione):
                         voceMarcata += 1
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = yp + GlobalVar.gsy // 18 * 1
-            if tastop == pygame.K_d and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata != 0:
                     if 1 <= voceMarcata <= 10:
                         voceMarcata += 10
@@ -1412,7 +1277,7 @@ def sceglicondiz(dati, condizione):
                         voceMarcata -= 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 1
-            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+            if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
             if primoFrame:
@@ -1598,6 +1463,8 @@ def sceglicondiz(dati, condizione):
 
             if GlobalVar.mouseVisibile:
                 messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+            elif GlobalVar.usandoIlController:
+                messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
             else:
                 messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
 
@@ -1634,13 +1501,11 @@ def sceglitecn(dati, tecnica):
     yp = GlobalVar.gsy // 18 * 4.6
     risposta = False
     voceMarcata = 0
-    primoFrame = True
     aggiornaSchermo = False
-    aggiornaInterfacciaPerMouse = False
-    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    mostraMouse = 2
 
-    tastop = 0
+    aggiornaInterfacciaPerCambioInput = True
+    primoFrame = True
+    bottoneDown = False
     tastotempfps = 5
 
     # carico le scenette
@@ -1648,26 +1513,14 @@ def sceglitecn(dati, tecnica):
 
     while not risposta:
         # rallenta per i 30 fps
-        if tastotempfps != 0 and tastop != 0:
+        if tastotempfps != 0 and bottoneDown:
             tastotempfps -= 1
-        elif tastotempfps == 0 and tastop != 0:
+        elif tastotempfps == 0 and bottoneDown:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         suTornaIndietro = False
-        mouseDaSpostare = False
-        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            aggiornaInterfacciaPerMouse = True
-            if mostraMouse == 0:
-                GlobalVar.setCursoreVisibile(True)
-                mostraMouse = 2
-            else:
-                mostraMouse -= 1
-                mouseDaSpostare = True
-        if mostraMouse == 1 and not mouseDaSpostare:
-            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
                 if GlobalVar.mouseBloccato:
@@ -1813,100 +1666,52 @@ def sceglitecn(dati, tecnica):
             if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
 
+        # gestione degli input
         primoMovimento = False
-        tastoTrovato = False
-        for event in pygame.event.get():
+        bottoneDownVecchio = bottoneDown
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        if bottoneDownVecchio != bottoneDown:
+            primoMovimento = True
             tastotempfps = 5
-            sinistroMouseVecchio = sinistroMouse
-            centraleMouseVecchio = centraleMouse
-            destroMouseVecchio = destroMouse
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            rotellaConCentralePremuto = False
-            if centraleMouseVecchio and centraleMouse:
-                rotellaConCentralePremuto = True
-            if not sinistroMouseVecchio and sinistroMouse:
-                centraleMouse = False
-                destroMouse = False
-            elif not centraleMouseVecchio and centraleMouse:
-                sinistroMouse = False
-                destroMouse = False
-            elif not destroMouseVecchio and destroMouse:
-                sinistroMouse = False
-                centraleMouse = False
-            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                GlobalVar.setCursoreVisibile(True)
-
-            if event.type == pygame.QUIT:
-                tastoTrovato = True
-                pygame.quit()
-                GlobalVar.quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                if GlobalVar.mouseVisibile:
-                    aggiornaInterfacciaPerMouse = True
-                    GlobalVar.setCursoreVisibile(False)
-                tastop = event.key
-                if event.key == pygame.K_q and not tastoTrovato:
-                    tastoTrovato = True
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    risposta = True
-                if event.key == pygame.K_s and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_w and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_d and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_a and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
-                tastoTrovato = True
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            risposta = True
+            bottoneDown = False
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+            if bottoneDown == "mouseSinistro" and suTornaIndietro:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                 risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
-                tastop = "spazioOsinistroMouse"
-                tastoTrovato = True
-                if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            else:
+                i = 11
+                c = 1
+                while i <= 30:
+                    if voceMarcata == c:
+                        if dati[i] != 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            tecnica = c
+                            risposta = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                        break
+                    i += 1
+                    c += 1
+                if voceMarcata == 0:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                    tecnica = 0
                     risposta = True
-                else:
-                    i = 11
-                    c = 1
-                    while i <= 30:
-                        if voceMarcata == c:
-                            if dati[i] != 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                tecnica = c
-                                risposta = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                            break
-                        i += 1
-                        c += 1
-                    if voceMarcata == 0:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                        tecnica = 0
-                        risposta = True
-            elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
+        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
 
-            if tastop != 0:
-                aggiornaSchermo = True
+        tastoMovimentoPremuto = False
+        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+            tastoMovimentoPremuto = True
 
-            if event.type == pygame.KEYUP and tastop == event.key:
-                tastop = 0
-            if event.type == pygame.MOUSEBUTTONUP:
-                tastop = 0
-
-        if aggiornaSchermo or primoMovimento or tastop == "spazioOsinistroMouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
-            aggiornaInterfacciaPerMouse = False
+        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+            aggiornaInterfacciaPerCambioInput = False
             aggiornaSchermo = False
-            if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 11:
                     if voceMarcata == 1:
                         voceMarcata -= 1
@@ -1926,9 +1731,7 @@ def sceglitecn(dati, tecnica):
                         voceMarcata -= 1
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = yp - GlobalVar.gsy // 18 * 1
-            if tastop == pygame.K_a and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata != 0:
                     if 11 <= voceMarcata <= 20:
                         voceMarcata -= 10
@@ -1938,9 +1741,7 @@ def sceglitecn(dati, tecnica):
                         voceMarcata += 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 8
-            if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -1960,9 +1761,7 @@ def sceglitecn(dati, tecnica):
                         voceMarcata += 1
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         yp = yp + GlobalVar.gsy // 18 * 1
-            if tastop == pygame.K_d and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata != 0:
                     if 1 <= voceMarcata <= 10:
                         voceMarcata += 10
@@ -1972,7 +1771,7 @@ def sceglitecn(dati, tecnica):
                         voceMarcata -= 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 1
-            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+            if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
             if primoFrame:
@@ -2178,6 +1977,8 @@ def sceglitecn(dati, tecnica):
 
             if GlobalVar.mouseVisibile:
                 messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+            elif GlobalVar.usandoIlController:
+                messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
             else:
                 messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
 
@@ -2223,13 +2024,11 @@ def equiprobo(dati):
     vypGambit = yp
     voceMarcata = 1
     voceGambitMarcata = 0
-    primoFrame = True
     aggiornaSchermo = False
-    aggiornaInterfacciaPerMouse = False
-    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    mostraMouse = 2
 
-    tastop = 0
+    aggiornaInterfacciaPerCambioInput = True
+    primoFrame = True
+    bottoneDown = False
     tastotempfps = 5
 
     vetImgBatterie = GlobalVar.vetImgBatterieMenu
@@ -2245,26 +2044,14 @@ def equiprobo(dati):
 
     while not risposta:
         # rallenta per i 30 fps
-        if tastotempfps != 0 and tastop != 0:
+        if tastotempfps != 0 and bottoneDown:
             tastotempfps -= 1
-        elif tastotempfps == 0 and tastop != 0:
+        elif tastotempfps == 0 and bottoneDown:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
-        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         suTornaIndietro = False
-        mouseDaSpostare = False
-        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            aggiornaInterfacciaPerMouse = True
-            if mostraMouse == 0:
-                GlobalVar.setCursoreVisibile(True)
-                mostraMouse = 2
-            else:
-                mostraMouse -= 1
-                mouseDaSpostare = True
-        if mostraMouse == 1 and not mouseDaSpostare:
-            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if not riordinamento:
                 if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
@@ -2755,186 +2542,133 @@ def equiprobo(dati):
             if voceMarcataVecchia != voceMarcata and not primoFrame:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
 
+        # gestione degli input
         primoMovimento = False
-        tastoTrovato = False
-        for event in pygame.event.get():
+        bottoneDownVecchio = bottoneDown
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        if bottoneDownVecchio != bottoneDown:
+            primoMovimento = True
             tastotempfps = 5
-            sinistroMouseVecchio = sinistroMouse
-            centraleMouseVecchio = centraleMouse
-            destroMouseVecchio = destroMouse
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            rotellaConCentralePremuto = False
-            if centraleMouseVecchio and centraleMouse:
-                rotellaConCentralePremuto = True
-            if not sinistroMouseVecchio and sinistroMouse:
-                centraleMouse = False
-                destroMouse = False
-            elif not centraleMouseVecchio and centraleMouse:
-                sinistroMouse = False
-                destroMouse = False
-            elif not destroMouseVecchio and destroMouse:
-                sinistroMouse = False
-                centraleMouse = False
-            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                GlobalVar.setCursoreVisibile(True)
-
-            if event.type == pygame.QUIT:
-                tastoTrovato = True
-                pygame.quit()
-                GlobalVar.quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata:
-                if GlobalVar.mouseVisibile:
-                    aggiornaInterfacciaPerMouse = True
-                    GlobalVar.setCursoreVisibile(False)
-                tastop = event.key
-                if event.key == pygame.K_q and not tastoTrovato:
-                    tastoTrovato = True
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            if not riordinamento:
+                risposta = True
+            else:
+                riordinamento = False
+                annullaRiordinamento = True
+            bottoneDown = False
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+            # riordina
+            if riordinamento:
+                if bottoneDown == "mouseSinistro" and suTornaIndietro:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                    if not riordinamento:
-                        risposta = True
-                    else:
-                        riordinamento = False
-                        annullaRiordinamento = True
-                if event.key == pygame.K_s and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_w and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_d and not riordinamento and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_a and not riordinamento and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
-                tastop = "spazioOmouse"
-                tastoTrovato = True
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                if not riordinamento:
-                    risposta = True
-                else:
                     riordinamento = False
                     annullaRiordinamento = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
-                tastop = "spazioOmouse"
-                tastoTrovato = True
-                # riordina
-                if riordinamento:
-                    if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                        riordinamento = False
-                        annullaRiordinamento = True
-                    else:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                        riordinamento = False
                 else:
-                    if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                        risposta = True
-                    else:
-                        # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
-                        # armrob
-                        if voceMarcata == 1:
-                            if dati[71] != 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                dati[9] = 0
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if voceMarcata == 2:
-                            if dati[72] != 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                dati[9] = 1
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if voceMarcata == 3:
-                            if dati[73] != 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                dati[9] = 2
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if voceMarcata == 4:
-                            if dati[74] != 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                dati[9] = 3
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if voceMarcata == 5:
-                            if dati[75] != 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                dati[9] = 4
-                                esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
-                                if dati[10] > entot:
-                                    dati[10] = entot
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-
-                        # riordina
-                        if 6 <= voceMarcata <= 15:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                    riordinamento = False
+            else:
+                if bottoneDown == "mouseSinistro" and suTornaIndietro:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                    risposta = True
+                else:
+                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                    # armrob
+                    if voceMarcata == 1:
+                        if dati[71] != 0:
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            riordinamento = True
-                            datiPrimaDiRiordinamento = list(dati)
-                            vxpGambit = xp
-                            vypGambit = yp
-                            voceGambitMarcata = voceMarcata
+                            dati[9] = 0
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if voceMarcata == 2:
+                        if dati[72] != 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            dati[9] = 1
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if voceMarcata == 3:
+                        if dati[73] != 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            dati[9] = 2
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if voceMarcata == 4:
+                        if dati[74] != 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            dati[9] = 3
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if voceMarcata == 5:
+                        if dati[75] != 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            dati[9] = 4
+                            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+                            if dati[10] > entot:
+                                dati[10] = entot
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
 
-                        # condizioni
-                        i = 101
-                        c = 16
-                        while i <= 110:
-                            if voceMarcata == c:
-                                primoFrame = True
-                                if dati[i] != -1:
-                                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                    dati[i] = sceglicondiz(dati, dati[i])
-                                else:
-                                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                            i += 1
-                            c += 1
+                    # riordina
+                    if 6 <= voceMarcata <= 15:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        riordinamento = True
+                        datiPrimaDiRiordinamento = list(dati)
+                        vxpGambit = xp
+                        vypGambit = yp
+                        voceGambitMarcata = voceMarcata
 
-                        # tecniche
-                        i = 111
-                        c = 26
-                        while i <= 120:
-                            if voceMarcata == c:
-                                primoFrame = True
-                                if dati[i] != -1:
-                                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                    dati[i] = sceglitecn(dati, dati[i])
-                                else:
-                                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                            i += 1
-                            c += 1
-            elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    # condizioni
+                    i = 101
+                    c = 16
+                    while i <= 110:
+                        if voceMarcata == c:
+                            primoFrame = True
+                            if dati[i] != -1:
+                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                                dati[i] = sceglicondiz(dati, dati[i])
+                            else:
+                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                        i += 1
+                        c += 1
 
-            if tastop != 0:
-                aggiornaSchermo = True
+                    # tecniche
+                    i = 111
+                    c = 26
+                    while i <= 120:
+                        if voceMarcata == c:
+                            primoFrame = True
+                            if dati[i] != -1:
+                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                                dati[i] = sceglitecn(dati, dati[i])
+                            else:
+                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                        i += 1
+                        c += 1
+            bottoneDown = False
+        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
 
-            if event.type == pygame.KEYUP and tastop == event.key:
-                tastop = 0
-            if event.type == pygame.MOUSEBUTTONUP:
-                tastop = 0
+        tastoMovimentoPremuto = False
+        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+            tastoMovimentoPremuto = True
 
-        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerMouse:
-            aggiornaInterfacciaPerMouse = False
+        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+            aggiornaInterfacciaPerCambioInput = False
             aggiornaSchermo = False
-            if tastop == pygame.K_w and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if riordinamento:
                     if voceMarcata != 6:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -2970,9 +2704,7 @@ def equiprobo(dati):
                             voceMarcata -= 1
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                             yp = yp - GlobalVar.gsy // 18 * 1
-            if tastop == pygame.K_a and not riordinamento and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and not riordinamento and (tastotempfps == 0 or primoMovimento):
                 if 1 <= voceMarcata <= 5:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     if voceMarcata == 1:
@@ -3032,9 +2764,7 @@ def equiprobo(dati):
                     voceMarcata -= 10
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = GlobalVar.gsx // 32 * 10
-            if tastop == pygame.K_s and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if riordinamento:
                     if voceMarcata != 15:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -3070,9 +2800,7 @@ def equiprobo(dati):
                             voceMarcata += 1
                             GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                             yp = yp + GlobalVar.gsy // 18 * 1
-            if tastop == pygame.K_d and not riordinamento and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and not riordinamento and (tastotempfps == 0 or primoMovimento):
                 if 1 <= voceMarcata <= 5:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     if voceMarcata == 1:
@@ -3132,7 +2860,7 @@ def equiprobo(dati):
                             voceMarcata -= 30
                         yp = GlobalVar.gsy // 18 * 14.8
                     xp = GlobalVar.gsx // 32 * 1
-            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+            if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
             if primoFrame:
@@ -3282,6 +3010,8 @@ def equiprobo(dati):
 
             if GlobalVar.mouseVisibile:
                 messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+            elif GlobalVar.usandoIlController:
+                messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
             else:
                 messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
 
@@ -3419,14 +3149,12 @@ def oggetti(dati, colcoInCasellaVista):
     attacco = 0
     oggetton = 1
     voceMarcata = 0
-    primoFrame = True
     aggiornaSchermo = False
-    aggiornaInterfacciaPerMouse = False
     impossibileUsareCaricaBatt = False
-    sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-    mostraMouse = 2
 
-    tastop = 0
+    aggiornaInterfacciaPerCambioInput = True
+    primoFrame = True
+    bottoneDown = False
     tastotempfps = 5
 
     imgOggetti = []
@@ -3442,27 +3170,15 @@ def oggetti(dati, colcoInCasellaVista):
 
     while not risposta:
         # rallenta per i 30 fps
-        if tastotempfps != 0 and tastop != 0:
+        if tastotempfps != 0 and bottoneDown:
             tastotempfps -= 1
-        elif tastotempfps == 0 and tastop != 0:
+        elif tastotempfps == 0 and bottoneDown:
             tastotempfps = 2
 
         voceMarcataVecchia = voceMarcata
         oggettonVecchio = oggetton
         xMouse, yMouse = pygame.mouse.get_pos()
-        deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
         suTornaIndietro = False
-        mouseDaSpostare = False
-        if (deltaXMouse != 0 or deltaYMouse != 0) and not GlobalVar.mouseVisibile:
-            aggiornaInterfacciaPerMouse = True
-            if mostraMouse == 0:
-                GlobalVar.setCursoreVisibile(True)
-                mostraMouse = 2
-            else:
-                mostraMouse -= 1
-                mouseDaSpostare = True
-        if mostraMouse == 1 and not mouseDaSpostare:
-            mostraMouse = 2
         if GlobalVar.mouseVisibile:
             if usa != 0:
                 if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
@@ -3563,84 +3279,45 @@ def oggetti(dati, colcoInCasellaVista):
             if (voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton) and not primoFrame:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
 
+        # gestione degli input
         primoMovimento = False
-        tastoTrovato = False
-        for event in pygame.event.get():
+        bottoneDownVecchio = bottoneDown
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        if bottoneDownVecchio != bottoneDown:
+            primoMovimento = True
             tastotempfps = 5
-            sinistroMouseVecchio = sinistroMouse
-            centraleMouseVecchio = centraleMouse
-            destroMouseVecchio = destroMouse
-            sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
-            rotellaConCentralePremuto = False
-            if centraleMouseVecchio and centraleMouse:
-                rotellaConCentralePremuto = True
-            if not sinistroMouseVecchio and sinistroMouse:
-                centraleMouse = False
-                destroMouse = False
-            elif not centraleMouseVecchio and centraleMouse:
-                sinistroMouse = False
-                destroMouse = False
-            elif not destroMouseVecchio and destroMouse:
-                sinistroMouse = False
-                centraleMouse = False
-            if event.type == pygame.MOUSEBUTTONDOWN and not GlobalVar.mouseVisibile:
-                aggiornaInterfacciaPerMouse = True
-                GlobalVar.setCursoreVisibile(True)
-
-            if event.type == pygame.QUIT:
-                tastoTrovato = True
-                pygame.quit()
-                GlobalVar.quit()
-            if event.type == pygame.KEYDOWN and not tastoTrovato and voceMarcataVecchia == voceMarcata and oggettonVecchio == oggetton:
-                if GlobalVar.mouseVisibile:
-                    aggiornaInterfacciaPerMouse = True
-                    GlobalVar.setCursoreVisibile(False)
-                tastop = event.key
-                if event.key == pygame.K_q and not tastoTrovato:
-                    tastoTrovato = True
-                    voceMarcata = 0
-                    if usa != 0:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                        xp = GlobalVar.gsx // 32 * 1
-                        if usa == 1:
-                            yp = GlobalVar.gsy // 18 * 5
-                        if usa == 2:
-                            yp = GlobalVar.gsy // 18 * 6
-                        if usa == 3:
-                            yp = GlobalVar.gsy // 18 * 7
-                        if usa == 4:
-                            yp = GlobalVar.gsy // 18 * 8
-                        if usa == 5:
-                            yp = GlobalVar.gsy // 18 * 9
-                        if usa == 6:
-                            yp = GlobalVar.gsy // 18 * 11
-                        if usa == 7:
-                            yp = GlobalVar.gsy // 18 * 12
-                        if usa == 8:
-                            yp = GlobalVar.gsy // 18 * 13
-                        if usa == 9:
-                            yp = GlobalVar.gsy // 18 * 14
-                        if usa == 10:
-                            yp = GlobalVar.gsy // 18 * 15
-                        usa = 0
-                    else:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                        risposta = True
-                if event.key == pygame.K_s and voceMarcata == 0 and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_w and voceMarcata == 0 and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_a and voceMarcata != 0 and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-                if event.key == pygame.K_d and voceMarcata != 0 and not tastoTrovato:
-                    primoMovimento = True
-                    tastoTrovato = True
-            if GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and destroMouse and not rotellaConCentralePremuto:
-                tastop = "spazioOmouse"
-                tastoTrovato = True
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            voceMarcata = 0
+            if usa != 0:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                xp = GlobalVar.gsx // 32 * 1
+                if usa == 1:
+                    yp = GlobalVar.gsy // 18 * 5
+                if usa == 2:
+                    yp = GlobalVar.gsy // 18 * 6
+                if usa == 3:
+                    yp = GlobalVar.gsy // 18 * 7
+                if usa == 4:
+                    yp = GlobalVar.gsy // 18 * 8
+                if usa == 5:
+                    yp = GlobalVar.gsy // 18 * 9
+                if usa == 6:
+                    yp = GlobalVar.gsy // 18 * 11
+                if usa == 7:
+                    yp = GlobalVar.gsy // 18 * 12
+                if usa == 8:
+                    yp = GlobalVar.gsy // 18 * 13
+                if usa == 9:
+                    yp = GlobalVar.gsy // 18 * 14
+                if usa == 10:
+                    yp = GlobalVar.gsy // 18 * 15
+                usa = 0
+            else:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                risposta = True
+            bottoneDown = False
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+            if bottoneDown == "mouseSinistro" and suTornaIndietro:
                 voceMarcata = 0
                 if usa != 0:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -3669,222 +3346,186 @@ def oggetti(dati, colcoInCasellaVista):
                 else:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     risposta = True
-            if (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE) or (GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and not GlobalVar.mouseBloccato):
-                tastop = "spazioOmouse"
-                tastoTrovato = True
-                if event.type == pygame.MOUSEBUTTONDOWN and suTornaIndietro:
-                    voceMarcata = 0
-                    if usa != 0:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                        xp = GlobalVar.gsx // 32 * 1
-                        if usa == 1:
-                            yp = GlobalVar.gsy // 18 * 5
-                        if usa == 2:
-                            yp = GlobalVar.gsy // 18 * 6
-                        if usa == 3:
-                            yp = GlobalVar.gsy // 18 * 7
-                        if usa == 4:
-                            yp = GlobalVar.gsy // 18 * 8
-                        if usa == 5:
-                            yp = GlobalVar.gsy // 18 * 9
-                        if usa == 6:
-                            yp = GlobalVar.gsy // 18 * 11
-                        if usa == 7:
-                            yp = GlobalVar.gsy // 18 * 12
-                        if usa == 8:
-                            yp = GlobalVar.gsy // 18 * 13
-                        if usa == 9:
-                            yp = GlobalVar.gsy // 18 * 14
-                        if usa == 10:
-                            yp = GlobalVar.gsy // 18 * 15
-                        usa = 0
+            else:
+                usadue = True
+                # usa?
+                if voceMarcata == 1:
+                    usadue = False
+                    # pozione
+                    if usa == 1:
+                        dati[5] = dati[5] + 100
+                        if dati[5] > pvtot:
+                            dati[5] = pvtot
+                        dati[31] = dati[31] - 1
+                        yp = GlobalVar.gsy // 18 * 5
+                    # carica batt
+                    if usa == 2:
+                        dati[10] = dati[10] + 250
+                        if dati[10] > entot:
+                            dati[10] = entot
+                        dati[32] = dati[32] - 1
+                        yp = GlobalVar.gsy // 18 * 6
+                    # antidoto
+                    if usa == 3:
+                        dati[121] = 0
+                        dati[33] = dati[33] - 1
+                        yp = GlobalVar.gsy // 18 * 7
+                    # super pozione
+                    if usa == 4:
+                        dati[5] = dati[5] + 300
+                        if dati[5] > pvtot:
+                            dati[5] = pvtot
+                        dati[34] = dati[34] - 1
+                        yp = GlobalVar.gsy // 18 * 8
+                    # carica migliorato
+                    if usa == 5:
+                        dati[10] = dati[10] + 600
+                        if dati[10] > entot:
+                            dati[10] = entot
+                        dati[35] = dati[35] - 1
+                        yp = GlobalVar.gsy // 18 * 9
+                    # bomba
+                    if usa == 6:
+                        attacco = 2
+                        yp = GlobalVar.gsy // 18 * 11
+                    # bomba veleno
+                    if usa == 7:
+                        attacco = 3
+                        yp = GlobalVar.gsy // 18 * 12
+                    # esca
+                    if usa == 8:
+                        attacco = 4
+                        yp = GlobalVar.gsy // 18 * 13
+                    # bomba appiccicosa
+                    if usa == 9:
+                        attacco = 5
+                        yp = GlobalVar.gsy // 18 * 14
+                    # bomba potenziata
+                    if usa == 10:
+                        attacco = 6
+                        yp = GlobalVar.gsy // 18 * 15
+                    if (usa == 2 or usa == 5) and dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                     else:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                        risposta = True
-                else:
-                    usadue = True
-                    # usa?
-                    if voceMarcata == 1:
-                        usadue = False
-                        # pozione
-                        if usa == 1:
-                            dati[5] = dati[5] + 100
-                            if dati[5] > pvtot:
-                                dati[5] = pvtot
-                            dati[31] = dati[31] - 1
-                            yp = GlobalVar.gsy // 18 * 5
-                        # carica batt
-                        if usa == 2:
-                            dati[10] = dati[10] + 250
-                            if dati[10] > entot:
-                                dati[10] = entot
-                            dati[32] = dati[32] - 1
-                            yp = GlobalVar.gsy // 18 * 6
-                        # antidoto
-                        if usa == 3:
-                            dati[121] = 0
-                            dati[33] = dati[33] - 1
-                            yp = GlobalVar.gsy // 18 * 7
-                        # super pozione
-                        if usa == 4:
-                            dati[5] = dati[5] + 300
-                            if dati[5] > pvtot:
-                                dati[5] = pvtot
-                            dati[34] = dati[34] - 1
-                            yp = GlobalVar.gsy // 18 * 8
-                        # carica migliorato
-                        if usa == 5:
-                            dati[10] = dati[10] + 600
-                            if dati[10] > entot:
-                                dati[10] = entot
-                            dati[35] = dati[35] - 1
-                            yp = GlobalVar.gsy // 18 * 9
-                        # bomba
-                        if usa == 6:
-                            attacco = 2
-                            yp = GlobalVar.gsy // 18 * 11
-                        # bomba veleno
-                        if usa == 7:
-                            attacco = 3
-                            yp = GlobalVar.gsy // 18 * 12
-                        # esca
-                        if usa == 8:
-                            attacco = 4
-                            yp = GlobalVar.gsy // 18 * 13
-                        # bomba appiccicosa
-                        if usa == 9:
-                            attacco = 5
-                            yp = GlobalVar.gsy // 18 * 14
-                        # bomba potenziata
-                        if usa == 10:
-                            attacco = 6
-                            yp = GlobalVar.gsy // 18 * 15
-                        if (usa == 2 or usa == 5) and dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        else:
-                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                            xp = GlobalVar.gsx // 32 * 1
-                            voceMarcata = 0
-                            usa = 0
-                    elif voceMarcata == 2:
-                        voceMarcata = 0
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                         xp = GlobalVar.gsx // 32 * 1
-                        if usa == 1:
-                            yp = GlobalVar.gsy // 18 * 5
-                        if usa == 2:
-                            yp = GlobalVar.gsy // 18 * 6
-                        if usa == 3:
-                            yp = GlobalVar.gsy // 18 * 7
-                        if usa == 4:
-                            yp = GlobalVar.gsy // 18 * 8
-                        if usa == 5:
-                            yp = GlobalVar.gsy // 18 * 9
-                        if usa == 6:
-                            yp = GlobalVar.gsy // 18 * 11
-                        if usa == 7:
-                            yp = GlobalVar.gsy // 18 * 12
-                        if usa == 8:
-                            yp = GlobalVar.gsy // 18 * 13
-                        if usa == 9:
-                            yp = GlobalVar.gsy // 18 * 14
-                        if usa == 10:
-                            yp = GlobalVar.gsy // 18 * 15
+                        voceMarcata = 0
                         usa = 0
-                        usadue = False
-                    # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
-                    if usadue:
-                        if oggetton == 1:
-                            if dati[31] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 1
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if oggetton == 2:
-                            if dati[32] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 2
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                                if not dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
-                                    impossibileUsareCaricaBatt = True
-                        if oggetton == 3:
-                            if dati[33] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 3
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if oggetton == 4:
-                            if dati[34] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 4
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if oggetton == 5:
-                            if dati[35] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 5
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                                if not dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
-                                    impossibileUsareCaricaBatt = True
-                        if oggetton == 6:
-                            if dati[36] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 6
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if oggetton == 7:
-                            if dati[37] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 7
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if oggetton == 8:
-                            if dati[38] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 8
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if oggetton == 9:
-                            if dati[39] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 9
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-                        if oggetton == 10:
-                            if dati[40] > 0:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                                usa = 10
-                                usauno = True
-                            else:
-                                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            elif GlobalVar.mouseVisibile and event.type == pygame.MOUSEBUTTONDOWN and sinistroMouse and not rotellaConCentralePremuto and GlobalVar.mouseBloccato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                elif voceMarcata == 2:
+                    voceMarcata = 0
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                    xp = GlobalVar.gsx // 32 * 1
+                    if usa == 1:
+                        yp = GlobalVar.gsy // 18 * 5
+                    if usa == 2:
+                        yp = GlobalVar.gsy // 18 * 6
+                    if usa == 3:
+                        yp = GlobalVar.gsy // 18 * 7
+                    if usa == 4:
+                        yp = GlobalVar.gsy // 18 * 8
+                    if usa == 5:
+                        yp = GlobalVar.gsy // 18 * 9
+                    if usa == 6:
+                        yp = GlobalVar.gsy // 18 * 11
+                    if usa == 7:
+                        yp = GlobalVar.gsy // 18 * 12
+                    if usa == 8:
+                        yp = GlobalVar.gsy // 18 * 13
+                    if usa == 9:
+                        yp = GlobalVar.gsy // 18 * 14
+                    if usa == 10:
+                        yp = GlobalVar.gsy // 18 * 15
+                    usa = 0
+                    usadue = False
+                # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
+                if usadue:
+                    if oggetton == 1:
+                        if dati[31] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 1
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if oggetton == 2:
+                        if dati[32] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 2
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                            if not dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
+                                impossibileUsareCaricaBatt = True
+                    if oggetton == 3:
+                        if dati[33] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 3
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if oggetton == 4:
+                        if dati[34] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 4
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if oggetton == 5:
+                        if dati[35] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 5
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                            if not dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
+                                impossibileUsareCaricaBatt = True
+                    if oggetton == 6:
+                        if dati[36] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 6
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if oggetton == 7:
+                        if dati[37] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 7
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if oggetton == 8:
+                        if dati[38] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 8
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if oggetton == 9:
+                        if dati[39] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 9
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    if oggetton == 10:
+                        if dati[40] > 0:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                            usa = 10
+                            usauno = True
+                        else:
+                            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
+        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
 
-            if tastop != 0:
-                aggiornaSchermo = True
+        tastoMovimentoPremuto = False
+        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+            tastoMovimentoPremuto = True
 
-            if event.type == pygame.KEYUP and tastop == event.key:
-                tastop = 0
-            if event.type == pygame.MOUSEBUTTONUP:
-                tastop = 0
-
-        if aggiornaSchermo or primoMovimento or tastop == pygame.K_q or tastop == "spazioOmouse" or ((tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d) and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerMouse:
-            aggiornaInterfacciaPerMouse = False
+        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerCambioInput:
+            aggiornaInterfacciaPerCambioInput = False
             aggiornaSchermo = False
-            if tastop == pygame.K_w and voceMarcata == 0 and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and voceMarcata == 0 and (tastotempfps == 0 or primoMovimento):
                 if oggetton != 1 and oggetton != 6:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     oggetton = oggetton - 1
@@ -3897,16 +3538,12 @@ def oggetti(dati, colcoInCasellaVista):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = GlobalVar.gsy // 18 * 15
                     oggetton = 10
-            if tastop == pygame.K_a and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = xp - GlobalVar.gsx // 32 * 2.4
-            if tastop == pygame.K_s and voceMarcata == 0 and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and voceMarcata == 0 and (tastotempfps == 0 or primoMovimento):
                 if oggetton != 10 and oggetton != 5:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     oggetton = oggetton + 1
@@ -3919,14 +3556,12 @@ def oggetti(dati, colcoInCasellaVista):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = GlobalVar.gsy // 18 * 5
                     oggetton = 1
-            if tastop == pygame.K_d and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
-                if GlobalVar.mouseVisibile:
-                    GlobalVar.setCursoreVisibile(False)
+            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = xp + GlobalVar.gsx // 32 * 2.4
-            if not primoMovimento and (tastop == pygame.K_w or tastop == pygame.K_a or tastop == pygame.K_s or tastop == pygame.K_d):
+            if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
             if primoFrame:
@@ -4100,6 +3735,8 @@ def oggetti(dati, colcoInCasellaVista):
 
             if GlobalVar.mouseVisibile:
                 messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+            elif GlobalVar.usandoIlController:
+                messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
             else:
                 messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
             GlobalVar.schermo.blit(imgOggetti[oggetton - 1], (GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 3))
