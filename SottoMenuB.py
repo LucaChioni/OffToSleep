@@ -814,7 +814,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
             bottoneDown = False
 
         tastoMovimentoPremuto = False
-        if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+        if bottoneDown == "mouseSinistro" or bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
             tastoMovimentoPremuto = True
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
@@ -1012,9 +1012,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = GlobalVar.gsx // 32 * 9
-            if not primoMovimento and tastoMovimentoPremuto:
-                tastotempfps = 2
-            if bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra:
+            if bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     if linguaTemp == "italiano":
@@ -1072,7 +1070,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                             schermoInteroTemp = True
                     else:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            if bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra:
+            if bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     if linguaTemp == "italiano":
@@ -1143,6 +1141,8 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                             schermoInteroTemp = True
                     else:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            if not primoMovimento and tastoMovimentoPremuto:
+                tastotempfps = 2
 
             if primoFrame:
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)

@@ -391,14 +391,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             else:
                 sprites = pygame.sprite.Group(Fade(2))
             schermoFadeToBlack = GlobalVar.schermo.copy()
-            i = 0
-            while i <= 6:
-                sprites.update()
-                GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                sprites.draw(GlobalVar.schermo)
-                pygame.display.update()
-                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                i += 1
+            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
         else:
             pygame.display.update()
 

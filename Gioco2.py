@@ -131,14 +131,7 @@ def gameloop():
                 if not inizio:
                     sprites = pygame.sprite.Group(Fade(0))
                     schermoFadeToBlack = GlobalVar.schermo.copy()
-                    i = 0
-                    while i <= 6:
-                        sprites.update()
-                        GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                        sprites.draw(GlobalVar.schermo)
-                        pygame.display.update()
-                        GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                        i += 1
+                    oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
 
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
@@ -601,14 +594,7 @@ def gameloop():
                             inquadratoQualcosa = "movimento:" + str(casevisteEntrateIncluse[i]) + ":" + str(casevisteEntrateIncluse[i + 1])
                             break
                         i += 3
-        if inquadratoQualcosa and not inquadratoQualcosa.startswith("movimento"):
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-        elif not inquadratoQualcosa and GlobalVar.mouseVisibile:
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
+        if not inquadratoQualcosa and GlobalVar.mouseVisibile:
             if not GlobalVar.mouseBloccato:
                 GlobalVar.configuraCursore(True)
 
@@ -620,7 +606,7 @@ def gameloop():
                 break
 
         # gestione degli input
-        if not impossibileCliccarePulsanti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf:
+        if not impossibileCliccarePulsanti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto:
             bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, False)
         else:
             bottoneDown = False
@@ -629,10 +615,10 @@ def gameloop():
             GlobalVar.canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
-
         movimentoPerMouse = False
         # movimenti personaggio
         if bottoneDown == pygame.K_w or bottoneDown == "padSu":
+            refreshSchermo = True
             npers = 3
             pers = GlobalVar.persw
             arma = armaw
@@ -652,6 +638,7 @@ def gameloop():
             ny = -GlobalVar.gpy
             nx = 0
         if bottoneDown == pygame.K_a or bottoneDown == "padSinistra":
+            refreshSchermo = True
             npers = 2
             pers = GlobalVar.persa
             arma = armaa
@@ -671,6 +658,7 @@ def gameloop():
             nx = -GlobalVar.gpx
             ny = 0
         if bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+            refreshSchermo = True
             npers = 4
             pers = GlobalVar.perss
             arma = armas
@@ -690,6 +678,7 @@ def gameloop():
             ny = GlobalVar.gpy
             nx = 0
         if bottoneDown == pygame.K_d or bottoneDown == "padDestra":
+            refreshSchermo = True
             npers = 1
             pers = GlobalVar.persd
             arma = armad
@@ -888,17 +877,23 @@ def gameloop():
                 attacco = 1
             bottoneDown = False
         if bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato:
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
             if inquadratoQualcosa == "start":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
                 startf = True
                 bottoneDown = False
             elif inquadratoQualcosa == "battaglia":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
                 attacco = 1
                 bottoneDown = False
             elif inquadratoQualcosa == "telecolco":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
                 GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
                 refreshSchermo = True
                 if chiamarob:
@@ -910,7 +905,10 @@ def gameloop():
                     ultimoObbiettivoColco.append(y)
                     chiamarob = True
                 bottoneDown = False
-            elif inquadratoQualcosa.startswith("porta"):
+            elif inquadratoQualcosa and inquadratoQualcosa.startswith("porta"):
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
                 inquadratoQualcosaList = inquadratoQualcosa.split(":")
                 posizPortaInVettore = int(inquadratoQualcosaList[1])
                 if possibileAprirePorta(dati[1], porte[posizPortaInVettore + 1], porte[posizPortaInVettore + 2], dati[0]):
@@ -1013,7 +1011,10 @@ def gameloop():
                     guantiAttacco = guantidAttacco
                     collana = collanad
                 bottoneDown = False
-            elif inquadratoQualcosa.startswith("cofanetto"):
+            elif inquadratoQualcosa and inquadratoQualcosa.startswith("cofanetto"):
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
                 inquadratoQualcosaList = inquadratoQualcosa.split(":")
                 posizCofanettoInVettore = int(inquadratoQualcosaList[1])
                 sposta = True
@@ -1103,7 +1104,10 @@ def gameloop():
                     guantiAttacco = guantidAttacco
                     collana = collanad
                 bottoneDown = False
-            elif inquadratoQualcosa.startswith("personaggio"):
+            elif inquadratoQualcosa and inquadratoQualcosa.startswith("personaggio"):
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
                 inquadratoQualcosaList = inquadratoQualcosa.split(":")
                 posizPersonaggioInVettore = int(inquadratoQualcosaList[1])
                 personaggio = listaPersonaggi[posizPersonaggioInVettore]
@@ -1193,7 +1197,7 @@ def gameloop():
                 dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
                 caricaTutto = True
                 bottoneDown = False
-            elif inquadratoQualcosa.startswith("movimento"):
+            elif inquadratoQualcosa and inquadratoQualcosa.startswith("movimento"):
                 movimentoPerMouse = True
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
             GlobalVar.canaleSoundPassiRallo.stop()
@@ -1343,7 +1347,6 @@ def gameloop():
 
         # menu start
         if startf and attacco != 1:
-            GlobalVar.canaleSoundPassiRallo.stop()
             GlobalVar.canaleSoundInterazioni.play(GlobalVar.selsta)
             refreshSchermo = True
             dati[2] = x
@@ -1485,7 +1488,6 @@ def gameloop():
             if (nx != 0 or ny != 0) and not nemiciInMovimento and mosseRimasteRob <= 0:
                 vx = x
                 vy = y
-                sposta = True
                 stanzaVecchia = dati[1]
                 x, y, dati[1], carim, cambiosta = controlloOstacoli(x, y, nx, ny, dati[1], carim, False, porte, cofanetti)
 
@@ -1503,6 +1505,8 @@ def gameloop():
                     y = vy
                 if x == rx and y == ry and not sovrapposto:
                     spingiColco = True
+                if not (vx == x and vy == y):
+                    sposta = True
             # gestione attacchi
             attaccoADistanza = False
             # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
@@ -2084,14 +2088,7 @@ def gameloop():
             if not caricaSalvataggio:
                 sprites = pygame.sprite.Group(Fade(0))
                 schermoFadeToBlack = GlobalVar.schermo.copy()
-                i = 0
-                while i <= 6:
-                    sprites.update()
-                    GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                    sprites.draw(GlobalVar.schermo)
-                    pygame.display.update()
-                    GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                    i += 1
+                oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
             GlobalVar.canaleSoundPuntatore.stop()
             GlobalVar.canaleSoundPassiRallo.stop()
             GlobalVar.canaleSoundPassiColco.stop()

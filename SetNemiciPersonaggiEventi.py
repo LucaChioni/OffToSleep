@@ -854,8 +854,6 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
 
-
     if caricaTutto:
-        movimentoPerMouse = False
         bottoneDown = False
     return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte

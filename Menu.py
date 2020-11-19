@@ -200,6 +200,9 @@ def menu(caricaSalvataggio, gameover):
                         background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
                         inutile, conferma = chiediconferma(3)
                         if conferma:
+                            sprites = pygame.sprite.Group(Fade(0))
+                            schermoFadeToBlack = GlobalVar.schermo.copy()
+                            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
                             dati = datiIniziali
                             xInizialie = GlobalVar.gsx // 32 * 15
                             yInizialie = GlobalVar.gsy // 18 * 7
@@ -240,14 +243,7 @@ def menu(caricaSalvataggio, gameover):
                         if n != -1:
                             sprites = pygame.sprite.Group(Fade(0))
                             schermoFadeToBlack = GlobalVar.schermo.copy()
-                            i = 0
-                            while i <= 6:
-                                sprites.update()
-                                GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                                sprites.draw(GlobalVar.schermo)
-                                pygame.display.update()
-                                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                                i += 1
+                            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
                             dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
                             datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
                             tutteporteGameover = []
@@ -482,14 +478,7 @@ def menu(caricaSalvataggio, gameover):
             illuminaSchermoDopoVideo = False
             sprites = pygame.sprite.Group(Fade(2))
             schermoFadeToBlack = GlobalVar.schermo.copy()
-            i = 0
-            while i <= 6:
-                sprites.update()
-                GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                sprites.draw(GlobalVar.schermo)
-                pygame.display.update()
-                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                i += 1
+            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
         else:
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
@@ -663,14 +652,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         if n != -1 and azioneFatta == 1:
                             sprites = pygame.sprite.Group(Fade(0))
                             schermoFadeToBlack = GlobalVar.schermo.copy()
-                            i = 0
-                            while i <= 6:
-                                sprites.update()
-                                GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-                                sprites.draw(GlobalVar.schermo)
-                                pygame.display.update()
-                                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-                                i += 1
+                            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
                             caricaSalvataggio = n
                             risposta = True
                     # impostazioni
@@ -1582,7 +1564,7 @@ def menuMercante(dati):
                 risposta = True
             bottoneDown = False
         if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
-            if bottoneDown == "mouseSinistro" and not (mouseInquadraFrecciaSu or mouseInquadraFrecciaGiu):
+            if not (bottoneDown == "mouseSinistro" and (mouseInquadraFrecciaSu or mouseInquadraFrecciaGiu)):
                 procediAllAcquisto = True
                 # confermaOggettoDaAcquistare?
                 if voceMarcata == 1 and not (bottoneDown == "mouseSinistro" and suTornaIndietro):

@@ -133,6 +133,9 @@ def guardaVideo(listaImg, audio, loop):
     if GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(False)
     GlobalVar.schermo.fill(GlobalVar.grigioscu)
+    sprites = pygame.sprite.Group(Fade(2))
+    schermoFadeToBlack = GlobalVar.schermo.copy()
+    oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
     pygame.display.update()
     bottoneDown = False
 
@@ -165,14 +168,7 @@ def guardaVideo(listaImg, audio, loop):
     # oscura lo schermo
     sprites = pygame.sprite.Group(Fade(0))
     schermoFadeToBlack = GlobalVar.schermo.copy()
-    i = 0
-    while i <= 6:
-        sprites.update()
-        GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-        sprites.draw(GlobalVar.schermo)
-        pygame.display.update()
-        GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-        i += 1
+    oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
     i = GlobalVar.volumeEffetti
     while i > 0:
         GlobalVar.canaleSoundSottofondoAmbientale.set_volume(i)
@@ -2052,8 +2048,7 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
 
 
 def dialoga(avanzamentoStoria, personaggio):
-    if GlobalVar.canaleSoundPassiRallo.get_busy():
-        GlobalVar.canaleSoundPassiRallo.stop()
+    GlobalVar.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
     menuMercante = False
     sceltaEffettuata = 0
@@ -2233,8 +2228,6 @@ def dialoga(avanzamentoStoria, personaggio):
 
 
 def animaOggettoSpecialeRicevuto(oggettoRicevuto):
-    if GlobalVar.canaleSoundPassiRallo.get_busy():
-        GlobalVar.canaleSoundPassiRallo.stop()
     if GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(False)
     GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoRaccoltaMonete)
@@ -2510,6 +2503,17 @@ def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y, casellaChiara, casellaScura)
         GlobalVar.schermo.blit(casellaChiara, (x, y))
     if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
         GlobalVar.schermo.blit(casellaScura, (x, y))
+
+
+def oscuraIlluminaSchermo(sprites, schermoFadeToBlack):
+    i = 0
+    while i <= 6:
+        sprites.update()
+        GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
+        sprites.draw(GlobalVar.schermo)
+        pygame.display.update()
+        GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+        i += 1
 
 
 '''# linea(dove,colore,inizio,fine,spessore)

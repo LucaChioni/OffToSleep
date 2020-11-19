@@ -37,17 +37,7 @@ def animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2
         disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz):
-    pers = False
-    if 5 < fineanimaz <= 10:
-        frame = 1
-        disegnaRallo(npers, x, y, avvele, pers, armaMov1, armatura, scudo, collana, arco, faretra, guantiMov1, True, frame)
-    elif 0 < fineanimaz <= 5:
-        frame = 2
-        disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
-
-
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, attacco, difesa, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz):
+def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -64,15 +54,7 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers
             # camminata quando non si entra in una stanza
             else:
                 animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
-        # mentre non ci si sposta
-        elif attacco == 0 and not difesa and (bottoneDown == pygame.K_w or bottoneDown == pygame.K_a or bottoneDown == pygame.K_s or bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and movimentoPerMouse)):
-            animazioneRallo = True
-            if not GlobalVar.canaleSoundPassiRallo.get_busy():
-                GlobalVar.canaleSoundPassiRallo.play(GlobalVar.rumorecamminata)
-            if primopasso:
-                primopasso = False
-            animaCamminataRalloFermo(npers, x, y, scudo, armatura, armaMov1, armaMov2, arco, faretra, guantiMov1, guantiMov2, collana, avvele, fineanimaz)
-        # quando si apre una porta o un cofanetto
+        # quando si apre una porta o un cofanetto oppure quando ci si sposta verso un muro
         elif difesa == 0 and fineanimaz > 0:
             animazioneRallo = True
             disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
@@ -1672,7 +1654,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], attacco, difesa, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz)
+                animazioneRallo, primopasso = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz)
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco
