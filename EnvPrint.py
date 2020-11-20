@@ -593,7 +593,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
             risposta = True
             bottoneDown = False
-        elif bottoneDown == "mouseSinistro":
+        if bottoneDown:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
 
@@ -1260,16 +1260,19 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             startf = True
             bottoneDown = False
         # attiva / disattiva il gambit
-        if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo"):
-            GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
-            if chiamarob:
-                chiamarob = False
+        if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo":
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
+                if chiamarob:
+                    chiamarob = False
+                else:
+                    ultimoObbiettivoColco = []
+                    ultimoObbiettivoColco.append("Telecomando")
+                    ultimoObbiettivoColco.append(x)
+                    ultimoObbiettivoColco.append(y)
+                    chiamarob = True
             else:
-                ultimoObbiettivoColco = []
-                ultimoObbiettivoColco.append("Telecomando")
-                ultimoObbiettivoColco.append(x)
-                ultimoObbiettivoColco.append(y)
-                chiamarob = True
+                GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
             bottoneDown = False
         # scorrere il puntatore sui nemici / esche / Colco
         if bottoneDown == pygame.K_3 or bottoneDown == pygame.K_KP3 or bottoneDown == "padR1":

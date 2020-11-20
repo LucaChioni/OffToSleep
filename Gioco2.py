@@ -588,10 +588,21 @@ def gameloop():
                 if not inquadratoQualcosa:
                     i = 0
                     while i < len(casevisteEntrateIncluse):
-                        if casevisteEntrateIncluse[i] <= xMouse <= casevisteEntrateIncluse[i] + GlobalVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse <= casevisteEntrateIncluse[i + 1] + GlobalVar.gpy and casevisteEntrateIncluse[i + 2]:
-                            if GlobalVar.mouseBloccato:
-                                GlobalVar.configuraCursore(False)
-                            inquadratoQualcosa = "movimento:" + str(casevisteEntrateIncluse[i]) + ":" + str(casevisteEntrateIncluse[i + 1])
+                        if casevisteEntrateIncluse[i] <= xMouse <= casevisteEntrateIncluse[i] + GlobalVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse <= casevisteEntrateIncluse[i + 1] + GlobalVar.gpy:
+                            if casevisteEntrateIncluse[i + 2]:
+                                casellaOccupata = False
+                                for personaggio in listaPersonaggi:
+                                    if casevisteEntrateIncluse[i] == personaggio.x and casevisteEntrateIncluse[i + 1] == personaggio.y:
+                                        casellaOccupata = True
+                                        break
+                                for nemico in listaNemici:
+                                    if casevisteEntrateIncluse[i] == nemico.x and casevisteEntrateIncluse[i + 1] == nemico.y:
+                                        casellaOccupata = True
+                                        break
+                                if not casellaOccupata:
+                                    if GlobalVar.mouseBloccato:
+                                        GlobalVar.configuraCursore(False)
+                                    inquadratoQualcosa = "movimento:" + str(casevisteEntrateIncluse[i]) + ":" + str(casevisteEntrateIncluse[i + 1])
                             break
                         i += 3
         if not inquadratoQualcosa and GlobalVar.mouseVisibile:
@@ -718,20 +729,23 @@ def gameloop():
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         # attivo / disattivo gambit di Colco
-        if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo"):
+        if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo":
             GlobalVar.canaleSoundPassiRallo.stop()
             nx = 0
             ny = 0
-            GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
-            refreshSchermo = True
-            if chiamarob:
-                chiamarob = False
+            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
+                refreshSchermo = True
+                if chiamarob:
+                    chiamarob = False
+                else:
+                    ultimoObbiettivoColco = []
+                    ultimoObbiettivoColco.append("Telecomando")
+                    ultimoObbiettivoColco.append(x)
+                    ultimoObbiettivoColco.append(y)
+                    chiamarob = True
             else:
-                ultimoObbiettivoColco = []
-                ultimoObbiettivoColco.append("Telecomando")
-                ultimoObbiettivoColco.append(x)
-                ultimoObbiettivoColco.append(y)
-                chiamarob = True
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         # scorro la selezione dell'obbiettivo
         if bottoneDown == pygame.K_3 or bottoneDown == pygame.K_KP3 or bottoneDown == "padR1":
@@ -844,6 +858,7 @@ def gameloop():
             for personaggio in listaPersonaggi:
                 if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy and npers == 3):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                    sposta = True
                     if npers == 1:
                         personaggio.girati("a")
                     elif npers == 2:
@@ -855,6 +870,8 @@ def gameloop():
                     disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
                     dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
                     caricaTutto = True
+            if not sposta:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         # apro il menu
         if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
@@ -1111,6 +1128,7 @@ def gameloop():
                 inquadratoQualcosaList = inquadratoQualcosa.split(":")
                 posizPersonaggioInVettore = int(inquadratoQualcosaList[1])
                 personaggio = listaPersonaggi[posizPersonaggioInVettore]
+                sposta = True
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                 # giro Rallo verso il personaggio e viceversa
                 if personaggio.x == x + GlobalVar.gpx and personaggio.y == y:

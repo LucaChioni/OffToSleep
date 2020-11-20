@@ -2131,6 +2131,8 @@ def dialoga(avanzamentoStoria, personaggio):
             if voceMarcata != 1 and voceMarcata != 3:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                 voceMarcata -= 1
+            else:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
@@ -2138,6 +2140,8 @@ def dialoga(avanzamentoStoria, personaggio):
             if voceMarcata != 1 and voceMarcata != 2:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                 voceMarcata -= 2
+            else:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
@@ -2145,6 +2149,8 @@ def dialoga(avanzamentoStoria, personaggio):
             if voceMarcata != 2 and voceMarcata != 4:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                 voceMarcata += 1
+            else:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
@@ -2152,6 +2158,8 @@ def dialoga(avanzamentoStoria, personaggio):
             if voceMarcata != 3 and voceMarcata != 4:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                 voceMarcata += 2
+            else:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         elif bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
@@ -2175,6 +2183,9 @@ def dialoga(avanzamentoStoria, personaggio):
                 prosegui = True
             bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
+        if bottoneDown:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
 
@@ -2242,6 +2253,9 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
         if bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
             risposta = True
+            bottoneDown = False
+        if bottoneDown:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
 
 

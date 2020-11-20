@@ -306,6 +306,8 @@ global puntatoreImpostazioniSinistraBloccato
 global tutorialTastieraInGioco
 global tutorialTastieraInMenu
 global tutorialMouse
+global tutorialControllerInGioco
+global tutorialControllerInMenu
 global persGrafMenu
 global saraGrafMenu
 global fraMaggioreGrafMenu
@@ -525,6 +527,8 @@ def loadImgs():
     global tutorialTastieraInGioco
     global tutorialTastieraInMenu
     global tutorialMouse
+    global tutorialControllerInGioco
+    global tutorialControllerInMenu
     global persGrafMenu
     global saraGrafMenu
     global fraMaggioreGrafMenu
@@ -989,6 +993,10 @@ def loadImgs():
     tutorialTastieraInMenu = pygame.transform.smoothscale(tutorialTastieraInMenu, (gsx // 32 * 7, gsy // 18 * 11))
     tutorialMouse = loadImage('Immagini/Tutorial/Mouse.png', True)
     tutorialMouse = pygame.transform.smoothscale(tutorialMouse, (gsx // 32 * 7, gsy // 18 * 11))
+    tutorialControllerInGioco = loadImage('Immagini/Tutorial/ControllerInGioco.png', True)
+    tutorialControllerInGioco = pygame.transform.smoothscale(tutorialControllerInGioco, (gsx // 32 * 7, gsy // 18 * 11))
+    tutorialControllerInMenu = loadImage('Immagini/Tutorial/ControllerInMenu.png', True)
+    tutorialControllerInMenu = pygame.transform.smoothscale(tutorialControllerInMenu, (gsx // 32 * 7, gsy // 18 * 11))
 
     # img grafiche / dialoghi
     persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucaGrafMenu.png', False)

@@ -381,6 +381,9 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 aggiornaSchermata = True
                 indietro = True
                 bottoneDown = False
+            if bottoneDown:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                bottoneDown = False
             if aggiornaSchermata or aggiornaInterfacciaPerCambioInput:
                 aggiornaSchermata = False
                 aggiornaInterfacciaPerCambioInput = False
@@ -418,6 +421,9 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                 aggiornaSchermata = True
                 indietro = True
                 bottoneDown = False
+            if bottoneDown:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                bottoneDown = False
             if aggiornaSchermata or aggiornaInterfacciaPerCambioInput:
                 aggiornaSchermata = False
                 aggiornaInterfacciaPerCambioInput = False
@@ -430,7 +436,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                     messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
                 else:
                     messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
-                messaggio("Slot di memoria danneggiato...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.2, GlobalVar.gsy // 18 * 14, 100)
+                messaggio("Slot di memoria danneggiato...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.5, GlobalVar.gsy // 18 * 14, 100)
                 pygame.display.update()
 
     if not errore:

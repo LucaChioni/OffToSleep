@@ -183,6 +183,9 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                     risposta = True
                     aumentoliv -= 1
                     bottoneDown = False
+                if bottoneDown:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
 
         caricaTutto = True
         movimentoPerMouse = False
@@ -1766,6 +1769,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                 risposta = True
                 bottoneDown = False
+            if bottoneDown:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                bottoneDown = False
         movimentoPerMouse = False
         caricaTutto = True
         tesoro = -1
@@ -1781,6 +1787,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                 risposta = True
+                bottoneDown = False
+            if bottoneDown:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                 bottoneDown = False
         movimentoPerMouse = False
         caricaTutto = True

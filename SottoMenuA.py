@@ -496,10 +496,12 @@ def equip(dati):
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
-
         tastoMovimentoPremuto = False
         if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
             tastoMovimentoPremuto = True
+        elif bottoneDown:
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            bottoneDown = False
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             aggiornaInterfacciaPerCambioInput = False
@@ -553,40 +555,34 @@ def equip(dati):
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 15.5))
 
                 messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
-                messaggio("Armi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.6, GlobalVar.gsy // 18 * 4.3, 60)
-                messaggio("Spade", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.9, GlobalVar.gsy // 18 * 5.3, 50)
+                messaggio("Armi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.5, GlobalVar.gsy // 18 * 4.5, 65)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 1.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgSpade[i], (GlobalVar.gsx // 32 * 1.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Archi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.4, GlobalVar.gsy // 18 * 5.3, 50)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 5.2, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgArchi[i], (GlobalVar.gsx // 32 * 5.2, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Protezioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.7, GlobalVar.gsy // 18 * 4.3, 60)
-                messaggio("Armature", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.45, GlobalVar.gsy // 18 * 5.3, 50)
+                messaggio("Protezioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.6, GlobalVar.gsy // 18 * 4.5, 65)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 8.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgArmature[i], (GlobalVar.gsx // 32 * 8.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Scudi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 12.4, GlobalVar.gsy // 18 * 5.3, 50)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 12.2, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgScudi[i], (GlobalVar.gsx // 32 * 12.2, int((GlobalVar.gsy // 18 * 6) + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Accessori", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.7, GlobalVar.gsy // 18 * 4.3, 60)
-                messaggio("Guanti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 15.8, GlobalVar.gsy // 18 * 5.3, 50)
+                messaggio("Accessori", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.6, GlobalVar.gsy // 18 * 4.5, 65)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 15.7, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
                     GlobalVar.schermo.blit(vetImgGuanti[i], (GlobalVar.gsx // 32 * 15.7, int((GlobalVar.gsy // 18 * 6) + (GlobalVar.gpy * 2 * i))))
                     i += 1
-                messaggio("Collane", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.2, GlobalVar.gsy // 18 * 5.3, 50)
                 i = 0
                 while i < 5:
                     GlobalVar.schermo.blit(sfondoOggetto, (GlobalVar.gsx // 32 * 19.2, (GlobalVar.gsy // 18 * 6 + (GlobalVar.gpy * 2 * i))))
@@ -611,11 +607,11 @@ def equip(dati):
                 collana = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
                 carim = False
 
-            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 4.5, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), (GlobalVar.gsx // 32 * 4.5, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), 1)
-            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 8, (GlobalVar.gsy // 18 * 4) + (GlobalVar.gpy // 2)), (GlobalVar.gsx // 32 * 8, (GlobalVar.gsy // 18 * 15.5) + (GlobalVar.gpy // 2)), 2)
-            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 11.5, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), (GlobalVar.gsx // 32 * 11.5, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), 1)
-            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 15, (GlobalVar.gsy // 18 * 4) + (GlobalVar.gpy // 2)), (GlobalVar.gsx // 32 * 15, (GlobalVar.gsy // 18 * 15.5) + (GlobalVar.gpy // 2)), 2)
-            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 18.5, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), (GlobalVar.gsx // 32 * 18.5, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), 1)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gsx // 32 * 4.5) - 1, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), ((GlobalVar.gsx // 32 * 4.5) - 1, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), 1)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gsx // 32 * 8) - 1, (GlobalVar.gsy // 18 * 4) + (GlobalVar.gpy // 2)), ((GlobalVar.gsx // 32 * 8) - 1, (GlobalVar.gsy // 18 * 15.5) + (GlobalVar.gpy // 2)), 2)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gsx // 32 * 11.5) - 1, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), ((GlobalVar.gsx // 32 * 11.5) - 1, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), 1)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gsx // 32 * 15) - 1, (GlobalVar.gsy // 18 * 4) + (GlobalVar.gpy // 2)), ((GlobalVar.gsx // 32 * 15) - 1, (GlobalVar.gsy // 18 * 15.5) + (GlobalVar.gpy // 2)), 2)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gsx // 32 * 18.5) - 1, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), ((GlobalVar.gsx // 32 * 18.5) - 1, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), 1)
 
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
             if dati[5] > pvtot:
@@ -1209,10 +1205,12 @@ def sceglicondiz(dati, condizione):
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
-
         tastoMovimentoPremuto = False
         if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
             tastoMovimentoPremuto = True
+        elif bottoneDown:
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            bottoneDown = False
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             aggiornaInterfacciaPerCambioInput = False
@@ -1703,10 +1701,12 @@ def sceglitecn(dati, tecnica):
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
-
         tastoMovimentoPremuto = False
         if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
             tastoMovimentoPremuto = True
+        elif bottoneDown:
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            bottoneDown = False
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             aggiornaInterfacciaPerCambioInput = False
@@ -2660,10 +2660,12 @@ def equiprobo(dati):
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
-
         tastoMovimentoPremuto = False
         if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
             tastoMovimentoPremuto = True
+        elif bottoneDown:
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            bottoneDown = False
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             aggiornaInterfacciaPerCambioInput = False
@@ -3517,10 +3519,12 @@ def oggetti(dati, colcoInCasellaVista):
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
-
         tastoMovimentoPremuto = False
         if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
             tastoMovimentoPremuto = True
+        elif bottoneDown:
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            bottoneDown = False
 
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerCambioInput:
             aggiornaInterfacciaPerCambioInput = False

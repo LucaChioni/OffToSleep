@@ -364,11 +364,11 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Per muoverti usa i tasti W, A, S e D della tastiera o clicca con il mouse sulla casella verso cui vuoi spostarti.")
+                dialogo.append("Per muoverti usa i tasti <*>#bold#W<*>, <*>#bold#A<*>, <*>#bold#S<*> e <*>#bold#D<*> della tastiera, la <*>#bold#Croce direzionale<*> del controller oppure, utilizzando il mouse, clicca sulla casella verso cui vuoi spostarti con il tasto <*>#bold#Sinistro<*>.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Muoviti verso il baule davanti a te e prova ad aprirlo utilizzando il tasto SPAZIO o cliccandoci sopra con il mouse.")
+                dialogo.append("Muoviti verso il baule davanti a te e prova ad aprirlo utilizzando il tasto <*>#bold#SPAZIO<*> sulla tastiera, la <*>#bold#Croce<*> del controller oppure cliccandoci sopra con il tasto <*>#bold#Sinistro<*> del mouse.")
                 self.partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["aperturaPrimoCofanetto"]:
                 self.oggettoDato = False
@@ -377,7 +377,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Hai trovato una pozione. Puoi usarla dal menu a cui puoi accedere premendo Esc o il tasto centrale del mouse.")
+                dialogo.append("Hai trovato una pozione. Puoi usarla dal menu a cui puoi accedere premendo <*>#bold#Esc<*> sulla tastiera, <*>#bold#Start<*> del controller o il tasto <*>#bold#Centrale<*> del mouse.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -390,15 +390,15 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Davanti a te c'è un nemico. Per vedere le sue informazioni passa alla modalità interazione (premi il tasto E della tastiera o il tasto destro del mouse) e inquadralo.")
+                dialogo.append(u"Davanti a te c'è un nemico. Per vedere le sue informazioni passa alla modalità interazione (premi il tasto <*>#bold#E<*> sulla tastiera, <*>#bold#Quadrato<*> del controller o il tasto <*>#bold#Destro<*> del mouse) e inquadralo spostando il puntatore sulla sua casella.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Una volta inquadrato puoi selezionarlo e attaccarlo premendo SPAZIO o il tasto sinistro del mouse (dato che al momento non hai freccie, puoi attaccarlo solo da vicino).")
+                dialogo.append("Una volta inquadrato puoi selezionarlo e attaccarlo premendo <*>#bold#SPAZIO<*> sulla tastiera, la <*>#bold#Croce<*> del controller o il tasto <*>#bold#Sinistro<*> del mouse (dato che al momento non hai freccie, puoi attaccarlo solo da vicino).")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo Esc o il tasto centrale del mouse, viene aperto un menu rapido che permette di compiere meno operazioni ripetto al menu \"normale\".")
+                dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc<*>, <*>#bold#Start<*> o il tasto <*>#bold#Centrale<*> del mouse, viene aperto un menu rapido che permette di compiere meno operazioni ripetto al menu \"normale\".")
                 self.partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialBattaglia"]:
                 self.oggettoDato = False
@@ -407,7 +407,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Fai attenzione a quel pipistrello: è velenoso e attacca a distanza!")
+                dialogo.append(u"Fai attenzione a quel pipistrello: è velenoso ed attacca a distanza!")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -437,7 +437,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Inquadrando un nemico inoltre compariranno delle crocette rosse e nere che contrassegnano le caselle che il nemico non riesce a vedere. Quando un nemico ti vede l'occhio in alto a destra nello schermo si aprirà. Viceversa, quando sei fuori dal campo visivo di tutti i nemici, l'occhio sarà chiuso.")
+                dialogo.append(u"Inquadrando un nemico inoltre compaiono delle crocette rosse e nere che contrassegnano le caselle che il nemico non riesce a vedere. Quando un nemico ti vede l'occhio in alto a destra nello schermo si aprirà. Viceversa, quando sei fuori dal campo visivo di tutti i nemici, l'occhio sarà chiuso.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -467,7 +467,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"È possibile accedere alla mappa anche dal menu di battaglia.")
+                dialogo.append(u"È possibile accedere alla mappa anche dal menu rapido di battaglia.")
                 self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False
@@ -1484,7 +1484,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Il mio nome è Michael e sto affrontando l'ultima prova per diventare ufficiale dell'esercito cittadino. Non ti conviene provare a derubarmi ragazzo: di solito non mi batto al di fuori degli allenamenti, ma nel caso ti avverto che sono armato e ben addestrato!")
+                dialogo.append(u"Il mio nome è Michael e sto affrontando l'ultima prova per diventare ufficiale dell'esercito cittadino. Non ti conviene provare a derubarmi ragazzo: di solito non mi batto al di fuori degli allenamenti, ma nel caso ti avverto che sono armato e ben addestrato!")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
