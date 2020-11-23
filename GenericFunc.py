@@ -5,7 +5,7 @@ from GestioneInput import *
 from SetOstacoliContenutoCofanetti import *
 
 
-def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False):
+def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False, centrale=False, lungMax=False):
     x = int(x)
     y = int(y)
 
@@ -18,7 +18,25 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
     xOrig = x
 
     # per mettere parti in italic, bold o colorate: "Premi <*>#bold#un<*> <*>#italic#tasto<*> per <*>#color#100,0,0#continuare<*>..."
-    if not daDestra:
+    if daDestra:
+        testo = font.render(msg, True, colore)
+        dimX, dimY = font.size(msg)
+        GlobalVar.schermo.blit(testo, (x - dimX, y))
+    elif centrale:
+        msgIniziale = msg
+        font.render(msg, True, colore)
+        dimX, dimY = font.size(msg)
+        if lungMax and dimX > lungMax * GlobalVar.gpx:
+            while dimX > lungMax * GlobalVar.gpx:
+                msg = msg[:-1]
+                font.render(msg + "...", True, colore)
+                dimX, dimY = font.size(msg)
+        if msgIniziale != msg:
+            msg += "..."
+        testo = font.render(msg, True, colore)
+        dimX, dimY = font.size(msg)
+        GlobalVar.schermo.blit(testo, (x - (dimX // 2), y))
+    else:
         vetMsg = msg.split("<*>")
         for text in vetMsg:
             colore = coloreOrig
@@ -52,10 +70,6 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
                                 y += dimY
                         GlobalVar.schermo.blit(testo, (x, y))
                         x += dimX
-    else:
-        testo = font.render(msg, True, colore)
-        dimX, dimY = font.size(msg)
-        GlobalVar.schermo.blit(testo, (x - dimX, y))
 
 
 def getStatistiche(dati, difesa=0):

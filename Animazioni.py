@@ -1717,7 +1717,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if (animazioneNemici or animazioneRallo or animazioneColco or animazionePersonaggi) and fineanimaz >= 0:
                 pygame.display.update()
                 GlobalVar.clockAnimazioni.tick(GlobalVar.fpsAnimazioni)
-                # print (GlobalVarG2.clockAnimazioni.get_fps())
+                # print (GlobalVar.clockAnimazioni.get_fps())
             fineanimaz -= 1
 
         azioniDaEseguire = []

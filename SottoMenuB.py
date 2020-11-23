@@ -580,7 +580,650 @@ def chiediconferma(conferma):
 
 
 def settaController():
-    print "ciao"
+    puntatore = GlobalVar.puntatore
+    puntatorevecchio = GlobalVar.puntatorevecchio
+    xp = GlobalVar.gsx // 32 * 1
+    yp = GlobalVar.gsy // 18 * 5.1
+    risposta = False
+    voceMarcata = 1
+    aggiornaSchermo = False
+
+    aggiornaInterfacciaPerCambioInput = True
+    primoFrame = True
+    bottoneDown = False
+    tastotempfps = 5
+    countdownAggiornamentoModulo = -1
+
+    listaIdPadConfigModificata = []
+    tastiPremutiPadConfig = []
+    tastoDaConfigurare = 0
+    ordineConfigTasti = ["croce", "cerchio", "quadrato", "triangolo", "l1", "r1", "start", "croceDir"]
+    configurazioneTastiFatta = []
+
+    precedentementeInizializzato = True
+    numPadSelezionato = 0
+    if len(GlobalVar.configPadConnessi) > 0:
+        controllerDaConfigurare = False
+        idController = GlobalVar.configPadConnessi[numPadSelezionato][0]
+        nomeController = GlobalVar.configPadConnessi[numPadSelezionato][1]
+        padInizialmeteConfigurato = False
+        for pad in GlobalVar.listaPadConnessiConfigurati:
+            if idController == pad.get_id():
+                controllerDaConfigurare = pad
+                padInizialmeteConfigurato = True
+                break
+        if not controllerDaConfigurare:
+            for pad in GlobalVar.listaPadConnessiSconosciuti:
+                if idController == pad.get_id():
+                    controllerDaConfigurare = pad
+                    padInizialmeteConfigurato = False
+                    break
+    else:
+        controllerDaConfigurare = False
+        idController = -1
+        nomeController = "Nessun controller rilevato"
+        padInizialmeteConfigurato = False
+
+    configTemp = []
+    impoControllerErrato, datiImpostazioniController = GlobalVar.caricaImpostazioniController()
+    for confPad in datiImpostazioniController:
+        impoPad = confPad.split("_")
+        impoPad.pop(len(impoPad) - 1)
+        if len(impoPad) > 0:
+            configTemp.append(impoPad)
+
+    configurando = False
+    testando = False
+    while not risposta:
+        # rallenta per i 30 fps
+        if tastotempfps != 0 and bottoneDown:
+            tastotempfps -= 1
+        elif tastotempfps == 0 and bottoneDown:
+            tastotempfps = 2
+
+        voceMarcataVecchia = voceMarcata
+        cursoreSuFrecciaSinistra = False
+        cursoreSuFrecciaDestra = False
+        suTornaIndietro = False
+        xMouse, yMouse = pygame.mouse.get_pos()
+        if GlobalVar.mouseVisibile:
+            if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                suTornaIndietro = True
+            elif GlobalVar.gsx // 32 * 4 <= xMouse <= GlobalVar.gsx // 32 * 8.5 and GlobalVar.gsy // 18 * 14.2 <= yMouse <= GlobalVar.gsy // 18 * 16.2 and not (configurando or testando):
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                voceMarcata = 6
+                xp = GlobalVar.gsx // 32 * 4.4
+                yp = GlobalVar.gsy // 18 * 14.9
+            elif GlobalVar.gsx // 32 * 8.5 <= xMouse <= GlobalVar.gsx // 32 * 13 and GlobalVar.gsy // 18 * 14.2 <= yMouse <= GlobalVar.gsy // 18 * 16.2 and not (configurando or testando):
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                voceMarcata = 7
+                xp = GlobalVar.gsx // 32 * 8.5
+                yp = GlobalVar.gsy // 18 * 14.9
+            elif GlobalVar.gsx // 32 * 1.8 <= xMouse <= GlobalVar.gsx // 32 * 2.7 and GlobalVar.gsy // 18 * 7.5 <= yMouse <= GlobalVar.gsy // 18 * 8.7 and not (configurando or testando):
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                cursoreSuFrecciaSinistra = True
+            elif GlobalVar.gsx // 32 * 14.3 <= xMouse <= GlobalVar.gsx // 32 * 15.2 and GlobalVar.gsy // 18 * 7.5 <= yMouse <= GlobalVar.gsy // 18 * 8.7 and not (configurando or testando):
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                cursoreSuFrecciaDestra = True
+            elif GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 4.7 <= yMouse <= GlobalVar.gsy // 18 * 6.2 and not (configurando or testando):
+                voceMarcata = 1
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                xp = GlobalVar.gsx // 32 * 1
+                yp = GlobalVar.gsy // 18 * 5.1
+            elif GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 9.2 <= yMouse <= GlobalVar.gsy // 18 * 10.7 and not (configurando or testando):
+                voceMarcata = 3
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                xp = GlobalVar.gsx // 32 * 1
+                yp = GlobalVar.gsy // 18 * 9.6
+            elif GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 10.7 <= yMouse <= GlobalVar.gsy // 18 * 12.2 and not (configurando or testando):
+                voceMarcata = 4
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                xp = GlobalVar.gsx // 32 * 1
+                yp = GlobalVar.gsy // 18 * 11.1
+            elif GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 12.2 <= yMouse <= GlobalVar.gsy // 18 * 13.7 and not (configurando or testando):
+                voceMarcata = 5
+                if GlobalVar.mouseBloccato:
+                    GlobalVar.configuraCursore(False)
+                xp = GlobalVar.gsx // 32 * 1
+                yp = GlobalVar.gsy // 18 * 12.6
+            elif not GlobalVar.mouseBloccato:
+                GlobalVar.configuraCursore(True)
+            if GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 6.2 <= yMouse < GlobalVar.gsy // 18 * 9.2 and not (configurando or testando):
+                voceMarcata = 2
+                xp = GlobalVar.gsx // 32 * 1
+                yp = GlobalVar.gsy // 18 * 6.6
+            if voceMarcataVecchia != voceMarcata and not primoFrame:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+
+        # gestione degli input
+        primoMovimento = False
+        bottoneDownVecchio = bottoneDown
+        padPassatoPerTestEConf = False
+        tastiPremutiPadConfigVecchi = tastiPremutiPadConfig[:]
+        tastiPremutiPadConfig = []
+        if configurando or testando:
+            padPassatoPerTestEConf = controllerDaConfigurare
+            # trovo i tasti premuti dal pad che sto configurando
+            buttons = controllerDaConfigurare.get_numbuttons()
+            for idTasto in range(buttons):
+                if controllerDaConfigurare.get_button(idTasto):
+                    tastiPremutiPadConfig.append(idTasto)
+            hats = controllerDaConfigurare.get_numhats()
+            for idCroceDirezionale in range(hats):
+                hat = controllerDaConfigurare.get_hat(idCroceDirezionale)
+                direzioneX, direzioneY = hat
+                if direzioneX != 0 or direzioneY != 0:
+                    tastiPremutiPadConfig.append("croceDir:" + str(idCroceDirezionale))
+            if configurando and len(tastiPremutiPadConfig) == 1:
+                if not ((ordineConfigTasti[tastoDaConfigurare].startswith("croceDir") and not (type(tastiPremutiPadConfig[0]) is str and tastiPremutiPadConfig[0].startswith("croceDir"))) or (not ordineConfigTasti[tastoDaConfigurare].startswith("croceDir") and type(tastiPremutiPadConfig[0]) is str and tastiPremutiPadConfig[0].startswith("croceDir"))):
+                    tastoGiaUsato = False
+                    for tasto in configurazioneTastiFatta:
+                        if tasto == tastiPremutiPadConfig[0]:
+                            tastoGiaUsato = True
+                    if not tastoGiaUsato:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        configurazioneTastiFatta.append(tastiPremutiPadConfig[0])
+                        tastoDaConfigurare += 1
+                        aggiornaSchermo = True
+        if configurando and len(configurazioneTastiFatta) == 9:
+            configurazioneSalvata = False
+            i = 0
+            while i < len(configTemp):
+                if configTemp[i][0] == nomeController:
+                    configTemp[i][1] = configurazioneTastiFatta[1]
+                    configTemp[i][2] = configurazioneTastiFatta[2]
+                    configTemp[i][3] = configurazioneTastiFatta[3]
+                    configTemp[i][4] = configurazioneTastiFatta[4]
+                    configTemp[i][5] = configurazioneTastiFatta[5]
+                    configTemp[i][6] = configurazioneTastiFatta[6]
+                    configTemp[i][7] = configurazioneTastiFatta[7]
+                    configTemp[i][8] = int(configurazioneTastiFatta[8].split(":")[1])
+                    configurazioneSalvata = True
+                    break
+                i += 1
+            if not configurazioneSalvata:
+                configurazioneTastiFatta[8] = int(configurazioneTastiFatta[8].split(":")[1])
+                configTemp.append(configurazioneTastiFatta)
+            if not precedentementeInizializzato:
+                controllerDaConfigurare.quit()
+            listaIdPadConfigModificata.append(idController)
+            configurazioneTastiFatta = []
+            configurando = False
+
+        if tastiPremutiPadConfig != tastiPremutiPadConfigVecchi:
+            aggiornaSchermo = True
+
+        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput, padPassatoPerTestEConf)
+        if bottoneDownVecchio != bottoneDown:
+            primoMovimento = True
+            tastotempfps = 5
+        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            if configurando or testando:
+                configurando = False
+                testando = False
+            else:
+                risposta = True
+            bottoneDown = False
+        elif bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+            if not (bottoneDown == "mouseSinistro" and (cursoreSuFrecciaSinistra or cursoreSuFrecciaDestra)):
+                if bottoneDown == "mouseSinistro" and suTornaIndietro:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                    if configurando or testando:
+                        if not precedentementeInizializzato:
+                            controllerDaConfigurare.quit()
+                        configurando = False
+                        testando = False
+                    else:
+                        risposta = True
+                # aggiorna lista controller
+                elif voceMarcata == 1 and countdownAggiornamentoModulo <= 0:
+                    countdownAggiornamentoModulo = 150
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                    for pad in GlobalVar.listaPadConnessiConfigurati:
+                        pad.quit()
+                    if controllerDaConfigurare and controllerDaConfigurare.get_init():
+                        controllerDaConfigurare.quit()
+                    GlobalVar.inizializzaModuloJoistick()
+
+                    numPadSelezionato = 0
+                    if len(GlobalVar.configPadConnessi) > 0:
+                        controllerDaConfigurare = False
+                        idController = GlobalVar.configPadConnessi[numPadSelezionato][0]
+                        nomeController = GlobalVar.configPadConnessi[numPadSelezionato][1]
+                        padInizialmeteConfigurato = False
+                        for pad in GlobalVar.listaPadConnessiConfigurati:
+                            if idController == pad.get_id():
+                                controllerDaConfigurare = pad
+                                padInizialmeteConfigurato = True
+                                break
+                        if not controllerDaConfigurare:
+                            for pad in GlobalVar.listaPadConnessiSconosciuti:
+                                if idController == pad.get_id():
+                                    controllerDaConfigurare = pad
+                                    padInizialmeteConfigurato = False
+                                    break
+                    else:
+                        controllerDaConfigurare = False
+                        idController = -1
+                        nomeController = "Nessun controller rilevato"
+                        padInizialmeteConfigurato = False
+                # inizia configurazione
+                elif not configurando and voceMarcata == 3:
+                    if controllerDaConfigurare and not controllerDaConfigurare.get_init():
+                        precedentementeInizializzato = False
+                        controllerDaConfigurare.init()
+                    elif controllerDaConfigurare and controllerDaConfigurare.get_init():
+                        precedentementeInizializzato = True
+                    if controllerDaConfigurare and controllerDaConfigurare.get_init():
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        configurazioneTastiFatta = []
+                        configurazioneTastiFatta.append(nomeController)
+                        tastoDaConfigurare = 0
+                        configurando = True
+                        aggiornaSchermo = True
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # canella configurazione
+                elif voceMarcata == 4:
+                    if controllerDaConfigurare:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        i = 0
+                        while i < len(configTemp):
+                            if configTemp[i][0] == nomeController:
+                                del configTemp[i]
+                                break
+                            i += 1
+                        i = 0
+                        while i < len(listaIdPadConfigModificata):
+                            if listaIdPadConfigModificata[i] == idController:
+                                del listaIdPadConfigModificata[i]
+                                break
+                            i += 1
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # testa controller
+                elif not testando and voceMarcata == 5:
+                    if controllerDaConfigurare and not controllerDaConfigurare.get_init():
+                        precedentementeInizializzato = False
+                        controllerDaConfigurare.init()
+                    elif controllerDaConfigurare and controllerDaConfigurare.get_init():
+                        precedentementeInizializzato = True
+                    if controllerDaConfigurare and controllerDaConfigurare.get_init():
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        testando = True
+                    else:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                # salva
+                elif voceMarcata == 6:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                    scrivi = GlobalVar.loadFile("Impostazioni/ImpoController.txt", "w")
+                    for padConf in configTemp:
+                        for elemento in padConf:
+                            scrivi.write(str(elemento) + "_")
+                        scrivi.write("\n")
+                    scrivi.close()
+                    for pad in GlobalVar.listaPadConnessiConfigurati:
+                        pad.quit()
+                    if controllerDaConfigurare and controllerDaConfigurare.get_init():
+                        controllerDaConfigurare.quit()
+                    GlobalVar.inizializzaModuloJoistick()
+
+                    listaIdPadConfigModificata = []
+                    numPadSelezionato = 0
+                    if len(GlobalVar.configPadConnessi) > 0:
+                        controllerDaConfigurare = False
+                        idController = GlobalVar.configPadConnessi[numPadSelezionato][0]
+                        nomeController = GlobalVar.configPadConnessi[numPadSelezionato][1]
+                        padInizialmeteConfigurato = False
+                        for pad in GlobalVar.listaPadConnessiConfigurati:
+                            if idController == pad.get_id():
+                                controllerDaConfigurare = pad
+                                padInizialmeteConfigurato = True
+                                break
+                        if not controllerDaConfigurare:
+                            for pad in GlobalVar.listaPadConnessiSconosciuti:
+                                if idController == pad.get_id():
+                                    controllerDaConfigurare = pad
+                                    padInizialmeteConfigurato = False
+                                    break
+                    else:
+                        controllerDaConfigurare = False
+                        idController = -1
+                        nomeController = "Nessun controller rilevato"
+                        padInizialmeteConfigurato = False
+                # esci
+                elif voceMarcata == 7:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                    risposta = True
+                else:
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+                bottoneDown = False
+        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
+        tastoMovimentoPremuto = False
+        if bottoneDown == "mouseSinistro" or bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu" or ((voceMarcata == 2 or voceMarcata == 6 or voceMarcata == 7) and (bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padDestra" or bottoneDown == "padSinistra")):
+            tastoMovimentoPremuto = True
+        elif bottoneDown:
+            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            bottoneDown = False
+
+        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput or countdownAggiornamentoModulo == 0:
+            if countdownAggiornamentoModulo == 0:
+                countdownAggiornamentoModulo = -1
+            aggiornaSchermo = False
+            aggiornaInterfacciaPerCambioInput = False
+            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
+                if not (configurando or testando):
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    if voceMarcata == 1:
+                        voceMarcata += 5
+                        xp = GlobalVar.gsx // 32 * 4.4
+                        yp = GlobalVar.gsy // 18 * 14.9
+                    elif voceMarcata == 2 or voceMarcata == 4 or voceMarcata == 5:
+                        voceMarcata -= 1
+                        yp = yp - GlobalVar.gsy // 18 * 1.5
+                    elif voceMarcata == 3:
+                        voceMarcata -= 1
+                        yp = GlobalVar.gsy // 18 * 6.6
+                    elif voceMarcata == 6:
+                        voceMarcata -= 1
+                        xp = GlobalVar.gsx // 32 * 1
+                        yp = GlobalVar.gsy // 18 * 12.6
+                    elif voceMarcata == 7:
+                        voceMarcata -= 2
+                        xp = GlobalVar.gsx // 32 * 1
+                        yp = GlobalVar.gsy // 18 * 12.6
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento) and not (configurando or testando):
+                if voceMarcata == 2:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    numPadSelezionato -= 1
+                    if numPadSelezionato < 0:
+                        numPadSelezionato = len(GlobalVar.configPadConnessi) - 1
+                    if len(GlobalVar.configPadConnessi) > 0:
+                        controllerDaConfigurare = False
+                        idController = GlobalVar.configPadConnessi[numPadSelezionato][0]
+                        nomeController = GlobalVar.configPadConnessi[numPadSelezionato][1]
+                        padInizialmeteConfigurato = False
+                        for pad in GlobalVar.listaPadConnessiConfigurati:
+                            if idController == pad.get_id():
+                                controllerDaConfigurare = pad
+                                padInizialmeteConfigurato = True
+                                break
+                        if not controllerDaConfigurare:
+                            for pad in GlobalVar.listaPadConnessiSconosciuti:
+                                if idController == pad.get_id():
+                                    controllerDaConfigurare = pad
+                                    padInizialmeteConfigurato = False
+                                    break
+                    else:
+                        controllerDaConfigurare = False
+                        idController = -1
+                        nomeController = "Nessun controller rilevato"
+                        padInizialmeteConfigurato = False
+                elif voceMarcata == 6:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    voceMarcata += 1
+                    xp = GlobalVar.gsx // 32 * 8.5
+                elif voceMarcata == 7:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    voceMarcata -= 1
+                    xp = GlobalVar.gsx // 32 * 4.5
+            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
+                if not (configurando or testando):
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    if voceMarcata == 1 or voceMarcata == 3 or voceMarcata == 4:
+                        voceMarcata += 1
+                        yp = yp + GlobalVar.gsy // 18 * 1.5
+                    elif voceMarcata == 2:
+                        voceMarcata += 1
+                        yp = GlobalVar.gsy // 18 * 9.6
+                    elif voceMarcata == 5:
+                        voceMarcata += 1
+                        xp = GlobalVar.gsx // 32 * 4.4
+                        yp = GlobalVar.gsy // 18 * 14.9
+                    elif voceMarcata == 6:
+                        voceMarcata -= 5
+                        xp = GlobalVar.gsx // 32 * 1
+                        yp = GlobalVar.gsy // 18 * 5.1
+                    elif voceMarcata == 7:
+                        voceMarcata -= 6
+                        xp = GlobalVar.gsx // 32 * 1
+                        yp = GlobalVar.gsy // 18 * 5.1
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento) and not (configurando or testando):
+                if voceMarcata == 2:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    numPadSelezionato += 1
+                    if numPadSelezionato > len(GlobalVar.configPadConnessi) - 1:
+                        numPadSelezionato = 0
+                    if len(GlobalVar.configPadConnessi) > 0:
+                        controllerDaConfigurare = False
+                        idController = GlobalVar.configPadConnessi[numPadSelezionato][0]
+                        nomeController = GlobalVar.configPadConnessi[numPadSelezionato][1]
+                        padInizialmeteConfigurato = False
+                        for pad in GlobalVar.listaPadConnessiConfigurati:
+                            if idController == pad.get_id():
+                                controllerDaConfigurare = pad
+                                padInizialmeteConfigurato = True
+                                break
+                        if not controllerDaConfigurare:
+                            for pad in GlobalVar.listaPadConnessiSconosciuti:
+                                if idController == pad.get_id():
+                                    controllerDaConfigurare = pad
+                                    padInizialmeteConfigurato = False
+                                    break
+                    else:
+                        controllerDaConfigurare = False
+                        idController = -1
+                        nomeController = "Nessun controller rilevato"
+                        padInizialmeteConfigurato = False
+                elif voceMarcata == 6:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    voceMarcata += 1
+                    xp = GlobalVar.gsx // 32 * 8.5
+                elif voceMarcata == 7:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                    voceMarcata -= 1
+                    xp = GlobalVar.gsx // 32 * 4.5
+            if bottoneDown == "mouseSinistro" and voceMarcata == 2 and cursoreSuFrecciaSinistra and (tastotempfps == 0 or primoMovimento):
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                numPadSelezionato -= 1
+                if numPadSelezionato < 0:
+                    numPadSelezionato = len(GlobalVar.configPadConnessi) - 1
+                if len(GlobalVar.configPadConnessi) > 0:
+                    controllerDaConfigurare = False
+                    idController = GlobalVar.configPadConnessi[numPadSelezionato][0]
+                    nomeController = GlobalVar.configPadConnessi[numPadSelezionato][1]
+                    padInizialmeteConfigurato = False
+                    for pad in GlobalVar.listaPadConnessiConfigurati:
+                        if idController == pad.get_id():
+                            controllerDaConfigurare = pad
+                            padInizialmeteConfigurato = True
+                            break
+                    if not controllerDaConfigurare:
+                        for pad in GlobalVar.listaPadConnessiSconosciuti:
+                            if idController == pad.get_id():
+                                controllerDaConfigurare = pad
+                                padInizialmeteConfigurato = False
+                                break
+                else:
+                    controllerDaConfigurare = False
+                    idController = -1
+                    nomeController = "Nessun controller rilevato"
+                    padInizialmeteConfigurato = False
+            if bottoneDown == "mouseSinistro" and voceMarcata == 2 and cursoreSuFrecciaDestra and (tastotempfps == 0 or primoMovimento):
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                numPadSelezionato += 1
+                if numPadSelezionato > len(GlobalVar.configPadConnessi) - 1:
+                    numPadSelezionato = 0
+                if len(GlobalVar.configPadConnessi) > 0:
+                    controllerDaConfigurare = False
+                    idController = GlobalVar.configPadConnessi[numPadSelezionato][0]
+                    nomeController = GlobalVar.configPadConnessi[numPadSelezionato][1]
+                    padInizialmeteConfigurato = False
+                    for pad in GlobalVar.listaPadConnessiConfigurati:
+                        if idController == pad.get_id():
+                            controllerDaConfigurare = pad
+                            padInizialmeteConfigurato = True
+                            break
+                    if not controllerDaConfigurare:
+                        for pad in GlobalVar.listaPadConnessiSconosciuti:
+                            if idController == pad.get_id():
+                                controllerDaConfigurare = pad
+                                padInizialmeteConfigurato = False
+                                break
+                else:
+                    controllerDaConfigurare = False
+                    idController = -1
+                    nomeController = "Nessun controller rilevato"
+                    padInizialmeteConfigurato = False
+            if not primoMovimento and tastoMovimentoPremuto:
+                tastotempfps = 2
+
+            if primoFrame:
+                GlobalVar.schermo.fill(GlobalVar.grigioscu)
+                messaggio("Configura controller", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+                # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 12.5))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 4))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15.5))
+                GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 15.5))
+                GlobalVar.schermo.blit(GlobalVar.impostazioniController, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+            else:
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 22, 0, GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 2.5))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 11.5))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 16.5, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 12.5))
+                GlobalVar.schermo.blit(GlobalVar.impostazioniController, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+
+            if countdownAggiornamentoModulo <= 0:
+                messaggio("Aggiorna lista controller collegati", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 60)
+            else:
+                messaggio("Aggiorna lista controller collegati", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 60)
+            messaggio("Seleziona il controller da configurare:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.5, 60)
+            if idController != -1:
+                messaggio("#" + str(idController) + " " + nomeController, GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 7.8, 50, centrale=True, lungMax=11)
+            else:
+                messaggio(nomeController, GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 7.8, 50, centrale=True, lungMax=11)
+            if voceMarcata == 2:
+                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
+                    GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniSinistraBloccato, (GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 7.6))
+                else:
+                    GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniSinistra, (GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 7.6))
+                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
+                    GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 14.5, GlobalVar.gsy // 18 * 7.6))
+                else:
+                    GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 14.5, GlobalVar.gsy // 18 * 7.6))
+            messaggio("Inizia configurazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.5, 60)
+            messaggio("Cancella configurazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, 60)
+            messaggio("Testa configurazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.5, 60)
+
+            messaggio("Salva", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.3, GlobalVar.gsy // 18 * 14.7, 70)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gpx * 8.5) - 1, GlobalVar.gpy * 14.5), ((GlobalVar.gpx * 8.5) - 1, GlobalVar.gpy * 15.9), 2)
+            messaggio("Indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.4, GlobalVar.gsy // 18 * 14.7, 70)
+
+            if configurando:
+                messaggio("Clicca i tasti illuminati", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13.5, 40, centrale=True)
+                if ordineConfigTasti[tastoDaConfigurare] == "croce":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerCroce, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "cerchio":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerCerchio, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "quadrato":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerQuadrato, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "triangolo":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerTriangolo, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "l1":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerL1, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "r1":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerR1, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "start":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerStart, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "croceDir":
+                    GlobalVar.schermo.blit(GlobalVar.impostaControllerCroceDirezionale, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+            elif testando:
+                configurazioneDaTestare = []
+                for padConf in configTemp:
+                    if padConf[0] == nomeController:
+                        configurazioneDaTestare.append(int(padConf[1]))
+                        configurazioneDaTestare.append(int(padConf[2]))
+                        configurazioneDaTestare.append(int(padConf[3]))
+                        configurazioneDaTestare.append(int(padConf[4]))
+                        configurazioneDaTestare.append(int(padConf[5]))
+                        configurazioneDaTestare.append(int(padConf[6]))
+                        configurazioneDaTestare.append(int(padConf[7]))
+                        configurazioneDaTestare.append("croceDir:" + str(padConf[8]))
+                        break
+                if len(configurazioneDaTestare) > 0:
+                    if configurazioneDaTestare[0] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerCroce, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[1] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerCerchio, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[2] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerQuadrato, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[3] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerTriangolo, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[4] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerL1, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[5] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerR1, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[6] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerStart, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[7] in tastiPremutiPadConfig:
+                        GlobalVar.schermo.blit(GlobalVar.impostaControllerCroceDirezionale, (GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2))
+                messaggio("Controlla che i tasti premuti corrispondano a quelli illuminati", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13.5, 40, centrale=True)
+            else:
+                if controllerDaConfigurare:
+                    if padInizialmeteConfigurato:
+                        messaggio(u"Controller configurato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13.5, 40, centrale=True)
+                    else:
+                        messaggio(u"Controller non configurato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13.5, 40, centrale=True)
+                else:
+                    messaggio("Nessun controller rilevato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 13.5, 40, centrale=True)
+            padConfiguratoTemp = False
+            for padConf in configTemp:
+                if padConf[0] == nomeController:
+                    padConfiguratoTemp = True
+            if padInizialmeteConfigurato != padConfiguratoTemp:
+                if padConfiguratoTemp:
+                    messaggio("Controller temporaneamente configurato", GlobalVar.verde, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 14.5, 40, centrale=True)
+                else:
+                    messaggio("Controller temporaneamente non configurato", GlobalVar.rosso, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 14.5, 40, centrale=True)
+            else:
+                if idController in listaIdPadConfigModificata:
+                    messaggio("Configurazione temporaneamente modificata", GlobalVar.verde, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 14.5, 40, centrale=True)
+
+            if GlobalVar.mouseVisibile:
+                messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+            elif GlobalVar.usandoIlController:
+                messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
+            else:
+                messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
+
+            if configurando or testando:
+                GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
+            else:
+                GlobalVar.schermo.blit(puntatore, (xp, yp))
+            primoFrame = False
+
+            pygame.display.update()
+
+        if countdownAggiornamentoModulo > 0:
+            countdownAggiornamentoModulo -= 1
+        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
 def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
@@ -621,17 +1264,17 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 suTornaIndietro = True
-            elif GlobalVar.gsx // 32 * 8 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 13.7 <= yMouse <= GlobalVar.gsy // 18 * 16.2:
+            elif GlobalVar.gsx // 32 * 10 <= xMouse <= GlobalVar.gsx // 32 * 16 and GlobalVar.gsy // 18 * 14.1 <= yMouse <= GlobalVar.gsy // 18 * 16.1:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 voceMarcata = 7
-                xp = GlobalVar.gsx // 32 * 9
+                xp = GlobalVar.gsx // 32 * 10.5
                 yp = GlobalVar.gsy // 18 * 14.8
-            elif GlobalVar.gsx // 32 * 16 <= xMouse <= GlobalVar.gsx // 32 * 23 and GlobalVar.gsy // 18 * 13.7 <= yMouse <= GlobalVar.gsy // 18 * 16.2:
+            elif GlobalVar.gsx // 32 * 16 <= xMouse <= GlobalVar.gsx // 32 * 22 and GlobalVar.gsy // 18 * 14.1 <= yMouse <= GlobalVar.gsy // 18 * 16.1:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 voceMarcata = 8
-                xp = GlobalVar.gsx // 32 * 17
+                xp = GlobalVar.gsx // 32 * 16
                 yp = GlobalVar.gsy // 18 * 14.8
             elif GlobalVar.gsx // 32 * 15 <= xMouse <= GlobalVar.gsx // 32 * 15.9 and GlobalVar.gsy // 18 * 4.8 <= yMouse <= GlobalVar.gsy // 18 * 6:
                 if GlobalVar.mouseBloccato:
@@ -681,27 +1324,27 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 if not GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(True)
             if GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 31:
-                if GlobalVar.gsy // 18 * 4.7 <= yMouse <= GlobalVar.gsy // 18 * 6.2:
+                if GlobalVar.gsy // 18 * 4.6 <= yMouse <= GlobalVar.gsy // 18 * 6.1:
                     voceMarcata = 1
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 5.1
-                elif GlobalVar.gsy // 18 * 6.2 <= yMouse <= GlobalVar.gsy // 18 * 7.7:
+                elif GlobalVar.gsy // 18 * 6.1 <= yMouse <= GlobalVar.gsy // 18 * 7.6:
                     voceMarcata = 2
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 6.6
-                elif GlobalVar.gsy // 18 * 7.7 <= yMouse <= GlobalVar.gsy // 18 * 9.2:
+                elif GlobalVar.gsy // 18 * 7.6 <= yMouse <= GlobalVar.gsy // 18 * 9.1:
                     voceMarcata = 3
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 8.1
-                elif GlobalVar.gsy // 18 * 9.2 <= yMouse <= GlobalVar.gsy // 18 * 10.7:
+                elif GlobalVar.gsy // 18 * 9.1 <= yMouse <= GlobalVar.gsy // 18 * 10.6:
                     voceMarcata = 4
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 9.6
-                elif GlobalVar.gsy // 18 * 10.7 <= yMouse <= GlobalVar.gsy // 18 * 12.2:
+                elif GlobalVar.gsy // 18 * 10.6 <= yMouse <= GlobalVar.gsy // 18 * 12.1:
                     voceMarcata = 5
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 11.1
-                elif GlobalVar.gsy // 18 * 12.2 <= yMouse <= GlobalVar.gsy // 18 * 13.7:
+                elif GlobalVar.gsy // 18 * 12.1 <= yMouse <= GlobalVar.gsy // 18 * 13.6:
                     voceMarcata = 6
                     xp = GlobalVar.gsx // 32 * 1
                     yp = GlobalVar.gsy // 18 * 12.6
@@ -724,12 +1367,14 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 if bottoneDown == "mouseSinistro" and suTornaIndietro:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     risposta = True
-                elif bottoneDown == "mouseSinistro" and cursoreSuImpoController:
+                elif bottoneDown == "mouseSinistro" and cursoreSuImpoController and settaRisoluzione:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     settaController()
-                elif voceMarcata == 4 and not bottoneDown == "mouseSinistro":
+                    primoFrame = True
+                elif voceMarcata == 4 and not bottoneDown == "mouseSinistro" and settaRisoluzione:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     settaController()
+                    primoFrame = True
                 elif voceMarcata == 7:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     GlobalVar.linguaImpostata = linguaTemp
@@ -768,7 +1413,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     scrivi.close()
                     puntatore = GlobalVar.puntatore
                     yp = GlobalVar.gsy // 18 * 14.8
-                    xp = GlobalVar.gsx // 32 * 9
+                    xp = GlobalVar.gsx // 32 * 10.5
                     primoFrame = True
                 elif voceMarcata == 8:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -780,7 +1425,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
-        if bottoneDown == "mouseSinistro" or bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padDestra" or bottoneDown == "padSinistra":
+        if bottoneDown == "mouseSinistro" or bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu" or (voceMarcata != 4 and (bottoneDown == pygame.K_d or bottoneDown == pygame.K_a or bottoneDown == "padDestra" or bottoneDown == "padSinistra")):
             tastoMovimentoPremuto = True
         elif bottoneDown:
             GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
@@ -790,7 +1435,6 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
             aggiornaSchermo = False
             aggiornaInterfacciaPerCambioInput = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                 if voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5 or voceMarcata == 6:
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -810,7 +1454,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     voceMarcata += 6
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = GlobalVar.gsy // 18 * 14.8
-                    xp = GlobalVar.gsx // 32 * 9
+                    xp = GlobalVar.gsx // 32 * 10.5
             if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -873,14 +1517,13 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    xp = GlobalVar.gsx // 32 * 17
+                    xp = GlobalVar.gsx // 32 * 16
                 elif voceMarcata == 8:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    xp = GlobalVar.gsx // 32 * 9
+                    xp = GlobalVar.gsx // 32 * 10.5
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                 if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -889,7 +1532,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     yp = GlobalVar.gsy // 18 * 14.8
-                    xp = GlobalVar.gsx // 32 * 9
+                    xp = GlobalVar.gsx // 32 * 10.5
                 elif voceMarcata == 7:
                     voceMarcata -= 6
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -975,12 +1618,12 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    xp = GlobalVar.gsx // 32 * 17
+                    xp = GlobalVar.gsx // 32 * 16
                 elif voceMarcata == 8:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    xp = GlobalVar.gsx // 32 * 9
+                    xp = GlobalVar.gsx // 32 * 10.5
             if bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -1126,8 +1769,9 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 21, 0, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2.5))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 11.5))
 
-            messaggio("Conferma", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 14.6, 70)
-            messaggio("Indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.6, 70)
+            messaggio("Salva", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 14.6, 70)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gpx * 16) - 1, GlobalVar.gpy * 14.3), ((GlobalVar.gpx * 16) - 1, GlobalVar.gpy * 15.9), 2)
+            messaggio("Indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.5, GlobalVar.gsy // 18 * 14.6, 70)
 
             messaggio("Lingua", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 60)
             if linguaTemp == "italiano":
@@ -1177,9 +1821,9 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                         GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 7.9))
                 else:
                     GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 7.9))
-            messaggio("Configurazione controller", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.5, 60)
-            messaggio("Modifica", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9.5, 60)
             if settaRisoluzione:
+                messaggio("Controller", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.5, 60)
+                messaggio("Configura", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9.5, 60)
                 messaggio("Risoluzione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, 60)
                 messaggio(str(gsxTemp) + "x" + str(gsyTemp), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 11, 60)
                 if voceMarcata == 5:
@@ -1206,12 +1850,16 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 17.3, GlobalVar.gsy // 18 * 12.4))
             else:
+                messaggio("Controller", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.5, 60)
+                messaggio("Configura", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9.5, 60)
+                messaggio("Configurabile solo dal menu principale", GlobalVar.rosso, GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 9.8, 40, daDestra=True)
                 messaggio("Risoluzione", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, 60)
                 messaggio(str(gsxTemp) + "x" + str(gsyTemp), GlobalVar.grigioscu, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 11, 60)
                 if voceMarcata == 5:
                     GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniSinistraBloccato, (GlobalVar.gsx // 32 * 14.7, GlobalVar.gsy // 18 * 10.9))
                     GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 10.9))
-                messaggio("Schermo intero", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.5, 70)
+                messaggio("Configurabile solo dal menu principale", GlobalVar.rosso, GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 11.3, 40, daDestra=True)
+                messaggio("Schermo intero", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.5, 60)
                 if schermoInteroTemp:
                     messaggio("Si", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12.5, 60)
                 else:
@@ -1219,6 +1867,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 if voceMarcata == 6:
                     GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniSinistraBloccato, (GlobalVar.gsx // 32 * 14.7, GlobalVar.gsy // 18 * 12.4))
                     GlobalVar.schermo.blit(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 17.3, GlobalVar.gsy // 18 * 12.4))
+                messaggio("Configurabile solo dal menu principale", GlobalVar.rosso, GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 12.8, 40, daDestra=True)
 
             if GlobalVar.mouseVisibile:
                 messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
@@ -1228,7 +1877,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             if voceMarcata != 7 and voceMarcata != 8:
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx // 1.5))), yp + (int(GlobalVar.gpy * 0.9))), (xp + (int(GlobalVar.gpx * 29)), yp + (int(GlobalVar.gpy * 0.9))), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx // 1.5))), yp + (int(GlobalVar.gpy * 1))), (xp + (int(GlobalVar.gpx * 29)), yp + (int(GlobalVar.gpy * 1))), 2)
             primoFrame = False
 
             pygame.display.update()
@@ -1598,7 +2247,7 @@ def menuMappa(avanzamentoStoria):
                         messaggio(u"Il laboratorio in cui Norm svolge le sue ricerche. È molto piccolo ma al suo interno è presente tutto ciò che serve, ossia un calcolatore di eventi, che si estende anche sotto il terreno, e diversi altri calcolatori che credo servano per gestire i sistemi di alimentazione e raffreddamento.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 8:
                         messaggio("Foresta cadetta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                        messaggio(u"La foresta che mi ha sempre separata dalla città... non mi è mai stato concesso attraversarla perchè entrambi i miei genitori la ritenevano troppo pericolosa per me. Il nome deriva dal fatto che viene utilizzata come terreno di prova per selezionare, tra i giovani appartenenti alla nobiltà, i futuri ufficiali dell'esercito.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        messaggio(u"La foresta che mi ha sempre separata dalla città... non ho mai avuto il permesso di attraversarla perchè entrambi i miei genitori la ritenevano troppo pericolosa per me. Il nome deriva dal fatto che viene utilizzata come terreno di prova per selezionare, tra i giovani appartenenti alla nobiltà, i futuri ufficiali dell'esercito.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 9:
                         messaggio("Selva arida", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
                         messaggio(u"Denominata in questo modo perchè un tempo fitta e intricata ed ora composta soltanto da secchi abusti e funghi. Le ragioni di questo suo decadimento non sono note agli abitanti locali ma, diversi libri della biblioteca in città, sostenevano che ciò fosse dovuto ad un cambiamento climatico avvenuto circa 50 anni fa... strano... <br> Rod è solito attraversarla per tornare al suo avamposto.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)

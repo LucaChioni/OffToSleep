@@ -79,7 +79,7 @@ def menu(caricaSalvataggio, gameover):
     listaImgVideo = []
     # load all the images
     for i in os.listdir(GlobalVar.gamePath + "Video/VideoInizio"):
-        img = GlobalVar.loadImage("Video/VideoInizio" + '/' + i, False, convert=True)
+        img = GlobalVar.loadImage("Video/VideoInizio" + '/' + i, False)
         img = pygame.transform.smoothscale(img, (GlobalVar.gsx, GlobalVar.gsy))
         listaImgVideo.append(img)
     guardaVideo(listaImgVideo, GlobalVar.audioSottofondoVideoIniziale, True)

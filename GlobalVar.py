@@ -33,7 +33,8 @@ if eseguibile:
 
 # i suoni vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
 pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
-pygame.init()
+pygame.display.init()
+pygame.font.init()
 
 gsx = 0
 gsy = 0
@@ -65,7 +66,6 @@ if gsx // 16 < gsy // 9:
 elif gsx // 16 > gsy // 9:
     print ("Larghezza piu grande")
     gsx = gsy * 16 // 9
-schermoIntero = True
 print ("Modificato", gsx, gsy)
 
 maxGsx = gsx
@@ -74,70 +74,34 @@ maxGsy = gsy
 # dimensione personaggio
 gpx = gsx // 32
 gpy = gsy // 18
+schermoIntero = True
+
+linguaImpostata = "inglese"
+# nascondo subito il cursore
+pygame.mouse.set_visible(False)
+mouseVisibile = False
 
 def quit():
     sys.exit()
 
-def loadImage(path, aumentaRisoluzione, convert=False):
-    if convert:
-        img = pygame.image.load(gamePath + path).convert()
-    else:
-        img = pygame.image.load(gamePath + path)
+def loadImage(path, aumentaRisoluzione):
+    img = pygame.image.load(gamePath + path).convert_alpha()
     if aumentaRisoluzione:
         sizeX, sizeY = img.get_rect().size
         img = pygame.transform.scale(img, (sizeX * 4, sizeY * 4))
     return img
 
 def loadSound(path):
-    sound = pygame.mixer.Sound(gamePath + path)
+    try:
+        sound = pygame.mixer.Sound(gamePath + path)
+    except Exception:
+        print ("Impossibile caricare " + path)
+        sound = False
     return sound
 
 def loadFile(path, mode):
     file = open(gamePath + path, mode)
     return file
-
-# nome-icona
-pygame.display.set_caption("Gioco 2")
-icona = loadImage("Immagini/Icona.png", False)
-pygame.display.set_icon(icona)
-
-# clock
-clockAttacco = pygame.time.Clock()
-clockAnimazioni = pygame.time.Clock()
-clockVideo = pygame.time.Clock()
-clockMenu = pygame.time.Clock()
-clockFadeToBlack = pygame.time.Clock()
-fpsAnimazioni = 30
-fpsInquadra = 20
-fpsVideo = 12
-fpsMenu = 30
-fpsFadeToBlack = 30
-
-# colori
-nero = (0, 0, 0)
-grigioscuPiuScu = (40, 40, 40)
-grigioscu = (50, 50, 50)
-grigioscurino = (70, 70, 70)
-grigio = (80, 80, 80)
-grigiochi = (230, 230, 230)
-bianco = (255, 255, 255)
-rosso = (255, 130, 0)
-verde = (130, 255, 0)
-verdeScuro = (80, 90, 80)
-verdeScuroPiuScuro = (70, 80, 70)
-blu = (0, 0, 255)
-bluScuro = (80, 80, 90)
-bluScuroPiuScuro = (70, 70, 80)
-rossoScuro = (100, 80, 80)
-rossoScuroPiuScuro = (90, 70, 70)
-
-linguaImpostata = "inglese"
-
-# vettore che conterrà tutti i dati dei salvataggi
-vetDatiSalvataggi = []
-# vettore che conterrà i dati di salvataggio del file gameover
-vetDatiSalvataggioGameOver = []
-numSalvataggioCaricato = 0
 
 # dichiaro le variabili globali della funzione loadImgs
 global puntatore
@@ -308,6 +272,15 @@ global tutorialTastieraInMenu
 global tutorialMouse
 global tutorialControllerInGioco
 global tutorialControllerInMenu
+global impostazioniController
+global impostaControllerCroce
+global impostaControllerCerchio
+global impostaControllerQuadrato
+global impostaControllerTriangolo
+global impostaControllerL1
+global impostaControllerR1
+global impostaControllerStart
+global impostaControllerCroceDirezionale
 global persGrafMenu
 global saraGrafMenu
 global fraMaggioreGrafMenu
@@ -529,6 +502,15 @@ def loadImgs():
     global tutorialMouse
     global tutorialControllerInGioco
     global tutorialControllerInMenu
+    global impostazioniController
+    global impostaControllerCroce
+    global impostaControllerCerchio
+    global impostaControllerQuadrato
+    global impostaControllerTriangolo
+    global impostaControllerL1
+    global impostaControllerR1
+    global impostaControllerStart
+    global impostaControllerCroceDirezionale
     global persGrafMenu
     global saraGrafMenu
     global fraMaggioreGrafMenu
@@ -997,6 +979,24 @@ def loadImgs():
     tutorialControllerInGioco = pygame.transform.smoothscale(tutorialControllerInGioco, (gsx // 32 * 7, gsy // 18 * 11))
     tutorialControllerInMenu = loadImage('Immagini/Tutorial/ControllerInMenu.png', True)
     tutorialControllerInMenu = pygame.transform.smoothscale(tutorialControllerInMenu, (gsx // 32 * 7, gsy // 18 * 11))
+    impostazioniController = loadImage('Immagini/Tutorial/ImpoController.png', False)
+    impostazioniController = pygame.transform.smoothscale(impostazioniController, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerCroce = loadImage('Immagini/Tutorial/ImpoControllerCroce.png', False)
+    impostaControllerCroce = pygame.transform.smoothscale(impostaControllerCroce, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerCerchio = loadImage('Immagini/Tutorial/ImpoControllerCerchio.png', False)
+    impostaControllerCerchio = pygame.transform.smoothscale(impostaControllerCerchio, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerQuadrato = loadImage('Immagini/Tutorial/ImpoControllerQuadrato.png', False)
+    impostaControllerQuadrato = pygame.transform.smoothscale(impostaControllerQuadrato, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerTriangolo = loadImage('Immagini/Tutorial/ImpoControllerTriangolo.png', False)
+    impostaControllerTriangolo = pygame.transform.smoothscale(impostaControllerTriangolo, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerL1 = loadImage('Immagini/Tutorial/ImpoControllerL1.png', False)
+    impostaControllerL1 = pygame.transform.smoothscale(impostaControllerL1, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerR1 = loadImage('Immagini/Tutorial/ImpoControllerR1.png', False)
+    impostaControllerR1 = pygame.transform.smoothscale(impostaControllerR1, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerStart = loadImage('Immagini/Tutorial/ImpoControllerStart.png', False)
+    impostaControllerStart = pygame.transform.smoothscale(impostaControllerStart, (gsx // 32 * 14, gsy // 18 * 14))
+    impostaControllerCroceDirezionale = loadImage('Immagini/Tutorial/ImpoControllerCroceDirezionale.png', False)
+    impostaControllerCroceDirezionale = pygame.transform.smoothscale(impostaControllerCroceDirezionale, (gsx // 32 * 14, gsy // 18 * 14))
 
     # img grafiche / dialoghi
     persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucaGrafMenu.png', False)
@@ -1142,8 +1142,6 @@ def loadImgs():
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
 
-loadImgs()
-
 # canali audio / volume (0-1)
 volumeCanzoni = 0.0
 volumeEffetti = 0.0
@@ -1169,7 +1167,93 @@ def initVolumeSounds():
     canaleSoundInterazioni.set_volume(volumeEffetti)
     canaleSoundAttacco.set_volume(volumeEffetti)
     canaleSoundSottofondoAmbientale.set_volume(volumeEffetti)
-initVolumeSounds()
+
+# lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
+leggi = loadFile("Impostazioni/Impostazioni.txt", "r")
+leggifile = leggi.read()
+leggi.close()
+datiFileImpostazioniString = leggifile.split("_")
+datiFileImpostazioniString.pop(len(datiFileImpostazioniString) - 1)
+erroreFileImpostazioni = False
+if len(datiFileImpostazioniString) == 6:
+    datiFileImpostazioni = []
+    for i in range(0, len(datiFileImpostazioniString)):
+        try:
+            datiFileImpostazioni.append(int(datiFileImpostazioniString[i]))
+        except ValueError:
+            erroreFileImpostazioni = True
+    if not erroreFileImpostazioni:
+        if datiFileImpostazioni[0] == 0:
+            linguaImpostata = "italiano"
+        elif datiFileImpostazioni[0] == 1:
+            linguaImpostata = "inglese"
+        if 0 <= int(datiFileImpostazioni[1]) <= 10:
+            volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
+        if 0 <= int(datiFileImpostazioni[2]) <= 10:
+            volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
+        if schermoIntero == 0 or schermoIntero == 1:
+            schermoIntero = int(datiFileImpostazioni[3])
+        if maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5] and ((maxGsx == datiFileImpostazioni[4] and maxGsy == datiFileImpostazioni[5]) or (datiFileImpostazioni[4] == 800 and datiFileImpostazioni[5] == 450) or (datiFileImpostazioni[4] == 1024 and datiFileImpostazioni[5] == 576) or (datiFileImpostazioni[4] == 1280 and datiFileImpostazioni[5] == 720) or (datiFileImpostazioni[4] == 1920 and datiFileImpostazioni[5] == 1080)):
+            gsx = int(datiFileImpostazioni[4])
+            gsy = int(datiFileImpostazioni[5])
+            gpx = gsx // 32
+            gpy = gsy // 18
+        if schermoIntero:
+            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
+            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+        else:
+            schermo = pygame.display.set_mode((gsx, gsy))
+        initVolumeSounds()
+        loadImgs()
+else:
+    erroreFileImpostazioni = True
+if erroreFileImpostazioni:
+    print ("Errore nella lettura del file di configurazione delle impostazioni")
+    schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+    loadImgs()
+    initVolumeSounds()
+
+# nome-icona
+pygame.display.set_caption("Gioco 2")
+icona = loadImage("Immagini/Icona.png", False)
+pygame.display.set_icon(icona)
+listaTastiPremuti = []
+
+# clock
+clockAttacco = pygame.time.Clock()
+clockAnimazioni = pygame.time.Clock()
+clockVideo = pygame.time.Clock()
+clockMenu = pygame.time.Clock()
+clockFadeToBlack = pygame.time.Clock()
+fpsAnimazioni = 30
+fpsInquadra = 20
+fpsVideo = 12
+fpsMenu = 30
+fpsFadeToBlack = 30
+
+# colori
+nero = (0, 0, 0)
+grigioscuPiuScu = (40, 40, 40)
+grigioscu = (50, 50, 50)
+grigioscurino = (70, 70, 70)
+grigio = (80, 80, 80)
+grigiochi = (230, 230, 230)
+bianco = (255, 255, 255)
+rosso = (255, 130, 0)
+verde = (130, 255, 0)
+verdeScuro = (80, 90, 80)
+verdeScuroPiuScuro = (70, 80, 70)
+blu = (0, 0, 255)
+bluScuro = (80, 80, 90)
+bluScuroPiuScuro = (70, 70, 80)
+rossoScuro = (100, 80, 80)
+rossoScuroPiuScuro = (90, 70, 70)
+
+# vettore che conterrà tutti i dati dei salvataggi
+vetDatiSalvataggi = []
+# vettore che conterrà i dati di salvataggio del file gameover
+vetDatiSalvataggioGameOver = []
+numSalvataggioCaricato = 0
 
 # suoni puntatore
 selsta = loadSound("Audio/RumoriPuntatore/SelSta.wav")
@@ -1266,51 +1350,6 @@ initVetCofanettiGlobale = definisciCofanetti(dictStanze)
 
 vistaRobo = 6
 
-pygame.mouse.set_visible(False)
-mouseVisibile = False
-
-# lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
-leggi = loadFile("Impostazioni/Impostazioni.txt", "r")
-leggifile = leggi.read()
-datiFileImpostazioni = leggifile.split("_")
-datiFileImpostazioni.pop(len(datiFileImpostazioni) - 1)
-erroreFileImpostazioni = False
-if len(datiFileImpostazioni) == 6:
-    for i in range(0, len(datiFileImpostazioni)):
-        try:
-            datiFileImpostazioni[i] = int(datiFileImpostazioni[i])
-        except ValueError:
-            erroreFileImpostazioni = True
-    if not erroreFileImpostazioni:
-        if datiFileImpostazioni[0] == 0:
-            linguaImpostata = "italiano"
-        elif datiFileImpostazioni[0] == 1:
-            linguaImpostata = "inglese"
-        if 0 <= datiFileImpostazioni[1] <= 10:
-            volumeEffetti = datiFileImpostazioni[1] / 10.0
-        if 0 <= datiFileImpostazioni[2] <= 10:
-            volumeCanzoni = datiFileImpostazioni[2] / 10.0
-        if schermoIntero == 0 or schermoIntero == 1:
-            schermoIntero = datiFileImpostazioni[3]
-        if maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5] and ((maxGsx == datiFileImpostazioni[4] and maxGsy == datiFileImpostazioni[5]) or (datiFileImpostazioni[4] == 800 and datiFileImpostazioni[5] == 450) or (datiFileImpostazioni[4] == 1024 and datiFileImpostazioni[5] == 576) or (datiFileImpostazioni[4] == 1280 and datiFileImpostazioni[5] == 720) or (datiFileImpostazioni[4] == 1920 and datiFileImpostazioni[5] == 1080)):
-            gsx = datiFileImpostazioni[4]
-            gsy = datiFileImpostazioni[5]
-            gpx = gsx // 32
-            gpy = gsy // 18
-        if schermoIntero:
-            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
-            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-        else:
-            schermo = pygame.display.set_mode((gsx, gsy))
-        initVolumeSounds()
-        loadImgs()
-else:
-    erroreFileImpostazioni = True
-if erroreFileImpostazioni:
-    print ("Errore nella lettura del file di configurazione delle impostazioni")
-    schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-leggi.close()
-
 # freccetta (sized 24x24)
 global mouseBloccato
 def configuraCursore(bloccato):
@@ -1380,19 +1419,130 @@ def setCursoreVisibile(visibile):
         pygame.mouse.set_visible(True)
         pygame.mouse.set_pos(gsx // 2, gsy // 2)
     else:
-        pygame.mouse.set_pos(0, 0)
-        pygame.mouse.set_visible(False)
         pygame.mouse.set_visible(False)
 configuraCursore(False)
-pygame.mouse.set_visible(False)
-mouseVisibile = False
 
-pygame.joystick.init()
-joystick_count = pygame.joystick.get_count()
-joystick = False
-if joystick_count > 0:
-    joystick = pygame.joystick.Joystick(0)
-    joystick.init()
-configTastiPad = [0, 1, 2, 3, 4, 5, 7]
-configAnalogicoPad = [0, 1]
+# lettura configurazione controller: per ogni controller: nome, croce, cerchio, quadrato, triangolo, l1, r1, start, croceDirezionale
+padUtilizzato = False
+configPadInUso = []
+listaPadConnessiConfigurati = []
+listaPadConnessiSconosciuti = []
+configPadConnessi = []
+def inizializzaPad(pad):
+    # faccio il vettore con la configurazione dei tasti del pad da usare
+    global configPadInUso
+    global configPadConnessi
+    global padUtilizzato
+    padUtilizzato = pad
+    configPadInUso = []
+    for configPad in configPadConnessi:
+        if configPad[1] == padUtilizzato.get_name():
+            configTastiPad = []
+            configTastiPad.append(configPad[2])
+            configTastiPad.append(configPad[3])
+            configTastiPad.append(configPad[4])
+            configTastiPad.append(configPad[5])
+            configTastiPad.append(configPad[6])
+            configTastiPad.append(configPad[7])
+            configTastiPad.append(configPad[8])
+
+            configPadInUso.append(configPad[0])
+            configPadInUso.append(configPad[1])
+            configPadInUso.append(configTastiPad)
+            configPadInUso.append(configPad[9])
+            break
+def caricaImpostazioniController():
+    impoControllerErrato = False
+    leggi = loadFile("Impostazioni/ImpoController.txt", "r")
+    leggifile = leggi.read()
+    leggi.close()
+    datiImpostazioniController = leggifile.split("\n")
+    datiImpostazioniController.pop(len(datiImpostazioniController) - 1)
+    if len(datiImpostazioniController) == 0:
+        impoControllerErrato = True
+        print ("File di configurazione dei controller vuoto")
+    else:
+        contaGlobale = 0
+        while contaGlobale < len(datiImpostazioniController):
+            setteggioController = datiImpostazioniController[contaGlobale].split("_")
+            setteggioController.pop(len(setteggioController) - 1)
+            if len(setteggioController) != 9:
+                impoControllerErrato = True
+                print ("File di configurazione dei controller corrotto 1")
+                break
+            else:
+                for i in range(1, len(setteggioController)):
+                    try:
+                        test = int(setteggioController[i])
+                        if type(test) is not int:
+                            impoControllerErrato = True
+                            print ("File di configurazione dei controller corrotto 2")
+                            break
+                    except ValueError:
+                        impoControllerErrato = True
+                        print ("File di configurazione dei controller corrotto 3")
+                        break
+            contaGlobale += 1
+    if impoControllerErrato:
+        # cancello il file se c'è un errore
+        scrivi = loadFile("Impostazioni/ImpoController.txt", "w")
+        scrivi.close()
+    return impoControllerErrato, datiImpostazioniController
+def inizializzaModuloJoistick():
+    impoControllerErrato, datiImpostazioniController = caricaImpostazioniController()
+
+    if pygame.joystick.get_init():
+        pygame.joystick.quit()
+    pygame.joystick.init()
+
+    global listaPadConnessiConfigurati
+    listaPadConnessiConfigurati = []
+    global listaPadConnessiSconosciuti
+    listaPadConnessiSconosciuti = []
+    global configPadConnessi
+    configPadConnessi = []
+
+    joystick_count = pygame.joystick.get_count()
+    for idPadGlobale in range(0, joystick_count):
+        joystick = pygame.joystick.Joystick(idPadGlobale)
+        nomeController = joystick.get_name()
+        print nomeController
+        idController = joystick.get_id()
+        configPad = []
+        padGiaConfigurato = False
+        if not impoControllerErrato:
+            contaGlobale = 0
+            while contaGlobale < len(datiImpostazioniController):
+                setteggioController = datiImpostazioniController[contaGlobale].split("_")
+                setteggioController.pop(len(setteggioController) - 1)
+                if nomeController == setteggioController[0]:
+                    padGiaConfigurato = True
+                    listaPadConnessiConfigurati.append(joystick)
+                    configPad.append(idController)
+                    configPad.append(nomeController)
+                    configPad.append(int(setteggioController[1]))
+                    configPad.append(int(setteggioController[2]))
+                    configPad.append(int(setteggioController[3]))
+                    configPad.append(int(setteggioController[4]))
+                    configPad.append(int(setteggioController[5]))
+                    configPad.append(int(setteggioController[6]))
+                    configPad.append(int(setteggioController[7]))
+                    configPad.append(int(setteggioController[8]))
+                    joystick.init()
+                    break
+                contaGlobale += 1
+        if not padGiaConfigurato:
+            listaPadConnessiSconosciuti.append(joystick)
+            configPad.append(idController)
+            configPad.append(nomeController)
+            configPad.append(False)
+            configPad.append(False)
+            configPad.append(False)
+            configPad.append(False)
+            configPad.append(False)
+            configPad.append(False)
+            configPad.append(False)
+            configPad.append(False)
+        configPadConnessi.append(configPad)
+inizializzaModuloJoistick()
 usandoIlController = False

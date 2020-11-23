@@ -1408,13 +1408,16 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
             if bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
                 interazioneConfermata = True
+                bottoneDown = False
             elif bottoneDown == "mouseSinistro":
                 if inquadratoQualcosa == "start":
                     risposta = True
                     startf = True
+                    bottoneDown = False
                 elif inquadratoQualcosa == "battaglia":
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     risposta = True
+                    bottoneDown = False
                 elif inquadratoQualcosa == "telecolco":
                     GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
                     if chiamarob:
@@ -1425,23 +1428,28 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         ultimoObbiettivoColco.append(x)
                         ultimoObbiettivoColco.append(y)
                         chiamarob = True
+                    bottoneDown = False
                 elif inquadratoQualcosa == "Rallo":
                     interazioneConfermata = True
+                    bottoneDown = False
                 elif inquadratoQualcosa == "Colco":
                     interazioneConfermata = True
                 elif inquadratoQualcosa == "porta":
                     interazioneConfermata = True
+                    bottoneDown = False
                 elif inquadratoQualcosa == "cofanetto":
                     interazioneConfermata = True
+                    bottoneDown = False
                 elif inquadratoQualcosa == "personaggio":
                     interazioneConfermata = True
+                    bottoneDown = False
                 elif inquadratoQualcosa == "nemico":
                     interazioneConfermata = True
                 elif inquadratoQualcosa == "esca":
                     interazioneConfermata = True
                 elif inquadratoQualcosa == "casellaNelRaggio":
                     interazioneConfermata = True
-            bottoneDown = False
+                    bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
             bottoneDown = False
@@ -1893,6 +1901,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
                 if not risposta and not analisiDiColcoEffettuata:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            bottoneDown = False
 
         if ricaricaschermo and not appenaCaricato:
             GlobalVar.schermo.blit(schermoOriginale, (0, 0))

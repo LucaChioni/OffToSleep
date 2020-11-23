@@ -189,7 +189,7 @@ def gameloop():
 
                 # stanza
                 nomeStanza = settaNomeStanza(dati[0], dati[1])
-                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", True, convert=True)
+                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", True)
                 imgSfondoStanza = pygame.transform.smoothscale(imgSfondoStanza, (GlobalVar.gsx, GlobalVar.gsy))
                 casellaChiara = GlobalVar.loadImage("Immagini/Scenari/CasellaChiara.png", True)
                 casellaChiara = pygame.transform.smoothscale(casellaChiara, (GlobalVar.gpx, GlobalVar.gpy))
