@@ -130,7 +130,7 @@ def gameloop():
             if cambiosta:
                 if not inizio:
                     sprites = pygame.sprite.Group(Fade(0))
-                    schermoFadeToBlack = GlobalVar.schermo.copy()
+                    schermoFadeToBlack = GlobalVar.schermo.copy().convert()
                     oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
 
                 canzoneCambiata = False
@@ -189,18 +189,12 @@ def gameloop():
 
                 # stanza
                 nomeStanza = settaNomeStanza(dati[0], dati[1])
-                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", True)
-                imgSfondoStanza = pygame.transform.smoothscale(imgSfondoStanza, (GlobalVar.gsx, GlobalVar.gsy))
-                casellaChiara = GlobalVar.loadImage("Immagini/Scenari/CasellaChiara.png", True)
-                casellaChiara = pygame.transform.smoothscale(casellaChiara, (GlobalVar.gpx, GlobalVar.gpy))
-                casellaScura = GlobalVar.loadImage("Immagini/Scenari/CasellaScura.png", True)
-                casellaScura = pygame.transform.smoothscale(casellaScura, (GlobalVar.gpx, GlobalVar.gpy))
-                casellaOscurata = GlobalVar.loadImage("Immagini/Scenari/CasellaOscurata.png", True)
-                casellaOscurata = pygame.transform.smoothscale(casellaOscurata, (GlobalVar.gpx, GlobalVar.gpy))
-                portaVert = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", True)
-                portaVert = pygame.transform.smoothscale(portaVert, (GlobalVar.gpx, GlobalVar.gpy))
-                portaOriz = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", True)
-                portaOriz = pygame.transform.smoothscale(portaOriz, (GlobalVar.gpx, GlobalVar.gpy))
+                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalVar.gsx, GlobalVar.gsy, True, canale_alpha=False)
+                casellaChiara = GlobalVar.loadImage("Immagini/Scenari/CasellaChiara.png", GlobalVar.gpx, GlobalVar.gpy, True)
+                casellaScura = GlobalVar.loadImage("Immagini/Scenari/CasellaScura.png", GlobalVar.gpx, GlobalVar.gpy, True)
+                casellaOscurata = GlobalVar.loadImage("Immagini/Scenari/CasellaOscurata.png", GlobalVar.gpx, GlobalVar.gpy, True)
+                portaVert = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalVar.gpx, GlobalVar.gpy, True)
+                portaOriz = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalVar.gpx, GlobalVar.gpy, True)
 
                 if not inizio:
                     mosseRimasteRob = 0
@@ -243,7 +237,7 @@ def gameloop():
                 caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
 
                 GlobalVar.schermo.blit(imgSfondoStanza, (0, 0))
-                schermoOriginale = GlobalVar.schermo.copy()
+                schermoOriginale = GlobalVar.schermo.copy().convert()
                 GlobalVar.schermo.fill(GlobalVar.nero)
                 vettoreImgCaselle = []
                 i = 0
@@ -265,137 +259,75 @@ def gameloop():
 
             if not cambiosta:
                 # arma
-                armaw = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iw.png" % dati[6], True)
-                armaw = pygame.transform.smoothscale(armaw, (GlobalVar.gpx, GlobalVar.gpy))
-                armawMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iwMov1.png" % dati[6], True)
-                armawMov1 = pygame.transform.smoothscale(armawMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                armawMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iwMov2.png" % dati[6], True)
-                armawMov2 = pygame.transform.smoothscale(armawMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                armaa = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%ia.png" % dati[6], True)
-                armaa = pygame.transform.smoothscale(armaa, (GlobalVar.gpx, GlobalVar.gpy))
-                armaaMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iaMov1.png" % dati[6], True)
-                armaaMov1 = pygame.transform.smoothscale(armaaMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                armaaMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iaMov2.png" % dati[6], True)
-                armaaMov2 = pygame.transform.smoothscale(armaaMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                armas = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%is.png" % dati[6], True)
-                armas = pygame.transform.smoothscale(armas, (GlobalVar.gpx, GlobalVar.gpy))
-                armasMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%isMov1.png" % dati[6], True)
-                armasMov1 = pygame.transform.smoothscale(armasMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                armasMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%isMov2.png" % dati[6], True)
-                armasMov2 = pygame.transform.smoothscale(armasMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                armad = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%id.png" % dati[6], True)
-                armad = pygame.transform.smoothscale(armad, (GlobalVar.gpx, GlobalVar.gpy))
-                armadMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%idMov1.png" % dati[6], True)
-                armadMov1 = pygame.transform.smoothscale(armadMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                armadMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%idMov2.png" % dati[6], True)
-                armadMov2 = pygame.transform.smoothscale(armadMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                armasAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%isAttacco.png" % dati[6], True)
-                armasAttacco = pygame.transform.smoothscale(armasAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
-                armaaAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iaAttacco.png" % dati[6], True)
-                armaaAttacco = pygame.transform.smoothscale(armaaAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
-                armadAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%idAttacco.png" % dati[6], True)
-                armadAttacco = pygame.transform.smoothscale(armadAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
-                armawAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iwAttacco.png" % dati[6], True)
-                armawAttacco = pygame.transform.smoothscale(armawAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
+                armaw = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iw.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armawMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iwMov1.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armawMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iwMov2.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armaa = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%ia.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armaaMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iaMov1.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armaaMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iaMov2.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armas = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%is.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armasMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%isMov1.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armasMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%isMov2.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armad = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%id.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armadMov1 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%idMov1.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armadMov2 = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%idMov2.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy, True)
+                armasAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%isAttacco.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy * 2, True)
+                armaaAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iaAttacco.png" % dati[6], GlobalVar.gpx * 2, GlobalVar.gpy, True)
+                armadAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%idAttacco.png" % dati[6], GlobalVar.gpx * 2, GlobalVar.gpy, True)
+                armawAttacco = GlobalVar.loadImage("Immagini/EquipSara/Spade/Spada%iwAttacco.png" % dati[6], GlobalVar.gpx, GlobalVar.gpy * 2, True)
                 # arco
-                arcow = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%iw.png" % dati[128], True)
-                arcow = pygame.transform.smoothscale(arcow, (GlobalVar.gpx, GlobalVar.gpy))
-                arcoa = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%ia.png" % dati[128], True)
-                arcoa = pygame.transform.smoothscale(arcoa, (GlobalVar.gpx, GlobalVar.gpy))
-                arcos = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%is.png" % dati[128], True)
-                arcos = pygame.transform.smoothscale(arcos, (GlobalVar.gpx, GlobalVar.gpy))
-                arcod = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%id.png" % dati[128], True)
-                arcod = pygame.transform.smoothscale(arcod, (GlobalVar.gpx, GlobalVar.gpy))
-                arcosAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%isAttacco.png" % dati[128], True)
-                arcosAttacco = pygame.transform.smoothscale(arcosAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
-                arcoaAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%iaAttacco.png" % dati[128], True)
-                arcoaAttacco = pygame.transform.smoothscale(arcoaAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
-                arcodAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%idAttacco.png" % dati[128], True)
-                arcodAttacco = pygame.transform.smoothscale(arcodAttacco, (GlobalVar.gpx * 2, GlobalVar.gpy))
-                arcowAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%iwAttacco.png" % dati[128], True)
-                arcowAttacco = pygame.transform.smoothscale(arcowAttacco, (GlobalVar.gpx, GlobalVar.gpy * 2))
+                arcow = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%iw.png" % dati[128], GlobalVar.gpx, GlobalVar.gpy, True)
+                arcoa = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%ia.png" % dati[128], GlobalVar.gpx, GlobalVar.gpy, True)
+                arcos = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%is.png" % dati[128], GlobalVar.gpx, GlobalVar.gpy, True)
+                arcod = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%id.png" % dati[128], GlobalVar.gpx, GlobalVar.gpy, True)
+                arcosAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%isAttacco.png" % dati[128], GlobalVar.gpx, GlobalVar.gpy * 2, True)
+                arcoaAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%iaAttacco.png" % dati[128], GlobalVar.gpx * 2, GlobalVar.gpy, True)
+                arcodAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%idAttacco.png" % dati[128], GlobalVar.gpx * 2, GlobalVar.gpy, True)
+                arcowAttacco = GlobalVar.loadImage("Immagini/EquipSara/Archi/Arco%iwAttacco.png" % dati[128], GlobalVar.gpx, GlobalVar.gpy * 2, True)
                 # faretra
-                faretraw = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%iw.png" % dati[133], True)
-                faretraw = pygame.transform.smoothscale(faretraw, (GlobalVar.gpx, GlobalVar.gpy))
-                faretraa = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%ia.png" % dati[133], True)
-                faretraa = pygame.transform.smoothscale(faretraa, (GlobalVar.gpx, GlobalVar.gpy))
-                faretras = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%is.png" % dati[133], True)
-                faretras = pygame.transform.smoothscale(faretras, (GlobalVar.gpx, GlobalVar.gpy))
-                faretrad = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%id.png" % dati[133], True)
-                faretrad = pygame.transform.smoothscale(faretrad, (GlobalVar.gpx, GlobalVar.gpy))
+                faretraw = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%iw.png" % dati[133], GlobalVar.gpx, GlobalVar.gpy, True)
+                faretraa = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%ia.png" % dati[133], GlobalVar.gpx, GlobalVar.gpy, True)
+                faretras = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%is.png" % dati[133], GlobalVar.gpx, GlobalVar.gpy, True)
+                faretrad = GlobalVar.loadImage("Immagini/EquipSara/Faretre/Faretra%id.png" % dati[133], GlobalVar.gpx, GlobalVar.gpy, True)
                 # armatura
-                armaturaw = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%iw.png" % dati[8], True)
-                armaturaw = pygame.transform.smoothscale(armaturaw, (GlobalVar.gpx, GlobalVar.gpy))
-                armaturaa = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%ia.png" % dati[8], True)
-                armaturaa = pygame.transform.smoothscale(armaturaa, (GlobalVar.gpx, GlobalVar.gpy))
-                armaturas = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%is.png" % dati[8], True)
-                armaturas = pygame.transform.smoothscale(armaturas, (GlobalVar.gpx, GlobalVar.gpy))
-                armaturad = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%id.png" % dati[8], True)
-                armaturad = pygame.transform.smoothscale(armaturad, (GlobalVar.gpx, GlobalVar.gpy))
+                armaturaw = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%iw.png" % dati[8], GlobalVar.gpx, GlobalVar.gpy, True)
+                armaturaa = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%ia.png" % dati[8], GlobalVar.gpx, GlobalVar.gpy, True)
+                armaturas = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%is.png" % dati[8], GlobalVar.gpx, GlobalVar.gpy, True)
+                armaturad = GlobalVar.loadImage("Immagini/EquipSara/Armature/Armatura%id.png" % dati[8], GlobalVar.gpx, GlobalVar.gpy, True)
                 # scudo
-                scudow = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%iw.png" % dati[7], True)
-                scudow = pygame.transform.smoothscale(scudow, (GlobalVar.gpx, GlobalVar.gpy))
-                scudoa = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%ia.png" % dati[7], True)
-                scudoa = pygame.transform.smoothscale(scudoa, (GlobalVar.gpx, GlobalVar.gpy))
-                scudos = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%is.png" % dati[7], True)
-                scudos = pygame.transform.smoothscale(scudos, (GlobalVar.gpx, GlobalVar.gpy))
-                scudod = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%id.png" % dati[7], True)
-                scudod = pygame.transform.smoothscale(scudod, (GlobalVar.gpx, GlobalVar.gpy))
-                scudoDifesa = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%iDifesa.png" % dati[7], True)
-                scudoDifesa = pygame.transform.smoothscale(scudoDifesa, (GlobalVar.gpx, GlobalVar.gpy))
+                scudow = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%iw.png" % dati[7], GlobalVar.gpx, GlobalVar.gpy, True)
+                scudoa = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%ia.png" % dati[7], GlobalVar.gpx, GlobalVar.gpy, True)
+                scudos = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%is.png" % dati[7], GlobalVar.gpx, GlobalVar.gpy, True)
+                scudod = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%id.png" % dati[7], GlobalVar.gpx, GlobalVar.gpy, True)
+                scudoDifesa = GlobalVar.loadImage("Immagini/EquipSara/Scudi/Scudo%iDifesa.png" % dati[7], GlobalVar.gpx, GlobalVar.gpy, True)
                 # guanti
-                guantiw = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iw.png" % dati[129], True)
-                guantiw = pygame.transform.smoothscale(guantiw, (GlobalVar.gpx, GlobalVar.gpy))
-                guantiwMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iwMov1.png" % dati[129], True)
-                guantiwMov1 = pygame.transform.smoothscale(guantiwMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                guantiwMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iwMov2.png" % dati[129], True)
-                guantiwMov2 = pygame.transform.smoothscale(guantiwMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                guantia = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%ia.png" % dati[129], True)
-                guantia = pygame.transform.smoothscale(guantia, (GlobalVar.gpx, GlobalVar.gpy))
-                guantiaMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iaMov1.png" % dati[129], True)
-                guantiaMov1 = pygame.transform.smoothscale(guantiaMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                guantiaMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iaMov2.png" % dati[129], True)
-                guantiaMov2 = pygame.transform.smoothscale(guantiaMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                guantis = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%is.png" % dati[129], True)
-                guantis = pygame.transform.smoothscale(guantis, (GlobalVar.gpx, GlobalVar.gpy))
-                guantisMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%isMov1.png" % dati[129], True)
-                guantisMov1 = pygame.transform.smoothscale(guantisMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                guantisMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%isMov2.png" % dati[129], True)
-                guantisMov2 = pygame.transform.smoothscale(guantisMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                guantid = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%id.png" % dati[129], True)
-                guantid = pygame.transform.smoothscale(guantid, (GlobalVar.gpx, GlobalVar.gpy))
-                guantidMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%idMov1.png" % dati[129], True)
-                guantidMov1 = pygame.transform.smoothscale(guantidMov1, (GlobalVar.gpx, GlobalVar.gpy))
-                guantidMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%idMov2.png" % dati[129], True)
-                guantidMov2 = pygame.transform.smoothscale(guantidMov2, (GlobalVar.gpx, GlobalVar.gpy))
-                guantisAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%isAttacco.png" % dati[129], True)
-                guantisAttacco = pygame.transform.smoothscale(guantisAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-                guantiaAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iaAttacco.png" % dati[129], True)
-                guantiaAttacco = pygame.transform.smoothscale(guantiaAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-                guantidAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%idAttacco.png" % dati[129], True)
-                guantidAttacco = pygame.transform.smoothscale(guantidAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-                guantiwAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iwAttacco.png" % dati[129], True)
-                guantiwAttacco = pygame.transform.smoothscale(guantiwAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-                guantiDifesa = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iDifesa.png" % dati[129], True)
-                guantiDifesa = pygame.transform.smoothscale(guantiDifesa, (GlobalVar.gpx, GlobalVar.gpy))
+                guantiw = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iw.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantiwMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iwMov1.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantiwMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iwMov2.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantia = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%ia.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantiaMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iaMov1.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantiaMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iaMov2.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantis = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%is.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantisMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%isMov1.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantisMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%isMov2.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantid = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%id.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantidMov1 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%idMov1.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantidMov2 = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%idMov2.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantisAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%isAttacco.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantiaAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iaAttacco.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantidAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%idAttacco.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantiwAttacco = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iwAttacco.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
+                guantiDifesa = GlobalVar.loadImage("Immagini/EquipSara/Guanti/Guanti%iDifesa.png" % dati[129], GlobalVar.gpx, GlobalVar.gpy, True)
                 # collana
-                collanaw = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%iw.png" % dati[130], True)
-                collanaw = pygame.transform.smoothscale(collanaw, (GlobalVar.gpx, GlobalVar.gpy))
-                collanaa = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%ia.png" % dati[130], True)
-                collanaa = pygame.transform.smoothscale(collanaa, (GlobalVar.gpx, GlobalVar.gpy))
-                collanas = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%is.png" % dati[130], True)
-                collanas = pygame.transform.smoothscale(collanas, (GlobalVar.gpx, GlobalVar.gpy))
-                collanad = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%id.png" % dati[130], True)
-                collanad = pygame.transform.smoothscale(collanad, (GlobalVar.gpx, GlobalVar.gpy))
+                collanaw = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%iw.png" % dati[130], GlobalVar.gpx, GlobalVar.gpy, True)
+                collanaa = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%ia.png" % dati[130], GlobalVar.gpx, GlobalVar.gpy, True)
+                collanas = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%is.png" % dati[130], GlobalVar.gpx, GlobalVar.gpy, True)
+                collanad = GlobalVar.loadImage("Immagini/EquipSara/Collane/Collana%id.png" % dati[130], GlobalVar.gpx, GlobalVar.gpy, True)
                 # armatura robot
-                armrobw = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%iw.png" % dati[9], True)
-                armrobw = pygame.transform.smoothscale(armrobw, (GlobalVar.gpx, GlobalVar.gpy))
-                armroba = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%ia.png" % dati[9], True)
-                armroba = pygame.transform.smoothscale(armroba, (GlobalVar.gpx, GlobalVar.gpy))
-                armrobs = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%is.png" % dati[9], True)
-                armrobs = pygame.transform.smoothscale(armrobs, (GlobalVar.gpx, GlobalVar.gpy))
-                armrobd = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%id.png" % dati[9], True)
-                armrobd = pygame.transform.smoothscale(armrobd, (GlobalVar.gpx, GlobalVar.gpy))
+                armrobw = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%iw.png" % dati[9], GlobalVar.gpx, GlobalVar.gpy, True)
+                armroba = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%ia.png" % dati[9], GlobalVar.gpx, GlobalVar.gpy, True)
+                armrobs = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%is.png" % dati[9], GlobalVar.gpx, GlobalVar.gpy, True)
+                armrobd = GlobalVar.loadImage("Immagini/EquipRobo/Batteria%id.png" % dati[9], GlobalVar.gpx, GlobalVar.gpy, True)
             if npers == 3:
                 pers = GlobalVar.persw
                 arma = armaw
@@ -1525,6 +1457,8 @@ def gameloop():
                     spingiColco = True
                 if not (vx == x and vy == y):
                     sposta = True
+                else:
+                    GlobalVar.canaleSoundPassiRallo.stop()
             # gestione attacchi
             attaccoADistanza = False
             # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
@@ -1723,7 +1657,8 @@ def gameloop():
             if visualizzaMenuMercante:
                 dati = menuMercante(dati)
                 visualizzaMenuMercante = False
-                uscitoDaMenu = 1
+                uscitoDaMenu = 2
+                carim = True
             # apertura cofanetti
             if apriCofanetto[0]:
                 i = 0
@@ -1941,7 +1876,7 @@ def gameloop():
                             nemico.settaObbiettivo(x, y, rx, ry, dati, vettoreDenaro, vettoreEsche, listaPersonaggi, listaNemici, porte, caseviste)
                             nemico.vx = nemico.x
                             nemico.vy = nemico.y
-                            nemico, direzioneMostro, dati, vettoreEsche = movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetDatiNemici, listaPersonaggi, caseviste)
+                            nemico, direzioneMostro, dati, vettoreEsche = movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetDatiNemici, listaPersonaggi, caseviste, dati[0])
                             if direzioneMostro == 1:
                                 nemico.girati("d")
                             elif direzioneMostro == 2:
@@ -2012,7 +1947,7 @@ def gameloop():
                     pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
                 caricaTutto = False
-            if azioneRobEseguita or nemiciInMovimento or sposta:
+            if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0:
                 primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle)
             if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta):
                 refreshSchermo = False
@@ -2105,7 +2040,7 @@ def gameloop():
         if inizio:
             if not caricaSalvataggio:
                 sprites = pygame.sprite.Group(Fade(0))
-                schermoFadeToBlack = GlobalVar.schermo.copy()
+                schermoFadeToBlack = GlobalVar.schermo.copy().convert()
                 oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
             GlobalVar.canaleSoundPuntatore.stop()
             GlobalVar.canaleSoundPassiRallo.stop()

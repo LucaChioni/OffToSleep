@@ -33,8 +33,8 @@ if eseguibile:
 
 # i suoni vengono velocizzati: metti 0,8 in velocità di audacity per risolvere
 pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
-pygame.display.init()
 pygame.font.init()
+pygame.display.init()
 
 gsx = 0
 gsy = 0
@@ -77,6 +77,50 @@ gpy = gsy // 18
 schermoIntero = True
 
 linguaImpostata = "inglese"
+
+# nome-icona
+titolo = "The normal world"
+pygame.display.set_caption(titolo)
+icona = pygame.image.load("Immagini/Icona.png")
+pygame.display.set_icon(icona)
+listaTastiPremuti = []
+
+# clock
+clockAttacco = pygame.time.Clock()
+clockAnimazioni = pygame.time.Clock()
+clockVideo = pygame.time.Clock()
+clockMenu = pygame.time.Clock()
+clockFadeToBlack = pygame.time.Clock()
+fpsAnimazioni = 30
+fpsInquadra = 20
+fpsVideo = 12
+fpsMenu = 30
+fpsFadeToBlack = 30
+
+# colori
+nero = (0, 0, 0)
+grigioscuPiuScu = (40, 40, 40)
+grigioscu = (50, 50, 50)
+grigioscurino = (70, 70, 70)
+grigio = (80, 80, 80)
+grigiochi = (230, 230, 230)
+bianco = (255, 255, 255)
+rosso = (255, 130, 0)
+verde = (130, 255, 0)
+verdeScuro = (80, 90, 80)
+verdeScuroPiuScuro = (70, 80, 70)
+blu = (0, 0, 255)
+bluScuro = (80, 80, 90)
+bluScuroPiuScuro = (70, 70, 80)
+rossoScuro = (100, 80, 80)
+rossoScuroPiuScuro = (90, 70, 70)
+
+# vettore che conterrà tutti i dati dei salvataggi
+vetDatiSalvataggi = []
+# vettore che conterrà i dati di salvataggio del file gameover
+vetDatiSalvataggioGameOver = []
+numSalvataggioCaricato = 0
+
 # nascondo subito il cursore
 pygame.mouse.set_visible(False)
 mouseVisibile = False
@@ -84,11 +128,21 @@ mouseVisibile = False
 def quit():
     sys.exit()
 
-def loadImage(path, aumentaRisoluzione):
-    img = pygame.image.load(gamePath + path).convert_alpha()
+def loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
+    img = pygame.image.load(gamePath + path)
     if aumentaRisoluzione:
         sizeX, sizeY = img.get_rect().size
-        img = pygame.transform.scale(img, (sizeX * 4, sizeY * 4))
+        moltiplicatore = 1
+        while sizeX * moltiplicatore < xScale and sizeY * moltiplicatore < yScale:
+            moltiplicatore += 1
+        img = pygame.transform.scale(img, (sizeX * moltiplicatore, sizeY * moltiplicatore))
+    if xScale != 0 and yScale != 0:
+        img = pygame.transform.smoothscale(img, (int(xScale), int(yScale)))
+    if canale_alpha:
+        img = img.convert_alpha()
+    else:
+        img = img.convert()
+    pygame.event.pump()
     return img
 
 def loadSound(path):
@@ -96,7 +150,7 @@ def loadSound(path):
         sound = pygame.mixer.Sound(gamePath + path)
     except Exception:
         print ("Impossibile caricare " + path)
-        sound = False
+        sound = pygame.mixer.Sound(gamePath + "Audio/RumoriAmbiente/Acquisto.wav")
     return sound
 
 def loadFile(path, mode):
@@ -169,7 +223,6 @@ global faretra1Menu
 global faretra2Menu
 global faretra3Menu
 global frecciaMenu
-global sfondostax3
 global sfondoRallo
 global sfondoColco
 global sfondoMostro
@@ -207,11 +260,13 @@ global sfocontcof
 global s1
 global s2
 global s3
-global campoattaccabile1
-global campoattaccabile2
+global campoattaccabileRallo1
+global campoattaccabileRallo2
+global campoattaccabileRallo3
+global campoattaccabileRallo4
+global campoattaccabileRallo5
 global campoattaccabileRobo
 global caselleattaccabiliRobo
-global campoattaccabilemostro
 global caselleattaccabilimostro
 global caselleattaccabili
 global saliliv
@@ -252,15 +307,14 @@ global imgFrecciaEletttricaLanciata
 global imgFrecciaEletttricaLanciataP
 global imgFrecciaEletttricaLanciataPP
 global sfondoDialoghi
-global puntatoreorigi
-global puntatoreorigivecchio
-global avvelenatoo
-global surriscaldatoo
-global attaccopiuo
-global difesapiuo
-global velocitapiuo
-global efficienzapiuo
-global roboo
+global avvelenatoMenu
+global surriscaldatoMenu
+global attaccopiuMenu
+global difesapiuMenu
+global velocitapiuMenu
+global efficienzapiuMenu
+global roboo1
+global roboo2
 global perso
 global persob
 global puntatoreImpostazioniDestra
@@ -312,22 +366,38 @@ global vitapersonaggio
 global vitarobo
 global sfondoOggettoMenu
 global sconosciutoEquipMenu
-global sconosciutoOggettoMenu
+global sconosciutoOggettoMenu1
+global sconosciutoOggettoMenu2
+global sconosciutoOggettoMenu3
 global sconosciutoOggettoIcoMenu
-global imgMappa1
-global imgMappa2
-global imgMappa3
-global imgMappa4
-global imgMappa5
-global imgMappa6
-global imgMappa7
-global imgMappa8
-global imgMappa9
-global imgMappa10
-global imgMappa11
-global imgMappa12
-global imgMappa13
-global imgMappa14
+global imgMappa1A
+global imgMappa1B
+global imgMappa2A
+global imgMappa2B
+global imgMappa3A
+global imgMappa3B
+global imgMappa4A
+global imgMappa4B
+global imgMappa5A
+global imgMappa5B
+global imgMappa6A
+global imgMappa6B
+global imgMappa7A
+global imgMappa7B
+global imgMappa8A
+global imgMappa8B
+global imgMappa9A
+global imgMappa9B
+global imgMappa10A
+global imgMappa10B
+global imgMappa11A
+global imgMappa11B
+global imgMappa12A
+global imgMappa12B
+global imgMappa13A
+global imgMappa13B
+global imgMappa14A
+global imgMappa14B
 global imgOmbreggiaturaContorniMappaMenu
 global dictionaryImgNemici
 global imgDanneggiamentoCausaRallo
@@ -399,7 +469,6 @@ def loadImgs():
     global faretra2Menu
     global faretra3Menu
     global frecciaMenu
-    global sfondostax3
     global sfondoRallo
     global sfondoColco
     global sfondoMostro
@@ -437,11 +506,13 @@ def loadImgs():
     global s1
     global s2
     global s3
-    global campoattaccabile1
-    global campoattaccabile2
+    global campoattaccabileRallo1
+    global campoattaccabileRallo2
+    global campoattaccabileRallo3
+    global campoattaccabileRallo4
+    global campoattaccabileRallo5
     global campoattaccabileRobo
     global caselleattaccabiliRobo
-    global campoattaccabilemostro
     global caselleattaccabilimostro
     global caselleattaccabili
     global saliliv
@@ -482,15 +553,14 @@ def loadImgs():
     global imgFrecciaEletttricaLanciataP
     global imgFrecciaEletttricaLanciataPP
     global sfondoDialoghi
-    global puntatoreorigi
-    global puntatoreorigivecchio
-    global avvelenatoo
-    global surriscaldatoo
-    global attaccopiuo
-    global difesapiuo
-    global velocitapiuo
-    global efficienzapiuo
-    global roboo
+    global avvelenatoMenu
+    global surriscaldatoMenu
+    global attaccopiuMenu
+    global difesapiuMenu
+    global velocitapiuMenu
+    global efficienzapiuMenu
+    global roboo1
+    global roboo2
     global perso
     global persob
     global puntatoreImpostazioniDestra
@@ -542,288 +612,198 @@ def loadImgs():
     global vitarobo
     global sfondoOggettoMenu
     global sconosciutoEquipMenu
-    global sconosciutoOggettoMenu
+    global sconosciutoOggettoMenu1
+    global sconosciutoOggettoMenu2
+    global sconosciutoOggettoMenu3
     global sconosciutoOggettoIcoMenu
-    global imgMappa1
-    global imgMappa2
-    global imgMappa3
-    global imgMappa4
-    global imgMappa5
-    global imgMappa6
-    global imgMappa7
-    global imgMappa8
-    global imgMappa9
-    global imgMappa10
-    global imgMappa11
-    global imgMappa12
-    global imgMappa13
-    global imgMappa14
+    global imgMappa1A
+    global imgMappa1B
+    global imgMappa2A
+    global imgMappa2B
+    global imgMappa3A
+    global imgMappa3B
+    global imgMappa4A
+    global imgMappa4B
+    global imgMappa5A
+    global imgMappa5B
+    global imgMappa6A
+    global imgMappa6B
+    global imgMappa7A
+    global imgMappa7B
+    global imgMappa8A
+    global imgMappa8B
+    global imgMappa9A
+    global imgMappa9B
+    global imgMappa10A
+    global imgMappa10B
+    global imgMappa11A
+    global imgMappa11B
+    global imgMappa12A
+    global imgMappa12B
+    global imgMappa13A
+    global imgMappa13B
+    global imgMappa14A
+    global imgMappa14B
     global imgOmbreggiaturaContorniMappaMenu
     global dictionaryImgNemici
     global imgDanneggiamentoCausaRallo
     global imgDanneggiamentoCausaColco
 
     # puntatore
-    puntatoreorigi = loadImage("Immagini/Puntatori/Puntatore.png", True)
-    puntatore = pygame.transform.smoothscale(puntatoreorigi, (gpx // 2, gpy // 2))
-    puntatoreorigivecchio = loadImage("Immagini/Puntatori/Puntatorevecchio.png", True)
-    puntatorevecchio = pygame.transform.smoothscale(puntatoreorigivecchio, (gpx // 2, gpy // 2))
-    puntatIn = loadImage('Immagini/Puntatori/InquadraCVin.png', True)
-    puntatIn = pygame.transform.smoothscale(puntatIn, (gpx, gpy))
-    puntatOut = loadImage('Immagini/Puntatori/InquadraCVout.png', True)
-    puntatOut = pygame.transform.smoothscale(puntatOut, (gpx, gpy))
-    puntatSfo = loadImage('Immagini/Oggetti/sfondoOggettoLanciato.png', True)
-    puntatSfo = pygame.transform.smoothscale(puntatSfo, (gpx, gpy))
-    puntatDif = loadImage('Immagini/Oggetti/Difesa.png', True)
-    puntatDif = pygame.transform.smoothscale(puntatDif, (gpx, gpy))
-    puntatAtt = loadImage('Immagini/Oggetti/Attacco.png', True)
-    puntatAtt = pygame.transform.smoothscale(puntatAtt, (gpx, gpy))
-    puntatArc = loadImage('Immagini/Oggetti/AttaccoDistanza.png', True)
-    puntatArc = pygame.transform.smoothscale(puntatArc, (gpx, gpy))
-    puntatPor = loadImage('Immagini/Oggetti/ApriChiudiPorta.png', True)
-    puntatPor = pygame.transform.smoothscale(puntatPor, (gpx, gpy))
-    puntatCof = loadImage('Immagini/Oggetti/ApriCofanetto.png', True)
-    puntatCof = pygame.transform.smoothscale(puntatCof, (gpx, gpy))
-    puntatAnalisi = loadImage('Immagini/Oggetti/AnalizzaColco.png', True)
-    puntatAnalisi = pygame.transform.smoothscale(puntatAnalisi, (gpx, gpy))
-    puntatBom = loadImage('Immagini/Oggetti/Oggetto6Ico.png', True)
-    puntatBom = pygame.transform.smoothscale(puntatBom, (gpx, gpy))
-    puntatBoV = loadImage('Immagini/Oggetti/Oggetto7Ico.png', True)
-    puntatBoV = pygame.transform.smoothscale(puntatBoV, (gpx, gpy))
-    puntatEsc = loadImage('Immagini/Oggetti/Oggetto8Ico.png', True)
-    puntatEsc = pygame.transform.smoothscale(puntatEsc, (gpx, gpy))
-    puntatBoA = loadImage('Immagini/Oggetti/Oggetto9Ico.png', True)
-    puntatBoA = pygame.transform.smoothscale(puntatBoA, (gpx, gpy))
-    puntatBoP = loadImage('Immagini/Oggetti/Oggetto10Ico.png', True)
-    puntatBoP = pygame.transform.smoothscale(puntatBoP, (gpx, gpy))
-    scorriSu = loadImage("Immagini/Puntatori/ScorriOggettiSu.png", True)
-    scorriSu = pygame.transform.smoothscale(scorriSu, (gpx, gpy))
-    scorriGiu = loadImage("Immagini/Puntatori/ScorriOggettiGiu.png", True)
-    scorriGiu = pygame.transform.smoothscale(scorriGiu, (gpx, gpy))
-    puntatDialoghi = loadImage('Immagini/Oggetti/IcoDialogo.png', True)
-    puntatDialoghi = pygame.transform.smoothscale(puntatDialoghi, (gpx, gpy))
-    puntatoreInquadraNemici = loadImage("Immagini/Puntatori/InquadraNemicoSelezionato.png", True)
-    puntatoreInquadraNemici = pygame.transform.smoothscale(puntatoreInquadraNemici, (gpx, gpy))
-    puntatoreImpostazioniDestra = loadImage("Immagini/Puntatori/ScorriImpostazioniDestra.png", True)
-    puntatoreImpostazioniDestra = pygame.transform.smoothscale(puntatoreImpostazioniDestra, (gpx, gpy))
-    puntatoreImpostazioniSinistra = loadImage("Immagini/Puntatori/ScorriImpostazioniSinistra.png", True)
-    puntatoreImpostazioniSinistra = pygame.transform.smoothscale(puntatoreImpostazioniSinistra, (gpx, gpy))
-    puntatoreImpostazioniDestraBloccato = loadImage("Immagini/Puntatori/ScorriImpostazioniDestraBloccato.png", True)
-    puntatoreImpostazioniDestraBloccato = pygame.transform.smoothscale(puntatoreImpostazioniDestraBloccato, (gpx, gpy))
-    puntatoreImpostazioniSinistraBloccato = loadImage("Immagini/Puntatori/ScorriImpostazioniSinistraBloccato.png", True)
-    puntatoreImpostazioniSinistraBloccato = pygame.transform.smoothscale(puntatoreImpostazioniSinistraBloccato, (gpx, gpy))
+    puntatore = loadImage("Immagini/Puntatori/Puntatore.png", gpx // 2, gpy // 2, True)
+    puntatorevecchio = loadImage("Immagini/Puntatori/Puntatorevecchio.png", gpx // 2, gpy // 2, True)
+    puntatIn = loadImage('Immagini/Puntatori/InquadraCVin.png', gpx, gpy, True)
+    puntatOut = loadImage('Immagini/Puntatori/InquadraCVout.png', gpx, gpy, True)
+    puntatSfo = loadImage('Immagini/Oggetti/sfondoOggettoLanciato.png', gpx, gpy, True)
+    puntatDif = loadImage('Immagini/Oggetti/Difesa.png', gpx, gpy, True)
+    puntatAtt = loadImage('Immagini/Oggetti/Attacco.png', gpx, gpy, True)
+    puntatArc = loadImage('Immagini/Oggetti/AttaccoDistanza.png', gpx, gpy, True)
+    puntatPor = loadImage('Immagini/Oggetti/ApriChiudiPorta.png', gpx, gpy, True)
+    puntatCof = loadImage('Immagini/Oggetti/ApriCofanetto.png', gpx, gpy, True)
+    puntatAnalisi = loadImage('Immagini/Oggetti/AnalizzaColco.png', gpx, gpy, True)
+    puntatBom = loadImage('Immagini/Oggetti/Oggetto6Ico.png', gpx, gpy, True)
+    puntatBoV = loadImage('Immagini/Oggetti/Oggetto7Ico.png', gpx, gpy, True)
+    puntatEsc = loadImage('Immagini/Oggetti/Oggetto8Ico.png', gpx, gpy, True)
+    puntatBoA = loadImage('Immagini/Oggetti/Oggetto9Ico.png', gpx, gpy, True)
+    puntatBoP = loadImage('Immagini/Oggetti/Oggetto10Ico.png', gpx, gpy, True)
+    scorriSu = loadImage("Immagini/Puntatori/ScorriOggettiSu.png", gpx, gpy, True)
+    scorriGiu = loadImage("Immagini/Puntatori/ScorriOggettiGiu.png", gpx, gpy, True)
+    puntatDialoghi = loadImage('Immagini/Oggetti/IcoDialogo.png', gpx, gpy, True)
+    puntatoreInquadraNemici = loadImage("Immagini/Puntatori/InquadraNemicoSelezionato.png", gpx, gpy, True)
+    puntatoreImpostazioniDestra = loadImage("Immagini/Puntatori/ScorriImpostazioniDestra.png", gpx, gpy, True)
+    puntatoreImpostazioniSinistra = loadImage("Immagini/Puntatori/ScorriImpostazioniSinistra.png", gpx, gpy, True)
+    puntatoreImpostazioniDestraBloccato = loadImage("Immagini/Puntatori/ScorriImpostazioniDestraBloccato.png", gpx, gpy, True)
+    puntatoreImpostazioniSinistraBloccato = loadImage("Immagini/Puntatori/ScorriImpostazioniSinistraBloccato.png", gpx, gpy, True)
 
     # immagini personaggio
-    persw = loadImage('Immagini/Personaggi/Sara/Personaggio4.png', True)
-    persw = pygame.transform.smoothscale(persw, (gpx, gpy))
-    perswb = loadImage('Immagini/Personaggi/Sara/Personaggio4b.png', True)
-    perswb = pygame.transform.smoothscale(perswb, (gpx, gpy))
-    persa = loadImage('Immagini/Personaggi/Sara/Personaggio3.png', True)
-    persa = pygame.transform.smoothscale(persa, (gpx, gpy))
-    persab = loadImage('Immagini/Personaggi/Sara/Personaggio3b.png', True)
-    persab = pygame.transform.smoothscale(persab, (gpx, gpy))
-    perso = loadImage('Immagini/Personaggi/Sara/Personaggio1.png', True)
-    perss = pygame.transform.smoothscale(perso, (gpx, gpy))
-    persob = loadImage('Immagini/Personaggi/Sara/Personaggio1b.png', True)
-    perssb = pygame.transform.smoothscale(persob, (gpx, gpy))
-    persd = loadImage('Immagini/Personaggi/Sara/Personaggio2.png', True)
-    persd = pygame.transform.smoothscale(persd, (gpx, gpy))
-    persdb = loadImage('Immagini/Personaggi/Sara/Personaggio2b.png', True)
-    persdb = pygame.transform.smoothscale(persdb, (gpx, gpy))
-    perssm = loadImage('Immagini/Personaggi/Sara/Personaggio1mov.png', True)
-    perssm = pygame.transform.smoothscale(perssm, (gpx, gpy))
-    perssmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio1movb1.png', True)
-    perssmb1 = pygame.transform.smoothscale(perssmb1, (gpx, gpy))
-    perssmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio1movb2.png', True)
-    perssmb2 = pygame.transform.smoothscale(perssmb2, (gpx, gpy))
-    persdm = loadImage('Immagini/Personaggi/Sara/Personaggio2mov.png', True)
-    persdm = pygame.transform.smoothscale(persdm, (gpx, gpy))
-    persdmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio2movb1.png', True)
-    persdmb1 = pygame.transform.smoothscale(persdmb1, (gpx, gpy))
-    persdmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio2movb2.png', True)
-    persdmb2 = pygame.transform.smoothscale(persdmb2, (gpx, gpy))
-    persam = loadImage('Immagini/Personaggi/Sara/Personaggio3mov.png', True)
-    persam = pygame.transform.smoothscale(persam, (gpx, gpy))
-    persamb1 = loadImage('Immagini/Personaggi/Sara/Personaggio3movb1.png', True)
-    persamb1 = pygame.transform.smoothscale(persamb1, (gpx, gpy))
-    persamb2 = loadImage('Immagini/Personaggi/Sara/Personaggio3movb2.png', True)
-    persamb2 = pygame.transform.smoothscale(persamb2, (gpx, gpy))
-    perswm = loadImage('Immagini/Personaggi/Sara/Personaggio4mov.png', True)
-    perswm = pygame.transform.smoothscale(perswm, (gpx, gpy))
-    perswmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio4movb1.png', True)
-    perswmb1 = pygame.transform.smoothscale(perswmb1, (gpx, gpy))
-    perswmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio4movb2.png', True)
-    perswmb2 = pygame.transform.smoothscale(perswmb2, (gpx, gpy))
-    perswmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio4movbAttacco.png', True)
-    perswmbAttacco = pygame.transform.smoothscale(perswmbAttacco, (gpx, gpy))
-    persambAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio3movbAttacco.png', True)
-    persambAttacco = pygame.transform.smoothscale(persambAttacco, (gpx, gpy))
-    perssmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio1movbAttacco.png', True)
-    perssmbAttacco = pygame.transform.smoothscale(perssmbAttacco, (gpx, gpy))
-    persdmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio2movbAttacco.png', True)
-    persdmbAttacco = pygame.transform.smoothscale(persdmbAttacco, (gpx, gpy))
-    persmbDifesa = loadImage('Immagini/Personaggi/Sara/PersonaggiomovbDifesa.png', True)
-    persmbDifesa = pygame.transform.smoothscale(persmbDifesa, (gpx, gpy))
-    persAvvele = loadImage('Immagini/Personaggi/Sara/PersonaggioAvvelenato.png', True)
-    persAvvele = pygame.transform.smoothscale(persAvvele, (gpx, gpy))
+    persw = loadImage('Immagini/Personaggi/Sara/Personaggio4.png', gpx, gpy, True)
+    perswb = loadImage('Immagini/Personaggi/Sara/Personaggio4b.png', gpx, gpy, True)
+    persa = loadImage('Immagini/Personaggi/Sara/Personaggio3.png', gpx, gpy, True)
+    persab = loadImage('Immagini/Personaggi/Sara/Personaggio3b.png', gpx, gpy, True)
+    perso = loadImage('Immagini/Personaggi/Sara/Personaggio1.png', gpx * 5, gpy * 5, True)
+    persob = loadImage('Immagini/Personaggi/Sara/Personaggio1b.png', gpx * 5, gpy * 5, True)
+    perss = loadImage('Immagini/Personaggi/Sara/Personaggio1.png', gpx, gpy, True)
+    perssb = loadImage('Immagini/Personaggi/Sara/Personaggio1b.png', gpx, gpy, True)
+    persd = loadImage('Immagini/Personaggi/Sara/Personaggio2.png', gpx, gpy, True)
+    persdb = loadImage('Immagini/Personaggi/Sara/Personaggio2b.png', gpx, gpy, True)
+    perssm = loadImage('Immagini/Personaggi/Sara/Personaggio1mov.png', gpx, gpy, True)
+    perssmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio1movb1.png', gpx, gpy, True)
+    perssmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio1movb2.png', gpx, gpy, True)
+    persdm = loadImage('Immagini/Personaggi/Sara/Personaggio2mov.png', gpx, gpy, True)
+    persdmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio2movb1.png', gpx, gpy, True)
+    persdmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio2movb2.png', gpx, gpy, True)
+    persam = loadImage('Immagini/Personaggi/Sara/Personaggio3mov.png', gpx, gpy, True)
+    persamb1 = loadImage('Immagini/Personaggi/Sara/Personaggio3movb1.png', gpx, gpy, True)
+    persamb2 = loadImage('Immagini/Personaggi/Sara/Personaggio3movb2.png', gpx, gpy, True)
+    perswm = loadImage('Immagini/Personaggi/Sara/Personaggio4mov.png', gpx, gpy, True)
+    perswmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio4movb1.png', gpx, gpy, True)
+    perswmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio4movb2.png', gpx, gpy, True)
+    perswmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio4movbAttacco.png', gpx, gpy, True)
+    persambAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio3movbAttacco.png', gpx, gpy, True)
+    perssmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio1movbAttacco.png', gpx, gpy, True)
+    persdmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio2movbAttacco.png', gpx, gpy, True)
+    persmbDifesa = loadImage('Immagini/Personaggi/Sara/PersonaggiomovbDifesa.png', gpx, gpy, True)
+    persAvvele = loadImage('Immagini/Personaggi/Sara/PersonaggioAvvelenato.png', gpx, gpy, True)
 
     # immagini robot
-    robow = loadImage('Immagini/Personaggi/Colco/Robot4.png', True)
-    robow = pygame.transform.smoothscale(robow, (gpx, gpy))
-    roboa = loadImage('Immagini/Personaggi/Colco/Robot3.png', True)
-    roboa = pygame.transform.smoothscale(roboa, (gpx, gpy))
-    roboo = loadImage('Immagini/Personaggi/Colco/Robot1.png', True)
-    robos = pygame.transform.smoothscale(roboo, (gpx, gpy))
-    robod = loadImage('Immagini/Personaggi/Colco/Robot2.png', True)
-    robod = pygame.transform.smoothscale(robod, (gpx, gpy))
-    robomo = loadImage('Immagini/Personaggi/Colco/Robot0.png', True)
-    robomo = pygame.transform.smoothscale(robomo, (gpx, gpy))
-    robodp = loadImage('Immagini/Personaggi/Colco/Robot2p.png', True)
-    robodp = pygame.transform.smoothscale(robodp, (gpx, gpy))
-    roboap = loadImage('Immagini/Personaggi/Colco/Robot3p.png', True)
-    roboap = pygame.transform.smoothscale(roboap, (gpx, gpy))
-    armrobmo = loadImage('Immagini/EquipRobo/Batteria00.png', True)
-    armrobmo = pygame.transform.smoothscale(armrobmo, (gpx, gpy))
-    roboSurrisc = loadImage('Immagini/Personaggi/Colco/RobotSurriscaldato.png', True)
-    roboSurrisc = pygame.transform.smoothscale(roboSurrisc, (gpx, gpy))
+    robow = loadImage('Immagini/Personaggi/Colco/Robot4.png', gpx, gpy, True)
+    roboa = loadImage('Immagini/Personaggi/Colco/Robot3.png', gpx, gpy, True)
+    roboo1 = loadImage('Immagini/Personaggi/Colco/Robot1.png', gpx * 5, gpy * 5, True)
+    roboo2 = loadImage('Immagini/Personaggi/Colco/Robot1.png', gpx * 3, gpy * 3, True)
+    robos = loadImage('Immagini/Personaggi/Colco/Robot1.png', gpx, gpy, True)
+    robod = loadImage('Immagini/Personaggi/Colco/Robot2.png', gpx, gpy, True)
+    robomo = loadImage('Immagini/Personaggi/Colco/Robot0.png', gpx, gpy, True)
+    robodp = loadImage('Immagini/Personaggi/Colco/Robot2p.png', gpx, gpy, True)
+    roboap = loadImage('Immagini/Personaggi/Colco/Robot3p.png', gpx, gpy, True)
+    armrobmo = loadImage('Immagini/EquipRobo/Batteria00.png', gpx, gpy, True)
+    roboSurrisc = loadImage('Immagini/Personaggi/Colco/RobotSurriscaldato.png', gpx, gpy, True)
 
     # img danneggiamento personaggio e Colco
-    imgDanneggiamentoCausaRallo = loadImage("Immagini/Nemici/DannoRallo.png", True)
-    imgDanneggiamentoCausaRallo = pygame.transform.smoothscale(imgDanneggiamentoCausaRallo, (gpx, gpy))
-    imgDanneggiamentoCausaColco = loadImage("Immagini/Nemici/DannoColco.png", True)
-    imgDanneggiamentoCausaColco = pygame.transform.smoothscale(imgDanneggiamentoCausaColco, (gpx, gpy))
+    imgDanneggiamentoCausaRallo = loadImage("Immagini/Nemici/DannoRallo.png", gpx, gpy, True)
+    imgDanneggiamentoCausaColco = loadImage("Immagini/Nemici/DannoColco.png", gpx, gpy, True)
 
     # img menu mercante
-    mercanteMenu = loadImage('Immagini/Personaggi/Mercante/MercanteDialogo.png', True)
-    mercanteMenu = pygame.transform.smoothscale(mercanteMenu, (gpx * 12, gpy * 9))
-    scorriSuGiu = loadImage('Immagini/Puntatori/ScorriSuGiu.png', True)
-    scorriSuGiu = pygame.transform.smoothscale(scorriSuGiu, (gpx, gpy))
-    scorriSuGiuBloccato = loadImage('Immagini/Puntatori/ScorriSuGiuBloccato.png', True)
-    scorriSuGiuBloccato = pygame.transform.smoothscale(scorriSuGiuBloccato, (gpx, gpy))
-    scorriSuGiuBloccatoGiu = loadImage('Immagini/Puntatori/ScorriSuGiuBloccatoGiu.png', True)
-    scorriSuGiuBloccatoGiu = pygame.transform.smoothscale(scorriSuGiuBloccatoGiu, (gpx, gpy))
-    scorriSuGiuBloccatoSu = loadImage('Immagini/Puntatori/ScorriSuGiuBloccatoSu.png', True)
-    scorriSuGiuBloccatoSu = pygame.transform.smoothscale(scorriSuGiuBloccatoSu, (gpx, gpy))
-    sfondoDialogoMercante = loadImage('Immagini/DecorazioniMenu/SfondoDialogoMercante.png', True)
-    sfondoDialogoMercante = pygame.transform.smoothscale(sfondoDialogoMercante, (int(gpx * 9.5), int(gpy * 4.5)))
-    faretra1Menu = loadImage('Immagini/Oggetti/Faretra1Menu.png', False)
-    faretra1Menu = pygame.transform.smoothscale(faretra1Menu, (gpx * 8, gpy * 8))
-    faretra2Menu = loadImage('Immagini/Oggetti/Faretra2Menu.png', False)
-    faretra2Menu = pygame.transform.smoothscale(faretra2Menu, (gpx * 8, gpy * 8))
-    faretra3Menu = loadImage('Immagini/Oggetti/Faretra3Menu.png', False)
-    faretra3Menu = pygame.transform.smoothscale(faretra3Menu, (gpx * 8, gpy * 8))
-    frecciaMenu = loadImage('Immagini/Oggetti/FrecciaMenu.png', False)
-    frecciaMenu = pygame.transform.smoothscale(frecciaMenu, (gpx * 8, gpy * 8))
+    mercanteMenu = loadImage('Immagini/Personaggi/Mercante/MercanteDialogo.png', gpx * 12, gpy * 9, False)
+    scorriSuGiu = loadImage('Immagini/Puntatori/ScorriSuGiu.png', gpx, gpy, True)
+    scorriSuGiuBloccato = loadImage('Immagini/Puntatori/ScorriSuGiuBloccato.png', gpx, gpy, True)
+    scorriSuGiuBloccatoGiu = loadImage('Immagini/Puntatori/ScorriSuGiuBloccatoGiu.png', gpx, gpy, True)
+    scorriSuGiuBloccatoSu = loadImage('Immagini/Puntatori/ScorriSuGiuBloccatoSu.png', gpx, gpy, True)
+    sfondoDialogoMercante = loadImage('Immagini/DecorazioniMenu/SfondoDialogoMercante.png', gpx * 9.5, gpy * 4.5, False)
+    faretra1Menu = loadImage('Immagini/Oggetti/Faretra1Menu.png', gpx * 8, gpy * 8, False)
+    faretra2Menu = loadImage('Immagini/Oggetti/Faretra2Menu.png', gpx * 8, gpy * 8, False)
+    faretra3Menu = loadImage('Immagini/Oggetti/Faretra3Menu.png', gpx * 8, gpy * 8, False)
+    frecciaMenu = loadImage('Immagini/Oggetti/FrecciaMenu.png', gpx * 8, gpy * 8, False)
 
     # sfondi
-    sfondostax3 = loadImage('Immagini/Status/Sfondostax3.png', True)
-    sfondostax3 = pygame.transform.smoothscale(sfondostax3, (gpx * 4, gpy))
-    sfondosta = loadImage('Immagini/Status/SfondoRallo.png', True)
-    sfondoRallo = pygame.transform.smoothscale(sfondosta, (gpx * 6, gpy))
-    sfondosta = loadImage('Immagini/Status/SfondoColco.png', True)
-    sfondoColco = pygame.transform.smoothscale(sfondosta, (gpx * 4, gpy))
-    sfondosta = loadImage('Immagini/Status/SfondoNemici.png', True)
-    sfondoMostro = pygame.transform.smoothscale(sfondosta, (gpx * 3, gpy))
-    sfondosta = loadImage('Immagini/Status/SfondoEsche.png', True)
-    sfondoEsche = pygame.transform.smoothscale(sfondosta, (gpx, gpy))
-    sfondoStartBattaglia = loadImage('Immagini/Oggetti/SfondoStartBattaglia.png', True)
-    sfondoStartBattaglia = pygame.transform.smoothscale(sfondoStartBattaglia, (gpx * 7, gpy * 10))
-    sfondoTriangolinoAltoDestra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoDestra.png', True)
-    sfondoTriangolinoAltoDestra = pygame.transform.smoothscale(sfondoTriangolinoAltoDestra, (gpx, gpy))
-    sfondoTriangolinoAltoSinistra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', True)
-    sfondoTriangolinoAltoSinistra = pygame.transform.smoothscale(sfondoTriangolinoAltoSinistra, (gpx, gpy))
-    sfondoTriangolinoBassoDestra = loadImage('Immagini/DecorazioniMenu/TriangoloBassoDestra.png', True)
-    sfondoTriangolinoBassoDestra = pygame.transform.smoothscale(sfondoTriangolinoBassoDestra, (gpx, gpy))
-    sfondoTriangolinoBassoSinistra = loadImage('Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', True)
-    sfondoTriangolinoBassoSinistra = pygame.transform.smoothscale(sfondoTriangolinoBassoSinistra, (gpx, gpy))
+    sfondoRallo = loadImage('Immagini/Status/SfondoRallo.png', gpx * 6, gpy, False)
+    sfondoColco = loadImage('Immagini/Status/SfondoColco.png', gpx * 4, gpy, False)
+    sfondoMostro = loadImage('Immagini/Status/SfondoNemici.png', gpx * 3, gpy, False)
+    sfondoEsche = loadImage('Immagini/Status/SfondoEsche.png', gpx, gpy, True)
+    sfondoStartBattaglia = loadImage('Immagini/Oggetti/SfondoStartBattaglia.png', gpx * 7, gpy * 10, False)
+    sfondoTriangolinoAltoDestra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoDestra.png', gpx, gpy, True)
+    sfondoTriangolinoAltoSinistra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', gpx, gpy, True)
+    sfondoTriangolinoBassoDestra = loadImage('Immagini/DecorazioniMenu/TriangoloBassoDestra.png', gpx, gpy, True)
+    sfondoTriangolinoBassoSinistra = loadImage('Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', gpx, gpy, True)
 
     # status
-    appiccicosoo = loadImage('Immagini/Status/Appiccicoso.png', True)
-    appiccicoso = pygame.transform.smoothscale(appiccicosoo, (gpx * 3 // 4, gpy * 3 // 4))
-    avvelenatoo = loadImage('Immagini/Status/Avvelenato.png', True)
-    avvelenato = pygame.transform.smoothscale(avvelenatoo, (gpx * 3 // 4, gpy * 3 // 4))
-    surriscaldatoo = loadImage('Immagini/Status/Surriscaldato.png', True)
-    surriscaldato = pygame.transform.smoothscale(surriscaldatoo, (gpx * 3 // 4, gpy * 3 // 4))
-    attaccopiuo = loadImage('Immagini/Status/Attaccopiu.png', True)
-    attaccopiu = pygame.transform.smoothscale(attaccopiuo, (gpx * 3 // 4, gpy * 3 // 4))
-    difesapiuo = loadImage('Immagini/Status/Difesapiu.png', True)
-    difesapiu = pygame.transform.smoothscale(difesapiuo, (gpx * 3 // 4, gpy * 3 // 4))
-    velocitapiuo = loadImage('Immagini/Status/Velocitapiu.png', True)
-    velocitapiu = pygame.transform.smoothscale(velocitapiuo, (gpx * 3 // 4, gpy * 3 // 4))
-    efficienzapiuo = loadImage('Immagini/Status/Efficienzapiu.png', True)
-    efficienzapiu = pygame.transform.smoothscale(efficienzapiuo, (gpx * 3 // 4, gpy * 3 // 4))
-    imgNumFrecce = loadImage('Immagini/Status/NumFrecce.png', True)
-    imgNumFrecce = pygame.transform.smoothscale(imgNumFrecce, (gpx * 3 // 4, gpy * 3 // 4))
+    appiccicoso = loadImage('Immagini/Status/Appiccicoso.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    avvelenatoMenu = loadImage('Immagini/Status/Avvelenato.png', gpx, gpy, True)
+    avvelenato = loadImage('Immagini/Status/Avvelenato.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    surriscaldatoMenu = loadImage('Immagini/Status/Surriscaldato.png', gpx, gpy, True)
+    surriscaldato = loadImage('Immagini/Status/Surriscaldato.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    attaccopiuMenu = loadImage('Immagini/Status/Attaccopiu.png', gpx, gpy, True)
+    attaccopiu = loadImage('Immagini/Status/Attaccopiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    difesapiuMenu = loadImage('Immagini/Status/Difesapiu.png', gpx, gpy, True)
+    difesapiu = loadImage('Immagini/Status/Difesapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    velocitapiuMenu = loadImage('Immagini/Status/Velocitapiu.png', gpx, gpy, True)
+    velocitapiu = loadImage('Immagini/Status/Velocitapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    efficienzapiuMenu = loadImage('Immagini/Status/Efficienzapiu.png', gpx, gpy, True)
+    efficienzapiu = loadImage('Immagini/Status/Efficienzapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    imgNumFrecce = loadImage('Immagini/Status/NumFrecce.png', gpx * 3 // 4, gpy * 3 // 4, True)
 
     # menu alto destra
-    sfochiaveocchio = loadImage("Immagini/Oggetti/SfondoOcchioChiave.png", True)
-    sfochiaveocchio = pygame.transform.smoothscale(sfochiaveocchio, (gpx * 5, gpy * 2))
-    occhioape = loadImage('Immagini/Status/OcchioAperto.png', True)
-    occhioape = pygame.transform.smoothscale(occhioape, (gpx, gpy))
-    occhiochiu = loadImage('Immagini/Status/OcchioChiuso.png', True)
-    occhiochiu = pygame.transform.smoothscale(occhiochiu, (gpx, gpy))
-    chiaveroboacc = loadImage('Immagini/Oggetti/ChiaveColcoAcc.png', True)
-    chiaveroboacc = pygame.transform.smoothscale(chiaveroboacc, (gpx * 2, gpy * 2))
-    chiaverobospe = loadImage('Immagini/Oggetti/ChiaveColcoSpe.png', True)
-    chiaverobospe = pygame.transform.smoothscale(chiaverobospe, (gpx * 2, gpy * 2))
+    sfochiaveocchio = loadImage("Immagini/Oggetti/SfondoOcchioChiave.png", gpx * 5, gpy * 2, False)
+    occhioape = loadImage('Immagini/Status/OcchioAperto.png', gpx, gpy, True)
+    occhiochiu = loadImage('Immagini/Status/OcchioChiuso.png', gpx, gpy, True)
+    chiaveroboacc = loadImage('Immagini/Oggetti/ChiaveColcoAcc.png', gpx * 2, gpy * 2, True)
+    chiaverobospe = loadImage('Immagini/Oggetti/ChiaveColcoSpe.png', gpx * 2, gpy * 2, True)
 
     # oggetti sulla schermata
-    esche = loadImage("Immagini/Oggetti/Oggetto8Ico.png", True)
-    esche = pygame.transform.smoothscale(esche, (gpx, gpy))
-    sacchettoDenaroStart = loadImage('Immagini/Oggetti/SacchettoDenaroSinistra.png', False)
-    sacchettoDenaroStart = pygame.transform.smoothscale(sacchettoDenaroStart, (gpx * 4, gpy * 4))
-    sacchettoDenaroMercante = loadImage('Immagini/Oggetti/SacchettoDenaroDestra.png', False)
-    sacchettoDenaroMercante = pygame.transform.smoothscale(sacchettoDenaroMercante, (gpx * 4, gpy * 4))
-    faretraFrecceStart0 = loadImage('Immagini/EquipSara/Faretre/Faretra0Menu.png', False)
-    faretraFrecceStart0 = pygame.transform.smoothscale(faretraFrecceStart0, (gpx * 4, gpy * 4))
-    faretraFrecceStart1 = loadImage('Immagini/EquipSara/Faretre/Faretra1Menu.png', False)
-    faretraFrecceStart1 = pygame.transform.smoothscale(faretraFrecceStart1, (gpx * 4, gpy * 4))
-    faretraFrecceStart2 = loadImage('Immagini/EquipSara/Faretre/Faretra2Menu.png', False)
-    faretraFrecceStart2 = pygame.transform.smoothscale(faretraFrecceStart2, (gpx * 4, gpy * 4))
-    faretraFrecceStart3 = loadImage('Immagini/EquipSara/Faretre/Faretra3Menu.png', False)
-    faretraFrecceStart3 = pygame.transform.smoothscale(faretraFrecceStart3, (gpx * 4, gpy * 4))
-    sacchettoDenaroo = loadImage('Immagini/Oggetti/SacchettoDenaroIco.png', True)
-    sacchettoDenaro = pygame.transform.smoothscale(sacchettoDenaroo, (gpx, gpy))
-    imgFrecciaLanciata = loadImage('Immagini/Oggetti/Freccia.png', True)
-    imgFrecciaLanciata = pygame.transform.smoothscale(imgFrecciaLanciata, (gpx, gpy))
+    esche = loadImage("Immagini/Oggetti/Oggetto8Ico.png", gpx, gpy, True)
+    sacchettoDenaroStart = loadImage('Immagini/Oggetti/SacchettoDenaroSinistra.png', gpx * 4, gpy * 4, False)
+    sacchettoDenaroMercante = loadImage('Immagini/Oggetti/SacchettoDenaroDestra.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart0 = loadImage('Immagini/EquipSara/Faretre/Faretra0Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart1 = loadImage('Immagini/EquipSara/Faretre/Faretra1Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart2 = loadImage('Immagini/EquipSara/Faretre/Faretra2Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart3 = loadImage('Immagini/EquipSara/Faretre/Faretra3Menu.png', gpx * 4, gpy * 4, False)
+    sacchettoDenaro = loadImage('Immagini/Oggetti/SacchettoDenaroIco.png', gpx, gpy, True)
+    imgFrecciaLanciata = loadImage('Immagini/Oggetti/Freccia.png', gpx, gpy, True)
 
     # cofanetti
-    cofaniaper = loadImage("Immagini/Oggetti/CofanettoAperto.png", True)
-    cofaniaper = pygame.transform.smoothscale(cofaniaper, (gpx, gpy))
-    cofanichiu = loadImage("Immagini/Oggetti/CofanettoChiuso.png", True)
-    cofanichiu = pygame.transform.smoothscale(cofanichiu, (gpx, gpy))
-    sfocontcof = loadImage("Immagini/Oggetti/SfondoContenutoCofanetto.png", True)
-    sfocontcof = pygame.transform.smoothscale(sfocontcof, (gpx * 16, gpy * 3))
+    cofaniaper = loadImage("Immagini/Oggetti/CofanettoAperto.png", gpx, gpy, True)
+    cofanichiu = loadImage("Immagini/Oggetti/CofanettoChiuso.png", gpx, gpy, True)
+    sfocontcof = loadImage("Immagini/Oggetti/SfondoContenutoCofanetto.png", gpx * 16, gpy * 3, False)
 
     # immagini salvataggi
-    s1 = loadImage('Immagini/Salvataggi/S1.png', True)
-    s1 = pygame.transform.smoothscale(s1, (gpx * 3, gpy * 3))
-    s2 = loadImage('Immagini/Salvataggi/S2.png', True)
-    s2 = pygame.transform.smoothscale(s2, (gpx * 3, gpy * 3))
-    s3 = loadImage('Immagini/Salvataggi/S3.png', True)
-    s3 = pygame.transform.smoothscale(s3, (gpx * 3, gpy * 3))
+    s1 = loadImage('Immagini/Salvataggi/S1.png', gpx * 3, gpy * 3, False)
+    s2 = loadImage('Immagini/Salvataggi/S2.png', gpx * 3, gpy * 3, False)
+    s3 = loadImage('Immagini/Salvataggi/S3.png', gpx * 3, gpy * 3, False)
 
     # caselle attaccabili
-    campoattaccabile1 = loadImage('Immagini/Campiattaccabili/Campoattaccabile1.png', True)
-    campoattaccabile1 = pygame.transform.smoothscale(campoattaccabile1, (gpx * 3, gpy * 3))
-    campoattaccabile2 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', True)
-    campoattaccabileRobo = loadImage('Immagini/Campiattaccabili/Campoattaccabile3.png', True)
-    campoattaccabileRobo = pygame.transform.smoothscale(campoattaccabileRobo, (gpx * 13, gpy * 13))
-    caselleattaccabiliRobo = loadImage('Immagini/Campiattaccabili/CaselleattaccabiliRobo.png', True)
-    caselleattaccabiliRobo = pygame.transform.smoothscale(caselleattaccabiliRobo, (gpx, gpy))
-    campoattaccabilemostro = loadImage('Immagini/Campiattaccabili/Campoattaccabilemostro.png', True)
-    caselleattaccabilimostro = loadImage('Immagini/Campiattaccabili/Caselleattaccabilimostro.png', True)
-    caselleattaccabilimostro = pygame.transform.smoothscale(caselleattaccabilimostro, (gpx, gpy))
-    caselleattaccabili = loadImage('Immagini/Campiattaccabili/Caselleattaccabili.png', True)
-    caselleattaccabili = pygame.transform.smoothscale(caselleattaccabili, (gpx, gpy))
+    campoattaccabileRallo1 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 13, gpy * 13, False)
+    campoattaccabileRallo2 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 11, gpy * 11, False)
+    campoattaccabileRallo3 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 13, gpy * 13, False)
+    campoattaccabileRallo4 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 11, gpy * 11, False)
+    campoattaccabileRallo5 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 9, gpy * 9, False)
+    campoattaccabileRobo = loadImage('Immagini/Campiattaccabili/Campoattaccabile3.png', gpx * 13, gpy * 13, False)
+    caselleattaccabiliRobo = loadImage('Immagini/Campiattaccabili/CaselleattaccabiliRobo.png', gpx, gpy, True)
+    caselleattaccabilimostro = loadImage('Immagini/Campiattaccabili/Caselleattaccabilimostro.png', gpx, gpy, True)
+    caselleattaccabili = loadImage('Immagini/Campiattaccabili/Caselleattaccabili.png', gpx, gpy, True)
 
     # aumento livello
-    saliliv = loadImage('Immagini/Levelup/Saliliv.png', True)
-    saliliv = pygame.transform.smoothscale(saliliv, (gpx, gpy))
-    saliliv1 = loadImage('Immagini/Levelup/Saliliv1.png', True)
-    saliliv1 = pygame.transform.smoothscale(saliliv1, (gpx, gpy))
-    saliliv2 = loadImage('Immagini/Levelup/Saliliv2.png', True)
-    saliliv2 = pygame.transform.smoothscale(saliliv2, (gpx, gpy))
+    saliliv = loadImage('Immagini/Levelup/Saliliv.png', gpx, gpy, True)
+    saliliv1 = loadImage('Immagini/Levelup/Saliliv1.png', gpx, gpy, True)
+    saliliv2 = loadImage('Immagini/Levelup/Saliliv2.png', gpx, gpy, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
     vetImgSpadeMenu = []
@@ -834,29 +814,29 @@ def loadImgs():
     vetImgCollaneMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadeMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipSara/Spade/Spada%iMenu.png" % contatoreGlobale, False), (int(gpx * 2), int(gpy * 2))))
-        vetImgArchiMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipSara/Archi/Arco%iMenu.png" % contatoreGlobale, False), (int(gpx * 2), int(gpy * 2))))
-        vetImgArmatureMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipSara/Armature/Armatura%iMenu.png" % contatoreGlobale, False), (int(gpx * 2), int(gpy * 2))))
-        vetImgScudiMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipSara/Scudi/Scudo%iMenu.png" % contatoreGlobale, False), (int(gpx * 2), int(gpy * 2))))
-        vetImgGuantiMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipSara/Guanti/Guanti%iMenu.png" % contatoreGlobale, False), (int(gpx * 2), int(gpy * 2))))
-        vetImgCollaneMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipSara/Collane/Collana%iMenu.png" % contatoreGlobale, False), (int(gpx * 2), int(gpy * 2))))
+        vetImgSpadeMenu.append(loadImage("Immagini/EquipSara/Spade/Spada%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgArchiMenu.append(loadImage("Immagini/EquipSara/Archi/Arco%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgArmatureMenu.append(loadImage("Immagini/EquipSara/Armature/Armatura%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgScudiMenu.append(loadImage("Immagini/EquipSara/Scudi/Scudo%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgGuantiMenu.append(loadImage("Immagini/EquipSara/Guanti/Guanti%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgCollaneMenu.append(loadImage("Immagini/EquipSara/Collane/Collana%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
         contatoreGlobale += 1
     vetImgCondizioniMenu = [0]
     contatoreGlobale = 1
     while contatoreGlobale <= 20:
-        vetImgCondizioniMenu.append(pygame.transform.smoothscale(loadImage("Immagini/GrafCondizioni/Condizione%i.png" % contatoreGlobale, False), (gpx * 12, gpy * 9)))
+        vetImgCondizioniMenu.append(loadImage("Immagini/GrafCondizioni/Condizione%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
         contatoreGlobale += 1
     vetImgTecnicheMenu = [0]
     contatoreGlobale = 1
     while contatoreGlobale <= 20:
-        vetImgTecnicheMenu.append(pygame.transform.smoothscale(loadImage("Immagini/GrafTecniche/Tecnica%i.png" % contatoreGlobale, False), (gpx * 12, gpy * 9)))
+        vetImgTecnicheMenu.append(loadImage("Immagini/GrafTecniche/Tecnica%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
         contatoreGlobale += 1
     vetImgBatterieMenu = []
     vetIcoBatterieMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgBatterieMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, True), (gpx * 5, gpy * 5)))
-        vetIcoBatterieMenu.append(pygame.transform.smoothscale(loadImage("Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale, False), (gpx * 2, gpy * 2)))
+        vetImgBatterieMenu.append(loadImage("Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetIcoBatterieMenu.append(loadImage("Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
         contatoreGlobale += 1
     vetImgOggettiMenu = []
     vetImgOggettiMercante = []
@@ -864,10 +844,10 @@ def loadImgs():
     vetIcoOggettiMenu = []
     contatoreGlobale = 1
     while contatoreGlobale <= 10:
-        vetImgOggettiMenu.append(pygame.transform.smoothscale(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, False), (gpx * 10, gpy * 10)))
-        vetImgOggettiMercante.append(pygame.transform.smoothscale(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, False), (gpx * 8, gpy * 8)))
-        vetImgOggettiStart.append(pygame.transform.smoothscale(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, False), (gpx * 4, gpy * 4)))
-        vetIcoOggettiMenu.append(pygame.transform.smoothscale(loadImage("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale, True), (gpx, gpy)))
+        vetImgOggettiMenu.append(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 10, gpy * 10, False))
+        vetImgOggettiMercante.append(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 8, gpy * 8, False))
+        vetImgOggettiStart.append(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 4, gpy * 4, False))
+        vetIcoOggettiMenu.append(loadImage("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale, gpx, gpy, True))
         contatoreGlobale += 1
 
     # img equipaggiamento pixellato
@@ -879,37 +859,27 @@ def loadImgs():
     vetImgCollanePixellate = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadePixellate.append(loadImage("Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, True))
-        vetImgArchiPixellate.append(loadImage("Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, True))
-        vetImgArmaturePixellate.append(loadImage("Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, True))
-        vetImgScudiPixellate.append(loadImage("Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, True))
-        vetImgGuantiPixellate.append(loadImage("Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, True))
-        vetImgCollanePixellate.append(loadImage("Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, True))
+        vetImgSpadePixellate.append(loadImage("Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgArchiPixellate.append(loadImage("Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgArmaturePixellate.append(loadImage("Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgScudiPixellate.append(loadImage("Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgGuantiPixellate.append(loadImage("Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgCollanePixellate.append(loadImage("Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
         contatoreGlobale += 1
 
     # img animazioni oggetti
-    imgAnimaBomba = loadImage('Immagini/AnimazioniOggetti/Bomba.png', True)
-    imgAnimaBomba = pygame.transform.smoothscale(imgAnimaBomba, (gpx * 3, gpy * 3))
-    imgAnimaBombaVeleno = loadImage('Immagini/AnimazioniOggetti/BombaVeleno.png', True)
-    imgAnimaBombaVeleno = pygame.transform.smoothscale(imgAnimaBombaVeleno, (gpx, gpy))
-    imgAnimaBombaAppiccicosa = loadImage('Immagini/AnimazioniOggetti/BombaAppiccicosa.png', True)
-    imgAnimaBombaAppiccicosa = pygame.transform.smoothscale(imgAnimaBombaAppiccicosa, (gpx, gpy))
-    imgAnimaBombaPotenziata = loadImage('Immagini/AnimazioniOggetti/BombaPotenziata.png', True)
-    imgAnimaBombaPotenziata = pygame.transform.smoothscale(imgAnimaBombaPotenziata, (gpx * 5, gpy * 5))
-    imgAnimaPozione1 = loadImage('Immagini/AnimazioniOggetti/Pozione1.png', True)
-    imgAnimaPozione1 = pygame.transform.smoothscale(imgAnimaPozione1, (gpx, gpy))
-    imgAnimaPozione2 = loadImage('Immagini/AnimazioniOggetti/Pozione2.png', True)
-    imgAnimaPozione2 = pygame.transform.smoothscale(imgAnimaPozione2, (gpx, gpy))
-    imgAnimaMedicina1 = loadImage('Immagini/AnimazioniOggetti/Medicina1.png', True)
-    imgAnimaMedicina1 = pygame.transform.smoothscale(imgAnimaMedicina1, (gpx, gpy))
-    imgAnimaMedicina2 = loadImage('Immagini/AnimazioniOggetti/Medicina2.png', True)
-    imgAnimaMedicina2 = pygame.transform.smoothscale(imgAnimaMedicina2, (gpx, gpy))
-    imgAnimaCaricabatterie = loadImage('Immagini/AnimazioniOggetti/Caricabatterie.png', True)
-    imgAnimaCaricabatterie = pygame.transform.smoothscale(imgAnimaCaricabatterie, (gpx, gpy))
+    imgAnimaBomba = loadImage('Immagini/AnimazioniOggetti/Bomba.png', gpx * 3, gpy * 3, True)
+    imgAnimaBombaVeleno = loadImage('Immagini/AnimazioniOggetti/BombaVeleno.png', gpx, gpy, True)
+    imgAnimaBombaAppiccicosa = loadImage('Immagini/AnimazioniOggetti/BombaAppiccicosa.png', gpx, gpy, True)
+    imgAnimaBombaPotenziata = loadImage('Immagini/AnimazioniOggetti/BombaPotenziata.png', gpx * 5, gpy * 5, True)
+    imgAnimaPozione1 = loadImage('Immagini/AnimazioniOggetti/Pozione1.png', gpx, gpy, True)
+    imgAnimaPozione2 = loadImage('Immagini/AnimazioniOggetti/Pozione2.png', gpx, gpy, True)
+    imgAnimaMedicina1 = loadImage('Immagini/AnimazioniOggetti/Medicina1.png', gpx, gpy, True)
+    imgAnimaMedicina2 = loadImage('Immagini/AnimazioniOggetti/Medicina2.png', gpx, gpy, True)
+    imgAnimaCaricabatterie = loadImage('Immagini/AnimazioniOggetti/Caricabatterie.png', gpx, gpy, True)
 
     # img animazioni tecniche
-    imgDanneggiamentoColco = loadImage('Immagini/AnimazioniTecniche/Danneggiamento.png', True)
-    imgDanneggiamentoColco = pygame.transform.smoothscale(imgDanneggiamentoColco, (gpx, gpy))
+    imgDanneggiamentoColco = loadImage('Immagini/AnimazioniTecniche/Danneggiamento.png', gpx, gpy, True)
     vetAnimazioniTecniche = []
     nomiTecniche = ["scossa", "scossa+", "scossa++", "freccia", "freccia+", "freccia++", "tempesta", "tempesta+", "tempesta++", "cura", "cura+", "cura++", "antidoto", "attP", "difP", "ricarica", "ricarica+", "raffred", "velocizza", "efficienza"]
     for contatoreGlobale in nomiTecniche:
@@ -918,154 +888,127 @@ def loadImgs():
         if contatoreGlobale.startswith("scossa") or contatoreGlobale.startswith("freccia") or contatoreGlobale.startswith("cura") or contatoreGlobale == "antidoto" or contatoreGlobale == "attP" or contatoreGlobale == "difP":
             if contatoreGlobale.startswith("freccia"):
                 contatoreGlobale = "freccia"
-            img1 = loadImage("Immagini/AnimazioniTecniche/%swAnima1.png" % contatoreGlobale, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%swAnima2.png" % contatoreGlobale, True)
-            img1 = pygame.transform.smoothscale(img1, (gpx, gpy * 2))
-            img2 = pygame.transform.smoothscale(img2, (gpx, gpy * 2))
+            img1 = loadImage("Immagini/AnimazioniTecniche/%swAnima1.png" % contatoreGlobale, gpx, gpy * 2, True)
+            img2 = loadImage("Immagini/AnimazioniTecniche/%swAnima2.png" % contatoreGlobale, gpx, gpy * 2, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = loadImage("Immagini/AnimazioniTecniche/%saAnima1.png" % contatoreGlobale, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%saAnima2.png" % contatoreGlobale, True)
-            img1 = pygame.transform.smoothscale(img1, (gpx * 2, gpy))
-            img2 = pygame.transform.smoothscale(img2, (gpx * 2, gpy))
+            img1 = loadImage("Immagini/AnimazioniTecniche/%saAnima1.png" % contatoreGlobale, gpx * 2, gpy, True)
+            img2 = loadImage("Immagini/AnimazioniTecniche/%saAnima2.png" % contatoreGlobale, gpx * 2, gpy, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = loadImage("Immagini/AnimazioniTecniche/%ssAnima1.png" % contatoreGlobale, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%ssAnima2.png" % contatoreGlobale, True)
-            img1 = pygame.transform.smoothscale(img1, (gpx, gpy * 2))
-            img2 = pygame.transform.smoothscale(img2, (gpx, gpy * 2))
+            img1 = loadImage("Immagini/AnimazioniTecniche/%ssAnima1.png" % contatoreGlobale, gpx, gpy * 2, True)
+            img2 = loadImage("Immagini/AnimazioniTecniche/%ssAnima2.png" % contatoreGlobale, gpx, gpy * 2, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = loadImage("Immagini/AnimazioniTecniche/%sdAnima1.png" % contatoreGlobale, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%sdAnima2.png" % contatoreGlobale, True)
-            img1 = pygame.transform.smoothscale(img1, (gpx * 2, gpy))
-            img2 = pygame.transform.smoothscale(img2, (gpx * 2, gpy))
+            img1 = loadImage("Immagini/AnimazioniTecniche/%sdAnima1.png" % contatoreGlobale, gpx * 2, gpy, True)
+            img2 = loadImage("Immagini/AnimazioniTecniche/%sdAnima2.png" % contatoreGlobale, gpx * 2, gpy, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            imgSelf = loadImage("Immagini/AnimazioniTecniche/%sAnimaSelf.png" % contatoreGlobale, True)
-            imgSelf = pygame.transform.smoothscale(imgSelf, (gpx, gpy))
+            imgSelf = loadImage("Immagini/AnimazioniTecniche/%sAnimaSelf.png" % contatoreGlobale, gpx, gpy, True)
             vetAnimaImgTecniche.append(imgSelf)
         elif contatoreGlobale.startswith("ricarica") or contatoreGlobale == "raffred" or contatoreGlobale == "velocizza" or contatoreGlobale == "efficienza":
-            img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale, True)
-            img1 = pygame.transform.smoothscale(img1, (gpx, gpy))
+            img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale, gpx, gpy, True)
             vetAnimaImgTecniche.append(img1)
         elif contatoreGlobale.startswith("tempesta"):
-            img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale, True)
-            img1 = pygame.transform.smoothscale(img1, (gpx * 13, gpy * 13))
-            img2 = pygame.transform.smoothscale(img2, (gpx * 13, gpy * 13))
+            img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale, gpx * 13, gpy * 13, True)
+            img2 = loadImage("Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale, gpx * 13, gpy * 13, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
         vetAnimazioniTecniche.append(vetAnimaImgTecniche)
-    imgFrecciaEletttricaLanciata = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata.png', True)
-    imgFrecciaEletttricaLanciata = pygame.transform.smoothscale(imgFrecciaEletttricaLanciata, (gpx, gpy))
-    imgFrecciaEletttricaLanciataP = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata+.png', True)
-    imgFrecciaEletttricaLanciataP = pygame.transform.smoothscale(imgFrecciaEletttricaLanciataP, (gpx, gpy))
-    imgFrecciaEletttricaLanciataPP = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata++.png', True)
-    imgFrecciaEletttricaLanciataPP = pygame.transform.smoothscale(imgFrecciaEletttricaLanciataPP, (gpx, gpy))
+    imgFrecciaEletttricaLanciata = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata.png', gpx, gpy, True)
+    imgFrecciaEletttricaLanciataP = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata+.png', gpx, gpy, True)
+    imgFrecciaEletttricaLanciataPP = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata++.png', gpx, gpy, True)
 
     # img sfondi dialoghi
-    sfondoDialoghi = loadImage('Immagini/Dialoghi/SfondoSotto.png', True)
-    sfondoDialoghi = pygame.transform.smoothscale(sfondoDialoghi, (gsx, gsy // 3))
+    sfondoDialoghi = loadImage('Immagini/Dialoghi/SfondoSotto.png', gsx, gsy // 3, False)
 
     # img tutorial
-    tutorialTastieraInGioco = loadImage('Immagini/Tutorial/TastieraInGioco.png', True)
-    tutorialTastieraInGioco = pygame.transform.smoothscale(tutorialTastieraInGioco, (gsx // 32 * 7, gsy // 18 * 11))
-    tutorialTastieraInMenu = loadImage('Immagini/Tutorial/TastieraInMenu.png', True)
-    tutorialTastieraInMenu = pygame.transform.smoothscale(tutorialTastieraInMenu, (gsx // 32 * 7, gsy // 18 * 11))
-    tutorialMouse = loadImage('Immagini/Tutorial/Mouse.png', True)
-    tutorialMouse = pygame.transform.smoothscale(tutorialMouse, (gsx // 32 * 7, gsy // 18 * 11))
-    tutorialControllerInGioco = loadImage('Immagini/Tutorial/ControllerInGioco.png', True)
-    tutorialControllerInGioco = pygame.transform.smoothscale(tutorialControllerInGioco, (gsx // 32 * 7, gsy // 18 * 11))
-    tutorialControllerInMenu = loadImage('Immagini/Tutorial/ControllerInMenu.png', True)
-    tutorialControllerInMenu = pygame.transform.smoothscale(tutorialControllerInMenu, (gsx // 32 * 7, gsy // 18 * 11))
-    impostazioniController = loadImage('Immagini/Tutorial/ImpoController.png', False)
-    impostazioniController = pygame.transform.smoothscale(impostazioniController, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerCroce = loadImage('Immagini/Tutorial/ImpoControllerCroce.png', False)
-    impostaControllerCroce = pygame.transform.smoothscale(impostaControllerCroce, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerCerchio = loadImage('Immagini/Tutorial/ImpoControllerCerchio.png', False)
-    impostaControllerCerchio = pygame.transform.smoothscale(impostaControllerCerchio, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerQuadrato = loadImage('Immagini/Tutorial/ImpoControllerQuadrato.png', False)
-    impostaControllerQuadrato = pygame.transform.smoothscale(impostaControllerQuadrato, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerTriangolo = loadImage('Immagini/Tutorial/ImpoControllerTriangolo.png', False)
-    impostaControllerTriangolo = pygame.transform.smoothscale(impostaControllerTriangolo, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerL1 = loadImage('Immagini/Tutorial/ImpoControllerL1.png', False)
-    impostaControllerL1 = pygame.transform.smoothscale(impostaControllerL1, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerR1 = loadImage('Immagini/Tutorial/ImpoControllerR1.png', False)
-    impostaControllerR1 = pygame.transform.smoothscale(impostaControllerR1, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerStart = loadImage('Immagini/Tutorial/ImpoControllerStart.png', False)
-    impostaControllerStart = pygame.transform.smoothscale(impostaControllerStart, (gsx // 32 * 14, gsy // 18 * 14))
-    impostaControllerCroceDirezionale = loadImage('Immagini/Tutorial/ImpoControllerCroceDirezionale.png', False)
-    impostaControllerCroceDirezionale = pygame.transform.smoothscale(impostaControllerCroceDirezionale, (gsx // 32 * 14, gsy // 18 * 14))
+    tutorialTastieraInGioco = loadImage('Immagini/Tutorial/TastieraInGioco.png', gpx * 7, gpy * 11, False)
+    tutorialTastieraInMenu = loadImage('Immagini/Tutorial/TastieraInMenu.png', gpx * 7, gpy * 11, False)
+    tutorialMouse = loadImage('Immagini/Tutorial/Mouse.png', gpx * 7, gpy * 11, False)
+    tutorialControllerInGioco = loadImage('Immagini/Tutorial/ControllerInGioco.png', gpx * 7, gpy * 11, False)
+    tutorialControllerInMenu = loadImage('Immagini/Tutorial/ControllerInMenu.png', gpx * 7, gpy * 11, False)
+    impostazioniController = loadImage('Immagini/Tutorial/ImpoController.png', gpx * 14, gpy * 14, False)
+    impostaControllerCroce = loadImage('Immagini/Tutorial/ImpoControllerCroce.png', gpx * 14, gpy * 14, False)
+    impostaControllerCerchio = loadImage('Immagini/Tutorial/ImpoControllerCerchio.png', gpx * 14, gpy * 14, False)
+    impostaControllerQuadrato = loadImage('Immagini/Tutorial/ImpoControllerQuadrato.png', gpx * 14, gpy * 14, False)
+    impostaControllerTriangolo = loadImage('Immagini/Tutorial/ImpoControllerTriangolo.png', gpx * 14, gpy * 14, False)
+    impostaControllerL1 = loadImage('Immagini/Tutorial/ImpoControllerL1.png', gpx * 14, gpy * 14, False)
+    impostaControllerR1 = loadImage('Immagini/Tutorial/ImpoControllerR1.png', gpx * 14, gpy * 14, False)
+    impostaControllerStart = loadImage('Immagini/Tutorial/ImpoControllerStart.png', gpx * 14, gpy * 14, False)
+    impostaControllerCroceDirezionale = loadImage('Immagini/Tutorial/ImpoControllerCroceDirezionale.png', gpx * 14, gpy * 14, False)
 
     # img grafiche / dialoghi
-    persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucaGrafMenu.png', False)
-    persGrafMenu = pygame.transform.smoothscale(persGrafMenu, (gpx * 18, gpy * 18))
-    saraGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenu.png', False)
-    saraGrafMenu = pygame.transform.smoothscale(saraGrafMenu, (gpx * 10, gpy * 10))
-    fraMaggioreGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', False)
-    fraMaggioreGrafMenu = pygame.transform.smoothscale(fraMaggioreGrafMenu, (gpx * 10, gpy * 10))
-    robograf0 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', False)
-    robograf0 = pygame.transform.smoothscale(robograf0, (gpx * 18, gpy * 18))
-    robograf1o = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', False)
-    robograf1 = pygame.transform.smoothscale(robograf1o, (gpx * 18, gpy * 18))
-    robograf1b = pygame.transform.smoothscale(robograf1o, (gpx * 10, gpy * 10))
-    robograf2o = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', False)
-    robograf2 = pygame.transform.smoothscale(robograf2o, (gpx * 18, gpy * 18))
-    robograf2b = pygame.transform.smoothscale(robograf2o, (gpx * 10, gpy * 10))
-    robograf3 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf3.png', False)
-    robograf3 = pygame.transform.smoothscale(robograf3, (gpx * 18, gpy * 18))
-    robograf4 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', False)
-    robograf4 = pygame.transform.smoothscale(robograf4, (gpx * 18, gpy * 18))
-    imgDialogoFraMaggiore = loadImage('Immagini/Dialoghi/FratelloMaggioreDialogo.png', False)
-    imgDialogoSara = loadImage('Immagini/Dialoghi/SaraDialogo.png', False)
-    imgFraMaggioreMenuOggetti = loadImage('Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', True)
-    imgFraMaggioreMenuOggetti = pygame.transform.smoothscale(imgFraMaggioreMenuOggetti, (gpx * 3, gpy * 3))
-    imgSaraMenuOggetti = loadImage('Immagini/DecorazioniMenu/SaraMenu.png', True)
-    imgSaraMenuOggetti = pygame.transform.smoothscale(imgSaraMenuOggetti, (gpx * 3, gpy * 3))
+    persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucaGrafMenu.png', gpx * 18, gpy * 18, False)
+    saraGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenu.png', gpx * 10, gpy * 10, False)
+    fraMaggioreGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', gpx * 10, gpy * 10, False)
+    robograf0 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', gpx * 18, gpy * 18, False)
+    robograf1 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', gpx * 18, gpy * 18, False)
+    robograf1b = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', gpx * 10, gpy * 10, False)
+    robograf2 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', gpx * 18, gpy * 18, False)
+    robograf2b = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', gpx * 10, gpy * 10, False)
+    robograf3 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf3.png', gpx * 18, gpy * 18, False)
+    robograf4 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', gpx * 18, gpy * 18, False)
+    imgDialogoFraMaggiore = loadImage('Immagini/Dialoghi/FratelloMaggioreDialogo.png', gpx * 16, gpy * 12, False)
+    imgDialogoSara = loadImage('Immagini/Dialoghi/SaraDialogo.png', gpx * 16, gpy * 12, False)
+    imgFraMaggioreMenuOggetti = loadImage('Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', gpx * 3, gpy * 3, True)
+    imgSaraMenuOggetti = loadImage('Immagini/DecorazioniMenu/SaraMenu.png', gpx * 3, gpy * 3, True)
 
     # indicatori vita
-    indvita = loadImage('Immagini/Barrevita/Indvita.png', True)
-    fineindvita = loadImage('Immagini/Barrevita/FineIndVita.png', True)
-    vitanemico00 = loadImage('Immagini/Barrevita/Vitanemico00.png', True)
-    vitanemico0 = loadImage('Immagini/Barrevita/Vitanemico0.png', True)
-    vitanemico1 = loadImage('Immagini/Barrevita/Vitanemico1.png', True)
-    vitanemico2 = loadImage('Immagini/Barrevita/Vitanemico2.png', True)
-    vitanemico3 = loadImage('Immagini/Barrevita/Vitanemico3.png', True)
-    vitanemico4 = loadImage('Immagini/Barrevita/Vitanemico4.png', True)
-    vitanemico5 = loadImage('Immagini/Barrevita/Vitanemico5.png', True)
-    vitanemico6 = loadImage('Immagini/Barrevita/Vitanemico6.png', True)
-    vitanemico7 = loadImage('Immagini/Barrevita/Vitanemico7.png', True)
-    vitanemico8 = loadImage('Immagini/Barrevita/Vitanemico8.png', True)
-    vitanemico9 = loadImage('Immagini/Barrevita/Vitanemico9.png', True)
-    vitapersonaggio = loadImage('Immagini/Barrevita/Vitapersonaggio.png', True)
-    vitarobo = loadImage('Immagini/Barrevita/Vitarobo.png', True)
+    indvita = loadImage('Immagini/Barrevita/Indvita.png', 0, 0, True)
+    fineindvita = loadImage('Immagini/Barrevita/FineIndVita.png', gpx // 12, gpy // 4, True)
+    vitanemico00 = loadImage('Immagini/Barrevita/Vitanemico00.png', 0, 0, True)
+    vitanemico0 = loadImage('Immagini/Barrevita/Vitanemico0.png', 0, 0, True)
+    vitanemico1 = loadImage('Immagini/Barrevita/Vitanemico1.png', 0, 0, True)
+    vitanemico2 = loadImage('Immagini/Barrevita/Vitanemico2.png', 0, 0, True)
+    vitanemico3 = loadImage('Immagini/Barrevita/Vitanemico3.png', 0, 0, True)
+    vitanemico4 = loadImage('Immagini/Barrevita/Vitanemico4.png', 0, 0, True)
+    vitanemico5 = loadImage('Immagini/Barrevita/Vitanemico5.png', 0, 0, True)
+    vitanemico6 = loadImage('Immagini/Barrevita/Vitanemico6.png', 0, 0, True)
+    vitanemico7 = loadImage('Immagini/Barrevita/Vitanemico7.png', 0, 0, True)
+    vitanemico8 = loadImage('Immagini/Barrevita/Vitanemico8.png', 0, 0, True)
+    vitanemico9 = loadImage('Immagini/Barrevita/Vitanemico9.png', 0, 0, True)
+    vitapersonaggio = loadImage('Immagini/Barrevita/Vitapersonaggio.png', 0, 0, True)
+    vitarobo = loadImage('Immagini/Barrevita/Vitarobo.png', 0, 0, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
-    sfondoOggettoMenu = loadImage("Immagini/EquipSara/SfondoOggetto.png", False)
-    sfondoOggettoMenu = pygame.transform.smoothscale(sfondoOggettoMenu, (int(gpx * 2), int(gpy * 2)))
-    sconosciutoEquipMenu = loadImage("Immagini/Oggetti/SconosciutoEquip.png", False)
-    sconosciutoEquipMenu = pygame.transform.smoothscale(sconosciutoEquipMenu, (int(gpx * 2), int(gpy * 2)))
-    sconosciutoOggettoMenu = loadImage("Immagini/Oggetti/Sconosciuto.png", False)
-    sconosciutoOggettoIcoMenu = loadImage("Immagini/Oggetti/SconosciutoIco.png", False)
+    sfondoOggettoMenu = loadImage("Immagini/EquipSara/SfondoOggetto.png", gpx * 2, gpy * 2, False)
+    sconosciutoEquipMenu = loadImage("Immagini/Oggetti/SconosciutoEquip.png", gpx * 2, gpy * 2, False)
+    sconosciutoOggettoMenu1 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 4, gpy * 4, False)
+    sconosciutoOggettoMenu2 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 8, gpy * 8, False)
+    sconosciutoOggettoMenu3 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 10, gpy * 10, False)
+    sconosciutoOggettoIcoMenu = loadImage("Immagini/Oggetti/SconosciutoIco.png", gpx, gpy, False)
 
     # img mappe
-    imgMappa1 = loadImage("Immagini/DecorazioniMenu/MappaMenu1.png", False)
-    imgMappa2 = loadImage("Immagini/DecorazioniMenu/MappaMenu2.png", False)
-    imgMappa3 = loadImage("Immagini/DecorazioniMenu/MappaMenu3.png", False)
-    imgMappa4 = loadImage("Immagini/DecorazioniMenu/MappaMenu4.png", False)
-    imgMappa5 = loadImage("Immagini/DecorazioniMenu/MappaMenu5.png", False)
-    imgMappa6 = loadImage("Immagini/DecorazioniMenu/MappaMenu6.png", False)
-    imgMappa7 = loadImage("Immagini/DecorazioniMenu/MappaMenu7.png", False)
-    imgMappa8 = loadImage("Immagini/DecorazioniMenu/MappaMenu8.png", False)
-    imgMappa9 = loadImage("Immagini/DecorazioniMenu/MappaMenu9.png", False)
-    imgMappa10 = loadImage("Immagini/DecorazioniMenu/MappaMenu10.png", False)
-    imgMappa11 = loadImage("Immagini/DecorazioniMenu/MappaMenu11.png", False)
-    imgMappa12 = loadImage("Immagini/DecorazioniMenu/MappaMenu12.png", False)
-    imgMappa13 = loadImage("Immagini/DecorazioniMenu/MappaMenu13.png", False)
-    imgMappa14 = loadImage("Immagini/DecorazioniMenu/MappaMenu14.png", False)
-    imgOmbreggiaturaContorniMappaMenu = loadImage("Immagini/DecorazioniMenu/OmbreggiaturaContorniMappaMenu.png", False)
-    imgOmbreggiaturaContorniMappaMenu = pygame.transform.smoothscale(imgOmbreggiaturaContorniMappaMenu, (gsx, gsy))
+    imgMappa1A = loadImage("Immagini/DecorazioniMenu/MappaMenu1.png", gpx * 22, gpy * 15, False)
+    imgMappa1B = loadImage("Immagini/DecorazioniMenu/MappaMenu1.png", gpx * 50, gpy * 35, False)
+    imgMappa2A = loadImage("Immagini/DecorazioniMenu/MappaMenu2.png", gpx * 22, gpy * 15, False)
+    imgMappa2B = loadImage("Immagini/DecorazioniMenu/MappaMenu2.png", gpx * 50, gpy * 35, False)
+    imgMappa3A = loadImage("Immagini/DecorazioniMenu/MappaMenu3.png", gpx * 22, gpy * 15, False)
+    imgMappa3B = loadImage("Immagini/DecorazioniMenu/MappaMenu3.png", gpx * 50, gpy * 35, False)
+    imgMappa4A = loadImage("Immagini/DecorazioniMenu/MappaMenu4.png", gpx * 22, gpy * 15, False)
+    imgMappa4B = loadImage("Immagini/DecorazioniMenu/MappaMenu4.png", gpx * 50, gpy * 35, False)
+    imgMappa5A = loadImage("Immagini/DecorazioniMenu/MappaMenu5.png", gpx * 22, gpy * 15, False)
+    imgMappa5B = loadImage("Immagini/DecorazioniMenu/MappaMenu5.png", gpx * 50, gpy * 35, False)
+    imgMappa6A = loadImage("Immagini/DecorazioniMenu/MappaMenu6.png", gpx * 22, gpy * 15, False)
+    imgMappa6B = loadImage("Immagini/DecorazioniMenu/MappaMenu6.png", gpx * 50, gpy * 35, False)
+    imgMappa7A = loadImage("Immagini/DecorazioniMenu/MappaMenu7.png", gpx * 22, gpy * 15, False)
+    imgMappa7B = loadImage("Immagini/DecorazioniMenu/MappaMenu7.png", gpx * 50, gpy * 35, False)
+    imgMappa8A = loadImage("Immagini/DecorazioniMenu/MappaMenu8.png", gpx * 22, gpy * 15, False)
+    imgMappa8B = loadImage("Immagini/DecorazioniMenu/MappaMenu8.png", gpx * 50, gpy * 35, False)
+    imgMappa9A = loadImage("Immagini/DecorazioniMenu/MappaMenu9.png", gpx * 22, gpy * 15, False)
+    imgMappa9B = loadImage("Immagini/DecorazioniMenu/MappaMenu9.png", gpx * 50, gpy * 35, False)
+    imgMappa10A = loadImage("Immagini/DecorazioniMenu/MappaMenu10.png", gpx * 22, gpy * 15, False)
+    imgMappa10B = loadImage("Immagini/DecorazioniMenu/MappaMenu10.png", gpx * 50, gpy * 35, False)
+    imgMappa11A = loadImage("Immagini/DecorazioniMenu/MappaMenu11.png", gpx * 22, gpy * 15, False)
+    imgMappa11B = loadImage("Immagini/DecorazioniMenu/MappaMenu11.png", gpx * 50, gpy * 35, False)
+    imgMappa12A = loadImage("Immagini/DecorazioniMenu/MappaMenu12.png", gpx * 22, gpy * 15, False)
+    imgMappa12B = loadImage("Immagini/DecorazioniMenu/MappaMenu12.png", gpx * 50, gpy * 35, False)
+    imgMappa13A = loadImage("Immagini/DecorazioniMenu/MappaMenu13.png", gpx * 22, gpy * 15, False)
+    imgMappa13B = loadImage("Immagini/DecorazioniMenu/MappaMenu13.png", gpx * 50, gpy * 35, False)
+    imgMappa14A = loadImage("Immagini/DecorazioniMenu/MappaMenu14.png", gpx * 22, gpy * 15, False)
+    imgMappa14B = loadImage("Immagini/DecorazioniMenu/MappaMenu14.png", gpx * 50, gpy * 35, False)
+    imgOmbreggiaturaContorniMappaMenu = loadImage("Immagini/DecorazioniMenu/OmbreggiaturaContorniMappaMenu.png", gsx, gsy, False)
 
     # img nemici
     vettoreNomiNemici = ["Orco", "Pipistrello", "TartarugaVerde", "TartarugaMarrone", "Cinghiale", "LupoGrigio", "LupoNero", "LupoBianco", "SerpeVerde", "SerpeArancio", "Scorpione", "RagnoNero", "RagnoRosso", "ServoSpada", "ServoArco", "ServoLancia", "GufoMarrone", "GufoBianco", "Falco", "Aquila", "Struzzo", "Casuario", "RoboLeggero", "RoboVolante", "RoboPesante", "RoboPesanteVolante", "RoboTorre"]
@@ -1073,71 +1016,49 @@ def loadImgs():
     for nomeNemico in vettoreNomiNemici:
         dictionaryImgPosizioni = {}
 
-        imgW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "w.png", True)
-        imgW = pygame.transform.smoothscale(imgW, (gpx, gpy))
+        imgW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "w.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgW"] = imgW
-        imgA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "a.png", True)
-        imgA = pygame.transform.smoothscale(imgA, (gpx, gpy))
+        imgA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "a.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgA"] = imgA
-        imgS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "s.png", True)
-        imgS = pygame.transform.smoothscale(imgS, (gpx, gpy))
+        imgS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "s.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgS"] = imgS
-        imgD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "d.png", True)
-        imgD = pygame.transform.smoothscale(imgD, (gpx, gpy))
+        imgD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "d.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgD"] = imgD
-        imgWMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov1.png", True)
-        imgWMov1 = pygame.transform.smoothscale(imgWMov1, (gpx, gpy))
+        imgWMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgWMov1"] = imgWMov1
-        imgWMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov2.png", True)
-        imgWMov2 = pygame.transform.smoothscale(imgWMov2, (gpx, gpy))
+        imgWMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgWMov2"] = imgWMov2
-        imgAMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov1.png", True)
-        imgAMov1 = pygame.transform.smoothscale(imgAMov1, (gpx, gpy))
+        imgAMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAMov1"] = imgAMov1
-        imgAMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov2.png", True)
-        imgAMov2 = pygame.transform.smoothscale(imgAMov2, (gpx, gpy))
+        imgAMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAMov2"] = imgAMov2
-        imgSMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov1.png", True)
-        imgSMov1 = pygame.transform.smoothscale(imgSMov1, (gpx, gpy))
+        imgSMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgSMov1"] = imgSMov1
-        imgSMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov2.png", True)
-        imgSMov2 = pygame.transform.smoothscale(imgSMov2, (gpx, gpy))
+        imgSMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgSMov2"] = imgSMov2
-        imgDMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov1.png", True)
-        imgDMov1 = pygame.transform.smoothscale(imgDMov1, (gpx, gpy))
+        imgDMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDMov1"] = imgDMov1
-        imgDMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov2.png", True)
-        imgDMov2 = pygame.transform.smoothscale(imgDMov2, (gpx, gpy))
+        imgDMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDMov2"] = imgDMov2
-        imgAvvelenamento = loadImage("Immagini/Nemici/NemicoAvvelenato.png", True)
-        imgAvvelenamento = pygame.transform.smoothscale(imgAvvelenamento, (gpx, gpy))
+        imgAvvelenamento = loadImage("Immagini/Nemici/NemicoAvvelenato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAvvelenamento"] = imgAvvelenamento
-        imgAppiccicato = loadImage("Immagini/Nemici/NemicoAppiccicato.png", True)
-        imgAppiccicato = pygame.transform.smoothscale(imgAppiccicato, (gpx, gpy))
+        imgAppiccicato = loadImage("Immagini/Nemici/NemicoAppiccicato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAppiccicato"] = imgAppiccicato
-        imgAttaccoW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wAttacco.png", True)
-        imgAttaccoW = pygame.transform.smoothscale(imgAttaccoW, (gpx, gpy * 2))
+        imgAttaccoW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wAttacco.png", gpx, gpy * 2, True)
         dictionaryImgPosizioni["imgAttaccoW"] = imgAttaccoW
-        imgAttaccoA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aAttacco.png", True)
-        imgAttaccoA = pygame.transform.smoothscale(imgAttaccoA, (gpx * 2, gpy))
+        imgAttaccoA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aAttacco.png", gpx * 2, gpy, True)
         dictionaryImgPosizioni["imgAttaccoA"] = imgAttaccoA
-        imgAttaccoS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sAttacco.png", True)
-        imgAttaccoS = pygame.transform.smoothscale(imgAttaccoS, (gpx, gpy * 2))
+        imgAttaccoS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sAttacco.png", gpx, gpy * 2, True)
         dictionaryImgPosizioni["imgAttaccoS"] = imgAttaccoS
-        imgAttaccoD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dAttacco.png", True)
-        imgAttaccoD = pygame.transform.smoothscale(imgAttaccoD, (gpx * 2, gpy))
+        imgAttaccoD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dAttacco.png", gpx * 2, gpy, True)
         dictionaryImgPosizioni["imgAttaccoD"] = imgAttaccoD
-        imgOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/OggettoLanciato.png", True)
-        imgOggettoLanciato = pygame.transform.smoothscale(imgOggettoLanciato, (gpx, gpy))
+        imgOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/OggettoLanciato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgOggettoLanciato"] = imgOggettoLanciato
-        imgDanneggiamentoOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/DanneggiamentoOggettoLanciato.png", True)
-        imgDanneggiamentoOggettoLanciato = pygame.transform.smoothscale(imgDanneggiamentoOggettoLanciato, (gpx, gpy))
+        imgDanneggiamentoOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/DanneggiamentoOggettoLanciato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoOggettoLanciato"] = imgDanneggiamentoOggettoLanciato
-        imgDanneggiamentoRalloNemico = loadImage("Immagini/Nemici/DannoRallo.png", True)
-        imgDanneggiamentoRalloNemico = pygame.transform.smoothscale(imgDanneggiamentoRalloNemico, (gpx, gpy))
+        imgDanneggiamentoRalloNemico = loadImage("Immagini/Nemici/DannoRallo.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoRalloNemico"] = imgDanneggiamentoRalloNemico
-        imgDanneggiamentoColcoNemico = loadImage("Immagini/Nemici/DannoColco.png", True)
-        imgDanneggiamentoColcoNemico = pygame.transform.smoothscale(imgDanneggiamentoColcoNemico, (gpx, gpy))
+        imgDanneggiamentoColcoNemico = loadImage("Immagini/Nemici/DannoColco.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoColcoNemico"] = imgDanneggiamentoColcoNemico
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
@@ -1199,7 +1120,7 @@ if len(datiFileImpostazioniString) == 6:
             gpx = gsx // 32
             gpy = gsy // 18
         if schermoIntero:
-            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
+            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
         else:
             schermo = pygame.display.set_mode((gsx, gsy))
@@ -1212,48 +1133,6 @@ if erroreFileImpostazioni:
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
     loadImgs()
     initVolumeSounds()
-
-# nome-icona
-pygame.display.set_caption("Gioco 2")
-icona = loadImage("Immagini/Icona.png", False)
-pygame.display.set_icon(icona)
-listaTastiPremuti = []
-
-# clock
-clockAttacco = pygame.time.Clock()
-clockAnimazioni = pygame.time.Clock()
-clockVideo = pygame.time.Clock()
-clockMenu = pygame.time.Clock()
-clockFadeToBlack = pygame.time.Clock()
-fpsAnimazioni = 30
-fpsInquadra = 20
-fpsVideo = 12
-fpsMenu = 30
-fpsFadeToBlack = 30
-
-# colori
-nero = (0, 0, 0)
-grigioscuPiuScu = (40, 40, 40)
-grigioscu = (50, 50, 50)
-grigioscurino = (70, 70, 70)
-grigio = (80, 80, 80)
-grigiochi = (230, 230, 230)
-bianco = (255, 255, 255)
-rosso = (255, 130, 0)
-verde = (130, 255, 0)
-verdeScuro = (80, 90, 80)
-verdeScuroPiuScuro = (70, 80, 70)
-blu = (0, 0, 255)
-bluScuro = (80, 80, 90)
-bluScuroPiuScuro = (70, 70, 80)
-rossoScuro = (100, 80, 80)
-rossoScuroPiuScuro = (90, 70, 70)
-
-# vettore che conterrà tutti i dati dei salvataggi
-vetDatiSalvataggi = []
-# vettore che conterrà i dati di salvataggio del file gameover
-vetDatiSalvataggioGameOver = []
-numSalvataggioCaricato = 0
 
 # suoni puntatore
 selsta = loadSound("Audio/RumoriPuntatore/SelSta.wav")
@@ -1419,6 +1298,7 @@ def setCursoreVisibile(visibile):
         pygame.mouse.set_visible(True)
         pygame.mouse.set_pos(gsx // 2, gsy // 2)
     else:
+        pygame.mouse.set_pos(gsx // 2, gsy // 2)
         pygame.mouse.set_visible(False)
 configuraCursore(False)
 
@@ -1506,7 +1386,6 @@ def inizializzaModuloJoistick():
     for idPadGlobale in range(0, joystick_count):
         joystick = pygame.joystick.Joystick(idPadGlobale)
         nomeController = joystick.get_name()
-        print nomeController
         idController = joystick.get_id()
         configPad = []
         padGiaConfigurato = False

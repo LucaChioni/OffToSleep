@@ -17,6 +17,10 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
     coloreOrig = colore
     xOrig = x
 
+    testoComplesso = False
+    if "<*>" in msg or "<br>" in msg or largezzaFoglio != -1 or spazioTraLeRighe != -1:
+        testoComplesso = True
+
     # per mettere parti in italic, bold o colorate: "Premi <*>#bold#un<*> <*>#italic#tasto<*> per <*>#color#100,0,0#continuare<*>..."
     if daDestra:
         testo = font.render(msg, True, colore)
@@ -36,7 +40,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
         testo = font.render(msg, True, colore)
         dimX, dimY = font.size(msg)
         GlobalVar.schermo.blit(testo, (x - (dimX // 2), y))
-    else:
+    elif testoComplesso:
         vetMsg = msg.split("<*>")
         for text in vetMsg:
             colore = coloreOrig
@@ -70,6 +74,9 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
                                 y += dimY
                         GlobalVar.schermo.blit(testo, (x, y))
                         x += dimX
+    else:
+        testo = font.render(msg, True, colore)
+        GlobalVar.schermo.blit(testo, (x, y))
 
 
 def getStatistiche(dati, difesa=0):
@@ -148,7 +155,7 @@ def guardaVideo(listaImg, audio, loop):
         GlobalVar.configuraCursore(False)
     GlobalVar.schermo.fill(GlobalVar.grigioscu)
     sprites = pygame.sprite.Group(Fade(2))
-    schermoFadeToBlack = GlobalVar.schermo.copy()
+    schermoFadeToBlack = GlobalVar.schermo.copy().convert()
     oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
     pygame.display.update()
     bottoneDown = False
@@ -181,7 +188,7 @@ def guardaVideo(listaImg, audio, loop):
 
     # oscura lo schermo
     sprites = pygame.sprite.Group(Fade(0))
-    schermoFadeToBlack = GlobalVar.schermo.copy()
+    schermoFadeToBlack = GlobalVar.schermo.copy().convert()
     oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
     i = GlobalVar.volumeEffetti
     while i > 0:
@@ -1877,7 +1884,7 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
 
         GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreMorte)
         sprites = pygame.sprite.Group(Fade(3))
-        schermoFadeToBlack = GlobalVar.schermo.copy()
+        schermoFadeToBlack = GlobalVar.schermo.copy().convert()
         i = 1
         while i <= 35:
             sprites.update()
@@ -2070,24 +2077,24 @@ def dialoga(avanzamentoStoria, personaggio):
     puntatoreSpostato = False
     puntatore = GlobalVar.puntatore
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        imgPersDialogo = pygame.transform.smoothscale(GlobalVar.imgDialogoFraMaggiore, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
+        imgPersDialogo = GlobalVar.imgDialogoFraMaggiore
         nomePersonaggio = "Sam"
     else:
-        imgPersDialogo = pygame.transform.smoothscale(GlobalVar.imgDialogoSara, (GlobalVar.gpx * 16, GlobalVar.gpy * 12))
+        imgPersDialogo = GlobalVar.imgDialogoSara
         nomePersonaggio = "Sara"
 
     if personaggio.nome != "Tutorial":
         GlobalVar.schermo.blit(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))
     if personaggio.nome != "Tutorial" and personaggio.nome != "Nessuno":
         GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
-    schermo_prima_del_dialogo = GlobalVar.schermo.copy()
+    schermo_prima_del_dialogo = GlobalVar.schermo.copy().convert()
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
     dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 150))
     background.blit(dark, (0, 0))
     GlobalVar.schermo.blit(background, (0, 0))
 
-    schermo_prima_del_dialogo = GlobalVar.schermo.copy()
+    schermo_prima_del_dialogo = GlobalVar.schermo.copy().convert()
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalVar.gsy // 18 * 3.5, GlobalVar.gsx, GlobalVar.gsy // 18 * 14.5))
 
     primoframe = True
@@ -2229,10 +2236,6 @@ def dialoga(avanzamentoStoria, personaggio):
                 messaggio(personaggio.partiDialogo[numeromessaggioAttuale][4], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2), 50)
                 messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2), 50)
                 messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2), 50)
-                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2), GlobalVar.gpx, GlobalVar.gpy))
-                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2), GlobalVar.gpx, GlobalVar.gpy))
-                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2), GlobalVar.gpx, GlobalVar.gpy))
-                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2), GlobalVar.gpx, GlobalVar.gpy))
                 if voceMarcata == 1:
                     GlobalVar.schermo.blit(puntatore, (GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2)))
                 if voceMarcata == 2:
@@ -2274,58 +2277,34 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
 
 
 def cambiaProtagonista(nome):
-    persw = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4.png', True)
-    GlobalVar.persw = pygame.transform.smoothscale(persw, (GlobalVar.gpx, GlobalVar.gpy))
-    perswb = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4b.png', True)
-    GlobalVar.perswb = pygame.transform.smoothscale(perswb, (GlobalVar.gpx, GlobalVar.gpy))
-    persa = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3.png', True)
-    GlobalVar.persa = pygame.transform.smoothscale(persa, (GlobalVar.gpx, GlobalVar.gpy))
-    persab = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3b.png', True)
-    GlobalVar.persab = pygame.transform.smoothscale(persab, (GlobalVar.gpx, GlobalVar.gpy))
-    GlobalVar.perso = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1.png', True)
-    GlobalVar.perss = pygame.transform.smoothscale(GlobalVar.perso, (GlobalVar.gpx, GlobalVar.gpy))
-    persob = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1b.png', True)
-    GlobalVar.perssb = pygame.transform.smoothscale(persob, (GlobalVar.gpx, GlobalVar.gpy))
-    persd = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2.png', True)
-    GlobalVar.persd = pygame.transform.smoothscale(persd, (GlobalVar.gpx, GlobalVar.gpy))
-    persdb = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2b.png', True)
-    GlobalVar.persdb = pygame.transform.smoothscale(persdb, (GlobalVar.gpx, GlobalVar.gpy))
-    perssm = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1mov.png', True)
-    GlobalVar.perssm = pygame.transform.smoothscale(perssm, (GlobalVar.gpx, GlobalVar.gpy))
-    perssmb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1movb1.png', True)
-    GlobalVar.perssmb1 = pygame.transform.smoothscale(perssmb1, (GlobalVar.gpx, GlobalVar.gpy))
-    perssmb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1movb2.png', True)
-    GlobalVar.perssmb2 = pygame.transform.smoothscale(perssmb2, (GlobalVar.gpx, GlobalVar.gpy))
-    persdm = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2mov.png', True)
-    GlobalVar.persdm = pygame.transform.smoothscale(persdm, (GlobalVar.gpx, GlobalVar.gpy))
-    persdmb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2movb1.png', True)
-    GlobalVar.persdmb1 = pygame.transform.smoothscale(persdmb1, (GlobalVar.gpx, GlobalVar.gpy))
-    persdmb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2movb2.png', True)
-    GlobalVar.persdmb2 = pygame.transform.smoothscale(persdmb2, (GlobalVar.gpx, GlobalVar.gpy))
-    persam = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3mov.png', True)
-    GlobalVar.persam = pygame.transform.smoothscale(persam, (GlobalVar.gpx, GlobalVar.gpy))
-    persamb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3movb1.png', True)
-    GlobalVar.persamb1 = pygame.transform.smoothscale(persamb1, (GlobalVar.gpx, GlobalVar.gpy))
-    persamb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3movb2.png', True)
-    GlobalVar.persamb2 = pygame.transform.smoothscale(persamb2, (GlobalVar.gpx, GlobalVar.gpy))
-    perswm = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4mov.png', True)
-    GlobalVar.perswm = pygame.transform.smoothscale(perswm, (GlobalVar.gpx, GlobalVar.gpy))
-    perswmb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4movb1.png', True)
-    GlobalVar.perswmb1 = pygame.transform.smoothscale(perswmb1, (GlobalVar.gpx, GlobalVar.gpy))
-    perswmb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4movb2.png', True)
-    GlobalVar.perswmb2 = pygame.transform.smoothscale(perswmb2, (GlobalVar.gpx, GlobalVar.gpy))
-    perswmbAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4movbAttacco.png', True)
-    GlobalVar.perswmbAttacco = pygame.transform.smoothscale(perswmbAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-    persambAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3movbAttacco.png', True)
-    GlobalVar.persambAttacco = pygame.transform.smoothscale(persambAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-    perssmbAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1movbAttacco.png', True)
-    GlobalVar.perssmbAttacco = pygame.transform.smoothscale(perssmbAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-    persdmbAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2movbAttacco.png', True)
-    GlobalVar.persdmbAttacco = pygame.transform.smoothscale(persdmbAttacco, (GlobalVar.gpx, GlobalVar.gpy))
-    persmbDifesa = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/PersonaggiomovbDifesa.png', True)
-    GlobalVar.persmbDifesa = pygame.transform.smoothscale(persmbDifesa, (GlobalVar.gpx, GlobalVar.gpy))
-    persAvvele = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/PersonaggioAvvelenato.png', True)
-    GlobalVar.persAvvele = pygame.transform.smoothscale(persAvvele, (GlobalVar.gpx, GlobalVar.gpy))
+    GlobalVar.persw = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perswb = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4b.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persa = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persab = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3b.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perso = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
+    GlobalVar.perss = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persob = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1b.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
+    GlobalVar.perssb = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1b.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persd = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persdb = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2b.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perssm = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1mov.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perssmb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1movb1.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perssmb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1movb2.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persdm = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2mov.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persdmb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2movb1.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persdmb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2movb2.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persam = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3mov.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persamb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3movb1.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persamb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3movb2.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perswm = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4mov.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perswmb1 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4movb1.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perswmb2 = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4movb2.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perswmbAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio4movbAttacco.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persambAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio3movbAttacco.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.perssmbAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio1movbAttacco.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persdmbAttacco = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/Personaggio2movbAttacco.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persmbDifesa = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/PersonaggiomovbDifesa.png', GlobalVar.gpx, GlobalVar.gpy, True)
+    GlobalVar.persAvvele = GlobalVar.loadImage('Immagini/Personaggi/' + nome + '/PersonaggioAvvelenato.png', GlobalVar.gpx, GlobalVar.gpy, True)
 
 
 def aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi):

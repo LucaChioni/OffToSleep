@@ -228,7 +228,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     if lungvita < 0:
         lungvita = 0
     indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+    fineindvitapers = GlobalVar.fineindvita
     vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
     GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
@@ -252,7 +252,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         if lungen < 0:
             lungen = 0
         indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-        fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        fineindvitarob = GlobalVar.fineindvita
         vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
         GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
@@ -286,7 +286,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                 GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
                 GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
                 indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                fineindvitamost = GlobalVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                 GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + int(((GlobalVar.gpx * 1000) / float(4)) // 15), 0))
@@ -308,7 +308,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         if nemicoAppiccicato:
             GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(nemicoInquadrato.imgS, (0, 0))
-        fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        fineindvitamost = GlobalVar.fineindvita
         if pvmtot > 1500:
             indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
             lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
@@ -390,7 +390,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                 sprites = pygame.sprite.Group(Fade(1))
             else:
                 sprites = pygame.sprite.Group(Fade(2))
-            schermoFadeToBlack = GlobalVar.schermo.copy()
+            schermoFadeToBlack = GlobalVar.schermo.copy().convert()
             oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
         else:
             pygame.display.update()
@@ -488,17 +488,17 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         if dati[i] == 4:
             messaggio("Sara con veleno", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 5:
-            messaggio("Colco surriscaldato", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Impo surriscaldato", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 6:
-            messaggio("Colco con pe < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Impo con pe < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 7:
-            messaggio("Colco con pe < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Impo con pe < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 8:
-            messaggio("Colco con pe < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Impo con pe < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 9:
             messaggio("Sempre a Sara", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 10:
-            messaggio("Sempre a Colco", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Sempre a Impo", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 11:
             messaggio("Nemico a caso", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 12:
@@ -834,7 +834,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if nemicoInquadrato.appiccicato:
             GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(nemicoInquadrato.imgS, (0, 0))
-        fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        fineindvitamost = GlobalVar.fineindvita
         if pvmtot > 1500:
             indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
             lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
@@ -907,7 +907,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
                 GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
                 indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                fineindvitamost = GlobalVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                 GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + int(((GlobalVar.gpx * 1000) / float(4)) // 15), 0))
@@ -921,7 +921,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if lungen < 0:
             lungen = 0
         indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-        fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+        fineindvitarob = GlobalVar.fineindvita
         vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
         GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
         GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
@@ -955,7 +955,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     if lungvita < 0:
         lungvita = 0
     indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+    fineindvitapers = GlobalVar.fineindvita
     vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
     GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
@@ -972,7 +972,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     if difp > 0:
         GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
 
-    schermoPrevisioneColco = GlobalVar.schermo.copy()
+    schermoPrevisioneColco = GlobalVar.schermo.copy().convert()
 
     # disegno le caselle non attaccabili (prima cerco gli oggetti che hanno accanto una casellaAttaccabile per non oscurarli)
     vetCaselleDaNonOscurare = []
@@ -1018,7 +1018,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     if lungvita < 0:
         lungvita = 0
     indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-    fineindvitapers = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+    fineindvitapers = GlobalVar.fineindvita
     vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
     GlobalVar.schermo.blit(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
     GlobalVar.schermo.blit(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
@@ -1035,9 +1035,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     if difp > 0:
         GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
 
-    schermoOriginale = GlobalVar.schermo.copy()
+    schermoOriginale = GlobalVar.schermo.copy().convert()
 
-    tastotempfps = 5
+    tastotempfps = 8
     danno = 0
     creaesca = False
     ricaricaschermo = False
@@ -1248,7 +1248,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if bottoneDownVecchio != bottoneDown:
             nxp = 0
             nyp = 0
-            tastotempfps = 5
+            tastotempfps = 8
         # esci
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -1456,7 +1456,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
         # rallenta per i 20 fps
         if tastotempfps != 0 and bottoneDown:
-            if tastotempfps != 5:
+            if tastotempfps != 8:
                 nxp = 0
                 nyp = 0
             tastotempfps -= 1
@@ -1536,7 +1536,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     analisiDiColcoEffettuata = True
                     GlobalVar.schermo.blit(schermoOriginale, (0, 0))
                 # apri/chiudi porta attacco = 1
-                elif attacco == 1 and ((xp == x + GlobalVar.gpx and yp == y) or (xp == x - GlobalVar.gpx and yp == y) or (xp == x and yp == y + GlobalVar.gpy) or (xp == x and yp == y - GlobalVar.gpy)) and suPorta:
+                elif attacco == 1 and ((xp == x + GlobalVar.gpx and yp == y) or (xp == x - GlobalVar.gpx and yp == y) or (xp == x and yp == y + GlobalVar.gpy) or (xp == x and yp == y - GlobalVar.gpy)) and (suPorta or inquadratoQualcosa == "porta"):
                     apriChiudiPorta = [True, xp, yp]
                     sposta = True
                     risposta = True
@@ -1549,7 +1549,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     if xp == x and yp == y - GlobalVar.gpy:
                         npers = 3
                 # apri cofanetto attacco = 1
-                elif attacco == 1 and ((xp == x + GlobalVar.gpx and yp == y) or (xp == x - GlobalVar.gpx and yp == y) or (xp == x and yp == y + GlobalVar.gpy) or (xp == x and yp == y - GlobalVar.gpy)) and suCofanetto:
+                elif attacco == 1 and ((xp == x + GlobalVar.gpx and yp == y) or (xp == x - GlobalVar.gpx and yp == y) or (xp == x and yp == y + GlobalVar.gpy) or (xp == x and yp == y - GlobalVar.gpy)) and (suCofanetto or inquadratoQualcosa == "cofanetto"):
                     apriCofanetto = [True, xp, yp]
                     sposta = True
                     risposta = True
@@ -1912,19 +1912,19 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         GlobalVar.schermo.blit(background, (xvp, yvp))
         # visualizza campo attaccabile se sto usando un oggetto
         if attacco == 2:
-            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 13, GlobalVar.gpy * 13))
+            campoattaccabile3 = GlobalVar.campoattaccabileRallo1
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 6), y - (GlobalVar.gpy * 6)))
         if attacco == 3:
-            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 11, GlobalVar.gpy * 11))
+            campoattaccabile3 = GlobalVar.campoattaccabileRallo2
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 5), y - (GlobalVar.gpy * 5)))
         if attacco == 4:
-            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 13, GlobalVar.gpy * 13))
+            campoattaccabile3 = GlobalVar.campoattaccabileRallo3
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 6), y - (GlobalVar.gpy * 6)))
         if attacco == 5:
-            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 11, GlobalVar.gpy * 11))
+            campoattaccabile3 = GlobalVar.campoattaccabileRallo4
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 5), y - (GlobalVar.gpy * 5)))
         if attacco == 6:
-            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabile2, (GlobalVar.gpx * 9, GlobalVar.gpy * 9))
+            campoattaccabile3 = GlobalVar.campoattaccabileRallo5
             GlobalVar.schermo.blit(campoattaccabile3, (x - (GlobalVar.gpx * 4), y - (GlobalVar.gpy * 4)))
 
         # movimenti del puntatore su porte e cofanetti quando si usa la tastiera
@@ -2146,7 +2146,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
                 GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
                 indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                fineindvitamost = GlobalVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                 GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + int(((GlobalVar.gpx * 1000) / float(4)) // 15), 0))
@@ -2170,7 +2170,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
                         GlobalVar.schermo.blit(GlobalVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
                     i = i + 3
-                campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabilemostro, ((raggiovista * 2) + GlobalVar.gpx, (raggiovista * 2) + GlobalVar.gpy))
+                campoattaccabile3 = nemico.imgCampoAttaccabile
                 GlobalVar.schermo.blit(campoattaccabile3, (mx - raggiovista, my - raggiovista))
                 GlobalVar.schermo.blit(GlobalVar.sfondoMostro, (0, 0))
                 if nemico.avvelenato:
@@ -2178,7 +2178,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if nemico.appiccicato:
                     GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
                 GlobalVar.schermo.blit(nemico.imgS, (0, 0))
-                fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                fineindvitamost = GlobalVar.fineindvita
                 if pvmtot > 1500:
                     indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                     lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
@@ -2262,7 +2262,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if lungen < 0:
                 lungen = 0
             indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-            fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            fineindvitarob = GlobalVar.fineindvita
             vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
             GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
@@ -2294,7 +2294,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if lungen < 0:
                 lungen = 0
             indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-            fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            fineindvitarob = GlobalVar.fineindvita
             vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
             GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))
@@ -2322,7 +2322,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
                     GlobalVar.schermo.blit(GlobalVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
                 i = i + 3
-            campoattaccabile3 = pygame.transform.smoothscale(GlobalVar.campoattaccabilemostro, ((raggiovista * 2) + GlobalVar.gpx, (raggiovista * 2) + GlobalVar.gpy))
+            campoattaccabile3 = nemicoInquadrato.imgCampoAttaccabile
             GlobalVar.schermo.blit(campoattaccabile3, (mx - raggiovista, my - raggiovista))
             GlobalVar.schermo.blit(GlobalVar.sfondoMostro, (0, 0))
             if nemicoInquadrato.avvelenato:
@@ -2330,7 +2330,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if nemicoInquadrato.appiccicato:
                 GlobalVar.schermo.blit(GlobalVar.appiccicoso, ((GlobalVar.gpx * 2) + (GlobalVar.gpx // 8), GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(nemicoInquadrato.imgS, (0, 0))
-            fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            fineindvitamost = GlobalVar.fineindvita
             if pvmtot > 1500:
                 indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1500) / float(4)) // 15), GlobalVar.gpy // 4))
                 lungvitatot = int(((GlobalVar.gpx * 1500) / float(4)) // 15)
@@ -2403,7 +2403,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     GlobalVar.schermo.blit(GlobalVar.sfondoEsche, (0, 0))
                     GlobalVar.schermo.blit(GlobalVar.esche, (0, 0))
                     indvitamost = pygame.transform.smoothscale(GlobalVar.indvita, (int(((GlobalVar.gpx * 1000) / float(4)) // 15), GlobalVar.gpy // 4))
-                    fineindvitamost = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+                    fineindvitamost = GlobalVar.fineindvita
                     vitaesche = pygame.transform.smoothscale(GlobalVar.vitanemico0, (lungvita, GlobalVar.gpy // 4))
                     GlobalVar.schermo.blit(indvitamost, (GlobalVar.gpx, 0))
                     GlobalVar.schermo.blit(fineindvitamost, (GlobalVar.gpx + int(((GlobalVar.gpx * 1000) / float(4)) // 15), 0))
@@ -2417,7 +2417,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if lungen < 0:
                 lungen = 0
             indvitarob = pygame.transform.smoothscale(GlobalVar.indvita, (lungentot, GlobalVar.gpy // 4))
-            fineindvitarob = pygame.transform.smoothscale(GlobalVar.fineindvita, (GlobalVar.gpx // 12, GlobalVar.gpy // 4))
+            fineindvitarob = GlobalVar.fineindvita
             vitarob = pygame.transform.smoothscale(GlobalVar.vitarobo, (lungen, GlobalVar.gpy // 4))
             GlobalVar.schermo.blit(GlobalVar.sfondoColco, (0, 0))
             GlobalVar.schermo.blit(indvitarob, (GlobalVar.gpx, 0))

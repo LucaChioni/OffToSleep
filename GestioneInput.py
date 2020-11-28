@@ -9,6 +9,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
     for event in pygame.event.get():
         # faccio apparire/sparire il cursore
         if event.type == pygame.KEYDOWN and (GlobalVar.mouseVisibile or GlobalVar.usandoIlController):
+            GlobalVar.listaTastiPremuti = []
             GlobalVar.padUtilizzato = False
             tastoTrovato = True
             aggiornaInterfaccia = True
@@ -16,6 +17,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
             GlobalVar.setCursoreVisibile(False)
             GlobalVar.usandoIlController = False
         elif event.type == pygame.MOUSEBUTTONDOWN and (not GlobalVar.mouseVisibile or GlobalVar.usandoIlController):
+            GlobalVar.listaTastiPremuti = []
             GlobalVar.padUtilizzato = False
             tastoTrovato = True
             aggiornaInterfaccia = True
@@ -30,6 +32,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                     for idTasto in range(buttons):
                         if pad.get_button(idTasto):
                             if pad != GlobalVar.padUtilizzato:
+                                GlobalVar.listaTastiPremuti =[]
                                 GlobalVar.inizializzaPad(pad)
                             padTrovato = True
                             break
@@ -43,6 +46,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                         direzioneX, direzioneY = hat
                         if direzioneX != 0 or direzioneY != 0:
                             if pad != GlobalVar.padUtilizzato:
+                                GlobalVar.listaTastiPremuti =[]
                                 GlobalVar.inizializzaPad(pad)
                             padTrovato = True
                             break
@@ -62,43 +66,60 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
             GlobalVar.quit()
 
         # tasto tastiera
-        if event.type == pygame.KEYDOWN and not tastoTrovato:
-            if event.key == pygame.K_w and not tastoTrovato:
+        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_w and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if event.key == pygame.K_a and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_a and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if event.key == pygame.K_s and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_s and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if event.key == pygame.K_d and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_d and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if event.key == pygame.K_e and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_e and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if event.key == pygame.K_q and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_q and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT) and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT) and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if (event.key == pygame.K_3 or event.key == pygame.K_KP3) and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_3 or event.key == pygame.K_KP3) and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if (event.key == pygame.K_2 or event.key == pygame.K_KP2) and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_2 or event.key == pygame.K_KP2) and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if event.key == pygame.K_SPACE and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
-            if event.key == pygame.K_ESCAPE and not tastoTrovato:
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE and not tastoTrovato:
                 tastoTrovato = True
                 bottoneDown = event.key
+                GlobalVar.listaTastiPremuti.append(bottoneDown)
+
+            if event.type == pygame.KEYUP and event.key in GlobalVar.listaTastiPremuti:
+                GlobalVar.listaTastiPremuti.remove(event.key)
+
+            if len(GlobalVar.listaTastiPremuti) == 0:
+                bottoneDown = False
 
         # tasto mouse
-        if (event.type == pygame.MOUSEBUTTONDOWN and not tastoTrovato) or event.type == pygame.MOUSEBUTTONUP:
+        if (event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP) and not tastoTrovato:
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
             tastoTrovato = True
 
@@ -119,8 +140,11 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                 bottoneDown = "mouseCentrale"
                 GlobalVar.listaTastiPremuti.append(bottoneDown)
 
+            if not "mouseSinistro" in GlobalVar.listaTastiPremuti and not "mouseDestro" in GlobalVar.listaTastiPremuti and not "mouseCentrale" in GlobalVar.listaTastiPremuti:
+                bottoneDown = False
+
         # tasto joypad
-        if (event.type == pygame.JOYBUTTONDOWN and not tastoTrovato) or event.type == pygame.JOYBUTTONUP:
+        if (event.type == pygame.JOYBUTTONDOWN or event.type == pygame.JOYBUTTONUP) and not tastoTrovato:
             padCambiato = False
             padTrovato = False
             for pad in GlobalVar.listaPadConnessiConfigurati:
@@ -129,6 +153,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                     for idTasto in range(buttons):
                         if pad.get_button(idTasto):
                             if pad != GlobalVar.padUtilizzato:
+                                GlobalVar.listaTastiPremuti =[]
                                 GlobalVar.inizializzaPad(pad)
                                 padCambiato = True
                             padTrovato = True
@@ -174,6 +199,9 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                             GlobalVar.listaTastiPremuti.append(idTasto)
                     elif idTasto in GlobalVar.listaTastiPremuti:
                         GlobalVar.listaTastiPremuti.remove(idTasto)
+
+            if len(GlobalVar.listaTastiPremuti) == 0:
+                bottoneDown = False
         if event.type == pygame.JOYHATMOTION and not tastoTrovato:
             padCambiato = False
             padTrovato = False
@@ -185,6 +213,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                         direzioneX, direzioneY = hat
                         if direzioneX != 0 or direzioneY != 0:
                             if pad != GlobalVar.padUtilizzato:
+                                GlobalVar.listaTastiPremuti =[]
                                 GlobalVar.inizializzaPad(pad)
                                 padCambiato = True
                             padTrovato = True
@@ -212,9 +241,5 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                             elif direzioneY == -1:
                                 tastoTrovato = True
                                 bottoneDown = "padGiu"
-
-        # se lascio un tasto e non ne ho premuti altri resetto la variabile "bottoneDown" (non ha effetto se nella lista di eventi ci sono altri tasti premuti)
-        if (event.type == pygame.KEYUP and event.key == bottoneDown) or event.type == pygame.MOUSEBUTTONUP or (GlobalVar.padUtilizzato and event.type == pygame.JOYBUTTONUP):
-            bottoneDown = False
 
     return bottoneDown, aggiornaInterfaccia

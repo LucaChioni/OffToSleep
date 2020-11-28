@@ -435,6 +435,8 @@ class NemicoObj(object):
         self.imgDanneggiamentoRallo = GlobalVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoRalloNemico"]
         self.imgDanneggiamentoColco = GlobalVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoColcoNemico"]
 
+        self.imgCampoAttaccabile = GlobalVar.loadImage('Immagini/Campiattaccabili/Campoattaccabilemostro.png', (self.raggioVisivo * 2) + GlobalVar.gpx, (self.raggioVisivo * 2) + GlobalVar.gpy, True)
+
     def girati(self, direzione):
         self.imgAttuale = self.imgS
         if direzione == "w":

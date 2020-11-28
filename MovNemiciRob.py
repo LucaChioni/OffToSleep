@@ -4,7 +4,7 @@ import copy
 from GenericFunc import *
 
 
-def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemici, listaPersonaggi, caseviste):
+def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemici, listaPersonaggi, caseviste, avanzamentoStoria):
     sposta = False
     attacca = False
     nmos = 0
@@ -60,7 +60,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                     danno = nemico.attacco - dif
                     if danno < 0:
                         danno = 0
-                    if random.randint(1, 100) <= par:
+                    if random.randint(1, 101) <= par and avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                         danno = 0
                         avvelena = False
                         nemico.ralloParato = True
@@ -352,7 +352,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                         danno = nemico.attacco - dif
                         if danno < 0:
                             danno = 0
-                        if random.randint(1, 100) <= par:
+                        if random.randint(1, 101) <= par and avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                             danno = 0
                             avvelena = False
                             nemico.ralloParato = True

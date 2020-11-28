@@ -4,8 +4,8 @@ from SottoMenuB import *
 
 
 def equip(dati):
-    perssta = pygame.transform.smoothscale(GlobalVar.perso, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    persstab = pygame.transform.smoothscale(GlobalVar.persob, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    perssta = GlobalVar.perso
+    persstab = GlobalVar.persob
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     sfondoOggetto = GlobalVar.sfondoOggettoMenu
@@ -19,14 +19,14 @@ def equip(dati):
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
     bottoneDown = False
-    tastotempfps = 5
+    tastotempfps = 8
 
-    spada = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    arco = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    scudo = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    armatura = pygame.transform.smoothscale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    guanti = pygame.transform.smoothscale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-    collana = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    spada = GlobalVar.vetImgSpadePixellate[dati[6]]
+    arco = GlobalVar.vetImgArchiPixellate[dati[128]]
+    scudo = GlobalVar.vetImgScudiPixellate[dati[7]]
+    armatura = GlobalVar.vetImgArmaturePixellate[dati[8]]
+    guanti = GlobalVar.vetImgGuantiPixellate[dati[129]]
+    collana = GlobalVar.vetImgCollanePixellate[dati[130]]
     carim = False
 
     vetImgSpade = []
@@ -294,7 +294,7 @@ def equip(dati):
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
-            tastotempfps = 5
+            tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
             risposta = True
@@ -599,12 +599,12 @@ def equip(dati):
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.5, GlobalVar.gsy // 18 * 6.8, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 9))
 
             if carim:
-                spada = pygame.transform.smoothscale(GlobalVar.vetImgSpadePixellate[dati[6]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                arco = pygame.transform.smoothscale(GlobalVar.vetImgArchiPixellate[dati[128]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                scudo = pygame.transform.smoothscale(GlobalVar.vetImgScudiPixellate[dati[7]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                armatura = pygame.transform.smoothscale(GlobalVar.vetImgArmaturePixellate[dati[8]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                guanti = pygame.transform.smoothscale(GlobalVar.vetImgGuantiPixellate[dati[129]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
-                collana = pygame.transform.smoothscale(GlobalVar.vetImgCollanePixellate[dati[130]], (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                spada = GlobalVar.vetImgSpadePixellate[dati[6]]
+                arco = GlobalVar.vetImgArchiPixellate[dati[128]]
+                scudo = GlobalVar.vetImgScudiPixellate[dati[7]]
+                armatura = GlobalVar.vetImgArmaturePixellate[dati[8]]
+                guanti = GlobalVar.vetImgGuantiPixellate[dati[129]]
+                collana = GlobalVar.vetImgCollanePixellate[dati[130]]
                 carim = False
 
             pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gsx // 32 * 4.5) - 1, (GlobalVar.gsy // 18 * 5.5) + (GlobalVar.gpy // 2)), ((GlobalVar.gsx // 32 * 4.5) - 1, (GlobalVar.gsy // 18 * 15) + (GlobalVar.gpy // 2)), 1)
@@ -1010,7 +1010,7 @@ def sceglicondiz(dati, condizione):
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
     bottoneDown = False
-    tastotempfps = 5
+    tastotempfps = 8
 
     # carico le scenette
     scecond = GlobalVar.vetImgCondizioniMenu
@@ -1176,7 +1176,7 @@ def sceglicondiz(dati, condizione):
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
-            tastotempfps = 5
+            tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
             risposta = True
@@ -1245,6 +1245,9 @@ def sceglicondiz(dati, condizione):
                         voceMarcata += 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 8
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
                     voceMarcata += 1
@@ -1275,6 +1278,9 @@ def sceglicondiz(dati, condizione):
                         voceMarcata -= 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 1
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -1297,7 +1303,7 @@ def sceglicondiz(dati, condizione):
             messaggio("Cancella", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.7, 45)
             if voceMarcata == 0:
                 messaggio("Cancella:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                messaggio("Cancella il settaggio di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio("Cancella il settaggio di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if dati[81] > 0:
                 messaggio("Sara con pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 40)
                 if voceMarcata == 1:
@@ -1331,35 +1337,35 @@ def sceglicondiz(dati, condizione):
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.2, 40)
             if dati[85] > 0:
-                messaggio("Colco surriscaldato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.2, 40)
+                messaggio("Impo surriscaldato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.2, 40)
                 if voceMarcata == 5:
                     GlobalVar.schermo.blit(scecond[5], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Colco surriscaldato:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Colco quando è surriscaldato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Impo surriscaldato:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Impo quando è surriscaldato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.2, 40)
             if dati[86] > 0:
-                messaggio("Colco con pe < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.2, 40)
+                messaggio("Impo con pe < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.2, 40)
                 if voceMarcata == 6:
                     GlobalVar.schermo.blit(scecond[6], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Colco con pe < 80%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Colco quando ha pe < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Impo con pe < 80%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Impo quando ha pe < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.2, 40)
             if dati[87] > 0:
-                messaggio("Colco con pe < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.2, 40)
+                messaggio("Impo con pe < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.2, 40)
                 if voceMarcata == 7:
                     GlobalVar.schermo.blit(scecond[7], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Colco con pe < 50%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Colco quando ha pe < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Impo con pe < 50%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Impo quando ha pe < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.2, 40)
             if dati[88] > 0:
-                messaggio("Colco con pe < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.2, 40)
+                messaggio("Impo con pe < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.2, 40)
                 if voceMarcata == 8:
                     GlobalVar.schermo.blit(scecond[8], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Colco con pe < 30%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Colco quando ha pe < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Impo con pe < 30%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Impo quando ha pe < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.2, 40)
             if dati[89] > 0:
@@ -1371,11 +1377,11 @@ def sceglicondiz(dati, condizione):
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.2, 40)
             if dati[90] > 0:
-                messaggio("Sempre a Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.2, 40)
+                messaggio("Sempre a Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.2, 40)
                 if voceMarcata == 10:
                     GlobalVar.schermo.blit(scecond[10], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Sempre a Colco:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Colco in continuazione (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Sempre a Impo:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Impo in continuazione (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.2, 40)
             if dati[91] > 0:
@@ -1504,7 +1510,7 @@ def sceglitecn(dati, tecnica):
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
     bottoneDown = False
-    tastotempfps = 5
+    tastotempfps = 8
 
     # carico le scenette
     scetecn = GlobalVar.vetImgTecnicheMenu
@@ -1670,7 +1676,7 @@ def sceglitecn(dati, tecnica):
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
-            tastotempfps = 5
+            tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
             risposta = True
@@ -1741,6 +1747,9 @@ def sceglitecn(dati, tecnica):
                         voceMarcata += 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 8
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
                     voceMarcata += 1
@@ -1771,6 +1780,9 @@ def sceglitecn(dati, tecnica):
                         voceMarcata -= 10
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                         xp = GlobalVar.gsx // 32 * 1
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -1793,7 +1805,7 @@ def sceglitecn(dati, tecnica):
             messaggio("Cancella", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.7, 45)
             if voceMarcata == 0:
                 messaggio("Cancella:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                messaggio("Cancella il settaggio di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio("Cancella il settaggio di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if dati[11] > 0:
                 messaggio("Scossa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 40)
                 if voceMarcata == 1:
@@ -1836,7 +1848,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[5], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Tempesta elettrica:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.2, 40)
             if dati[16] > 0:
@@ -1845,7 +1857,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[6], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Raffreddamento:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[5]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre su Colco)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre su Impo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.2, 40)
             if dati[17] > 0:
@@ -1854,7 +1866,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[7], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Auto-ricarica:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[6]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Ricarica un po' Colco ma richiede due turni e provoca surriscaldamento (applicata sempre su Colco)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Ricarica un po' Impo ma richiede due turni e provoca surriscaldamento (applicata sempre su Impo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.2, 40)
             if dati[18] > 0:
@@ -1890,7 +1902,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[11], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Velocizza:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[10]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Permette a Colco, se non surriscaldato, di eseguire due azioni al turno. Provoca surriscaldamento dopo 15 turni dall'esecuzione (applicata sempre su Colco)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Permette a Impo, se non surriscaldato, di eseguire due azioni al turno. Provoca surriscaldamento dopo 15 turni dall'esecuzione (applicata sempre su Impo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 6.2, 40)
             if dati[22] > 0:
@@ -1917,7 +1929,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[14], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Efficienza:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[13]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con surriscaldamento (applicata sempre su Colco)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio(u"Tutte le tecniche costano la metà dei pe per 15 turni. Si annulla con surriscaldamento (applicata sempre su Impo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 9.2, 40)
             if dati[25] > 0:
@@ -1926,7 +1938,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[15], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Tempesta elettrica +:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[14]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 10.2, 40)
             if dati[26] > 0:
@@ -1944,7 +1956,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[17], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Auto-ricarica +:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[16]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Ricarica di molto Colco ma richiede due turni e provoca surriscaldamento (applicata sempre su Colco)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Ricarica di molto Impo ma richiede due turni e provoca surriscaldamento (applicata sempre su Impo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 12.2, 40)
             if dati[28] > 0:
@@ -1971,7 +1983,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.schermo.blit(scetecn[20], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Tempesta elettrica ++:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[19]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
                 messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 15, 40)
 
@@ -2009,7 +2021,7 @@ def sceglitecn(dati, tecnica):
 
 
 def equiprobo(dati):
-    robosta = pygame.transform.smoothscale(GlobalVar.roboo, (GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+    robosta = GlobalVar.roboo1
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     sfondoOggetto = GlobalVar.sfondoOggettoMenu
@@ -2029,7 +2041,7 @@ def equiprobo(dati):
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
     bottoneDown = False
-    tastotempfps = 5
+    tastotempfps = 8
 
     vetImgBatterie = GlobalVar.vetImgBatterieMenu
 
@@ -2548,7 +2560,7 @@ def equiprobo(dati):
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
-            tastotempfps = 5
+            tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
             if not riordinamento:
@@ -2879,7 +2891,7 @@ def equiprobo(dati):
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 15.5))
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 15.5))
 
-                messaggio("Setta Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+                messaggio("Setta Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
                 messaggio("Batterie", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.5, 60)
                 messaggio("Ordine", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 7.5, GlobalVar.gsy // 18 * 4.5, 60)
                 messaggio("Condizione...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 4.5, 60)
@@ -2930,17 +2942,17 @@ def equiprobo(dati):
                 if dati[i] == 4:
                     messaggio("Sara con veleno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 5:
-                    messaggio("Colco surriscaldato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
+                    messaggio("Impo surriscaldato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 6:
-                    messaggio("Colco con pe < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
+                    messaggio("Impo con pe < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 7:
-                    messaggio("Colco con pe < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
+                    messaggio("Impo con pe < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 8:
-                    messaggio("Colco con pe < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
+                    messaggio("Impo con pe < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 9:
                     messaggio("Sempre a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 10:
-                    messaggio("Sempre a Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
+                    messaggio("Sempre a Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 11:
                     messaggio("Nemico a caso", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * c, 40)
                 if dati[i] == 12:
@@ -3069,7 +3081,7 @@ def equiprobo(dati):
             if voceMarcata == 4:
                 if dati[74] != 0:
                     messaggio("Batteria enorme:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 4.8, 60)
-                    messaggio(u"Grande batteria che permette a Colco di utilizzare le tecniche più dispendiose", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio(u"Grande batteria che permette a Impo di utilizzare le tecniche più dispendiose", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
                     if dati[9] > 3:
                         messaggio(str(diff), GlobalVar.rosso, GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 8.5, 35)
@@ -3097,15 +3109,15 @@ def equiprobo(dati):
 
             if 6 <= voceMarcata <= 15:
                 messaggio(u"Ordine:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 4.8, 60)
-                messaggio(u"Indica la priorità dell'azione. Colco eseguirà la tecnica associata alla prima condizione verificata della lista", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio(u"Indica la priorità dell'azione. Impo eseguirà la tecnica associata alla prima condizione verificata della lista", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
             if 16 <= voceMarcata <= 25:
                 messaggio("Condizione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 4.8, 60)
-                messaggio(u"Indica la situazione che si deve verificare affinché Colco esegua la tecnica associata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio(u"Indica la situazione che si deve verificare affinché Impo esegua la tecnica associata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
             if 26 <= voceMarcata <= 35:
                 messaggio("Tecnica:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 4.8, 60)
-                messaggio(u"La tecnica che Colco eseguirà quando si verifica la condizione associata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio(u"La tecnica che Impo eseguirà quando si verifica la condizione associata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
             # puntatore vecchio batterie/riordinamento gambit
             if dati[9] == 0:
@@ -3135,14 +3147,13 @@ def equiprobo(dati):
 def oggetti(dati, colcoInCasellaVista):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
-    sfondostastart = GlobalVar.sfondostax3
-    sconosciutoOggetto = pygame.transform.smoothscale(GlobalVar.sconosciutoOggettoMenu, (GlobalVar.gpx * 10, GlobalVar.gpy * 10))
+    sconosciutoOggetto = GlobalVar.sconosciutoOggettoMenu3
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.imgFraMaggioreMenuOggetti
     else:
         perssta = GlobalVar.imgSaraMenuOggetti
     xp = GlobalVar.gsx // 32 * 1
-    yp = GlobalVar.gsy // 18 * 5
+    yp = GlobalVar.gsy // 18 * 6.2
     xpv = xp
     ypv = yp
     usauno = False
@@ -3157,7 +3168,7 @@ def oggetti(dati, colcoInCasellaVista):
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
     bottoneDown = False
-    tastotempfps = 5
+    tastotempfps = 8
 
     imgOggetti = []
     i = 1
@@ -3212,66 +3223,66 @@ def oggetti(dati, colcoInCasellaVista):
                         GlobalVar.configuraCursore(False)
                     suTornaIndietro = True
                 elif GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 11:
-                    if GlobalVar.gsy // 18 * 4.7 <= yMouse <= GlobalVar.gsy // 18 * 5.7:
+                    if GlobalVar.gsy // 18 * 5.9 <= yMouse <= GlobalVar.gsy // 18 * 6.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 1
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 5
-                    elif GlobalVar.gsy // 18 * 5.7 <= yMouse <= GlobalVar.gsy // 18 * 6.7:
+                        yp = GlobalVar.gsy // 18 * 6.2
+                    elif GlobalVar.gsy // 18 * 6.9 <= yMouse <= GlobalVar.gsy // 18 * 7.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 2
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 6
-                    elif GlobalVar.gsy // 18 * 6.7 <= yMouse <= GlobalVar.gsy // 18 * 7.7:
+                        yp = GlobalVar.gsy // 18 * 7.2
+                    elif GlobalVar.gsy // 18 * 7.9 <= yMouse <= GlobalVar.gsy // 18 * 8.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 3
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 7
-                    elif GlobalVar.gsy // 18 * 7.7 <= yMouse <= GlobalVar.gsy // 18 * 8.7:
+                        yp = GlobalVar.gsy // 18 * 8.2
+                    elif GlobalVar.gsy // 18 * 8.9 <= yMouse <= GlobalVar.gsy // 18 * 9.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 4
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 8
-                    elif GlobalVar.gsy // 18 * 8.7 <= yMouse <= GlobalVar.gsy // 18 * 9.7:
+                        yp = GlobalVar.gsy // 18 * 9.2
+                    elif GlobalVar.gsy // 18 * 9.9 <= yMouse <= GlobalVar.gsy // 18 * 10.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 5
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 9
-                    elif GlobalVar.gsy // 18 * 10.7 <= yMouse <= GlobalVar.gsy // 18 * 11.7:
+                        yp = GlobalVar.gsy // 18 * 10.2
+                    elif GlobalVar.gsy // 18 * 10.9 <= yMouse <= GlobalVar.gsy // 18 * 11.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 6
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 11
-                    elif GlobalVar.gsy // 18 * 11.7 <= yMouse <= GlobalVar.gsy // 18 * 12.7:
+                        yp = GlobalVar.gsy // 18 * 11.2
+                    elif GlobalVar.gsy // 18 * 11.9 <= yMouse <= GlobalVar.gsy // 18 * 12.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 7
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 12
-                    elif GlobalVar.gsy // 18 * 12.7 <= yMouse <= GlobalVar.gsy // 18 * 13.7:
+                        yp = GlobalVar.gsy // 18 * 12.2
+                    elif GlobalVar.gsy // 18 * 12.9 <= yMouse <= GlobalVar.gsy // 18 * 13.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 8
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 13
-                    elif GlobalVar.gsy // 18 * 13.7 <= yMouse <= GlobalVar.gsy // 18 * 14.7:
+                        yp = GlobalVar.gsy // 18 * 13.2
+                    elif GlobalVar.gsy // 18 * 13.9 <= yMouse <= GlobalVar.gsy // 18 * 14.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 9
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 14
-                    elif GlobalVar.gsy // 18 * 14.7 <= yMouse <= GlobalVar.gsy // 18 * 15.7:
+                        yp = GlobalVar.gsy // 18 * 14.2
+                    elif GlobalVar.gsy // 18 * 14.9 <= yMouse <= GlobalVar.gsy // 18 * 15.9:
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         oggetton = 10
                         xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 15
+                        yp = GlobalVar.gsy // 18 * 15.2
                     else:
                         if not GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(True)
@@ -3287,32 +3298,32 @@ def oggetti(dati, colcoInCasellaVista):
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
-            tastotempfps = 5
+            tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             voceMarcata = 0
             if usa != 0:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                 xp = GlobalVar.gsx // 32 * 1
                 if usa == 1:
-                    yp = GlobalVar.gsy // 18 * 5
+                    yp = GlobalVar.gsy // 18 * 6.2
                 if usa == 2:
-                    yp = GlobalVar.gsy // 18 * 6
+                    yp = GlobalVar.gsy // 18 * 7.2
                 if usa == 3:
-                    yp = GlobalVar.gsy // 18 * 7
+                    yp = GlobalVar.gsy // 18 * 8.2
                 if usa == 4:
-                    yp = GlobalVar.gsy // 18 * 8
+                    yp = GlobalVar.gsy // 18 * 9.2
                 if usa == 5:
-                    yp = GlobalVar.gsy // 18 * 9
+                    yp = GlobalVar.gsy // 18 * 10.2
                 if usa == 6:
-                    yp = GlobalVar.gsy // 18 * 11
+                    yp = GlobalVar.gsy // 18 * 11.2
                 if usa == 7:
-                    yp = GlobalVar.gsy // 18 * 12
+                    yp = GlobalVar.gsy // 18 * 12.2
                 if usa == 8:
-                    yp = GlobalVar.gsy // 18 * 13
+                    yp = GlobalVar.gsy // 18 * 13.2
                 if usa == 9:
-                    yp = GlobalVar.gsy // 18 * 14
+                    yp = GlobalVar.gsy // 18 * 14.2
                 if usa == 10:
-                    yp = GlobalVar.gsy // 18 * 15
+                    yp = GlobalVar.gsy // 18 * 15.2
                 usa = 0
             else:
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -3325,25 +3336,25 @@ def oggetti(dati, colcoInCasellaVista):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     xp = GlobalVar.gsx // 32 * 1
                     if usa == 1:
-                        yp = GlobalVar.gsy // 18 * 5
+                        yp = GlobalVar.gsy // 18 * 6.2
                     if usa == 2:
-                        yp = GlobalVar.gsy // 18 * 6
+                        yp = GlobalVar.gsy // 18 * 7.2
                     if usa == 3:
-                        yp = GlobalVar.gsy // 18 * 7
+                        yp = GlobalVar.gsy // 18 * 8.2
                     if usa == 4:
-                        yp = GlobalVar.gsy // 18 * 8
+                        yp = GlobalVar.gsy // 18 * 9.2
                     if usa == 5:
-                        yp = GlobalVar.gsy // 18 * 9
+                        yp = GlobalVar.gsy // 18 * 10.2
                     if usa == 6:
-                        yp = GlobalVar.gsy // 18 * 11
+                        yp = GlobalVar.gsy // 18 * 11.2
                     if usa == 7:
-                        yp = GlobalVar.gsy // 18 * 12
+                        yp = GlobalVar.gsy // 18 * 12.2
                     if usa == 8:
-                        yp = GlobalVar.gsy // 18 * 13
+                        yp = GlobalVar.gsy // 18 * 13.2
                     if usa == 9:
-                        yp = GlobalVar.gsy // 18 * 14
+                        yp = GlobalVar.gsy // 18 * 14.2
                     if usa == 10:
-                        yp = GlobalVar.gsy // 18 * 15
+                        yp = GlobalVar.gsy // 18 * 15.2
                     usa = 0
                 else:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -3359,53 +3370,53 @@ def oggetti(dati, colcoInCasellaVista):
                         if dati[5] > pvtot:
                             dati[5] = pvtot
                         dati[31] = dati[31] - 1
-                        yp = GlobalVar.gsy // 18 * 5
+                        yp = GlobalVar.gsy // 18 * 6.2
                     # carica batt
                     if usa == 2:
                         dati[10] = dati[10] + 250
                         if dati[10] > entot:
                             dati[10] = entot
                         dati[32] = dati[32] - 1
-                        yp = GlobalVar.gsy // 18 * 6
+                        yp = GlobalVar.gsy // 18 * 7.2
                     # antidoto
                     if usa == 3:
                         dati[121] = 0
                         dati[33] = dati[33] - 1
-                        yp = GlobalVar.gsy // 18 * 7
+                        yp = GlobalVar.gsy // 18 * 8.2
                     # super pozione
                     if usa == 4:
                         dati[5] = dati[5] + 300
                         if dati[5] > pvtot:
                             dati[5] = pvtot
                         dati[34] = dati[34] - 1
-                        yp = GlobalVar.gsy // 18 * 8
+                        yp = GlobalVar.gsy // 18 * 9.2
                     # carica migliorato
                     if usa == 5:
                         dati[10] = dati[10] + 600
                         if dati[10] > entot:
                             dati[10] = entot
                         dati[35] = dati[35] - 1
-                        yp = GlobalVar.gsy // 18 * 9
+                        yp = GlobalVar.gsy // 18 * 10.2
                     # bomba
                     if usa == 6:
                         attacco = 2
-                        yp = GlobalVar.gsy // 18 * 11
+                        yp = GlobalVar.gsy // 18 * 11.2
                     # bomba veleno
                     if usa == 7:
                         attacco = 3
-                        yp = GlobalVar.gsy // 18 * 12
+                        yp = GlobalVar.gsy // 18 * 12.2
                     # esca
                     if usa == 8:
                         attacco = 4
-                        yp = GlobalVar.gsy // 18 * 13
+                        yp = GlobalVar.gsy // 18 * 13.2
                     # bomba appiccicosa
                     if usa == 9:
                         attacco = 5
-                        yp = GlobalVar.gsy // 18 * 14
+                        yp = GlobalVar.gsy // 18 * 14.2
                     # bomba potenziata
                     if usa == 10:
                         attacco = 6
-                        yp = GlobalVar.gsy // 18 * 15
+                        yp = GlobalVar.gsy // 18 * 15.2
                     if (usa == 2 or usa == 5) and dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
                     else:
@@ -3418,25 +3429,25 @@ def oggetti(dati, colcoInCasellaVista):
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
                     xp = GlobalVar.gsx // 32 * 1
                     if usa == 1:
-                        yp = GlobalVar.gsy // 18 * 5
+                        yp = GlobalVar.gsy // 18 * 6.2
                     if usa == 2:
-                        yp = GlobalVar.gsy // 18 * 6
+                        yp = GlobalVar.gsy // 18 * 7.2
                     if usa == 3:
-                        yp = GlobalVar.gsy // 18 * 7
+                        yp = GlobalVar.gsy // 18 * 8.2
                     if usa == 4:
-                        yp = GlobalVar.gsy // 18 * 8
+                        yp = GlobalVar.gsy // 18 * 9.2
                     if usa == 5:
-                        yp = GlobalVar.gsy // 18 * 9
+                        yp = GlobalVar.gsy // 18 * 10.2
                     if usa == 6:
-                        yp = GlobalVar.gsy // 18 * 11
+                        yp = GlobalVar.gsy // 18 * 11.2
                     if usa == 7:
-                        yp = GlobalVar.gsy // 18 * 12
+                        yp = GlobalVar.gsy // 18 * 12.2
                     if usa == 8:
-                        yp = GlobalVar.gsy // 18 * 13
+                        yp = GlobalVar.gsy // 18 * 13.2
                     if usa == 9:
-                        yp = GlobalVar.gsy // 18 * 14
+                        yp = GlobalVar.gsy // 18 * 14.2
                     if usa == 10:
-                        yp = GlobalVar.gsy // 18 * 15
+                        yp = GlobalVar.gsy // 18 * 15.2
                     usa = 0
                     usadue = False
                 # progresso-stanza-x-y-liv-pv-arma-scudo-armatura-armrob-energiarob-tecniche(20)-oggetti(50)
@@ -3529,42 +3540,48 @@ def oggetti(dati, colcoInCasellaVista):
         if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerCambioInput:
             aggiornaInterfacciaPerCambioInput = False
             aggiornaSchermo = False
-            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and voceMarcata == 0 and (tastotempfps == 0 or primoMovimento):
-                if oggetton != 1 and oggetton != 6:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    oggetton = oggetton - 1
-                    yp = yp - GlobalVar.gsy // 18 * 1
-                elif oggetton == 6:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    oggetton = oggetton - 1
-                    yp = yp - GlobalVar.gsy // 18 * 2
-                elif oggetton == 1:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    yp = GlobalVar.gsy // 18 * 15
-                    oggetton = 10
-            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
+            if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
+                if voceMarcata == 0:
+                    if oggetton != 1:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                        oggetton = oggetton - 1
+                        yp = yp - GlobalVar.gsy // 18 * 1
+                    elif oggetton == 1:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                        yp = GlobalVar.gsy // 18 * 15.2
+                        oggetton = 10
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
+            if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = xp - GlobalVar.gsx // 32 * 2.4
-            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and voceMarcata == 0 and (tastotempfps == 0 or primoMovimento):
-                if oggetton != 10 and oggetton != 5:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    oggetton = oggetton + 1
-                    yp = yp + GlobalVar.gsy // 18 * 1
-                elif oggetton == 5:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    oggetton = oggetton + 1
-                    yp = yp + GlobalVar.gsy // 18 * 2
-                elif oggetton == 10:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
-                    yp = GlobalVar.gsy // 18 * 5
-                    oggetton = 1
-            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and voceMarcata != 0 and (tastotempfps == 0 or primoMovimento):
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
+            if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
+                if voceMarcata == 0:
+                    if oggetton != 10:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                        oggetton = oggetton + 1
+                        yp = yp + GlobalVar.gsy // 18 * 1
+                    elif oggetton == 10:
+                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                        yp = GlobalVar.gsy // 18 * 6.2
+                        oggetton = 1
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
+            if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
                     xp = xp + GlobalVar.gsx // 32 * 2.4
+                else:
+                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                    bottoneDown = False
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -3583,12 +3600,15 @@ def oggetti(dati, colcoInCasellaVista):
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 19.5, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 14))
                 if impossibileUsareCaricaBatt:
-                    messaggio(u"Colco è irraggiungibile!", GlobalVar.rosso, GlobalVar.gsx // 32 * 12.2, GlobalVar.gsy // 18 * 15, 50)
+                    messaggio(u"Impo è irraggiungibile!", GlobalVar.rosso, GlobalVar.gsx // 32 * 12.2, GlobalVar.gsy // 18 * 15, 50)
                     if oggettonVecchio != oggetton:
                         impossibileUsareCaricaBatt = False
                         pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14))
                 else:
                     pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 14))
+
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 7.6) - 1, int(GlobalVar.gpy * 4.5)), (int(GlobalVar.gpx * 7.6) - 1, int(GlobalVar.gpy * 5.3)), 2)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 7.6) - 1, int(GlobalVar.gpy * 5.9)), (int(GlobalVar.gpx * 7.6) - 1, int(GlobalVar.gpy * 16)), 2)
 
             # menu conferma
             if usa != 0:
@@ -3606,133 +3626,138 @@ def oggetti(dati, colcoInCasellaVista):
                 GlobalVar.schermo.blit(puntatorevecchio, (xpv, ypv))
                 messaggio("Usare?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.3, GlobalVar.gsy // 18 * 13, 90)
                 messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.3, GlobalVar.gsy // 18 * 14.9, 70)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 15) - 1, int(GlobalVar.gpy * 14.8)), (int(GlobalVar.gpx * 15) - 1, int(GlobalVar.gpy * 15.9)), 2)
                 messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 14.9, 70)
 
             # pozione, carica batt, bomba, antidoto, bomba veleno, esca, super poz, carica migliorato, bomba pot, bomba atomica
+            messaggio("Nome oggetto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 4.7, 50, centrale=True)
+            messaggio(u"Quantità", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 4.7, 50, centrale=True)
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 1.5), int(GlobalVar.gpy * 5.6)), (int(GlobalVar.gpx * 10.5), int(GlobalVar.gpy * 5.6)), 1)
+
             larghezzaTestoDescrizioni = GlobalVar.gpx * 11
             spazioTraLeRigheTestoDescrizione = GlobalVar.gpy // 2
             if dati[31] >= 0:
-                messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 45)
-                messaggio("x %i" % dati[31], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 5, 45)
+                messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 45)
+                messaggio("x%i" % dati[31], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 6.2, 45, centrale=True)
                 if oggetton == 1:
                     messaggio("Pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Recupera 100 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 45)
             if dati[32] >= 0:
                 if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
-                    messaggio("Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 45)
+                    messaggio("Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.2, 45)
                 else:
-                    messaggio("Alimentazione 100gr", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 45)
-                messaggio("x %i" % dati[32], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 6, 45)
+                    messaggio("Alimentazione 100gr", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.2, 45)
+                messaggio("x%i" % dati[32], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 7.2, 45, centrale=True)
                 if oggetton == 2:
                     messaggio("Alimentazione 100gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 250 pe di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Recupera 250 pe di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.2, 45)
             if dati[33] >= 0:
-                messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 45)
-                messaggio("x %i" % dati[33], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 7, 45)
+                messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.2, 45)
+                messaggio("x%i" % dati[33], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 8.2, 45, centrale=True)
                 if oggetton == 3:
                     messaggio("Medicina:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Cura avvelenamento a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.2, 45)
             if dati[34] >= 0:
-                messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 45)
-                messaggio("x %i" % dati[34], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 8, 45)
+                messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.2, 45)
+                messaggio("x%i" % dati[34], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 9.2, 45, centrale=True)
                 if oggetton == 4:
                     messaggio("Super pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Recupera 300 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.2, 45)
             if dati[35] >= 0:
                 if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
-                    messaggio("Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 45)
+                    messaggio("Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.2, 45)
                 else:
-                    messaggio("Alimentazione 250gr", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 45)
-                messaggio("x %i" % dati[35], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 9, 45)
+                    messaggio("Alimentazione 250gr", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.2, 45)
+                messaggio("x%i" % dati[35], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 10.2, 45, centrale=True)
                 if oggetton == 5:
                     messaggio("Alimentazione 250gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Recupera 600 pe di Colco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Recupera 600 pe di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 10.2, 45)
             if dati[36] >= 0:
-                messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, 45)
-                messaggio("x %i" % dati[36], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 11, 45)
+                messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.2, 45)
+                messaggio("x%i" % dati[36], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 11.2, 45, centrale=True)
                 if oggetton == 6:
                     messaggio("Bomba:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 11.2, 45)
             if dati[37] >= 0:
-                messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12, 45)
-                messaggio("x %i" % dati[37], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 12, 45)
+                messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.2, 45)
+                messaggio("x%i" % dati[37], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 12.2, 45, centrale=True)
                 if oggetton == 7:
                     messaggio("Bomba velenosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Infligge avvelenamento al nemico su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 12.2, 45)
             if dati[38] >= 0:
-                messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, 45)
-                messaggio("x %i" % dati[38], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 13, 45)
+                messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.2, 45)
+                messaggio("x%i" % dati[38], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 13.2, 45, centrale=True)
                 if oggetton == 8:
                     messaggio("Esca:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio(u"Distrae i nemici finché non viene distrutta. È possibile riprenderla passandoci sopra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.2, 45)
             if dati[39] >= 0:
-                messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, 45)
-                messaggio("x %i" % dati[39], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 14, 45)
+                messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.2, 45)
+                messaggio("x%i" % dati[39], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 14.2, 45, centrale=True)
                 if oggetton == 9:
                     messaggio("Bomba appiccicosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.2, 45)
             if dati[40] >= 0:
-                messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, 45)
-                messaggio("x %i" % dati[40], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 15, 45)
+                messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.2, 45)
+                messaggio("x%i" % dati[40], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 9.1, GlobalVar.gsy // 18 * 15.2, 45, centrale=True)
                 if oggetton == 10:
                     messaggio("Bomba potenziata:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Infligge molti danni ai nemici su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
-                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, 45)
+                messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15.2, 45)
 
             # vita-status personaggio
             if dati[5] < 0:
                 dati[5] = 0
-            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 4, 50)
-            messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 5, 50)
-            GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 4))
-            GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 14, (GlobalVar.gsy // 18 * 6) + (GlobalVar.gpy // 8)))
+            messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.1, GlobalVar.gsy // 18 * 4.9, 50)
+            messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.1, GlobalVar.gsy // 18 * 5.7, 50)
+            GlobalVar.schermo.blit(perssta, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 4.6))
+            pygame.draw.line(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 11), int(GlobalVar.gpy * 7.6)), (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 7.6)), 2)
             if dati[121]:
-                avvelenato = pygame.transform.smoothscale(GlobalVar.avvelenatoo, (GlobalVar.gpx, GlobalVar.gpy))
-                GlobalVar.schermo.blit(avvelenato, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 6))
+                avvelenato = GlobalVar.avvelenatoMenu
+                GlobalVar.schermo.blit(avvelenato, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 6.5))
             if dati[123] > 0:
-                attaccopiu = pygame.transform.smoothscale(GlobalVar.attaccopiuo, (GlobalVar.gpx, GlobalVar.gpy))
-                GlobalVar.schermo.blit(attaccopiu, ((GlobalVar.gsx // 32 * 14) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 6))
+                attaccopiu = GlobalVar.attaccopiuMenu
+                GlobalVar.schermo.blit(attaccopiu, ((GlobalVar.gsx // 32 * 14) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 6.5))
             if dati[124] > 0:
-                difesapiu = pygame.transform.smoothscale(GlobalVar.difesapiuo, (GlobalVar.gpx, GlobalVar.gpy))
-                GlobalVar.schermo.blit(difesapiu, ((GlobalVar.gsx // 32 * 14) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 6))
+                difesapiu = GlobalVar.difesapiuMenu
+                GlobalVar.schermo.blit(difesapiu, ((GlobalVar.gsx // 32 * 14) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 6.5))
 
             # vita-status robo
             if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
                 if dati[10] < 0:
                     dati[10] = 0
-                messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 9, 50)
-                messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 10, 50)
-                robomen = pygame.transform.smoothscale(GlobalVar.roboo, (GlobalVar.gpx * 3, GlobalVar.gpy * 3))
-                GlobalVar.schermo.blit(robomen, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 8.5))
-                GlobalVar.schermo.blit(sfondostastart, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11))
+                messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.1, GlobalVar.gsy // 18 * 8.4, 50)
+                messaggio("Status alterati: ", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.1, GlobalVar.gsy // 18 * 9.2, 50)
+                robomen = GlobalVar.roboo2
+                GlobalVar.schermo.blit(robomen, (GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 8.1))
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 11), int(GlobalVar.gpy * 11.1)), (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 11.1)), 2)
                 if dati[122] > 0:
-                    surriscaldato = pygame.transform.smoothscale(GlobalVar.surriscaldatoo, (GlobalVar.gpx, GlobalVar.gpy))
-                    GlobalVar.schermo.blit(surriscaldato, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 11))
+                    surriscaldato = GlobalVar.surriscaldatoMenu
+                    GlobalVar.schermo.blit(surriscaldato, (GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 10))
                 if dati[125] > 0:
-                    velocitapiu = pygame.transform.smoothscale(GlobalVar.velocitapiuo, (GlobalVar.gpx, GlobalVar.gpy))
-                    GlobalVar.schermo.blit(velocitapiu, ((GlobalVar.gsx // 32 * 14) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 11))
+                    velocitapiu = GlobalVar.velocitapiuMenu
+                    GlobalVar.schermo.blit(velocitapiu, ((GlobalVar.gsx // 32 * 14) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 10))
                 if dati[126] > 0:
-                    efficienzapiu = pygame.transform.smoothscale(GlobalVar.efficienzapiuo, (GlobalVar.gpx, GlobalVar.gpy))
-                    GlobalVar.schermo.blit(efficienzapiu, ((GlobalVar.gsx // 32 * 14) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 11))
+                    efficienzapiu = GlobalVar.efficienzapiuMenu
+                    GlobalVar.schermo.blit(efficienzapiu, ((GlobalVar.gsx // 32 * 14) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 10))
 
             if attacco != 0:
                 risposta = True
@@ -3746,9 +3771,11 @@ def oggetti(dati, colcoInCasellaVista):
             GlobalVar.schermo.blit(imgOggetti[oggetton - 1], (GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 3))
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             if usa == 0:
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx // 1.5))), yp + (int(GlobalVar.gpy * 0.7))), (xp + (int(GlobalVar.gpx * 9.5)), yp + (int(GlobalVar.gpy * 0.7))), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx * 0.5))), yp + (int(GlobalVar.gpy * 0.7)) - 1), (xp + (int(GlobalVar.gpx * 6.3)), yp + (int(GlobalVar.gpy * 0.7)) - 1), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx * 6.9))), yp + (int(GlobalVar.gpy * 0.7)) - 1), (xp + (int(GlobalVar.gpx * 9.5)), yp + (int(GlobalVar.gpy * 0.7)) - 1), 2)
             else:
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx // 1.5))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 9.5)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 0.5))), ypv + (int(GlobalVar.gpy * 0.7)) - 1), (xpv + (int(GlobalVar.gpx * 6.3)), ypv + (int(GlobalVar.gpy * 0.7)) - 1), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 6.9))), ypv + (int(GlobalVar.gpy * 0.7)) - 1), (xpv + (int(GlobalVar.gpx * 9.5)), ypv + (int(GlobalVar.gpy * 0.7)) - 1), 2)
             primoFrame = False
 
             pygame.display.update()
