@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from FadeToBlackClass import *
+import pygame
 from SetOstacoliContenutoCofanetti import *
 
 
@@ -32,7 +32,6 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                     for idTasto in range(buttons):
                         if pad.get_button(idTasto):
                             if pad != GlobalVar.padUtilizzato:
-                                GlobalVar.listaTastiPremuti =[]
                                 GlobalVar.inizializzaPad(pad)
                             padTrovato = True
                             break
@@ -46,13 +45,13 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False):
                         direzioneX, direzioneY = hat
                         if direzioneX != 0 or direzioneY != 0:
                             if pad != GlobalVar.padUtilizzato:
-                                GlobalVar.listaTastiPremuti =[]
                                 GlobalVar.inizializzaPad(pad)
                             padTrovato = True
                             break
                     if padTrovato:
                         break
             if padTrovato:
+                GlobalVar.listaTastiPremuti = []
                 tastoTrovato = True
                 aggiornaInterfaccia = True
                 bottoneDown = False

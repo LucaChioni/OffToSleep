@@ -89,7 +89,6 @@ def menu(caricaSalvataggio, gameover):
     voceMarcata = 1
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
-    robomenuinizio = GlobalVar.robograf0
     mostraTutorial = False
 
     aggiornaInterfacciaPerCambioInput = True
@@ -97,7 +96,7 @@ def menu(caricaSalvataggio, gameover):
     bottoneDown = False
     tastotempfps = 8
 
-    # numero per la posizione di robo all'avvio
+    # numero img di robo
     c = random.randint(1, 4)
 
     canzone = GlobalVar.canzoneMenuPrincipale
@@ -162,6 +161,7 @@ def menu(caricaSalvataggio, gameover):
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
 
         # gestione degli input
+        menuConferma = False
         primoMovimento = False
         bottoneDownVecchio = bottoneDown
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
@@ -188,51 +188,13 @@ def menu(caricaSalvataggio, gameover):
             if suTutorial and bottoneDown == "mouseSinistro":
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                 mostraTutorial = True
+                primoFrame = True
             else:
                 if not mostraTutorial:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
                     # nuova partita
                     if voceMarcata == 1:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                        GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
-                        schermo_temp = GlobalVar.schermo.copy().convert()
-                        background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
-                        inutile, conferma = chiediconferma(3)
-                        if conferma:
-                            sprites = pygame.sprite.Group(Fade(0))
-                            schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-                            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
-                            dati = datiIniziali
-                            xInizialie = GlobalVar.gsx // 32 * 15
-                            yInizialie = GlobalVar.gsy // 18 * 7
-                            rxInizialie = xInizialie
-                            ryInizialie = yInizialie
-                            dati[2] = xInizialie
-                            dati[3] = yInizialie
-                            dati[134] = rxInizialie
-                            dati[135] = ryInizialie
-                            datiNemici = []
-                            datiEsche = []
-                            datiMonete = []
-                            stanzeGiaVisitate = []
-                            listaPersonaggiTotali = []
-                            oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                            ultimoObbiettivoColco = []
-                            obbiettivoCasualeColco = False
-                            i = porteini
-                            while i <= portefin:
-                                dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-                                dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-                                i = i + 4
-                            i = cofaniini
-                            while i <= cofanifin:
-                                dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-                                dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-                                i = i + 4
-                            GlobalVar.numSalvataggioCaricato = 0
-                            return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
-                        else:
-                            GlobalVar.schermo.blit(background, (0, 0))
+                        menuConferma = "inizia"
 
                     # carica partita
                     if voceMarcata == 2:
@@ -240,9 +202,7 @@ def menu(caricaSalvataggio, gameover):
 
                         # lettura salvataggio
                         if n != -1:
-                            sprites = pygame.sprite.Group(Fade(0))
-                            schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-                            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+                            oscuraIlluminaSchermo(illumina=False)
                             dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
                             datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
                             tutteporteGameover = []
@@ -274,13 +234,7 @@ def menu(caricaSalvataggio, gameover):
 
                     # esci dal gioco
                     if voceMarcata == 4:
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                        GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
-                        schermo_temp = GlobalVar.schermo.copy().convert()
-                        background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
-                        inizio, inutile = chiediconferma(2)
-                        if not inizio:
-                            GlobalVar.schermo.blit(background, (0, 0))
+                        menuConferma = "esci"
                 else:
                     if suTogliTutorial and bottoneDown == "mouseSinistro":
                         GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
@@ -300,7 +254,6 @@ def menu(caricaSalvataggio, gameover):
             bottoneDown = False
 
         if primoMovimento or primoFrame or (tastoMovimentoPremuto and tastotempfps == 0) or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
-            aggiornaInterfacciaPerCambioInput = False
             if not mostraTutorial:
                 if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                     if voceMarcata != 4:
@@ -340,16 +293,19 @@ def menu(caricaSalvataggio, gameover):
                 persomenuinizio = GlobalVar.persGrafMenu
                 if c == 1:
                     robomenuinizio = GlobalVar.robograf0
-                if c == 2:
+                elif c == 2:
                     robomenuinizio = GlobalVar.robograf1
-                if c == 3:
+                elif c == 3:
                     robomenuinizio = GlobalVar.robograf2
-                if c == 4:
+                elif c == 4:
                     robomenuinizio = GlobalVar.robograf3
+                else:
+                    robomenuinizio = GlobalVar.robograf0
 
                 # per ottimizzare
                 if primoFrame:
                     primoFrame = False
+                    aggiornaInterfacciaPerCambioInput = True
                     puntatore = GlobalVar.puntatore
                     xp = GlobalVar.gsx // 32 * 1.5
                     if voceMarcata == 1:
@@ -368,23 +324,70 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 7, 90)
                     messaggio("Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 12, 90)
                 else:
-                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (0, 0, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy))
+                    pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 2.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 10.5))
+                if aggiornaInterfacciaPerCambioInput:
+                    aggiornaInterfacciaPerCambioInput = False
                     pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (0, GlobalVar.gsy // 18 * 16.5, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2))
+                    if GlobalVar.mouseVisibile:
+                        messaggio("Tasto centrale: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 0.8, GlobalVar.gsy // 18 * 16.8, 50)
+                    elif GlobalVar.usandoIlController:
+                        messaggio("Start: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 16.8, 50)
+                    else:
+                        messaggio("Esc: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.7, GlobalVar.gsy // 18 * 16.8, 50)
 
-                if GlobalVar.mouseVisibile:
-                    messaggio("Tasto centrale: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 0.8, GlobalVar.gsy // 18 * 16.8, 50)
-                elif GlobalVar.usandoIlController:
-                    messaggio("Start: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 16.8, 50)
-                else:
-                    messaggio("Esc: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.7, GlobalVar.gsy // 18 * 16.8, 50)
-
+                if menuConferma:
+                    GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
+                    schermo_temp = GlobalVar.schermo.copy().convert()
+                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+                    if menuConferma == "inizia":
+                        inutile, conferma = chiediconferma(3)
+                        if conferma:
+                            oscuraIlluminaSchermo(illumina=False)
+                            dati = datiIniziali
+                            xInizialie = GlobalVar.gsx // 32 * 15
+                            yInizialie = GlobalVar.gsy // 18 * 7
+                            rxInizialie = xInizialie
+                            ryInizialie = yInizialie
+                            dati[2] = xInizialie
+                            dati[3] = yInizialie
+                            dati[134] = rxInizialie
+                            dati[135] = ryInizialie
+                            datiNemici = []
+                            datiEsche = []
+                            datiMonete = []
+                            stanzeGiaVisitate = []
+                            listaPersonaggiTotali = []
+                            oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                            ultimoObbiettivoColco = []
+                            obbiettivoCasualeColco = False
+                            i = porteini
+                            while i <= portefin:
+                                dati[i + 1] = dati[i + 1] * GlobalVar.gpx
+                                dati[i + 2] = dati[i + 2] * GlobalVar.gpy
+                                i = i + 4
+                            i = cofaniini
+                            while i <= cofanifin:
+                                dati[i + 1] = dati[i + 1] * GlobalVar.gpx
+                                dati[i + 2] = dati[i + 2] * GlobalVar.gpy
+                                i = i + 4
+                            GlobalVar.numSalvataggioCaricato = 0
+                            return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+                        else:
+                            GlobalVar.schermo.blit(background, (0, 0))
+                    else:
+                        inizio, inutile = chiediconferma(2)
+                        if not inizio:
+                            GlobalVar.schermo.blit(background, (0, 0))
+                    aggiornaInterfacciaPerCambioInput = True
                 GlobalVar.schermo.blit(puntatore, (xp, yp))
-            else:
+            elif primoFrame or aggiornaInterfacciaPerCambioInput:
+                primoFrame = False
+                aggiornaInterfacciaPerCambioInput = False
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 if GlobalVar.mouseVisibile:
                     messaggio("Comandi mouse", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
 
-                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.2, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 0.4, GlobalVar.gsy // 18 * 6))
                     messaggio("Movimento (su casella libera) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 6.8, 35)
                     messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 7.3, 35)
@@ -398,7 +401,7 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 14.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 17), 2)
 
-                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.7, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6))
                     messaggio("Inquadra o attacca (su casella nemica) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 6.8, 35)
                     messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 7.3, 35)
@@ -411,7 +414,7 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 14.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 17), 2)
 
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.2, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 21.4, GlobalVar.gsy // 18 * 6))
                     messaggio("Seleziona", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 7.8, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 9.8), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 9.8), 2)
@@ -421,7 +424,7 @@ def menu(caricaSalvataggio, gameover):
                 elif GlobalVar.usandoIlController:
                     messaggio("Comandi controller", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
 
-                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.2, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialControllerInGioco, (GlobalVar.gsx // 32 * 0.4, GlobalVar.gsy // 18 * 6))
                     messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 6.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 7.6), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 7.6), 2)
@@ -438,7 +441,7 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 16.1, 35)
 
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.7, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialControllerInGioco, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6))
                     messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 6.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 7.6), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 7.6), 2)
@@ -455,7 +458,7 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Attacca / Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 16.1, 35)
 
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.2, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialControllerInMenu, (GlobalVar.gsx // 32 * 21.4, GlobalVar.gsy // 18 * 6))
                     messaggio("Esci (dove specificato)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 8.3, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 9.2), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 9.2), 2)
@@ -469,7 +472,7 @@ def menu(caricaSalvataggio, gameover):
                 else:
                     messaggio("Comandi tastiera", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
 
-                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.2, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 0.4, GlobalVar.gsy // 18 * 6))
                     messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 6.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 7.3), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 7.3), 2)
@@ -486,7 +489,7 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 16, 35)
 
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.7, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6))
                     messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 6.7, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 7.3), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 7.3), 2)
@@ -503,7 +506,7 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Attacca / Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 16, 35)
 
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.2, GlobalVar.gsy // 18 * 4.2, 80)
+                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
                     GlobalVar.schermo.blit(GlobalVar.tutorialTastieraInMenu, (GlobalVar.gsx // 32 * 21.4, GlobalVar.gsy // 18 * 6))
                     messaggio("Esci (dove specificato)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 8.1, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 8.7), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 8.7), 2)
@@ -514,7 +517,6 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Cambia operazione (se consentito)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 13.2, 35)
                     pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 14), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 14), 2)
                     messaggio("Seleziona", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 14.6, 35)
-
                 if GlobalVar.mouseVisibile:
                     messaggio("Tasto destro / centrale: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 1, 50)
                 elif GlobalVar.usandoIlController:
@@ -526,9 +528,7 @@ def menu(caricaSalvataggio, gameover):
 
         if illuminaSchermoDopoVideo:
             illuminaSchermoDopoVideo = False
-            sprites = pygame.sprite.Group(Fade(2))
-            schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+            oscuraIlluminaSchermo(illumina=2)
         else:
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
@@ -699,9 +699,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
                         n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco)
                         if n != -1 and azioneFatta == 1:
-                            sprites = pygame.sprite.Group(Fade(0))
-                            schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-                            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+                            oscuraIlluminaSchermo(illumina=False)
                             caricaSalvataggio = n
                             risposta = True
                     # impostazioni
@@ -709,6 +707,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                         menuImpostazioni(False, True)
                     # menu principale
                     if voceMarcata == 8:
+                        pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 11.5))
                         GlobalVar.schermo.blit(puntatoreVecchio, (xp, yp))
                         conferma = 1
             bottoneDown = False
@@ -723,7 +722,6 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             bottoneDown = False
 
         if primoMovimento or primoFrame or (tastoMovimentoPremuto and tastotempfps == 0) or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
-            aggiornaInterfacciaPerCambioInput = False
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 2:
                     GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
@@ -781,6 +779,8 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     conferma = 0
 
             if primoFrame:
+                primoFrame = False
+                aggiornaInterfacciaPerCambioInput = True
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12.5))
@@ -849,10 +849,10 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
 
                 if faretraFrecceStart != 0:
                     GlobalVar.schermo.blit(faretraFrecceStart, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 2.7))
-                    messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 6.2, 50)
+                    messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 6.2, 50, centrale=True)
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 26), int(GlobalVar.gpy * 3)), (int(GlobalVar.gpx * 26), int(GlobalVar.gpy * 6.7)), 2)
                 GlobalVar.schermo.blit(GlobalVar.sacchettoDenaroStart, (GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 2.7))
-                messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 6.2, 50)
+                messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 28.4, GlobalVar.gsy // 18 * 6.2, 50, centrale=True)
             else:
                 if aperturaSettaColcoNonRiuscita:
                     pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 0.6))
@@ -861,21 +861,21 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                 elif voceMarcataVecchia != voceMarcata:
                     pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 0.6))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 11.5))
+            if aggiornaInterfacciaPerCambioInput:
+                aggiornaInterfacciaPerCambioInput = False
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 19, 0, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 2))
-
-            if GlobalVar.mouseVisibile:
-                messaggio("Tasto destro / centrale: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 1, 50)
-            elif GlobalVar.usandoIlController:
-                messaggio("Start / Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.1, GlobalVar.gsy // 18 * 1, 50)
-            else:
-                messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 1, 50)
+                if GlobalVar.mouseVisibile:
+                    messaggio("Tasto destro / centrale: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 1, 50)
+                elif GlobalVar.usandoIlController:
+                    messaggio("Start / Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.1, GlobalVar.gsy // 18 * 1, 50)
+                else:
+                    messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 1, 50)
 
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             if not risposta:
                 pygame.display.update()
             else:
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
-            primoFrame = False
 
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     if not inizio and not caricaSalvataggio:
@@ -1046,6 +1046,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
 
         # gestione degli input
+        menuConferma = False
         primoMovimento = False
         bottoneDownVecchio = bottoneDown
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
@@ -1080,13 +1081,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     menuMappa(dati[0])
                     GlobalVar.schermo.blit(background, (0, 0))
                 elif voceMarcata == -2:
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                    GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
-                    schermo_temp = GlobalVar.schermo.copy().convert()
-                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
-                    inizio, risposta = chiediconferma(1)
-                    if not inizio:
-                        GlobalVar.schermo.blit(background, (0, 0))
+                    menuConferma = True
             else:
                 if difensivi:
                     # pozione
@@ -1187,7 +1182,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
             bottoneDown = False
 
-        if not inizio and (primoMovimento or primoFrame or (tastoMovimentoPremuto and tastotempfps == 0) or voceMarcataVecchia != voceMarcata) or aggiornaInterfacciaPerCambioInput:
+        if not inizio and (primoMovimento or primoFrame or (tastoMovimentoPremuto and tastotempfps == 0) or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaInterfacciaPerCambioInput = False
             primoFrame = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
@@ -1404,6 +1399,16 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 GlobalVar.schermo.blit(GlobalVar.attaccopiu, (GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 17))
             if dati[124] > 0:
                 GlobalVar.schermo.blit(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
+
+            if menuConferma:
+                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                GlobalVar.schermo.blit(puntatorevecchio, (xp, yp))
+                schermo_temp = GlobalVar.schermo.copy().convert()
+                background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+                inizio, risposta = chiediconferma(1)
+                if not inizio:
+                    GlobalVar.schermo.blit(background, (0, 0))
+                    GlobalVar.schermo.blit(puntatore, (xp, yp))
 
             if not risposta:
                 pygame.display.update()
@@ -1865,7 +1870,6 @@ def menuMercante(dati):
             bottoneDown = False
 
         if primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
-            aggiornaInterfacciaPerCambioInput = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
                     if oggetton != 0:
@@ -1991,6 +1995,7 @@ def menuMercante(dati):
                 maxFrecce = 60
 
             if primoFrame:
+                aggiornaInterfacciaPerCambioInput = True
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13.5))
                 GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4))
@@ -2002,25 +2007,177 @@ def menuMercante(dati):
                 GlobalVar.schermo.blit(GlobalVar.mercanteMenu, (GlobalVar.gsx // 32 * (-1), GlobalVar.gsy // 18 * 8))
 
                 messaggio("Acquista oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
-                messaggio("Oggetti acquistabili", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 4.8, 40)
-                messaggio("Costo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.6, GlobalVar.gsy // 18 * 4.8, 40)
-                messaggio("Posseduti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18.7, GlobalVar.gsy // 18 * 4.8, 40)
+                messaggio("Oggetti acquistabili", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 4.7, 45, centrale=True)
+                messaggio("Costo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 4.7, 45, centrale=True)
+                messaggio("Posseduti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 4.7, 45, centrale=True)
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 11), int(GlobalVar.gpy * 5.5)), (int(GlobalVar.gpx * 20.9), int(GlobalVar.gpy * 5.5)), 1)
 
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 16.2), int(GlobalVar.gpy * 4.5)), (int(GlobalVar.gpx * 16.2), int(GlobalVar.gpy * 5.3)), 2)
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 16.2), int(GlobalVar.gpy * 5.7)), (int(GlobalVar.gpx * 16.2), int(GlobalVar.gpy * 17)), 2)
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 4.5)), (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 5.3)), 2)
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 5.7)), (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 17)), 2)
-            elif confermaOggettoDaAcquistare == 0:
-                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 21, 0, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2.5))
-                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.1, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 11))
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 4.5)), (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 5.3)), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 5.7)), (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 17)), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 4.5)), (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 5.3)), 2)
+                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 5.7)), (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 17)), 2)
+
+                messaggio("Freccia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 6.2, 40)
+                messaggio(str(GlobalVar.costoOggetti[0]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 6.2, 40, centrale=True)
+                messaggio("x%i" % dati[132], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 6.2, 40, centrale=True)
+                if imgOggetti[0] != sconosciutoOggetto:
+                    messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
+                    messaggio(str(GlobalVar.costoOggetti[1]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
+                    if dati[31] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[31], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
+                if imgOggetti[1] != sconosciutoOggetto:
+                    messaggio("Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8, 40)
+                    messaggio(str(GlobalVar.costoOggetti[2]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 8, 40, centrale=True)
+                    if dati[32] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[32], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8, 40)
+                if imgOggetti[2] != sconosciutoOggetto:
+                    messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8.9, 40)
+                    messaggio(str(GlobalVar.costoOggetti[3]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
+                    if dati[33] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[33], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8.9, 40)
+                if imgOggetti[3] != sconosciutoOggetto:
+                    messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 9.8, 40)
+                    messaggio(str(GlobalVar.costoOggetti[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
+                    if dati[34] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[34], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 9.8, 40)
+                if imgOggetti[4] != sconosciutoOggetto:
+                    messaggio("Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 10.7, 40)
+                    messaggio(str(GlobalVar.costoOggetti[5]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
+                    if dati[35] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[35], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 10.7, 40)
+                if imgOggetti[5] != sconosciutoOggetto:
+                    messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 11.6, 40)
+                    messaggio(str(GlobalVar.costoOggetti[6]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
+                    if dati[36] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[36], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 11.6, 40)
+                if imgOggetti[6] != sconosciutoOggetto:
+                    messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 12.5, 40)
+                    messaggio(str(GlobalVar.costoOggetti[7]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
+                    if dati[37] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[37], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 12.5, 40)
+                if imgOggetti[7] != sconosciutoOggetto:
+                    messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 13.4, 40)
+                    messaggio(str(GlobalVar.costoOggetti[8]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
+                    if dati[38] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[38], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 13.4, 40)
+                if imgOggetti[8] != sconosciutoOggetto:
+                    messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 14.3, 40)
+                    messaggio(str(GlobalVar.costoOggetti[9]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
+                    if dati[39] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[39], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 14.3, 40)
+                if imgOggetti[9] != sconosciutoOggetto:
+                    messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 15.2, 40)
+                    messaggio(str(GlobalVar.costoOggetti[10]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
+                    if dati[40] < 0:
+                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
+                    else:
+                        messaggio("x%i" % dati[40], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
+                else:
+                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 15.2, 40)
+                messaggio("Faretra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 16.1, 40)
+                if dati[133] == 0:
+                    messaggio(str(GlobalVar.costoOggetti[11]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                if dati[133] == 1:
+                    messaggio(str(GlobalVar.costoOggetti[12]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                if dati[133] >= 2:
+                    messaggio(str(GlobalVar.costoOggetti[13]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                if dati[133] == 3:
+                    messaggio("x1", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                else:
+                    messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+            elif confermaOggettoDaAcquistare == 0 and (oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata):
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.1, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 10.5))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6.7, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 6.7, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 6.7, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 7.6, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 7.6, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 7.6, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 8.5, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 8.5, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 8.5, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 9.4, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 9.4, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 9.4, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 10.3, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 10.3, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 10.3, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 11.2, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 11.2, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 11.2, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 12.1, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 12.1, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 12.1, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 13, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 13, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 13, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 13.9, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 13.9, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 13.9, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 14.8, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 14.8, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 14.8, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 15.7, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 15.7, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 15.7, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 16.6, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 16.6, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 16.6, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 9.5, GlobalVar.gsy // 18 * 11))
                 pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.5, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 1))
+            if aggiornaInterfacciaPerCambioInput:
+                aggiornaInterfacciaPerCambioInput = False
+                pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 21, 0, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2.5))
+                if GlobalVar.mouseVisibile:
+                    messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
+                elif GlobalVar.usandoIlController:
+                    messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
+                else:
+                    messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
 
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 16.2), int(GlobalVar.gpy * 6.1)), (int(GlobalVar.gpx * 16.2), int(GlobalVar.gpy * 17)), 2)
-                pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 6.1)), (int(GlobalVar.gpx * 18.2), int(GlobalVar.gpy * 17)), 2)
-
+            pygame.draw.rect(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 9.5, GlobalVar.gsy // 18 * 4.5))
             GlobalVar.schermo.blit(GlobalVar.sfondoDialogoMercante, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4))
+            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4))
+            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4))
+            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 7))
+            GlobalVar.schermo.blit(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 7))
             if moneteInsufficienti:
                 messaggio("Non hai abbastanza monete!", GlobalVar.rosso, GlobalVar.gsx // 32 * 5.3, GlobalVar.gsy // 18 * 6.1, 40, centrale=True)
             if inventarioPieno:
@@ -2060,170 +2217,81 @@ def menuMercante(dati):
                 messaggio("Annulla", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 6.9, 50)
             else:
                 messaggio("Prendi quello che ti serve", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, 50)
+                if primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata:
+                    if 1 <= oggetton <= 10:
+                        GlobalVar.schermo.blit(imgOggetti[oggetton - 1], (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                    elif oggetton == 0:
+                        GlobalVar.schermo.blit(GlobalVar.frecciaMenu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                    elif oggetton == 11:
+                        if dati[133] == 0:
+                            GlobalVar.schermo.blit(GlobalVar.faretra1Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                        elif dati[133] == 1:
+                            GlobalVar.schermo.blit(GlobalVar.faretra2Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                        else:
+                            GlobalVar.schermo.blit(GlobalVar.faretra3Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
 
-                if 1 <= oggetton <= 10:
-                    GlobalVar.schermo.blit(imgOggetti[oggetton - 1], (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-                elif oggetton == 0:
-                    GlobalVar.schermo.blit(GlobalVar.frecciaMenu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-                elif oggetton == 11:
-                    if dati[133] == 0:
-                        GlobalVar.schermo.blit(GlobalVar.faretra1Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-                    elif dati[133] == 1:
-                        GlobalVar.schermo.blit(GlobalVar.faretra2Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
-                    else:
-                        GlobalVar.schermo.blit(GlobalVar.faretra3Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                    messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.8, 50)
 
-                messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.8, 50)
-                messaggio("Freccia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 6.2, 40)
-                messaggio(str(GlobalVar.costoOggetti[0]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 6.2, 40, centrale=True)
-                messaggio("x%i" % dati[132], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 6.2, 40, centrale=True)
-                larghezzaTestoDescrizioni = GlobalVar.gpx * 8.5
-                spazioTraLeRigheTestoDescrizione = GlobalVar.gpy // 2
-                if oggetton == 0:
-                    messaggio("Freccia:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio("Usate per attaccare i nemici a distanza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                if imgOggetti[0] != sconosciutoOggetto:
-                    messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
-                    messaggio(str(GlobalVar.costoOggetti[1]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
-                    if dati[31] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[31], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
-                    if oggetton == 1:
+                    larghezzaTestoDescrizioni = GlobalVar.gpx * 8.5
+                    spazioTraLeRigheTestoDescrizione = GlobalVar.gpy // 2
+                    if oggetton == 0:
+                        messaggio("Freccia:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        messaggio("Usate per attaccare i nemici a distanza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    if imgOggetti[0] != sconosciutoOggetto and oggetton == 1:
                         messaggio("Pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Recupera 100 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
-                if imgOggetti[1] != sconosciutoOggetto:
-                    messaggio("Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8, 40)
-                    messaggio(str(GlobalVar.costoOggetti[2]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 8, 40, centrale=True)
-                    if dati[32] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[32], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8, 40, centrale=True)
-                    if oggetton == 2:
+                    elif oggetton == 1:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[1] != sconosciutoOggetto and oggetton == 2:
                         messaggio("Alimentazione 100gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Recupera 250 pe di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8, 40)
-                if imgOggetti[2] != sconosciutoOggetto:
-                    messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8.9, 40)
-                    messaggio(str(GlobalVar.costoOggetti[3]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
-                    if dati[33] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[33], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
-                    if oggetton == 3:
+                    elif oggetton == 2:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[2] != sconosciutoOggetto and oggetton == 3:
                         messaggio("Medicina:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Cura avvelenamento a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8.9, 40)
-                if imgOggetti[3] != sconosciutoOggetto:
-                    messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 9.8, 40)
-                    messaggio(str(GlobalVar.costoOggetti[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
-                    if dati[34] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[34], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
-                    if oggetton == 4:
+                    elif oggetton == 3:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[3] != sconosciutoOggetto and oggetton == 4:
                         messaggio("Super pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Recupera 300 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 9.8, 40)
-                if imgOggetti[4] != sconosciutoOggetto:
-                    messaggio("Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 10.7, 40)
-                    messaggio(str(GlobalVar.costoOggetti[5]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
-                    if dati[35] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[35], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
-                    if oggetton == 5:
+                    elif oggetton == 4:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[4] != sconosciutoOggetto and oggetton == 5:
                         messaggio("Alimentazione 250gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Recupera 600 pe di Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 10.7, 40)
-                if imgOggetti[5] != sconosciutoOggetto:
-                    messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 11.6, 40)
-                    messaggio(str(GlobalVar.costoOggetti[6]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
-                    if dati[36] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[36], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
-                    if oggetton == 6:
+                    elif oggetton == 5:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[5] != sconosciutoOggetto and oggetton == 6:
                         messaggio("Bomba:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Infligge un po' di danni ai nemici su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 11.6, 40)
-                if imgOggetti[6] != sconosciutoOggetto:
-                    messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 12.5, 40)
-                    messaggio(str(GlobalVar.costoOggetti[7]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
-                    if dati[37] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[37], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
-                    if oggetton == 7:
+                    elif oggetton == 6:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[6] != sconosciutoOggetto and oggetton == 7:
                         messaggio("Bomba velenosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Infligge avvelenamento al nemico su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 12.5, 40)
-                if imgOggetti[7] != sconosciutoOggetto:
-                    messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 13.4, 40)
-                    messaggio(str(GlobalVar.costoOggetti[8]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
-                    if dati[38] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[38], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
-                    if oggetton == 8:
+                    elif oggetton == 7:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[7] != sconosciutoOggetto and oggetton == 8:
                         messaggio("Esca:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio(u"Distrae i nemici finché non viene distrutta. È possibile riprenderla passandoci sopra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 13.4, 40)
-                if imgOggetti[8] != sconosciutoOggetto:
-                    messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 14.3, 40)
-                    messaggio(str(GlobalVar.costoOggetti[9]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
-                    if dati[39] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[39], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
-                    if oggetton == 9:
+                    elif oggetton == 8:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[8] != sconosciutoOggetto and oggetton == 9:
                         messaggio("Bomba appiccicosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio(u"Dimezza la velocità del nemico su cui viene lanciata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 14.3, 40)
-                if imgOggetti[9] != sconosciutoOggetto:
-                    messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 15.2, 40)
-                    messaggio(str(GlobalVar.costoOggetti[10]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
-                    if dati[40] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
-                    else:
-                        messaggio("x%i" % dati[40], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
-                    if oggetton == 10:
+                    elif oggetton == 9:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if imgOggetti[9] != sconosciutoOggetto and oggetton == 10:
                         messaggio("Bomba potenziata:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                         messaggio("Infligge molti danni ai nemici su cui viene lanciata in un vasto raggio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
-                else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 15.2, 40)
-                messaggio("Faretra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 16.1, 40)
-                if dati[133] == 0:
-                    messaggio(str(GlobalVar.costoOggetti[11]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
-                if dati[133] == 1:
-                    messaggio(str(GlobalVar.costoOggetti[12]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
-                if dati[133] >= 2:
-                    messaggio(str(GlobalVar.costoOggetti[13]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
-                if dati[133] == 3:
-                    messaggio("x1", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
-                else:
-                    messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
-                if oggetton == 11:
-                    messaggio("Faretra:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                    messaggio(u"Permette di trasportare più frecce", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    elif oggetton == 10:
+                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                    if oggetton == 11:
+                        messaggio("Faretra:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        messaggio(u"Permette di trasportare più frecce", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
-                if GlobalVar.mouseVisibile:
-                    messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
-                elif GlobalVar.usandoIlController:
-                    messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
-                else:
-                    messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
-
+            primoFrame = False
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             if confermaOggettoDaAcquistare == 0:
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx * 0.5))), yp + (int(GlobalVar.gpy * 0.7))), (xp + (int(GlobalVar.gpx * 5.5)), yp + (int(GlobalVar.gpy * 0.7))), 2)
@@ -2233,7 +2301,6 @@ def menuMercante(dati):
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 0.5))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 5.5)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 5.9))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 7.5)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
                 pygame.draw.line(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 7.9))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 10.4)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
-            primoFrame = False
 
             pygame.display.update()
 

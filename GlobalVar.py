@@ -278,6 +278,7 @@ global vetImgArmatureMenu
 global vetImgScudiMenu
 global vetImgGuantiMenu
 global vetImgCollaneMenu
+global imgGambitSconosciuta
 global vetImgCondizioniMenu
 global vetImgTecnicheMenu
 global vetImgBatterieMenu
@@ -525,6 +526,7 @@ def loadImgs():
     global vetImgGuantiMenu
     global vetImgCollaneMenu
     global vetImgCondizioniMenu
+    global imgGambitSconosciuta
     global vetImgTecnicheMenu
     global vetImgBatterieMenu
     global vetIcoBatterieMenu
@@ -821,15 +823,16 @@ def loadImgs():
         vetImgGuantiMenu.append(loadImage("Immagini/EquipSara/Guanti/Guanti%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
         vetImgCollaneMenu.append(loadImage("Immagini/EquipSara/Collane/Collana%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
         contatoreGlobale += 1
-    vetImgCondizioniMenu = [0]
-    contatoreGlobale = 1
+    imgGambitSconosciuta = loadImage('Immagini/GrafGambit/Sconosciuto.png', gpx * 12, gpy * 9, False)
+    vetImgCondizioniMenu = []
+    contatoreGlobale = 0
     while contatoreGlobale <= 20:
-        vetImgCondizioniMenu.append(loadImage("Immagini/GrafCondizioni/Condizione%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
+        vetImgCondizioniMenu.append(loadImage("Immagini/GrafGambit/GrafCondizioni/Condizione%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
         contatoreGlobale += 1
-    vetImgTecnicheMenu = [0]
-    contatoreGlobale = 1
+    vetImgTecnicheMenu = []
+    contatoreGlobale = 0
     while contatoreGlobale <= 20:
-        vetImgTecnicheMenu.append(loadImage("Immagini/GrafTecniche/Tecnica%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
+        vetImgTecnicheMenu.append(loadImage("Immagini/GrafGambit/GrafTecniche/Tecnica%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
         contatoreGlobale += 1
     vetImgBatterieMenu = []
     vetIcoBatterieMenu = []

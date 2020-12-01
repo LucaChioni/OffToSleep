@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import gc
 from Menu import *
 from EnvPrint import *
 from Animazioni import *
@@ -129,9 +130,7 @@ def gameloop():
 
             if cambiosta:
                 if not inizio:
-                    sprites = pygame.sprite.Group(Fade(0))
-                    schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-                    oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+                    oscuraIlluminaSchermo(illumina=False)
 
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
@@ -440,6 +439,7 @@ def gameloop():
 
             caricaTutto = True
             carim = False
+            gc.collect()
 
         if inizio:
             if npers != 1 and npers != 2 and npers != 3 and npers != 4:
@@ -551,7 +551,7 @@ def gameloop():
         # gestione degli input
         if not impossibileCliccarePulsanti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto:
             bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, False)
-        else:
+        elif startf or oggettoRicevuto or impossibileCliccarePulsanti:
             bottoneDown = False
             pygame.event.pump()
         if not bottoneDown:
@@ -959,7 +959,6 @@ def gameloop():
                     guantiMov2 = guantidMov2
                     guantiAttacco = guantidAttacco
                     collana = collanad
-                bottoneDown = False
             elif inquadratoQualcosa and inquadratoQualcosa.startswith("cofanetto"):
                 GlobalVar.canaleSoundPassiRallo.stop()
                 nx = 0
@@ -2039,9 +2038,7 @@ def gameloop():
 
         if inizio:
             if not caricaSalvataggio:
-                sprites = pygame.sprite.Group(Fade(0))
-                schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-                oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+                oscuraIlluminaSchermo(illumina=False)
             GlobalVar.canaleSoundPuntatore.stop()
             GlobalVar.canaleSoundPassiRallo.stop()
             GlobalVar.canaleSoundPassiColco.stop()

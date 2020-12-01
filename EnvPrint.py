@@ -387,11 +387,9 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     if not caricaTutto:
         if stanzaCambiata or uscitoDaMenu > 0:
             if uscitoDaMenu > 0:
-                sprites = pygame.sprite.Group(Fade(1))
+                oscuraIlluminaSchermo(illumina=1)
             else:
-                sprites = pygame.sprite.Group(Fade(2))
-            schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-            oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+                oscuraIlluminaSchermo(illumina=2)
         else:
             pygame.display.update()
 

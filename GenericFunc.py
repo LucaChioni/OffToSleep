@@ -79,7 +79,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
         GlobalVar.schermo.blit(testo, (x, y))
 
 
-def getStatistiche(dati, difesa=0):
+def getStatistiche(dati, difesa=0, inMenu=False):
     esptot = 1 + pow(dati[4], 2) + (dati[4] * 2)
     pvtot = 50
     if dati[129] == 1:
@@ -124,11 +124,12 @@ def getStatistiche(dati, difesa=0):
                 break
             i += 3
 
-    if dati[123] > 0:
-        attVicino += attVicino // 4
-        attLontano += attLontano // 4
-    if dati[124] > 0:
-        dif += dif // 4
+    if not inMenu:
+        if dati[123] > 0:
+            attVicino += attVicino // 4
+            attLontano += attLontano // 4
+        if dati[124] > 0:
+            dif += dif // 4
 
     entot = 220 + (dati[9] * dati[9] * 80)
     difro = 20 + (dati[9] * dati[9] * 30)
@@ -154,9 +155,7 @@ def guardaVideo(listaImg, audio, loop):
     if GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(False)
     GlobalVar.schermo.fill(GlobalVar.grigioscu)
-    sprites = pygame.sprite.Group(Fade(2))
-    schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-    oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+    oscuraIlluminaSchermo(illumina=2)
     pygame.display.update()
     bottoneDown = False
 
@@ -171,13 +170,13 @@ def guardaVideo(listaImg, audio, loop):
             GlobalVar.schermo.blit(listaImg[i], (0, 0))
             pygame.display.update()
 
-            # gestione degli input
-            bottoneDown, inutile = getInput(bottoneDown, False)
-            if bottoneDown:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                continua = True
-                bottoneDown = False
-        pygame.event.pump()
+        # gestione degli input
+        bottoneDown, inutile = getInput(bottoneDown, False)
+        if bottoneDown:
+            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+            continua = True
+            bottoneDown = False
+
         GlobalVar.clockVideo.tick(GlobalVar.fpsVideo)
         if countdownInizioVideo > 0:
             countdownInizioVideo -= 1
@@ -187,9 +186,7 @@ def guardaVideo(listaImg, audio, loop):
                 i = 0
 
     # oscura lo schermo
-    sprites = pygame.sprite.Group(Fade(0))
-    schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-    oscuraIlluminaSchermo(sprites, schermoFadeToBlack)
+    oscuraIlluminaSchermo(illumina=False)
     i = GlobalVar.volumeEffetti
     while i > 0:
         GlobalVar.canaleSoundSottofondoAmbientale.set_volume(i)
@@ -1883,16 +1880,7 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
         GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
         GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreMorte)
-        sprites = pygame.sprite.Group(Fade(3))
-        schermoFadeToBlack = GlobalVar.schermo.copy().convert()
-        i = 1
-        while i <= 35:
-            sprites.update()
-            GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-            sprites.draw(GlobalVar.schermo)
-            pygame.display.update()
-            GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-            i += 1
+        oscuraIlluminaSchermo(illumina=False, tipoOscuramento=2)
 
         # GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
         messaggio("Sei morto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 13, 150)
@@ -2512,15 +2500,82 @@ def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y, casellaChiara, casellaScura)
         GlobalVar.schermo.blit(casellaScura, (x, y))
 
 
-def oscuraIlluminaSchermo(sprites, schermoFadeToBlack):
-    i = 0
-    while i <= 6:
-        sprites.update()
-        GlobalVar.schermo.blit(schermoFadeToBlack, (0, 0))
-        sprites.draw(GlobalVar.schermo)
+def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
+    # se "screen" è False oscura lo schermo
+    if not illumina:
+        rect = pygame.display.get_surface().get_rect()
+        image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+        if tipoOscuramento == 1:
+            image.fill((0, 0, 0, 100))
+            image = image.convert_alpha(GlobalVar.schermo)
+            i = 0
+            while i <= 5:
+                GlobalVar.schermo.blit(image, (0, 0))
+                pygame.display.update()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
+            GlobalVar.schermo.fill(GlobalVar.nero)
+            pygame.display.update()
+        elif tipoOscuramento == 2:
+            image.fill((0, 0, 0, 5))
+            image = image.convert_alpha(GlobalVar.schermo)
+            i = 0
+            while i <= 35:
+                GlobalVar.schermo.blit(image, (0, 0))
+                pygame.display.update()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
+    else:
+        screen = GlobalVar.schermo.copy().convert()
+        rect = pygame.display.get_surface().get_rect()
+        vetImg = []
+        if illumina == 1:
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 150))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 120))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 90))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 60))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 40))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 20))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+        elif illumina == 2:
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 250))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 200))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 150))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 100))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 60))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 20))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+        i = 0
+        while i <= 5:
+            GlobalVar.schermo.blit(screen, (0, 0))
+            GlobalVar.schermo.blit(vetImg[i], (0, 0))
+            pygame.display.update()
+            GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+            i += 1
+        GlobalVar.schermo.blit(screen, (0, 0))
         pygame.display.update()
-        GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-        i += 1
 
 
 '''# linea(dove,colore,inizio,fine,spessore)
