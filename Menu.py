@@ -530,6 +530,7 @@ def menu(caricaSalvataggio, gameover):
             illuminaSchermoDopoVideo = False
             oscuraIlluminaSchermo(illumina=2)
         else:
+            pygame.event.pump()
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
@@ -877,6 +878,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
             else:
                 GlobalVar.schermo.fill(GlobalVar.grigioscu)
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     if not inizio and not caricaSalvataggio:
         GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
@@ -1413,6 +1415,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             if not risposta:
                 pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     if not inizio:
         GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
@@ -2304,6 +2307,7 @@ def menuMercante(dati):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)

@@ -1299,9 +1299,11 @@ def setCursoreVisibile(visibile):
     mouseVisibile = visibile
     if visibile:
         pygame.mouse.set_visible(True)
-        pygame.mouse.set_pos(gsx // 2, gsy // 2)
+        if sistemaOperativo == "Windows":
+            pygame.mouse.set_pos(gsx // 2, gsy // 2)
     else:
-        pygame.mouse.set_pos(gsx // 2, gsy // 2)
+        if sistemaOperativo == "Windows":
+            pygame.mouse.set_pos(gsx // 2, gsy // 2)
         pygame.mouse.set_visible(False)
 configuraCursore(False)
 

@@ -294,7 +294,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 if vetTemp[1] != 0:
                                     mostraErroreCaricamentoSalvataggio(vetTemp[1])
                                 elif vetTemp[3] != 0:
-                                    mostraErroreCaricamentoSalvataggio(vetTemp[3])
+                                    mostraErroreCaricamentoSalvataggio(2)
                                 conferma = False
                                 xp = vxp
                                 yp = vyp
@@ -310,6 +310,12 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                             primoFrame = True
                         elif cosa == 2:
                             leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+                            leggi.close()
+                            leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+                            leggi.close()
+                            leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover.txt" % n, "w")
+                            leggi.close()
+                            leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover-backup.txt" % n, "w")
                             leggi.close()
                             # ricarico i salvataggi
                             ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
@@ -534,6 +540,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
@@ -682,6 +689,7 @@ def chiediconferma(conferma):
             GlobalVar.schermo.blit(puntatore, (xp, yp))
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
@@ -1349,6 +1357,7 @@ def settaController():
 
         if countdownAggiornamentoModulo > 0:
             countdownAggiornamentoModulo -= 1
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
@@ -2024,6 +2033,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
@@ -2506,6 +2516,7 @@ def menuMappa(avanzamentoStoria):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
@@ -2800,4 +2811,5 @@ def menuDiario(dati):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)

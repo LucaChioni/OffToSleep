@@ -449,7 +449,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
 
     messaggio("Previsione prossima azione", GlobalVar.grigiochi, xPartenzaPannello + (GlobalVar.gsx // 32 * 1.5), GlobalVar.gsy // 18 * 1, 65)
     azionePrevistaTrovata = False
-    messaggio("Movimento verso TeleColco", GlobalVar.grigiochi, xPartenzaPannello + (GlobalVar.gsx // 32 * 0.8), GlobalVar.gsy // 18 * 2.6, 40)
+    messaggio("Movimento verso teleImpo", GlobalVar.grigiochi, xPartenzaPannello + (GlobalVar.gsx // 32 * 0.8), GlobalVar.gsy // 18 * 2.6, 40)
     if vettorePrevisione[0][1] == "":
         GlobalVar.schermo.blit(GlobalVar.puntatore, (xPartenzaPannello, GlobalVar.gsy // 18 * 2.5))
         messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 3.2, 35, daDestra=True)

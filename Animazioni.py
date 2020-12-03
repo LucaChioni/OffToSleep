@@ -1713,9 +1713,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if animazioneColco:
                 animazioneColcoFatta = True
 
-            pygame.event.pump()
             if (animazioneNemici or animazioneRallo or animazioneColco or animazionePersonaggi) and fineanimaz >= 0:
                 pygame.display.update()
+                pygame.event.pump()
                 GlobalVar.clockAnimazioni.tick(GlobalVar.fpsAnimazioni)
                 # print (GlobalVar.clockAnimazioni.get_fps())
             fineanimaz -= 1

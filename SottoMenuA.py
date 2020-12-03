@@ -1060,6 +1060,7 @@ def equip(dati):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     return dati
 
@@ -1648,6 +1649,7 @@ def sceglicondiz(dati, condizione):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     return condizione
 
@@ -2258,6 +2260,7 @@ def sceglitecn(dati, tecnica):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     return tecnica
 
@@ -3438,6 +3441,7 @@ def equiprobo(dati):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     return dati
 
@@ -4116,5 +4120,6 @@ def oggetti(dati, colcoInCasellaVista):
 
             pygame.display.update()
 
+        pygame.event.pump()
         GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     return dati, attacco

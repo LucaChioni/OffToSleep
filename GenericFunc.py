@@ -177,6 +177,7 @@ def guardaVideo(listaImg, audio, loop):
             continua = True
             bottoneDown = False
 
+        pygame.event.pump()
         GlobalVar.clockVideo.tick(GlobalVar.fpsVideo)
         if countdownInizioVideo > 0:
             countdownInizioVideo -= 1
@@ -2512,6 +2513,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             while i <= 5:
                 GlobalVar.schermo.blit(image, (0, 0))
                 pygame.display.update()
+                pygame.event.pump()
                 GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
                 i += 1
             GlobalVar.schermo.fill(GlobalVar.nero)
@@ -2523,6 +2525,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             while i <= 35:
                 GlobalVar.schermo.blit(image, (0, 0))
                 pygame.display.update()
+                pygame.event.pump()
                 GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
                 i += 1
     else:
@@ -2572,6 +2575,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             GlobalVar.schermo.blit(screen, (0, 0))
             GlobalVar.schermo.blit(vetImg[i], (0, 0))
             pygame.display.update()
+            pygame.event.pump()
             GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
             i += 1
         GlobalVar.schermo.blit(screen, (0, 0))

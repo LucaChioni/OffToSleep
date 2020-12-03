@@ -1606,6 +1606,11 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
     sposta = False
     # movimento robot
     if chiamarob:
+        if dati[10] <= 0:
+            i = 0
+            while i < len(vettorePrevisione):
+                vettorePrevisione[i][1] = "Energia insufficiente"
+                i += 1
         previsionePosizioneObbiettivo.append([x, y])
         azioneEseguita = False
         if (vx == rx + GlobalVar.gpx and vy == ry) or (vx == rx - GlobalVar.gpx and vy == ry) or (vx == rx and vy == ry + GlobalVar.gpy) or (vx == rx and vy == ry - GlobalVar.gpy):
@@ -1650,7 +1655,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
         else:
             ultimoObbiettivoColco = []
     else:
-        vettorePrevisione[0][1] = "TeleColco spento"
+        vettorePrevisione[0][1] = "TeleImpo spento"
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
 
         if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
@@ -2397,12 +2402,20 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             else:
                 ultimoObbiettivoColco = []
             if azioneEseguita and sposta:
+                if dati[10] <= 0:
+                    vettorePrevisione[11][1] = "Energia insufficiente"
                 previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                 tecnicaUsata = "spostamento"
             else:
-                vettorePrevisione[11][1] = "Obbiettivo irraggiungibile"
+                if dati[10] <= 0:
+                    vettorePrevisione[11][1] = "Energia insufficiente"
+                else:
+                    vettorePrevisione[11][1] = "Obbiettivo irraggiungibile"
         elif not azioneEseguita:
-            vettorePrevisione[11][1] = "Nessun obbiettivo in memoria"
+            if dati[10] <= 0:
+                vettorePrevisione[11][1] = "Energia insufficiente"
+            else:
+                vettorePrevisione[11][1] = "Nessun obbiettivo in memoria"
 
     for nemico in nemiciVistiDaColco:
         listaNemici.append(nemico)
