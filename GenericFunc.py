@@ -25,7 +25,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
     if daDestra:
         testo = font.render(msg, True, colore)
         dimX, dimY = font.size(msg)
-        GlobalVar.schermo.blit(testo, (x - dimX, y))
+        GlobalVar.disegnaImmagineSuSchermo(testo, (x - dimX, y))
     elif centrale:
         msgIniziale = msg
         font.render(msg, True, colore)
@@ -39,7 +39,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
             msg += "..."
         testo = font.render(msg, True, colore)
         dimX, dimY = font.size(msg)
-        GlobalVar.schermo.blit(testo, (x - (dimX // 2), y))
+        GlobalVar.disegnaImmagineSuSchermo(testo, (x - (dimX // 2), y))
     elif testoComplesso:
         vetMsg = msg.split("<*>")
         for text in vetMsg:
@@ -72,11 +72,11 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
                                 y += spazioTraLeRighe
                             else:
                                 y += dimY
-                        GlobalVar.schermo.blit(testo, (x, y))
+                        GlobalVar.disegnaImmagineSuSchermo(testo, (x, y))
                         x += dimX
     else:
         testo = font.render(msg, True, colore)
-        GlobalVar.schermo.blit(testo, (x, y))
+        GlobalVar.disegnaImmagineSuSchermo(testo, (x, y))
 
 
 def getStatistiche(dati, difesa=0, inMenu=False):
@@ -154,9 +154,9 @@ def getVitaTotRallo(livello, guanti):
 def guardaVideo(listaImg, audio, loop):
     if GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(False)
-    GlobalVar.schermo.fill(GlobalVar.grigioscu)
+    GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
     oscuraIlluminaSchermo(illumina=2)
-    pygame.display.update()
+    GlobalVar.aggiornaSchermo()
     bottoneDown = False
 
     # play video
@@ -167,13 +167,13 @@ def guardaVideo(listaImg, audio, loop):
         if countdownInizioVideo == 0:
             if i == 0:
                 GlobalVar.canaleSoundSottofondoAmbientale.play(audio)
-            GlobalVar.schermo.blit(listaImg[i], (0, 0))
-            pygame.display.update()
+            GlobalVar.disegnaImmagineSuSchermo(listaImg[i], (0, 0))
+            GlobalVar.aggiornaSchermo()
 
         # gestione degli input
         bottoneDown, inutile = getInput(bottoneDown, False)
         if bottoneDown:
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
             continua = True
             bottoneDown = False
 
@@ -258,7 +258,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -268,7 +268,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacbassodestra):
                 if caseattacbassodestra[j] == caseattac[i] and caseattacbassodestra[j + 1] == caseattac[i + 1]:
@@ -402,7 +402,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -412,7 +412,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacbassosinistra):
                 if caseattacbassosinistra[j] == caseattac[i] and caseattacbassosinistra[j + 1] == caseattac[i + 1]:
@@ -546,7 +546,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -556,7 +556,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacaltosinistra):
                 if caseattacaltosinistra[j] == caseattac[i] and caseattacaltosinistra[j + 1] == caseattac[i + 1]:
@@ -690,7 +690,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -700,7 +700,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacaltodestra):
                 if caseattacaltodestra[j] == caseattac[i] and caseattacaltodestra[j + 1] == caseattac[i + 1]:
@@ -840,7 +840,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a sinistra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i]
@@ -850,7 +850,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacdestra):
                 if caseattacdestra[j] == caseattac[i] and caseattacdestra[j + 1] == caseattac[i + 1]:
@@ -990,7 +990,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -1000,7 +1000,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacsinistra):
                 if caseattacsinistra[j] == caseattac[i] and caseattacsinistra[j + 1] == caseattac[i + 1]:
@@ -1140,7 +1140,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in basso a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -1150,7 +1150,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = - deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacalto):
                 if caseattacalto[j] == caseattac[i] and caseattacalto[j + 1] == caseattac[i + 1]:
@@ -1290,7 +1290,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare1 = - deltaYRetta / deltaXRetta
             altezzaRetta1 = yInizioRetta - (xInizioRetta * coeffAngolare1)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             # la seconda retta va dal personaggio all'angolo in alto a destra dell'ostacolo
             xInizioRetta = (x + (GlobalVar.gpx / 2.0))
             xFineRetta = caseattac[i] + GlobalVar.gpx
@@ -1300,7 +1300,7 @@ def trovacasattaccabili(x, y, raggio, caseviste):
             deltaYRetta = abs(yInizioRetta - yFineRetta)
             coeffAngolare2 = deltaYRetta / deltaXRetta
             altezzaRetta2 = yInizioRetta - (xInizioRetta * coeffAngolare2)
-            #pygame.draw.line(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
+            #GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, rosso, (xInizioRetta, yInizioRetta), (xFineRetta, yFineRetta), 1)
             j = 0
             while j < len(caseattacbasso):
                 if caseattacbasso[j] == caseattac[i] and caseattacbasso[j + 1] == caseattac[i + 1]:
@@ -1859,7 +1859,8 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
         gameover = True
         if GlobalVar.mouseBloccato:
             GlobalVar.configuraCursore(False)
-        GlobalVar.canaleSoundPuntatore.stop()
+        GlobalVar.canaleSoundPuntatoreSposta.stop()
+        GlobalVar.canaleSoundPuntatoreSeleziona.stop()
         GlobalVar.canaleSoundPassiRallo.stop()
         GlobalVar.canaleSoundPassiColco.stop()
         GlobalVar.canaleSoundPassiNemiciPersonaggi.stop()
@@ -1883,9 +1884,9 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
         GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreMorte)
         oscuraIlluminaSchermo(illumina=False, tipoOscuramento=2)
 
-        # GlobalVarG2.schermo.fill(GlobalVarG2.grigioscu)
+        # GlobalVarG2.disegnaColoreSuTuttoLoSchermo(GlobalVarG2.grigioscu)
         messaggio("Sei morto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 13, 150)
-        pygame.display.update()
+        GlobalVar.aggiornaSchermo()
 
         bottoneDown = False
         continua = False
@@ -1893,7 +1894,7 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
             # gestione degli input
             bottoneDown, inutile = getInput(bottoneDown, False)
             if bottoneDown:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
                 continua = True
                 bottoneDown = False
         inizio = True
@@ -1917,144 +1918,144 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
     # personaggio: 1=d, 2=a, 3=w, 4=s
     if attaccoDaLontano:
         if npers == 1:
-            GlobalVar.schermo.blit(pers, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
-            GlobalVar.schermo.blit(faretra, (x, y))
-            GlobalVar.schermo.blit(GlobalVar.persdmbAttacco, (x, y))
-            GlobalVar.schermo.blit(arco, (x, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persdmbAttacco, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
         if npers == 2:
-            GlobalVar.schermo.blit(pers, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
-            GlobalVar.schermo.blit(faretra, (x, y))
-            GlobalVar.schermo.blit(GlobalVar.persambAttacco, (x, y))
-            GlobalVar.schermo.blit(arco, (x - GlobalVar.gpx, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persambAttacco, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x - GlobalVar.gpx, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
         if npers == 3:
-            GlobalVar.schermo.blit(arco, (x, y - GlobalVar.gpy))
-            GlobalVar.schermo.blit(GlobalVar.perswmbAttacco, (x, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
-            GlobalVar.schermo.blit(pers, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x, y - GlobalVar.gpy))
+            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perswmbAttacco, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
-            GlobalVar.schermo.blit(faretra, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
         if npers == 4:
-            GlobalVar.schermo.blit(faretra, (x, y))
-            GlobalVar.schermo.blit(pers, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
-            GlobalVar.schermo.blit(GlobalVar.perssmbAttacco, (x, y))
-            GlobalVar.schermo.blit(arco, (x, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perssmbAttacco, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
     else:
         if npers == 1:
-            GlobalVar.schermo.blit(scudo, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(scudo, (x, y))
             if inMovimento:
-                GlobalVar.schermo.blit(GlobalVar.persdm, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persdm, (x, y))
             else:
-                GlobalVar.schermo.blit(pers, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
-            GlobalVar.schermo.blit(faretra, (x, y))
-            GlobalVar.schermo.blit(arco, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x, y))
             if attaccoRavvicinato:
-                GlobalVar.schermo.blit(GlobalVar.persdmbAttacco, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persdmbAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    GlobalVar.schermo.blit(GlobalVar.persdmb1, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persdmb1, (x, y))
                 elif frame == 2:
-                    GlobalVar.schermo.blit(GlobalVar.persdmb2, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persdmb2, (x, y))
             else:
-                GlobalVar.schermo.blit(GlobalVar.persdb, (x, y))
-            GlobalVar.schermo.blit(arma, (x, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persdb, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arma, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
         if npers == 2:
             if attaccoRavvicinato:
-                GlobalVar.schermo.blit(arma, (x - GlobalVar.gpx, y))
+                GlobalVar.disegnaImmagineSuSchermo(arma, (x - GlobalVar.gpx, y))
             else:
-                GlobalVar.schermo.blit(arma, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(arma, (x, y))
             if inMovimento:
-                GlobalVar.schermo.blit(GlobalVar.persam, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persam, (x, y))
             else:
-                GlobalVar.schermo.blit(pers, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
-            GlobalVar.schermo.blit(faretra, (x, y))
-            GlobalVar.schermo.blit(arco, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x, y))
             if attaccoRavvicinato:
-                GlobalVar.schermo.blit(GlobalVar.persambAttacco, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persambAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    GlobalVar.schermo.blit(GlobalVar.persamb1, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persamb1, (x, y))
                 elif frame == 2:
-                    GlobalVar.schermo.blit(GlobalVar.persamb2, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persamb2, (x, y))
             else:
-                GlobalVar.schermo.blit(GlobalVar.persab, (x, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
-            GlobalVar.schermo.blit(scudo, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persab, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(scudo, (x, y))
         if npers == 3:
             if attaccoRavvicinato:
-                GlobalVar.schermo.blit(arma, (x, y - GlobalVar.gpy))
+                GlobalVar.disegnaImmagineSuSchermo(arma, (x, y - GlobalVar.gpy))
             else:
-                GlobalVar.schermo.blit(arma, (x, y))
-            GlobalVar.schermo.blit(scudo, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(arma, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(scudo, (x, y))
             if attaccoRavvicinato:
-                GlobalVar.schermo.blit(GlobalVar.perswmbAttacco, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perswmbAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    GlobalVar.schermo.blit(GlobalVar.perswmb1, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perswmb1, (x, y))
                 elif frame == 2:
-                    GlobalVar.schermo.blit(GlobalVar.perswmb2, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perswmb2, (x, y))
             else:
-                GlobalVar.schermo.blit(GlobalVar.perswb, (x, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perswb, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
             if inMovimento:
-                GlobalVar.schermo.blit(GlobalVar.perswm, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perswm, (x, y))
             else:
-                GlobalVar.schermo.blit(pers, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
-            GlobalVar.schermo.blit(faretra, (x, y))
-            GlobalVar.schermo.blit(arco, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x, y))
         if npers == 4:
-            GlobalVar.schermo.blit(arco, (x, y))
-            GlobalVar.schermo.blit(faretra, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arco, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(faretra, (x, y))
             if inMovimento:
-                GlobalVar.schermo.blit(GlobalVar.perssm, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perssm, (x, y))
             else:
-                GlobalVar.schermo.blit(pers, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(pers, (x, y))
             if avvele:
-                GlobalVar.schermo.blit(GlobalVar.persAvvele, (x, y))
-            GlobalVar.schermo.blit(armatura, (x, y))
-            GlobalVar.schermo.blit(collana, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.persAvvele, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(armatura, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(collana, (x, y))
             if attaccoRavvicinato:
-                GlobalVar.schermo.blit(GlobalVar.perssmbAttacco, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perssmbAttacco, (x, y))
             elif inMovimento:
                 if frame == 1:
-                    GlobalVar.schermo.blit(GlobalVar.perssmb1, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perssmb1, (x, y))
                 elif frame == 2:
-                    GlobalVar.schermo.blit(GlobalVar.perssmb2, (x, y))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perssmb2, (x, y))
             else:
-                GlobalVar.schermo.blit(GlobalVar.perssb, (x, y))
-            GlobalVar.schermo.blit(arma, (x, y))
-            GlobalVar.schermo.blit(guanti, (x, y))
-            GlobalVar.schermo.blit(scudo, (x, y))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perssb, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(arma, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(guanti, (x, y))
+            GlobalVar.disegnaImmagineSuSchermo(scudo, (x, y))
 
 
 def dialoga(avanzamentoStoria, personaggio):
@@ -2073,15 +2074,15 @@ def dialoga(avanzamentoStoria, personaggio):
         nomePersonaggio = "Sara"
 
     if personaggio.nome != "Tutorial":
-        GlobalVar.schermo.blit(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))
+        GlobalVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))
     if personaggio.nome != "Tutorial" and personaggio.nome != "Nessuno":
-        GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
+        GlobalVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
     schermo_prima_del_dialogo = GlobalVar.schermo.copy().convert()
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
     dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 150))
     background.blit(dark, (0, 0))
-    GlobalVar.schermo.blit(background, (0, 0))
+    GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
 
     schermo_prima_del_dialogo = GlobalVar.schermo.copy().convert()
     background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalVar.gsy // 18 * 3.5, GlobalVar.gsx, GlobalVar.gsy // 18 * 14.5))
@@ -2126,53 +2127,53 @@ def dialoga(avanzamentoStoria, personaggio):
                     GlobalVar.configuraCursore(False)
             if voceMarcataVecchia != voceMarcata and not primoframe:
                 aggiornaInterfacciaPerCambioInput = True
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
         primoframe = False
 
         # gestione degli input
         bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
+            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
             fineDialogo = True
             bottoneDown = False
         if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             prosegui = True
             if voceMarcata != 1 and voceMarcata != 3:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                 voceMarcata -= 1
             else:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
         if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             prosegui = True
             if voceMarcata != 1 and voceMarcata != 2:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                 voceMarcata -= 2
             else:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
         if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             prosegui = True
             if voceMarcata != 2 and voceMarcata != 4:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                 voceMarcata += 1
             else:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
         if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and personaggio.scelta and numeromessaggioAttuale < numeroMessaggiTotali and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
             puntatoreSpostato = True
             prosegui = True
             if voceMarcata != 3 and voceMarcata != 4:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostapun)
+                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                 voceMarcata += 2
             else:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
         elif bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
             if sceltaEffettuata != 0 and sceltaEffettuata != personaggio.scelta:
                 fineDialogo = True
             elif numeromessaggioAttuale == numeroMessaggiTotali:
@@ -2193,10 +2194,10 @@ def dialoga(avanzamentoStoria, personaggio):
                 prosegui = True
             bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
         if bottoneDown:
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
 
         if (prosegui or aggiornaInterfacciaPerCambioInput) and not fineDialogo:
@@ -2206,13 +2207,13 @@ def dialoga(avanzamentoStoria, personaggio):
             if puntatoreSpostato:
                 numeromessaggioAttuale -= 1
                 puntatoreSpostato = False
-            GlobalVar.schermo.blit(background, (0, GlobalVar.gsy // 18 * 3.5))
+            GlobalVar.disegnaImmagineSuSchermo(background, (0, GlobalVar.gsy // 18 * 3.5))
             if personaggio.nome != "Tutorial":
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio" and personaggio.nome != "Nessuno":
-                    GlobalVar.schermo.blit(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
+                    GlobalVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu" or personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
-                    GlobalVar.schermo.blit(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))
-            GlobalVar.schermo.blit(GlobalVar.sfondoDialoghi, (0, GlobalVar.gsy * 2 // 3))
+                    GlobalVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))
+            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoDialoghi, (0, GlobalVar.gsy * 2 // 3))
             if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio":
                 messaggio(personaggio.nome + ":", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, (GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 4 // 5), 80)
             elif personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu":
@@ -2226,18 +2227,18 @@ def dialoga(avanzamentoStoria, personaggio):
                 messaggio(personaggio.partiDialogo[numeromessaggioAttuale][5], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2), 50)
                 messaggio(personaggio.partiDialogo[numeromessaggioAttuale][6], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2), 50)
                 if voceMarcata == 1:
-                    GlobalVar.schermo.blit(puntatore, (GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2)))
+                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2)))
                 if voceMarcata == 2:
-                    GlobalVar.schermo.blit(puntatore, (GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2)))
+                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (GlobalVar.gsx // 32 * 1, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2)))
                 if voceMarcata == 3:
-                    GlobalVar.schermo.blit(puntatore, (GlobalVar.gsx // 32 * 16, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2)))
+                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (GlobalVar.gsx // 32 * 16, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 1.2)))
                 if voceMarcata == 4:
-                    GlobalVar.schermo.blit(puntatore, (GlobalVar.gsx // 32 * 16, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2)))
+                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (GlobalVar.gsx // 32 * 16, ((GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3)) + int(GlobalVar.gpy * 2.2)))
             else:
                 messaggio(personaggio.partiDialogo[numeromessaggioAttuale][1], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, (GlobalVar.gsy * 2 // 3) + (GlobalVar.gpy * 7 // 3), 50, GlobalVar.gpx * 30, GlobalVar.gpy * 4 // 5)
             numeromessaggioAttuale += 1
             prosegui = False
-            pygame.display.update()
+            GlobalVar.aggiornaSchermo()
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
     GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
@@ -2248,20 +2249,20 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     if GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(False)
     GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoRaccoltaMonete)
-    GlobalVar.schermo.blit(GlobalVar.sfocontcof, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 0))
+    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfocontcof, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 0))
     messaggio("Hai ottenuto: " + oggettoRicevuto, GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 1, 60)
-    pygame.display.update()
+    GlobalVar.aggiornaSchermo()
     bottoneDown = False
     risposta = False
     while not risposta:
         # gestione degli input
         bottoneDown, inutile = getInput(bottoneDown, False)
         if bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
             risposta = True
             bottoneDown = False
         if bottoneDown:
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
 
 
@@ -2433,9 +2434,9 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
             cicliDisponibili -= 1
 
     if trovatoNemicoDaInquadrare:
-        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selObbiettivo)
+        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selObbiettivo)
     else:
-        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
+        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
     return nemicoInquadrato
 
 
@@ -2496,9 +2497,9 @@ def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti):
 
 def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y, casellaChiara, casellaScura):
     if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 0:
-        GlobalVar.schermo.blit(casellaChiara, (x, y))
+        GlobalVar.disegnaImmagineSuSchermo(casellaChiara, (x, y))
     if ((x / GlobalVar.gpx) + (y / GlobalVar.gpy)) % 2 == 1:
-        GlobalVar.schermo.blit(casellaScura, (x, y))
+        GlobalVar.disegnaImmagineSuSchermo(casellaScura, (x, y))
 
 
 def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
@@ -2511,46 +2512,60 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             image = image.convert_alpha(GlobalVar.schermo)
             i = 0
             while i <= 5:
-                GlobalVar.schermo.blit(image, (0, 0))
-                pygame.display.update()
+                GlobalVar.disegnaImmagineSuSchermo(image, (0, 0))
+                GlobalVar.aggiornaSchermo()
                 pygame.event.pump()
                 GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
                 i += 1
-            GlobalVar.schermo.fill(GlobalVar.nero)
-            pygame.display.update()
+            GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
+            GlobalVar.aggiornaSchermo()
         elif tipoOscuramento == 2:
             image.fill((0, 0, 0, 5))
             image = image.convert_alpha(GlobalVar.schermo)
             i = 0
             while i <= 35:
-                GlobalVar.schermo.blit(image, (0, 0))
-                pygame.display.update()
+                GlobalVar.disegnaImmagineSuSchermo(image, (0, 0))
+                GlobalVar.aggiornaSchermo()
                 pygame.event.pump()
                 GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
                 i += 1
+        elif tipoOscuramento == 3:
+            image.fill((0, 0, 0, 100))
+            image = image.convert_alpha(GlobalVar.schermo)
+            i = 0
+            while i <= 3:
+                GlobalVar.disegnaImmagineSuSchermo(image, (0, 0))
+                GlobalVar.aggiornaSchermo()
+                pygame.event.pump()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
+            GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
+            GlobalVar.aggiornaSchermo()
     else:
         screen = GlobalVar.schermo.copy().convert()
         rect = pygame.display.get_surface().get_rect()
         vetImg = []
         if illumina == 1:
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((0, 0, 0, 200))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((0, 0, 0, 150))
             vetImg.append(image.convert_alpha(GlobalVar.schermo))
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-            image.fill((0, 0, 0, 120))
+            image.fill((0, 0, 0, 100))
             vetImg.append(image.convert_alpha(GlobalVar.schermo))
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-            image.fill((0, 0, 0, 90))
+            image.fill((0, 0, 0, 50))
             vetImg.append(image.convert_alpha(GlobalVar.schermo))
-            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-            image.fill((0, 0, 0, 60))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
-            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-            image.fill((0, 0, 0, 40))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
-            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
-            image.fill((0, 0, 0, 20))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            i = 0
+            while i <= 3:
+                GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                GlobalVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+                GlobalVar.aggiornaSchermo()
+                pygame.event.pump()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
         elif illumina == 2:
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((0, 0, 0, 250))
@@ -2570,21 +2585,21 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((0, 0, 0, 20))
             vetImg.append(image.convert_alpha(GlobalVar.schermo))
-        i = 0
-        while i <= 5:
-            GlobalVar.schermo.blit(screen, (0, 0))
-            GlobalVar.schermo.blit(vetImg[i], (0, 0))
-            pygame.display.update()
-            pygame.event.pump()
-            GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
-            i += 1
-        GlobalVar.schermo.blit(screen, (0, 0))
-        pygame.display.update()
+            i = 0
+            while i <= 5:
+                GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                GlobalVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+                GlobalVar.aggiornaSchermo()
+                pygame.event.pump()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
+        GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        GlobalVar.aggiornaSchermo()
 
 
 '''# linea(dove,colore,inizio,fine,spessore)
-pygame.draw.line(GlobalVarG2.schermo, verde, (0, 0), (GlobalVarG2.gsx, GlobalVarG2.gsy), 10)
+GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, verde, (0, 0), (GlobalVarG2.gsx, GlobalVarG2.gsy), 10)
 # cerchio(dove,colore,centro,raggio,spessore)
 pygame.draw.circle(GlobalVarG2.schermo, blu, (300, 100), 5)
 # rettangolo(dove,colore,(x,y,larghezza,altezza),spessore)
-pygame.draw.rect(GlobalVarG2.schermo, rosso, (200, 100, 30, 40), 5)'''
+GlobalVar.disegnaRettangoloSuSchermo(GlobalVarG2.schermo, rosso, (200, 100, 30, 40), 5)'''

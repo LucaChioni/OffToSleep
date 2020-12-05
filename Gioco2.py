@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import gc
 from Menu import *
 from EnvPrint import *
 from Animazioni import *
@@ -235,9 +234,9 @@ def gameloop():
 
                 caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
 
-                GlobalVar.schermo.blit(imgSfondoStanza, (0, 0))
+                GlobalVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
                 schermoOriginale = GlobalVar.schermo.copy().convert()
-                GlobalVar.schermo.fill(GlobalVar.nero)
+                GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
                 vettoreImgCaselle = []
                 i = 0
                 while i < len(casellePercorribili):
@@ -439,7 +438,6 @@ def gameloop():
 
             caricaTutto = True
             carim = False
-            gc.collect()
 
         if inizio:
             if npers != 1 and npers != 2 and npers != 3 and npers != 4:
@@ -559,195 +557,321 @@ def gameloop():
             nx = 0
             ny = 0
         movimentoPerMouse = False
-        # movimenti personaggio
-        if bottoneDown == pygame.K_w or bottoneDown == "padSu":
-            refreshSchermo = True
-            npers = 3
-            pers = GlobalVar.persw
-            arma = armaw
-            armaMov1 = armawMov1
-            armaMov2 = armawMov2
-            armaAttacco = armawAttacco
-            armatura = armaturaw
-            scudo = scudow
-            arco = arcow
-            faretra = faretraw
-            arcoAttacco = arcowAttacco
-            guanti = guantiw
-            guantiMov1 = guantiwMov1
-            guantiMov2 = guantiwMov2
-            guantiAttacco = guantiwAttacco
-            collana = collanaw
-            ny = -GlobalVar.gpy
-            nx = 0
-        if bottoneDown == pygame.K_a or bottoneDown == "padSinistra":
-            refreshSchermo = True
-            npers = 2
-            pers = GlobalVar.persa
-            arma = armaa
-            armaMov1 = armaaMov1
-            armaMov2 = armaaMov2
-            armaAttacco = armaaAttacco
-            armatura = armaturaa
-            scudo = scudoa
-            arco = arcoa
-            faretra = faretraa
-            arcoAttacco = arcoaAttacco
-            guanti = guantia
-            guantiMov1 = guantiaMov1
-            guantiMov2 = guantiaMov2
-            guantiAttacco = guantiaAttacco
-            collana = collanaa
-            nx = -GlobalVar.gpx
-            ny = 0
-        if bottoneDown == pygame.K_s or bottoneDown == "padGiu":
-            refreshSchermo = True
-            npers = 4
-            pers = GlobalVar.perss
-            arma = armas
-            armaMov1 = armasMov1
-            armaMov2 = armasMov2
-            armaAttacco = armasAttacco
-            armatura = armaturas
-            scudo = scudos
-            arco = arcos
-            faretra = faretras
-            arcoAttacco = arcosAttacco
-            guanti = guantis
-            guantiMov1 = guantisMov1
-            guantiMov2 = guantisMov2
-            guantiAttacco = guantisAttacco
-            collana = collanas
-            ny = GlobalVar.gpy
-            nx = 0
-        if bottoneDown == pygame.K_d or bottoneDown == "padDestra":
-            refreshSchermo = True
-            npers = 1
-            pers = GlobalVar.persd
-            arma = armad
-            armaMov1 = armadMov1
-            armaMov2 = armadMov2
-            armaAttacco = armadAttacco
-            armatura = armaturad
-            scudo = scudod
-            arco = arcod
-            faretra = faretrad
-            arcoAttacco = arcodAttacco
-            guanti = guantid
-            guantiMov1 = guantidMov1
-            guantiMov2 = guantidMov2
-            guantiAttacco = guantidAttacco
-            collana = collanad
-            nx = GlobalVar.gpx
-            ny = 0
-        # vado in mod. interazione
-        if bottoneDown == pygame.K_e or bottoneDown == "padQuadrato":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-            attacco = 1
-            bottoneDown = False
-        # tolgo l'obbiettivo se presente
-        if bottoneDown == pygame.K_q or bottoneDown == "padCerchio":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            if nemicoInquadrato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                nemicoInquadrato = False
-                caricaTutto = True
-            else:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            bottoneDown = False
-        # attivo / disattivo gambit di Colco
-        if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-                GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
+        if mosseRimasteRob <= 0 and not nemiciInMovimento:
+            # movimenti personaggio
+            if bottoneDown == pygame.K_w or bottoneDown == "padSu":
                 refreshSchermo = True
-                if chiamarob:
-                    chiamarob = False
+                npers = 3
+                pers = GlobalVar.persw
+                arma = armaw
+                armaMov1 = armawMov1
+                armaMov2 = armawMov2
+                armaAttacco = armawAttacco
+                armatura = armaturaw
+                scudo = scudow
+                arco = arcow
+                faretra = faretraw
+                arcoAttacco = arcowAttacco
+                guanti = guantiw
+                guantiMov1 = guantiwMov1
+                guantiMov2 = guantiwMov2
+                guantiAttacco = guantiwAttacco
+                collana = collanaw
+                ny = -GlobalVar.gpy
+                nx = 0
+            if bottoneDown == pygame.K_a or bottoneDown == "padSinistra":
+                refreshSchermo = True
+                npers = 2
+                pers = GlobalVar.persa
+                arma = armaa
+                armaMov1 = armaaMov1
+                armaMov2 = armaaMov2
+                armaAttacco = armaaAttacco
+                armatura = armaturaa
+                scudo = scudoa
+                arco = arcoa
+                faretra = faretraa
+                arcoAttacco = arcoaAttacco
+                guanti = guantia
+                guantiMov1 = guantiaMov1
+                guantiMov2 = guantiaMov2
+                guantiAttacco = guantiaAttacco
+                collana = collanaa
+                nx = -GlobalVar.gpx
+                ny = 0
+            if bottoneDown == pygame.K_s or bottoneDown == "padGiu":
+                refreshSchermo = True
+                npers = 4
+                pers = GlobalVar.perss
+                arma = armas
+                armaMov1 = armasMov1
+                armaMov2 = armasMov2
+                armaAttacco = armasAttacco
+                armatura = armaturas
+                scudo = scudos
+                arco = arcos
+                faretra = faretras
+                arcoAttacco = arcosAttacco
+                guanti = guantis
+                guantiMov1 = guantisMov1
+                guantiMov2 = guantisMov2
+                guantiAttacco = guantisAttacco
+                collana = collanas
+                ny = GlobalVar.gpy
+                nx = 0
+            if bottoneDown == pygame.K_d or bottoneDown == "padDestra":
+                refreshSchermo = True
+                npers = 1
+                pers = GlobalVar.persd
+                arma = armad
+                armaMov1 = armadMov1
+                armaMov2 = armadMov2
+                armaAttacco = armadAttacco
+                armatura = armaturad
+                scudo = scudod
+                arco = arcod
+                faretra = faretrad
+                arcoAttacco = arcodAttacco
+                guanti = guantid
+                guantiMov1 = guantidMov1
+                guantiMov2 = guantidMov2
+                guantiAttacco = guantidAttacco
+                collana = collanad
+                nx = GlobalVar.gpx
+                ny = 0
+            # vado in mod. interazione
+            if bottoneDown == pygame.K_e or bottoneDown == "padQuadrato":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostaPunBattaglia)
+                attacco = 1
+                bottoneDown = False
+            # tolgo l'obbiettivo se presente
+            if bottoneDown == pygame.K_q or bottoneDown == "padCerchio":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                if nemicoInquadrato:
+                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                    nemicoInquadrato = False
+                    caricaTutto = True
                 else:
-                    ultimoObbiettivoColco = []
-                    ultimoObbiettivoColco.append("Telecomando")
-                    ultimoObbiettivoColco.append(x)
-                    ultimoObbiettivoColco.append(y)
-                    chiamarob = True
-            else:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            bottoneDown = False
-        # scorro la selezione dell'obbiettivo
-        if bottoneDown == pygame.K_3 or bottoneDown == pygame.K_KP3 or bottoneDown == "padR1":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            listaNemiciVisti = []
-            for nemico in listaNemici:
-                if nemico.inCasellaVista:
-                    listaNemiciVisti.append(nemico)
-            listaEscheViste = []
-            i = 0
-            while i < len(vettoreEsche):
-                j = 0
-                while j < len(caseviste):
-                    if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
-                        listaEscheViste.append(vettoreEsche[i])
-                        listaEscheViste.append(vettoreEsche[i + 1])
-                        listaEscheViste.append(vettoreEsche[i + 2])
-                        listaEscheViste.append(vettoreEsche[i + 3])
-                    j += 3
-                i += 4
-            nemicoInquadrato = scorriObbiettiviInquadrati(dati[0], nemicoInquadrato, listaNemiciVisti, listaEscheViste, True)
-            caricaTutto = True
-            bottoneDown = False
-        if bottoneDown == pygame.K_2 or bottoneDown == pygame.K_KP2 or bottoneDown == "padL1":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            listaNemiciVisti = []
-            for nemico in listaNemici:
-                if nemico.inCasellaVista:
-                    listaNemiciVisti.append(nemico)
-            listaEscheViste = []
-            i = 0
-            while i < len(vettoreEsche):
-                j = 0
-                while j < len(caseviste):
-                    if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
-                        listaEscheViste.append(vettoreEsche[i])
-                        listaEscheViste.append(vettoreEsche[i + 1])
-                        listaEscheViste.append(vettoreEsche[i + 2])
-                        listaEscheViste.append(vettoreEsche[i + 3])
-                    j += 3
-                i += 4
-            nemicoInquadrato = scorriObbiettiviInquadrati(dati[0], nemicoInquadrato, listaNemiciVisti, listaEscheViste, False)
-            caricaTutto = True
-            bottoneDown = False
-        # interagisco
-        if bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            # apertura porte
-            k = 0
-            while k < len(porte):
-                if porte[k] == dati[1] and not porte[k + 3] and ((porte[k + 1] == x + GlobalVar.gpx and porte[k + 2] == y and npers == 1) or (porte[k + 1] == x - GlobalVar.gpx and porte[k + 2] == y and npers == 2) or (porte[k + 1] == x and porte[k + 2] == y + GlobalVar.gpy and npers == 4) or (porte[k + 1] == x and porte[k + 2] == y - GlobalVar.gpy and npers == 3)):
-                    if possibileAprirePorta(dati[1], porte[k + 1], porte[k + 2], dati[0]):
+                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                bottoneDown = False
+            # attivo / disattivo gambit di Colco
+            if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
+                    refreshSchermo = True
+                    if chiamarob:
+                        chiamarob = False
+                    else:
+                        ultimoObbiettivoColco = []
+                        ultimoObbiettivoColco.append("Telecomando")
+                        ultimoObbiettivoColco.append(x)
+                        ultimoObbiettivoColco.append(y)
+                        chiamarob = True
+                else:
+                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                bottoneDown = False
+            # scorro la selezione dell'obbiettivo
+            if bottoneDown == pygame.K_3 or bottoneDown == pygame.K_KP3 or bottoneDown == "padR1":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                listaNemiciVisti = []
+                for nemico in listaNemici:
+                    if nemico.inCasellaVista:
+                        listaNemiciVisti.append(nemico)
+                listaEscheViste = []
+                i = 0
+                while i < len(vettoreEsche):
+                    j = 0
+                    while j < len(caseviste):
+                        if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
+                            listaEscheViste.append(vettoreEsche[i])
+                            listaEscheViste.append(vettoreEsche[i + 1])
+                            listaEscheViste.append(vettoreEsche[i + 2])
+                            listaEscheViste.append(vettoreEsche[i + 3])
+                        j += 3
+                    i += 4
+                nemicoInquadrato = scorriObbiettiviInquadrati(dati[0], nemicoInquadrato, listaNemiciVisti, listaEscheViste, True)
+                caricaTutto = True
+                bottoneDown = False
+            if bottoneDown == pygame.K_2 or bottoneDown == pygame.K_KP2 or bottoneDown == "padL1":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                listaNemiciVisti = []
+                for nemico in listaNemici:
+                    if nemico.inCasellaVista:
+                        listaNemiciVisti.append(nemico)
+                listaEscheViste = []
+                i = 0
+                while i < len(vettoreEsche):
+                    j = 0
+                    while j < len(caseviste):
+                        if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
+                            listaEscheViste.append(vettoreEsche[i])
+                            listaEscheViste.append(vettoreEsche[i + 1])
+                            listaEscheViste.append(vettoreEsche[i + 2])
+                            listaEscheViste.append(vettoreEsche[i + 3])
+                        j += 3
+                    i += 4
+                nemicoInquadrato = scorriObbiettiviInquadrati(dati[0], nemicoInquadrato, listaNemiciVisti, listaEscheViste, False)
+                caricaTutto = True
+                bottoneDown = False
+            # interagisco
+            if bottoneDown == pygame.K_SPACE or bottoneDown == "padCroce":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                # apertura porte
+                k = 0
+                while k < len(porte):
+                    if porte[k] == dati[1] and not porte[k + 3] and ((porte[k + 1] == x + GlobalVar.gpx and porte[k + 2] == y and npers == 1) or (porte[k + 1] == x - GlobalVar.gpx and porte[k + 2] == y and npers == 2) or (porte[k + 1] == x and porte[k + 2] == y + GlobalVar.gpy and npers == 4) or (porte[k + 1] == x and porte[k + 2] == y - GlobalVar.gpy and npers == 3)):
+                        if possibileAprirePorta(dati[1], porte[k + 1], porte[k + 2], dati[0]):
+                            sposta = True
+                            GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
+                            porte[k + 3] = True
+                            caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
+                            caricaTutto = True
+                            # aggiornare vettore tutteporte
+                            j = 0
+                            while j < len(tutteporte):
+                                if tutteporte[j] == porte[k] and tutteporte[j + 1] == porte[k + 1] and tutteporte[j + 2] == porte[k + 2]:
+                                    tutteporte[j + 3] = True
+                                    break
+                                j = j + 4
+                            # aggiorno inCasellaVista di nemici e personaggi
+                            listaNemici, listaPersonaggi = aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
+                            # aggiorno il campo attaccabile di colco
+                            if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                                caselleAttaccabiliColco = trovacasattaccabili(rx, ry, GlobalVar.vistaRobo * GlobalVar.gpx, caseviste)
+                                posizioneColcoAggiornamentoCaseAttac = [rx, ry]
+                            # aggiorno la vista dei nemici
+                            for nemico in listaNemici:
+                                if nemico.vita > 0 and nemico.inCasellaVista:
+                                    nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+                        else:
+                            caricaTutto = True
+                            impossibileAprirePorta = True
+                        break
+                    k = k + 4
+                # apertura cofanetti
+                i = 0
+                while i < len(cofanetti):
+                    if cofanetti[i] == dati[1] and (
+                            (cofanetti[i + 1] == x + GlobalVar.gpx and cofanetti[i + 2] == y and npers == 1) or (
+                            cofanetti[i + 1] == x - GlobalVar.gpx and cofanetti[i + 2] == y and npers == 2) or (
+                                    cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVar.gpy and npers == 4) or (
+                                    cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVar.gpy and npers == 3)) and not \
+                    cofanetti[i + 3]:
+                        GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
+                        sposta = True
+                        dati, tesoro, dati[0] = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
+                        if tesoro == -2 or tesoro == -1 or tesoro > 0:
+                            cofanetti[i + 3] = True
+                        caricaTutto = True
+                        # aggiornare vettore tutticofanetti
+                        j = 0
+                        while j < len(tutticofanetti):
+                            if tutticofanetti[j] == cofanetti[i] and tutticofanetti[j + 1] == cofanetti[i + 1] and tutticofanetti[j + 2] == cofanetti[i + 2]:
+                                if tesoro == -2 or tesoro == -1 or tesoro > 0:
+                                    tutticofanetti[j + 3] = True
+                            j = j + 4
+                    i = i + 4
+                # interazioni con altri personaggi
+                for personaggio in listaPersonaggi:
+                    if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy and npers == 3):
+                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                        sposta = True
+                        if npers == 1:
+                            personaggio.girati("a")
+                        elif npers == 2:
+                            personaggio.girati("d")
+                        elif npers == 3:
+                            personaggio.girati("s")
+                        elif npers == 4:
+                            personaggio.girati("w")
+                        disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
+                        dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
+                        caricaTutto = True
+                if not sposta:
+                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                bottoneDown = False
+            # apro il menu
+            if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                startf = True
+                bottoneDown = False
+            # comandi mouse
+            if bottoneDown == "mouseDestro":
+                GlobalVar.canaleSoundPassiRallo.stop()
+                nx = 0
+                ny = 0
+                if inquadratoQualcosa == "battaglia" and nemicoInquadrato:
+                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                    nemicoInquadrato = False
+                    caricaTutto = True
+                else:
+                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostaPunBattaglia)
+                    attacco = 1
+                bottoneDown = False
+            if bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato:
+                if inquadratoQualcosa == "start":
+                    GlobalVar.canaleSoundPassiRallo.stop()
+                    nx = 0
+                    ny = 0
+                    startf = True
+                    bottoneDown = False
+                elif inquadratoQualcosa == "battaglia":
+                    GlobalVar.canaleSoundPassiRallo.stop()
+                    nx = 0
+                    ny = 0
+                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostaPunBattaglia)
+                    attacco = 1
+                    bottoneDown = False
+                elif inquadratoQualcosa == "telecolco":
+                    GlobalVar.canaleSoundPassiRallo.stop()
+                    nx = 0
+                    ny = 0
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
+                    refreshSchermo = True
+                    if chiamarob:
+                        chiamarob = False
+                    else:
+                        ultimoObbiettivoColco = []
+                        ultimoObbiettivoColco.append("Telecomando")
+                        ultimoObbiettivoColco.append(x)
+                        ultimoObbiettivoColco.append(y)
+                        chiamarob = True
+                    bottoneDown = False
+                elif inquadratoQualcosa and inquadratoQualcosa.startswith("porta"):
+                    GlobalVar.canaleSoundPassiRallo.stop()
+                    nx = 0
+                    ny = 0
+                    inquadratoQualcosaList = inquadratoQualcosa.split(":")
+                    posizPortaInVettore = int(inquadratoQualcosaList[1])
+                    if possibileAprirePorta(dati[1], porte[posizPortaInVettore + 1], porte[posizPortaInVettore + 2], dati[0]):
                         sposta = True
                         GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
-                        porte[k + 3] = True
+                        porte[posizPortaInVettore + 3] = True
                         caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
                         caricaTutto = True
                         # aggiornare vettore tutteporte
                         j = 0
                         while j < len(tutteporte):
-                            if tutteporte[j] == porte[k] and tutteporte[j + 1] == porte[k + 1] and tutteporte[j + 2] == porte[k + 2]:
+                            if tutteporte[j] == porte[posizPortaInVettore] and tutteporte[j + 1] == porte[posizPortaInVettore + 1] and tutteporte[j + 2] == porte[posizPortaInVettore + 2]:
                                 tutteporte[j + 3] = True
                                 break
-                            j = j + 4
+                            j += 4
                         # aggiorno inCasellaVista di nemici e personaggi
                         listaNemici, listaPersonaggi = aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
                         # aggiorno il campo attaccabile di colco
@@ -759,38 +883,256 @@ def gameloop():
                             if nemico.vita > 0 and nemico.inCasellaVista:
                                 nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
                     else:
-                        caricaTutto = True
                         impossibileAprirePorta = True
-                    break
-                k = k + 4
-            # apertura cofanetti
-            i = 0
-            while i < len(cofanetti):
-                if cofanetti[i] == dati[1] and (
-                        (cofanetti[i + 1] == x + GlobalVar.gpx and cofanetti[i + 2] == y and npers == 1) or (
-                        cofanetti[i + 1] == x - GlobalVar.gpx and cofanetti[i + 2] == y and npers == 2) or (
-                                cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVar.gpy and npers == 4) or (
-                                cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVar.gpy and npers == 3)) and not \
-                cofanetti[i + 3]:
-                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
+                        caricaTutto = True
+                    # giro il pers verso la porta
+                    if porte[posizPortaInVettore + 1] == x + GlobalVar.gpx and porte[posizPortaInVettore + 2] == y:
+                        npers = 1
+                    if porte[posizPortaInVettore + 1] == x - GlobalVar.gpx and porte[posizPortaInVettore + 2] == y:
+                        npers = 2
+                    if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y + GlobalVar.gpy:
+                        npers = 4
+                    if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y - GlobalVar.gpy:
+                        npers = 3
+                    if npers == 3:
+                        pers = GlobalVar.persw
+                        arma = armaw
+                        armaMov1 = armawMov1
+                        armaMov2 = armawMov2
+                        armaAttacco = armawAttacco
+                        armatura = armaturaw
+                        scudo = scudow
+                        arco = arcow
+                        faretra = faretraw
+                        arcoAttacco = arcowAttacco
+                        guanti = guantiw
+                        guantiMov1 = guantiwMov1
+                        guantiMov2 = guantiwMov2
+                        guantiAttacco = guantiwAttacco
+                        collana = collanaw
+                    if npers == 2:
+                        pers = GlobalVar.persa
+                        arma = armaa
+                        armaMov1 = armaaMov1
+                        armaMov2 = armaaMov2
+                        armaAttacco = armaaAttacco
+                        armatura = armaturaa
+                        scudo = scudoa
+                        arco = arcoa
+                        faretra = faretraa
+                        arcoAttacco = arcoaAttacco
+                        guanti = guantia
+                        guantiMov1 = guantiaMov1
+                        guantiMov2 = guantiaMov2
+                        guantiAttacco = guantiaAttacco
+                        collana = collanaa
+                    if npers == 4:
+                        pers = GlobalVar.perss
+                        arma = armas
+                        armaMov1 = armasMov1
+                        armaMov2 = armasMov2
+                        armaAttacco = armasAttacco
+                        armatura = armaturas
+                        scudo = scudos
+                        arco = arcos
+                        faretra = faretras
+                        arcoAttacco = arcosAttacco
+                        guanti = guantis
+                        guantiMov1 = guantisMov1
+                        guantiMov2 = guantisMov2
+                        guantiAttacco = guantisAttacco
+                        collana = collanas
+                    if npers == 1:
+                        pers = GlobalVar.persd
+                        arma = armad
+                        armaMov1 = armadMov1
+                        armaMov2 = armadMov2
+                        armaAttacco = armadAttacco
+                        armatura = armaturad
+                        scudo = scudod
+                        arco = arcod
+                        faretra = faretrad
+                        arcoAttacco = arcodAttacco
+                        guanti = guantid
+                        guantiMov1 = guantidMov1
+                        guantiMov2 = guantidMov2
+                        guantiAttacco = guantidAttacco
+                        collana = collanad
+                elif inquadratoQualcosa and inquadratoQualcosa.startswith("cofanetto"):
+                    GlobalVar.canaleSoundPassiRallo.stop()
+                    nx = 0
+                    ny = 0
+                    inquadratoQualcosaList = inquadratoQualcosa.split(":")
+                    posizCofanettoInVettore = int(inquadratoQualcosaList[1])
                     sposta = True
-                    dati, tesoro, dati[0] = aperturacofanetto(cofanetti[i], cofanetti[i + 1], cofanetti[i + 2], dati)
+                    GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
+                    dati, tesoro, dati[0] = aperturacofanetto(cofanetti[posizCofanettoInVettore], cofanetti[posizCofanettoInVettore + 1], cofanetti[posizCofanettoInVettore + 2], dati)
                     if tesoro == -2 or tesoro == -1 or tesoro > 0:
-                        cofanetti[i + 3] = True
+                        cofanetti[posizCofanettoInVettore + 3] = True
                     caricaTutto = True
                     # aggiornare vettore tutticofanetti
                     j = 0
                     while j < len(tutticofanetti):
-                        if tutticofanetti[j] == cofanetti[i] and tutticofanetti[j + 1] == cofanetti[i + 1] and tutticofanetti[j + 2] == cofanetti[i + 2]:
+                        if tutticofanetti[j] == cofanetti[posizCofanettoInVettore] and tutticofanetti[j + 1] == cofanetti[posizCofanettoInVettore + 1] and tutticofanetti[j + 2] == cofanetti[posizCofanettoInVettore + 2]:
                             if tesoro == -2 or tesoro == -1 or tesoro > 0:
                                 tutticofanetti[j + 3] = True
-                        j = j + 4
-                i = i + 4
-            # interazioni con altri personaggi
-            for personaggio in listaPersonaggi:
-                if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy and npers == 3):
-                    GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        j += 4
+                    # giro il pers verso il cofanetto
+                    if cofanetti[posizCofanettoInVettore + 1] == x + GlobalVar.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
+                        npers = 1
+                    if cofanetti[posizCofanettoInVettore + 1] == x - GlobalVar.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
+                        npers = 2
+                    if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y + GlobalVar.gpy:
+                        npers = 4
+                    if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y - GlobalVar.gpy:
+                        npers = 3
+                    if npers == 3:
+                        pers = GlobalVar.persw
+                        arma = armaw
+                        armaMov1 = armawMov1
+                        armaMov2 = armawMov2
+                        armaAttacco = armawAttacco
+                        armatura = armaturaw
+                        scudo = scudow
+                        arco = arcow
+                        faretra = faretraw
+                        arcoAttacco = arcowAttacco
+                        guanti = guantiw
+                        guantiMov1 = guantiwMov1
+                        guantiMov2 = guantiwMov2
+                        guantiAttacco = guantiwAttacco
+                        collana = collanaw
+                    if npers == 2:
+                        pers = GlobalVar.persa
+                        arma = armaa
+                        armaMov1 = armaaMov1
+                        armaMov2 = armaaMov2
+                        armaAttacco = armaaAttacco
+                        armatura = armaturaa
+                        scudo = scudoa
+                        arco = arcoa
+                        faretra = faretraa
+                        arcoAttacco = arcoaAttacco
+                        guanti = guantia
+                        guantiMov1 = guantiaMov1
+                        guantiMov2 = guantiaMov2
+                        guantiAttacco = guantiaAttacco
+                        collana = collanaa
+                    if npers == 4:
+                        pers = GlobalVar.perss
+                        arma = armas
+                        armaMov1 = armasMov1
+                        armaMov2 = armasMov2
+                        armaAttacco = armasAttacco
+                        armatura = armaturas
+                        scudo = scudos
+                        arco = arcos
+                        faretra = faretras
+                        arcoAttacco = arcosAttacco
+                        guanti = guantis
+                        guantiMov1 = guantisMov1
+                        guantiMov2 = guantisMov2
+                        guantiAttacco = guantisAttacco
+                        collana = collanas
+                    if npers == 1:
+                        pers = GlobalVar.persd
+                        arma = armad
+                        armaMov1 = armadMov1
+                        armaMov2 = armadMov2
+                        armaAttacco = armadAttacco
+                        armatura = armaturad
+                        scudo = scudod
+                        arco = arcod
+                        faretra = faretrad
+                        arcoAttacco = arcodAttacco
+                        guanti = guantid
+                        guantiMov1 = guantidMov1
+                        guantiMov2 = guantidMov2
+                        guantiAttacco = guantidAttacco
+                        collana = collanad
+                    bottoneDown = False
+                elif inquadratoQualcosa and inquadratoQualcosa.startswith("personaggio"):
+                    GlobalVar.canaleSoundPassiRallo.stop()
+                    nx = 0
+                    ny = 0
+                    inquadratoQualcosaList = inquadratoQualcosa.split(":")
+                    posizPersonaggioInVettore = int(inquadratoQualcosaList[1])
+                    personaggio = listaPersonaggi[posizPersonaggioInVettore]
                     sposta = True
+                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                    # giro Rallo verso il personaggio e viceversa
+                    if personaggio.x == x + GlobalVar.gpx and personaggio.y == y:
+                        npers = 1
+                    if personaggio.x == x - GlobalVar.gpx and personaggio.y == y:
+                        npers = 2
+                    if personaggio.x == x and personaggio.y == y + GlobalVar.gpy:
+                        npers = 4
+                    if personaggio.x == x and personaggio.y == y - GlobalVar.gpy:
+                        npers = 3
+                    if npers == 3:
+                        pers = GlobalVar.persw
+                        arma = armaw
+                        armaMov1 = armawMov1
+                        armaMov2 = armawMov2
+                        armaAttacco = armawAttacco
+                        armatura = armaturaw
+                        scudo = scudow
+                        arco = arcow
+                        faretra = faretraw
+                        arcoAttacco = arcowAttacco
+                        guanti = guantiw
+                        guantiMov1 = guantiwMov1
+                        guantiMov2 = guantiwMov2
+                        guantiAttacco = guantiwAttacco
+                        collana = collanaw
+                    if npers == 2:
+                        pers = GlobalVar.persa
+                        arma = armaa
+                        armaMov1 = armaaMov1
+                        armaMov2 = armaaMov2
+                        armaAttacco = armaaAttacco
+                        armatura = armaturaa
+                        scudo = scudoa
+                        arco = arcoa
+                        faretra = faretraa
+                        arcoAttacco = arcoaAttacco
+                        guanti = guantia
+                        guantiMov1 = guantiaMov1
+                        guantiMov2 = guantiaMov2
+                        guantiAttacco = guantiaAttacco
+                        collana = collanaa
+                    if npers == 4:
+                        pers = GlobalVar.perss
+                        arma = armas
+                        armaMov1 = armasMov1
+                        armaMov2 = armasMov2
+                        armaAttacco = armasAttacco
+                        armatura = armaturas
+                        scudo = scudos
+                        arco = arcos
+                        faretra = faretras
+                        arcoAttacco = arcosAttacco
+                        guanti = guantis
+                        guantiMov1 = guantisMov1
+                        guantiMov2 = guantisMov2
+                        guantiAttacco = guantisAttacco
+                        collana = collanas
+                    if npers == 1:
+                        pers = GlobalVar.persd
+                        arma = armad
+                        armaMov1 = armadMov1
+                        armaMov2 = armadMov2
+                        armaAttacco = armadAttacco
+                        armatura = armaturad
+                        scudo = scudod
+                        arco = arcod
+                        faretra = faretrad
+                        arcoAttacco = arcodAttacco
+                        guanti = guantid
+                        guantiMov1 = guantidMov1
+                        guantiMov2 = guantidMov2
+                        guantiAttacco = guantidAttacco
+                        collana = collanad
                     if npers == 1:
                         personaggio.girati("a")
                     elif npers == 2:
@@ -802,358 +1144,15 @@ def gameloop():
                     disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
                     dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
                     caricaTutto = True
-            if not sposta:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            bottoneDown = False
-        # apro il menu
-        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            startf = True
-            bottoneDown = False
-        # comandi mouse
-        if bottoneDown == "mouseDestro":
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            if inquadratoQualcosa == "battaglia" and nemicoInquadrato:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selind)
-                nemicoInquadrato = False
-                caricaTutto = True
-            else:
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                attacco = 1
-            bottoneDown = False
-        if bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato:
-            if inquadratoQualcosa == "start":
+                    bottoneDown = False
+                elif inquadratoQualcosa and inquadratoQualcosa.startswith("movimento"):
+                    movimentoPerMouse = True
+            elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
                 GlobalVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0
-                startf = True
+                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                 bottoneDown = False
-            elif inquadratoQualcosa == "battaglia":
-                GlobalVar.canaleSoundPassiRallo.stop()
-                nx = 0
-                ny = 0
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.spostaPunBattaglia)
-                attacco = 1
-                bottoneDown = False
-            elif inquadratoQualcosa == "telecolco":
-                GlobalVar.canaleSoundPassiRallo.stop()
-                nx = 0
-                ny = 0
-                GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoTeleColco)
-                refreshSchermo = True
-                if chiamarob:
-                    chiamarob = False
-                else:
-                    ultimoObbiettivoColco = []
-                    ultimoObbiettivoColco.append("Telecomando")
-                    ultimoObbiettivoColco.append(x)
-                    ultimoObbiettivoColco.append(y)
-                    chiamarob = True
-                bottoneDown = False
-            elif inquadratoQualcosa and inquadratoQualcosa.startswith("porta"):
-                GlobalVar.canaleSoundPassiRallo.stop()
-                nx = 0
-                ny = 0
-                inquadratoQualcosaList = inquadratoQualcosa.split(":")
-                posizPortaInVettore = int(inquadratoQualcosaList[1])
-                if possibileAprirePorta(dati[1], porte[posizPortaInVettore + 1], porte[posizPortaInVettore + 2], dati[0]):
-                    sposta = True
-                    GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
-                    porte[posizPortaInVettore + 3] = True
-                    caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
-                    caricaTutto = True
-                    # aggiornare vettore tutteporte
-                    j = 0
-                    while j < len(tutteporte):
-                        if tutteporte[j] == porte[posizPortaInVettore] and tutteporte[j + 1] == porte[posizPortaInVettore + 1] and tutteporte[j + 2] == porte[posizPortaInVettore + 2]:
-                            tutteporte[j + 3] = True
-                            break
-                        j += 4
-                    # aggiorno inCasellaVista di nemici e personaggi
-                    listaNemici, listaPersonaggi = aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
-                    # aggiorno il campo attaccabile di colco
-                    if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
-                        caselleAttaccabiliColco = trovacasattaccabili(rx, ry, GlobalVar.vistaRobo * GlobalVar.gpx, caseviste)
-                        posizioneColcoAggiornamentoCaseAttac = [rx, ry]
-                    # aggiorno la vista dei nemici
-                    for nemico in listaNemici:
-                        if nemico.vita > 0 and nemico.inCasellaVista:
-                            nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
-                else:
-                    impossibileAprirePorta = True
-                    caricaTutto = True
-                # giro il pers verso la porta
-                if porte[posizPortaInVettore + 1] == x + GlobalVar.gpx and porte[posizPortaInVettore + 2] == y:
-                    npers = 1
-                if porte[posizPortaInVettore + 1] == x - GlobalVar.gpx and porte[posizPortaInVettore + 2] == y:
-                    npers = 2
-                if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y + GlobalVar.gpy:
-                    npers = 4
-                if porte[posizPortaInVettore + 1] == x and porte[posizPortaInVettore + 2] == y - GlobalVar.gpy:
-                    npers = 3
-                if npers == 3:
-                    pers = GlobalVar.persw
-                    arma = armaw
-                    armaMov1 = armawMov1
-                    armaMov2 = armawMov2
-                    armaAttacco = armawAttacco
-                    armatura = armaturaw
-                    scudo = scudow
-                    arco = arcow
-                    faretra = faretraw
-                    arcoAttacco = arcowAttacco
-                    guanti = guantiw
-                    guantiMov1 = guantiwMov1
-                    guantiMov2 = guantiwMov2
-                    guantiAttacco = guantiwAttacco
-                    collana = collanaw
-                if npers == 2:
-                    pers = GlobalVar.persa
-                    arma = armaa
-                    armaMov1 = armaaMov1
-                    armaMov2 = armaaMov2
-                    armaAttacco = armaaAttacco
-                    armatura = armaturaa
-                    scudo = scudoa
-                    arco = arcoa
-                    faretra = faretraa
-                    arcoAttacco = arcoaAttacco
-                    guanti = guantia
-                    guantiMov1 = guantiaMov1
-                    guantiMov2 = guantiaMov2
-                    guantiAttacco = guantiaAttacco
-                    collana = collanaa
-                if npers == 4:
-                    pers = GlobalVar.perss
-                    arma = armas
-                    armaMov1 = armasMov1
-                    armaMov2 = armasMov2
-                    armaAttacco = armasAttacco
-                    armatura = armaturas
-                    scudo = scudos
-                    arco = arcos
-                    faretra = faretras
-                    arcoAttacco = arcosAttacco
-                    guanti = guantis
-                    guantiMov1 = guantisMov1
-                    guantiMov2 = guantisMov2
-                    guantiAttacco = guantisAttacco
-                    collana = collanas
-                if npers == 1:
-                    pers = GlobalVar.persd
-                    arma = armad
-                    armaMov1 = armadMov1
-                    armaMov2 = armadMov2
-                    armaAttacco = armadAttacco
-                    armatura = armaturad
-                    scudo = scudod
-                    arco = arcod
-                    faretra = faretrad
-                    arcoAttacco = arcodAttacco
-                    guanti = guantid
-                    guantiMov1 = guantidMov1
-                    guantiMov2 = guantidMov2
-                    guantiAttacco = guantidAttacco
-                    collana = collanad
-            elif inquadratoQualcosa and inquadratoQualcosa.startswith("cofanetto"):
-                GlobalVar.canaleSoundPassiRallo.stop()
-                nx = 0
-                ny = 0
-                inquadratoQualcosaList = inquadratoQualcosa.split(":")
-                posizCofanettoInVettore = int(inquadratoQualcosaList[1])
-                sposta = True
-                GlobalVar.canaleSoundInterazioni.play(GlobalVar.suonoaperturacofanetti)
-                dati, tesoro, dati[0] = aperturacofanetto(cofanetti[posizCofanettoInVettore], cofanetti[posizCofanettoInVettore + 1], cofanetti[posizCofanettoInVettore + 2], dati)
-                if tesoro == -2 or tesoro == -1 or tesoro > 0:
-                    cofanetti[posizCofanettoInVettore + 3] = True
-                caricaTutto = True
-                # aggiornare vettore tutticofanetti
-                j = 0
-                while j < len(tutticofanetti):
-                    if tutticofanetti[j] == cofanetti[posizCofanettoInVettore] and tutticofanetti[j + 1] == cofanetti[posizCofanettoInVettore + 1] and tutticofanetti[j + 2] == cofanetti[posizCofanettoInVettore + 2]:
-                        if tesoro == -2 or tesoro == -1 or tesoro > 0:
-                            tutticofanetti[j + 3] = True
-                    j += 4
-                # giro il pers verso il cofanetto
-                if cofanetti[posizCofanettoInVettore + 1] == x + GlobalVar.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
-                    npers = 1
-                if cofanetti[posizCofanettoInVettore + 1] == x - GlobalVar.gpx and cofanetti[posizCofanettoInVettore + 2] == y:
-                    npers = 2
-                if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y + GlobalVar.gpy:
-                    npers = 4
-                if cofanetti[posizCofanettoInVettore + 1] == x and cofanetti[posizCofanettoInVettore + 2] == y - GlobalVar.gpy:
-                    npers = 3
-                if npers == 3:
-                    pers = GlobalVar.persw
-                    arma = armaw
-                    armaMov1 = armawMov1
-                    armaMov2 = armawMov2
-                    armaAttacco = armawAttacco
-                    armatura = armaturaw
-                    scudo = scudow
-                    arco = arcow
-                    faretra = faretraw
-                    arcoAttacco = arcowAttacco
-                    guanti = guantiw
-                    guantiMov1 = guantiwMov1
-                    guantiMov2 = guantiwMov2
-                    guantiAttacco = guantiwAttacco
-                    collana = collanaw
-                if npers == 2:
-                    pers = GlobalVar.persa
-                    arma = armaa
-                    armaMov1 = armaaMov1
-                    armaMov2 = armaaMov2
-                    armaAttacco = armaaAttacco
-                    armatura = armaturaa
-                    scudo = scudoa
-                    arco = arcoa
-                    faretra = faretraa
-                    arcoAttacco = arcoaAttacco
-                    guanti = guantia
-                    guantiMov1 = guantiaMov1
-                    guantiMov2 = guantiaMov2
-                    guantiAttacco = guantiaAttacco
-                    collana = collanaa
-                if npers == 4:
-                    pers = GlobalVar.perss
-                    arma = armas
-                    armaMov1 = armasMov1
-                    armaMov2 = armasMov2
-                    armaAttacco = armasAttacco
-                    armatura = armaturas
-                    scudo = scudos
-                    arco = arcos
-                    faretra = faretras
-                    arcoAttacco = arcosAttacco
-                    guanti = guantis
-                    guantiMov1 = guantisMov1
-                    guantiMov2 = guantisMov2
-                    guantiAttacco = guantisAttacco
-                    collana = collanas
-                if npers == 1:
-                    pers = GlobalVar.persd
-                    arma = armad
-                    armaMov1 = armadMov1
-                    armaMov2 = armadMov2
-                    armaAttacco = armadAttacco
-                    armatura = armaturad
-                    scudo = scudod
-                    arco = arcod
-                    faretra = faretrad
-                    arcoAttacco = arcodAttacco
-                    guanti = guantid
-                    guantiMov1 = guantidMov1
-                    guantiMov2 = guantidMov2
-                    guantiAttacco = guantidAttacco
-                    collana = collanad
-                bottoneDown = False
-            elif inquadratoQualcosa and inquadratoQualcosa.startswith("personaggio"):
-                GlobalVar.canaleSoundPassiRallo.stop()
-                nx = 0
-                ny = 0
-                inquadratoQualcosaList = inquadratoQualcosa.split(":")
-                posizPersonaggioInVettore = int(inquadratoQualcosaList[1])
-                personaggio = listaPersonaggi[posizPersonaggioInVettore]
-                sposta = True
-                GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
-                # giro Rallo verso il personaggio e viceversa
-                if personaggio.x == x + GlobalVar.gpx and personaggio.y == y:
-                    npers = 1
-                if personaggio.x == x - GlobalVar.gpx and personaggio.y == y:
-                    npers = 2
-                if personaggio.x == x and personaggio.y == y + GlobalVar.gpy:
-                    npers = 4
-                if personaggio.x == x and personaggio.y == y - GlobalVar.gpy:
-                    npers = 3
-                if npers == 3:
-                    pers = GlobalVar.persw
-                    arma = armaw
-                    armaMov1 = armawMov1
-                    armaMov2 = armawMov2
-                    armaAttacco = armawAttacco
-                    armatura = armaturaw
-                    scudo = scudow
-                    arco = arcow
-                    faretra = faretraw
-                    arcoAttacco = arcowAttacco
-                    guanti = guantiw
-                    guantiMov1 = guantiwMov1
-                    guantiMov2 = guantiwMov2
-                    guantiAttacco = guantiwAttacco
-                    collana = collanaw
-                if npers == 2:
-                    pers = GlobalVar.persa
-                    arma = armaa
-                    armaMov1 = armaaMov1
-                    armaMov2 = armaaMov2
-                    armaAttacco = armaaAttacco
-                    armatura = armaturaa
-                    scudo = scudoa
-                    arco = arcoa
-                    faretra = faretraa
-                    arcoAttacco = arcoaAttacco
-                    guanti = guantia
-                    guantiMov1 = guantiaMov1
-                    guantiMov2 = guantiaMov2
-                    guantiAttacco = guantiaAttacco
-                    collana = collanaa
-                if npers == 4:
-                    pers = GlobalVar.perss
-                    arma = armas
-                    armaMov1 = armasMov1
-                    armaMov2 = armasMov2
-                    armaAttacco = armasAttacco
-                    armatura = armaturas
-                    scudo = scudos
-                    arco = arcos
-                    faretra = faretras
-                    arcoAttacco = arcosAttacco
-                    guanti = guantis
-                    guantiMov1 = guantisMov1
-                    guantiMov2 = guantisMov2
-                    guantiAttacco = guantisAttacco
-                    collana = collanas
-                if npers == 1:
-                    pers = GlobalVar.persd
-                    arma = armad
-                    armaMov1 = armadMov1
-                    armaMov2 = armadMov2
-                    armaAttacco = armadAttacco
-                    armatura = armaturad
-                    scudo = scudod
-                    arco = arcod
-                    faretra = faretrad
-                    arcoAttacco = arcodAttacco
-                    guanti = guantid
-                    guantiMov1 = guantidMov1
-                    guantiMov2 = guantidMov2
-                    guantiAttacco = guantidAttacco
-                    collana = collanad
-                if npers == 1:
-                    personaggio.girati("a")
-                elif npers == 2:
-                    personaggio.girati("d")
-                elif npers == 3:
-                    personaggio.girati("s")
-                elif npers == 4:
-                    personaggio.girati("w")
-                disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, dati[0])
-                dati[0], oggettoRicevuto, visualizzaMenuMercante = dialoga(dati[0], personaggio)
-                caricaTutto = True
-                bottoneDown = False
-            elif inquadratoQualcosa and inquadratoQualcosa.startswith("movimento"):
-                movimentoPerMouse = True
-        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
-            GlobalVar.canaleSoundPassiRallo.stop()
-            nx = 0
-            ny = 0
-            GlobalVar.canaleSoundPuntatore.play(GlobalVar.selimp)
-            bottoneDown = False
 
         impossibileCliccarePulsanti = False
         # statistiche personaggio e robo
@@ -1327,6 +1326,8 @@ def gameloop():
                     inizio = True
                 if attacco == 0:
                     uscitoDaMenu = 2
+                if not inizio:
+                    oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
             else:
                 dati, attacco, sposta, animaOggetto, npers, inizio = startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio)
                 # cambiare posizione dopo l'uso di caricabatterie
@@ -1638,7 +1639,7 @@ def gameloop():
             if interagisciConPersonaggio:
                 for personaggio in listaPersonaggi:
                     if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy and npers == 3):
-                        GlobalVar.canaleSoundPuntatore.play(GlobalVar.selezione)
+                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
                         if npers == 1:
                             personaggio.girati("a")
                         elif npers == 2:
@@ -2039,7 +2040,8 @@ def gameloop():
         if inizio:
             if not caricaSalvataggio:
                 oscuraIlluminaSchermo(illumina=False)
-            GlobalVar.canaleSoundPuntatore.stop()
+            GlobalVar.canaleSoundPuntatoreSposta.stop()
+            GlobalVar.canaleSoundPuntatoreSeleziona.stop()
             GlobalVar.canaleSoundPassiRallo.stop()
             GlobalVar.canaleSoundPassiColco.stop()
             GlobalVar.canaleSoundPassiNemiciPersonaggi.stop()

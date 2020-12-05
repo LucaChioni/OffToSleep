@@ -2,6 +2,7 @@
 
 import os
 import sys
+import gc
 import pygame
 from SetAvanzamentiStanzePorteCofanetti import *
 
@@ -53,7 +54,6 @@ elif sistemaOperativo == "Linux":
     gsx = int(resolution[0])
     gsy = int(resolution[1])
 
-opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE
 print ("Origine", gsx, gsy)
 if gsx % 32 != 0 or gsy % 18 != 0:
     while gsx % 32 != 0:
@@ -68,6 +68,10 @@ elif gsx // 16 > gsy // 9:
     gsx = gsy * 16 // 9
 print ("Modificato", gsx, gsy)
 
+# metto il fullhd come risoluzione massima
+if gsy > 1080:
+    gsx = 1920
+    gsy = 1080
 maxGsx = gsx
 maxGsy = gsy
 
@@ -1067,22 +1071,24 @@ def loadImgs():
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
 
 # canali audio / volume (0-1)
-volumeCanzoni = 0.0
-volumeEffetti = 0.0
-pygame.mixer.set_num_channels(10)
+volumeCanzoni = 1.0
+volumeEffetti = 1.0
+pygame.mixer.set_num_channels(11)
 canaleSoundCanzone = pygame.mixer.Channel(0)
-canaleSoundPuntatore = pygame.mixer.Channel(1)
-canaleSoundPassiRallo = pygame.mixer.Channel(2)
-canaleSoundPassiColco = pygame.mixer.Channel(3)
-canaleSoundPassiNemiciPersonaggi = pygame.mixer.Channel(4)
-canaleSoundMorteNemici = pygame.mixer.Channel(5)
-canaleSoundLvUp = pygame.mixer.Channel(6)
-canaleSoundInterazioni = pygame.mixer.Channel(7)
-canaleSoundAttacco = pygame.mixer.Channel(8)
-canaleSoundSottofondoAmbientale = pygame.mixer.Channel(9)
+canaleSoundPuntatoreSposta = pygame.mixer.Channel(1)
+canaleSoundPuntatoreSeleziona = pygame.mixer.Channel(2)
+canaleSoundPassiRallo = pygame.mixer.Channel(3)
+canaleSoundPassiColco = pygame.mixer.Channel(4)
+canaleSoundPassiNemiciPersonaggi = pygame.mixer.Channel(5)
+canaleSoundMorteNemici = pygame.mixer.Channel(6)
+canaleSoundLvUp = pygame.mixer.Channel(7)
+canaleSoundInterazioni = pygame.mixer.Channel(8)
+canaleSoundAttacco = pygame.mixer.Channel(9)
+canaleSoundSottofondoAmbientale = pygame.mixer.Channel(10)
 def initVolumeSounds():
     canaleSoundCanzone.set_volume(volumeCanzoni)
-    canaleSoundPuntatore.set_volume(volumeEffetti)
+    canaleSoundPuntatoreSeleziona.set_volume(volumeEffetti)
+    canaleSoundPuntatoreSposta.set_volume(volumeEffetti)
     canaleSoundPassiRallo.set_volume(volumeEffetti)
     canaleSoundPassiColco.set_volume(volumeEffetti)
     canaleSoundPassiNemiciPersonaggi.set_volume(volumeEffetti)
@@ -1126,13 +1132,15 @@ if len(datiFileImpostazioniString) == 6:
             opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
             schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
         else:
-            schermo = pygame.display.set_mode((gsx, gsy))
+            opzioni_schermo = pygame.DOUBLEBUF
+            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
         initVolumeSounds()
         loadImgs()
 else:
     erroreFileImpostazioni = True
 if erroreFileImpostazioni:
     print ("Errore nella lettura del file di configurazione delle impostazioni")
+    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
     schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
     loadImgs()
     initVolumeSounds()
@@ -1430,3 +1438,144 @@ def inizializzaModuloJoistick():
         configPadConnessi.append(configPad)
 inizializzaModuloJoistick()
 usandoIlController = False
+
+# funzioni per disegnare tutto sullo schermo (serve per ottimizzare)
+listaRettangoliDaAggiornare = []
+aggiornaTuttoLoSchermo = False
+def disegnaColoreSuTuttoLoSchermo(colore):
+    global schermo
+    global gsx
+    global gsy
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    schermo.fill(colore)
+
+    if not aggiornaTuttoLoSchermo:
+        listaRettangoliDaAggiornare = []
+        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+        aggiornaTuttoLoSchermo = True
+def disegnaLineaSuSchermo(schermo, colore, coordinateInizio, coordinateFine, spessore):
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    pygame.draw.line(schermo, colore, coordinateInizio, coordinateFine, spessore)
+    x, y = coordinateInizio
+    xFine, yFine = coordinateFine
+    dimX = xFine - x
+    dimY = yFine - y
+
+    if dimX < spessore:
+        dimX = spessore
+    if dimY < spessore:
+        dimY = spessore
+
+    if not aggiornaTuttoLoSchermo:
+        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+        aggiungiRettangolo = True
+        rectOrig = pygame.Rect(x, y, dimX, dimY)
+        xInizioRectOrig = rectOrig.left
+        yInizioRectOrig = rectOrig.top
+        xFineRectOrig = rectOrig.right
+        yFineRectOrig = rectOrig.bottom
+        i = 0
+        while i < len(listaRettangoliDaAggiornare):
+            rectConfronto = listaRettangoliDaAggiornare[i]
+            xInizioRectConfronto = rectConfronto.left
+            yInizioRectConfronto = rectConfronto.top
+            xFineRectConfronto = rectConfronto.right
+            yFineRectConfronto = rectConfronto.bottom
+            rettangoloEliminato = False
+            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                aggiungiRettangolo = False
+                break
+            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                del listaRettangoliDaAggiornare[i]
+                rettangoloEliminato = True
+            if not rettangoloEliminato:
+                i += 1
+        if aggiungiRettangolo:
+            listaRettangoliDaAggiornare.append(rectOrig)
+def disegnaRettangoloSuSchermo(schermo, colore, coordinateEDimensione):
+    global gsx
+    global gsy
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    pygame.draw.rect(schermo, colore, coordinateEDimensione)
+    x, y, dimX, dimY = coordinateEDimensione
+
+    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
+        listaRettangoliDaAggiornare = []
+        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+        aggiornaTuttoLoSchermo = True
+    if not aggiornaTuttoLoSchermo:
+        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+        aggiungiRettangolo = True
+        rectOrig = pygame.Rect(x, y, dimX, dimY)
+        xInizioRectOrig = rectOrig.left
+        yInizioRectOrig = rectOrig.top
+        xFineRectOrig = rectOrig.right
+        yFineRectOrig = rectOrig.bottom
+        i = 0
+        while i < len(listaRettangoliDaAggiornare):
+            rectConfronto = listaRettangoliDaAggiornare[i]
+            xInizioRectConfronto = rectConfronto.left
+            yInizioRectConfronto = rectConfronto.top
+            xFineRectConfronto = rectConfronto.right
+            yFineRectConfronto = rectConfronto.bottom
+            rettangoloEliminato = False
+            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                aggiungiRettangolo = False
+                break
+            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                del listaRettangoliDaAggiornare[i]
+                rettangoloEliminato = True
+            if not rettangoloEliminato:
+                i += 1
+        if aggiungiRettangolo:
+            listaRettangoliDaAggiornare.append(rectOrig)
+def disegnaImmagineSuSchermo(img, coordinate):
+    global schermo
+    global gsx
+    global gsy
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    x, y = coordinate
+    schermo.blit(img, (x, y))
+    dimX, dimY = img.get_rect().size
+
+    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
+        listaRettangoliDaAggiornare = []
+        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+        aggiornaTuttoLoSchermo = True
+    if not aggiornaTuttoLoSchermo:
+        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+        aggiungiRettangolo = True
+        rectOrig = pygame.Rect(x, y, dimX, dimY)
+        xInizioRectOrig = rectOrig.left
+        yInizioRectOrig = rectOrig.top
+        xFineRectOrig = rectOrig.right
+        yFineRectOrig = rectOrig.bottom
+        i = 0
+        while i < len(listaRettangoliDaAggiornare):
+            rectConfronto = listaRettangoliDaAggiornare[i]
+            xInizioRectConfronto = rectConfronto.left
+            yInizioRectConfronto = rectConfronto.top
+            xFineRectConfronto = rectConfronto.right
+            yFineRectConfronto = rectConfronto.bottom
+            rettangoloEliminato = False
+            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                aggiungiRettangolo = False
+                break
+            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                del listaRettangoliDaAggiornare[i]
+                rettangoloEliminato = True
+            if not rettangoloEliminato:
+                i += 1
+        if aggiungiRettangolo:
+            listaRettangoliDaAggiornare.append(rectOrig)
+def aggiornaSchermo():
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    pygame.display.update(listaRettangoliDaAggiornare)
+    listaRettangoliDaAggiornare = []
+    aggiornaTuttoLoSchermo = False
+    gc.collect()

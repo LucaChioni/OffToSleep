@@ -795,8 +795,8 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
                 nemicoArrivato = True
                 break
         if nemicoArrivato:
-            GlobalVar.schermo.fill(GlobalVar.nero)
-            pygame.display.update()
+            GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
+            GlobalVar.aggiornaSchermo()
             i = 0
             while i < len(tutteporte):
                 if tutteporte[i] == GlobalVar.dictStanze["casaSamSara1"] and tutteporte[i + 1] == GlobalVar.gpx * 6 and tutteporte[i + 2] == GlobalVar.gpx * 9:
