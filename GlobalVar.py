@@ -80,10 +80,8 @@ gpx = gsx // 32
 gpy = gsy // 18
 schermoIntero = True
 
-linguaImpostata = "inglese"
-
 # nome-icona
-titolo = "The normal world"
+titolo = "Still waiting"
 pygame.display.set_caption(titolo)
 icona = pygame.image.load("Immagini/Icona.png")
 pygame.display.set_icon(icona)
@@ -1099,6 +1097,7 @@ def initVolumeSounds():
     canaleSoundSottofondoAmbientale.set_volume(volumeEffetti)
 
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
+linguaImpostata = "inglese"
 leggi = loadFile("Impostazioni/Impostazioni.txt", "r")
 leggifile = leggi.read()
 leggi.close()

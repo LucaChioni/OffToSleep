@@ -1642,6 +1642,7 @@ def menuMercante(dati):
                 if voceMarcata == 1 and not (bottoneDown == "mouseSinistro" and suTornaIndietro):
                     if 0 <= oggetton <= 10 and GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
                         GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                        primoFrame = True
                         dati[131] -= GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                         voceMarcata = 0
                         xp = GlobalVar.gsx // 32 * 10.5
@@ -1694,6 +1695,7 @@ def menuMercante(dati):
                     elif oggetton == 11:
                         if dati[133] == 0 and GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
                             GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                            primoFrame = True
                             dati[131] -= GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalVar.gsx // 32 * 10.5
@@ -1705,6 +1707,7 @@ def menuMercante(dati):
                             procediAllAcquisto = False
                         elif dati[133] == 1 and GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
                             GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                            primoFrame = True
                             dati[131] -= GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalVar.gsx // 32 * 10.5
@@ -1716,6 +1719,7 @@ def menuMercante(dati):
                             procediAllAcquisto = False
                         elif dati[133] == 2 and GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
                             GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                            primoFrame = True
                             dati[131] -= GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati
                             voceMarcata = 0
                             xp = GlobalVar.gsx // 32 * 10.5
