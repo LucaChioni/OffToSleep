@@ -934,7 +934,7 @@ def equip(dati):
             if voceMarcata == 24:
                 if dati[64] != 0:
                     messaggio("Guanti offensivi:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
-                    messaggio("Guanti che consentono una presa salda dell'arma. Aumentano l'attacco", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Guanti che aumentano l'attacco del portatore grazie ad una presa salda dell'arma", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if dati[129] != 3:
                         messaggio("+20", GlobalVar.verde, GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 8, 35)
                         messaggio("+20", GlobalVar.verde, GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 8.5, 35)
@@ -3890,7 +3890,7 @@ def oggetti(dati, colcoInCasellaVista):
             spazioTraLeRigheTestoDescrizione = GlobalVar.gpy // 2
             if dati[31] >= 0 and oggetton == 1:
                 messaggio("Pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
-                messaggio("Recupera 100 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio("Recupera 100 pv", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 1:
                 messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
             if dati[32] >= 0 and oggetton == 2:
@@ -3900,12 +3900,12 @@ def oggetti(dati, colcoInCasellaVista):
                 messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
             if dati[33] >= 0 and oggetton == 3:
                 messaggio("Medicina:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
-                messaggio("Cura avvelenamento a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio("Cura avvelenamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 3:
                 messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
             if dati[34] >= 0 and oggetton == 4:
                 messaggio("Super pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
-                messaggio("Recupera 300 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                messaggio("Recupera 300 pv", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 4:
                 messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 13.5, 60)
             if dati[35] >= 0 and oggetton == 5:

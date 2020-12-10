@@ -755,9 +755,16 @@ def animaPorte(porte, caseviste, portaOriz, portaVert):
         i = i + 4
 
 
-def animaAperturaCofanetto(tesoro, x, y, npers, animazioneRallo):
+def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, casellaChiara, casellaScura, animazioneRallo):
     if tesoro != -1:
         animazioneRallo = True
+        i = 0
+        while i < len(vettoreImgCaselle):
+            if (npers == 1 and x + GlobalVar.gpx == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]) or (npers == 2 and x - GlobalVar.gpx == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]) or (npers == 3 and x == vettoreImgCaselle[i] and y - GlobalVar.gpy == vettoreImgCaselle[i + 1]) or (npers == 4 and x == vettoreImgCaselle[i] and y + GlobalVar.gpy == vettoreImgCaselle[i + 1]):
+                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                break
+            i += 3
         if npers == 1:
             GlobalVar.disegnaImmagineSuSchermo(GlobalVar.cofaniaper, (x + GlobalVar.gpx, y))
         if npers == 2:
@@ -1643,10 +1650,6 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             # animazione difesa Rallo
             animazioneRallo = animaDifesaRallo(x, y, armaS, armaturaS, arcoS, faretraS, collanaS, scudoDifesa, guantiDifesa, statoRalloInizioTurno[1], difesa, animazioneRallo, nemicoAttaccante, fineanimaz)
 
-            if "aumentaLv" in azioniDaEseguire:
-                # animazione aumento di livello
-                animazioneRallo, caricaTutto, bottoneDown, aumentoliv, movimentoPerMouse = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, caricaTutto, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz)
-
             if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo
                 animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, robot, armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
@@ -1700,8 +1703,12 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             statoRalloInizioTurno, statoColcoInizioTurno = animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa, azioniDaEseguire, nemicoAttaccante, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, listaNemici, fineanimaz, aumentoliv, apriocchio, chiamarob)
 
+            if "aumentaLv" in azioniDaEseguire:
+                # animazione aumento di livello
+                animazioneRallo, caricaTutto, bottoneDown, aumentoliv, movimentoPerMouse = animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, guanti, dati[4], aumentoliv, caricaTutto, bottoneDown, animazioneRallo, movimentoPerMouse, fineanimaz)
+
             # animazione apertura cofanetto
-            animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, animazioneRallo)
+            animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, casellaChiara, casellaScura, animazioneRallo)
             # anima raccolta denaro
             denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, fineanimaz)
 

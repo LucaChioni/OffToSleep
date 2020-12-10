@@ -1870,7 +1870,7 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
         GlobalVar.canaleSoundAttacco.stop()
         i = GlobalVar.volumeCanzoni
         j = GlobalVar.volumeEffetti
-        while i > 0 and j > 0:
+        while i > 0 or j > 0:
             GlobalVar.canaleSoundCanzone.set_volume(i)
             GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
             i -= GlobalVar.volumeCanzoni / 10

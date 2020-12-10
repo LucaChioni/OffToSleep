@@ -1007,10 +1007,6 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Noi non la trovavamo molto necessaria ma la mamma continuava a pensare che lo fosse soprattutto per lavare i panni. Così abbiamo deciso di fargli la sorpresa.")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
                 dialogo.append(u"La parte più difficile e faticosa è stata senza dubbio costruire il canale per l'acqua... ma una volta fatto quello abbiamo potuto pensare a fare anche le altre fontanelle.")
                 self.partiDialogo.append(dialogo)
             else:
@@ -1113,7 +1109,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Ci sono dei bellissimi fiori che sarebbero già morti se non ci fossi io ad innaffiassi.")
+                dialogo.append(u"Ci sono dei bellissimi fiori che sarebbero già morti se non ci fossi io ad innaffiarli.")
                 self.partiDialogo.append(dialogo)
             elif GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
                 self.oggettoDato = "Chiave ripostiglio"
@@ -1410,7 +1406,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
             elif avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["trovatoLegna2"]:
                 self.oggettoDato = False
-                self.avanzaStoria = True
+                self.avanzaStoria = False
                 self.menuMercante = False
                 self.scelta = False
                 dialogo = []

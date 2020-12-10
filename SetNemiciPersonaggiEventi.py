@@ -796,6 +796,8 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
                 break
         if nemicoArrivato:
             GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
+            GlobalVar.canaleSoundCanzone.stop()
+            GlobalVar.canaleSoundSottofondoAmbientale.stop()
             GlobalVar.aggiornaSchermo()
             i = 0
             while i < len(tutteporte):
@@ -825,7 +827,9 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
             if dati[40] > 0:
                 dati[40] = 0
             dati[132] = 0
+            # tolgo anche gli eventuali guanti trovati
             dati[62] = 0
+            dati[129] = 0
             pygame.time.wait(1000)
             avanzamentoStoria += 1
             stanza = GlobalVar.dictStanze["casaSamSara1"]

@@ -157,7 +157,7 @@ def gameloop():
                 if canzoneCambiata or sottofondoAmbientaleCambiato:
                     i = GlobalVar.volumeCanzoni
                     j = GlobalVar.volumeEffetti
-                    while i > 0 and j > 0:
+                    while i > 0 or j > 0:
                         if canzoneCambiata:
                             GlobalVar.canaleSoundCanzone.set_volume(i)
                         if sottofondoAmbientaleCambiato:
@@ -167,14 +167,26 @@ def gameloop():
                         pygame.time.wait(30)
                     if canzoneCambiata:
                         GlobalVar.canaleSoundCanzone.stop()
-                        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+                        if canzone:
+                            GlobalVar.canaleSoundCanzone.play(canzone, -1)
                     if sottofondoAmbientaleCambiato:
                         GlobalVar.canaleSoundSottofondoAmbientale.stop()
+                        if sottofondoAmbientale:
+                            GlobalVar.canaleSoundSottofondoAmbientale.play(sottofondoAmbientale, -1)
+                    i = 0
+                    j = 0
+                    while i < GlobalVar.volumeCanzoni or j < GlobalVar.volumeEffetti:
+                        if canzoneCambiata:
+                            GlobalVar.canaleSoundCanzone.set_volume(i)
+                        if sottofondoAmbientaleCambiato:
+                            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                        i += GlobalVar.volumeCanzoni / 10
+                        j += GlobalVar.volumeEffetti / 10
+                        pygame.time.wait(30)
+                    if canzoneCambiata:
+                        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+                    if sottofondoAmbientaleCambiato:
                         GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
-                    if canzone and canzoneCambiata:
-                        GlobalVar.canaleSoundCanzone.play(canzone, -1)
-                    if sottofondoAmbientale and sottofondoAmbientaleCambiato:
-                        GlobalVar.canaleSoundSottofondoAmbientale.play(sottofondoAmbientale, -1)
 
                 # resetto obbiettivo Colco
                 if not inizio:
@@ -1868,10 +1880,11 @@ def gameloop():
                         if nemico.mosseRimaste > 0:
                             vetDatiNemici = []
                             for nemicoTemp in listaNemici:
-                                vetDatiNemici.append(nemicoTemp.vita)
-                                vetDatiNemici.append(nemicoTemp.x)
-                                vetDatiNemici.append(nemicoTemp.y)
-                                vetDatiNemici.append(nemicoTemp.vitaTotale)
+                                if nemicoTemp.vita > 0:
+                                    vetDatiNemici.append(nemicoTemp.vita)
+                                    vetDatiNemici.append(nemicoTemp.x)
+                                    vetDatiNemici.append(nemicoTemp.y)
+                                    vetDatiNemici.append(nemicoTemp.vitaTotale)
                             # trovo l'obbiettivo
                             nemico.settaObbiettivo(x, y, rx, ry, dati, vettoreDenaro, vettoreEsche, listaPersonaggi, listaNemici, porte, caseviste)
                             nemico.vx = nemico.x
@@ -1953,7 +1966,7 @@ def gameloop():
                 refreshSchermo = False
                 apriocchio = False
                 for nemico in listaNemici:
-                    if nemico.visto:
+                    if nemico.vita > 0 and nemico.visto:
                         apriocchio = True
                         break
                 pvtot = getVitaTotRallo(dati[4], dati[129])
@@ -2051,7 +2064,7 @@ def gameloop():
             GlobalVar.canaleSoundAttacco.stop()
             i = GlobalVar.volumeCanzoni / 2
             j = GlobalVar.volumeEffetti / 2
-            while i > 0 and j > 0:
+            while i > 0 or j > 0:
                 GlobalVar.canaleSoundCanzone.set_volume(i)
                 GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
                 i -= GlobalVar.volumeCanzoni / 10

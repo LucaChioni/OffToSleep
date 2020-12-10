@@ -588,7 +588,7 @@ class NemicoObj(object):
             vetNemiciSoloConXeY.append(rx)
             vetNemiciSoloConXeY.append(ry)
         for nemico in listaNemici:
-            if not (nemico.x == self.x and nemico.y == self.y):
+            if not (nemico.x == self.x and nemico.y == self.y) and nemico.vita > 0:
                 vetNemiciSoloConXeY.append(nemico.x)
                 vetNemiciSoloConXeY.append(nemico.y)
         for personaggio in listaPersonaggi:

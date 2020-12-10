@@ -203,6 +203,18 @@ def menu(caricaSalvataggio, gameover):
                         # lettura salvataggio
                         if n != -1:
                             oscuraIlluminaSchermo(illumina=False)
+                            i = GlobalVar.volumeCanzoni
+                            j = GlobalVar.volumeEffetti
+                            while i > 0 or j > 0:
+                                GlobalVar.canaleSoundCanzone.set_volume(i)
+                                GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                                i -= GlobalVar.volumeCanzoni / 10
+                                j -= GlobalVar.volumeEffetti / 10
+                                pygame.time.wait(30)
+                            GlobalVar.canaleSoundCanzone.stop()
+                            GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+                            GlobalVar.canaleSoundSottofondoAmbientale.stop()
+                            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
                             dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
                             datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
                             tutteporteGameover = []
@@ -343,6 +355,18 @@ def menu(caricaSalvataggio, gameover):
                         inutile, conferma = chiediconferma(3)
                         if conferma:
                             oscuraIlluminaSchermo(illumina=False)
+                            i = GlobalVar.volumeCanzoni
+                            j = GlobalVar.volumeEffetti
+                            while i > 0 or j > 0:
+                                GlobalVar.canaleSoundCanzone.set_volume(i)
+                                GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                                i -= GlobalVar.volumeCanzoni / 10
+                                j -= GlobalVar.volumeEffetti / 10
+                                pygame.time.wait(30)
+                            GlobalVar.canaleSoundCanzone.stop()
+                            GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
+                            GlobalVar.canaleSoundSottofondoAmbientale.stop()
+                            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
                             dati = datiIniziali
                             xInizialie = GlobalVar.gsx // 32 * 15
                             yInizialie = GlobalVar.gsy // 18 * 7
