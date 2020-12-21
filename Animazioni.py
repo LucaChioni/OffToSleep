@@ -722,39 +722,6 @@ def animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreIm
         i += 3
 
 
-def animaCofanetti(cofanetti, caseviste):
-    # cofanetti[stanza, x, y, True / False, ...]
-    i = 0
-    while i < len(cofanetti):
-        j = 0
-        while j < len(caseviste):
-            if ((caseviste[j] == cofanetti[i + 1] - GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] + GlobalVar.gpx and caseviste[j + 1] == cofanetti[i + 2]) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] - GlobalVar.gpy) or (caseviste[j] == cofanetti[i + 1] and caseviste[j + 1] == cofanetti[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                if cofanetti[i + 3]:
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.cofaniaper, (cofanetti[i + 1], cofanetti[i + 2]))
-                else:
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.cofanichiu, (cofanetti[i + 1], cofanetti[i + 2]))
-                break
-            j += 3
-        i += 4
-
-
-def animaPorte(porte, caseviste, portaOriz, portaVert):
-    # porte[stanza, x, y, True / False, ...]
-    i = 0
-    while i < len(porte):
-        if not porte[i + 3]:
-            j = 0
-            while j < len(caseviste):
-                if ((caseviste[j] == porte[i + 1] - GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] - GlobalVar.gpy) or (caseviste[j] == porte[i + 1] and caseviste[j + 1] == porte[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                    if (caseviste[j] == porte[i + 1] - GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]) or (caseviste[j] == porte[i + 1] + GlobalVar.gpx and caseviste[j + 1] == porte[i + 2]):
-                        GlobalVar.disegnaImmagineSuSchermo(portaVert, (porte[i + 1], porte[i + 2]))
-                    else:
-                        GlobalVar.disegnaImmagineSuSchermo(portaOriz, (porte[i + 1], porte[i + 2]))
-                    break
-                j += 3
-        i = i + 4
-
-
 def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, casellaChiara, casellaScura, animazioneRallo):
     if tesoro != -1:
         animazioneRallo = True
@@ -762,7 +729,6 @@ def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, casellaChiara
         while i < len(vettoreImgCaselle):
             if (npers == 1 and x + GlobalVar.gpx == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]) or (npers == 2 and x - GlobalVar.gpx == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]) or (npers == 3 and x == vettoreImgCaselle[i] and y - GlobalVar.gpy == vettoreImgCaselle[i + 1]) or (npers == 4 and x == vettoreImgCaselle[i] and y + GlobalVar.gpy == vettoreImgCaselle[i + 1]):
                 GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                 break
             i += 3
         if npers == 1:
@@ -948,10 +914,10 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
         global quadrettoSottoEsplosione
         if fineanimaz > 5:
             if fineanimaz == 10 and (animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata"):
-                quadrettoSottoEsplosione = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xFineRetta - (GlobalVar.gpx * 2), yFineRetta - (GlobalVar.gpy * 2), GlobalVar.gpx * 5, GlobalVar.gpy * 5))
+                quadrettoSottoEsplosione = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xFineRetta - (GlobalVar.gpx * 2), yFineRetta - (GlobalVar.gpy * 2), GlobalVar.gpx * 5, GlobalVar.gpy * 5)).convert()
             if fineanimaz != 10:
                 GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - GlobalVar.gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpy))
-            quadrettoSottoLaFreccia = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+            quadrettoSottoLaFreccia = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3)).convert()
         elif fineanimaz == 5:
             GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoLaFreccia, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpy))
         elif fineanimaz == 0 and (animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata"):
@@ -971,7 +937,7 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
         if fineanimaz > 5:
             if fineanimaz != 10:
                 GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - GlobalVar.gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpy))
-            quadrettoSottoLaFrecciaElettrica = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+            quadrettoSottoLaFrecciaElettrica = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3)).convert()
         elif fineanimaz == 5:
             GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoLaFrecciaElettrica, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpy))
 
@@ -985,7 +951,7 @@ def eliminaOggettoLanciato(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNe
             if fineanimaz > 5:
                 if fineanimaz != 10:
                     GlobalVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz) - GlobalVar.gpx), yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpy))
-                nemicoAttaccante.quadrettoSottoOggettoLanciato = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                nemicoAttaccante.quadrettoSottoOggettoLanciato = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (10 - fineanimaz)) - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3)).convert()
             elif fineanimaz == 5:
                 GlobalVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoOggettoLanciato, (xInizioRetta + ((xFineRetta - xInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpx, yInizioRetta + ((yFineRetta - yInizioRetta) // 5 * (9 - fineanimaz)) - GlobalVar.gpy))
 
@@ -1009,7 +975,7 @@ def disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, te
             xAttaccoPers = x
             yAttaccoPers = y + GlobalVar.gpy
         if fineanimaz == 10:
-            quadrettoSottoLaSpada = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoPers, yAttaccoPers, GlobalVar.gpx, GlobalVar.gpy))
+            quadrettoSottoLaSpada = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoPers, yAttaccoPers, GlobalVar.gpx, GlobalVar.gpy)).convert()
         else:
             GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoLaSpada, (xAttaccoPers, yAttaccoPers))
 
@@ -1032,7 +998,7 @@ def disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, te
                 xAttaccoPers = rx
                 yAttaccoPers = ry - GlobalVar.gpy
             if fineanimaz == 10:
-                quadrettoSottoAttaccoColco = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoPers, yAttaccoPers, GlobalVar.gpx, GlobalVar.gpy))
+                quadrettoSottoAttaccoColco = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoPers, yAttaccoPers, GlobalVar.gpx, GlobalVar.gpy)).convert()
             else:
                 GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoAttaccoColco, (xAttaccoPers, yAttaccoPers))
         elif tecnicaUsata.startswith("tempesta"):
@@ -1049,7 +1015,7 @@ def disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, te
             if ry + yFineAttaccoPers >= GlobalVar.gsy:
                 yFineAttaccoPers = GlobalVar.gsy - ry - GlobalVar.gpy
             if fineanimaz == 10:
-                quadrettoSottoAttaccoColco = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoPers, yAttaccoPers, (GlobalVar.gpx * 9) + xFineAttaccoPers, (GlobalVar.gpy * 9) + yFineAttaccoPers))
+                quadrettoSottoAttaccoColco = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoPers, yAttaccoPers, (GlobalVar.gpx * 9) + xFineAttaccoPers, (GlobalVar.gpy * 9) + yFineAttaccoPers)).convert()
             else:
                 GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoAttaccoColco, (xAttaccoPers, yAttaccoPers))
 
@@ -1070,7 +1036,7 @@ def disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, te
                 xAttaccoNemico = nemicoAttaccante.x + GlobalVar.gpx
                 yAttaccoNemico = nemicoAttaccante.y
             if fineanimaz == 10:
-                nemicoAttaccante.quadrettoSottoArma = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoNemico, yAttaccoNemico, GlobalVar.gpx, GlobalVar.gpy))
+                nemicoAttaccante.quadrettoSottoArma = schermo_prima_delle_animazioni.subsurface(pygame.Rect(xAttaccoNemico, yAttaccoNemico, GlobalVar.gpx, GlobalVar.gpy)).convert()
             else:
                 GlobalVar.disegnaImmagineSuSchermo(nemicoAttaccante.quadrettoSottoArma, (xAttaccoNemico, yAttaccoNemico))
 
@@ -1497,7 +1463,7 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
 
 
 def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle):
-    schermo_prima_delle_animazioni = GlobalVar.schermo.copy().convert()
+    schermo_prima_delle_animazioni = GlobalVar.schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
     azioniDaEseguire = []
@@ -1622,11 +1588,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                                 disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                     i += 3
 
-            # disegno: esche, denaro, cofanetti e porte
+            # disegno: esche e denaro
             animaEsche(vettoreEsche, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata)
             animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreImgCaselle)
-            animaCofanetti(cofanetti, caseviste)
-            animaPorte(porte, caseviste, portaOriz, portaVert)
 
             if fineanimaz == 10:
                 schermo_prima_delle_animazioni = GlobalVar.schermo.copy().convert()
@@ -1634,7 +1598,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             disegnaCasellaAccantoAlPersCheAttacca(x, y, attacco, npers, rx, ry, nrob, tecnicaUsata, nemicoAttaccante, schermo_prima_delle_animazioni, cambiosta, azioniDaEseguire, fineanimaz)
 
             if cambiosta:
-                quadrettoSottoRallo = schermo_prima_delle_animazioni.subsurface(pygame.Rect(x - GlobalVar.gpx, y - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3))
+                quadrettoSottoRallo = schermo_prima_delle_animazioni.subsurface(pygame.Rect(x - GlobalVar.gpx, y - GlobalVar.gpy, GlobalVar.gpx * 3, GlobalVar.gpy * 3)).convert()
                 GlobalVar.disegnaImmagineSuSchermo(quadrettoSottoRallo, (x - GlobalVar.gpx, y - GlobalVar.gpy))
 
             # disegna personaggi se ci sono animazioni ma non loro

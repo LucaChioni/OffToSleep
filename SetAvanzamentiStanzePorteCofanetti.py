@@ -92,8 +92,28 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["mappaForestaCadetta"] = i
     i += 1
     dictAvanzamentoStoria["accampamentoForestaSara"] = i
+    i += 1
+    dictAvanzamentoStoria["accampamentoForestaAnalizzato"] = i
+    i += 1
+    dictAvanzamentoStoria["incontratoBrancoLupiNeri"] = i
+    i += 1
+    dictAvanzamentoStoria["incontratoCinghiale"] = i
+    i += 1
+    dictAvanzamentoStoria["cinghialeUcciso"] = i
+    i += 1
+    dictAvanzamentoStoria["cadavereMichaelDepredato"] = i
+    i += 1
+    dictAvanzamentoStoria["sotterratoMichael"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoDopoTombaMichael"] = i
+    i += 1
+    dictAvanzamentoStoria["ultimaStanzaForesta"] = i
+    i += 1
+    dictAvanzamentoStoria["uscitaDaForesta"] = i
 
     i += 100
+    i += 1
+    dictAvanzamentoStoria["inizioSecondoGiorno"] = i
     i += 1
     dictAvanzamentoStoria["incontratoColco"] = i
 
@@ -188,6 +208,10 @@ def definisciStanze():
     dictStanze["forestaCadetta6"] = i
     i += 1
     dictStanze["forestaCadetta7"] = i
+    i += 1
+    dictStanze["forestaCadetta8"] = i
+    i += 1
+    dictStanze["stradaPerCittà1"] = i
 
     return dictStanze, vetStanzePacifiche
 
@@ -231,6 +255,23 @@ def definisciPorte(dictStanze):
     vetPorte += [stanza, 22, 10, False]
     vetPorte += [stanza, 26, 9, False]
 
+    stanza = dictStanze["forestaCadetta7"]
+    vetPorte += [stanza, 27, 3, False]
+    vetPorte += [stanza, 28, 4, False]
+    vetPorte += [stanza, 22, 3, False]
+    vetPorte += [stanza, 16, 2, False]
+    vetPorte += [stanza, 13, 6, False]
+    vetPorte += [stanza, 13, 10, False]
+    vetPorte += [stanza, 3, 9, False]
+
+    stanza = dictStanze["forestaCadetta8"]
+    vetPorte += [stanza, 25, 9, False]
+    vetPorte += [stanza, 29, 10, False]
+    vetPorte += [stanza, 24, 15, False]
+    vetPorte += [stanza, 16, 9, False]
+    vetPorte += [stanza, 7, 10, False]
+    vetPorte += [stanza, 5, 9, False]
+
     return vetPorte
 
 
@@ -265,7 +306,6 @@ def definisciCofanetti(dictStanze):
     vetCofanetti += [stanza, 18, 14, False]
     vetCofanetti += [stanza, 11, 2, False]
     vetCofanetti += [stanza, 5, 9, False]
-    vetCofanetti += [stanza, 5, 14, False]
 
     stanza = dictStanze["forestaCadetta3"]
     vetCofanetti += [stanza, 20, 2, False]
@@ -279,5 +319,12 @@ def definisciCofanetti(dictStanze):
     stanza = dictStanze["forestaCadetta6"]
     vetCofanetti += [stanza, 12, 2, False]
     vetCofanetti += [stanza, 21, 2, False]
+
+    stanza = dictStanze["forestaCadetta7"]
+    vetCofanetti += [stanza, 26, 15, False]
+    vetCofanetti += [stanza, 2, 4, False]
+
+    stanza = dictStanze["forestaCadetta8"]
+    vetCofanetti += [stanza, 2, 6, False]
 
     return vetCofanetti

@@ -67,7 +67,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                         print ("parato:", par)
                     nemico.bersaglioColpito.append("Rallo")
                     nemico.bersaglioColpito.append(-danno)
-                    if avvelena and not dati[130] == 1:
+                    if avvelena and not dati[130] == 2:
                         dati[121] = True
                         nemico.bersaglioColpito.append("avvelena")
                     else:
@@ -359,7 +359,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                             print ("parato:", par)
                         nemico.bersaglioColpito.append("Rallo")
                         nemico.bersaglioColpito.append(-danno)
-                        if avvelena and not dati[130] == 1:
+                        if avvelena and not dati[130] == 2:
                             dati[121] = True
                             nemico.bersaglioColpito.append("avvelena")
                         else:
@@ -498,7 +498,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
     else:
         nemico.obbiettivo = ["", 0, 0, []]
         if nemico.triggerato:
-            nmos = random.randint(1, 4)
+            nmos = random.randint(0, 4)
         else:
             if len(nemico.percorso) > 0:
                 direzione = nemico.percorso[nemico.numeroMovimento]

@@ -1468,7 +1468,9 @@ def trovacasattaccabili(x, y, raggio, caseviste):
     return caseattactot
 
 
-def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, escludiPorte=True):
+def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, escludiOggettiBassi=False, vetPartenze=False):
+    escludiPorte = True
+
     # caseviste[x, y, flag, ... ] -> riempito come se non vedessi niente
     caseviste = []
     n = 0
@@ -1486,7 +1488,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
     # caselle viste da rallo
     j = 0
     while j < len(caselleEsplorate):
-        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1504,7 +1506,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1522,7 +1524,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1540,7 +1542,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                     caseviste[i + 2] = True
                     break
                 i += 3
-        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
+        nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
         if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
             giaVisitata = False
             k = 0
@@ -1561,19 +1563,19 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
         j += 2
 
     # se colco non è in una casella vista scopri il campo visto da colco
-    incasevista = False
+    incasevistaColco = False
     i = 0
     while i < len(caseviste):
         if caseviste[i] == rx and caseviste[i + 1] == ry:
             if caseviste[i + 2]:
-                incasevista = True
+                incasevistaColco = True
             break
         i = i + 3
-    if not incasevista and GlobalVar.gsx // 32 * 2 <= rx <= GlobalVar.gsx // 32 * 29 and GlobalVar.gsy // 18 * 2 <= ry <= GlobalVar.gsy // 18 * 15:
+    if not incasevistaColco and GlobalVar.gsx // 32 * 2 <= rx <= GlobalVar.gsx // 32 * 29 and GlobalVar.gsy // 18 * 2 <= ry <= GlobalVar.gsy // 18 * 15:
         caselleEsplorate = [rx, ry]
         j = 0
         while j < len(caselleEsplorate):
-            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1591,7 +1593,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1609,7 +1611,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1627,7 +1629,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                         caseviste[i + 2] = True
                         break
                     i += 3
-            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
+            nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
             if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                 giaVisitata = False
                 k = 0
@@ -1648,6 +1650,8 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
             j += 2
 
     # scopro le caselle del vettore vetPartenze se non sono in caselle già viste
+    if not vetPartenze:
+        vetPartenze = []
     if len(vetPartenze) > 0:
         contatoreVetPartenze = 0
         while contatoreVetPartenze < len(vetPartenze):
@@ -1663,7 +1667,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                 caselleEsplorate = [vetPartenze[contatoreVetPartenze], vetPartenze[contatoreVetPartenze + 1]]
                 j = 0
                 while j < len(caselleEsplorate):
-                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
+                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, -GlobalVar.gpy, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
                     if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                         giaVisitata = False
                         k = 0
@@ -1681,7 +1685,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                                 caseviste[i + 2] = True
                                 break
                             i += 3
-                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, escludiPorte, porte, cofanetti)
+                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], 0, GlobalVar.gpy, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
                     if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                         giaVisitata = False
                         k = 0
@@ -1699,7 +1703,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                                 caseviste[i + 2] = True
                                 break
                             i += 3
-                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
+                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], -GlobalVar.gpx, 0, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
                     if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                         giaVisitata = False
                         k = 0
@@ -1717,7 +1721,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                                 caseviste[i + 2] = True
                                 break
                             i += 3
-                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, escludiPorte, porte, cofanetti)
+                    nx, ny, stanza, carim, cambiosta = controlloOstacoli(caselleEsplorate[j], caselleEsplorate[j + 1], GlobalVar.gpx, 0, numstanza, False, porte, cofanetti, escludiPorte, escludiOggettiBassi)
                     if caselleEsplorate[j] != nx or caselleEsplorate[j + 1] != ny:
                         giaVisitata = False
                         k = 0
@@ -1738,7 +1742,7 @@ def scopriCaselleViste(x, y, rx, ry, vetPartenze, numstanza, porte, cofanetti, e
                     j += 2
             contatoreVetPartenze += 5
 
-    return caseviste
+    return caseviste, incasevistaColco
 
 
 def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, vetOstacoli, caseviste):
@@ -2078,14 +2082,14 @@ def dialoga(avanzamentoStoria, personaggio):
     if personaggio.nome != "Tutorial" and personaggio.nome != "Nessuno":
         GlobalVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 3.5))
     schermo_prima_del_dialogo = GlobalVar.schermo.copy().convert()
-    background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+    background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
     dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 150))
     background.blit(dark, (0, 0))
     GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
 
     schermo_prima_del_dialogo = GlobalVar.schermo.copy().convert()
-    background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalVar.gsy // 18 * 3.5, GlobalVar.gsx, GlobalVar.gsy // 18 * 14.5))
+    background = schermo_prima_del_dialogo.subsurface(pygame.Rect(0, GlobalVar.gsy // 18 * 3.5, GlobalVar.gsx, GlobalVar.gsy // 18 * 14.5)).convert()
 
     primoframe = True
     numeroMessaggiTotali = len(personaggio.partiDialogo)
@@ -2442,16 +2446,16 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
 
 def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti):
     # scoprire caselle viste
-    caseviste = scopriCaselleViste(x, y, rx, ry, [], stanza, porte, cofanetti)
+    caseviste, colcoInCasellaVista = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti)
     # scoprire caselle viste solo da Rallo
-    casevisteDaRallo = scopriCaselleViste(x, y, -1, -1, [], stanza, porte, cofanetti)
-    # casevisteEntrateIncluse include anche le entrate della stanza
-    casevisteEntrateIncluse = scopriCaselleViste(x, y, rx, ry, [], stanza, porte, cofanetti, False)
-    # casellePercorribili include solo le caselle su cui si può camminare
-    vetPartenze = getEntrateStanze(stanza)
-    casellePercorribili = scopriCaselleViste(x, y, rx, ry, vetPartenze, stanza, [], [])
+    if not colcoInCasellaVista and GlobalVar.gsx // 32 * 2 <= rx <= GlobalVar.gsx // 32 * 29 and GlobalVar.gsy // 18 * 2 <= ry <= GlobalVar.gsy // 18 * 15:
+        casevisteDaRallo, colcoInCasellaVista = scopriCaselleViste(x, y, -1, -1, stanza, porte, cofanetti)
+    else:
+        casevisteDaRallo = caseviste[:]
 
-    # sistemo il vettore delle caselle percorribili: togliendo le caselle-ostacolo, coprendo le caselle non viste, scoprendo le caselle delle porte vicine a caselle viste
+    # casellePercorribili include solo le caselle su cui si può camminare
+    casellePercorribili = caseviste[:]
+    # sistemo il vettore delle caselle percorribili: togliendo le caselle non viste e scoprendo le caselle delle porte vicine a caselle viste
     i = 0
     while i < len(casellePercorribili):
         if not casellePercorribili[i + 2]:
@@ -2459,40 +2463,61 @@ def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti):
             del casellePercorribili[i + 1]
             del casellePercorribili[i]
         else:
-            i += 3
-    i = 0
-    while i < len(caseviste):
-        j = 0
-        while j < len(casellePercorribili):
-            if caseviste[i] == casellePercorribili[j] and caseviste[i + 1] == casellePercorribili[j + 1]:
-                if not caseviste[i + 2]:
-                    casellePercorribili[j + 2] = False
-                break
-            j += 3
-        i += 3
-    vetPorteViste = []
+            del casellePercorribili[i + 2]
+            i += 2
     i = 0
     while i < len(porte):
         if not porte[i + 3]:
             j = 0
             while j < len(casellePercorribili):
-                if casellePercorribili[j + 2] and ((porte[i + 1] == casellePercorribili[j] + GlobalVar.gpx and porte[i + 2] == casellePercorribili[j + 1]) or (porte[i + 1] == casellePercorribili[j] - GlobalVar.gpx and porte[i + 2] == casellePercorribili[j + 1]) or (porte[i + 1] == casellePercorribili[j] and porte[i + 2] == casellePercorribili[j + 1] + GlobalVar.gpy) or (porte[i + 1] == casellePercorribili[j] and porte[i + 2] == casellePercorribili[j + 1] - GlobalVar.gpy)):
-                    vetPorteViste.append(porte[i + 1])
-                    vetPorteViste.append(porte[i + 2])
+                if casellePercorribili[j] - GlobalVar.gpx <= porte[i + 1] <= casellePercorribili[j] + GlobalVar.gpx and casellePercorribili[j + 1] - GlobalVar.gpy <= porte[i + 2] <= casellePercorribili[j + 1] + GlobalVar.gpy:
+                    casellePercorribili.append(porte[i + 1])
+                    casellePercorribili.append(porte[i + 2])
                     break
-                j += 3
+                j += 2
         i += 4
-    i = 0
-    while i < len(casellePercorribili):
-        j = 0
-        while j < len(vetPorteViste):
-            if casellePercorribili[i] == vetPorteViste[j] and casellePercorribili[i + 1] == vetPorteViste[j + 1]:
-                casellePercorribili[i + 2] = True
-                break
-            j += 2
-        i += 3
 
-    return caseviste, casevisteDaRallo, casevisteEntrateIncluse, casellePercorribili
+    # casevisteEntrateIncluse include anche le entrate della stanza
+    casevisteEntrateIncluse = caseviste[:]
+    vetEntrate = getEntrateStanze(stanza)
+    i = 0
+    while i < len(vetEntrate):
+        j = 0
+        while j < len(casevisteEntrateIncluse):
+            if vetEntrate[i] == casevisteEntrateIncluse[j] and vetEntrate[i + 1] == casevisteEntrateIncluse[j + 1]:
+                if casevisteEntrateIncluse[j + 2]:
+                    k = 0
+                    while k < len(casevisteEntrateIncluse):
+                        if vetEntrate[i] + vetEntrate[i + 2] == casevisteEntrateIncluse[k] and vetEntrate[i + 1] + vetEntrate[i + 3] == casevisteEntrateIncluse[k + 1]:
+                            casevisteEntrateIncluse[k + 2] = True
+                            break
+                        k += 3
+                break
+            j += 3
+        i += 5
+
+    # il vettore delle caselle non visibili serve per tenere conto degli "oggetti bassi"
+    caselleNonVisibili, colcoInCasellaVista = scopriCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, escludiOggettiBassi=True)
+    i = 0
+    while i < 32:
+        caselleNonVisibili.append(GlobalVar.gpx * i)
+        caselleNonVisibili.append(0)
+        caselleNonVisibili.append(False)
+        caselleNonVisibili.append(GlobalVar.gpx * i)
+        caselleNonVisibili.append(GlobalVar.gpy * 17)
+        caselleNonVisibili.append(False)
+        i += 1
+    i = 1
+    while i < 17:
+        caselleNonVisibili.append(0)
+        caselleNonVisibili.append(GlobalVar.gpx * i)
+        caselleNonVisibili.append(False)
+        caselleNonVisibili.append(GlobalVar.gpx * 31)
+        caselleNonVisibili.append(GlobalVar.gpy * i)
+        caselleNonVisibili.append(False)
+        i += 1
+
+    return caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili
 
 
 def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y, casellaChiara, casellaScura):

@@ -26,19 +26,17 @@ def menu(caricaSalvataggio, gameover):
         ]
 
     # posizione porte e cofanetti nel vettore dati
-    vetPorte = GlobalVar.initVetPorteGlobale
-    vetCofanetti = GlobalVar.initVetCofanettiGlobale
+    tuttePorte = GlobalVar.initVetPorteGlobale
+    tuttiCofanetti = GlobalVar.initVetCofanettiGlobale
 
-    porteini = len(datiIniziali)
-    portefin = len(datiIniziali) + len(vetPorte) - 1
-    cofaniini = portefin + 1
-    cofanifin = len(datiIniziali) + len(vetPorte) + len(vetCofanetti) - 1
-    datiIniziali += vetPorte
-    datiIniziali += vetCofanetti
     lunghezzadati = len(datiIniziali)
+    lunghezzadatiPorte = len(tuttePorte)
+    lunghezzadatiCofanetti = len(tuttiCofanetti)
 
     if gameover:
         dati = GlobalVar.vetDatiSalvataggioGameOver[0]
+        tuttePorte = GlobalVar.vetDatiSalvataggioGameOver[1]
+        tuttiCofanetti = GlobalVar.vetDatiSalvataggioGameOver[2]
         listaNemiciTotali = GlobalVar.vetDatiSalvataggioGameOver[3]
         listaEsche = GlobalVar.vetDatiSalvataggioGameOver[4]
         listaMonete = GlobalVar.vetDatiSalvataggioGameOver[5]
@@ -47,33 +45,17 @@ def menu(caricaSalvataggio, gameover):
         oggettiRimastiASam = GlobalVar.vetDatiSalvataggioGameOver[8]
         ultimoObbiettivoColco = GlobalVar.vetDatiSalvataggioGameOver[9]
         obbiettivoCasualeColco = GlobalVar.vetDatiSalvataggioGameOver[10]
-        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+        return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
-        dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
-        datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(caricaSalvataggio, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
-        tutteporteGameover = []
-        i = porteini
-        while i <= portefin:
-            tutteporteGameover.append(datiGameover[i])
-            tutteporteGameover.append(datiGameover[i + 1])
-            tutteporteGameover.append(datiGameover[i + 2])
-            tutteporteGameover.append(datiGameover[i + 3])
-            i += 4
-        tutticofanettiGameover = []
-        i = cofaniini
-        while i <= cofanifin:
-            tutticofanettiGameover.append(datiGameover[i])
-            tutticofanettiGameover.append(datiGameover[i + 1])
-            tutticofanettiGameover.append(datiGameover[i + 2])
-            tutticofanettiGameover.append(datiGameover[i + 3])
-            i += 4
+        dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
+        datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
         GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
         GlobalVar.numSalvataggioCaricato = caricaSalvataggio
-        return dati, porteini, portefin, cofaniini, cofanifin, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+        return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     # carico subito tutti i dati salvati
-    ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+    ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
 
     # video
     listaImgVideo = []
@@ -198,7 +180,7 @@ def menu(caricaSalvataggio, gameover):
 
                     # carica partita
                     if voceMarcata == 2:
-                        n, inutile = scegli_sal(False, lunghezzadati, porteini, portefin, cofaniini, cofanifin, [], [], [], [], [], [], [], [], [], [], False)
+                        n, inutile = scegli_sal(False, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, [], [], [], [], [], [], [], [], [], [], False)
 
                         # lettura salvataggio
                         if n != -1:
@@ -215,28 +197,12 @@ def menu(caricaSalvataggio, gameover):
                             GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
                             GlobalVar.canaleSoundSottofondoAmbientale.stop()
                             GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
-                            dati, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, False)
-                            datiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, True, True)
-                            tutteporteGameover = []
-                            i = porteini
-                            while i <= portefin:
-                                tutteporteGameover.append(datiGameover[i])
-                                tutteporteGameover.append(datiGameover[i + 1])
-                                tutteporteGameover.append(datiGameover[i + 2])
-                                tutteporteGameover.append(datiGameover[i + 3])
-                                i += 4
-                            tutticofanettiGameover = []
-                            i = cofaniini
-                            while i <= cofanifin:
-                                tutticofanettiGameover.append(datiGameover[i])
-                                tutticofanettiGameover.append(datiGameover[i + 1])
-                                tutticofanettiGameover.append(datiGameover[i + 2])
-                                tutticofanettiGameover.append(datiGameover[i + 3])
-                                i += 4
+                            dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
+                            datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
                             GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiASamGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
                             if dati:
                                 GlobalVar.numSalvataggioCaricato = n
-                                return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+                                return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
                         primoFrame = True
 
                     # Impostazioni
@@ -337,6 +303,7 @@ def menu(caricaSalvataggio, gameover):
                     messaggio("Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 12, 90)
                 else:
                     GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 2.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 10.5))
+                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 1.5) - 1, int(GlobalVar.gpy * 1.5)), (int(GlobalVar.gpx * 1.5) - 1, int(GlobalVar.gpy * 14)), 2)
                 if aggiornaInterfacciaPerCambioInput:
                     aggiornaInterfacciaPerCambioInput = False
                     GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (0, GlobalVar.gsy // 18 * 16.5, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2))
@@ -350,7 +317,7 @@ def menu(caricaSalvataggio, gameover):
                 if menuConferma:
                     GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
                     schermo_temp = GlobalVar.schermo.copy().convert()
-                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
                     if menuConferma == "inizia":
                         inutile, conferma = chiediconferma(3)
                         if conferma:
@@ -384,18 +351,18 @@ def menu(caricaSalvataggio, gameover):
                             oggettiRimastiASam = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                             ultimoObbiettivoColco = []
                             obbiettivoCasualeColco = False
-                            i = porteini
-                            while i <= portefin:
-                                dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-                                dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-                                i = i + 4
-                            i = cofaniini
-                            while i <= cofanifin:
-                                dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-                                dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-                                i = i + 4
+                            i = 0
+                            while i < len(tuttePorte):
+                                tuttePorte[i + 1] = tuttePorte[i + 1] * GlobalVar.gpx
+                                tuttePorte[i + 2] = tuttePorte[i + 2] * GlobalVar.gpy
+                                i += 4
+                            i = 0
+                            while i < len(tuttiCofanetti):
+                                tuttiCofanetti[i + 1] = tuttiCofanetti[i + 1] * GlobalVar.gpx
+                                tuttiCofanetti[i + 2] = tuttiCofanetti[i + 2] * GlobalVar.gpy
+                                i += 4
                             GlobalVar.numSalvataggioCaricato = 0
-                            return dati, porteini, portefin, cofaniini, cofanifin, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+                            return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
                         else:
                             GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
                     else:
@@ -558,7 +525,7 @@ def menu(caricaSalvataggio, gameover):
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
+def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
     else:
@@ -724,7 +691,7 @@ def start(dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, list
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                        n, azioneFatta = scegli_sal(True, len(dati), porteini, portefin, cofaniini, cofanifin, porte, cofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                        n, azioneFatta = scegli_sal(True, len(dati), len(tutteporte), len(tutticofanetti), tutteporte, tutticofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco)
                         if n != -1 and azioneFatta == 1:
                             oscuraIlluminaSchermo(illumina=False)
                             caricaSalvataggio = n
@@ -916,7 +883,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     sconosciutoOggettoIco = GlobalVar.sconosciutoOggettoIcoMenu
 
     schermo_temp = GlobalVar.schermo.copy().convert()
-    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
     dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 80))
     background.blit(dark, (0, 0))
@@ -1100,7 +1067,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
                     GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
                     schermo_temp = GlobalVar.schermo.copy().convert()
-                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
                     menuMappa(dati[0])
                     GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
                 elif voceMarcata == -2:
@@ -1427,7 +1394,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
                 GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
                 schermo_temp = GlobalVar.schermo.copy().convert()
-                background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+                background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
                 inizio, risposta = chiediconferma(1)
                 if not inizio:
                     GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))

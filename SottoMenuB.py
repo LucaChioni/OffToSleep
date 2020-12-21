@@ -3,12 +3,12 @@
 from CaricaSalvaPartita import *
 
 
-def ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin):
+def ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti):
     contasalva = 1
     GlobalVar.vetDatiSalvataggi = []
     while contasalva <= 3:
-        dati, errore = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False, False)
-        datiGameover, erroreGameover = caricaPartita(contasalva, lunghezzadati, porteini, portefin, cofaniini, cofanifin, False, True)
+        dati, errore = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, False)
+        datiGameover, erroreGameover = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, True)
         vetTempDati = []
         vetTempDati.append(dati)
         vetTempDati.append(errore)
@@ -101,7 +101,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 GlobalVar.aggiornaSchermo()
 
 
-def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco):
+def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco):
     puntatore = GlobalVar.puntatore
     puntatorevecchio = GlobalVar.puntatorevecchio
     xp = GlobalVar.gsx // 32 * 2
@@ -300,10 +300,10 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                                 yp = vyp
                             primoFrame = True
                         elif cosa == 3:
-                            salvataggio(n, datiAttuali, porteini, portefin, cofaniini, cofanifin, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco, False)
-                            salvataggio(n, GlobalVar.vetDatiSalvataggioGameOver[0], porteini, portefin, cofaniini, cofanifin, GlobalVar.vetDatiSalvataggioGameOver[1], GlobalVar.vetDatiSalvataggioGameOver[2], GlobalVar.vetDatiSalvataggioGameOver[3], GlobalVar.vetDatiSalvataggioGameOver[4], GlobalVar.vetDatiSalvataggioGameOver[5], GlobalVar.vetDatiSalvataggioGameOver[6], GlobalVar.vetDatiSalvataggioGameOver[7], GlobalVar.vetDatiSalvataggioGameOver[8], GlobalVar.vetDatiSalvataggioGameOver[9], GlobalVar.vetDatiSalvataggioGameOver[10], True)
+                            salvataggio(n, datiAttuali, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco, False)
+                            salvataggio(n, GlobalVar.vetDatiSalvataggioGameOver[0], GlobalVar.vetDatiSalvataggioGameOver[1], GlobalVar.vetDatiSalvataggioGameOver[2], GlobalVar.vetDatiSalvataggioGameOver[3], GlobalVar.vetDatiSalvataggioGameOver[4], GlobalVar.vetDatiSalvataggioGameOver[5], GlobalVar.vetDatiSalvataggioGameOver[6], GlobalVar.vetDatiSalvataggioGameOver[7], GlobalVar.vetDatiSalvataggioGameOver[8], GlobalVar.vetDatiSalvataggioGameOver[9], GlobalVar.vetDatiSalvataggioGameOver[10], True)
                             # ricarico i salvataggi
-                            ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+                            ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
                             xp = vxp
                             yp = vyp
                             conferma = False
@@ -318,7 +318,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, porteini, portefin, cofaniini, c
                             leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover-backup.txt" % n, "w")
                             leggi.close()
                             # ricarico i salvataggi
-                            ricaricaTuttiISalvataggi(lunghezzadati, porteini, portefin, cofaniini, cofanifin)
+                            ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
                             xp = vxp
                             yp = vyp
                             conferma = False
@@ -549,15 +549,15 @@ def chiediconferma(conferma):
     xp = GlobalVar.gsx // 32 * 17.5
     yp = GlobalVar.gsy // 18 * 10.3
     schermo_temp = GlobalVar.schermo.copy().convert()
-    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy))
+    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
     dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 210))
     background.blit(dark, (0, 0))
     GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
 
     schermo_temp = GlobalVar.schermo.copy().convert()
-    backgroundUpdate1 = schermo_temp.subsurface(pygame.Rect(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 9, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 3))
-    backgroundUpdate2 = schermo_temp.subsurface(pygame.Rect(GlobalVar.gsx // 32 * 21, 0, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2.5))
+    backgroundUpdate1 = schermo_temp.subsurface(pygame.Rect(GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 9, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 3)).convert()
+    backgroundUpdate2 = schermo_temp.subsurface(pygame.Rect(GlobalVar.gsx // 32 * 21, 0, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2.5)).convert()
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True

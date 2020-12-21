@@ -1206,12 +1206,16 @@ rumoreMorteNemico = loadSound("Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
 # suono mappa
 suonoAperturaMappa = loadSound("Audio/RumoriAmbiente/AperturaMappa.wav")
 
+# effetti speciali
+rumoreScavare = loadSound("Audio/RumoriAmbiente/Scavare.wav")
+
 # suoni sottofondi ambientali
 audioSottofondoVideoIniziale = loadSound("Video/AudioVideoInizio.wav")
 audioAmbienteSogno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/Sogno.wav")
 audioAmbienteCasaInterno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/CasaInterno.wav")
 audioAmbienteCasaEsterno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/CasaEsterno.wav")
 audioAmbienteForesta = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/Foresta.wav")
+audioAmbienteForestaFuoco = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/ForestaFuoco.wav")
 
 # suoni canzoni
 canzoneMenuPrincipale = loadSound("Audio/Canzoni/Canzone11.wav")

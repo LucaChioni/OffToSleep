@@ -970,14 +970,14 @@ def equip(dati):
                     messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
             if voceMarcata == 27:
                 if dati[67] != 0:
-                    messaggio("Collana medicinale:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
-                    messaggio(u"Collana composta da erbe il cui odore neutralizza la tissicità del veleno (non ha effetto se si è già avvelenati)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Collana rigenerante:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
+                    messaggio("Collana composta da erbe il cui odore ripristina punti vita ogni turno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
             if voceMarcata == 28:
                 if dati[68] != 0:
-                    messaggio("Collana rigenerante:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
-                    messaggio("Collana composta da erbe il cui odore ripristina punti vita ogni turno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Collana medicinale:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
+                    messaggio(u"Collana composta da erbe il cui odore neutralizza la tissicità del veleno (non ha effetto se si è già avvelenati)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3.8, 60)
             if voceMarcata == 29:
@@ -3374,7 +3374,7 @@ def oggetti(dati, colcoInCasellaVista):
                         if GlobalVar.mouseBloccato:
                             GlobalVar.configuraCursore(False)
                         voceMarcata = 1
-                        xp = GlobalVar.gsx // 32 * 12.6
+                        xp = GlobalVar.gsx // 32 * 12.7
                         yp = GlobalVar.gsy // 18 * 15.1
                     elif GlobalVar.gsx // 32 * 15 <= xMouse <= GlobalVar.gsx // 32 * 19:
                         if GlobalVar.mouseBloccato:
@@ -3592,6 +3592,7 @@ def oggetti(dati, colcoInCasellaVista):
                         GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                     else:
                         GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                        primoFrame = True
                         xp = GlobalVar.gsx // 32 * 1
                         voceMarcata = 0
                         usa = 0
@@ -3727,7 +3728,7 @@ def oggetti(dati, colcoInCasellaVista):
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = xp - GlobalVar.gsx // 32 * 2.4
+                    xp = GlobalVar.gsx // 32 * 12.7
                 else:
                     GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                     bottoneDown = False
@@ -3748,7 +3749,7 @@ def oggetti(dati, colcoInCasellaVista):
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = xp + GlobalVar.gsx // 32 * 2.4
+                    xp = GlobalVar.gsx // 32 * 15
                 else:
                     GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                     bottoneDown = False
@@ -3882,7 +3883,7 @@ def oggetti(dati, colcoInCasellaVista):
                     usauno = False
                 GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
                 messaggio("Usare?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.3, GlobalVar.gsy // 18 * 13, 90)
-                messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.3, GlobalVar.gsy // 18 * 14.9, 70)
+                messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.4, GlobalVar.gsy // 18 * 14.9, 70)
                 GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 15) - 1, int(GlobalVar.gpy * 14.8)), (int(GlobalVar.gpx * 15) - 1, int(GlobalVar.gpy * 15.9)), 2)
                 messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 14.9, 70)
 

@@ -4,32 +4,23 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
+def salvataggio(n, dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVar.gpx
     dati[3] = dati[3] // GlobalVar.gpy
     dati[134] = dati[134] // GlobalVar.gpx
     dati[135] = dati[135] // GlobalVar.gpy
-    i = porteini
-    while i <= portefin:
-        j = 0
-        while j < len(porte):
-            if dati[i] == porte[j] and dati[i + 1] == porte[j + 1] and dati[i + 2] == porte[j + 2]:
-                dati[i + 3] = porte[j + 3]
-            j = j + 4
-        dati[i + 1] = dati[i + 1] // GlobalVar.gpx
-        dati[i + 2] = dati[i + 2] // GlobalVar.gpy
-        i = i + 4
-    i = cofaniini
-    while i <= cofanifin:
-        j = 0
-        while j < len(cofanetti):
-            if dati[i] == cofanetti[j] and dati[i + 1] == cofanetti[j + 1] and dati[i + 2] == cofanetti[j + 2]:
-                dati[i + 3] = cofanetti[j + 3]
-            j = j + 4
-        dati[i + 1] = dati[i + 1] // GlobalVar.gpx
-        dati[i + 2] = dati[i + 2] // GlobalVar.gpy
-        i = i + 4
+
+    i = 0
+    while i < len(tutteporte):
+        tutteporte[i + 1] = tutteporte[i + 1] // GlobalVar.gpx
+        tutteporte[i + 2] = tutteporte[i + 2] // GlobalVar.gpy
+        i += 4
+    i = 0
+    while i < len(tutticofanetti):
+        tutticofanetti[i + 1] = tutticofanetti[i + 1] // GlobalVar.gpx
+        tutticofanetti[i + 2] = tutticofanetti[i + 2] // GlobalVar.gpy
+        i += 4
 
     backup = False
     salvataggio = False
@@ -49,8 +40,15 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
                 scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
             else:
                 scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+
         for i in range(0, len(dati)):
             scrivi.write("%i_" % dati[i])
+        scrivi.write("\n")
+        for i in range(0, len(tutteporte)):
+            scrivi.write("%i_" % tutteporte[i])
+        scrivi.write("\n")
+        for i in range(0, len(tutticofanetti)):
+            scrivi.write("%i_" % tutticofanetti[i])
         scrivi.write("\n")
         for nemico in listaNemiciTotali:
             scrivi.write("%s_" % nemico.tipo)
@@ -148,23 +146,25 @@ def salvataggio(n, dati, porteini, portefin, cofaniini, cofanifin, porte, cofane
     dati[3] = dati[3] * GlobalVar.gpy
     dati[134] = dati[134] * GlobalVar.gpx
     dati[135] = dati[135] * GlobalVar.gpy
-    i = porteini
-    while i <= portefin:
-        dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-        dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-        i = i + 4
-    i = cofaniini
-    while i <= cofanifin:
-        dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-        dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-        i = i + 4
+    i = 0
+    while i < len(tutteporte):
+        tutteporte[i + 1] = tutteporte[i + 1] * GlobalVar.gpx
+        tutteporte[i + 2] = tutteporte[i + 2] * GlobalVar.gpy
+        i += 4
+    i = 0
+    while i < len(tutticofanetti):
+        tutticofanetti[i + 1] = tutticofanetti[i + 1] * GlobalVar.gpx
+        tutticofanetti[i + 2] = tutticofanetti[i + 2] * GlobalVar.gpy
+        i += 4
 
 
-def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mostraErrori, caricaGameOver):
+def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, mostraErrori, caricaGameOver):
     errore = False
     tipoErrore = 0
 
     dati = []
+    tutteporte = []
+    tutticofanetti = []
     listaNemiciTotali = []
     listaEsche = []
     listaMonete = []
@@ -181,6 +181,8 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
         tipoErrore = 0
 
         dati = []
+        tutteporte = []
+        tutticofanetti = []
         listaNemiciTotali = []
         listaEsche = []
         listaMonete = []
@@ -213,7 +215,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
             tipoErrore = 2
 
         if not errore and not (len(datiTotali) == 1 and datiTotali[0] == ""):
-            if len(datiTotali) == 9:
+            if len(datiTotali) == 11:
                 datiStringa = datiTotali[0].split("_")
                 datiStringa.pop(len(datiStringa) - 1)
                 if len(datiStringa) == 0 or len(datiStringa) != lunghezzadati:
@@ -231,17 +233,43 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                         dati[3] = dati[3] * GlobalVar.gpy
                         dati[134] = dati[134] * GlobalVar.gpx
                         dati[135] = dati[135] * GlobalVar.gpy
-                        i = porteini
-                        while i <= portefin:
-                            dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-                            dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-                            i = i + 4
-                        i = cofaniini
-                        while i <= cofanifin:
-                            dati[i + 1] = dati[i + 1] * GlobalVar.gpx
-                            dati[i + 2] = dati[i + 2] * GlobalVar.gpy
-                            i = i + 4
-                datiNemici = datiTotali[1].split("_")
+                porteStringa = datiTotali[1].split("_")
+                porteStringa.pop(len(porteStringa) - 1)
+                if len(porteStringa) == 0 or len(porteStringa) != lunghezzadatiPorte:
+                    errore = True
+                else:
+                    for i in range(0, len(porteStringa)):
+                        try:
+                            tutteporte.append(int(porteStringa[i]))
+                        except ValueError:
+                            errore = True
+                            break
+                    if not errore:
+                        # conversione della posizione in pixel
+                        i = 0
+                        while i < len(tutteporte):
+                            tutteporte[i + 1] = tutteporte[i + 1] * GlobalVar.gpx
+                            tutteporte[i + 2] = tutteporte[i + 2] * GlobalVar.gpy
+                            i += 4
+                cofanettiStringa = datiTotali[2].split("_")
+                cofanettiStringa.pop(len(cofanettiStringa) - 1)
+                if len(cofanettiStringa) == 0 or len(cofanettiStringa) != lunghezzadatiCofanetti:
+                    errore = True
+                else:
+                    for i in range(0, len(cofanettiStringa)):
+                        try:
+                            tutticofanetti.append(int(cofanettiStringa[i]))
+                        except ValueError:
+                            errore = True
+                            break
+                    if not errore:
+                        # conversione della posizione in pixel
+                        i = 0
+                        while i < len(tutticofanetti):
+                            tutticofanetti[i + 1] = tutticofanetti[i + 1] * GlobalVar.gpx
+                            tutticofanetti[i + 2] = tutticofanetti[i + 2] * GlobalVar.gpy
+                            i += 4
+                datiNemici = datiTotali[3].split("_")
                 datiNemici.pop(len(datiNemici) - 1)
                 try:
                     i = 0
@@ -282,7 +310,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                             errore = True
                             break
                         i += 17
-                listaEscheStringa = datiTotali[2].split("_")
+                listaEscheStringa = datiTotali[4].split("_")
                 listaEscheStringa.pop(len(listaEscheStringa) - 1)
                 if len(listaEscheStringa) % 4 != 0:
                     errore = True
@@ -298,7 +326,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                             errore = True
                             break
                         i += 4
-                listaMoneteStringa = datiTotali[3].split("_")
+                listaMoneteStringa = datiTotali[5].split("_")
                 listaMoneteStringa.pop(len(listaMoneteStringa) - 1)
                 if len(listaMoneteStringa) % 3 != 0:
                     errore = True
@@ -313,7 +341,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                             errore = True
                             break
                         i += 3
-                stanzeGiaVisitateStringa = datiTotali[4].split("_")
+                stanzeGiaVisitateStringa = datiTotali[6].split("_")
                 stanzeGiaVisitateStringa.pop(len(stanzeGiaVisitateStringa) - 1)
                 i = 0
                 while i < len(stanzeGiaVisitateStringa):
@@ -323,7 +351,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                         errore = True
                         break
                     i += 1
-                datiPersonaggi = datiTotali[5].split("_")
+                datiPersonaggi = datiTotali[7].split("_")
                 datiPersonaggi.pop(len(datiPersonaggi) - 1)
                 try:
                     i = 0
@@ -356,7 +384,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                             errore = True
                             break
                         i += 9
-                oggettiRimastiASamStringa = datiTotali[6].split("_")
+                oggettiRimastiASamStringa = datiTotali[8].split("_")
                 oggettiRimastiASamStringa.pop(len(oggettiRimastiASamStringa) - 1)
                 if len(oggettiRimastiASamStringa) != 13:
                     errore = True
@@ -367,7 +395,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                         except ValueError:
                             errore = True
                             break
-                ultimoObbiettivoColcoStringa = datiTotali[7].split("_")
+                ultimoObbiettivoColcoStringa = datiTotali[9].split("_")
                 ultimoObbiettivoColcoStringa.pop(len(ultimoObbiettivoColcoStringa) - 1)
                 if len(ultimoObbiettivoColcoStringa) != 3:
                     errore = True
@@ -376,7 +404,7 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                         ultimoObbiettivoColco.append(ultimoObbiettivoColcoStringa[0])
                         ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[1]) * GlobalVar.gpx)
                         ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[2]) * GlobalVar.gpx)
-                obbiettivoCasualeColcoStringa = datiTotali[8].split("_")
+                obbiettivoCasualeColcoStringa = datiTotali[10].split("_")
                 obbiettivoCasualeColcoStringa.pop(len(obbiettivoCasualeColcoStringa) - 1)
                 if len(obbiettivoCasualeColcoStringa) != 3:
                     errore = True
@@ -428,11 +456,11 @@ def caricaPartita(n, lunghezzadati, porteini, portefin, cofaniini, cofanifin, mo
                     scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
             scrivi.write(contenutoFile)
             scrivi.close()
-            return dati, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return dati, tutteporte, tutticofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return dati, tipoErrore
     else:
         if mostraErrori:
-            return False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return False, False, False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return False, tipoErrore

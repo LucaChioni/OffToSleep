@@ -3,7 +3,7 @@
 from MovNemiciRob import *
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, avanzamentoStoria):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria):
     if caricaTutto:
         GlobalVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
         # salvo la lista di cofanetti vicini a ceselle viste per non mettergli la casella oscurata
@@ -17,28 +17,59 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     vetCofanettiVisti.append(cofanetti[i + 2])
                 j += 3
             i += 4
-        # disegno l'ombreggiatura delle caselle
+        # disegno l'ombreggiatura delle caselle percorribili
         i = 0
         while i < len(casellePercorribili):
-            if casellePercorribili[i + 2]:
-                if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
-                if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
-            else:
-                casellaNonOscurata = False
+            if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 0:
+                GlobalVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
+            if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 1:
+                GlobalVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
+            i += 2
+        # disegno l'ombreggiatura delle caselle non viste
+        caselleNonVisibiliSenzaPorteChiuse = []
+        i = 0
+        while i < len(caselleNonVisibili):
+            if caselleNonVisibili[i + 2]:
+                casellaPortaChiusa = False
+                j = 0
+                while j < len(porte):
+                    if not porte[j + 3] and caselleNonVisibili[i] == porte[j + 1] and caselleNonVisibili[i + 1] == porte[j + 2]:
+                        casellaPortaChiusa = True
+                        break
+                    j += 4
+                if not casellaPortaChiusa:
+                    caselleNonVisibiliSenzaPorteChiuse.append(caselleNonVisibili[i])
+                    caselleNonVisibiliSenzaPorteChiuse.append(caselleNonVisibili[i + 1])
+            i += 3
+        i = 0
+        while i < len(caselleNonVisibili):
+            if not caselleNonVisibili[i + 2]:
+                casellaVicinaACasellaVista = False
+                j = 0
+                while j < len(caselleNonVisibiliSenzaPorteChiuse):
+                    if caselleNonVisibiliSenzaPorteChiuse[j] - GlobalVar.gpx <= caselleNonVisibili[i] <= caselleNonVisibiliSenzaPorteChiuse[j] + GlobalVar.gpx and caselleNonVisibiliSenzaPorteChiuse[j + 1] - GlobalVar.gpy <= caselleNonVisibili[i + 1] <= caselleNonVisibiliSenzaPorteChiuse[j + 1] + GlobalVar.gpy:
+                        casellaVicinaACasellaVista = True
+                        break
+                    j += 2
                 j = 0
                 while j < len(vetCofanettiVisti):
-                    if casellePercorribili[i] == vetCofanettiVisti[j] and casellePercorribili[i + 1] == vetCofanettiVisti[j + 1]:
-                        casellaNonOscurata = True
+                    if vetCofanettiVisti[j] - GlobalVar.gpx <= caselleNonVisibili[i] <= vetCofanettiVisti[j] + GlobalVar.gpx and vetCofanettiVisti[j + 1] - GlobalVar.gpy <= caselleNonVisibili[i + 1] <= vetCofanettiVisti[j + 1] + GlobalVar.gpy:
+                        casellaVicinaACasellaVista = True
+                        break
                     j += 2
-                if casellaNonOscurata:
-                    if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 0:
-                        GlobalVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
-                    if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 1:
-                        GlobalVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
-                else:
-                    GlobalVar.disegnaImmagineSuSchermo(casellaOscurata, (casellePercorribili[i], casellePercorribili[i + 1]))
+                j = 0
+                while j < len(entrateStanza):
+                    if entrateStanza[j] + entrateStanza[j + 2] - GlobalVar.gpx <= caselleNonVisibili[i] <= entrateStanza[j] + entrateStanza[j + 2] + GlobalVar.gpx and entrateStanza[j + 1] + entrateStanza[j + 3] - GlobalVar.gpy <= caselleNonVisibili[i + 1] <= entrateStanza[j + 1] + entrateStanza[j + 3] + GlobalVar.gpy:
+                        k = 0
+                        while k < len(caselleNonVisibiliSenzaPorteChiuse):
+                            if entrateStanza[j] + entrateStanza[j + 2] - GlobalVar.gpx <= caselleNonVisibiliSenzaPorteChiuse[k] <= entrateStanza[j] + entrateStanza[j + 2] + GlobalVar.gpx and entrateStanza[j + 1] + entrateStanza[j + 3] - GlobalVar.gpy <= caselleNonVisibiliSenzaPorteChiuse[k + 1] <= entrateStanza[j + 1] + entrateStanza[j + 3] + GlobalVar.gpy:
+                                casellaVicinaACasellaVista = True
+                                break
+                            k += 2
+                        break
+                    j += 5
+                if not casellaVicinaACasellaVista:
+                    GlobalVar.disegnaImmagineSuSchermo(casellaOscurata, (caselleNonVisibili[i], caselleNonVisibili[i + 1]))
             i += 3
 
         # disegna porte
@@ -68,69 +99,92 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                 j += 3
             i += 4
     else:
-        # disegnare casella sopra la vecchia posizione di rallo, colco, nemici e personaggi
+        # disegnare casella sopra la vecchia posizione e la posizioe attuale di rallo, colco, nemici, personaggi, esche e denaro
         i = 0
         while i < len(vettoreImgCaselle):
             if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
                 GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
                 disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
-            if vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
+            elif vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
                 GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
                 disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
-            for nemico in listaNemici:
-                if nemico.inCasellaVista and nemico.vx == vettoreImgCaselle[i] and nemico.vy == vettoreImgCaselle[i + 1]:
-                    GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                    disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
-            for personaggio in listaPersonaggi:
-                if (personaggio.inCasellaVista or personaggio.mantieniSempreASchermo) and personaggio.vx == vettoreImgCaselle[i] and personaggio.vy == vettoreImgCaselle[i + 1]:
-                    GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                    disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
-            i += 3
+            elif x == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]:
+                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+            elif rx == vettoreImgCaselle[i] and ry == vettoreImgCaselle[i + 1]:
+                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+            else:
+                casellaTrovata = False
+                if not casellaTrovata:
+                    for nemico in listaNemici:
+                        if nemico.x == vettoreImgCaselle[i] and nemico.y == vettoreImgCaselle[i + 1]:
+                            if not nemico.morto and nemico.inCasellaVista:
+                                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            casellaTrovata = True
+                            break
+                        if nemico.vx == vettoreImgCaselle[i] and nemico.vy == vettoreImgCaselle[i + 1]:
+                            if not nemico.morto and nemico.inCasellaVista:
+                                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            casellaTrovata = True
+                            break
+                if not casellaTrovata:
+                    for personaggio in listaPersonaggi:
+                        if personaggio.x == vettoreImgCaselle[i] and personaggio.y == vettoreImgCaselle[i + 1]:
+                            if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
+                                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                if not personaggio.mantieniSempreASchermo:
+                                    disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            casellaTrovata = True
+                            break
+                        if personaggio.vx == vettoreImgCaselle[i] and personaggio.vy == vettoreImgCaselle[i + 1]:
+                            if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
+                                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            casellaTrovata = True
+                            break
+                if not casellaTrovata:
+                    j = 0
+                    while j < len(vettoreEsche):
+                        if vettoreEsche[j + 2] == vettoreImgCaselle[i] and vettoreEsche[j + 3] == vettoreImgCaselle[i + 1]:
+                            k = 0
+                            while k < len(caseviste):
+                                if caseviste[k] == vettoreEsche[j + 2] and caseviste[k + 1] == vettoreEsche[j + 3]:
+                                    if caseviste[k + 2] and (primaDiAnima or vettoreEsche[j + 1] > 0):
+                                        GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                    break
+                                k += 3
+                            casellaTrovata = True
+                            break
+                        j += 4
+                if not casellaTrovata:
+                    j = 0
+                    while j < len(vettoreDenaro):
+                        if vettoreDenaro[j + 1] == vettoreImgCaselle[i] and vettoreDenaro[j + 2] == vettoreImgCaselle[i + 1]:
+                            k = 0
+                            while k < len(caseviste):
+                                if caseviste[k] == vettoreDenaro[j + 1] and caseviste[k + 1] == vettoreDenaro[j + 2]:
+                                    if caseviste[k + 2]:
+                                        GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                    break
+                                k += 3
+                            casellaTrovata = True
+                            break
+                        j += 3
 
-    # disegno la casella sopra la posizione di rallo, colco, personaggi e nemici
-    c = 0
-    while c < len(vettoreImgCaselle):
-        if x == vettoreImgCaselle[c] and y == vettoreImgCaselle[c + 1]:
-            GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-            disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-        if rx == vettoreImgCaselle[c] and ry == vettoreImgCaselle[c + 1]:
-            GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-            disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-        for nemico in listaNemici:
-            if not nemico.morto and nemico.inCasellaVista and nemico.x == vettoreImgCaselle[c] and nemico.y == vettoreImgCaselle[c + 1]:
-                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-                break
-        for personaggio in listaPersonaggi:
-            if (personaggio.inCasellaVista or personaggio.mantieniSempreASchermo) and personaggio.x == vettoreImgCaselle[c] and personaggio.y == vettoreImgCaselle[c + 1]:
-                GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-                break
-        c += 3
+            i += 3
 
     # esche: id, vita, xesca, yesca
     i = 0
     while i < len(vettoreEsche):
         j = 0
         while j < len(caseviste):
-            if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] and caseviste[j + 2]:
-                if primaDiAnima:
-                    c = 0
-                    while c < len(vettoreImgCaselle):
-                        if vettoreEsche[i + 2] == vettoreImgCaselle[c] and vettoreEsche[i + 3] == vettoreImgCaselle[c + 1]:
-                            GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                            disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-                            break
-                        c += 3
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.esche, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
-                elif vettoreEsche[i + 1] > 0:
-                    c = 0
-                    while c < len(vettoreImgCaselle):
-                        if vettoreEsche[i + 2] == vettoreImgCaselle[c] and vettoreEsche[i + 3] == vettoreImgCaselle[c + 1]:
-                            GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                            disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-                            break
-                        c += 3
+            if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3]:
+                if caseviste[j + 2] and (primaDiAnima or vettoreEsche[i + 1] > 0):
                     GlobalVar.disegnaImmagineSuSchermo(GlobalVar.esche, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
                 break
             j += 3
@@ -141,15 +195,9 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     while i < len(vettoreDenaro):
         j = 0
         while j < len(caseviste):
-            if ((caseviste[j] == vettoreDenaro[i + 1] - GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - GlobalVar.gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                c = 0
-                while c < len(vettoreImgCaselle):
-                    if vettoreDenaro[i + 1] == vettoreImgCaselle[c] and vettoreDenaro[i + 2] == vettoreImgCaselle[c + 1]:
-                        GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                        disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
-                        break
-                    c += 3
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+            if caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2]:
+                if caseviste[j + 2]:
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
                 break
             j += 3
         i += 3
@@ -205,7 +253,19 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
 
     # disegno tutti i personaggi
     for personaggio in listaPersonaggi:
-        if personaggio.inCasellaVista or personaggio.mantieniSempreASchermo:
+        if personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto):
+            if caricaTutto:
+                i = 0
+                while i < len(vettoreImgCaselle):
+                    if personaggio.x == vettoreImgCaselle[i] and personaggio.y == vettoreImgCaselle[i + 1]:
+                        GlobalVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
+                        break
+                    i += 3
+            GlobalVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+            if not personaggio.vicinoACasellaVista:
+                GlobalVar.disegnaImmagineSuSchermo(casellaOscurata, (personaggio.x, personaggio.y))
+            personaggio.imgAggiornata = False
+        elif not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista:
             GlobalVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
     # backbround occhio/chiave
@@ -370,7 +430,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalVar.disegnaImmagineSuSchermo(vitanemsucc, (GlobalVar.gpx, 0))
         GlobalVar.disegnaImmagineSuSchermo(vitanem, (GlobalVar.gpx, 0))
 
-    # disegno img GlobalVarG2.puntatoreInquadraNemici
+    # disegno img puntatoreInquadraNemici
     if nemicoInquadrato == "Colco":
         GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreInquadraNemici, (rx, ry))
     elif not type(nemicoInquadrato) is str and nemicoInquadrato:
@@ -592,7 +652,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         xPartenzaPannello = GlobalVar.gsx // 32 * 19
     else:
         xPartenzaPannello = 0
-    backgroundRiquadro = schermoBackground.subsurface(pygame.Rect(xPartenzaPannello, 0, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 18))
+    backgroundRiquadro = schermoBackground.subsurface(pygame.Rect(xPartenzaPannello, 0, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 18)).convert()
     dark = pygame.Surface((GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 18), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 180))
     backgroundRiquadro.blit(dark, (0, 0))
@@ -819,26 +879,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     # disegno l'ombreggiatura delle caselle
     i = 0
     while i < len(casellePercorribili):
-        if casellePercorribili[i + 2]:
-            if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 0:
-                GlobalVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
-            if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 1:
-                GlobalVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
-        else:
-            casellaNonOscurata = False
-            j = 0
-            while j < len(vetCofanettiVisti):
-                if casellePercorribili[i] == vetCofanettiVisti[j] and casellePercorribili[i + 1] == vetCofanettiVisti[j + 1]:
-                    casellaNonOscurata = True
-                j += 2
-            if casellaNonOscurata:
-                if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 0:
-                    GlobalVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
-                if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 1:
-                    GlobalVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
-            else:
-                GlobalVar.disegnaImmagineSuSchermo(casellaOscurata, (casellePercorribili[i], casellePercorribili[i + 1]))
-        i += 3
+        if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 0:
+            GlobalVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
+        if ((casellePercorribili[i] / GlobalVar.gpx) + (casellePercorribili[i + 1] / GlobalVar.gpy)) % 2 == 1:
+            GlobalVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
+        i += 2
 
     # controllo caselle attaccabili tue e di Colco
     raggioDiLancio = 0
@@ -970,7 +1015,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
     # disegno tutti i personaggi
     for personaggio in listaPersonaggi:
-        if (personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista) or personaggio.inCasellaVista:
+        if personaggio.mantieniSempreASchermo or personaggio.inCasellaVista:
             GlobalVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
     schermoPrevisioneColco = GlobalVar.schermo.copy().convert()
@@ -2050,7 +2095,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             ricaricaschermo = False
             appenaCaricato = True
 
-        background = schermoOriginale.subsurface(pygame.Rect(xvp, yvp, GlobalVar.gpx, GlobalVar.gpy))
+        background = schermoOriginale.subsurface(pygame.Rect(xvp, yvp, GlobalVar.gpx, GlobalVar.gpy)).convert()
         GlobalVar.disegnaImmagineSuSchermo(background, (xvp, yvp))
         # visualizza campo attaccabile se sto usando un oggetto
         if attacco == 2:
@@ -2592,12 +2637,12 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if vecchiaCasellaInquadrata[0] and (vecchiaCasellaInquadrata[1] != rx or vecchiaCasellaInquadrata[2] != ry):
                 GlobalVar.disegnaImmagineSuSchermo(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
             GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreInquadraNemici, (rx, ry))
-            vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(rx, ry, GlobalVar.gpx, GlobalVar.gpy)), rx, ry]
+            vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(rx, ry, GlobalVar.gpx, GlobalVar.gpy)).convert(), rx, ry]
         elif not type(nemicoInquadrato) is str and nemicoInquadrato:
             if vecchiaCasellaInquadrata[0] and (vecchiaCasellaInquadrata[1] != nemicoInquadrato.x or vecchiaCasellaInquadrata[2] != nemicoInquadrato.y):
                 GlobalVar.disegnaImmagineSuSchermo(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
             GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
-            vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(nemicoInquadrato.x, nemicoInquadrato.y, GlobalVar.gpx, GlobalVar.gpy)), nemicoInquadrato.x, nemicoInquadrato.y]
+            vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(nemicoInquadrato.x, nemicoInquadrato.y, GlobalVar.gpx, GlobalVar.gpy)).convert(), nemicoInquadrato.x, nemicoInquadrato.y]
         elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
             idEscaInquadrata = int(nemicoInquadrato[4:])
             i = 0
@@ -2606,7 +2651,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     if vecchiaCasellaInquadrata[0] and (vecchiaCasellaInquadrata[1] != vettoreEsche[i + 2] or vecchiaCasellaInquadrata[2] != vettoreEsche[i + 3]):
                         GlobalVar.disegnaImmagineSuSchermo(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
                     GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreInquadraNemici, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
-                    vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(vettoreEsche[i + 2], vettoreEsche[i + 3], GlobalVar.gpx, GlobalVar.gpy)), vettoreEsche[i + 2], vettoreEsche[i + 3]]
+                    vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(vettoreEsche[i + 2], vettoreEsche[i + 3], GlobalVar.gpx, GlobalVar.gpy)).convert(), vettoreEsche[i + 2], vettoreEsche[i + 3]]
                     break
                 i += 4
 
