@@ -88,15 +88,17 @@ pygame.display.set_icon(icona)
 listaTastiPremuti = []
 
 # clock
-clockAttacco = pygame.time.Clock()
+clockMainLoop = pygame.time.Clock()
+clockInterazioni = pygame.time.Clock()
+clockMenu = pygame.time.Clock()
 clockAnimazioni = pygame.time.Clock()
 clockVideo = pygame.time.Clock()
-clockMenu = pygame.time.Clock()
 clockFadeToBlack = pygame.time.Clock()
-fpsAnimazioni = 30
-fpsInquadra = 20
-fpsVideo = 12
+fpsMainLoop = 60
+fpsInterazioni = 30
 fpsMenu = 30
+fpsAnimazioni = 30
+fpsVideo = 12
 fpsFadeToBlack = 30
 
 # colori
@@ -132,12 +134,20 @@ def quit():
 
 def loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     img = pygame.image.load(gamePath + path)
+
+    # aumento la risoluzione per evitare imprecisioni delle img piccole e bug dello smoothscale per le img grandi (lo smoothscle ha problemi nel ridurre la risoluzione)
     if aumentaRisoluzione:
-        sizeX, sizeY = img.get_rect().size
-        moltiplicatore = 1
-        while sizeX * moltiplicatore < xScale and sizeY * moltiplicatore < yScale:
-            moltiplicatore += 1
-        img = pygame.transform.scale(img, (sizeX * moltiplicatore, sizeY * moltiplicatore))
+        risoluzioneXPerFix = xScale
+        risoluzioneYPerFix = yScale
+    else:
+        risoluzioneXPerFix = xScale * 2
+        risoluzioneYPerFix = yScale * 2
+    sizeX, sizeY = img.get_rect().size
+    moltiplicatore = 1
+    while sizeX * moltiplicatore < risoluzioneXPerFix and sizeY * moltiplicatore < risoluzioneYPerFix:
+        moltiplicatore += 1
+    img = pygame.transform.scale(img, (sizeX * moltiplicatore, sizeY * moltiplicatore))
+
     if xScale != 0 and yScale != 0:
         img = pygame.transform.smoothscale(img, (int(xScale), int(yScale)))
     if canale_alpha:

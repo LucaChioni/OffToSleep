@@ -806,6 +806,9 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
             GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
 
+        pygame.event.pump()
+        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+
 
 def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob):
     xp = x
@@ -1641,7 +1644,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
 
-        # rallenta per i 20 fps
+        # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
             if tastotempfps != 8:
                 nxp = 0
@@ -2660,6 +2663,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         elif not sposta or not attaccato:
             attacco = 0
         pygame.event.pump()
-        GlobalVar.clockAttacco.tick(GlobalVar.fpsInquadra)
+        GlobalVar.clockInterazioni.tick(GlobalVar.fpsInterazioni)
 
     return sposta, creaesca, xp, yp, npers, nrob, pv, avvele, enrob, difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac

@@ -187,6 +187,9 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                     GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                     bottoneDown = False
 
+                pygame.event.pump()
+                GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+
         caricaTutto = True
         movimentoPerMouse = False
         bottoneDown = False
@@ -1743,6 +1746,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if bottoneDown:
                 GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                 bottoneDown = False
+
+            pygame.event.pump()
+            GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
         movimentoPerMouse = False
         caricaTutto = True
         tesoro = -1
@@ -1762,6 +1768,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if bottoneDown:
                 GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                 bottoneDown = False
+
+            pygame.event.pump()
+            GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
         movimentoPerMouse = False
         caricaTutto = True
         bottoneDown = False

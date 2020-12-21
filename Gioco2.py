@@ -2071,4 +2071,7 @@ def gameloop():
             GlobalVar.canaleSoundSottofondoAmbientale.stop()
             GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
+        pygame.event.pump()
+        GlobalVar.clockMainLoop.tick(GlobalVar.fpsMainLoop)
+
 gameloop()

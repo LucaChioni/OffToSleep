@@ -59,6 +59,9 @@ def mostraErroreCaricamentoSalvataggio(errore):
                     messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
                 messaggio("Slot di memoria vuoto...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 14, 100)
                 GlobalVar.aggiornaSchermo()
+
+            pygame.event.pump()
+            GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     if errore == 2:
         print ("Dati corrotti")
         aggiornaSchermata = True
@@ -99,6 +102,9 @@ def mostraErroreCaricamentoSalvataggio(errore):
                     messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
                 messaggio("Slot di memoria danneggiato...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6.5, GlobalVar.gsy // 18 * 14, 100)
                 GlobalVar.aggiornaSchermo()
+
+            pygame.event.pump()
+            GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
 def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, porteAttuali, cofanettiAttuali, vitaescaAttuali, vettoreDenaroAttuali, datiAttuali, listaNemiciTotaliAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco):

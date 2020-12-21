@@ -1901,6 +1901,9 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
                 GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
                 continua = True
                 bottoneDown = False
+
+            pygame.event.pump()
+            GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
         inizio = True
 
     return inizio, gameover
@@ -2243,6 +2246,9 @@ def dialoga(avanzamentoStoria, personaggio):
             numeromessaggioAttuale += 1
             prosegui = False
             GlobalVar.aggiornaSchermo()
+
+        pygame.event.pump()
+        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
     GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
@@ -2268,6 +2274,9 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
         if bottoneDown:
             GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
             bottoneDown = False
+
+        pygame.event.pump()
+        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
 def cambiaProtagonista(nome):
