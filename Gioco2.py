@@ -13,6 +13,7 @@ def gameloop():
     gameover = False
     while True:
         if inizio:
+            turniDaSaltare = 0
             refreshSchermo = True
             impossibileAprirePorta = False
             canzone = False
@@ -225,7 +226,7 @@ def gameloop():
                         porte.append(tutteporte[i + 1])
                         porte.append(tutteporte[i + 2])
                         porte.append(tutteporte[i + 3])
-                    i = i + 4
+                    i += 4
 
                 caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
                 entrateStanza = getEntrateStanze(dati[1])
@@ -260,7 +261,7 @@ def gameloop():
                     dati[136] = raffredda
                     dati[137] = autoRic1
                     dati[138] = autoRic2
-                    GlobalVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], copy.deepcopy(listaNemiciTotali), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], copy.deepcopy(listaPersonaggiTotali), oggettiRimastiASam[:], ultimoObbiettivoColco[:], copy.deepcopy(obbiettivoCasualeColco)]
+                    GlobalVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], copiaListaDiOggettiConImmagini(listaNemiciTotali, True), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, dati[0]), oggettiRimastiASam[:], ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco)]
 
                 stanzaCambiata = True
                 impossibileCliccarePulsanti = True
@@ -545,7 +546,7 @@ def gameloop():
                 break
 
         # gestione degli input
-        if not impossibileCliccarePulsanti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto:
+        if not impossibileCliccarePulsanti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto and turniDaSaltare == 0:
             bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, False)
         elif startf or oggettoRicevuto or impossibileCliccarePulsanti:
             bottoneDown = False
@@ -1559,12 +1560,32 @@ def gameloop():
             if sposta:
                 difesa = 0
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
+            if turniDaSaltare > 0 and not sposta:
+                turniDaSaltare -= 1
+                sposta = True
+                if turniDaSaltare == 0:
+                    caricaTutto = True
+                    uscitoDaMenu = 2
             if difesa == 2 and not sposta:
                 difesa = 1
                 sposta = True
-                dati[5] = dati[5] + 3
-                if dati[5] > pvtot:
+                riempiTuttaLaVita = True
+                turniDaSaltare = 0
+                for nemico in listaNemici:
+                    if nemico.vita > 0 and nemico.inCasellaVista:
+                        riempiTuttaLaVita = False
+                        break
+                if riempiTuttaLaVita and dati[5] + 3 < pvtot:
+                    while dati[5] < pvtot:
+                        dati[5] += 3
+                        turniDaSaltare += 1
+                    turniDaSaltare -= 1
                     dati[5] = pvtot
+                    oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
+                else:
+                    dati[5] += 3
+                    if dati[5] > pvtot:
+                        dati[5] = pvtot
             # gestione att+ e dif+
             if dati[123] > 0 and sposta:
                 dati[123] = dati[123] - 1
@@ -1950,15 +1971,15 @@ def gameloop():
                 impossibileCliccarePulsanti = True
 
             # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
-            if caricaTutto:
+            if caricaTutto and turniDaSaltare == 0:
                 refreshSchermo = True
                 if aumentoliv != 0:
                     pvtot = getVitaTotRallo(dati[4] - aumentoliv, dati[129])
                 disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0])
                 caricaTutto = False
-            if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0:
+            if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0 and turniDaSaltare == 0:
                 primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, porte, cofanetti, portaOriz, portaVert, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle)
-            if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta):
+            if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta) and turniDaSaltare == 0:
                 refreshSchermo = False
                 apriocchio = False
                 for nemico in listaNemici:

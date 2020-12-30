@@ -45,16 +45,16 @@ class NemicoObj(object):
 
     def inizializzaStatistiche(self, monetePossedute):
         vitaTotale = 0
-        esp = 0
-        raggioVisivo = 0
-        velocita = 0
         attacco = 0
+        difesa = 0
+        velocita = 0
+        raggioVisivo = 0
         attaccaDaLontano = False
         velenoso = False
         surriscaldante = False
-        denaro = 0
-        difesa = 0
         avvelenabile = True
+        denaro = 0
+        esp = 0
 
         if self.tipo == "Orco":
             vitaTotale = 20
@@ -67,7 +67,7 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = True
             denaro = 0
-            esp = 1
+            esp = 0
         if self.tipo == "Pipistrello":
             vitaTotale = 10
             attacco = 15
@@ -79,32 +79,32 @@ class NemicoObj(object):
             surriscaldante = False
             avvelenabile = False
             denaro = 0
-            esp = 2
+            esp = 0
 
         if self.tipo == "TartarugaVerde":
-            vitaTotale = 40
+            vitaTotale = 30
             attacco = 40
-            difesa = 5
+            difesa = 4
             velocita = -2
             raggioVisivo = GlobalVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(0, 1)
+            esp = 1
         if self.tipo == "TartarugaMarrone":
-            vitaTotale = 60
+            vitaTotale = 50
             attacco = 45
-            difesa = 10
+            difesa = 7
             velocita = -1
             raggioVisivo = GlobalVar.gpx * 3
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(0, 2)
+            esp = 2
         if self.tipo == "LupoGrigio":
             vitaTotale = 40
             attacco = 55
@@ -115,8 +115,8 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(1, 4)
+            esp = 3
         if self.tipo == "LupoBianco":
             vitaTotale = 60
             attacco = 65
@@ -127,32 +127,32 @@ class NemicoObj(object):
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
+            denaro = random.randint(3, 6)
             esp = 5
         if self.tipo == "LupoNero":
             vitaTotale = 80
             attacco = 80
-            difesa = 5
+            difesa = 4
             velocita = 0
             raggioVisivo = GlobalVar.gpx * 5
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(5, 8)
+            esp = 7
         if self.tipo == "Cinghiale":
             vitaTotale = 100
             attacco = 100
-            difesa = 15
+            difesa = 8
             velocita = 0
             raggioVisivo = GlobalVar.gpx * 4
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(15, 20)
+            esp = 20
 
         if self.tipo == "SerpeVerde":
             vitaTotale = 25

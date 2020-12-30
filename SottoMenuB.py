@@ -3,19 +3,29 @@
 from CaricaSalvaPartita import *
 
 
-def ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti):
-    contasalva = 1
-    GlobalVar.vetDatiSalvataggi = []
-    while contasalva <= 3:
-        dati, errore = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, False)
-        datiGameover, erroreGameover = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, True)
+def ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=-1):
+    if numSalvataggio == -1:
+        contasalva = 1
+        GlobalVar.vetDatiSalvataggi = []
+        while contasalva <= 3:
+            dati, errore = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, False)
+            datiGameover, erroreGameover = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, True)
+            vetTempDati = []
+            vetTempDati.append(dati)
+            vetTempDati.append(errore)
+            vetTempDati.append(datiGameover)
+            vetTempDati.append(erroreGameover)
+            GlobalVar.vetDatiSalvataggi.append(vetTempDati)
+            contasalva += 1
+    else:
+        dati, errore = caricaPartita(numSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, False)
+        datiGameover, erroreGameover = caricaPartita(numSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, True)
         vetTempDati = []
         vetTempDati.append(dati)
         vetTempDati.append(errore)
         vetTempDati.append(datiGameover)
         vetTempDati.append(erroreGameover)
-        GlobalVar.vetDatiSalvataggi.append(vetTempDati)
-        contasalva += 1
+        GlobalVar.vetDatiSalvataggi[numSalvataggio - 1] = vetTempDati
 
 
 def mostraErroreCaricamentoSalvataggio(errore):
@@ -306,15 +316,28 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                                 yp = vyp
                             primoFrame = True
                         elif cosa == 3:
+                            GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.verdeScuroPiuScuro, ((GlobalVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 12.5, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 3.5))
+                            GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.verdeScuroPiuScuro, ((GlobalVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), (GlobalVar.gsy // 18 * 12.5) - 1), ((GlobalVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), (GlobalVar.gsy // 18 * 12.5) - 1), 2)
+                            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoSinistra, ((GlobalVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 15))
+                            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoDestra, ((GlobalVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 15))
+                            messaggio("Salvando...", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 13.7, 80, centrale=True)
+                            GlobalVar.aggiornaSchermo()
                             salvataggio(n, datiAttuali, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, oggettiRimastiASamAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco, False)
                             salvataggio(n, GlobalVar.vetDatiSalvataggioGameOver[0], GlobalVar.vetDatiSalvataggioGameOver[1], GlobalVar.vetDatiSalvataggioGameOver[2], GlobalVar.vetDatiSalvataggioGameOver[3], GlobalVar.vetDatiSalvataggioGameOver[4], GlobalVar.vetDatiSalvataggioGameOver[5], GlobalVar.vetDatiSalvataggioGameOver[6], GlobalVar.vetDatiSalvataggioGameOver[7], GlobalVar.vetDatiSalvataggioGameOver[8], GlobalVar.vetDatiSalvataggioGameOver[9], GlobalVar.vetDatiSalvataggioGameOver[10], True)
                             # ricarico i salvataggi
-                            ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
+                            ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
+                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                             xp = vxp
                             yp = vyp
                             conferma = False
                             primoFrame = True
                         elif cosa == 2:
+                            GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.rossoScuroPiuScuro, ((GlobalVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 12.5, GlobalVar.gsx // 32 * 9.3, GlobalVar.gsy // 18 * 3.5))
+                            GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.rossoScuroPiuScuro, ((GlobalVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), (GlobalVar.gsy // 18 * 12.5) - 1), ((GlobalVar.gsx // 32 * 11.3) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), (GlobalVar.gsy // 18 * 12.5) - 1), 2)
+                            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoSinistra, ((GlobalVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 15))
+                            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoDestra, ((GlobalVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 15))
+                            messaggio("Cancellando...", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 13.7, 80, centrale=True)
+                            GlobalVar.aggiornaSchermo()
                             leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
                             leggi.close()
                             leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
@@ -324,7 +347,8 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover-backup.txt" % n, "w")
                             leggi.close()
                             # ricarico i salvataggi
-                            ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
+                            ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
+                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                             xp = vxp
                             yp = vyp
                             conferma = False

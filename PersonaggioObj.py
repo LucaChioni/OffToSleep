@@ -560,15 +560,11 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Cavolo! Dovevo immaginarlo che partiva stanotte.")
+                dialogo.append("Dovevo immaginarlo che partiva stanotte... cosa devo fare adesso... ?")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Cosa devo fare adesso... ?")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append("Di certo non posso dirlo al babbo e la mamma: si arrabbierebbero troppo.")
+                dialogo.append("Di certo non posso dirlo al babbo: si arrabbierebbe troppo.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -1706,7 +1702,7 @@ class PersonaggioObj(object):
                 self.cambiaImg = True
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Credo che sia questa la legna tagliata Michael... di sicuro non basterà per la notte.")
+                dialogo.append(u"Credo che sia questa la legna tagliata da Michael... di sicuro non basterà per la notte.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

@@ -949,8 +949,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     while i < len(vettoreEsche):
         j = 0
         while j < len(caseviste):
-            if ((caseviste[j] == vettoreEsche[i + 2] - GlobalVar.gpx and caseviste[j + 1] == vettoreEsche[i + 3]) or (caseviste[j] == vettoreEsche[i + 2] + GlobalVar.gpx and caseviste[j + 1] == vettoreEsche[i + 3]) or (caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] - GlobalVar.gpy) or (caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3] + GlobalVar.gpy)) and caseviste[j + 2]:
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.esche, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
+            if caseviste[j] == vettoreEsche[i + 2] and caseviste[j + 1] == vettoreEsche[i + 3]:
+                if caseviste[j + 2]:
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.esche, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
                 break
             j += 3
         i += 4
@@ -960,8 +961,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     while i < len(vettoreDenaro):
         j = 0
         while j < len(caseviste):
-            if ((caseviste[j] == vettoreDenaro[i + 1] - GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] + GlobalVar.gpx and caseviste[j + 1] == vettoreDenaro[i + 2]) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] - GlobalVar.gpy) or (caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2] + GlobalVar.gpy)) and caseviste[j + 2]:
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
+            if caseviste[j] == vettoreDenaro[i + 1] and caseviste[j + 1] == vettoreDenaro[i + 2]:
+                if caseviste[j + 2]:
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
                 break
             j += 3
         i += 3
@@ -1373,26 +1375,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             break
                 if not inquadratoQualcosa:
                     i = 0
-                    while i < len(porte):
-                        if porte[i + 1] < xMouse < porte[i + 1] + GlobalVar.gpx and porte[i + 2] < yMouse < porte[i + 2] + GlobalVar.gpy:
-                            if (porte[i + 1] == x + GlobalVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalVar.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalVar.gpy):
-                                if GlobalVar.mouseBloccato:
-                                    GlobalVar.configuraCursore(False)
-                                inquadratoQualcosa = "porta"
-                            break
-                        i += 4
-                if not inquadratoQualcosa:
-                    i = 0
-                    while i < len(cofanetti):
-                        if cofanetti[i + 1] < xMouse < cofanetti[i + 1] + GlobalVar.gpx and cofanetti[i + 2] < yMouse < cofanetti[i + 2] + GlobalVar.gpy and not cofanetti[i + 3]:
-                            if ((cofanetti[i + 1] == x + GlobalVar.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x - GlobalVar.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVar.gpy) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVar.gpy)) and not cofanetti[i + 3]:
-                                if GlobalVar.mouseBloccato:
-                                    GlobalVar.configuraCursore(False)
-                                inquadratoQualcosa = "cofanetto"
-                            break
-                        i += 4
-                if not inquadratoQualcosa:
-                    i = 0
                     while i < len(vettoreEsche):
                         if vettoreEsche[i + 2] < xMouse < vettoreEsche[i + 2] + GlobalVar.gpx and vettoreEsche[i + 3] < yMouse < vettoreEsche[i + 3] + GlobalVar.gpy:
                             if nemicoInquadrato and type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
@@ -1427,6 +1409,26 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                 inquadratoQualcosa = "casellaNelRaggio"
                                 break
                             i += 3
+                if not inquadratoQualcosa:
+                    i = 0
+                    while i < len(porte):
+                        if porte[i + 1] < xMouse < porte[i + 1] + GlobalVar.gpx and porte[i + 2] < yMouse < porte[i + 2] + GlobalVar.gpy:
+                            if (porte[i + 1] == x + GlobalVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x - GlobalVar.gpx and porte[i + 2] == y) or (porte[i + 1] == x and porte[i + 2] == y + GlobalVar.gpy) or (porte[i + 1] == x and porte[i + 2] == y - GlobalVar.gpy):
+                                if GlobalVar.mouseBloccato:
+                                    GlobalVar.configuraCursore(False)
+                                inquadratoQualcosa = "porta"
+                            break
+                        i += 4
+                if not inquadratoQualcosa:
+                    i = 0
+                    while i < len(cofanetti):
+                        if cofanetti[i + 1] < xMouse < cofanetti[i + 1] + GlobalVar.gpx and cofanetti[i + 2] < yMouse < cofanetti[i + 2] + GlobalVar.gpy and not cofanetti[i + 3]:
+                            if ((cofanetti[i + 1] == x + GlobalVar.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x - GlobalVar.gpx and cofanetti[i + 2] == y) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y + GlobalVar.gpy) or (cofanetti[i + 1] == x and cofanetti[i + 2] == y - GlobalVar.gpy)) and not cofanetti[i + 3]:
+                                if GlobalVar.mouseBloccato:
+                                    GlobalVar.configuraCursore(False)
+                                inquadratoQualcosa = "cofanetto"
+                            break
+                        i += 4
         if not inquadratoQualcosa:
             if not GlobalVar.mouseBloccato:
                 GlobalVar.configuraCursore(True)
@@ -1722,7 +1724,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 # analizza Colco attacco = 1
                 elif attacco == 1 and (xp == rx and yp == ry) and not (rx == x and ry == y):
                     GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
-                    analizzaColco(copy.copy(schermoPrevisioneColco), casellaOscurata, x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], copy.deepcopy(listaNemici), difesa, ultimoObbiettivoColco[:], copy.deepcopy(obbiettivoCasualeColco), copy.deepcopy(listaPersonaggi), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp)
+                    analizzaColco(copy.copy(schermoPrevisioneColco), casellaOscurata, x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], copiaListaDiOggettiConImmagini(listaNemici, True), difesa, ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco), copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp)
                     analisiDiColcoEffettuata = True
                     GlobalVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
                 # apri/chiudi porta attacco = 1

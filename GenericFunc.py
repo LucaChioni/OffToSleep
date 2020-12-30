@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import copy
 from GestioneInput import *
 from SetOstacoliContenutoCofanetti import *
 
@@ -2554,12 +2555,13 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
             GlobalVar.aggiornaSchermo()
         elif tipoOscuramento == 2:
-            image.fill((0, 0, 0, 5))
+            image.fill((0, 0, 0, 8))
             image = image.convert_alpha(GlobalVar.schermo)
             i = 0
-            while i <= 35:
-                GlobalVar.disegnaImmagineSuSchermo(image, (0, 0))
-                GlobalVar.aggiornaSchermo()
+            while i <= 30:
+                if i % 2 == 0:
+                    GlobalVar.disegnaImmagineSuSchermo(image, (0, 0))
+                    GlobalVar.aggiornaSchermo()
                 pygame.event.pump()
                 GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
                 i += 1
@@ -2629,6 +2631,40 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 i += 1
         GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalVar.aggiornaSchermo()
+
+
+def copiaNemico(oggettoNemico):
+    copia = copy.deepcopy(oggettoNemico)
+    if oggettoNemico:
+        copia.caricaImg()
+        copia.girati(copia.direzione)
+
+    return copia
+
+
+def copiaPersonaggio(oggettoPersonaggio, avanzamentoStoria):
+    copia = copy.deepcopy(oggettoPersonaggio)
+    if copia.tipo != "Tutorial" and copia.tipo != "Nessuno":
+        if copia.tipo.startswith("Oggetto"):
+            copia.caricaImgOggetto()
+            copia.aggiornaImgOggetto(avanzamentoStoria, True)
+        else:
+            copia.caricaImgPersonaggio()
+            copia.girati(copia.direzione)
+
+    return copia
+
+
+def copiaListaDiOggettiConImmagini(listaOggetti, nemici, avanzamentoStoria=0):
+    copiaLista = []
+    if nemici:
+        for oggetto in listaOggetti:
+            copiaLista.append(copiaNemico(oggetto))
+    else:
+        for oggetto in listaOggetti:
+            copiaLista.append(copiaPersonaggio(oggetto, avanzamentoStoria))
+
+    return copiaLista
 
 
 '''# linea(dove,colore,inizio,fine,spessore)

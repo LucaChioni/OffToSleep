@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import copy
 from GenericFunc import *
 
 
@@ -1673,7 +1672,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 vetNemiciSoloConXeY.append(personaggio.y)
         pathToRallo = pathFinding(rx, ry, x, y, vetNemiciSoloConXeY, caseviste)
         # trovo i nemici/Rallo visti
-        listaNemiciTotali = copy.deepcopy(listaNemici)
+        listaNemiciTotali = copiaListaDiOggettiConImmagini(listaNemici, True)
         k = 0
         while k < len(caselleAttaccabiliColco):
             if caselleAttaccabiliColco[k + 2]:

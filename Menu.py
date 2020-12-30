@@ -26,8 +26,8 @@ def menu(caricaSalvataggio, gameover):
         ]
 
     # posizione porte e cofanetti nel vettore dati
-    tuttePorte = GlobalVar.initVetPorteGlobale
-    tuttiCofanetti = GlobalVar.initVetCofanettiGlobale
+    tuttePorte = GlobalVar.initVetPorteGlobale[:]
+    tuttiCofanetti = GlobalVar.initVetCofanettiGlobale[:]
 
     lunghezzadati = len(datiIniziali)
     lunghezzadatiPorte = len(tuttePorte)
@@ -55,7 +55,7 @@ def menu(caricaSalvataggio, gameover):
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     # carico subito tutti i dati salvati
-    ricaricaTuttiISalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
+    ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
 
     # video
     listaImgVideo = []
