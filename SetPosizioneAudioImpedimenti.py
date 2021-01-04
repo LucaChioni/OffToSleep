@@ -5,7 +5,7 @@ from PersonaggioObj import *
 
 def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio):
     # npers: 1=d, 2=a, 3=w, 4=s
-    if stanza == GlobalVar.dictStanze["sognoSara1"]:
+    if stanza == GlobalVar.dictStanze["sognoLucy1"]:
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
@@ -17,11 +17,11 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["sognoSara2"]:
+            if stanzaVecchia == GlobalVar.dictStanze["sognoLucy2"]:
                 npers = 3
                 x = GlobalVar.gsx // 32 * 15
                 y = GlobalVar.gsy // 18 * 15
-    if stanza == GlobalVar.dictStanze["sognoSara2"]:
+    if stanza == GlobalVar.dictStanze["sognoLucy2"]:
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
@@ -33,15 +33,15 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["sognoSara1"]:
+            if stanzaVecchia == GlobalVar.dictStanze["sognoLucy1"]:
                 npers = 4
                 x = GlobalVar.gsx // 32 * 7
                 y = GlobalVar.gsy // 18 * 2
-            if stanzaVecchia == GlobalVar.dictStanze["sognoSara3"]:
+            if stanzaVecchia == GlobalVar.dictStanze["sognoLucy3"]:
                 npers = 2
                 x = GlobalVar.gsx // 32 * 29
                 y = GlobalVar.gsy // 18 * 3
-    if stanza == GlobalVar.dictStanze["sognoSara3"]:
+    if stanza == GlobalVar.dictStanze["sognoLucy3"]:
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
@@ -53,15 +53,15 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["sognoSara2"]:
+            if stanzaVecchia == GlobalVar.dictStanze["sognoLucy2"]:
                 npers = 1
                 x = GlobalVar.gsx // 32 * 2
                 y = GlobalVar.gsy // 18 * 11
-            if stanzaVecchia == GlobalVar.dictStanze["sognoSara4"]:
+            if stanzaVecchia == GlobalVar.dictStanze["sognoLucy4"]:
                 npers = 4
                 x = GlobalVar.gsx // 32 * 14
                 y = GlobalVar.gsy // 18 * 2
-    if stanza == GlobalVar.dictStanze["sognoSara4"]:
+    if stanza == GlobalVar.dictStanze["sognoLucy4"]:
         if canzone != GlobalVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneSogno
@@ -73,11 +73,11 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["sognoSara3"]:
+            if stanzaVecchia == GlobalVar.dictStanze["sognoLucy3"]:
                 npers = 3
                 x = GlobalVar.gsx // 32 * 15
                 y = GlobalVar.gsy // 18 * 15
-    if stanza == GlobalVar.dictStanze["casaSamSara1"]:
+    if stanza == GlobalVar.dictStanze["casaSamLucy1"]:
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
@@ -89,11 +89,11 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["sognoSara4"]:
+            if stanzaVecchia == GlobalVar.dictStanze["sognoLucy4"]:
                 npers = 4
                 x = GlobalVar.gsx // 32 * 3
                 y = GlobalVar.gsy // 18 * 14
-            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara2"]:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamLucy2"]:
                 npers = 3
                 if x == GlobalVar.gsx // 32 * 16:
                     x = GlobalVar.gsx // 32 * 16
@@ -105,7 +105,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = 4
                 x = GlobalVar.gsx // 32 * 4
                 y = GlobalVar.gsy // 18 * 14
-    if stanza == GlobalVar.dictStanze["casaSamSara2"]:
+    if stanza == GlobalVar.dictStanze["casaSamLucy2"]:
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
@@ -117,7 +117,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara1"]:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamLucy1"]:
                 npers = 4
                 if x == GlobalVar.gsx // 32 * 16:
                     x = GlobalVar.gsx // 32 * 16
@@ -125,7 +125,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if x == GlobalVar.gsx // 32 * 17:
                     x = GlobalVar.gsx // 32 * 17
                     y = GlobalVar.gsy // 18 * 2
-            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara3"]:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamLucy3"]:
                 npers = 4
                 if x == GlobalVar.gsx // 32 * 3:
                     x = GlobalVar.gsx // 32 * 3
@@ -139,7 +139,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if x == GlobalVar.gsx // 32 * 28:
                     x = GlobalVar.gsx // 32 * 28
                     y = GlobalVar.gsy // 18 * 2
-            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara4"]:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamLucy4"]:
                 npers = 3
                 if x == GlobalVar.gsx // 32 * 14:
                     x = GlobalVar.gsx // 32 * 14
@@ -153,7 +153,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if x == GlobalVar.gsx // 32 * 17:
                     x = GlobalVar.gsx // 32 * 17
                     y = GlobalVar.gsy // 18 * 15
-    if stanza == GlobalVar.dictStanze["casaSamSara3"]:
+    if stanza == GlobalVar.dictStanze["casaSamLucy3"]:
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
@@ -165,7 +165,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara2"]:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamLucy2"]:
                 npers = 3
                 if x == GlobalVar.gsx // 32 * 3:
                     x = GlobalVar.gsx // 32 * 3
@@ -179,7 +179,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if x == GlobalVar.gsx // 32 * 28:
                     x = GlobalVar.gsx // 32 * 28
                     y = GlobalVar.gsy // 18 * 15
-    if stanza == GlobalVar.dictStanze["casaSamSara4"]:
+    if stanza == GlobalVar.dictStanze["casaSamLucy4"]:
         if canzone != GlobalVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalVar.canzoneCasa
@@ -191,7 +191,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteCasa
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara2"]:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamLucy2"]:
                 npers = 4
                 if x == GlobalVar.gsx // 32 * 13:
                     x = GlobalVar.gsx // 32 * 14
@@ -231,7 +231,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
         # posizione personaggio e robot al cambio stanza
         if not inizio:
-            if stanzaVecchia == GlobalVar.dictStanze["casaSamSara4"]:
+            if stanzaVecchia == GlobalVar.dictStanze["casaSamLucy4"]:
                 npers = 4
                 if x == GlobalVar.gsx // 32 * 15:
                     x = GlobalVar.gsx // 32 * 15
@@ -402,11 +402,11 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
 
 def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione):
     nonProcedere = False
-    if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["tutorialUtilizzoOggetti"] and stanzaVecchia == GlobalVar.dictStanze["sognoSara1"] and stanzaDestinazione == GlobalVar.dictStanze["sognoSara2"]:
+    if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["tutorialUtilizzoOggetti"] and stanzaVecchia == GlobalVar.dictStanze["sognoLucy1"] and stanzaDestinazione == GlobalVar.dictStanze["sognoLucy2"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
-    elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["dialogoCasaSamSara2"] and stanzaVecchia == GlobalVar.dictStanze["casaSamSara1"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamSara2"]:
+    elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["dialogoCasaSamLucy2"] and stanzaVecchia == GlobalVar.dictStanze["casaSamLucy1"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamLucy2"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
@@ -422,7 +422,7 @@ def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione)
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
-    elif GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["armaturaNonnoCompletata"] and stanzaVecchia == GlobalVar.dictStanze["casaSamSara1"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamSara2"]:
+    elif GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["armaturaNonnoCompletata"] and stanzaVecchia == GlobalVar.dictStanze["casaSamLucy1"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamLucy2"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
@@ -430,7 +430,7 @@ def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione)
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
-    elif avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanzaVecchia == GlobalVar.dictStanze["casaSamSara4"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamSara2"]:
+    elif avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanzaVecchia == GlobalVar.dictStanze["casaSamLucy4"] and stanzaDestinazione == GlobalVar.dictStanze["casaSamLucy2"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanzaVecchia, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         nonProcedere = True
@@ -440,11 +440,11 @@ def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione)
 
 def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
     procedi = True
-    if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and xPorta == GlobalVar.gpx * 25 and yPorta == GlobalVar.gpy * 3:
+    if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamLucy1"] and xPorta == GlobalVar.gpx * 25 and yPorta == GlobalVar.gpy * 3:
         procedi = False
-    if GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["tutorialMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and xPorta == GlobalVar.gpx * 6 and yPorta == GlobalVar.gpy * 9:
+    if GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["tutorialMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamLucy1"] and xPorta == GlobalVar.gpx * 6 and yPorta == GlobalVar.gpy * 9:
         procedi = False
-    if GlobalVar.dictAvanzamentoStoria["monologoIndicazioniArmaturaNonno"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"] and stanza == GlobalVar.dictStanze["casaSamSara1"] and xPorta == GlobalVar.gpx * 26 and yPorta == GlobalVar.gpy * 11:
+    if GlobalVar.dictAvanzamentoStoria["monologoIndicazioniArmaturaNonno"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"] and stanza == GlobalVar.dictStanze["casaSamLucy1"] and xPorta == GlobalVar.gpx * 26 and yPorta == GlobalVar.gpy * 11:
         procedi = False
 
     return procedi
@@ -452,7 +452,7 @@ def possibileAprirePorta(stanza, xPorta, yPorta, avanzamentoStoria):
 
 def settaNomeStanza(avanzamentoStoria, stanza):
     nomeStanza = "Stanza"
-    if stanza == GlobalVar.dictStanze["casaSamSara1"]:
+    if stanza == GlobalVar.dictStanze["casaSamLucy1"]:
         if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             nomeStanza = "StanzaA"
         else:

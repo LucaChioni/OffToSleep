@@ -663,7 +663,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
     messaggio("Movimento verso teleImpo", GlobalVar.grigiochi, xPartenzaPannello + (GlobalVar.gsx // 32 * 0.8), GlobalVar.gsy // 18 * 2.6, 40)
     if vettorePrevisione[0][1] == "":
         GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatore, (xPartenzaPannello, GlobalVar.gsy // 18 * 2.5))
-        messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 3.2, 35, daDestra=True)
+        messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 3.2, 35, daDestra=True)
         azionePrevistaTrovata = True
     else:
         messaggio(vettorePrevisione[0][1], GlobalVar.rosso, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 3.2, 35, daDestra=True)
@@ -672,7 +672,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
     for i in range(1, 11):
         if not azionePrevistaTrovata and vettorePrevisione[i][1] == "":
             GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatore, (xPartenzaPannello, GlobalVar.gsy // 18 * c))
-            messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
+            messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
             azionePrevistaTrovata = True
         elif not azionePrevistaTrovata and vettorePrevisione[i][1] != "":
             messaggio(vettorePrevisione[i][1], GlobalVar.rosso, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
@@ -689,13 +689,13 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         if dati[i] == 0:
             messaggio("---", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            messaggio("Sara con pv < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Lucy con pv < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            messaggio("Sara con pv < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Lucy con pv < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            messaggio("Sara con pv < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Lucy con pv < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 4:
-            messaggio("Sara con veleno", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Lucy con veleno", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 5:
             messaggio("Impo surriscaldato", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 6:
@@ -705,7 +705,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         if dati[i] == 8:
             messaggio("Impo con pe < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 9:
-            messaggio("Sempre a Sara", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Sempre a Lucy", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 10:
             messaggio("Sempre a Impo", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 11:
@@ -780,14 +780,14 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
     messaggio("Movimento verso obbiettivo salvato in memoria", GlobalVar.grigiochi, xPartenzaPannello + (GlobalVar.gsx // 32 * 0.8), GlobalVar.gsy // 18 * 14.9, 40)
     if not azionePrevistaTrovata and vettorePrevisione[11][1] == "":
         GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatore, (xPartenzaPannello, GlobalVar.gsy // 18 * 14.8))
-        messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 15.5, 35, daDestra=True)
+        messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 15.5, 35, daDestra=True)
         azionePrevistaTrovata = True
     elif not azionePrevistaTrovata and vettorePrevisione[11][1] != "":
         messaggio(vettorePrevisione[11][1], GlobalVar.rosso, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 15.5, 35, daDestra=True)
     messaggio("Nessuna azione da eseguire", GlobalVar.grigiochi, xPartenzaPannello + (GlobalVar.gsx // 32 * 0.8), GlobalVar.gsy // 18 * 16, 40)
     if not azionePrevistaTrovata:
         GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatore, (xPartenzaPannello, GlobalVar.gsy // 18 * 15.9))
-        messaggio("Istruzione eseguita salvo interferenza di Sara", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 16.6, 35, daDestra=True)
+        messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalVar.verde, xPartenzaPannello + (GlobalVar.gsx // 32 * 12.5), GlobalVar.gsy // 18 * 16.6, 35, daDestra=True)
 
     GlobalVar.aggiornaSchermo()
 

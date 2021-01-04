@@ -143,8 +143,8 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
     aggiornaSchermo = False
     n = -1
 
-    persoSara = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
-    persobSara = GlobalVar.loadImage('Immagini/Personaggi/Sara/Personaggio1b.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
+    persoLucy = GlobalVar.loadImage('Immagini/Personaggi/Lucy/Personaggio1.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
+    persobLucy = GlobalVar.loadImage('Immagini/Personaggi/Lucy/Personaggio1b.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
     persoFraMaggiore = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
     persobFraMaggiore = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
 
@@ -464,8 +464,8 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                                 persalva = persoFraMaggiore
                                 persSalvaBraccia = persobFraMaggiore
                             else:
-                                persalva = persoSara
-                                persSalvaBraccia = persobSara
+                                persalva = persoLucy
+                                persSalvaBraccia = persobLucy
 
                             spasalva = GlobalVar.vetImgSpadePixellate[dati[6]]
                             arcsalva = GlobalVar.vetImgArchiPixellate[dati[128]]

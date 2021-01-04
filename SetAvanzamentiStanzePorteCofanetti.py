@@ -8,7 +8,7 @@ def definisciAvanzamentiStoria():
     i = 0
     dictAvanzamentoStoria["inizio"] = i
     i += 1
-    dictAvanzamentoStoria["dialogoSognoSara1"] = i
+    dictAvanzamentoStoria["dialogoSognoLucy1"] = i
     i += 1
     dictAvanzamentoStoria["tutorialMovimento"] = i
     i += 1
@@ -20,12 +20,12 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["tutorialOggettiBattaglia"] = i
     i += 1
-    dictAvanzamentoStoria["dialogoSognoSara2"] = i
+    dictAvanzamentoStoria["dialogoSognoLucy2"] = i
     i += 1
-    dictAvanzamentoStoria["dialogoSognoSara3"] = i
+    dictAvanzamentoStoria["dialogoSognoLucy3"] = i
     dictAvanzamentoStoria["primoCambioPersonaggio"] = i
     i += 1
-    dictAvanzamentoStoria["dialogoCasaSamSara1"] = i
+    dictAvanzamentoStoria["dialogoCasaSamLucy1"] = i
     i += 1
     dictAvanzamentoStoria["tutorialChiusuraPorte"] = i
     i += 1
@@ -33,7 +33,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["ottenutoBicchiereAcqua"] = i
     i += 1
-    dictAvanzamentoStoria["dialogoCasaSamSara2"] = i
+    dictAvanzamentoStoria["dialogoCasaSamLucy2"] = i
     i += 1
     dictAvanzamentoStoria["ingressoForestaCadetta"] = i
     i += 1
@@ -65,7 +65,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["secondoCambioPersonaggio"] = i
     i += 1
-    dictAvanzamentoStoria["monologoRisveglioSara"] = i
+    dictAvanzamentoStoria["monologoRisveglioLucy"] = i
     i += 1
     dictAvanzamentoStoria["trovatoMappaDiario"] = i
     dictAvanzamentoStoria["mappaCasa"] = i
@@ -88,10 +88,10 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["armaturaNonnoCompletata"] = i
     i += 1
-    dictAvanzamentoStoria["ingressoForestaCadettaSara"] = i
+    dictAvanzamentoStoria["ingressoForestaCadettaLucy"] = i
     dictAvanzamentoStoria["mappaForestaCadetta"] = i
     i += 1
-    dictAvanzamentoStoria["accampamentoForestaSara"] = i
+    dictAvanzamentoStoria["accampamentoForestaLucy"] = i
     i += 1
     dictAvanzamentoStoria["accampamentoForestaAnalizzato"] = i
     i += 1
@@ -174,25 +174,25 @@ def definisciStanze():
 
     # la key del dictionary descrive la stanza
     i = 1
-    dictStanze["sognoSara1"] = i
+    dictStanze["sognoLucy1"] = i
     vetStanzePacifiche.append(i)
     i += 1
-    dictStanze["sognoSara2"] = i
+    dictStanze["sognoLucy2"] = i
     i += 1
-    dictStanze["sognoSara3"] = i
+    dictStanze["sognoLucy3"] = i
     i += 1
-    dictStanze["sognoSara4"] = i
+    dictStanze["sognoLucy4"] = i
     i += 1
-    dictStanze["casaSamSara1"] = i
+    dictStanze["casaSamLucy1"] = i
     vetStanzePacifiche.append(i)
     i += 1
-    dictStanze["casaSamSara2"] = i
+    dictStanze["casaSamLucy2"] = i
     vetStanzePacifiche.append(i)
     i += 1
-    dictStanze["casaSamSara3"] = i
+    dictStanze["casaSamLucy3"] = i
     vetStanzePacifiche.append(i)
     i += 1
-    dictStanze["casaSamSara4"] = i
+    dictStanze["casaSamLucy4"] = i
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["forestaCadetta1"] = i
@@ -219,10 +219,10 @@ def definisciStanze():
 def definisciPorte(dictStanze):
     vetPorte = []
 
-    stanza = dictStanze["sognoSara4"]
+    stanza = dictStanze["sognoLucy4"]
     vetPorte += [stanza, 15, 9, False]
 
-    stanza = dictStanze["casaSamSara1"]
+    stanza = dictStanze["casaSamLucy1"]
     vetPorte += [stanza, 6, 9, False]
     vetPorte += [stanza, 7, 6, False]
     vetPorte += [stanza, 25, 3, False]
@@ -278,23 +278,23 @@ def definisciPorte(dictStanze):
 def definisciCofanetti(dictStanze):
     vetCofanetti = []
 
-    stanza = dictStanze["sognoSara1"]
+    stanza = dictStanze["sognoLucy1"]
     vetCofanetti += [stanza, 13, 10, False]
 
-    stanza = dictStanze["sognoSara2"]
+    stanza = dictStanze["sognoLucy2"]
     vetCofanetti += [stanza, 13, 5, False]
     vetCofanetti += [stanza, 28, 7, False]
 
-    stanza = dictStanze["sognoSara3"]
+    stanza = dictStanze["sognoLucy3"]
     vetCofanetti += [stanza, 3, 13, False]
 
-    stanza = dictStanze["casaSamSara1"]
+    stanza = dictStanze["casaSamLucy1"]
     vetCofanetti += [stanza, 23, 13, False]
     vetCofanetti += [stanza, 24, 15, False]
     vetCofanetti += [stanza, 27, 15, False]
     vetCofanetti += [stanza, 29, 14, False]
 
-    stanza = dictStanze["casaSamSara3"]
+    stanza = dictStanze["casaSamLucy3"]
     vetCofanetti += [stanza, 21, 10, False]
 
     stanza = dictStanze["forestaCadetta1"]

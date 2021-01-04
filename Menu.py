@@ -529,7 +529,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
     else:
-        perssta = GlobalVar.saraGrafMenu
+        perssta = GlobalVar.lucyGrafMenu
     robosta = GlobalVar.robograf1b
     puntatore = GlobalVar.puntatore
     puntatoreVecchio = GlobalVar.puntatorevecchio
@@ -2234,7 +2234,7 @@ def menuMercante(dati):
                         messaggio("Usate per attaccare i nemici a distanza", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if imgOggetti[0] != sconosciutoOggetto and oggetton == 1:
                         messaggio("Pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Recupera 100 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        messaggio("Recupera 100 pv di Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 1:
                         messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[1] != sconosciutoOggetto and oggetton == 2:
@@ -2244,12 +2244,12 @@ def menuMercante(dati):
                         messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[2] != sconosciutoOggetto and oggetton == 3:
                         messaggio("Medicina:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Cura avvelenamento a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        messaggio("Cura avvelenamento a Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 3:
                         messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[3] != sconosciutoOggetto and oggetton == 4:
                         messaggio("Super pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Recupera 300 pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        messaggio("Recupera 300 pv di Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 4:
                         messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[4] != sconosciutoOggetto and oggetton == 5:

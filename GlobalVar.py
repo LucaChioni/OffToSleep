@@ -349,7 +349,7 @@ global impostaControllerR1
 global impostaControllerStart
 global impostaControllerCroceDirezionale
 global persGrafMenu
-global saraGrafMenu
+global lucyGrafMenu
 global fraMaggioreGrafMenu
 global robograf0
 global robograf1
@@ -359,9 +359,9 @@ global robograf2b
 global robograf3
 global robograf4
 global imgDialogoFraMaggiore
-global imgDialogoSara
+global imgDialogoLucy
 global imgFraMaggioreMenuOggetti
-global imgSaraMenuOggetti
+global imgLucyMenuOggetti
 global indvita
 global fineindvita
 global vitanemico00
@@ -596,7 +596,7 @@ def loadImgs():
     global impostaControllerStart
     global impostaControllerCroceDirezionale
     global persGrafMenu
-    global saraGrafMenu
+    global lucyGrafMenu
     global fraMaggioreGrafMenu
     global robograf0
     global robograf1
@@ -606,9 +606,9 @@ def loadImgs():
     global robograf3
     global robograf4
     global imgDialogoFraMaggiore
-    global imgDialogoSara
+    global imgDialogoLucy
     global imgFraMaggioreMenuOggetti
-    global imgSaraMenuOggetti
+    global imgLucyMenuOggetti
     global indvita
     global fineindvita
     global vitanemico00
@@ -690,34 +690,34 @@ def loadImgs():
     puntatoreImpostazioniSinistraBloccato = loadImage("Immagini/Puntatori/ScorriImpostazioniSinistraBloccato.png", gpx, gpy, True)
 
     # immagini personaggio
-    persw = loadImage('Immagini/Personaggi/Sara/Personaggio4.png', gpx, gpy, True)
-    perswb = loadImage('Immagini/Personaggi/Sara/Personaggio4b.png', gpx, gpy, True)
-    persa = loadImage('Immagini/Personaggi/Sara/Personaggio3.png', gpx, gpy, True)
-    persab = loadImage('Immagini/Personaggi/Sara/Personaggio3b.png', gpx, gpy, True)
-    perso = loadImage('Immagini/Personaggi/Sara/Personaggio1.png', gpx * 5, gpy * 5, True)
-    persob = loadImage('Immagini/Personaggi/Sara/Personaggio1b.png', gpx * 5, gpy * 5, True)
-    perss = loadImage('Immagini/Personaggi/Sara/Personaggio1.png', gpx, gpy, True)
-    perssb = loadImage('Immagini/Personaggi/Sara/Personaggio1b.png', gpx, gpy, True)
-    persd = loadImage('Immagini/Personaggi/Sara/Personaggio2.png', gpx, gpy, True)
-    persdb = loadImage('Immagini/Personaggi/Sara/Personaggio2b.png', gpx, gpy, True)
-    perssm = loadImage('Immagini/Personaggi/Sara/Personaggio1mov.png', gpx, gpy, True)
-    perssmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio1movb1.png', gpx, gpy, True)
-    perssmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio1movb2.png', gpx, gpy, True)
-    persdm = loadImage('Immagini/Personaggi/Sara/Personaggio2mov.png', gpx, gpy, True)
-    persdmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio2movb1.png', gpx, gpy, True)
-    persdmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio2movb2.png', gpx, gpy, True)
-    persam = loadImage('Immagini/Personaggi/Sara/Personaggio3mov.png', gpx, gpy, True)
-    persamb1 = loadImage('Immagini/Personaggi/Sara/Personaggio3movb1.png', gpx, gpy, True)
-    persamb2 = loadImage('Immagini/Personaggi/Sara/Personaggio3movb2.png', gpx, gpy, True)
-    perswm = loadImage('Immagini/Personaggi/Sara/Personaggio4mov.png', gpx, gpy, True)
-    perswmb1 = loadImage('Immagini/Personaggi/Sara/Personaggio4movb1.png', gpx, gpy, True)
-    perswmb2 = loadImage('Immagini/Personaggi/Sara/Personaggio4movb2.png', gpx, gpy, True)
-    perswmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio4movbAttacco.png', gpx, gpy, True)
-    persambAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio3movbAttacco.png', gpx, gpy, True)
-    perssmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio1movbAttacco.png', gpx, gpy, True)
-    persdmbAttacco = loadImage('Immagini/Personaggi/Sara/Personaggio2movbAttacco.png', gpx, gpy, True)
-    persmbDifesa = loadImage('Immagini/Personaggi/Sara/PersonaggiomovbDifesa.png', gpx, gpy, True)
-    persAvvele = loadImage('Immagini/Personaggi/Sara/PersonaggioAvvelenato.png', gpx, gpy, True)
+    persw = loadImage('Immagini/Personaggi/Lucy/Personaggio4.png', gpx, gpy, True)
+    perswb = loadImage('Immagini/Personaggi/Lucy/Personaggio4b.png', gpx, gpy, True)
+    persa = loadImage('Immagini/Personaggi/Lucy/Personaggio3.png', gpx, gpy, True)
+    persab = loadImage('Immagini/Personaggi/Lucy/Personaggio3b.png', gpx, gpy, True)
+    perso = loadImage('Immagini/Personaggi/Lucy/Personaggio1.png', gpx * 5, gpy * 5, True)
+    persob = loadImage('Immagini/Personaggi/Lucy/Personaggio1b.png', gpx * 5, gpy * 5, True)
+    perss = loadImage('Immagini/Personaggi/Lucy/Personaggio1.png', gpx, gpy, True)
+    perssb = loadImage('Immagini/Personaggi/Lucy/Personaggio1b.png', gpx, gpy, True)
+    persd = loadImage('Immagini/Personaggi/Lucy/Personaggio2.png', gpx, gpy, True)
+    persdb = loadImage('Immagini/Personaggi/Lucy/Personaggio2b.png', gpx, gpy, True)
+    perssm = loadImage('Immagini/Personaggi/Lucy/Personaggio1mov.png', gpx, gpy, True)
+    perssmb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio1movb1.png', gpx, gpy, True)
+    perssmb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio1movb2.png', gpx, gpy, True)
+    persdm = loadImage('Immagini/Personaggi/Lucy/Personaggio2mov.png', gpx, gpy, True)
+    persdmb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio2movb1.png', gpx, gpy, True)
+    persdmb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio2movb2.png', gpx, gpy, True)
+    persam = loadImage('Immagini/Personaggi/Lucy/Personaggio3mov.png', gpx, gpy, True)
+    persamb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio3movb1.png', gpx, gpy, True)
+    persamb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio3movb2.png', gpx, gpy, True)
+    perswm = loadImage('Immagini/Personaggi/Lucy/Personaggio4mov.png', gpx, gpy, True)
+    perswmb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio4movb1.png', gpx, gpy, True)
+    perswmb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio4movb2.png', gpx, gpy, True)
+    perswmbAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio4movbAttacco.png', gpx, gpy, True)
+    persambAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio3movbAttacco.png', gpx, gpy, True)
+    perssmbAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio1movbAttacco.png', gpx, gpy, True)
+    persdmbAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio2movbAttacco.png', gpx, gpy, True)
+    persmbDifesa = loadImage('Immagini/Personaggi/Lucy/PersonaggiomovbDifesa.png', gpx, gpy, True)
+    persAvvele = loadImage('Immagini/Personaggi/Lucy/PersonaggioAvvelenato.png', gpx, gpy, True)
 
     # immagini robot
     robow = loadImage('Immagini/Personaggi/Colco/Robot4.png', gpx, gpy, True)
@@ -786,10 +786,10 @@ def loadImgs():
     esche = loadImage("Immagini/Oggetti/Oggetto8Ico.png", gpx, gpy, True)
     sacchettoDenaroStart = loadImage('Immagini/Oggetti/SacchettoDenaroSinistra.png', gpx * 4, gpy * 4, False)
     sacchettoDenaroMercante = loadImage('Immagini/Oggetti/SacchettoDenaroDestra.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart0 = loadImage('Immagini/EquipSara/Faretre/Faretra0Menu.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart1 = loadImage('Immagini/EquipSara/Faretre/Faretra1Menu.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart2 = loadImage('Immagini/EquipSara/Faretre/Faretra2Menu.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart3 = loadImage('Immagini/EquipSara/Faretre/Faretra3Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart0 = loadImage('Immagini/EquipLucy/Faretre/Faretra0Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart1 = loadImage('Immagini/EquipLucy/Faretre/Faretra1Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart2 = loadImage('Immagini/EquipLucy/Faretre/Faretra2Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart3 = loadImage('Immagini/EquipLucy/Faretre/Faretra3Menu.png', gpx * 4, gpy * 4, False)
     sacchettoDenaro = loadImage('Immagini/Oggetti/SacchettoDenaroIco.png', gpx, gpy, True)
     imgFrecciaLanciata = loadImage('Immagini/Oggetti/Freccia.png', gpx, gpy, True)
 
@@ -828,12 +828,12 @@ def loadImgs():
     vetImgCollaneMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadeMenu.append(loadImage("Immagini/EquipSara/Spade/Spada%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgArchiMenu.append(loadImage("Immagini/EquipSara/Archi/Arco%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgArmatureMenu.append(loadImage("Immagini/EquipSara/Armature/Armatura%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgScudiMenu.append(loadImage("Immagini/EquipSara/Scudi/Scudo%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgGuantiMenu.append(loadImage("Immagini/EquipSara/Guanti/Guanti%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgCollaneMenu.append(loadImage("Immagini/EquipSara/Collane/Collana%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgSpadeMenu.append(loadImage("Immagini/EquipLucy/Spade/Spada%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgArchiMenu.append(loadImage("Immagini/EquipLucy/Archi/Arco%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgArmatureMenu.append(loadImage("Immagini/EquipLucy/Armature/Armatura%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgScudiMenu.append(loadImage("Immagini/EquipLucy/Scudi/Scudo%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgGuantiMenu.append(loadImage("Immagini/EquipLucy/Guanti/Guanti%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgCollaneMenu.append(loadImage("Immagini/EquipLucy/Collane/Collana%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
         contatoreGlobale += 1
     imgGambitSconosciuta = loadImage('Immagini/GrafGambit/Sconosciuto.png', gpx * 12, gpy * 9, False)
     vetImgCondizioniMenu = []
@@ -874,12 +874,12 @@ def loadImgs():
     vetImgCollanePixellate = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadePixellate.append(loadImage("Immagini/EquipSara/Spade/Spada%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgArchiPixellate.append(loadImage("Immagini/EquipSara/Archi/Arco%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgArmaturePixellate.append(loadImage("Immagini/EquipSara/Armature/Armatura%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgScudiPixellate.append(loadImage("Immagini/EquipSara/Scudi/Scudo%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgGuantiPixellate.append(loadImage("Immagini/EquipSara/Guanti/Guanti%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgCollanePixellate.append(loadImage("Immagini/EquipSara/Collane/Collana%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgSpadePixellate.append(loadImage("Immagini/EquipLucy/Spade/Spada%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgArchiPixellate.append(loadImage("Immagini/EquipLucy/Archi/Arco%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgArmaturePixellate.append(loadImage("Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgScudiPixellate.append(loadImage("Immagini/EquipLucy/Scudi/Scudo%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgGuantiPixellate.append(loadImage("Immagini/EquipLucy/Guanti/Guanti%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgCollanePixellate.append(loadImage("Immagini/EquipLucy/Collane/Collana%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
         contatoreGlobale += 1
 
     # img animazioni oggetti
@@ -955,7 +955,7 @@ def loadImgs():
 
     # img grafiche / dialoghi
     persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucaGrafMenu.png', gpx * 18, gpy * 18, False)
-    saraGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/SaraGrafMenu.png', gpx * 10, gpy * 10, False)
+    lucyGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucyGrafMenu.png', gpx * 10, gpy * 10, False)
     fraMaggioreGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', gpx * 10, gpy * 10, False)
     robograf0 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', gpx * 18, gpy * 18, False)
     robograf1 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', gpx * 18, gpy * 18, False)
@@ -965,9 +965,9 @@ def loadImgs():
     robograf3 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf3.png', gpx * 18, gpy * 18, False)
     robograf4 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', gpx * 18, gpy * 18, False)
     imgDialogoFraMaggiore = loadImage('Immagini/Dialoghi/FratelloMaggioreDialogo.png', gpx * 16, gpy * 12, False)
-    imgDialogoSara = loadImage('Immagini/Dialoghi/SaraDialogo.png', gpx * 16, gpy * 12, False)
+    imgDialogoLucy = loadImage('Immagini/Dialoghi/LucyDialogo.png', gpx * 16, gpy * 12, False)
     imgFraMaggioreMenuOggetti = loadImage('Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', gpx * 3, gpy * 3, True)
-    imgSaraMenuOggetti = loadImage('Immagini/DecorazioniMenu/SaraMenu.png', gpx * 3, gpy * 3, True)
+    imgLucyMenuOggetti = loadImage('Immagini/DecorazioniMenu/LucyMenu.png', gpx * 3, gpy * 3, True)
 
     # indicatori vita
     indvita = loadImage('Immagini/Barrevita/Indvita.png', 0, 0, True)
@@ -987,7 +987,7 @@ def loadImgs():
     vitarobo = loadImage('Immagini/Barrevita/Vitarobo.png', 0, 0, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
-    sfondoOggettoMenu = loadImage("Immagini/EquipSara/SfondoOggetto.png", gpx * 2, gpy * 2, False)
+    sfondoOggettoMenu = loadImage("Immagini/EquipLucy/SfondoOggetto.png", gpx * 2, gpy * 2, False)
     sconosciutoEquipMenu = loadImage("Immagini/Oggetti/SconosciutoEquip.png", gpx * 2, gpy * 2, False)
     sconosciutoOggettoMenu1 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 4, gpy * 4, False)
     sconosciutoOggettoMenu2 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 8, gpy * 8, False)

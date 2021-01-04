@@ -2078,8 +2078,8 @@ def dialoga(avanzamentoStoria, personaggio):
         imgPersDialogo = GlobalVar.imgDialogoFraMaggiore
         nomePersonaggio = "Sam"
     else:
-        imgPersDialogo = GlobalVar.imgDialogoSara
-        nomePersonaggio = "Sara"
+        imgPersDialogo = GlobalVar.imgDialogoLucy
+        nomePersonaggio = "Lucy"
 
     if personaggio.nome != "Tutorial":
         GlobalVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 3.5))

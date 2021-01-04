@@ -1363,19 +1363,19 @@ def sceglicondiz(dati, condizione):
                 messaggio("Scegli condizione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
                 messaggio("Cancella settaggio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4.7, 45)
                 if dati[81] > 0:
-                    messaggio("Sara con pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 40)
+                    messaggio("Lucy con pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 40)
                 else:
                     messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.2, 40)
                 if dati[82] > 0:
-                    messaggio("Sara con pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.2, 40)
+                    messaggio("Lucy con pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.2, 40)
                 else:
                     messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7.2, 40)
                 if dati[83] > 0:
-                    messaggio("Sara con pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.2, 40)
+                    messaggio("Lucy con pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.2, 40)
                 else:
                     messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8.2, 40)
                 if dati[84] > 0:
-                    messaggio("Sara con veleno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.2, 40)
+                    messaggio("Lucy con veleno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.2, 40)
                 else:
                     messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9.2, 40)
                 if dati[85] > 0:
@@ -1395,7 +1395,7 @@ def sceglicondiz(dati, condizione):
                 else:
                     messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13.2, 40)
                 if dati[89] > 0:
-                    messaggio("Sempre a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.2, 40)
+                    messaggio("Sempre a Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.2, 40)
                 else:
                     messaggio("???", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14.2, 40)
                 if dati[90] > 0:
@@ -1467,32 +1467,32 @@ def sceglicondiz(dati, condizione):
             if voceMarcata == 1:
                 if dati[81] > 0:
                     GlobalVar.disegnaImmagineSuSchermo(scecond[1], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Sara con pv < 80%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Sara se la vede e ha pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Lucy con pv < 80%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Lucy se la vede e ha pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 2:
                 if dati[82] > 0:
                     GlobalVar.disegnaImmagineSuSchermo(scecond[2], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Sara con pv < 50%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Sara se la vede e ha pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Lucy con pv < 50%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Lucy se la vede e ha pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 3:
                 if dati[83] > 0:
                     GlobalVar.disegnaImmagineSuSchermo(scecond[3], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Sara con pv < 30%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio("Esegue l'azione su Sara se la vede e ha pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Lucy con pv < 30%:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio("Esegue l'azione su Lucy se la vede e ha pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
             if voceMarcata == 4:
                 if dati[84] > 0:
                     GlobalVar.disegnaImmagineSuSchermo(scecond[4], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Sara con veleno:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Sara se la vede ed è avvelenata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Lucy con veleno:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Lucy se la vede ed è avvelenata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -1531,8 +1531,8 @@ def sceglicondiz(dati, condizione):
             if voceMarcata == 9:
                 if dati[89] > 0:
                     GlobalVar.disegnaImmagineSuSchermo(scecond[9], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
-                    messaggio("Sempre a Sara:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
-                    messaggio(u"Esegue l'azione su Sara in continuazione quando la vede (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Sempre a Lucy:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
+                    messaggio(u"Esegue l'azione su Lucy in continuazione quando la vede (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -2069,7 +2069,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.disegnaImmagineSuSchermo(scetecn[2], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Cura:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[1]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Recupera un po' di pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Recupera un po' di pv di Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -2078,7 +2078,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.disegnaImmagineSuSchermo(scetecn[3], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Antidoto:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[2]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Cura avvelenamento a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Cura avvelenamento a Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -2123,7 +2123,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.disegnaImmagineSuSchermo(scetecn[8], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Cura +:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[7]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Recupera molti pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Recupera molti pv di Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -2159,7 +2159,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.disegnaImmagineSuSchermo(scetecn[12], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Carica attacco:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[11]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Incrementa l'attacco di Sara per 10 turni (non ha effetto sui nemici)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Incrementa l'attacco di Lucy per 10 turni (non ha effetto sui nemici)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -2168,7 +2168,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.disegnaImmagineSuSchermo(scetecn[13], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Carica difesa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[12]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio("Incrementa la difesa di Sara per 10 turni (non ha effetto sui nemici)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio("Incrementa la difesa di Lucy per 10 turni (non ha effetto sui nemici)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -2195,7 +2195,7 @@ def sceglitecn(dati, tecnica):
                     GlobalVar.disegnaImmagineSuSchermo(scetecn[16], (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Cura ++:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
                     messaggio("Costo Pe: " + str(GlobalVar.costoTecniche[15]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 27.5, GlobalVar.gsy // 18 * 13.8, 45)
-                    messaggio(u"Recupera un enorme quantità dei pv di Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    messaggio(u"Recupera un enorme quantità dei pv di Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 4))
                     messaggio("Sconosciuta", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 13.5, 60)
@@ -3074,13 +3074,13 @@ def equiprobo(dati):
                     if dati[i] == 0:
                         messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 1:
-                        messaggio("Sara con pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
+                        messaggio("Lucy con pv < 80%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 2:
-                        messaggio("Sara con pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
+                        messaggio("Lucy con pv < 50%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 3:
-                        messaggio("Sara con pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
+                        messaggio("Lucy con pv < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 4:
-                        messaggio("Sara con veleno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
+                        messaggio("Lucy con veleno", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 5:
                         messaggio("Impo surriscaldato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 6:
@@ -3090,7 +3090,7 @@ def equiprobo(dati):
                     if dati[i] == 8:
                         messaggio("Impo con pe < 30%", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 9:
-                        messaggio("Sempre a Sara", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
+                        messaggio("Sempre a Lucy", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 10:
                         messaggio("Sempre a Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * posXCondizioni, GlobalVar.gsy // 18 * c, 40)
                     if dati[i] == 11:
@@ -3322,7 +3322,7 @@ def oggetti(dati, colcoInCasellaVista):
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.imgFraMaggioreMenuOggetti
     else:
-        perssta = GlobalVar.imgSaraMenuOggetti
+        perssta = GlobalVar.imgLucyMenuOggetti
     xp = GlobalVar.gsx // 32 * 1
     yp = GlobalVar.gsy // 18 * 6.2
     xpv = xp
