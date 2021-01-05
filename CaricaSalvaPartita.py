@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
+def salvataggio(n, dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVar.gpx
     dati[3] = dati[3] // GlobalVar.gpy
@@ -109,7 +109,7 @@ def salvataggio(n, dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreE
             scrivi.write("%i_" % personaggio.numeroMovimento)
             scrivi.write("%i_" % personaggio.imgCambiata)
         scrivi.write("\n")
-        for oggetto in oggettiRimastiASam:
+        for oggetto in oggettiRimastiAHans:
             scrivi.write("%i_" % oggetto)
         scrivi.write("\n")
         if len(ultimoObbiettivoColco) > 0:
@@ -170,7 +170,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
     listaMonete = []
     stanzeGiaVisitate = []
     listaPersonaggiTotali = []
-    oggettiRimastiASam = []
+    oggettiRimastiAHans = []
     ultimoObbiettivoColco = []
     obbiettivoCasualeColco = False
 
@@ -188,7 +188,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
         listaMonete = []
         stanzeGiaVisitate = []
         listaPersonaggiTotali = []
-        oggettiRimastiASam = []
+        oggettiRimastiAHans = []
         ultimoObbiettivoColco = []
         obbiettivoCasualeColco = False
 
@@ -384,14 +384,14 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             errore = True
                             break
                         i += 9
-                oggettiRimastiASamStringa = datiTotali[8].split("_")
-                oggettiRimastiASamStringa.pop(len(oggettiRimastiASamStringa) - 1)
-                if len(oggettiRimastiASamStringa) != 13:
+                oggettiRimastiAHansStringa = datiTotali[8].split("_")
+                oggettiRimastiAHansStringa.pop(len(oggettiRimastiAHansStringa) - 1)
+                if len(oggettiRimastiAHansStringa) != 13:
                     errore = True
                 else:
-                    for i in range(0, len(oggettiRimastiASamStringa)):
+                    for i in range(0, len(oggettiRimastiAHansStringa)):
                         try:
-                            oggettiRimastiASam.append(int(oggettiRimastiASamStringa[i]))
+                            oggettiRimastiAHans.append(int(oggettiRimastiAHansStringa[i]))
                         except ValueError:
                             errore = True
                             break
@@ -456,11 +456,11 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                     scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
             scrivi.write(contenutoFile)
             scrivi.close()
-            return dati, tutteporte, tutticofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return dati, tutteporte, tutticofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return dati, tipoErrore
     else:
         if mostraErrori:
-            return False, False, False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiASam, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return False, False, False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return False, tipoErrore

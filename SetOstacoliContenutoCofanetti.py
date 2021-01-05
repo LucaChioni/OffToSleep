@@ -16,37 +16,37 @@ def getEntrateStanze(stanza):
         entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["sognoLucy4"]])
     elif stanza == GlobalVar.dictStanze["sognoLucy4"]:
         entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["sognoLucy3"]])
-    elif stanza == GlobalVar.dictStanze["casaSamLucy1"]:
-        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-    elif stanza == GlobalVar.dictStanze["casaSamLucy2"]:
-        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy1"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy1"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy3"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy3"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy3"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy3"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
-    elif stanza == GlobalVar.dictStanze["casaSamLucy3"]:
-        entrateStanza.extend([GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-    elif stanza == GlobalVar.dictStanze["casaSamLucy4"]:
-        entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy2"]])
+    elif stanza == GlobalVar.dictStanze["casaHansLucy1"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+    elif stanza == GlobalVar.dictStanze["casaHansLucy2"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy1"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy1"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy3"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 18, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
+    elif stanza == GlobalVar.dictStanze["casaHansLucy3"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 27, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+    elif stanza == GlobalVar.dictStanze["casaHansLucy4"]:
+        entrateStanza.extend([GlobalVar.gsx // 32 * 14, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy2"]])
         entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta1"]])
         entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 15, 0, +GlobalVar.gpy, GlobalVar.dictStanze["forestaCadetta1"]])
     elif stanza == GlobalVar.dictStanze["forestaCadetta1"]:
-        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
-        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaSamLucy4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
+        entrateStanza.extend([GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 2, 0, -GlobalVar.gpy, GlobalVar.dictStanze["casaHansLucy4"]])
         entrateStanza.extend([GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 4, -GlobalVar.gpx, 0, GlobalVar.dictStanze["forestaCadetta2"]])
     elif stanza == GlobalVar.dictStanze["forestaCadetta2"]:
         entrateStanza.extend([GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 14, +GlobalVar.gpx, 0, GlobalVar.dictStanze["forestaCadetta1"]])
@@ -312,7 +312,7 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, escludiPort
             elif oggetto(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, GlobalVar.gpx * 1, GlobalVar.gpy * 7, x, y, nx, ny):
                 nx = 0
                 ny = 0
-        if stanza == GlobalVar.dictStanze["casaSamLucy1"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy1"]:
             # bordi stanza
             if not escludiOggettiBassi:
                 if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
@@ -484,7 +484,7 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, escludiPort
                 elif not escludiOggettiBassi and oggetto(GlobalVar.gsx // 32 * 29, GlobalVar.gsy // 18 * 2, GlobalVar.gpx * 1, GlobalVar.gpy * 3, x, y, nx, ny):
                     nx = 0
                     ny = 0
-        if stanza == GlobalVar.dictStanze["casaSamLucy2"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy2"]:
             # bordi stanza
             if not escludiOggettiBassi:
                 if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
@@ -557,7 +557,7 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, escludiPort
                 elif oggetto(GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 12, GlobalVar.gpx * 1, GlobalVar.gpy * 4, x, y, nx, ny):
                     nx = 0
                     ny = 0
-        if stanza == GlobalVar.dictStanze["casaSamLucy3"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy3"]:
             # bordi stanza
             if not escludiOggettiBassi:
                 if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
@@ -612,7 +612,7 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, escludiPort
                 elif oggetto(GlobalVar.gsx // 32 * 28, GlobalVar.gsy // 18 * 10, GlobalVar.gpx * 2, GlobalVar.gpy * 2, x, y, nx, ny):
                     nx = 0
                     ny = 0
-        if stanza == GlobalVar.dictStanze["casaSamLucy4"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy4"]:
             # bordi stanza
             if not escludiOggettiBassi:
                 if nx == -GlobalVar.gpx and x <= GlobalVar.gpx * 2:
@@ -1878,7 +1878,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
         # ottieni bomba
         if cx == GlobalVar.gpx * 3 and cy == GlobalVar.gpy * 13:
             tesoro = 36
-    if stanza == GlobalVar.dictStanze["casaSamLucy1"]:
+    if stanza == GlobalVar.dictStanze["casaHansLucy1"]:
         # ottieni armatura
         if cx == GlobalVar.gpx * 23 and cy == GlobalVar.gpy * 13:
             tesoro = 52
@@ -1895,7 +1895,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if cx == GlobalVar.gpx * 29 and cy == GlobalVar.gpy * 14:
             tesoro = 47
             avanzamentoStoria += 1
-    if stanza == GlobalVar.dictStanze["casaSamLucy3"]:
+    if stanza == GlobalVar.dictStanze["casaHansLucy3"]:
         # ottieni pozione
         if cx == GlobalVar.gpx * 21 and cy == GlobalVar.gpy * 10:
             tesoro = 31

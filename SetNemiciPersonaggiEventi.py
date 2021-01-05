@@ -518,7 +518,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
 
     listaPersonaggi = []
     if not stanza in stanzeGiaVisitate:
-        if stanza == GlobalVar.dictStanze["casaSamLucy1"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy1"]:
             percorsoPersonaggio = []
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 7, GlobalVar.gsy // 18 * 13, "a", "OggettoLettoLucy", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
@@ -556,11 +556,11 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = []
-            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 12, "d", "OggettoLettoSam", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 12, "d", "OggettoLettoHans", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = []
-            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, "d", "OggettoComodinoSam", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, "d", "OggettoComodinoHans", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = []
@@ -655,7 +655,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 10, "d", "OggettoComodinoBabbo", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
-        if stanza == GlobalVar.dictStanze["casaSamLucy2"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy2"]:
             if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 percorsoPersonaggio = ["d", "d", "s", "s", "d", "s", "s", "s", "a", "a", "w", "w", "a", "s", "a", "a", "a", "w", "w", "w", "d", "d", "w", "d"]
                 personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 4, "d", "CaneCasa", stanza, avanzamentoStoria, percorsoPersonaggio)
@@ -669,7 +669,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 30, GlobalVar.gsy // 18 * 3, "a", "OggettoCancellettoCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
-        if stanza == GlobalVar.dictStanze["casaSamLucy3"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy3"]:
             percorsoPersonaggio = []
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 9, "s", "OggettoCancellettoCasaA", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
@@ -722,7 +722,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 12, GlobalVar.gsy // 18 * 15, "d", "OggettoCanaleCasaB", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
-        if stanza == GlobalVar.dictStanze["casaSamLucy4"]:
+        if stanza == GlobalVar.dictStanze["casaHansLucy4"]:
             if GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 percorsoPersonaggio = []
                 personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 15, GlobalVar.gsy // 18 * 10, "s", "CaneCasa", stanza, avanzamentoStoria, percorsoPersonaggio)
@@ -786,7 +786,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
     return listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali
 
 
-def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante):
+def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante):
     if impossibileAprirePorta:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
@@ -819,20 +819,20 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoSognoLucy2"] and stanza == GlobalVar.dictStanze["sognoLucy4"] and x == GlobalVar.gpx * 15 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
-        stanza = GlobalVar.dictStanze["casaSamLucy1"]
+        stanza = GlobalVar.dictStanze["casaHansLucy1"]
         cambiosta = True
         carim = True
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamLucy1"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]:
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "OggettoLettoLucy", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamLucy1"] and stanza == GlobalVar.dictStanze["casaSamLucy1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"] and stanza == GlobalVar.dictStanze["casaHansLucy1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaSamLucy2"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
@@ -871,7 +871,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
         personaggio = PersonaggioObj(x, y, False, "FiglioUfficiale", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["fineUltimoDialogoSam"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["fineUltimoDialogoHans"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         percorsoNemico = ["w", "w"]
         nemico = NemicoObj(GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 12, "w", "Cinghiale", stanza, percorsoNemico)
         nemico.mosseRimaste = 3
@@ -900,12 +900,12 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
             GlobalVar.aggiornaSchermo()
             i = 0
             while i < len(tutteporte):
-                if tutteporte[i] == GlobalVar.dictStanze["casaSamLucy1"] and tutteporte[i + 1] == GlobalVar.gpx * 6 and tutteporte[i + 2] == GlobalVar.gpx * 9:
+                if tutteporte[i] == GlobalVar.dictStanze["casaHansLucy1"] and tutteporte[i + 1] == GlobalVar.gpx * 6 and tutteporte[i + 2] == GlobalVar.gpx * 9:
                     tutteporte[i + 3] = False
                     break
                 i += 4
             # 0-9 => oggetti / 10 => frecce / 11 => guanti / 12 => monete
-            oggettiRimastiASam = [dati[31], dati[32], dati[33], dati[34], dati[35], dati[36], dati[37], dati[38], dati[39], dati[40], dati[132], dati[62], dati[131]]
+            oggettiRimastiAHans = [dati[31], dati[32], dati[33], dati[34], dati[35], dati[36], dati[37], dati[38], dati[39], dati[40], dati[132], dati[62], dati[131]]
             dati[31] = 2
             if dati[32] > 0:
                 dati[32] = 0
@@ -932,24 +932,24 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
             dati[129] = 0
             pygame.time.wait(1000)
             avanzamentoStoria += 1
-            stanza = GlobalVar.dictStanze["casaSamLucy1"]
+            stanza = GlobalVar.dictStanze["casaHansLucy1"]
             cambiosta = True
             carim = True
             caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaSamLucy1"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]:
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamLucy1"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialMappaDiario"] and stanza == GlobalVar.dictStanze["casaSamLucy1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialMappaDiario"] and stanza == GlobalVar.dictStanze["casaHansLucy1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["armaturaNonno4"] and stanza == GlobalVar.dictStanze["casaSamLucy1"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["armaturaNonno4"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
@@ -988,23 +988,23 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
             avanzamentoStoria -= 1
             caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["cadavereMichaelDepredato"] and stanza == GlobalVar.dictStanze["forestaCadetta7"]:
-        # oggettiRimastiASam: 0-9 => oggetti / 10 => frecce / 11 => guanti / 12 => monete
-        dati[31] += oggettiRimastiASam[0]
-        dati[32] += oggettiRimastiASam[1]
-        dati[33] += oggettiRimastiASam[2]
-        dati[34] += oggettiRimastiASam[3]
-        dati[35] += oggettiRimastiASam[4]
-        dati[36] += oggettiRimastiASam[5]
-        dati[37] += oggettiRimastiASam[6]
-        dati[38] += oggettiRimastiASam[7]
-        dati[39] += oggettiRimastiASam[8]
-        dati[40] += oggettiRimastiASam[9]
-        dati[132] += oggettiRimastiASam[10]
+        # oggettiRimastiAHans: 0-9 => oggetti / 10 => frecce / 11 => guanti / 12 => monete
+        dati[31] += oggettiRimastiAHans[0]
+        dati[32] += oggettiRimastiAHans[1]
+        dati[33] += oggettiRimastiAHans[2]
+        dati[34] += oggettiRimastiAHans[3]
+        dati[35] += oggettiRimastiAHans[4]
+        dati[36] += oggettiRimastiAHans[5]
+        dati[37] += oggettiRimastiAHans[6]
+        dati[38] += oggettiRimastiAHans[7]
+        dati[39] += oggettiRimastiAHans[8]
+        dati[40] += oggettiRimastiAHans[9]
+        dati[132] += oggettiRimastiAHans[10]
         if dati[132] > 1:
             dati[132] = 1
         if dati[62] <= 0:
-            dati[62] = oggettiRimastiASam[11]
-        dati[131] += oggettiRimastiASam[12]
+            dati[62] = oggettiRimastiAHans[11]
+        dati[131] += oggettiRimastiAHans[12]
         # il soldato ti lascia la sua spada/armatura/scudo
         dati[43] = 1
         dati[53] = 1
@@ -1043,4 +1043,4 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
 
     if caricaTutto:
         bottoneDown = False
-    return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiASam, tutteporte, oggettoRicevuto, visualizzaMenuMercante
+    return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante

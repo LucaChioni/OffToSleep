@@ -2076,7 +2076,7 @@ def dialoga(avanzamentoStoria, personaggio):
     puntatore = GlobalVar.puntatore
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         imgPersDialogo = GlobalVar.imgDialogoFraMaggiore
-        nomePersonaggio = "Sam"
+        nomePersonaggio = "Hans"
     else:
         imgPersDialogo = GlobalVar.imgDialogoLucy
         nomePersonaggio = "Lucy"
