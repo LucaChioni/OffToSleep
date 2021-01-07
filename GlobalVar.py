@@ -954,7 +954,7 @@ def loadImgs():
     impostaControllerCroceDirezionale = loadImage('Immagini/Tutorial/ImpoControllerCroceDirezionale.png', gpx * 14, gpy * 14, False)
 
     # img grafiche / dialoghi
-    persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucaGrafMenu.png', gpx * 18, gpy * 18, False)
+    persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/NeilGrafMenu.png', gpx * 18, gpy * 18, False)
     lucyGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucyGrafMenu.png', gpx * 10, gpy * 10, False)
     fraMaggioreGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', gpx * 10, gpy * 10, False)
     robograf0 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', gpx * 18, gpy * 18, False)

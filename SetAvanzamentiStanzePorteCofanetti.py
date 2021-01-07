@@ -55,7 +55,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["legnaDepositata"] = i
     i += 1
-    dictAvanzamentoStoria["legnaReportataMichael"] = i
+    dictAvanzamentoStoria["legnaReportataSam"] = i
     i += 1
     dictAvanzamentoStoria["inizioNotteForestaCadetta"] = i
     i += 1
@@ -101,11 +101,11 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["cinghialeUcciso"] = i
     i += 1
-    dictAvanzamentoStoria["cadavereMichaelDepredato"] = i
+    dictAvanzamentoStoria["cadavereSamDepredato"] = i
     i += 1
-    dictAvanzamentoStoria["sotterratoMichael"] = i
+    dictAvanzamentoStoria["sotterratoSam"] = i
     i += 1
-    dictAvanzamentoStoria["monologoDopoTombaMichael"] = i
+    dictAvanzamentoStoria["monologoDopoTombaSam"] = i
     i += 1
     dictAvanzamentoStoria["ultimaStanzaForesta"] = i
     i += 1

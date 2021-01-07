@@ -765,14 +765,14 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
         if stanza == GlobalVar.dictStanze["forestaCadetta7"]:
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["sotterratoMichael"]:
+            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["sotterratoSam"]:
                 percorsoPersonaggio = []
-                personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 7, "s", "OggettoPersonaCadavereMichael", stanza, avanzamentoStoria, percorsoPersonaggio)
+                personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 7, "s", "OggettoPersonaCadavereSam", stanza, avanzamentoStoria, percorsoPersonaggio)
                 listaPersonaggi.append(personaggio)
                 listaPersonaggiTotali.append(personaggio)
             else:
                 percorsoPersonaggio = []
-                personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, "d", "OggettoTombaMichael", stanza, avanzamentoStoria, percorsoPersonaggio)
+                personaggio = PersonaggioObj(GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, "d", "OggettoTombaSam", stanza, avanzamentoStoria, percorsoPersonaggio)
                 listaPersonaggi.append(personaggio)
                 listaPersonaggiTotali.append(personaggio)
     else:
@@ -852,7 +852,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["legnaReportataMichael"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["legnaReportataSam"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         avanzamentoStoria += 1
         stanza = GlobalVar.dictStanze["forestaCadetta5"]
         cambiosta = True
@@ -987,7 +987,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
         if not campoRipulito:
             avanzamentoStoria -= 1
             caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["cadavereMichaelDepredato"] and stanza == GlobalVar.dictStanze["forestaCadetta7"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["cadavereSamDepredato"] and stanza == GlobalVar.dictStanze["forestaCadetta7"]:
         # oggettiRimastiAHans: 0-9 => oggetti / 10 => frecce / 11 => guanti / 12 => monete
         dati[31] += oggettiRimastiAHans[0]
         dati[32] += oggettiRimastiAHans[1]
@@ -1031,12 +1031,12 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
         cambiosta = True
         carim = True
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["sotterratoMichael"] and stanza == GlobalVar.dictStanze["forestaCadetta7"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["sotterratoSam"] and stanza == GlobalVar.dictStanze["forestaCadetta7"]:
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["monologoDopoTombaMichael"] and stanza == GlobalVar.dictStanze["forestaCadetta8"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["monologoDopoTombaSam"] and stanza == GlobalVar.dictStanze["forestaCadetta8"]:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante = dialoga(avanzamentoStoria, personaggio)
         caricaTutto = True
