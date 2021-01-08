@@ -1949,11 +1949,11 @@ def aperturacofanetto(stanza, cx, cy, dati):
             tesoro = 31
         # ottieni collana rigenerante
         if cx == GlobalVar.gpx * 2 and cy == GlobalVar.gpy * 4:
-            tesoro = 67
+            tesoro = 48
     if stanza == GlobalVar.dictStanze["forestaCadetta8"]:
         # ottieni arco di ferro
         if cx == GlobalVar.gpx * 2 and cy == GlobalVar.gpy * 6:
-            tesoro = 48
+            tesoro = 67
 
     # assegna oggetto ottenuto
     if tesoro != -1 and tesoro != -2:

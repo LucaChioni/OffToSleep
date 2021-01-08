@@ -42,17 +42,18 @@ def menu(caricaSalvataggio, gameover):
         listaMonete = GlobalVar.vetDatiSalvataggioGameOver[5]
         stanzeGiaVisitate = GlobalVar.vetDatiSalvataggioGameOver[6]
         listaPersonaggiTotali = GlobalVar.vetDatiSalvataggioGameOver[7]
-        oggettiRimastiAHans = GlobalVar.vetDatiSalvataggioGameOver[8]
-        ultimoObbiettivoColco = GlobalVar.vetDatiSalvataggioGameOver[9]
-        obbiettivoCasualeColco = GlobalVar.vetDatiSalvataggioGameOver[10]
-        return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
+        listaAvanzamentoDialoghi = GlobalVar.vetDatiSalvataggioGameOver[8]
+        oggettiRimastiAHans = GlobalVar.vetDatiSalvataggioGameOver[9]
+        ultimoObbiettivoColco = GlobalVar.vetDatiSalvataggioGameOver[10]
+        obbiettivoCasualeColco = GlobalVar.vetDatiSalvataggioGameOver[11]
+        return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
-        dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
-        datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
-        GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
+        dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
+        datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
+        GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
         GlobalVar.numSalvataggioCaricato = caricaSalvataggio
-        return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
+        return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     # carico subito tutti i dati salvati
     ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
@@ -180,7 +181,7 @@ def menu(caricaSalvataggio, gameover):
 
                     # carica partita
                     if voceMarcata == 2:
-                        n, inutile = scegli_sal(False, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, [], [], [], [], [], [], [], [], [], [], False)
+                        n, inutile = scegli_sal(False, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, [], [], [], [], [], [], [], [], [], [], [], False)
 
                         # lettura salvataggio
                         if n != -1:
@@ -197,12 +198,12 @@ def menu(caricaSalvataggio, gameover):
                             GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
                             GlobalVar.canaleSoundSottofondoAmbientale.stop()
                             GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
-                            dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
-                            datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
-                            GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
+                            dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
+                            datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
+                            GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
                             if dati:
                                 GlobalVar.numSalvataggioCaricato = n
-                                return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
+                                return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
                         primoFrame = True
 
                     # Impostazioni
@@ -348,6 +349,7 @@ def menu(caricaSalvataggio, gameover):
                             datiMonete = []
                             stanzeGiaVisitate = []
                             listaPersonaggiTotali = []
+                            listaAvanzamentoDialoghi = []
                             oggettiRimastiAHans = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                             ultimoObbiettivoColco = []
                             obbiettivoCasualeColco = False
@@ -362,7 +364,7 @@ def menu(caricaSalvataggio, gameover):
                                 tuttiCofanetti[i + 2] = tuttiCofanetti[i + 2] * GlobalVar.gpy
                                 i += 4
                             GlobalVar.numSalvataggioCaricato = 0
-                            return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
+                            return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
                         else:
                             GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
                     else:
@@ -525,7 +527,7 @@ def menu(caricaSalvataggio, gameover):
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
 
 
-def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
+def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
     if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         perssta = GlobalVar.fraMaggioreGrafMenu
     else:
@@ -691,7 +693,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                        n, azioneFatta = scegli_sal(True, len(dati), len(tutteporte), len(tutticofanetti), tutteporte, tutticofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                        n, azioneFatta = scegli_sal(True, len(dati), len(tutteporte), len(tutticofanetti), tutteporte, tutticofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco)
                         if n != -1 and azioneFatta == 1:
                             oscuraIlluminaSchermo(illumina=False)
                             caricaSalvataggio = n

@@ -93,7 +93,9 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["accampamentoForestaLucy"] = i
     i += 1
-    dictAvanzamentoStoria["accampamentoForestaAnalizzato"] = i
+    dictAvanzamentoStoria["accampamentoForestaAnalizzato1"] = i
+    i += 1
+    dictAvanzamentoStoria["accampamentoForestaAnalizzato2"] = i
     i += 1
     dictAvanzamentoStoria["incontratoBrancoLupiNeri"] = i
     i += 1

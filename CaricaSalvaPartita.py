@@ -4,7 +4,7 @@ from NemicoObj import *
 from PersonaggioObj import *
 
 
-def salvataggio(n, dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
+def salvataggio(n, dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, salvaGameOver):
     # conversione della posizione in caselle
     dati[2] = dati[2] // GlobalVar.gpx
     dati[3] = dati[3] // GlobalVar.gpy
@@ -107,7 +107,13 @@ def salvataggio(n, dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreE
                 scrivi.write("%s_" % direzione)
             scrivi.write("]_")
             scrivi.write("%i_" % personaggio.numeroMovimento)
-            scrivi.write("%i_" % personaggio.imgCambiata)
+            scrivi.write("%i_" % personaggio.avanzamentoDialogo)
+        scrivi.write("\n")
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            scrivi.write("%s_" % listaAvanzamentoDialoghi[i])
+            scrivi.write("%i_" % listaAvanzamentoDialoghi[i + 1])
+            i += 2
         scrivi.write("\n")
         for oggetto in oggettiRimastiAHans:
             scrivi.write("%i_" % oggetto)
@@ -170,6 +176,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
     listaMonete = []
     stanzeGiaVisitate = []
     listaPersonaggiTotali = []
+    listaAvanzamentoDialoghi = []
     oggettiRimastiAHans = []
     ultimoObbiettivoColco = []
     obbiettivoCasualeColco = False
@@ -188,6 +195,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
         listaMonete = []
         stanzeGiaVisitate = []
         listaPersonaggiTotali = []
+        listaAvanzamentoDialoghi = []
         oggettiRimastiAHans = []
         ultimoObbiettivoColco = []
         obbiettivoCasualeColco = False
@@ -215,7 +223,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
             tipoErrore = 2
 
         if not errore and not (len(datiTotali) == 1 and datiTotali[0] == ""):
-            if len(datiTotali) == 11:
+            if len(datiTotali) == 12:
                 datiStringa = datiTotali[0].split("_")
                 datiStringa.pop(len(datiStringa) - 1)
                 if len(datiStringa) == 0 or len(datiStringa) != lunghezzadati:
@@ -384,7 +392,21 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             errore = True
                             break
                         i += 9
-                oggettiRimastiAHansStringa = datiTotali[8].split("_")
+                datiDialoghi = datiTotali[8].split("_")
+                datiDialoghi.pop(len(datiDialoghi) - 1)
+                if len(datiDialoghi) % 2 != 0:
+                    errore = True
+                else:
+                    i = 0
+                    while i < len(datiDialoghi):
+                        try:
+                            listaAvanzamentoDialoghi.append(datiDialoghi[i])
+                            listaAvanzamentoDialoghi.append(int(datiDialoghi[i + 1]))
+                        except ValueError:
+                            errore = True
+                            break
+                        i += 2
+                oggettiRimastiAHansStringa = datiTotali[9].split("_")
                 oggettiRimastiAHansStringa.pop(len(oggettiRimastiAHansStringa) - 1)
                 if len(oggettiRimastiAHansStringa) != 13:
                     errore = True
@@ -395,7 +417,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         except ValueError:
                             errore = True
                             break
-                ultimoObbiettivoColcoStringa = datiTotali[9].split("_")
+                ultimoObbiettivoColcoStringa = datiTotali[10].split("_")
                 ultimoObbiettivoColcoStringa.pop(len(ultimoObbiettivoColcoStringa) - 1)
                 if len(ultimoObbiettivoColcoStringa) != 3:
                     errore = True
@@ -404,7 +426,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         ultimoObbiettivoColco.append(ultimoObbiettivoColcoStringa[0])
                         ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[1]) * GlobalVar.gpx)
                         ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[2]) * GlobalVar.gpx)
-                obbiettivoCasualeColcoStringa = datiTotali[10].split("_")
+                obbiettivoCasualeColcoStringa = datiTotali[11].split("_")
                 obbiettivoCasualeColcoStringa.pop(len(obbiettivoCasualeColcoStringa) - 1)
                 if len(obbiettivoCasualeColcoStringa) != 3:
                     errore = True
@@ -456,11 +478,11 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                     scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
             scrivi.write(contenutoFile)
             scrivi.close()
-            return dati, tutteporte, tutticofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return dati, tutteporte, tutticofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return dati, tipoErrore
     else:
         if mostraErrori:
-            return False, False, False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
+            return False, False, False, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
         else:
             return False, tipoErrore

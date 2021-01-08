@@ -2066,7 +2066,7 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
             GlobalVar.disegnaImmagineSuSchermo(scudo, (x, y))
 
 
-def dialoga(avanzamentoStoria, personaggio):
+def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
     GlobalVar.canaleSoundPassiRallo.stop()
     oggettoRicevuto = False
     menuMercante = False
@@ -2192,9 +2192,15 @@ def dialoga(avanzamentoStoria, personaggio):
                         oggettoRicevuto = personaggio.oggettoDato
                     if personaggio.menuMercante:
                         menuMercante = personaggio.menuMercante
-                if personaggio.cambiaImg:
-                    personaggio.imgCambiata += 1
-                    personaggio.cambiaImg = False
+                if personaggio.avanzaColDialogo:
+                    personaggio.avanzamentoDialogo += 1
+                    personaggio.avanzaColDialogo = False
+                    i = 0
+                    while i < len(listaAvanzamentoDialoghi):
+                        if personaggio.tipo == listaAvanzamentoDialoghi[i]:
+                            listaAvanzamentoDialoghi[i + 1] = personaggio.avanzamentoDialogo
+                            break
+                        i += 2
                 fineDialogo = True
             else:
                 if personaggio.scelta and personaggio.partiDialogo[numeromessaggioAttuale][1] == "!!!RISPOSTA!!!":
@@ -2253,7 +2259,7 @@ def dialoga(avanzamentoStoria, personaggio):
     GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
     GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
 
-    return avanzamentoStoria, oggettoRicevuto, menuMercante
+    return avanzamentoStoria, oggettoRicevuto, menuMercante, listaAvanzamentoDialoghi
 
 
 def animaOggettoSpecialeRicevuto(oggettoRicevuto):
