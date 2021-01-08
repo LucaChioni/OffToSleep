@@ -8,23 +8,19 @@ def ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti
         contasalva = 1
         GlobalVar.vetDatiSalvataggi = []
         while contasalva <= 3:
-            dati, errore = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, False)
-            datiGameover, erroreGameover = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, True)
+            dati, datiGameover, errore = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
             vetTempDati = []
-            vetTempDati.append(dati)
+            vetTempDati.append(dati[0])
+            vetTempDati.append(datiGameover[0])
             vetTempDati.append(errore)
-            vetTempDati.append(datiGameover)
-            vetTempDati.append(erroreGameover)
             GlobalVar.vetDatiSalvataggi.append(vetTempDati)
             contasalva += 1
     else:
-        dati, errore = caricaPartita(numSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, False)
-        datiGameover, erroreGameover = caricaPartita(numSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False, True)
+        dati, datiGameover, errore = caricaPartita(numSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
         vetTempDati = []
-        vetTempDati.append(dati)
+        vetTempDati.append(dati[0])
+        vetTempDati.append(datiGameover[0])
         vetTempDati.append(errore)
-        vetTempDati.append(datiGameover)
-        vetTempDati.append(erroreGameover)
         GlobalVar.vetDatiSalvataggi[numSalvataggio - 1] = vetTempDati
 
 
@@ -303,14 +299,12 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                         if cosa == 1:
                             vetTemp = GlobalVar.vetDatiSalvataggi[n - 1]
                             dati = vetTemp[0]
-                            datiGameover = vetTemp[2]
+                            datiGameover = vetTemp[1]
+                            erroreDatiVettore = vetTemp[2]
                             if dati and datiGameover:
                                 return n, cosa
                             else:
-                                if vetTemp[1] != 0:
-                                    mostraErroreCaricamentoSalvataggio(vetTemp[1])
-                                elif vetTemp[3] != 0:
-                                    mostraErroreCaricamentoSalvataggio(2)
+                                mostraErroreCaricamentoSalvataggio(erroreDatiVettore)
                                 conferma = False
                                 xp = vxp
                                 yp = vyp
@@ -322,8 +316,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoDestra, ((GlobalVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 15))
                             messaggio("Salvando...", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 13.7, 80, centrale=True)
                             GlobalVar.aggiornaSchermo()
-                            salvataggio(n, datiAttuali, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, listaAvanzamentoDialoghi, oggettiRimastiAHansAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco, False)
-                            salvataggio(n, GlobalVar.vetDatiSalvataggioGameOver[0], GlobalVar.vetDatiSalvataggioGameOver[1], GlobalVar.vetDatiSalvataggioGameOver[2], GlobalVar.vetDatiSalvataggioGameOver[3], GlobalVar.vetDatiSalvataggioGameOver[4], GlobalVar.vetDatiSalvataggioGameOver[5], GlobalVar.vetDatiSalvataggioGameOver[6], GlobalVar.vetDatiSalvataggioGameOver[7], GlobalVar.vetDatiSalvataggioGameOver[8], GlobalVar.vetDatiSalvataggioGameOver[9], GlobalVar.vetDatiSalvataggioGameOver[10], GlobalVar.vetDatiSalvataggioGameOver[11], True)
+                            datiAttualiTotali = [datiAttuali, porteAttuali, cofanettiAttuali, listaNemiciTotaliAttuali, vitaescaAttuali, vettoreDenaroAttuali, stanzeGiaVisitateAttuali, listaPersonaggiTotaliAttuali, listaAvanzamentoDialoghi, oggettiRimastiAHansAttuali, ultimoObbiettivoColco, obbiettivoCasualeColco]
+                            datiGameoverTotali = [GlobalVar.vetDatiSalvataggioGameOver[0], GlobalVar.vetDatiSalvataggioGameOver[1], GlobalVar.vetDatiSalvataggioGameOver[2], GlobalVar.vetDatiSalvataggioGameOver[3], GlobalVar.vetDatiSalvataggioGameOver[4], GlobalVar.vetDatiSalvataggioGameOver[5], GlobalVar.vetDatiSalvataggioGameOver[6], GlobalVar.vetDatiSalvataggioGameOver[7], GlobalVar.vetDatiSalvataggioGameOver[8], GlobalVar.vetDatiSalvataggioGameOver[9], GlobalVar.vetDatiSalvataggioGameOver[10], GlobalVar.vetDatiSalvataggioGameOver[11]]
+                            salvataggio(n, datiAttualiTotali, datiGameoverTotali)
                             # ricarico i salvataggi
                             ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
                             GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
@@ -341,10 +336,6 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
                             leggi.close()
                             leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
-                            leggi.close()
-                            leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover.txt" % n, "w")
-                            leggi.close()
-                            leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-gameover-backup.txt" % n, "w")
                             leggi.close()
                             # ricarico i salvataggi
                             ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
@@ -454,12 +445,11 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 while contasalva <= len(GlobalVar.vetDatiSalvataggi):
                     vetTemp = GlobalVar.vetDatiSalvataggi[contasalva - 1]
                     dati = vetTemp[0]
-                    errore = vetTemp[1]
-                    erroreGameover = vetTemp[3]
+                    errore = vetTemp[2]
                     if errore == 1:
                         messaggio("Slot vuoto", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 6.5) + ((contasalva - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 8.2, 60)
                     else:
-                        if not errore and not erroreGameover:
+                        if not errore:
                             if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                                 persalva = persoFraMaggiore
                                 persSalvaBraccia = persobFraMaggiore
@@ -2431,7 +2421,7 @@ def menuMappa(avanzamentoStoria):
                     grandezzaScritteDescrizioni = 40
                     if voceMarcata == 1:
                         messaggio("Casa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                        messaggio(u"È l'abitazione in cui ho vissuto con la mia famiglia fin'ora. È stata costruita da un mio vecchio antenato e, da allora, è sempre stata abitata dalle varie generazioni della mia famiglia. Secondo il babbo Hans sarà il prossimo proprietario e l'idea non lo entusiasma affatto: durande diverse discussioni Hans ha detto di non voler fare questo lavoro per tutta la vita come lui. Dice che è monotono, faticoso e anche instabile a causa delle enormi imposte dello stato e della spietata concorrenza.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        messaggio(u"È l'abitazione in cui ho vissuto con la mia famiglia fin'ora. È stata costruita da un mio vecchio antenato e, da allora, è sempre stata abitata dalle varie generazioni della mia famiglia. Secondo il babbo Hans sarà il prossimo proprietario e l'idea non lo entusiasma affatto: durante diverse discussioni Hans ha detto di non voler fare questo lavoro per tutta la vita come lui. Dice che è monotono, faticoso e anche instabile a causa delle enormi imposte dello stato e della spietata concorrenza.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 2:
                         messaggio(u"Città", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
                         messaggio(u"Da quando ne ho sentito parlare per la prima volta, ho sempre avuto il desiderio di viverci. Da quello che so, lì a tutti è concesso scegliere quale mansione svolgere nella vita. Questo è diventato possibile grazie ai nuovi strumenti di produzione che hanno reso possibile un sistema in cui poche persone riescono a produrre abbastanza anche per tutte le altre. La parte di popolazione \"impoduttiva\" può quindi dedicarsi ad altre attività come musica, teatro, studio, sport e chissà cos'altro.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)

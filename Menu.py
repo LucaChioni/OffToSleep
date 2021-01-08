@@ -49,8 +49,32 @@ def menu(caricaSalvataggio, gameover):
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
-        dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
-        datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
+        datiTotaliAttuali, datiTotaliGameover = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True)
+        dati = datiTotaliAttuali[0]
+        tuttePorte = datiTotaliAttuali[1]
+        tuttiCofanetti = datiTotaliAttuali[2]
+        listaNemiciTotali = datiTotaliAttuali[3]
+        listaEsche = datiTotaliAttuali[4]
+        listaMonete = datiTotaliAttuali[5]
+        stanzeGiaVisitate = datiTotaliAttuali[6]
+        listaPersonaggiTotali = datiTotaliAttuali[7]
+        listaAvanzamentoDialoghi = datiTotaliAttuali[8]
+        oggettiRimastiAHans = datiTotaliAttuali[9]
+        ultimoObbiettivoColco = datiTotaliAttuali[10]
+        obbiettivoCasualeColco = datiTotaliAttuali[11]
+        datiGameover = datiTotaliGameover[0]
+        tutteporteGameover = datiTotaliGameover[1]
+        tutticofanettiGameover = datiTotaliGameover[2]
+        listaNemiciTotaliGameover = datiTotaliGameover[3]
+        listaEscheGameover = datiTotaliGameover[4]
+        listaMoneteGameover = datiTotaliGameover[5]
+        stanzeGiaVisitateGameover = datiTotaliGameover[6]
+        listaPersonaggiTotaliGameover = datiTotaliGameover[7]
+        listaAvanzamentoDialoghiGameover = datiTotaliGameover[8]
+        oggettiRimastiAHansGameover = datiTotaliGameover[9]
+        ultimoObbiettivoColcoGameover = datiTotaliGameover[10]
+        obbiettivoCasualeColcoGameover = datiTotaliGameover[11]
+
         GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
         GlobalVar.numSalvataggioCaricato = caricaSalvataggio
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
@@ -198,8 +222,32 @@ def menu(caricaSalvataggio, gameover):
                             GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
                             GlobalVar.canaleSoundSottofondoAmbientale.stop()
                             GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
-                            dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, False)
-                            datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True, True)
+                            datiTotaliAttuali, datiTotaliGameover = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True)
+                            dati = datiTotaliAttuali[0]
+                            tuttePorte = datiTotaliAttuali[1]
+                            tuttiCofanetti = datiTotaliAttuali[2]
+                            datiNemici = datiTotaliAttuali[3]
+                            datiEsche = datiTotaliAttuali[4]
+                            datiMonete = datiTotaliAttuali[5]
+                            stanzeGiaVisitate = datiTotaliAttuali[6]
+                            listaPersonaggiTotali = datiTotaliAttuali[7]
+                            listaAvanzamentoDialoghi = datiTotaliAttuali[8]
+                            oggettiRimastiAHans = datiTotaliAttuali[9]
+                            ultimoObbiettivoColco = datiTotaliAttuali[10]
+                            obbiettivoCasualeColco = datiTotaliAttuali[11]
+                            datiGameover = datiTotaliGameover[0]
+                            tutteporteGameover = datiTotaliGameover[1]
+                            tutticofanettiGameover = datiTotaliGameover[2]
+                            listaNemiciTotaliGameover = datiTotaliGameover[3]
+                            listaEscheGameover = datiTotaliGameover[4]
+                            listaMoneteGameover = datiTotaliGameover[5]
+                            stanzeGiaVisitateGameover = datiTotaliGameover[6]
+                            listaPersonaggiTotaliGameover = datiTotaliGameover[7]
+                            listaAvanzamentoDialoghiGameover = datiTotaliGameover[8]
+                            oggettiRimastiAHansGameover = datiTotaliGameover[9]
+                            ultimoObbiettivoColcoGameover = datiTotaliGameover[10]
+                            obbiettivoCasualeColcoGameover = datiTotaliGameover[11]
+
                             GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
                             if dati:
                                 GlobalVar.numSalvataggioCaricato = n
