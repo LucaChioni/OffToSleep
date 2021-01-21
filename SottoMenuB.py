@@ -8,7 +8,7 @@ def ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti
         contasalva = 1
         GlobalVar.vetDatiSalvataggi = []
         while contasalva <= 3:
-            dati, datiGameover, errore = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
+            dati, datiGameover, errore = caricaPartita(contasalva, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True)
             vetTempDati = []
             vetTempDati.append(dati[0])
             vetTempDati.append(datiGameover[0])
@@ -16,7 +16,7 @@ def ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti
             GlobalVar.vetDatiSalvataggi.append(vetTempDati)
             contasalva += 1
     else:
-        dati, datiGameover, errore = caricaPartita(numSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
+        dati, datiGameover, errore = caricaPartita(numSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True)
         vetTempDati = []
         vetTempDati.append(dati[0])
         vetTempDati.append(datiGameover[0])
@@ -55,8 +55,8 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 aggiornaSchermata = False
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.robograf2, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.robograf2, (GlobalVar.gpx * 7, int(-GlobalVar.gpy * 4.45)))
+                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, int(GlobalVar.gpy * 13.5)), (GlobalVar.gpx * 22, int(GlobalVar.gpy * 13.5)), 2)
                 if GlobalVar.mouseVisibile:
                     messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
                 elif GlobalVar.usandoIlController:
@@ -98,8 +98,8 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 aggiornaSchermata = False
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.robograf4, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.5))
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, GlobalVar.gpy * 13.5), (GlobalVar.gpx * 22, GlobalVar.gpy * 13.5), 2)
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.robograf4, (GlobalVar.gpx * 7, -GlobalVar.gpy * 4.45))
+                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.nero, (GlobalVar.gpx * 10, int(GlobalVar.gpy * 13.5)), (GlobalVar.gpx * 22, int(GlobalVar.gpy * 13.5)), 2)
                 if GlobalVar.mouseVisibile:
                     messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
                 elif GlobalVar.usandoIlController:
@@ -139,10 +139,10 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
     aggiornaSchermo = False
     n = -1
 
-    persoLucy = GlobalVar.loadImage('Immagini/Personaggi/Lucy/Personaggio1.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
-    persobLucy = GlobalVar.loadImage('Immagini/Personaggi/Lucy/Personaggio1b.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
-    persoFraMaggiore = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
-    persobFraMaggiore = GlobalVar.loadImage('Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', GlobalVar.gpx * 5, GlobalVar.gpy * 5, True)
+    persoLucy = GlobalVar.persoLucy
+    persobLucy = GlobalVar.persobLucy
+    persoFraMaggiore = GlobalVar.persoFraMaggiore
+    persobFraMaggiore = GlobalVar.persobFraMaggiore
 
     while not risposta:
         # rallenta per i 30 fps
@@ -298,10 +298,8 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                         GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
                         if cosa == 1:
                             vetTemp = GlobalVar.vetDatiSalvataggi[n - 1]
-                            dati = vetTemp[0]
-                            datiGameover = vetTemp[1]
                             erroreDatiVettore = vetTemp[2]
-                            if dati and datiGameover:
+                            if erroreDatiVettore == 0:
                                 return n, cosa
                             else:
                                 mostraErroreCaricamentoSalvataggio(erroreDatiVettore)
@@ -1557,7 +1555,11 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                             pygame.display.set_caption(GlobalVar.titolo)
                             pygame.display.set_icon(GlobalVar.icona)
                         if ricaricaImgs:
-                            GlobalVar.loadImgs()
+                            GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
+                            messaggio("Cambio risoluzione in corso...", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 7.5, 120, centrale=True)
+                            oscuraIlluminaSchermo(illumina=2)
+                            GlobalVar.numImgCaricata = 0
+                            GlobalVar.loadImgs(cambioRisoluzione=True)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
                     scrivi = GlobalVar.loadFile("Impostazioni/Impostazioni.txt", "w")
                     if GlobalVar.linguaImpostata == "italiano":
@@ -1666,14 +1668,11 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                 elif voceMarcata == 6:
-                    if settaRisoluzione:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        if schermoInteroTemp:
-                            schermoInteroTemp = False
-                        else:
-                            schermoInteroTemp = True
+                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                    if schermoInteroTemp:
+                        schermoInteroTemp = False
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        schermoInteroTemp = True
                 elif voceMarcata == 7:
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                     voceMarcata += 1
@@ -1767,14 +1766,11 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                 elif voceMarcata == 6:
-                    if settaRisoluzione:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        if schermoInteroTemp:
-                            schermoInteroTemp = False
-                        else:
-                            schermoInteroTemp = True
+                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                    if schermoInteroTemp:
+                        schermoInteroTemp = False
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        schermoInteroTemp = True
                 elif voceMarcata == 7:
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                     voceMarcata += 1
@@ -1835,14 +1831,11 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                 elif voceMarcata == 6:
-                    if settaRisoluzione:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        if schermoInteroTemp:
-                            schermoInteroTemp = False
-                        else:
-                            schermoInteroTemp = True
+                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                    if schermoInteroTemp:
+                        schermoInteroTemp = False
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        schermoInteroTemp = True
             if bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
@@ -1906,14 +1899,11 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
                 elif voceMarcata == 6:
-                    if settaRisoluzione:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        if schermoInteroTemp:
-                            schermoInteroTemp = False
-                        else:
-                            schermoInteroTemp = True
+                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                    if schermoInteroTemp:
+                        schermoInteroTemp = False
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        schermoInteroTemp = True
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
@@ -2016,19 +2006,6 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                         GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 10.9))
                     else:
                         GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 10.9))
-                if schermoInteroTemp:
-                    messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
-                else:
-                    messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
-                if voceMarcata == 6:
-                    if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniSinistraBloccato, (GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 12.4))
-                    else:
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniSinistra, (GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 12.4))
-                    if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 12.4))
-                    else:
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 12.4))
             else:
                 messaggio("Configura", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 9.5, 60)
                 messaggio("Configurabile solo dal menu principale", GlobalVar.rosso, GlobalVar.gsx // 32 * 30.3, GlobalVar.gsy // 18 * 9.8, 40, daDestra=True)
@@ -2037,14 +2014,19 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniSinistraBloccato, (GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 10.9))
                     GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 10.9))
                 messaggio("Configurabile solo dal menu principale", GlobalVar.rosso, GlobalVar.gsx // 32 * 30.3, GlobalVar.gsy // 18 * 11.3, 40, daDestra=True)
-                if schermoInteroTemp:
-                    messaggio("Si", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
-                else:
-                    messaggio("No", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
-                if voceMarcata == 6:
+            if schermoInteroTemp:
+                messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
+            else:
+                messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
+            if voceMarcata == 6:
+                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniSinistraBloccato, (GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 12.4))
+                else:
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniSinistra, (GlobalVar.gsx // 32 * 15.7, GlobalVar.gsy // 18 * 12.4))
+                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                     GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 12.4))
-                messaggio("Configurabile solo dal menu principale", GlobalVar.rosso, GlobalVar.gsx // 32 * 30.3, GlobalVar.gsy // 18 * 12.8, 40, daDestra=True)
+                else:
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestra, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 12.4))
 
             GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             if voceMarcata != 7 and voceMarcata != 8:
@@ -2421,7 +2403,7 @@ def menuMappa(avanzamentoStoria):
                     grandezzaScritteDescrizioni = 40
                     if voceMarcata == 1:
                         messaggio("Casa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
-                        messaggio(u"È l'abitazione in cui ho vissuto con la mia famiglia fin'ora. È stata costruita da un mio vecchio antenato e, da allora, è sempre stata abitata dalle varie generazioni della mia famiglia. Secondo il babbo Hans sarà il prossimo proprietario e l'idea non lo entusiasma affatto: durante diverse discussioni Hans ha detto di non voler fare questo lavoro per tutta la vita come lui. Dice che è monotono, faticoso e anche instabile a causa delle enormi imposte dello stato e della spietata concorrenza.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        messaggio(u"È l'abitazione in cui ho vissuto con la mia famiglia fin'ora. È stata costruita da un mio vecchio antenato e, da allora, è sempre stata abitata dalle varie generazioni della mia famiglia. Secondo il babbo Hans sarà il prossimo proprietario e l'idea non lo entusiasma affatto: durante diverse discussioni Hans ha detto di non voler fare questo lavoro per tutta la vita come lui. Dice che è monotono, faticoso e anche instabile a causa delle enormi imposte e della spietata concorrenza.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 2:
                         messaggio(u"Città", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 5, 70)
                         messaggio(u"Da quando ne ho sentito parlare per la prima volta, ho sempre avuto il desiderio di viverci. Da quello che so, lì a tutti è concesso scegliere quale mansione svolgere nella vita. Questo è diventato possibile grazie ai nuovi strumenti di produzione che hanno reso possibile un sistema in cui poche persone riescono a produrre abbastanza anche per tutte le altre. La parte di popolazione \"impoduttiva\" può quindi dedicarsi ad altre attività come musica, teatro, studio, sport e chissà cos'altro.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)

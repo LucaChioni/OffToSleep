@@ -5,7 +5,7 @@ from GenericFunc import *
 
 class PersonaggioObj(object):
 
-    def __init__(self, x, y, direzione, tipo, stanza, avanzamentoStoria, percorso, numeroMovimento=0, avanzamentoDialogo=0):
+    def __init__(self, x, y, direzione, tipo, stanza, avanzamentoStoria, percorso, numeroMovimento=0, avanzamentoDialogo=0, nonCaricareImg=False):
         self.tipo = tipo
         self.x = x
         self.y = y
@@ -37,16 +37,16 @@ class PersonaggioObj(object):
                     self.mantieniSempreASchermo = False
                 else:
                     self.mantieniSempreASchermo = True
-                self.caricaImgOggetto()
+                self.caricaImgOggetto(nonCaricareImg=nonCaricareImg)
                 self.aggiornaImgOggetto(avanzamentoStoria, True)
             else:
                 self.mantieniSempreASchermo = False
-                self.caricaImgPersonaggio()
+                self.caricaImgPersonaggio(nonCaricareImg=nonCaricareImg)
                 self.girati(direzione)
 
         self.aggiornaDialogo(avanzamentoStoria)
 
-    def caricaImgOggetto(self):
+    def caricaImgOggetto(self, nonCaricareImg=False):
         self.imgOggetto = []
         self.imgOggettoDialogo = []
         numImg = 1
@@ -94,13 +94,25 @@ class PersonaggioObj(object):
             nomeImgDialogo = ["Vuota"]
         i = 1
         while i <= numImg:
-            img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgOggetto.append(img)
+            if nonCaricareImg:
+                if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png"):
+                    raise Exception("Immagine \"" + self.tipo + str(i) + ".png\" non trovata...")
+                img = False
+                self.imgOggetto.append(img)
+            else:
+                img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalVar.gpx, GlobalVar.gpy, True)
+                self.imgOggetto.append(img)
             i += 1
         i = 0
         while i < numImgDialogo:
-            img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalVar.gpx * 16, GlobalVar.gpy * 12, False)
-            self.imgOggettoDialogo.append(img)
+            if nonCaricareImg:
+                if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png"):
+                    raise Exception("Immagine \"" + nomeImgDialogo[i] + ".png\" non trovata...")
+                img = False
+                self.imgOggettoDialogo.append(img)
+            else:
+                img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalVar.gpx * 16, GlobalVar.gpy * 12, False)
+                self.imgOggettoDialogo.append(img)
             i += 1
 
     def aggiornaImgOggetto(self, avanzamentoStoria, primoCaricamento=False):
@@ -118,7 +130,7 @@ class PersonaggioObj(object):
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 2
         if self.tipo == "OggettoFuoco":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["legnaReportataSam"]:
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
                 numImgAttuale = 1
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 2
@@ -164,22 +176,65 @@ class PersonaggioObj(object):
         if not primoCaricamento:
             return refreshSchermo
 
-    def caricaImgPersonaggio(self):
-        self.imgW = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgA = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgS = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgD = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png", GlobalVar.gpx, GlobalVar.gpy, True)
+    def caricaImgPersonaggio(self, nonCaricareImg=False):
+        if nonCaricareImg:
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png"):
+                raise Exception("Immagine \"" + self.tipo + "W.png\" non trovata...")
+            self.imgW = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png"):
+                raise Exception("Immagine \"" + self.tipo + "A.png\" non trovata...")
+            self.imgA = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png"):
+                raise Exception("Immagine \"" + self.tipo + "S.png\" non trovata...")
+            self.imgS = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png"):
+                raise Exception("Immagine \"" + self.tipo + "D.png\" non trovata...")
+            self.imgD = False
 
-        self.imgWMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgWMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgAMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgAMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgSMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgSMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgDMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-        self.imgDMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png"):
+                raise Exception("Immagine \"" + self.tipo + "WMov1.png\" non trovata...")
+            self.imgWMov1 = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png"):
+                raise Exception("Immagine \"" + self.tipo + "WMov2.png\" non trovata...")
+            self.imgWMov2 = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png"):
+                raise Exception("Immagine \"" + self.tipo + "AMov1.png\" non trovata...")
+            self.imgAMov1 = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png"):
+                raise Exception("Immagine \"" + self.tipo + "AMov2.png\" non trovata...")
+            self.imgAMov2 = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png"):
+                raise Exception("Immagine \"" + self.tipo + "SMov1.png\" non trovata...")
+            self.imgSMov1 = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png"):
+                raise Exception("Immagine \"" + self.tipo + "SMov2.png\" non trovata...")
+            self.imgSMov2 = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png"):
+                raise Exception("Immagine \"" + self.tipo + "DMov1.png\" non trovata...")
+            self.imgDMov1 = False
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png"):
+                raise Exception("Immagine \"" + self.tipo + "DMov2.png\" non trovata...")
+            self.imgDMov2 = False
 
-        self.imgDialogo = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalVar.gpx * 16, GlobalVar.gpy * 12, True)
+            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png"):
+                raise Exception("Immagine \"" + self.tipo + "Dialogo.png\" non trovata...")
+            self.imgDialogo = False
+        else:
+            self.imgW = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgA = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgS = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgD = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png", GlobalVar.gpx, GlobalVar.gpy, True)
+
+            self.imgWMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgWMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgAMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgAMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgSMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgSMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgDMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgDMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
+
+            self.imgDialogo = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalVar.gpx * 16, GlobalVar.gpy * 12, True)
 
     def girati(self, direzione):
         if direzione == "w":
@@ -1626,7 +1681,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("Vieni, accendiamo il fuoco e organizziamo i turni per la notte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioNotteForestaCadetta"]:
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
                 self.nome = "Sam"
                 self.oggettoDato = False
                 self.avanzaStoria = True

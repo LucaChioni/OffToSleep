@@ -13,7 +13,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
     gr = gr - 10
     gr = GlobalVar.gpx * gr // 60
     y = y - (GlobalVar.gpy // 8)
-    carattere = "Liberation Serif"
+    carattere = GlobalVar.fontUtilizzato
     font = pygame.font.SysFont(carattere, gr)
     coloreOrig = colore
     xOrig = x
@@ -155,9 +155,6 @@ def getVitaTotRallo(livello, guanti):
 def guardaVideo(listaImg, audio, loop):
     if GlobalVar.mouseBloccato:
         GlobalVar.configuraCursore(False)
-    GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-    oscuraIlluminaSchermo(illumina=2)
-    GlobalVar.aggiornaSchermo()
     bottoneDown = False
 
     # play video
@@ -166,8 +163,8 @@ def guardaVideo(listaImg, audio, loop):
     i = 0
     while i < len(listaImg) and not continua:
         if countdownInizioVideo == 0:
-            if i == 0:
-                GlobalVar.canaleSoundSottofondoAmbientale.play(audio)
+            if audio and i == 0:
+                GlobalVar.canaleSoundCanzone.play(audio)
             GlobalVar.disegnaImmagineSuSchermo(listaImg[i], (0, 0))
             GlobalVar.aggiornaSchermo()
 
@@ -188,14 +185,7 @@ def guardaVideo(listaImg, audio, loop):
                 i = 0
 
     # oscura lo schermo
-    oscuraIlluminaSchermo(illumina=False)
-    i = GlobalVar.volumeEffetti
-    while i > 0:
-        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(i)
-        i -= GlobalVar.volumeEffetti / 10
-        pygame.time.wait(30)
-    GlobalVar.canaleSoundSottofondoAmbientale.stop()
-    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+    # oscuraIlluminaSchermo(illumina=False)
 
 
 def trovacasattaccabili(x, y, raggio, caseviste):
@@ -2639,18 +2629,18 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
         GlobalVar.aggiornaSchermo()
 
 
-def copiaNemico(oggettoNemico):
+def copiaNemico(oggettoNemico, checkErrori=False):
     copia = copy.deepcopy(oggettoNemico)
-    if oggettoNemico:
+    if oggettoNemico and not checkErrori:
         copia.caricaImg()
         copia.girati(copia.direzione)
 
     return copia
 
 
-def copiaPersonaggio(oggettoPersonaggio, avanzamentoStoria):
+def copiaPersonaggio(oggettoPersonaggio, avanzamentoStoria, checkErrori=False):
     copia = copy.deepcopy(oggettoPersonaggio)
-    if copia.tipo != "Tutorial" and copia.tipo != "Nessuno":
+    if copia.tipo != "Tutorial" and copia.tipo != "Nessuno" and not checkErrori:
         if copia.tipo.startswith("Oggetto"):
             copia.caricaImgOggetto()
             copia.aggiornaImgOggetto(avanzamentoStoria, True)
@@ -2661,14 +2651,14 @@ def copiaPersonaggio(oggettoPersonaggio, avanzamentoStoria):
     return copia
 
 
-def copiaListaDiOggettiConImmagini(listaOggetti, nemici, avanzamentoStoria=0):
+def copiaListaDiOggettiConImmagini(listaOggetti, nemici, avanzamentoStoria=0, checkErrori=False):
     copiaLista = []
     if nemici:
         for oggetto in listaOggetti:
-            copiaLista.append(copiaNemico(oggetto))
+            copiaLista.append(copiaNemico(oggetto, checkErrori=checkErrori))
     else:
         for oggetto in listaOggetti:
-            copiaLista.append(copiaPersonaggio(oggetto, avanzamentoStoria))
+            copiaLista.append(copiaPersonaggio(oggetto, avanzamentoStoria, checkErrori=checkErrori))
 
     return copiaLista
 

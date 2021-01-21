@@ -57,7 +57,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["legnaReportataSam"] = i
     i += 1
-    dictAvanzamentoStoria["inizioNotteForestaCadetta"] = i
+    dictAvanzamentoStoria["inizioUltimoDialogoHans"] = i
     i += 1
     dictAvanzamentoStoria["fineUltimoDialogoHans"] = i
     i += 1
@@ -206,6 +206,7 @@ def definisciStanze():
     dictStanze["forestaCadetta4"] = i
     i += 1
     dictStanze["forestaCadetta5"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["forestaCadetta6"] = i
     i += 1

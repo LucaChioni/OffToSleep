@@ -5,7 +5,7 @@ from GenericFunc import *
 
 class NemicoObj(object):
 
-    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False, monetePossedute=-1):
+    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False, monetePossedute=-1, nonCaricareImg=False):
         self.x = x
         self.y = y
         self.vx = x
@@ -40,7 +40,7 @@ class NemicoObj(object):
         self.tipo = tipo
 
         self.inizializzaStatistiche(monetePossedute)
-        self.caricaImg()
+        self.caricaImg(nonCaricareImg=nonCaricareImg)
         self.girati(direzione)
 
     def inizializzaStatistiche(self, monetePossedute):
@@ -403,7 +403,7 @@ class NemicoObj(object):
         self.difesa = difesa
         self.avvelenabile = avvelenabile
 
-    def caricaImg(self):
+    def caricaImg(self, nonCaricareImg=False):
         self.imgW = GlobalVar.dictionaryImgNemici[self.tipo]["imgW"]
         self.imgA = GlobalVar.dictionaryImgNemici[self.tipo]["imgA"]
         self.imgS = GlobalVar.dictionaryImgNemici[self.tipo]["imgS"]
@@ -435,7 +435,10 @@ class NemicoObj(object):
         self.imgDanneggiamentoRallo = GlobalVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoRalloNemico"]
         self.imgDanneggiamentoColco = GlobalVar.dictionaryImgNemici[self.tipo]["imgDanneggiamentoColcoNemico"]
 
-        self.imgCampoAttaccabile = GlobalVar.loadImage('Immagini/Campiattaccabili/Campoattaccabilemostro.png', (self.raggioVisivo * 2) + GlobalVar.gpx, (self.raggioVisivo * 2) + GlobalVar.gpy, True)
+        if nonCaricareImg:
+            self.imgCampoAttaccabile = False
+        else:
+            self.imgCampoAttaccabile = GlobalVar.loadImage("Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (self.raggioVisivo * 2) + GlobalVar.gpx, (self.raggioVisivo * 2) + GlobalVar.gpy, True)
 
     def girati(self, direzione):
         self.imgAttuale = self.imgS

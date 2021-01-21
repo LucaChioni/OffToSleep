@@ -814,7 +814,7 @@ def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaV
     return listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi
 
 
-def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi):
+def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, canzone):
     if impossibileAprirePorta:
         personaggio = PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
@@ -852,9 +852,22 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]:
+        screen = GlobalVar.schermo.copy().convert()
+
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "OggettoLettoLucy", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+
+        GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
+        GlobalVar.aggiornaSchermo()
+        GlobalVar.canaleSoundCanzone.set_volume(0)
+        GlobalVar.canaleSoundCanzone.play(canzone, -1)
+        i = 0
+        while i < GlobalVar.volumeCanzoni:
+            GlobalVar.canaleSoundCanzone.set_volume(i)
+            i += GlobalVar.volumeCanzoni / 10
+            pygame.time.wait(30)
+        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
         caricaTutto = True
     elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"] and stanza == GlobalVar.dictStanze["casaHansLucy1"] and x == GlobalVar.gpx * 6 and y == GlobalVar.gpy * 8:
         personaggio = PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
@@ -894,7 +907,7 @@ def gestisciEventiStoria(avanzamentoStoria, stanza, npers, x, y, cambiosta, cari
                 personaggio.vy = personaggio.y
                 personaggio.girati("s")
                 break
-    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioNotteForestaCadetta"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+    elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"] and stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         pygame.time.wait(1000)
         personaggio = PersonaggioObj(x, y, False, "FiglioUfficiale", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)

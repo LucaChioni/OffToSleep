@@ -323,6 +323,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 if sottofondoAmbientale != GlobalVar.audioAmbienteForestaFuoco:
                     sottofondoAmbientaleCambiato = True
                 sottofondoAmbientale = GlobalVar.audioAmbienteForestaFuoco
+                canzoneCambiata = True
+                canzone = False
                 npers = 1
                 x = GlobalVar.gsx // 32 * 16
                 y = GlobalVar.gsy // 18 * 9
@@ -398,6 +400,26 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 y = GlobalVar.gsy // 18 * 15
 
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale
+
+
+def scriviNomeZona(stanza, stanzaVecchia):
+    stoppaMusica = False
+    if (stanzaVecchia == GlobalVar.dictStanze["sognoLucy4"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]) or (stanzaVecchia == GlobalVar.dictStanze["forestaCadetta1"] and stanza == GlobalVar.dictStanze["casaHansLucy4"]) or (stanzaVecchia == GlobalVar.dictStanze["forestaCadetta5"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]):
+        GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
+        messaggio("Casa", GlobalVar.grigiochi, GlobalVar.gpx * 16, GlobalVar.gpy * 8, 150, centrale=True)
+        GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 4), int(GlobalVar.gpy * 10.6)), (int(GlobalVar.gpx * 28) - 1, int(GlobalVar.gpy * 10.6)), 2)
+        oscuraIlluminaSchermo(illumina=2)
+        GlobalVar.aggiornaSchermo()
+        if stanzaVecchia == GlobalVar.dictStanze["sognoLucy4"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]:
+            stoppaMusica = True
+    elif (stanzaVecchia == GlobalVar.dictStanze["casaHansLucy4"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]) or (stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà1"] and stanza == GlobalVar.dictStanze["forestaCadetta8"]):
+        GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
+        messaggio("Foresta Cadetta", GlobalVar.grigiochi, GlobalVar.gpx * 16, GlobalVar.gpy * 8, 150, centrale=True)
+        GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 4), int(GlobalVar.gpy * 10.6)), (int(GlobalVar.gpx * 28) - 1, int(GlobalVar.gpy * 10.6)), 2)
+        oscuraIlluminaSchermo(illumina=2)
+        GlobalVar.aggiornaSchermo()
+
+    return stoppaMusica
 
 
 def nonPuoiProcedere(avanzamentoStoria, x, y, stanzaVecchia, stanzaDestinazione, listaAvanzamentoDialoghi):

@@ -83,9 +83,11 @@ schermoIntero = True
 # nome-icona
 titolo = "Still waiting"
 pygame.display.set_caption(titolo)
-icona = pygame.image.load("Immagini/Icona.png")
+icona = pygame.image.load(gamePath + "Immagini/Icone/Icona.png")
 pygame.display.set_icon(icona)
+fontUtilizzato = "Liberation Serif"
 listaTastiPremuti = []
+primoAvvio = True
 
 # clock
 clockMainLoop = pygame.time.Clock()
@@ -154,7 +156,15 @@ def loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
         img = img.convert_alpha()
     else:
         img = img.convert()
-    pygame.event.pump()
+
+    # per poter chiudere il gioco durante il caricamento
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+    global listaTastiPremuti
+    listaTastiPremuti = []
+
     return img
 
 def loadSound(path):
@@ -162,12 +172,62 @@ def loadSound(path):
         sound = pygame.mixer.Sound(gamePath + path)
     except Exception:
         print ("Impossibile caricare " + path)
-        sound = pygame.mixer.Sound(gamePath + "Audio/RumoriAmbiente/Acquisto.wav")
+        sound = False
+
+    # per poter chiudere il gioco durante il caricamento
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+
     return sound
 
 def loadFile(path, mode):
+    if not os.path.exists(gamePath + path):
+        creazione = open(gamePath + path, "w+")
+        creazione.close()
     file = open(gamePath + path, mode)
+
+    # per poter chiudere il gioco durante il caricamento
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+    global listaTastiPremuti
+    listaTastiPremuti = []
+
     return file
+
+def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
+    global numImgCaricata
+    immagine = loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
+    disegnaRettangoloSuSchermo(schermo, grigioscuPiuScu, (int(gpx * 0.5), gpy * 6.5, int(gpx * 16), gpy * 1))
+    numImgCaricata += 1
+    caricamentoCompiuto = (gpx * 15.0 / numImgTotali) * numImgCaricata
+    disegnaRettangoloSuSchermo(schermo, grigio, (int(gpx * 0.5), gpy * 6.5, int(caricamentoCompiuto), gpy * 1))
+    aggiornaSchermo()
+    return immagine
+def caricaImmagineCambioRisoluzione(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
+    global numImgCaricata
+    immagine = loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
+    disegnaRettangoloSuSchermo(schermo, grigioscuPiuScu, (int(gpx * 0.5), gpy * 10, int(gpx * 31), gpy * 1))
+    numImgCaricata += 1
+    caricamentoCompiuto = (gpx * 31.0 / numImgTotali) * numImgCaricata
+    disegnaRettangoloSuSchermo(schermo, grigio, (int(gpx * 0.5), gpy * 10, int(caricamentoCompiuto), gpy * 1))
+    aggiornaSchermo()
+    return immagine
+
+numSndTotali = 55
+numSndCaricato = 0
+def caricaSuonoMostrandoAvanzamento(path):
+    global numSndCaricato
+    suono = loadSound(path)
+    disegnaRettangoloSuSchermo(schermo, grigioscuPiuScu, (int(gpx * 0.5), gpy * 6.5, int(gpx * 16), gpy * 1))
+    numSndCaricato += 1
+    caricamentoCompiuto = (gpx * 15) + ((gpx * 1.0 / numSndTotali) * numSndCaricato)
+    disegnaRettangoloSuSchermo(schermo, grigio, (int(gpx * 0.5), gpy * 6.5, int(caricamentoCompiuto), gpy * 1))
+    aggiornaSchermo()
+    return suono
 
 # dichiaro le variabili globali della funzione loadImgs
 global puntatore
@@ -415,8 +475,12 @@ global imgOmbreggiaturaContorniMappaMenu
 global dictionaryImgNemici
 global imgDanneggiamentoCausaRallo
 global imgDanneggiamentoCausaColco
-
-def loadImgs():
+global persoLucy
+global persobLucy
+global persoFraMaggiore
+global persobFraMaggiore
+global schemataDiCaricamento
+def loadImgs(cambioRisoluzione=False):
     global puntatore
     global puntatorevecchio
     global puntatIn
@@ -662,162 +726,176 @@ def loadImgs():
     global dictionaryImgNemici
     global imgDanneggiamentoCausaRallo
     global imgDanneggiamentoCausaColco
+    global persoLucy
+    global persobLucy
+    global persoFraMaggiore
+    global persobFraMaggiore
+    global schemataDiCaricamento
+
+    if cambioRisoluzione:
+        funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
+    else:
+        funzionePerCaricareImmagini = caricaImmagineMostrandoAvanzamento
 
     # puntatore
-    puntatore = loadImage("Immagini/Puntatori/Puntatore.png", gpx // 2, gpy // 2, True)
-    puntatorevecchio = loadImage("Immagini/Puntatori/Puntatorevecchio.png", gpx // 2, gpy // 2, True)
-    puntatIn = loadImage('Immagini/Puntatori/InquadraCVin.png', gpx, gpy, True)
-    puntatOut = loadImage('Immagini/Puntatori/InquadraCVout.png', gpx, gpy, True)
-    puntatSfo = loadImage('Immagini/Oggetti/sfondoOggettoLanciato.png', gpx, gpy, True)
-    puntatDif = loadImage('Immagini/Oggetti/Difesa.png', gpx, gpy, True)
-    puntatAtt = loadImage('Immagini/Oggetti/Attacco.png', gpx, gpy, True)
-    puntatArc = loadImage('Immagini/Oggetti/AttaccoDistanza.png', gpx, gpy, True)
-    puntatPor = loadImage('Immagini/Oggetti/ApriChiudiPorta.png', gpx, gpy, True)
-    puntatCof = loadImage('Immagini/Oggetti/ApriCofanetto.png', gpx, gpy, True)
-    puntatAnalisi = loadImage('Immagini/Oggetti/AnalizzaColco.png', gpx, gpy, True)
-    puntatBom = loadImage('Immagini/Oggetti/Oggetto6Ico.png', gpx, gpy, True)
-    puntatBoV = loadImage('Immagini/Oggetti/Oggetto7Ico.png', gpx, gpy, True)
-    puntatEsc = loadImage('Immagini/Oggetti/Oggetto8Ico.png', gpx, gpy, True)
-    puntatBoA = loadImage('Immagini/Oggetti/Oggetto9Ico.png', gpx, gpy, True)
-    puntatBoP = loadImage('Immagini/Oggetti/Oggetto10Ico.png', gpx, gpy, True)
-    scorriSu = loadImage("Immagini/Puntatori/ScorriOggettiSu.png", gpx, gpy, True)
-    scorriGiu = loadImage("Immagini/Puntatori/ScorriOggettiGiu.png", gpx, gpy, True)
-    puntatDialoghi = loadImage('Immagini/Oggetti/IcoDialogo.png', gpx, gpy, True)
-    puntatoreInquadraNemici = loadImage("Immagini/Puntatori/InquadraNemicoSelezionato.png", gpx, gpy, True)
-    puntatoreImpostazioniDestra = loadImage("Immagini/Puntatori/ScorriImpostazioniDestra.png", gpx, gpy, True)
-    puntatoreImpostazioniSinistra = loadImage("Immagini/Puntatori/ScorriImpostazioniSinistra.png", gpx, gpy, True)
-    puntatoreImpostazioniDestraBloccato = loadImage("Immagini/Puntatori/ScorriImpostazioniDestraBloccato.png", gpx, gpy, True)
-    puntatoreImpostazioniSinistraBloccato = loadImage("Immagini/Puntatori/ScorriImpostazioniSinistraBloccato.png", gpx, gpy, True)
+    puntatore = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/Puntatore.png", gpx // 2, gpy // 2, True)
+    puntatorevecchio = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/Puntatorevecchio.png", gpx // 2, gpy // 2, True)
+    puntatIn = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Puntatori/InquadraCVin.png', gpx, gpy, True)
+    puntatOut = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Puntatori/InquadraCVout.png', gpx, gpy, True)
+    puntatSfo = funzionePerCaricareImmagini('Immagini/Oggetti/sfondoOggettoLanciato.png', gpx, gpy, True)
+    puntatDif = funzionePerCaricareImmagini('Immagini/Oggetti/Difesa.png', gpx, gpy, True)
+    puntatAtt = funzionePerCaricareImmagini('Immagini/Oggetti/Attacco.png', gpx, gpy, True)
+    puntatArc = funzionePerCaricareImmagini('Immagini/Oggetti/AttaccoDistanza.png', gpx, gpy, True)
+    puntatPor = funzionePerCaricareImmagini('Immagini/Oggetti/ApriChiudiPorta.png', gpx, gpy, True)
+    puntatCof = funzionePerCaricareImmagini('Immagini/Oggetti/ApriCofanetto.png', gpx, gpy, True)
+    puntatAnalisi = funzionePerCaricareImmagini('Immagini/Oggetti/AnalizzaColco.png', gpx, gpy, True)
+    puntatBom = funzionePerCaricareImmagini('Immagini/Oggetti/Oggetto6Ico.png', gpx, gpy, True)
+    puntatBoV = funzionePerCaricareImmagini('Immagini/Oggetti/Oggetto7Ico.png', gpx, gpy, True)
+    puntatEsc = funzionePerCaricareImmagini('Immagini/Oggetti/Oggetto8Ico.png', gpx, gpy, True)
+    puntatBoA = funzionePerCaricareImmagini('Immagini/Oggetti/Oggetto9Ico.png', gpx, gpy, True)
+    puntatBoP = funzionePerCaricareImmagini('Immagini/Oggetti/Oggetto10Ico.png', gpx, gpy, True)
+    scorriSu = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/ScorriOggettiSu.png", gpx, gpy, True)
+    scorriGiu = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/ScorriOggettiGiu.png", gpx, gpy, True)
+    puntatDialoghi = funzionePerCaricareImmagini('Immagini/Oggetti/IcoDialogo.png', gpx, gpy, True)
+    puntatoreInquadraNemici = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/InquadraNemicoSelezionato.png", gpx, gpy, True)
+    puntatoreImpostazioniDestra = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniDestra.png", gpx, gpy, True)
+    puntatoreImpostazioniSinistra = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistra.png", gpx, gpy, True)
+    puntatoreImpostazioniDestraBloccato = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniDestraBloccato.png", gpx, gpy, True)
+    puntatoreImpostazioniSinistraBloccato = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistraBloccato.png", gpx, gpy, True)
 
     # immagini personaggio
-    persw = loadImage('Immagini/Personaggi/Lucy/Personaggio4.png', gpx, gpy, True)
-    perswb = loadImage('Immagini/Personaggi/Lucy/Personaggio4b.png', gpx, gpy, True)
-    persa = loadImage('Immagini/Personaggi/Lucy/Personaggio3.png', gpx, gpy, True)
-    persab = loadImage('Immagini/Personaggi/Lucy/Personaggio3b.png', gpx, gpy, True)
-    perso = loadImage('Immagini/Personaggi/Lucy/Personaggio1.png', gpx * 5, gpy * 5, True)
-    persob = loadImage('Immagini/Personaggi/Lucy/Personaggio1b.png', gpx * 5, gpy * 5, True)
-    perss = loadImage('Immagini/Personaggi/Lucy/Personaggio1.png', gpx, gpy, True)
-    perssb = loadImage('Immagini/Personaggi/Lucy/Personaggio1b.png', gpx, gpy, True)
-    persd = loadImage('Immagini/Personaggi/Lucy/Personaggio2.png', gpx, gpy, True)
-    persdb = loadImage('Immagini/Personaggi/Lucy/Personaggio2b.png', gpx, gpy, True)
-    perssm = loadImage('Immagini/Personaggi/Lucy/Personaggio1mov.png', gpx, gpy, True)
-    perssmb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio1movb1.png', gpx, gpy, True)
-    perssmb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio1movb2.png', gpx, gpy, True)
-    persdm = loadImage('Immagini/Personaggi/Lucy/Personaggio2mov.png', gpx, gpy, True)
-    persdmb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio2movb1.png', gpx, gpy, True)
-    persdmb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio2movb2.png', gpx, gpy, True)
-    persam = loadImage('Immagini/Personaggi/Lucy/Personaggio3mov.png', gpx, gpy, True)
-    persamb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio3movb1.png', gpx, gpy, True)
-    persamb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio3movb2.png', gpx, gpy, True)
-    perswm = loadImage('Immagini/Personaggi/Lucy/Personaggio4mov.png', gpx, gpy, True)
-    perswmb1 = loadImage('Immagini/Personaggi/Lucy/Personaggio4movb1.png', gpx, gpy, True)
-    perswmb2 = loadImage('Immagini/Personaggi/Lucy/Personaggio4movb2.png', gpx, gpy, True)
-    perswmbAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio4movbAttacco.png', gpx, gpy, True)
-    persambAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio3movbAttacco.png', gpx, gpy, True)
-    perssmbAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio1movbAttacco.png', gpx, gpy, True)
-    persdmbAttacco = loadImage('Immagini/Personaggi/Lucy/Personaggio2movbAttacco.png', gpx, gpy, True)
-    persmbDifesa = loadImage('Immagini/Personaggi/Lucy/PersonaggiomovbDifesa.png', gpx, gpy, True)
-    persAvvele = loadImage('Immagini/Personaggi/Lucy/PersonaggioAvvelenato.png', gpx, gpy, True)
+    persw = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio4.png', gpx, gpy, True)
+    perswb = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio4b.png', gpx, gpy, True)
+    persa = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio3.png', gpx, gpy, True)
+    persab = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio3b.png', gpx, gpy, True)
+    perso = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1.png', gpx * 5, gpy * 5, True)
+    persob = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1b.png', gpx * 5, gpy * 5, True)
+    perss = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1.png', gpx, gpy, True)
+    perssb = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1b.png', gpx, gpy, True)
+    persd = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio2.png', gpx, gpy, True)
+    persdb = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio2b.png', gpx, gpy, True)
+    perssm = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1mov.png', gpx, gpy, True)
+    perssmb1 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1movb1.png', gpx, gpy, True)
+    perssmb2 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1movb2.png', gpx, gpy, True)
+    persdm = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio2mov.png', gpx, gpy, True)
+    persdmb1 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio2movb1.png', gpx, gpy, True)
+    persdmb2 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio2movb2.png', gpx, gpy, True)
+    persam = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio3mov.png', gpx, gpy, True)
+    persamb1 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio3movb1.png', gpx, gpy, True)
+    persamb2 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio3movb2.png', gpx, gpy, True)
+    perswm = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio4mov.png', gpx, gpy, True)
+    perswmb1 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio4movb1.png', gpx, gpy, True)
+    perswmb2 = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio4movb2.png', gpx, gpy, True)
+    perswmbAttacco = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio4movbAttacco.png', gpx, gpy, True)
+    persambAttacco = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio3movbAttacco.png', gpx, gpy, True)
+    perssmbAttacco = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1movbAttacco.png', gpx, gpy, True)
+    persdmbAttacco = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio2movbAttacco.png', gpx, gpy, True)
+    persmbDifesa = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/PersonaggiomovbDifesa.png', gpx, gpy, True)
+    persAvvele = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/PersonaggioAvvelenato.png', gpx, gpy, True)
+    persoLucy = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1.png', gpx * 5, gpy * 5, True)
+    persobLucy = funzionePerCaricareImmagini('Immagini/Personaggi/Lucy/Personaggio1b.png', gpx * 5, gpy * 5, True)
+    persoFraMaggiore = funzionePerCaricareImmagini('Immagini/Personaggi/FratelloMaggiore/Personaggio1.png', gpx * 5, gpy * 5, True)
+    persobFraMaggiore = funzionePerCaricareImmagini('Immagini/Personaggi/FratelloMaggiore/Personaggio1b.png', gpx * 5, gpy * 5, True)
 
     # immagini robot
-    robow = loadImage('Immagini/Personaggi/Colco/Robot4.png', gpx, gpy, True)
-    roboa = loadImage('Immagini/Personaggi/Colco/Robot3.png', gpx, gpy, True)
-    roboo1 = loadImage('Immagini/Personaggi/Colco/Robot1.png', gpx * 5, gpy * 5, True)
-    roboo2 = loadImage('Immagini/Personaggi/Colco/Robot1.png', gpx * 3, gpy * 3, True)
-    robos = loadImage('Immagini/Personaggi/Colco/Robot1.png', gpx, gpy, True)
-    robod = loadImage('Immagini/Personaggi/Colco/Robot2.png', gpx, gpy, True)
-    robomo = loadImage('Immagini/Personaggi/Colco/Robot0.png', gpx, gpy, True)
-    robodp = loadImage('Immagini/Personaggi/Colco/Robot2p.png', gpx, gpy, True)
-    roboap = loadImage('Immagini/Personaggi/Colco/Robot3p.png', gpx, gpy, True)
-    armrobmo = loadImage('Immagini/EquipRobo/Batteria00.png', gpx, gpy, True)
-    roboSurrisc = loadImage('Immagini/Personaggi/Colco/RobotSurriscaldato.png', gpx, gpy, True)
+    robow = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot4.png', gpx, gpy, True)
+    roboa = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot3.png', gpx, gpy, True)
+    roboo1 = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot1.png', gpx * 5, gpy * 5, True)
+    roboo2 = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot1.png', gpx * 3, gpy * 3, True)
+    robos = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot1.png', gpx, gpy, True)
+    robod = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot2.png', gpx, gpy, True)
+    robomo = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot0.png', gpx, gpy, True)
+    robodp = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot2p.png', gpx, gpy, True)
+    roboap = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/Robot3p.png', gpx, gpy, True)
+    armrobmo = funzionePerCaricareImmagini('Immagini/EquipRobo/Batteria00.png', gpx, gpy, True)
+    roboSurrisc = funzionePerCaricareImmagini('Immagini/Personaggi/Colco/RobotSurriscaldato.png', gpx, gpy, True)
 
     # img danneggiamento personaggio e Colco
-    imgDanneggiamentoCausaRallo = loadImage("Immagini/Nemici/DannoRallo.png", gpx, gpy, True)
-    imgDanneggiamentoCausaColco = loadImage("Immagini/Nemici/DannoColco.png", gpx, gpy, True)
+    imgDanneggiamentoCausaRallo = funzionePerCaricareImmagini("Immagini/Nemici/DannoRallo.png", gpx, gpy, True)
+    imgDanneggiamentoCausaColco = funzionePerCaricareImmagini("Immagini/Nemici/DannoColco.png", gpx, gpy, True)
 
     # img menu mercante
-    mercanteMenu = loadImage('Immagini/Personaggi/Mercante/MercanteDialogo.png', gpx * 12, gpy * 9, False)
-    scorriSuGiu = loadImage('Immagini/Puntatori/ScorriSuGiu.png', gpx, gpy, True)
-    scorriSuGiuBloccato = loadImage('Immagini/Puntatori/ScorriSuGiuBloccato.png', gpx, gpy, True)
-    scorriSuGiuBloccatoGiu = loadImage('Immagini/Puntatori/ScorriSuGiuBloccatoGiu.png', gpx, gpy, True)
-    scorriSuGiuBloccatoSu = loadImage('Immagini/Puntatori/ScorriSuGiuBloccatoSu.png', gpx, gpy, True)
-    sfondoDialogoMercante = loadImage('Immagini/DecorazioniMenu/SfondoDialogoMercante.png', gpx * 9.5, gpy * 4.5, False)
-    faretra1Menu = loadImage('Immagini/Oggetti/Faretra1Menu.png', gpx * 8, gpy * 8, False)
-    faretra2Menu = loadImage('Immagini/Oggetti/Faretra2Menu.png', gpx * 8, gpy * 8, False)
-    faretra3Menu = loadImage('Immagini/Oggetti/Faretra3Menu.png', gpx * 8, gpy * 8, False)
-    frecciaMenu = loadImage('Immagini/Oggetti/FrecciaMenu.png', gpx * 8, gpy * 8, False)
+    mercanteMenu = funzionePerCaricareImmagini('Immagini/Personaggi/Mercante/MercanteDialogo.png', gpx * 12, gpy * 9, False)
+    scorriSuGiu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Puntatori/ScorriSuGiu.png', gpx, gpy, True)
+    scorriSuGiuBloccato = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccato.png', gpx, gpy, True)
+    scorriSuGiuBloccatoGiu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoGiu.png', gpx, gpy, True)
+    scorriSuGiuBloccatoSu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Puntatori/ScorriSuGiuBloccatoSu.png', gpx, gpy, True)
+    sfondoDialogoMercante = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/SfondoDialogoMercante.png', gpx * 9.5, gpy * 4.5, False)
+    faretra1Menu = funzionePerCaricareImmagini('Immagini/Oggetti/Faretra1Menu.png', gpx * 8, gpy * 8, False)
+    faretra2Menu = funzionePerCaricareImmagini('Immagini/Oggetti/Faretra2Menu.png', gpx * 8, gpy * 8, False)
+    faretra3Menu = funzionePerCaricareImmagini('Immagini/Oggetti/Faretra3Menu.png', gpx * 8, gpy * 8, False)
+    frecciaMenu = funzionePerCaricareImmagini('Immagini/Oggetti/FrecciaMenu.png', gpx * 8, gpy * 8, False)
 
     # sfondi
-    sfondoRallo = loadImage('Immagini/Status/SfondoRallo.png', gpx * 6, gpy, False)
-    sfondoColco = loadImage('Immagini/Status/SfondoColco.png', gpx * 4, gpy, False)
-    sfondoMostro = loadImage('Immagini/Status/SfondoNemici.png', gpx * 3, gpy, False)
-    sfondoEsche = loadImage('Immagini/Status/SfondoEsche.png', gpx, gpy, True)
-    sfondoStartBattaglia = loadImage('Immagini/Oggetti/SfondoStartBattaglia.png', gpx * 7, gpy * 10, False)
-    sfondoTriangolinoAltoDestra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoDestra.png', gpx, gpy, True)
-    sfondoTriangolinoAltoSinistra = loadImage('Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', gpx, gpy, True)
-    sfondoTriangolinoBassoDestra = loadImage('Immagini/DecorazioniMenu/TriangoloBassoDestra.png', gpx, gpy, True)
-    sfondoTriangolinoBassoSinistra = loadImage('Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', gpx, gpy, True)
+    sfondoRallo = funzionePerCaricareImmagini('Immagini/Status/SfondoRallo.png', gpx * 6, gpy, False)
+    sfondoColco = funzionePerCaricareImmagini('Immagini/Status/SfondoColco.png', gpx * 4, gpy, False)
+    sfondoMostro = funzionePerCaricareImmagini('Immagini/Status/SfondoNemici.png', gpx * 3, gpy, False)
+    sfondoEsche = funzionePerCaricareImmagini('Immagini/Status/SfondoEsche.png', gpx, gpy, True)
+    sfondoStartBattaglia = funzionePerCaricareImmagini('Immagini/Oggetti/SfondoStartBattaglia.png', gpx * 7, gpy * 10, False)
+    sfondoTriangolinoAltoDestra = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/TriangoloAltoDestra.png', gpx, gpy, True)
+    sfondoTriangolinoAltoSinistra = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', gpx, gpy, True)
+    sfondoTriangolinoBassoDestra = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/TriangoloBassoDestra.png', gpx, gpy, True)
+    sfondoTriangolinoBassoSinistra = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', gpx, gpy, True)
 
     # status
-    appiccicoso = loadImage('Immagini/Status/Appiccicoso.png', gpx * 3 // 4, gpy * 3 // 4, True)
-    avvelenatoMenu = loadImage('Immagini/Status/Avvelenato.png', gpx, gpy, True)
-    avvelenato = loadImage('Immagini/Status/Avvelenato.png', gpx * 3 // 4, gpy * 3 // 4, True)
-    surriscaldatoMenu = loadImage('Immagini/Status/Surriscaldato.png', gpx, gpy, True)
-    surriscaldato = loadImage('Immagini/Status/Surriscaldato.png', gpx * 3 // 4, gpy * 3 // 4, True)
-    attaccopiuMenu = loadImage('Immagini/Status/Attaccopiu.png', gpx, gpy, True)
-    attaccopiu = loadImage('Immagini/Status/Attaccopiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
-    difesapiuMenu = loadImage('Immagini/Status/Difesapiu.png', gpx, gpy, True)
-    difesapiu = loadImage('Immagini/Status/Difesapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
-    velocitapiuMenu = loadImage('Immagini/Status/Velocitapiu.png', gpx, gpy, True)
-    velocitapiu = loadImage('Immagini/Status/Velocitapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
-    efficienzapiuMenu = loadImage('Immagini/Status/Efficienzapiu.png', gpx, gpy, True)
-    efficienzapiu = loadImage('Immagini/Status/Efficienzapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
-    imgNumFrecce = loadImage('Immagini/Status/NumFrecce.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    appiccicoso = funzionePerCaricareImmagini('Immagini/Status/Appiccicoso.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    avvelenatoMenu = funzionePerCaricareImmagini('Immagini/Status/Avvelenato.png', gpx, gpy, True)
+    avvelenato = funzionePerCaricareImmagini('Immagini/Status/Avvelenato.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    surriscaldatoMenu = funzionePerCaricareImmagini('Immagini/Status/Surriscaldato.png', gpx, gpy, True)
+    surriscaldato = funzionePerCaricareImmagini('Immagini/Status/Surriscaldato.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    attaccopiuMenu = funzionePerCaricareImmagini('Immagini/Status/Attaccopiu.png', gpx, gpy, True)
+    attaccopiu = funzionePerCaricareImmagini('Immagini/Status/Attaccopiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    difesapiuMenu = funzionePerCaricareImmagini('Immagini/Status/Difesapiu.png', gpx, gpy, True)
+    difesapiu = funzionePerCaricareImmagini('Immagini/Status/Difesapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    velocitapiuMenu = funzionePerCaricareImmagini('Immagini/Status/Velocitapiu.png', gpx, gpy, True)
+    velocitapiu = funzionePerCaricareImmagini('Immagini/Status/Velocitapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    efficienzapiuMenu = funzionePerCaricareImmagini('Immagini/Status/Efficienzapiu.png', gpx, gpy, True)
+    efficienzapiu = funzionePerCaricareImmagini('Immagini/Status/Efficienzapiu.png', gpx * 3 // 4, gpy * 3 // 4, True)
+    imgNumFrecce = funzionePerCaricareImmagini('Immagini/Status/NumFrecce.png', gpx * 3 // 4, gpy * 3 // 4, True)
 
     # menu alto destra
-    sfochiaveocchio = loadImage("Immagini/Oggetti/SfondoOcchioChiave.png", gpx * 5, gpy * 2, False)
-    occhioape = loadImage('Immagini/Status/OcchioAperto.png', gpx, gpy, True)
-    occhiochiu = loadImage('Immagini/Status/OcchioChiuso.png', gpx, gpy, True)
-    chiaveroboacc = loadImage('Immagini/Oggetti/ChiaveColcoAcc.png', gpx * 2, gpy * 2, True)
-    chiaverobospe = loadImage('Immagini/Oggetti/ChiaveColcoSpe.png', gpx * 2, gpy * 2, True)
+    sfochiaveocchio = funzionePerCaricareImmagini("Immagini/Oggetti/SfondoOcchioChiave.png", gpx * 5, gpy * 2, False)
+    occhioape = funzionePerCaricareImmagini('Immagini/Status/OcchioAperto.png', gpx, gpy, True)
+    occhiochiu = funzionePerCaricareImmagini('Immagini/Status/OcchioChiuso.png', gpx, gpy, True)
+    chiaveroboacc = funzionePerCaricareImmagini('Immagini/Oggetti/ChiaveColcoAcc.png', gpx * 2, gpy * 2, True)
+    chiaverobospe = funzionePerCaricareImmagini('Immagini/Oggetti/ChiaveColcoSpe.png', gpx * 2, gpy * 2, True)
 
     # oggetti sulla schermata
-    esche = loadImage("Immagini/Oggetti/Oggetto8Ico.png", gpx, gpy, True)
-    sacchettoDenaroStart = loadImage('Immagini/Oggetti/SacchettoDenaroSinistra.png', gpx * 4, gpy * 4, False)
-    sacchettoDenaroMercante = loadImage('Immagini/Oggetti/SacchettoDenaroDestra.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart0 = loadImage('Immagini/EquipLucy/Faretre/Faretra0Menu.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart1 = loadImage('Immagini/EquipLucy/Faretre/Faretra1Menu.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart2 = loadImage('Immagini/EquipLucy/Faretre/Faretra2Menu.png', gpx * 4, gpy * 4, False)
-    faretraFrecceStart3 = loadImage('Immagini/EquipLucy/Faretre/Faretra3Menu.png', gpx * 4, gpy * 4, False)
-    sacchettoDenaro = loadImage('Immagini/Oggetti/SacchettoDenaroIco.png', gpx, gpy, True)
-    imgFrecciaLanciata = loadImage('Immagini/Oggetti/Freccia.png', gpx, gpy, True)
+    esche = funzionePerCaricareImmagini("Immagini/Oggetti/Oggetto8Ico.png", gpx, gpy, True)
+    sacchettoDenaroStart = funzionePerCaricareImmagini('Immagini/Oggetti/SacchettoDenaroSinistra.png', gpx * 4, gpy * 4, False)
+    sacchettoDenaroMercante = funzionePerCaricareImmagini('Immagini/Oggetti/SacchettoDenaroDestra.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart0 = funzionePerCaricareImmagini('Immagini/EquipLucy/Faretre/Faretra0Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart1 = funzionePerCaricareImmagini('Immagini/EquipLucy/Faretre/Faretra1Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart2 = funzionePerCaricareImmagini('Immagini/EquipLucy/Faretre/Faretra2Menu.png', gpx * 4, gpy * 4, False)
+    faretraFrecceStart3 = funzionePerCaricareImmagini('Immagini/EquipLucy/Faretre/Faretra3Menu.png', gpx * 4, gpy * 4, False)
+    sacchettoDenaro = funzionePerCaricareImmagini('Immagini/Oggetti/SacchettoDenaroIco.png', gpx, gpy, True)
+    imgFrecciaLanciata = funzionePerCaricareImmagini('Immagini/Oggetti/Freccia.png', gpx, gpy, True)
 
     # cofanetti
-    cofaniaper = loadImage("Immagini/Oggetti/CofanettoAperto.png", gpx, gpy, True)
-    cofanichiu = loadImage("Immagini/Oggetti/CofanettoChiuso.png", gpx, gpy, True)
-    sfocontcof = loadImage("Immagini/Oggetti/SfondoContenutoCofanetto.png", gpx * 16, gpy * 3, False)
+    cofaniaper = funzionePerCaricareImmagini("Immagini/Oggetti/CofanettoAperto.png", gpx, gpy, True)
+    cofanichiu = funzionePerCaricareImmagini("Immagini/Oggetti/CofanettoChiuso.png", gpx, gpy, True)
+    sfocontcof = funzionePerCaricareImmagini("Immagini/Oggetti/SfondoContenutoCofanetto.png", gpx * 16, gpy * 3, False)
 
     # immagini salvataggi
-    s1 = loadImage('Immagini/Salvataggi/S1.png', gpx * 3, gpy * 3, False)
-    s2 = loadImage('Immagini/Salvataggi/S2.png', gpx * 3, gpy * 3, False)
-    s3 = loadImage('Immagini/Salvataggi/S3.png', gpx * 3, gpy * 3, False)
+    s1 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Salvataggi/S1.png', gpx * 3, gpy * 3, False)
+    s2 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Salvataggi/S2.png', gpx * 3, gpy * 3, False)
+    s3 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Salvataggi/S3.png', gpx * 3, gpy * 3, False)
 
     # caselle attaccabili
-    campoattaccabileRallo1 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 13, gpy * 13, False)
-    campoattaccabileRallo2 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 11, gpy * 11, False)
-    campoattaccabileRallo3 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 13, gpy * 13, False)
-    campoattaccabileRallo4 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 11, gpy * 11, False)
-    campoattaccabileRallo5 = loadImage('Immagini/Campiattaccabili/Campoattaccabile2.png', gpx * 9, gpy * 9, False)
-    campoattaccabileRobo = loadImage('Immagini/Campiattaccabili/Campoattaccabile3.png', gpx * 13, gpy * 13, False)
-    caselleattaccabiliRobo = loadImage('Immagini/Campiattaccabili/CaselleattaccabiliRobo.png', gpx, gpy, True)
-    caselleattaccabilimostro = loadImage('Immagini/Campiattaccabili/Caselleattaccabilimostro.png', gpx, gpy, True)
-    caselleattaccabili = loadImage('Immagini/Campiattaccabili/Caselleattaccabili.png', gpx, gpy, True)
+    campoattaccabileRallo1 = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Campoattaccabile2.png', gpx * 13, gpy * 13, False)
+    campoattaccabileRallo2 = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Campoattaccabile2.png', gpx * 11, gpy * 11, False)
+    campoattaccabileRallo3 = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Campoattaccabile2.png', gpx * 13, gpy * 13, False)
+    campoattaccabileRallo4 = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Campoattaccabile2.png', gpx * 11, gpy * 11, False)
+    campoattaccabileRallo5 = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Campoattaccabile2.png', gpx * 9, gpy * 9, False)
+    campoattaccabileRobo = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Campoattaccabile3.png', gpx * 13, gpy * 13, False)
+    caselleattaccabiliRobo = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/CaselleattaccabiliRobo.png', gpx, gpy, True)
+    caselleattaccabilimostro = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Caselleattaccabilimostro.png', gpx, gpy, True)
+    caselleattaccabili = funzionePerCaricareImmagini('Immagini/Status/Campiattaccabili/Caselleattaccabili.png', gpx, gpy, True)
 
     # aumento livello
-    saliliv = loadImage('Immagini/Levelup/Saliliv.png', gpx, gpy, True)
-    saliliv1 = loadImage('Immagini/Levelup/Saliliv1.png', gpx, gpy, True)
-    saliliv2 = loadImage('Immagini/Levelup/Saliliv2.png', gpx, gpy, True)
+    saliliv = funzionePerCaricareImmagini('Immagini/Status/Levelup/Saliliv.png', gpx, gpy, True)
+    saliliv1 = funzionePerCaricareImmagini('Immagini/Status/Levelup/Saliliv1.png', gpx, gpy, True)
+    saliliv2 = funzionePerCaricareImmagini('Immagini/Status/Levelup/Saliliv2.png', gpx, gpy, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
     vetImgSpadeMenu = []
@@ -828,30 +906,30 @@ def loadImgs():
     vetImgCollaneMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadeMenu.append(loadImage("Immagini/EquipLucy/Spade/Spada%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgArchiMenu.append(loadImage("Immagini/EquipLucy/Archi/Arco%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgArmatureMenu.append(loadImage("Immagini/EquipLucy/Armature/Armatura%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgScudiMenu.append(loadImage("Immagini/EquipLucy/Scudi/Scudo%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgGuantiMenu.append(loadImage("Immagini/EquipLucy/Guanti/Guanti%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
-        vetImgCollaneMenu.append(loadImage("Immagini/EquipLucy/Collane/Collana%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgSpadeMenu.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Spade/Spada%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgArchiMenu.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Archi/Arco%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgArmatureMenu.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Armature/Armatura%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgScudiMenu.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Scudi/Scudo%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgGuantiMenu.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Guanti/Guanti%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgCollaneMenu.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Collane/Collana%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
         contatoreGlobale += 1
-    imgGambitSconosciuta = loadImage('Immagini/GrafGambit/Sconosciuto.png', gpx * 12, gpy * 9, False)
+    imgGambitSconosciuta = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/GrafGambit/Sconosciuto.png', gpx * 12, gpy * 9, False)
     vetImgCondizioniMenu = []
     contatoreGlobale = 0
     while contatoreGlobale <= 20:
-        vetImgCondizioniMenu.append(loadImage("Immagini/GrafGambit/GrafCondizioni/Condizione%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
+        vetImgCondizioniMenu.append(funzionePerCaricareImmagini("Immagini/DecorazioniMenu/GrafGambit/GrafCondizioni/Condizione%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
         contatoreGlobale += 1
     vetImgTecnicheMenu = []
     contatoreGlobale = 0
     while contatoreGlobale <= 20:
-        vetImgTecnicheMenu.append(loadImage("Immagini/GrafGambit/GrafTecniche/Tecnica%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
+        vetImgTecnicheMenu.append(funzionePerCaricareImmagini("Immagini/DecorazioniMenu/GrafGambit/GrafTecniche/Tecnica%i.png" % contatoreGlobale, gpx * 12, gpy * 9, False))
         contatoreGlobale += 1
     vetImgBatterieMenu = []
     vetIcoBatterieMenu = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgBatterieMenu.append(loadImage("Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetIcoBatterieMenu.append(loadImage("Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
+        vetImgBatterieMenu.append(funzionePerCaricareImmagini("Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetIcoBatterieMenu.append(funzionePerCaricareImmagini("Immagini/EquipRobo/Batteria%iMenu.png" % contatoreGlobale, gpx * 2, gpy * 2, False))
         contatoreGlobale += 1
     vetImgOggettiMenu = []
     vetImgOggettiMercante = []
@@ -859,10 +937,10 @@ def loadImgs():
     vetIcoOggettiMenu = []
     contatoreGlobale = 1
     while contatoreGlobale <= 10:
-        vetImgOggettiMenu.append(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 10, gpy * 10, False))
-        vetImgOggettiMercante.append(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 8, gpy * 8, False))
-        vetImgOggettiStart.append(loadImage("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 4, gpy * 4, False))
-        vetIcoOggettiMenu.append(loadImage("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale, gpx, gpy, True))
+        vetImgOggettiMenu.append(funzionePerCaricareImmagini("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 10, gpy * 10, False))
+        vetImgOggettiMercante.append(funzionePerCaricareImmagini("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 8, gpy * 8, False))
+        vetImgOggettiStart.append(funzionePerCaricareImmagini("Immagini/Oggetti/Oggetto%i.png" % contatoreGlobale, gpx * 4, gpy * 4, False))
+        vetIcoOggettiMenu.append(funzionePerCaricareImmagini("Immagini/Oggetti/Oggetto%iIco.png" % contatoreGlobale, gpx, gpy, True))
         contatoreGlobale += 1
 
     # img equipaggiamento pixellato
@@ -874,27 +952,27 @@ def loadImgs():
     vetImgCollanePixellate = []
     contatoreGlobale = 0
     while contatoreGlobale < 5:
-        vetImgSpadePixellate.append(loadImage("Immagini/EquipLucy/Spade/Spada%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgArchiPixellate.append(loadImage("Immagini/EquipLucy/Archi/Arco%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgArmaturePixellate.append(loadImage("Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgScudiPixellate.append(loadImage("Immagini/EquipLucy/Scudi/Scudo%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgGuantiPixellate.append(loadImage("Immagini/EquipLucy/Guanti/Guanti%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
-        vetImgCollanePixellate.append(loadImage("Immagini/EquipLucy/Collane/Collana%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgSpadePixellate.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Spade/Spada%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgArchiPixellate.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Archi/Arco%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgArmaturePixellate.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgScudiPixellate.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Scudi/Scudo%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgGuantiPixellate.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Guanti/Guanti%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
+        vetImgCollanePixellate.append(funzionePerCaricareImmagini("Immagini/EquipLucy/Collane/Collana%is.png" % contatoreGlobale, gpx * 5, gpy * 5, True))
         contatoreGlobale += 1
 
     # img animazioni oggetti
-    imgAnimaBomba = loadImage('Immagini/AnimazioniOggetti/Bomba.png', gpx * 3, gpy * 3, True)
-    imgAnimaBombaVeleno = loadImage('Immagini/AnimazioniOggetti/BombaVeleno.png', gpx, gpy, True)
-    imgAnimaBombaAppiccicosa = loadImage('Immagini/AnimazioniOggetti/BombaAppiccicosa.png', gpx, gpy, True)
-    imgAnimaBombaPotenziata = loadImage('Immagini/AnimazioniOggetti/BombaPotenziata.png', gpx * 5, gpy * 5, True)
-    imgAnimaPozione1 = loadImage('Immagini/AnimazioniOggetti/Pozione1.png', gpx, gpy, True)
-    imgAnimaPozione2 = loadImage('Immagini/AnimazioniOggetti/Pozione2.png', gpx, gpy, True)
-    imgAnimaMedicina1 = loadImage('Immagini/AnimazioniOggetti/Medicina1.png', gpx, gpy, True)
-    imgAnimaMedicina2 = loadImage('Immagini/AnimazioniOggetti/Medicina2.png', gpx, gpy, True)
-    imgAnimaCaricabatterie = loadImage('Immagini/AnimazioniOggetti/Caricabatterie.png', gpx, gpy, True)
+    imgAnimaBomba = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/Bomba.png', gpx * 3, gpy * 3, True)
+    imgAnimaBombaVeleno = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/BombaVeleno.png', gpx, gpy, True)
+    imgAnimaBombaAppiccicosa = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/BombaAppiccicosa.png', gpx, gpy, True)
+    imgAnimaBombaPotenziata = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/BombaPotenziata.png', gpx * 5, gpy * 5, True)
+    imgAnimaPozione1 = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/Pozione1.png', gpx, gpy, True)
+    imgAnimaPozione2 = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/Pozione2.png', gpx, gpy, True)
+    imgAnimaMedicina1 = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/Medicina1.png', gpx, gpy, True)
+    imgAnimaMedicina2 = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/Medicina2.png', gpx, gpy, True)
+    imgAnimaCaricabatterie = funzionePerCaricareImmagini('Immagini/AnimazioniOggetti/Caricabatterie.png', gpx, gpy, True)
 
     # img animazioni tecniche
-    imgDanneggiamentoColco = loadImage('Immagini/AnimazioniTecniche/Danneggiamento.png', gpx, gpy, True)
+    imgDanneggiamentoColco = funzionePerCaricareImmagini('Immagini/AnimazioniTecniche/Danneggiamento.png', gpx, gpy, True)
     vetAnimazioniTecniche = []
     nomiTecniche = ["scossa", "scossa+", "scossa++", "freccia", "freccia+", "freccia++", "tempesta", "tempesta+", "tempesta++", "cura", "cura+", "cura++", "antidoto", "attP", "difP", "ricarica", "ricarica+", "raffred", "velocizza", "efficienza"]
     for contatoreGlobale in nomiTecniche:
@@ -903,127 +981,127 @@ def loadImgs():
         if contatoreGlobale.startswith("scossa") or contatoreGlobale.startswith("freccia") or contatoreGlobale.startswith("cura") or contatoreGlobale == "antidoto" or contatoreGlobale == "attP" or contatoreGlobale == "difP":
             if contatoreGlobale.startswith("freccia"):
                 contatoreGlobale = "freccia"
-            img1 = loadImage("Immagini/AnimazioniTecniche/%swAnima1.png" % contatoreGlobale, gpx, gpy * 2, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%swAnima2.png" % contatoreGlobale, gpx, gpy * 2, True)
+            img1 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%swAnima1.png" % contatoreGlobale, gpx, gpy * 2, True)
+            img2 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%swAnima2.png" % contatoreGlobale, gpx, gpy * 2, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = loadImage("Immagini/AnimazioniTecniche/%saAnima1.png" % contatoreGlobale, gpx * 2, gpy, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%saAnima2.png" % contatoreGlobale, gpx * 2, gpy, True)
+            img1 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%saAnima1.png" % contatoreGlobale, gpx * 2, gpy, True)
+            img2 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%saAnima2.png" % contatoreGlobale, gpx * 2, gpy, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = loadImage("Immagini/AnimazioniTecniche/%ssAnima1.png" % contatoreGlobale, gpx, gpy * 2, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%ssAnima2.png" % contatoreGlobale, gpx, gpy * 2, True)
+            img1 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%ssAnima1.png" % contatoreGlobale, gpx, gpy * 2, True)
+            img2 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%ssAnima2.png" % contatoreGlobale, gpx, gpy * 2, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            img1 = loadImage("Immagini/AnimazioniTecniche/%sdAnima1.png" % contatoreGlobale, gpx * 2, gpy, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%sdAnima2.png" % contatoreGlobale, gpx * 2, gpy, True)
+            img1 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%sdAnima1.png" % contatoreGlobale, gpx * 2, gpy, True)
+            img2 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%sdAnima2.png" % contatoreGlobale, gpx * 2, gpy, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
-            imgSelf = loadImage("Immagini/AnimazioniTecniche/%sAnimaSelf.png" % contatoreGlobale, gpx, gpy, True)
+            imgSelf = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%sAnimaSelf.png" % contatoreGlobale, gpx, gpy, True)
             vetAnimaImgTecniche.append(imgSelf)
         elif contatoreGlobale.startswith("ricarica") or contatoreGlobale == "raffred" or contatoreGlobale == "velocizza" or contatoreGlobale == "efficienza":
-            img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale, gpx, gpy, True)
+            img1 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%sAnima.png" % contatoreGlobale, gpx, gpy, True)
             vetAnimaImgTecniche.append(img1)
         elif contatoreGlobale.startswith("tempesta"):
-            img1 = loadImage("Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale, gpx * 13, gpy * 13, True)
-            img2 = loadImage("Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale, gpx * 13, gpy * 13, True)
+            img1 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%sAnima1.png" % contatoreGlobale, gpx * 13, gpy * 13, True)
+            img2 = funzionePerCaricareImmagini("Immagini/AnimazioniTecniche/%sAnima2.png" % contatoreGlobale, gpx * 13, gpy * 13, True)
             vetAnimaImgTecniche.append(img1)
             vetAnimaImgTecniche.append(img2)
         vetAnimazioniTecniche.append(vetAnimaImgTecniche)
-    imgFrecciaEletttricaLanciata = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata.png', gpx, gpy, True)
-    imgFrecciaEletttricaLanciataP = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata+.png', gpx, gpy, True)
-    imgFrecciaEletttricaLanciataPP = loadImage('Immagini/AnimazioniTecniche/FrecciaLanciata++.png', gpx, gpy, True)
+    imgFrecciaEletttricaLanciata = funzionePerCaricareImmagini('Immagini/AnimazioniTecniche/FrecciaLanciata.png', gpx, gpy, True)
+    imgFrecciaEletttricaLanciataP = funzionePerCaricareImmagini('Immagini/AnimazioniTecniche/FrecciaLanciata+.png', gpx, gpy, True)
+    imgFrecciaEletttricaLanciataPP = funzionePerCaricareImmagini('Immagini/AnimazioniTecniche/FrecciaLanciata++.png', gpx, gpy, True)
 
     # img sfondi dialoghi
-    sfondoDialoghi = loadImage('Immagini/Dialoghi/SfondoSotto.png', gsx, gsy // 3, False)
+    sfondoDialoghi = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Dialoghi/SfondoSotto.png', gsx, gsy // 3, False)
 
     # img tutorial
-    tutorialTastieraInGioco = loadImage('Immagini/Tutorial/TastieraInGioco.png', gpx * 7, gpy * 11, False)
-    tutorialTastieraInMenu = loadImage('Immagini/Tutorial/TastieraInMenu.png', gpx * 7, gpy * 11, False)
-    tutorialMouse = loadImage('Immagini/Tutorial/Mouse.png', gpx * 7, gpy * 11, False)
-    tutorialControllerInGioco = loadImage('Immagini/Tutorial/ControllerInGioco.png', gpx * 7, gpy * 11, False)
-    tutorialControllerInMenu = loadImage('Immagini/Tutorial/ControllerInMenu.png', gpx * 7, gpy * 11, False)
-    impostazioniController = loadImage('Immagini/Tutorial/ImpoController.png', gpx * 14, gpy * 14, False)
-    impostaControllerCroce = loadImage('Immagini/Tutorial/ImpoControllerCroce.png', gpx * 14, gpy * 14, False)
-    impostaControllerCerchio = loadImage('Immagini/Tutorial/ImpoControllerCerchio.png', gpx * 14, gpy * 14, False)
-    impostaControllerQuadrato = loadImage('Immagini/Tutorial/ImpoControllerQuadrato.png', gpx * 14, gpy * 14, False)
-    impostaControllerTriangolo = loadImage('Immagini/Tutorial/ImpoControllerTriangolo.png', gpx * 14, gpy * 14, False)
-    impostaControllerL1 = loadImage('Immagini/Tutorial/ImpoControllerL1.png', gpx * 14, gpy * 14, False)
-    impostaControllerR1 = loadImage('Immagini/Tutorial/ImpoControllerR1.png', gpx * 14, gpy * 14, False)
-    impostaControllerStart = loadImage('Immagini/Tutorial/ImpoControllerStart.png', gpx * 14, gpy * 14, False)
-    impostaControllerCroceDirezionale = loadImage('Immagini/Tutorial/ImpoControllerCroceDirezionale.png', gpx * 14, gpy * 14, False)
+    tutorialTastieraInGioco = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/TastieraInGioco.png', gpx * 7, gpy * 11, False)
+    tutorialTastieraInMenu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/TastieraInMenu.png', gpx * 7, gpy * 11, False)
+    tutorialMouse = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/Mouse.png', gpx * 7, gpy * 11, False)
+    tutorialControllerInGioco = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ControllerInGioco.png', gpx * 7, gpy * 11, False)
+    tutorialControllerInMenu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ControllerInMenu.png', gpx * 7, gpy * 11, False)
+    impostazioniController = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoController.png', gpx * 14, gpy * 14, False)
+    impostaControllerCroce = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroce.png', gpx * 14, gpy * 14, False)
+    impostaControllerCerchio = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerCerchio.png', gpx * 14, gpy * 14, False)
+    impostaControllerQuadrato = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerQuadrato.png', gpx * 14, gpy * 14, False)
+    impostaControllerTriangolo = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerTriangolo.png', gpx * 14, gpy * 14, False)
+    impostaControllerL1 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerL1.png', gpx * 14, gpy * 14, False)
+    impostaControllerR1 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerR1.png', gpx * 14, gpy * 14, False)
+    impostaControllerStart = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerStart.png', gpx * 14, gpy * 14, False)
+    impostaControllerCroceDirezionale = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale.png', gpx * 14, gpy * 14, False)
 
     # img grafiche / dialoghi
-    persGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/NeilGrafMenu.png', gpx * 18, gpy * 18, False)
-    lucyGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/LucyGrafMenu.png', gpx * 10, gpy * 10, False)
-    fraMaggioreGrafMenu = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', gpx * 10, gpy * 10, False)
-    robograf0 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', gpx * 18, gpy * 18, False)
-    robograf1 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', gpx * 18, gpy * 18, False)
-    robograf1b = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', gpx * 10, gpy * 10, False)
-    robograf2 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', gpx * 18, gpy * 18, False)
-    robograf2b = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', gpx * 10, gpy * 10, False)
-    robograf3 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf3.png', gpx * 18, gpy * 18, False)
-    robograf4 = loadImage('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', gpx * 18, gpy * 18, False)
-    imgDialogoFraMaggiore = loadImage('Immagini/Dialoghi/FratelloMaggioreDialogo.png', gpx * 16, gpy * 12, False)
-    imgDialogoLucy = loadImage('Immagini/Dialoghi/LucyDialogo.png', gpx * 16, gpy * 12, False)
-    imgFraMaggioreMenuOggetti = loadImage('Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', gpx * 3, gpy * 3, True)
-    imgLucyMenuOggetti = loadImage('Immagini/DecorazioniMenu/LucyMenu.png', gpx * 3, gpy * 3, True)
+    persGrafMenu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/NeilGrafMenu.png', gpx * 18, gpy * 18, False)
+    lucyGrafMenu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/LucyGrafMenu.png', gpx * 10, gpy * 10, False)
+    fraMaggioreGrafMenu = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', gpx * 10, gpy * 10, False)
+    robograf0 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', gpx * 18, gpy * 18, False)
+    robograf1 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', gpx * 18, gpy * 18, False)
+    robograf1b = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', gpx * 10, gpy * 10, False)
+    robograf2 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', gpx * 18, gpy * 18, False)
+    robograf2b = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf2.png', gpx * 10, gpy * 10, False)
+    robograf3 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf3.png', gpx * 18, gpy * 18, False)
+    robograf4 = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf4.png', gpx * 18, gpy * 18, False)
+    imgDialogoFraMaggiore = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Dialoghi/FratelloMaggioreDialogo.png', gpx * 16, gpy * 12, False)
+    imgDialogoLucy = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/Dialoghi/LucyDialogo.png', gpx * 16, gpy * 12, False)
+    imgFraMaggioreMenuOggetti = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', gpx * 3, gpy * 3, True)
+    imgLucyMenuOggetti = funzionePerCaricareImmagini('Immagini/DecorazioniMenu/LucyMenu.png', gpx * 3, gpy * 3, True)
 
     # indicatori vita
-    indvita = loadImage('Immagini/Barrevita/Indvita.png', 0, 0, True)
-    fineindvita = loadImage('Immagini/Barrevita/FineIndVita.png', gpx // 12, gpy // 4, True)
-    vitanemico00 = loadImage('Immagini/Barrevita/Vitanemico00.png', 0, 0, True)
-    vitanemico0 = loadImage('Immagini/Barrevita/Vitanemico0.png', 0, 0, True)
-    vitanemico1 = loadImage('Immagini/Barrevita/Vitanemico1.png', 0, 0, True)
-    vitanemico2 = loadImage('Immagini/Barrevita/Vitanemico2.png', 0, 0, True)
-    vitanemico3 = loadImage('Immagini/Barrevita/Vitanemico3.png', 0, 0, True)
-    vitanemico4 = loadImage('Immagini/Barrevita/Vitanemico4.png', 0, 0, True)
-    vitanemico5 = loadImage('Immagini/Barrevita/Vitanemico5.png', 0, 0, True)
-    vitanemico6 = loadImage('Immagini/Barrevita/Vitanemico6.png', 0, 0, True)
-    vitanemico7 = loadImage('Immagini/Barrevita/Vitanemico7.png', 0, 0, True)
-    vitanemico8 = loadImage('Immagini/Barrevita/Vitanemico8.png', 0, 0, True)
-    vitanemico9 = loadImage('Immagini/Barrevita/Vitanemico9.png', 0, 0, True)
-    vitapersonaggio = loadImage('Immagini/Barrevita/Vitapersonaggio.png', 0, 0, True)
-    vitarobo = loadImage('Immagini/Barrevita/Vitarobo.png', 0, 0, True)
+    indvita = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Indvita.png', 0, 0, True)
+    fineindvita = funzionePerCaricareImmagini('Immagini/Status/Barrevita/FineIndVita.png', gpx // 12, gpy // 4, True)
+    vitanemico00 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico00.png', 0, 0, True)
+    vitanemico0 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico0.png', 0, 0, True)
+    vitanemico1 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico1.png', 0, 0, True)
+    vitanemico2 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico2.png', 0, 0, True)
+    vitanemico3 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico3.png', 0, 0, True)
+    vitanemico4 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico4.png', 0, 0, True)
+    vitanemico5 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico5.png', 0, 0, True)
+    vitanemico6 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico6.png', 0, 0, True)
+    vitanemico7 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico7.png', 0, 0, True)
+    vitanemico8 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico8.png', 0, 0, True)
+    vitanemico9 = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitanemico9.png', 0, 0, True)
+    vitapersonaggio = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitapersonaggio.png', 0, 0, True)
+    vitarobo = funzionePerCaricareImmagini('Immagini/Status/Barrevita/Vitarobo.png', 0, 0, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
-    sfondoOggettoMenu = loadImage("Immagini/EquipLucy/SfondoOggetto.png", gpx * 2, gpy * 2, False)
-    sconosciutoEquipMenu = loadImage("Immagini/Oggetti/SconosciutoEquip.png", gpx * 2, gpy * 2, False)
-    sconosciutoOggettoMenu1 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 4, gpy * 4, False)
-    sconosciutoOggettoMenu2 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 8, gpy * 8, False)
-    sconosciutoOggettoMenu3 = loadImage("Immagini/Oggetti/Sconosciuto.png", gpx * 10, gpy * 10, False)
-    sconosciutoOggettoIcoMenu = loadImage("Immagini/Oggetti/SconosciutoIco.png", gpx, gpy, False)
+    sfondoOggettoMenu = funzionePerCaricareImmagini("Immagini/EquipLucy/SfondoOggetto.png", gpx * 2, gpy * 2, False)
+    sconosciutoEquipMenu = funzionePerCaricareImmagini("Immagini/Oggetti/SconosciutoEquip.png", gpx * 2, gpy * 2, False)
+    sconosciutoOggettoMenu1 = funzionePerCaricareImmagini("Immagini/Oggetti/Sconosciuto.png", gpx * 4, gpy * 4, False)
+    sconosciutoOggettoMenu2 = funzionePerCaricareImmagini("Immagini/Oggetti/Sconosciuto.png", gpx * 8, gpy * 8, False)
+    sconosciutoOggettoMenu3 = funzionePerCaricareImmagini("Immagini/Oggetti/Sconosciuto.png", gpx * 10, gpy * 10, False)
+    sconosciutoOggettoIcoMenu = funzionePerCaricareImmagini("Immagini/Oggetti/SconosciutoIco.png", gpx, gpy, False)
 
     # img mappe
-    imgMappa1A = loadImage("Immagini/DecorazioniMenu/MappaMenu1.png", gpx * 22, gpy * 15, False)
-    imgMappa1B = loadImage("Immagini/DecorazioniMenu/MappaMenu1.png", gpx * 50, gpy * 35, False)
-    imgMappa2A = loadImage("Immagini/DecorazioniMenu/MappaMenu2.png", gpx * 22, gpy * 15, False)
-    imgMappa2B = loadImage("Immagini/DecorazioniMenu/MappaMenu2.png", gpx * 50, gpy * 35, False)
-    imgMappa3A = loadImage("Immagini/DecorazioniMenu/MappaMenu3.png", gpx * 22, gpy * 15, False)
-    imgMappa3B = loadImage("Immagini/DecorazioniMenu/MappaMenu3.png", gpx * 50, gpy * 35, False)
-    imgMappa4A = loadImage("Immagini/DecorazioniMenu/MappaMenu4.png", gpx * 22, gpy * 15, False)
-    imgMappa4B = loadImage("Immagini/DecorazioniMenu/MappaMenu4.png", gpx * 50, gpy * 35, False)
-    imgMappa5A = loadImage("Immagini/DecorazioniMenu/MappaMenu5.png", gpx * 22, gpy * 15, False)
-    imgMappa5B = loadImage("Immagini/DecorazioniMenu/MappaMenu5.png", gpx * 50, gpy * 35, False)
-    imgMappa6A = loadImage("Immagini/DecorazioniMenu/MappaMenu6.png", gpx * 22, gpy * 15, False)
-    imgMappa6B = loadImage("Immagini/DecorazioniMenu/MappaMenu6.png", gpx * 50, gpy * 35, False)
-    imgMappa7A = loadImage("Immagini/DecorazioniMenu/MappaMenu7.png", gpx * 22, gpy * 15, False)
-    imgMappa7B = loadImage("Immagini/DecorazioniMenu/MappaMenu7.png", gpx * 50, gpy * 35, False)
-    imgMappa8A = loadImage("Immagini/DecorazioniMenu/MappaMenu8.png", gpx * 22, gpy * 15, False)
-    imgMappa8B = loadImage("Immagini/DecorazioniMenu/MappaMenu8.png", gpx * 50, gpy * 35, False)
-    imgMappa9A = loadImage("Immagini/DecorazioniMenu/MappaMenu9.png", gpx * 22, gpy * 15, False)
-    imgMappa9B = loadImage("Immagini/DecorazioniMenu/MappaMenu9.png", gpx * 50, gpy * 35, False)
-    imgMappa10A = loadImage("Immagini/DecorazioniMenu/MappaMenu10.png", gpx * 22, gpy * 15, False)
-    imgMappa10B = loadImage("Immagini/DecorazioniMenu/MappaMenu10.png", gpx * 50, gpy * 35, False)
-    imgMappa11A = loadImage("Immagini/DecorazioniMenu/MappaMenu11.png", gpx * 22, gpy * 15, False)
-    imgMappa11B = loadImage("Immagini/DecorazioniMenu/MappaMenu11.png", gpx * 50, gpy * 35, False)
-    imgMappa12A = loadImage("Immagini/DecorazioniMenu/MappaMenu12.png", gpx * 22, gpy * 15, False)
-    imgMappa12B = loadImage("Immagini/DecorazioniMenu/MappaMenu12.png", gpx * 50, gpy * 35, False)
-    imgMappa13A = loadImage("Immagini/DecorazioniMenu/MappaMenu13.png", gpx * 22, gpy * 15, False)
-    imgMappa13B = loadImage("Immagini/DecorazioniMenu/MappaMenu13.png", gpx * 50, gpy * 35, False)
-    imgMappa14A = loadImage("Immagini/DecorazioniMenu/MappaMenu14.png", gpx * 22, gpy * 15, False)
-    imgMappa14B = loadImage("Immagini/DecorazioniMenu/MappaMenu14.png", gpx * 50, gpy * 35, False)
-    imgOmbreggiaturaContorniMappaMenu = loadImage("Immagini/DecorazioniMenu/OmbreggiaturaContorniMappaMenu.png", gsx, gsy, False)
+    imgMappa1A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", gpx * 22, gpy * 15, False)
+    imgMappa1B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", gpx * 50, gpy * 35, False)
+    imgMappa2A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", gpx * 22, gpy * 15, False)
+    imgMappa2B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", gpx * 50, gpy * 35, False)
+    imgMappa3A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", gpx * 22, gpy * 15, False)
+    imgMappa3B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", gpx * 50, gpy * 35, False)
+    imgMappa4A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", gpx * 22, gpy * 15, False)
+    imgMappa4B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", gpx * 50, gpy * 35, False)
+    imgMappa5A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", gpx * 22, gpy * 15, False)
+    imgMappa5B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", gpx * 50, gpy * 35, False)
+    imgMappa6A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", gpx * 22, gpy * 15, False)
+    imgMappa6B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", gpx * 50, gpy * 35, False)
+    imgMappa7A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", gpx * 22, gpy * 15, False)
+    imgMappa7B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", gpx * 50, gpy * 35, False)
+    imgMappa8A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", gpx * 22, gpy * 15, False)
+    imgMappa8B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", gpx * 50, gpy * 35, False)
+    imgMappa9A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", gpx * 22, gpy * 15, False)
+    imgMappa9B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", gpx * 50, gpy * 35, False)
+    imgMappa10A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", gpx * 22, gpy * 15, False)
+    imgMappa10B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", gpx * 50, gpy * 35, False)
+    imgMappa11A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", gpx * 22, gpy * 15, False)
+    imgMappa11B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", gpx * 50, gpy * 35, False)
+    imgMappa12A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", gpx * 22, gpy * 15, False)
+    imgMappa12B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", gpx * 50, gpy * 35, False)
+    imgMappa13A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", gpx * 22, gpy * 15, False)
+    imgMappa13B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", gpx * 50, gpy * 35, False)
+    imgMappa14A = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", gpx * 22, gpy * 15, False)
+    imgMappa14B = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", gpx * 50, gpy * 35, False)
+    imgOmbreggiaturaContorniMappaMenu = funzionePerCaricareImmagini("Immagini/DecorazioniMenu/Mappe/OmbreggiaturaContorniMappaMenu.png", gsx, gsy, False)
 
     # img nemici
     vettoreNomiNemici = ["Orco", "Pipistrello", "TartarugaVerde", "TartarugaMarrone", "Cinghiale", "LupoGrigio", "LupoNero", "LupoBianco", "SerpeVerde", "SerpeArancio", "Scorpione", "RagnoNero", "RagnoRosso", "ServoSpada", "ServoArco", "ServoLancia", "GufoMarrone", "GufoBianco", "Falco", "Aquila", "Struzzo", "Casuario", "RoboLeggero", "RoboVolante", "RoboPesante", "RoboPesanteVolante", "RoboTorre"]
@@ -1031,52 +1109,306 @@ def loadImgs():
     for nomeNemico in vettoreNomiNemici:
         dictionaryImgPosizioni = {}
 
-        imgW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "w.png", gpx, gpy, True)
+        imgW = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "w.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgW"] = imgW
-        imgA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "a.png", gpx, gpy, True)
+        imgA = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "a.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgA"] = imgA
-        imgS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "s.png", gpx, gpy, True)
+        imgS = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "s.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgS"] = imgS
-        imgD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "d.png", gpx, gpy, True)
+        imgD = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "d.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgD"] = imgD
-        imgWMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov1.png", gpx, gpy, True)
+        imgWMov1 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgWMov1"] = imgWMov1
-        imgWMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov2.png", gpx, gpy, True)
+        imgWMov2 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgWMov2"] = imgWMov2
-        imgAMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov1.png", gpx, gpy, True)
+        imgAMov1 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAMov1"] = imgAMov1
-        imgAMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov2.png", gpx, gpy, True)
+        imgAMov2 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAMov2"] = imgAMov2
-        imgSMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov1.png", gpx, gpy, True)
+        imgSMov1 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgSMov1"] = imgSMov1
-        imgSMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov2.png", gpx, gpy, True)
+        imgSMov2 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgSMov2"] = imgSMov2
-        imgDMov1 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov1.png", gpx, gpy, True)
+        imgDMov1 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov1.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDMov1"] = imgDMov1
-        imgDMov2 = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov2.png", gpx, gpy, True)
+        imgDMov2 = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dMov2.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDMov2"] = imgDMov2
-        imgAvvelenamento = loadImage("Immagini/Nemici/NemicoAvvelenato.png", gpx, gpy, True)
+        imgAvvelenamento = funzionePerCaricareImmagini("Immagini/Nemici/NemicoAvvelenato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAvvelenamento"] = imgAvvelenamento
-        imgAppiccicato = loadImage("Immagini/Nemici/NemicoAppiccicato.png", gpx, gpy, True)
+        imgAppiccicato = funzionePerCaricareImmagini("Immagini/Nemici/NemicoAppiccicato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgAppiccicato"] = imgAppiccicato
-        imgAttaccoW = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wAttacco.png", gpx, gpy * 2, True)
+        imgAttaccoW = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "wAttacco.png", gpx, gpy * 2, True)
         dictionaryImgPosizioni["imgAttaccoW"] = imgAttaccoW
-        imgAttaccoA = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aAttacco.png", gpx * 2, gpy, True)
+        imgAttaccoA = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "aAttacco.png", gpx * 2, gpy, True)
         dictionaryImgPosizioni["imgAttaccoA"] = imgAttaccoA
-        imgAttaccoS = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sAttacco.png", gpx, gpy * 2, True)
+        imgAttaccoS = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "sAttacco.png", gpx, gpy * 2, True)
         dictionaryImgPosizioni["imgAttaccoS"] = imgAttaccoS
-        imgAttaccoD = loadImage("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dAttacco.png", gpx * 2, gpy, True)
+        imgAttaccoD = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/" + nomeNemico + "dAttacco.png", gpx * 2, gpy, True)
         dictionaryImgPosizioni["imgAttaccoD"] = imgAttaccoD
-        imgOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/OggettoLanciato.png", gpx, gpy, True)
+        imgOggettoLanciato = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/OggettoLanciato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgOggettoLanciato"] = imgOggettoLanciato
-        imgDanneggiamentoOggettoLanciato = loadImage("Immagini/Nemici/" + nomeNemico + "/DanneggiamentoOggettoLanciato.png", gpx, gpy, True)
+        imgDanneggiamentoOggettoLanciato = funzionePerCaricareImmagini("Immagini/Nemici/" + nomeNemico + "/DanneggiamentoOggettoLanciato.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoOggettoLanciato"] = imgDanneggiamentoOggettoLanciato
-        imgDanneggiamentoRalloNemico = loadImage("Immagini/Nemici/DannoRallo.png", gpx, gpy, True)
+        imgDanneggiamentoRalloNemico = funzionePerCaricareImmagini("Immagini/Nemici/DannoRallo.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoRalloNemico"] = imgDanneggiamentoRalloNemico
-        imgDanneggiamentoColcoNemico = loadImage("Immagini/Nemici/DannoColco.png", gpx, gpy, True)
+        imgDanneggiamentoColcoNemico = funzionePerCaricareImmagini("Immagini/Nemici/DannoColco.png", gpx, gpy, True)
         dictionaryImgPosizioni["imgDanneggiamentoColcoNemico"] = imgDanneggiamentoColcoNemico
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
+
+    schemataDiCaricamento = loadImage("Immagini/DecorazioniMenu/SchermataDiCaricamento.png", gsx, gsy, False)
+
+# funzioni per disegnare tutto sullo schermo (serve per ottimizzare)
+listaRettangoliDaAggiornare = []
+aggiornaTuttoLoSchermo = False
+def disegnaColoreSuTuttoLoSchermo(colore):
+    global schermo
+    global gsx
+    global gsy
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    schermo.fill(colore)
+
+    if not aggiornaTuttoLoSchermo:
+        listaRettangoliDaAggiornare = []
+        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+        aggiornaTuttoLoSchermo = True
+def disegnaLineaSuSchermo(schermo, colore, coordinateInizio, coordinateFine, spessore):
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    x, y = coordinateInizio
+    x = int(x)
+    y = int(y)
+    xFine, yFine = coordinateFine
+    xFine = int(xFine)
+    yFine = int(yFine)
+    coordinateInizio = (x, y)
+    coordinateFine = (xFine, yFine)
+    spessore = int(spessore)
+    pygame.draw.line(schermo, colore, coordinateInizio, coordinateFine, spessore)
+    dimX = xFine - x
+    dimY = yFine - y
+
+    if dimX < spessore:
+        dimX = spessore
+    if dimY < spessore:
+        dimY = spessore
+
+    if not aggiornaTuttoLoSchermo:
+        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+        aggiungiRettangolo = True
+        rectOrig = pygame.Rect(x, y, dimX, dimY)
+        xInizioRectOrig = rectOrig.left
+        yInizioRectOrig = rectOrig.top
+        xFineRectOrig = rectOrig.right
+        yFineRectOrig = rectOrig.bottom
+        i = 0
+        while i < len(listaRettangoliDaAggiornare):
+            rectConfronto = listaRettangoliDaAggiornare[i]
+            xInizioRectConfronto = rectConfronto.left
+            yInizioRectConfronto = rectConfronto.top
+            xFineRectConfronto = rectConfronto.right
+            yFineRectConfronto = rectConfronto.bottom
+            rettangoloEliminato = False
+            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                aggiungiRettangolo = False
+                break
+            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                del listaRettangoliDaAggiornare[i]
+                rettangoloEliminato = True
+            if not rettangoloEliminato:
+                i += 1
+        if aggiungiRettangolo:
+            listaRettangoliDaAggiornare.append(rectOrig)
+def disegnaRettangoloSuSchermo(schermo, colore, coordinateEDimensione):
+    global gsx
+    global gsy
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    pygame.draw.rect(schermo, colore, coordinateEDimensione)
+    x, y, dimX, dimY = coordinateEDimensione
+    x = int(x)
+    y = int(y)
+    dimX = int(dimX)
+    dimY = int(dimY)
+
+    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
+        listaRettangoliDaAggiornare = []
+        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+        aggiornaTuttoLoSchermo = True
+    if not aggiornaTuttoLoSchermo:
+        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+        aggiungiRettangolo = True
+        rectOrig = pygame.Rect(x, y, dimX, dimY)
+        xInizioRectOrig = rectOrig.left
+        yInizioRectOrig = rectOrig.top
+        xFineRectOrig = rectOrig.right
+        yFineRectOrig = rectOrig.bottom
+        i = 0
+        while i < len(listaRettangoliDaAggiornare):
+            rectConfronto = listaRettangoliDaAggiornare[i]
+            xInizioRectConfronto = rectConfronto.left
+            yInizioRectConfronto = rectConfronto.top
+            xFineRectConfronto = rectConfronto.right
+            yFineRectConfronto = rectConfronto.bottom
+            rettangoloEliminato = False
+            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                aggiungiRettangolo = False
+                break
+            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                del listaRettangoliDaAggiornare[i]
+                rettangoloEliminato = True
+            if not rettangoloEliminato:
+                i += 1
+        if aggiungiRettangolo:
+            listaRettangoliDaAggiornare.append(rectOrig)
+def disegnaImmagineSuSchermo(img, coordinate):
+    global schermo
+    global gsx
+    global gsy
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    x, y = coordinate
+    x = int(x)
+    y = int(y)
+    schermo.blit(img, (x, y))
+    dimX, dimY = img.get_rect().size
+
+    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
+        listaRettangoliDaAggiornare = []
+        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+        aggiornaTuttoLoSchermo = True
+    if not aggiornaTuttoLoSchermo:
+        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+        aggiungiRettangolo = True
+        rectOrig = pygame.Rect(x, y, dimX, dimY)
+        xInizioRectOrig = rectOrig.left
+        yInizioRectOrig = rectOrig.top
+        xFineRectOrig = rectOrig.right
+        yFineRectOrig = rectOrig.bottom
+        i = 0
+        while i < len(listaRettangoliDaAggiornare):
+            rectConfronto = listaRettangoliDaAggiornare[i]
+            xInizioRectConfronto = rectConfronto.left
+            yInizioRectConfronto = rectConfronto.top
+            xFineRectConfronto = rectConfronto.right
+            yFineRectConfronto = rectConfronto.bottom
+            rettangoloEliminato = False
+            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                aggiungiRettangolo = False
+                break
+            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                del listaRettangoliDaAggiornare[i]
+                rettangoloEliminato = True
+            if not rettangoloEliminato:
+                i += 1
+        if aggiungiRettangolo:
+            listaRettangoliDaAggiornare.append(rectOrig)
+def aggiornaSchermo():
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    pygame.display.update(listaRettangoliDaAggiornare)
+    listaRettangoliDaAggiornare = []
+    aggiornaTuttoLoSchermo = False
+    gc.collect()
+
+def mostraLogo():
+    effettoAvvio = loadSound("Audio/RumoriAmbiente/EffettoAvvio.wav")
+    canaleSoundCanzone.play(effettoAvvio)
+    logo = loadImage("Immagini/Icone/LogoPresentazione.png", gpx * 12, gpy * 12, True)
+    disegnaImmagineSuSchermo(logo, (gpx * 10, gpy * 3))
+
+    rect = pygame.display.get_surface().get_rect()
+    vetImg = []
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 250))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 200))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 150))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 100))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 60))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 20))
+    vetImg.append(image.convert_alpha(schermo))
+    i = 0
+    while i <= 5:
+        disegnaImmagineSuSchermo(logo, (gpx * 10, gpy * 3))
+        disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+        aggiornaSchermo()
+        pygame.event.pump()
+        clockFadeToBlack.tick(fpsFadeToBlack)
+        i += 1
+    disegnaImmagineSuSchermo(logo, (gpx * 10, gpy * 3))
+    aggiornaSchermo()
+
+    pygame.time.wait(1000)
+
+    rect = pygame.display.get_surface().get_rect()
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 100))
+    image = image.convert_alpha(schermo)
+    i = 0
+    while i <= 5:
+        disegnaImmagineSuSchermo(image, (0, 0))
+        aggiornaSchermo()
+        pygame.event.pump()
+        clockFadeToBlack.tick(fpsFadeToBlack)
+        i += 1
+    disegnaColoreSuTuttoLoSchermo(nero)
+    aggiornaSchermo()
+global canzoneMenuPrincipale
+def disegnaSchermataDiCaricamento():
+    global canzoneMenuPrincipale
+    canzoneMenuPrincipale = loadSound("Audio/Canzoni/00-Menu.wav")
+    canaleSoundCanzone.play(canzoneMenuPrincipale, -1)
+
+    global schemataDiCaricamento
+    schemataDiCaricamento = loadImage("Immagini/DecorazioniMenu/SchermataDiCaricamento.png", gsx, gsy, False)
+    disegnaColoreSuTuttoLoSchermo(grigioscu)
+    disegnaImmagineSuSchermo(schemataDiCaricamento, (0, 0))
+    carattere = pygame.font.SysFont(fontUtilizzato, gpx * 130 // 60)
+    testo = carattere.render("Caricamento...", True, grigiochi)
+    disegnaImmagineSuSchermo(testo, (gsx // 32 * 1, gsy // 18 * 4))
+    screen = schermo.copy().convert()
+
+    rect = pygame.display.get_surface().get_rect()
+    vetImg = []
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 250))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 200))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 150))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 100))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 60))
+    vetImg.append(image.convert_alpha(schermo))
+    image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+    image.fill((0, 0, 0, 20))
+    vetImg.append(image.convert_alpha(schermo))
+    i = 0
+    while i <= 5:
+        disegnaImmagineSuSchermo(screen, (0, 0))
+        disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+        aggiornaSchermo()
+        pygame.event.pump()
+        clockFadeToBlack.tick(fpsFadeToBlack)
+        i += 1
+    disegnaImmagineSuSchermo(screen, (0, 0))
+    aggiornaSchermo()
 
 # canali audio / volume (0-1)
 volumeCanzoni = 1.0
@@ -1106,152 +1438,194 @@ def initVolumeSounds():
     canaleSoundAttacco.set_volume(volumeEffetti)
     canaleSoundSottofondoAmbientale.set_volume(volumeEffetti)
 
-# lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
-linguaImpostata = "inglese"
-leggi = loadFile("Impostazioni/Impostazioni.txt", "r")
-leggifile = leggi.read()
-leggi.close()
-datiFileImpostazioniString = leggifile.split("_")
-datiFileImpostazioniString.pop(len(datiFileImpostazioniString) - 1)
-erroreFileImpostazioni = False
-if len(datiFileImpostazioniString) == 6:
-    datiFileImpostazioni = []
-    for i in range(0, len(datiFileImpostazioniString)):
-        try:
-            datiFileImpostazioni.append(int(datiFileImpostazioniString[i]))
-        except ValueError:
-            erroreFileImpostazioni = True
-    if not erroreFileImpostazioni:
-        if datiFileImpostazioni[0] == 0:
-            linguaImpostata = "italiano"
-        elif datiFileImpostazioni[0] == 1:
-            linguaImpostata = "inglese"
-        if 0 <= int(datiFileImpostazioni[1]) <= 10:
-            volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
-        if 0 <= int(datiFileImpostazioni[2]) <= 10:
-            volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
-        if schermoIntero == 0 or schermoIntero == 1:
-            schermoIntero = int(datiFileImpostazioni[3])
-        if maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5] and ((maxGsx == datiFileImpostazioni[4] and maxGsy == datiFileImpostazioni[5]) or (datiFileImpostazioni[4] == 800 and datiFileImpostazioni[5] == 450) or (datiFileImpostazioni[4] == 1024 and datiFileImpostazioni[5] == 576) or (datiFileImpostazioni[4] == 1280 and datiFileImpostazioni[5] == 720) or (datiFileImpostazioni[4] == 1920 and datiFileImpostazioni[5] == 1080)):
-            gsx = int(datiFileImpostazioni[4])
-            gsy = int(datiFileImpostazioni[5])
-            gpx = gsx // 32
-            gpy = gsy // 18
-        if schermoIntero:
-            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
-            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-        else:
-            opzioni_schermo = pygame.DOUBLEBUF
-            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-        initVolumeSounds()
-        loadImgs()
-else:
-    erroreFileImpostazioni = True
-if erroreFileImpostazioni:
-    print ("Errore nella lettura del file di configurazione delle impostazioni")
-    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
-    schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
-    loadImgs()
-    initVolumeSounds()
+global selsta
+global selind
+global spostapun
+global selimp
+global selezione
+global spostaPunBattaglia
+global selObbiettivo
+global rumoreAttaccoSpada
+global rumoreLancioFreccia
+global rumoreAttaccoArco
+global rumoreParata
+global rumorecamminata
+global rumorelevelup
+global rumoreMorte
+global suonoaperturacofanetti
+global suonoaperturaporteForesta
+global suonochiusuraporteForesta
+global suonoaperturaporteCasa
+global suonochiusuraporteCasa
+global suonoRaccoltaEsca
+global suonoRaccoltaMonete
+global rumoreAcquisto
+global rumoreCamminataColco
+global rumoreScossaFreccia
+global rumoreTempestaElettrica
+global rumoreCuraRobo
+global rumoreAntidoto
+global rumoreAttPDifP
+global rumoreAutoricarica
+global rumoreRaffreddamento
+global rumoreVelocizzaEfficienza
+global suonoTeleColco
+global suonoLancioOggetti
+global suonoUsoPozione
+global suonoUsoCaricabatterie
+global suonoUsoMedicina
+global suonoUsoBomba
+global suonoUsoBombaVeleno
+global suonoUsoEsca
+global suonoUsoBombaAppiccicosa
+global suonoUsoBombaPotenziata
+global rumoreMovimentoNemiciPersonaggi
+global rumoreAttaccoNemico
+global rumoreLancioOggettoNemico
+global rumoreMorteNemico
+global suonoAperturaMappa
+global rumoreScavare
+global audioAmbienteSogno
+global audioAmbienteCasaInterno
+global audioAmbienteCasaEsterno
+global audioAmbienteForesta
+global audioAmbienteForestaFuoco
+global canzoneSogno
+global canzoneCasa
+global canzoneForesta
+def loadSounds():
+    global selsta
+    global selind
+    global spostapun
+    global selimp
+    global selezione
+    global spostaPunBattaglia
+    global selObbiettivo
+    global rumoreAttaccoSpada
+    global rumoreLancioFreccia
+    global rumoreAttaccoArco
+    global rumoreParata
+    global rumorecamminata
+    global rumorelevelup
+    global rumoreMorte
+    global suonoaperturacofanetti
+    global suonoaperturaporteForesta
+    global suonochiusuraporteForesta
+    global suonoaperturaporteCasa
+    global suonochiusuraporteCasa
+    global suonoRaccoltaEsca
+    global suonoRaccoltaMonete
+    global rumoreAcquisto
+    global rumoreCamminataColco
+    global rumoreScossaFreccia
+    global rumoreTempestaElettrica
+    global rumoreCuraRobo
+    global rumoreAntidoto
+    global rumoreAttPDifP
+    global rumoreAutoricarica
+    global rumoreRaffreddamento
+    global rumoreVelocizzaEfficienza
+    global suonoTeleColco
+    global suonoLancioOggetti
+    global suonoUsoPozione
+    global suonoUsoCaricabatterie
+    global suonoUsoMedicina
+    global suonoUsoBomba
+    global suonoUsoBombaVeleno
+    global suonoUsoEsca
+    global suonoUsoBombaAppiccicosa
+    global suonoUsoBombaPotenziata
+    global rumoreMovimentoNemiciPersonaggi
+    global rumoreAttaccoNemico
+    global rumoreLancioOggettoNemico
+    global rumoreMorteNemico
+    global suonoAperturaMappa
+    global rumoreScavare
+    global audioAmbienteSogno
+    global audioAmbienteCasaInterno
+    global audioAmbienteCasaEsterno
+    global audioAmbienteForesta
+    global audioAmbienteForestaFuoco
+    global canzoneSogno
+    global canzoneCasa
+    global canzoneForesta
 
-# suoni puntatore
-selsta = loadSound("Audio/RumoriPuntatore/SelSta.wav")
-selind = loadSound("Audio/RumoriPuntatore/SelInd.wav")
-spostapun = loadSound("Audio/RumoriPuntatore/SpostaPun.wav")
-selimp = loadSound("Audio/RumoriPuntatore/SelImp.wav")
-selezione = loadSound("Audio/RumoriPuntatore/Selezione.wav")
-spostaPunBattaglia = loadSound("Audio/RumoriPuntatore/SpostaPunBattaglia.wav")
-selObbiettivo = loadSound("Audio/RumoriPuntatore/SelObbiettivo.wav")
+    # suoni puntatore
+    selsta = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/SelSta.wav")
+    selind = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/SelInd.wav")
+    spostapun = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/SpostaPun.wav")
+    selimp = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/SelImp.wav")
+    selezione = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/Selezione.wav")
+    spostaPunBattaglia = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/SpostaPunBattaglia.wav")
+    selObbiettivo = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/SelObbiettivo.wav")
 
-# suoni personaggio
-rumoreAttaccoSpada = loadSound("Audio/RumoriPersonaggio/AttaccoSpada.wav")
-rumoreLancioFreccia = loadSound("Audio/RumoriPersonaggio/LancioFreccia.wav")
-rumoreAttaccoArco = loadSound("Audio/RumoriPersonaggio/AttaccoArco.wav")
-rumoreParata = loadSound("Audio/RumoriPersonaggio/ParataConScudo.wav")
-rumorecamminata = loadSound("Audio/RumoriPersonaggio/Camminata.wav")
-rumorelevelup = loadSound("Audio/RumoriPersonaggio/Levelup.wav")
-rumoreMorte = loadSound("Audio/RumoriPersonaggio/Morte.wav")
+    # suoni personaggio
+    rumoreAttaccoSpada = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/AttaccoSpada.wav")
+    rumoreLancioFreccia = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/LancioFreccia.wav")
+    rumoreAttaccoArco = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/AttaccoArco.wav")
+    rumoreParata = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/ParataConScudo.wav")
+    rumorecamminata = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/Camminata.wav")
+    rumorelevelup = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/Levelup.wav")
+    rumoreMorte = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/Morte.wav")
 
-# suoni apertura-chiusura cofanetti-porte
-suonoaperturacofanetti = loadSound("Audio/RumoriAmbiente/AperturaCofanetto.wav")
-suonoaperturaporteForesta = loadSound("Audio/RumoriAmbiente/AperturaPortaForesta.wav")
-suonochiusuraporteForesta = loadSound("Audio/RumoriAmbiente/ChiusuraPortaForesta.wav")
-suonoaperturaporteCasa = loadSound("Audio/RumoriAmbiente/AperturaPortaCasa.wav")
-suonochiusuraporteCasa = loadSound("Audio/RumoriAmbiente/ChiusuraPortaCasa.wav")
+    # suoni apertura-chiusura cofanetti-porte
+    suonoaperturacofanetti = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaCofanetto.wav")
+    suonoaperturaporteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaPortaForesta.wav")
+    suonochiusuraporteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/ChiusuraPortaForesta.wav")
+    suonoaperturaporteCasa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaPortaCasa.wav")
+    suonochiusuraporteCasa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/ChiusuraPortaCasa.wav")
 
-# souno raccolta esca - monete
-suonoRaccoltaEsca = loadSound("Audio/RumoriAmbiente/RaccoltaEsca.wav")
-suonoRaccoltaMonete = loadSound("Audio/RumoriAmbiente/RaccoltaMonete.wav")
-rumoreAcquisto = loadSound("Audio/RumoriAmbiente/Acquisto.wav")
+    # souno raccolta esca - monete
+    suonoRaccoltaEsca = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/RaccoltaEsca.wav")
+    suonoRaccoltaMonete = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/RaccoltaMonete.wav")
+    rumoreAcquisto = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/Acquisto.wav")
 
-# suoni robo
-rumoreCamminataColco = loadSound("Audio/RumoriColco/Camminata.wav")
-rumoreScossaFreccia = loadSound("Audio/RumoriColco/ScossaFreccia.wav")
-rumoreTempestaElettrica = loadSound("Audio/RumoriColco/TempestaElettrica.wav")
-rumoreCuraRobo = loadSound("Audio/RumoriColco/Cura.wav")
-rumoreAntidoto = loadSound("Audio/RumoriColco/Antidoto.wav")
-rumoreAttPDifP = loadSound("Audio/RumoriColco/AttPDifP.wav")
-rumoreAutoricarica = loadSound("Audio/RumoriColco/Autoricarica.wav")
-rumoreRaffreddamento = loadSound("Audio/RumoriColco/Raffreddamento.wav")
-rumoreVelocizzaEfficienza = loadSound("Audio/RumoriColco/VelocizzaEfficienza.wav")
+    # suoni robo
+    rumoreCamminataColco = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/Camminata.wav")
+    rumoreScossaFreccia = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/ScossaFreccia.wav")
+    rumoreTempestaElettrica = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/TempestaElettrica.wav")
+    rumoreCuraRobo = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/Cura.wav")
+    rumoreAntidoto = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/Antidoto.wav")
+    rumoreAttPDifP = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/AttPDifP.wav")
+    rumoreAutoricarica = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/Autoricarica.wav")
+    rumoreRaffreddamento = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/Raffreddamento.wav")
+    rumoreVelocizzaEfficienza = caricaSuonoMostrandoAvanzamento("Audio/RumoriColco/VelocizzaEfficienza.wav")
 
-# suono oggetti
-suonoTeleColco = loadSound("Audio/RumoriOggetti/TeleColco.wav")
-suonoLancioOggetti = loadSound("Audio/RumoriOggetti/LancioOggetti.wav")
-suonoUsoPozione = loadSound("Audio/RumoriOggetti/Pozione.wav")
-suonoUsoCaricabatterie = loadSound("Audio/RumoriOggetti/Caricabatterie.wav")
-suonoUsoMedicina = loadSound("Audio/RumoriOggetti/Medicina.wav")
-suonoUsoBomba = loadSound("Audio/RumoriOggetti/Bomba.wav")
-suonoUsoBombaVeleno = loadSound("Audio/RumoriOggetti/BombaVeleno.wav")
-suonoUsoEsca = loadSound("Audio/RumoriOggetti/Esca.wav")
-suonoUsoBombaAppiccicosa = loadSound("Audio/RumoriOggetti/BombaAppiccicosa.wav")
-suonoUsoBombaPotenziata = loadSound("Audio/RumoriOggetti/BombaPotenziata.wav")
+    # suono oggetti
+    suonoTeleColco = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/TeleColco.wav")
+    suonoLancioOggetti = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/LancioOggetti.wav")
+    suonoUsoPozione = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/Pozione.wav")
+    suonoUsoCaricabatterie = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/Caricabatterie.wav")
+    suonoUsoMedicina = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/Medicina.wav")
+    suonoUsoBomba = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/Bomba.wav")
+    suonoUsoBombaVeleno = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/BombaVeleno.wav")
+    suonoUsoEsca = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/Esca.wav")
+    suonoUsoBombaAppiccicosa = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/BombaAppiccicosa.wav")
+    suonoUsoBombaPotenziata = caricaSuonoMostrandoAvanzamento("Audio/RumoriOggetti/BombaPotenziata.wav")
 
-# suoni nemici
-rumoreMovimentoNemiciPersonaggi = loadSound("Audio/RumoriNemiciPersonaggi/MovimentoNemiciPersonaggi.wav")
-rumoreAttaccoNemico = loadSound("Audio/RumoriNemiciPersonaggi/AttaccoVicinoNemico.wav")
-rumoreLancioOggettoNemico = loadSound("Audio/RumoriNemiciPersonaggi/AttaccoLontanoNemico.wav")
-rumoreMorteNemico = loadSound("Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
+    # suoni nemici
+    rumoreMovimentoNemiciPersonaggi = caricaSuonoMostrandoAvanzamento("Audio/RumoriNemiciPersonaggi/MovimentoNemiciPersonaggi.wav")
+    rumoreAttaccoNemico = caricaSuonoMostrandoAvanzamento("Audio/RumoriNemiciPersonaggi/AttaccoVicinoNemico.wav")
+    rumoreLancioOggettoNemico = caricaSuonoMostrandoAvanzamento("Audio/RumoriNemiciPersonaggi/AttaccoLontanoNemico.wav")
+    rumoreMorteNemico = caricaSuonoMostrandoAvanzamento("Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
 
-# suono mappa
-suonoAperturaMappa = loadSound("Audio/RumoriAmbiente/AperturaMappa.wav")
+    # suono mappa
+    suonoAperturaMappa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaMappa.wav")
 
-# effetti speciali
-rumoreScavare = loadSound("Audio/RumoriAmbiente/Scavare.wav")
+    # effetti speciali
+    rumoreScavare = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/Scavare.wav")
 
-# suoni sottofondi ambientali
-audioSottofondoVideoIniziale = loadSound("Video/AudioVideoInizio.wav")
-audioAmbienteSogno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/Sogno.wav")
-audioAmbienteCasaInterno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/CasaInterno.wav")
-audioAmbienteCasaEsterno = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/CasaEsterno.wav")
-audioAmbienteForesta = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/Foresta.wav")
-audioAmbienteForestaFuoco = loadSound("Audio/RumoriAmbiente/SottofondoPerZona/ForestaFuoco.wav")
+    # suoni sottofondi ambientali
+    audioAmbienteSogno = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/Sogno.wav")
+    audioAmbienteCasaInterno = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/CasaInterno.wav")
+    audioAmbienteCasaEsterno = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/CasaEsterno.wav")
+    audioAmbienteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/Foresta.wav")
+    audioAmbienteForestaFuoco = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/ForestaFuoco.wav")
 
-# suoni canzoni
-canzoneMenuPrincipale = loadSound("Audio/Canzoni/Canzone11.wav")
-canzoneSogno = loadSound("Audio/Canzoni/Canzone27.wav")
-canzoneCasa = loadSound("Audio/Canzoni/Canzone24.wav")
-canzoneForesta = loadSound("Audio/Canzoni/Canzone27.wav")
-
-# dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++]
-costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
-dannoTecniche = [40, 30, 0, 30, 20, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
-
-# costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
-costoOggetti = [1, 5, 5, 7, 20, 20, 10, 15, 30, 50, 50, 10, 50, 250]
-# danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
-dannoOggetti = [100, 50, 0, 20, 500]
-
-# dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
-dictAvanzamentoStoria = definisciAvanzamentiStoria()
-# dichiaro il dictionary che contiene le stanze associate a un nome che le descrive
-dictStanze, vetStanzePacifiche = definisciStanze()
-
-# dichiaro i vettori di porte e cofanetti
-initVetPorteGlobale = definisciPorte(dictStanze)
-initVetCofanettiGlobale = definisciCofanetti(dictStanze)
-
-vistaRobo = 6
+    # suoni canzoni
+    canzoneSogno = caricaSuonoMostrandoAvanzamento("Audio/Canzoni/01-Sogno.wav")
+    canzoneCasa = caricaSuonoMostrandoAvanzamento("Audio/Canzoni/02-Casa.wav")
+    canzoneForesta = caricaSuonoMostrandoAvanzamento("Audio/Canzoni/03-Foresta.wav")
 
 # freccetta (sized 24x24)
 global mouseBloccato
@@ -1326,7 +1700,85 @@ def setCursoreVisibile(visibile):
         if sistemaOperativo == "Windows":
             pygame.mouse.set_pos(gsx // 2, gsy // 2)
         pygame.mouse.set_visible(False)
-configuraCursore(False)
+configuraCursore(True)
+setCursoreVisibile(True)
+
+numImgTotali = 1092
+# lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
+linguaImpostata = "inglese"
+leggi = loadFile("Impostazioni/Impostazioni.txt", "r")
+leggifile = leggi.read()
+leggi.close()
+datiFileImpostazioniString = leggifile.split("_")
+datiFileImpostazioniString.pop(len(datiFileImpostazioniString) - 1)
+erroreFileImpostazioni = False
+if len(datiFileImpostazioniString) == 6:
+    datiFileImpostazioni = []
+    for i in range(0, len(datiFileImpostazioniString)):
+        try:
+            datiFileImpostazioni.append(int(datiFileImpostazioniString[i]))
+        except ValueError:
+            erroreFileImpostazioni = True
+    if not erroreFileImpostazioni:
+        if datiFileImpostazioni[0] == 0:
+            linguaImpostata = "italiano"
+        elif datiFileImpostazioni[0] == 1:
+            linguaImpostata = "inglese"
+        if 0 <= int(datiFileImpostazioni[1]) <= 10:
+            volumeEffetti = int(datiFileImpostazioni[1]) / 10.0
+        if 0 <= int(datiFileImpostazioni[2]) <= 10:
+            volumeCanzoni = int(datiFileImpostazioni[2]) / 10.0
+        if schermoIntero == 0 or schermoIntero == 1:
+            schermoIntero = int(datiFileImpostazioni[3])
+        if maxGsx >= datiFileImpostazioni[4] and maxGsy >= datiFileImpostazioni[5] and ((maxGsx == datiFileImpostazioni[4] and maxGsy == datiFileImpostazioni[5]) or (datiFileImpostazioni[4] == 800 and datiFileImpostazioni[5] == 450) or (datiFileImpostazioni[4] == 1024 and datiFileImpostazioni[5] == 576) or (datiFileImpostazioni[4] == 1280 and datiFileImpostazioni[5] == 720) or (datiFileImpostazioni[4] == 1920 and datiFileImpostazioni[5] == 1080)):
+            gsx = int(datiFileImpostazioni[4])
+            gsy = int(datiFileImpostazioni[5])
+            gpx = gsx // 32
+            gpy = gsy // 18
+        if schermoIntero:
+            opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+        else:
+            opzioni_schermo = pygame.DOUBLEBUF
+            schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+        initVolumeSounds()
+        mostraLogo()
+        disegnaSchermataDiCaricamento()
+        numImgCaricata = 0
+        loadImgs(cambioRisoluzione=False)
+        loadSounds()
+else:
+    erroreFileImpostazioni = True
+if erroreFileImpostazioni:
+    print ("Errore nella lettura del file di configurazione delle impostazioni")
+    opzioni_schermo = pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF
+    schermo = pygame.display.set_mode((gsx, gsy), opzioni_schermo)
+    initVolumeSounds()
+    mostraLogo()
+    disegnaSchermataDiCaricamento()
+    numImgCaricata = 0
+    loadImgs(cambioRisoluzione=False)
+    loadSounds()
+
+# dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesa++]
+costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
+dannoTecniche = [40, 30, 0, 30, 20, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
+
+# costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
+costoOggetti = [1, 5, 5, 7, 20, 20, 10, 15, 30, 50, 50, 10, 50, 250]
+# danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
+dannoOggetti = [100, 50, 0, 20, 500]
+
+# dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
+dictAvanzamentoStoria = definisciAvanzamentiStoria()
+# dichiaro il dictionary che contiene le stanze associate a un nome che le descrive
+dictStanze, vetStanzePacifiche = definisciStanze()
+
+# dichiaro i vettori di porte e cofanetti
+initVetPorteGlobale = definisciPorte(dictStanze)
+initVetCofanettiGlobale = definisciCofanetti(dictStanze)
+
+vistaRobo = 6
 
 # lettura configurazione controller: per ogni controller: nome, croce, cerchio, quadrato, triangolo, l1, r1, start, croceDirezionale
 padUtilizzato = False
@@ -1451,144 +1903,3 @@ def inizializzaModuloJoistick():
         configPadConnessi.append(configPad)
 inizializzaModuloJoistick()
 usandoIlController = False
-
-# funzioni per disegnare tutto sullo schermo (serve per ottimizzare)
-listaRettangoliDaAggiornare = []
-aggiornaTuttoLoSchermo = False
-def disegnaColoreSuTuttoLoSchermo(colore):
-    global schermo
-    global gsx
-    global gsy
-    global listaRettangoliDaAggiornare
-    global aggiornaTuttoLoSchermo
-    schermo.fill(colore)
-
-    if not aggiornaTuttoLoSchermo:
-        listaRettangoliDaAggiornare = []
-        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
-        aggiornaTuttoLoSchermo = True
-def disegnaLineaSuSchermo(schermo, colore, coordinateInizio, coordinateFine, spessore):
-    global listaRettangoliDaAggiornare
-    global aggiornaTuttoLoSchermo
-    pygame.draw.line(schermo, colore, coordinateInizio, coordinateFine, spessore)
-    x, y = coordinateInizio
-    xFine, yFine = coordinateFine
-    dimX = xFine - x
-    dimY = yFine - y
-
-    if dimX < spessore:
-        dimX = spessore
-    if dimY < spessore:
-        dimY = spessore
-
-    if not aggiornaTuttoLoSchermo:
-        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
-        aggiungiRettangolo = True
-        rectOrig = pygame.Rect(x, y, dimX, dimY)
-        xInizioRectOrig = rectOrig.left
-        yInizioRectOrig = rectOrig.top
-        xFineRectOrig = rectOrig.right
-        yFineRectOrig = rectOrig.bottom
-        i = 0
-        while i < len(listaRettangoliDaAggiornare):
-            rectConfronto = listaRettangoliDaAggiornare[i]
-            xInizioRectConfronto = rectConfronto.left
-            yInizioRectConfronto = rectConfronto.top
-            xFineRectConfronto = rectConfronto.right
-            yFineRectConfronto = rectConfronto.bottom
-            rettangoloEliminato = False
-            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
-                aggiungiRettangolo = False
-                break
-            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
-                del listaRettangoliDaAggiornare[i]
-                rettangoloEliminato = True
-            if not rettangoloEliminato:
-                i += 1
-        if aggiungiRettangolo:
-            listaRettangoliDaAggiornare.append(rectOrig)
-def disegnaRettangoloSuSchermo(schermo, colore, coordinateEDimensione):
-    global gsx
-    global gsy
-    global listaRettangoliDaAggiornare
-    global aggiornaTuttoLoSchermo
-    pygame.draw.rect(schermo, colore, coordinateEDimensione)
-    x, y, dimX, dimY = coordinateEDimensione
-
-    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
-        listaRettangoliDaAggiornare = []
-        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
-        aggiornaTuttoLoSchermo = True
-    if not aggiornaTuttoLoSchermo:
-        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
-        aggiungiRettangolo = True
-        rectOrig = pygame.Rect(x, y, dimX, dimY)
-        xInizioRectOrig = rectOrig.left
-        yInizioRectOrig = rectOrig.top
-        xFineRectOrig = rectOrig.right
-        yFineRectOrig = rectOrig.bottom
-        i = 0
-        while i < len(listaRettangoliDaAggiornare):
-            rectConfronto = listaRettangoliDaAggiornare[i]
-            xInizioRectConfronto = rectConfronto.left
-            yInizioRectConfronto = rectConfronto.top
-            xFineRectConfronto = rectConfronto.right
-            yFineRectConfronto = rectConfronto.bottom
-            rettangoloEliminato = False
-            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
-                aggiungiRettangolo = False
-                break
-            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
-                del listaRettangoliDaAggiornare[i]
-                rettangoloEliminato = True
-            if not rettangoloEliminato:
-                i += 1
-        if aggiungiRettangolo:
-            listaRettangoliDaAggiornare.append(rectOrig)
-def disegnaImmagineSuSchermo(img, coordinate):
-    global schermo
-    global gsx
-    global gsy
-    global listaRettangoliDaAggiornare
-    global aggiornaTuttoLoSchermo
-    x, y = coordinate
-    schermo.blit(img, (x, y))
-    dimX, dimY = img.get_rect().size
-
-    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
-        listaRettangoliDaAggiornare = []
-        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
-        aggiornaTuttoLoSchermo = True
-    if not aggiornaTuttoLoSchermo:
-        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
-        aggiungiRettangolo = True
-        rectOrig = pygame.Rect(x, y, dimX, dimY)
-        xInizioRectOrig = rectOrig.left
-        yInizioRectOrig = rectOrig.top
-        xFineRectOrig = rectOrig.right
-        yFineRectOrig = rectOrig.bottom
-        i = 0
-        while i < len(listaRettangoliDaAggiornare):
-            rectConfronto = listaRettangoliDaAggiornare[i]
-            xInizioRectConfronto = rectConfronto.left
-            yInizioRectConfronto = rectConfronto.top
-            xFineRectConfronto = rectConfronto.right
-            yFineRectConfronto = rectConfronto.bottom
-            rettangoloEliminato = False
-            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
-                aggiungiRettangolo = False
-                break
-            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
-                del listaRettangoliDaAggiornare[i]
-                rettangoloEliminato = True
-            if not rettangoloEliminato:
-                i += 1
-        if aggiungiRettangolo:
-            listaRettangoliDaAggiornare.append(rectOrig)
-def aggiornaSchermo():
-    global listaRettangoliDaAggiornare
-    global aggiornaTuttoLoSchermo
-    pygame.display.update(listaRettangoliDaAggiornare)
-    listaRettangoliDaAggiornare = []
-    aggiornaTuttoLoSchermo = False
-    gc.collect()

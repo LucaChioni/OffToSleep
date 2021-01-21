@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 from SottoMenuA import *
 
 
@@ -49,7 +48,7 @@ def menu(caricaSalvataggio, gameover):
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
-        datiTotaliAttuali, datiTotaliGameover = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True)
+        datiTotaliAttuali, datiTotaliGameover, errore = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
         dati = datiTotaliAttuali[0]
         tuttePorte = datiTotaliAttuali[1]
         tuttiCofanetti = datiTotaliAttuali[2]
@@ -79,16 +78,19 @@ def menu(caricaSalvataggio, gameover):
         GlobalVar.numSalvataggioCaricato = caricaSalvataggio
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
-    # carico subito tutti i dati salvati
+    # carico subito tutti i salvataggi
     ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
 
-    # video
-    listaImgVideo = []
-    # load all the images
-    for i in os.listdir(GlobalVar.gamePath + "Video/VideoInizio"):
-        img = GlobalVar.loadImage("Video/VideoInizio" + '/' + i, GlobalVar.gsx, GlobalVar.gsy, False, canale_alpha=False)
-        listaImgVideo.append(img)
-    guardaVideo(listaImgVideo, GlobalVar.audioSottofondoVideoIniziale, True)
+    GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
+    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
+
+    canzone = GlobalVar.canzoneMenuPrincipale
+    if not GlobalVar.canaleSoundCanzone.get_busy():
+        GlobalVar.canaleSoundCanzone.play(canzone, -1)
+    if not GlobalVar.primoAvvio:
+        oscuraIlluminaSchermo(illumina=2)
+    else:
+        GlobalVar.primoAvvio = False
     illuminaSchermoDopoVideo = True
 
     xp = GlobalVar.gsx // 32 * 1.5
@@ -102,12 +104,6 @@ def menu(caricaSalvataggio, gameover):
     primoFrame = True
     bottoneDown = False
     tastotempfps = 8
-
-    # numero img di robo
-    c = random.randint(1, 4)
-
-    canzone = GlobalVar.canzoneMenuPrincipale
-    GlobalVar.canaleSoundCanzone.play(canzone, -1)
     while True:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -222,7 +218,7 @@ def menu(caricaSalvataggio, gameover):
                             GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
                             GlobalVar.canaleSoundSottofondoAmbientale.stop()
                             GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
-                            datiTotaliAttuali, datiTotaliGameover = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, True)
+                            datiTotaliAttuali, datiTotaliGameover, errore = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
                             dati = datiTotaliAttuali[0]
                             tuttePorte = datiTotaliAttuali[1]
                             tuttiCofanetti = datiTotaliAttuali[2]
@@ -317,18 +313,6 @@ def menu(caricaSalvataggio, gameover):
                 if not primoMovimento and tastoMovimentoPremuto:
                     tastotempfps = 2
 
-                persomenuinizio = GlobalVar.persGrafMenu
-                if c == 1:
-                    robomenuinizio = GlobalVar.robograf0
-                elif c == 2:
-                    robomenuinizio = GlobalVar.robograf1
-                elif c == 3:
-                    robomenuinizio = GlobalVar.robograf2
-                elif c == 4:
-                    robomenuinizio = GlobalVar.robograf3
-                else:
-                    robomenuinizio = GlobalVar.robograf0
-
                 # per ottimizzare
                 if primoFrame:
                     primoFrame = False
@@ -344,8 +328,7 @@ def menu(caricaSalvataggio, gameover):
                     if voceMarcata == 4:
                         yp = GlobalVar.gsy // 18 * 12.5
                     GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-                    GlobalVar.disegnaImmagineSuSchermo(persomenuinizio, (GlobalVar.gpx * 15, 0))
-                    GlobalVar.disegnaImmagineSuSchermo(robomenuinizio, (GlobalVar.gpx * 3, 0))
+                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
                     messaggio("Inizia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 2, 90)
                     messaggio("Continua", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 4.5, 90)
                     messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 7, 90)
@@ -569,7 +552,40 @@ def menu(caricaSalvataggio, gameover):
 
         if illuminaSchermoDopoVideo:
             illuminaSchermoDopoVideo = False
-            oscuraIlluminaSchermo(illumina=2)
+
+            vetImg = []
+            screen = GlobalVar.schermo.copy().convert()
+            rect = pygame.display.get_surface().get_rect()
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((50, 50, 50, 250))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((50, 50, 50, 200))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((50, 50, 50, 150))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((50, 50, 50, 100))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((50, 50, 50, 60))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
+            image.fill((50, 50, 50, 20))
+            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            i = 0
+            while i <= 5:
+                GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                GlobalVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
+                GlobalVar.aggiornaSchermo()
+                pygame.event.pump()
+                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                i += 1
+            GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
+            GlobalVar.aggiornaSchermo()
         else:
             pygame.event.pump()
             GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
@@ -982,16 +998,16 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
         mouseInquadraFreccia = False
         suTornaIndietro = False
         if GlobalVar.mouseVisibile:
-            if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and 0 <= xMouse <= GlobalVar.gsx // 32 * 3.5:
+            if GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and 0 <= xMouse < GlobalVar.gsx // 32 * 4.2:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
                 xp = 0
                 yp = GlobalVar.gsy // 18 * 16.05
                 voceMarcata = -1
-            elif GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and GlobalVar.gsx // 32 * 3.5 <= xMouse <= GlobalVar.gsx // 32 * 6.8:
+            elif GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and GlobalVar.gsx // 32 * 4.2 <= xMouse <= GlobalVar.gsx // 32 * 6.8:
                 if GlobalVar.mouseBloccato:
                     GlobalVar.configuraCursore(False)
-                xp = GlobalVar.gsx // 32 * 3.5
+                xp = GlobalVar.gsx // 32 * 4.2
                 yp = GlobalVar.gsy // 18 * 16.05
                 voceMarcata = -2
             elif GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 7:
@@ -1118,7 +1134,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
                     schermo_temp = GlobalVar.schermo.copy().convert()
                     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
-                    menuMappa(dati[0])
+                    menuImpostazioni(False, True)
                     GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
                 elif voceMarcata == -2:
                     menuConferma = True
@@ -1235,9 +1251,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         yp = GlobalVar.gpy * 14.3
                         voceMarcata = 1
                     elif voceMarcata == -2:
-                        xp = GlobalVar.gpx * 3
+                        xp = GlobalVar.gpx * 4
                         yp = GlobalVar.gpy * 14.3
-                        voceMarcata = 3
+                        voceMarcata = 4
                 elif offensivi:
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                     yp = GlobalVar.gpy * 13.8
@@ -1248,13 +1264,14 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     bottoneDown = False
             if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata < 0:
-                    if voceMarcata == -2 and dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+                    if voceMarcata == -2:
                         voceMarcata += 1
                         GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
                         xp = 0
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
-                        bottoneDown = False
+                        voceMarcata -= 1
+                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                        xp = GlobalVar.gsx // 32 * 4.2
                 elif voceMarcata != 1:
                     voceMarcata -= 1
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
@@ -1271,12 +1288,12 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     offensivi = True
                 elif voceMarcata >= 0:
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    if voceMarcata < 3 and dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+                    if voceMarcata <= 3:
                         xp = 0
                         yp = GlobalVar.gsy // 18 * 16.05
                         voceMarcata = -1
                     else:
-                        xp = GlobalVar.gsx // 32 * 3.5
+                        xp = GlobalVar.gsx // 32 * 4.2
                         yp = GlobalVar.gsy // 18 * 16.05
                         voceMarcata = -2
                 else:
@@ -1287,10 +1304,11 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     if voceMarcata == -1:
                         voceMarcata -= 1
                         GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        xp = GlobalVar.gsx // 32 * 3.5
+                        xp = GlobalVar.gsx // 32 * 4.2
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
-                        bottoneDown = False
+                        voceMarcata += 1
+                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                        xp = 0
                 elif voceMarcata != 5:
                     voceMarcata += 1
                     GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
@@ -1306,10 +1324,9 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 voceMarcataOggetto = voceMarcata
 
             GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoStartBattaglia, (0, GlobalVar.gsy // 18 * 8))
-            if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
-                messaggio("Mappa", GlobalVar.grigiochi, int(GlobalVar.gpx * 0.7), int(GlobalVar.gpy * 16.05), 45)
-            GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 3.5), int(GlobalVar.gpy * 15.8)), (int(GlobalVar.gpx * 3.5), int(GlobalVar.gpy * 16.8)), 2)
-            messaggio("Esci", GlobalVar.grigiochi, int(GlobalVar.gpx * 4.2), int(GlobalVar.gpy * 16.05), 45)
+            messaggio("Impostazioni", GlobalVar.grigiochi, int(GlobalVar.gpx * 0.7), int(GlobalVar.gpy * 16.05), 45)
+            GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 4.2) - 1, int(GlobalVar.gpy * 15.8)), (int(GlobalVar.gpx * 4.2) - 1, int(GlobalVar.gpy * 16.8)), 2)
+            messaggio("Esci", GlobalVar.grigiochi, int(GlobalVar.gpx * 4.9), int(GlobalVar.gpy * 16.05), 45)
             if difensivi:
                 if voceMarcata == 1:
                     disegnoOggetto = 0

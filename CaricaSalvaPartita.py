@@ -193,7 +193,7 @@ def salvataggio(n, datiAttuali, datiGameover):
     # scrivi.close()
 
 
-def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, mostraErrori):
+def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, checkErrori):
     errore = False
     tipoErrore = 0
 
@@ -221,7 +221,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
         try:
             # contenutoFile = contenutoFile.decode('base64')
             datiTotali = contenutoFile.split("\n")
-        except Exception:
+        except:
             errore = True
             tipoErrore = 2
 
@@ -252,7 +252,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         for i in range(0, len(datiStringa)):
                             try:
                                 dati.append(int(datiStringa[i]))
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                         if not errore:
@@ -269,7 +269,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         for i in range(0, len(porteStringa)):
                             try:
                                 tutteporte.append(int(porteStringa[i]))
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                         if not errore:
@@ -287,7 +287,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         for i in range(0, len(cofanettiStringa)):
                             try:
                                 tutticofanetti.append(int(cofanettiStringa[i]))
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                         if not errore:
@@ -316,7 +316,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                     break
                                 j += 1
                             i += 17
-                    except ValueError:
+                    except:
                         errore = True
                     if len(datiNemici) % 17 != 0:
                         errore = True
@@ -324,7 +324,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         i = 0
                         while i < len(datiNemici):
                             try:
-                                nemico = NemicoObj(GlobalVar.gsx // 32 * int(datiNemici[i + 2]), GlobalVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 16], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])), int(datiNemici[i + 15]))
+                                nemico = NemicoObj(GlobalVar.gsx // 32 * int(datiNemici[i + 2]), GlobalVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 16], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])), int(datiNemici[i + 15]), nonCaricareImg=checkErrori)
                                 nemico.vita = int(datiNemici[i + 4])
                                 nemico.avvelenato = bool(int(datiNemici[i + 5]))
                                 nemico.appiccicato = bool(int(datiNemici[i + 6]))
@@ -334,7 +334,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                 nemico.xPosizioneUltimoBersaglio = int(datiNemici[i + 11]) * GlobalVar.gpx
                                 nemico.yPosizioneUltimoBersaglio = int(datiNemici[i + 12]) * GlobalVar.gpy
                                 listaNemiciTotali.append(nemico)
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                             i += 17
@@ -350,7 +350,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                 listaEsche.append(int(listaEscheStringa[i + 1]))
                                 listaEsche.append(GlobalVar.gpx * int(listaEscheStringa[i + 2]))
                                 listaEsche.append(GlobalVar.gpy * int(listaEscheStringa[i + 3]))
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                             i += 4
@@ -365,7 +365,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                 listaMonete.append(int(listaMoneteStringa[i]))
                                 listaMonete.append(GlobalVar.gpx * int(listaMoneteStringa[i + 1]))
                                 listaMonete.append(GlobalVar.gpy * int(listaMoneteStringa[i + 2]))
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                             i += 3
@@ -375,7 +375,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                     while i < len(stanzeGiaVisitateStringa):
                         try:
                             stanzeGiaVisitate.append(int(stanzeGiaVisitateStringa[i]))
-                        except ValueError:
+                        except:
                             errore = True
                             break
                         i += 1
@@ -398,7 +398,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                     break
                                 j += 1
                             i += 9
-                    except ValueError:
+                    except:
                         errore = True
                     if len(datiPersonaggi) % 9 != 0:
                         errore = True
@@ -406,9 +406,9 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         i = 0
                         while i < len(datiPersonaggi):
                             try:
-                                personaggio = PersonaggioObj(GlobalVar.gsx // 32 * int(datiPersonaggi[i]), GlobalVar.gsy // 18 * int(datiPersonaggi[i + 1]), datiPersonaggi[i + 2], datiPersonaggi[i + 3], int(datiPersonaggi[i + 4]), int(datiPersonaggi[i + 5]), datiPersonaggi[i + 6], int(datiPersonaggi[i + 7]), int(datiPersonaggi[i + 8]))
+                                personaggio = PersonaggioObj(GlobalVar.gsx // 32 * int(datiPersonaggi[i]), GlobalVar.gsy // 18 * int(datiPersonaggi[i + 1]), datiPersonaggi[i + 2], datiPersonaggi[i + 3], int(datiPersonaggi[i + 4]), int(datiPersonaggi[i + 5]), datiPersonaggi[i + 6], int(datiPersonaggi[i + 7]), int(datiPersonaggi[i + 8]), nonCaricareImg=checkErrori)
                                 listaPersonaggiTotali.append(personaggio)
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                             i += 9
@@ -422,7 +422,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             try:
                                 listaAvanzamentoDialoghi.append(datiDialoghi[i])
                                 listaAvanzamentoDialoghi.append(int(datiDialoghi[i + 1]))
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                             i += 2
@@ -434,7 +434,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         for i in range(0, len(oggettiRimastiAHansStringa)):
                             try:
                                 oggettiRimastiAHans.append(int(oggettiRimastiAHansStringa[i]))
-                            except ValueError:
+                            except:
                                 errore = True
                                 break
                     ultimoObbiettivoColcoStringa = datiTotali[c + 10].split("_")
@@ -458,10 +458,10 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                     break
 
                     if not caricandoGameover:
-                        datiAttuali = [dati[:], tutteporte[:], tutticofanetti[:], copiaListaDiOggettiConImmagini(listaNemiciTotali, True), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco)]
+                        datiAttuali = [dati[:], tutteporte[:], tutticofanetti[:], copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
                         caricandoGameover = True
                     else:
-                        datiGameover = [dati[:], tutteporte[:], tutticofanetti[:], copiaListaDiOggettiConImmagini(listaNemiciTotali, True), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco)]
+                        datiGameover = [dati[:], tutteporte[:], tutticofanetti[:], copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
                         gameoverCaricato = True
                     c += 13
             else:
@@ -482,7 +482,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
             partitaCaricata = True
 
     if not errore:
-        if mostraErrori:
+        if not checkErrori:
             if not backupNecessario:
                 leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
             else:
@@ -495,16 +495,10 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                 scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
             scrivi.write(contenutoFile)
             scrivi.close()
-            return datiAttuali, datiGameover
-        else:
-            return datiAttuali, datiGameover, tipoErrore
     else:
         if len(datiAttuali) == 0:
             datiAttuali = [[], [], [], [], [], [], [], [], [], [], [], []]
         if len(datiGameover) == 0:
             datiGameover = [[], [], [], [], [], [], [], [], [], [], [], []]
 
-        if mostraErrori:
-            return datiAttuali, datiGameover
-        else:
-            return datiAttuali, datiGameover, tipoErrore
+    return datiAttuali, datiGameover, tipoErrore

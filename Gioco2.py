@@ -115,6 +115,8 @@ def gameloop():
                 if not inizio:
                     oscuraIlluminaSchermo(illumina=False)
 
+                stoppaMusica = scriviNomeZona(dati[1], stanzaVecchia)
+
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
                 # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
@@ -151,7 +153,7 @@ def gameloop():
                         pygame.time.wait(30)
                     if canzoneCambiata:
                         GlobalVar.canaleSoundCanzone.stop()
-                        if canzone:
+                        if canzone and not stoppaMusica:
                             GlobalVar.canaleSoundCanzone.play(canzone, -1)
                     if sottofondoAmbientaleCambiato:
                         GlobalVar.canaleSoundSottofondoAmbientale.stop()
@@ -1979,6 +1981,13 @@ def gameloop():
                 esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati, difesa)
                 impossibileCliccarePulsanti = True
 
+            # aggiorna i dialoghi e le img di tutti i personaggi in base all'avanzamento nella storia
+            for personaggio in listaPersonaggi:
+                if personaggio.tipo.startswith("Oggetto"):
+                    imgAggiornata = personaggio.aggiornaImgOggetto(dati[0])
+                    if imgAggiornata:
+                        refreshSchermo = True
+
             # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
             if caricaTutto and turniDaSaltare == 0:
                 refreshSchermo = True
@@ -2000,7 +2009,7 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi)
+                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, canzone)
                 impossibileAprirePorta = False
 
             # cancella definitivamente i mostri morti e resetta vx/vy/anima
