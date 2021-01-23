@@ -13,8 +13,9 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
     gr = gr - 10
     gr = GlobalVar.gpx * gr // 60
     y = y - (GlobalVar.gpy // 8)
-    carattere = GlobalVar.fontUtilizzato
-    font = pygame.font.SysFont(carattere, gr)
+    font = pygame.font.Font(GlobalVar.fontUtilizzato, gr)
+    italic = False
+    bold = False
     coloreOrig = colore
     xOrig = x
 
@@ -45,14 +46,18 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
         vetMsg = msg.split("<*>")
         for text in vetMsg:
             colore = coloreOrig
-            font.set_italic(False)
-            font.set_bold(False)
+            if italic or bold:
+                font = pygame.font.Font(GlobalVar.fontUtilizzato, gr)
+                italic = False
+                bold = False
             if text.startswith("#italic#"):
                 text = text.replace("#italic#", "")
-                font.set_italic(True)
+                font = pygame.font.Font(GlobalVar.fontUtilizzatoItalic, gr)
+                italic = True
             elif text.startswith("#bold#"):
                 text = text.replace("#bold#", "")
-                font.set_bold(True)
+                font = pygame.font.Font(GlobalVar.fontUtilizzatoBold, gr)
+                bold = True
             elif text.startswith("#color#"):
                 text = text.replace("#color#", "")
                 coloreRgb = text.split("#")[0]

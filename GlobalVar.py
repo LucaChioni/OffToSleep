@@ -85,7 +85,9 @@ titolo = "Still waiting"
 pygame.display.set_caption(titolo)
 icona = pygame.image.load(gamePath + "Immagini/Icone/Icona.png")
 pygame.display.set_icon(icona)
-fontUtilizzato = "Liberation Serif"
+fontUtilizzato = gamePath + "Font/LiberationSerif-Regular.ttf"
+fontUtilizzatoItalic = gamePath + "Font/LiberationSerif-Italic.ttf"
+fontUtilizzatoBold = gamePath + "Font/LiberationSerif-Bold.ttf"
 listaTastiPremuti = []
 primoAvvio = True
 
@@ -1374,7 +1376,7 @@ def disegnaSchermataDiCaricamento():
     schemataDiCaricamento = loadImage("Immagini/DecorazioniMenu/SchermataDiCaricamento.png", gsx, gsy, False)
     disegnaColoreSuTuttoLoSchermo(grigioscu)
     disegnaImmagineSuSchermo(schemataDiCaricamento, (0, 0))
-    carattere = pygame.font.SysFont(fontUtilizzato, gpx * 130 // 60)
+    carattere = pygame.font.Font(fontUtilizzato, gpx * 130 // 60)
     testo = carattere.render("Caricamento...", True, grigiochi)
     disegnaImmagineSuSchermo(testo, (gsx // 32 * 1, gsy // 18 * 4))
     screen = schermo.copy().convert()

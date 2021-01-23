@@ -365,7 +365,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Per muoverti usa i tasti <*>#bold#W<*>, <*>#bold#A<*>, <*>#bold#S<*> e <*>#bold#D<*> della tastiera, la <*>#bold#Croce direzionale<*> del controller oppure, utilizzando il mouse, clicca sulla casella verso cui vuoi spostarti con il tasto <*>#bold#Sinistro<*>.")
+                dialogo.append("Per muoverti usa i tasti <*>#bold#W<*>, <*>#bold#A<*>, <*>#bold#S<*> e <*>#bold#D<*> della tastiera, la <*>#bold#Croce direzionale<*> del controller oppure, utilizzando il mouse, clicca con il tasto <*>#bold#Sinistro<*> sulla casella verso cui vuoi spostarti.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
