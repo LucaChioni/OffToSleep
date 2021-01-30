@@ -185,7 +185,7 @@ def gameloop():
 
                 # stanza
                 nomeStanza = settaNomeStanza(dati[0], dati[1])
-                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalVar.gsx, GlobalVar.gsy, True, canale_alpha=False)
+                imgSfondoStanza = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalVar.gsx, GlobalVar.gsy, False, canale_alpha=False)
                 casellaChiara = GlobalVar.loadImage("Immagini/Scenari/CasellaChiara.png", GlobalVar.gpx, GlobalVar.gpy, True)
                 casellaScura = GlobalVar.loadImage("Immagini/Scenari/CasellaScura.png", GlobalVar.gpx, GlobalVar.gpy, True)
                 casellaOscurata = GlobalVar.loadImage("Immagini/Scenari/CasellaOscurata.png", GlobalVar.gpx, GlobalVar.gpy, True)

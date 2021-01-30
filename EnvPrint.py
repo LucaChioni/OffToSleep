@@ -1350,7 +1350,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if not inquadratoQualcosa:
                     for personaggio in listaPersonaggi:
                         if personaggio.x < xMouse < personaggio.x + GlobalVar.gpx and personaggio.y < yMouse < personaggio.y + GlobalVar.gpy:
-                            if (personaggio.x == x + GlobalVar.gpx and personaggio.y == y) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy):
+                            if attacco == 1 and ((personaggio.x == x + GlobalVar.gpx and personaggio.y == y) or (personaggio.x == x - GlobalVar.gpx and personaggio.y == y) or (personaggio.x == x and personaggio.y == y + GlobalVar.gpy) or (personaggio.x == x and personaggio.y == y - GlobalVar.gpy)):
                                 if GlobalVar.mouseBloccato:
                                     GlobalVar.configuraCursore(False)
                                 inquadratoQualcosa = "personaggio"
@@ -1404,9 +1404,15 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         i = 0
                         while i < len(caseattactot):
                             if caseattactot[i] <= xMouse <= caseattactot[i] + GlobalVar.gpx and caseattactot[i + 1] <= yMouse <= caseattactot[i + 1] + GlobalVar.gpy and caseattactot[i + 2]:
-                                if GlobalVar.mouseBloccato:
-                                    GlobalVar.configuraCursore(False)
-                                inquadratoQualcosa = "casellaNelRaggio"
+                                suPersonaggio = False
+                                for personaggio in listaPersonaggi:
+                                    if xp == personaggio.x and yp == personaggio.y:
+                                        suPersonaggio = True
+                                        break
+                                if not suPersonaggio:
+                                    if GlobalVar.mouseBloccato:
+                                        GlobalVar.configuraCursore(False)
+                                    inquadratoQualcosa = "casellaNelRaggio"
                                 break
                             i += 3
                 if not inquadratoQualcosa:
@@ -1774,7 +1780,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     difesa = 2
                     risposta = True
                 # bomba attacco = 2
-                if attacco == 2 and (abs(x - xp) <= GlobalVar.gpx * 6 and abs(y - yp) <= GlobalVar.gpy * 6):
+                if attacco == 2 and (abs(x - xp) <= GlobalVar.gpx * 6 and abs(y - yp) <= GlobalVar.gpy * 6) and not suPersonaggio:
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
@@ -1808,7 +1814,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         sposta = True
                         risposta = True
                 # bomba veleno attacco = 3
-                if attacco == 3 and (abs(x - xp) <= GlobalVar.gpx * 5 and abs(y - yp) <= GlobalVar.gpy * 5):
+                if attacco == 3 and (abs(x - xp) <= GlobalVar.gpx * 5 and abs(y - yp) <= GlobalVar.gpy * 5) and not suPersonaggio:
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
@@ -1843,7 +1849,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         sposta = True
                         risposta = True
                 # esca attacco = 4
-                if attacco == 4 and (abs(x - xp) <= GlobalVar.gpx * 6 and abs(y - yp) <= GlobalVar.gpy * 6):
+                if attacco == 4 and (abs(x - xp) <= GlobalVar.gpx * 6 and abs(y - yp) <= GlobalVar.gpy * 6) and not suPersonaggio:
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
@@ -1897,7 +1903,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             sposta = True
                             risposta = True
                 # bomba appiccicosa attacco = 5
-                if attacco == 5 and (abs(x - xp) <= GlobalVar.gpx * 5 and abs(y - yp) <= GlobalVar.gpy * 5):
+                if attacco == 5 and (abs(x - xp) <= GlobalVar.gpx * 5 and abs(y - yp) <= GlobalVar.gpy * 5) and not suPersonaggio:
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
@@ -1932,7 +1938,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         sposta = True
                         risposta = True
                 # bomba potenziata attacco = 6
-                if attacco == 6 and (abs(x - xp) <= GlobalVar.gpx * 4 and abs(y - yp) <= GlobalVar.gpy * 4):
+                if attacco == 6 and (abs(x - xp) <= GlobalVar.gpx * 4 and abs(y - yp) <= GlobalVar.gpy * 4) and not suPersonaggio:
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
@@ -2265,6 +2271,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             puntat = GlobalVar.puntatOut
                         break
                     i = i + 3
+                for personaggio in listaPersonaggi:
+                    if xp == personaggio.x and yp == personaggio.y:
+                        puntat = GlobalVar.puntatOut
+                        break
             else:
                 puntat = GlobalVar.puntatOut
         if attacco == 3:
@@ -2277,6 +2287,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             puntat = GlobalVar.puntatOut
                         break
                     i = i + 3
+                for personaggio in listaPersonaggi:
+                    if xp == personaggio.x and yp == personaggio.y:
+                        puntat = GlobalVar.puntatOut
+                        break
             else:
                 puntat = GlobalVar.puntatOut
         if attacco == 4:
@@ -2295,6 +2309,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         puntat = GlobalVar.puntatOut
                         break
                     i += 3
+                for personaggio in listaPersonaggi:
+                    if xp == personaggio.x and yp == personaggio.y:
+                        puntat = GlobalVar.puntatOut
+                        break
             else:
                 puntat = GlobalVar.puntatOut
         if attacco == 5:
@@ -2307,6 +2325,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             puntat = GlobalVar.puntatOut
                         break
                     i = i + 3
+                for personaggio in listaPersonaggi:
+                    if xp == personaggio.x and yp == personaggio.y:
+                        puntat = GlobalVar.puntatOut
+                        break
             else:
                 puntat = GlobalVar.puntatOut
         if attacco == 6:
@@ -2319,6 +2341,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             puntat = GlobalVar.puntatOut
                         break
                     i = i + 3
+                for personaggio in listaPersonaggi:
+                    if xp == personaggio.x and yp == personaggio.y:
+                        puntat = GlobalVar.puntatOut
+                        break
             else:
                 puntat = GlobalVar.puntatOut
         if puntatogg != 0:

@@ -56,8 +56,20 @@ class PersonaggioObj(object):
             numImg = 1
             numImgDialogo = 3
             nomeImgDialogo = ["LucyDormienteDialogo1", "LucyDormienteDialogo2", "Vuota"]
+        if self.tipo == "OggettoLettoHans":
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoComodinoLucy":
-            numImg = 3
+            numImg = 4
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo == "OggettoComodinoHans":
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo.startswith("OggettoFinestra"):
+            numImg = 2
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoSiepe":
@@ -119,11 +131,22 @@ class PersonaggioObj(object):
         refreshSchermo = False
 
         numImgAttuale = 0
+        if self.tipo == "OggettoLettoHans":
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                numImgAttuale = 1
         if self.tipo == "OggettoComodinoLucy":
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
                 numImgAttuale = 1
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 2
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+                numImgAttuale = 3
+        if self.tipo == "OggettoComodinoHans":
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                numImgAttuale = 1
+        if self.tipo.startswith("OggettoFinestra"):
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                numImgAttuale = 1
         if self.tipo == "OggettoSiepe":
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 1
@@ -617,11 +640,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Dovevo immaginarlo che partiva stanotte... cosa devo fare adesso... ?")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append("Di certo non posso dirlo al babbo: si arrabbierebbe troppo.")
+                dialogo.append("Dovevo immaginarlo che partiva stanotte... di certo non posso dirlo al babbo: si arrabbierebbe troppo e mi vieterebbe di uscire.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -695,11 +714,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Bene! Quest'armatura mi entra perfettamente.")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append("Sono pronta per andare adesso.")
+                dialogo.append(u"Bene! Quest'armatura mi entra perfettamente. Sono pronta per andare adesso.")
                 self.partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["armaturaNonnoCompletata"]:
                 self.oggettoDato = False
@@ -776,6 +791,24 @@ class PersonaggioObj(object):
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"I miei genitori non se la staranno passando bene, ma non posso tornare finché non scopro dov'è andato Hans.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["penultimaStanzaForesta"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta9"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Finalmente l'uscita!!!")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ultimaStanzaForesta"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Perfetto, adesso mi basterà seguire la strada e arriverò in città. Hans sarà sicuramente la da qualche parte.")
                 self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False
@@ -1888,6 +1921,174 @@ class PersonaggioObj(object):
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"Qui è dove ho seppellito il figlio di David. Sulla lapide hanno inciso il suo nome: \"Sam\".")
+                self.partiDialogo.append(dialogo)
+
+        # strada per la città
+        if self.tipo.startswith("OggettoCartelloForesta"):
+            self.partiDialogo = []
+            self.nome = "OggettoCartelloForesta"
+            self.oggettoDato = False
+            self.avanzaStoria = False
+            self.menuMercante = False
+            self.scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"C'è scritto: \" - <*>#bold#FORESTA CADETTA<*> - Attenzione alla fauna notturna\".")
+            self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoCartelloStaccionata"):
+            self.partiDialogo = []
+            self.nome = "OggettoCartelloStaccionata"
+            self.oggettoDato = False
+            self.avanzaStoria = False
+            self.menuMercante = False
+            self.scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Su questa staccionata c'è un cartello che dice: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!!\"...")
+            self.partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Da quello che so tutti i passaggi verso oriente sono bloccati da molti anni.")
+            self.partiDialogo.append(dialogo)
+        if self.tipo == "OggettoCartelloBloccoStrada":
+            self.partiDialogo = []
+            self.nome = "OggettoCartelloBloccoStrada"
+            self.oggettoDato = False
+            self.avanzaStoria = False
+            self.menuMercante = False
+            self.scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"C'è un cartello con la scritta: \"!!! <*>#bold#VIETATO L'ACCESSO<*> !!! - Se oltrepassi questo cartello ti dichiari nemico del reggente cittadino\".")
+            self.partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Non credo che Hans sia andato di qua...")
+            self.partiDialogo.append(dialogo)
+        if self.tipo == "GuardiaCittà":
+            self.partiDialogo = []
+            self.nome = "Soldato"
+            if self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 0:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Chiedo scusa soldato...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Stai lontano! Per ordine del Re l'accesso verso oriente è vietato a tutti i civili.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Perché?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("Per ordine del Re.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Si ok, ma perché il Re lo ha ordinato?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Non mi è concesso divulgare informazioni a riguardo. ")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"E... esiste qualcuno a cui è concesso divulgare informazioni a riguardo?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"È mio compito arrestare chi commette questo illecito.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Oh ok...")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 1:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Scusa la domanda, ma se è così importante che nessuno passi di qua, perché sei da solo a fare la guardia?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"La strada è già bloccata da questi cartelli e l'unico punto libero è quello in cui sono io adesso, quindi è praticamente impossibile passare.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Cosa?!")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Senti, ho studiato personalmente questo sistema di blocco, se trovi un modo per passare provaci pure ma sappi che ne subirai le conseguenze!")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ehm... ok... ma uno potrebbe farsi strada nel bosco senza troppi problemi, no?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Di questo non devi preoccuparti, tutti gli accessi verso oriente sono bloccati e ben protetti.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ok...")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 2:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ehm ehm, dovrei passare...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("Prova a fare un altro passo e ti taglio le gambe!")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ok ok, me ne vado.")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 3:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Devo dire che hai organizzato proprio un bel sistema per bloccare la strada.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Sono già abbastanza fiducioso nei miei mezzi, non ho bisogno del tuo giudizio. Adesso vattene che ho molto da fare qui!")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ok...")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 4:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("(<*>#italic#Meglio lasciarlo al suo lavoro...<*>)")
                 self.partiDialogo.append(dialogo)
 
     def spostati(self, x, y, rx, ry, listaNemici, caseviste):

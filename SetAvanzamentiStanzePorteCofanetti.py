@@ -109,9 +109,13 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoDopoTombaSam"] = i
     i += 1
+    dictAvanzamentoStoria["penultimaStanzaForesta"] = i
+    i += 1
     dictAvanzamentoStoria["ultimaStanzaForesta"] = i
     i += 1
-    dictAvanzamentoStoria["uscitaDaForesta"] = i
+    dictAvanzamentoStoria["uscitoDaForesta"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivatoInCittà"] = i
 
     i += 100
     i += 1
@@ -214,7 +218,15 @@ def definisciStanze():
     i += 1
     dictStanze["forestaCadetta8"] = i
     i += 1
+    dictStanze["forestaCadetta9"] = i
+    i += 1
     dictStanze["stradaPerCittà1"] = i
+    i += 1
+    dictStanze["stradaPerCittà2"] = i
+    i += 1
+    dictStanze["stradaPerCittà3"] = i
+    i += 1
+    dictStanze["città1"] = i
 
     return dictStanze, vetStanzePacifiche
 
@@ -329,5 +341,8 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["forestaCadetta8"]
     vetCofanetti += [stanza, 2, 6, False]
+
+    stanza = dictStanze["forestaCadetta9"]
+    vetCofanetti += [stanza, 5, 11, False]
 
     return vetCofanetti

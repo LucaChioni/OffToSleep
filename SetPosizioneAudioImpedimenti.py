@@ -394,10 +394,105 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = 4
                 x = GlobalVar.gsx // 32 * 19
                 y = GlobalVar.gsy // 18 * 2
-            if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà1"]:
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta9"]:
                 npers = 3
                 x = GlobalVar.gsx // 32 * 11
                 y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["forestaCadetta9"]:
+        if canzone != GlobalVar.canzoneForesta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneForesta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteForesta:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteForesta
+        # rumore porte
+        rumoreAperturaPorte = GlobalVar.suonoaperturaporteForesta
+        rumoreChiusuraPorte = GlobalVar.suonochiusuraporteForesta
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta8"]:
+                npers = 4
+                x = GlobalVar.gsx // 32 * 25
+                y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà1"]:
+                npers = 3
+                y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["stradaPerCittà1"]:
+        if canzone != GlobalVar.canzoneEsternoCitta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneEsternoCitta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta1:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta1
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta9"]:
+                npers = 4
+                y = GlobalVar.gsy // 18 * 2
+            if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà2"]:
+                npers = 1
+                x = GlobalVar.gsx // 32 * 2
+                if y == GlobalVar.gsy // 18 * 4:
+                    y = GlobalVar.gsy // 18 * 6
+                elif y == GlobalVar.gsy // 18 * 5:
+                    y = GlobalVar.gsy // 18 * 7
+                elif y == GlobalVar.gsy // 18 * 6:
+                    y = GlobalVar.gsy // 18 * 8
+                elif y == GlobalVar.gsy // 18 * 7:
+                    y = GlobalVar.gsy // 18 * 9
+                elif y == GlobalVar.gsy // 18 * 8:
+                    y = GlobalVar.gsy // 18 * 10
+                elif y == GlobalVar.gsy // 18 * 9:
+                    y = GlobalVar.gsy // 18 * 11
+                elif y == GlobalVar.gsy // 18 * 10:
+                    y = GlobalVar.gsy // 18 * 12
+                elif y == GlobalVar.gsy // 18 * 11:
+                    y = GlobalVar.gsy // 18 * 13
+                elif y == GlobalVar.gsy // 18 * 12:
+                    y = GlobalVar.gsy // 18 * 14
+                elif y == GlobalVar.gsy // 18 * 13:
+                    y = GlobalVar.gsy // 18 * 15
+    if stanza == GlobalVar.dictStanze["stradaPerCittà2"]:
+        if canzone != GlobalVar.canzoneEsternoCitta:
+            canzoneCambiata = True
+        canzone = GlobalVar.canzoneEsternoCitta
+        if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta2:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta2
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà1"]:
+                npers = 2
+                x = GlobalVar.gsx // 32 * 29
+                if y == GlobalVar.gsy // 18 * 6:
+                    y = GlobalVar.gsy // 18 * 4
+                elif y == GlobalVar.gsy // 18 * 7:
+                    y = GlobalVar.gsy // 18 * 5
+                elif y == GlobalVar.gsy // 18 * 8:
+                    y = GlobalVar.gsy // 18 * 6
+                elif y == GlobalVar.gsy // 18 * 9:
+                    y = GlobalVar.gsy // 18 * 7
+                elif y == GlobalVar.gsy // 18 * 10:
+                    y = GlobalVar.gsy // 18 * 8
+                elif y == GlobalVar.gsy // 18 * 11:
+                    y = GlobalVar.gsy // 18 * 9
+                elif y == GlobalVar.gsy // 18 * 12:
+                    y = GlobalVar.gsy // 18 * 10
+                elif y == GlobalVar.gsy // 18 * 13:
+                    y = GlobalVar.gsy // 18 * 11
+                elif y == GlobalVar.gsy // 18 * 14:
+                    y = GlobalVar.gsy // 18 * 12
+                elif y == GlobalVar.gsy // 18 * 15:
+                    y = GlobalVar.gsy // 18 * 13
+            if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà3"]:
+                npers = 1
+                x = GlobalVar.gsx // 32 * 2
 
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale
 
@@ -412,9 +507,15 @@ def scriviNomeZona(stanza, stanzaVecchia):
         GlobalVar.aggiornaSchermo()
         if stanzaVecchia == GlobalVar.dictStanze["sognoLucy4"] and stanza == GlobalVar.dictStanze["casaHansLucy1"]:
             stoppaMusica = True
-    elif (stanzaVecchia == GlobalVar.dictStanze["casaHansLucy4"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]) or (stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà1"] and stanza == GlobalVar.dictStanze["forestaCadetta8"]):
+    elif (stanzaVecchia == GlobalVar.dictStanze["casaHansLucy4"] and stanza == GlobalVar.dictStanze["forestaCadetta1"]) or (stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà1"] and stanza == GlobalVar.dictStanze["forestaCadetta9"]):
         GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
         messaggio("Foresta Cadetta", GlobalVar.grigiochi, GlobalVar.gpx * 16, GlobalVar.gpy * 8, 150, centrale=True)
+        GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 4), int(GlobalVar.gpy * 10.6)), (int(GlobalVar.gpx * 28) - 1, int(GlobalVar.gpy * 10.6)), 2)
+        oscuraIlluminaSchermo(illumina=2)
+        GlobalVar.aggiornaSchermo()
+    elif (stanzaVecchia == GlobalVar.dictStanze["forestaCadetta9"] and stanza == GlobalVar.dictStanze["stradaPerCittà1"]) or (stanzaVecchia == GlobalVar.dictStanze["città1"] and stanza == GlobalVar.dictStanze["stradaPerCittà3"]):
+        GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.nero)
+        messaggio(u"Strada per la città", GlobalVar.grigiochi, GlobalVar.gpx * 16, GlobalVar.gpy * 8, 150, centrale=True)
         GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 4), int(GlobalVar.gpy * 10.6)), (int(GlobalVar.gpx * 28) - 1, int(GlobalVar.gpy * 10.6)), 2)
         oscuraIlluminaSchermo(illumina=2)
         GlobalVar.aggiornaSchermo()
@@ -476,6 +577,31 @@ def settaNomeStanza(avanzamentoStoria, stanza):
     nomeStanza = "Stanza"
     if stanza == GlobalVar.dictStanze["casaHansLucy1"]:
         if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalVar.dictStanze["casaHansLucy2"]:
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalVar.dictStanze["forestaCadetta5"]:
+        if GlobalVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaA"
+    if stanza == GlobalVar.dictStanze["stradaPerCittà1"]:
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalVar.dictStanze["stradaPerCittà2"]:
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
+    if stanza == GlobalVar.dictStanze["stradaPerCittà3"]:
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"

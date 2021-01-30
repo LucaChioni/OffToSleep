@@ -1413,8 +1413,8 @@ def disegnaSchermataDiCaricamento():
     aggiornaSchermo()
 
 # canali audio / volume (0-1)
-volumeCanzoni = 1.0
-volumeEffetti = 1.0
+volumeCanzoni = 0.5
+volumeEffetti = 0.5
 pygame.mixer.set_num_channels(11)
 canaleSoundCanzone = pygame.mixer.Channel(0)
 canaleSoundPuntatoreSposta = pygame.mixer.Channel(1)
@@ -1495,6 +1495,10 @@ global audioAmbienteForestaFuoco
 global canzoneSogno
 global canzoneCasa
 global canzoneForesta
+global audioAmbienteStradaPerCitta1
+global audioAmbienteStradaPerCitta2
+global audioAmbienteStradaPerCitta3
+global canzoneEsternoCitta
 def loadSounds():
     global selsta
     global selind
@@ -1551,6 +1555,10 @@ def loadSounds():
     global canzoneSogno
     global canzoneCasa
     global canzoneForesta
+    global audioAmbienteStradaPerCitta1
+    global audioAmbienteStradaPerCitta2
+    global audioAmbienteStradaPerCitta3
+    global canzoneEsternoCitta
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Audio/RumoriPuntatore/SelSta.wav")
@@ -1569,13 +1577,6 @@ def loadSounds():
     rumorecamminata = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/Camminata.wav")
     rumorelevelup = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/Levelup.wav")
     rumoreMorte = caricaSuonoMostrandoAvanzamento("Audio/RumoriPersonaggio/Morte.wav")
-
-    # suoni apertura-chiusura cofanetti-porte
-    suonoaperturacofanetti = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaCofanetto.wav")
-    suonoaperturaporteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaPortaForesta.wav")
-    suonochiusuraporteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/ChiusuraPortaForesta.wav")
-    suonoaperturaporteCasa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaPortaCasa.wav")
-    suonochiusuraporteCasa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/ChiusuraPortaCasa.wav")
 
     # souno raccolta esca - monete
     suonoRaccoltaEsca = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/RaccoltaEsca.wav")
@@ -1611,11 +1612,16 @@ def loadSounds():
     rumoreLancioOggettoNemico = caricaSuonoMostrandoAvanzamento("Audio/RumoriNemiciPersonaggi/AttaccoLontanoNemico.wav")
     rumoreMorteNemico = caricaSuonoMostrandoAvanzamento("Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
 
-    # suono mappa
-    suonoAperturaMappa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaMappa.wav")
-
     # effetti speciali
+    suonoaperturacofanetti = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaCofanetto.wav")
+    suonoAperturaMappa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaMappa.wav")
     rumoreScavare = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/Scavare.wav")
+
+    # suoni apertura-chiusura porte
+    suonoaperturaporteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaPortaForesta.wav")
+    suonochiusuraporteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/ChiusuraPortaForesta.wav")
+    suonoaperturaporteCasa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/AperturaPortaCasa.wav")
+    suonochiusuraporteCasa = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/ChiusuraPortaCasa.wav")
 
     # suoni sottofondi ambientali
     audioAmbienteSogno = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/Sogno.wav")
@@ -1623,11 +1629,15 @@ def loadSounds():
     audioAmbienteCasaEsterno = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/CasaEsterno.wav")
     audioAmbienteForesta = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/Foresta.wav")
     audioAmbienteForestaFuoco = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/ForestaFuoco.wav")
+    audioAmbienteStradaPerCitta1 = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta1.wav")
+    audioAmbienteStradaPerCitta2 = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta2.wav")
+    audioAmbienteStradaPerCitta3 = caricaSuonoMostrandoAvanzamento("Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta3.wav")
 
     # suoni canzoni
     canzoneSogno = caricaSuonoMostrandoAvanzamento("Audio/Canzoni/01-Sogno.wav")
     canzoneCasa = caricaSuonoMostrandoAvanzamento("Audio/Canzoni/02-Casa.wav")
     canzoneForesta = caricaSuonoMostrandoAvanzamento("Audio/Canzoni/03-Foresta.wav")
+    canzoneEsternoCitta = caricaSuonoMostrandoAvanzamento("Audio/Canzoni/04-CittàEsterno.wav")
 
 # freccetta (sized 24x24)
 global mouseBloccato
