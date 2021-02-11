@@ -3,7 +3,7 @@
 from PersonaggioObj import *
 
 
-def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio):
+def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio, avanzamentoStoria):
     # npers: 1=d, 2=a, 3=w, 4=s
     if stanza == GlobalVar.dictStanze["sognoLucy1"]:
         if canzone != GlobalVar.canzoneSogno:
@@ -106,9 +106,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalVar.gsx // 32 * 4
                 y = GlobalVar.gsy // 18 * 14
     if stanza == GlobalVar.dictStanze["casaHansLucy2"]:
-        if canzone != GlobalVar.canzoneCasa:
+        if canzone != GlobalVar.canzoneEsternoCasa:
             canzoneCambiata = True
-        canzone = GlobalVar.canzoneCasa
+        canzone = GlobalVar.canzoneEsternoCasa
         if sottofondoAmbientale != GlobalVar.audioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
         sottofondoAmbientale = GlobalVar.audioAmbienteCasaEsterno
@@ -121,42 +121,42 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = 4
                 if x == GlobalVar.gsx // 32 * 16:
                     x = GlobalVar.gsx // 32 * 16
-                    y = GlobalVar.gsy // 18 * 2
+                    y = GlobalVar.gsy // 18 * 4
                 if x == GlobalVar.gsx // 32 * 17:
                     x = GlobalVar.gsx // 32 * 17
-                    y = GlobalVar.gsy // 18 * 2
+                    y = GlobalVar.gsy // 18 * 4
             if stanzaVecchia == GlobalVar.dictStanze["casaHansLucy3"]:
                 npers = 4
                 if x == GlobalVar.gsx // 32 * 3:
                     x = GlobalVar.gsx // 32 * 3
-                    y = GlobalVar.gsy // 18 * 2
+                    y = GlobalVar.gsy // 18 * 3
                 if x == GlobalVar.gsx // 32 * 4:
                     x = GlobalVar.gsx // 32 * 4
-                    y = GlobalVar.gsy // 18 * 2
+                    y = GlobalVar.gsy // 18 * 3
                 if x == GlobalVar.gsx // 32 * 27:
                     x = GlobalVar.gsx // 32 * 27
-                    y = GlobalVar.gsy // 18 * 2
+                    y = GlobalVar.gsy // 18 * 4
                 if x == GlobalVar.gsx // 32 * 28:
                     x = GlobalVar.gsx // 32 * 28
-                    y = GlobalVar.gsy // 18 * 2
+                    y = GlobalVar.gsy // 18 * 4
             if stanzaVecchia == GlobalVar.dictStanze["casaHansLucy4"]:
                 npers = 3
                 if x == GlobalVar.gsx // 32 * 14:
                     x = GlobalVar.gsx // 32 * 14
-                    y = GlobalVar.gsy // 18 * 15
+                    y = GlobalVar.gsy // 18 * 14
                 if x == GlobalVar.gsx // 32 * 15:
                     x = GlobalVar.gsx // 32 * 15
-                    y = GlobalVar.gsy // 18 * 15
+                    y = GlobalVar.gsy // 18 * 14
                 if x == GlobalVar.gsx // 32 * 16:
                     x = GlobalVar.gsx // 32 * 16
-                    y = GlobalVar.gsy // 18 * 15
+                    y = GlobalVar.gsy // 18 * 14
                 if x == GlobalVar.gsx // 32 * 17:
                     x = GlobalVar.gsx // 32 * 17
-                    y = GlobalVar.gsy // 18 * 15
+                    y = GlobalVar.gsy // 18 * 14
     if stanza == GlobalVar.dictStanze["casaHansLucy3"]:
-        if canzone != GlobalVar.canzoneCasa:
+        if canzone != GlobalVar.canzoneEsternoCasa:
             canzoneCambiata = True
-        canzone = GlobalVar.canzoneCasa
+        canzone = GlobalVar.canzoneEsternoCasa
         if sottofondoAmbientale != GlobalVar.audioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
         sottofondoAmbientale = GlobalVar.audioAmbienteCasaEsterno
@@ -180,9 +180,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x = GlobalVar.gsx // 32 * 28
                     y = GlobalVar.gsy // 18 * 15
     if stanza == GlobalVar.dictStanze["casaHansLucy4"]:
-        if canzone != GlobalVar.canzoneCasa:
+        if canzone != GlobalVar.canzoneEsternoCasa:
             canzoneCambiata = True
-        canzone = GlobalVar.canzoneCasa
+        canzone = GlobalVar.canzoneEsternoCasa
         if sottofondoAmbientale != GlobalVar.audioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
         sottofondoAmbientale = GlobalVar.audioAmbienteCasaEsterno
@@ -373,7 +373,11 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalVar.gsx // 32 * 3
                 y = GlobalVar.gsy // 18 * 7
                 GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreScavare)
-                pygame.time.wait(3000)
+                i = 0
+                while i < 3:
+                    pygame.time.wait(1000)
+                    pygame.event.pump()
+                    i += 1
             if stanzaVecchia == GlobalVar.dictStanze["forestaCadetta8"]:
                 npers = 3
                 x = GlobalVar.gsx // 32 * 4
@@ -420,10 +424,18 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
     if stanza == GlobalVar.dictStanze["stradaPerCittà1"]:
         if canzone != GlobalVar.canzoneEsternoCitta:
             canzoneCambiata = True
-        canzone = GlobalVar.canzoneEsternoCitta
-        if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta1:
-            sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta1
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            canzone = GlobalVar.canzoneEsternoCitta
+        else:
+            canzone = False
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta1_1:
+                sottofondoAmbientaleCambiato = True
+            sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta1_1
+        else:
+            if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta1_2:
+                sottofondoAmbientaleCambiato = True
+            sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta1_2
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -458,10 +470,18 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
     if stanza == GlobalVar.dictStanze["stradaPerCittà2"]:
         if canzone != GlobalVar.canzoneEsternoCitta:
             canzoneCambiata = True
-        canzone = GlobalVar.canzoneEsternoCitta
-        if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta2:
-            sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta2
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            canzone = GlobalVar.canzoneEsternoCitta
+        else:
+            canzone = False
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta2_1:
+                sottofondoAmbientaleCambiato = True
+            sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta2_1
+        else:
+            if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta2_2:
+                sottofondoAmbientaleCambiato = True
+            sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta2_2
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -491,6 +511,43 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 elif y == GlobalVar.gsy // 18 * 15:
                     y = GlobalVar.gsy // 18 * 13
             if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà3"]:
+                npers = 1
+                x = GlobalVar.gsx // 32 * 2
+    if stanza == GlobalVar.dictStanze["stradaPerCittà3"]:
+        if canzone != GlobalVar.canzoneEsternoCitta:
+            canzoneCambiata = True
+        if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            canzone = GlobalVar.canzoneEsternoCitta
+        else:
+            canzone = False
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta3_1:
+                sottofondoAmbientaleCambiato = True
+            sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta3_1
+        else:
+            if sottofondoAmbientale != GlobalVar.audioAmbienteStradaPerCitta3_2:
+                sottofondoAmbientaleCambiato = True
+            sottofondoAmbientale = GlobalVar.audioAmbienteStradaPerCitta3_2
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà2"]:
+                npers = 2
+                x = GlobalVar.gsx // 32 * 29
+            if stanzaVecchia == GlobalVar.dictStanze["stradaPerCittà3"]:
+                npers = 2
+                x = GlobalVar.gsx // 32 * 4
+                y = GlobalVar.gsy // 18 * 8
+                GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreSollevamentoPortaCitta)
+                i = 0
+                while i < 6:
+                    pygame.time.wait(1000)
+                    pygame.event.pump()
+                    i += 1
+                pygame.time.wait(500)
+            if stanzaVecchia == GlobalVar.dictStanze["città1"]:
                 npers = 1
                 x = GlobalVar.gsx // 32 * 2
 
@@ -585,11 +642,18 @@ def settaNomeStanza(avanzamentoStoria, stanza):
             nomeStanza = "StanzaA"
         else:
             nomeStanza = "StanzaB"
+    if stanza == GlobalVar.dictStanze["forestaCadetta1"] or stanza == GlobalVar.dictStanze["forestaCadetta2"] or stanza == GlobalVar.dictStanze["forestaCadetta3"] or stanza == GlobalVar.dictStanze["forestaCadetta4"] or stanza == GlobalVar.dictStanze["forestaCadetta6"] or stanza == GlobalVar.dictStanze["forestaCadetta7"] or stanza == GlobalVar.dictStanze["forestaCadetta8"] or stanza == GlobalVar.dictStanze["forestaCadetta9"]:
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
     if stanza == GlobalVar.dictStanze["forestaCadetta5"]:
         if GlobalVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             nomeStanza = "StanzaB"
-        else:
+        elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaC"
     if stanza == GlobalVar.dictStanze["stradaPerCittà1"]:
         if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             nomeStanza = "StanzaA"
@@ -601,9 +665,11 @@ def settaNomeStanza(avanzamentoStoria, stanza):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalVar.dictStanze["stradaPerCittà3"]:
-        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+        if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["apertoPortaCittà"]:
             nomeStanza = "StanzaA"
-        else:
+        elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
 
     return nomeStanza

@@ -115,7 +115,11 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["uscitoDaForesta"] = i
     i += 1
-    dictAvanzamentoStoria["arrivatoInCittà"] = i
+    dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"] = i
+    i += 1
+    dictAvanzamentoStoria["apertoPortaCittà"] = i
+    i += 1
+    dictAvanzamentoStoria["entratoInCittà"] = i
 
     i += 100
     i += 1
@@ -221,12 +225,25 @@ def definisciStanze():
     dictStanze["forestaCadetta9"] = i
     i += 1
     dictStanze["stradaPerCittà1"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["stradaPerCittà2"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["stradaPerCittà3"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["casaDavid1"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["casaDavid2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["casaDavid3"] = i
+    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["città1"] = i
+    vetStanzePacifiche.append(i)
 
     return dictStanze, vetStanzePacifiche
 

@@ -120,7 +120,7 @@ def gameloop():
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
                 # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
-                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale = settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, sottofondoAmbientale, inizio)
+                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale = settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, sottofondoAmbientale, inizio, dati[0])
                 if not inizio:
                     vx = x
                     vy = y
@@ -230,8 +230,8 @@ def gameloop():
                         porte.append(tutteporte[i + 3])
                     i += 4
 
-                caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
-                entrateStanza = getEntrateStanze(dati[1])
+                caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti, dati[0])
+                entrateStanza = getEntrateStanze(dati[1], dati[0])
 
                 GlobalVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
 
@@ -747,7 +747,7 @@ def gameloop():
                             sposta = True
                             GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
-                            caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
+                            caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti, dati[0])
                             caricaTutto = True
                             # aggiornare vettore tutteporte
                             j = 0
@@ -872,7 +872,7 @@ def gameloop():
                         sposta = True
                         GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                         porte[posizPortaInVettore + 3] = True
-                        caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
+                        caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti, dati[0])
                         caricaTutto = True
                         # aggiornare vettore tutteporte
                         j = 0
@@ -1448,7 +1448,7 @@ def gameloop():
                 vx = x
                 vy = y
                 stanzaVecchia = dati[1]
-                x, y, dati[1], carim, cambiosta = controlloOstacoli(x, y, nx, ny, dati[1], carim, porte, cofanetti)
+                x, y, dati[1], carim, cambiosta = controlloOstacoli(x, y, nx, ny, dati[1], carim, porte, cofanetti, dati[0])
 
                 sovrapposto = False
                 for nemico in listaNemici:
@@ -1622,7 +1622,7 @@ def gameloop():
                         else:
                             GlobalVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
-                        caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti)
+                        caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti, dati[0])
                         # aggiornare vettore tutteporte
                         j = 0
                         while j < len(tutteporte):

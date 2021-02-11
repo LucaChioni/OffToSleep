@@ -689,21 +689,21 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         if dati[i] == 0:
             messaggio("---", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            messaggio("Lucy con pv < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Lucy con Pv < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            messaggio("Lucy con pv < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Lucy con Pv < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            messaggio("Lucy con pv < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Lucy con Pv < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 4:
             messaggio("Lucy con veleno", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 5:
             messaggio("Impo surriscaldato", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 6:
-            messaggio("Impo con pe < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Impo con Pe < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 7:
-            messaggio("Impo con pe < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Impo con Pe < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 8:
-            messaggio("Impo con pe < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Impo con Pe < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 9:
             messaggio("Sempre a Lucy", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 10:
@@ -715,13 +715,13 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         if dati[i] == 13:
             messaggio("Nemico lontano", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 14:
-            messaggio("Nemico con pv < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Nemico con Pv < 80%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 15:
-            messaggio("Nemico con pv < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Nemico con Pv < 50%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 16:
-            messaggio("Nemico con pv < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Nemico con Pv < 30%", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 17:
-            messaggio("Nemico con meno pv", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
+            messaggio("Nemico con meno Pv", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 18:
             messaggio("Numero di nemici > 1", GlobalVar.grigiochi, xListaCondizioni, GlobalVar.gsy // 18 * c, 40)
         if dati[i] == 19:

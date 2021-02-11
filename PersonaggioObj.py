@@ -104,6 +104,14 @@ class PersonaggioObj(object):
             numImg = 2
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
+        if self.tipo.startswith("OggettoCartelloStaccionata"):
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo == "OggettoCartelloBloccoStrada":
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         i = 1
         while i <= numImg:
             if nonCaricareImg:
@@ -169,6 +177,12 @@ class PersonaggioObj(object):
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["trovatoLegna3"] or self.avanzamentoDialogo == 1:
                 numImgAttuale = 1
         if self.tipo == "OggettoTombaSam":
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                numImgAttuale = 1
+        if self.tipo.startswith("OggettoCartelloStaccionata"):
+            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                numImgAttuale = 1
+        if self.tipo == "OggettoCartelloBloccoStrada":
             if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
 
@@ -474,7 +488,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni e di recuperare qualche pv.")
+                dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni e di recuperare qualche <*>#italic#Pv<*>.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -808,7 +822,16 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Perfetto, adesso mi basterà seguire la strada e arriverò in città. Hans sarà sicuramente la da qualche parte.")
+                dialogo.append(u"Perfetto, adesso mi basterà seguire la strada e arriverò in città. Hans sarà sicuramente là da qualche parte.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà3"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("...")
                 self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False
@@ -851,15 +874,11 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append("Si, si... mi porti un bicchiere d'acqua quando torni?")
+                dialogo.append(u"Sì, sì... mi porti un bicchiere d'acqua quando torni?")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Va bene.")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Grazie.")
+                dialogo.append("Ok...")
                 self.partiDialogo.append(dialogo)
             elif GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"] <= avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
                 self.oggettoDato = False
@@ -872,7 +891,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("Si, sto andando.")
+                dialogo.append(u"Sì, sto andando.")
                 self.partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
                 self.oggettoDato = False
@@ -1145,7 +1164,7 @@ class PersonaggioObj(object):
                 self.scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non mi scappa la pipì!")
+                dialogo.append(u"Non mi scappa la pipì.")
                 self.partiDialogo.append(dialogo)
         if self.tipo.startswith("OggettoCamino"):
             self.partiDialogo = []
@@ -1708,7 +1727,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Mmh... si, dovrebbe bastare.")
+                dialogo.append(u"Mmh... sì, dovrebbe bastare.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1965,7 +1984,7 @@ class PersonaggioObj(object):
             dialogo.append("tu")
             dialogo.append(u"Non credo che Hans sia andato di qua...")
             self.partiDialogo.append(dialogo)
-        if self.tipo == "GuardiaCittà":
+        if self.tipo == "GuardiaCitta":
             self.partiDialogo = []
             self.nome = "Soldato"
             if self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 0:
@@ -1992,7 +2011,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Si ok, ma perché il Re lo ha ordinato?")
+                dialogo.append(u"Sì ok, ma perché il Re lo ha ordinato?")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -2090,6 +2109,95 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("(<*>#italic#Meglio lasciarlo al suo lavoro...<*>)")
                 self.partiDialogo.append(dialogo)
+        if self.tipo == "PadreUfficialeServizio":
+            self.partiDialogo = []
+            self.nome = "Soldato"
+            if avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Chi va là!")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ehm, scusate sono di passaggio, sto cercando un ragazzo che dovrebbe essere passato di qua poco fa...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("Una ragazza! Aprite!")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["apertoPortaCittà"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("Chi sei e cosa vuoi?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Sono... ehm... mi chiamo Lucy e sto cercando mio fratello. Si chiama Hans e ha più o meno la mia età. Dovrebbe essere passato di qui non molto tempo fa...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("... Sei da sola?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Si.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Mmh... ok... se tuo fratello è in città, è stato allocato in uno degli alloggi profughi. E al momento gli alloggi sono tutti occupati... potrebbe aver preso uno degl'ultimi posti disponibili.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Questo però vuol dire che non c'è più spazio per nessun altro.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Posso dividere la stanza con lui!")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Tsk, si certo... non credo proprio, vedi: ogni stanza ha una ventina di letti e ogni letto ospita almeno tre o quattro persone: se un alloggio è al completo significa che lì dentro non c'entra più niente.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Oh... e come...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Senti... per stanotte potrai essere mia ospite: ti farò preparare una stanza da mia moglie. Ma da domani dovrai togliere il disturbo perché, come avrai già intuito, siamo un po' al limite con le risorse.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("V-va bene, grazie ma... chi sei tu?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Sono David, ex ufficiale dell'esercito cittadino, ora a comando della guardia notturna.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Vado a predisporre la guardia per la mia assenza e andiamo.")
+                self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoBucoPorta"):
+            self.partiDialogo = []
+            self.nome = "OggettoBucoPorta"
+            self.oggettoDato = False
+            self.avanzaStoria = True
+            self.menuMercante = False
+            self.scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"È chiuso...")
+            self.partiDialogo.append(dialogo)
 
     def spostati(self, x, y, rx, ry, listaNemici, caseviste):
         self.vx = self.x

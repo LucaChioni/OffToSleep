@@ -549,7 +549,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                 GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoSinistra, ((GlobalVar.gsx // 32 * 2) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 15))
                 GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoDestra, ((GlobalVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 15))
                 messaggio("Confermi?", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 4.5) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 13, 70)
-                messaggio("Si", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 4.6) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 14.5, 70)
+                messaggio(u"Sì", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 4.6) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 14.5, 70)
                 GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, ((GlobalVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3) - 1, GlobalVar.gsy // 18 * 14.3), ((GlobalVar.gsx // 32 * 6.6) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3) - 1, GlobalVar.gsy // 18 * 15.7), 2)
                 messaggio("No", GlobalVar.grigiochi, (GlobalVar.gsx // 32 * 7.6) + ((salMarcato - 1) * GlobalVar.gsx // 32 * 9.3), GlobalVar.gsy // 18 * 14.5, 70)
                 GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (vxp, vyp))
@@ -700,7 +700,7 @@ def chiediconferma(conferma):
                     messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
                 else:
                     messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
-            messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 9.5, 120)
+            messaggio(u"Sì", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 9.5, 120)
             GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 16), int(GlobalVar.gpy * 9.3)), (int(GlobalVar.gpx * 16), int(GlobalVar.gpy * 11.6)), 2)
             messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19, GlobalVar.gsy // 18 * 9.5, 120)
             primoFrame = False
@@ -2015,7 +2015,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatoreImpostazioniDestraBloccato, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 10.9))
                 messaggio("Configurabile solo dal menu principale", GlobalVar.rosso, GlobalVar.gsx // 32 * 30.3, GlobalVar.gsy // 18 * 11.3, 40, daDestra=True)
             if schermoInteroTemp:
-                messaggio("Si", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
+                messaggio(u"Sì", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
             else:
                 messaggio("No", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17, GlobalVar.gsy // 18 * 12.5, 60)
             if voceMarcata == 6:
