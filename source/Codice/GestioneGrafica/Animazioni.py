@@ -3,11 +3,11 @@
 import math
 import pygame
 import GlobalHWVar
-import GlobalGameVar
-import GlobalImgVar
-import GlobalSndVar
-import GestioneInput
-import GenericFunc
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
 
 def animaCamminataRalloCambiosta(npers, x, y, scudo, armatura, armaMov1, arco, faretra, guantiMov1, collana, avvele, fineanimaz):

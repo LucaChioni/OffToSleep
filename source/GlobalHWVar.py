@@ -82,11 +82,11 @@ schermoIntero = True
 # nome-icona
 titolo = "Still waiting"
 pygame.display.set_caption(titolo)
-icona = pygame.image.load(gamePath + "Immagini/Icone/Icona.png")
+icona = pygame.image.load(gamePath + "Risorse/Immagini/Icone/Icona.png")
 pygame.display.set_icon(icona)
-fontUtilizzato = gamePath + "Font/LiberationSerif-Regular.ttf"
-fontUtilizzatoItalic = gamePath + "Font/LiberationSerif-Italic.ttf"
-fontUtilizzatoBold = gamePath + "Font/LiberationSerif-Bold.ttf"
+fontUtilizzato = gamePath + "Risorse/Font/LiberationSerif-Regular.ttf"
+fontUtilizzatoItalic = gamePath + "Risorse/Font/LiberationSerif-Italic.ttf"
+fontUtilizzatoBold = gamePath + "Risorse/Font/LiberationSerif-Bold.ttf"
 listaTastiPremuti = []
 primoAvvio = True
 
@@ -280,7 +280,7 @@ def inizializzaPad(pad):
             break
 def caricaImpostazioniController():
     impoControllerErrato = False
-    leggi = loadFile("Impostazioni/ImpoController.txt", "r")
+    leggi = loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "r")
     leggifile = leggi.read()
     leggi.close()
     datiImpostazioniController = leggifile.split("\n")
@@ -312,7 +312,7 @@ def caricaImpostazioniController():
             contaGlobale += 1
     if impoControllerErrato:
         # cancello il file se c'è un errore
-        scrivi = loadFile("Impostazioni/ImpoController.txt", "w")
+        scrivi = loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
         scrivi.close()
     return impoControllerErrato, datiImpostazioniController
 def inizializzaModuloJoistick():
@@ -529,7 +529,7 @@ def aggiornaSchermo():
 
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
 linguaImpostata = "inglese"
-leggi = loadFile("Impostazioni/Impostazioni.txt", "r")
+leggi = loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
 leggifile = leggi.read()
 leggi.close()
 datiFileImpostazioniString = leggifile.split("_")

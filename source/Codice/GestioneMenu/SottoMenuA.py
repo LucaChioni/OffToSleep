@@ -2,11 +2,11 @@
 
 import pygame
 import GlobalHWVar
-import GlobalImgVar
-import GlobalSndVar
-import GlobalGameVar
-import GestioneInput
-import GenericFunc
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
 
 def equip(dati):

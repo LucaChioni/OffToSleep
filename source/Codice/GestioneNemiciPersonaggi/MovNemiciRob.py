@@ -2,8 +2,8 @@
 
 import random
 import GlobalHWVar
-import GlobalGameVar
-import GenericFunc
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 
 
 def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemici, listaPersonaggi, caseviste, avanzamentoStoria):

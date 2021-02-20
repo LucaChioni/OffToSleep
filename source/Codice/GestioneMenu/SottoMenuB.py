@@ -2,12 +2,12 @@
 
 import pygame
 import GlobalHWVar
-import GlobalImgVar
-import GlobalSndVar
-import GlobalGameVar
-import GestioneInput
-import GenericFunc
-import CaricaSalvaPartita
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.FunzioniGeneriche.CaricaSalvaPartita as CaricaSalvaPartita
 
 
 def ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=-1):
@@ -339,9 +339,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
                             GenericFunc.messaggio("Cancellando...", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 13.7, 80, centrale=True)
                             GlobalHWVar.aggiornaSchermo()
-                            leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+                            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
                             leggi.close()
-                            leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+                            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
                             leggi.close()
                             # ricarico i salvataggi
                             ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
@@ -1012,7 +1012,7 @@ def settaController():
                 # salva
                 elif voceMarcata == 6:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    scrivi = GlobalHWVar.loadFile("Impostazioni/ImpoController.txt", "w")
+                    scrivi = GlobalHWVar.loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
                     for padConf in configTemp:
                         for elemento in padConf:
                             scrivi.write(str(elemento) + "_")
@@ -1575,7 +1575,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                             GlobalGameVar.numImgCaricata = 0
                             GlobalImgVar.loadImgs(GlobalGameVar.numImgCaricata, cambioRisoluzione=True)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
-                    scrivi = GlobalHWVar.loadFile("Impostazioni/Impostazioni.txt", "w")
+                    scrivi = GlobalHWVar.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
                     if GlobalHWVar.linguaImpostata == "italiano":
                         scrivi.write("0_")
                     elif GlobalHWVar.linguaImpostata == "inglese":

@@ -2,19 +2,19 @@
 
 import pygame
 import GlobalHWVar
-import GlobalSndVar
-import GlobalImgVar
-import GlobalGameVar
-import GestioneInput
-import GenericFunc
-import Menu
-import EnvPrint
-import Animazioni
-import MovNemiciRob
-import UtilityOstacoliContenutoCofanetti
-import SetNemiciPersonaggiEventi
-import SetOstacoliContenutoCofanetti
-import SetPosizioneAudioImpedimenti
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.GestioneMenu.Menu as Menu
+import Codice.GestioneGrafica.EnvPrint as EnvPrint
+import Codice.GestioneGrafica.Animazioni as Animazioni
+import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
+import Codice.SettaggiLivelli.UtilityOstacoliContenutoCofanetti as UtilityOstacoliContenutoCofanetti
+import Codice.SettaggiLivelli.SetNemiciPersonaggiEventi as SetNemiciPersonaggiEventi
+import Codice.SettaggiLivelli.Ostacoli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
+import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
 
 
 def gameloop():
@@ -210,12 +210,12 @@ def gameloop():
 
                 # stanza
                 nomeStanza = SetPosizioneAudioImpedimenti.settaNomeStanza(dati[0], dati[1])
-                imgSfondoStanza = GlobalImgVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
-                casellaChiara = GlobalImgVar.loadImage("Immagini/Scenari/CasellaChiara.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                casellaScura = GlobalImgVar.loadImage("Immagini/Scenari/CasellaScura.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                casellaOscurata = GlobalImgVar.loadImage("Immagini/Scenari/CasellaOscurata.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                portaVert = GlobalImgVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                portaOriz = GlobalImgVar.loadImage("Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                imgSfondoStanza = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
+                casellaChiara = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/CasellaChiara.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                casellaScura = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/CasellaScura.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                casellaOscurata = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/CasellaOscurata.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                portaVert = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                portaOriz = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
                 if not inizio:
                     mosseRimasteRob = 0
@@ -295,75 +295,75 @@ def gameloop():
 
             if aggiornaImgEquip:
                 # arma
-                armaw = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%iw.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armawMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%iwMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armawMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%iwMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaa = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%ia.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaaMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%iaMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaaMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%iaMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armas = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%is.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armasMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%isMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armasMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%isMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armad = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%id.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armadMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%idMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armadMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%idMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armasAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%isAttacco.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
-                armaaAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%iaAttacco.png" % dati[6], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                armadAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%idAttacco.png" % dati[6], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                armawAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Spade/Spada%iwAttacco.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+                armaw = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iw.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armawMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armawMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%ia.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaaMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaaMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armas = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%is.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armasMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%isMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armasMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%isMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armad = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%id.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armadMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%idMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armadMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%idMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armasAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%isAttacco.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+                armaaAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iaAttacco.png" % dati[6], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+                armadAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%idAttacco.png" % dati[6], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+                armawAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iwAttacco.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
                 # arco
-                arcow = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%iw.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcoa = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%ia.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcos = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%is.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcod = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%id.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcosAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%isAttacco.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
-                arcoaAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%iaAttacco.png" % dati[128], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                arcodAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%idAttacco.png" % dati[128], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                arcowAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Archi/Arco%iwAttacco.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+                arcow = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%iw.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                arcoa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%ia.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                arcos = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%is.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                arcod = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%id.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                arcosAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%isAttacco.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+                arcoaAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%iaAttacco.png" % dati[128], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+                arcodAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%idAttacco.png" % dati[128], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
+                arcowAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%iwAttacco.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
                 # faretra
-                faretraw = GlobalImgVar.loadImage("Immagini/EquipLucy/Faretre/Faretra%iw.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                faretraa = GlobalImgVar.loadImage("Immagini/EquipLucy/Faretre/Faretra%ia.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                faretras = GlobalImgVar.loadImage("Immagini/EquipLucy/Faretre/Faretra%is.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                faretrad = GlobalImgVar.loadImage("Immagini/EquipLucy/Faretre/Faretra%id.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                faretraw = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%iw.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                faretraa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%ia.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                faretras = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%is.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                faretrad = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%id.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 # armatura
-                armaturaw = GlobalImgVar.loadImage("Immagini/EquipLucy/Armature/Armatura%iw.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaturaa = GlobalImgVar.loadImage("Immagini/EquipLucy/Armature/Armatura%ia.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaturas = GlobalImgVar.loadImage("Immagini/EquipLucy/Armature/Armatura%is.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaturad = GlobalImgVar.loadImage("Immagini/EquipLucy/Armature/Armatura%id.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaturaw = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%iw.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaturaa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%ia.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaturas = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaturad = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%id.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 # scudo
-                scudow = GlobalImgVar.loadImage("Immagini/EquipLucy/Scudi/Scudo%iw.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudoa = GlobalImgVar.loadImage("Immagini/EquipLucy/Scudi/Scudo%ia.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudos = GlobalImgVar.loadImage("Immagini/EquipLucy/Scudi/Scudo%is.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudod = GlobalImgVar.loadImage("Immagini/EquipLucy/Scudi/Scudo%id.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudoDifesa = GlobalImgVar.loadImage("Immagini/EquipLucy/Scudi/Scudo%iDifesa.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                scudow = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%iw.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                scudoa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%ia.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                scudos = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%is.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                scudod = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%id.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                scudoDifesa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%iDifesa.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 # guanti
-                guantiw = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iw.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiwMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iwMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiwMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iwMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantia = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%ia.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiaMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iaMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiaMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iaMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantis = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%is.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantisMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%isMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantisMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%isMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantid = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%id.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantidMov1 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%idMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantidMov2 = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%idMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantisAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%isAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiaAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iaAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantidAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%idAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiwAttacco = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iwAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiDifesa = GlobalImgVar.loadImage("Immagini/EquipLucy/Guanti/Guanti%iDifesa.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiw = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iw.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiwMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiwMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantia = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%ia.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiaMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiaMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantis = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%is.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantisMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantisMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantid = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%id.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantidMov1 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantidMov2 = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantisAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%isAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiaAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantidAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%idAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiwAttacco = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiDifesa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iDifesa.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 # collana
-                collanaw = GlobalImgVar.loadImage("Immagini/EquipLucy/Collane/Collana%iw.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                collanaa = GlobalImgVar.loadImage("Immagini/EquipLucy/Collane/Collana%ia.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                collanas = GlobalImgVar.loadImage("Immagini/EquipLucy/Collane/Collana%is.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                collanad = GlobalImgVar.loadImage("Immagini/EquipLucy/Collane/Collana%id.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                collanaw = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%iw.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                collanaa = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%ia.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                collanas = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%is.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                collanad = GlobalImgVar.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%id.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 # armatura robot
-                armrobw = GlobalImgVar.loadImage("Immagini/EquipRobo/Batteria%iw.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armroba = GlobalImgVar.loadImage("Immagini/EquipRobo/Batteria%ia.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armrobs = GlobalImgVar.loadImage("Immagini/EquipRobo/Batteria%is.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armrobd = GlobalImgVar.loadImage("Immagini/EquipRobo/Batteria%id.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armrobw = GlobalImgVar.loadImage("Risorse/Immagini/EquipRobo/Batteria%iw.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armroba = GlobalImgVar.loadImage("Risorse/Immagini/EquipRobo/Batteria%ia.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armrobs = GlobalImgVar.loadImage("Risorse/Immagini/EquipRobo/Batteria%is.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armrobd = GlobalImgVar.loadImage("Risorse/Immagini/EquipRobo/Batteria%id.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
             if npers == 3:
                 pers = GlobalImgVar.persw

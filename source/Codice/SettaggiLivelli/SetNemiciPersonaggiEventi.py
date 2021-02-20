@@ -2,11 +2,11 @@
 
 import pygame
 import GlobalHWVar
-import GlobalSndVar
-import GlobalGameVar
-import GenericFunc
-import NemicoObj
-import PersonaggioObj
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
+import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 
 def caricaNemiciEPersonaggi(avanzamentoStoria, stanza, stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi):

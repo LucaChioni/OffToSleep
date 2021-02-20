@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import GlobalHWVar
-import GlobalGameVar
-import UtilityOstacoliContenutoCofanetti
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.SettaggiLivelli.UtilityOstacoliContenutoCofanetti as UtilityOstacoliContenutoCofanetti
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):

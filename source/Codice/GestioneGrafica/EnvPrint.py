@@ -4,12 +4,12 @@ import random
 import copy
 import pygame
 import GlobalHWVar
-import GlobalImgVar
-import GlobalSndVar
-import GlobalGameVar
-import GestioneInput
-import GenericFunc
-import MovNemiciRob
+import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalSndVar as GlobalSndVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 
 def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria):

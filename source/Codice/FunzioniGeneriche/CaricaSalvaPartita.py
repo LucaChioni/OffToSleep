@@ -2,8 +2,8 @@
 
 import GlobalHWVar
 import GenericFunc
-import NemicoObj
-import PersonaggioObj
+import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
+import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 
 def salvataggio(n, datiAttuali, datiGameover):
@@ -16,9 +16,9 @@ def salvataggio(n, datiAttuali, datiGameover):
             backup = True
 
         if not backup:
-            scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+            scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
         else:
-            scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+            scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
 
         gameoverSalvato = False
         salvandoGameover = False
@@ -186,11 +186,11 @@ def salvataggio(n, datiAttuali, datiGameover):
         scrivi.close()
 
     # critta il salvataggio
-    # leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
+    # leggi = GlobalVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
     # contenutoFile = leggi.read()
     # leggi.close()
     # encoded_text = contenutoFile.encode('base64')
-    # scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+    # scrivi = GlobalVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
     # scrivi.write(encoded_text)
     # scrivi.close()
 
@@ -212,9 +212,9 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
         datiGameover = []
 
         if not backupNecessario:
-            leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
+            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
         else:
-            leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "r")
+            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
         contenutoFile = leggi.read()
         leggi.close()
 
@@ -486,15 +486,15 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
     if not errore:
         if not checkErrori:
             if not backupNecessario:
-                leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
+                leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
             else:
-                leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "r")
+                leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
             contenutoFile = leggi.read()
             leggi.close()
             if not backupNecessario:
-                scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+                scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
             else:
-                scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+                scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
             scrivi.write(contenutoFile)
             scrivi.close()
     else:

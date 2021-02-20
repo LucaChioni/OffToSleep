@@ -4,13 +4,13 @@ import pygame
 import GlobalHWVar
 import GlobalImgVar
 import GlobalSndVar
-import SetAvanzamentiStanzePorteCofanetti
+import Codice.SettaggiLivelli.SetAvanzamentiStanzePorteCofanetti as SetAvanzamentiStanzePorteCofanetti
 
 
 def mostraLogo():
-    effettoAvvio = GlobalSndVar.loadSound("Audio/RumoriAmbiente/EffettoAvvio.wav")
+    effettoAvvio = GlobalSndVar.loadSound("Risorse/Audio/RumoriAmbiente/EffettoAvvio.wav")
     GlobalHWVar.canaleSoundSottofondoAmbientale.play(effettoAvvio)
-    logo = GlobalImgVar.loadImage("Immagini/Icone/LogoPresentazione.png", GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 12, True)
+    logo = GlobalImgVar.loadImage("Risorse/Immagini/Icone/LogoPresentazione.png", GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 12, True)
     GlobalHWVar.disegnaImmagineSuSchermo(logo, (GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 3))
 
     rect = pygame.display.get_surface().get_rect()
@@ -62,11 +62,11 @@ def mostraLogo():
 global canzoneMenuPrincipale
 def disegnaSchermataDiCaricamento():
     global canzoneMenuPrincipale
-    canzoneMenuPrincipale = GlobalSndVar.loadSound("Audio/Canzoni/00-Menu.wav")
+    canzoneMenuPrincipale = GlobalSndVar.loadSound("Risorse/Audio/Canzoni/00-Menu.wav")
     GlobalHWVar.canaleSoundCanzone.play(canzoneMenuPrincipale, -1)
 
     global schemataDiCaricamento
-    schemataDiCaricamento = GlobalImgVar.loadImage("Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    schemataDiCaricamento = GlobalImgVar.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
     GlobalHWVar.disegnaImmagineSuSchermo(schemataDiCaricamento, (0, 0))
     carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 100 // 60)
