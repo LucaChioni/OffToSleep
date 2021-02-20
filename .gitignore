@@ -1,4 +1,4 @@
-source/DatiSalvati/
-source/Risorse/
+FileProgetto/DatiSalvati/
+FileProgetto/Risorse/
 /.idea/
 *.pyc

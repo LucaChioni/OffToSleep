@@ -1,8 +1,4 @@
-python setup.py build
-xcopy /s ".\Immagini" ".\build\exe.win-amd64-2.7\Immagini\"
-xcopy /s ".\Salvataggi" ".\build\exe.win-amd64-2.7\Salvataggi\"
-xcopy /s ".\Video" ".\build\exe.win-amd64-2.7\Video\"
-xcopy /s ".\Audio" ".\build\exe.win-amd64-2.7\Audio\"
-xcopy /s ".\Impostazioni" ".\build\exe.win-amd64-2.7\Impostazioni\"
-xcopy /s ".\Font" ".\build\exe.win-amd64-2.7\Font\"
-move ".\build\exe.win-amd64-2.7\Immagini\Icone\icona.ico" ".\build\exe.win-amd64-2.7\icona.ico"
+python FileProgetto\setup.py build
+xcopy /s ".\FileProgetto\Risorse" ".\build\exe.win-amd64-2.7\Risorse\"
+xcopy /s ".\FileProgetto\DatiSalvati" ".\build\exe.win-amd64-2.7\DatiSalvati\"
+move ".\build\exe.win-amd64-2.7\Risorse\Immagini\Icone\icona.ico" ".\build\exe.win-amd64-2.7\icona.ico"
