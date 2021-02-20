@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from GenericFunc import *
+import os
+import GlobalHWVar
+import GlobalImgVar
+import GlobalGameVar
 
 
 class PersonaggioObj(object):
@@ -115,23 +118,23 @@ class PersonaggioObj(object):
         i = 1
         while i <= numImg:
             if nonCaricareImg:
-                if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png"):
+                if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png"):
                     raise Exception("Immagine \"" + self.tipo + str(i) + ".png\" non trovata...")
                 img = False
                 self.imgOggetto.append(img)
             else:
-                img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalVar.gpx, GlobalVar.gpy, True)
+                img = GlobalImgVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 self.imgOggetto.append(img)
             i += 1
         i = 0
         while i < numImgDialogo:
             if nonCaricareImg:
-                if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png"):
+                if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png"):
                     raise Exception("Immagine \"" + nomeImgDialogo[i] + ".png\" non trovata...")
                 img = False
                 self.imgOggettoDialogo.append(img)
             else:
-                img = GlobalVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalVar.gpx * 16, GlobalVar.gpy * 12, False)
+                img = GlobalImgVar.loadImage("Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
                 self.imgOggettoDialogo.append(img)
             i += 1
 
@@ -140,50 +143,50 @@ class PersonaggioObj(object):
 
         numImgAttuale = 0
         if self.tipo == "OggettoLettoHans":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 1
         if self.tipo == "OggettoComodinoLucy":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
                 numImgAttuale = 1
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 2
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                 numImgAttuale = 3
         if self.tipo == "OggettoComodinoHans":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 1
         if self.tipo.startswith("OggettoFinestra"):
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 1
         if self.tipo == "OggettoSiepe":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 1
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 2
         if self.tipo == "OggettoFuoco":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
                 numImgAttuale = 1
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 2
         if self.tipo == "OggettoCibo":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["trovatoLegna3"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"]:
                 numImgAttuale = 1
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 2
         if self.tipo == "OggettoMucchioLegna":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["legnaDepositata"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"]:
                 numImgAttuale = 1
         if self.tipo.startswith("OggettoLegna"):
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["trovatoLegna3"] or self.avanzamentoDialogo == 1:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"] or self.avanzamentoDialogo == 1:
                 numImgAttuale = 1
         if self.tipo == "OggettoTombaSam":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
         if self.tipo.startswith("OggettoCartelloStaccionata"):
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
         if self.tipo == "OggettoCartelloBloccoStrada":
-            if avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
 
         if primoCaricamento or self.imgAttuale != self.imgOggetto[numImgAttuale]:
@@ -197,14 +200,14 @@ class PersonaggioObj(object):
 
         numImgAttualeDialogo = 0
         if self.tipo == "OggettoLettoLucy":
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
                 numImgAttualeDialogo = 0
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttualeDialogo = 1
             else:
                 numImgAttualeDialogo = 2
         if self.tipo == "OggettoPersonaCadavereSam":
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["cinghialeUcciso"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"]:
                 numImgAttualeDialogo = 0
             else:
                 numImgAttualeDialogo = 1
@@ -215,63 +218,63 @@ class PersonaggioObj(object):
 
     def caricaImgPersonaggio(self, nonCaricareImg=False):
         if nonCaricareImg:
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png"):
                 raise Exception("Immagine \"" + self.tipo + "W.png\" non trovata...")
             self.imgW = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png"):
                 raise Exception("Immagine \"" + self.tipo + "A.png\" non trovata...")
             self.imgA = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png"):
                 raise Exception("Immagine \"" + self.tipo + "S.png\" non trovata...")
             self.imgS = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png"):
                 raise Exception("Immagine \"" + self.tipo + "D.png\" non trovata...")
             self.imgD = False
 
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png"):
                 raise Exception("Immagine \"" + self.tipo + "WMov1.png\" non trovata...")
             self.imgWMov1 = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png"):
                 raise Exception("Immagine \"" + self.tipo + "WMov2.png\" non trovata...")
             self.imgWMov2 = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png"):
                 raise Exception("Immagine \"" + self.tipo + "AMov1.png\" non trovata...")
             self.imgAMov1 = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png"):
                 raise Exception("Immagine \"" + self.tipo + "AMov2.png\" non trovata...")
             self.imgAMov2 = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png"):
                 raise Exception("Immagine \"" + self.tipo + "SMov1.png\" non trovata...")
             self.imgSMov1 = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png"):
                 raise Exception("Immagine \"" + self.tipo + "SMov2.png\" non trovata...")
             self.imgSMov2 = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png"):
                 raise Exception("Immagine \"" + self.tipo + "DMov1.png\" non trovata...")
             self.imgDMov1 = False
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png"):
                 raise Exception("Immagine \"" + self.tipo + "DMov2.png\" non trovata...")
             self.imgDMov2 = False
 
-            if not GlobalVar.os.path.exists(GlobalVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png"):
+            if not os.path.exists(GlobalHWVar.gamePath + "Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png"):
                 raise Exception("Immagine \"" + self.tipo + "Dialogo.png\" non trovata...")
             self.imgDialogo = False
         else:
-            self.imgW = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgA = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgS = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgD = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgW = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgA = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgS = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgD = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
-            self.imgWMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgWMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgAMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgAMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgSMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgSMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgDMov1 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png", GlobalVar.gpx, GlobalVar.gpy, True)
-            self.imgDMov2 = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png", GlobalVar.gpx, GlobalVar.gpy, True)
+            self.imgWMov1 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgWMov2 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgAMov1 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgAMov2 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgSMov1 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgSMov2 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgDMov1 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgDMov2 = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
-            self.imgDialogo = GlobalVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalVar.gpx * 16, GlobalVar.gpy * 12, True)
+            self.imgDialogo = GlobalImgVar.loadImage("Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
 
     def girati(self, direzione):
         if direzione == "w":
@@ -395,7 +398,7 @@ class PersonaggioObj(object):
         if self.tipo == "Tutorial":
             self.partiDialogo = []
             self.nome = "Tutorial"
-            if avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoSognoLucy1"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -408,7 +411,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("Muoviti verso il baule davanti a te e prova ad aprirlo utilizzando il tasto <*>#bold#SPAZIO<*> sulla tastiera, la <*>#bold#Croce<*> sul controller oppure cliccandoci sopra con il tasto <*>#bold#Sinistro<*> del mouse.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["aperturaPrimoCofanetto"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["aperturaPrimoCofanetto"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -421,7 +424,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("Dal menu potrai anche accedere a \"Equipaggiamento\" dove potrai selezionare armi, protezioni e accessori da equipaggiarti.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialUtilizzoOggetti"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialUtilizzoOggetti"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -438,7 +441,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"Attenzione: se ci sono dei nemici presenti nella stanza, premendo <*>#bold#Esc<*>, <*>#bold#Start<*> o il tasto <*>#bold#Centrale<*> del mouse, viene aperto un menu rapido che permette di compiere meno operazioni ripetto al menu normale.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialBattaglia"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialBattaglia"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -455,7 +458,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("In quel baule potrebbe esserci qualcosa che fa al caso tuo...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -464,7 +467,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"È possibile richiudere le porte utilizzando la modalità interazione.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -481,7 +484,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"Dato che al momento sei disarmato non ti conviene affrontare i nemici a viso aperto: prova a passare senza farti vedere!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialCampoVisivo"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialCampoVisivo"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -494,7 +497,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"Usala anche fuori dal combattimento per evitare di sprecare pozioni!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -519,7 +522,7 @@ class PersonaggioObj(object):
         if self.tipo == "Nessuno":
             self.partiDialogo = []
             self.nome = "Nessuno"
-            if avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizio"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -532,7 +535,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Mi sono persa... lo sapevo...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialMovimento"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialMovimento"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -541,7 +544,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Dovrei aprire quel baule prima di andare... ?")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialOggettiBattaglia"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialOggettiBattaglia"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -550,7 +553,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ok, Hans dovrebbe essere passato di qua... credo...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["dialogoSognoLucy2"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoSognoLucy2"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -559,7 +562,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Perché sono venuta qui...?")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and self.x == GlobalVar.gpx * 24 and self.y == GlobalVar.gpy * 3 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and self.x == GlobalHWVar.gpx * 24 and self.y == GlobalHWVar.gpy * 3 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -572,7 +575,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("... Non lo voglio sapere... basta che non mi faccia vedere.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"] and (self.x == GlobalVar.gpx * 16 or self.x == GlobalVar.gpx * 17) and self.y == GlobalVar.gpy * 16 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"] and (self.x == GlobalHWVar.gpx * 16 or self.x == GlobalHWVar.gpx * 17) and self.y == GlobalHWVar.gpy * 16 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -581,7 +584,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Prima devo portare l'acqua a Lucy, così si riaddormenterà di nuovo e non si accorgerà che sono uscito.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ingressoForestaCadetta"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ingressoForestaCadetta"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -590,7 +593,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Bene, dall'altra parte della foresta c'è la città.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialDifesa"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialDifesa"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -603,7 +606,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Dovrei essere quasi dall'altra parte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["quartaStanzaForestaCadetta"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["quartaStanzaForestaCadetta"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -616,7 +619,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Credo che dovrei parlargli, magari possiamo aiutarci per superare la notte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["incontroFiglioUfficiale"] and ((self.x == GlobalVar.gpx * 15 and self.y == GlobalVar.gpy * 16) or (self.x == GlobalVar.gpx * 30 and self.y == GlobalVar.gpy * 8)) and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta5"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontroFiglioUfficiale"] and ((self.x == GlobalHWVar.gpx * 15 and self.y == GlobalHWVar.gpy * 16) or (self.x == GlobalHWVar.gpx * 30 and self.y == GlobalHWVar.gpy * 8)) and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta5"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -625,7 +628,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Prima di procedere potrei chiedere a quel soldato da che parte si trova la città.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["trovatoLegna1"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["legnaDepositata"] and self.x == GlobalVar.gpx * 16 and self.y == GlobalVar.gpy * 1 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta5"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["trovatoLegna1"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"] and self.x == GlobalHWVar.gpx * 16 and self.y == GlobalHWVar.gpy * 1 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta5"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -634,7 +637,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Non voglio portare la legna che ho raccolto in giro per la foresta!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and self.x == GlobalVar.gpx * 15 and self.y == GlobalVar.gpy * 16 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta5"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and self.x == GlobalHWVar.gpx * 15 and self.y == GlobalHWVar.gpy * 16 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta5"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -643,7 +646,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Meglio prendere la legna e accamparsi qui per la notte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -660,7 +663,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Mmh... provo a vedere se è ancora qua fuori da qualche parte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["monologoRisveglioLucy"] and self.x == GlobalVar.gpx * 6 and self.y == GlobalVar.gpy * 10 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoRisveglioLucy"] and self.x == GlobalHWVar.gpx * 6 and self.y == GlobalHWVar.gpy * 10 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -673,7 +676,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Dovrei poter documentare qualcosa di interessante.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialMappaDiario"] and self.x == GlobalVar.gpx * 6 and self.y == GlobalVar.gpy * 8 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialMappaDiario"] and self.x == GlobalHWVar.gpx * 6 and self.y == GlobalHWVar.gpy * 8 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -686,7 +689,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Nel ripostiglio del babbo ci dovrebbe essere qualcosa di utile.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["armaturaNonnoCompletata"] and (self.x == GlobalVar.gpx * 16 or self.x == GlobalVar.gpx * 17) and self.y == GlobalVar.gpy * 16 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["armaturaNonnoCompletata"] and (self.x == GlobalHWVar.gpx * 16 or self.x == GlobalHWVar.gpx * 17) and self.y == GlobalHWVar.gpy * 16 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -699,7 +702,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Nel ripostiglio del babbo e la mamma ci dovrebbe essere qualcosa di utile.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["monologoIndicazioniArmaturaNonno"] and self.x == GlobalVar.gpx * 26 and self.y == GlobalVar.gpy * 10 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoIndicazioniArmaturaNonno"] and self.x == GlobalHWVar.gpx * 26 and self.y == GlobalHWVar.gpy * 10 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -712,7 +715,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("La chiave deve essere qui da qualche parte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] and self.x == GlobalVar.gpx * 26 and self.y == GlobalVar.gpy * 10 and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] and self.x == GlobalHWVar.gpx * 26 and self.y == GlobalHWVar.gpy * 10 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -721,7 +724,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Devo trovare la chiave per entrare!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["armaturaNonno4"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["armaturaNonno4"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -730,7 +733,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Bene! Quest'armatura mi entra perfettamente. Sono pronta per andare adesso.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["armaturaNonnoCompletata"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["armaturaNonnoCompletata"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -739,7 +742,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Hans? HAAANS? ... Cavolo! È pieno di bestie selvatiche qui!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ingressoForestaCadettaLucy"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ingressoForestaCadettaLucy"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -748,7 +751,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Ehi, c'è un accampamento qui!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["accampamentoForestaAnalizzato2"] and ((self.x == GlobalVar.gpx * 15 and self.y == GlobalVar.gpy * 16) or (self.x == GlobalVar.gpx * 30 and self.y == GlobalVar.gpy * 8)) and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta5"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["accampamentoForestaAnalizzato2"] and ((self.x == GlobalHWVar.gpx * 15 and self.y == GlobalHWVar.gpy * 16) or (self.x == GlobalHWVar.gpx * 30 and self.y == GlobalHWVar.gpy * 8)) and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta5"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -757,7 +760,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Dovrei guardare bene l'accampamento per capire se Hans è stato qui.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["accampamentoForestaAnalizzato2"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta7"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["accampamentoForestaAnalizzato2"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta7"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -766,7 +769,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Non sarà facile passare qua in mezzo...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["incontratoBrancoLupiNeri"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta7"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontratoBrancoLupiNeri"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta7"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -775,7 +778,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"C'è un uomo a terra e... ok, prima di tutto mi devo occupare di quel bestione.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["sotterratoSam"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta7"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sotterratoSam"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta7"]:
                 self.oggettoDato = "Armatura d'acciaio"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -788,7 +791,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Forse non avrei dovuto prendere le sue cose, ma... non credo che gli servissero ancora...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["monologoDopoTombaSam"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta8"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoTombaSam"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta8"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -797,7 +800,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Uff... ma quanto è grande questa foresta!?")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria >= GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and self.y == GlobalVar.gpy * 1 and (self.x == GlobalVar.gpx * 14 or self.x == GlobalVar.gpx * 15 or self.x == GlobalVar.gpx * 16 or self.x == GlobalVar.gpx * 17) and self.stanzaDiAppartenenza == GlobalVar.dictStanze["casaHansLucy4"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and self.y == GlobalHWVar.gpy * 1 and (self.x == GlobalHWVar.gpx * 14 or self.x == GlobalHWVar.gpx * 15 or self.x == GlobalHWVar.gpx * 16 or self.x == GlobalHWVar.gpx * 17) and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy4"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -806,7 +809,16 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"I miei genitori non se la staranno passando bene, ma non posso tornare finché non scopro dov'è andato Hans.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["penultimaStanzaForesta"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["forestaCadetta9"]:
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and self.y == GlobalHWVar.gpy * 1 and (self.x == GlobalHWVar.gpx * 14 or self.x == GlobalHWVar.gpx * 15 or self.x == GlobalHWVar.gpx * 16 or self.x == GlobalHWVar.gpx * 17) and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaHansLucy4"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non mi va di tornare a casa adesso... prima devo capire come uscire da questa situazione.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["penultimaStanzaForesta"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta9"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -815,7 +827,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Finalmente l'uscita!!!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ultimaStanzaForesta"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ultimaStanzaForesta"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -824,7 +836,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Perfetto, adesso mi basterà seguire la strada e arriverò in città. Hans sarà sicuramente là da qualche parte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"] and self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà3"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà3"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -833,6 +845,77 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("...")
                 self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] or self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] or self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"]:
+                if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                    if (self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and (self.x == GlobalHWVar.gpx * 30 or self.x == GlobalHWVar.gpx * 1 or self.y == GlobalHWVar.gpy * 1)) or (self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and (self.y == GlobalHWVar.gpy * 1 or self.y == GlobalHWVar.gpy * 16)):
+                        self.oggettoDato = False
+                        self.avanzaStoria = False
+                        self.menuMercante = False
+                        self.scelta = False
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append("Non posso gironzolare per tutta la casa, mi stanno aspettando per la cena...")
+                        self.partiDialogo.append(dialogo)
+                    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"] and self.x == GlobalHWVar.gpx * 12 and self.y == GlobalHWVar.gpy * 9 and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"]:
+                        self.oggettoDato = False
+                        self.avanzaStoria = False
+                        self.menuMercante = False
+                        self.scelta = False
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"È chiuso a chiave.")
+                        self.partiDialogo.append(dialogo)
+                    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fattoBagnoCasaDavid"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"]:
+                        self.oggettoDato = False
+                        self.avanzaStoria = True
+                        self.menuMercante = False
+                        self.scelta = False
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"Cavolo! Quest'acqua riscaldata... vorrei rimanere lì dentro per sempre!")
+                        self.partiDialogo.append(dialogo)
+                    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoBagnoDavid"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"] and self.x == GlobalHWVar.gpx * 29:
+                        self.oggettoDato = False
+                        self.avanzaStoria = False
+                        self.menuMercante = False
+                        self.scelta = False
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"Mi sono lavata ma sarà meglio anche cambiarmi i vestiti...")
+                        self.partiDialogo.append(dialogo)
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"Credo che me li abbiano lasciati nella mia camera.")
+                        self.partiDialogo.append(dialogo)
+                    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"] and self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"]:
+                        self.oggettoDato = False
+                        self.avanzaStoria = True
+                        self.menuMercante = False
+                        self.scelta = False
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"Ok... questi andranno bene.")
+                        self.partiDialogo.append(dialogo)
+                elif GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                    if (self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and (self.x == GlobalHWVar.gpx * 30 or self.x == GlobalHWVar.gpx * 1 or self.y == GlobalHWVar.gpy * 1)) or (self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and (self.y == GlobalHWVar.gpy * 1 or self.y == GlobalHWVar.gpy * 16)):
+                        self.oggettoDato = False
+                        self.avanzaStoria = False
+                        self.menuMercante = False
+                        self.scelta = False
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append("Non posso gironzolare per tutta la casa, credo che darei fastidio...")
+                        self.partiDialogo.append(dialogo)
+                elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                    if (self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and (self.x == GlobalHWVar.gpx * 30 or self.x == GlobalHWVar.gpx * 1 or self.y == GlobalHWVar.gpy * 1)) or (self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and (self.y == GlobalHWVar.gpy * 1 or self.y == GlobalHWVar.gpy * 16)):
+                        self.oggettoDato = False
+                        self.avanzaStoria = False
+                        self.menuMercante = False
+                        self.scelta = False
+                        dialogo = []
+                        dialogo.append("tu")
+                        dialogo.append(u"Non c'è niente di interessante da quella parte.")
+                        self.partiDialogo.append(dialogo)
             else:
                 self.oggettoDato = False
                 self.avanzaStoria = False
@@ -847,7 +930,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoLettoLucy":
             self.partiDialogo = []
             self.nome = "Lucy"
-            if avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -880,7 +963,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ok...")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"] <= avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"] <= avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -893,7 +976,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Sì, sto andando.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -910,7 +993,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("Mmh...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -927,7 +1010,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Si è già riaddormentata... Posso partire adesso allora, prima che qualcun altro si svegli.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -948,7 +1031,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoLavandinoCucina" or self.tipo == "OggettoLavandinoBagno":
             self.partiDialogo = []
             self.nome = "OggettoLavandino"
-            if avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
+            if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -957,7 +1040,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Devo prendere un bicchiere prima.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
                 self.oggettoDato = "Bicchiere con acqua"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -966,7 +1049,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ok, ho riempito il bicchiere.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -987,7 +1070,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoScaffaleBicchieri"):
             self.partiDialogo = []
             self.nome = "OggettoScaffaleBicchieri"
-            if avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
                 self.oggettoDato = "Bicchiere"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -996,7 +1079,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ecco un bicchiere, ora devo riempirlo d'acqua.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1017,7 +1100,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoComodinoLucy":
             self.partiDialogo = []
             self.nome = "OggettoComodinoLucy"
-            if avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
+            if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1030,7 +1113,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Non importa, non prenderò queste cose.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1039,7 +1122,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ho messo qua il bicchiere con l'acqua.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                 self.oggettoDato = "Mappa e Diario"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1060,7 +1143,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoComodinoHans":
             self.partiDialogo = []
             self.nome = "OggettoComodinoHans"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1081,7 +1164,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoFinestra"):
             self.partiDialogo = []
             self.nome = "OggettoFinestra"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1102,7 +1185,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoLettoHans":
             self.partiDialogo = []
             self.nome = "OggettoLettoHans"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1123,7 +1206,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoVasca"):
             self.partiDialogo = []
             self.nome = "OggettoVasca"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1148,7 +1231,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoGabinetto"):
             self.partiDialogo = []
             self.nome = "OggettoGabinetto"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1169,7 +1252,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoCamino"):
             self.partiDialogo = []
             self.nome = "OggettoCamino"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1190,7 +1273,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoScaffaleCucina"):
             self.partiDialogo = []
             self.nome = "OggettoScaffaleCucina"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1199,7 +1282,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"È lo scaffale dove conserviamo gli alimenti... niente bicchieri qui!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1220,7 +1303,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoTavolinoFiori":
             self.partiDialogo = []
             self.nome = "OggettoTavolinoFiori"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1229,7 +1312,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"È un tavolino con dei fiori... lo hanno voluto mettere perchè sembrava uno spazio troppo vuoto.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1238,7 +1321,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Ci sono dei bellissimi fiori che sarebbero già morti se non ci fossi io ad innaffiarli.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
                 self.oggettoDato = "Chiave ripostiglio"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1263,7 +1346,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoComodinoMamma":
             self.partiDialogo = []
             self.nome = "OggettoComodinoMamma"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1272,7 +1355,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"È il comodino della mamma... niente di interessante.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1293,7 +1376,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoComodinoBabbo":
             self.partiDialogo = []
             self.nome = "OggettoComodinoBabbo"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1302,7 +1385,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"È il comodino del babbo... niente di interessante qui, solo un po' di roba puzzolente.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1323,7 +1406,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoLettoGenitori"):
             self.partiDialogo = []
             self.nome = "OggettoLettoGenitori"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1332,7 +1415,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Devo fare piano, non voglio svegliarli.")
                 self.partiDialogo.append(dialogo)
-            elif GlobalVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
+            elif GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1355,7 +1438,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoCancellettoCasa"):
             self.partiDialogo = []
             self.nome = "OggettoCancellettoCasa"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1376,7 +1459,7 @@ class PersonaggioObj(object):
         if self.tipo == "CaneCasa":
             self.partiDialogo = []
             self.nome = "Agglomerato"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1401,7 +1484,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoCanaleCasa"):
             self.partiDialogo = []
             self.nome = "OggettoCanaleCasa"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1428,7 +1511,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoSiepe":
             self.partiDialogo = []
             self.nome = "OggettoSiepe"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and self.avanzamentoDialogo == 0:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and self.avanzamentoDialogo == 0:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1446,7 +1529,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Credo che mi attaccherebbe se lo liberassi, quindi... sono costretta a lasciarlo qui e sperare che riesca a cavarsela in qualche modo.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and self.avanzamentoDialogo == 1:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and self.avanzamentoDialogo == 1:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1469,7 +1552,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoFuoco":
             self.partiDialogo = []
             self.nome = "OggettoFuoco"
-            if avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
+            if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1478,7 +1561,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Sembra allestito per fare un piccolo falò.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1487,7 +1570,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Qui è dove Sam ha intezione di accendere il fuoco per la notte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1508,7 +1591,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoCibo":
             self.partiDialogo = []
             self.nome = "OggettoCibo"
-            if avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
+            if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1518,7 +1601,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"È una tavoletta di legno con una tovaglietta sopra.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovatoLegna3"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1528,7 +1611,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Presumo che Sam voglia mettere qua il cibo che raccoglierà.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1542,7 +1625,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Mi domando cosa abbia cacciato... le ossa sembrano piccole ma molto robuste...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["cadavereSamDepredato"] and self.avanzamentoDialogo == 0:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cadavereSamDepredato"] and self.avanzamentoDialogo == 0:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1560,7 +1643,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Ok ok, calma! Starà sicuramente bene.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["cadavereSamDepredato"] and self.avanzamentoDialogo == 1:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cadavereSamDepredato"] and self.avanzamentoDialogo == 1:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1570,7 +1653,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"C'è della carne su questa tavoletta e non è di Hans...")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1593,7 +1676,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoMucchioLegna":
             self.partiDialogo = []
             self.nome = "OggettoMucchioLegna"
-            if avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
+            if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["quintaStanzaForestaCadetta"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1602,7 +1685,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"È un mucchietto di legna.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria <= GlobalVar.dictAvanzamentoStoria["trovatoLegna2"]:
+            elif avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["trovatoLegna2"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1615,7 +1698,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append(u"Devo raccoglierne altra.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["trovatoLegna3"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1635,7 +1718,7 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
         if self.tipo == "FiglioUfficiale":
             self.partiDialogo = []
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["incontroFiglioUfficiale"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontroFiglioUfficiale"]:
                 self.nome = "Sconosciuto"
                 self.oggettoDato = False
                 self.avanzaStoria = True
@@ -1701,7 +1784,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"Allora fai in fretta, tra poco sarà molto più pericoloso! Nel frattempo io mi procurerò del cibo.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["legnaDepositata"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"]:
                 self.nome = "Sam"
                 self.oggettoDato = False
                 self.avanzaStoria = False
@@ -1715,7 +1798,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"Ho già tagliato la legna ad est di qui, devi solo prenderla e metterla accanto al falò.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["legnaDepositata"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"]:
                 self.nome = "Sam"
                 self.oggettoDato = False
                 self.avanzaStoria = True
@@ -1733,7 +1816,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("Vieni, accendiamo il fuoco e organizziamo i turni per la notte.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
                 self.nome = "Sam"
                 self.oggettoDato = False
                 self.avanzaStoria = True
@@ -1822,7 +1905,7 @@ class PersonaggioObj(object):
         if self.tipo.startswith("OggettoLegna"):
             self.partiDialogo = []
             self.nome = "OggettoLegna"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovatoLegna1"] and self.avanzamentoDialogo == 0:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoLegna1"] and self.avanzamentoDialogo == 0:
                 self.oggettoDato = "Legna"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1836,7 +1919,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Qui intorno ce ne dovrebbe essere dell'altra.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovatoLegna2"] and self.avanzamentoDialogo == 0:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoLegna2"] and self.avanzamentoDialogo == 0:
                 self.oggettoDato = "Legna"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1846,7 +1929,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ecco dell'altra legna! Ancora un po' e posso tornare indietro.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["trovatoLegna3"] and self.avanzamentoDialogo == 0:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"] and self.avanzamentoDialogo == 0:
                 self.oggettoDato = "Legna"
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1856,7 +1939,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ok, ho preso abbastanza legna. Adesso devo portarla all'accampamento.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1890,7 +1973,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoPersonaCadavereSam":
             self.partiDialogo = []
             self.nome = "Soldato"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["cinghialeUcciso"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1899,7 +1982,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Devo liberare la zona prima di occuparmi di lui.")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["cinghialeUcciso"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -1919,7 +2002,7 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoTombaSam":
             self.partiDialogo = []
             self.nome = "OggettoTombaSam"
-            if avanzamentoStoria < GlobalVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -1987,7 +2070,7 @@ class PersonaggioObj(object):
         if self.tipo == "GuardiaCitta":
             self.partiDialogo = []
             self.nome = "Soldato"
-            if self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 0:
+            if self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 0:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -2029,7 +2112,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Oh ok...")
                 self.partiDialogo.append(dialogo)
-            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 1:
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 1:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -2063,7 +2146,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ok...")
                 self.partiDialogo.append(dialogo)
-            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 2:
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 2:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -2081,7 +2164,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ok ok, me ne vado.")
                 self.partiDialogo.append(dialogo)
-            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 3:
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 3:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -2099,7 +2182,7 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("Ok...")
                 self.partiDialogo.append(dialogo)
-            elif self.stanzaDiAppartenenza == GlobalVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 4:
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà1"] and self.avanzamentoDialogo == 4:
                 self.oggettoDato = False
                 self.avanzaStoria = False
                 self.menuMercante = False
@@ -2109,10 +2192,23 @@ class PersonaggioObj(object):
                 dialogo.append("tu")
                 dialogo.append("(<*>#italic#Meglio lasciarlo al suo lavoro...<*>)")
                 self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoBucoPorta"):
+            self.partiDialogo = []
+            self.nome = "OggettoBucoPorta"
+            self.oggettoDato = False
+            self.avanzaStoria = True
+            self.menuMercante = False
+            self.scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"È chiuso...")
+            self.partiDialogo.append(dialogo)
+
+        # casa David
         if self.tipo == "PadreUfficialeServizio":
             self.partiDialogo = []
             self.nome = "Soldato"
-            if avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -2130,7 +2226,7 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append("Una ragazza! Aprite!")
                 self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == GlobalVar.dictAvanzamentoStoria["apertoPortaCittà"]:
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoPortaCittà"]:
                 self.oggettoDato = False
                 self.avanzaStoria = True
                 self.menuMercante = False
@@ -2173,7 +2269,23 @@ class PersonaggioObj(object):
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Senti... per stanotte potrai essere mia ospite: ti farò preparare una stanza da mia moglie. Ma da domani dovrai togliere il disturbo perché, come avrai già intuito, siamo un po' al limite con le risorse.")
+                dialogo.append(u"La tua armatura d'acciaio... dove l'hai presa?!")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Era... l'ho trovata su un cadavere di un soldato nella foresta e ... ho pensato che mi poteva essere utile per arrivare in città...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"E... cosa ne hai fatto del cadavere?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"L'ho sepolto perché non venisse divorato dai lupi e dai cinghiali...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Mmh... senti... per stanotte potrai essere mia ospite: ti farò preparare una stanza. Ma da domani dovrai togliere il disturbo perché, come avrai già intuito, siamo un po' al limite con le risorse.")
                 self.partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -2187,19 +2299,377 @@ class PersonaggioObj(object):
                 dialogo.append("personaggio")
                 dialogo.append(u"Vado a predisporre la guardia per la mia assenza e andiamo.")
                 self.partiDialogo.append(dialogo)
-        if self.tipo.startswith("OggettoBucoPorta"):
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoCasaUfficiale"]:
+                self.nome = "David"
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Eccoci...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ma... è enorme...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Avverto che abbiamo ospiti per cena. La sala da pranzo è al piano di sopra, intanto prendi pure posto.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoDavidPrimoPiano"]:
+                self.nome = "David"
+                self.oggettoDato = "Chiave stanza"
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"La tua stanza è già stata preparata, è l'ultima porta a destra di quel corridoio. Vai pure a cambiarti, questa è la chiave.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"E... nella porta in fondo al corridoio c'è il bagno se hai bisogno di darti una ripulita.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ok... grazie.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+                self.nome = "David"
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Vai pure a cambiarti. Quando torni la cena sarà servita.")
+                self.partiDialogo.append(dialogo)
+        if self.tipo == "ServoDavid":
             self.partiDialogo = []
-            self.nome = "OggettoBucoPorta"
-            self.oggettoDato = False
-            self.avanzaStoria = True
-            self.menuMercante = False
-            self.scelta = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"È chiuso...")
-            self.partiDialogo.append(dialogo)
+            self.nome = "Servo"
+            if self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"] and self.avanzamentoDialogo == 0:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ehm... salve...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("Salve, posso esserle d'aiuto?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"No, cioè... tu lavori qui?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Sì, al momento sono in servizio: se ha bisogno di qualcosa può chiedere a me o agli altri servi. Resterà qui per la notte?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ehm... sì. Me lo ha proposto David perché gli alloggi profughi sono tutti occupati.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Perfetto, allora può cambiarsi in una delle stanze per gli ospiti al piano di sopra, il padrone ne starà già facendo preparare una.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Va bene... grazie.")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"] and self.avanzamentoDialogo == 1:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Può cambiarsi in una delle stanze per gli ospiti al piano di sopra, il padrone ne starà già facendo preparare una.")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"] and self.avanzamentoDialogo == 1:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("La cena sta per essere servita, la prego di prendere posto.")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Salve signorina, la sua stanza è stata preparata, può andare a cambiarsi.")
+                self.partiDialogo.append(dialogo)
+            elif self.stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("La prego di prendere posto, la cena sta per essere servita.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Salve signorina, al momento il padrone non è in casa. Può provare a ripassare più tardi se lo desidera.")
+                self.partiDialogo.append(dialogo)
+        if self.tipo == "MadreUfficiale":
+            self.partiDialogo = []
+            self.nome = "Sara"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"] and self.avanzamentoDialogo == 0:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("S-salve mi chiamo Lucy.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ehm...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("Sara... sono la moglie di David e... la madre di Sam.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Sam? Scusami ma non sono di qui, non lo conosco...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ehm... dovrei conoscerlo? Ricopre un ruolo importante in città o qualcosa del genere?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append("... Mh... qualcosa del genere...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("Ok...")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"] and self.avanzamentoDialogo == 1:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(<*>#italic#Non credo voglia parlarmi, sembra... distratta...<*>)")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid1"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoLettoCasaDavid"):
+            self.partiDialogo = []
+            self.nome = "OggettoLettoCasaDavid"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Questo sarà il mio letto per stanotte. Non vedo l'ora di dormire!")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fineDialogoCenaDavid"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append("... Almeno spero di farmi una bella dormita...")
+                self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoArmadioCasaDavid"):
+            self.partiDialogo = []
+            self.nome = "OggettoArmadioCasaDavid"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["fattoBagnoCasaDavid"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Qua ci sono un po' di vestiti ma... credo che dovrei darmi una \"ripulita\" prima...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ha detto che il bagno è in fondo al corridoio.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoBagnoDavid"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ok... ci sono un po' di vestiti... questi sembrano i più normali...")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ci sono altri vestiti tra cui scegliere ma questi vanno più che bene.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non ho bisogno di altri vestiti.")
+                self.partiDialogo.append(dialogo)
+        if self.tipo.startswith("OggettoVascaCasaDavid"):
+            self.partiDialogo = []
+            self.nome = "OggettoVascaCasaDavid"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Sembra una fontana come quella che usiamo a casa per lavarci. È <*>#italic#molto<*> simile... chissà se il babbo ha preso spunto da una come questa per fare la nostra...")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ok credo che questa fontana funzioni più o meno come quella cha abbiamo a casa... vediamo...")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Vorrei rientrare in questo piccolo paradiso ma mi stanno aspettando per la cena...")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non ho bisogno di lavarmi adesso.")
+                self.partiDialogo.append(dialogo)
+        if self.tipo == "PadreUfficialeCasa":
+            self.partiDialogo = []
+            self.nome = "David"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = False
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Siediti pure, la cena verrà servita a breve.")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... È buono... cos'è?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Cinghiale in umido, una specialità del posto.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Oh, è... <*>#italic#molto<*> buono.")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Sì, è uno dei piatti che più preferiscono gli abitanti di questa zona ma, da quello che si dice, presto sarà anche il più raro...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Perché \"raro\"?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Pare che i cinghiali si stiano estinguendo... o forse stanno solo fuggendo dalla foresta...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Per quale motivo?")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Non so... forse per via della putrefazione del lago o forse solo per la troppa caccia...")
+                self.partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid2"]:
+                self.oggettoDato = False
+                self.avanzaStoria = True
+                self.menuMercante = False
+                self.scelta = False
+                self.avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Beh, per le persone di passaggio è sicuramente una buona fonte di cibo... sempre che non ci rimangono uccisi...")
+                self.partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"")
+                self.partiDialogo.append(dialogo)
 
-    def spostati(self, x, y, rx, ry, listaNemici, caseviste):
+    def spostati(self, x, y, rx, ry, listaNemici, listaPersonaggi, caseviste):
         self.vx = self.x
         self.vy = self.y
         self.animaSpostamento = True
@@ -2211,18 +2681,25 @@ class PersonaggioObj(object):
         else:
             direzione = ""
         if direzione == "w":
-            self.y -= GlobalVar.gpy
+            self.y -= GlobalHWVar.gpy
         elif direzione == "a":
-            self.x -= GlobalVar.gpx
+            self.x -= GlobalHWVar.gpx
         elif direzione == "s":
-            self.y += GlobalVar.gpy
+            self.y += GlobalHWVar.gpy
         elif direzione == "d":
-            self.x += GlobalVar.gpx
+            self.x += GlobalHWVar.gpx
         else:
             self.animaSpostamento = False
 
         for nemico in listaNemici:
             if self.x == nemico.x and self.y == nemico.y:
+                self.x = self.vx
+                self.y = self.vy
+                self.animaSpostamento = False
+                movimentoAnnullato = True
+                break
+        for personaggio in listaPersonaggi:
+            if self.tipo != personaggio.tipo and self.x == personaggio.x and self.y == personaggio.y:
                 self.x = self.vx
                 self.y = self.vy
                 self.animaSpostamento = False

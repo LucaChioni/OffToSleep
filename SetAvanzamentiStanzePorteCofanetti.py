@@ -119,13 +119,47 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["apertoPortaCittà"] = i
     i += 1
-    dictAvanzamentoStoria["entratoInCittà"] = i
+    dictAvanzamentoStoria["arrivoCasaUfficiale"] = i
+    i += 1
+    dictAvanzamentoStoria["primoDialogoConDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivoDavidPrimoPiano"] = i
+    i += 1
+    dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioBagnoCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["fattoBagnoCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoDopoBagnoDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoPreCambioPerCenaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["cambiataPerCenaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoPostCambioPerCenaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["cenaConDavidIniziata"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoCenaDavid1"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoCenaDavid2"] = i
+    i += 1
+    dictAvanzamentoStoria["fineDialogoCenaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["andatoADormireCasaDavid"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioDialogoSaraNotturno"] = i
+    i += 1
+    dictAvanzamentoStoria["fineDialogoSaraNotturno"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioSecondoGiorno"] = i
 
     i += 100
     i += 1
-    dictAvanzamentoStoria["inizioSecondoGiorno"] = i
-    i += 1
     dictAvanzamentoStoria["incontratoColco"] = i
+    i += 1
+    dictAvanzamentoStoria["tempoBloccato"] = i
 
     i += 1
     dictAvanzamentoStoria["mercantePozione"] = i
@@ -244,6 +278,12 @@ def definisciStanze():
     i += 1
     dictStanze["città1"] = i
     vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città3"] = i
+    vetStanzePacifiche.append(i)
 
     return dictStanze, vetStanzePacifiche
 
@@ -303,6 +343,10 @@ def definisciPorte(dictStanze):
     vetPorte += [stanza, 16, 9, False]
     vetPorte += [stanza, 7, 10, False]
     vetPorte += [stanza, 5, 9, False]
+
+    stanza = dictStanze["casaDavid3"]
+    vetPorte += [stanza, 12, 8, False]
+    vetPorte += [stanza, 10, 11, False]
 
     return vetPorte
 

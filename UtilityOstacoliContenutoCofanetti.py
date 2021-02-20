@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import GlobalVar
+import GlobalHWVar
 
 
 def oggetto(xInizio, yInizio, dimx, dimy, px, py, nx, ny):
-    xFine = xInizio + dimx - GlobalVar.gpx
-    yFine = yInizio + dimy - GlobalVar.gpy
+    xFine = xInizio + dimx - GlobalHWVar.gpx
+    yFine = yInizio + dimy - GlobalHWVar.gpy
     if xInizio <= px <= xFine:
-        if (ny == -GlobalVar.gpy and py == yFine + GlobalVar.gpy) or (ny == GlobalVar.gpy and py == yInizio - GlobalVar.gpy):
+        if (ny == -GlobalHWVar.gpy and py == yFine + GlobalHWVar.gpy) or (ny == GlobalHWVar.gpy and py == yInizio - GlobalHWVar.gpy):
             return True
     if yInizio <= py <= yFine:
-        if (nx == -GlobalVar.gpx and px == xFine + GlobalVar.gpx) or (nx == GlobalVar.gpx and px == xInizio - GlobalVar.gpx):
+        if (nx == -GlobalHWVar.gpx and px == xFine + GlobalHWVar.gpx) or (nx == GlobalHWVar.gpx and px == xInizio - GlobalHWVar.gpx):
             return True
 
 

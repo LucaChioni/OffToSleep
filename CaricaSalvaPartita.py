@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from NemicoObj import *
-from PersonaggioObj import *
+import GlobalHWVar
+import GenericFunc
+import NemicoObj
+import PersonaggioObj
 
 
 def salvataggio(n, datiAttuali, datiGameover):
@@ -14,9 +16,9 @@ def salvataggio(n, datiAttuali, datiGameover):
             backup = True
 
         if not backup:
-            scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+            scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
         else:
-            scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+            scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
 
         gameoverSalvato = False
         salvandoGameover = False
@@ -49,19 +51,19 @@ def salvataggio(n, datiAttuali, datiGameover):
                 obbiettivoCasualeColco = datiGameover[11]
 
             # conversione della posizione in caselle
-            dati[2] = dati[2] // GlobalVar.gpx
-            dati[3] = dati[3] // GlobalVar.gpy
-            dati[134] = dati[134] // GlobalVar.gpx
-            dati[135] = dati[135] // GlobalVar.gpy
+            dati[2] = dati[2] // GlobalHWVar.gpx
+            dati[3] = dati[3] // GlobalHWVar.gpy
+            dati[134] = dati[134] // GlobalHWVar.gpx
+            dati[135] = dati[135] // GlobalHWVar.gpy
             i = 0
             while i < len(tutteporte):
-                tutteporte[i + 1] = tutteporte[i + 1] // GlobalVar.gpx
-                tutteporte[i + 2] = tutteporte[i + 2] // GlobalVar.gpy
+                tutteporte[i + 1] = tutteporte[i + 1] // GlobalHWVar.gpx
+                tutteporte[i + 2] = tutteporte[i + 2] // GlobalHWVar.gpy
                 i += 4
             i = 0
             while i < len(tutticofanetti):
-                tutticofanetti[i + 1] = tutticofanetti[i + 1] // GlobalVar.gpx
-                tutticofanetti[i + 2] = tutticofanetti[i + 2] // GlobalVar.gpy
+                tutticofanetti[i + 1] = tutticofanetti[i + 1] // GlobalHWVar.gpx
+                tutticofanetti[i + 2] = tutticofanetti[i + 2] // GlobalHWVar.gpy
                 i += 4
 
             for i in range(0, len(dati)):
@@ -76,8 +78,8 @@ def salvataggio(n, datiAttuali, datiGameover):
             for nemico in listaNemiciTotali:
                 scrivi.write("%s_" % nemico.tipo)
                 scrivi.write("%i_" % nemico.stanzaDiAppartenenza)
-                scrivi.write("%i_" % (nemico.x // GlobalVar.gpx))
-                scrivi.write("%i_" % (nemico.y // GlobalVar.gpy))
+                scrivi.write("%i_" % (nemico.x // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (nemico.y // GlobalHWVar.gpy))
                 scrivi.write("%i_" % nemico.vita)
                 scrivi.write("%i_" % nemico.avvelenato)
                 scrivi.write("%i_" % nemico.appiccicato)
@@ -86,10 +88,10 @@ def salvataggio(n, datiAttuali, datiGameover):
                 else:
                     scrivi.write("0_")
                 scrivi.write("%s_" % nemico.direzione)
-                scrivi.write("%i_" % (nemico.obbiettivo[1] // GlobalVar.gpx))
-                scrivi.write("%i_" % (nemico.obbiettivo[2] // GlobalVar.gpy))
-                scrivi.write("%i_" % (nemico.xPosizioneUltimoBersaglio // GlobalVar.gpx))
-                scrivi.write("%i_" % (nemico.yPosizioneUltimoBersaglio // GlobalVar.gpy))
+                scrivi.write("%i_" % (nemico.obbiettivo[1] // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (nemico.obbiettivo[2] // GlobalHWVar.gpy))
+                scrivi.write("%i_" % (nemico.xPosizioneUltimoBersaglio // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (nemico.yPosizioneUltimoBersaglio // GlobalHWVar.gpy))
                 scrivi.write("%i_" % nemico.numeroMovimento)
                 scrivi.write("%i_" % nemico.triggerato)
                 scrivi.write("%i_" % nemico.denaro)
@@ -102,15 +104,15 @@ def salvataggio(n, datiAttuali, datiGameover):
             while i < len(vettoreEsche):
                 scrivi.write("%i_" % vettoreEsche[i])
                 scrivi.write("%i_" % vettoreEsche[i + 1])
-                scrivi.write("%i_" % (vettoreEsche[i + 2] // GlobalVar.gpx))
-                scrivi.write("%i_" % (vettoreEsche[i + 3] // GlobalVar.gpy))
+                scrivi.write("%i_" % (vettoreEsche[i + 2] // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (vettoreEsche[i + 3] // GlobalHWVar.gpy))
                 i += 4
             scrivi.write("\n")
             i = 0
             while i < len(vettoreDenaro):
                 scrivi.write("%i_" % vettoreDenaro[i])
-                scrivi.write("%i_" % (vettoreDenaro[i + 1] // GlobalVar.gpx))
-                scrivi.write("%i_" % (vettoreDenaro[i + 2] // GlobalVar.gpy))
+                scrivi.write("%i_" % (vettoreDenaro[i + 1] // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (vettoreDenaro[i + 2] // GlobalHWVar.gpy))
                 i += 3
             scrivi.write("\n")
             i = 0
@@ -119,8 +121,8 @@ def salvataggio(n, datiAttuali, datiGameover):
                 i += 1
             scrivi.write("\n")
             for personaggio in listaPersonaggiTotali:
-                scrivi.write("%i_" % (personaggio.x // GlobalVar.gpx))
-                scrivi.write("%i_" % (personaggio.y // GlobalVar.gpy))
+                scrivi.write("%i_" % (personaggio.x // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (personaggio.y // GlobalHWVar.gpy))
                 scrivi.write("%s_" % personaggio.direzione)
                 scrivi.write("%s_" % personaggio.tipo)
                 scrivi.write("%i_" % personaggio.stanzaDiAppartenenza)
@@ -143,8 +145,8 @@ def salvataggio(n, datiAttuali, datiGameover):
             scrivi.write("\n")
             if len(ultimoObbiettivoColco) > 0:
                 scrivi.write("%s_" % ultimoObbiettivoColco[0])
-                scrivi.write("%i_" % (ultimoObbiettivoColco[1] // GlobalVar.gpx))
-                scrivi.write("%i_" % (ultimoObbiettivoColco[2] // GlobalVar.gpy))
+                scrivi.write("%i_" % (ultimoObbiettivoColco[1] // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (ultimoObbiettivoColco[2] // GlobalHWVar.gpy))
             else:
                 scrivi.write("_")
                 scrivi.write("-1_")
@@ -152,27 +154,27 @@ def salvataggio(n, datiAttuali, datiGameover):
             scrivi.write("\n")
             if obbiettivoCasualeColco:
                 scrivi.write("%i_" % obbiettivoCasualeColco.stanzaDiAppartenenza)
-                scrivi.write("%i_" % (obbiettivoCasualeColco.x // GlobalVar.gpx))
-                scrivi.write("%i_" % (obbiettivoCasualeColco.y // GlobalVar.gpy))
+                scrivi.write("%i_" % (obbiettivoCasualeColco.x // GlobalHWVar.gpx))
+                scrivi.write("%i_" % (obbiettivoCasualeColco.y // GlobalHWVar.gpy))
             else:
                 scrivi.write("-1_")
                 scrivi.write("-1_")
                 scrivi.write("-1_")
 
             # conversione della posizione in pixel
-            dati[2] = dati[2] * GlobalVar.gpx
-            dati[3] = dati[3] * GlobalVar.gpy
-            dati[134] = dati[134] * GlobalVar.gpx
-            dati[135] = dati[135] * GlobalVar.gpy
+            dati[2] = dati[2] * GlobalHWVar.gpx
+            dati[3] = dati[3] * GlobalHWVar.gpy
+            dati[134] = dati[134] * GlobalHWVar.gpx
+            dati[135] = dati[135] * GlobalHWVar.gpy
             i = 0
             while i < len(tutteporte):
-                tutteporte[i + 1] = tutteporte[i + 1] * GlobalVar.gpx
-                tutteporte[i + 2] = tutteporte[i + 2] * GlobalVar.gpy
+                tutteporte[i + 1] = tutteporte[i + 1] * GlobalHWVar.gpx
+                tutteporte[i + 2] = tutteporte[i + 2] * GlobalHWVar.gpy
                 i += 4
             i = 0
             while i < len(tutticofanetti):
-                tutticofanetti[i + 1] = tutticofanetti[i + 1] * GlobalVar.gpx
-                tutticofanetti[i + 2] = tutticofanetti[i + 2] * GlobalVar.gpy
+                tutticofanetti[i + 1] = tutticofanetti[i + 1] * GlobalHWVar.gpx
+                tutticofanetti[i + 2] = tutticofanetti[i + 2] * GlobalHWVar.gpy
                 i += 4
 
             if not salvandoGameover:
@@ -210,9 +212,9 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
         datiGameover = []
 
         if not backupNecessario:
-            leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
+            leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
         else:
-            leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "r")
+            leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "r")
         contenutoFile = leggi.read()
         leggi.close()
 
@@ -257,10 +259,10 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                 break
                         if not errore:
                             # conversione della posizione in pixel
-                            dati[2] = dati[2] * GlobalVar.gpx
-                            dati[3] = dati[3] * GlobalVar.gpy
-                            dati[134] = dati[134] * GlobalVar.gpx
-                            dati[135] = dati[135] * GlobalVar.gpy
+                            dati[2] = dati[2] * GlobalHWVar.gpx
+                            dati[3] = dati[3] * GlobalHWVar.gpy
+                            dati[134] = dati[134] * GlobalHWVar.gpx
+                            dati[135] = dati[135] * GlobalHWVar.gpy
                     porteStringa = datiTotali[c + 1].split("_")
                     porteStringa.pop(len(porteStringa) - 1)
                     if len(porteStringa) == 0 or len(porteStringa) != lunghezzadatiPorte:
@@ -276,8 +278,8 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             # conversione della posizione in pixel
                             i = 0
                             while i < len(tutteporte):
-                                tutteporte[i + 1] = tutteporte[i + 1] * GlobalVar.gpx
-                                tutteporte[i + 2] = tutteporte[i + 2] * GlobalVar.gpy
+                                tutteporte[i + 1] = tutteporte[i + 1] * GlobalHWVar.gpx
+                                tutteporte[i + 2] = tutteporte[i + 2] * GlobalHWVar.gpy
                                 i += 4
                     cofanettiStringa = datiTotali[c + 2].split("_")
                     cofanettiStringa.pop(len(cofanettiStringa) - 1)
@@ -294,8 +296,8 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             # conversione della posizione in pixel
                             i = 0
                             while i < len(tutticofanetti):
-                                tutticofanetti[i + 1] = tutticofanetti[i + 1] * GlobalVar.gpx
-                                tutticofanetti[i + 2] = tutticofanetti[i + 2] * GlobalVar.gpy
+                                tutticofanetti[i + 1] = tutticofanetti[i + 1] * GlobalHWVar.gpx
+                                tutticofanetti[i + 2] = tutticofanetti[i + 2] * GlobalHWVar.gpy
                                 i += 4
                     datiNemici = datiTotali[c + 3].split("_")
                     datiNemici.pop(len(datiNemici) - 1)
@@ -324,15 +326,15 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         i = 0
                         while i < len(datiNemici):
                             try:
-                                nemico = NemicoObj(GlobalVar.gsx // 32 * int(datiNemici[i + 2]), GlobalVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 16], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])), int(datiNemici[i + 15]), nonCaricareImg=checkErrori)
+                                nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * int(datiNemici[i + 2]), GlobalHWVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 16], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])), int(datiNemici[i + 15]), nonCaricareImg=checkErrori)
                                 nemico.vita = int(datiNemici[i + 4])
                                 nemico.avvelenato = bool(int(datiNemici[i + 5]))
                                 nemico.appiccicato = bool(int(datiNemici[i + 6]))
                                 nemico.mosseRimaste = int(datiNemici[i + 7])
-                                nemico.obbiettivo[1] = int(datiNemici[i + 9]) * GlobalVar.gpx
-                                nemico.obbiettivo[2] = int(datiNemici[i + 10]) * GlobalVar.gpy
-                                nemico.xPosizioneUltimoBersaglio = int(datiNemici[i + 11]) * GlobalVar.gpx
-                                nemico.yPosizioneUltimoBersaglio = int(datiNemici[i + 12]) * GlobalVar.gpy
+                                nemico.obbiettivo[1] = int(datiNemici[i + 9]) * GlobalHWVar.gpx
+                                nemico.obbiettivo[2] = int(datiNemici[i + 10]) * GlobalHWVar.gpy
+                                nemico.xPosizioneUltimoBersaglio = int(datiNemici[i + 11]) * GlobalHWVar.gpx
+                                nemico.yPosizioneUltimoBersaglio = int(datiNemici[i + 12]) * GlobalHWVar.gpy
                                 listaNemiciTotali.append(nemico)
                             except:
                                 errore = True
@@ -348,8 +350,8 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             try:
                                 listaEsche.append(int(listaEscheStringa[i]))
                                 listaEsche.append(int(listaEscheStringa[i + 1]))
-                                listaEsche.append(GlobalVar.gpx * int(listaEscheStringa[i + 2]))
-                                listaEsche.append(GlobalVar.gpy * int(listaEscheStringa[i + 3]))
+                                listaEsche.append(GlobalHWVar.gpx * int(listaEscheStringa[i + 2]))
+                                listaEsche.append(GlobalHWVar.gpy * int(listaEscheStringa[i + 3]))
                             except:
                                 errore = True
                                 break
@@ -363,8 +365,8 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         while i < len(listaMoneteStringa):
                             try:
                                 listaMonete.append(int(listaMoneteStringa[i]))
-                                listaMonete.append(GlobalVar.gpx * int(listaMoneteStringa[i + 1]))
-                                listaMonete.append(GlobalVar.gpy * int(listaMoneteStringa[i + 2]))
+                                listaMonete.append(GlobalHWVar.gpx * int(listaMoneteStringa[i + 1]))
+                                listaMonete.append(GlobalHWVar.gpy * int(listaMoneteStringa[i + 2]))
                             except:
                                 errore = True
                                 break
@@ -406,7 +408,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                         i = 0
                         while i < len(datiPersonaggi):
                             try:
-                                personaggio = PersonaggioObj(GlobalVar.gsx // 32 * int(datiPersonaggi[i]), GlobalVar.gsy // 18 * int(datiPersonaggi[i + 1]), datiPersonaggi[i + 2], datiPersonaggi[i + 3], int(datiPersonaggi[i + 4]), int(datiPersonaggi[i + 5]), datiPersonaggi[i + 6], int(datiPersonaggi[i + 7]), int(datiPersonaggi[i + 8]), nonCaricareImg=checkErrori)
+                                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * int(datiPersonaggi[i]), GlobalHWVar.gsy // 18 * int(datiPersonaggi[i + 1]), datiPersonaggi[i + 2], datiPersonaggi[i + 3], int(datiPersonaggi[i + 4]), int(datiPersonaggi[i + 5]), datiPersonaggi[i + 6], int(datiPersonaggi[i + 7]), int(datiPersonaggi[i + 8]), nonCaricareImg=checkErrori)
                                 listaPersonaggiTotali.append(personaggio)
                             except:
                                 errore = True
@@ -444,8 +446,8 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                     else:
                         if ultimoObbiettivoColcoStringa[0] != "":
                             ultimoObbiettivoColco.append(ultimoObbiettivoColcoStringa[0])
-                            ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[1]) * GlobalVar.gpx)
-                            ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[2]) * GlobalVar.gpx)
+                            ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[1]) * GlobalHWVar.gpx)
+                            ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[2]) * GlobalHWVar.gpx)
                     obbiettivoCasualeColcoStringa = datiTotali[c + 11].split("_")
                     obbiettivoCasualeColcoStringa.pop(len(obbiettivoCasualeColcoStringa) - 1)
                     if len(obbiettivoCasualeColcoStringa) != 3:
@@ -453,15 +455,15 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                     else:
                         if obbiettivoCasualeColcoStringa[0] != "-1" and obbiettivoCasualeColcoStringa[1] != "-1" and obbiettivoCasualeColcoStringa[2] != "-1":
                             for nemico in listaNemiciTotali:
-                                if nemico.stanzaDiAppartenenza == int(obbiettivoCasualeColcoStringa[0]) and nemico.x == int(obbiettivoCasualeColcoStringa[1] * GlobalVar.gpx) and nemico.y == int(obbiettivoCasualeColcoStringa[2] * GlobalVar.gpy):
+                                if nemico.stanzaDiAppartenenza == int(obbiettivoCasualeColcoStringa[0]) and nemico.x == int(obbiettivoCasualeColcoStringa[1] * GlobalHWVar.gpx) and nemico.y == int(obbiettivoCasualeColcoStringa[2] * GlobalHWVar.gpy):
                                     obbiettivoCasualeColco = nemico
                                     break
 
                     if not caricandoGameover:
-                        datiAttuali = [dati[:], tutteporte[:], tutticofanetti[:], copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
+                        datiAttuali = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
                         caricandoGameover = True
                     else:
-                        datiGameover = [dati[:], tutteporte[:], tutticofanetti[:], copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
+                        datiGameover = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True, checkErrori=checkErrori), listaEsche[:], listaMonete[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, checkErrori=checkErrori), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco, checkErrori=checkErrori)]
                         gameoverCaricato = True
                     c += 13
             else:
@@ -484,15 +486,15 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
     if not errore:
         if not checkErrori:
             if not backupNecessario:
-                leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
+                leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "r")
             else:
-                leggi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "r")
+                leggi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "r")
             contenutoFile = leggi.read()
             leggi.close()
             if not backupNecessario:
-                scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+                scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i-backup.txt" % n, "w")
             else:
-                scrivi = GlobalVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
+                scrivi = GlobalHWVar.loadFile("Salvataggi/Salvataggio%i.txt" % n, "w")
             scrivi.write(contenutoFile)
             scrivi.close()
     else:

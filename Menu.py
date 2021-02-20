@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from SottoMenuA import *
+import pygame
+import GlobalHWVar
+import GlobalImgVar
+import GlobalSndVar
+import GlobalGameVar
+import GestioneInput
+import GenericFunc
+import CaricaSalvaPartita
+import SottoMenuA
+import SottoMenuB
 
 
 def menu(caricaSalvataggio, gameover):
@@ -25,30 +34,30 @@ def menu(caricaSalvataggio, gameover):
         ]
 
     # posizione porte e cofanetti nel vettore dati
-    tuttePorte = GlobalVar.initVetPorteGlobale[:]
-    tuttiCofanetti = GlobalVar.initVetCofanettiGlobale[:]
+    tuttePorte = GlobalGameVar.initVetPorteGlobale[:]
+    tuttiCofanetti = GlobalGameVar.initVetCofanettiGlobale[:]
 
     lunghezzadati = len(datiIniziali)
     lunghezzadatiPorte = len(tuttePorte)
     lunghezzadatiCofanetti = len(tuttiCofanetti)
 
     if gameover:
-        dati = GlobalVar.vetDatiSalvataggioGameOver[0]
-        tuttePorte = GlobalVar.vetDatiSalvataggioGameOver[1]
-        tuttiCofanetti = GlobalVar.vetDatiSalvataggioGameOver[2]
-        listaNemiciTotali = GlobalVar.vetDatiSalvataggioGameOver[3]
-        listaEsche = GlobalVar.vetDatiSalvataggioGameOver[4]
-        listaMonete = GlobalVar.vetDatiSalvataggioGameOver[5]
-        stanzeGiaVisitate = GlobalVar.vetDatiSalvataggioGameOver[6]
-        listaPersonaggiTotali = GlobalVar.vetDatiSalvataggioGameOver[7]
-        listaAvanzamentoDialoghi = GlobalVar.vetDatiSalvataggioGameOver[8]
-        oggettiRimastiAHans = GlobalVar.vetDatiSalvataggioGameOver[9]
-        ultimoObbiettivoColco = GlobalVar.vetDatiSalvataggioGameOver[10]
-        obbiettivoCasualeColco = GlobalVar.vetDatiSalvataggioGameOver[11]
+        dati = GlobalGameVar.vetDatiSalvataggioGameOver[0]
+        tuttePorte = GlobalGameVar.vetDatiSalvataggioGameOver[1]
+        tuttiCofanetti = GlobalGameVar.vetDatiSalvataggioGameOver[2]
+        listaNemiciTotali = GlobalGameVar.vetDatiSalvataggioGameOver[3]
+        listaEsche = GlobalGameVar.vetDatiSalvataggioGameOver[4]
+        listaMonete = GlobalGameVar.vetDatiSalvataggioGameOver[5]
+        stanzeGiaVisitate = GlobalGameVar.vetDatiSalvataggioGameOver[6]
+        listaPersonaggiTotali = GlobalGameVar.vetDatiSalvataggioGameOver[7]
+        listaAvanzamentoDialoghi = GlobalGameVar.vetDatiSalvataggioGameOver[8]
+        oggettiRimastiAHans = GlobalGameVar.vetDatiSalvataggioGameOver[9]
+        ultimoObbiettivoColco = GlobalGameVar.vetDatiSalvataggioGameOver[10]
+        obbiettivoCasualeColco = GlobalGameVar.vetDatiSalvataggioGameOver[11]
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
-        datiTotaliAttuali, datiTotaliGameover, errore = caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
+        datiTotaliAttuali, datiTotaliGameover, errore = CaricaSalvaPartita.caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
         dati = datiTotaliAttuali[0]
         tuttePorte = datiTotaliAttuali[1]
         tuttiCofanetti = datiTotaliAttuali[2]
@@ -74,30 +83,30 @@ def menu(caricaSalvataggio, gameover):
         ultimoObbiettivoColcoGameover = datiTotaliGameover[10]
         obbiettivoCasualeColcoGameover = datiTotaliGameover[11]
 
-        GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
-        GlobalVar.numSalvataggioCaricato = caricaSalvataggio
+        GlobalGameVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
+        GlobalGameVar.numSalvataggioCaricato = caricaSalvataggio
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     # carico subito tutti i salvataggi
-    ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
+    SottoMenuB.ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
 
-    GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
+    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
 
-    canzone = GlobalVar.canzoneMenuPrincipale
-    if not GlobalVar.canaleSoundCanzone.get_busy():
-        GlobalVar.canaleSoundCanzone.play(canzone, -1)
-    if not GlobalVar.primoAvvio:
-        oscuraIlluminaSchermo(illumina=2)
+    canzone = GlobalGameVar.canzoneMenuPrincipale
+    if not GlobalHWVar.canaleSoundCanzone.get_busy():
+        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+    if not GlobalHWVar.primoAvvio:
+        GenericFunc.oscuraIlluminaSchermo(illumina=2)
     else:
-        GlobalVar.primoAvvio = False
+        GlobalHWVar.primoAvvio = False
     illuminaSchermoDopoVideo = True
 
-    xp = GlobalVar.gsx // 32 * 1.5
-    yp = GlobalVar.gsy // 18 * 2.5
+    xp = GlobalHWVar.gsx // 32 * 1.5
+    yp = GlobalHWVar.gsy // 18 * 2.5
     voceMarcata = 1
-    puntatore = GlobalVar.puntatore
-    puntatorevecchio = GlobalVar.puntatorevecchio
+    puntatore = GlobalImgVar.puntatore
+    puntatorevecchio = GlobalImgVar.puntatorevecchio
     mostraTutorial = False
 
     aggiornaInterfacciaPerCambioInput = True
@@ -115,110 +124,110 @@ def menu(caricaSalvataggio, gameover):
         xMouse, yMouse = pygame.mouse.get_pos()
         suTutorial = False
         suTogliTutorial = False
-        if GlobalVar.mouseVisibile:
+        if GlobalHWVar.mouseVisibile:
             if not mostraTutorial:
-                if 0 <= xMouse <= GlobalVar.gsx // 32 * 7.7 and GlobalVar.gsy // 18 * 16.2 <= yMouse <= GlobalVar.gsy:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                if 0 <= xMouse <= GlobalHWVar.gsx // 32 * 7.7 and GlobalHWVar.gsy // 18 * 16.2 <= yMouse <= GlobalHWVar.gsy:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     suTutorial = True
-                elif 0 <= xMouse <= GlobalVar.gsx // 32 * 11:
-                    if GlobalVar.gsy // 18 * 1.5 <= yMouse <= GlobalVar.gsy // 18 * 4:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                elif 0 <= xMouse <= GlobalHWVar.gsx // 32 * 11:
+                    if GlobalHWVar.gsy // 18 * 1.5 <= yMouse <= GlobalHWVar.gsy // 18 * 4:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
-                        xp = GlobalVar.gsx // 32 * 1.5
-                        yp = GlobalVar.gsy // 18 * 2.5
-                    elif GlobalVar.gsy // 18 * 4 <= yMouse <= GlobalVar.gsy // 18 * 6.5:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 1.5
+                        yp = GlobalHWVar.gsy // 18 * 2.5
+                    elif GlobalHWVar.gsy // 18 * 4 <= yMouse <= GlobalHWVar.gsy // 18 * 6.5:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
-                        xp = GlobalVar.gsx // 32 * 1.5
-                        yp = GlobalVar.gsy // 18 * 5
-                    elif GlobalVar.gsy // 18 * 6.5 <= yMouse <= GlobalVar.gsy // 18 * 9:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 1.5
+                        yp = GlobalHWVar.gsy // 18 * 5
+                    elif GlobalHWVar.gsy // 18 * 6.5 <= yMouse <= GlobalHWVar.gsy // 18 * 9:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 3
-                        xp = GlobalVar.gsx // 32 * 1.5
-                        yp = GlobalVar.gsy // 18 * 7.5
-                    elif GlobalVar.gsy // 18 * 11.5 <= yMouse <= GlobalVar.gsy // 18 * 14:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 1.5
+                        yp = GlobalHWVar.gsy // 18 * 7.5
+                    elif GlobalHWVar.gsy // 18 * 11.5 <= yMouse <= GlobalHWVar.gsy // 18 * 14:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 4
-                        xp = GlobalVar.gsx // 32 * 1.5
-                        yp = GlobalVar.gsy // 18 * 12.5
+                        xp = GlobalHWVar.gsx // 32 * 1.5
+                        yp = GlobalHWVar.gsy // 18 * 12.5
                     else:
-                        if not GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(True)
+                        if not GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(True)
                 else:
-                    if not GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(True)
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             else:
-                if GlobalVar.gsx // 32 * 20.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                if GlobalHWVar.gsx // 32 * 20.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     suTogliTutorial = True
                 else:
-                    if not GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(True)
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             if voceMarcataVecchia != voceMarcata and not primoFrame:
-                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
 
         # gestione degli input
         menuConferma = False
         primoMovimento = False
         bottoneDownVecchio = bottoneDown
-        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
         if (bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio") and mostraTutorial:
             if mostraTutorial:
-                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 mostraTutorial = False
                 primoFrame = True
             bottoneDown = False
         if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
             if not mostraTutorial:
-                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 mostraTutorial = True
                 primoFrame = True
             else:
-                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 mostraTutorial = False
                 primoFrame = True
             bottoneDown = False
-        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
             if suTutorial and bottoneDown == "mouseSinistro":
-                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 mostraTutorial = True
                 primoFrame = True
             else:
                 if not mostraTutorial:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     # nuova partita
                     if voceMarcata == 1:
                         menuConferma = "inizia"
 
                     # carica partita
                     if voceMarcata == 2:
-                        n, inutile = scegli_sal(False, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, [], [], [], [], [], [], [], [], [], [], [], False)
+                        n, inutile = SottoMenuB.scegli_sal(False, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, [], [], [], [], [], [], [], [], [], [], [], False)
 
                         # lettura salvataggio
                         if n != -1:
-                            oscuraIlluminaSchermo(illumina=False)
-                            i = GlobalVar.volumeCanzoni
-                            j = GlobalVar.volumeEffetti
+                            GenericFunc.oscuraIlluminaSchermo(illumina=False)
+                            i = GlobalHWVar.volumeCanzoni
+                            j = GlobalHWVar.volumeEffetti
                             while i > 0 or j > 0:
-                                GlobalVar.canaleSoundCanzone.set_volume(i)
-                                GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
-                                i -= GlobalVar.volumeCanzoni / 10
-                                j -= GlobalVar.volumeEffetti / 10
+                                GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                                GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                                i -= GlobalHWVar.volumeCanzoni / 10
+                                j -= GlobalHWVar.volumeEffetti / 10
                                 pygame.time.wait(30)
-                            GlobalVar.canaleSoundCanzone.stop()
-                            GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-                            GlobalVar.canaleSoundSottofondoAmbientale.stop()
-                            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
-                            datiTotaliAttuali, datiTotaliGameover, errore = caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
+                            GlobalHWVar.canaleSoundCanzone.stop()
+                            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+                            GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
+                            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+                            datiTotaliAttuali, datiTotaliGameover, errore = CaricaSalvaPartita.caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
                             dati = datiTotaliAttuali[0]
                             tuttePorte = datiTotaliAttuali[1]
                             tuttiCofanetti = datiTotaliAttuali[2]
@@ -244,15 +253,15 @@ def menu(caricaSalvataggio, gameover):
                             ultimoObbiettivoColcoGameover = datiTotaliGameover[10]
                             obbiettivoCasualeColcoGameover = datiTotaliGameover[11]
 
-                            GlobalVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
+                            GlobalGameVar.vetDatiSalvataggioGameOver = [datiGameover, tutteporteGameover, tutticofanettiGameover, listaNemiciTotaliGameover, listaEscheGameover, listaMoneteGameover, stanzeGiaVisitateGameover, listaPersonaggiTotaliGameover, listaAvanzamentoDialoghiGameover, oggettiRimastiAHansGameover, ultimoObbiettivoColcoGameover, obbiettivoCasualeColcoGameover]
                             if dati:
-                                GlobalVar.numSalvataggioCaricato = n
+                                GlobalGameVar.numSalvataggioCaricato = n
                                 return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
                         primoFrame = True
 
                     # Impostazioni
                     if voceMarcata == 3:
-                        menuImpostazioni(True, False)
+                        SottoMenuB.menuImpostazioni(True, False)
                         primoFrame = True
 
                     # esci dal gioco
@@ -260,20 +269,20 @@ def menu(caricaSalvataggio, gameover):
                         menuConferma = "esci"
                 else:
                     if suTogliTutorial and bottoneDown == "mouseSinistro":
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                         mostraTutorial = False
                         primoFrame = True
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
-        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
-            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+        elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
         if not mostraTutorial and (bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu"):
             tastoMovimentoPremuto = True
         elif bottoneDown:
-            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
         if primoMovimento or primoFrame or (tastoMovimentoPremuto and tastotempfps == 0) or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
@@ -281,34 +290,34 @@ def menu(caricaSalvataggio, gameover):
                 if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                     if voceMarcata != 4:
                         if voceMarcata == 1:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                            yp = GlobalVar.gsy // 18 * 5
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            yp = GlobalHWVar.gsy // 18 * 5
                         elif voceMarcata == 2:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                            yp = GlobalVar.gsy // 18 * 7.5
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            yp = GlobalHWVar.gsy // 18 * 7.5
                         elif voceMarcata == 3:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                            yp = GlobalVar.gsy // 18 * 12.5
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            yp = GlobalHWVar.gsy // 18 * 12.5
                         voceMarcata += 1
                     else:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = GlobalVar.gsy // 18 * 2.5
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = GlobalHWVar.gsy // 18 * 2.5
                         voceMarcata -= 3
                 if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                     if voceMarcata != 1:
                         if voceMarcata == 2:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                            yp = GlobalVar.gsy // 18 * 2.5
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            yp = GlobalHWVar.gsy // 18 * 2.5
                         elif voceMarcata == 3:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                            yp = GlobalVar.gsy // 18 * 5
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            yp = GlobalHWVar.gsy // 18 * 5
                         elif voceMarcata == 4:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                            yp = GlobalVar.gsy // 18 * 7.5
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                            yp = GlobalHWVar.gsy // 18 * 7.5
                         voceMarcata -= 1
                     else:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = GlobalVar.gsy // 18 * 12.5
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = GlobalHWVar.gsy // 18 * 12.5
                         voceMarcata += 3
                 if not primoMovimento and tastoMovimentoPremuto:
                     tastotempfps = 2
@@ -317,58 +326,58 @@ def menu(caricaSalvataggio, gameover):
                 if primoFrame:
                     primoFrame = False
                     aggiornaInterfacciaPerCambioInput = True
-                    puntatore = GlobalVar.puntatore
-                    xp = GlobalVar.gsx // 32 * 1.5
+                    puntatore = GlobalImgVar.puntatore
+                    xp = GlobalHWVar.gsx // 32 * 1.5
                     if voceMarcata == 1:
-                        yp = GlobalVar.gsy // 18 * 2.5
+                        yp = GlobalHWVar.gsy // 18 * 2.5
                     if voceMarcata == 2:
-                        yp = GlobalVar.gsy // 18 * 5
+                        yp = GlobalHWVar.gsy // 18 * 5
                     if voceMarcata == 3:
-                        yp = GlobalVar.gsy // 18 * 7.5
+                        yp = GlobalHWVar.gsy // 18 * 7.5
                     if voceMarcata == 4:
-                        yp = GlobalVar.gsy // 18 * 12.5
-                    GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
-                    messaggio("Inizia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 2, 90)
-                    messaggio("Continua", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 4.5, 90)
-                    messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 7, 90)
-                    messaggio("Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2.5, GlobalVar.gsy // 18 * 12, 90)
+                        yp = GlobalHWVar.gsy // 18 * 12.5
+                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
+                    GenericFunc.messaggio("Inizia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 2, 90)
+                    GenericFunc.messaggio("Continua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 4.5, 90)
+                    GenericFunc.messaggio("Impostazioni", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 7, 90)
+                    GenericFunc.messaggio("Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 12, 90)
                 else:
-                    GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 2.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 10.5))
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 1.5) - 1, int(GlobalVar.gpy * 1.5)), (int(GlobalVar.gpx * 1.5) - 1, int(GlobalVar.gpy * 14)), 2)
+                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 2.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10.5))
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
                 if aggiornaInterfacciaPerCambioInput:
                     aggiornaInterfacciaPerCambioInput = False
-                    GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (0, GlobalVar.gsy // 18 * 16.5, GlobalVar.gsx // 32 * 8, GlobalVar.gsy // 18 * 2))
-                    if GlobalVar.mouseVisibile:
-                        messaggio("Tasto centrale: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 0.8, GlobalVar.gsy // 18 * 16.8, 50)
-                    elif GlobalVar.usandoIlController:
-                        messaggio("Start: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.5, GlobalVar.gsy // 18 * 16.8, 50)
+                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (0, GlobalHWVar.gsy // 18 * 16.5, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 2))
+                    if GlobalHWVar.mouseVisibile:
+                        GenericFunc.messaggio("Tasto centrale: comandi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 0.8, GlobalHWVar.gsy // 18 * 16.8, 50)
+                    elif GlobalHWVar.usandoIlController:
+                        GenericFunc.messaggio("Start: comandi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 16.8, 50)
                     else:
-                        messaggio("Esc: comandi", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1.7, GlobalVar.gsy // 18 * 16.8, 50)
+                        GenericFunc.messaggio("Esc: comandi", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1.7, GlobalHWVar.gsy // 18 * 16.8, 50)
 
                 if menuConferma:
-                    GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
-                    schermo_temp = GlobalVar.schermo.copy().convert()
-                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
+                    GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
+                    schermo_temp = GlobalHWVar.schermo.copy().convert()
+                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
                     if menuConferma == "inizia":
-                        inutile, conferma = chiediconferma(3)
+                        inutile, conferma = SottoMenuB.chiediconferma(3)
                         if conferma:
-                            oscuraIlluminaSchermo(illumina=False)
-                            i = GlobalVar.volumeCanzoni
-                            j = GlobalVar.volumeEffetti
+                            GenericFunc.oscuraIlluminaSchermo(illumina=False)
+                            i = GlobalHWVar.volumeCanzoni
+                            j = GlobalHWVar.volumeEffetti
                             while i > 0 or j > 0:
-                                GlobalVar.canaleSoundCanzone.set_volume(i)
-                                GlobalVar.canaleSoundSottofondoAmbientale.set_volume(j)
-                                i -= GlobalVar.volumeCanzoni / 10
-                                j -= GlobalVar.volumeEffetti / 10
+                                GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                                GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                                i -= GlobalHWVar.volumeCanzoni / 10
+                                j -= GlobalHWVar.volumeEffetti / 10
                                 pygame.time.wait(30)
-                            GlobalVar.canaleSoundCanzone.stop()
-                            GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-                            GlobalVar.canaleSoundSottofondoAmbientale.stop()
-                            GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+                            GlobalHWVar.canaleSoundCanzone.stop()
+                            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+                            GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
+                            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
                             dati = datiIniziali
-                            xInizialie = GlobalVar.gsx // 32 * 15
-                            yInizialie = GlobalVar.gsy // 18 * 7
+                            xInizialie = GlobalHWVar.gsx // 32 * 15
+                            yInizialie = GlobalHWVar.gsy // 18 * 7
                             rxInizialie = xInizialie
                             ryInizialie = yInizialie
                             dati[2] = xInizialie
@@ -386,242 +395,246 @@ def menu(caricaSalvataggio, gameover):
                             obbiettivoCasualeColco = False
                             i = 0
                             while i < len(tuttePorte):
-                                tuttePorte[i + 1] = tuttePorte[i + 1] * GlobalVar.gpx
-                                tuttePorte[i + 2] = tuttePorte[i + 2] * GlobalVar.gpy
+                                tuttePorte[i + 1] = tuttePorte[i + 1] * GlobalHWVar.gpx
+                                tuttePorte[i + 2] = tuttePorte[i + 2] * GlobalHWVar.gpy
                                 i += 4
                             i = 0
                             while i < len(tuttiCofanetti):
-                                tuttiCofanetti[i + 1] = tuttiCofanetti[i + 1] * GlobalVar.gpx
-                                tuttiCofanetti[i + 2] = tuttiCofanetti[i + 2] * GlobalVar.gpy
+                                tuttiCofanetti[i + 1] = tuttiCofanetti[i + 1] * GlobalHWVar.gpx
+                                tuttiCofanetti[i + 2] = tuttiCofanetti[i + 2] * GlobalHWVar.gpy
                                 i += 4
-                            GlobalVar.numSalvataggioCaricato = 0
+                            GlobalGameVar.numSalvataggioCaricato = 0
                             return dati, tuttePorte, tuttiCofanetti, datiNemici, datiEsche, datiMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
                         else:
-                            GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
+                            GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
                     else:
-                        inizio, inutile = chiediconferma(2)
+                        inizio, inutile = SottoMenuB.chiediconferma(2)
                         if not inizio:
-                            GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
+                            GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
                     aggiornaInterfacciaPerCambioInput = True
-                GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             elif primoFrame or aggiornaInterfacciaPerCambioInput:
                 primoFrame = False
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-                if GlobalVar.mouseVisibile:
-                    messaggio("Comandi mouse", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                if GlobalHWVar.mouseVisibile:
+                    GenericFunc.messaggio("Comandi mouse", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
 
-                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 0.4, GlobalVar.gsy // 18 * 6))
-                    messaggio("Movimento (su casella libera) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 6.8, 35)
-                    messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 7.3, 35)
-                    messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 7.8, 35)
-                    messaggio("Menu (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 8.3, 35)
-                    messaggio(u"Modalità interazione (su stato nemico)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 8.8, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 9.8), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 9.8), 2)
-                    messaggio(u"Modalità interazione /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 11.1, 35)
-                    messaggio("Rimuovi selezione (su stato nemico)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 11.6, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 13.2), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 13.2), 2)
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 3.2, GlobalVar.gsy // 18 * 14.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 17), 2)
+                    GenericFunc.messaggio("Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 0.4, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Movimento (su casella libera) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 6.8, 35)
+                    GenericFunc.messaggio("Interagisci (su casella interagibile) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.3, 35)
+                    GenericFunc.messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.8, 35)
+                    GenericFunc.messaggio("Menu (su stato personaggio) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 8.3, 35)
+                    GenericFunc.messaggio(u"Modalità interazione (su stato nemico)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 8.8, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 9.8), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 9.8), 2)
+                    GenericFunc.messaggio(u"Modalità interazione /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 11.1, 35)
+                    GenericFunc.messaggio("Rimuovi selezione (su stato nemico)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 11.6, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 13.2), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 13.2), 2)
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 14.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 4), (GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 17), 2)
 
-                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6))
-                    messaggio("Inquadra o attacca (su casella nemica) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 6.8, 35)
-                    messaggio("Interagisci (su casella interagibile) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 7.3, 35)
-                    messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 7.8, 35)
-                    messaggio("Menu (su stato personaggio) /", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 8.3, 35)
-                    messaggio(u"Modalità movimento (su stato nemico)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 8.8, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 9.8), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 9.8), 2)
-                    messaggio(u"Modalità movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 11.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 13.2), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 13.2), 2)
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.7, GlobalVar.gsy // 18 * 14.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 17), 2)
+                    GenericFunc.messaggio("Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Inquadra o attacca (su casella nemica) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 6.8, 35)
+                    GenericFunc.messaggio("Interagisci (su casella interagibile) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.3, 35)
+                    GenericFunc.messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.8, 35)
+                    GenericFunc.messaggio("Menu (su stato personaggio) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 8.3, 35)
+                    GenericFunc.messaggio(u"Modalità movimento (su stato nemico)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 8.8, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 9.8), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 9.8), 2)
+                    GenericFunc.messaggio(u"Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 11.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 13.2), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 13.2), 2)
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 14.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 4), (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 17), 2)
 
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialMouse, (GlobalVar.gsx // 32 * 21.4, GlobalVar.gsy // 18 * 6))
-                    messaggio("Seleziona", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 7.8, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 9.8), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 9.8), 2)
-                    messaggio("Indietro / Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 11.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 13.2), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 13.2), 2)
-                    messaggio("Cambia operazione (se consentito)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 24.2, GlobalVar.gsy // 18 * 14.7, 35)
-                elif GlobalVar.usandoIlController:
-                    messaggio("Comandi controller", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26.5, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 21.4, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Seleziona", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 7.8, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 9.8), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 9.8), 2)
+                    GenericFunc.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 11.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 13.2), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 13.2), 2)
+                    GenericFunc.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.7, 35)
+                elif GlobalHWVar.usandoIlController:
+                    GenericFunc.messaggio("Comandi controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
 
-                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialControllerInGioco, (GlobalVar.gsx // 32 * 0.4, GlobalVar.gsy // 18 * 6))
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 6.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 7.6), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 7.6), 2)
-                    messaggio("Cambia bersaglio inquadrato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 8.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 9.2), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 9.2), 2)
-                    messaggio("Deseleziona bersaglio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 9.85, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 10.75), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 10.75), 2)
-                    messaggio(u"Modalità interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 11.4, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 12.3), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 12.3), 2)
-                    messaggio("Movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 12.95, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 13.85), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 13.85), 2)
-                    messaggio("Attiva o disattiva Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 14.5, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 15.4), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 15.4), 2)
-                    messaggio("Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 16.1, 35)
+                    GenericFunc.messaggio("Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 0.4, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 6.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 7.6), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 7.6), 2)
+                    GenericFunc.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 8.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 9.2), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 9.2), 2)
+                    GenericFunc.messaggio("Deseleziona bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 9.85, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 10.75), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 10.75), 2)
+                    GenericFunc.messaggio(u"Modalità interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 11.4, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 12.3), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 12.3), 2)
+                    GenericFunc.messaggio("Movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 12.95, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 13.85), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 13.85), 2)
+                    GenericFunc.messaggio("Attiva o disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 14.5, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 15.4), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 15.4), 2)
+                    GenericFunc.messaggio("Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 16.1, 35)
 
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialControllerInGioco, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6))
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 6.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 7.6), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 7.6), 2)
-                    messaggio("Punta sul prossimo bersaglio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 8.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 9.2), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 9.2), 2)
-                    messaggio(u"Modalità movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 9.85, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 10.75), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 10.75), 2)
-                    messaggio("Inquadra bersaglio puntato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 11.4, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 12.3), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 12.3), 2)
-                    messaggio("Sposta puntatore", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 12.95, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 13.85), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 13.85), 2)
-                    messaggio("Attiva o disattiva Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 14.5, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 15.4), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 15.4), 2)
-                    messaggio("Attacca / Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 16.1, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 4), (GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 17), 2)
+                    GenericFunc.messaggio("Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 6.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 7.6), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 7.6), 2)
+                    GenericFunc.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 8.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 9.2), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 9.2), 2)
+                    GenericFunc.messaggio(u"Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 9.85, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 10.75), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 10.75), 2)
+                    GenericFunc.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 11.4, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 12.3), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 12.3), 2)
+                    GenericFunc.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 12.95, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 13.85), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 13.85), 2)
+                    GenericFunc.messaggio("Attiva o disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 14.5, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 15.4), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 15.4), 2)
+                    GenericFunc.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 16.1, 35)
 
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialControllerInMenu, (GlobalVar.gsx // 32 * 21.4, GlobalVar.gsy // 18 * 6))
-                    messaggio("Esci (dove specificato)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 8.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 9.2), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 9.2), 2)
-                    messaggio("Indietro / Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 9.85, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 10.75), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 10.75), 2)
-                    messaggio("Sposta puntatore", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 11.4, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 12.3), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 12.3), 2)
-                    messaggio("Cambia operazione (se consentito)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 12.95, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 13.85), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 13.85), 2)
-                    messaggio("Seleziona", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 14.5, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 4), (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 17), 2)
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26.5, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInMenu, (GlobalHWVar.gsx // 32 * 21.4, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Esci (dove specificato)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 8.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 9.2), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 9.2), 2)
+                    GenericFunc.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 9.85, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 10.75), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 10.75), 2)
+                    GenericFunc.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 11.4, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 12.3), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 12.3), 2)
+                    GenericFunc.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 12.95, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 13.85), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 13.85), 2)
+                    GenericFunc.messaggio("Seleziona", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 14.5, 35)
                 else:
-                    messaggio("Comandi tastiera", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
+                    GenericFunc.messaggio("Comandi tastiera", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
 
-                    messaggio("Mod. movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 0.4, GlobalVar.gsy // 18 * 6))
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 6.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 7.3), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 7.3), 2)
-                    messaggio("Cambia bersaglio inquadrato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 7.9, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 8.7), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 8.7), 2)
-                    messaggio("Deseleziona bersaglio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 9.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 10.1), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 10.1), 2)
-                    messaggio(u"Modalità interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 10.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 11.5), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 11.5), 2)
-                    messaggio("Movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 12.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 14), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 14), 2)
-                    messaggio("Attiva o disattiva Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 14.6, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 0.7, GlobalVar.gsy // 18 * 15.4), (GlobalVar.gsx // 32 * 10.2, GlobalVar.gsy // 18 * 15.4), 2)
-                    messaggio("Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 4.4, GlobalVar.gsy // 18 * 16, 35)
+                    GenericFunc.messaggio("Mod. movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (GlobalHWVar.gsx // 32 * 0.4, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 6.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 7.3), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 7.3), 2)
+                    GenericFunc.messaggio("Cambia bersaglio inquadrato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 7.9, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 8.7), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 8.7), 2)
+                    GenericFunc.messaggio("Deseleziona bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 9.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 10.1), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 10.1), 2)
+                    GenericFunc.messaggio(u"Modalità interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 10.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 11.5), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 11.5), 2)
+                    GenericFunc.messaggio("Movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 12.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 14), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 14), 2)
+                    GenericFunc.messaggio("Attiva o disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 14.6, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 15.4), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 15.4), 2)
+                    GenericFunc.messaggio("Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 4.4, GlobalHWVar.gsy // 18 * 16, 35)
 
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 10.7, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Mod. interazione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialTastieraInGioco, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6))
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 6.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 7.3), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 7.3), 2)
-                    messaggio("Punta sul prossimo bersaglio", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 7.9, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 8.7), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 8.7), 2)
-                    messaggio(u"Modalità movimento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 9.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 10.1), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 10.1), 2)
-                    messaggio("Inquadra bersaglio puntato", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 10.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 11.5), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 11.5), 2)
-                    messaggio("Sposta puntatore", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 12.7, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 14), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 14), 2)
-                    messaggio("Attiva o disattiva Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 14.6, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 11.2, GlobalVar.gsy // 18 * 15.4), (GlobalVar.gsx // 32 * 20.7, GlobalVar.gsy // 18 * 15.4), 2)
-                    messaggio("Attacca / Interagisci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 14.9, GlobalVar.gsy // 18 * 16, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 4), (GlobalHWVar.gsx // 32 * 10.7, GlobalHWVar.gsy // 18 * 17), 2)
+                    GenericFunc.messaggio("Mod. interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInGioco, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 6.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 7.3), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 7.3), 2)
+                    GenericFunc.messaggio("Punta sul prossimo bersaglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 7.9, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 8.7), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 8.7), 2)
+                    GenericFunc.messaggio(u"Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 9.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 10.1), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 10.1), 2)
+                    GenericFunc.messaggio("Inquadra bersaglio puntato", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 10.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 11.5), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 11.5), 2)
+                    GenericFunc.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 12.7, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 14), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 14), 2)
+                    GenericFunc.messaggio("Attiva o disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 14.6, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 15.4), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 15.4), 2)
+                    GenericFunc.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 16, 35)
 
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 4), (GlobalVar.gsx // 32 * 21.2, GlobalVar.gsy // 18 * 17), 2)
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 4.2, 80, centrale=True)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.tutorialTastieraInMenu, (GlobalVar.gsx // 32 * 21.4, GlobalVar.gsy // 18 * 6))
-                    messaggio("Esci (dove specificato)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 8.1, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 8.7), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 8.7), 2)
-                    messaggio("Indietro / Esci", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 9.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 10.1), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 10.1), 2)
-                    messaggio("Sposta puntatore", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 11.3, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 12.6), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 12.6), 2)
-                    messaggio("Cambia operazione (se consentito)", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 13.2, 35)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscurino, (GlobalVar.gsx // 32 * 21.7, GlobalVar.gsy // 18 * 14), (GlobalVar.gsx // 32 * 31.2, GlobalVar.gsy // 18 * 14), 2)
-                    messaggio("Seleziona", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25.4, GlobalVar.gsy // 18 * 14.6, 35)
-                if GlobalVar.mouseVisibile:
-                    messaggio("Tasto destro / centrale: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 1, 50)
-                elif GlobalVar.usandoIlController:
-                    messaggio("Start / Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.3, GlobalVar.gsy // 18 * 1, 50)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 4), (GlobalHWVar.gsx // 32 * 21.2, GlobalHWVar.gsy // 18 * 17), 2)
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26.5, GlobalHWVar.gsy // 18 * 4.2, 80, centrale=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInMenu, (GlobalHWVar.gsx // 32 * 21.4, GlobalHWVar.gsy // 18 * 6))
+                    GenericFunc.messaggio("Esci (dove specificato)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 8.1, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 8.7), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 8.7), 2)
+                    GenericFunc.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 9.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 10.1), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 10.1), 2)
+                    GenericFunc.messaggio("Sposta puntatore", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 11.3, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 12.6), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 12.6), 2)
+                    GenericFunc.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 13.2, 35)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 14), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 14), 2)
+                    GenericFunc.messaggio("Seleziona", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 14.6, 35)
+                if GlobalHWVar.mouseVisibile:
+                    GenericFunc.messaggio("Tasto destro / centrale: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 1, 50)
+                elif GlobalHWVar.usandoIlController:
+                    GenericFunc.messaggio("Start / Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.3, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
-                    messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.3, GlobalVar.gsy // 18 * 1, 50)
+                    GenericFunc.messaggio("Esc / Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.3, GlobalHWVar.gsy // 18 * 1, 50)
             if not illuminaSchermoDopoVideo:
-                GlobalVar.aggiornaSchermo()
+                GlobalHWVar.aggiornaSchermo()
 
         if illuminaSchermoDopoVideo:
             illuminaSchermoDopoVideo = False
 
             vetImg = []
-            screen = GlobalVar.schermo.copy().convert()
+            screen = GlobalHWVar.schermo.copy().convert()
             rect = pygame.display.get_surface().get_rect()
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((50, 50, 50, 250))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((50, 50, 50, 200))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((50, 50, 50, 150))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((50, 50, 50, 100))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((50, 50, 50, 60))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
             image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)
             image.fill((50, 50, 50, 20))
-            vetImg.append(image.convert_alpha(GlobalVar.schermo))
+            vetImg.append(image.convert_alpha(GlobalHWVar.schermo))
             i = 0
             while i <= 5:
-                GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
-                GlobalVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
-                GlobalVar.aggiornaSchermo()
+                GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
+                GlobalHWVar.aggiornaSchermo()
                 pygame.event.pump()
-                GlobalVar.clockFadeToBlack.tick(GlobalVar.fpsFadeToBlack)
+                GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
-            GlobalVar.disegnaImmagineSuSchermo(screen, (0, 0))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.schemataDiCaricamento, (0, 0))
-            GlobalVar.aggiornaSchermo()
+            GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
+            GlobalHWVar.aggiornaSchermo()
         else:
             pygame.event.pump()
-            GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+            GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
 def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
-    if GlobalVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        perssta = GlobalVar.fraMaggioreGrafMenu
+    if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
+        perssta = GlobalImgVar.lucy1GrafMenu
+    elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+        perssta = GlobalImgVar.fraMaggioreGrafMenu
+    elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+        perssta = GlobalImgVar.lucy1GrafMenu
     else:
-        perssta = GlobalVar.lucyGrafMenu
-    robosta = GlobalVar.robograf1b
-    puntatore = GlobalVar.puntatore
-    puntatoreVecchio = GlobalVar.puntatorevecchio
-    avvelenatosta = GlobalVar.avvelenatoMenu
-    surriscaldatosta = GlobalVar.surriscaldatoMenu
-    attaccopiusta = GlobalVar.attaccopiuMenu
-    difesapiusta = GlobalVar.difesapiuMenu
-    velocitapiusta = GlobalVar.velocitapiuMenu
-    efficienzapiusta = GlobalVar.efficienzapiuMenu
+        perssta = GlobalImgVar.lucy2GrafMenu
+    robosta = GlobalImgVar.robograf1b
+    puntatore = GlobalImgVar.puntatore
+    puntatoreVecchio = GlobalImgVar.puntatorevecchio
+    avvelenatosta = GlobalImgVar.avvelenatoMenu
+    surriscaldatosta = GlobalImgVar.surriscaldatoMenu
+    attaccopiusta = GlobalImgVar.attaccopiuMenu
+    difesapiusta = GlobalImgVar.difesapiuMenu
+    velocitapiusta = GlobalImgVar.velocitapiuMenu
+    efficienzapiusta = GlobalImgVar.efficienzapiuMenu
     if dati[133] == 0:
-        faretraFrecceStart = GlobalVar.faretraFrecceStart0
+        faretraFrecceStart = GlobalImgVar.faretraFrecceStart0
         maxFrecce = 1
     elif dati[133] == 1:
-        faretraFrecceStart = GlobalVar.faretraFrecceStart1
+        faretraFrecceStart = GlobalImgVar.faretraFrecceStart1
         maxFrecce = 5
     elif dati[133] == 2:
-        faretraFrecceStart = GlobalVar.faretraFrecceStart2
+        faretraFrecceStart = GlobalImgVar.faretraFrecceStart2
         maxFrecce = 20
     elif dati[133] == 3:
-        faretraFrecceStart = GlobalVar.faretraFrecceStart3
+        faretraFrecceStart = GlobalImgVar.faretraFrecceStart3
         maxFrecce = 60
     else:
         faretraFrecceStart = 0
         maxFrecce = 0
-    xp = GlobalVar.gsx // 32 * 1
-    yp = GlobalVar.gsy // 18 * 5
+    xp = GlobalHWVar.gsx // 32 * 1
+    yp = GlobalHWVar.gsy // 18 * 5
     carim = True
     risposta = False
     attacco = 0
@@ -636,8 +649,8 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     bottoneDown = False
     tastotempfps = 8
 
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
-    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
+    GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
+    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -648,191 +661,191 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
         suTornaIndietro = False
-        if GlobalVar.mouseVisibile:
-            if GlobalVar.gsx // 32 * 19 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
-                if GlobalVar.mouseBloccato:
-                    GlobalVar.configuraCursore(False)
+        if GlobalHWVar.mouseVisibile:
+            if GlobalHWVar.gsx // 32 * 19 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
-            elif GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 11:
-                if GlobalVar.gsy // 18 * 4.8 <= yMouse <= GlobalVar.gsy // 18 * 5.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+            elif GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 11:
+                if GlobalHWVar.gsy // 18 * 4.8 <= yMouse <= GlobalHWVar.gsy // 18 * 5.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 1
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 5
-                elif GlobalVar.gsy // 18 * 5.8 <= yMouse <= GlobalVar.gsy // 18 * 6.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 5
+                elif GlobalHWVar.gsy // 18 * 5.8 <= yMouse <= GlobalHWVar.gsy // 18 * 6.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 2
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 6
-                elif dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and GlobalVar.gsy // 18 * 6.8 <= yMouse <= GlobalVar.gsy // 18 * 7.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 6
+                elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and GlobalHWVar.gsy // 18 * 6.8 <= yMouse <= GlobalHWVar.gsy // 18 * 7.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 3
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 7
-                elif dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalVar.gsy // 18 * 7.8 <= yMouse <= GlobalVar.gsy // 18 * 8.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 7
+                elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalHWVar.gsy // 18 * 7.8 <= yMouse <= GlobalHWVar.gsy // 18 * 8.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 4
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 8
-                elif dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalVar.gsy // 18 * 8.8 <= yMouse <= GlobalVar.gsy // 18 * 9.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 8
+                elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"] and GlobalHWVar.gsy // 18 * 8.8 <= yMouse <= GlobalHWVar.gsy // 18 * 9.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 5
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 9
-                elif GlobalVar.gsy // 18 * 12.8 <= yMouse <= GlobalVar.gsy // 18 * 13.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 9
+                elif GlobalHWVar.gsy // 18 * 12.8 <= yMouse <= GlobalHWVar.gsy // 18 * 13.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 6
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 13
-                elif GlobalVar.gsy // 18 * 13.8 <= yMouse <= GlobalVar.gsy // 18 * 14.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 13
+                elif GlobalHWVar.gsy // 18 * 13.8 <= yMouse <= GlobalHWVar.gsy // 18 * 14.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 7
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 14
-                elif GlobalVar.gsy // 18 * 14.8 <= yMouse <= GlobalVar.gsy // 18 * 15.8:
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 14
+                elif GlobalHWVar.gsy // 18 * 14.8 <= yMouse <= GlobalHWVar.gsy // 18 * 15.8:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
                     voceMarcata = 8
-                    xp = GlobalVar.gsx // 32 * 1
-                    yp = GlobalVar.gsy // 18 * 15
+                    xp = GlobalHWVar.gsx // 32 * 1
+                    yp = GlobalHWVar.gsy // 18 * 15
                 else:
-                    if not GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(True)
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             else:
-                if not GlobalVar.mouseBloccato:
-                    GlobalVar.configuraCursore(True)
+                if not GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(True)
             if voceMarcataVecchia != voceMarcata and not primoFrame:
-                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
 
         # gestione degli input
         primoMovimento = False
         bottoneDownVecchio = bottoneDown
-        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseDestro" or bottoneDown == "mouseCentrale" or bottoneDown == "padCerchio" or bottoneDown == "padStart":
-            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
             bottoneDown = False
-        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
             if suTornaIndietro and bottoneDown == "mouseSinistro":
-                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 risposta = True
             else:
                 # non far cliccare su "Setta Colco" se Colco non è in una casella vista
                 if voceMarcata == 3 and not colcoInCasellaVista:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     aperturaSettaColcoNonRiuscita = True
                 else:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     primoFrame = True
                     # oggetti
                     if voceMarcata == 1:
-                        dati, attacco = oggetti(dati, colcoInCasellaVista)
+                        dati, attacco = SottoMenuA.oggetti(dati, colcoInCasellaVista)
                         if attacco != 0:
                             risposta = True
                         carim = True
                     # equip pers
                     if voceMarcata == 2:
-                        dati = equip(dati)
+                        dati = SottoMenuA.equip(dati)
                         carim = True
                     # equip robot
                     if voceMarcata == 3:
-                        dati = equiprobo(dati)
+                        dati = SottoMenuA.equiprobo(dati)
                         carim = True
                     # mappa
                     if voceMarcata == 4:
-                        menuMappa(dati[0])
+                        SottoMenuB.menuMappa(dati[0])
                     # diario
                     if voceMarcata == 5:
-                        menuDiario(dati)
+                        SottoMenuB.menuDiario(dati)
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio
-                        n, azioneFatta = scegli_sal(True, len(dati), len(tutteporte), len(tutticofanetti), tutteporte, tutticofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco)
+                        n, azioneFatta = SottoMenuB.scegli_sal(True, len(dati), len(tutteporte), len(tutticofanetti), tutteporte, tutticofanetti, vettoreEsche, vettoreDenaro, dati, listaNemiciTotali, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco)
                         if n != -1 and azioneFatta == 1:
-                            oscuraIlluminaSchermo(illumina=False)
+                            GenericFunc.oscuraIlluminaSchermo(illumina=False)
                             caricaSalvataggio = n
                             risposta = True
                     # impostazioni
                     if voceMarcata == 7:
-                        menuImpostazioni(False, True)
+                        SottoMenuB.menuImpostazioni(False, True)
                     # menu principale
                     if voceMarcata == 8:
-                        GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 11.5))
-                        GlobalVar.disegnaImmagineSuSchermo(puntatoreVecchio, (xp, yp))
+                        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 11.5))
+                        GlobalHWVar.disegnaImmagineSuSchermo(puntatoreVecchio, (xp, yp))
                         conferma = 1
             bottoneDown = False
-        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
-            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+        elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
         if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == "padGiu" or bottoneDown == "padSu":
             tastoMovimentoPremuto = True
         elif bottoneDown:
-            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
         if primoMovimento or primoFrame or (tastoMovimentoPremuto and tastotempfps == 0) or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
-                if dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 2:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = yp + GlobalVar.gsy // 18 * 7
+                if dati[0] < GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 2:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = yp + GlobalHWVar.gsy // 18 * 7
                     voceMarcata += 4
-                elif dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 2:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = yp + GlobalVar.gsy // 18 * 2
+                elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 2:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = yp + GlobalHWVar.gsy // 18 * 2
                     voceMarcata += 2
                 elif voceMarcata != 5 and voceMarcata != 8:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = yp + GlobalVar.gsy // 18 * 1
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = yp + GlobalHWVar.gsy // 18 * 1
                     voceMarcata += 1
                 else:
                     if voceMarcata == 5:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = yp + GlobalVar.gsy // 18 * 4
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = yp + GlobalHWVar.gsy // 18 * 4
                         voceMarcata += 1
                     elif voceMarcata == 8:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = GlobalVar.gsy // 18 * 5
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = GlobalHWVar.gsy // 18 * 5
                         voceMarcata = 1
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
-                if dati[0] < GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 6:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = yp - GlobalVar.gsy // 18 * 7
+                if dati[0] < GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"] and voceMarcata == 6:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = yp - GlobalHWVar.gsy // 18 * 7
                     voceMarcata -= 4
-                elif dati[0] < GlobalVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 4:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = yp - GlobalVar.gsy // 18 * 2
+                elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 4:
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = yp - GlobalHWVar.gsy // 18 * 2
                     voceMarcata -= 2
                 elif voceMarcata != 6 and voceMarcata != 1:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = yp - GlobalVar.gsy // 18 * 1
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = yp - GlobalHWVar.gsy // 18 * 1
                     voceMarcata -= 1
                 else:
                     if voceMarcata == 6:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = yp - GlobalVar.gsy // 18 * 4
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = yp - GlobalHWVar.gsy // 18 * 4
                         voceMarcata -= 1
                     elif voceMarcata == 1:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = GlobalVar.gsy // 18 * 15
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = GlobalHWVar.gsy // 18 * 15
                         voceMarcata = 8
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
-            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+            esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
 
             # chiedere conferma per uscire
             if conferma != 0:
-                inizio, risposta = chiediconferma(conferma)
+                inizio, risposta = SottoMenuB.chiediconferma(conferma)
                 if inizio:
                     break
                 else:
@@ -842,120 +855,120 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                 if primoFrame:
                     primoFrame = False
                     aggiornaInterfacciaPerCambioInput = True
-                    GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
+                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
                     # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
-                    GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 12.5))
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4))
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 4))
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 10, GlobalVar.gsy // 18 * 15.5))
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 15.5))
-                    messaggio("Menu", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
-                    messaggio("Oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 5, 50)
-                    messaggio("Equipaggiamento", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6, 50)
-                    if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 12.5))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 4))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 15.5))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
+                    GenericFunc.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                    GenericFunc.messaggio("Oggetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 50)
+                    GenericFunc.messaggio("Equipaggiamento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, 50)
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
                         if colcoInCasellaVista:
-                            messaggio("Setta Impo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
+                            GenericFunc.messaggio("Setta Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
                         else:
-                            messaggio("Setta Impo", GlobalVar.grigioscu, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 7, 50)
-                    if dati[0] >= GlobalVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
-                        messaggio("Mappa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 8, 50)
-                        messaggio("Diario", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 9, 50)
-                    messaggio("Salva", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 13, 50)
-                    messaggio("Impostazioni", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 14, 50)
-                    messaggio("Menu principale", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 15, 50)
+                            GenericFunc.messaggio("Setta Impo", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
+                        GenericFunc.messaggio("Mappa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8, 50)
+                        GenericFunc.messaggio("Diario", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9, 50)
+                    GenericFunc.messaggio("Salva", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13, 50)
+                    GenericFunc.messaggio("Impostazioni", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14, 50)
+                    GenericFunc.messaggio("Menu principale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15, 50)
                     if carim:
                         if dati[10] <= 0:
-                            robosta = GlobalVar.robograf2b
+                            robosta = GlobalImgVar.robograf2b
                         else:
-                            robosta = GlobalVar.robograf1b
+                            robosta = GlobalImgVar.robograf1b
                         carim = False
 
                     # vita-status personaggio
                     if dati[5] < 0:
                         dati[5] = 0
                     if dati[4] < 100:
-                        messaggio("Lv: " + str(dati[4]) + "    Esp: " + str(dati[127]) + " / " + str(esptot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.4, GlobalVar.gsy // 18 * 12.9, 50, centrale=True)
+                        GenericFunc.messaggio("Lv: " + str(dati[4]) + "    Esp: " + str(dati[127]) + " / " + str(esptot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.4, GlobalHWVar.gsy // 18 * 12.9, 50, centrale=True)
                     else:
-                        messaggio("Lv: " + str(dati[4]) + "    Esp: -- / --", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.4, GlobalVar.gsy // 18 * 12.9, 50, centrale=True)
-                    messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.4, GlobalVar.gsy // 18 * 13.7, 50, centrale=True)
-                    messaggio("Status alterati:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 16.4, GlobalVar.gsy // 18 * 14.5, 50, centrale=True)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 12), int(GlobalVar.gpy * 16.5) - 2), (int(GlobalVar.gpx * 21), int(GlobalVar.gpy * 16.5) - 2), 2)
+                        GenericFunc.messaggio("Lv: " + str(dati[4]) + "    Esp: -- / --", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.4, GlobalHWVar.gsy // 18 * 12.9, 50, centrale=True)
+                    GenericFunc.messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.4, GlobalHWVar.gsy // 18 * 13.7, 50, centrale=True)
+                    GenericFunc.messaggio("Status alterati:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16.4, GlobalHWVar.gsy // 18 * 14.5, 50, centrale=True)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 12), int(GlobalHWVar.gpy * 16.5) - 2), (int(GlobalHWVar.gpx * 21), int(GlobalHWVar.gpy * 16.5) - 2), 2)
                     if dati[121]:
-                        GlobalVar.disegnaImmagineSuSchermo(avvelenatosta, (GlobalVar.gsx // 32 * 14.4, GlobalVar.gsy // 18 * 15.2))
+                        GlobalHWVar.disegnaImmagineSuSchermo(avvelenatosta, (GlobalHWVar.gsx // 32 * 14.4, GlobalHWVar.gsy // 18 * 15.2))
                     if dati[123] > 0:
-                        GlobalVar.disegnaImmagineSuSchermo(attaccopiusta, ((GlobalVar.gsx // 32 * 14.4) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15.2))
+                        GlobalHWVar.disegnaImmagineSuSchermo(attaccopiusta, ((GlobalHWVar.gsx // 32 * 14.4) + (2 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 15.2))
                     if dati[124] > 0:
-                        GlobalVar.disegnaImmagineSuSchermo(difesapiusta, ((GlobalVar.gsx // 32 * 14.4) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 15.2))
-                    GlobalVar.disegnaImmagineSuSchermo(perssta, (GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 2.5))
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 12), int(GlobalVar.gpy * 12.5)), (int(GlobalVar.gpx * 21), int(GlobalVar.gpy * 12.5)), 2)
+                        GlobalHWVar.disegnaImmagineSuSchermo(difesapiusta, ((GlobalHWVar.gsx // 32 * 14.4) + (4 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 15.2))
+                    GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 2.5))
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 12), int(GlobalHWVar.gpy * 12.5)), (int(GlobalHWVar.gpx * 21), int(GlobalHWVar.gpy * 12.5)), 2)
 
-                    if dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"]:
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
                         # vita-status robo
                         if dati[10] < 0:
                             dati[10] = 0
-                        messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 13.3, 50, centrale=True)
-                        messaggio("Status alterati:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 14.1, 50, centrale=True)
-                        GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 21), int(GlobalVar.gpy * 16.5) - 2), (int(GlobalVar.gpx * 30), int(GlobalVar.gpy * 16.5) - 2), 2)
+                        GenericFunc.messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 13.3, 50, centrale=True)
+                        GenericFunc.messaggio("Status alterati:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 14.1, 50, centrale=True)
+                        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 21), int(GlobalHWVar.gpy * 16.5) - 2), (int(GlobalHWVar.gpx * 30), int(GlobalHWVar.gpy * 16.5) - 2), 2)
                         if dati[122] > 0:
-                            GlobalVar.disegnaImmagineSuSchermo(surriscaldatosta, (GlobalVar.gsx // 32 * 24, GlobalVar.gsy // 18 * 14.8))
+                            GlobalHWVar.disegnaImmagineSuSchermo(surriscaldatosta, (GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.8))
                         if dati[125] > 0:
-                            GlobalVar.disegnaImmagineSuSchermo(velocitapiusta, ((GlobalVar.gsx // 32 * 24) + (2 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 14.8))
+                            GlobalHWVar.disegnaImmagineSuSchermo(velocitapiusta, ((GlobalHWVar.gsx // 32 * 24) + (2 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 14.8))
                         if dati[126] > 0:
-                            GlobalVar.disegnaImmagineSuSchermo(efficienzapiusta, ((GlobalVar.gsx // 32 * 24) + (4 * GlobalVar.gpx // 4 * 3), GlobalVar.gsy // 18 * 14.8))
-                        GlobalVar.disegnaImmagineSuSchermo(robosta, (GlobalVar.gsx // 32 * 21, GlobalVar.gsy // 18 * 2.5))
-                        GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 21), int(GlobalVar.gpy * 12.5)), (int(GlobalVar.gpx * 30), int(GlobalVar.gpy * 12.5)), 2)
+                            GlobalHWVar.disegnaImmagineSuSchermo(efficienzapiusta, ((GlobalHWVar.gsx // 32 * 24) + (4 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 14.8))
+                        GlobalHWVar.disegnaImmagineSuSchermo(robosta, (GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 2.5))
+                        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 21), int(GlobalHWVar.gpy * 12.5)), (int(GlobalHWVar.gpx * 30), int(GlobalHWVar.gpy * 12.5)), 2)
 
                     if faretraFrecceStart != 0:
-                        GlobalVar.disegnaImmagineSuSchermo(faretraFrecceStart, (GlobalVar.gsx // 32 * 21.5, GlobalVar.gsy // 18 * 2.7))
-                        messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 6.2, 50, centrale=True)
-                    GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (int(GlobalVar.gpx * 26), int(GlobalVar.gpy * 3)), (int(GlobalVar.gpx * 26), int(GlobalVar.gpy * 6.7)), 2)
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sacchettoDenaroStart, (GlobalVar.gsx // 32 * 26.5, GlobalVar.gsy // 18 * 2.7))
-                    messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 28.4, GlobalVar.gsy // 18 * 6.2, 50, centrale=True)
+                        GlobalHWVar.disegnaImmagineSuSchermo(faretraFrecceStart, (GlobalHWVar.gsx // 32 * 21.5, GlobalHWVar.gsy // 18 * 2.7))
+                        GenericFunc.messaggio("Frecce: " + str(dati[132]) + " / " + str(maxFrecce), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
+                    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 26), int(GlobalHWVar.gpy * 3)), (int(GlobalHWVar.gpx * 26), int(GlobalHWVar.gpy * 6.7)), 2)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sacchettoDenaroStart, (GlobalHWVar.gsx // 32 * 26.5, GlobalHWVar.gsy // 18 * 2.7))
+                    GenericFunc.messaggio("Monete: " + str(dati[131]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 28.4, GlobalHWVar.gsy // 18 * 6.2, 50, centrale=True)
                 else:
                     if aperturaSettaColcoNonRiuscita:
-                        GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 0.6))
-                        messaggio(u"Impo è irraggiungibile!", GlobalVar.rosso, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7.1, 40)
+                        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 7, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 0.6))
+                        GenericFunc.messaggio(u"Impo è irraggiungibile!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 7.1, 40)
                         aperturaSettaColcoNonRiuscita = False
                     elif voceMarcataVecchia != voceMarcata:
-                        GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 7, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 0.6))
-                    GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 11.5))
+                        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 7, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 0.6))
+                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 11.5))
                 if aggiornaInterfacciaPerCambioInput:
                     aggiornaInterfacciaPerCambioInput = False
-                    GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 19, 0, GlobalVar.gsx // 32 * 13, GlobalVar.gsy // 18 * 2))
-                    if GlobalVar.mouseVisibile:
-                        messaggio("Tasto destro / centrale: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 20, GlobalVar.gsy // 18 * 1, 50)
-                    elif GlobalVar.usandoIlController:
-                        messaggio("Start / Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.1, GlobalVar.gsy // 18 * 1, 50)
+                    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 19, 0, GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 2))
+                    if GlobalHWVar.mouseVisibile:
+                        GenericFunc.messaggio("Tasto destro / centrale: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 1, 50)
+                    elif GlobalHWVar.usandoIlController:
+                        GenericFunc.messaggio("Start / Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.1, GlobalHWVar.gsy // 18 * 1, 50)
                     else:
-                        messaggio("Esc / Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 1, 50)
+                        GenericFunc.messaggio("Esc / Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 1, 50)
 
-                GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
-                GlobalVar.aggiornaSchermo()
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                GlobalHWVar.aggiornaSchermo()
 
         pygame.event.pump()
-        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+        GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio and not caricaSalvataggio:
-        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
     return dati, inizio, attacco, caricaSalvataggio
 
 
 def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
-    xp = GlobalVar.gpx * 1
-    yp = GlobalVar.gpy * 13.8
-    puntatore = GlobalVar.puntatore
-    puntatorevecchio = GlobalVar.puntatorevecchio
-    sconosciutoOggetto = GlobalVar.sconosciutoOggettoMenu1
-    sconosciutoOggettoIco = GlobalVar.sconosciutoOggettoIcoMenu
+    xp = GlobalHWVar.gpx * 1
+    yp = GlobalHWVar.gpy * 13.8
+    puntatore = GlobalImgVar.puntatore
+    puntatorevecchio = GlobalImgVar.puntatorevecchio
+    sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu1
+    sconosciutoOggettoIco = GlobalImgVar.sconosciutoOggettoIcoMenu
 
-    schermo_temp = GlobalVar.schermo.copy().convert()
-    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
-    dark = pygame.Surface((GlobalVar.gsx, GlobalVar.gsy), flags=pygame.SRCALPHA)
+    schermo_temp = GlobalHWVar.schermo.copy().convert()
+    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
+    dark = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
     dark.fill((0, 0, 0, 80))
     background.blit(dark, (0, 0))
-    GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
+    GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
 
-    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = getStatistiche(dati)
+    esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
 
     attacco = 0
     disegnoOggetto = 0
@@ -977,15 +990,15 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     vettoreOggettiIco = []
     while oggetton <= 10:
         if dati[oggetton + 30] >= 0:
-            vettoreOggettiGraf.append(GlobalVar.vetImgOggettiStart[oggetton - 1])
-            vettoreOggettiIco.append(GlobalVar.vetIcoOggettiMenu[oggetton - 1])
+            vettoreOggettiGraf.append(GlobalImgVar.vetImgOggettiStart[oggetton - 1])
+            vettoreOggettiIco.append(GlobalImgVar.vetIcoOggettiMenu[oggetton - 1])
         else:
             vettoreOggettiGraf.append(sconosciutoOggetto)
             vettoreOggettiIco.append(sconosciutoOggettoIco)
         oggetton += 1
 
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
-    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
+    GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
+    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -997,145 +1010,145 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
         xMouse, yMouse = pygame.mouse.get_pos()
         mouseInquadraFreccia = False
         suTornaIndietro = False
-        if GlobalVar.mouseVisibile:
-            if GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and 0 <= xMouse < GlobalVar.gsx // 32 * 4.2:
-                if GlobalVar.mouseBloccato:
-                    GlobalVar.configuraCursore(False)
+        if GlobalHWVar.mouseVisibile:
+            if GlobalHWVar.gsy // 18 * 15.6 <= yMouse <= GlobalHWVar.gsy // 18 * 17 and 0 <= xMouse < GlobalHWVar.gsx // 32 * 4.2:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
                 xp = 0
-                yp = GlobalVar.gsy // 18 * 16.05
+                yp = GlobalHWVar.gsy // 18 * 16.05
                 voceMarcata = -1
-            elif GlobalVar.gsy // 18 * 15.6 <= yMouse <= GlobalVar.gsy // 18 * 17 and GlobalVar.gsx // 32 * 4.2 <= xMouse <= GlobalVar.gsx // 32 * 6.8:
-                if GlobalVar.mouseBloccato:
-                    GlobalVar.configuraCursore(False)
-                xp = GlobalVar.gsx // 32 * 4.2
-                yp = GlobalVar.gsy // 18 * 16.05
+            elif GlobalHWVar.gsy // 18 * 15.6 <= yMouse <= GlobalHWVar.gsy // 18 * 17 and GlobalHWVar.gsx // 32 * 4.2 <= xMouse <= GlobalHWVar.gsx // 32 * 6.8:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                xp = GlobalHWVar.gsx // 32 * 4.2
+                yp = GlobalHWVar.gsy // 18 * 16.05
                 voceMarcata = -2
-            elif GlobalVar.gsy // 18 * 17 <= yMouse <= GlobalVar.gsy and GlobalVar.gsx // 32 * 0 <= xMouse <= GlobalVar.gsx // 32 * 7:
-                if GlobalVar.mouseBloccato:
-                    GlobalVar.configuraCursore(False)
+            elif GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 7:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
             elif difensivi:
-                if GlobalVar.gsy // 18 * 14.8 <= yMouse <= GlobalVar.gsy // 18 * 15.3 and GlobalVar.gsx // 32 * 3 <= xMouse <= GlobalVar.gsx // 32 * 4:
+                if GlobalHWVar.gsy // 18 * 14.8 <= yMouse <= GlobalHWVar.gsy // 18 * 15.3 and GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
                     mouseInquadraFreccia = True
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
-                elif GlobalVar.gsy // 18 * 13.8 <= yMouse <= GlobalVar.gsy // 18 * 14.8:
-                    if GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 2:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                elif GlobalHWVar.gsy // 18 * 13.8 <= yMouse <= GlobalHWVar.gsy // 18 * 14.8:
+                    if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 2:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
-                        xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 13.8
-                    elif GlobalVar.gsx // 32 * 2 <= xMouse <= GlobalVar.gsx // 32 * 3:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 1
+                        yp = GlobalHWVar.gsy // 18 * 13.8
+                    elif GlobalHWVar.gsx // 32 * 2 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
-                        xp = GlobalVar.gsx // 32 * 2
-                        yp = GlobalVar.gsy // 18 * 13.8
-                    elif GlobalVar.gsx // 32 * 3 <= xMouse <= GlobalVar.gsx // 32 * 4:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 2
+                        yp = GlobalHWVar.gsy // 18 * 13.8
+                    elif GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 3
-                        xp = GlobalVar.gsx // 32 * 3
-                        yp = GlobalVar.gsy // 18 * 13.8
-                    elif GlobalVar.gsx // 32 * 4 <= xMouse <= GlobalVar.gsx // 32 * 5:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 3
+                        yp = GlobalHWVar.gsy // 18 * 13.8
+                    elif GlobalHWVar.gsx // 32 * 4 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 4
-                        xp = GlobalVar.gsx // 32 * 4
-                        yp = GlobalVar.gsy // 18 * 13.8
-                    elif GlobalVar.gsx // 32 * 5 <= xMouse <= GlobalVar.gsx // 32 * 6:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 4
+                        yp = GlobalHWVar.gsy // 18 * 13.8
+                    elif GlobalHWVar.gsx // 32 * 5 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 5
-                        xp = GlobalVar.gsx // 32 * 5
-                        yp = GlobalVar.gsy // 18 * 13.8
+                        xp = GlobalHWVar.gsx // 32 * 5
+                        yp = GlobalHWVar.gsy // 18 * 13.8
                     else:
-                        if not GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(True)
+                        if not GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(True)
                 else:
-                    if not GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(True)
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             elif offensivi:
-                if GlobalVar.gsy // 18 * 13.8 <= yMouse <= GlobalVar.gsy // 18 * 14.3 and GlobalVar.gsx // 32 * 3 <= xMouse <= GlobalVar.gsx // 32 * 4:
+                if GlobalHWVar.gsy // 18 * 13.8 <= yMouse <= GlobalHWVar.gsy // 18 * 14.3 and GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
                     mouseInquadraFreccia = True
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
-                elif GlobalVar.gsy // 18 * 14.3 <= yMouse <= GlobalVar.gsy // 18 * 15.3:
-                    if GlobalVar.gsx // 32 * 1 <= xMouse <= GlobalVar.gsx // 32 * 2:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                elif GlobalHWVar.gsy // 18 * 14.3 <= yMouse <= GlobalHWVar.gsy // 18 * 15.3:
+                    if GlobalHWVar.gsx // 32 * 1 <= xMouse <= GlobalHWVar.gsx // 32 * 2:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
-                        xp = GlobalVar.gsx // 32 * 1
-                        yp = GlobalVar.gsy // 18 * 14.3
-                    elif GlobalVar.gsx // 32 * 2 <= xMouse <= GlobalVar.gsx // 32 * 3:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 1
+                        yp = GlobalHWVar.gsy // 18 * 14.3
+                    elif GlobalHWVar.gsx // 32 * 2 <= xMouse <= GlobalHWVar.gsx // 32 * 3:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
-                        xp = GlobalVar.gsx // 32 * 2
-                        yp = GlobalVar.gsy // 18 * 14.3
-                    elif GlobalVar.gsx // 32 * 3 <= xMouse <= GlobalVar.gsx // 32 * 4:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 2
+                        yp = GlobalHWVar.gsy // 18 * 14.3
+                    elif GlobalHWVar.gsx // 32 * 3 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 3
-                        xp = GlobalVar.gsx // 32 * 3
-                        yp = GlobalVar.gsy // 18 * 14.3
-                    elif GlobalVar.gsx // 32 * 4 <= xMouse <= GlobalVar.gsx // 32 * 5:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 3
+                        yp = GlobalHWVar.gsy // 18 * 14.3
+                    elif GlobalHWVar.gsx // 32 * 4 <= xMouse <= GlobalHWVar.gsx // 32 * 5:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 4
-                        xp = GlobalVar.gsx // 32 * 4
-                        yp = GlobalVar.gsy // 18 * 14.3
-                    elif GlobalVar.gsx // 32 * 5 <= xMouse <= GlobalVar.gsx // 32 * 6:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 4
+                        yp = GlobalHWVar.gsy // 18 * 14.3
+                    elif GlobalHWVar.gsx // 32 * 5 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 5
-                        xp = GlobalVar.gsx // 32 * 5
-                        yp = GlobalVar.gsy // 18 * 14.3
+                        xp = GlobalHWVar.gsx // 32 * 5
+                        yp = GlobalHWVar.gsy // 18 * 14.3
                     else:
-                        if not GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(True)
+                        if not GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(True)
                 else:
-                    if not GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(True)
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             if voceMarcataVecchia != voceMarcata and not primoFrame:
-                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
 
         # gestione degli input
         menuConferma = False
         primoMovimento = False
         bottoneDownVecchio = bottoneDown
-        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseDestro" or bottoneDown == "mouseCentrale" or bottoneDown == "padCerchio" or bottoneDown == "padStart":
-            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
             bottoneDown = False
-        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
             if bottoneDown == "mouseSinistro" and suTornaIndietro:
-                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 risposta = True
             elif bottoneDown == "mouseSinistro" and mouseInquadraFreccia:
                 if difensivi:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = GlobalVar.gpy * 14.3
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = GlobalHWVar.gpy * 14.3
                     difensivi = False
                     offensivi = True
                 elif offensivi:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = GlobalVar.gpy * 13.8
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = GlobalHWVar.gpy * 13.8
                     offensivi = False
                     difensivi = True
             elif voceMarcata < 0:
                 if voceMarcata == -1:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
-                    GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
-                    schermo_temp = GlobalVar.schermo.copy().convert()
-                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
-                    menuImpostazioni(False, True)
-                    GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                    GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
+                    schermo_temp = GlobalHWVar.schermo.copy().convert()
+                    background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
+                    SottoMenuB.menuImpostazioni(False, True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
                 elif voceMarcata == -2:
                     menuConferma = True
             else:
@@ -1150,7 +1163,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         sposta = True
                         risposta = True
                     # carica batt
-                    if voceMarcata == 2 and dati[32] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalVar.gpx:
+                    if voceMarcata == 2 and dati[32] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                         animaOggetto[0] = "caricaBatterie"
                         dati[10] = dati[10] + 250
                         if dati[10] > entot:
@@ -1184,7 +1197,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         sposta = True
                         risposta = True
                     # carica migliorato
-                    if voceMarcata == 5 and dati[35] > 0 and dati[0] >= GlobalVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalVar.gpx:
+                    if voceMarcata == 5 and dati[35] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                         animaOggetto[0] = "caricaBatterieMigliorato"
                         dati[10] = dati[10] + 600
                         if dati[10] > entot:
@@ -1224,18 +1237,18 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         risposta = True
                 if risposta:
                     if offensivi:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                 else:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
-        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
-            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+        elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
         if bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_a or bottoneDown == pygame.K_d or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padSinistra" or bottoneDown == "padDestra":
             tastoMovimentoPremuto = True
         elif bottoneDown:
-            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
         if not inizio and (primoMovimento or primoFrame or (tastoMovimentoPremuto and tastotempfps == 0) or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
@@ -1243,90 +1256,90 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             primoFrame = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata < 0:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     offensivi = True
                     difensivi = False
                     if voceMarcata == -1:
-                        xp = GlobalVar.gpx * 1
-                        yp = GlobalVar.gpy * 14.3
+                        xp = GlobalHWVar.gpx * 1
+                        yp = GlobalHWVar.gpy * 14.3
                         voceMarcata = 1
                     elif voceMarcata == -2:
-                        xp = GlobalVar.gpx * 4
-                        yp = GlobalVar.gpy * 14.3
+                        xp = GlobalHWVar.gpx * 4
+                        yp = GlobalHWVar.gpy * 14.3
                         voceMarcata = 4
                 elif offensivi:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = GlobalVar.gpy * 13.8
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = GlobalHWVar.gpy * 13.8
                     offensivi = False
                     difensivi = True
                 else:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
             if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata < 0:
                     if voceMarcata == -2:
                         voceMarcata += 1
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         xp = 0
                     else:
                         voceMarcata -= 1
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        xp = GlobalVar.gsx // 32 * 4.2
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        xp = GlobalHWVar.gsx // 32 * 4.2
                 elif voceMarcata != 1:
                     voceMarcata -= 1
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = xp - GlobalVar.gpx
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = xp - GlobalHWVar.gpx
                 else:
                     voceMarcata += 4
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = GlobalVar.gpx * 5
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = GlobalHWVar.gpx * 5
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if difensivi:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    yp = GlobalVar.gpy * 14.3
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    yp = GlobalHWVar.gpy * 14.3
                     difensivi = False
                     offensivi = True
                 elif voceMarcata >= 0:
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     if voceMarcata <= 3:
                         xp = 0
-                        yp = GlobalVar.gsy // 18 * 16.05
+                        yp = GlobalHWVar.gsy // 18 * 16.05
                         voceMarcata = -1
                     else:
-                        xp = GlobalVar.gsx // 32 * 4.2
-                        yp = GlobalVar.gsy // 18 * 16.05
+                        xp = GlobalHWVar.gsx // 32 * 4.2
+                        yp = GlobalHWVar.gsy // 18 * 16.05
                         voceMarcata = -2
                 else:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
             if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata < 0:
                     if voceMarcata == -1:
                         voceMarcata -= 1
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        xp = GlobalVar.gsx // 32 * 4.2
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        xp = GlobalHWVar.gsx // 32 * 4.2
                     else:
                         voceMarcata += 1
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         xp = 0
                 elif voceMarcata != 5:
                     voceMarcata += 1
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = xp + GlobalVar.gpx
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = xp + GlobalHWVar.gpx
                 else:
                     voceMarcata -= 4
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = GlobalVar.gpx * 1
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = GlobalHWVar.gpx * 1
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
             if voceMarcata >= 0:
                 voceMarcataOggetto = voceMarcata
 
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoStartBattaglia, (0, GlobalVar.gsy // 18 * 8))
-            messaggio("Impostazioni", GlobalVar.grigiochi, int(GlobalVar.gpx * 0.7), int(GlobalVar.gpy * 16.05), 45)
-            GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 4.2) - 1, int(GlobalVar.gpy * 15.8)), (int(GlobalVar.gpx * 4.2) - 1, int(GlobalVar.gpy * 16.8)), 2)
-            messaggio("Esci", GlobalVar.grigiochi, int(GlobalVar.gpx * 4.9), int(GlobalVar.gpy * 16.05), 45)
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoStartBattaglia, (0, GlobalHWVar.gsy // 18 * 8))
+            GenericFunc.messaggio("Impostazioni", GlobalHWVar.grigiochi, int(GlobalHWVar.gpx * 0.7), int(GlobalHWVar.gpy * 16.05), 45)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 4.2) - 1, int(GlobalHWVar.gpy * 15.8)), (int(GlobalHWVar.gpx * 4.2) - 1, int(GlobalHWVar.gpy * 16.8)), 2)
+            GenericFunc.messaggio("Esci", GlobalHWVar.grigiochi, int(GlobalHWVar.gpx * 4.9), int(GlobalHWVar.gpy * 16.05), 45)
             if difensivi:
                 if voceMarcata == 1:
                     disegnoOggetto = 0
@@ -1349,141 +1362,141 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     disegnoOggetto = 8
                 if voceMarcata == 5:
                     disegnoOggetto = 9
-            GlobalVar.disegnaImmagineSuSchermo(vettoreOggettiGraf[disegnoOggetto], (GlobalVar.gpx // 2, GlobalVar.gpy * 9.7))
+            GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiGraf[disegnoOggetto], (GlobalHWVar.gpx // 2, GlobalHWVar.gpy * 9.7))
             if dati[disegnoOggetto + 31] <= 0:
                 if voceMarcata < 0:
-                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
                 else:
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatOut, (xp, yp))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatOut, (xp, yp))
                 qta = 0
-            elif (disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > GlobalVar.gpx:
+            elif (disegnoOggetto == 1 or disegnoOggetto == 4) and abs(x - rx) + abs(y - ry) > GlobalHWVar.gpx:
                 if voceMarcata < 0:
-                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
                 else:
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatOut, (xp, yp))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatOut, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
             else:
                 if voceMarcata < 0:
-                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
                 else:
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.puntatIn, (xp, yp))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatIn, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
-            messaggio("x%i" % qta, GlobalVar.grigiochi, (GlobalVar.gpx * 4) + (GlobalVar.gpx // 2), GlobalVar.gpy * 11.2, 80)
+            GenericFunc.messaggio("x%i" % qta, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 4) + (GlobalHWVar.gpx // 2), GlobalHWVar.gpy * 11.2, 80)
             disegnati = 0
             i = 0
             while i < 10:
                 if difensivi and (i == 0 or i == 1 or i == 2 or i == 3 or i == 4):
-                    GlobalVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalVar.gpx * (disegnati + 1), GlobalVar.gpy * 13.8))
+                    GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalHWVar.gpx * (disegnati + 1), GlobalHWVar.gpy * 13.8))
                     disegnati += 1
                 if offensivi and (i == 5 or i == 6 or i == 7 or i == 8 or i == 9):
-                    GlobalVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalVar.gpx * (disegnati + 1), (GlobalVar.gpy * 13.8) + (GlobalVar.gpy // 2)))
+                    GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalHWVar.gpx * (disegnati + 1), (GlobalHWVar.gpy * 13.8) + (GlobalHWVar.gpy // 2)))
                     disegnati += 1
                 i += 1
             if difensivi:
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
                     if dati[31] >= 0:
-                        messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Pozione", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
                     if dati[32] >= 0:
-                        messaggio("Alimentaz. 100gr", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Alimentaz. 100gr", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
                     if dati[33] >= 0:
-                        messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 4 or voceMarcataOggetto == 4:
                     if dati[34] >= 0:
-                        messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Super pozione", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
                     if dati[35] >= 0:
-                        messaggio("Alimentaz. 250gr", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Alimentaz. 250gr", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.scorriGiu, (GlobalVar.gpx * 3, GlobalVar.gpy * 14.8))
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 14.8))
             if offensivi:
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
                     if dati[36] >= 0:
-                        messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
                     if dati[37] >= 0:
-                        messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
                     if dati[38] >= 0:
-                        messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Esca", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 4 or voceMarcataOggetto == 4:
                     if dati[39] >= 0:
-                        messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
                     if dati[40] >= 0:
-                        messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
+                        GenericFunc.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
                     else:
-                        messaggio("???", GlobalVar.grigiochi, GlobalVar.gpx // 3, int(GlobalVar.gpy * 8.9), 55)
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.scorriSu, (GlobalVar.gpx * 3, GlobalVar.gpy * 13.3))
+                        GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 13.3))
 
             # vita-status rallo
-            lungvitatot = int(((GlobalVar.gpx * pvtot) / float(4)) // 5)
+            lungvitatot = int(((GlobalHWVar.gpx * pvtot) / float(4)) // 5)
             lungvita = (lungvitatot * dati[5]) // pvtot
             if lungvita < 0:
                 lungvita = 0
-            indvitapers = pygame.transform.smoothscale(GlobalVar.indvita, (lungvitatot, GlobalVar.gpy // 4))
-            fineindvitapers = GlobalVar.fineindvita
-            vitaral = pygame.transform.smoothscale(GlobalVar.vitapersonaggio, (lungvita, GlobalVar.gpy // 4))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoRallo, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-            GlobalVar.disegnaImmagineSuSchermo(indvitapers, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-            GlobalVar.disegnaImmagineSuSchermo(fineindvitapers, ((GlobalVar.gsx // 32 * 1) + lungvitatot, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-            GlobalVar.disegnaImmagineSuSchermo(vitaral, (GlobalVar.gsx // 32 * 1, (GlobalVar.gsy // 18 * 17) + (GlobalVar.gpy // 4 * 3)))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perss, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.perssb, (GlobalVar.gsx // 32 * 0, GlobalVar.gsy // 18 * 17))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.imgNumFrecce, (int(GlobalVar.gsx // 32 * 1.2), GlobalVar.gsy // 18 * 17))
-            messaggio(" x" + str(dati[132]), GlobalVar.grigiochi, int(GlobalVar.gsx // 32 * 1.8), int(GlobalVar.gsy // 18 * 17.3), 40)
+            indvitapers = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
+            fineindvitapers = GlobalImgVar.fineindvita
+            vitaral = pygame.transform.smoothscale(GlobalImgVar.vitapersonaggio, (lungvita, GlobalHWVar.gpy // 4))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoRallo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
+            GlobalHWVar.disegnaImmagineSuSchermo(indvitapers, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
+            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitapers, ((GlobalHWVar.gsx // 32 * 1) + lungvitatot, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
+            GlobalHWVar.disegnaImmagineSuSchermo(vitaral, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
+            GenericFunc.messaggio(" x" + str(dati[132]), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
             if dati[121]:
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.avvelenato, (GlobalVar.gsx // 32 * 3, GlobalVar.gsy // 18 * 17))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
             if dati[123] > 0:
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.attaccopiu, (GlobalVar.gsx // 32 * 4, GlobalVar.gsy // 18 * 17))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
             if dati[124] > 0:
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.difesapiu, (GlobalVar.gsx // 32 * 5, GlobalVar.gsy // 18 * 17))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
 
             if menuConferma:
-                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
-                GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
-                schermo_temp = GlobalVar.schermo.copy().convert()
-                background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalVar.gsx, GlobalVar.gsy)).convert()
-                inizio, risposta = chiediconferma(1)
+                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
+                schermo_temp = GlobalHWVar.schermo.copy().convert()
+                background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
+                inizio, risposta = SottoMenuB.chiediconferma(1)
                 if not inizio:
-                    GlobalVar.disegnaImmagineSuSchermo(background, (0, 0))
-                    GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+                    GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
+                    GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
 
             if not risposta:
-                GlobalVar.aggiornaSchermo()
+                GlobalHWVar.aggiornaSchermo()
 
         pygame.event.pump()
-        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+        GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio:
-        GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-        GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
     return dati, attacco, sposta, animaOggetto, npers, inizio
 
 
 def menuMercante(dati):
-    puntatore = GlobalVar.puntatore
-    puntatorevecchio = GlobalVar.puntatorevecchio
-    sconosciutoOggetto = GlobalVar.sconosciutoOggettoMenu2
-    xp = GlobalVar.gsx // 32 * 10.5
-    yp = GlobalVar.gsy // 18 * 6.1
+    puntatore = GlobalImgVar.puntatore
+    puntatorevecchio = GlobalImgVar.puntatorevecchio
+    sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu2
+    xp = GlobalHWVar.gsx // 32 * 10.5
+    yp = GlobalHWVar.gsy // 18 * 6.1
     xpv = xp
     ypv = yp
     usauno = False
@@ -1511,14 +1524,14 @@ def menuMercante(dati):
     imgOggetti = []
     i = 1
     while i <= 10:
-        if (i == 1 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercantePozione"]) or (i == 2 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteAlimantaz"]) or (i == 3 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteMedicina"]) or (i == 4 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteSuperPoz"]) or (i == 5 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteAlimMiglio"]) or (i == 6 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomba"]) or (i == 7 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomVele"]) or (i == 8 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteEsca"]) or (i == 9 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomAppi"]) or (i == 10 and dati[0] > GlobalVar.dictAvanzamentoStoria["mercanteBomPote"]):
-            imgOggetti.append(GlobalVar.vetImgOggettiMercante[i - 1])
+        if (i == 1 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercantePozione"]) or (i == 2 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteAlimantaz"]) or (i == 3 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteMedicina"]) or (i == 4 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteSuperPoz"]) or (i == 5 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteAlimMiglio"]) or (i == 6 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteBomba"]) or (i == 7 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteBomVele"]) or (i == 8 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteEsca"]) or (i == 9 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteBomAppi"]) or (i == 10 and dati[0] > GlobalGameVar.dictAvanzamentoStoria["mercanteBomPote"]):
+            imgOggetti.append(GlobalImgVar.vetImgOggettiMercante[i - 1])
         else:
             imgOggetti.append(sconosciutoOggetto)
         i += 1
 
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni / 2)
-    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti / 2)
+    GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
+    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -1532,302 +1545,302 @@ def menuMercante(dati):
         mouseInquadraFrecciaSu = False
         mouseInquadraFrecciaGiu = False
         suTornaIndietro = False
-        if GlobalVar.mouseVisibile:
-            if GlobalVar.gsx // 32 * 21.5 <= xMouse <= GlobalVar.gsx and 0 <= yMouse <= GlobalVar.gsy // 18 * 2:
-                if GlobalVar.mouseBloccato:
-                    GlobalVar.configuraCursore(False)
+        if GlobalHWVar.mouseVisibile:
+            if GlobalHWVar.gsx // 32 * 21.5 <= xMouse <= GlobalHWVar.gsx and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 2:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
                 suTornaIndietro = True
             elif voceMarcata == 0:
-                if GlobalVar.gsx // 32 * 10.5 <= xMouse <= GlobalVar.gsx // 32 * 21.5:
-                    if GlobalVar.gsy // 18 * 6 <= yMouse <= GlobalVar.gsy // 18 * 6.8:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                if GlobalHWVar.gsx // 32 * 10.5 <= xMouse <= GlobalHWVar.gsx // 32 * 21.5:
+                    if GlobalHWVar.gsy // 18 * 6 <= yMouse <= GlobalHWVar.gsy // 18 * 6.8:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 0
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 6.1
-                    elif GlobalVar.gsy // 18 * 6.8 <= yMouse <= GlobalVar.gsy // 18 * 7.7:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 6.1
+                    elif GlobalHWVar.gsy // 18 * 6.8 <= yMouse <= GlobalHWVar.gsy // 18 * 7.7:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 1
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 7
-                    elif GlobalVar.gsy // 18 * 7.7 <= yMouse <= GlobalVar.gsy // 18 * 8.6:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 7
+                    elif GlobalHWVar.gsy // 18 * 7.7 <= yMouse <= GlobalHWVar.gsy // 18 * 8.6:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 2
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 7.9
-                    elif GlobalVar.gsy // 18 * 8.6 <= yMouse <= GlobalVar.gsy // 18 * 9.5:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 7.9
+                    elif GlobalHWVar.gsy // 18 * 8.6 <= yMouse <= GlobalHWVar.gsy // 18 * 9.5:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 3
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 8.8
-                    elif GlobalVar.gsy // 18 * 9.5 <= yMouse <= GlobalVar.gsy // 18 * 10.4:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 8.8
+                    elif GlobalHWVar.gsy // 18 * 9.5 <= yMouse <= GlobalHWVar.gsy // 18 * 10.4:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 4
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 9.7
-                    elif GlobalVar.gsy // 18 * 10.4 <= yMouse <= GlobalVar.gsy // 18 * 11.3:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 9.7
+                    elif GlobalHWVar.gsy // 18 * 10.4 <= yMouse <= GlobalHWVar.gsy // 18 * 11.3:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 5
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 10.6
-                    elif GlobalVar.gsy // 18 * 11.3 <= yMouse <= GlobalVar.gsy // 18 * 12.2:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 10.6
+                    elif GlobalHWVar.gsy // 18 * 11.3 <= yMouse <= GlobalHWVar.gsy // 18 * 12.2:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 6
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 11.5
-                    elif GlobalVar.gsy // 18 * 12.2 <= yMouse <= GlobalVar.gsy // 18 * 13.1:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 11.5
+                    elif GlobalHWVar.gsy // 18 * 12.2 <= yMouse <= GlobalHWVar.gsy // 18 * 13.1:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 7
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 12.4
-                    elif GlobalVar.gsy // 18 * 13.1 <= yMouse <= GlobalVar.gsy // 18 * 14:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 12.4
+                    elif GlobalHWVar.gsy // 18 * 13.1 <= yMouse <= GlobalHWVar.gsy // 18 * 14:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 8
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 13.3
-                    elif GlobalVar.gsy // 18 * 14 <= yMouse <= GlobalVar.gsy // 18 * 14.9:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 13.3
+                    elif GlobalHWVar.gsy // 18 * 14 <= yMouse <= GlobalHWVar.gsy // 18 * 14.9:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 9
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 14.2
-                    elif GlobalVar.gsy // 18 * 14.9 <= yMouse <= GlobalVar.gsy // 18 * 15.8:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 14.2
+                    elif GlobalHWVar.gsy // 18 * 14.9 <= yMouse <= GlobalHWVar.gsy // 18 * 15.8:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 10
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 15.1
-                    elif GlobalVar.gsy // 18 * 15.8 <= yMouse <= GlobalVar.gsy // 18 * 16.7:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 15.1
+                    elif GlobalHWVar.gsy // 18 * 15.8 <= yMouse <= GlobalHWVar.gsy // 18 * 16.7:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         oggetton = 11
-                        xp = GlobalVar.gsx // 32 * 10.5
-                        yp = GlobalVar.gsy // 18 * 16
+                        xp = GlobalHWVar.gsx // 32 * 10.5
+                        yp = GlobalHWVar.gsy // 18 * 16
                     else:
-                        if not GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(True)
+                        if not GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(True)
                 else:
-                    if not GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(True)
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             else:
-                if GlobalVar.gsy // 18 * 4.3 <= yMouse <= GlobalVar.gsy // 18 * 4.8 and GlobalVar.gsx // 32 * 8.5 <= xMouse <= GlobalVar.gsx // 32 * 9.5:
+                if GlobalHWVar.gsy // 18 * 4.3 <= yMouse <= GlobalHWVar.gsy // 18 * 4.8 and GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 9.5:
                     mouseInquadraFrecciaSu = True
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
-                elif GlobalVar.gsy // 18 * 4.8 <= yMouse <= GlobalVar.gsy // 18 * 5.3 and GlobalVar.gsx // 32 * 8.5 <= xMouse <= GlobalVar.gsx // 32 * 9.5:
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                elif GlobalHWVar.gsy // 18 * 4.8 <= yMouse <= GlobalHWVar.gsy // 18 * 5.3 and GlobalHWVar.gsx // 32 * 8.5 <= xMouse <= GlobalHWVar.gsx // 32 * 9.5:
                     mouseInquadraFrecciaGiu = True
-                    if GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(False)
-                elif GlobalVar.gsy // 18 * 6.5 <= yMouse <= GlobalVar.gsy // 18 * 7.9:
-                    if GlobalVar.gsx // 32 * 0.5 <= xMouse <= GlobalVar.gsx // 32 * 5.3:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                    if GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(False)
+                elif GlobalHWVar.gsy // 18 * 6.5 <= yMouse <= GlobalHWVar.gsy // 18 * 7.9:
+                    if GlobalHWVar.gsx // 32 * 0.5 <= xMouse <= GlobalHWVar.gsx // 32 * 5.3:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
-                        xp = GlobalVar.gsx // 32 * 1.3
-                        yp = GlobalVar.gsy // 18 * 6.9
-                    elif GlobalVar.gsx // 32 * 5.3 <= xMouse <= GlobalVar.gsx // 32 * 10:
-                        if GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(False)
+                        xp = GlobalHWVar.gsx // 32 * 1.3
+                        yp = GlobalHWVar.gsy // 18 * 6.9
+                    elif GlobalHWVar.gsx // 32 * 5.3 <= xMouse <= GlobalHWVar.gsx // 32 * 10:
+                        if GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
-                        xp = GlobalVar.gsx // 32 * 5.3
-                        yp = GlobalVar.gsy // 18 * 6.9
+                        xp = GlobalHWVar.gsx // 32 * 5.3
+                        yp = GlobalHWVar.gsy // 18 * 6.9
                     else:
-                        if not GlobalVar.mouseBloccato:
-                            GlobalVar.configuraCursore(True)
+                        if not GlobalHWVar.mouseBloccato:
+                            GlobalHWVar.configuraCursore(True)
                 else:
-                    if not GlobalVar.mouseBloccato:
-                        GlobalVar.configuraCursore(True)
+                    if not GlobalHWVar.mouseBloccato:
+                        GlobalHWVar.configuraCursore(True)
             if (oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata) and not primoFrame:
                 inventarioPieno = False
                 moneteInsufficienti = False
-                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
 
         # gestione degli input
         primoMovimento = False
         bottoneDownVecchio = bottoneDown
-        bottoneDown, aggiornaInterfacciaPerCambioInput = getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
+        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             moneteInsufficienti = False
             inventarioPieno = False
             tastotempfps = 8
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
-            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             numeroOggettiAcquistati = 1
             voceMarcata = 0
             if confermaOggettoDaAcquistare != 0:
-                xp = GlobalVar.gsx // 32 * 10.5
+                xp = GlobalHWVar.gsx // 32 * 10.5
                 if confermaOggettoDaAcquistare == -1:
-                    yp = GlobalVar.gsy // 18 * 6.1
+                    yp = GlobalHWVar.gsy // 18 * 6.1
                 if confermaOggettoDaAcquistare == 1:
-                    yp = GlobalVar.gsy // 18 * 7
+                    yp = GlobalHWVar.gsy // 18 * 7
                 if confermaOggettoDaAcquistare == 2:
-                    yp = GlobalVar.gsy // 18 * 7.9
+                    yp = GlobalHWVar.gsy // 18 * 7.9
                 if confermaOggettoDaAcquistare == 3:
-                    yp = GlobalVar.gsy // 18 * 8.8
+                    yp = GlobalHWVar.gsy // 18 * 8.8
                 if confermaOggettoDaAcquistare == 4:
-                    yp = GlobalVar.gsy // 18 * 9.7
+                    yp = GlobalHWVar.gsy // 18 * 9.7
                 if confermaOggettoDaAcquistare == 5:
-                    yp = GlobalVar.gsy // 18 * 10.6
+                    yp = GlobalHWVar.gsy // 18 * 10.6
                 if confermaOggettoDaAcquistare == 6:
-                    yp = GlobalVar.gsy // 18 * 11.5
+                    yp = GlobalHWVar.gsy // 18 * 11.5
                 if confermaOggettoDaAcquistare == 7:
-                    yp = GlobalVar.gsy // 18 * 12.4
+                    yp = GlobalHWVar.gsy // 18 * 12.4
                 if confermaOggettoDaAcquistare == 8:
-                    yp = GlobalVar.gsy // 18 * 13.3
+                    yp = GlobalHWVar.gsy // 18 * 13.3
                 if confermaOggettoDaAcquistare == 9:
-                    yp = GlobalVar.gsy // 18 * 14.2
+                    yp = GlobalHWVar.gsy // 18 * 14.2
                 if confermaOggettoDaAcquistare == 10:
-                    yp = GlobalVar.gsy // 18 * 15.1
+                    yp = GlobalHWVar.gsy // 18 * 15.1
                 if confermaOggettoDaAcquistare == 11:
-                    yp = GlobalVar.gsy // 18 * 16
+                    yp = GlobalHWVar.gsy // 18 * 16
                 confermaOggettoDaAcquistare = 0
             else:
                 risposta = True
             bottoneDown = False
-        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalVar.mouseBloccato) or bottoneDown == "padCroce":
+        if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
             if not (bottoneDown == "mouseSinistro" and (mouseInquadraFrecciaSu or mouseInquadraFrecciaGiu)):
                 procediAllAcquisto = True
                 # confermaOggettoDaAcquistare?
                 if voceMarcata == 1 and not (bottoneDown == "mouseSinistro" and suTornaIndietro):
-                    if 0 <= oggetton <= 10 and GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
-                        GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                    if 0 <= oggetton <= 10 and GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                         primoFrame = True
-                        dati[131] -= GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                        dati[131] -= GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                         voceMarcata = 0
-                        xp = GlobalVar.gsx // 32 * 10.5
+                        xp = GlobalHWVar.gsx // 32 * 10.5
                         # freccia
                         if confermaOggettoDaAcquistare == -1:
                             dati[132] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 6.1
+                            yp = GlobalHWVar.gsy // 18 * 6.1
                         # pozione
                         if confermaOggettoDaAcquistare == 1:
                             dati[31] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 7
+                            yp = GlobalHWVar.gsy // 18 * 7
                         # carica batt
                         if confermaOggettoDaAcquistare == 2:
                             dati[32] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 7.9
+                            yp = GlobalHWVar.gsy // 18 * 7.9
                         # antidoto
                         if confermaOggettoDaAcquistare == 3:
                             dati[33] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 8.8
+                            yp = GlobalHWVar.gsy // 18 * 8.8
                         # super pozione
                         if confermaOggettoDaAcquistare == 4:
                             dati[34] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 9.7
+                            yp = GlobalHWVar.gsy // 18 * 9.7
                         # carica migliorato
                         if confermaOggettoDaAcquistare == 5:
                             dati[35] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 10.6
+                            yp = GlobalHWVar.gsy // 18 * 10.6
                         # bomba
                         if confermaOggettoDaAcquistare == 6:
                             dati[36] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 11.5
+                            yp = GlobalHWVar.gsy // 18 * 11.5
                         # bomba veleno
                         if confermaOggettoDaAcquistare == 7:
                             dati[37] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 12.4
+                            yp = GlobalHWVar.gsy // 18 * 12.4
                         # esca
                         if confermaOggettoDaAcquistare == 8:
                             dati[38] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 13.3
+                            yp = GlobalHWVar.gsy // 18 * 13.3
                         # bomba appiccicosa
                         if confermaOggettoDaAcquistare == 9:
                             dati[39] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 14.2
+                            yp = GlobalHWVar.gsy // 18 * 14.2
                         # bomba potenziata
                         if confermaOggettoDaAcquistare == 10:
                             dati[40] += numeroOggettiAcquistati
-                            yp = GlobalVar.gsy // 18 * 15.1
+                            yp = GlobalHWVar.gsy // 18 * 15.1
                         confermaOggettoDaAcquistare = 0
                         procediAllAcquisto = False
                     elif oggetton == 11:
-                        if dati[133] == 0 and GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
-                            GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                        if dati[133] == 0 and GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati <= dati[131]:
+                            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
-                            dati[131] -= GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati
+                            dati[131] -= GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati
                             voceMarcata = 0
-                            xp = GlobalVar.gsx // 32 * 10.5
+                            xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
                             if confermaOggettoDaAcquistare == 11:
                                 dati[133] += numeroOggettiAcquistati
-                                yp = GlobalVar.gsy // 18 * 16
+                                yp = GlobalHWVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
-                        elif dati[133] == 1 and GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
-                            GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                        elif dati[133] == 1 and GlobalGameVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati <= dati[131]:
+                            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
-                            dati[131] -= GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati
+                            dati[131] -= GlobalGameVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati
                             voceMarcata = 0
-                            xp = GlobalVar.gsx // 32 * 10.5
+                            xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
                             if confermaOggettoDaAcquistare == 11:
                                 dati[133] += numeroOggettiAcquistati
-                                yp = GlobalVar.gsy // 18 * 16
+                                yp = GlobalHWVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
-                        elif dati[133] == 2 and GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
-                            GlobalVar.canaleSoundInterazioni.play(GlobalVar.rumoreAcquisto)
+                        elif dati[133] == 2 and GlobalGameVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati <= dati[131]:
+                            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreAcquisto)
                             primoFrame = True
-                            dati[131] -= GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati
+                            dati[131] -= GlobalGameVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati
                             voceMarcata = 0
-                            xp = GlobalVar.gsx // 32 * 10.5
+                            xp = GlobalHWVar.gsx // 32 * 10.5
                             # faretra
                             if confermaOggettoDaAcquistare == 11:
                                 dati[133] += numeroOggettiAcquistati
-                                yp = GlobalVar.gsy // 18 * 16
+                                yp = GlobalHWVar.gsy // 18 * 16
                             confermaOggettoDaAcquistare = 0
                             procediAllAcquisto = False
                         else:
-                            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                             moneteInsufficienti = True
                             procediAllAcquisto = False
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         moneteInsufficienti = True
                         procediAllAcquisto = False
                 elif voceMarcata == 2 or (voceMarcata == 1 and bottoneDown == "mouseSinistro" and suTornaIndietro):
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                     voceMarcata = 0
                     numeroOggettiAcquistati = 1
-                    xp = GlobalVar.gsx // 32 * 10.5
+                    xp = GlobalHWVar.gsx // 32 * 10.5
                     if confermaOggettoDaAcquistare == -1:
-                        yp = GlobalVar.gsy // 18 * 6.1
+                        yp = GlobalHWVar.gsy // 18 * 6.1
                     if confermaOggettoDaAcquistare == 1:
-                        yp = GlobalVar.gsy // 18 * 7
+                        yp = GlobalHWVar.gsy // 18 * 7
                     if confermaOggettoDaAcquistare == 2:
-                        yp = GlobalVar.gsy // 18 * 7.9
+                        yp = GlobalHWVar.gsy // 18 * 7.9
                     if confermaOggettoDaAcquistare == 3:
-                        yp = GlobalVar.gsy // 18 * 8.8
+                        yp = GlobalHWVar.gsy // 18 * 8.8
                     if confermaOggettoDaAcquistare == 4:
-                        yp = GlobalVar.gsy // 18 * 9.7
+                        yp = GlobalHWVar.gsy // 18 * 9.7
                     if confermaOggettoDaAcquistare == 5:
-                        yp = GlobalVar.gsy // 18 * 10.6
+                        yp = GlobalHWVar.gsy // 18 * 10.6
                     if confermaOggettoDaAcquistare == 6:
-                        yp = GlobalVar.gsy // 18 * 11.5
+                        yp = GlobalHWVar.gsy // 18 * 11.5
                     if confermaOggettoDaAcquistare == 7:
-                        yp = GlobalVar.gsy // 18 * 12.4
+                        yp = GlobalHWVar.gsy // 18 * 12.4
                     if confermaOggettoDaAcquistare == 8:
-                        yp = GlobalVar.gsy // 18 * 13.3
+                        yp = GlobalHWVar.gsy // 18 * 13.3
                     if confermaOggettoDaAcquistare == 9:
-                        yp = GlobalVar.gsy // 18 * 14.2
+                        yp = GlobalHWVar.gsy // 18 * 14.2
                     if confermaOggettoDaAcquistare == 10:
-                        yp = GlobalVar.gsy // 18 * 15.1
+                        yp = GlobalHWVar.gsy // 18 * 15.1
                     if confermaOggettoDaAcquistare == 11:
-                        yp = GlobalVar.gsy // 18 * 16
+                        yp = GlobalHWVar.gsy // 18 * 16
                     confermaOggettoDaAcquistare = 0
                     procediAllAcquisto = False
                 elif voceMarcata == 0 and bottoneDown == "mouseSinistro" and suTornaIndietro:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selind)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                     risposta = True
                     procediAllAcquisto = False
 
@@ -1840,107 +1853,107 @@ def menuMercante(dati):
                     if 1 <= oggetton <= 10 and numOggettiPosseduti < 99:
                         if oggetton == 1:
                             if imgOggetti[0] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 1
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 2:
                             if imgOggetti[1] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 2
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 3:
                             if imgOggetti[2] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 3
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 4:
                             if imgOggetti[3] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 4
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 5:
                             if imgOggetti[4] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 5
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 6:
                             if imgOggetti[5] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 6
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 7:
                             if imgOggetti[6] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 7
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 8:
                             if imgOggetti[7] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 8
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 9:
                             if imgOggetti[8] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 9
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         if oggetton == 10:
                             if imgOggetti[9] != sconosciutoOggetto:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                                 confermaOggettoDaAcquistare = 10
                                 usauno = True
                             else:
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     elif oggetton == 0 and dati[132] < maxFrecce:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         confermaOggettoDaAcquistare = -1
                         usauno = True
                     elif oggetton == 11 and dati[133] != 3:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selezione)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         confermaOggettoDaAcquistare = 11
                         usauno = True
                     else:
                         inventarioPieno = True
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
 
                 bottoneDown = False
-        elif bottoneDown == "mouseSinistro" and GlobalVar.mouseBloccato:
-            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+        elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
         tastoMovimentoPremuto = False
         if bottoneDown == "mouseSinistro" or bottoneDown == pygame.K_s or bottoneDown == pygame.K_w or bottoneDown == pygame.K_a or bottoneDown == pygame.K_d or bottoneDown == "padGiu" or bottoneDown == "padSu" or bottoneDown == "padSinistra" or bottoneDown == "padDestra":
             tastoMovimentoPremuto = True
         elif bottoneDown:
-            GlobalVar.canaleSoundInterazioni.play(GlobalVar.selimp)
+            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
         if primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
                     if oggetton != 0:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         oggetton = oggetton - 1
-                        yp = yp - GlobalVar.gsy // 18 * 0.9
+                        yp = yp - GlobalHWVar.gsy // 18 * 0.9
                     elif oggetton == 0:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = GlobalVar.gsy // 18 * 16
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = GlobalHWVar.gsy // 18 * 16
                         oggetton = 11
                 elif voceMarcata != 0:
                     if oggetton != 11:
@@ -1948,9 +1961,9 @@ def menuMercante(dati):
                         if numOggettiPosseduti < 0:
                             numOggettiPosseduti = 0
                         if (1 <= oggetton <= 10 and numOggettiPosseduti == 98) or (oggetton == 0 and dati[132] == maxFrecce - 1):
-                            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         else:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if 1 <= oggetton <= 10 and numeroOggettiAcquistati + numOggettiPosseduti >= 99:
                             numeroOggettiAcquistati = 1
                         elif oggetton == 0 and numeroOggettiAcquistati + dati[132] >= maxFrecce:
@@ -1958,26 +1971,26 @@ def menuMercante(dati):
                         else:
                             numeroOggettiAcquistati += 1
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         numeroOggettiAcquistati = 1
                         bottoneDown = False
             if (bottoneDown == pygame.K_a or bottoneDown == "padSinistra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 2:
                     voceMarcata -= 1
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = xp - GlobalVar.gsx // 32 * 4
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = xp - GlobalHWVar.gsx // 32 * 4
                 else:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
                     if oggetton != 11:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         oggetton = oggetton + 1
-                        yp = yp + GlobalVar.gsy // 18 * 0.9
+                        yp = yp + GlobalHWVar.gsy // 18 * 0.9
                     elif oggetton == 11:
-                        GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                        yp = GlobalVar.gsy // 18 * 6.1
+                        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                        yp = GlobalHWVar.gsy // 18 * 6.1
                         oggetton = 0
                 elif voceMarcata != 0:
                     if oggetton != 11:
@@ -1985,9 +1998,9 @@ def menuMercante(dati):
                         if numOggettiPosseduti < 0:
                             numOggettiPosseduti = 0
                         if (1 <= oggetton <= 10 and numOggettiPosseduti == 98) or (oggetton == 0 and dati[132] == maxFrecce - 1):
-                            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         else:
-                            GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if 1 <= oggetton <= 10 and numeroOggettiAcquistati == 1:
                             numeroOggettiAcquistati = 99 - numOggettiPosseduti
                         elif oggetton == 0 and numeroOggettiAcquistati == 1:
@@ -1995,16 +2008,16 @@ def menuMercante(dati):
                         else:
                             numeroOggettiAcquistati -= 1
                     else:
-                        GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         numeroOggettiAcquistati = 1
                         bottoneDown = False
             if (bottoneDown == pygame.K_d or bottoneDown == "padDestra") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
                     voceMarcata += 1
-                    GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
-                    xp = xp + GlobalVar.gsx // 32 * 4
+                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
+                    xp = xp + GlobalHWVar.gsx // 32 * 4
                 else:
-                    GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
             if bottoneDown == "mouseSinistro" and (mouseInquadraFrecciaSu or mouseInquadraFrecciaGiu):
                 if mouseInquadraFrecciaSu:
@@ -2014,9 +2027,9 @@ def menuMercante(dati):
                             if numOggettiPosseduti < 0:
                                 numOggettiPosseduti = 0
                             if (1 <= oggetton <= 10 and numOggettiPosseduti == 98) or (oggetton == 0 and dati[132] == maxFrecce - 1):
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                             else:
-                                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                             if 1 <= oggetton <= 10 and numeroOggettiAcquistati + numOggettiPosseduti >= 99:
                                 numeroOggettiAcquistati = 1
                             elif oggetton == 0 and numeroOggettiAcquistati + dati[132] >= maxFrecce:
@@ -2024,7 +2037,7 @@ def menuMercante(dati):
                             else:
                                 numeroOggettiAcquistati += 1
                         else:
-                            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                             numeroOggettiAcquistati = 1
                 elif mouseInquadraFrecciaGiu:
                     if voceMarcata != 0:
@@ -2033,9 +2046,9 @@ def menuMercante(dati):
                             if numOggettiPosseduti < 0:
                                 numOggettiPosseduti = 0
                             if (1 <= oggetton <= 10 and numOggettiPosseduti == 98) or (oggetton == 0 and dati[132] == maxFrecce - 1):
-                                GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                             else:
-                                GlobalVar.canaleSoundPuntatoreSposta.play(GlobalVar.spostapun)
+                                GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                             if 1 <= oggetton <= 10 and numeroOggettiAcquistati == 1:
                                 numeroOggettiAcquistati = 99 - numOggettiPosseduti
                             elif oggetton == 0 and numeroOggettiAcquistati == 1:
@@ -2043,7 +2056,7 @@ def menuMercante(dati):
                             else:
                                 numeroOggettiAcquistati -= 1
                         else:
-                            GlobalVar.canaleSoundPuntatoreSeleziona.play(GlobalVar.selimp)
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                             numeroOggettiAcquistati = 1
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
@@ -2058,317 +2071,317 @@ def menuMercante(dati):
 
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
-                GlobalVar.disegnaColoreSuTuttoLoSchermo(GlobalVar.grigioscu)
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 13.5))
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 4))
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 4))
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 20.5, GlobalVar.gsy // 18 * 16.5))
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 16.5))
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 13.5))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 4))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 4))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 16.5))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 16.5))
 
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sacchettoDenaroMercante, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 14))
-                GlobalVar.disegnaImmagineSuSchermo(GlobalVar.mercanteMenu, (GlobalVar.gsx // 32 * (-1), GlobalVar.gsy // 18 * 8))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sacchettoDenaroMercante, (GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 14))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.mercanteMenu, (GlobalHWVar.gsx // 32 * (-1), GlobalHWVar.gsy // 18 * 8))
 
-                messaggio("Acquista oggetti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 1, 150)
-                messaggio("Oggetti acquistabili", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 13.5, GlobalVar.gsy // 18 * 4.7, 45, centrale=True)
-                messaggio("Costo", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 4.7, 45, centrale=True)
-                messaggio("Posseduti", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 4.7, 45, centrale=True)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigiochi, (int(GlobalVar.gpx * 11), int(GlobalVar.gpy * 5.5)), (int(GlobalVar.gpx * 20.9), int(GlobalVar.gpy * 5.5)), 1)
+                GenericFunc.messaggio("Acquista oggetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                GenericFunc.messaggio("Oggetti acquistabili", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.5, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
+                GenericFunc.messaggio("Costo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
+                GenericFunc.messaggio("Posseduti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 4.7, 45, centrale=True)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 5.5)), (int(GlobalHWVar.gpx * 20.9), int(GlobalHWVar.gpy * 5.5)), 1)
 
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 4.5)), (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 5.3)), 2)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 5.7)), (int(GlobalVar.gpx * 16.2) - 1, int(GlobalVar.gpy * 17)), 2)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 4.5)), (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 5.3)), 2)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 5.7)), (int(GlobalVar.gpx * 18.2) - 1, int(GlobalVar.gpy * 17)), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 16.2) - 1, int(GlobalHWVar.gpy * 4.5)), (int(GlobalHWVar.gpx * 16.2) - 1, int(GlobalHWVar.gpy * 5.3)), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 16.2) - 1, int(GlobalHWVar.gpy * 5.7)), (int(GlobalHWVar.gpx * 16.2) - 1, int(GlobalHWVar.gpy * 17)), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 18.2) - 1, int(GlobalHWVar.gpy * 4.5)), (int(GlobalHWVar.gpx * 18.2) - 1, int(GlobalHWVar.gpy * 5.3)), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 18.2) - 1, int(GlobalHWVar.gpy * 5.7)), (int(GlobalHWVar.gpx * 18.2) - 1, int(GlobalHWVar.gpy * 17)), 2)
 
-                messaggio("Freccia", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 6.2, 40)
-                messaggio(str(GlobalVar.costoOggetti[0]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 6.2, 40, centrale=True)
-                messaggio("x%i" % dati[132], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 6.2, 40, centrale=True)
+                GenericFunc.messaggio("Freccia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 6.2, 40)
+                GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[0]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 6.2, 40, centrale=True)
+                GenericFunc.messaggio("x%i" % dati[132], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 6.2, 40, centrale=True)
                 if imgOggetti[0] != sconosciutoOggetto:
-                    messaggio("Pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
-                    messaggio(str(GlobalVar.costoOggetti[1]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
+                    GenericFunc.messaggio("Pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 7.1, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[1]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 7.1, 40, centrale=True)
                     if dati[31] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 7.1, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[31], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 7.1, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[31], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 7.1, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 7.1, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 7.1, 40)
                 if imgOggetti[1] != sconosciutoOggetto:
-                    messaggio("Alimentazione 100gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8, 40)
-                    messaggio(str(GlobalVar.costoOggetti[2]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 8, 40, centrale=True)
+                    GenericFunc.messaggio("Alimentazione 100gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[2]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 8, 40, centrale=True)
                     if dati[32] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 8, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[32], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[32], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 8, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8, 40)
                 if imgOggetti[2] != sconosciutoOggetto:
-                    messaggio("Medicina", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8.9, 40)
-                    messaggio(str(GlobalVar.costoOggetti[3]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
+                    GenericFunc.messaggio("Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8.9, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[3]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 8.9, 40, centrale=True)
                     if dati[33] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 8.9, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[33], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 8.9, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[33], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 8.9, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 8.9, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 8.9, 40)
                 if imgOggetti[3] != sconosciutoOggetto:
-                    messaggio("Super pozione", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 9.8, 40)
-                    messaggio(str(GlobalVar.costoOggetti[4]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
+                    GenericFunc.messaggio("Super pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 9.8, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[4]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 9.8, 40, centrale=True)
                     if dati[34] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 9.8, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[34], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 9.8, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[34], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 9.8, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 9.8, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 9.8, 40)
                 if imgOggetti[4] != sconosciutoOggetto:
-                    messaggio("Alimentazione 250gr", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 10.7, 40)
-                    messaggio(str(GlobalVar.costoOggetti[5]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
+                    GenericFunc.messaggio("Alimentazione 250gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 10.7, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[5]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 10.7, 40, centrale=True)
                     if dati[35] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 10.7, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[35], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 10.7, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[35], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 10.7, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 10.7, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 10.7, 40)
                 if imgOggetti[5] != sconosciutoOggetto:
-                    messaggio("Bomba", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 11.6, 40)
-                    messaggio(str(GlobalVar.costoOggetti[6]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
+                    GenericFunc.messaggio("Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 11.6, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[6]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 11.6, 40, centrale=True)
                     if dati[36] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 11.6, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[36], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 11.6, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[36], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 11.6, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 11.6, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 11.6, 40)
                 if imgOggetti[6] != sconosciutoOggetto:
-                    messaggio("Bomba velenosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 12.5, 40)
-                    messaggio(str(GlobalVar.costoOggetti[7]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
+                    GenericFunc.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 12.5, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[7]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 12.5, 40, centrale=True)
                     if dati[37] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 12.5, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[37], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 12.5, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[37], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 12.5, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 12.5, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 12.5, 40)
                 if imgOggetti[7] != sconosciutoOggetto:
-                    messaggio("Esca", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 13.4, 40)
-                    messaggio(str(GlobalVar.costoOggetti[8]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
+                    GenericFunc.messaggio("Esca", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 13.4, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[8]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 13.4, 40, centrale=True)
                     if dati[38] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 13.4, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[38], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 13.4, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[38], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 13.4, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 13.4, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 13.4, 40)
                 if imgOggetti[8] != sconosciutoOggetto:
-                    messaggio("Bomba appiccicosa", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 14.3, 40)
-                    messaggio(str(GlobalVar.costoOggetti[9]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
+                    GenericFunc.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 14.3, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[9]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 14.3, 40, centrale=True)
                     if dati[39] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 14.3, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[39], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 14.3, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[39], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 14.3, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 14.3, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 14.3, 40)
                 if imgOggetti[9] != sconosciutoOggetto:
-                    messaggio("Bomba potenziata", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 15.2, 40)
-                    messaggio(str(GlobalVar.costoOggetti[10]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
+                    GenericFunc.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 15.2, 40)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[10]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 15.2, 40, centrale=True)
                     if dati[40] < 0:
-                        messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
+                        GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 15.2, 40, centrale=True)
                     else:
-                        messaggio("x%i" % dati[40], GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 15.2, 40, centrale=True)
+                        GenericFunc.messaggio("x%i" % dati[40], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 15.2, 40, centrale=True)
                 else:
-                    messaggio("---", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 15.2, 40)
-                messaggio("Faretra", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 11.5, GlobalVar.gsy // 18 * 16.1, 40)
+                    GenericFunc.messaggio("---", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 15.2, 40)
+                GenericFunc.messaggio("Faretra", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 16.1, 40)
                 if dati[133] == 0:
-                    messaggio(str(GlobalVar.costoOggetti[11]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[11]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 if dati[133] == 1:
-                    messaggio(str(GlobalVar.costoOggetti[12]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[12]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 if dati[133] >= 2:
-                    messaggio(str(GlobalVar.costoOggetti[13]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 17.2, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                    GenericFunc.messaggio(str(GlobalGameVar.costoOggetti[13]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17.2, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 if dati[133] == 3:
-                    messaggio("x1", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                    GenericFunc.messaggio("x1", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
                 else:
-                    messaggio("x0", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 19.6, GlobalVar.gsy // 18 * 16.1, 40, centrale=True)
+                    GenericFunc.messaggio("x0", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.6, GlobalHWVar.gsy // 18 * 16.1, 40, centrale=True)
             elif confermaOggettoDaAcquistare == 0 and (oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata):
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.5, GlobalVar.gsy // 18 * 6.1, GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 10.5))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 6.7, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 6.7, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 6.7, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 7.6, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 7.6, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 7.6, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 8.5, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 8.5, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 8.5, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 9.4, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 9.4, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 9.4, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 10.3, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 10.3, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 10.3, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 11.2, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 11.2, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 11.2, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 12.1, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 12.1, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 12.1, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 13, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 13, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 13, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 13.9, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 13.9, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 13.9, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 14.8, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 14.8, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 14.8, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 15.7, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 15.7, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 15.7, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 10.9, GlobalVar.gsy // 18 * 16.6, GlobalVar.gsx // 32 * 5.2, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 16.3, GlobalVar.gsy // 18 * 16.6, GlobalVar.gsx // 32 * 1.8, GlobalVar.gsy // 18 * 0.3))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigio, (GlobalVar.gsx // 32 * 18.3, GlobalVar.gsy // 18 * 16.6, GlobalVar.gsx // 32 * 2.7, GlobalVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.1, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 10.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 6.7, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 6.7, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 6.7, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 7.6, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 7.6, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 7.6, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 8.5, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 8.5, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 8.5, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 9.4, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 9.4, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 9.4, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 10.3, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 10.3, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 10.3, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 11.2, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 11.2, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 11.2, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 12.1, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 12.1, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 12.1, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 13, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 13, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 13, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 13.9, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 13.9, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 13.9, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 14.8, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 14.8, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 14.8, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 15.7, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 15.7, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 15.7, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 16.6, GlobalHWVar.gsx // 32 * 5.2, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16.3, GlobalHWVar.gsy // 18 * 16.6, GlobalHWVar.gsx // 32 * 1.8, GlobalHWVar.gsy // 18 * 0.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 18.3, GlobalHWVar.gsy // 18 * 16.6, GlobalHWVar.gsx // 32 * 2.7, GlobalHWVar.gsy // 18 * 0.3))
 
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 22, GlobalVar.gsy // 18 * 3, GlobalVar.gsx // 32 * 9.5, GlobalVar.gsy // 18 * 11))
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.5, GlobalVar.gsx // 32 * 5.5, GlobalVar.gsy // 18 * 1))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 3, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 11))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 15.5, GlobalHWVar.gsx // 32 * 5.5, GlobalHWVar.gsy // 18 * 1))
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 21, 0, GlobalVar.gsx // 32 * 11, GlobalVar.gsy // 18 * 2.5))
-                if GlobalVar.mouseVisibile:
-                    messaggio("Tasto destro: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 1, 50)
-                elif GlobalVar.usandoIlController:
-                    messaggio("Cerchio: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 23.5, GlobalVar.gsy // 18 * 1, 50)
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
+                if GlobalHWVar.mouseVisibile:
+                    GenericFunc.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
+                elif GlobalHWVar.usandoIlController:
+                    GenericFunc.messaggio("Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
-                    messaggio("Q: torna indietro", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 25, GlobalVar.gsy // 18 * 1, 50)
+                    GenericFunc.messaggio("Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 1, 50)
 
-            GlobalVar.disegnaRettangoloSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4, GlobalVar.gsx // 32 * 9.5, GlobalVar.gsy // 18 * 4.5))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoDialogoMercante, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoAltoSinistra, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 4))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoAltoDestra, (GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 4))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoDestra, (GlobalVar.gsx // 32 * 9, GlobalVar.gsy // 18 * 7))
-            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.sfondoTriangolinoBassoSinistra, (GlobalVar.gsx // 32 * 0.5, GlobalVar.gsy // 18 * 7))
+            GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 9.5, GlobalHWVar.gsy // 18 * 4.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialogoMercante, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 4))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 4))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 4))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 7))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 7))
             if moneteInsufficienti:
-                messaggio("Non hai abbastanza monete!", GlobalVar.rosso, GlobalVar.gsx // 32 * 5.3, GlobalVar.gsy // 18 * 6.1, 40, centrale=True)
+                GenericFunc.messaggio("Non hai abbastanza monete!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 6.1, 40, centrale=True)
             if inventarioPieno:
-                messaggio("Non puoi prenderne altre...", GlobalVar.rosso, GlobalVar.gsx // 32 * 5.3, GlobalVar.gsy // 18 * 5.3, 40, centrale=True)
+                GenericFunc.messaggio("Non puoi prenderne altre...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 5.3, GlobalHWVar.gsy // 18 * 5.3, 40, centrale=True)
 
             # menu conferma
             if confermaOggettoDaAcquistare != 0:
-                messaggio("Quante te ne servono?", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, 50)
+                GenericFunc.messaggio("Quante te ne servono?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
                 # posizionare il cursore sul menu compra
                 if usauno:
                     xpv = xp
                     ypv = yp
-                    xp = GlobalVar.gsx // 32 * 5.3
-                    yp = GlobalVar.gsy // 18 * 6.9
+                    xp = GlobalHWVar.gsx // 32 * 5.3
+                    yp = GlobalHWVar.gsy // 18 * 6.9
                     voceMarcata = 2
                     usauno = False
-                GlobalVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
-                messaggio("x" + str(numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 7.5, GlobalVar.gsy // 18 * 4.5, 50)
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
+                GenericFunc.messaggio("x" + str(numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4.5, 50)
                 if oggetton == 11:
-                    GlobalVar.disegnaImmagineSuSchermo(GlobalVar.scorriSuGiuBloccato, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccato, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     if dati[133] == 1:
-                        messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
+                        GenericFunc.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton + 1] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
                     elif dati[133] >= 2:
-                        messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
+                        GenericFunc.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton + 2] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
                     else:
-                        messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
+                        GenericFunc.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
                 else:
                     if voceMarcata != 0 and oggetton != 11 and (bottoneDown == pygame.K_w or (bottoneDown == "mouseSinistro" and mouseInquadraFrecciaSu) or bottoneDown == "padSu"):
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.scorriSuGiuBloccatoSu, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccatoSu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     elif voceMarcata != 0 and oggetton != 11 and (bottoneDown == pygame.K_s or (bottoneDown == "mouseSinistro" and mouseInquadraFrecciaGiu) or bottoneDown == "padGiu"):
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.scorriSuGiuBloccatoGiu, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiuBloccatoGiu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
                     else:
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.scorriSuGiu, (GlobalVar.gsx // 32 * 8.5, GlobalVar.gsy // 18 * 4.3))
-                    messaggio("(Monete necessarie: %i)" % (GlobalVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 5.3, 50)
-                messaggio("Conferma", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 2, GlobalVar.gsy // 18 * 6.9, 50)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, (int(GlobalVar.gpx * 5.3) - 1, int(GlobalVar.gpy * 6.8)), (int(GlobalVar.gpx * 5.3) - 1, int(GlobalVar.gpy * 7.5)), 2)
-                messaggio("Annulla", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 6, GlobalVar.gsy // 18 * 6.9, 50)
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSuGiu, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 4.3))
+                    GenericFunc.messaggio("(Monete necessarie: %i)" % (GlobalGameVar.costoOggetti[oggetton] * numeroOggettiAcquistati), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 5.3, 50)
+                GenericFunc.messaggio("Conferma", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.9, 50)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 6.8)), (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 7.5)), 2)
+                GenericFunc.messaggio("Annulla", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 6.9, 50)
             else:
-                messaggio("Prendi quello che ti serve", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 1, GlobalVar.gsy // 18 * 4.5, 50)
+                GenericFunc.messaggio("Prendi quello che ti serve", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
                 if primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata:
                     if 1 <= oggetton <= 10:
-                        GlobalVar.disegnaImmagineSuSchermo(imgOggetti[oggetton - 1], (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgOggetti[oggetton - 1], (GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3))
                     elif oggetton == 0:
-                        GlobalVar.disegnaImmagineSuSchermo(GlobalVar.frecciaMenu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.frecciaMenu, (GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3))
                     elif oggetton == 11:
                         if dati[133] == 0:
-                            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.faretra1Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.faretra1Menu, (GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3))
                         elif dati[133] == 1:
-                            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.faretra2Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.faretra2Menu, (GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3))
                         else:
-                            GlobalVar.disegnaImmagineSuSchermo(GlobalVar.faretra3Menu, (GlobalVar.gsx // 32 * 23, GlobalVar.gsy // 18 * 3))
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.faretra3Menu, (GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3))
 
-                    messaggio("Monete: " + str(dati[131]), GlobalVar.grigiochi, GlobalVar.gsx // 32 * 26, GlobalVar.gsy // 18 * 15.8, 50)
+                    GenericFunc.messaggio("Monete: " + str(dati[131]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 26, GlobalHWVar.gsy // 18 * 15.8, 50)
 
-                    larghezzaTestoDescrizioni = GlobalVar.gpx * 8.5
-                    spazioTraLeRigheTestoDescrizione = GlobalVar.gpy // 2
+                    larghezzaTestoDescrizioni = GlobalHWVar.gpx * 8.5
+                    spazioTraLeRigheTestoDescrizione = GlobalHWVar.gpy // 2
                     if oggetton == 0:
-                        messaggio("Freccia:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Usate per attaccare i nemici a distanza.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Freccia:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Usate per attaccare i nemici a distanza.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if imgOggetti[0] != sconosciutoOggetto and oggetton == 1:
-                        messaggio("Pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Recupera 100 <*>#italic#Pv<*> di Lucy.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Pozione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Recupera 100 <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 1:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[1] != sconosciutoOggetto and oggetton == 2:
-                        messaggio("Alimentazione 100gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Recupera 250 <*>#italic#Pe<*> di Impo.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Alimentazione 100gr:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Recupera 250 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 2:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[2] != sconosciutoOggetto and oggetton == 3:
-                        messaggio("Medicina:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Cura avvelenamento a Lucy.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Medicina:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Cura avvelenamento a Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 3:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[3] != sconosciutoOggetto and oggetton == 4:
-                        messaggio("Super pozione:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Recupera 300 <*>#italic#Pv<*> di Lucy.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Super pozione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Recupera 300 <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 4:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[4] != sconosciutoOggetto and oggetton == 5:
-                        messaggio("Alimentazione 250gr:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Recupera 600 <*>#italic#Pe<*> di Impo.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Alimentazione 250gr:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Recupera 600 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 5:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[5] != sconosciutoOggetto and oggetton == 6:
-                        messaggio("Bomba:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Infligge un po' di danni ai nemici su cui viene lanciata.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Bomba:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Infligge un po' di danni ai nemici su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 6:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[6] != sconosciutoOggetto and oggetton == 7:
-                        messaggio("Bomba velenosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Infligge avvelenamento al nemico su cui viene lanciata.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Bomba velenosa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Infligge avvelenamento al nemico su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 7:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[7] != sconosciutoOggetto and oggetton == 8:
-                        messaggio("Esca:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio(u"Distrae i nemici finché non viene distrutta. È possibile riprenderla passandoci sopra.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Esca:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio(u"Distrae i nemici finché non viene distrutta. È possibile riprenderla passandoci sopra.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 8:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[8] != sconosciutoOggetto and oggetton == 9:
-                        messaggio("Bomba appiccicosa:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio(u"Dimezza la velocità del nemico su cui viene lanciata.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Bomba appiccicosa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio(u"Dimezza la velocità del nemico su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 9:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if imgOggetti[9] != sconosciutoOggetto and oggetton == 10:
-                        messaggio("Bomba potenziata:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio("Infligge molti danni ai nemici su cui viene lanciata in un vasto raggio.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Bomba potenziata:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Infligge molti danni ai nemici su cui viene lanciata in un vasto raggio.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     elif oggetton == 10:
-                        messaggio("Sconosciuto", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
                     if oggetton == 11:
-                        messaggio("Faretra:", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 11.5, 60)
-                        messaggio(u"Permette di trasportare più frecce.", GlobalVar.grigiochi, GlobalVar.gsx // 32 * 22.5, GlobalVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Faretra:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 11.5, 60)
+                        GenericFunc.messaggio(u"Permette di trasportare più frecce.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 12.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
             primoFrame = False
-            GlobalVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
+            GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             if confermaOggettoDaAcquistare == 0:
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx * 0.5))), yp + (int(GlobalVar.gpy * 0.7))), (xp + (int(GlobalVar.gpx * 5.5)), yp + (int(GlobalVar.gpy * 0.7))), 2)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx * 5.9))), yp + (int(GlobalVar.gpy * 0.7))), (xp + (int(GlobalVar.gpx * 7.5)), yp + (int(GlobalVar.gpy * 0.7))), 2)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, ((xp + (int(GlobalVar.gpx * 7.9))), yp + (int(GlobalVar.gpy * 0.7))), (xp + (int(GlobalVar.gpx * 10.4)), yp + (int(GlobalVar.gpy * 0.7))), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 0.5))), yp + (int(GlobalHWVar.gpy * 0.7))), (xp + (int(GlobalHWVar.gpx * 5.5)), yp + (int(GlobalHWVar.gpy * 0.7))), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 5.9))), yp + (int(GlobalHWVar.gpy * 0.7))), (xp + (int(GlobalHWVar.gpx * 7.5)), yp + (int(GlobalHWVar.gpy * 0.7))), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 7.9))), yp + (int(GlobalHWVar.gpy * 0.7))), (xp + (int(GlobalHWVar.gpx * 10.4)), yp + (int(GlobalHWVar.gpy * 0.7))), 2)
             else:
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 0.5))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 5.5)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 5.9))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 7.5)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
-                GlobalVar.disegnaLineaSuSchermo(GlobalVar.schermo, GlobalVar.grigioscu, ((xpv + (int(GlobalVar.gpx * 7.9))), ypv + (int(GlobalVar.gpy * 0.7))), (xpv + (int(GlobalVar.gpx * 10.4)), ypv + (int(GlobalVar.gpy * 0.7))), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xpv + (int(GlobalHWVar.gpx * 0.5))), ypv + (int(GlobalHWVar.gpy * 0.7))), (xpv + (int(GlobalHWVar.gpx * 5.5)), ypv + (int(GlobalHWVar.gpy * 0.7))), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xpv + (int(GlobalHWVar.gpx * 5.9))), ypv + (int(GlobalHWVar.gpy * 0.7))), (xpv + (int(GlobalHWVar.gpx * 7.5)), ypv + (int(GlobalHWVar.gpy * 0.7))), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xpv + (int(GlobalHWVar.gpx * 7.9))), ypv + (int(GlobalHWVar.gpy * 0.7))), (xpv + (int(GlobalHWVar.gpx * 10.4)), ypv + (int(GlobalHWVar.gpy * 0.7))), 2)
 
-            GlobalVar.aggiornaSchermo()
+            GlobalHWVar.aggiornaSchermo()
 
         pygame.event.pump()
-        GlobalVar.clockMenu.tick(GlobalVar.fpsMenu)
+        GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
-    GlobalVar.canaleSoundCanzone.set_volume(GlobalVar.volumeCanzoni)
-    GlobalVar.canaleSoundSottofondoAmbientale.set_volume(GlobalVar.volumeEffetti)
+    GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
     return dati
