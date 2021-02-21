@@ -8,7 +8,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import GestioneInput
-import Codice.SettaggiLivelli.Ostacoli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
+import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 
 
 def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daDestra=False, centrale=False, lungMax=False):

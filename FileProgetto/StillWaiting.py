@@ -11,9 +11,9 @@ import Codice.GestioneMenu.Menu as Menu
 import Codice.GestioneGrafica.EnvPrint as EnvPrint
 import Codice.GestioneGrafica.Animazioni as Animazioni
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
-import Codice.SettaggiLivelli.UtilityOstacoliContenutoCofanetti as UtilityOstacoliContenutoCofanetti
+import Codice.FunzioniGeneriche.UtilityOstacoliContenutoCofanetti as UtilityOstacoliContenutoCofanetti
 import Codice.SettaggiLivelli.SetNemiciPersonaggiEventi as SetNemiciPersonaggiEventi
-import Codice.SettaggiLivelli.Ostacoli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
+import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
 
 
