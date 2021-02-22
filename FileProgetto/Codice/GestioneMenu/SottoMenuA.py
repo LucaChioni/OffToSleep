@@ -634,370 +634,381 @@ def equip(dati):
             if dati[5] > pvtot:
                 dati[5] = pvtot
 
-            GlobalHWVar.disegnaImmagineSuSchermo(arco, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaImmagineSuSchermo(persstab, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaImmagineSuSchermo(collana, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaImmagineSuSchermo(spada, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaImmagineSuSchermo(guanti, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaImmagineSuSchermo(scudo, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.3))
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 24.5), int(GlobalHWVar.gpy * 16.3)), (int(GlobalHWVar.gpx * 29.5), int(GlobalHWVar.gpy * 16.3)), 2)
-            GenericFunc.messaggio("Statistiche:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.7, 50)
-            GenericFunc.messaggio("Punti vita: %i" % pvtot, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7.5, 35)
-            GenericFunc.messaggio("Attacco ravvicinato: %i" % attVicino, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 8, 35)
-            GenericFunc.messaggio("Attacco a distanza: %i" % attLontano, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 8.5, 35)
-            GenericFunc.messaggio("Difesa: %i" % dif, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 9, 35)
-            GenericFunc.messaggio(u"Probabilità parata: %i" % par + "%", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 9.5, 35)
+            grandezzaCarattereStatistiche = 40
+            posizioneStatisticheX = int(GlobalHWVar.gsx // 32 * 28)
+            posizioneStatPvY = int(GlobalHWVar.gsy // 18 * 8.3)
+            posizioneStatAttRavY = int(GlobalHWVar.gsy // 18 * 8.9)
+            posizioneStatAttDistY = int(GlobalHWVar.gsy // 18 * 9.5)
+            posizioneStatDifY = int(GlobalHWVar.gsy // 18 * 10.1)
+            posizioneStatParY = int(GlobalHWVar.gsy // 18 * 10.7)
+            GlobalHWVar.disegnaImmagineSuSchermo(arco, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(persstab, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(armatura, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(collana, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(spada, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(guanti, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaImmagineSuSchermo(scudo, (GlobalHWVar.gsx // 32 * 24.5, GlobalHWVar.gsy // 18 * 11.5))
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 24.5), int(GlobalHWVar.gpy * 16.5)), (int(GlobalHWVar.gpx * 29.5), int(GlobalHWVar.gpy * 16.5)), 2)
+            GenericFunc.messaggio("Statistiche:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 7.3, 60)
+            GenericFunc.messaggio("Punti vita: %i" % pvtot, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, posizioneStatPvY, grandezzaCarattereStatistiche)
+            GenericFunc.messaggio("Attacco ravvicinato: %i" % attVicino, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, posizioneStatAttRavY, grandezzaCarattereStatistiche)
+            GenericFunc.messaggio("Attacco a distanza: %i" % attLontano, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, posizioneStatAttDistY, grandezzaCarattereStatistiche)
+            GenericFunc.messaggio("Difesa: %i" % dif, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, posizioneStatDifY, grandezzaCarattereStatistiche)
+            GenericFunc.messaggio(u"Probabilità parata: %i" % par + "%", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, posizioneStatParY, grandezzaCarattereStatistiche)
             # confronto statistiche
-            larghezzaTestoDescrizioni = GlobalHWVar.gpx * 8
-            spazioTraLeRigheTestoDescrizione = GlobalHWVar.gpy // 2
+            grandezzaCarattereDescrizioni = 40
+            posizioneTitoliY = int(GlobalHWVar.gsy // 18 * 4)
+            posizioneDescrizioniX = int(GlobalHWVar.gsx // 32 * 22.5)
+            posizioneDescrizioniY = int(GlobalHWVar.gsy // 18 * 5)
+            larghezzaTestoDescrizioni = int(GlobalHWVar.gpx * 9)
+            spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             # spade
             if voceMarcata == 1:
                 if dati[41] != 0:
-                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Rimuovi spada.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Rimuovi spada.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 0 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 0:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 2:
                 if dati[42] != 0:
-                    GenericFunc.messaggio("Spada di ferro:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Semplice spada di ferro.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Spada di ferro:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Semplice spada di ferro.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 10 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 1:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                     elif dati[6] < 1:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 3:
                 if dati[43] != 0:
-                    GenericFunc.messaggio("Spadone d'acciaio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Grande spadone in acciaio con ornamenti in oro. Rappresenta il modello di spada migliore mai prodotto dall'uomo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Spadone d'acciaio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Grande spadone in acciaio con ornamenti in oro. Rappresenta il modello di spada migliore mai prodotto dall'uomo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 40 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 2:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                     elif dati[6] < 2:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 4:
                 if dati[44] != 0:
-                    GenericFunc.messaggio("Lykother:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Spada molto leggera e affilata. Si dice essere stata ricavata da un dente di un enorme lupo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Lykother:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Spada molto leggera e affilata. Si dice essere stata ricavata da un dente di un enorme lupo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 90 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 3:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                     elif dati[6] < 3:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 5:
                 if dati[45] != 0:
-                    GenericFunc.messaggio("Mendaxritas:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Potentissima spada composta da materiali ignoti.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Mendaxritas:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Potentissima spada composta da materiali ignoti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 160 - ((dati[6] * dati[6]) * 10)
                     if dati[6] > 4:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                     elif dati[6] < 4:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             # archi
             if voceMarcata == 6:
                 if dati[46] != 0:
-                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Rimuovi arco.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Rimuovi arco.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diffAtt = 0 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 0:
-                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 7:
                 if dati[47] != 0:
-                    GenericFunc.messaggio("Arco di legno:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Semplice arco in legno usato dalla maggior parte dei forestieri.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Arco di legno:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Semplice arco in legno usato dalla maggior parte dei forestieri.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diffAtt = 10 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 1:
-                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     elif dati[128] < 1:
-                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 8:
                 if dati[48] != 0:
-                    GenericFunc.messaggio("Arco di ferro:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Elaborato arco in ferro usato solo dai più esperti.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Arco di ferro:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Elaborato arco in ferro usato solo dai più esperti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diffAtt = 40 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 2:
-                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     elif dati[128] < 2:
-                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 9:
                 if dati[49] != 0:
-                    GenericFunc.messaggio("Arco di precisione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Sofisticato arco in legno e acciaio. Molto leggero e potente. Massima espressione dell'ingegno umano.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Arco di precisione:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Sofisticato arco in legno e acciaio. Molto leggero e potente. Massima espressione dell'ingegno umano.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diffAtt = 90 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 3:
-                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     elif dati[128] < 3:
-                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 10:
                 if dati[50] != 0:
-                    GenericFunc.messaggio("Accipiter:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Potentissimo arco di origine sconosciuta.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Accipiter:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Potentissimo arco di origine sconosciuta.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diffAtt = 160 - ((dati[128] * dati[128]) * 10)
                     if dati[128] > 4:
-                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio(str(diffAtt), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     elif dati[128] < 4:
-                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("+" + str(diffAtt), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             # armature
             if voceMarcata == 11:
                 if dati[51] != 0:
-                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Rimuovi armatura.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Rimuovi armatura.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 0 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 0:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 12:
                 if dati[52] != 0:
-                    GenericFunc.messaggio("Armatura di pelle:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Semplice armatura in pelle.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Armatura di pelle:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Semplice armatura in pelle.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 10 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 1:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[8] < 1:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 13:
                 if dati[53] != 0:
-                    GenericFunc.messaggio("Armatura d'acciaio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Grande armatura d'acciaio con ornamenti in oro. Usata solo dagli ufficiali dell'esercito.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Armatura d'acciaio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Grande armatura d'acciaio con ornamenti in oro. Usata solo dagli ufficiali dell'esercito.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 40 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 2:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[8] < 2:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 14:
                 if dati[54] != 0:
-                    GenericFunc.messaggio("Lykodes:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Armatura formata da materiali leggieri e resistenti. Si dice essere stata ricavata dalle ossa di un enorme lupo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Lykodes:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Armatura formata da materiali leggieri e resistenti. Si dice essere stata ricavata dalle ossa di un enorme lupo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 90 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 3:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[8] < 3:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 15:
                 if dati[55] != 0:
-                    GenericFunc.messaggio("Loriquam:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Armatura incredibilmente resistente. La sua origine è ignota.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Loriquam:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Armatura incredibilmente resistente. La sua origine è ignota.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 160 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 4:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[8] < 4:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             # scudi
             if voceMarcata == 16:
                 if dati[56] != 0:
-                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Rimuovi scudo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Rimuovi scudo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 0 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 0:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     diff = 0 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 0:
-                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 17:
                 if dati[57] != 0:
-                    GenericFunc.messaggio("Scudo di pelle:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Semplice scudo in pelle.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Scudo di pelle:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Semplice scudo in pelle.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 5 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 1:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[7] < 1:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     diff = 3 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 1:
-                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                     elif dati[7] < 1:
-                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 18:
                 if dati[58] != 0:
-                    GenericFunc.messaggio("Scudo d'acciaio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Sofisticato scudo in acciaio e oro. Studiato per respingere gli attacchi più pesanti.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Scudo d'acciaio:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Sofisticato scudo in acciaio e oro. Studiato per respingere gli attacchi più pesanti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 20 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 2:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[7] < 2:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     diff = 12 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 2:
-                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                     elif dati[7] < 2:
-                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 19:
                 if dati[59] != 0:
-                    GenericFunc.messaggio("Lykethmos:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Scudo molto leggero e resistente. Si dice essere stato ricavato dalle ossa più resistenti di un enorme lupo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Lykethmos:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Scudo molto leggero e resistente. Si dice essere stato ricavato dalle ossa più resistenti di un enorme lupo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 45 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 3:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[7] < 3:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     diff = 27 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 3:
-                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                     elif dati[7] < 3:
-                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 20:
                 if dati[60] != 0:
-                    GenericFunc.messaggio("Clipequam:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Scudo incredibilmente resistente. Non è nota l'origine.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Clipequam:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Scudo incredibilmente resistente. Non è nota l'origine.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 80 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 4:
-                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[7] < 4:
-                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     diff = 48 - ((dati[7] * dati[7]) * 3)
                     if dati[7] > 4:
-                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio(str(diff) + "%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                     elif dati[7] < 4:
-                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("+" + str(diff) + "%", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             # guanti
             if voceMarcata == 21:
                 if dati[61] != 0:
-                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Rimuovi guanti.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Rimuovi guanti.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if dati[129] == 1:
-                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 7.5, 35)
+                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPvY, grandezzaCarattereStatistiche)
                     elif dati[129] == 2:
-                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[129] == 3:
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     elif dati[129] == 4:
-                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 22:
                 if dati[62] != 0:
-                    GenericFunc.messaggio("Guanti vitali:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Guanti che aumentano i <*>#italic#Pv<*> massimi del portatore.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Guanti vitali:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Guanti che aumentano i <*>#italic#Pv<*> massimi del portatore.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if dati[129] != 1:
-                        GenericFunc.messaggio("+50", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 7.5, 35)
+                        GenericFunc.messaggio("+50", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPvY, grandezzaCarattereStatistiche)
                     if dati[129] == 2:
-                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[129] == 3:
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     elif dati[129] == 4:
-                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 23:
                 if dati[63] != 0:
-                    GenericFunc.messaggio("Guanti difensivi:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Guanti che consentono di subire meno danno grazie ad una presa salda dello scudo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Guanti difensivi:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Guanti che consentono di subire meno danno grazie ad una presa salda dello scudo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if dati[129] != 2:
-                        GenericFunc.messaggio("+30", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("+30", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     if dati[129] == 1:
-                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 7.5, 35)
+                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPvY, grandezzaCarattereStatistiche)
                     elif dati[129] == 3:
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     elif dati[129] == 4:
-                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 24:
                 if dati[64] != 0:
-                    GenericFunc.messaggio("Guanti offensivi:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Guanti che aumentano l'attacco del portatore grazie ad una presa salda dell'arma.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Guanti offensivi:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Guanti che aumentano l'attacco del portatore grazie ad una presa salda dell'arma.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if dati[129] != 3:
-                        GenericFunc.messaggio("+20", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
-                        GenericFunc.messaggio("+20", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("+20", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
+                        GenericFunc.messaggio("+20", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                     if dati[129] == 1:
-                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 7.5, 35)
+                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPvY, grandezzaCarattereStatistiche)
                     elif dati[129] == 2:
-                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[129] == 4:
-                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("-10%", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 25:
                 if dati[65] != 0:
-                    GenericFunc.messaggio("Guanti confortevoli:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Guanti che aumentano la probabilità di parare gli attacchi grazie ad una presa agevole dello scudo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Guanti confortevoli:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Guanti che aumentano la probabilità di parare gli attacchi grazie ad una presa agevole dello scudo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if dati[129] != 4:
-                        GenericFunc.messaggio("+10%", GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9.5, 35)
+                        GenericFunc.messaggio("+10%", GlobalHWVar.verde, posizioneStatisticheX, posizioneStatParY, grandezzaCarattereStatistiche)
                     if dati[129] == 1:
-                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 7.5, 35)
+                        GenericFunc.messaggio("-50", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPvY, grandezzaCarattereStatistiche)
                     elif dati[129] == 2:
-                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                        GenericFunc.messaggio("-30", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     elif dati[129] == 3:
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8, 35)
-                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttRavY, grandezzaCarattereStatistiche)
+                        GenericFunc.messaggio("-20", GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatAttDistY, grandezzaCarattereStatistiche)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             # collane
             if voceMarcata == 26:
                 if dati[66] != 0:
-                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Rimuovi collana.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Niente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Rimuovi collana.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 27:
                 if dati[67] != 0:
-                    GenericFunc.messaggio("Collana rigenerante:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio("Collana composta da erbe il cui odore ripristina <*>#italic#Pv<*> ogni turno.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Collana rigenerante:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio("Collana composta da erbe il cui odore ripristina <*>#italic#Pv<*> ogni turno.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 28:
                 if dati[68] != 0:
-                    GenericFunc.messaggio("Collana medicinale:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Collana composta da erbe il cui odore neutralizza la tossicità del veleno (non ha effetto se si è già avvelenati).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Collana medicinale:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Collana composta da erbe il cui odore neutralizza la tossicità del veleno (non ha effetto se si è già avvelenati).", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 29:
                 if dati[69] != 0:
-                    GenericFunc.messaggio("Apprendimaschera:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Collana che consente di ricevere più punti esperienza.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Apprendimaschera:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Collana che consente di ricevere più punti esperienza.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
             if voceMarcata == 30:
                 if dati[70] != 0:
-                    GenericFunc.messaggio("Portafortuna:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
-                    GenericFunc.messaggio(u"Collana che permette di ottenere più monete dai nemici.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 4.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Portafortuna:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Collana che permette di ottenere più monete dai nemici.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
-                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3.8, 60)
+                    GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
 
             # puntatore vecchio
             if dati[6] == 0:
@@ -1448,7 +1459,7 @@ def sceglicondiz(dati, condizione):
                     GenericFunc.messaggio("Numero di nemici > 7", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
                 else:
                     GenericFunc.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
-            elif voceMarcataVecchia != voceMarcata:
+            else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 11.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 11.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 13))
@@ -1464,17 +1475,18 @@ def sceglicondiz(dati, condizione):
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 8) - 1, int(GlobalHWVar.gpy * 5.7)), (int(GlobalHWVar.gpx * 8) - 1, int(GlobalHWVar.gpy * 16)), 2)
 
+            grandezzaCarattereDescrizioni = 40
             larghezzaTestoDescrizioni = GlobalHWVar.gpx * 13
-            spazioTraLeRigheTestoDescrizione = GlobalHWVar.gpy // 2
+            spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             if voceMarcata == 0:
                 GlobalHWVar.disegnaImmagineSuSchermo(scecond[0], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                 GenericFunc.messaggio("Cancella settaggio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Cancella il settaggio di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Cancella il settaggio di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if voceMarcata == 1:
                 if dati[81] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[1], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Lucy con Pv < 80%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio("Esegue l'azione su Lucy se la vede e ha <*>#italic#Pv<*> < 80%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Esegue l'azione su Lucy se la vede e ha <*>#italic#Pv<*> < 80%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1482,7 +1494,7 @@ def sceglicondiz(dati, condizione):
                 if dati[82] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[2], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Lucy con Pv < 50%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio("Esegue l'azione su Lucy se la vede e ha <*>#italic#Pv<*> < 50%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Esegue l'azione su Lucy se la vede e ha <*>#italic#Pv<*> < 50%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1490,7 +1502,7 @@ def sceglicondiz(dati, condizione):
                 if dati[83] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[3], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Lucy con Pv < 30%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio("Esegue l'azione su Lucy se la vede e ha <*>#italic#Pv<*> < 30%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Esegue l'azione su Lucy se la vede e ha <*>#italic#Pv<*> < 30%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1498,7 +1510,7 @@ def sceglicondiz(dati, condizione):
                 if dati[84] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[4], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Lucy con veleno:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione su Lucy se la vede ed è avvelenata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione su Lucy se la vede ed è avvelenata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1506,7 +1518,7 @@ def sceglicondiz(dati, condizione):
                 if dati[85] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[5], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Impo surriscaldato:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione su Impo quando è surriscaldato.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione su Impo quando è surriscaldato.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1514,7 +1526,7 @@ def sceglicondiz(dati, condizione):
                 if dati[86] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[6], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Impo con Pe < 80%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio("Esegue l'azione su Impo quando ha <*>#italic#Pe<*> < 80%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Esegue l'azione su Impo quando ha <*>#italic#Pe<*> < 80%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1522,7 +1534,7 @@ def sceglicondiz(dati, condizione):
                 if dati[87] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[7], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Impo con Pe < 50%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio("Esegue l'azione su Impo quando ha <*>#italic#Pe<*> < 50%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Esegue l'azione su Impo quando ha <*>#italic#Pe<*> < 50%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1530,7 +1542,7 @@ def sceglicondiz(dati, condizione):
                 if dati[88] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[8], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Impo con Pe < 30%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio("Esegue l'azione su Impo quando ha <*>#italic#Pe<*> < 30%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Esegue l'azione su Impo quando ha <*>#italic#Pe<*> < 30%.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1538,7 +1550,7 @@ def sceglicondiz(dati, condizione):
                 if dati[89] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[9], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sempre a Lucy:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione su Lucy in continuazione quando la vede (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione su Lucy in continuazione quando la vede (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1546,7 +1558,7 @@ def sceglicondiz(dati, condizione):
                 if dati[90] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[10], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sempre a Impo:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione su Impo in continuazione (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione su Impo in continuazione (se la tecnica associata comporta un'alterazione di stato, viene eseguita solo se lo status non è attivo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1554,7 +1566,7 @@ def sceglicondiz(dati, condizione):
                 if dati[91] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[11], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Nemico a caso:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio("Esegue l'azione su un nemico a caso.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Esegue l'azione su un nemico a caso.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1562,7 +1574,7 @@ def sceglicondiz(dati, condizione):
                 if dati[92] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[12], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Nemico vicino:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione sul nemico più vicino nel raggio di 2 caselle.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione sul nemico più vicino nel raggio di 2 caselle.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1570,7 +1582,7 @@ def sceglicondiz(dati, condizione):
                 if dati[93] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[13], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Nemico lontano:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione sul nemico lontano (distante di 3 o più caselle) più vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1578,7 +1590,7 @@ def sceglicondiz(dati, condizione):
                 if dati[94] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[14], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Nemico con Pv < 80%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione su un nemico con <*>#italic#Pv<*> < 80% (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione su un nemico con <*>#italic#Pv<*> < 80% (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1586,7 +1598,7 @@ def sceglicondiz(dati, condizione):
                 if dati[95] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[15], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Nemico con Pv < 50%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione su un nemico con <*>#italic#Pv<*> < 50% (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione su un nemico con <*>#italic#Pv<*> < 50% (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1594,7 +1606,7 @@ def sceglicondiz(dati, condizione):
                 if dati[96] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[16], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Nemico con Pv < 30%:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione su un nemico con <*>#italic#Pv<*> < 30% (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione su un nemico con <*>#italic#Pv<*> < 30% (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1602,7 +1614,7 @@ def sceglicondiz(dati, condizione):
                 if dati[97] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[17], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Nemico con meno Pv:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione sul nemico con meno <*>#italic#Pv<*> (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione sul nemico con meno <*>#italic#Pv<*> (in caso di molteplici bersagli, esegue l'azione su quello più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1610,7 +1622,7 @@ def sceglicondiz(dati, condizione):
                 if dati[98] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[18], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Numero di nemici > 1:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione quando nei paraggi c'è più di 1 nemico (in caso di tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1618,7 +1630,7 @@ def sceglicondiz(dati, condizione):
                 if dati[99] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[19], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Numero di nemici > 4:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 4 nemici (in caso di tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -1626,7 +1638,7 @@ def sceglicondiz(dati, condizione):
                 if dati[100] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scecond[20], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Numero di nemici > 7:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                    GenericFunc.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Esegue l'azione quando nei paraggi ci sono più di 7 nemici (in caso di tecnica a bersaglio singolo, questa viene eseguita sul nemico più vicino).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2055,18 +2067,19 @@ def sceglitecn(dati, tecnica):
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 8) - 1, int(GlobalHWVar.gpy * 5.7)), (int(GlobalHWVar.gpx * 8) - 1, int(GlobalHWVar.gpy * 16)), 2)
 
+            grandezzaCarattereDescrizioni = 40
             larghezzaTestoDescrizioni = GlobalHWVar.gpx * 13
-            spazioTraLeRigheTestoDescrizione = GlobalHWVar.gpy // 2
+            spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             if voceMarcata == 0:
                 GlobalHWVar.disegnaImmagineSuSchermo(scetecn[0], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                 GenericFunc.messaggio("Cancella settaggio:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Cancella il settaggio di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Cancella il settaggio di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if voceMarcata == 1:
                 if dati[11] > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[1], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Scossa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[0]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2075,7 +2088,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[2], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Cura:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[1]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Recupera un po' di <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Recupera un po' di <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2084,7 +2097,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[3], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Antidoto:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[2]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Cura avvelenamento a Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Cura avvelenamento a Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2093,7 +2106,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[4], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Freccia elettrica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[3]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2102,7 +2115,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[5], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Tempesta elettrica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[4]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2111,7 +2124,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[6], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Raffreddamento:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[5]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Annulla il surriscaldamento ma richiede due turni (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2120,7 +2133,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[7], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Auto-ricarica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[6]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Ricarica un po' Impo ma richiede due turni e provoca surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Ricarica un po' Impo ma richiede due turni e provoca surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2129,7 +2142,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[8], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Cura +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[7]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Recupera molti <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Recupera molti <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2138,7 +2151,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[9], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Scossa +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[8]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge molti danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge molti danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2147,7 +2160,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[10], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Freccia elettrica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[9]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge molti danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge molti danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2156,7 +2169,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[11], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Velocizza:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[10]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Permette a Impo, se non surriscaldato, di eseguire due azioni al turno. Provoca surriscaldamento dopo 15 turni dall'esecuzione (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Permette a Impo, se non surriscaldato, di eseguire due azioni al turno. Provoca surriscaldamento dopo 15 turni dall'esecuzione (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2165,7 +2178,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[12], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Carica attacco:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[11]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Incrementa l'attacco di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Incrementa l'attacco di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2174,7 +2187,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[13], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Carica difesa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[12]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Incrementa la difesa di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Incrementa la difesa di Lucy per 10 turni (non ha effetto sui nemici).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2183,7 +2196,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[14], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Efficienza:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[13]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio(u"Tutte le tecniche costano la metà dei <*>#italic#Pe<*> per 15 turni. Si annulla con surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Tutte le tecniche costano la metà dei <*>#italic#Pe<*> per 15 turni. Si annulla con surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2192,7 +2205,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[15], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Tempesta elettrica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[14]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge molti danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2201,7 +2214,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[16], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Cura ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[15]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio(u"Recupera un enorme quantità dei <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Recupera un enorme quantità dei <*>#italic#Pv<*> di Lucy.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2210,7 +2223,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[17], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Auto-ricarica +:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[16]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Ricarica di molto Impo ma richiede due turni e provoca surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Ricarica di molto Impo ma richiede due turni e provoca surriscaldamento (applicata sempre su Impo).", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2219,7 +2232,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[18], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Scossa ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[17]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge enormi danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge enormi danni a un nemico vicino.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2228,7 +2241,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[19], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Freccia Elettrica ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[18]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge enormi danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge enormi danni a distanza a un nemico.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -2237,7 +2250,7 @@ def sceglitecn(dati, tecnica):
                     GlobalHWVar.disegnaImmagineSuSchermo(scetecn[20], (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Tempesta elettrica ++:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
                     GenericFunc.messaggio("Costo Pe: " + str(GlobalGameVar.costoTecniche[19]), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27.5, GlobalHWVar.gsy // 18 * 13.8, 45)
-                    GenericFunc.messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Infligge enormi danni a tutti i nemici o alleati nel raggio visivo di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(condSconosciuta, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 4))
                     GenericFunc.messaggio("Sconosciuta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 13.5, 60)
@@ -3172,125 +3185,137 @@ def equiprobo(dati):
                 if riordinamento:
                     screenRiordinamento = GlobalHWVar.schermo.copy()
                     imgRigheGambit = []
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 6.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 7.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 8.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 9.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 10.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 11.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 12.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 13.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 14.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
-                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, (GlobalHWVar.gpy * 15.2) - (GlobalHWVar.gpy // 4), GlobalHWVar.gpx * 16, GlobalHWVar.gpy)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 6.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 7.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 8.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 9.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 10.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 11.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 12.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 13.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 14.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
+                    imgRigheGambit.append(screenRiordinamento.subsurface(pygame.Rect(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 15.2, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 0.6)).convert())
 
             if annullaRiordinamento:
                 annullaRiordinamento = False
 
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
 
-            if not riordinamento:
+            if primoFrame or not riordinamento:
+                grandezzaCarattereStatistiche = 40
+                posizioneStatisticheX = int(GlobalHWVar.gsx // 32 * 28)
+                posizioneStatPeY = int(GlobalHWVar.gsy // 18 * 9.1)
+                posizioneStatDifY = int(GlobalHWVar.gsy // 18 * 9.7)
                 GlobalHWVar.disegnaImmagineSuSchermo(robosta, (GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 10))
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 25), int(GlobalHWVar.gpy * 15)), (int(GlobalHWVar.gpx * 30), int(GlobalHWVar.gpy * 15)), 2)
                 GlobalHWVar.disegnaImmagineSuSchermo(vetImgBatterie[dati[9]], (GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 10))
-                GenericFunc.messaggio("Statistiche:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 7.7, 50)
-                GenericFunc.messaggio("Pe totali: %i" % entot, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 8.5, 35)
-                GenericFunc.messaggio("Difesa: %i" % difro, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 9, 35)
+                GenericFunc.messaggio("Statistiche:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 8.1, 60)
+                GenericFunc.messaggio("Pe totali: %i" % entot, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, posizioneStatPeY, grandezzaCarattereStatistiche)
+                GenericFunc.messaggio("Difesa: %i" % difro, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, posizioneStatDifY, grandezzaCarattereStatistiche)
 
                 # mostrare descrizione batterie / priorità / condizioni / azioni
-                larghezzaTestoDescrizioni = GlobalHWVar.gpx * 7.5
-                spazioTraLeRigheTestoDescrizione = GlobalHWVar.gpy // 2
+                grandezzaCarattereDescrizioni = 40
+                posizioneTitoliY = int(GlobalHWVar.gsy // 18 * 4.8)
+                posizioneDescrizioniX = int(GlobalHWVar.gsx // 32 * 23.5)
+                posizioneDescrizioniY = int(GlobalHWVar.gsy // 18 * 5.8)
+                larghezzaTestoDescrizioni = int(GlobalHWVar.gpx * 8)
+                spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
                 if voceMarcata == 1:
                     if dati[71] != 0:
-                        GenericFunc.messaggio("Batteria piccola:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                        GenericFunc.messaggio("Batteria che contiene poca alimentazione.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Batteria piccola:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                        GenericFunc.messaggio("Batteria che contiene poca alimentazione.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 0:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         diff = 0 - (dati[9] * dati[9] * 30)
                         if dati[9] > 0:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
-                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                 if voceMarcata == 2:
                     if dati[72] != 0:
-                        GenericFunc.messaggio("Batteria discreta:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                        GenericFunc.messaggio("Batteria con una buona capienza e ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Batteria discreta:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                        GenericFunc.messaggio("Batteria con una buona capienza e ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (1 * 1 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 1:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 1:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         diff = 30 - (dati[9] * dati[9] * 30)
                         if dati[9] > 1:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 1:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
-                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                 if voceMarcata == 3:
                     if dati[73] != 0:
-                        GenericFunc.messaggio("Batteria capiente:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                        GenericFunc.messaggio(u"Batteria con una grande capacità e un ottimo sistema difensivo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Batteria capiente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                        GenericFunc.messaggio(u"Batteria con una grande capacità e un ottimo sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (2 * 2 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 2:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 2:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         diff = 120 - (dati[9] * dati[9] * 30)
                         if dati[9] > 2:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 2:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
-                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                 if voceMarcata == 4:
                     if dati[74] != 0:
-                        GenericFunc.messaggio("Batteria enorme:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                        GenericFunc.messaggio(u"Grande batteria che permette a Impo di utilizzare le tecniche più dispendiose.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Batteria enorme:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                        GenericFunc.messaggio(u"Grande batteria che permette a Impo di utilizzare le tecniche più dispendiose.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 3:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 3:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         diff = 270 - (dati[9] * dati[9] * 30)
                         if dati[9] > 3:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 3:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
-                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
                 if voceMarcata == 5:
                     if dati[75] != 0:
-                        GenericFunc.messaggio("Batteria illimitata:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                        GenericFunc.messaggio("Batteria incredibilmente capiente. Permette un eccellente ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        GenericFunc.messaggio("Batteria illimitata:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                        GenericFunc.messaggio("Batteria incredibilmente capiente. Permette un eccellente ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (4 * 4 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 4:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 4:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 8.5, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         diff = 480 - (dati[9] * dati[9] * 30)
                         if dati[9] > 4:
-                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 4:
-                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 9, 35)
+                            GenericFunc.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
-                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
+                        GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
 
                 if 6 <= voceMarcata <= 15:
-                    GenericFunc.messaggio(u"Ordine:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                    GenericFunc.messaggio(u"Indica la priorità dell'azione. Impo eseguirà la tecnica associata alla prima condizione verificata della lista.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio(u"Ordine:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Indica la priorità dell'azione. Impo eseguirà la tecnica associata alla prima condizione verificata della lista.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
                 if 16 <= voceMarcata <= 25:
-                    GenericFunc.messaggio("Condizione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                    GenericFunc.messaggio(u"Indica la situazione che si deve verificare affinché Impo esegua la tecnica associata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Condizione:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"Indica la situazione che si deve verificare affinché Impo esegua la tecnica associata.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
 
                 if 26 <= voceMarcata <= 35:
-                    GenericFunc.messaggio("Tecnica:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 4.8, 60)
-                    GenericFunc.messaggio(u"La tecnica che Impo eseguirà quando si verifica la condizione associata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 5.8, 35, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    GenericFunc.messaggio("Tecnica:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
+                    GenericFunc.messaggio(u"La tecnica che Impo eseguirà quando si verifica la condizione associata.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             else:
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 5.8, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 10.3))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (xp, yp - (GlobalHWVar.gpy // 4), GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 1))
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 10.8) - 1, int(GlobalHWVar.gpy * 5.8)), (int(GlobalHWVar.gpx * 10.8) - 1, int(GlobalHWVar.gpy * 16)), 2)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 17) - 1, int(GlobalHWVar.gpy * 5.8)), (int(GlobalHWVar.gpx * 17) - 1, int(GlobalHWVar.gpy * 16)), 2)
                 i = 0
                 for riga in imgRigheGambit:
-                    GlobalHWVar.disegnaImmagineSuSchermo(riga, (GlobalHWVar.gsx // 32 * 7, (GlobalHWVar.gsy // 18 * 6.2) - (GlobalHWVar.gpy // 4) + (GlobalHWVar.gpx * i)))
+                    GlobalHWVar.disegnaImmagineSuSchermo(riga, (GlobalHWVar.gsx // 32 * 7, (GlobalHWVar.gsy // 18 * 6.2) + (GlobalHWVar.gpy * i)))
                     i += 1
 
             # puntatore vecchio batterie/riordinamento gambit
@@ -3899,7 +3924,7 @@ def oggetti(dati, colcoInCasellaVista):
 
             grandezzaCarattereDescrizioni = 40
             larghezzaTestoDescrizioni = GlobalHWVar.gpx * 11
-            spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy / 3 * 2)
+            spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             if dati[31] >= 0 and oggetton == 1:
                 GenericFunc.messaggio("Pozione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
                 GenericFunc.messaggio("Recupera 100 <*>#italic#Pv<*>.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)

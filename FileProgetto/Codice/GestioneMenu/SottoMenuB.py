@@ -2058,6 +2058,7 @@ def menuMappa(avanzamentoStoria):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     imgOmbreggiaturaContorniMappaMenu = GlobalImgVar.imgOmbreggiaturaContorniMappaMenu
+    backgroundTornaIndietro = GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2))
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 4.5
     risposta = False
@@ -2358,6 +2359,8 @@ def menuMappa(avanzamentoStoria):
                 if primoFrame:
                     aggiornaInterfacciaPerCambioInput = True
                     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                    screen = GlobalHWVar.schermo.copy()
+                    backgroundTornaIndietro = screen.subsurface(pygame.Rect(GlobalHWVar.gpx * 21, 0, GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 2)).convert()
                     imgMappa = imgMappaA
                     GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
                     # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
@@ -2402,6 +2405,8 @@ def menuMappa(avanzamentoStoria):
                     if voceMarcata == 14:
                         GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-1.5), GlobalHWVar.gsy // 18 * (-18.5)))
                     GlobalHWVar.disegnaImmagineSuSchermo(imgOmbreggiaturaContorniMappaMenu, (0, 0))
+                    screen = GlobalHWVar.schermo.copy()
+                    backgroundTornaIndietro = screen.subsurface(pygame.Rect(GlobalHWVar.gpx * 21, 0, GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 2)).convert()
                     # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 12.5))
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
@@ -2459,7 +2464,7 @@ def menuMappa(avanzamentoStoria):
                         GenericFunc.messaggio(u"Un passaggio segreto nei sotterranei del castello di Norm che porta al suo laboratorio principale sul fondo del lago. Nonostante le pareti del tunnel siano fatte di un materiale trasparente simile al vetro, non si riesce ad osservare chiaramente il fondale del bacino a causa delle sostanze con cui questo è stato contaminato circa 50 anni fa.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2))
+                GlobalHWVar.disegnaImmagineSuSchermo(backgroundTornaIndietro, (GlobalHWVar.gsx // 32 * 21, 0))
                 if GlobalHWVar.mouseVisibile:
                     GenericFunc.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
