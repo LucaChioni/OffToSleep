@@ -37,7 +37,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Stavo andando in bagno, è tutto ok?")
+            dialogo.append(u"Stavo andando in bagno, va tutto bene?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")

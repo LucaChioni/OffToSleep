@@ -4,11 +4,12 @@ import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 
-def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio, avanzamentoStoria):
+def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio, avanzamentoStoria, bottoneDown):
     # npers: 1=d, 2=a, 3=w, 4=s
     if stanza == GlobalGameVar.dictStanze["sognoLucy1"]:
         if canzone != GlobalSndVar.canzoneSogno:
@@ -379,9 +380,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 y = GlobalHWVar.gsy // 18 * 7
                 GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreScavare)
                 i = 0
-                while i < 3:
-                    pygame.time.wait(1000)
-                    pygame.event.pump()
+                while i < 30:
+                    pygame.time.wait(100)
+                    bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
                     i += 1
             if stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta8"]:
                 npers = 3
@@ -547,9 +548,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 y = GlobalHWVar.gsy // 18 * 8
                 GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreSollevamentoPortaCitta)
                 i = 0
-                while i < 6:
-                    pygame.time.wait(1000)
-                    pygame.event.pump()
+                while i < 60:
+                    pygame.time.wait(100)
+                    bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
                     i += 1
                 pygame.time.wait(500)
             if stanzaVecchia == GlobalGameVar.dictStanze["città1"]:
@@ -658,16 +659,16 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     pygame.time.wait(500)
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreDoccia)
                     i = 0
-                    while i < 6:
-                        pygame.time.wait(1000)
-                        pygame.event.pump()
+                    while i < 60:
+                        pygame.time.wait(100)
+                        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
                         i += 1
                 elif (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 3) or (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 4) or (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 5) or (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 6):
                     npers = 1
                     x = GlobalHWVar.gsx // 32 * 8
                     y = GlobalHWVar.gsy // 18 * 5
 
-    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale
+    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown
 
 
 def scriviNomeZona(stanza, stanzaVecchia):

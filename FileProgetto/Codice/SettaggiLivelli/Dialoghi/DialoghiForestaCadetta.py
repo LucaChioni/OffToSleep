@@ -222,7 +222,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     elif tipo == "FiglioUfficiale":
         partiDialogo = []
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontroFiglioUfficiale"]:
-            nome = "Sconosciuto"
+            nome = "Soldato"
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -241,11 +241,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("No, non voglio causarti problemi.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append("Fai parte dell'esercito cittadino, vero?")
+            dialogo.append("No, non voglio causarti problemi. Fai parte dell'esercito cittadino, vero?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -269,7 +265,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Non chiamarmi <*>#italic#ragazzo,<*> se stai affrontando questa prova vuol dire che hai più o meno la mia età!")
+            dialogo.append(u"Non chiamarmi <*>#italic#ragazzo<*>, se stai affrontando questa prova vuol dire che hai più o meno la mia età!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -403,7 +399,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Oh CAZZO, ATTENTO!!!")
+            dialogo.append(u"OH CAZZO, ATTENTO!!!")
             partiDialogo.append(dialogo)
     elif tipo.startswith("OggettoLegna"):
         partiDialogo = []

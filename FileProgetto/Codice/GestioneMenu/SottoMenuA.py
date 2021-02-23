@@ -3917,7 +3917,7 @@ def oggetti(dati, colcoInCasellaVista):
                     voceMarcata = 2
                     usauno = False
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
-                GenericFunc.messaggio("Usare?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.3, GlobalHWVar.gsy // 18 * 13, 90)
+                GenericFunc.messaggio("Usare?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 15.1, GlobalHWVar.gsy // 18 * 13.1, 85, centrale=True)
                 GenericFunc.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.4, GlobalHWVar.gsy // 18 * 14.9, 70)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 15) - 1, int(GlobalHWVar.gpy * 14.8)), (int(GlobalHWVar.gpx * 15) - 1, int(GlobalHWVar.gpy * 15.9)), 2)
                 GenericFunc.messaggio("No", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 14.9, 70)
