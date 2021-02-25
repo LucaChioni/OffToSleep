@@ -1077,7 +1077,7 @@ def equip(dati):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     return dati
 
@@ -1667,7 +1667,7 @@ def sceglicondiz(dati, condizione):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     return condizione
 
@@ -2279,7 +2279,7 @@ def sceglitecn(dati, tecnica):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     return tecnica
 
@@ -3341,7 +3341,7 @@ def equiprobo(dati):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     return dati
 
@@ -3405,17 +3405,17 @@ def oggetti(dati, colcoInCasellaVista):
                         GlobalHWVar.configuraCursore(False)
                     suTornaIndietro = True
                 elif GlobalHWVar.gsy // 18 * 14.5 <= yMouse <= GlobalHWVar.gsy // 18 * 16.5:
-                    if GlobalHWVar.gsx // 32 * 11 <= xMouse <= GlobalHWVar.gsx // 32 * 15:
+                    if GlobalHWVar.gsx // 32 * 11 <= xMouse <= GlobalHWVar.gsx // 32 * 14.8:
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 1
-                        xp = GlobalHWVar.gsx // 32 * 12.7
+                        xp = GlobalHWVar.gsx // 32 * 11.9
                         yp = GlobalHWVar.gsy // 18 * 15.1
-                    elif GlobalHWVar.gsx // 32 * 15 <= xMouse <= GlobalHWVar.gsx // 32 * 19:
+                    elif GlobalHWVar.gsx // 32 * 14.8 <= xMouse <= GlobalHWVar.gsx // 32 * 18.5:
                         if GlobalHWVar.mouseBloccato:
                             GlobalHWVar.configuraCursore(False)
                         voceMarcata = 2
-                        xp = GlobalHWVar.gsx // 32 * 15
+                        xp = GlobalHWVar.gsx // 32 * 14.8
                         yp = GlobalHWVar.gsy // 18 * 15.1
                     else:
                         if not GlobalHWVar.mouseBloccato:
@@ -3673,7 +3673,7 @@ def oggetti(dati, colcoInCasellaVista):
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                            if not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
+                            if dati[35] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista):
                                 impossibileUsareCaricaBatt = True
                     if oggetton == 3:
                         if dati[33] > 0:
@@ -3696,7 +3696,7 @@ def oggetti(dati, colcoInCasellaVista):
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                            if not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista:
+                            if dati[35] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista):
                                 impossibileUsareCaricaBatt = True
                     if oggetton == 6:
                         if dati[36] > 0:
@@ -3763,7 +3763,7 @@ def oggetti(dati, colcoInCasellaVista):
                 if voceMarcata == 2:
                     voceMarcata -= 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    xp = GlobalHWVar.gsx // 32 * 12.7
+                    xp = GlobalHWVar.gsx // 32 * 11.9
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
@@ -3784,7 +3784,7 @@ def oggetti(dati, colcoInCasellaVista):
                 if voceMarcata == 1:
                     voceMarcata += 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    xp = GlobalHWVar.gsx // 32 * 15
+                    xp = GlobalHWVar.gsx // 32 * 14.8
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
@@ -3885,9 +3885,18 @@ def oggetti(dati, colcoInCasellaVista):
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.77, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 0.3))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 7.7, GlobalHWVar.gsy // 18 * 15.77, GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 0.3))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 3, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 14))
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 19.5, GlobalHWVar.gsy // 18 * 3, GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 14))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 19.5, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 15.1))
                 if impossibileUsareCaricaBatt:
-                    GenericFunc.messaggio(u"Impo è irraggiungibile!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 12.2, GlobalHWVar.gsy // 18 * 15, 50)
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and not colcoInCasellaVista:
+                        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 12.5))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 15.5))
+                        GenericFunc.messaggio(u"Impo irraggiungibile!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 14.15, 55, centrale=True)
+                    elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 12.5))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 15.5))
+                        GenericFunc.messaggio(u"Inutilizzabile...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 14.15, 55, centrale=True)
                     if oggettonVecchio != oggetton:
                         impossibileUsareCaricaBatt = False
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 3, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 14))
@@ -3905,116 +3914,129 @@ def oggetti(dati, colcoInCasellaVista):
 
             # menu conferma
             if usa != 0:
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 12.5))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 15.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 12.5))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 15.5))
                 # posizionare il cursore su menu usa
                 if usauno:
                     xpv = xp
                     ypv = yp
-                    xp = GlobalHWVar.gsx // 32 * 15
+                    xp = GlobalHWVar.gsx // 32 * 14.8
                     yp = GlobalHWVar.gsy // 18 * 15.1
                     voceMarcata = 2
                     usauno = False
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xpv, ypv))
-                GenericFunc.messaggio("Usare?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 15.1, GlobalHWVar.gsy // 18 * 13.1, 85, centrale=True)
-                GenericFunc.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.4, GlobalHWVar.gsy // 18 * 14.9, 70)
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 15) - 1, int(GlobalHWVar.gpy * 14.8)), (int(GlobalHWVar.gpx * 15) - 1, int(GlobalHWVar.gpy * 15.9)), 2)
-                GenericFunc.messaggio("No", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 14.9, 70)
+                GenericFunc.messaggio("Usare?", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 13.1, 85, centrale=True)
+                GenericFunc.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 12.8, GlobalHWVar.gsy // 18 * 14.9, 70)
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 14.8) - 1, int(GlobalHWVar.gpy * 14.8)), (int(GlobalHWVar.gpx * 14.8) - 1, int(GlobalHWVar.gpy * 15.9)), 2)
+                GenericFunc.messaggio("No", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 15.8, GlobalHWVar.gsy // 18 * 14.9, 70)
+
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 19.5), int(GlobalHWVar.gpy * 3.5)), (int(GlobalHWVar.gpx * 19.5), int(GlobalHWVar.gpy * 17)), 2)
 
             grandezzaCarattereDescrizioni = 40
-            larghezzaTestoDescrizioni = GlobalHWVar.gpx * 11
+            posizioneXTitoli = GlobalHWVar.gsx // 32 * 21
+            posizioneYTitoli = GlobalHWVar.gsy // 18 * 13.5
+            posizioneXDescrizioni = GlobalHWVar.gsx // 32 * 21
+            posizioneYDescrizioni = GlobalHWVar.gsy // 18 * 14.5
+            larghezzaTestoDescrizioni = GlobalHWVar.gpx * 10
             spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             if dati[31] >= 0 and oggetton == 1:
-                GenericFunc.messaggio("Pozione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Recupera 100 <*>#italic#Pv<*>.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Pozione:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio("Recupera 100 <*>#italic#Pv<*>.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 1:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[32] >= 0 and oggetton == 2:
-                GenericFunc.messaggio("Alimentazione 100gr:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Recupera 250 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Alimentazione 100gr:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                    GenericFunc.messaggio("Recupera 250 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GenericFunc.messaggio("Nutrimento per usa specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 2:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[33] >= 0 and oggetton == 3:
-                GenericFunc.messaggio("Medicina:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Cura avvelenamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Medicina:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio("Cura avvelenamento.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 3:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[34] >= 0 and oggetton == 4:
-                GenericFunc.messaggio("Super pozione:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Recupera 300 <*>#italic#Pv<*>.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Super pozione:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio("Recupera 300 <*>#italic#Pv<*>.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 4:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[35] >= 0 and oggetton == 5:
-                GenericFunc.messaggio("Alimentazione 250gr:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Recupera 600 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Alimentazione 250gr:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                    GenericFunc.messaggio("Recupera 600 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                else:
+                    GenericFunc.messaggio("Nutrimento per usa specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 5:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[36] >= 0 and oggetton == 6:
-                GenericFunc.messaggio("Bomba:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Infligge un po' di danni ai nemici su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Bomba:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio("Infligge un po' di danni ai nemici su cui viene lanciata.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 6:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[37] >= 0 and oggetton == 7:
-                GenericFunc.messaggio("Bomba velenosa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Infligge avvelenamento al nemico su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Bomba velenosa:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio("Infligge avvelenamento al nemico su cui viene lanciata.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 7:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[38] >= 0 and oggetton == 8:
-                GenericFunc.messaggio("Esca:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio(u"Distrae i nemici finché non viene distrutta. È possibile riprenderla passandoci sopra.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Esca:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio(u"Distrae i nemici finché non viene distrutta. È possibile riprenderla passandoci sopra.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 8:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[39] >= 0 and oggetton == 9:
-                GenericFunc.messaggio("Bomba appiccicosa:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio(u"Dimezza la velocità del nemico su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Bomba appiccicosa:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio(u"Dimezza la velocità del nemico su cui viene lanciata.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 9:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[40] >= 0 and oggetton == 10:
-                GenericFunc.messaggio("Bomba potenziata:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
-                GenericFunc.messaggio("Infligge molti danni ai nemici su cui viene lanciata.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 14.5, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                GenericFunc.messaggio("Bomba potenziata:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                GenericFunc.messaggio("Infligge molti danni ai nemici su cui viene lanciata.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 10:
-                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 13.5, 60)
+                GenericFunc.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
 
             # vita-status personaggio
             if dati[5] < 0:
                 dati[5] = 0
-            GenericFunc.messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 4.9, 50)
-            GenericFunc.messaggio("Status alterati: ", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 5.7, 50)
-            GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 4.6))
-            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 7.6)), (int(GlobalHWVar.gpx * 18.2), int(GlobalHWVar.gpy * 7.6)), 2)
+            GenericFunc.messaggio("Pv:  " + str(dati[5]) + " / " + str(pvtot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 4.8, 50)
+            GenericFunc.messaggio("Status alterati: ", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 5.6, 50)
+            GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 4.5))
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 4)), (int(GlobalHWVar.gpx * 18.5), int(GlobalHWVar.gpy * 4)), 2)
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 7.5)), (int(GlobalHWVar.gpx * 18.5), int(GlobalHWVar.gpy * 7.5)), 2)
             if dati[121]:
                 avvelenato = GlobalImgVar.avvelenatoMenu
-                GlobalHWVar.disegnaImmagineSuSchermo(avvelenato, (GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 6.5))
+                GlobalHWVar.disegnaImmagineSuSchermo(avvelenato, (GlobalHWVar.gsx // 32 * 13.9, GlobalHWVar.gsy // 18 * 6.3))
             if dati[123] > 0:
                 attaccopiu = GlobalImgVar.attaccopiuMenu
-                GlobalHWVar.disegnaImmagineSuSchermo(attaccopiu, ((GlobalHWVar.gsx // 32 * 14) + (2 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 6.5))
+                GlobalHWVar.disegnaImmagineSuSchermo(attaccopiu, ((GlobalHWVar.gsx // 32 * 13.9) + (2 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 6.3))
             if dati[124] > 0:
                 difesapiu = GlobalImgVar.difesapiuMenu
-                GlobalHWVar.disegnaImmagineSuSchermo(difesapiu, ((GlobalHWVar.gsx // 32 * 14) + (4 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 6.5))
+                GlobalHWVar.disegnaImmagineSuSchermo(difesapiu, ((GlobalHWVar.gsx // 32 * 13.9) + (4 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 6.3))
             # vita-status robo
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
                 if dati[10] < 0:
                     dati[10] = 0
-                GenericFunc.messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 8.4, 50)
-                GenericFunc.messaggio("Status alterati: ", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 9.2, 50)
+                GenericFunc.messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 8.3, 50)
+                GenericFunc.messaggio("Status alterati: ", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 9.1, 50)
                 robomen = GlobalImgVar.roboo2
-                GlobalHWVar.disegnaImmagineSuSchermo(robomen, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8.1))
-                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 11.1)), (int(GlobalHWVar.gpx * 18.2), int(GlobalHWVar.gpy * 11.1)), 2)
+                GlobalHWVar.disegnaImmagineSuSchermo(robomen, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 8))
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 11), int(GlobalHWVar.gpy * 11)), (int(GlobalHWVar.gpx * 18.5), int(GlobalHWVar.gpy * 11)), 2)
                 if dati[122] > 0:
                     surriscaldato = GlobalImgVar.surriscaldatoMenu
-                    GlobalHWVar.disegnaImmagineSuSchermo(surriscaldato, (GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 10))
+                    GlobalHWVar.disegnaImmagineSuSchermo(surriscaldato, (GlobalHWVar.gsx // 32 * 13.9, GlobalHWVar.gsy // 18 * 9.8))
                 if dati[125] > 0:
                     velocitapiu = GlobalImgVar.velocitapiuMenu
-                    GlobalHWVar.disegnaImmagineSuSchermo(velocitapiu, ((GlobalHWVar.gsx // 32 * 14) + (2 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 10))
+                    GlobalHWVar.disegnaImmagineSuSchermo(velocitapiu, ((GlobalHWVar.gsx // 32 * 13.9) + (2 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 9.8))
                 if dati[126] > 0:
                     efficienzapiu = GlobalImgVar.efficienzapiuMenu
-                    GlobalHWVar.disegnaImmagineSuSchermo(efficienzapiu, ((GlobalHWVar.gsx // 32 * 14) + (4 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 10))
+                    GlobalHWVar.disegnaImmagineSuSchermo(efficienzapiu, ((GlobalHWVar.gsx // 32 * 13.9) + (4 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 9.8))
 
             if attacco != 0:
                 risposta = True
 
-            GlobalHWVar.disegnaImmagineSuSchermo(imgOggetti[oggetton - 1], (GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 3))
+            GlobalHWVar.disegnaImmagineSuSchermo(imgOggetti[oggetton - 1], (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 2.5))
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             if usa == 0:
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 0.5))), yp + (int(GlobalHWVar.gpy * 0.7)) - 1), (xp + (int(GlobalHWVar.gpx * 6.4)), yp + (int(GlobalHWVar.gpy * 0.7)) - 1), 2)
@@ -4026,6 +4048,6 @@ def oggetti(dati, colcoInCasellaVista):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     return dati, attacco

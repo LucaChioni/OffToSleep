@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import pygame
 import GlobalHWVar
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
 # dichiaro le variabili globali della funzione loadSounds
@@ -77,27 +77,11 @@ global suonoaperturaporteCasaDavid
 global suonochiusuraporteCasaDavid
 global rumoreDoccia
 
-def loadSound(path):
-    try:
-        sound = pygame.mixer.Sound(GlobalHWVar.gamePath + path)
-    except Exception:
-        print ("Impossibile caricare " + path)
-        sound = False
-
-    # per poter chiudere il gioco durante il caricamento
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-
-    GlobalHWVar.listaTastiPremuti = []
-
-    return sound
 
 numSndTotali = 55
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
-    suono = loadSound(path)
+    suono = CaricaFileProgetto.loadSound(path)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscuPiuScu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 6.5, int(GlobalHWVar.gpx * 16), GlobalHWVar.gpy * 1))
     numSndCaricatoTemp += 1
     caricamentoCompiuto = (GlobalHWVar.gpx * 15) + ((GlobalHWVar.gpx * 1.0 / numSndTotali) * numSndCaricatoTemp)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import pygame
 import GlobalHWVar
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
 # dichiaro le variabili globali della funzione loadImgs
@@ -260,43 +260,10 @@ global persoFraMaggiore
 global persobFraMaggiore
 global schemataDiCaricamento
 
-def loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
-    img = pygame.image.load(GlobalHWVar.gamePath + path)
-
-    # aumento la risoluzione per evitare imprecisioni delle img piccole e bug dello smoothscale per le img grandi (lo smoothscle ha problemi nel ridurre la risoluzione)
-    if aumentaRisoluzione:
-        risoluzioneXPerFix = xScale
-        risoluzioneYPerFix = yScale
-    else:
-        risoluzioneXPerFix = xScale * 2
-        risoluzioneYPerFix = yScale * 2
-    sizeX, sizeY = img.get_rect().size
-    moltiplicatore = 1
-    while sizeX * moltiplicatore < risoluzioneXPerFix and sizeY * moltiplicatore < risoluzioneYPerFix:
-        moltiplicatore += 1
-    img = pygame.transform.scale(img, (sizeX * moltiplicatore, sizeY * moltiplicatore))
-
-    if xScale != 0 and yScale != 0:
-        img = pygame.transform.smoothscale(img, (int(xScale), int(yScale)))
-    if canale_alpha:
-        img = img.convert_alpha()
-    else:
-        img = img.convert()
-
-    # per poter chiudere il gioco durante il caricamento
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-
-    GlobalHWVar.listaTastiPremuti = []
-
-    return img
-
 numImgTotali = 1092
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
-    immagine = loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
+    immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscuPiuScu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 6.5, int(GlobalHWVar.gpx * 16), GlobalHWVar.gpy * 1))
     numImgCaricataTemp += 1
     caricamentoCompiuto = (GlobalHWVar.gpx * 15.0 / numImgTotali) * numImgCaricataTemp
@@ -305,7 +272,7 @@ def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione,
     return immagine
 def caricaImmagineCambioRisoluzione(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
-    immagine = loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
+    immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscuPiuScu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 10, int(GlobalHWVar.gpx * 31), GlobalHWVar.gpy * 1))
     numImgCaricataTemp += 1
     caricamentoCompiuto = (GlobalHWVar.gpx * 31.0 / numImgTotali) * numImgCaricataTemp
@@ -1000,4 +967,4 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
 
-    schemataDiCaricamento = loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)

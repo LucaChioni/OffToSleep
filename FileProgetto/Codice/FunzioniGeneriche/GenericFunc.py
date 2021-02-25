@@ -8,6 +8,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import GestioneInput
+import CaricaFileProgetto
 import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 
 
@@ -185,7 +186,7 @@ def guardaVideo(listaImg, audio, loop):
             continua = True
             bottoneDown = False
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockVideo.tick(GlobalHWVar.fpsVideo)
         if countdownInizioVideo > 0:
             countdownInizioVideo -= 1
@@ -1903,7 +1904,7 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
                 continua = True
                 bottoneDown = False
 
-            pygame.event.pump()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
         inizio = True
 
@@ -2260,7 +2261,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
             prosegui = False
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
     GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
@@ -2288,39 +2289,39 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
 def cambiaProtagonista(nome):
-    GlobalImgVar.persw = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perswb = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persa = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persab = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perso = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    GlobalImgVar.perss = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persob = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
-    GlobalImgVar.perssb = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persd = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persdb = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perssm = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perssmb1 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perssmb2 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persdm = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persdmb1 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persdmb2 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persam = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persamb1 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persamb2 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perswm = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perswmb1 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perswmb2 = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perswmbAttacco = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persambAttacco = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.perssmbAttacco = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persdmbAttacco = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persmbDifesa = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/PersonaggiomovbDifesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    GlobalImgVar.persAvvele = GlobalImgVar.loadImage('Risorse/Immagini/Personaggi/' + nome + '/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persw = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perswb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persa = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persab = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perso = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    GlobalImgVar.perss = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persob = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1b.png', GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 5, True)
+    GlobalImgVar.perssb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persd = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persdb = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2b.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perssm = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perssmb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perssmb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persdm = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persdmb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persdmb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persam = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persamb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persamb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perswm = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4mov.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perswmb1 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4movb1.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perswmb2 = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4movb2.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perswmbAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio4movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persambAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio3movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.perssmbAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio1movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persdmbAttacco = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/Personaggio2movbAttacco.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persmbDifesa = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/PersonaggiomovbDifesa.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    GlobalImgVar.persAvvele = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
 
 def aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi):
@@ -2561,7 +2562,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             while i <= 5:
                 GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
                 GlobalHWVar.aggiornaSchermo()
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
@@ -2574,7 +2575,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 if i % 2 == 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
                     GlobalHWVar.aggiornaSchermo()
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
         elif tipoOscuramento == 3:
@@ -2584,7 +2585,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             while i <= 3:
                 GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
                 GlobalHWVar.aggiornaSchermo()
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
@@ -2611,7 +2612,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
                 GlobalHWVar.aggiornaSchermo()
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
         elif illumina == 2:
@@ -2638,7 +2639,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
                 GlobalHWVar.aggiornaSchermo()
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))

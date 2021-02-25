@@ -4,6 +4,7 @@ import os
 import sys
 import gc
 import pygame
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
 sistemaOperativo = "Windows"
@@ -88,6 +89,7 @@ fontUtilizzato = gamePath + "Risorse/Font/LiberationSerif-Regular.ttf"
 fontUtilizzatoItalic = gamePath + "Risorse/Font/LiberationSerif-Italic.ttf"
 fontUtilizzatoBold = gamePath + "Risorse/Font/LiberationSerif-Bold.ttf"
 listaTastiPremuti = []
+listaInputInSospeso = []
 primoAvvio = True
 
 # clock
@@ -128,22 +130,6 @@ mouseVisibile = False
 
 def quit():
     sys.exit()
-
-def loadFile(path, mode):
-    if not os.path.exists(gamePath + path):
-        creazione = open(gamePath + path, "w+")
-        creazione.close()
-    file = open(gamePath + path, mode)
-
-    # per poter chiudere il gioco durante il caricamento
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-    global listaTastiPremuti
-    listaTastiPremuti = []
-
-    return file
 
 # canali audio / volume (0-1)
 volumeCanzoni = 0.5
@@ -280,7 +266,7 @@ def inizializzaPad(pad):
             break
 def caricaImpostazioniController():
     impoControllerErrato = False
-    leggi = loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "r")
+    leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "r")
     leggifile = leggi.read()
     leggi.close()
     datiImpostazioniController = leggifile.split("\n")
@@ -312,7 +298,7 @@ def caricaImpostazioniController():
             contaGlobale += 1
     if impoControllerErrato:
         # cancello il file se c'è un errore
-        scrivi = loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
+        scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
         scrivi.close()
     return impoControllerErrato, datiImpostazioniController
 def inizializzaModuloJoistick():
@@ -529,7 +515,7 @@ def aggiornaSchermo():
 
 # lettura configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
 linguaImpostata = "inglese"
-leggi = loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
+leggi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "r")
 leggifile = leggi.read()
 leggi.close()
 datiFileImpostazioniString = leggifile.split("_")

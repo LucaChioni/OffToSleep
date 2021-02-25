@@ -7,6 +7,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.CaricaSalvaPartita as CaricaSalvaPartita
 
 
@@ -73,7 +74,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 GenericFunc.messaggio("Slot di memoria vuoto...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 14, 100)
                 GlobalHWVar.aggiornaSchermo()
 
-            pygame.event.pump()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if errore == 2:
         print ("Dati corrotti")
@@ -116,7 +117,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
                 GenericFunc.messaggio("Slot di memoria danneggiato...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6.5, GlobalHWVar.gsy // 18 * 14, 100)
                 GlobalHWVar.aggiornaSchermo()
 
-            pygame.event.pump()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
@@ -339,9 +340,9 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, ((GlobalHWVar.gsx // 32 * 10.3) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 15))
                             GenericFunc.messaggio("Cancellando...", GlobalHWVar.grigiochi, (GlobalHWVar.gsx // 32 * 6.7) + ((salMarcato - 1) * GlobalHWVar.gsx // 32 * 9.3), GlobalHWVar.gsy // 18 * 13.7, 80, centrale=True)
                             GlobalHWVar.aggiornaSchermo()
-                            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
+                            leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
                             leggi.close()
-                            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+                            leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
                             leggi.close()
                             # ricarico i salvataggi
                             ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, numSalvataggio=n)
@@ -572,7 +573,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
@@ -721,7 +722,7 @@ def chiediconferma(conferma):
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
@@ -908,7 +909,7 @@ def settaController():
         if tastiPremutiPadConfig != tastiPremutiPadConfigVecchi:
             aggiornaSchermo = True
 
-        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput, padPassatoPerTestEConf)
+        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput, controllerDaConfigurare=padPassatoPerTestEConf)
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
@@ -1012,7 +1013,7 @@ def settaController():
                 # salva
                 elif voceMarcata == 6:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    scrivi = GlobalHWVar.loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
+                    scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
                     for padConf in configTemp:
                         for elemento in padConf:
                             scrivi.write(str(elemento) + "_")
@@ -1129,7 +1130,7 @@ def settaController():
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
-                    xp = GlobalHWVar.gsx // 32 * 4.5
+                    xp = GlobalHWVar.gsx // 32 * 4.4
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if not (configurando or testando):
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1191,7 +1192,7 @@ def settaController():
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
-                    xp = GlobalHWVar.gsx // 32 * 4.5
+                    xp = GlobalHWVar.gsx // 32 * 4.4
             if bottoneDown == "mouseSinistro" and voceMarcata == 2 and cursoreSuFrecciaSinistra and (tastotempfps == 0 or primoMovimento):
                 if len(GlobalHWVar.configPadConnessi) > 1:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -1389,7 +1390,7 @@ def settaController():
 
         if countdownAggiornamentoModulo > 0:
             countdownAggiornamentoModulo -= 1
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
@@ -1575,7 +1576,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                             GlobalGameVar.numImgCaricata = 0
                             GlobalImgVar.loadImgs(GlobalGameVar.numImgCaricata, cambioRisoluzione=True)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
-                    scrivi = GlobalHWVar.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
+                    scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
                     if GlobalHWVar.linguaImpostata == "italiano":
                         scrivi.write("0_")
                     elif GlobalHWVar.linguaImpostata == "inglese":
@@ -1690,12 +1691,10 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata += 1
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     xp = GlobalHWVar.gsx // 32 * 16
                 elif voceMarcata == 8:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     xp = GlobalHWVar.gsx // 32 * 10.5
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 2 or voceMarcata == 3 or voceMarcata == 4 or voceMarcata == 5:
@@ -1788,12 +1787,10 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata += 1
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     xp = GlobalHWVar.gsx // 32 * 16
                 elif voceMarcata == 8:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     voceMarcata -= 1
-                    GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     xp = GlobalHWVar.gsx // 32 * 10.5
             if bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1:
@@ -2050,7 +2047,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
@@ -2538,7 +2535,7 @@ def menuMappa(avanzamentoStoria):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
@@ -2833,5 +2830,5 @@ def menuDiario(dati):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)

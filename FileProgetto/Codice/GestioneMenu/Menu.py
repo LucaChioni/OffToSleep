@@ -589,14 +589,14 @@ def menu(caricaSalvataggio, gameover):
                 GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
                 GlobalHWVar.aggiornaSchermo()
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
             GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
             GlobalHWVar.aggiornaSchermo()
         else:
-            pygame.event.pump()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
@@ -945,7 +945,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                 GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
                 GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio and not caricaSalvataggio:
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
@@ -1483,7 +1483,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             if not risposta:
                 GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio:
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
@@ -2379,7 +2379,7 @@ def menuMercante(dati):
 
             GlobalHWVar.aggiornaSchermo()
 
-        pygame.event.pump()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
     GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)

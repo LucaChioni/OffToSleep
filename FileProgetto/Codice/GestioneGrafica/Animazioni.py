@@ -193,7 +193,7 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     bottoneDown = False
 
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
         caricaTutto = True
@@ -848,9 +848,9 @@ def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRal
         elif tesoro == 66:
             GenericFunc.messaggio("Hai trovato: Niente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 67:
-            GenericFunc.messaggio("Hai trovato: Collana medicinale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
-        elif tesoro == 68:
             GenericFunc.messaggio("Hai trovato: Collana rigenerante", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+        elif tesoro == 68:
+            GenericFunc.messaggio("Hai trovato: Collana medicinale", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 69:
             GenericFunc.messaggio("Hai trovato: Apprendimaschera", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 70:
@@ -1696,7 +1696,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if (animazioneNemici or animazioneRallo or animazioneColco or animazionePersonaggi) and fineanimaz >= 0:
                 GlobalHWVar.aggiornaSchermo()
-                pygame.event.pump()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
                 # print (GlobalVar.clockAnimazioni.get_fps())
             fineanimaz -= 1
@@ -1754,7 +1754,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 bottoneDown = False
 
-            pygame.event.pump()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
         movimentoPerMouse = False
         caricaTutto = True
@@ -1776,7 +1776,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 bottoneDown = False
 
-            pygame.event.pump()
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
         movimentoPerMouse = False
         caricaTutto = True

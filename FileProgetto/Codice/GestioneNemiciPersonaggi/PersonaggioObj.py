@@ -2,8 +2,8 @@
 
 import os
 import GlobalHWVar
-import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.Dialoghi.DialoghiNessuno as DialoghiNessuno
 import Codice.SettaggiLivelli.Dialoghi.DialoghiTutorial as DialoghiTutorial
 import Codice.SettaggiLivelli.Dialoghi.DialoghiCasa as DialoghiCasa
@@ -129,7 +129,7 @@ class PersonaggioObj(object):
                 img = False
                 self.imgOggetto.append(img)
             else:
-                img = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 self.imgOggetto.append(img)
             i += 1
         i = 0
@@ -140,7 +140,7 @@ class PersonaggioObj(object):
                 img = False
                 self.imgOggettoDialogo.append(img)
             else:
-                img = GlobalImgVar.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+                img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
                 self.imgOggettoDialogo.append(img)
             i += 1
 
@@ -266,21 +266,21 @@ class PersonaggioObj(object):
                 raise Exception("Immagine \"" + self.tipo + "Dialogo.png\" non trovata...")
             self.imgDialogo = False
         else:
-            self.imgW = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgA = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgS = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgD = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgW = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "W.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgA = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "A.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgS = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "S.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgD = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "D.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
-            self.imgWMov1 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgWMov2 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgAMov1 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgAMov2 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgSMov1 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgSMov2 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgDMov1 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-            self.imgDMov2 = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgWMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgWMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "WMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgAMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgAMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "AMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgSMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgSMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "SMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgDMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov1.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+            self.imgDMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "DMov2.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
-            self.imgDialogo = GlobalImgVar.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
+            self.imgDialogo = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
 
     def girati(self, direzione):
         if direzione == "w":

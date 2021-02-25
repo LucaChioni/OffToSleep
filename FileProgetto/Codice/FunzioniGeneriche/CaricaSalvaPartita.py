@@ -2,6 +2,7 @@
 
 import GlobalHWVar
 import GenericFunc
+import CaricaFileProgetto
 import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
@@ -16,9 +17,9 @@ def salvataggio(n, datiAttuali, datiGameover):
             backup = True
 
         if not backup:
-            scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
+            scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
         else:
-            scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+            scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
 
         gameoverSalvato = False
         salvandoGameover = False
@@ -212,9 +213,9 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
         datiGameover = []
 
         if not backupNecessario:
-            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
+            leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
         else:
-            leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
+            leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
         contenutoFile = leggi.read()
         leggi.close()
 
@@ -486,15 +487,15 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
     if not errore:
         if not checkErrori:
             if not backupNecessario:
-                leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
+                leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "r")
             else:
-                leggi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
+                leggi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "r")
             contenutoFile = leggi.read()
             leggi.close()
             if not backupNecessario:
-                scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
+                scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
             else:
-                scrivi = GlobalHWVar.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
+                scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
             scrivi.write(contenutoFile)
             scrivi.close()
     else:

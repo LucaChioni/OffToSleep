@@ -4,6 +4,7 @@ import random
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
 class NemicoObj(object):
@@ -441,7 +442,7 @@ class NemicoObj(object):
         if nonCaricareImg:
             self.imgCampoAttaccabile = False
         else:
-            self.imgCampoAttaccabile = GlobalImgVar.loadImage("Risorse/Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (self.raggioVisivo * 2) + GlobalHWVar.gpx, (self.raggioVisivo * 2) + GlobalHWVar.gpy, True)
+            self.imgCampoAttaccabile = CaricaFileProgetto.loadImage("Risorse/Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (self.raggioVisivo * 2) + GlobalHWVar.gpx, (self.raggioVisivo * 2) + GlobalHWVar.gpy, True)
 
     def girati(self, direzione):
         self.imgAttuale = self.imgS
