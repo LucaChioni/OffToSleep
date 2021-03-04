@@ -78,14 +78,14 @@ global suonochiusuraporteCasaDavid
 global rumoreDoccia
 
 
-numSndTotali = 55
+numSndTotali = 71
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscuPiuScu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 6.5, int(GlobalHWVar.gpx * 16), GlobalHWVar.gpy * 1))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(GlobalHWVar.gpx * 31), GlobalHWVar.gpy * 0.5))
     numSndCaricatoTemp += 1
-    caricamentoCompiuto = (GlobalHWVar.gpx * 15) + ((GlobalHWVar.gpx * 1.0 / numSndTotali) * numSndCaricatoTemp)
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 6.5, int(caricamentoCompiuto), GlobalHWVar.gpy * 1))
+    caricamentoCompiuto = (GlobalHWVar.gpx * 28) + ((GlobalHWVar.gpx * 3.0 / numSndTotali) * numSndCaricatoTemp)
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(caricamentoCompiuto), GlobalHWVar.gpy * 0.5))
     GlobalHWVar.aggiornaSchermo()
     return suono
 

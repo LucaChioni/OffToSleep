@@ -2415,7 +2415,7 @@ def menuMappa(avanzamentoStoria):
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 15.5))
                     GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
                     larghezzaTestoDescrizioni = GlobalHWVar.gpx * 9
-                    spazioTraLeRigheTestoDescrizione = GlobalHWVar.gpy * 7 // 10
+                    spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
                     grandezzaScritteDescrizioni = 40
                     if voceMarcata == 1:
                         GenericFunc.messaggio("Casa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)

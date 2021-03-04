@@ -30,7 +30,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Avverto che abbiamo ospiti per cena. La sala da pranzo è al piano di sopra, intanto prendi pure posto.")
+            dialogo.append(u"Avverto che abbiamo ospiti per cena. Seguimi, la sala da pranzo è al piano di sopra.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoDavidPrimoPiano"]:
             oggettoDato = "Chiave stanza"
@@ -107,7 +107,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("personaggio")
             dialogo.append(u"Può cambiarsi in una delle stanze per gli ospiti al piano di sopra, il padrone ne starà già facendo preparare una.")
             partiDialogo.append(dialogo)
-        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"] and avanzamentoDialogo == 1:
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"] and avanzamentoDialogo == 1:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -116,6 +116,30 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("La cena sta per essere servita, la prego di prendere posto.")
+            partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and avanzamentoDialogo == 1:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = True
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Scusa, per caso hai visto se David è passato di qui?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Sì, è appena uscito. Ma non so dove fosse diretto.")
+            partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and avanzamentoDialogo == 2:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"La prego di andare a riposare, tra qualche ora sarà giorno.")
             partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
             oggettoDato = False
@@ -127,7 +151,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("personaggio")
             dialogo.append(u"Salve signorina, la sua stanza è stata preparata, può andare a cambiarsi.")
             partiDialogo.append(dialogo)
-        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -137,7 +161,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("personaggio")
             dialogo.append("La prego di prendere posto, la cena sta per essere servita.")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -145,12 +169,22 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Salve signorina, al momento il padrone non è in casa. Può provare a ripassare più tardi se lo desidera.")
+            dialogo.append(u"La sua stanza è in fondo al corridoio. Può andare a riposare quando vuole.")
+            partiDialogo.append(dialogo)
+        elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Salve, al momento il padrone non è in casa. Può ripassare più tardi.")
             partiDialogo.append(dialogo)
     elif tipo == "MadreUfficiale":
         partiDialogo = []
         nome = "Sara"
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"] and avanzamentoDialogo == 0:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"] and avanzamentoDialogo == 0:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -174,7 +208,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Sam? Scusami ma non sono di qui, non lo conosco...")
+            dialogo.append("Sam? Scusami ma non sono di qui, non... non lo conosco...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -192,7 +226,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append("Ok...")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"] and avanzamentoDialogo == 1:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"] and avanzamentoDialogo == 1:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -215,7 +249,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     elif tipo.startswith("OggettoLettoCasaDavid"):
         partiDialogo = []
         nome = "OggettoLettoCasaDavid"
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -231,7 +265,25 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("... Almeno spero di farmi una bella dormita...")
+            dialogo.append(u"Yaaawn... sto crollando... penserò a tutto domani...")
+            partiDialogo.append(dialogo)
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavid"]:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append("Non posso rimetteremi a dormire adesso.")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"È un letto molto comodo.")
             partiDialogo.append(dialogo)
     elif tipo.startswith("OggettoArmadioCasaDavid"):
         partiDialogo = []
@@ -258,7 +310,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"Ok... ci sono un po' di vestiti... questi sembrano i più normali...")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -267,7 +319,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"Ci sono altri vestiti tra cui scegliere ma questi vanno più che bene.")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -297,7 +349,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"Ok credo che questa fontana funzioni più o meno come quella cha abbiamo a casa... vediamo...")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -306,7 +358,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"Vorrei rientrare in questo piccolo paradiso ma mi stanno aspettando per la cena...")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -318,7 +370,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     elif tipo == "PadreUfficialeCasa":
         partiDialogo = []
         nome = "David"
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -344,11 +396,11 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Oh, è... <*>#italic#molto<*> buono.")
+            dialogo.append(u"Oh, è davvero... <*>#italic#gnam gnam<*>... molto buono.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Sì, è uno dei piatti che più preferiscono gli abitanti di questa zona ma, da quello che si dice, presto sarà anche il più raro...")
+            dialogo.append(u"È uno dei piatti che più preferiscono gli abitanti di questa zona. E da quello che si dice, presto sarà anche il più raro...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -356,15 +408,11 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Pare che i cinghiali si stiano estinguendo... o forse stanno solo fuggendo dalla foresta...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Per quale motivo?")
+            dialogo.append(u"Pare che i cinghiali si stiano estinguendo... o forse semplicemente fuggendo dalla foresta...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non so... forse per via della putrefazione del lago o forse solo per la troppa caccia...")
+            dialogo.append(u"Molti pensano che sia colpa della caccia troppo frequente...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCenaDavid2"]:
             oggettoDato = False
@@ -374,11 +422,126 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Beh, per le persone di passaggio è sicuramente una buona fonte di cibo... sempre che non ci rimangono uccisi...")
+            dialogo.append(u"Beh, sicuramente è la fonte di cibo principale per le persone di passaggio.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"")
+            dialogo.append(u"... Per le persone capaci di cacciare. Non di certo per i deboli!")
+            partiDialogo.append(dialogo)
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mammaUfficialeUscitaDallaCena"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... In realtà è quasi sicuramente per via della putrefazione del lago.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"... Cosa?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Una ventina di anni fa il lago è stato... avvelenato. Non solo per le persone ma anche per le imbarcazioni... il legno viene corroso quando entra in contatto con quella poltiglia putrefatta...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"David, che cos'ha Sara? Non... non credo stia molto bene...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"... David...?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Abbiamo bisogno di uomini più forti. Il nemico avanza e utilizza armi sempre più subdole... sono animali da guerra instancabili. Non ci possiamo permettere degli incompetenti a capo delle nostre squadre!")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Il nemico... avanza...?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Tsk... ci ostiniamo a tenerlo nascosto ma tra poco non avrà più importanza... nel giro di cinque, sei giorni o una settimana al massimo ci saranno addosso.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Chi ci sarà addosso?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Mmmh... Lucy, giusto?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Sì.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Lucy... è un bel nome... <*>#italic#Lucy<*>... mi ricorda quella ragazza al primo anno di addestramento...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"David...? C-c'è una guerra in corso?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Era così bella...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... E simpatica...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"... Sei ubriaco?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"<*>#italic#Umpf<*>! ... <*>#italic#Lucy<*>... torna nella tua stanza. E dormi, domani dovrai svegliarti presto.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"... Perché mi hai voluto ospitare per la notte?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Mmpf... il soldato da cui hai preso quella bella armatura d'acciao... dove l'hai seploto precisamente?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Era in mezzo alla foresta, poco distante da un accampamento. Non saprei dirti con esattezza, perché?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Mmh... ok...")
+            partiDialogo.append(dialogo)
+    elif tipo == "OggettoSedia":
+        partiDialogo = []
+        nome = "OggettoSedia"
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Mi siederò qui.")
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

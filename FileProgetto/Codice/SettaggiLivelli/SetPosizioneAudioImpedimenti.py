@@ -615,6 +615,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     x = GlobalHWVar.gsx // 32 * 27
                 elif x == GlobalHWVar.gsx // 32 * 29:
                     x = GlobalHWVar.gsx // 32 * 28
+            if stanzaVecchia == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+                npers = 4
+                x = GlobalHWVar.gsx // 32 * 14
+                y = GlobalHWVar.gsy // 18 * 5
             if stanzaVecchia == GlobalGameVar.dictStanze["casaDavid3"]:
                 npers = 1
                 x = GlobalHWVar.gsx // 32 * 2
@@ -651,7 +655,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 elif y == GlobalHWVar.gsy // 18 * 5:
                     y = GlobalHWVar.gsy // 18 * 12
             if stanzaVecchia == GlobalGameVar.dictStanze["casaDavid3"]:
-                if (x == GlobalHWVar.gpx * 4 and y == GlobalHWVar.gpx * 10) or (x == GlobalHWVar.gpx * 5 and y == GlobalHWVar.gpx * 10) or (x == GlobalHWVar.gpx * 6 and y == GlobalHWVar.gpx * 11):
+                if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fattoBagnoCasaDavid"]:
                     npers = 1
                     x = GlobalHWVar.gsx // 32 * 6
                     y = GlobalHWVar.gsy // 18 * 11
@@ -662,10 +666,14 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                         pygame.time.wait(100)
                         bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
                         i += 1
-                elif (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 3) or (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 4) or (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 5) or (x == GlobalHWVar.gpx * 8 and y == GlobalHWVar.gpx * 6):
+                elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
                     npers = 1
                     x = GlobalHWVar.gsx // 32 * 8
                     y = GlobalHWVar.gsy // 18 * 5
+                elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                    npers = 2
+                    x = GlobalHWVar.gsx // 32 * 10
+                    y = GlobalHWVar.gsy // 18 * 4
 
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown
 
@@ -721,6 +729,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione):
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy4"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaHansLucy2"]:
         nonProcedere = True
     elif (stanzaVecchia == GlobalGameVar.dictStanze["casaDavid1"] or stanzaVecchia == GlobalGameVar.dictStanze["casaDavid2"]) and stanzaDestinazione == -1:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanzaVecchia == GlobalGameVar.dictStanze["casaDavid1"] and stanzaDestinazione == GlobalGameVar.dictStanze["città3"]:
         nonProcedere = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoBagnoDavid"] and stanzaVecchia == GlobalGameVar.dictStanze["casaDavid3"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaDavid2"]:
         nonProcedere = True
@@ -789,7 +799,7 @@ def settaNomeStanza(avanzamentoStoria, stanza):
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["casaDavid2"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cenaConDavidIniziata"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             nomeStanza = "StanzaA"
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             nomeStanza = "StanzaB"
@@ -798,9 +808,7 @@ def settaNomeStanza(avanzamentoStoria, stanza):
     if stanza == GlobalGameVar.dictStanze["casaDavid3"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["andatoADormireCasaDavid"]:
             nomeStanza = "StanzaA"
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            nomeStanza = "StanzaB"
         else:
-            nomeStanza = "StanzaC"
+            nomeStanza = "StanzaB"
 
     return nomeStanza

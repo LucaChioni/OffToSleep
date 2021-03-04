@@ -259,15 +259,16 @@ global persobLucy
 global persoFraMaggiore
 global persobFraMaggiore
 global schemataDiCaricamento
+global sfumaturaCaricamentoMenuPrincipale
 
-numImgTotali = 1092
+numImgTotali = 1098
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscuPiuScu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 6.5, int(GlobalHWVar.gpx * 16), GlobalHWVar.gpy * 1))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(GlobalHWVar.gpx * 31), GlobalHWVar.gpy * 0.5))
     numImgCaricataTemp += 1
-    caricamentoCompiuto = (GlobalHWVar.gpx * 15.0 / numImgTotali) * numImgCaricataTemp
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 6.5, int(caricamentoCompiuto), GlobalHWVar.gpy * 1))
+    caricamentoCompiuto = (GlobalHWVar.gpx * 28.0 / numImgTotali) * numImgCaricataTemp
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(caricamentoCompiuto), GlobalHWVar.gpy * 0.5))
     GlobalHWVar.aggiornaSchermo()
     return immagine
 def caricaImmagineCambioRisoluzione(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
@@ -538,6 +539,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persoFraMaggiore
     global persobFraMaggiore
     global schemataDiCaricamento
+    global sfumaturaCaricamentoMenuPrincipale
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -967,4 +969,5 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
 
-    schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    schemataDiCaricamento = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    sfumaturaCaricamentoMenuPrincipale = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)

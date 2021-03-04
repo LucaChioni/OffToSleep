@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+# import psutil
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
@@ -20,13 +21,21 @@ import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioI
 
 
 def gameloop():
+    # p = psutil.Process()
+    # maxMemoryUsage = 0
     caricaSalvataggio = False
     inizio = True
     gameover = False
     while True:
+
+        # if p.memory_info().rss / 1000000.0 > maxMemoryUsage:
+        #     maxMemoryUsage = p.memory_info().rss / 1000000.0
+        #     print u"Max RAM usata: " + str(maxMemoryUsage) + " MB"
+
         if inizio:
+            avanzaIlTurnoSenzaMuoverti = False
             aggiornaImgEquip = True
-            turniDaSaltare = 0
+            turniDaSaltarePerDifesa = 0
             refreshSchermo = True
             impossibileAprirePorta = False
             canzone = False
@@ -582,9 +591,9 @@ def gameloop():
                 break
 
         # gestione degli input
-        if not impossibileCliccarePulsanti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto and turniDaSaltare == 0:
+        if not impossibileCliccarePulsanti and not avanzaIlTurnoSenzaMuoverti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto and turniDaSaltarePerDifesa == 0:
             bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
-        elif startf or oggettoRicevuto or impossibileCliccarePulsanti:
+        elif startf or oggettoRicevuto or impossibileCliccarePulsanti or avanzaIlTurnoSenzaMuoverti:
             bottoneDown = False
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         if not bottoneDown:
@@ -1190,6 +1199,9 @@ def gameloop():
                 bottoneDown = False
 
         impossibileCliccarePulsanti = False
+        if avanzaIlTurnoSenzaMuoverti:
+            sposta = True
+        avanzaIlTurnoSenzaMuoverti = False
         # statistiche personaggio e robo
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
@@ -1597,17 +1609,17 @@ def gameloop():
             if sposta:
                 difesa = 0
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
-            if turniDaSaltare > 0 and not sposta:
-                turniDaSaltare -= 1
+            if turniDaSaltarePerDifesa > 0 and not sposta:
+                turniDaSaltarePerDifesa -= 1
                 sposta = True
-                if turniDaSaltare == 0:
+                if turniDaSaltarePerDifesa == 0:
                     caricaTutto = True
                     uscitoDaMenu = 2
             if difesa == 2 and not sposta:
                 difesa = 1
                 sposta = True
                 riempiTuttaLaVita = True
-                turniDaSaltare = 0
+                turniDaSaltarePerDifesa = 0
                 for nemico in listaNemici:
                     if nemico.vita > 0 and nemico.inCasellaVista:
                         riempiTuttaLaVita = False
@@ -1615,8 +1627,8 @@ def gameloop():
                 if riempiTuttaLaVita and dati[5] + 3 < pvtot:
                     while dati[5] < pvtot:
                         dati[5] += 3
-                        turniDaSaltare += 1
-                    turniDaSaltare -= 1
+                        turniDaSaltarePerDifesa += 1
+                    turniDaSaltarePerDifesa -= 1
                     dati[5] = pvtot
                     GenericFunc.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
                 else:
@@ -2022,15 +2034,15 @@ def gameloop():
                         refreshSchermo = True
 
             # fai tutte le animazioni del turno e disegni gli sfondi e personaggi
-            if caricaTutto and turniDaSaltare == 0:
+            if caricaTutto and turniDaSaltarePerDifesa == 0:
                 refreshSchermo = True
                 if aumentoliv != 0:
                     pvtot = GenericFunc.getVitaTotRallo(dati[4] - aumentoliv, dati[129])
                 EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0])
                 caricaTutto = False
-            if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0 and turniDaSaltare == 0:
+            if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0 and turniDaSaltarePerDifesa == 0:
                 primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = Animazioni.anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle)
-            if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta) and turniDaSaltare == 0:
+            if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta) and turniDaSaltarePerDifesa == 0:
                 refreshSchermo = False
                 apriocchio = False
                 for nemico in listaNemici:
@@ -2042,8 +2054,10 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone)
+                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti)
                 impossibileAprirePorta = False
+                if caricaTutto:
+                    impossibileCliccarePulsanti = True
 
             # cancella definitivamente i mostri morti e resetta vx/vy/anima
             i = len(listaNemici) - 1

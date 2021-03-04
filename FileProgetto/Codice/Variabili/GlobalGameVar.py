@@ -66,13 +66,15 @@ def disegnaSchermataDiCaricamento():
     canzoneMenuPrincipale = CaricaFileProgetto.loadSound("Risorse/Audio/Canzoni/00-Menu.wav")
     GlobalHWVar.canaleSoundCanzone.play(canzoneMenuPrincipale, -1)
 
-    global schemataDiCaricamento
     schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    sfumaturaCaricamentoMenuPrincipale = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
     GlobalHWVar.disegnaImmagineSuSchermo(schemataDiCaricamento, (0, 0))
-    carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 100 // 60)
+    GlobalHWVar.disegnaImmagineSuSchermo(sfumaturaCaricamentoMenuPrincipale, (0, 0))
+    carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 70 // 60)
     testo = carattere.render("Caricamento...", True, GlobalHWVar.grigiochi)
-    GlobalHWVar.disegnaImmagineSuSchermo(testo, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5))
+    GlobalHWVar.disegnaImmagineSuSchermo(testo, (GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 15.5))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(GlobalHWVar.gpx * 31), GlobalHWVar.gpy * 0.5))
     screen = GlobalHWVar.schermo.copy().convert()
 
     rect = pygame.display.get_surface().get_rect()

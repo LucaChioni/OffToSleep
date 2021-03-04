@@ -120,6 +120,7 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["apertoPortaCittà"] = i
     i += 1
     dictAvanzamentoStoria["arrivoCasaUfficiale"] = i
+    dictAvanzamentoStoria["mappaCittà"] = i
     i += 1
     dictAvanzamentoStoria["primoDialogoConDavid"] = i
     i += 1
@@ -139,21 +140,31 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["monologoPostCambioPerCenaDavid"] = i
     i += 1
+    dictAvanzamentoStoria["sedutoACenaDavid"] = i
+    i += 1
     dictAvanzamentoStoria["cenaConDavidIniziata"] = i
     i += 1
     dictAvanzamentoStoria["dialogoCenaDavid1"] = i
     i += 1
     dictAvanzamentoStoria["dialogoCenaDavid2"] = i
     i += 1
+    dictAvanzamentoStoria["dialogoCenaDavid3"] = i
+    i += 1
+    dictAvanzamentoStoria["mammaUfficialeUscitaDallaCena"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoCenaDavid4"] = i
+    i += 1
+    dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"] = i
+    i += 1
     dictAvanzamentoStoria["fineDialogoCenaDavid"] = i
     i += 1
     dictAvanzamentoStoria["andatoADormireCasaDavid"] = i
     i += 1
-    dictAvanzamentoStoria["inizioDialogoSaraNotturno"] = i
-    i += 1
-    dictAvanzamentoStoria["fineDialogoSaraNotturno"] = i
-    i += 1
     dictAvanzamentoStoria["inizioSecondoGiorno"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoServoAlRisveglio"] = i
+    i += 1
+    dictAvanzamentoStoria["uscitoCasaDavid"] = i
 
     i += 100
     i += 1
@@ -182,8 +193,6 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["mercanteBomPote"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mappaCittà"] = i
     i += 1
     dictAvanzamentoStoria["mappaSelvaArida"] = i
     i += 1
