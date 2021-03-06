@@ -54,7 +54,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("Yaaawn... Sto ancora aspettando la mia acqua.")
+            dialogo.append("Yaaawn... sto ancora aspettando la mia acqua.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

@@ -225,6 +225,7 @@ def menu(caricaSalvataggio, gameover):
                                 i -= GlobalHWVar.volumeCanzoni / 10
                                 j -= GlobalHWVar.volumeEffetti / 10
                                 pygame.time.wait(30)
+                                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             GlobalHWVar.canaleSoundCanzone.stop()
                             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
@@ -375,6 +376,7 @@ def menu(caricaSalvataggio, gameover):
                                 i -= GlobalHWVar.volumeCanzoni / 10
                                 j -= GlobalHWVar.volumeEffetti / 10
                                 pygame.time.wait(30)
+                                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             GlobalHWVar.canaleSoundCanzone.stop()
                             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                             GlobalHWVar.canaleSoundSottofondoAmbientale.stop()

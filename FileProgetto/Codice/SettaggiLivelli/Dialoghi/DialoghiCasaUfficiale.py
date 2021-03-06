@@ -171,7 +171,33 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("personaggio")
             dialogo.append(u"La sua stanza è in fondo al corridoio. Può andare a riposare quando vuole.")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Buongiorno signorina, è mattina.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Uh...? Ohh... buongiorno...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Cosa desidera per colazione?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"No, non... non importa, non sono solita fare colazione.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Come preferisce. Se cambia idea non si faccia problemi a chiedere.")
+            partiDialogo.append(dialogo)
+        elif avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["dialogoServoRisveglioSecondoGiorno"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
@@ -179,7 +205,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Salve, al momento il padrone non è in casa. Può ripassare più tardi.")
+            dialogo.append(u"Salve. Al momento il padrone non è in casa. Può ripassare più tardi.")
             partiDialogo.append(dialogo)
     elif tipo == "MadreUfficiale":
         partiDialogo = []
@@ -265,7 +291,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Yaaawn... sto crollando... penserò a tutto domani...")
+            dialogo.append(u"Sto morendo di sonno... penserò a tutto domani...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavid"]:
             oggettoDato = False
@@ -530,9 +556,9 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("personaggio")
             dialogo.append(u"Mmh... ok...")
             partiDialogo.append(dialogo)
-    elif tipo == "OggettoSedia":
+    elif tipo == "OggettoSediaCasaUfficiale":
         partiDialogo = []
-        nome = "OggettoSedia"
+        nome = "OggettoSediaCasaUfficiale"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
             avanzaStoria = True

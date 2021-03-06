@@ -3,12 +3,13 @@
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 import Codice.GestioneNemiciPersonaggi.NemicoObj as NemicoObj
 
 
-def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti):
+def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"] and stanza == GlobalGameVar.dictStanze["forestaCadetta1"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Tutorial", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
@@ -36,7 +37,11 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"] and stanza == GlobalGameVar.dictStanze["forestaCadetta5"]:
-        pygame.time.wait(1000)
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "FiglioUfficiale", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
@@ -100,7 +105,11 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
             dati[131] = 0
             # tolgo gli eventuali guanti equipaggiati
             dati[129] = 0
-            pygame.time.wait(1000)
+            i = 0
+            while i < 10:
+                pygame.time.wait(100)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                i += 1
             avanzamentoStoria += 1
             stanza = GlobalGameVar.dictStanze["casaHansLucy1"]
             cambiosta = True
@@ -198,7 +207,11 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
         carim = True
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["sotterratoSam"] and stanza == GlobalGameVar.dictStanze["forestaCadetta7"]:
-        pygame.time.wait(1000)
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
@@ -211,4 +224,4 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
 
-    return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti
+    return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio

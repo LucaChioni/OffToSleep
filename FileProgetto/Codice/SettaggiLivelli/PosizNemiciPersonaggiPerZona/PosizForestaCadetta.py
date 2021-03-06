@@ -30,7 +30,7 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
             percorsoNemico = ["w", "s", "s", "w"]
-            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
         else:
@@ -79,7 +79,7 @@ def setNemici(stanza, listaNemiciTotali, listaNemici, avanzamentoStoria):
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
             percorsoNemico = ["w", "s", "s", "w"]
-            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
+            nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 4, "w", "TartarugaMarrone", stanza, percorsoNemico)
             listaNemiciTotali.append(nemico)
             listaNemici.append(nemico)
     elif stanza == GlobalGameVar.dictStanze["forestaCadetta2"]:

@@ -1882,6 +1882,7 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
             i -= GlobalHWVar.volumeCanzoni / 10
             j -= GlobalHWVar.volumeEffetti / 10
             pygame.time.wait(30)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.canaleSoundCanzone.stop()
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
@@ -2085,7 +2086,10 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
         imgPersDialogo = GlobalImgVar.imgDialogoLucy1
         nomePersonaggio = "Lucy"
     else:
-        imgPersDialogo = GlobalImgVar.imgDialogoLucy2
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucyAssonnata
+        else:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucy2
         nomePersonaggio = "Lucy"
 
     if personaggio.nome != "Tutorial":

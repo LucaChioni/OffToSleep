@@ -4,6 +4,7 @@ import pygame
 import GlobalHWVar
 import GlobalImgVar
 import GlobalSndVar
+import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetAvanzamentiStanzePorteCofanetti as SetAvanzamentiStanzePorteCofanetti
 
@@ -45,7 +46,11 @@ def mostraLogo():
     GlobalHWVar.disegnaImmagineSuSchermo(logo, (GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 3))
     GlobalHWVar.aggiornaSchermo()
 
-    pygame.time.wait(1000)
+    i = 0
+    while i < 10:
+        pygame.time.wait(100)
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        i += 1
 
     rect = pygame.display.get_surface().get_rect()
     image = pygame.Surface(rect.size, flags=pygame.SRCALPHA)

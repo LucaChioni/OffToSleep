@@ -8,11 +8,15 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 
-def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti):
+def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio):
     if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoCasaUfficiale"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
         screen = GlobalHWVar.schermo.copy().convert()
 
-        pygame.time.wait(1000)
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "PadreUfficialeServizio", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
 
@@ -25,6 +29,7 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
             GlobalHWVar.canaleSoundCanzone.set_volume(i)
             i += GlobalHWVar.volumeCanzoni / 10
             pygame.time.wait(30)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["primoDialogoConDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
@@ -100,7 +105,7 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
         i = 0
         while i < 10:
             pygame.time.wait(100)
-            bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             i += 1
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "PadreUfficialeCasa", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
@@ -117,6 +122,7 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
             GlobalHWVar.canaleSoundCanzone.set_volume(i)
             i -= GlobalHWVar.volumeCanzoni / 10
             pygame.time.wait(30)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.canaleSoundCanzone.set_volume(0)
         GlobalHWVar.canaleSoundCanzone.stop()
         caricaTutto = True
@@ -217,6 +223,7 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
             GlobalHWVar.canaleSoundCanzone.set_volume(i)
             i += GlobalHWVar.volumeCanzoni / 10
             pygame.time.wait(30)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         # avanzo col dialogo il servo nella prima stanza (sennò si bugga il dialogo)
         for personaggio in listaPersonaggiTotali:
@@ -232,10 +239,31 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
 
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoADormireCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
+        nonMostrarePersonaggio = True
         avanzamentoStoria += 1
         stanza = GlobalGameVar.dictStanze["casaDavid3"]
         cambiosta = True
         carim = True
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
+        i = 0
+        while i < 10:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "ServoDavid", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoServoRisveglioSecondoGiorno"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
+        nonMostrarePersonaggio = False
+        avanzamentoStoria += 1
+        stanza = GlobalGameVar.dictStanze["casaDavid3"]
+        cambiosta = True
+        carim = True
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        caricaTutto = True
 
-    return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti
+    return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio

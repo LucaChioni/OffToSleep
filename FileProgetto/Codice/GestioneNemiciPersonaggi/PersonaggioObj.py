@@ -121,6 +121,23 @@ class PersonaggioObj(object):
             numImg = 2
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
+        if self.tipo.startswith("OggettoArmadioCasaDavid"):
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo.startswith("OggettoLettoCasaDavid"):
+            if self.tipo == "OggettoLettoCasaDavidA":
+                numImg = 3
+                numImgDialogo = 1
+                nomeImgDialogo = ["Vuota"]
+            else:
+                numImg = 2
+                numImgDialogo = 1
+                nomeImgDialogo = ["Vuota"]
+        if self.tipo.startswith("OggettoVascaCasaDavid"):
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
         i = 1
         while i <= numImg:
             if nonCaricareImg:
@@ -192,6 +209,21 @@ class PersonaggioObj(object):
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
         if self.tipo == "OggettoCartelloBloccoStrada":
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                numImgAttuale = 1
+        if self.tipo.startswith("OggettoArmadioCasaDavid"):
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                numImgAttuale = 1
+        if self.tipo.startswith("OggettoLettoCasaDavid"):
+            if self.tipo == "OggettoLettoCasaDavidA":
+                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                    numImgAttuale = 1
+                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"]:
+                    numImgAttuale = 2
+            else:
+                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+                    numImgAttuale = 1
+        if self.tipo.startswith("OggettoVascaCasaDavid"):
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
 

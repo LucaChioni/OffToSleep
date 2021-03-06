@@ -162,7 +162,9 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["inizioSecondoGiorno"] = i
     i += 1
-    dictAvanzamentoStoria["dialogoServoAlRisveglio"] = i
+    dictAvanzamentoStoria["dialogoServoRisveglioSecondoGiorno"] = i
+    i += 1
+    dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"] = i
     i += 1
     dictAvanzamentoStoria["uscitoCasaDavid"] = i
 
@@ -276,15 +278,6 @@ def definisciStanze():
     dictStanze["stradaPerCittà3"] = i
     vetStanzePacifiche.append(i)
     i += 1
-    dictStanze["casaDavid1"] = i
-    vetStanzePacifiche.append(i)
-    i += 1
-    dictStanze["casaDavid2"] = i
-    vetStanzePacifiche.append(i)
-    i += 1
-    dictStanze["casaDavid3"] = i
-    vetStanzePacifiche.append(i)
-    i += 1
     dictStanze["città1"] = i
     vetStanzePacifiche.append(i)
     i += 1
@@ -292,6 +285,24 @@ def definisciStanze():
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["città3"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città4"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città5"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città6"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["casaDavid1"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["casaDavid2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["casaDavid3"] = i
     vetStanzePacifiche.append(i)
 
     return dictStanze, vetStanzePacifiche
