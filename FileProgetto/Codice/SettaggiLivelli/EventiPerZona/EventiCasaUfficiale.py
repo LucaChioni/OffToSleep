@@ -239,6 +239,14 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
 
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["andatoADormireCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
+        i = GlobalHWVar.volumeCanzoni
+        while i > 0:
+            GlobalHWVar.canaleSoundCanzone.set_volume(i)
+            i -= GlobalHWVar.volumeCanzoni / 10
+            pygame.time.wait(30)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GlobalHWVar.canaleSoundCanzone.set_volume(0)
+        GlobalHWVar.canaleSoundCanzone.stop()
         nonMostrarePersonaggio = True
         avanzamentoStoria += 1
         stanza = GlobalGameVar.dictStanze["casaDavid3"]
@@ -264,6 +272,14 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+        i = 0
+        while i < GlobalHWVar.volumeCanzoni:
+            GlobalHWVar.canaleSoundCanzone.set_volume(i)
+            i += GlobalHWVar.volumeCanzoni / 10
+            pygame.time.wait(30)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         caricaTutto = True
 
     return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio
