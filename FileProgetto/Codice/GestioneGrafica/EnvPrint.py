@@ -9,6 +9,7 @@ import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
+import FunzioniGraficheGeneriche
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 
@@ -113,16 +114,16 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         while i < len(vettoreImgCaselle):
             if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
             elif vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
             elif x == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
             elif rx == vettoreImgCaselle[i] and ry == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
             else:
                 casellaTrovata = False
                 if not casellaTrovata:
@@ -130,13 +131,13 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                         if nemico.x == vettoreImgCaselle[i] and nemico.y == vettoreImgCaselle[i + 1]:
                             if not nemico.morto and nemico.inCasellaVista:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                             casellaTrovata = True
                             break
                         if nemico.vx == vettoreImgCaselle[i] and nemico.vy == vettoreImgCaselle[i + 1]:
                             if not nemico.morto and nemico.inCasellaVista:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                             casellaTrovata = True
                             break
                 if not casellaTrovata:
@@ -145,13 +146,13 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                             if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
                                 if not personaggio.mantieniSempreASchermo:
-                                    GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                    FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                             casellaTrovata = True
                             break
                         if personaggio.vx == vettoreImgCaselle[i] and personaggio.vy == vettoreImgCaselle[i + 1]:
                             if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                             casellaTrovata = True
                             break
                 if not casellaTrovata:
@@ -163,7 +164,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                                 if caseviste[k] == vettoreEsche[j + 2] and caseviste[k + 1] == vettoreEsche[j + 3]:
                                     if caseviste[k + 2] and (primaDiAnima or vettoreEsche[j + 1] > 0):
                                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                        GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                                     break
                                 k += 3
                             casellaTrovata = True
@@ -178,7 +179,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                                 if caseviste[k] == vettoreDenaro[j + 1] and caseviste[k + 1] == vettoreDenaro[j + 2]:
                                     if caseviste[k + 2]:
                                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                        GenericFunc.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
                                     break
                                 k += 3
                             casellaTrovata = True
@@ -250,7 +251,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry))
 
     if not nonMostrarePersonaggio:
-        GenericFunc.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
     # disegnare i nemici
     for nemico in listaNemici:
@@ -307,7 +308,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    GenericFunc.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+    FunzioniGraficheGeneriche.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
     if avvele:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
     if attp > 0:
@@ -457,9 +458,9 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     if not caricaTutto:
         if stanzaCambiata or uscitoDaMenu > 0:
             if uscitoDaMenu > 0:
-                GenericFunc.oscuraIlluminaSchermo(illumina=1)
+                FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=1)
             else:
-                GenericFunc.oscuraIlluminaSchermo(illumina=2)
+                FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         else:
             GlobalHWVar.aggiornaSchermo()
 
@@ -495,7 +496,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    GenericFunc.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+    FunzioniGraficheGeneriche.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
     if avvele:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
     if attp > 0:
@@ -668,136 +669,136 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
     backgroundRiquadro.blit(dark, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(backgroundRiquadro, (xPartenzaPannello, 0))
 
-    GenericFunc.messaggio("Previsione prossima azione", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 1.5), GlobalHWVar.gsy // 18 * 1, 65)
+    FunzioniGraficheGeneriche.messaggio("Previsione prossima azione", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 1.5), GlobalHWVar.gsy // 18 * 1, 65)
     azionePrevistaTrovata = False
-    GenericFunc.messaggio("Movimento verso teleImpo", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
+    FunzioniGraficheGeneriche.messaggio("Movimento verso teleImpo", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
     if vettorePrevisione[0][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 2.5))
-        GenericFunc.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
         azionePrevistaTrovata = True
     else:
-        GenericFunc.messaggio(vettorePrevisione[0][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio(vettorePrevisione[0][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)
     # lista programmazione Colco
     c = 3.7
     for i in range(1, 11):
         if not azionePrevistaTrovata and vettorePrevisione[i][1] == "":
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * c))
-            GenericFunc.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
+            FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
             azionePrevistaTrovata = True
         elif not azionePrevistaTrovata and vettorePrevisione[i][1] != "":
-            GenericFunc.messaggio(vettorePrevisione[i][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
+            FunzioniGraficheGeneriche.messaggio(vettorePrevisione[i][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * (c + 0.6), 35, daDestra=True)
         if i == 10:
-            GenericFunc.messaggio(str(i), GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.7), GlobalHWVar.gsy // 18 * c, 50)
+            FunzioniGraficheGeneriche.messaggio(str(i), GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.7), GlobalHWVar.gsy // 18 * c, 50)
         else:
-            GenericFunc.messaggio(str(i), GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.9), GlobalHWVar.gsy // 18 * c, 50)
+            FunzioniGraficheGeneriche.messaggio(str(i), GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.9), GlobalHWVar.gsy // 18 * c, 50)
         c += 1.1
     xListaCondizioni = xPartenzaPannello + (GlobalHWVar.gsx // 32 * 1.7)
     c = 3.8
     for i in range(101, 111):
         if dati[i] == -1:
-            GenericFunc.messaggio("---", GlobalHWVar.grigioscu, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigioscu, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 0:
-            GenericFunc.messaggio("---", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            GenericFunc.messaggio("Lucy con Pv < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Lucy con Pv < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            GenericFunc.messaggio("Lucy con Pv < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Lucy con Pv < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            GenericFunc.messaggio("Lucy con Pv < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Lucy con Pv < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 4:
-            GenericFunc.messaggio("Lucy con veleno", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Lucy con veleno", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 5:
-            GenericFunc.messaggio("Impo surriscaldato", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Impo surriscaldato", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 6:
-            GenericFunc.messaggio("Impo con Pe < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Impo con Pe < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 7:
-            GenericFunc.messaggio("Impo con Pe < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Impo con Pe < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 8:
-            GenericFunc.messaggio("Impo con Pe < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Impo con Pe < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 9:
-            GenericFunc.messaggio("Sempre a Lucy", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Sempre a Lucy", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 10:
-            GenericFunc.messaggio("Sempre a Impo", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Sempre a Impo", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 11:
-            GenericFunc.messaggio("Nemico a caso", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico a caso", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 12:
-            GenericFunc.messaggio("Nemico vicino", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico vicino", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 13:
-            GenericFunc.messaggio("Nemico lontano", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico lontano", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 14:
-            GenericFunc.messaggio("Nemico con Pv < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con Pv < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 15:
-            GenericFunc.messaggio("Nemico con Pv < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con Pv < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 16:
-            GenericFunc.messaggio("Nemico con Pv < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con Pv < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 17:
-            GenericFunc.messaggio("Nemico con meno Pv", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con meno Pv", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 18:
-            GenericFunc.messaggio("Numero di nemici > 1", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 1", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 19:
-            GenericFunc.messaggio("Numero di nemici > 4", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 4", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 20:
-            GenericFunc.messaggio("Numero di nemici > 7", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Numero di nemici > 7", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         c += 1.1
     xListaTecniche = xPartenzaPannello + (GlobalHWVar.gsx // 32 * 7.2)
     c = 3.8
     for i in range(111, 121):
         if dati[i] == -1:
-            GenericFunc.messaggio("---", GlobalHWVar.grigioscu, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigioscu, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 0:
-            GenericFunc.messaggio("---", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            GenericFunc.messaggio("Scossa", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Scossa", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            GenericFunc.messaggio("Cura", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Cura", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            GenericFunc.messaggio("Antidoto", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Antidoto", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 4:
-            GenericFunc.messaggio("Freccia elettrica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Freccia elettrica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 5:
-            GenericFunc.messaggio("Tempesta elettrica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Tempesta elettrica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 6:
-            GenericFunc.messaggio("Raffreddamento", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Raffreddamento", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 7:
-            GenericFunc.messaggio("Auto-ricarica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Auto-ricarica", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 8:
-            GenericFunc.messaggio("Cura +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Cura +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 9:
-            GenericFunc.messaggio("Scossa +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Scossa +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 10:
-            GenericFunc.messaggio("Freccia elettrica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Freccia elettrica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 11:
-            GenericFunc.messaggio("Velocizza", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Velocizza", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 12:
-            GenericFunc.messaggio("Carica attacco", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Carica attacco", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 13:
-            GenericFunc.messaggio("Carica difesa", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Carica difesa", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 14:
-            GenericFunc.messaggio("Efficienza", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Efficienza", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 15:
-            GenericFunc.messaggio("Tempesta elettrica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Tempesta elettrica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 16:
-            GenericFunc.messaggio("Cura ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Cura ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 17:
-            GenericFunc.messaggio("Auto-ricarica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Auto-ricarica +", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 18:
-            GenericFunc.messaggio("Scossa ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Scossa ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 19:
-            GenericFunc.messaggio("Freccia Elettrica ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Freccia Elettrica ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 20:
-            GenericFunc.messaggio("Tempesta elettrica ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Tempesta elettrica ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         c += 1.1
-    GenericFunc.messaggio("Movimento verso obbiettivo salvato in memoria", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 14.9, 40)
+    FunzioniGraficheGeneriche.messaggio("Movimento verso obbiettivo salvato in memoria", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 14.9, 40)
     if not azionePrevistaTrovata and vettorePrevisione[11][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 14.8))
-        GenericFunc.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
         azionePrevistaTrovata = True
     elif not azionePrevistaTrovata and vettorePrevisione[11][1] != "":
-        GenericFunc.messaggio(vettorePrevisione[11][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
-    GenericFunc.messaggio("Nessuna azione da eseguire", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 16, 40)
+        FunzioniGraficheGeneriche.messaggio(vettorePrevisione[11][1], GlobalHWVar.rosso, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
+    FunzioniGraficheGeneriche.messaggio("Nessuna azione da eseguire", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 16, 40)
     if not azionePrevistaTrovata:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 15.9))
-        GenericFunc.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 16.6, 35, daDestra=True)
+        FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 16.6, 35, daDestra=True)
 
     GlobalHWVar.aggiornaSchermo()
 
@@ -1018,7 +1019,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
     # personaggio
     if not nonMostrarePersonaggio:
-        GenericFunc.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+        FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
     # disegnare i mostri
     for nemico in listaNemici:
@@ -1089,7 +1090,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    GenericFunc.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+    FunzioniGraficheGeneriche.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
     if avvele:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
     if attp > 0:

@@ -296,6 +296,18 @@ def definisciStanze():
     dictStanze["città6"] = i
     vetStanzePacifiche.append(i)
     i += 1
+    dictStanze["città7"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città8"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città9"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["città10"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
     dictStanze["casaDavid1"] = i
     vetStanzePacifiche.append(i)
     i += 1

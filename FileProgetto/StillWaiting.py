@@ -9,7 +9,9 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
-import Codice.GestioneMenu.Menu as Menu
+import Codice.GestioneMenu.MenuPrincipali as MenuPrincipali
+import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
+import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneGrafica.EnvPrint as EnvPrint
 import Codice.GestioneGrafica.Animazioni as Animazioni
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
@@ -73,7 +75,7 @@ def gameloop():
             nx = 0
             ny = 0
 
-            dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = Menu.menu(caricaSalvataggio, gameover)
+            dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = MenuPrincipali.menu(caricaSalvataggio, gameover)
             print ("Salvataggio: " + str(GlobalGameVar.numSalvataggioCaricato))
             gameover = False
             # controlla se devi cambiare personaggio giocabile
@@ -148,7 +150,7 @@ def gameloop():
 
             if cambiosta:
                 if not inizio:
-                    GenericFunc.oscuraIlluminaSchermo(illumina=False)
+                    FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
 
                 stoppaMusica = SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
 
@@ -846,7 +848,7 @@ def gameloop():
                         elif npers == 4:
                             personaggio.girati("w")
                         EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
-                        dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                        dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                         caricaTutto = True
                 if not sposta:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -1189,7 +1191,7 @@ def gameloop():
                     elif npers == 4:
                         personaggio.girati("w")
                     EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
-                    dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                    dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                     caricaTutto = True
                     bottoneDown = False
                 elif inquadratoQualcosa and inquadratoQualcosa.startswith("movimento"):
@@ -1372,15 +1374,15 @@ def gameloop():
                 i += 3
             if not nemicoInCasellaVista:
                 aggiornaImgEquip = True
-                dati, inizio, attacco, caricaSalvataggio = Menu.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista)
+                dati, inizio, attacco, caricaSalvataggio = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista)
                 if caricaSalvataggio:
                     inizio = True
                 if attacco == 0:
                     uscitoDaMenu = 2
                 if not inizio:
-                    GenericFunc.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
+                    FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
             else:
-                dati, attacco, sposta, animaOggetto, npers, inizio = Menu.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio)
+                dati, attacco, sposta, animaOggetto, npers, inizio = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio)
                 # cambiare posizione dopo l'uso di caricabatterie
                 if npers == 3:
                     pers = GlobalImgVar.persw
@@ -1451,7 +1453,7 @@ def gameloop():
             startf = False
 
         # morte tua e di robo
-        inizio, gameover = GenericFunc.controllaMorteRallo(dati[5], inizio, gameover)
+        inizio, gameover = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], inizio, gameover)
         morterob, dati, mosseRimasteRob = GenericFunc.controllaMorteColco(dati, mosseRimasteRob)
 
         if not inizio:
@@ -1481,7 +1483,7 @@ def gameloop():
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
                 EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
-                GenericFunc.animaOggettoSpecialeRicevuto(oggettoRicevuto)
+                FunzioniGraficheGeneriche.animaOggettoSpecialeRicevuto(oggettoRicevuto)
                 oggettoRicevuto = False
                 caricaTutto = True
 
@@ -1633,7 +1635,7 @@ def gameloop():
                         turniDaSaltarePerDifesa += 1
                     turniDaSaltarePerDifesa -= 1
                     dati[5] = pvtot
-                    GenericFunc.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
+                    FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
                 else:
                     dati[5] += 3
                     if dati[5] > pvtot:
@@ -1721,13 +1723,13 @@ def gameloop():
                             personaggio.girati("w")
                         # aggiorno lo GlobalVarG2.schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
                         EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
-                        dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                        dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                         sposta = True
                         caricaTutto = True
                 interagisciConPersonaggio = False
             # menu mercante
             if visualizzaMenuMercante:
-                dati = Menu.menuMercante(dati)
+                dati = MenuDialoghi.menuMercante(dati)
                 visualizzaMenuMercante = False
                 uscitoDaMenu = 2
                 carim = True
@@ -1780,7 +1782,7 @@ def gameloop():
 
                 EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                 personaggio = PersonaggioObj.PersonaggioObj(xPrimaDiCambioStanza, yPrimaDiCambioStanza, False, "Nessuno", dati[1], dati[0], False)
-                dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = GenericFunc.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
 
             # lancio esche
             if creaesca:
@@ -2137,7 +2139,7 @@ def gameloop():
 
         if inizio:
             if not caricaSalvataggio:
-                GenericFunc.oscuraIlluminaSchermo(illumina=False)
+                FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
             GlobalHWVar.canaleSoundPuntatoreSposta.stop()
             GlobalHWVar.canaleSoundPuntatoreSeleziona.stop()
             GlobalHWVar.canaleSoundPassiRallo.stop()
