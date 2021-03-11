@@ -86,6 +86,89 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
         GlobalHWVar.disegnaImmagineSuSchermo(testo, (x, y))
 
 
+def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFoglio, spazioTraLeRighe):
+    x = int(x)
+    y = int(y)
+
+    gr = gr - 10
+    gr = GlobalHWVar.gpx * gr // 60
+    y = y - (GlobalHWVar.gpy // 8)
+    font = pygame.font.Font(GlobalHWVar.fontUtilizzato, gr)
+    italic = False
+    bold = False
+    coloreOrig = colore
+    xOrig = x
+
+    scriviTutto = False
+    vetMsg = msg.split("<*>")
+    for text in vetMsg:
+        if fineDialogo:
+            break
+        colore = coloreOrig
+        if italic or bold:
+            font = pygame.font.Font(GlobalHWVar.fontUtilizzato, gr)
+            italic = False
+            bold = False
+        if text.startswith("#italic#"):
+            text = text.replace("#italic#", "")
+            font = pygame.font.Font(GlobalHWVar.fontUtilizzatoItalic, gr)
+            italic = True
+        elif text.startswith("#bold#"):
+            text = text.replace("#bold#", "")
+            font = pygame.font.Font(GlobalHWVar.fontUtilizzatoBold, gr)
+            bold = True
+        elif text.startswith("#color#"):
+            text = text.replace("#color#", "")
+            coloreRgb = text.split("#")[0]
+            text = text.split("#")[1]
+            colore = (int(coloreRgb.split(",")[0]), int(coloreRgb.split(",")[1]), int(coloreRgb.split(",")[2]))
+        vetParole = text.split(" ")
+        for parola in vetParole:
+            if fineDialogo:
+                break
+            if parola != "":
+                if parola == "<br>":
+                    x = xOrig
+                    y += spazioTraLeRighe
+                else:
+                    dimX, dimY = font.size(parola + " ")
+                    if largezzaFoglio != -1 and x + dimX > xOrig + largezzaFoglio:
+                        x = xOrig
+                        if spazioTraLeRighe != 1:
+                            y += spazioTraLeRighe
+                        else:
+                            y += dimY
+                    for lettera in parola:
+                        if fineDialogo:
+                            break
+                        bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
+                        if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+                            fineDialogo = True
+                            bottoneDown = False
+                        elif bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                            scriviTutto = True
+                            bottoneDown = False
+                        if bottoneDown:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
+                            bottoneDown = False
+
+                        letteraRenderizzata = font.render(lettera, True, colore)
+                        GlobalHWVar.disegnaImmagineSuSchermo(letteraRenderizzata, (x, y))
+                        dimX, dimY = font.size(lettera)
+                        x += dimX
+
+                        if not scriviTutto:
+                            GlobalHWVar.aggiornaSchermo()
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                            GlobalHWVar.clockScritturaDialogo.tick(GlobalHWVar.fpsScritturaDialogo)
+                    dimX, dimY = font.size(" ")
+                    x += dimX
+
+    return bottoneDown, fineDialogo
+
+
 def guardaVideo(listaImg, audio, loop):
     if GlobalHWVar.mouseBloccato:
         GlobalHWVar.configuraCursore(False)
@@ -388,6 +471,17 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+            GlobalHWVar.aggiornaSchermo()
+        elif tipoOscuramento == 4:
+            image.fill((0, 0, 0, 25))
+            image = image.convert_alpha(GlobalHWVar.schermo)
+            i = 0
+            while i <= 6:
+                GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+                GlobalHWVar.aggiornaSchermo()
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
+                i += 1
             GlobalHWVar.aggiornaSchermo()
     else:
         screen = GlobalHWVar.schermo.copy().convert()

@@ -301,7 +301,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"La parte più difficile e faticosa è stata senza dubbio costruire il canale per l'acqua... ma una volta fatto quello abbiamo potuto pensare di fare anche le altre fontanelle.")
+            dialogo.append(u"La parte più difficile e faticosa è stata senza dubbio costruire il canale per l'acqua...")
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False

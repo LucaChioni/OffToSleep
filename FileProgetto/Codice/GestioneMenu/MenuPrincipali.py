@@ -254,6 +254,7 @@ def menu(caricaSalvataggio, gameover):
     if not GlobalHWVar.primoAvvio:
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
     else:
+        GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
         GlobalHWVar.primoAvvio = False
     illuminaSchermoDopoVideo = True
 

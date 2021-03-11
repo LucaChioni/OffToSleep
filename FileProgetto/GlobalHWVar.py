@@ -99,12 +99,14 @@ clockMenu = pygame.time.Clock()
 clockAnimazioni = pygame.time.Clock()
 clockVideo = pygame.time.Clock()
 clockFadeToBlack = pygame.time.Clock()
+clockScritturaDialogo = pygame.time.Clock()
 fpsMainLoop = 60
 fpsInterazioni = 30
 fpsMenu = 30
 fpsAnimazioni = 30
 fpsVideo = 12
 fpsFadeToBlack = 30
+fpsScritturaDialogo = 30
 
 # colori
 nero = (0, 0, 0)
