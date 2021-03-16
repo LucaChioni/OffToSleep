@@ -33,7 +33,7 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["primoDialogoConDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoArrivoCasaConDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
         padreArrivato = False
         for personaggio in listaPersonaggi:
             if personaggio.tipo == "PadreUfficialeServizio":
@@ -52,6 +52,31 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
                     break
             avanzamentoStoria += 1
             caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoDavidPrimoPiano"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
+        padreArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "PadreUfficialeServizio":
+                if personaggio.x == GlobalHWVar.gpx * 21 and personaggio.y == GlobalHWVar.gpy * 4:
+                    padreArrivato = True
+                break
+
+        if padreArrivato:
+            for personaggio in listaPersonaggi:
+                if personaggio.tipo == "PadreUfficialeServizio":
+                    personaggio.percorso = ["s", "mantieniPosizione"]
+                    personaggio.numeroMovimento = 1
+                    personaggio.girati("s")
+                    break
+            avanzamentoStoria += 1
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["presaChiaveStanzaDaLettoDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid2"]:
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "PadreUfficialeServizio":
+                personaggio.percorso = ["a", "mantieniPosizione"]
+                personaggio.numeroMovimento = 1
+            if personaggio.tipo == "ServoDavid":
+                personaggio.percorso = ["s", "s", "d", "mantieniPosizione"]
+                personaggio.numeroMovimento = 0
+        avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioBagnoCasaDavid"] and stanza == GlobalGameVar.dictStanze["casaDavid3"]:
         dati[6] = 0
         dati[7] = 0

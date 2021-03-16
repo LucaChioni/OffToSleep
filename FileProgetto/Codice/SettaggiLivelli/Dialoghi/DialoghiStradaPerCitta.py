@@ -7,11 +7,11 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     partiDialogo = []
     nome = "---"
     oggettoDato = False
-    avanzaStoria = True
+    avanzaStoria = False
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if tipo.startswith("OggettoCartelloForesta"):
+    if tipo == "OggettoCartelloForesta":
         partiDialogo = []
         nome = "OggettoCartelloForesta"
         oggettoDato = False
@@ -22,7 +22,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
         dialogo.append("tu")
         dialogo.append(u"C'è scritto: \" - <*>#bold#FORESTA CADETTA<*> - Attenzione alla fauna notturna\".")
         partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoCartelloStaccionata"):
+    elif tipo == "OggettoCartelloStaccionata":
         partiDialogo = []
         nome = "OggettoCartelloStaccionata"
         oggettoDato = False
@@ -177,7 +177,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append("(<*>#italic#Meglio lasciarlo al suo lavoro...<*>)")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoBucoPorta"):
+    elif tipo == "OggettoBucoPorta":
         partiDialogo = []
         nome = "OggettoBucoPorta"
         oggettoDato = False
@@ -191,7 +191,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     elif tipo == "PadreUfficialeServizio":
         partiDialogo = []
         nome = "Soldato"
-        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivatoAllaPortaDellaCittà"]:
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["bussatoAllaPortaCittà"]:
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -208,79 +208,6 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append("Una ragazza! Aprite!")
-            partiDialogo.append(dialogo)
-        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["apertoPortaCittà"]:
-            oggettoDato = False
-            avanzaStoria = True
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("Chi sei e cosa vuoi?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Sono... ehm... mi chiamo Lucy e sto cercando mio fratello. Si chiama Hans e ha più o meno la mia età. Dovrebbe essere passato di qui non molto tempo fa...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("... Sei da sola?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append("Si.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Mmh... ok... se tuo fratello è in città, è stato allocato in uno degli alloggi profughi. E al momento gli alloggi sono tutti occupati... potrebbe aver preso uno degl'ultimi posti disponibili.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Questo però vuol dire che non c'è più spazio per nessun altro.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append("Posso dividere la stanza con lui!")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Tsk, si certo... non credo proprio, vedi: ogni stanza ha una ventina di letti e ogni letto ospita almeno tre o quattro persone: se un alloggio è al completo significa che lì dentro non c'entra più niente.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append("Oh... e come...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"La tua armatura d'acciaio... d-dove l'hai presa... ?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Era... l'ho trovata su un cadavere di un soldato nella foresta e ... ho pensato che mi poteva essere utile per arrivare in città...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"E... cosa ne hai fatto del cadavere?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"L'ho sepolto perché non venisse divorato dai lupi e dai cinghiali...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Mmh... senti... per stanotte potrai essere mia ospite: ti farò preparare una stanza. Ma da domani dovrai togliere il disturbo perché, come avrai già intuito, siamo un po' al limite con le risorse.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append("V-va bene, grazie ma... chi sei tu?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Sono David, ex ufficiale dell'esercito cittadino, ora a comando della guardia notturna.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Vado a predisporre la guardia per la mia assenza e andiamo.")
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

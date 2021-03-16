@@ -152,12 +152,12 @@ def gameloop():
                 if not inizio:
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
 
-                stoppaMusica = SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
+                stoppaMusica = SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia, dati[0])
 
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
                 # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
-                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown = SetPosizioneAudioImpedimenti.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, sottofondoAmbientale, inizio, dati[0], bottoneDown)
+                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown, dati[0] = SetPosizioneAudioImpedimenti.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, sottofondoAmbientale, inizio, dati[0], bottoneDown)
                 if not inizio:
                     vx = x
                     vy = y
@@ -225,9 +225,6 @@ def gameloop():
                 # stanza
                 nomeStanza = SetPosizioneAudioImpedimenti.settaNomeStanza(dati[0], dati[1])
                 imgSfondoStanza = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
-                casellaChiara = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/CasellaChiara.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                casellaScura = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/CasellaScura.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                casellaOscurata = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/CasellaOscurata.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 portaOriz = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
@@ -309,75 +306,75 @@ def gameloop():
 
             if aggiornaImgEquip:
                 # arma
-                armaw = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iw.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armawMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armawMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%ia.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaaMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaaMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armas = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%is.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armasMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%isMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armasMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%isMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armad = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%id.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armadMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%idMov1.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armadMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%idMov2.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armasAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%isAttacco.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
-                armaaAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iaAttacco.png" % dati[6], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                armadAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%idAttacco.png" % dati[6], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                armawAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Spade/Spada%iwAttacco.png" % dati[6], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+                armaw = GlobalImgVar.vetImgSpadeInGame[dati[6]][0]
+                armawMov1 = GlobalImgVar.vetImgSpadeInGame[dati[6]][1]
+                armawMov2 = GlobalImgVar.vetImgSpadeInGame[dati[6]][2]
+                armaa = GlobalImgVar.vetImgSpadeInGame[dati[6]][3]
+                armaaMov1 = GlobalImgVar.vetImgSpadeInGame[dati[6]][4]
+                armaaMov2 = GlobalImgVar.vetImgSpadeInGame[dati[6]][5]
+                armas = GlobalImgVar.vetImgSpadeInGame[dati[6]][6]
+                armasMov1 = GlobalImgVar.vetImgSpadeInGame[dati[6]][7]
+                armasMov2 = GlobalImgVar.vetImgSpadeInGame[dati[6]][8]
+                armad = GlobalImgVar.vetImgSpadeInGame[dati[6]][9]
+                armadMov1 = GlobalImgVar.vetImgSpadeInGame[dati[6]][10]
+                armadMov2 = GlobalImgVar.vetImgSpadeInGame[dati[6]][11]
+                armasAttacco = GlobalImgVar.vetImgSpadeInGame[dati[6]][12]
+                armaaAttacco = GlobalImgVar.vetImgSpadeInGame[dati[6]][13]
+                armadAttacco = GlobalImgVar.vetImgSpadeInGame[dati[6]][14]
+                armawAttacco = GlobalImgVar.vetImgSpadeInGame[dati[6]][15]
                 # arco
-                arcow = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%iw.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcoa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%ia.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcos = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%is.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcod = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%id.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                arcosAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%isAttacco.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
-                arcoaAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%iaAttacco.png" % dati[128], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                arcodAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%idAttacco.png" % dati[128], GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True)
-                arcowAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Archi/Arco%iwAttacco.png" % dati[128], GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True)
+                arcow = GlobalImgVar.vetImgArchiInGame[dati[128]][0]
+                arcoa = GlobalImgVar.vetImgArchiInGame[dati[128]][1]
+                arcos = GlobalImgVar.vetImgArchiInGame[dati[128]][2]
+                arcod = GlobalImgVar.vetImgArchiInGame[dati[128]][3]
+                arcosAttacco = GlobalImgVar.vetImgArchiInGame[dati[128]][4]
+                arcoaAttacco = GlobalImgVar.vetImgArchiInGame[dati[128]][5]
+                arcodAttacco = GlobalImgVar.vetImgArchiInGame[dati[128]][6]
+                arcowAttacco = GlobalImgVar.vetImgArchiInGame[dati[128]][7]
                 # faretra
-                faretraw = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%iw.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                faretraa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%ia.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                faretras = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%is.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                faretrad = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Faretre/Faretra%id.png" % dati[133], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                faretraw = GlobalImgVar.vetImgFaretreInGame[dati[133]][0]
+                faretraa = GlobalImgVar.vetImgFaretreInGame[dati[133]][1]
+                faretras = GlobalImgVar.vetImgFaretreInGame[dati[133]][2]
+                faretrad = GlobalImgVar.vetImgFaretreInGame[dati[133]][3]
                 # armatura
-                armaturaw = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%iw.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaturaa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%ia.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaturas = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armaturad = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Armature/Armatura%id.png" % dati[8], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armaturaw = GlobalImgVar.vetImgArmatureInGame[dati[8]][0]
+                armaturaa = GlobalImgVar.vetImgArmatureInGame[dati[8]][1]
+                armaturas = GlobalImgVar.vetImgArmatureInGame[dati[8]][2]
+                armaturad = GlobalImgVar.vetImgArmatureInGame[dati[8]][3]
                 # scudo
-                scudow = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%iw.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudoa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%ia.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudos = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%is.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudod = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%id.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                scudoDifesa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Scudi/Scudo%iDifesa.png" % dati[7], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                scudow = GlobalImgVar.vetImgScudiInGame[dati[7]][0]
+                scudoa = GlobalImgVar.vetImgScudiInGame[dati[7]][1]
+                scudos = GlobalImgVar.vetImgScudiInGame[dati[7]][2]
+                scudod = GlobalImgVar.vetImgScudiInGame[dati[7]][3]
+                scudoDifesa = GlobalImgVar.vetImgScudiInGame[dati[7]][4]
                 # guanti
-                guantiw = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iw.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiwMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiwMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantia = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%ia.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiaMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiaMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantis = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%is.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantisMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantisMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantid = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%id.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantidMov1 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov1.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantidMov2 = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov2.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantisAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%isAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiaAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantidAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%idAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiwAttacco = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwAttacco.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                guantiDifesa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Guanti/Guanti%iDifesa.png" % dati[129], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                guantiw = GlobalImgVar.vetImgGuantiInGame[dati[129]][0]
+                guantiwMov1 = GlobalImgVar.vetImgGuantiInGame[dati[129]][1]
+                guantiwMov2 = GlobalImgVar.vetImgGuantiInGame[dati[129]][2]
+                guantia = GlobalImgVar.vetImgGuantiInGame[dati[129]][3]
+                guantiaMov1 = GlobalImgVar.vetImgGuantiInGame[dati[129]][4]
+                guantiaMov2 = GlobalImgVar.vetImgGuantiInGame[dati[129]][5]
+                guantis = GlobalImgVar.vetImgGuantiInGame[dati[129]][6]
+                guantisMov1 = GlobalImgVar.vetImgGuantiInGame[dati[129]][7]
+                guantisMov2 = GlobalImgVar.vetImgGuantiInGame[dati[129]][8]
+                guantid = GlobalImgVar.vetImgGuantiInGame[dati[129]][9]
+                guantidMov1 = GlobalImgVar.vetImgGuantiInGame[dati[129]][10]
+                guantidMov2 = GlobalImgVar.vetImgGuantiInGame[dati[129]][11]
+                guantisAttacco = GlobalImgVar.vetImgGuantiInGame[dati[129]][12]
+                guantiaAttacco = GlobalImgVar.vetImgGuantiInGame[dati[129]][13]
+                guantidAttacco = GlobalImgVar.vetImgGuantiInGame[dati[129]][14]
+                guantiwAttacco = GlobalImgVar.vetImgGuantiInGame[dati[129]][15]
+                guantiDifesa = GlobalImgVar.vetImgGuantiInGame[dati[129]][16]
                 # collana
-                collanaw = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%iw.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                collanaa = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%ia.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                collanas = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%is.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                collanad = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipLucy/Collane/Collana%id.png" % dati[130], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                collanaw = GlobalImgVar.vetImgCollaneInGame[dati[130]][0]
+                collanaa = GlobalImgVar.vetImgCollaneInGame[dati[130]][1]
+                collanas = GlobalImgVar.vetImgCollaneInGame[dati[130]][2]
+                collanad = GlobalImgVar.vetImgCollaneInGame[dati[130]][3]
                 # armatura robot
-                armrobw = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipRobo/Batteria%iw.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armroba = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipRobo/Batteria%ia.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armrobs = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipRobo/Batteria%is.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                armrobd = CaricaFileProgetto.loadImage("Risorse/Immagini/EquipRobo/Batteria%id.png" % dati[9], GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                armrobw = GlobalImgVar.vetImgArmRobInGame[dati[9]][0]
+                armroba = GlobalImgVar.vetImgArmRobInGame[dati[9]][1]
+                armrobs = GlobalImgVar.vetImgArmRobInGame[dati[9]][2]
+                armrobd = GlobalImgVar.vetImgArmRobInGame[dati[9]][3]
 
             if npers == 3:
                 pers = GlobalImgVar.persw
@@ -847,7 +844,7 @@ def gameloop():
                             personaggio.girati("s")
                         elif npers == 4:
                             personaggio.girati("w")
-                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
+                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                         dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                         caricaTutto = True
                 if not sposta:
@@ -1190,7 +1187,7 @@ def gameloop():
                         personaggio.girati("s")
                     elif npers == 4:
                         personaggio.girati("w")
-                    EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
+                    EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                     dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                     caricaTutto = True
                     bottoneDown = False
@@ -1482,7 +1479,7 @@ def gameloop():
 
             # faccio animazione di quando ricevo un oggetto speciale
             if oggettoRicevuto:
-                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
+                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                 FunzioniGraficheGeneriche.animaOggettoSpecialeRicevuto(oggettoRicevuto)
                 oggettoRicevuto = False
                 caricaTutto = True
@@ -1517,7 +1514,7 @@ def gameloop():
             # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
             attaccoDiRallo = []
             if attacco != 0:
-                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio)
+                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio)
                 refreshSchermo = True
                 caricaTutto = True
                 # cancello apertura porta se non si può aprire
@@ -1722,7 +1719,7 @@ def gameloop():
                         elif npers == 4:
                             personaggio.girati("w")
                         # aggiorno lo GlobalVarG2.schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
-                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
+                        EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                         dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                         sposta = True
                         caricaTutto = True
@@ -1780,7 +1777,7 @@ def gameloop():
                 caricaTutto = True
                 bottoneDown = False
 
-                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
+                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                 personaggio = PersonaggioObj.PersonaggioObj(xPrimaDiCambioStanza, yPrimaDiCambioStanza, False, "Nessuno", dati[1], dati[0], False)
                 dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
 
@@ -2043,10 +2040,10 @@ def gameloop():
                 refreshSchermo = True
                 if aumentoliv != 0:
                     pvtot = GenericFunc.getVitaTotRallo(dati[4] - aumentoliv, dati[129])
-                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
+                EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                 caricaTutto = False
             if (azioneRobEseguita or nemiciInMovimento or sposta) and not uscitoDaMenu > 0 and turniDaSaltarePerDifesa == 0:
-                primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = Animazioni.anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio)
+                primopasso, caricaTutto, tesoro, bottoneDown, movimentoPerMouse, robot, armrob = Animazioni.anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armas, armaturas, arcos, faretras, collanas, armrob, armrobs, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio)
             if not carim and (refreshSchermo or azioneRobEseguita or nemiciInMovimento or sposta) and turniDaSaltarePerDifesa == 0:
                 refreshSchermo = False
                 apriocchio = False
@@ -2055,7 +2052,7 @@ def gameloop():
                         apriocchio = True
                         break
                 pvtot = GenericFunc.getVitaTotRallo(dati[4], dati[129])
-                EnvPrint.disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
+                EnvPrint.disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:

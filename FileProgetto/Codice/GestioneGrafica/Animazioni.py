@@ -70,7 +70,7 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers
     return animazioneRallo, primopasso
 
 
-def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, vrx, vry, armrobS, casellaChiara, casellaScura, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz):
+def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, avvele, attacco, difesa, vrx, vry, armrobS, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz):
     if sposta and fineanimaz != 0:
         if attacco == 1 and difesa == 0:
             animazioneRallo = True
@@ -111,7 +111,7 @@ def animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana,
                 while i < len(vettoreImgCaselle):
                     if vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                         break
                     i += 3
                 GlobalHWVar.disegnaImmagineSuSchermo(armrobS, (vrx, vry))
@@ -603,13 +603,13 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
 
 
-def animaEsche(vettoreEsche, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata):
+def animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata):
     if "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
         c = 0
         while c < len(vettoreImgCaselle):
             if animaOggetto[1] == vettoreImgCaselle[c] and animaOggetto[2] == vettoreImgCaselle[c + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1])
                 break
             c += 3
     elif not "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
@@ -617,7 +617,7 @@ def animaEsche(vettoreEsche, caseviste, casellaChiara, casellaScura, azioniDaEse
         while c < len(vettoreImgCaselle):
             if animaOggetto[1] == vettoreImgCaselle[c] and animaOggetto[2] == vettoreImgCaselle[c + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1])
                 break
             c += 3
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.vetIcoOggettiMenu[7], (animaOggetto[1], animaOggetto[2]))
@@ -635,7 +635,7 @@ def animaEsche(vettoreEsche, caseviste, casellaChiara, casellaScura, azioniDaEse
                                 while c < len(vettoreImgCaselle):
                                     if vettoreEsche[i + 2] == vettoreImgCaselle[c] and vettoreEsche[i + 3] == vettoreImgCaselle[c + 1]:
                                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1])
                                         break
                                     c += 3
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
@@ -646,7 +646,7 @@ def animaEsche(vettoreEsche, caseviste, casellaChiara, casellaScura, azioniDaEse
         i += 4
 
 
-def animaMorteEsche(x, y, vettoreEsche, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz):
+def animaMorteEsche(x, y, vettoreEsche, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz):
     escheMorte = []
     if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0:
         i = 0
@@ -693,7 +693,7 @@ def animaMorteEsche(x, y, vettoreEsche, casellaChiara, casellaScura, vettoreImgC
                 while c < len(vettoreImgCaselle):
                     if vettoreEsche[i + 2] == vettoreImgCaselle[c] and vettoreEsche[i + 3] == vettoreImgCaselle[c + 1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1])
                         break
                     c += 3
                 if fineanimaz > 5 or (0 < fineanimaz <= 5 and fineanimaz % 4 == 0):
@@ -716,7 +716,7 @@ def animaMorteEsche(x, y, vettoreEsche, casellaChiara, casellaScura, vettoreImgC
     return morteEscheAnimata
 
 
-def animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreImgCaselle):
+def animaDenaro(vettoreDenaro, caseviste, vettoreImgCaselle):
     i = 0
     while i < len(vettoreDenaro):
         j = 0
@@ -727,7 +727,7 @@ def animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreIm
                     while c < len(vettoreImgCaselle):
                         if vettoreDenaro[i + 1] == vettoreImgCaselle[c] and vettoreDenaro[i + 2] == vettoreImgCaselle[c + 1]:
                             GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[c + 2], (vettoreImgCaselle[c], vettoreImgCaselle[c + 1]))
-                            FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1], casellaChiara, casellaScura)
+                            FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[c], vettoreImgCaselle[c + 1])
                             break
                         c += 3
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sacchettoDenaro, (vettoreDenaro[i + 1], vettoreDenaro[i + 2]))
@@ -1404,7 +1404,8 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
         GlobalHWVar.disegnaImmagineSuSchermo(vitanem, (GlobalHWVar.gpx, 0))
 
     # backbround occhio/chiave
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 5), 0))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
     # vista nemici
     if apriocchio:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
@@ -1476,7 +1477,7 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
     return animazionePersonaggi
 
 
-def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, casellaChiara, casellaScura, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio):
+def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, primopasso, cambiosta, scudo, armatura, arma, armaMov1, armaMov2, armaAttacco, scudoDifesa, arco, faretra, arcoAttacco, guanti, guantiMov1, guantiMov2, guantiAttacco, guantiDifesa, collana, armaS, armaturaS, arcoS, faretraS, collanaS, armrob, armrobS, dati, attacco, difesa, bottoneDown, tesoro, aumentoliv, caricaTutto, listaNemici, vettoreEsche, vettoreDenaro, attaccoADistanza, caseviste, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoInquadrato, attaccoDiRallo, attaccoDiColco, statoRalloInizioTurno, statoColcoInizioTurno, statoEscheInizioTurno, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, animaOggetto, listaPersonaggi, apriocchio, chiamarob, movimentoPerMouse, vettoreImgCaselle, nonMostrarePersonaggio):
     schermo_prima_delle_animazioni = GlobalHWVar.schermo.copy()
 
     azioniPossibili = ["attaccoColco", "movimentoColcoNemiciPersonaggi", "attaccoNemici", "aumentaLv"]
@@ -1566,7 +1567,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     while i < len(vettoreImgCaselle):
                         if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
                             GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                            FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                            FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             break
                         i += 3
             else:
@@ -1574,37 +1575,37 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 while i < len(vettoreImgCaselle):
                     if x == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                     if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                     if rx == vettoreImgCaselle[i] and ry == vettoreImgCaselle[i + 1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                     if vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                     for nemico in listaNemici:
                         if nemico.inCasellaVista:
                             if nemico.x == vettoreImgCaselle[i] and nemico.y == vettoreImgCaselle[i + 1]:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             if nemico.vx == vettoreImgCaselle[i] and nemico.vy == vettoreImgCaselle[i + 1]:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                     for personaggio in listaPersonaggi:
                         if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo:
                             if personaggio.x == vettoreImgCaselle[i] and personaggio.y == vettoreImgCaselle[i + 1]:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             if personaggio.vx == vettoreImgCaselle[i] and personaggio.vy == vettoreImgCaselle[i + 1]:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                     i += 3
 
             # disegno: esche e denaro
-            animaEsche(vettoreEsche, caseviste, casellaChiara, casellaScura, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata)
-            animaDenaro(vettoreDenaro, caseviste, casellaChiara, casellaScura, vettoreImgCaselle)
+            animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata)
+            animaDenaro(vettoreDenaro, caseviste, vettoreImgCaselle)
 
             if fineanimaz == 10:
                 schermo_prima_delle_animazioni = GlobalHWVar.schermo.copy().convert()
@@ -1644,7 +1645,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 # animazione danneggiamento Colco
                 robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, attaccoDiRallo, cambiosta, azioniDaEseguire, fineanimaz)
                 # animazione morte esche
-                morteEscheAnimata = animaMorteEsche(x, y, vettoreEsche, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
+                morteEscheAnimata = animaMorteEsche(x, y, vettoreEsche, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
                 # animazione attacco nemici
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)
@@ -1654,10 +1655,10 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 # animazione danneggiamento Colco
                 robot, armrob, statoColcoInizioTurno[1] = animaDanneggiamentoColco(rx, ry, robot, armrob, statoColcoInizioTurno[1], nemicoAttaccante, attaccoDiRallo, cambiosta, azioniDaEseguire, fineanimaz)
                 # animazione morte esche
-                morteEscheAnimata = animaMorteEsche(x, y, vettoreEsche, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
+                morteEscheAnimata = animaMorteEsche(x, y, vettoreEsche, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
                 # animazione attacco Rallo
-                animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, casellaChiara, casellaScura, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz)
+                animazioneRallo = animaAttaccoRallo(sposta, x, y, npers, pers, arma, scudo, armatura, collana, arco, faretra, guanti, armaAttacco, arcoAttacco, guantiAttacco, statoRalloInizioTurno[1], attacco, difesa, vrx, vry, armrobS, animazioneRallo, attaccoADistanza, animaOggetto, vettoreImgCaselle, fineanimaz)
                 # animazione danneggiamento Rallo
                 animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, tecnicaUsata, azioniDaEseguire, fineanimaz)
                 # animazione oggetto lanciato
@@ -1668,7 +1669,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "attaccoColco" in azioniDaEseguire:
                 # animazione morte esche
-                morteEscheAnimata = animaMorteEsche(x, y, vettoreEsche, casellaChiara, casellaScura, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
+                morteEscheAnimata = animaMorteEsche(x, y, vettoreEsche, vettoreImgCaselle, nemicoAttaccante, attaccoDiColco, attaccoDiRallo, morteEscheAnimata, azioniDaEseguire, fineanimaz)
 
                 # animazione attacco Colco
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)

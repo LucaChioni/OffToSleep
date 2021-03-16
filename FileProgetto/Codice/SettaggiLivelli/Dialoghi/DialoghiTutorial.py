@@ -7,7 +7,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     partiDialogo = []
     nome = "Tutorial"
     oggettoDato = False
-    avanzaStoria = True
+    avanzaStoria = False
     menuMercante = False
     scelta = False
     avanzaColDialogo = False

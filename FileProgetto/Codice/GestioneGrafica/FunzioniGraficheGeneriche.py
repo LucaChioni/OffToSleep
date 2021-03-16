@@ -425,11 +425,11 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y, casellaChiara, casellaScura):
+def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y):
     if ((x / GlobalHWVar.gpx) + (y / GlobalHWVar.gpy)) % 2 == 0:
-        GlobalHWVar.disegnaImmagineSuSchermo(casellaChiara, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaChiara, (x, y))
     if ((x / GlobalHWVar.gpx) + (y / GlobalHWVar.gpy)) % 2 == 1:
-        GlobalHWVar.disegnaImmagineSuSchermo(casellaScura, (x, y))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaScura, (x, y))
 
 
 def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):

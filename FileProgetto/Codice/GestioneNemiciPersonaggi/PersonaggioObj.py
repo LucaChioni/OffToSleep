@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
@@ -9,6 +10,7 @@ import Codice.SettaggiLivelli.Dialoghi.DialoghiTutorial as DialoghiTutorial
 import Codice.SettaggiLivelli.Dialoghi.DialoghiCasa as DialoghiCasa
 import Codice.SettaggiLivelli.Dialoghi.DialoghiForestaCadetta as DialoghiForestaCadetta
 import Codice.SettaggiLivelli.Dialoghi.DialoghiStradaPerCitta as DialoghiStradaPerCitta
+import Codice.SettaggiLivelli.Dialoghi.DialoghiCitta as DialoghiCitta
 import Codice.SettaggiLivelli.Dialoghi.DialoghiCasaUfficiale as DialoghiCasaUfficiale
 
 
@@ -58,106 +60,97 @@ class PersonaggioObj(object):
     def caricaImgOggetto(self, nonCaricareImg=False):
         self.imgOggetto = []
         self.imgOggettoDialogo = []
+        disegnaImg = False
         numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoLettoLucy":
+            disegnaImg = False
             numImg = 1
             numImgDialogo = 3
             nomeImgDialogo = ["LucyDormienteDialogo1", "LucyDormienteDialogo2", "Vuota"]
-        if self.tipo == "OggettoLettoHans":
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoComodinoLucy":
+            disegnaImg = True
             numImg = 4
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoComodinoHans":
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo.startswith("OggettoFinestra"):
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoSiepe":
+            disegnaImg = True
             numImg = 3
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoFuoco":
+            disegnaImg = True
             numImg = 3
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoCibo":
+            disegnaImg = True
             numImg = 3
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoMucchioLegna":
+            disegnaImg = True
             numImg = 2
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
         if self.tipo.startswith("OggettoLegna"):
+            disegnaImg = True
             numImg = 2
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoCinghiale":
+            disegnaImg = False
             numImg = 1
             numImgDialogo = 1
             nomeImgDialogo = ["CinghialeDialogo"]
         if self.tipo == "OggettoPersonaCadavereSam":
+            disegnaImg = True
             numImg = 1
             numImgDialogo = 2
             nomeImgDialogo = ["Vuota", "FiglioUfficialeCadavereDialogo"]
         if self.tipo == "OggettoTombaSam":
+            disegnaImg = True
             numImg = 2
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
-        if self.tipo.startswith("OggettoCartelloStaccionata"):
-            numImg = 2
+        if self.tipo == "OggettoMadreUfficialeSeduta":
+            disegnaImg = True
+            numImg = 1
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoCartelloBloccoStrada":
-            numImg = 2
+        if self.tipo == "OggettoPadreUfficialeSeduto":
+            disegnaImg = True
+            numImg = 1
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
-        if self.tipo.startswith("OggettoArmadioCasaDavid"):
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo.startswith("OggettoLettoCasaDavid"):
-            if self.tipo == "OggettoLettoCasaDavidA":
-                numImg = 3
-                numImgDialogo = 1
-                nomeImgDialogo = ["Vuota"]
-            else:
-                numImg = 2
-                numImgDialogo = 1
-                nomeImgDialogo = ["Vuota"]
-        if self.tipo.startswith("OggettoVascaCasaDavid"):
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
+
         i = 1
         while i <= numImg:
             if nonCaricareImg:
-                if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png"):
+                if disegnaImg and not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png"):
                     raise Exception("Immagine \"" + self.tipo + str(i) + ".png\" non trovata...")
                 img = False
                 self.imgOggetto.append(img)
             else:
-                img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                if disegnaImg:
+                    img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                else:
+                    img = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
                 self.imgOggetto.append(img)
             i += 1
         i = 0
         while i < numImgDialogo:
             if nonCaricareImg:
-                if not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png"):
+                if nomeImgDialogo[i] != "Vuota" and not os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png"):
                     raise Exception("Immagine \"" + nomeImgDialogo[i] + ".png\" non trovata...")
                 img = False
                 self.imgOggettoDialogo.append(img)
             else:
-                img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+                if nomeImgDialogo[i] != "Vuota":
+                    img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+                else:
+                    img = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
                 self.imgOggettoDialogo.append(img)
             i += 1
 
@@ -165,9 +158,6 @@ class PersonaggioObj(object):
         refreshSchermo = False
 
         numImgAttuale = 0
-        if self.tipo == "OggettoLettoHans":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                numImgAttuale = 1
         if self.tipo == "OggettoComodinoLucy":
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
                 numImgAttuale = 1
@@ -175,12 +165,6 @@ class PersonaggioObj(object):
                 numImgAttuale = 2
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
                 numImgAttuale = 3
-        if self.tipo == "OggettoComodinoHans":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                numImgAttuale = 1
-        if self.tipo.startswith("OggettoFinestra"):
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                numImgAttuale = 1
         if self.tipo == "OggettoSiepe":
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
                 numImgAttuale = 1
@@ -203,27 +187,6 @@ class PersonaggioObj(object):
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"] or self.avanzamentoDialogo == 1:
                 numImgAttuale = 1
         if self.tipo == "OggettoTombaSam":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                numImgAttuale = 1
-        if self.tipo.startswith("OggettoCartelloStaccionata"):
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                numImgAttuale = 1
-        if self.tipo == "OggettoCartelloBloccoStrada":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                numImgAttuale = 1
-        if self.tipo.startswith("OggettoArmadioCasaDavid"):
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                numImgAttuale = 1
-        if self.tipo.startswith("OggettoLettoCasaDavid"):
-            if self.tipo == "OggettoLettoCasaDavidA":
-                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                    numImgAttuale = 1
-                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"]:
-                    numImgAttuale = 2
-            else:
-                if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                    numImgAttuale = 1
-        if self.tipo.startswith("OggettoVascaCasaDavid"):
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
 
@@ -324,7 +287,7 @@ class PersonaggioObj(object):
         elif direzione == "d":
             self.imgAttuale = self.imgD
 
-        if direzione != "":
+        if direzione != "" and direzione != "fermati" and direzione != "mantieniPosizione":
             self.direzione = direzione
 
     def aggiornaDialogo(self, avanzamentoStoria):
@@ -440,6 +403,8 @@ class PersonaggioObj(object):
             self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiForestaCadetta.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
         elif GlobalGameVar.dictStanze["stradaPerCittà1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["stradaPerCittà3"]:
             self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiStradaPerCitta.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
+        elif GlobalGameVar.dictStanze["città1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["città10"]:
+            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiCitta.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
         elif GlobalGameVar.dictStanze["casaDavid1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaDavid3"]:
             self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiCasaUfficiale.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
 
@@ -449,9 +414,12 @@ class PersonaggioObj(object):
         self.animaSpostamento = True
         movimentoAnnullato = False
 
-        if len(self.percorso) > 0:
+        if len(self.percorso) > 0 and self.percorso[self.numeroMovimento] != "fermati" and self.percorso[self.numeroMovimento] != "mantieniPosizione":
             direzione = self.percorso[self.numeroMovimento]
             self.girati(direzione)
+        elif len(self.percorso) > 0 and self.percorso[self.numeroMovimento] == "mantieniPosizione":
+            direzione = ""
+            self.girati(self.percorso[self.numeroMovimento - 1])
         else:
             direzione = ""
         if direzione == "w":
@@ -495,7 +463,7 @@ class PersonaggioObj(object):
                 break
             i += 3
 
-        if not movimentoAnnullato:
+        if not movimentoAnnullato and len(self.percorso) > 0 and self.percorso[self.numeroMovimento] != "fermati" and self.percorso[self.numeroMovimento] != "mantieniPosizione":
             if self.numeroMovimento < len(self.percorso) - 1:
                 self.numeroMovimento += 1
             else:

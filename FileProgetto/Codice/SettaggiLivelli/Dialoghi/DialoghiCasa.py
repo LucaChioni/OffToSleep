@@ -7,7 +7,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     partiDialogo = []
     nome = "---"
     oggettoDato = False
-    avanzaStoria = True
+    avanzaStoria = False
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
@@ -151,7 +151,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append("Non ho bisogno di acqua.")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoScaffaleBicchieri"):
+    elif tipo == "OggettoScaffaleBicchieri":
         partiDialogo = []
         nome = "OggettoScaffaleBicchieri"
         if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialChiusuraPorte"]:
@@ -245,7 +245,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"È il comodino di Hans. Non c'è niente di interessante... solo una piccola lanterna.")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoFinestra"):
+    elif tipo == "OggettoFinestra":
         partiDialogo = []
         nome = "OggettoFinestra"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -287,7 +287,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"È il letto di Hans e lui non c'è...")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoVasca"):
+    elif tipo == "OggettoVasca":
         partiDialogo = []
         nome = "OggettoVasca"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -312,7 +312,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"È la fontana che usiamo per lavarci. È molto comodo averla dentro casa.")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoGabinetto"):
+    elif tipo == "OggettoGabinetto":
         partiDialogo = []
         nome = "OggettoGabinetto"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -333,7 +333,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"Non mi scappa la pipì.")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoCamino"):
+    elif tipo == "OggettoCamino":
         partiDialogo = []
         nome = "OggettoCamino"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -354,7 +354,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"È il camino che usiamo sempre io e la mamma per cucinare.")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoScaffaleCucina"):
+    elif tipo == "OggettoScaffaleCucina":
         partiDialogo = []
         nome = "OggettoScaffaleCucina"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiere"]:
@@ -487,7 +487,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append(u"Non c'è niente di utile per me qui.")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoLettoGenitori"):
+    elif tipo == "OggettoLettoGenitori":
         partiDialogo = []
         nome = "OggettoLettoGenitori"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
@@ -517,7 +517,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append("Stanno dormento profondamente, non devo fare rumore.")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoCancellettoCasa"):
+    elif tipo == "OggettoCancellettoCasa":
         partiDialogo = []
         nome = "OggettoCancellettoCasa"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -536,7 +536,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Non credo che Hans sia andato nei campi a quest'ora.")
+            dialogo.append("Non credo che Hans sia andato nei campi adesso.")
             partiDialogo.append(dialogo)
     elif tipo == "CaneCasa":
         partiDialogo = []
@@ -563,7 +563,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("tu")
             dialogo.append("Ehi Agglo, hai visto Hans andare da quella parte?")
             partiDialogo.append(dialogo)
-    elif tipo.startswith("OggettoCanaleCasa"):
+    elif tipo == "OggettoCanaleCasa":
         partiDialogo = []
         nome = "OggettoCanaleCasa"
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:

@@ -7,7 +7,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
     partiDialogo = []
     nome = "---"
     oggettoDato = False
-    avanzaStoria = True
+    avanzaStoria = False
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
@@ -253,7 +253,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("Mmh... Cosa ci fai in mezzo alla foresta disarmato a quest'ora?")
+            dialogo.append("Mmh... cosa ci fai in mezzo alla foresta di notte senza neanche un'arma?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -521,7 +521,11 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Qui è dove ho seppellito il figlio di David. Sulla lapide hanno inciso il suo nome: \"Sam\".")
+            dialogo.append(u"Hanno messo una lapide. C'è scritto solo \"Sam\"...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"... È il figlio di David... era...")
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

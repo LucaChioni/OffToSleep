@@ -13,7 +13,7 @@ import FunzioniGraficheGeneriche
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio):
     if caricaTutto:
         GlobalHWVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
         # salvo la lista di cofanetti vicini a ceselle viste per non mettergli la casella oscurata
@@ -31,9 +31,9 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         i = 0
         while i < len(casellePercorribili):
             if ((casellePercorribili[i] / GlobalHWVar.gpx) + (casellePercorribili[i + 1] / GlobalHWVar.gpy)) % 2 == 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
             if ((casellePercorribili[i] / GlobalHWVar.gpx) + (casellePercorribili[i + 1] / GlobalHWVar.gpy)) % 2 == 1:
-                GlobalHWVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
             i += 2
         # disegno l'ombreggiatura delle caselle non viste
         caselleNonVisibiliSenzaPorteChiuse = []
@@ -79,7 +79,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                         break
                     j += 5
                 if not casellaVicinaACasellaVista:
-                    GlobalHWVar.disegnaImmagineSuSchermo(casellaOscurata, (caselleNonVisibili[i], caselleNonVisibili[i + 1]))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaOscurata, (caselleNonVisibili[i], caselleNonVisibili[i + 1]))
             i += 3
 
         # disegna porte
@@ -114,16 +114,16 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         while i < len(vettoreImgCaselle):
             if vx == vettoreImgCaselle[i] and vy == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             elif vrx == vettoreImgCaselle[i] and vry == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             elif x == vettoreImgCaselle[i] and y == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             elif rx == vettoreImgCaselle[i] and ry == vettoreImgCaselle[i + 1]:
                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
             else:
                 casellaTrovata = False
                 if not casellaTrovata:
@@ -131,13 +131,13 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                         if nemico.x == vettoreImgCaselle[i] and nemico.y == vettoreImgCaselle[i + 1]:
                             if not nemico.morto and nemico.inCasellaVista:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
                         if nemico.vx == vettoreImgCaselle[i] and nemico.vy == vettoreImgCaselle[i + 1]:
                             if not nemico.morto and nemico.inCasellaVista:
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
                 if not casellaTrovata:
@@ -146,13 +146,13 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                             if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
                                 if not personaggio.mantieniSempreASchermo:
-                                    FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                    FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
                         if personaggio.vx == vettoreImgCaselle[i] and personaggio.vy == vettoreImgCaselle[i + 1]:
                             if (not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista) or (personaggio.mantieniSempreASchermo and (personaggio.imgAggiornata or caricaTutto)):
                                 GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                             casellaTrovata = True
                             break
                 if not casellaTrovata:
@@ -164,7 +164,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                                 if caseviste[k] == vettoreEsche[j + 2] and caseviste[k + 1] == vettoreEsche[j + 3]:
                                     if caseviste[k + 2] and (primaDiAnima or vettoreEsche[j + 1] > 0):
                                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                                     break
                                 k += 3
                             casellaTrovata = True
@@ -179,7 +179,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                                 if caseviste[k] == vettoreDenaro[j + 1] and caseviste[k + 1] == vettoreDenaro[j + 2]:
                                     if caseviste[k + 2]:
                                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
-                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1], casellaChiara, casellaScura)
+                                        FunzioniGraficheGeneriche.disegnaOmbreggiaturaNellaCasellaSpecifica(vettoreImgCaselle[i], vettoreImgCaselle[i + 1])
                                     break
                                 k += 3
                             casellaTrovata = True
@@ -274,13 +274,14 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     i += 3
             GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
             if not personaggio.vicinoACasellaVista:
-                GlobalHWVar.disegnaImmagineSuSchermo(casellaOscurata, (personaggio.x, personaggio.y))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaOscurata, (personaggio.x, personaggio.y))
             personaggio.imgAggiornata = False
         elif not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista:
             GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
     # backbround occhio/chiave
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 5), 0))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
     # vista nemici
     if apriocchio:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
@@ -465,7 +466,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             GlobalHWVar.aggiornaSchermo()
 
 
-def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp):
+def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp):
     if raffredda > 0 or autoRic1 > 0 or autoRic2 > 0 or mosseRimasteRob < 0:
         messaggioDiErrore = ""
         if raffredda > 0:
@@ -630,7 +631,8 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
 
     # background occhio/chiave
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 5), 0))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
     # vista nemici
     if apriocchio:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
@@ -655,7 +657,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
                     casellaObbiettivo = True
                     break
             if not casellaObbiettivo:
-                GlobalHWVar.disegnaImmagineSuSchermo(casellaOscurata, (GlobalHWVar.gpx * i, GlobalHWVar.gpy * j))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaOscurata, (GlobalHWVar.gpx * i, GlobalHWVar.gpy * j))
             j += 1
         i += 1
 
@@ -821,7 +823,7 @@ def analizzaColco(schermoBackground, casellaOscurata, x, y, vx, vy, rx, ry, chia
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, casellaChiara, casellaScura, casellaOscurata, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio):
+def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -894,9 +896,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     i = 0
     while i < len(casellePercorribili):
         if ((casellePercorribili[i] / GlobalHWVar.gpx) + (casellePercorribili[i + 1] / GlobalHWVar.gpy)) % 2 == 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaChiara, (casellePercorribili[i], casellePercorribili[i + 1]))
         if ((casellePercorribili[i] / GlobalHWVar.gpx) + (casellePercorribili[i + 1] / GlobalHWVar.gpy)) % 2 == 1:
-            GlobalHWVar.disegnaImmagineSuSchermo(casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaScura, (casellePercorribili[i], casellePercorribili[i + 1]))
         i += 2
 
     # controllo caselle attaccabili tue e di Colco
@@ -1101,7 +1103,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     schermoOriginale = GlobalHWVar.schermo.copy().convert()
 
     # background occhio/chiave
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 5), 0))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
     # vista nemici
     if apriocchio:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
@@ -1742,7 +1745,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 # analizza Colco attacco = 1
                 elif attacco == 1 and (xp == rx and yp == ry) and not (rx == x and ry == y):
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    analizzaColco(copy.copy(schermoPrevisioneColco), casellaOscurata, x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemici, True), difesa, ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco), GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp)
+                    analizzaColco(copy.copy(schermoPrevisioneColco), x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemici, True), difesa, ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco), GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp)
                     analisiDiColcoEffettuata = True
                     GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
                 # apri/chiudi porta attacco = 1
@@ -2662,7 +2665,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
 
         # background occhio/chiave
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 5), 0))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
         # vista nemici
         if apriocchio:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
