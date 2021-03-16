@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import pygame
 import GlobalHWVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
@@ -655,75 +656,141 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     while contatoreGlobale < 5:
         # arma
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Spade/Spada%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
         vetImgSpadeInGame.append(vetAnimaTemp)
         # arco
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx * 2, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy * 2), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx * 2, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Archi/Arco%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy * 2, True))
         vetImgArchiInGame.append(vetAnimaTemp)
         # armatura
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgArmatureInGame.append(vetAnimaTemp)
         # scudo
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Scudi/Scudo%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgScudiInGame.append(vetAnimaTemp)
         # guanti
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov1.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idMov2.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%isAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iaAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%idAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iwAttacco.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Guanti/Guanti%iDifesa.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgGuantiInGame.append(vetAnimaTemp)
         # collana
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Collane/Collana%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgCollaneInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
     vetImgFaretreInGame = []
@@ -731,10 +798,16 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     while contatoreGlobale < 4:
         # faretra
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Faretre/Faretra%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgFaretreInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
     vetImgArmRobInGame = []
@@ -742,10 +815,16 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     while contatoreGlobale < 5:
         # armatura robot
         vetAnimaTemp = []
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        if contatoreGlobale == 0:
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
+        else:
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgArmRobInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
 
