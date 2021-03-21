@@ -274,7 +274,7 @@ global vetImgCollaneInGame
 global vetImgFaretreInGame
 global vetImgArmRobInGame
 
-numImgTotali = 1408
+numImgTotali = 1346
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)

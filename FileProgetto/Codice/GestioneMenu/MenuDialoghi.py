@@ -81,10 +81,10 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
             if voceMarcataVecchia != voceMarcata and not primoframe:
                 puntatoreSpostato = True
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-        primoframe = False
 
         # gestione degli input
-        bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
+        if not primoframe:
+            bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             fineDialogo = True
@@ -195,6 +195,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
             puntatoreSpostato = False
             GlobalHWVar.aggiornaSchermo()
 
+        primoframe = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     # GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
