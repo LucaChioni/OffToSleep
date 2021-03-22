@@ -101,6 +101,7 @@ clockVideo = pygame.time.Clock()
 clockFadeToBlack = pygame.time.Clock()
 clockScritturaDialogo = pygame.time.Clock()
 fpsMainLoop = 60
+fpsMainLoopDifesa = 240
 fpsInterazioni = 30
 fpsMenu = 30
 fpsAnimazioni = 30
@@ -510,7 +511,10 @@ def disegnaImmagineSuSchermo(img, coordinate):
 def aggiornaSchermo():
     global listaRettangoliDaAggiornare
     global aggiornaTuttoLoSchermo
-    pygame.display.update(listaRettangoliDaAggiornare)
+    if aggiornaTuttoLoSchermo:
+        pygame.display.update()
+    else:
+        pygame.display.update(listaRettangoliDaAggiornare)
     listaRettangoliDaAggiornare = []
     aggiornaTuttoLoSchermo = False
     gc.collect()

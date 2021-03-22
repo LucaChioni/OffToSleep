@@ -1707,7 +1707,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
-                # print (GlobalVar.clockAnimazioni.get_fps())
+                # print (GlobalHWVar.clockAnimazioni.get_fps())
             fineanimaz -= 1
 
         azioniDaEseguire = []

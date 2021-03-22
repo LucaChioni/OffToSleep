@@ -1643,7 +1643,7 @@ def gameloop():
             if dati[124] > 0 and sposta:
                 dati[124] = dati[124] - 1
             # veleno
-            if dati[121] and sposta and dati[5] > 0:
+            if dati[121] and sposta and dati[5] > 0 and turniDaSaltarePerDifesa == 0:
                 dati[5] = dati[5] - 2
                 if dati[5] <= 0:
                     dati[5] = 1
@@ -2161,6 +2161,10 @@ def gameloop():
             GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-        GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoop)
+        if turniDaSaltarePerDifesa == 0:
+            GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoop)
+        else:
+            GlobalHWVar.clockMainLoop.tick(GlobalHWVar.fpsMainLoopDifesa)
+            print (GlobalHWVar.clockMainLoop.get_fps())
 
 gameloop()
