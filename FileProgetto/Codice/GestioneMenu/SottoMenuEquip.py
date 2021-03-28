@@ -1360,7 +1360,7 @@ def oggetti(dati, colcoInCasellaVista):
                     if usa == 10:
                         attacco = 6
                         yp = GlobalHWVar.gsy // 18 * 15.2
-                    if (usa == 2 or usa == 5) and dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                    if (usa == 2 or usa == 5) and dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
@@ -1404,13 +1404,13 @@ def oggetti(dati, colcoInCasellaVista):
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 2:
-                        if dati[32] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                        if dati[32] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and colcoInCasellaVista:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 2
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                            if dati[35] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista):
+                            if dati[35] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] or not colcoInCasellaVista):
                                 impossibileUsareCaricaBatt = True
                     if oggetton == 3:
                         if dati[33] > 0:
@@ -1427,13 +1427,13 @@ def oggetti(dati, colcoInCasellaVista):
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     if oggetton == 5:
-                        if dati[35] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                        if dati[35] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and colcoInCasellaVista:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                             usa = 5
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                            if dati[35] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] or not colcoInCasellaVista):
+                            if dati[35] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] or not colcoInCasellaVista):
                                 impossibileUsareCaricaBatt = True
                     if oggetton == 6:
                         if dati[36] > 0:
@@ -1547,7 +1547,7 @@ def oggetti(dati, colcoInCasellaVista):
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 45)
                 if dati[32] >= 0:
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and colcoInCasellaVista:
                         FunzioniGraficheGeneriche.messaggio("Alimentazione 100gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Alimentazione 100gr", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
@@ -1565,7 +1565,7 @@ def oggetti(dati, colcoInCasellaVista):
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 45)
                 if dati[35] >= 0:
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and colcoInCasellaVista:
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and colcoInCasellaVista:
                         FunzioniGraficheGeneriche.messaggio("Alimentazione 250gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("Alimentazione 250gr", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
@@ -1624,12 +1624,12 @@ def oggetti(dati, colcoInCasellaVista):
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 3, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 14))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 19.5, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 15.1))
                 if impossibileUsareCaricaBatt:
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and not colcoInCasellaVista:
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and not colcoInCasellaVista:
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 12.5))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 15.5))
                         FunzioniGraficheGeneriche.messaggio(u"Impo irraggiungibile!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 14.15, 55, centrale=True)
-                    elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                    elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 12.5))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 15.5))
@@ -1684,7 +1684,7 @@ def oggetti(dati, colcoInCasellaVista):
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[32] >= 0 and oggetton == 2:
                 FunzioniGraficheGeneriche.messaggio("Alimentazione 100gr:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
-                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                     FunzioniGraficheGeneriche.messaggio("Recupera 250 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Nutrimento per usa specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
@@ -1702,7 +1702,7 @@ def oggetti(dati, colcoInCasellaVista):
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[35] >= 0 and oggetton == 5:
                 FunzioniGraficheGeneriche.messaggio("Alimentazione 250gr:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
-                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                     FunzioniGraficheGeneriche.messaggio("Recupera 600 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Nutrimento per usa specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
@@ -1752,7 +1752,7 @@ def oggetti(dati, colcoInCasellaVista):
                 difesapiu = GlobalImgVar.difesapiuMenu
                 GlobalHWVar.disegnaImmagineSuSchermo(difesapiu, ((GlobalHWVar.gsx // 32 * 13.9) + (4 * GlobalHWVar.gpx // 4 * 3), GlobalHWVar.gsy // 18 * 6.3))
             # vita-status robo
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                 if dati[10] < 0:
                     dati[10] = 0
                 FunzioniGraficheGeneriche.messaggio("Pe:  " + str(dati[10]) + " / " + str(entot), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.1, GlobalHWVar.gsy // 18 * 8.3, 50)

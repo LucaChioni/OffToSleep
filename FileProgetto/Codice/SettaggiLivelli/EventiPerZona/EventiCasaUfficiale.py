@@ -73,7 +73,7 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
             if personaggio.tipo == "PadreUfficialeServizio":
                 personaggio.percorso = ["a", "mantieniPosizione"]
                 personaggio.numeroMovimento = 1
-            if personaggio.tipo == "ServoDavid":
+            if personaggio.tipo == "ServoDavid" and personaggio.x == GlobalHWVar.gpx * 19 and personaggio.y == GlobalHWVar.gpx * 2:
                 personaggio.percorso = ["s", "s", "d", "mantieniPosizione"]
                 personaggio.numeroMovimento = 0
         avanzamentoStoria += 1

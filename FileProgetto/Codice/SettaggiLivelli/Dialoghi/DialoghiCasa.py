@@ -297,7 +297,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È una specie di fontana che abbiamo fatto io e il babbo per poterci lavare senza dover uscire di casa.")
+            dialogo.append(u"È una vasca da bagno! L'abbiamo fatta io e mio padre per poterci lavare senza dover uscire di casa.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -310,7 +310,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È la fontana che usiamo per lavarci. È molto comodo averla dentro casa.")
+            dialogo.append(u"È la vasca che usiamo per lavarci. È molto comodo averne una in casa.")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoGabinetto":
         partiDialogo = []
@@ -394,7 +394,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È un tavolino con dei fiori... lo hanno voluto mettere perchè sembrava uno spazio troppo vuoto.")
+            dialogo.append(u"È un tavolino con dei fiori... lo hanno voluto mettere perché sembrava uno spazio troppo vuoto.")
             partiDialogo.append(dialogo)
         elif GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"]:
             oggettoDato = False
@@ -437,7 +437,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È il comodino della mamma... niente di interessante.")
+            dialogo.append(u"È il comodino di mia madre... niente di interessante.")
             partiDialogo.append(dialogo)
         elif GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
             oggettoDato = False
@@ -467,7 +467,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È il comodino del babbo... niente di interessante qui, solo un po' di roba puzzolente.")
+            dialogo.append(u"È il comodino di mio padre... niente di interessante qui, solo un po' di roba puzzolente.")
             partiDialogo.append(dialogo)
         elif GlobalGameVar.dictAvanzamentoStoria["inizioRicercaChiaveRipostiglio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["trovataChiaveRipostiglio"]:
             oggettoDato = False
@@ -573,7 +573,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È il canale che abbiamo costruito per portare l'acqua del fiume nelle fontane in casa.")
+            dialogo.append(u"È il canale che abbiamo costruito per portare l'acqua del fiume nei rubinetti di casa.")
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False

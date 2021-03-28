@@ -123,5 +123,101 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
             dialogo.append("personaggio")
             dialogo.append(u"Siamo arrivati.")
             partiDialogo.append(dialogo)
+    elif tipo == "Ragazzo1":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
+    elif tipo == "Ragazzo2":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
+    elif tipo == "Ragazzo3":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
+    elif tipo == "Ragazza1":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
+    elif tipo == "Ragazza2":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
+    elif tipo == "Ragazza3":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
+    elif tipo == "GuardiaCitta":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
+    elif tipo == "Mercante":
+        partiDialogo = []
+        nome = "Soldato"
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["entratoInCittà"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append("")
+            partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

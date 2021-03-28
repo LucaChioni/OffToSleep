@@ -1226,7 +1226,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
 
     # disegno la vita del Colco / esca / mostro selezionato
-    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]):
+    if nemicoInquadrato == "Colco" or (not nemicoInquadrato and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]):
         if "attaccoRallo" in azioniDaEseguire and len(attaccoDiRallo) > 0 and "Colco" in attaccoDiRallo and fineanimaz == 5:
             i = 0
             while i < len(attaccoDiRallo):
@@ -1416,7 +1416,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
     else:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
     # chiave robo
-    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
         if chiamarob:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
         else:

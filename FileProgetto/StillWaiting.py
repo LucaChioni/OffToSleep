@@ -161,7 +161,7 @@ def gameloop():
                 if not inizio:
                     vx = x
                     vy = y
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         rx = x
                         ry = y
                         vrx = x
@@ -457,12 +457,12 @@ def gameloop():
             # aggiorno inCasellaVista di nemici e personaggi
             listaNemici, listaPersonaggi = GenericFunc.aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
             # aggiorno il campo attaccabile di colco
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and rx == GlobalHWVar.gsx and ry == GlobalHWVar.gsy:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and rx == GlobalHWVar.gsx and ry == GlobalHWVar.gsy:
                 rx = x
                 ry = y
                 vrx = rx
                 vry = ry
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                 caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
                 posizioneColcoAggiornamentoCaseAttac = [rx, ry]
             # faccio il primo aggiornamento delle caselle attaccabili dei nemici (lo faccio perché queste caselle non vengono aggiornate finché il nemico non si sposta almeno una volta)
@@ -514,7 +514,7 @@ def gameloop():
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "start"
-            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"])) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
+            elif ((type(nemicoInquadrato) is str and nemicoInquadrato == "Colco") or (not nemicoInquadrato and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"])) and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 4:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
@@ -526,7 +526,7 @@ def gameloop():
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1.5 and GlobalHWVar.gsx // 32 * 27.8 < xMouse <= GlobalHWVar.gsx // 32 * 30.2:
+            elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1.5 and GlobalHWVar.gsx // 32 * 27.8 < xMouse <= GlobalHWVar.gsx // 32 * 30.2:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
@@ -710,7 +710,7 @@ def gameloop():
                 GlobalHWVar.canaleSoundPassiRallo.stop()
                 nx = 0
                 ny = 0
-                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoTeleColco)
                     refreshSchermo = True
                     if chiamarob:
@@ -796,7 +796,7 @@ def gameloop():
                             # aggiorno inCasellaVista di nemici e personaggi
                             listaNemici, listaPersonaggi = GenericFunc.aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
                             # aggiorno il campo attaccabile di colco
-                            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                                 caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
                                 posizioneColcoAggiornamentoCaseAttac = [rx, ry]
                             # aggiorno la vista dei nemici
@@ -921,7 +921,7 @@ def gameloop():
                         # aggiorno inCasellaVista di nemici e personaggi
                         listaNemici, listaPersonaggi = GenericFunc.aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
                         # aggiorno il campo attaccabile di colco
-                        if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                        if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                             caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
                             posizioneColcoAggiornamentoCaseAttac = [rx, ry]
                         # aggiorno la vista dei nemici
@@ -1674,7 +1674,7 @@ def gameloop():
                         # aggiorno inCasellaVista di nemici e personaggi
                         listaNemici, listaPersonaggi = GenericFunc.aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi)
                         # aggiorno il campo attaccabile di colco
-                        if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                        if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                             caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
                             posizioneColcoAggiornamentoCaseAttac = [rx, ry]
                         # aggiorno la vista dei nemici
@@ -1816,18 +1816,18 @@ def gameloop():
 
             # movimento-azioni robo
             azioneRobEseguita = False
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and dati[122] > 0 and (dati[125] > 0 or dati[126] > 0):
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and dati[122] > 0 and (dati[125] > 0 or dati[126] > 0):
                 # se surriscaldato toglie vel+ e efficienza
                 dati[125] = 0
                 dati[126] = 0
                 refreshSchermo = True
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and sposta and mosseRimasteRob == 0 and not morterob:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and sposta and mosseRimasteRob == 0 and not morterob:
                 if dati[125] > 0:
                     mosseRimasteRob = 2
                 else:
                     mosseRimasteRob = 1
             # effetto di surriscalda / raffreddamento / auto-ricarica / auto-ricarica+
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and sposta:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and sposta:
                 # surriscalda
                 if dati[122] > 0:
                     dati[122] = dati[122] - 1
@@ -1865,10 +1865,10 @@ def gameloop():
                         dati[10] = entot
                     dati[122] = 10
             listaNemiciAttaccatiADistanzaRobo = False
-            # attaccoDiColco [obbiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perchè deve rimanere per più turni)]
+            # attaccoDiColco [obbiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perché deve rimanere per più turni)]
             attaccoDiColco = []
             tecnicaUsata = False
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and mosseRimasteRob > 0 and not morterob and not cambiosta:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and mosseRimasteRob > 0 and not morterob and not cambiosta:
                 vrx = rx
                 vry = ry
 
@@ -1913,12 +1913,12 @@ def gameloop():
                 if (rx != vrx or ry != vry) and not chiamarob:
                     caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
                     posizioneColcoAggiornamentoCaseAttac = [rx, ry]
-            elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and sposta and mosseRimasteRob < 0 and not morterob:
+            elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and sposta and mosseRimasteRob < 0 and not morterob:
                 mosseRimasteRob += 1
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and morterob:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and morterob:
                 robot = GlobalImgVar.robomo
                 armrob = GlobalImgVar.armrobmo
-            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                 rx = GlobalHWVar.gsx
                 ry = GlobalHWVar.gsy
                 vrx = rx
@@ -2097,6 +2097,15 @@ def gameloop():
 
             # aggiorna i dialoghi e le img di tutti i personaggi in base all'avanzamento nella storia
             for personaggio in listaPersonaggi:
+                # aggiorno il dialogo in caso di oggetto-personaggi che sono in più di una casella
+                if personaggio.tipo.startswith("Oggetto"):
+                    i = 0
+                    while i < len(listaAvanzamentoDialoghi):
+                        if personaggio.tipo == listaAvanzamentoDialoghi[i]:
+                            if personaggio.avanzamentoDialogo != listaAvanzamentoDialoghi[i + 1]:
+                                personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
+                            break
+                        i += 2
                 personaggio.aggiornaDialogo(dati[0])
                 if personaggio.tipo.startswith("Oggetto"):
                     imgAggiornata = personaggio.aggiornaImgOggetto(dati[0])

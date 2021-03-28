@@ -839,7 +839,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     voceMarcata = 2
                     xp = GlobalHWVar.gsx // 32 * 1
                     yp = GlobalHWVar.gsy // 18 * 6
-                elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and GlobalHWVar.gsy // 18 * 6.8 <= yMouse <= GlobalHWVar.gsy // 18 * 7.8:
+                elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and GlobalHWVar.gsy // 18 * 6.8 <= yMouse <= GlobalHWVar.gsy // 18 * 7.8:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
                     voceMarcata = 3
@@ -960,7 +960,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     yp = yp + GlobalHWVar.gsy // 18 * 7
                     voceMarcata += 4
-                elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 2:
+                elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and voceMarcata == 2:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     yp = yp + GlobalHWVar.gsy // 18 * 2
                     voceMarcata += 2
@@ -982,7 +982,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     yp = yp - GlobalHWVar.gsy // 18 * 7
                     voceMarcata -= 4
-                elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and voceMarcata == 4:
+                elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and voceMarcata == 4:
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                     yp = yp - GlobalHWVar.gsy // 18 * 2
                     voceMarcata -= 2
@@ -1025,7 +1025,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     FunzioniGraficheGeneriche.messaggio("Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                     FunzioniGraficheGeneriche.messaggio("Oggetti", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 50)
                     FunzioniGraficheGeneriche.messaggio("Equipaggiamento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6, 50)
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         if colcoInCasellaVista:
                             FunzioniGraficheGeneriche.messaggio("Setta Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7, 50)
                         else:
@@ -1062,7 +1062,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     GlobalHWVar.disegnaImmagineSuSchermo(perssta, (GlobalHWVar.gsx // 32 * 11.5, GlobalHWVar.gsy // 18 * 2.5))
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 12), int(GlobalHWVar.gpy * 12.5)), (int(GlobalHWVar.gpx * 21), int(GlobalHWVar.gpy * 12.5)), 2)
 
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"]:
+                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         # vita-status robo
                         if dati[10] < 0:
                             dati[10] = 0
@@ -1323,7 +1323,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         sposta = True
                         risposta = True
                     # carica batt
-                    if voceMarcata == 2 and dati[32] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
+                    if voceMarcata == 2 and dati[32] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                         animaOggetto[0] = "caricaBatterie"
                         dati[10] = dati[10] + 250
                         if dati[10] > entot:
@@ -1357,7 +1357,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                         sposta = True
                         risposta = True
                     # carica migliorato
-                    if voceMarcata == 5 and dati[35] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["incontratoColco"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
+                    if voceMarcata == 5 and dati[35] > 0 and dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (abs(x - rx) + abs(y - ry)) <= GlobalHWVar.gpx:
                         animaOggetto[0] = "caricaBatterieMigliorato"
                         dati[10] = dati[10] + 600
                         if dati[10] > entot:

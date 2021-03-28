@@ -415,8 +415,12 @@ class PersonaggioObj(object):
         movimentoAnnullato = False
 
         if len(self.percorso) > 0 and self.percorso[self.numeroMovimento] != "fermati" and self.percorso[self.numeroMovimento] != "mantieniPosizione":
-            direzione = self.percorso[self.numeroMovimento]
-            self.girati(direzione)
+            if self.percorso[self.numeroMovimento].endswith("Gira"):
+                direzione = ""
+                self.girati(self.percorso[self.numeroMovimento][0])
+            else:
+                direzione = self.percorso[self.numeroMovimento]
+                self.girati(direzione)
         elif len(self.percorso) > 0 and self.percorso[self.numeroMovimento] == "mantieniPosizione":
             direzione = ""
             self.girati(self.percorso[self.numeroMovimento - 1])

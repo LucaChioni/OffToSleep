@@ -181,6 +181,11 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["andatoADormireCasaDavid"] = i
     i += 1
     dictAvanzamentoStoria["inizioSecondoGiorno"] = i
+    dictAvanzamentoStoria["mercantePozione"] = i
+    dictAvanzamentoStoria["mercanteMedicina"] = i
+    dictAvanzamentoStoria["mercanteBomba"] = i
+    dictAvanzamentoStoria["mercanteBomVele"] = i
+    dictAvanzamentoStoria["mercanteEsca"] = i
     i += 1
     dictAvanzamentoStoria["dialogoServoRisveglioSecondoGiorno"] = i
     i += 1
@@ -190,39 +195,54 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["uscitoCasaDavid"] = i
 
+    i += 1
+    dictAvanzamentoStoria["trovatoAlloggioProfughi"] = i
+    i += 1
+    dictAvanzamentoStoria["cercatoHansInAlloggiProfughi"] = i
+    i += 1
+    dictAvanzamentoStoria["chiestoDiHansAlMercante"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivatoInBiblioteca"] = i
+    i += 1
+    dictAvanzamentoStoria["incontratoBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["risoltoPrimoEnigmaBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["risoltoSecondoEnigmaBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["risoltoTerzoEnigmaBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["ricevutoImpo"] = i
+    dictAvanzamentoStoria["mercanteAlimantaz"] = i
+    i += 1
+    dictAvanzamentoStoria["inizioViaggioVersoNeil"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivoStradaPerSelvaArida"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivoSelvaArida"] = i
+    dictAvanzamentoStoria["mappaSelvaArida"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivoAvampostoDiRod"] = i
+    dictAvanzamentoStoria["mappaAvampostoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivoLabirinto"] = i
+    dictAvanzamentoStoria["mappaLabirinto"] = i
+
     i += 100
     i += 1
-    dictAvanzamentoStoria["incontratoColco"] = i
+    dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] = i
     i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mercantePozione"] = i
-    i += 1
-    dictAvanzamentoStoria["mercanteAlimantaz"] = i
-    i += 1
-    dictAvanzamentoStoria["mercanteMedicina"] = i
     i += 1
     dictAvanzamentoStoria["mercanteSuperPoz"] = i
     i += 1
     dictAvanzamentoStoria["mercanteAlimMiglio"] = i
     i += 1
-    dictAvanzamentoStoria["mercanteBomba"] = i
-    i += 1
-    dictAvanzamentoStoria["mercanteBomVele"] = i
-    i += 1
-    dictAvanzamentoStoria["mercanteEsca"] = i
-    i += 1
     dictAvanzamentoStoria["mercanteBomAppi"] = i
     i += 1
     dictAvanzamentoStoria["mercanteBomPote"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mappaSelvaArida"] = i
-    i += 1
-    dictAvanzamentoStoria["mappaAvampostoDiRod"] = i
-    i += 1
-    dictAvanzamentoStoria["mappaLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["mappaCastello"] = i
     i += 1
@@ -337,6 +357,21 @@ def definisciStanze():
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["casaDavid3"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["biblioteca1"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["biblioteca2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["stradaPerSelvaArida1"] = i
+    vetStanzePacifiche.append(i)
+
+
+    i += 100
+    i += 1
+    dictStanze["stradaPerPassoMontano1"] = i
     vetStanzePacifiche.append(i)
 
     return dictStanze, vetStanzePacifiche
