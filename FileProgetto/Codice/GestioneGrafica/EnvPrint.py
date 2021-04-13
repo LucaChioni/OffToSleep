@@ -1875,7 +1875,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             break
                         i += 3
                     if continua:
-                        # conferma lancio GlobalVarG2.esche
+                        # conferma lancio esche
                         confesca = True
                         i = 0
                         while i < len(vettoreDenaro):

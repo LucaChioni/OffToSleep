@@ -138,7 +138,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
                     personaggio.avanzaColDialogo = False
                     i = 0
                     while i < len(listaAvanzamentoDialoghi):
-                        if personaggio.tipo == listaAvanzamentoDialoghi[i]:
+                        if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
                             listaAvanzamentoDialoghi[i + 1] = personaggio.avanzamentoDialogo
                             break
                         i += 2
@@ -1004,7 +1004,7 @@ def menuMercante(dati):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 6.8)), (int(GlobalHWVar.gpx * 5.3) - 1, int(GlobalHWVar.gpy * 7.5)), 2)
                 FunzioniGraficheGeneriche.messaggio("Annulla", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 6.9, 50)
             else:
-                FunzioniGraficheGeneriche.messaggio("Prendi quello che ti serve", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
+                FunzioniGraficheGeneriche.messaggio("Prendi quello che ti serve.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, 50)
                 if primoFrame or oggettonVecchio != oggetton or voceMarcataVecchia != voceMarcata:
                     if 1 <= oggetton <= 10:
                         GlobalHWVar.disegnaImmagineSuSchermo(imgOggetti[oggetton - 1], (GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 3))

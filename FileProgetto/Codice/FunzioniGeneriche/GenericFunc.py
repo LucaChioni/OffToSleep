@@ -1786,13 +1786,13 @@ def cambiaProtagonista(nome):
     GlobalImgVar.persAvvele = CaricaFileProgetto.loadImage('Risorse/Immagini/Personaggi/' + nome + '/PersonaggioAvvelenato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
 
-def aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPersonaggi):
+def aggiornaInCasellaVistaDiNemiciEPersonaggi(caselleNonVisibili, listaNemici, listaPersonaggi):
     for nemico in listaNemici:
         nemico.inCasellaVista = False
         i = 0
-        while i < len(caseviste):
-            if caseviste[i] == nemico.x and caseviste[i + 1] == nemico.y:
-                if caseviste[i + 2]:
+        while i < len(caselleNonVisibili):
+            if caselleNonVisibili[i] == nemico.x and caselleNonVisibili[i + 1] == nemico.y:
+                if caselleNonVisibili[i + 2]:
                     nemico.inCasellaVista = True
                 break
             i += 3
@@ -1801,18 +1801,18 @@ def aggiornaInCasellaVistaDiNemiciEPersonaggi(caseviste, listaNemici, listaPerso
         if not personaggio.mantieniSempreASchermo:
             personaggio.inCasellaVista = False
             i = 0
-            while i < len(caseviste):
-                if caseviste[i] == personaggio.x and caseviste[i + 1] == personaggio.y:
-                    if caseviste[i + 2]:
+            while i < len(caselleNonVisibili):
+                if caselleNonVisibili[i] == personaggio.x and caselleNonVisibili[i + 1] == personaggio.y:
+                    if caselleNonVisibili[i + 2]:
                         personaggio.inCasellaVista = True
                     break
                 i += 3
         else:
             personaggio.vicinoACasellaVista = False
             i = 0
-            while i < len(caseviste):
-                if (personaggio.x + GlobalHWVar.gpx == caseviste[i] and personaggio.y == caseviste[i + 1]) or (personaggio.x - GlobalHWVar.gpx == caseviste[i] and personaggio.y == caseviste[i + 1]) or (personaggio.x == caseviste[i] and personaggio.y + GlobalHWVar.gpy == caseviste[i + 1]) or (personaggio.x == caseviste[i] and personaggio.y - GlobalHWVar.gpy == caseviste[i + 1]):
-                    if caseviste[i + 2]:
+            while i < len(caselleNonVisibili):
+                if (personaggio.x + GlobalHWVar.gpx == caselleNonVisibili[i] and personaggio.y == caselleNonVisibili[i + 1]) or (personaggio.x - GlobalHWVar.gpx == caselleNonVisibili[i] and personaggio.y == caselleNonVisibili[i + 1]) or (personaggio.x == caselleNonVisibili[i] and personaggio.y + GlobalHWVar.gpy == caselleNonVisibili[i + 1]) or (personaggio.x == caselleNonVisibili[i] and personaggio.y - GlobalHWVar.gpy == caselleNonVisibili[i + 1]):
+                    if caselleNonVisibili[i + 2]:
                         personaggio.vicinoACasellaVista = True
                         break
                 i += 3

@@ -3,7 +3,9 @@
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
-def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo):
+def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
+    tipo = tipoId.split("-")[0]
+
     partiDialogo = []
     nome = "Tutorial"
     oggettoDato = False

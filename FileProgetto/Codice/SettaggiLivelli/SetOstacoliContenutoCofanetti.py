@@ -9,6 +9,7 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliForestaCadetta as Ostacoli
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliStradaPerCitta as OstacoliStradaPerCitta
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliCitta as OstacoliCitta
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliCasaUfficiale as OstacoliCasaUfficiale
+import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliBiblioteca as OstacoliBiblioteca
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):
@@ -391,6 +392,26 @@ def getEntrateStanze(stanza, avanzamentoStoria):
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 11, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["casaDavid2"]])
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 12, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["casaDavid2"]])
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 13, +GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["casaDavid2"]])
+    elif stanza == GlobalGameVar.dictStanze["biblioteca1"]:
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["città7"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["città7"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
+    elif stanza == GlobalGameVar.dictStanze["biblioteca2"]:
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
 
     return entrateStanza
 
@@ -429,6 +450,8 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliCitta.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
         elif GlobalGameVar.dictStanze["casaDavid1"] <= stanza <= GlobalGameVar.dictStanze["casaDavid3"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliCasaUfficiale.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
+        elif GlobalGameVar.dictStanze["biblioteca1"] <= stanza <= GlobalGameVar.dictStanze["biblioteca2"]:
+            stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliBiblioteca.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
 
         # controllo se le porte sono chiuse o aperte
         if not (nx == 0 and ny == 0):

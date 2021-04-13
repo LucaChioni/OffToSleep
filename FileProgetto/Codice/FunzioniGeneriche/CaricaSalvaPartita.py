@@ -51,6 +51,9 @@ def salvataggio(n, datiAttuali, datiGameover):
                 ultimoObbiettivoColco = datiGameover[10]
                 obbiettivoCasualeColco = datiGameover[11]
 
+            # salvo l'avanzamento della storia per metterlo nei personaggi
+            avanzamentoStoria = dati[0]
+
             # conversione della posizione in caselle
             dati[2] = dati[2] // GlobalHWVar.gpx
             dati[3] = dati[3] // GlobalHWVar.gpy
@@ -125,9 +128,9 @@ def salvataggio(n, datiAttuali, datiGameover):
                 scrivi.write("%i_" % (personaggio.x // GlobalHWVar.gpx))
                 scrivi.write("%i_" % (personaggio.y // GlobalHWVar.gpy))
                 scrivi.write("%s_" % personaggio.direzione)
-                scrivi.write("%s_" % personaggio.tipo)
+                scrivi.write("%s_" % personaggio.tipoId)
                 scrivi.write("%i_" % personaggio.stanzaDiAppartenenza)
-                scrivi.write("%i_" % personaggio.avanzaStoria)
+                scrivi.write("%i_" % avanzamentoStoria)
                 scrivi.write("[_")
                 for direzione in personaggio.percorso:
                     scrivi.write("%s_" % direzione)

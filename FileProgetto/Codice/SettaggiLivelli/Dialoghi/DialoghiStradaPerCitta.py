@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import GlobalHWVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
-def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo):
+def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoDialogo, monetePossedute):
+    tipo = tipoId.split("-")[0]
+
     partiDialogo = []
     nome = "---"
     oggettoDato = False
@@ -177,7 +179,7 @@ def setDialogo(tipo, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzamentoD
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append("(<*>#italic#Meglio lasciarlo al suo lavoro...<*>)")
+                dialogo.append("(Meglio lasciarlo al suo lavoro...)")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["stradaPerCittà3"]:
             if y == GlobalHWVar.gpy * 5:

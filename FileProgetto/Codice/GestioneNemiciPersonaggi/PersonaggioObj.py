@@ -5,19 +5,15 @@ import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
-import Codice.SettaggiLivelli.Dialoghi.DialoghiNessuno as DialoghiNessuno
-import Codice.SettaggiLivelli.Dialoghi.DialoghiTutorial as DialoghiTutorial
-import Codice.SettaggiLivelli.Dialoghi.DialoghiCasa as DialoghiCasa
-import Codice.SettaggiLivelli.Dialoghi.DialoghiForestaCadetta as DialoghiForestaCadetta
-import Codice.SettaggiLivelli.Dialoghi.DialoghiStradaPerCitta as DialoghiStradaPerCitta
-import Codice.SettaggiLivelli.Dialoghi.DialoghiCitta as DialoghiCitta
-import Codice.SettaggiLivelli.Dialoghi.DialoghiCasaUfficiale as DialoghiCasaUfficiale
+import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
 
 
 class PersonaggioObj(object):
 
-    def __init__(self, x, y, direzione, tipo, stanza, avanzamentoStoria, percorso, numeroMovimento=0, avanzamentoDialogo=0, nonCaricareImg=False):
-        self.tipo = tipo
+    def __init__(self, x, y, direzione, tipoId, stanza, avanzamentoStoria, percorso, numeroMovimento=0, avanzamentoDialogo=0, nonCaricareImg=False):
+        self.tipoId = tipoId
+
+        self.tipo = tipoId.split("-")[0]
         self.x = x
         self.y = y
         self.vx = x
@@ -290,123 +286,8 @@ class PersonaggioObj(object):
         if direzione != "" and direzione != "fermati" and direzione != "mantieniPosizione":
             self.direzione = direzione
 
-    def aggiornaDialogo(self, avanzamentoStoria):
-        # se c'è una scelta la variabile self.scelta conterrà il numero corrispondente a quella giusta (se ce n'è più di una giusta, la variabile conterrà i numeri di queste una dopo l'altra (es. 12, 134))
-        # i dialoghi che iniziano con "???DOMANDA???" contengono 6 frasi in totale (ossia => "???DOMANDA???", la domanda posta, opzione 1, opzione 2, opzione 3, opzione 4)
-        # i dialoghi che iniziano con "!!!RISPOSTA!!!" contengono 5 frasi in totale (ossia => "!!!RISPOSTA!!!", risposta opzione 1, risposta opzione 2, risposta opzione 3, risposta opzione 4)
-        if self.tipo == "test":
-            self.partiDialogo = []
-            self.nome = "Bob"
-            if avanzamentoStoria == 0:
-                self.oggettoDato = False
-                self.avanzaStoria = True
-                self.menuMercante = True
-                self.scelta = False
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Ciao, ecco la merce")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Ecco la merceee")
-                self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == 1:
-                self.oggettoDato = "oggetto speciale"
-                self.avanzaStoria = True
-                self.menuMercante = False
-                self.scelta = False
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Ciao, la merce è finita")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append(u"È finita?")
-                self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == 2:
-                self.oggettoDato = False
-                self.avanzaStoria = True
-                self.menuMercante = False
-                self.scelta = 3
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Ti sto per fare una domanda")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("???DOMANDA???")
-                dialogo.append("Quanto fa 2+3?")
-                dialogo.append("Che schifo di domanda!")
-                dialogo.append("(cambia discorso parlando di carote)")
-                dialogo.append("Almeno 3")
-                dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("!!!RISPOSTA!!!")
-                dialogo.append("Scusa...")
-                dialogo.append("Scusa, non mi interessano le carote")
-                dialogo.append(u"Mmh... è giusto...")
-                dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Non ho più merce")
-                self.partiDialogo.append(dialogo)
-            elif avanzamentoStoria == 3:
-                self.oggettoDato = False
-                self.avanzaStoria = False
-                self.menuMercante = True
-                self.scelta = 3
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Ciao, ecco la merce")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("???DOMANDA???")
-                dialogo.append("Quanto fa 2+3?")
-                dialogo.append("Che schifo di domanda!")
-                dialogo.append("(cambia discorso parlando di carote)")
-                dialogo.append("Almeno 3")
-                dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("!!!RISPOSTA!!!")
-                dialogo.append("Scusa...")
-                dialogo.append("Scusa, non mi interessano le carote")
-                dialogo.append(u"Mmh... è giusto...")
-                dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
-                self.partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Ecco la merceee")
-                self.partiDialogo.append(dialogo)
-            else:
-                self.oggettoDato = False
-                self.avanzaStoria = False
-                self.menuMercante = False
-                self.scelta = False
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append("Vattene")
-                self.partiDialogo.append(dialogo)
-
-        if self.tipo == "Nessuno":
-            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiNessuno.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
-        elif self.tipo == "Tutorial":
-            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiTutorial.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
-        elif GlobalGameVar.dictStanze["casaHansLucy1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaHansLucy4"]:
-            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiCasa.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
-        elif GlobalGameVar.dictStanze["forestaCadetta1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["forestaCadetta9"]:
-            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiForestaCadetta.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
-        elif GlobalGameVar.dictStanze["stradaPerCittà1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["stradaPerCittà3"]:
-            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiStradaPerCitta.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
-        elif GlobalGameVar.dictStanze["città1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["città10"]:
-            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiCitta.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
-        elif GlobalGameVar.dictStanze["casaDavid1"] <= self.stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaDavid3"]:
-            self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = DialoghiCasaUfficiale.setDialogo(self.tipo, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo)
+    def aggiornaDialogo(self, avanzamentoStoria, monetePossedute=0):
+        self.partiDialogo, self.nome, self.oggettoDato, self.avanzaStoria, self.menuMercante, self.scelta, self.avanzaColDialogo = SetDialoghiPersonaggi.caricaDialogo(self.tipoId, self.x, self.y, avanzamentoStoria, self.stanzaDiAppartenenza, self.avanzamentoDialogo, monetePossedute)
 
     def spostati(self, x, y, rx, ry, listaNemici, listaPersonaggi, caseviste):
         self.vx = self.x

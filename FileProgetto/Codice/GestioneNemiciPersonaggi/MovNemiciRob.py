@@ -528,12 +528,6 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
             else:
                 nmx = GlobalHWVar.gpx
                 nmy = 0
-            i = 2
-            while i <= len(vettoreEsche):
-                if nemico.x + GlobalHWVar.gpx == vettoreEsche[i] and nemico.y == vettoreEsche[i + 1]:
-                    nmx = 0
-                    nmy = 0
-                i = i + 4
         if nmos == 2:
             if nemico.obbiettivo[0] != "Monete" and nemico.x - GlobalHWVar.gpx == nemico.obbiettivo[1] and nemico.y == nemico.obbiettivo[2]:
                 nmx = 0
@@ -541,12 +535,6 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
             else:
                 nmx = -GlobalHWVar.gpx
                 nmy = 0
-            i = 2
-            while i <= len(vettoreEsche):
-                if nemico.x - GlobalHWVar.gpx == vettoreEsche[i] and nemico.y == vettoreEsche[i + 1]:
-                    nmx = 0
-                    nmy = 0
-                i = i + 4
         if nmos == 3:
             if nemico.obbiettivo[0] != "Monete" and nemico.x == nemico.obbiettivo[1] and nemico.y + GlobalHWVar.gpy == nemico.obbiettivo[2]:
                 nmx = 0
@@ -554,12 +542,6 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
             else:
                 nmx = 0
                 nmy = GlobalHWVar.gpy
-            i = 2
-            while i <= len(vettoreEsche):
-                if nemico.x == vettoreEsche[i] and nemico.y + GlobalHWVar.gpy == vettoreEsche[i + 1]:
-                    nmx = 0
-                    nmy = 0
-                i = i + 4
         if nmos == 4:
             if nemico.obbiettivo[0] != "Monete" and nemico.x == nemico.obbiettivo[1] and nemico.y - GlobalHWVar.gpy == nemico.obbiettivo[2]:
                 nmx = 0
@@ -567,12 +549,14 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
             else:
                 nmx = 0
                 nmy = -GlobalHWVar.gpy
+        if not nemico.ignoraEsche:
             i = 2
             while i <= len(vettoreEsche):
-                if nemico.x == vettoreEsche[i] and nemico.y - GlobalHWVar.gpy == vettoreEsche[i + 1]:
+                if nemico.x + nmx == vettoreEsche[i] and nemico.y + nmy == vettoreEsche[i + 1]:
                     nmx = 0
                     nmy = 0
-                i = i + 4
+                    break
+                i += 4
 
     i = 0
     while i < len(caseviste):
