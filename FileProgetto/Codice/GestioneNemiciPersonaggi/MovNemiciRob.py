@@ -15,6 +15,10 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
     avvelena = nemico.velenoso
     surriscalda = nemico.surriscaldante
 
+    impossibileParare = False
+    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"] or GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"]:
+        impossibileParare = True
+
     if nemico.obbiettivo[0] == "Esca" or nemico.obbiettivo[0] == "Colco" or nemico.obbiettivo[0] == "Rallo":
         nemico.triggerato = True
         # nemici che attaccano da vicino
@@ -62,7 +66,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                     danno = nemico.attacco - dif
                     if danno < 0:
                         danno = 0
-                    if random.randint(1, 101) <= par and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                    if random.randint(1, 100) <= par and not impossibileParare:
                         danno = 0
                         avvelena = False
                         nemico.ralloParato = True
@@ -354,7 +358,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                         danno = nemico.attacco - dif
                         if danno < 0:
                             danno = 0
-                        if random.randint(1, 101) <= par and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                        if random.randint(1, 100) <= par and not impossibileParare:
                             danno = 0
                             avvelena = False
                             nemico.ralloParato = True

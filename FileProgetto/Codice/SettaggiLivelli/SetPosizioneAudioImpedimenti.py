@@ -734,12 +734,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 y += GlobalHWVar.gpy * 6
             if stanzaVecchia == GlobalGameVar.dictStanze["biblioteca1"]:
                 npers = "s"
-                if y == GlobalHWVar.gpx * 15:
-                    x += GlobalHWVar.gpx * 3
-                    y = GlobalHWVar.gpy * 6
-                else:
-                    x = GlobalHWVar.gpx * 19
-                    y = GlobalHWVar.gpy * 6
+                x += GlobalHWVar.gpx * 3
+                y = GlobalHWVar.gpy * 6
     if stanza == GlobalGameVar.dictStanze["città8"]:
         if canzone != GlobalSndVar.canzoneCitta:
             canzoneCambiata = True
@@ -1060,8 +1056,6 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione):
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["città9"] and stanzaDestinazione == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["città10"] and stanzaDestinazione == GlobalGameVar.dictStanze["stradaPerPassoMontano1"]:
-        nonProcedere = True
-    elif GlobalGameVar.dictAvanzamentoStoria["rifiutatoDallaBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"] and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca1"]:
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["dialogoServoCasaDavidDopoSuicidio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"] and stanzaVecchia == GlobalGameVar.dictStanze["casaDavid2"] and (stanzaDestinazione == GlobalGameVar.dictStanze["casaDavid1"] or stanzaDestinazione == GlobalGameVar.dictStanze["casaDavid3"]):
         nonProcedere = True

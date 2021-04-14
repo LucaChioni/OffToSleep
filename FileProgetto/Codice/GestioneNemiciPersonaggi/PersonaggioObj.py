@@ -120,6 +120,16 @@ class PersonaggioObj(object):
             numImg = 1
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
+        if self.tipo == "OggettoPersonaCittadino3Cadavere":
+            disegnaImg = True
+            numImg = 1
+            numImgDialogo = 1
+            nomeImgDialogo = ["Cittadino3CadavereDialogo"]
+        if self.tipo == "OggettoPersonaCittadino1Cadavere":
+            disegnaImg = True
+            numImg = 1
+            numImgDialogo = 1
+            nomeImgDialogo = ["Cittadino1CadavereDialogo"]
 
         i = 1
         while i <= numImg:

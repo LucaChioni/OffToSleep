@@ -50,7 +50,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
     bottoneDown = False
 
     # GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
-    # GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
+    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
     while not fineDialogo:
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
@@ -199,7 +199,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     # GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-    # GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
 
     return avanzamentoStoria, oggettoRicevuto, menuMercante, listaAvanzamentoDialoghi
 

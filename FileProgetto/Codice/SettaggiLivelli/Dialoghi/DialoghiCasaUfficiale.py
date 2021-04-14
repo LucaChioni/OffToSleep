@@ -155,7 +155,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Salve signorina, la sua stanza è stata preparata, può andare a cambiarsi.")
+            dialogo.append(u"Salve signorina, la sua stanza è stata preparata. Può andare a cambiarsi.")
             partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["sedutoACenaDavid"]:
             oggettoDato = False
@@ -177,31 +177,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"La sua stanza è in fondo al corridoio. Può andare a riposare quando vuole.")
             partiDialogo.append(dialogo)
-        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["vistoDalServo"]:
             oggettoDato = False
-            avanzaStoria = True
+            avanzaStoria = False
             menuMercante = False
             scelta = False
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Buongiorno signorina, è mattina.")
+            dialogo.append(u"Salve. Al momento il padrone non è in casa. Posso esserti d'aiuto?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Uh...? Ohh... buongiorno...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Cosa desidera per colazione?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"No, non... non importa, non sono solita fare colazione.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Come preferisce. Se cambia idea non si faccia problemi a farlo presente.")
+            dialogo.append(u"No, grazie.")
             partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid2"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["vistoDalServo"]:
             oggettoDato = False
@@ -278,6 +266,32 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"...")
+            partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["casaDavid3"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            avanzaColDialogo = False
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"... Buongiorno signorina, è mattina.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Uh...? Ohh... buongiorno...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Cosa desidera per colazione?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"No, non... non importa, non sono solita fare colazione.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Come preferisce. Se cambia idea non si faccia problemi a farlo presente.")
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False

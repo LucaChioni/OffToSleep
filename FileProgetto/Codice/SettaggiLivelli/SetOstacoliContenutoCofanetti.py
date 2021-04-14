@@ -486,7 +486,7 @@ def aperturacofanetto(stanza, cx, cy, dati):
     numMoneteOttenute = 50
 
     tesoro = -1
-    # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> gambit (=celle di memoria)(20) / 131 -> monete / 132 frecce
+    # 11-30 -> tecniche(20) / 31-40 -> oggetti(10) / 41-70 -> armi(30) / 71-75 -> batterie(10) / 81-100 -> condizioni(20) / 101-120 -> celle di memoria(20) / 131 -> monete / 132 frecce
     if stanza == -1:
         # ottieni pozione
         if cx == GlobalHWVar.gpx * 3 and cy == GlobalHWVar.gpy * 7:
@@ -542,9 +542,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
             tesoro = 47
             avanzamentoStoria += 1
     if stanza == GlobalGameVar.dictStanze["casaHansLucy3"]:
-        # ottieni pozione
+        # ottieni monete
         if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 10:
-            tesoro = 31
+            tesoro = 131
     if stanza == GlobalGameVar.dictStanze["forestaCadetta1"]:
         # ottieni pozione
         if cx == GlobalHWVar.gpx * 27 and cy == GlobalHWVar.gpy * 2:
@@ -576,9 +576,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 9:
             tesoro = 62
     if stanza == GlobalGameVar.dictStanze["forestaCadetta4"]:
-        # ottieni pozione
+        # ottieni monete
         if cx == GlobalHWVar.gpx * 29 and cy == GlobalHWVar.gpy * 9:
-            tesoro = 31
+            tesoro = 131
         # ottieni bomba
         if cx == GlobalHWVar.gpx * 10 and cy == GlobalHWVar.gpy * 2:
             tesoro = 36
@@ -586,13 +586,13 @@ def aperturacofanetto(stanza, cx, cy, dati):
         # ottieni freccia
         if cx == GlobalHWVar.gpx * 12 and cy == GlobalHWVar.gpy * 2:
             tesoro = 132
-        # ottieni esca
-        if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 2:
-            tesoro = 38
-    if stanza == GlobalGameVar.dictStanze["forestaCadetta7"]:
         # ottieni pozione
-        if cx == GlobalHWVar.gpx * 26 and cy == GlobalHWVar.gpy * 15:
+        if cx == GlobalHWVar.gpx * 21 and cy == GlobalHWVar.gpy * 2:
             tesoro = 31
+    if stanza == GlobalGameVar.dictStanze["forestaCadetta7"]:
+        # ottieni esca
+        if cx == GlobalHWVar.gpx * 26 and cy == GlobalHWVar.gpy * 15:
+            tesoro = 38
         # ottieni collana rigenerante
         if cx == GlobalHWVar.gpx * 2 and cy == GlobalHWVar.gpy * 4:
             tesoro = 48

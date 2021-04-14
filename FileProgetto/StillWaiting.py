@@ -32,7 +32,7 @@ def gameloop():
 
         # if p.memory_info().rss / 1000000.0 > maxMemoryUsage:
         #     maxMemoryUsage = p.memory_info().rss / 1000000.0
-        #     print u"Max RAM usata: " + str(maxMemoryUsage) + " MB"
+        #     print (u"Max RAM usata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
             movimentoDaCompiere = False
@@ -597,11 +597,13 @@ def gameloop():
         # gestione degli input
         if not impossibileCliccarePulsanti and not avanzaIlTurnoSenzaMuoverti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto and turniDaSaltarePerDifesa == 0 and len(percorsoDaEseguire) == 0:
             bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
-        elif startf or oggettoRicevuto or impossibileCliccarePulsanti or avanzaIlTurnoSenzaMuoverti or len(percorsoDaEseguire) > 0:
+        elif startf or oggettoRicevuto or impossibileCliccarePulsanti or avanzaIlTurnoSenzaMuoverti:
             bottoneDown = False
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            if len(percorsoDaEseguire) > 0:
-                movimentoDaCompiere = percorsoDaEseguire.pop(0)
+        elif len(percorsoDaEseguire) > 0:
+            bottoneDown = False
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            movimentoDaCompiere = percorsoDaEseguire.pop(0)
         if not bottoneDown and not movimentoDaCompiere:
             GlobalHWVar.canaleSoundPassiRallo.stop()
             nx = 0
@@ -1733,8 +1735,10 @@ def gameloop():
             # menu mercante
             if visualizzaMenuMercante:
                 dati = MenuDialoghi.menuMercante(dati)
+                FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
                 visualizzaMenuMercante = False
                 uscitoDaMenu = 2
+                aggiornaImgEquip = True
                 carim = True
             # apertura cofanetti
             if apriCofanetto[0]:
@@ -2076,7 +2080,7 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, dati[131], percorsoDaEseguire = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, dati[131], percorsoDaEseguire)
+                dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, dati[131], percorsoDaEseguire = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse)
                 impossibileAprirePorta = False
                 if caricaTutto:
                     impossibileCliccarePulsanti = True

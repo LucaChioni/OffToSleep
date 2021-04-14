@@ -268,7 +268,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = True
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Salve, mi stavo chiedendo se fosse possibile entrare negli alloggi?")
+                    dialogo.append(u"Salve, mi stavo chiedendo se fosse possibile entrare negli alloggi...")
                     partiDialogo.append(dialogo)
                     dialogo = []
                     dialogo.append("personaggio")
@@ -493,11 +493,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Non parlerò senza compenso. Sono 100 monete.")
+            dialogo.append(u"... Non parlerò senza compenso. Sono 300 monete.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"100 monete!? Per rispondere a una domanda!?")
+            dialogo.append(u"300 monete!? Per rispondere a una domanda!?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -521,7 +521,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Certo, sono sicura che tu non te lo sia appena inventato... 100 monete per avere l'opportunità di pagare altre monete per delle \"risorse\"... Non mi sento per niente truffata, anzi sembra un'opportunità da prendere al volo.")
+            dialogo.append(u"Certo, sono sicura che tu non te lo sia appena inventato... 300 monete per avere l'opportunità di pagare altre monete per delle \"risorse\"... Non mi sento per niente truffata, anzi sembra un'opportunità da prendere al volo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -532,7 +532,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Certo...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["richieste100MoneteDalMercante"]:
-            if monetePossedute < 100:
+            if monetePossedute < 300:
                 nome = "Sconosciuto"
                 oggettoDato = False
                 avanzaStoria = False
@@ -544,7 +544,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Certo, sono 100 monete.")
+                dialogo.append(u"Certo, sono 300 monete.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -557,7 +557,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Tieni le 100 monete... ehm... non so ancora il tuo nome...")
+                dialogo.append(u"Tieni le 300 monete... ehm... non so ancora il tuo nome...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -692,7 +692,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
             elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uccisoPrimoAggressore"]:
                 oggettoDato = False
-                avanzaStoria = False
+                avanzaStoria = True
                 menuMercante = False
                 scelta = False
                 dialogo = []
@@ -705,7 +705,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Vieni qui, puttana!")
+                dialogo.append(u"Vieni qui, schifosa puttana!")
                 partiDialogo.append(dialogo)
     elif tipo == "Ragazzo2":
         partiDialogo = []

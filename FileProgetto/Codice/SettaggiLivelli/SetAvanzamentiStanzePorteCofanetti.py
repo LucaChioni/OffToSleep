@@ -227,12 +227,16 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["uccisoPrimoAggressore"] = i
     i += 1
+    dictAvanzamentoStoria["dialogoDopoPrimoOmicidio"] = i
+    i += 1
     dictAvanzamentoStoria["uccisoSecondoAggressore"] = i
     i += 1
     dictAvanzamentoStoria["monologoDopoUccisioneAggressori"] = i
 
     i += 1
-    dictAvanzamentoStoria["scappatoVersoLaBiblioteca"] = i
+    dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] = i
+    i += 1
+    dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] = i
     i += 1
     dictAvanzamentoStoria["incontratoBibliotecario"] = i
     i += 1
