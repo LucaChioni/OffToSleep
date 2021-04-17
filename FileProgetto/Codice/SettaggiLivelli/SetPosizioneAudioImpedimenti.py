@@ -1008,11 +1008,17 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
         stoppaMusica = True
     elif GlobalGameVar.dictStanze["città1"] <= stanza <= GlobalGameVar.dictStanze["città4"] and avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
         stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"]:
+        stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["vistoDalServo"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"]:
+        stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"]:
+        stoppaMusica = True
 
     return stoppaMusica
 
 
-def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione):
+def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equipaggiamentoIndossato):
     nonProcedere = False
 
     if stanzaDestinazione == -1:
@@ -1051,7 +1057,7 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione):
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["città5"] and stanzaDestinazione == GlobalGameVar.dictStanze["città6"]:
         nonProcedere = True
-    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["richieste100MoneteDalMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["città5"] and stanzaDestinazione == GlobalGameVar.dictStanze["città7"]:
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["rimosse300Monete"] and stanzaVecchia == GlobalGameVar.dictStanze["città5"] and stanzaDestinazione == GlobalGameVar.dictStanze["città7"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["città9"] and stanzaDestinazione == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
         nonProcedere = True
@@ -1060,6 +1066,10 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione):
     elif GlobalGameVar.dictAvanzamentoStoria["dialogoServoCasaDavidDopoSuicidio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"] and stanzaVecchia == GlobalGameVar.dictStanze["casaDavid2"] and (stanzaDestinazione == GlobalGameVar.dictStanze["casaDavid1"] or stanzaDestinazione == GlobalGameVar.dictStanze["casaDavid3"]):
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["uccisoPrimoAggressore"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["città4"] and stanzaDestinazione == GlobalGameVar.dictStanze["casaDavid1"]:
+        nonProcedere = True
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["città5"]:
+        nonProcedere = True
+    elif equipaggiamentoIndossato and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca1"]:
         nonProcedere = True
 
     return nonProcedere
@@ -1128,6 +1138,8 @@ def settaNomeStanza(avanzamentoStoria, stanza):
     if stanza == GlobalGameVar.dictStanze["città1"] or stanza == GlobalGameVar.dictStanze["città2"] or stanza == GlobalGameVar.dictStanze["città3"] or stanza == GlobalGameVar.dictStanze["città4"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             nomeStanza = "StanzaA"
+        elif stanza == GlobalGameVar.dictStanze["città4"] and avanzamentoStoria > GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"]:
+            nomeStanza = "StanzaC"
         else:
             nomeStanza = "StanzaB"
     if stanza == GlobalGameVar.dictStanze["casaDavid1"]:

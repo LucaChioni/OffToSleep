@@ -404,14 +404,14 @@ def getEntrateStanze(stanza, avanzamentoStoria):
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca2"]])
     elif stanza == GlobalGameVar.dictStanze["biblioteca2"]:
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
-        entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 16, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 28, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 29, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["biblioteca1"]])
 
     return entrateStanza
 

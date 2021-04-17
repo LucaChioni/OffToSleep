@@ -498,7 +498,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ohh... cazzo...")
+            dialogo.append("Oh... cazzo...")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoTombaSam":
         partiDialogo = []

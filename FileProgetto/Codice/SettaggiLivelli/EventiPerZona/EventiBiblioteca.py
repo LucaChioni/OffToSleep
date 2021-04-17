@@ -7,7 +7,7 @@ import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 
 def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialoghi, listaPersonaggi, listaPersonaggiTotali, listaNemici, listaNemiciTotali, tutteporte, oggettiRimastiAHans, stanzeGiaVisitate, caricaTutto, cambiosta, carim, canzone, npers, bottoneDown, movimentoPerMouse, oggettoRicevuto, visualizzaMenuMercante, aggiornaImgEquip, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire, casevisteEntrateIncluse):
-    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosse100Monete"] and stanza == GlobalGameVar.dictStanze["biblioteca1"] and y == GlobalHWVar.gpy * 11:
+    if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosse300Monete"] and stanza == GlobalGameVar.dictStanze["biblioteca1"] and y == GlobalHWVar.gpy * 11:
         screen = GlobalHWVar.schermo.copy().convert()
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "AssistBiblioteca-0", stanza, avanzamentoStoria, False)
         while avanzamentoStoria != GlobalGameVar.dictAvanzamentoStoria["rifiutatoDallaBiblioteca"]:

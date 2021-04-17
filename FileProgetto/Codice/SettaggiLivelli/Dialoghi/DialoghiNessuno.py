@@ -354,7 +354,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"Meglio seguire David.")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città3"]:
-            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and ((x == GlobalHWVar.gpx * 14 and y == GlobalHWVar.gpy * 13) or (x == GlobalHWVar.gpx * 15 and y == GlobalHWVar.gpy * 13)):
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 13 and (x == GlobalHWVar.gpx * 14 or x == GlobalHWVar.gpx * 15):
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -363,7 +363,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Non credo di poter entrare in queste abitazioni.")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and ((x == GlobalHWVar.gpx * 14 and y == GlobalHWVar.gpy * 12) or (x == GlobalHWVar.gpx * 15 or y == GlobalHWVar.gpy * 12)):
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 13 and (x == GlobalHWVar.gpx * 14 or x == GlobalHWVar.gpx * 15):
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -441,7 +441,25 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"Non credo ci sia niente di interessante da quella parte.")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città5"]:
-            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and x == GlobalHWVar.gpx * 1 and (y == GlobalHWVar.gpy * 12 or y == GlobalHWVar.gpy * 13):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non credo di poter entrare in queste abitazioni.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and x == GlobalHWVar.gpx * 1 and (y == GlobalHWVar.gpy * 12 or y == GlobalHWVar.gpy * 13):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non c'è niente di utile in queste case.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -459,7 +477,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Il cuore mi dice che sto sbagliando strada... la sinistra è dall'altra parte...")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["richieste100MoneteDalMercante"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["rimosse300Monete"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -469,7 +487,16 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"Qua ci sono tante persone che potrebbero aver visto Hans. Devo parlare con tutti prima di continuare ad esplorare la città.")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città6"]:
-            if y == GlobalHWVar.gpy * 4 and (x == GlobalHWVar.gpx * 17 or x == GlobalHWVar.gpx * 18):
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cercatoHansInAlloggiProfughi"] and y == GlobalHWVar.gpy * 4 and (x == GlobalHWVar.gpx * 17 or x == GlobalHWVar.gpx * 18):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiuso. Forse questi soldati possono aiutarmi.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["cercatoHansInAlloggiProfughi"] and y == GlobalHWVar.gpy * 4 and (x == GlobalHWVar.gpx * 17 or x == GlobalHWVar.gpx * 18):
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -488,14 +515,129 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append(u"Quello dovrebbe essere lo stabile che ospita gli alloggi profughi.")
                 partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città7"]:
-            if y == GlobalHWVar.gpy * 5 and (x == GlobalHWVar.gpx * 18 or x == GlobalHWVar.gpx * 19):
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 15 and (x == GlobalHWVar.gpx * 9 or x == GlobalHWVar.gpx * 10):
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Non mi faranno entrare senza una certificazione. Posso provare a chiedere a David.")
+                dialogo.append(u"Non credo di poter entrare in queste abitazioni.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 15 and (x == GlobalHWVar.gpx * 9 or x == GlobalHWVar.gpx * 10):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non c'è niente di utile in queste case.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... <*>#italic#Pant pant<*>... cazzo... che cos'ho fatto...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... <*>#italic#Pant pant<*>... c-che faccio ora? ...")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non voglio tornare indietro...")
+                partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 5 and (x == GlobalHWVar.gpx * 18 or x == GlobalHWVar.gpx * 19):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Il sangue sulle mie armi... non dovrei tenerle addosso.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città8"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non credo che lascino entrare persone come me o Hans.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non credo ci sia niente di utile nel castello.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città9"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and x == GlobalHWVar.gpx * 28 and (y == GlobalHWVar.gpy * 9 or y == GlobalHWVar.gpy * 10):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non credo di poter entrare in queste abitazioni.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and x == GlobalHWVar.gpx * 28 and (y == GlobalHWVar.gpy * 9 or y == GlobalHWVar.gpy * 10):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non c'è niente di utile in queste case.")
+                partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 16:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Devo cercare meglio in città prima di andarmene.")
+                partiDialogo.append(dialogo)
+        elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città10"]:
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 2 and (x == GlobalHWVar.gpx * 8 or x == GlobalHWVar.gpx * 9):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non credo di poter entrare in queste abitazioni.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 2 and (x == GlobalHWVar.gpx * 8 or x == GlobalHWVar.gpx * 9):
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non c'è niente di utile in queste case.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Devo cercare meglio in città prima di andarmene.")
                 partiDialogo.append(dialogo)
     elif GlobalGameVar.dictStanze["casaDavid1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaDavid3"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:

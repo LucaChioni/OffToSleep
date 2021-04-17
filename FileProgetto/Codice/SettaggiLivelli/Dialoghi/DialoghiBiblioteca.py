@@ -16,7 +16,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     if tipo == "AssistBiblioteca":
         partiDialogo = []
         nome = "Assistente bibliotecario"
-        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosse100Monete"]:
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosse300Monete"]:
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -35,15 +35,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"No, non mi è stato dato nessun documento quando sono arrivata. Chi è che me lo avrebbe dovuto dare?")
+            dialogo.append(u"No, non mi hanno dato nessun documento quando sono arrivata. Chi me lo avrebbe dovuto dare?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Se non sei residente, ti viene assegnato il certificato di permanenza quando arrivi agli alloggi profughi. Era in mezzo agli altri fogli che ti hanno dato...")
+            dialogo.append(u"Se non sei residente, ti viene assegnato un certificato di permanenza quando arrivi agli alloggi profughi. Era in mezzo agli altri fogli che hai ricevuto...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Oh, perfetto... quando sono arrivata mi è stato detto che non c'era più posto negli alloggi. Quindi David, il capitano della guardia notturna, si è offerto di ospitarmi per la notte.")
+            dialogo.append(u"Oh, perfetto... quando sono arrivata mi è stato detto che non c'era più posto negli alloggi. Quindi David, il comandante della guardia notturna, si è offerto di ospitarmi per la notte.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -64,7 +64,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Va bene, va bene.")
+            dialogo.append(u"Va bene, va bene. Lo richiederò a David.")
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

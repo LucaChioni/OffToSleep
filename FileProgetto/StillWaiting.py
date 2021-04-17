@@ -192,10 +192,12 @@ def gameloop():
                         pygame.time.wait(30)
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                     if canzoneCambiata:
+                        GlobalHWVar.canaleSoundCanzone.set_volume(0)
                         GlobalHWVar.canaleSoundCanzone.stop()
                         if canzone and not stoppaMusica:
                             GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
                     if sottofondoAmbientaleCambiato:
+                        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(0)
                         GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
                         if sottofondoAmbientale:
                             GlobalHWVar.canaleSoundSottofondoAmbientale.play(sottofondoAmbientale, -1)
@@ -476,7 +478,7 @@ def gameloop():
 
             # aggiorno dialoghi/img dei personaggi
             for personaggio in listaPersonaggi:
-                personaggio.aggiornaDialogo(dati[0], str(dati[131]))
+                personaggio.aggiornaDialogo(dati[0], dati[131])
                 if personaggio.tipo.startswith("Oggetto"):
                     imgAggiornata = personaggio.aggiornaImgOggetto(dati[0])
                     if imgAggiornata:
@@ -1776,7 +1778,11 @@ def gameloop():
                 ultimoObbiettivoColco.append(y)
 
             # impedisce di andare avanti quando si vuole andare in una zona non ancora sbloccata
-            if cambiosta and SetPosizioneAudioImpedimenti.nonPuoiProcedere(dati[0], stanzaVecchia, dati[1]):
+            if dati[6] != 0 or dati[128] != 0 or dati[8] != 0 or dati[7] != 0:
+                equipaggiamentoIndossato = True
+            else:
+                equipaggiamentoIndossato = False
+            if cambiosta and SetPosizioneAudioImpedimenti.nonPuoiProcedere(dati[0], stanzaVecchia, dati[1], equipaggiamentoIndossato):
                 cambiosta = False
                 dati[1] = stanzaVecchia
                 xPrimaDiCambioStanza = x
@@ -2133,7 +2139,7 @@ def gameloop():
                                 personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
                             break
                         i += 2
-                personaggio.aggiornaDialogo(dati[0], str(dati[131]))
+                personaggio.aggiornaDialogo(dati[0], dati[131])
                 if personaggio.tipo.startswith("Oggetto"):
                     imgAggiornata = personaggio.aggiornaImgOggetto(dati[0])
                     if imgAggiornata:

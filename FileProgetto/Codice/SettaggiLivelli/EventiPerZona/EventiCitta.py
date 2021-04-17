@@ -104,10 +104,19 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["date100MoneteAlMercante"] and stanza == GlobalGameVar.dictStanze["città5"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["date300MoneteAlMercante"] and stanza == GlobalGameVar.dictStanze["città5"]:
         monetePossedute -= 300
         avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"] and stanza == GlobalGameVar.dictStanze["città4"]:
+        GlobalHWVar.canaleSoundCanzone.set_volume(0)
+        GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
+        i = 0
+        while i < GlobalHWVar.volumeCanzoni:
+            GlobalHWVar.canaleSoundCanzone.set_volume(i)
+            i += GlobalHWVar.volumeCanzoni / 10
+            pygame.time.wait(30)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
@@ -239,6 +248,7 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uccisoSecondoAggressore"] and stanza == GlobalGameVar.dictStanze["città4"]:
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        caricaTutto = True
 
         vetNemiciSoloConXeY = []
         for personaggio in listaPersonaggi:
@@ -275,19 +285,52 @@ def gestioneEventi(stanza, x, y, avanzamentoStoria, dati, listaAvanzamentoDialog
         else:
             print ("Percorso Rallo verso uscita città4 non trovato")
             percorsoDaEseguire = []
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"] and stanza == GlobalGameVar.dictStanze["città4"]:
+        if x == GlobalHWVar.gpx * 27:
+            percorsoPersonaggio = ["s"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-20", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggiTotali.append(personaggio)
+            listaPersonaggi.append(personaggio)
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoPrimaGuardia"] and stanza == GlobalGameVar.dictStanze["città4"]:
+        if x == GlobalHWVar.gpx * 28:
+            percorsoPersonaggio = ["s"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-21", stanza, avanzamentoStoria, percorsoPersonaggio)
+            listaPersonaggiTotali.append(personaggio)
+            listaPersonaggi.append(personaggio)
+            avanzamentoStoria += 1
+            carim = True
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoSecondaGuardia"] and stanza == GlobalGameVar.dictStanze["città3"]:
+        percorsoDaEseguire = ["d", "d", "d", "d", "d", "d", "w", "w", "w", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "w", "d", "d", "d", "d", "d", "w"]
+        avanzamentoStoria += 1
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà5"] and stanza == GlobalGameVar.dictStanze["città3"]:
+        mercanteArrivato = False
+        for personaggio in listaPersonaggi:
+            if personaggio.tipo == "Mercante":
+                if personaggio.x == GlobalHWVar.gpx * 29 and personaggio.y == GlobalHWVar.gpy * 9:
+                    mercanteArrivato = True
+                break
 
+        if mercanteArrivato:
+            for personaggio in listaPersonaggi:
+                if personaggio.tipo == "Mercante":
+                    listaPersonaggi.remove(personaggio)
+                    break
+            for personaggio in listaPersonaggiTotali:
+                if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["città3"] and personaggio.tipo == "Mercante":
+                    listaPersonaggiTotali.remove(personaggio)
+                    break
+            avanzamentoStoria += 1
+            caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mercanteFuggitoDopoOmicidio"] and stanza == GlobalGameVar.dictStanze["città5"]:
+        percorsoDaEseguire = ["d", "d", "w", "w", "w", "d", "w", "d", "w", "d", "d", "d", "w", "w", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "w", "d", "d", "w", "d", "d"]
+        avanzamentoStoria += 1
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"] and stanza == GlobalGameVar.dictStanze["città7"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
-
-    # togli la musica quando non desiderata (serve farlo in continuazione per evitare che riprenda quando carichi il salvataggio)
-    if GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"]:
-        if GlobalHWVar.canaleSoundCanzone.get_busy():
-            i = GlobalHWVar.volumeCanzoni
-            while i > 0:
-                GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                i -= GlobalHWVar.volumeCanzoni / 10
-                pygame.time.wait(30)
-                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            GlobalHWVar.canaleSoundCanzone.set_volume(0)
-            GlobalHWVar.canaleSoundCanzone.stop()
 
     return avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire

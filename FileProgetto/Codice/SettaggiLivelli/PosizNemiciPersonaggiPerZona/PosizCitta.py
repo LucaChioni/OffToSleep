@@ -110,20 +110,26 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            percorsoPersonaggio = ["d", "mantieniPosizione"]
-            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, "d", "Ragazza3-3", stanza, avanzamentoStoria, percorsoPersonaggio)
-            personaggio.numeroMovimento = 1
-            listaPersonaggi.append(personaggio)
-            listaPersonaggiTotali.append(personaggio)
-            percorsoPersonaggio = ["a", "mantieniPosizione"]
-            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 6, "a", "Ragazzo2-2", stanza, avanzamentoStoria, percorsoPersonaggio)
-            personaggio.numeroMovimento = 1
-            listaPersonaggi.append(personaggio)
-            listaPersonaggiTotali.append(personaggio)
-            percorsoPersonaggio = ["w", "w", "", "s", "s", ""]
-            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 12, "s", "Ragazzo1-4", stanza, avanzamentoStoria, percorsoPersonaggio)
-            listaPersonaggi.append(personaggio)
-            listaPersonaggiTotali.append(personaggio)
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoSecondaGuardia"]:
+                percorsoPersonaggio = ["d", "d"]
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 9, "a", "Mercante-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+            else:
+                percorsoPersonaggio = ["d", "mantieniPosizione"]
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 6, "d", "Ragazza3-3", stanza, avanzamentoStoria, percorsoPersonaggio)
+                personaggio.numeroMovimento = 1
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = ["a", "mantieniPosizione"]
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 6, "a", "Ragazzo2-2", stanza, avanzamentoStoria, percorsoPersonaggio)
+                personaggio.numeroMovimento = 1
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
+                percorsoPersonaggio = ["w", "w", "", "s", "s", ""]
+                personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 12, "s", "Ragazzo1-4", stanza, avanzamentoStoria, percorsoPersonaggio)
+                listaPersonaggi.append(personaggio)
+                listaPersonaggiTotali.append(personaggio)
             percorsoPersonaggio = ["d", "mantieniPosizione"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 5, "d", "Ragazzo3-2", stanza, avanzamentoStoria, percorsoPersonaggio)
             personaggio.numeroMovimento = 1
@@ -172,7 +178,7 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
     if stanza == GlobalGameVar.dictStanze["città5"]:
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"]:
             percorsoPersonaggio = ["dGira", "", "sGira", "", "aGira", "", "sGira", ""]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 18, GlobalHWVar.gsy // 18 * 7, "s", "Mercante-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
@@ -246,21 +252,22 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
     if stanza == GlobalGameVar.dictStanze["città7"]:
-        percorsoPersonaggio = ["d", "mantieniPosizione"]
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 11, "d", "Ragazzo1-11", stanza, avanzamentoStoria, percorsoPersonaggio)
-        personaggio.numeroMovimento = 1
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
-        percorsoPersonaggio = ["s", "mantieniPosizione"]
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 10, "s", "Ragazza1-7", stanza, avanzamentoStoria, percorsoPersonaggio)
-        personaggio.numeroMovimento = 1
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
-        percorsoPersonaggio = ["a", "mantieniPosizione"]
-        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 11, "a", "Ragazzo3-5", stanza, avanzamentoStoria, percorsoPersonaggio)
-        personaggio.numeroMovimento = 1
-        listaPersonaggi.append(personaggio)
-        listaPersonaggiTotali.append(personaggio)
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"]:
+            percorsoPersonaggio = ["d", "mantieniPosizione"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 13, GlobalHWVar.gsy // 18 * 11, "d", "Ragazzo1-11", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio.numeroMovimento = 1
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = ["s", "mantieniPosizione"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 10, "s", "Ragazza1-7", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio.numeroMovimento = 1
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
+            percorsoPersonaggio = ["a", "mantieniPosizione"]
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 11, "a", "Ragazzo3-5", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio.numeroMovimento = 1
+            listaPersonaggi.append(personaggio)
+            listaPersonaggiTotali.append(personaggio)
     if stanza == GlobalGameVar.dictStanze["città8"]:
         percorsoPersonaggio = ["s", "mantieniPosizione"]
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 5, "s", "GuardiaCitta-6", stanza, avanzamentoStoria, percorsoPersonaggio)

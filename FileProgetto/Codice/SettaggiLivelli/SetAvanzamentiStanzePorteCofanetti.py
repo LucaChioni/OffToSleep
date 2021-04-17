@@ -201,11 +201,11 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["cercatoHansInAlloggiProfughi"] = i
     i += 1
-    dictAvanzamentoStoria["richieste100MoneteDalMercante"] = i
+    dictAvanzamentoStoria["richieste300MoneteDalMercante"] = i
     i += 1
-    dictAvanzamentoStoria["date100MoneteAlMercante"] = i
+    dictAvanzamentoStoria["date300MoneteAlMercante"] = i
     i += 1
-    dictAvanzamentoStoria["rimosse100Monete"] = i
+    dictAvanzamentoStoria["rimosse300Monete"] = i
     i += 1
     dictAvanzamentoStoria["rifiutatoDallaBiblioteca"] = i
     i += 1
@@ -232,9 +232,19 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["uccisoSecondoAggressore"] = i
     i += 1
     dictAvanzamentoStoria["monologoDopoUccisioneAggressori"] = i
-
+    i += 1
+    dictAvanzamentoStoria["arrivoPrimaGuardia"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivoSecondaGuardia"] = i
+    i += 1
+    dictAvanzamentoStoria["fuggitoVersoCittà5"] = i
+    i += 1
+    dictAvanzamentoStoria["mercanteFuggitoDopoOmicidio"] = i
+    i += 1
+    dictAvanzamentoStoria["fuggitoVersoCittà7"] = i
     i += 1
     dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] = i
+
     i += 1
     dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] = i
     i += 1

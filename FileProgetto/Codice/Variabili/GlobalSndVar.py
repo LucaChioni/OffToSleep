@@ -84,7 +84,7 @@ global audioAmbienteBiblioteca
 global canzoneBiblioteca
 
 
-numSndTotali = 75
+numSndTotali = 77
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
