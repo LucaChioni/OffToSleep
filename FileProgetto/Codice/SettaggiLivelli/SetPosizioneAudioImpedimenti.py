@@ -947,6 +947,26 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             if stanzaVecchia == GlobalGameVar.dictStanze["biblioteca1"]:
                 npers = "w"
                 y = GlobalHWVar.gsy // 18 * 15
+            elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"]:
+                npers = "d"
+                x = GlobalHWVar.gsx // 32 * 22
+                y = GlobalHWVar.gsy // 18 * 11
+    if stanza == GlobalGameVar.dictStanze["biblioteca3"]:
+        if canzone != GlobalSndVar.canzoneBiblioteca:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneBiblioteca
+        if sottofondoAmbientale != GlobalSndVar.audioAmbienteBiblioteca:
+            sottofondoAmbientaleCambiato = True
+        sottofondoAmbientale = GlobalSndVar.audioAmbienteBiblioteca
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["biblioteca2"]:
+                npers = "a"
+                x = GlobalHWVar.gsx // 32 * 20
+                y = GlobalHWVar.gsy // 18 * 10
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -1014,6 +1034,8 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
         stoppaMusica = True
     elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"]:
         stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
+        stoppaMusica = True
 
     return stoppaMusica
 
@@ -1070,6 +1092,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
     elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["città5"]:
         nonProcedere = True
     elif equipaggiamentoIndossato and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca1"]:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["andatoNelloStudioDelBibliotecario"] and stanzaVecchia == GlobalGameVar.dictStanze["biblioteca2"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca3"]:
         nonProcedere = True
 
     return nonProcedere

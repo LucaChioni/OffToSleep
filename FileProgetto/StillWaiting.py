@@ -1812,7 +1812,7 @@ def gameloop():
             i = 1
             while i < len(vettoreEsche):
                 if vettoreEsche[i + 1] == x and vettoreEsche[i + 2] == y:
-                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaEsca)
+                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
                     # tolgo la selezione dell'esca ripresa
                     if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vettoreEsche[i - 1]:
                         nemicoInquadrato = False
@@ -2003,7 +2003,7 @@ def gameloop():
                             i = 1
                             while i < len(vettoreEsche):
                                 if vettoreEsche[i + 1] == nemico.x and vettoreEsche[i + 2] == nemico.y:
-                                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaEsca)
+                                    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
                                     # tolgo la selezione dell'esca sparita
                                     if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and int(nemicoInquadrato[4:]) == vettoreEsche[i - 1]:
                                         nemicoInquadrato = False

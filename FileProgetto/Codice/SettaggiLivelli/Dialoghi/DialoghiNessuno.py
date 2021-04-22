@@ -800,6 +800,27 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Non c'è niente di interessante da quella parte.")
                 partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["biblioteca1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["biblioteca3"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca2"]:
+            if x == GlobalHWVar.gpx * 21 and y == GlobalHWVar.gpy * 11:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Chiuso a chiave...")
+                partiDialogo.append(dialogo)
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioPreVomito2"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Puah!")
+                partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

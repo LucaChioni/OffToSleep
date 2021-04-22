@@ -404,7 +404,7 @@ def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco
 def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     if GlobalHWVar.mouseBloccato:
         GlobalHWVar.configuraCursore(False)
-    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaMonete)
+    GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoRaccoltaOggetto)
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfocontcof, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 0))
     messaggio("Hai ottenuto: " + oggettoRicevuto, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
     GlobalHWVar.aggiornaSchermo()

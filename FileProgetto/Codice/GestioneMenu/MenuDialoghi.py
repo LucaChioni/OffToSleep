@@ -17,21 +17,19 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
     voceMarcata = 1
     puntatoreSpostato = False
     puntatore = GlobalImgVar.puntatore
-    if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
-        imgPersDialogo = GlobalImgVar.imgDialogoLucy1
-        nomePersonaggio = "Lucy"
-    elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-        imgPersDialogo = GlobalImgVar.imgDialogoFraMaggiore
+    if GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
         nomePersonaggio = "Hans"
-    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
-        imgPersDialogo = GlobalImgVar.imgDialogoLucy1
-        nomePersonaggio = "Lucy"
+        imgPersDialogo = GlobalImgVar.imgDialogoFraMaggiore
     else:
-        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+        nomePersonaggio = "Lucy"
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucy1
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             imgPersDialogo = GlobalImgVar.imgDialogoLucyAssonnata
+        elif GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tranquillizzataDopoDialogoBibliotecario"]:
+            imgPersDialogo = GlobalImgVar.imgDialogoLucySconvolta
         else:
             imgPersDialogo = GlobalImgVar.imgDialogoLucy2
-        nomePersonaggio = "Lucy"
 
     if personaggio.nome != "Tutorial":
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))

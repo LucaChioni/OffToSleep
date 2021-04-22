@@ -244,11 +244,37 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["fuggitoVersoCittà7"] = i
     i += 1
     dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] = i
-
     i += 1
     dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] = i
     i += 1
     dictAvanzamentoStoria["incontratoBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["andatoNelloStudioDelBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoBibliotecarioArrivoNelloStudio"] = i
+    i += 1
+    dictAvanzamentoStoria["toltoRegistroBibliotecaDallaLibreria"] = i
+    i += 1
+    dictAvanzamentoStoria["messoRegistroBibliotecaSullaScrivania"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoBibliotecarioPreVomito1"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoBibliotecarioPreVomito2"] = i
+    i += 1
+    dictAvanzamentoStoria["vomitatoInBiblioteca"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoBibliotecarioPostVomito"] = i
+    i += 1
+    dictAvanzamentoStoria["sedutaInBiblioteca"] = i
+    i += 1
+    dictAvanzamentoStoria["ripulitoVomito"] = i
+    i += 1
+    dictAvanzamentoStoria["bibliotecarioVenutoVersoDiTe"] = i
+    i += 1
+    dictAvanzamentoStoria["tranquillizzataDopoDialogoBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"] = i
+
     i += 1
     dictAvanzamentoStoria["risoltoPrimoEnigmaBibliotecario"] = i
     i += 1
@@ -407,6 +433,9 @@ def definisciStanze():
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["biblioteca2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["biblioteca3"] = i
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["stradaPerSelvaArida1"] = i

@@ -48,7 +48,7 @@ def animaCamminataRalloSpostato(npers, x, y, scudo, armatura, armaMov1, armaMov2
         FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, armaMov2, armatura, scudo, collana, arco, faretra, guantiMov2, True, frame)
 
 
-def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz):
+def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, avvele, difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio):
     if sposta:
         # mentre ci si sposta
         if x != vx or y != vy:
@@ -68,7 +68,8 @@ def animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers
         # quando si apre una porta o un cofanetto oppure quando ci si sposta verso un muro
         elif difesa == 0 and fineanimaz > 0:
             animazioneRallo = True
-            FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
+            if not nonMostrarePersonaggio:
+                FunzioniGraficheGeneriche.disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
     elif GlobalHWVar.canaleSoundPassiRallo.get_busy():
         GlobalHWVar.canaleSoundPassiRallo.stop()
     return animazioneRallo, primopasso, fineanimaz
@@ -1643,7 +1644,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoRallo" in azioniDaEseguire:
                 # animazione camminata personaggio
-                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz)
+                animazioneRallo, primopasso, fineanimaz = animaCamminataRallo(sposta, x, y, vx, vy, primopasso, cambiosta, npers, pers, arma, scudo, armatura, armaMov1, armaMov2, arco, faretra, guanti, guantiMov1, guantiMov2, collana, statoRalloInizioTurno[1], difesa, animazioneRallo, fineanimaz, nonMostrarePersonaggio)
 
             if "attaccoNemici" in azioniDaEseguire:
                 # animazione danneggiamento Colco

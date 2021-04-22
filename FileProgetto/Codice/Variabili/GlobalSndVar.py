@@ -24,7 +24,7 @@ global suonoaperturaporteForesta
 global suonochiusuraporteForesta
 global suonoaperturaporteCasa
 global suonochiusuraporteCasa
-global suonoRaccoltaEsca
+global suonoRaccoltaOggetto
 global suonoRaccoltaMonete
 global rumoreAcquisto
 global rumoreCamminataColco
@@ -118,7 +118,7 @@ def loadSounds(numSndCaricato):
     global suonochiusuraporteForesta
     global suonoaperturaporteCasa
     global suonochiusuraporteCasa
-    global suonoRaccoltaEsca
+    global suonoRaccoltaOggetto
     global suonoRaccoltaMonete
     global rumoreAcquisto
     global rumoreCamminataColco
@@ -196,7 +196,7 @@ def loadSounds(numSndCaricato):
     rumoreMorte = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPersonaggio/Morte.wav")
 
     # souno raccolta esca - monete
-    suonoRaccoltaEsca = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaEsca.wav")
+    suonoRaccoltaOggetto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaOggetto.wav")
     suonoRaccoltaMonete = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RaccoltaMonete.wav")
     rumoreAcquisto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Acquisto.wav")
 

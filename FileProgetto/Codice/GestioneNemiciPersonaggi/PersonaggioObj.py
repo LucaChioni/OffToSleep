@@ -130,6 +130,36 @@ class PersonaggioObj(object):
             numImg = 1
             numImgDialogo = 1
             nomeImgDialogo = ["Cittadino1CadavereDialogo"]
+        if self.tipo == "OggettoAssistBiblioteca":
+            disegnaImg = False
+            numImg = 1
+            numImgDialogo = 1
+            nomeImgDialogo = ["AssistBibliotecaDialogo"]
+        if self.tipo == "OggettoLibreriaRegistri":
+            disegnaImg = True
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo == "OggettoRegistroBiblioteca":
+            disegnaImg = True
+            numImg = 2
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo == "OggettoVomito":
+            disegnaImg = True
+            numImg = 3
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo == "OggettoMocio":
+            disegnaImg = True
+            numImg = 1
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
+        if self.tipo == "OggettoLucySeduta":
+            disegnaImg = True
+            numImg = 1
+            numImgDialogo = 1
+            nomeImgDialogo = ["Vuota"]
 
         i = 1
         while i <= numImg:
@@ -195,6 +225,17 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoTombaSam":
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
                 numImgAttuale = 1
+        if self.tipo == "OggettoLibreriaRegistri":
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["toltoRegistroBibliotecaDallaLibreria"]:
+                numImgAttuale = 1
+        if self.tipo == "OggettoRegistroBiblioteca":
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["messoRegistroBibliotecaSullaScrivania"]:
+                numImgAttuale = 1
+        if self.tipo == "OggettoVomito":
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
+                numImgAttuale = 1
+            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"]:
+                numImgAttuale = 2
 
         if primoCaricamento or self.imgAttuale != self.imgOggetto[numImgAttuale]:
             refreshSchermo = True
@@ -314,7 +355,7 @@ class PersonaggioObj(object):
                 self.girati(direzione)
         elif len(self.percorso) > 0 and self.percorso[self.numeroMovimento] == "mantieniPosizione":
             direzione = ""
-            self.girati(self.percorso[self.numeroMovimento - 1])
+            self.girati(self.percorso[self.numeroMovimento - 1][0])
         else:
             direzione = ""
         if direzione == "w":
