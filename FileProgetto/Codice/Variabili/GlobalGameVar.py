@@ -141,3 +141,12 @@ dictStanze, vetStanzePacifiche = SetAvanzamentiStanzePorteCofanetti.definisciSta
 # dichiaro i vettori di porte e cofanetti
 initVetPorteGlobale = SetAvanzamentiStanzePorteCofanetti.definisciPorte(dictStanze)
 initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(dictStanze)
+
+# dictionary che contiene i dati dell'enigma del bibliotecario
+datiEnigmaBibliotecario = {}
+datiEnigmaBibliotecario["reset"] = False
+datiEnigmaBibliotecario["velocità"] = 5
+datiEnigmaBibliotecario["soluzione"] = 6.25
+datiEnigmaBibliotecario["rispostaFalsa1"] = 5
+datiEnigmaBibliotecario["rispostaFalsa2"] = 4.75
+datiEnigmaBibliotecario["rispostaFalsa3"] = 5.5

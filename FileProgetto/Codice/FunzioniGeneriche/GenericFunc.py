@@ -1859,8 +1859,7 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
                 else:
                     obbiettivoRichiesto = "ColcoFinale"
             if obbiettivoRichiesto == "EscaSuccessiva":
-                if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadrato[4:])) + 3 < len(
-                        listaEscheViste) - 1:
+                if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadrato[4:])) + 3 < len(listaEscheViste) - 1:
                     nemicoInquadrato = "Esca" + str(listaEscheViste[listaEscheViste.index(int(nemicoInquadrato[4:])) + 4])
                     trovatoNemicoDaInquadrare = True
                 else:
@@ -1897,8 +1896,7 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
                     obbiettivoRichiesto = "NemicoFinale"
             if obbiettivoRichiesto == "EscaPrecedente":
                 if len(listaEscheViste) > 0 and listaEscheViste.index(int(nemicoInquadrato[4:])) != 0:
-                    nemicoInquadrato = "Esca" + str(
-                        listaEscheViste[listaEscheViste.index(int(nemicoInquadrato[4:])) - 4])
+                    nemicoInquadrato = "Esca" + str(listaEscheViste[listaEscheViste.index(int(nemicoInquadrato[4:])) - 4])
                     trovatoNemicoDaInquadrare = True
                 else:
                     obbiettivoRichiesto = "NemicoFinale"
@@ -1922,11 +1920,7 @@ def scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadrato, listaNemiciV
                     obbiettivoRichiesto = "EscaFinale"
             cicliDisponibili -= 1
 
-    if trovatoNemicoDaInquadrare:
-        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selObbiettivo)
-    else:
-        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-    return nemicoInquadrato
+    return trovatoNemicoDaInquadrare, nemicoInquadrato
 
 
 def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, avanzamentoStoria):

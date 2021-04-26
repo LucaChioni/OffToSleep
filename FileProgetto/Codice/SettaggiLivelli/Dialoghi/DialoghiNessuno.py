@@ -821,6 +821,25 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Puah!")
                 partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 21 and y == GlobalHWVar.gpy * 9:
+                if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Il bibliotecario mi sta aspettando...")
+                    partiDialogo.append(dialogo)
+                else:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Devo controllare i registri prima di andare...")
+                    partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

@@ -184,10 +184,11 @@ def animaLvUp(x, y, npers, pers, arma, armatura, scudo, collana, arco, faretra, 
             if GlobalHWVar.mouseBloccato:
                 GlobalHWVar.configuraCursore(False)
             GlobalHWVar.aggiornaSchermo()
+            i = 0
             while i < 5:
                 pygame.time.wait(100)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-            i += 1
+                i += 1
             risposta = False
             bottoneDown = False
             while not risposta:
@@ -1707,8 +1708,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             if (animazioneNemici or animazioneRallo or animazioneColco or animazionePersonaggi) and fineanimaz >= 0:
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
-                # print (GlobalHWVar.clockAnimazioni.get_fps())
+                if fineanimaz > 0:
+                    GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
+                    # print (GlobalHWVar.clockAnimazioni.get_fps())
             fineanimaz -= 1
 
         azioniDaEseguire = []

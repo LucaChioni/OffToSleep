@@ -147,7 +147,7 @@ class PersonaggioObj(object):
             nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoVomito":
             disegnaImg = True
-            numImg = 3
+            numImg = 2
             numImgDialogo = 1
             nomeImgDialogo = ["Vuota"]
         if self.tipo == "OggettoMocio":
@@ -234,8 +234,6 @@ class PersonaggioObj(object):
         if self.tipo == "OggettoVomito":
             if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
                 numImgAttuale = 1
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["sedutaInBiblioteca"]:
-                numImgAttuale = 2
 
         if primoCaricamento or self.imgAttuale != self.imgOggetto[numImgAttuale]:
             refreshSchermo = True

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import os
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 
 
@@ -86,7 +88,7 @@ def messaggio(msg, colore, x, y, gr, largezzaFoglio=-1, spazioTraLeRighe=-1, daD
         GlobalHWVar.disegnaImmagineSuSchermo(testo, (x, y))
 
 
-def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFoglio, spazioTraLeRighe):
+def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFoglio, spazioTraLeRighe, scriviTutto=False):
     x = int(x)
     y = int(y)
 
@@ -99,7 +101,6 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
     coloreOrig = colore
     xOrig = x
 
-    scriviTutto = False
     vetMsg = msg.split("<*>")
     for text in vetMsg:
         if fineDialogo:
@@ -537,6 +538,32 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 i += 1
         GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
         GlobalHWVar.aggiornaSchermo()
+
+
+def animaEvento(pathImgs, coordinateImgAnimata, listaAudio):
+    # animazione effettiva
+    vetImgAnimazione = []
+    if pathImgs:
+        numImgAnimazione = len(os.listdir(GlobalHWVar.gamePath + pathImgs))
+    else:
+        numImgAnimazione = 0
+    i = 1
+    while i <= numImgAnimazione:
+        vetImgAnimazione.append(CaricaFileProgetto.loadImage(pathImgs + "img" + str(i) + ".png", GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 1, True))
+        i += 1
+
+    numFrameAttuale = 0
+    while len(vetImgAnimazione) > 0:
+        if len(listaAudio) > 0 and listaAudio[0] == numFrameAttuale:
+            GlobalHWVar.canaleSoundInterazioni.play(listaAudio[1])
+            del listaAudio[1]
+            del listaAudio[0]
+        GlobalHWVar.disegnaImmagineSuSchermo(vetImgAnimazione.pop(0), coordinateImgAnimata)
+
+        GlobalHWVar.aggiornaSchermo()
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GlobalHWVar.clockAnimazioni.tick(GlobalHWVar.fpsAnimazioni)
+        numFrameAttuale += 1
 
 
 '''# linea(dove,colore,inizio,fine,spessore)

@@ -1273,7 +1273,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        if deltaXMouse != 0 or deltaYMouse != 0 or (primoFrame and GlobalHWVar.mouseVisibile) or (analisiDiColcoEffettuata and GlobalHWVar.mouseVisibile):
+        if (GlobalHWVar.mouseVisibile and (deltaXMouse != 0 or deltaYMouse != 0)) or (primoFrame and GlobalHWVar.mouseVisibile) or (analisiDiColcoEffettuata and GlobalHWVar.mouseVisibile):
             casellaTrovata = False
             i = 0
             while i < len(caseviste):
@@ -1513,7 +1513,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 i += 4
             if rx == xp and ry == yp:
                 nemicoInquadratoTemp = "Colco"
-            nemicoInquadratoTemp = GenericFunc.scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, True)
+            trovatoNemicoDaInquadrare, nemicoInquadratoTemp = GenericFunc.scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, True)
 
             if not nemicoInquadratoTemp:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -1532,7 +1532,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             bottoneDown = False
         if bottoneDown == pygame.K_2 or bottoneDown == pygame.K_KP2 or bottoneDown == "padL1":
             nemicoInquadratoTemp = False
-            GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
             # seleziono i nemici / esche visti/e + controllo se il puntatore è su un nemico / esca / Colco
             listaNemiciVisti = []
             for nemico in listaNemici:
@@ -1556,7 +1555,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 i += 4
             if rx == xp and ry == yp:
                 nemicoInquadratoTemp = "Colco"
-            nemicoInquadratoTemp = GenericFunc.scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, False)
+            trovatoNemicoDaInquadrare, nemicoInquadratoTemp = GenericFunc.scorriObbiettiviInquadrati(avanzamentoStoria, nemicoInquadratoTemp, listaNemiciVisti, listaEscheViste, False)
 
             if not nemicoInquadratoTemp:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)

@@ -966,7 +966,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             if stanzaVecchia == GlobalGameVar.dictStanze["biblioteca2"]:
                 npers = "a"
                 x = GlobalHWVar.gsx // 32 * 20
-                y = GlobalHWVar.gsy // 18 * 10
+                y = GlobalHWVar.gsy // 18 * 9
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -1032,9 +1032,7 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
         stoppaMusica = True
     elif GlobalGameVar.dictAvanzamentoStoria["vistoDalServo"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"]:
         stoppaMusica = True
-    elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"]:
-        stoppaMusica = True
-    elif GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
+    elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["riavviatoMusicaPostDialogoBibliotecario"]:
         stoppaMusica = True
 
     return stoppaMusica
@@ -1094,6 +1092,8 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
     elif equipaggiamentoIndossato and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca1"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["andatoNelloStudioDelBibliotecario"] and stanzaVecchia == GlobalGameVar.dictStanze["biblioteca2"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca3"]:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca2"]:
         nonProcedere = True
 
     return nonProcedere
@@ -1185,5 +1185,10 @@ def settaNomeStanza(avanzamentoStoria, stanza):
             nomeStanza = "StanzaB"
         else:
             nomeStanza = "StanzaC"
+    if stanza == GlobalGameVar.dictStanze["biblioteca3"]:
+        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
+            nomeStanza = "StanzaA"
+        else:
+            nomeStanza = "StanzaB"
 
     return nomeStanza
