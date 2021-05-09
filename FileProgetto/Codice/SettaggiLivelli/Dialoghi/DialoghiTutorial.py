@@ -106,7 +106,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni e di recuperare qualche <*>#italic#Pv<*>.")
+        dialogo.append(u"In modalità interazione, cliccando su te stesso assumerai una posizione difensiva che ti permetterà di subire meno danni e di recuperare qualche <*>#italic#Pv.<*>")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")

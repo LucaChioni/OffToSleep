@@ -243,7 +243,7 @@ def menu(caricaSalvataggio, gameover):
     # carico subito tutti i salvataggi
     SottoMenuSalva.ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
 
-    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
     sreen_temp = GlobalHWVar.schermo.copy().convert()
     imgOscuraPuntatore = sreen_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 11.5)).convert()
@@ -493,7 +493,7 @@ def menu(caricaSalvataggio, gameover):
                         yp = GlobalHWVar.gsy // 18 * 7.5
                     if voceMarcata == 4:
                         yp = GlobalHWVar.gsy // 18 * 12.5
-                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
                     FunzioniGraficheGeneriche.messaggio("Inizia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 2, 90)
                     FunzioniGraficheGeneriche.messaggio("Continua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 4.5, 90)
@@ -576,7 +576,7 @@ def menu(caricaSalvataggio, gameover):
             elif primoFrame or aggiornaInterfacciaPerCambioInput:
                 primoFrame = False
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Comandi mouse", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
 
@@ -584,7 +584,7 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 0.4, GlobalHWVar.gsy // 18 * 6))
                     FunzioniGraficheGeneriche.messaggio("Movimento (su casella libera) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 6.8, 35)
                     FunzioniGraficheGeneriche.messaggio("Interagisci (su casella interagibile) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.3, 35)
-                    FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.8, 35)
+                    FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su PietraImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.8, 35)
                     FunzioniGraficheGeneriche.messaggio("Menu (su stato personaggio) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 8.3, 35)
                     FunzioniGraficheGeneriche.messaggio(u"Modalità interazione (su stato nemico)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 8.8, 35)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 0.7, GlobalHWVar.gsy // 18 * 9.8), (GlobalHWVar.gsx // 32 * 10.2, GlobalHWVar.gsy // 18 * 9.8), 2)
@@ -598,7 +598,7 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 10.9, GlobalHWVar.gsy // 18 * 6))
                     FunzioniGraficheGeneriche.messaggio("Inquadra o attacca (su casella nemica) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 6.8, 35)
                     FunzioniGraficheGeneriche.messaggio("Interagisci (su casella interagibile) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.3, 35)
-                    FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.8, 35)
+                    FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su PietraImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.8, 35)
                     FunzioniGraficheGeneriche.messaggio("Menu (su stato personaggio) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 8.3, 35)
                     FunzioniGraficheGeneriche.messaggio(u"Modalità movimento (su stato nemico)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 8.8, 35)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 9.8), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 9.8), 2)
@@ -1015,7 +1015,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                 if primoFrame:
                     primoFrame = False
                     aggiornaInterfacciaPerCambioInput = True
-                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                     # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 12.5))
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))

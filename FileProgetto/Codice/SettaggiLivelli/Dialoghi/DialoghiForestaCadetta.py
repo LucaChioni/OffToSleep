@@ -24,7 +24,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"C'è un cinghiale incastrato in questo cespuglio...?")
+            dialogo.append(u"C'è un cinghiale incastrato in questo cespuglio.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -255,7 +255,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("Mmh... cosa ci fai in mezzo alla foresta di notte senza neanche un'arma?")
+            dialogo.append("<*>#italic#Mmh...<*> cosa ci fai in mezzo alla foresta di notte senza neanche un'arma?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -263,11 +263,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("Mmh... certo. Senti ragazzo se mi aiuterai a finire di allestire l'accampamento, potrai passare qua la notte e continuare domani il tuo cammino.")
+            dialogo.append("Certo... Senti ragazzo se mi aiuterai a finire di allestire l'accampamento, potrai passare qua la notte e continuare domani il tuo cammino.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Non chiamarmi <*>#italic#ragazzo<*>, se stai affrontando questa prova vuol dire che hai più o meno la mia età!")
+            dialogo.append(u"Non chiamarmi <*>#italic#ragazzo,<*> se stai affrontando questa prova vuol dire che hai più o meno la mia età!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -311,7 +311,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Mmh... sì, dovrebbe bastare.")
+            dialogo.append(u"Sì, dovrebbe bastare.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -345,7 +345,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append("Mmh...")
+            dialogo.append("<*>#italic#Mmh...<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -389,11 +389,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Mah... senz'altro <*>#italic#ragazzo<*>...")
+            dialogo.append("Mah... senz'altro <*>#italic#ragazzo...<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Mmh... e tu invece perché stai andando tutto solo verso la città?")
+            dialogo.append(u"<*>#italic#Mmh...<*> e tu invece perché stai andando tutto solo verso la città?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

@@ -553,7 +553,7 @@ def equip(dati):
 
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
@@ -1530,7 +1530,7 @@ def oggetti(dati, colcoInCasellaVista):
 
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
@@ -1679,7 +1679,7 @@ def oggetti(dati, colcoInCasellaVista):
             spazioTraLeRigheTestoDescrizione = int(GlobalHWVar.gpy * 0.6)
             if dati[31] >= 0 and oggetton == 1:
                 FunzioniGraficheGeneriche.messaggio("Pozione:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
-                FunzioniGraficheGeneriche.messaggio("Recupera 100 <*>#italic#Pv<*>.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                FunzioniGraficheGeneriche.messaggio("Recupera 100 <*>#italic#Pv.<*>", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 1:
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[32] >= 0 and oggetton == 2:
@@ -1697,7 +1697,7 @@ def oggetti(dati, colcoInCasellaVista):
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[34] >= 0 and oggetton == 4:
                 FunzioniGraficheGeneriche.messaggio("Super pozione:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
-                FunzioniGraficheGeneriche.messaggio("Recupera 300 <*>#italic#Pv<*>.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                FunzioniGraficheGeneriche.messaggio("Recupera 300 <*>#italic#Pv.<*>", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 4:
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[35] >= 0 and oggetton == 5:

@@ -53,7 +53,7 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo.append("tu")
             dialogo.append(u"È finita?")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria == 2:
+        else:
             oggettoDato = False
             avanzaStoria = True
             menuMercante = False
@@ -82,45 +82,6 @@ def caricaDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzam
             dialogo = []
             dialogo.append("personaggio")
             dialogo.append(u"Non ho più merce")
-            partiDialogo.append(dialogo)
-        elif avanzamentoStoria == 3:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = True
-            scelta = 3
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("Ciao, ecco la merce")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("???DOMANDA???")
-            dialogo.append("Quanto fa 2+3?")
-            dialogo.append("Che schifo di domanda!")
-            dialogo.append("(cambia discorso parlando di carote)")
-            dialogo.append("Almeno 3")
-            dialogo.append("(mettilo a disagio fingendo di non aver sentito)")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("!!!RISPOSTA!!!")
-            dialogo.append("Scusa...")
-            dialogo.append("Scusa, non mi interessano le carote")
-            dialogo.append(u"Mmh... è giusto...")
-            dialogo.append("2+3? ... mi scusi signore ... 2+3? ...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("Ecco la merceee")
-            partiDialogo.append(dialogo)
-        else:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append("Vattene")
             partiDialogo.append(dialogo)
 
     if tipo == "Nessuno":

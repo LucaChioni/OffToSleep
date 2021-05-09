@@ -54,14 +54,12 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
         elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            percorsoPersonaggio = ["d", "mantieniPosizione"]
+            percorsoPersonaggio = ["dGira", "mantieniPosizione"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 5, "d", "GuardiaCitta-17", stanza, avanzamentoStoria, percorsoPersonaggio)
-            personaggio.numeroMovimento = 1
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
-            percorsoPersonaggio = ["d", "mantieniPosizione"]
+            percorsoPersonaggio = ["dGira", "mantieniPosizione"]
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 12, "d", "GuardiaCitta-18", stanza, avanzamentoStoria, percorsoPersonaggio)
-            personaggio.numeroMovimento = 1
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
 

@@ -313,7 +313,7 @@ def menuMappa(avanzamentoStoria):
             if not voceMarcataSottoMenu:
                 if primoFrame:
                     aggiornaInterfacciaPerCambioInput = True
-                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                     screen = GlobalHWVar.schermo.copy()
                     backgroundTornaIndietro = screen.subsurface(pygame.Rect(GlobalHWVar.gpx * 21, 0, GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 2)).convert()
                     imgMappa = imgMappaA
@@ -628,7 +628,7 @@ def menuDiario(dati):
 
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4))
@@ -714,7 +714,7 @@ def menuDiario(dati):
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
                             FunzioniGraficheGeneriche.messaggio("Movimento (su casella libera) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 5.6, 35)
                             FunzioniGraficheGeneriche.messaggio("Interagisci (su casella interagibile) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.1, 35)
-                            FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.6, 35)
+                            FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su PietraImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.6, 35)
                             FunzioniGraficheGeneriche.messaggio("Menu (su stato personaggio) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7.1, 35)
                             FunzioniGraficheGeneriche.messaggio(u"Modalità interazione (su stato nemico)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7.6, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.6), 2)
@@ -726,7 +726,7 @@ def menuDiario(dati):
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialMouse, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
                             FunzioniGraficheGeneriche.messaggio("Inquadra o attacca (su casella nemica) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 5.6, 35)
                             FunzioniGraficheGeneriche.messaggio("Interagisci (su casella interagibile) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.1, 35)
-                            FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su teleImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.6, 35)
+                            FunzioniGraficheGeneriche.messaggio("Attiva o disattiva Impo (su PietraImpo) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 6.6, 35)
                             FunzioniGraficheGeneriche.messaggio("Menu (su stato personaggio) /", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7.1, 35)
                             FunzioniGraficheGeneriche.messaggio(u"Modalità movimento (su stato nemico)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 7.6, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.6), 2)

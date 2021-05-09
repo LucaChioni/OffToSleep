@@ -62,7 +62,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
             if aggiornaSchermata or aggiornaInterfacciaPerCambioInput:
                 aggiornaSchermata = False
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robograf2, (GlobalHWVar.gpx * 7, int(-GlobalHWVar.gpy * 4.45)))
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (GlobalHWVar.gpx * 10, int(GlobalHWVar.gpy * 13.5)), (GlobalHWVar.gpx * 22, int(GlobalHWVar.gpy * 13.5)), 2)
                 if GlobalHWVar.mouseVisibile:
@@ -105,7 +105,7 @@ def mostraErroreCaricamentoSalvataggio(errore):
             if aggiornaSchermata or aggiornaInterfacciaPerCambioInput:
                 aggiornaSchermata = False
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robograf4, (GlobalHWVar.gpx * 7, -GlobalHWVar.gpy * 4.45))
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.nero, (GlobalHWVar.gpx * 10, int(GlobalHWVar.gpy * 13.5)), (GlobalHWVar.gpx * 22, int(GlobalHWVar.gpy * 13.5)), 2)
                 if GlobalHWVar.mouseVisibile:
@@ -424,7 +424,7 @@ def scegli_sal(possibileSalvare, lunghezzadati, lunghezzadatiPorte, lunghezzadat
             if primoFrame or aggiornaTutto:
                 aggiornaInterfacciaPerCambioInput = True
                 aggiornaTutto = False
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 if cosa == 2:
                     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.rossoScuro, (GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 27.9, GlobalHWVar.gsy // 18 * 8))

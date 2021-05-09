@@ -63,7 +63,7 @@ def mostraLogo():
         pygame.event.pump()
         GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
         i += 1
-    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     GlobalHWVar.aggiornaSchermo()
 global canzoneMenuPrincipale
 def disegnaSchermataDiCaricamento():
@@ -73,7 +73,7 @@ def disegnaSchermataDiCaricamento():
 
     schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     sfumaturaCaricamentoMenuPrincipale = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
     GlobalHWVar.disegnaImmagineSuSchermo(schemataDiCaricamento, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(sfumaturaCaricamentoMenuPrincipale, (0, 0))
     carattere = pygame.font.Font(GlobalHWVar.fontUtilizzato, GlobalHWVar.gpx * 70 // 60)
@@ -145,8 +145,8 @@ initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(
 # dictionary che contiene i dati dell'enigma del bibliotecario
 datiEnigmaBibliotecario = {}
 datiEnigmaBibliotecario["reset"] = False
-datiEnigmaBibliotecario["velocità"] = 5
-datiEnigmaBibliotecario["soluzione"] = 6.25
-datiEnigmaBibliotecario["rispostaFalsa1"] = 5
-datiEnigmaBibliotecario["rispostaFalsa2"] = 4.75
-datiEnigmaBibliotecario["rispostaFalsa3"] = 5.5
+datiEnigmaBibliotecario["velocità"] = 2
+datiEnigmaBibliotecario["soluzione"] = 1
+datiEnigmaBibliotecario["rispostaFalsa1"] = 1.25
+datiEnigmaBibliotecario["rispostaFalsa2"] = 0.25
+datiEnigmaBibliotecario["rispostaFalsa3"] = 1.5

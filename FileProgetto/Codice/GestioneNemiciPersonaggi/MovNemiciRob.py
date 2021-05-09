@@ -730,7 +730,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dannoEffettivo = 0
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
-            # giro Colco verso l'obiettivo
+            # giro Colco verso l'obbiettivo
             if azioneEseguita:
                 if abs(nemicoBersaglio.x - rx) > abs(nemicoBersaglio.y - ry):
                     if rx < nemicoBersaglio.x:
@@ -964,7 +964,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
-            # giro Colco verso l'obiettivo
+            # giro Colco verso l'obbiettivo
             if azioneEseguita:
                 if abs(nemicoBersaglio.x - rx) > abs(nemicoBersaglio.y - ry):
                     if rx < nemicoBersaglio.x:
@@ -1121,7 +1121,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
-                    # giro Colco verso l'obiettivo
+                    # giro Colco verso l'obbiettivo
                     if azioneEseguita:
                         if abs(x - rx) > abs(y - ry):
                             if rx < x:
@@ -1343,7 +1343,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                                 dannoEffettivo = 0
                             attaccoDiColco.append(-dannoEffettivo)
                             attaccoDiColco.append("")
-                # giro Colco verso l'obiettivo
+                # giro Colco verso l'obbiettivo
                 if azioneEseguita:
                     if abs(x - rx) > abs(y - ry):
                         if rx < x:
@@ -1601,7 +1601,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             while i < len(vettorePrevisione):
                 vettorePrevisione[i][1] = "Energia insufficiente"
                 i += 1
-        previsionePosizioneObbiettivo.append([x, y])
+        else:
+            previsionePosizioneObbiettivo.append([x, y])
         azioneEseguita = False
         if (vx == rx + GlobalHWVar.gpx and vy == ry) or (vx == rx - GlobalHWVar.gpx and vy == ry) or (vx == rx and vy == ry + GlobalHWVar.gpy) or (vx == rx and vy == ry - GlobalHWVar.gpy):
             if not (x == vx and y == vy):
@@ -1638,14 +1639,14 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     nrob = 4
                 sposta = True
             else:
-                print ("Percorso Colco verso telecolco non trovato")
+                print ("Percorso Colco verso PietraImpo non trovato")
         if azioneEseguita and sposta:
             tecnicaUsata = "spostamento"
             ultimoObbiettivoColco = ["Telecomando", x, y]
         else:
             ultimoObbiettivoColco = []
     else:
-        vettorePrevisione[0][1] = "TeleImpo spento"
+        vettorePrevisione[0][1] = "PietraImpo spenta"
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
         if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
@@ -1690,7 +1691,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             else:
                 costoTecnicaUsata = GlobalGameVar.costoTecniche[dati[i + 10] - 1]
             rigaGambitAttuale = i - 100
-            if dati[i] == 0 or dati[i + 10] == 0:
+            if dati[i] <= 0 or dati[i + 10] <= 0:
                 vettorePrevisione[rigaGambitAttuale][1] = "Settaggio incompleto"
             elif dati[10] > costoTecnicaUsata:
                 if not (dati[122] > 0 and (dati[i + 10] == 11 or dati[i + 10] == 14)):
@@ -2394,7 +2395,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             if azioneEseguita and sposta:
                 if dati[10] <= 0:
                     vettorePrevisione[11][1] = "Energia insufficiente"
-                previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
+                else:
+                    previsionePosizioneObbiettivo.append([ultimoObbiettivoColco[1], ultimoObbiettivoColco[2]])
                 tecnicaUsata = "spostamento"
             else:
                 if dati[10] <= 0:

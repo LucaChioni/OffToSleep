@@ -540,7 +540,7 @@ def settaController():
 
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 FunzioniGraficheGeneriche.messaggio("Configura controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
@@ -854,7 +854,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                             pygame.display.set_caption(GlobalHWVar.titolo)
                             pygame.display.set_icon(GlobalHWVar.icona)
                         if ricaricaImgs:
-                            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                             FunzioniGraficheGeneriche.messaggio("Cambio risoluzione in corso...", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 7.5, 120, centrale=True)
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
                             GlobalGameVar.numImgCaricata = 0
@@ -1204,7 +1204,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
 
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.grigioscu)
+                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
                 FunzioniGraficheGeneriche.messaggio("Impostazioni", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                 # rettangolo(dove,colore,posizione-larghezza/altezza,spessore)
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12.5))

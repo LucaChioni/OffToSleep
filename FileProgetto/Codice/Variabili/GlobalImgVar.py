@@ -274,6 +274,15 @@ global vetImgGuantiInGame
 global vetImgCollaneInGame
 global vetImgFaretreInGame
 global vetImgArmRobInGame
+global schemataEnigmaBibliotecarioUsandoMatita
+global schemataEnigmaBibliotecarioUsandoGomma
+global imgEnigmaBibliotecarioVel1
+global imgEnigmaBibliotecarioVel2
+global imgEnigmaBibliotecarioVel3
+global imgEnigmaBibliotecarioVel4
+global imgEnigmaBibliotecarioVel5
+global cursoreMatitaEnigmaBibliotecario
+global cursoreGommaEnigmaBibliotecario
 
 numImgTotali = 1390
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
@@ -567,6 +576,15 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global vetImgCollaneInGame
     global vetImgFaretreInGame
     global vetImgArmRobInGame
+    global schemataEnigmaBibliotecarioUsandoMatita
+    global schemataEnigmaBibliotecarioUsandoGomma
+    global imgEnigmaBibliotecarioVel1
+    global imgEnigmaBibliotecarioVel2
+    global imgEnigmaBibliotecarioVel3
+    global imgEnigmaBibliotecarioVel4
+    global imgEnigmaBibliotecarioVel5
+    global cursoreMatitaEnigmaBibliotecario
+    global cursoreGommaEnigmaBibliotecario
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -716,16 +734,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         vetImgArchiInGame.append(vetAnimaTemp)
         # armatura
         vetAnimaTemp = []
-        if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-        else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/Armature/Armatura%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgArmatureInGame.append(vetAnimaTemp)
         # scudo
         vetAnimaTemp = []
@@ -1186,3 +1198,14 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
 
     schemataDiCaricamento = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     sfumaturaCaricamentoMenuPrincipale = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+
+    # immagini eventi
+    schemataEnigmaBibliotecarioUsandoMatita = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    schemataEnigmaBibliotecarioUsandoGomma = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel1 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel1.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel2 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel2.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel3 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel3.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel4 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel4.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel5 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel5.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    cursoreMatitaEnigmaBibliotecario = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/CursoreMatita.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True)
+    cursoreGommaEnigmaBibliotecario = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/CursoreGomma.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True)

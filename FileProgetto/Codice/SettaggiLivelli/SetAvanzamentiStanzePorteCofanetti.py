@@ -290,12 +290,30 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["scrittiDatiEnigmaBibliotecario"] = i
     i += 1
     dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"] = i
-
     i += 1
     dictAvanzamentoStoria["risoltoEnigmaBibliotecario"] = i
     i += 1
+    dictAvanzamentoStoria["eseguitaVerificaRisultatoEnigma"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoConclusivoEnigmaBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["bibliotecarioArrivatoAlRegistro"] = i
+    i += 1
+    dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"] = i
+    i += 1
+    dictAvanzamentoStoria["andatoACercareImpo"] = i
+    i += 1
+    dictAvanzamentoStoria["ricercaImpoDiBibliotecario1"] = i
+    i += 1
+    dictAvanzamentoStoria["ricercaImpoDiBibliotecario2"] = i
+    i += 1
     dictAvanzamentoStoria["ricevutoImpo"] = i
     dictAvanzamentoStoria["mercanteAlimantaz"] = i
+    i += 1
+    dictAvanzamentoStoria["ricevutoPietraImpo"] = i
+    i += 1
+    dictAvanzamentoStoria["ricaricatoImpoDalBibliotecario"] = i
+
     i += 1
     dictAvanzamentoStoria["inizioViaggioVersoNeil"] = i
     i += 1

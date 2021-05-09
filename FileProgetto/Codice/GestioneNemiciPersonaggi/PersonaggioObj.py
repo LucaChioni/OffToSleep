@@ -24,6 +24,7 @@ class PersonaggioObj(object):
         self.numeroMovimento = numeroMovimento
         self.inCasellaVista = False
         self.vicinoACasellaVista = False
+        self.oggettoEnigma = False
 
         self.oggettoDato = False
         self.avanzaStoria = False
@@ -46,6 +47,8 @@ class PersonaggioObj(object):
                     self.mantieniSempreASchermo = True
                 self.caricaImgOggetto(nonCaricareImg=nonCaricareImg)
                 self.aggiornaImgOggetto(avanzamentoStoria, True)
+                if self.tipo.startswith("OggettoEnigma"):
+                    self.oggettoEnigma = True
             else:
                 self.mantieniSempreASchermo = False
                 self.caricaImgPersonaggio(nonCaricareImg=nonCaricareImg)

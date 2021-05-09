@@ -82,6 +82,12 @@ global audioAmbienteCitta_giorno
 global rumoreChiusuraPortaCitta
 global audioAmbienteBiblioteca
 global canzoneBiblioteca
+global rumoreLancioPallaBibliotecario
+global rumoreRitornoPallaBibliotecario
+global rumoreAppoggioStrumentoEnigmi
+global rumoreScorrimentoMatitaEnigmi
+global rumoreScorrimentoGommaEnigmi
+global rumoreCancellaTuttoEnigmi
 
 
 numSndTotali = 77
@@ -176,6 +182,12 @@ def loadSounds(numSndCaricato):
     global rumoreChiusuraPortaCitta
     global audioAmbienteBiblioteca
     global canzoneBiblioteca
+    global rumoreLancioPallaBibliotecario
+    global rumoreRitornoPallaBibliotecario
+    global rumoreAppoggioStrumentoEnigmi
+    global rumoreScorrimentoMatitaEnigmi
+    global rumoreScorrimentoGommaEnigmi
+    global rumoreCancellaTuttoEnigmi
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -237,6 +249,12 @@ def loadSounds(numSndCaricato):
     rumoreSollevamentoPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SollevamentoPortaCittà.wav")
     rumoreChiusuraPortaCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AbbassamentoPortaCittà.wav")
     rumoreDoccia = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/DocciaCasaUfficiale.wav")
+    rumoreLancioPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/LancioPallaBibliotecario.wav")
+    rumoreRitornoPallaBibliotecario = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/RitornoPallaBibliotecario.wav")
+    rumoreAppoggioStrumentoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AppaggioMatitaEnigmi.wav")
+    rumoreScorrimentoMatitaEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/ScorrimentoMatitaEnigmi.wav")
+    rumoreScorrimentoGommaEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/ScorrimentoGommaEnigmi.wav")
+    rumoreCancellaTuttoEnigmi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/CancellaTuttoEnigmi.wav")
 
     # suoni apertura-chiusura porte
     suonoaperturaporteForesta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/AperturaPortaForesta.wav")

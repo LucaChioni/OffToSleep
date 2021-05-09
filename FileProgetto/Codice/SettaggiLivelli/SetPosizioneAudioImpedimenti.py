@@ -9,6 +9,8 @@ import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGener
 
 
 def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio, avanzamentoStoria, bottoneDown):
+    mantieniPosizioneImpo = False
+
     if stanza == GlobalGameVar.dictStanze["sognoLucy1"]:
         if canzone != GlobalSndVar.canzoneSogno:
             canzoneCambiata = True
@@ -967,6 +969,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = "a"
                 x = GlobalHWVar.gsx // 32 * 20
                 y = GlobalHWVar.gsy // 18 * 9
+            elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"]:
+                mantieniPosizioneImpo = True
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -978,13 +982,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
     elif npers == "s":
         npers = 4
 
-    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown, avanzamentoStoria
+    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown, avanzamentoStoria, mantieniPosizioneImpo
 
 
 def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
     stoppaMusica = False
     if (stanzaVecchia == GlobalGameVar.dictStanze["sognoLucy4"] and stanza == GlobalGameVar.dictStanze["casaHansLucy1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta1"] and stanza == GlobalGameVar.dictStanze["casaHansLucy4"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["casaHansLucy1"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio("Casa", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
@@ -992,25 +996,25 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
         if stanzaVecchia == GlobalGameVar.dictStanze["sognoLucy4"] and stanza == GlobalGameVar.dictStanze["casaHansLucy1"]:
             stoppaMusica = True
     elif (stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy4"] and stanza == GlobalGameVar.dictStanze["forestaCadetta1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerCittà1"] and stanza == GlobalGameVar.dictStanze["forestaCadetta9"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio("Foresta Cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
     elif (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta9"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["città1"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà3"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio(u"Strada per la città", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerCittà3"] and stanza == GlobalGameVar.dictStanze["città1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["casaDavid1"] and stanza == GlobalGameVar.dictStanze["città4"]) or (stanzaVecchia == GlobalGameVar.dictStanze["biblioteca1"] and stanza == GlobalGameVar.dictStanze["città7"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida1"] and stanza == GlobalGameVar.dictStanze["città9"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerPassoMontano1"] and stanza == GlobalGameVar.dictStanze["città10"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio(u"Città", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
     elif stanzaVecchia == GlobalGameVar.dictStanze["città4"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio(u"Casa di David", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
@@ -1018,7 +1022,7 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
         if avanzamentotoria <= GlobalGameVar.dictAvanzamentoStoria["arrivoCasaUfficiale"]:
             stoppaMusica = True
     elif stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanza == GlobalGameVar.dictStanze["biblioteca1"]:
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio(u"Biblioteca", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
@@ -1188,7 +1192,9 @@ def settaNomeStanza(avanzamentoStoria, stanza):
     if stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
             nomeStanza = "StanzaA"
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["andatoACercareImpo"]:
             nomeStanza = "StanzaB"
+        else:
+            nomeStanza = "StanzaC"
 
     return nomeStanza

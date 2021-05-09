@@ -237,7 +237,6 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMorte)
         oscuraIlluminaSchermo(illumina=False, tipoOscuramento=2)
 
-        # GlobalVarG2.disegnaColoreSuTuttoLoSchermo(GlobalVarG2.grigioscu)
         messaggio("Sei morto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 13, 150)
         GlobalHWVar.aggiornaSchermo()
 
@@ -448,7 +447,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
-            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 2:
             image.fill((0, 0, 0, 8))
@@ -471,7 +470,7 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
-            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.nero)
+            GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.aggiornaSchermo()
         elif tipoOscuramento == 4:
             image.fill((0, 0, 0, 25))
@@ -540,8 +539,8 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
         GlobalHWVar.aggiornaSchermo()
 
 
-def animaEvento(pathImgs, coordinateImgAnimata, listaAudio):
-    # animazione effettiva
+def animaEvento(pathImgs, coordinateImgAnimata, dimensioniImgAnimata, listaAudio):
+    dimX, dimY = dimensioniImgAnimata
     vetImgAnimazione = []
     if pathImgs:
         numImgAnimazione = len(os.listdir(GlobalHWVar.gamePath + pathImgs))
@@ -549,9 +548,16 @@ def animaEvento(pathImgs, coordinateImgAnimata, listaAudio):
         numImgAnimazione = 0
     i = 1
     while i <= numImgAnimazione:
-        vetImgAnimazione.append(CaricaFileProgetto.loadImage(pathImgs + "img" + str(i) + ".png", GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 1, True))
+        vetImgAnimazione.append(CaricaFileProgetto.loadImage(pathImgs + "img" + str(i) + ".png", dimX, dimY, True))
         i += 1
+    # metto i suoni marcati con "-1" nell'ultimo frame dell'animazione
+    i = 0
+    while i < len(listaAudio):
+        if listaAudio[i] == -1:
+            listaAudio[i] = len(vetImgAnimazione) - 1
+        i += 2
 
+    # animazione effettiva
     numFrameAttuale = 0
     while len(vetImgAnimazione) > 0:
         if len(listaAudio) > 0 and listaAudio[0] == numFrameAttuale:

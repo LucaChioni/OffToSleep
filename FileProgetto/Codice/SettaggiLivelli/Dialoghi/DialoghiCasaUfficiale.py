@@ -279,7 +279,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Uh...? Ohh... buongiorno...")
+            dialogo.append(u"Uh... ? Ohh... buongiorno...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -510,7 +510,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Oh, è davvero... <*>#italic#gnam gnam<*>... molto buono.")
+            dialogo.append(u"Oh, è davvero... <*>#italic#gnam gnam...<*> molto buono.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -570,7 +570,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... David...?")
+            dialogo.append(u"... David... ?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -578,11 +578,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Il nemico avanza...?")
+            dialogo.append(u"Il nemico avanza... ?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Tsk... ci ostiniamo a tenerlo nascosto ma tra poco non avrà più importanza! Nel giro di cinque, sei giorni o una settimana al massimo, ci saranno addosso.")
+            dialogo.append(u"<*>#italic#Tsk...<*> ci ostiniamo a tenerlo nascosto ma tra poco non avrà più importanza! Nel giro di cinque, sei giorni o una settimana al massimo, ci saranno addosso.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -590,7 +590,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Mmmh... Lucy, giusto?")
+            dialogo.append(u"... <*>#italic#Mmmh...<*> Lucy, giusto?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -598,7 +598,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Lucy... è un bel nome... <*>#italic#Lucy<*>... mi ricorda quella ragazza al primo anno di addestramento...")
+            dialogo.append(u"... Lucy... è un bel nome... <*>#italic#Lucy...<*> mi ricorda quella ragazza al primo anno di addestramento...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -662,7 +662,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Mmh... uff...")
+            dialogo.append(u"... <*>#italic#Mmh...<*> <*>#italic#uff...<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -797,7 +797,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ci sono un sacco di libri. Come si fa ad aver voglia di leggere tutta questa roba... ?")
+            dialogo.append(u"Ci sono un sacco di libri. Come si fa ad aver voglia di leggere tutta questa roba?")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoMappamondo":
         partiDialogo = []
@@ -954,7 +954,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Uff... mi devo lavare...")
+            dialogo.append(u"... <*>#italic#Uff...<*> mi devo lavare...")
             partiDialogo.append(dialogo)
         elif avanzamentoDialogo == 1 and GlobalGameVar.dictAvanzamentoStoria["fattoBagnoCasaDavid"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             oggettoDato = False

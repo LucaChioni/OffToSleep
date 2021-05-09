@@ -100,6 +100,7 @@ clockAnimazioni = pygame.time.Clock()
 clockVideo = pygame.time.Clock()
 clockFadeToBlack = pygame.time.Clock()
 clockScritturaDialogo = pygame.time.Clock()
+clockDisegno = pygame.time.Clock()
 fpsMainLoop = 60
 fpsMainLoopDifesa = 240
 fpsInterazioni = 30
@@ -108,6 +109,7 @@ fpsAnimazioni = 30
 fpsVideo = 12
 fpsFadeToBlack = 30
 fpsScritturaDialogo = 30
+fpsDisegno = 120
 
 # colori
 nero = (0, 0, 0)
@@ -126,6 +128,7 @@ bluScuro = (80, 80, 90)
 bluScuroPiuScuro = (70, 70, 80)
 rossoScuro = (100, 80, 80)
 rossoScuroPiuScuro = (90, 70, 70)
+gialloCarta = (200, 200, 160)
 
 # nascondo subito il cursore
 pygame.mouse.set_visible(False)
@@ -164,64 +167,63 @@ def initVolumeSounds():
 
 # freccetta (sized 24x24)
 global mouseBloccato
+stringCursoreSbloccato = ("                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "       XXX              ",
+    "       XXXXX            ",
+    "       XX..XXX          ",
+    "       XX....XXX        ",
+    "        XX.....XXX      ",
+    "        XX.......XXX    ",
+    "        XX........XX    ",
+    "        XX......XXX     ",
+    "         XX...XXX       ",
+    "         XX..XX         ",
+    "         XX.XX          ",
+    "         XXXX           ",
+    "          XX            ")
+cursore, mask = pygame.cursors.compile(stringCursoreSbloccato, black='X', white='.', xor='o')
+cursor_sizer_CursoreSbloccato = ((24, 24), (7, 11), cursore, mask)
+stringCursoreBloccato = ("                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "       ...              ",
+    "       .....            ",
+    "       ..XX...          ",
+    "       ..XXXX...        ",
+    "        ..XXXXX...      ",
+    "        ..XXXXXXX...    ",
+    "        ..XXXXXXXX..    ",
+    "        ..XXXXXX...     ",
+    "         ..XXX...       ",
+    "         ..XX..         ",
+    "         ..X..          ",
+    "         ....           ",
+    "          ..            ")
+cursore, mask = pygame.cursors.compile(stringCursoreBloccato, black='X', white='.', xor='o')
+cursor_sizer_CursoreBloccato = ((24, 24), (7, 11), cursore, mask)
 def configuraCursore(bloccato):
     if not bloccato:
-        strings = (
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "       XXX              ",
-            "       XXXXX            ",
-            "       XX..XXX          ",
-            "       XX....XXX        ",
-            "        XX.....XXX      ",
-            "        XX.......XXX    ",
-            "        XX........XX    ",
-            "        XX......XXX     ",
-            "         XX...XXX       ",
-            "         XX..XX         ",
-            "         XX.XX          ",
-            "         XXXX           ",
-            "          XX            "
-        )
+        pygame.mouse.set_cursor(*cursor_sizer_CursoreSbloccato)
     else:
-        strings = (
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "                        ",
-            "       ...              ",
-            "       .....            ",
-            "       ..XX...          ",
-            "       ..XXXX...        ",
-            "        ..XXXXX...      ",
-            "        ..XXXXXXX...    ",
-            "        ..XXXXXXXX..    ",
-            "        ..XXXXXX...     ",
-            "         ..XXX...       ",
-            "         ..XX..         ",
-            "         ..X..          ",
-            "         ....           ",
-            "          ..            "
-        )
-    cursore, mask = pygame.cursors.compile(strings, black='X', white='.', xor='o')
-    cursor_sizer = ((24, 24), (7, 11), cursore, mask)
-    pygame.mouse.set_cursor(*cursor_sizer)
+        pygame.mouse.set_cursor(*cursor_sizer_CursoreBloccato)
     global mouseBloccato
     mouseBloccato = bloccato
 def setCursoreVisibile(visibile):
@@ -365,8 +367,7 @@ usandoIlController = False
 # funzioni per disegnare tutto sullo schermo (serve per ottimizzare)
 listaRettangoliDaAggiornare = []
 aggiornaTuttoLoSchermo = False
-def disegnaColoreSuTuttoLoSchermo(colore):
-    global schermo
+def disegnaColoreSuTuttoLoSchermo(schermo, colore):
     global gsx
     global gsy
     global listaRettangoliDaAggiornare
@@ -435,6 +436,48 @@ def disegnaRettangoloSuSchermo(schermo, colore, coordinateEDimensione):
     y = int(y)
     dimX = int(dimX)
     dimY = int(dimY)
+
+    if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
+        listaRettangoliDaAggiornare = []
+        listaRettangoliDaAggiornare.append(pygame.Rect(0, 0, gsx, gsy))
+        aggiornaTuttoLoSchermo = True
+    if not aggiornaTuttoLoSchermo:
+        # non aggiungo il rettangolo se è già compreso in altri o tolgo quelli che sono contenuti nel rettangolo che sto aggiungendo
+        aggiungiRettangolo = True
+        rectOrig = pygame.Rect(x, y, dimX, dimY)
+        xInizioRectOrig = rectOrig.left
+        yInizioRectOrig = rectOrig.top
+        xFineRectOrig = rectOrig.right
+        yFineRectOrig = rectOrig.bottom
+        i = 0
+        while i < len(listaRettangoliDaAggiornare):
+            rectConfronto = listaRettangoliDaAggiornare[i]
+            xInizioRectConfronto = rectConfronto.left
+            yInizioRectConfronto = rectConfronto.top
+            xFineRectConfronto = rectConfronto.right
+            yFineRectConfronto = rectConfronto.bottom
+            rettangoloEliminato = False
+            if xInizioRectOrig >= xInizioRectConfronto and xFineRectOrig <= xFineRectConfronto and yInizioRectOrig >= yInizioRectConfronto and yFineRectOrig <= yFineRectConfronto:
+                aggiungiRettangolo = False
+                break
+            elif xInizioRectConfronto >= xInizioRectOrig and xFineRectConfronto <= xFineRectOrig and yInizioRectConfronto >= yInizioRectOrig and yFineRectConfronto <= yFineRectOrig:
+                del listaRettangoliDaAggiornare[i]
+                rettangoloEliminato = True
+            if not rettangoloEliminato:
+                i += 1
+        if aggiungiRettangolo:
+            listaRettangoliDaAggiornare.append(rectOrig)
+def disegnaCerchioSuSchermo(schermo, colore, coordinate, raggio):
+    global gsx
+    global gsy
+    global listaRettangoliDaAggiornare
+    global aggiornaTuttoLoSchermo
+    pygame.draw.circle(schermo, colore, coordinate, raggio)
+    x, y = coordinate
+    x = int(x - raggio - 1)
+    y = int(y - raggio - 1)
+    dimX = int(2 * raggio + 2)
+    dimY = int(2 * raggio + 2)
 
     if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:
         listaRettangoliDaAggiornare = []
