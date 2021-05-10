@@ -1692,7 +1692,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 costoTecnicaUsata = GlobalGameVar.costoTecniche[dati[i + 10] - 1]
             rigaGambitAttuale = i - 100
             if dati[i] <= 0 or dati[i + 10] <= 0:
-                vettorePrevisione[rigaGambitAttuale][1] = "Settaggio incompleto"
+                vettorePrevisione[rigaGambitAttuale][1] = "Cella di memoria incompleta"
             elif dati[10] > costoTecnicaUsata:
                 if not (dati[122] > 0 and (dati[i + 10] == 11 or dati[i + 10] == 14)):
                     pathToNemico = []
@@ -2313,7 +2313,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         if dati[i + 10] == 20:
                             tecnicaUsata = "tempesta++"
                 else:
-                    vettorePrevisione[rigaGambitAttuale][1] = "Tecnica inutilizzabile con surriscaldamento"
+                    vettorePrevisione[rigaGambitAttuale][1] = "Azione impraticabile con surriscaldamento"
             else:
                 vettorePrevisione[rigaGambitAttuale][1] = "Energia insufficiente"
 

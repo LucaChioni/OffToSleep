@@ -720,7 +720,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Tuo fratello è scappato di casa senza dire niente... non credo che voglia essere seguito. La cosa migliore da fare sarebbe lascialo andare per la sua strada. Magari un giorno vi rincontrerete.")
+            dialogo.append(u"Tuo fratello è scappato di casa senza dire niente, non credo che voglia essere seguito. La cosa migliore sarebbe lascialo andare per la sua strada. Magari un giorno vi rincontrerete.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -736,7 +736,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Come vuoi. In effetti c'è qualcuno. E mi faresti anche un bel favore se ci andassi...")
+            dialogo.append(u"Come vuoi. In effetti c'è qualcuno. E mi faresti anche un bel favore se ci andassi...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -803,7 +803,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ma è... è vivo?")
+            dialogo.append(u"Ma... è vivo?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -811,11 +811,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ah, ok... e come hanno fatto ad estinguersi se sono immortali?")
+            dialogo.append(u"Ah, ok. E come hanno fatto ad estinguersi se sono immortali?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Questa è una bella domanda... Sono spariti tutti in una notte di circa cinquant'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che molti videro come naturale conseguenza dell'inaridimento della selva e della putrefazione del lago avvenuti qualche anno prima. In realtà questa fu una delle poche specie a non soffrire di quei disastri...")
+            dialogo.append(u"Questa è una bella domanda. Sono spariti tutti in una notte di circa cinquant'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che molti videro come naturale conseguenza dell'inaridimento della selva e della putrefazione del lago avvenuti qualche anno prima. In realtà questa fu una delle poche specie a non soffrire di quei disastri...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -823,7 +823,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Impo? Si chiama così?")
+            dialogo.append(u"Impo? Si chiama così?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -835,11 +835,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Esatto. Comunque, io l'ho osservato abbastanza e non saprei cos'altro ricavarne. Neil era molto appassionato di queste creature, se glielo lasciassi studiare potrebbe ricavarne qualcosa che a me è sfuggito.")
+            dialogo.append(u"Esatto. Comunque, io l'ho osservato abbastanza e non saprei cos'altro ricavarne. Neil era molto appassionato di queste creature, se glielo lasciassi studiare potrebbe dedurne qualcosa che a me è sfuggito.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Va bene... Ma come lo trasporto?")
+            dialogo.append(u"Va bene. Ma come lo trasporto?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -851,8 +851,80 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             menuMercante = False
             scelta = False
             dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Si è svegliato?!")
+            partiDialogo.append(dialogo)
+            dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"")
+            dialogo.append(u"Sì, l'ho appena alimentato ma non ti preoccupare, non è aggressivo.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ok. Quindi adesso mi seguirà?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Segue sempre la pietra che ti ho dato quando è attiva. Ma ciò che rende veramente interessante questa creatura è il suo comportamento quando la pietra è spenta.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"... Adesso è spenta ma non sta facendo niente...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Gli Impo sono degli animali molto metodici. Svolgono diverse attivià che ritengono assolutamente prioritarie rispetto a tutto il resto, anche rispetto alla loro stessa vita. Lo fanno finché non esauriscono le energie, a quel punto di fermano e aspettano il nutrimento. Adesso, sembrerà strano, ma la priorità di questo Impo è rimanere fermo. E ci resterà finché qualcuno non gli dirà di fare qualcos'altro.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Cioè possiamo dirgli cosa fare?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Esattamente. Puoi dirgli che azione compiere in quale situazione e lui la eseguirà ogni volta senza batter ciglio.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"<*>#italic#Mmh...<*> non ho mai sentito niente del genere. Possimo provare anche adesso?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Sì ma non sente la tua voce. L'unico modo per comunicargli cosa fare è inserirgli degli ImpoFogli nell'apertura che ha dietro la testa. Queste aperture vengono chiamate \"celle di memoria\" e lui ne ha solo una al momento, quindi puoi fargli fare solo un'azione alla volta. Ma non preoccuparti, anche se sono molto rare, credo che ne troverai delle altre durante il viaggio.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ok... e cos'è un \"ImpoFoglio\"?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"È una specie di foglio non molto spesso ma fatto di un materiale molto più rigido e resistente della carta normale. Tutti gli ImpoFogli sono diversi tra di loro ma si dividono in due categorie: \"Condizio-ImpoFogli\" che indicano una condizione e \"Azio-ImpoFogli\" che indicano un'azione da compiere.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Per dare un'istruzione ad Impo devi inserire un Condizio-ImpoFoglio e un Azio-ImpoFoglio nella cella di memoria. Impo, ogni volta che deve decidere cosa fare, legge la condizione e l'azione nella cella e, se valuta di trovarsi nella situazione adatta, esegue l'istruzione.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ok, sembra abbastanza complicato.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Non lo è. Se vuoi dare un'occhiata, in biblioteca ci sono diversi libri che parlano più dettagliatamente del loro funzionamento. Ma sono sicuro che imparearai in fretta facendo qualche prova. In totale io ho solo due ImpoFogli che potrai usare da subito. Ma anche di questi, seppure molto raramente, ne potrai trovare altri in giro fuori città.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"E lui cosa potrebbe fare adesso con i tuoi ImpoFogli?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Beh, ti saranno sicuramente d'aiuto se incontrerai altri stupratori o bestie durante il tragitto. Questo Condizio-ImpoFoglio individua una situazione in cui qualcuno vuole aggredirti, mentre  questo Azio-ImpoFoglio fa fare a Impo un attacco che folgora il bersaglio.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"<*>#italic#Wow!<*> Possiamo farglielo fare ora?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva Arida è una zona parecchio ostile per gli umani.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

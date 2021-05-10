@@ -1228,6 +1228,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 10.4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 11.9, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 13.4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 0.4))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 13.9, GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 0.4))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 9.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 14.8, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 14.8, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
@@ -1327,6 +1328,8 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
             if voceMarcata != 7 and voceMarcata != 8:
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 0.5))), yp + (int(GlobalHWVar.gpy * 1))), (xp + (int(GlobalHWVar.gpx * 14.5)), yp + (int(GlobalHWVar.gpy * 1))), 2)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((xp + (int(GlobalHWVar.gpx * 15.5))), yp + (int(GlobalHWVar.gpy * 1))), (xp + (int(GlobalHWVar.gpx * 29.4)), yp + (int(GlobalHWVar.gpy * 1))), 2)
+            else:
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 1.5), int(GlobalHWVar.gpy * 14.05)), (int(GlobalHWVar.gpx * 30.45), int(GlobalHWVar.gpy * 14.05)), 2)
             primoFrame = False
 
             GlobalHWVar.aggiornaSchermo()

@@ -472,7 +472,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if raffredda > 0:
             messaggioDiErrore = "Raffreddamento in corso"
         elif autoRic1 > 0 or autoRic2 > 0:
-            messaggioDiErrore = "Batteria in carica"
+            messaggioDiErrore = "Sacca energetica in carica"
         elif mosseRimasteRob < 0:
             messaggioDiErrore = "Temperatura troppo elevata"
         vettorePrevisione = [["telecolco", messaggioDiErrore], [1, messaggioDiErrore], [2, messaggioDiErrore], [3, messaggioDiErrore], [4, messaggioDiErrore], [5, messaggioDiErrore], [6, messaggioDiErrore], [7, messaggioDiErrore], [8, messaggioDiErrore], [9, messaggioDiErrore], [10, messaggioDiErrore], ["ultimoObbiettivo", messaggioDiErrore]]
