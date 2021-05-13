@@ -408,6 +408,11 @@ def animaOggettoSpecialeRicevuto(oggettoRicevuto):
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfocontcof, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 0))
     messaggio("Hai ottenuto: " + oggettoRicevuto, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
     GlobalHWVar.aggiornaSchermo()
+    i = 0
+    while i < 10:
+        pygame.time.wait(100)
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        i += 1
     bottoneDown = False
     risposta = False
     while not risposta:

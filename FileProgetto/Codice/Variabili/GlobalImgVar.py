@@ -829,16 +829,10 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     while contatoreGlobale < 5:
         # armatura robot
         vetAnimaTemp = []
-        if contatoreGlobale == 0:
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-            vetAnimaTemp.append(pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA))
-        else:
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
-            vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%iw.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%ia.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%is.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
+        vetAnimaTemp.append(funzionePerCaricareImmagini("Risorse/Immagini/EquipRobo/Batteria%id.png" % contatoreGlobale, GlobalHWVar.gpx, GlobalHWVar.gpy, True))
         vetImgArmRobInGame.append(vetAnimaTemp)
         contatoreGlobale += 1
 

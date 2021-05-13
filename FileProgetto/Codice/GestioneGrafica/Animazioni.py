@@ -770,9 +770,9 @@ def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRal
         elif tesoro == -31:
             FunzioniGraficheGeneriche.messaggio(u"Hai già troppe Pozioni!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 32:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Alimentazione 100gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: ImpoFrutto piccolo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -32:
-            FunzioniGraficheGeneriche.messaggio(u"Hai già troppe Alimentazioni 100gr!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio(u"Hai già troppi ImpoFrutti piccoli!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 33:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -33:
@@ -782,9 +782,9 @@ def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRal
         elif tesoro == -34:
             FunzioniGraficheGeneriche.messaggio(u"Hai già troppe Superpozioni!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 35:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Alimentazione 250gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: ImpoFrutto grande", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -35:
-            FunzioniGraficheGeneriche.messaggio(u"Hai già troppe Alimentazioni 250gr!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio(u"Hai già troppi ImpoFrutti grandi!", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 36:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == -36:
@@ -1753,6 +1753,11 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
         if GlobalHWVar.mouseBloccato:
             GlobalHWVar.configuraCursore(False)
         GlobalHWVar.aggiornaSchermo()
+        i = 0
+        while i < 5:
+            pygame.time.wait(100)
+            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+            i += 1
         risposta = False
         bottoneDown = False
         while not risposta:

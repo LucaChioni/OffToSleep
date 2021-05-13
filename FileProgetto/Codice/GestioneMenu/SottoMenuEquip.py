@@ -1548,9 +1548,9 @@ def oggetti(dati, colcoInCasellaVista):
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 45)
                 if dati[32] >= 0:
                     if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and colcoInCasellaVista:
-                        FunzioniGraficheGeneriche.messaggio("Alimentazione 100gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
+                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("Alimentazione 100gr", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
+                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
                     FunzioniGraficheGeneriche.messaggio("x%i" % dati[32], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 7.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
@@ -1566,9 +1566,9 @@ def oggetti(dati, colcoInCasellaVista):
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 45)
                 if dati[35] >= 0:
                     if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and colcoInCasellaVista:
-                        FunzioniGraficheGeneriche.messaggio("Alimentazione 250gr", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
+                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("Alimentazione 250gr", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
+                        FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
                     FunzioniGraficheGeneriche.messaggio("x%i" % dati[35], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 10.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
@@ -1683,11 +1683,11 @@ def oggetti(dati, colcoInCasellaVista):
             elif oggetton == 1:
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[32] >= 0 and oggetton == 2:
-                FunzioniGraficheGeneriche.messaggio("Alimentazione 100gr:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
                 if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                     FunzioniGraficheGeneriche.messaggio("Recupera 250 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Nutrimento per usa specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Nutrimento per una specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 2:
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[33] >= 0 and oggetton == 3:
@@ -1701,11 +1701,11 @@ def oggetti(dati, colcoInCasellaVista):
             elif oggetton == 4:
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[35] >= 0 and oggetton == 5:
-                FunzioniGraficheGeneriche.messaggio("Alimentazione 250gr:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
+                FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande:", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
                 if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                     FunzioniGraficheGeneriche.messaggio("Recupera 600 <*>#italic#Pe<*> di Impo.", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("Nutrimento per usa specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio("Nutrimento per una specie in via di estinzione...", GlobalHWVar.grigiochi, posizioneXDescrizioni, posizioneYDescrizioni, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             elif oggetton == 5:
                 FunzioniGraficheGeneriche.messaggio("Sconosciuto", GlobalHWVar.grigiochi, posizioneXTitoli, posizioneYTitoli, 60)
             if dati[36] >= 0 and oggetton == 6:

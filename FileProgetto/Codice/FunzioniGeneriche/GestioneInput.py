@@ -17,8 +17,8 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                     bottoneDown = int(bottoneDown)
         GlobalHWVar.listaInputInSospeso = []
 
+    tastoTrovato = False
     for event in pygame.event.get():
-        tastoTrovato = False
         # faccio apparire/sparire il cursore
         if event.type == pygame.KEYDOWN and (GlobalHWVar.mouseVisibile or GlobalHWVar.usandoIlController):
             GlobalHWVar.listaTastiPremuti = []

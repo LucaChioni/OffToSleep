@@ -125,5 +125,18 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"È possibile accedere alla mappa anche dal menu rapido di battaglia.")
         partiDialogo.append(dialogo)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["introduzioneImpoDalBibliotecario"]:
+        oggettoDato = False
+        avanzaStoria = True
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"Per attivare e disattivare la PietraImpo usa il tasto <*>#bold#SHIFT<*> sulla tastiera, il <*>#bold#Triangolo<*> sul controller oppure clicca sulla sua icona in alto a destra dello schermo con il tasto <*>#bold#Sinistro<*> del mouse.")
+        partiDialogo.append(dialogo)
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"Nel menu è apparsa la voce \"Setta Impo\". Selezionala per gestire gli equipaggiamenti di Impo. <br> Attenzione: è possibile accedervi solo se Impo si trova in una casella raggiungibile da Lucy.")
+        partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

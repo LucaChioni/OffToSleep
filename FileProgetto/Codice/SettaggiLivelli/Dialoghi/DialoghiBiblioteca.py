@@ -736,7 +736,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Come vuoi. In effetti c'è qualcuno. E mi faresti anche un bel favore se ci andassi...")
+            dialogo.append(u"Come vuoi... In effetti qualcuno c'è. E mi faresti anche un bel favore se ci andassi...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -744,7 +744,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Devo fare una consegna ad un mio vecchio amico. Vive a sud oltre la Selva Arida. Si chiama Neil, è una persona molto potente che ha notizia di tutti gli spostamenti che avvengono in questo territorio. Da quello che ho capito, è possibile che tuo fratello non sia in questa città, quindi se c'è una persona a cui dovresti chiedere è senza dubbio Neil.")
+            dialogo.append(u"Devo fare una consegna ad un mio vecchio amico. Vive a sud oltre la Selva arida. Si chiama Neil, è una persona molto potente che ha notizia di tutti gli spostamenti che avvengono in questo territorio. Da quello che ho capito, è possibile che tuo fratello non sia in questa città, quindi se c'è una persona a cui dovresti chiedere è senza dubbio Neil.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -782,7 +782,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Trovato!")
+            dialogo.append(u"... Ah! Trovato.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
             oggettoDato = "PietraImpo"
@@ -811,11 +811,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ah, ok. E come hanno fatto ad estinguersi se sono immortali?")
+            dialogo.append(u"Ah, ok. E come hanno fatto ad estinguersi allora?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Questa è una bella domanda. Sono spariti tutti in una notte di circa cinquant'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che molti videro come naturale conseguenza dell'inaridimento della selva e della putrefazione del lago avvenuti qualche anno prima. In realtà questa fu una delle poche specie a non soffrire di quei disastri...")
+            dialogo.append(u"Questa è una bella domanda. Sono spariti tutti in una notte di circa cinquant'anni fa. Di colpo non se ne sono più visti in giro. Un episodio piuttosto strano che molti videro come naturale conseguenza dell'inaridimento della selva e della putrefazione del lago avvenuti qualche anno prima. In realtà questa fu una delle poche specie a non soffrire per niente di quei disastri...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -846,7 +846,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"Non devi trasportarlo. Ti seguirà se attivi questa pietra...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricaricatoImpoDalBibliotecario"]:
-            oggettoDato = False
+            oggettoDato = "ImpoFrutto piccolo"
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -868,7 +868,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... Adesso è spenta ma non sta facendo niente...")
+            dialogo.append(u"Adesso è spenta e non sta facendo niente...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -896,7 +896,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"È una specie di foglio non molto spesso ma fatto di un materiale molto più rigido e resistente della carta normale. Tutti gli ImpoFogli sono diversi tra di loro ma si dividono in due categorie: \"Condizio-ImpoFogli\" che indicano una condizione e \"Azio-ImpoFogli\" che indicano un'azione da compiere.")
+            dialogo.append(u"È una specie di foglio non molto spesso ma fatto di un materiale molto più rigido e resistente della carta normale. Tutti gli ImpoFogli sono diversi tra loro e si dividono in due categorie: \"Condizio-ImpoFogli\" che indicano una condizione e \"Azio-ImpoFogli\" che indicano un'azione da compiere.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -924,11 +924,44 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva Arida è una zona parecchio ostile per gli umani.")
+            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Poi adesso devo tornare a lavoro. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva arida è una zona parecchio ostile per gli umani ma con un Impo non avrai problemi.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"")
+            dialogo.append(u"Va bene. La Selva arida si trova a sud, giusto?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Esatto. Dopo averla attraversata, procedi ancora verso sud costeggiando il lago e arriverai al castello di Neil.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Ok: selva e poi lago. Ti lascio al tuo lavoro adesso. Grazie mille per avermi aiutata.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Non c'è di che. Ah, dimenticavo, prendi questo... è un ImpoFrutto, un frutto che nasce nelle montagne occidentali di cui si nutre Impo. Daglielo quando vedi che sta esaurendo le energie.")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Un \"ImpoFrutto\"? Sembra più un <*>#italic#ImpoSasso...<*>")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"Già... è una creatura parecchio strana. In ogni caso, buona fortuna per il viaggio ragazza.")
+            partiDialogo.append(dialogo)
+        else:
+            oggettoDato = False
+            avanzaStoria = False
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Scusa René, dove hai detto che si trova la Selva arida?")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("personaggio")
+            dialogo.append(u"A sud della città, non puoi sbagliare.")
             partiDialogo.append(dialogo)
     if tipo == "OggettoLibreriaStudioBibliotecario":
         partiDialogo = []

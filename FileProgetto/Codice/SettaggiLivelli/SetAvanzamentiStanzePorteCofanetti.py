@@ -313,9 +313,12 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["ricevutoPietraImpo"] = i
     i += 1
     dictAvanzamentoStoria["ricaricatoImpoDalBibliotecario"] = i
-
     i += 1
+    dictAvanzamentoStoria["introduzioneImpoDalBibliotecario"] = i
+    i += 1
+    dictAvanzamentoStoria["tutorialPietraImpoMenuSettaImpo"] = i
     dictAvanzamentoStoria["inizioViaggioVersoNeil"] = i
+
     i += 1
     dictAvanzamentoStoria["monologoUscitaBibliotecaDirettoVersoNeil"] = i
     i += 1

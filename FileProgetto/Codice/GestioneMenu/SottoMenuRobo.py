@@ -15,7 +15,7 @@ def sceglicondiz(dati, condizione):
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     condSconosciuta = GlobalImgVar.imgGambitSconosciuta
     xp = GlobalHWVar.gsx // 32 * 1
-    yp = GlobalHWVar.gsy // 18 * 4.6
+    yp = GlobalHWVar.gsy // 18 * 4.7
     risposta = False
     voceMarcata = 0
     aggiornaSchermo = False
@@ -49,7 +49,7 @@ def sceglicondiz(dati, condizione):
                         GlobalHWVar.configuraCursore(False)
                     voceMarcata = 0
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 4.6
+                    yp = GlobalHWVar.gsy // 18 * 4.7
                 elif GlobalHWVar.gsy // 18 * 5.9 <= yMouse <= GlobalHWVar.gsy // 18 * 6.9:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
@@ -232,7 +232,7 @@ def sceglicondiz(dati, condizione):
                     if voceMarcata == 1:
                         voceMarcata -= 1
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                        yp = yp - GlobalHWVar.gsy // 18 * 1.5
+                        yp = GlobalHWVar.gsy // 18 * 4.7
                         xp = GlobalHWVar.gsx // 32 * 1
                     else:
                         voceMarcata += 9
@@ -264,7 +264,7 @@ def sceglicondiz(dati, condizione):
                 if voceMarcata == 0:
                     voceMarcata += 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = yp + GlobalHWVar.gsy // 18 * 1.5
+                    yp = GlobalHWVar.gsy // 18 * 6.1
                 else:
                     if voceMarcata == 10 or voceMarcata == 20:
                         if voceMarcata == 10:
@@ -305,8 +305,8 @@ def sceglicondiz(dati, condizione):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                FunzioniGraficheGeneriche.messaggio("Scegli Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
-                FunzioniGraficheGeneriche.messaggio("Togli Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.7, 45)
+                FunzioniGraficheGeneriche.messaggio("Condizio-ImpoFogli", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio("Togli Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.8, 40)
                 if dati[81] > 0:
                     FunzioniGraficheGeneriche.messaggio("Lucy con Pv < 80%", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 40)
                 else:
@@ -393,7 +393,7 @@ def sceglicondiz(dati, condizione):
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 13))
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 22, 0, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
@@ -589,7 +589,7 @@ def sceglicondiz(dati, condizione):
                 i += 1
                 k += 1
             if condizione == 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.6))
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.7))
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             primoFrame = False
 
@@ -605,7 +605,7 @@ def sceglitecn(dati, tecnica):
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     condSconosciuta = GlobalImgVar.imgGambitSconosciuta
     xp = GlobalHWVar.gsx // 32 * 1
-    yp = GlobalHWVar.gsy // 18 * 4.6
+    yp = GlobalHWVar.gsy // 18 * 4.7
     risposta = False
     voceMarcata = 0
     aggiornaSchermo = False
@@ -639,7 +639,7 @@ def sceglitecn(dati, tecnica):
                         GlobalHWVar.configuraCursore(False)
                     voceMarcata = 0
                     xp = GlobalHWVar.gsx // 32 * 1
-                    yp = GlobalHWVar.gsy // 18 * 4.6
+                    yp = GlobalHWVar.gsy // 18 * 4.7
                 elif GlobalHWVar.gsy // 18 * 5.9 <= yMouse <= GlobalHWVar.gsy // 18 * 6.9:
                     if GlobalHWVar.mouseBloccato:
                         GlobalHWVar.configuraCursore(False)
@@ -824,7 +824,7 @@ def sceglitecn(dati, tecnica):
                     if voceMarcata == 1:
                         voceMarcata -= 1
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                        yp = yp - GlobalHWVar.gsy // 18 * 1.5
+                        yp = GlobalHWVar.gsy // 18 * 4.7
                         xp = GlobalHWVar.gsx // 32 * 1
                     else:
                         voceMarcata += 9
@@ -856,13 +856,13 @@ def sceglitecn(dati, tecnica):
                 if voceMarcata == 0:
                     voceMarcata += 1
                     GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                    yp = yp + GlobalHWVar.gsy // 18 * 1.5
+                    yp = GlobalHWVar.gsy // 18 * 6.1
                 else:
                     if voceMarcata == 10 or voceMarcata == 20:
                         if voceMarcata == 10:
                             voceMarcata -= 10
                             GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
-                            yp = GlobalHWVar.gsy // 18 * 4.6
+                            yp = GlobalHWVar.gsy // 18 * 4.7
                             xp = GlobalHWVar.gsx // 32 * 1
                         else:
                             voceMarcata -= 9
@@ -897,8 +897,8 @@ def sceglitecn(dati, tecnica):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 15.5))
-                FunzioniGraficheGeneriche.messaggio("Scegli Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
-                FunzioniGraficheGeneriche.messaggio("Togli Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.7, 45)
+                FunzioniGraficheGeneriche.messaggio("Azio-ImpoFogli", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
+                FunzioniGraficheGeneriche.messaggio("Togli Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 4.8, 40)
                 if dati[11] > 0:
                     FunzioniGraficheGeneriche.messaggio("Scossa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 40)
                 else:
@@ -985,7 +985,7 @@ def sceglitecn(dati, tecnica):
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 13))
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
-                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2.5))
+                GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 22, 0, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
                 if GlobalHWVar.mouseVisibile:
                     FunzioniGraficheGeneriche.messaggio("Tasto destro: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.5, GlobalHWVar.gsy // 18 * 1, 50)
                 elif GlobalHWVar.usandoIlController:
@@ -1201,7 +1201,7 @@ def sceglitecn(dati, tecnica):
                 i += 1
                 k += 1
             if tecnica == 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.6))
+                GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.7))
             GlobalHWVar.disegnaImmagineSuSchermo(puntatore, (xp, yp))
             primoFrame = False
 
@@ -2138,7 +2138,7 @@ def equiprobo(dati):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 25), int(GlobalHWVar.gpy * 15)), (int(GlobalHWVar.gpx * 30), int(GlobalHWVar.gpy * 15)), 2)
                 GlobalHWVar.disegnaImmagineSuSchermo(vetImgBatterie[dati[9]], (GlobalHWVar.gsx // 32 * 25, GlobalHWVar.gsy // 18 * 10))
                 FunzioniGraficheGeneriche.messaggio("Statistiche:", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, GlobalHWVar.gsy // 18 * 8.1, 60)
-                FunzioniGraficheGeneriche.messaggio("Pe totali: %i" % entot, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, posizioneStatPeY, grandezzaCarattereStatistiche)
+                FunzioniGraficheGeneriche.messaggio("Punti energia: %i" % entot, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, posizioneStatPeY, grandezzaCarattereStatistiche)
                 FunzioniGraficheGeneriche.messaggio("Difesa: %i" % difro, GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.5, posizioneStatDifY, grandezzaCarattereStatistiche)
 
                 # mostrare descrizione batterie / priorità / condizioni / azioni
