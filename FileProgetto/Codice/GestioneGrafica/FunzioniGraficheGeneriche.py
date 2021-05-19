@@ -437,7 +437,10 @@ def disegnaOmbreggiaturaNellaCasellaSpecifica(x, y):
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaScura, (x, y))
 
 
-def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
+def oscuraIlluminaSchermo(illumina, tipoOscuramento=1, imgIlluminata=False):
+    if not imgIlluminata:
+        imgIlluminata = []
+
     # se "screen" è False oscura lo schermo
     if not illumina:
         rect = pygame.display.get_surface().get_rect()
@@ -448,6 +451,8 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             i = 0
             while i <= 5:
                 GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+                if imgIlluminata:
+                    GlobalHWVar.disegnaImmagineSuSchermo(imgIlluminata[0], imgIlluminata[1])
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
@@ -461,6 +466,8 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             while i <= 30:
                 if i % 2 == 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+                    if imgIlluminata:
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgIlluminata[0], imgIlluminata[1])
                     GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
@@ -471,6 +478,8 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             i = 0
             while i <= 3:
                 GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+                if imgIlluminata:
+                    GlobalHWVar.disegnaImmagineSuSchermo(imgIlluminata[0], imgIlluminata[1])
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
@@ -483,6 +492,8 @@ def oscuraIlluminaSchermo(illumina, tipoOscuramento=1):
             i = 0
             while i <= 6:
                 GlobalHWVar.disegnaImmagineSuSchermo(image, (0, 0))
+                if imgIlluminata:
+                    GlobalHWVar.disegnaImmagineSuSchermo(imgIlluminata[0], imgIlluminata[1])
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)

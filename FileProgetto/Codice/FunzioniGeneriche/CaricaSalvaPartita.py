@@ -51,6 +51,14 @@ def salvataggio(n, datiAttuali, datiGameover):
                 ultimoObbiettivoColco = datiGameover[10]
                 obbiettivoCasualeColco = datiGameover[11]
 
+            listaAvanzamentoDialoghi_Temp = listaAvanzamentoDialoghi[:]
+            i = len(listaAvanzamentoDialoghi_Temp) - 2
+            while i >= 0:
+                if listaAvanzamentoDialoghi_Temp[i + 1] == 0:
+                    del listaAvanzamentoDialoghi_Temp[i + 1]
+                    del listaAvanzamentoDialoghi_Temp[i]
+                i -= 2
+
             # salvo l'avanzamento della storia per metterlo nei personaggi
             avanzamentoStoria = dati[0]
 
@@ -139,9 +147,9 @@ def salvataggio(n, datiAttuali, datiGameover):
                 scrivi.write("%i_" % personaggio.avanzamentoDialogo)
             scrivi.write("\n")
             i = 0
-            while i < len(listaAvanzamentoDialoghi):
-                scrivi.write("%s_" % listaAvanzamentoDialoghi[i])
-                scrivi.write("%i_" % listaAvanzamentoDialoghi[i + 1])
+            while i < len(listaAvanzamentoDialoghi_Temp):
+                scrivi.write("%s_" % listaAvanzamentoDialoghi_Temp[i])
+                scrivi.write("%i_" % listaAvanzamentoDialoghi_Temp[i + 1])
                 i += 2
             scrivi.write("\n")
             for oggetto in oggettiRimastiAHans:

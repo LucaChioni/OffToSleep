@@ -197,9 +197,11 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["chiestoDegliAlloggiAlMercante"] = i
     i += 1
-    dictAvanzamentoStoria["trovatoAlloggioProfughi"] = i
+    dictAvanzamentoStoria["trovatoAlloggiProfughi"] = i
     i += 1
     dictAvanzamentoStoria["cercatoHansInAlloggiProfughi"] = i
+    i += 1
+    dictAvanzamentoStoria["resettatoAvanzamentoDialoghiCittadiniACuiChiediInfo"] = i
     i += 1
     dictAvanzamentoStoria["richieste300MoneteDalMercante"] = i
     i += 1

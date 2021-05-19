@@ -97,6 +97,27 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzamentoStoria += 1
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoAlzatoDalLetto"] and stanza == GlobalGameVar.dictStanze["città4"]:
+        # resetto avanzamento dialoghi dei 2 soldati all'ingresso città1
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "GuardiaCitta-0" or listaAvanzamentoDialoghi[i] == "GuardiaCitta-1":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            i += 2
+        for personaggio in listaPersonaggi:
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
+                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
+                    break
+                i += 2
+        for personaggio in listaPersonaggiTotali:
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
+                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
+                    break
+                i += 2
+
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
@@ -104,6 +125,39 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["cercatoHansInAlloggiProfughi"] and stanza == GlobalGameVar.dictStanze["città6"]:
+        # resetto avanzamento dialoghi di tutti i cittadini a cui chiedo informazioni
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "Ragazzo1-0" or listaAvanzamentoDialoghi[i] == "Ragazzo1-3" or listaAvanzamentoDialoghi[i] == "Ragazzo1-4" or listaAvanzamentoDialoghi[i] == "Ragazzo1-5" or listaAvanzamentoDialoghi[i] == "Ragazzo1-6" or listaAvanzamentoDialoghi[i] == "Ragazzo1-7" or listaAvanzamentoDialoghi[i] == "Ragazzo1-8":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazzo2-0" or listaAvanzamentoDialoghi[i] == "Ragazzo2-1" or listaAvanzamentoDialoghi[i] == "Ragazzo2-2" or listaAvanzamentoDialoghi[i] == "Ragazzo2-3" or listaAvanzamentoDialoghi[i] == "Ragazzo2-4" or listaAvanzamentoDialoghi[i] == "Ragazzo2-5" or listaAvanzamentoDialoghi[i] == "Ragazzo2-6" or listaAvanzamentoDialoghi[i] == "Ragazzo2-7":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazzo3-0" or listaAvanzamentoDialoghi[i] == "Ragazzo3-1" or listaAvanzamentoDialoghi[i] == "Ragazzo3-3" or listaAvanzamentoDialoghi[i] == "Ragazzo3-4" or listaAvanzamentoDialoghi[i] == "Ragazzo3-5" or listaAvanzamentoDialoghi[i] == "Ragazzo3-6" or listaAvanzamentoDialoghi[i] == "Ragazzo3-7":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazza1-0" or listaAvanzamentoDialoghi[i] == "Ragazza1-1" or listaAvanzamentoDialoghi[i] == "Ragazza1-2" or listaAvanzamentoDialoghi[i] == "Ragazza1-3" or listaAvanzamentoDialoghi[i] == "Ragazza1-4" or listaAvanzamentoDialoghi[i] == "Ragazza1-5" or listaAvanzamentoDialoghi[i] == "Ragazza1-6" or listaAvanzamentoDialoghi[i] == "Ragazza1-7" or listaAvanzamentoDialoghi[i] == "Ragazza1-8":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazza2-0":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazza3-0" or listaAvanzamentoDialoghi[i] == "Ragazza3-1" or listaAvanzamentoDialoghi[i] == "Ragazza3-2" or listaAvanzamentoDialoghi[i] == "Ragazza3-3" or listaAvanzamentoDialoghi[i] == "Ragazza3-4" or listaAvanzamentoDialoghi[i] == "Ragazza3-5" or listaAvanzamentoDialoghi[i] == "Ragazza3-6":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            i += 2
+        for personaggio in listaPersonaggi:
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
+                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
+                    break
+                i += 2
+        for personaggio in listaPersonaggiTotali:
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
+                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
+                    break
+                i += 2
+
+        avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["date300MoneteAlMercante"] and stanza == GlobalGameVar.dictStanze["città5"]:
         monetePossedute -= 300
         avanzamentoStoria += 1
@@ -123,7 +177,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"] and stanza == GlobalGameVar.dictStanze["città4"]:
         arrivatoDaAggressore = False
         for personaggio in listaPersonaggi:
-            if personaggio.tipoId == "Ragazzo1-6":
+            if personaggio.tipoId == "Ragazzo1-2":
                 if x == GlobalHWVar.gpx * 20 and personaggio.y == y:
                     arrivatoDaAggressore = True
                 elif x >= GlobalHWVar.gpx * 16 and personaggio.y > y:
@@ -136,7 +190,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
 
         if arrivatoDaAggressore:
             for personaggio in listaPersonaggi:
-                if personaggio.tipoId == "Ragazzo1-6":
+                if personaggio.tipoId == "Ragazzo1-2":
                     if personaggio.percorso != ["aGira", "mantieniPosizione"]:
                         personaggio.percorso = ["aGira", "mantieniPosizione"]
                         avanzaIlTurnoSenzaMuoverti = True
@@ -151,16 +205,16 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 GlobalHWVar.canaleSoundCanzone.set_volume(0)
                 GlobalHWVar.canaleSoundCanzone.stop()
 
-                personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-6", stanza, avanzamentoStoria, False)
+                personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-2", stanza, avanzamentoStoria, False)
                 avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
 
                 if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"]:
                     for personaggio in listaPersonaggi:
-                        if personaggio.tipoId == "Ragazzo3-4":
+                        if personaggio.tipoId == "Ragazzo3-2":
                             listaPersonaggi.remove(personaggio)
                             break
                     for personaggio in listaPersonaggiTotali:
-                        if personaggio.tipoId == "Ragazzo3-4":
+                        if personaggio.tipoId == "Ragazzo3-2":
                             listaPersonaggiTotali.remove(personaggio)
                             break
                     percorsoNemico = []
@@ -185,7 +239,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 break
         if aggressoreAncoraVivo:
             for personaggio in listaPersonaggi:
-                if personaggio.tipoId == "Ragazzo1-6":
+                if personaggio.tipoId == "Ragazzo1-2":
                     if x == GlobalHWVar.gpx * 20 and personaggio.y == y:
                         personaggio.percorso = ["aGira", "mantieniPosizione"]
                     elif x >= GlobalHWVar.gpx * 16 and personaggio.y > y:
@@ -204,16 +258,16 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             carim = True
             caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["uccisoPrimoAggressore"] and stanza == GlobalGameVar.dictStanze["città4"]:
-        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-6", stanza, avanzamentoStoria, False)
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Ragazzo1-2", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
 
         ySpawnSecondoAggressore = GlobalHWVar.gsy // 18 * 13
         for personaggio in listaPersonaggi:
-            if personaggio.tipoId == "Ragazzo1-6":
+            if personaggio.tipoId == "Ragazzo1-2":
                 listaPersonaggi.remove(personaggio)
                 break
         for personaggio in listaPersonaggiTotali:
-            if personaggio.tipoId == "Ragazzo1-6":
+            if personaggio.tipoId == "Ragazzo1-2":
                 ySpawnSecondoAggressore = personaggio.y
                 listaPersonaggiTotali.remove(personaggio)
                 break
@@ -286,7 +340,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoUccisioneAggressori"] and stanza == GlobalGameVar.dictStanze["città4"]:
         if x == GlobalHWVar.gpx * 27:
             percorsoPersonaggio = ["s"]
-            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-20", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-18", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggiTotali.append(personaggio)
             listaPersonaggi.append(personaggio)
             avanzamentoStoria += 1
@@ -295,7 +349,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoPrimaGuardia"] and stanza == GlobalGameVar.dictStanze["città4"]:
         if x == GlobalHWVar.gpx * 28:
             percorsoPersonaggio = ["s"]
-            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-21", stanza, avanzamentoStoria, percorsoPersonaggio)
+            personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 5, "s", "GuardiaCitta-18", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggiTotali.append(personaggio)
             listaPersonaggi.append(personaggio)
             avanzamentoStoria += 1
@@ -327,6 +381,41 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         percorsoDaEseguire = ["d", "d", "w", "w", "w", "d", "w", "d", "w", "d", "d", "d", "w", "w", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "w", "d", "d", "w", "d", "d"]
         avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["fuggitoVersoCittà7"] and stanza == GlobalGameVar.dictStanze["città7"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanza == GlobalGameVar.dictStanze["città7"]:
+        # resetto avanzamento dialoghi di tutti i cittadini a cui chiedo informazioni
+        i = 0
+        while i < len(listaAvanzamentoDialoghi):
+            if listaAvanzamentoDialoghi[i] == "Ragazzo1-0" or listaAvanzamentoDialoghi[i] == "Ragazzo1-3" or listaAvanzamentoDialoghi[i] == "Ragazzo1-4" or listaAvanzamentoDialoghi[i] == "Ragazzo1-5" or listaAvanzamentoDialoghi[i] == "Ragazzo1-6" or listaAvanzamentoDialoghi[i] == "Ragazzo1-7" or listaAvanzamentoDialoghi[i] == "Ragazzo1-8":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazzo2-0" or listaAvanzamentoDialoghi[i] == "Ragazzo2-1" or listaAvanzamentoDialoghi[i] == "Ragazzo2-2" or listaAvanzamentoDialoghi[i] == "Ragazzo2-3" or listaAvanzamentoDialoghi[i] == "Ragazzo2-4" or listaAvanzamentoDialoghi[i] == "Ragazzo2-5" or listaAvanzamentoDialoghi[i] == "Ragazzo2-6" or listaAvanzamentoDialoghi[i] == "Ragazzo2-7":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazzo3-0" or listaAvanzamentoDialoghi[i] == "Ragazzo3-1" or listaAvanzamentoDialoghi[i] == "Ragazzo3-3" or listaAvanzamentoDialoghi[i] == "Ragazzo3-4" or listaAvanzamentoDialoghi[i] == "Ragazzo3-5" or listaAvanzamentoDialoghi[i] == "Ragazzo3-6" or listaAvanzamentoDialoghi[i] == "Ragazzo3-7":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazza1-0" or listaAvanzamentoDialoghi[i] == "Ragazza1-1" or listaAvanzamentoDialoghi[i] == "Ragazza1-3" or listaAvanzamentoDialoghi[i] == "Ragazza1-4" or listaAvanzamentoDialoghi[i] == "Ragazza1-5" or listaAvanzamentoDialoghi[i] == "Ragazza1-6" or listaAvanzamentoDialoghi[i] == "Ragazza1-7" or listaAvanzamentoDialoghi[i] == "Ragazza1-8":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazza2-0":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            elif listaAvanzamentoDialoghi[i] == "Ragazza3-0" or listaAvanzamentoDialoghi[i] == "Ragazza3-1" or listaAvanzamentoDialoghi[i] == "Ragazza3-2" or listaAvanzamentoDialoghi[i] == "Ragazza3-3" or listaAvanzamentoDialoghi[i] == "Ragazza3-4" or listaAvanzamentoDialoghi[i] == "Ragazza3-5" or listaAvanzamentoDialoghi[i] == "Ragazza3-6":
+                listaAvanzamentoDialoghi[i + 1] = 0
+            i += 2
+        for personaggio in listaPersonaggi:
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
+                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
+                    break
+                i += 2
+        for personaggio in listaPersonaggiTotali:
+            i = 0
+            while i < len(listaAvanzamentoDialoghi):
+                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
+                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
+                    break
+                i += 2
+
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True

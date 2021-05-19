@@ -299,7 +299,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"È una vasca da bagno! L'abbiamo fatta io e mio padre per poterci lavare senza dover uscire di casa.")
+            dialogo.append(u"È una vasca da bagno. L'abbiamo fatta io e mio padre per poterci lavare senza dover uscire di casa.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

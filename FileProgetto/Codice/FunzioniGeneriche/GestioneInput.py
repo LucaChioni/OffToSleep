@@ -223,7 +223,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                     for idTasto in range(buttons):
                         if pad.get_button(idTasto):
                             if pad != GlobalHWVar.padUtilizzato:
-                                GlobalHWVar.listaTastiPremuti =[]
+                                GlobalHWVar.listaTastiPremuti = []
                                 GlobalHWVar.inizializzaPad(pad)
                                 padCambiato = True
                             padTrovato = True
@@ -329,7 +329,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                         direzioneX, direzioneY = hat
                         if direzioneX != 0 or direzioneY != 0:
                             if pad != GlobalHWVar.padUtilizzato:
-                                GlobalHWVar.listaTastiPremuti =[]
+                                GlobalHWVar.listaTastiPremuti = []
                                 GlobalHWVar.inizializzaPad(pad)
                                 padCambiato = True
                             padTrovato = True

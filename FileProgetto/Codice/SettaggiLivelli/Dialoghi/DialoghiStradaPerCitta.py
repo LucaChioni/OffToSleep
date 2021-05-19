@@ -190,26 +190,65 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Benvenuta in città, hai bisogno di qualcosa?")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append("No no.")
+                dialogo.append(u"Benvenuta in città. Se sei in cerca di un posto sicuro per riposare, rivolgiti agli alloggi profughi.")
                 partiDialogo.append(dialogo)
             elif y == GlobalHWVar.gpy * 12:
-                oggettoDato = False
-                avanzaStoria = False
-                menuMercante = False
-                scelta = False
-                avanzaColDialogo = False
-                dialogo = []
-                dialogo.append("personaggio")
-                dialogo.append(u"Salve... si prega di non ingombrare il ponte troppo a lungo.")
-                partiDialogo.append(dialogo)
-                dialogo = []
-                dialogo.append("tu")
-                dialogo.append("Va bene, ero solo di passaggio.")
-                partiDialogo.append(dialogo)
+                if avanzamentoDialogo == 0:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = True
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Salve, soldato.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"Salve... si prega di non ingombrare il ponte troppo a lungo! È necessario che sia sempre il più fruibile possibile.")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Va bene, mi stavo proprio chiedendo perché non ci fosse nessuno qui...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"Perché è un ponte... serve per attraversare il fiume, non per ostruire il passaggio!")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Ok, ma tu invece? Non lo stai \"ostruendo\"?")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"No. Deve esserci qualcuno che lo mantenga libero. Altrimenti sarebbe pieno di persone che, come te, bloccherebbero un traffico di persone che lo vuole attraversare solo per stanci sopra!")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"A me sembre che l'unico traffico qui sia composto da due guardie che stanno sul ponte senza neanche attraversarlo...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"Due guardie che mantengono il ponte libero dal traffico!")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Certo. Dico solo che, senza tutte quelle guardie, il ponte sarebbe sicuramente più libero e fruibile, tutto qui...")
+                    partiDialogo.append(dialogo)
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"Senti ragazzina, non ho altro tempo da perdere! Vai dove devi andare senza ostruire il passaggio!")
+                    partiDialogo.append(dialogo)
+                if avanzamentoDialogo == 1:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    avanzaColDialogo = False
+                    dialogo = []
+                    dialogo.append("personaggio")
+                    dialogo.append(u"Vai dove devi andare senza ostruire il passaggio!")
+                    partiDialogo.append(dialogo)
     elif tipo == "OggettoBucoPorta":
         partiDialogo = []
         nome = "OggettoBucoPorta"

@@ -318,7 +318,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("S-salve mi chiamo Lucy.")
+            dialogo.append("Salve mi chiamo Lucy.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -334,7 +334,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("Ok, piacere.")
+            dialogo.append("Ok... piacere.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
