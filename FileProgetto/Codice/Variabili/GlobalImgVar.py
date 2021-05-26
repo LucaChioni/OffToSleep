@@ -187,6 +187,7 @@ global impostaControllerCroceDirezionale
 global persGrafMenu
 global lucy1GrafMenu
 global lucy2GrafMenu
+global lucy3GrafMenu
 global fraMaggioreGrafMenu
 global robograf0
 global robograf1
@@ -284,7 +285,7 @@ global imgEnigmaBibliotecarioVel5
 global cursoreMatitaEnigmaBibliotecario
 global cursoreGommaEnigmaBibliotecario
 
-numImgTotali = 1390
+numImgTotali = 1409
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
@@ -489,6 +490,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global persGrafMenu
     global lucy1GrafMenu
     global lucy2GrafMenu
+    global lucy3GrafMenu
     global fraMaggioreGrafMenu
     global robograf0
     global robograf1
@@ -1064,6 +1066,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     persGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/NeilGrafMenu.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     lucy1GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy1GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     lucy2GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy2GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
+    lucy3GrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/Lucy3GrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     fraMaggioreGrafMenu = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/FratelloMaggioreGrafMenu.png', GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 10, False)
     robograf0 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf0.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)
     robograf1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/DisegniPersonaggi/RobotGraf1.png', GlobalHWVar.gpx * 18, GlobalHWVar.gpy * 18, False)

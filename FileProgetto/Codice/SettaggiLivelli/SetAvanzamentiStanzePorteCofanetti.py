@@ -320,22 +320,26 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["tutorialPietraImpoMenuSettaImpo"] = i
     dictAvanzamentoStoria["inizioViaggioVersoNeil"] = i
-
     i += 1
     dictAvanzamentoStoria["monologoUscitaBibliotecaDirettoVersoNeil"] = i
+
     i += 1
     dictAvanzamentoStoria["arrivoStradaPerSelvaArida"] = i
     i += 1
+    dictAvanzamentoStoria["tutorialUsoImpoFrutti"] = i
+    i += 1
     dictAvanzamentoStoria["arrivoSelvaArida"] = i
     dictAvanzamentoStoria["mappaSelvaArida"] = i
+    i += 1
+    dictAvanzamentoStoria["tutorialMenuPrevisioniImpo"] = i
+
+    i += 100
     i += 1
     dictAvanzamentoStoria["arrivoAvampostoDiRod"] = i
     dictAvanzamentoStoria["mappaAvampostoDiRod"] = i
     i += 1
     dictAvanzamentoStoria["arrivoLabirinto"] = i
     dictAvanzamentoStoria["mappaLabirinto"] = i
-
-    i += 100
     i += 1
     dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] = i
     i += 1

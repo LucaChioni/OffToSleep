@@ -1543,7 +1543,7 @@ def oggetti(dati, colcoInCasellaVista):
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 1.5), int(GlobalHWVar.gpy * 5.6)), (int(GlobalHWVar.gpx * 10.5), int(GlobalHWVar.gpy * 5.6)), 1)
                 if dati[31] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[31], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 6.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[31], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 6.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 6.2, 45)
                 if dati[32] >= 0:
@@ -1551,17 +1551,17 @@ def oggetti(dati, colcoInCasellaVista):
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto piccolo", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[32], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 7.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[32], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 7.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 7.2, 45)
                 if dati[33] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[33], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 8.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[33], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 8.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 8.2, 45)
                 if dati[34] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Super pozione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[34], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 9.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[34], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 9.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.2, 45)
                 if dati[35] >= 0:
@@ -1569,32 +1569,32 @@ def oggetti(dati, colcoInCasellaVista):
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
                     else:
                         FunzioniGraficheGeneriche.messaggio("ImpoFrutto grande", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[35], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 10.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[35], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 10.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.2, 45)
                 if dati[36] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[36], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 11.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[36], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 11.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.2, 45)
                 if dati[37] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[37], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 12.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[37], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 12.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.2, 45)
                 if dati[38] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Esca", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[38], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 13.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[38], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 13.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.2, 45)
                 if dati[39] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[39], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 14.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[39], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 14.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.2, 45)
                 if dati[40] >= 0:
                     FunzioniGraficheGeneriche.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.2, 45)
-                    FunzioniGraficheGeneriche.messaggio("x%i" % dati[40], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 15.2, 45, centrale=True)
+                    FunzioniGraficheGeneriche.messaggio(u"×%i" % dati[40], GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9.1, GlobalHWVar.gsy // 18 * 15.2, 45, centrale=True)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.2, 45)
                 GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 7.6) - 1, int(GlobalHWVar.gpy * 4.5)), (int(GlobalHWVar.gpx * 7.6) - 1, int(GlobalHWVar.gpy * 5.4)), 2)

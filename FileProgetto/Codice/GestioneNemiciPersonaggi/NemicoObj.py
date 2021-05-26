@@ -23,7 +23,7 @@ class NemicoObj(object):
         self.triggerato = triggerato
         self.percorso = percorso
         self.numeroMovimento = numeroMovimento
-        # il vettore "obbiettivo" contiene nome, x, y e path dell'obbiettivo
+        # il vettore "obbiettivo" contiene nome, x, y e path dell'obiettivo
         self.obbiettivo = ["", 0, 0, []]
         self.xPosizioneUltimoBersaglio = False
         self.yPosizioneUltimoBersaglio = False
@@ -635,7 +635,7 @@ class NemicoObj(object):
                 vetNemiciSoloConXeY.append(personaggio.x)
                 vetNemiciSoloConXeY.append(personaggio.y)
 
-        # se l'obbiettivo precedente è un'esca che esiste ancora, che puoi ancora raggiungere me che non vedi più non cambi bersaglio a meno che non vedi un'altra esca (corregge il caso in cui il nemico vede te o colco e non più l'esca => fa avanti e indietro di continuo)
+        # se l'obiettivo precedente è un'esca che esiste ancora, che puoi ancora raggiungere me che non vedi più non cambi bersaglio a meno che non vedi un'altra esca (corregge il caso in cui il nemico vede te o colco e non più l'esca => fa avanti e indietro di continuo)
         escaVecchiaAncoraRaggiungibilie = False
         if self.obbiettivo[0] == "Esca":
             j = 0
@@ -667,11 +667,11 @@ class NemicoObj(object):
                 del vetNemiciSoloConXeY[i]
             else:
                 i += 2
-        # se l'obbiettivo precedente è in una casella vicina, non si è spostato e è prioritario rispetto a tutte le cose che vedi => non cerchi altri obbiettivi
+        # se l'obiettivo precedente è in una casella vicina, non si è spostato e è prioritario rispetto a tutte le cose che vedi => non cerchi altri obiettivi
         inutileCalcolareObbiettivo = False
         if self.obbiettivo[0] != "" and ((self.obbiettivo[1] == self.x + GlobalHWVar.gpx and self.obbiettivo[2] == self.y) or (self.obbiettivo[1] == self.x - GlobalHWVar.gpx and self.obbiettivo[2] == self.y) or (self.obbiettivo[1] == self.x and self.obbiettivo[2] == self.y + GlobalHWVar.gpy) or (self.obbiettivo[1] == self.x and self.obbiettivo[2] == self.y - GlobalHWVar.gpy)):
             if self.obbiettivo[0] == "Esca":
-                # controllo se esiste ancora l'obbiettivo precedente
+                # controllo se esiste ancora l'obiettivo precedente
                 i = 0
                 while i < len(vettoreEsche):
                     if self.obbiettivo[1] == vettoreEsche[i + 2] and self.obbiettivo[2] == vettoreEsche[i + 3] and vettoreEsche[i + 1] > 0:
@@ -679,12 +679,12 @@ class NemicoObj(object):
                         break
                     i += 4
             elif self.obbiettivo[0] == "Colco" or self.obbiettivo[0] == "Rallo":
-                # controllo se esiste ancora l'obbiettivo precedente
+                # controllo se esiste ancora l'obiettivo precedente
                 if self.obbiettivo[0] == "Rallo" and self.obbiettivo[1] == x and self.obbiettivo[2] == y and dati[5] > 0:
                     inutileCalcolareObbiettivo = True
                 if self.obbiettivo[0] == "Colco" and self.obbiettivo[1] == rx and self.obbiettivo[2] == ry and dati[10] > 0:
                     inutileCalcolareObbiettivo = True
-                # controllo se ci sono altri obbiettivi (esche)
+                # controllo se ci sono altri obiettivi (esche)
                 j = 0
                 while j < len(self.caseattactot):
                     i = 0
@@ -696,14 +696,14 @@ class NemicoObj(object):
                         i += 4
                     j += 3
             elif self.obbiettivo[0] == "Monete":
-                # controllo se esiste ancora l'obbiettivo precedente
+                # controllo se esiste ancora l'obiettivo precedente
                 i = 0
                 while i < len(vettoreDenaro):
                     if self.obbiettivo[1] == vettoreDenaro[i + 1] and self.obbiettivo[2] == vettoreDenaro[i + 2]:
                         inutileCalcolareObbiettivo = True
                         break
                     i += 3
-                # controllo se ci sono altri obbiettivi (esche, rallo o colco)
+                # controllo se ci sono altri obiettivi (esche, rallo o colco)
                 j = 0
                 while j < len(self.caseattactot):
                     i = 0

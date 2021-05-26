@@ -90,7 +90,7 @@ global rumoreScorrimentoGommaEnigmi
 global rumoreCancellaTuttoEnigmi
 
 
-numSndTotali = 77
+numSndTotali = 83
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)

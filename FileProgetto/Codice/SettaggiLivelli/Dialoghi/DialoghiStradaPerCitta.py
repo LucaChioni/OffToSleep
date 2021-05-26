@@ -239,7 +239,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("personaggio")
                     dialogo.append(u"Senti ragazzina, non ho altro tempo da perdere! Vai dove devi andare senza ostruire il passaggio!")
                     partiDialogo.append(dialogo)
-                if avanzamentoDialogo == 1:
+                elif avanzamentoDialogo == 1:
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False

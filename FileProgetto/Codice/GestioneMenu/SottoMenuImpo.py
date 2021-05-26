@@ -1292,7 +1292,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.9))
             if settaRisoluzione:
                 FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 9.5, 60)
-                FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + "x" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
+                FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
                 if voceMarcata == 5:
                     if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
@@ -1305,7 +1305,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
             else:
                 FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 9.5, 60)
                 FunzioniGraficheGeneriche.messaggio("Configurabile solo dal menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 30.3, GlobalHWVar.gsy // 18 * 9.8, 40, daDestra=True)
-                FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + "x" + str(gsyTemp), GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
+                FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
                 if voceMarcata == 5:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.5, GlobalHWVar.gsy // 18 * 10.9))

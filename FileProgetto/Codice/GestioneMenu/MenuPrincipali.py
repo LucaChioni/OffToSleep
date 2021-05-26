@@ -767,6 +767,8 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
         perssta = GlobalImgVar.fraMaggioreGrafMenu
     elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
         perssta = GlobalImgVar.lucy1GrafMenu
+    elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
+        perssta = GlobalImgVar.lucy3GrafMenu
     else:
         perssta = GlobalImgVar.lucy2GrafMenu
     robosta = GlobalImgVar.robograf1b
@@ -1541,7 +1543,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatIn, (xp, yp))
                 qta = dati[disegnoOggetto + 31]
-            FunzioniGraficheGeneriche.messaggio("x%i" % qta, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 4) + (GlobalHWVar.gpx // 2), GlobalHWVar.gpy * 11.2, 80)
+            FunzioniGraficheGeneriche.messaggio(u"×%i" % qta, GlobalHWVar.grigiochi, (GlobalHWVar.gpx * 4) + (GlobalHWVar.gpx // 2), GlobalHWVar.gpy * 11.2, 80)
             disegnati = 0
             i = 0
             while i < 10:
@@ -1622,7 +1624,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-            FunzioniGraficheGeneriche.messaggio(" x" + str(dati[132]), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+            FunzioniGraficheGeneriche.messaggio(u" ×" + str(dati[132]), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
             if dati[121]:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
             if dati[123] > 0:

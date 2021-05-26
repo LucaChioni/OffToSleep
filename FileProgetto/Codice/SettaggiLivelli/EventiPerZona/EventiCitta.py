@@ -129,17 +129,9 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         # resetto avanzamento dialoghi di tutti i cittadini a cui chiedo informazioni
         i = 0
         while i < len(listaAvanzamentoDialoghi):
-            if listaAvanzamentoDialoghi[i] == "Ragazzo1-0" or listaAvanzamentoDialoghi[i] == "Ragazzo1-3" or listaAvanzamentoDialoghi[i] == "Ragazzo1-4" or listaAvanzamentoDialoghi[i] == "Ragazzo1-5" or listaAvanzamentoDialoghi[i] == "Ragazzo1-6" or listaAvanzamentoDialoghi[i] == "Ragazzo1-7" or listaAvanzamentoDialoghi[i] == "Ragazzo1-8":
+            if listaAvanzamentoDialoghi[i] == "Ragazzo2-2":
                 listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazzo2-0" or listaAvanzamentoDialoghi[i] == "Ragazzo2-1" or listaAvanzamentoDialoghi[i] == "Ragazzo2-2" or listaAvanzamentoDialoghi[i] == "Ragazzo2-3" or listaAvanzamentoDialoghi[i] == "Ragazzo2-4" or listaAvanzamentoDialoghi[i] == "Ragazzo2-5" or listaAvanzamentoDialoghi[i] == "Ragazzo2-6" or listaAvanzamentoDialoghi[i] == "Ragazzo2-7":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazzo3-0" or listaAvanzamentoDialoghi[i] == "Ragazzo3-1" or listaAvanzamentoDialoghi[i] == "Ragazzo3-3" or listaAvanzamentoDialoghi[i] == "Ragazzo3-4" or listaAvanzamentoDialoghi[i] == "Ragazzo3-5" or listaAvanzamentoDialoghi[i] == "Ragazzo3-6" or listaAvanzamentoDialoghi[i] == "Ragazzo3-7":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazza1-0" or listaAvanzamentoDialoghi[i] == "Ragazza1-1" or listaAvanzamentoDialoghi[i] == "Ragazza1-2" or listaAvanzamentoDialoghi[i] == "Ragazza1-3" or listaAvanzamentoDialoghi[i] == "Ragazza1-4" or listaAvanzamentoDialoghi[i] == "Ragazza1-5" or listaAvanzamentoDialoghi[i] == "Ragazza1-6" or listaAvanzamentoDialoghi[i] == "Ragazza1-7" or listaAvanzamentoDialoghi[i] == "Ragazza1-8":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazza2-0":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazza3-0" or listaAvanzamentoDialoghi[i] == "Ragazza3-1" or listaAvanzamentoDialoghi[i] == "Ragazza3-2" or listaAvanzamentoDialoghi[i] == "Ragazza3-3" or listaAvanzamentoDialoghi[i] == "Ragazza3-4" or listaAvanzamentoDialoghi[i] == "Ragazza3-5" or listaAvanzamentoDialoghi[i] == "Ragazza3-6":
+            elif listaAvanzamentoDialoghi[i] == "Ragazzo3-1":
                 listaAvanzamentoDialoghi[i + 1] = 0
             i += 2
         for personaggio in listaPersonaggi:
@@ -193,6 +185,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 if personaggio.tipoId == "Ragazzo1-2":
                     if personaggio.percorso != ["aGira", "mantieniPosizione"]:
                         personaggio.percorso = ["aGira", "mantieniPosizione"]
+                        personaggio.numeroMovimento = 0
                         avanzaIlTurnoSenzaMuoverti = True
                     break
             if not avanzaIlTurnoSenzaMuoverti:
@@ -385,37 +378,6 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanza == GlobalGameVar.dictStanze["città7"]:
-        # resetto avanzamento dialoghi di tutti i cittadini a cui chiedo informazioni
-        i = 0
-        while i < len(listaAvanzamentoDialoghi):
-            if listaAvanzamentoDialoghi[i] == "Ragazzo1-0" or listaAvanzamentoDialoghi[i] == "Ragazzo1-3" or listaAvanzamentoDialoghi[i] == "Ragazzo1-4" or listaAvanzamentoDialoghi[i] == "Ragazzo1-5" or listaAvanzamentoDialoghi[i] == "Ragazzo1-6" or listaAvanzamentoDialoghi[i] == "Ragazzo1-7" or listaAvanzamentoDialoghi[i] == "Ragazzo1-8":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazzo2-0" or listaAvanzamentoDialoghi[i] == "Ragazzo2-1" or listaAvanzamentoDialoghi[i] == "Ragazzo2-2" or listaAvanzamentoDialoghi[i] == "Ragazzo2-3" or listaAvanzamentoDialoghi[i] == "Ragazzo2-4" or listaAvanzamentoDialoghi[i] == "Ragazzo2-5" or listaAvanzamentoDialoghi[i] == "Ragazzo2-6" or listaAvanzamentoDialoghi[i] == "Ragazzo2-7":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazzo3-0" or listaAvanzamentoDialoghi[i] == "Ragazzo3-1" or listaAvanzamentoDialoghi[i] == "Ragazzo3-3" or listaAvanzamentoDialoghi[i] == "Ragazzo3-4" or listaAvanzamentoDialoghi[i] == "Ragazzo3-5" or listaAvanzamentoDialoghi[i] == "Ragazzo3-6" or listaAvanzamentoDialoghi[i] == "Ragazzo3-7":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazza1-0" or listaAvanzamentoDialoghi[i] == "Ragazza1-1" or listaAvanzamentoDialoghi[i] == "Ragazza1-3" or listaAvanzamentoDialoghi[i] == "Ragazza1-4" or listaAvanzamentoDialoghi[i] == "Ragazza1-5" or listaAvanzamentoDialoghi[i] == "Ragazza1-6" or listaAvanzamentoDialoghi[i] == "Ragazza1-7" or listaAvanzamentoDialoghi[i] == "Ragazza1-8":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazza2-0":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            elif listaAvanzamentoDialoghi[i] == "Ragazza3-0" or listaAvanzamentoDialoghi[i] == "Ragazza3-1" or listaAvanzamentoDialoghi[i] == "Ragazza3-2" or listaAvanzamentoDialoghi[i] == "Ragazza3-3" or listaAvanzamentoDialoghi[i] == "Ragazza3-4" or listaAvanzamentoDialoghi[i] == "Ragazza3-5" or listaAvanzamentoDialoghi[i] == "Ragazza3-6":
-                listaAvanzamentoDialoghi[i + 1] = 0
-            i += 2
-        for personaggio in listaPersonaggi:
-            i = 0
-            while i < len(listaAvanzamentoDialoghi):
-                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
-                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
-                    break
-                i += 2
-        for personaggio in listaPersonaggiTotali:
-            i = 0
-            while i < len(listaAvanzamentoDialoghi):
-                if personaggio.tipoId == listaAvanzamentoDialoghi[i]:
-                    personaggio.avanzamentoDialogo = listaAvanzamentoDialoghi[i + 1]
-                    break
-                i += 2
-
         personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True

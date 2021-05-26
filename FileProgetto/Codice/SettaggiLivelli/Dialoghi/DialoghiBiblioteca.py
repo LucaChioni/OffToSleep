@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
@@ -14,154 +15,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
     menuMercante = False
     scelta = False
     avanzaColDialogo = False
-    if tipo == "AssistBiblioteca" or tipo == "OggettoAssistBiblioteca":
-        partiDialogo = []
-        nome = "Assistente bibliotecario"
-        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosse300Monete"]:
-            oggettoDato = False
-            avanzaStoria = True
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Ehi, tu! Devi fornire un documento per entrare!")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Eh? Io non ho nessun documento...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Mi serve per certificare la t... Non puoi non averlo. Ne viene assegnato uno a tutti quando entrano in città. L'hai perso?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"No, non mi hanno dato nessun documento quando sono arrivata. Chi me lo avrebbe dovuto dare?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Se non sei residente, ti viene assegnato un certificato di permanenza quando arrivi agli alloggi profughi. Era in mezzo agli altri fogli che hai ricevuto...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Oh, perfetto... quando sono arrivata mi è stato detto che non c'era più posto negli alloggi. Quindi David, il comandante della guardia notturna, si è offerto di ospitarmi per la notte.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Addirittura... ospitata da David? Beh, allora chiedi a lui di rilasciarti la certificazione. Altrimenti non posso lasciarti passare.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Va bene, ma in realtà avrei soltanto bisogno di sapere se mio fratello è passato di qua oggi...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Non posso darti questo genere di informazioni. Gli accessi alla biblioteca vengono inseriti in dei registri che solo il bibliotecario può consultare.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Ah... allora posso chiedere al bibliotecario?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Sì, certo. Ma non sarò certo io a disturbarlo. Lui... non ha molta pazienza per queste cose...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"E come... ? Posso passare solo per parlare con lui?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Mi spiace, devi per forza avere un documeto...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"E va bene...")
-            partiDialogo.append(dialogo)
-        elif GlobalGameVar.dictAvanzamentoStoria["rifiutatoDallaBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"]:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Ehi! Devi fornire un documento per entrare!")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Va bene, va bene. Lo richiederò a David.")
-            partiDialogo.append(dialogo)
-        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"]:
-            oggettoDato = False
-            avanzaStoria = True
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"... Ecco il certificato...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Perfetto. Ti do la benvenuta nella biblioteca. Al piano terra troverai tutti gli scritti riguardanti...")
-            partiDialogo.append(dialogo)
-        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] and avanzamentoDialogo == 0:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = True
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Salve, sai dirmi dove posso trovare il bibliotecario?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"... Senti, ragazzina! È consuetudine esporre l'organizzazione dei reparti ai nuovi arrivati! Prima di fare le tue domande dovresti almeno avere la cortesia di rispettare e ascoltare chi hai di fronte!")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Mi stai ascoltando!?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"... Sì, ma... io ho bisogno di parlare col bibliotecario...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Come ti pare! È al primo piano ma di sicuro non vorrà essere diturbato.")
-            partiDialogo.append(dialogo)
-        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] and avanzamentoDialogo == 1:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Scusa, dove hai detto che si trova il bibliotecario?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"... Primo piano.")
-            partiDialogo.append(dialogo)
-        else:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            avanzaColDialogo = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"(Non ho niente da chiedergli...)")
-            partiDialogo.append(dialogo)
     if tipo == "Bibliotecario":
         partiDialogo = []
         nome = u"René"
@@ -173,7 +26,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Scusa, sei tu il bibliotecario?")
+            dialogo.append(u"... Sei tu il bibliotecario?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -393,15 +246,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Sì, va bene... scusa ma non mi servono queste banalità da quindicenni.")
+            dialogo.append(u"Sì... Certo, certo...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non ho quindici anni. Metti un attimo da parte la tua presunzione e lasciami finire.")
+            dialogo.append(u"So che sembra una stupidaggine ma lasciami finire.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"...")
+            dialogo.append(u"<*>#italic#Mh.<*>")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -478,7 +331,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Bibliotecario? Chiamami René, per favore. Vediamo... ah, ecco fatto.")
+            dialogo.append(u"Chiamami René, per favore... Vediamo... ah, ecco fatto.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -507,7 +360,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"La palla è arrivata fino alla linea che segna un metro. Mettiamo che il momento in cui abbiamo caricato la molla è il nostro momento <*>#italic#E1,<*> mentre il momento in cui la palla si ferma è il momento <*>#italic#E2.<*> Se adesso ripetessi l'esperimento allo stesso modo, fino a dove pensi che arriverebbe la palla prima di fermarsi e tornare indietro?")
+            dialogo.append(u"La palla è arrivata fino alla linea che segna un metro. Mettiamo che il momento in cui abbiamo caricato la molla è il nostro momento <*>#italic#E1,<*> mentre il momento in cui la palla si ferma prima di tornare indietro è il momento <*>#italic#E2.<*> Se adesso ripetessi l'esperimento allo stesso modo, fino a dove pensi che arriverebbe la palla prima di fermarsi e tornare indietro?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -606,7 +459,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Nonostante non sia possibile dimostrarlo, ciò che lo fa sembrare ovvio è che gli umani sono in grado di spigare il motivo delle loro azioni. E, se ci sono dei motivi, vuol dire che, anche potendo tornare indietro nel tempo, l'azione compiuta sarebbe sempre la stessa. Ossia quella che il soggetto reputava migliore per la situazione.")
+            dialogo.append(u"Nonostante non sia possibile dimostrarlo, ciò che lo fa sembrare ovvio è che gli umani sono in grado di spiegare il motivo delle loro azioni. E, se ci sono dei motivi, vuol dire che, anche potendo tornare indietro nel tempo, l'azione compiuta sarebbe sempre la stessa. Ossia quella che il soggetto reputava migliore per la situazione.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -614,7 +467,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Qualunque cosa tu abbia fatto o detto nella tua vita, non è per colpa o merito tuo. Semplicemente succedono degli eventi che ti impongono delle reazioni. Prima, ad esempio, eri scossa per qualcosa. Ma punirti per quello che hai fatto, sarebbe come punire questa palla perché si ferma troppo presto o troppo tardi prima di tornare indietro. Se le condizioni di partenza sono le stesse, i risultati non cambieranno.")
+            dialogo.append(u"Qualunque cosa tu abbia fatto o detto nella tua vita, non è per colpa o merito tuo. Semplicemente succedono degli eventi che ti impongono delle reazioni. Prima, ad esempio, eri scossa per qualcosa. Ma punirti per quello che hai fatto, sarebbe come punire questa palla perché qualcuno pensa che si ferma troppo presto o troppo tardi prima di tornare indietro. Se le condizioni di partenza sono le stesse, i risultati non cambieranno.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -744,7 +597,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Devo fare una consegna ad un mio vecchio amico. Vive a sud oltre la Selva arida. Si chiama Neil, è una persona molto potente che ha notizia di tutti gli spostamenti che avvengono in questo territorio. Da quello che ho capito, è possibile che tuo fratello non sia in questa città, quindi se c'è una persona a cui dovresti chiedere è senza dubbio Neil.")
+            dialogo.append(u"Devo fare una consegna ad un mio vecchio amico. Vive a sud oltre la Selva Arida. Si chiama Neil, è una persona molto potente che ha notizia di tutti gli spostamenti che avvengono in questo territorio. Da quello che ho capito, è possibile che tuo fratello non sia in questa città, quindi se c'è una persona a cui dovresti chiedere è senza dubbio Neil.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -872,7 +725,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Gli Impo sono degli animali molto metodici. Svolgono diverse attivià che ritengono assolutamente prioritarie rispetto a tutto il resto, anche rispetto alla loro stessa vita. Lo fanno finché non esauriscono le energie, a quel punto di fermano e aspettano il nutrimento. Adesso, sembrerà strano, ma la priorità di questo Impo è rimanere fermo. E ci resterà finché qualcuno non gli dirà di fare qualcos'altro.")
+            dialogo.append(u"Gli Impo sono degli animali molto metodici. Svolgono diverse attività che ritengono assolutamente prioritarie rispetto a tutto il resto, anche rispetto alla loro stessa vita. Lo fanno finché non esauriscono le energie, a quel punto di fermano e aspettano il nutrimento. Adesso, sembrerà strano, ma la priorità di questo Impo è rimanere fermo. E ci resterà finché qualcuno non gli dirà di fare qualcos'altro.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -924,11 +777,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Poi adesso devo tornare a lavoro. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva arida è una zona parecchio ostile per gli umani ma con un Impo non avrai problemi.")
+            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Poi adesso devo tornare a lavoro. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva Arida è una zona parecchio ostile per gli umani ma con un Impo non avrai problemi.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Va bene. La Selva arida si trova a sud, giusto?")
+            dialogo.append(u"Va bene. La Selva Arida si trova a sud, giusto?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -950,128 +803,745 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("personaggio")
             dialogo.append(u"Già... è una creatura parecchio strana. In ogni caso, buona fortuna per il viaggio ragazza.")
             partiDialogo.append(dialogo)
-        else:
+        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Scusa René, dove hai detto che si trova la Selva arida?")
+            dialogo.append(u"Scusa René, hai detto che ci sono dei libri in biblioteca che parlano degli Impo?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"A sud della città, non puoi sbagliare.")
+            dialogo.append(u"Sì, li puoi trovare tutti nelle librerie al piano di sopra. Sono tutti colorari di nero, non puoi sbagliarti.")
             partiDialogo.append(dialogo)
-    if tipo == "OggettoLibreriaStudioBibliotecario":
-        partiDialogo = []
-        nome = "Libro"
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"]:
+
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca1"]:
+        if tipo == "AssistBiblioteca" or tipo == "OggettoAssistBiblioteca":
+            partiDialogo = []
+            nome = "Assistente bibliotecario"
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosse300Monete"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Ehi, tu! Devi fornire un documento per entrare!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Eh? Io non ho nessun documento...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Mi serve per certificare la t... Non puoi non averlo. Ne viene assegnato uno a tutti quando entrano in città. L'hai perso?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"No, non mi hanno dato nessun documento quando sono arrivata. Chi me lo avrebbe dovuto dare?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Se non sei residente, ti viene assegnato un certificato di permanenza quando arrivi agli alloggi profughi. Era in mezzo agli altri fogli che hai ricevuto...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Oh, perfetto... quando sono arrivata mi è stato detto che non c'era più posto negli alloggi. Quindi David, il comandante della guardia notturna, si è offerto di ospitarmi per la notte.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Addirittura... ospitata da David? Beh, allora chiedi a lui di rilasciarti la certificazione. Altrimenti non posso lasciarti passare.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Va bene, ma in realtà avrei soltanto bisogno di sapere se mio fratello è passato di qua oggi...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Non posso darti questo genere di informazioni. Gli accessi alla biblioteca vengono inseriti in dei registri che solo il bibliotecario può consultare.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ah... allora posso chiedere al bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Sì, certo. Ma non sarò certo io a disturbarlo. Lui... non ha molta pazienza per queste cose...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"E come... ? Posso passare solo per parlare con lui?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Mi spiace, devi per forza avere un documeto...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"E va bene...")
+                partiDialogo.append(dialogo)
+            elif GlobalGameVar.dictAvanzamentoStoria["rifiutatoDallaBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Ehi! Devi fornire un documento per entrare!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Va bene, va bene. Lo richiederò a David.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Ecco il certificato...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Perfetto. Ti do la benvenuta nella biblioteca. Al piano terra troverai tutti gli scritti riguardanti...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Salve, sai dirmi dove posso trovare il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Senti, ragazzina! È consuetudine esporre l'organizzazione dei reparti ai nuovi arrivati! Prima di fare le tue domande dovresti almeno avere la cortesia di rispettare e ascoltare chi hai di fronte!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Mi stai ascoltando!?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sì ma... io ho bisogno di parlare col bibliotecario...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Come ti pare! È al primo piano ma di sicuro non vorrà essere diturbato.")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["mostratoCertificatoPerIngressoBiblioteca"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Scusa, dove hai detto che si trova il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Primo piano.")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non ho niente da chiedergli...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "Ragazzo3":
+            partiDialogo = []
+            nome = "Sconosciuto"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No, lui è dall'altra perte di questi scaffali adesso.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Che c'è?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Dall'altra parte?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Sì...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No, ti ho detto che non sono io! Lui è dall'altra parte di questi scaffali.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "Ragazzo1":
+            partiDialogo = []
+            nome = "Sconosciuto"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Dovrebbe essere al piano di sopra al momento.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No... tutto bene?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "Ragazza3":
+            partiDialogo = []
+            nome = "Sconosciuta"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Perché mi fissi?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No... non sono io il bibliotecario...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca2"]:
+        if tipo == "Ragazzo1":
+            partiDialogo = []
+            nome = "Sconosciuto"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Che vuoi?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Niente...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No, non sono io!")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "Ragazzo2":
+            partiDialogo = []
+            nome = "Sconosciuto"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No. È quel signore con la barba laggiù... tra le due colonne...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Quel signore...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No, È quel signore un po' anziano laggiù...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "Ragazza1":
+            partiDialogo = []
+            nome = "Sconosciuta"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Non sono io... il bibliotecario...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["incontratoBibliotecario"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"... Sei tu il bibliotecario?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"No.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoLibriImpo":
+            partiDialogo = []
+            nome = "Libro"
+            if x == GlobalHWVar.gpx * 12:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Questo libro si intitola: \"Scopo degli Impo\".")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Come già spiegato in precedenza, ciò che spinge gli Impo ad agire è determinato dagli ImpoFogli. Tuttavia esistono due casi eccezionali in cui l'azione compiuta è dovuta ad altre ragioni...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la PietraImpo è attiva. A quel punto, l'Impo proprietario della pietra, inizierà ad avvicinarsi ad essa...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma, in precedenza, è stato rilevato un obiettivo che non è più nel campo visivo. In questo caso, Impo si muoverà verso la posizione in cui ha visto per l'ultima volta quell'obiettivo...")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 18:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Questo libro si intitola: \"Sacche Energetiche\".")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... L'energia degli Impo viene conservata in delle sacche dette \"Sacche Energetiche\"...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Queste sacche, a seconda della dimensione, possono contenere più o meno energia...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... In uno degli ultimi studi, si è scoperto che le Sacche Energetiche sono responsabili anche dell'efficienza del sistema difensivo: alcune sacche permettono di resistere alle aggressioni spendendo meno energia...")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 22:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Questo libro si intitola: \"Gestione dell'ImpoForza\".")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... L'energia degli Impo, detta anche \"ImpoForza\", può essere gestita solo in parte dagli umani...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Gli Impo hanno infatti un'istinto di sopravvivenza che permette loro di difendersi dagli attacchi nemici sfruttando la propria energia. Più è violenta l'aggressione, più energia verrà consumata...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Anche se relativamente poco influente, questo loro comportamento non può essere alterato da agenti esterni...")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 25:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Questo libro si intitola: \"ImpoMalus\".")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Gli Impo soffrono negli ambienti troppo caldi...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Quando un Impo supera la propria temperatura massima inizia a perdere energia...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"... Gli Impo sono in grado di tornare autonomamente alle loro temperature ideali. Ma per farlo rallentano i propri movimenti per un po' di tempo...")
+                partiDialogo.append(dialogo)
+    elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"]:
+        if tipo == "OggettoLibreriaStudioBibliotecario":
+            partiDialogo = []
+            nome = "Libro"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario4"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ci sono un sacco di libri...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Allora, ha detto di vedere il \"Moto rettilineo uniformemente accelerato\"... Oh, trovato! Vediamo se c'è una spiegazione comprensibile...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"In questa lezione inizieremo a trattare il modello del moto uniformemente accelerato... <br> Un \"moto rettilineo uniformemente accelerato\" è un tipo di moto in cui un corpo si muove lungo una linea retta con accelerazione costante.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Le formule che si usano per calcolare gli esiti di questi tipi di moto vengono chiamate \"leggi orarie del moto rettilineo uniformemente accelerato\" e sono principalmente due: <br> <*>#italic#Vf = Vi + AT<*> <br> <*>#italic#S = Vi×T + (1/2)×A×T²<*>")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Dove: <*>#italic#Vf<*> è la velocità del corpo (in metri al secondo) nell'evento finale; <*>#italic#Vi<*> è la velocità del corpo (in metri al secondo) nell'evento iniziale; <*>#italic#A<*> è l'accelerazione (in metri al secondo quadrato) che il corpo mantiene tra l'evento iniziale e l'evento finale; <*>#italic#T<*> è il tempo che passa (in secondi) tra l'evento iniziale e l'evento finale; <*>#italic#S<*> è lo spazio percorso dal corpo (in metri) tra l'evento iniziale e l'evento finale.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Osservazioni sulle formule del moto uniformemente accelerato...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"La prima equazione determina qual è la relazione tra velocità, accelerazione e tempo: la differenza di velocità tra l'evento iniziale e quello finale dipende da quant'è l'accelerazione e per quanto tempo essa viene applicata. La seconda formula invece esprime la distanza percorsa da un corpo in un determinato lasso di tempo in cui viene impressa un'accelerazione costante.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Esempi sul moto rettilineo uniformemente accelerato...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Vediamo se ce n'è uno simile alla mia situazione...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Un carro di cavalli viaggia a 6 m/s. Se il carro rallenta con una decelerazione (accelerazione negativa) costante di 2 m/s², quanto spazio percorre prima di fermarsi?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"La velocità iniziale del carro è: <*>#italic#Vi = 6 m/s.<*> <br> La velocità finale, dato che si deve fermare, è: <*>#italic#Vf = 0 m/s.<*> <br> L'accelerazione, dato che è contraria alla direzione del carro, è negativa: <*>#italic#A = -2 m/s².<*>")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Prima di tutto, è necessario ricavare il tempo che impiega il carro per fermarsi. <br> Dalla relazione <*>#italic#Vf = Vi + A×T,<*> si ottiene: <*>#italic#T = (Vf - Vi) / A.<*> <br> Sostituendo con i dati che abbiamo: <*>#italic#T = (0 - 6) / (-2) = 3.<*> <br> Per fermarsi il carro impiega 3 secondi.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Ora che sappiamo quanto tempo serve per azzerare la velocità, possiamo calcolare quanta distanza percorre il carro prima di fermarsi tramite la relazione: <*>#italic#S = Vi×T + (1/2)×A×T².<*> <br> Ossia: <*>#italic#S = 6×3 + (1/2)×(-2)×3² = 9.<*> <br> Il carro si ferma dopo 9 metri.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Mmh...<*> non so se ho capito tutto... ma, da quello che ho capito, basta sostituire i dati nelle formule e dovrebbe andare... credo...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non mi va di leggere altre spiegazioni di formule che non capisco...")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoRegistroBiblioteca":
+            partiDialogo = []
+            nome = "OggettoRegistroBiblioteca"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"<*>#italic#Mmmh...<*> non capisco niente di come è organizzato. Meglio chiedere al bibliotecario.")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Hans non è stato segnato su questo registro.")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoLibreriaRegistri":
+            partiDialogo = []
+            nome = "OggettoLibreriaRegistri"
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ci sono un sacco di libri...")
+            dialogo.append(u"Sono i registri della biblioteca. Quello di oggi è sulla scrivania.")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
+        elif tipo == "OggettoTavoloEnigmaBiblioteca":
+            partiDialogo = []
+            nome = "OggettoTavoloEnigmaBiblioteca"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["spiegazioneEnigmaBibliotecario1"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ci sono dei fogli e una penna... Spero che non servano per \"l'esperimento\"...")
+                partiDialogo.append(dialogo)
+            else:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Non mi metterò a fare altri calcoli adesso.")
+                partiDialogo.append(dialogo)
+        elif tipo == "OggettoMocio":
+            partiDialogo = []
+            nome = "OggettoMocio"
             oggettoDato = False
             avanzaStoria = False
             menuMercante = False
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Allora, ha detto di vedere il \"Moto rettilineo uniformemente accelerato\"... Oh, trovato! Vediamo se c'è una spiegazione comprensibile...")
+            dialogo.append(u"Non è bastato per pulire...")
             partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"In questa lezione inizieremo a trattare il modello del moto uniformemente accelerato... <br> Un \"moto rettilineo uniformemente accelerato\" è un tipo di moto in cui un corpo si muove lungo una linea retta con accelerazione costante.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Le formule che si usano per calcolare gli esiti di questi tipi di moto vengono chiamate \"leggi orarie del moto rettilineo uniformemente accelerato\" e sono principalmente due: <br> <*>#italic#Vf = Vi + AT<*> <br> <*>#italic#S = Vi×T + (1/2)×A×T²<*>")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Dove: <*>#italic#Vf<*> è la velocità del corpo (in metri al secondo) nell'evento finale; <*>#italic#Vi<*> è la velocità del corpo (in metri al secondo) nell'evento iniziale; <*>#italic#A<*> è l'accelerazione (in metri al secondo quadrato) che il corpo mantiene tra l'evento iniziale e l'evento finale; <*>#italic#T<*> è il tempo che passa (in secondi) tra l'evento iniziale e l'evento finale; <*>#italic#S<*> è lo spazio percorso dal corpo (in metri) tra l'evento iniziale e l'evento finale.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Osservazioni sulle formule del moto uniformemente accelerato...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"La prima equazione determina qual è la relazione tra velocità, accelerazione e tempo: la differenza di velocità tra l'evento iniziale e quello finale dipende da quant'è l'accelerazione e per quanto tempo essa viene applicata. La seconda formula invece esprime la distanza percorsa da un corpo in un determinato lasso di tempo in cui viene impressa un'accelerazione costante.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Esempi sul moto rettilineo uniformemente accelerato...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Vediamo se ce n'è uno simile alla mia situazione...")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Un carro di cavalli viaggia a 6 m/s. Se il carro rallenta con una decelerazione (accelerazione negativa) costante di 2 m/s², quanto spazio percorre prima di fermarsi?")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"La velocità iniziale del carro è: <*>#italic#Vi = 6 m/s.<*> <br> La velocità finale, dato che si deve fermare, è: <*>#italic#Vf = 0 m/s.<*> <br> L'accelerazione, dato che è contraria alla direzione del carro, è negativa: <*>#italic#A = -2 m/s².<*>")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Prima di tutto, è necessario ricavare il tempo che impiega il carro per fermarsi. <br> Dalla relazione <*>#italic#Vf = Vi + A×T,<*> si ottiene: <*>#italic#T = (Vf - Vi) / A.<*> <br> Sostituendo con i dati che abbiamo: <*>#italic#T = (0 - 6) / (-2) = 3.<*> <br> Per fermarsi il carro impiega 3 secondi.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("personaggio")
-            dialogo.append(u"Ora che sappiamo quanto tempo serve per azzerare la velocità, possiamo calcolare quanta distanza percorre il carro prima di fermarsi tramite la relazione: <*>#italic#S = Vi×T + (1/2)×A×T².<*> <br> Ossia: <*>#italic#S = 6×3 + (1/2)×(-2)×3² = 9.<*> <br> Il carro si ferma dopo 9 metri.")
-            partiDialogo.append(dialogo)
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mmh...<*> non so se ho capito tutto... ma, da quello che ho capito, basta sostituire i dati nelle formule e dovrebbe andare... credo...")
-            partiDialogo.append(dialogo)
-        elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaBibliotecario"]:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Non mi va di leggere altre spiegazioni di formule che non capisco...")
-            partiDialogo.append(dialogo)
-    if tipo == "OggettoRegistroBiblioteca":
-        partiDialogo = []
-        nome = "OggettoRegistroBiblioteca"
-        if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["dialogoBibliotecarioControlloRegistri"]:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"<*>#italic#Mmmh...<*> non capisco niente di come è organizzato. Meglio chiedere al bibliotecario.")
-            partiDialogo.append(dialogo)
-        else:
-            oggettoDato = False
-            avanzaStoria = False
-            menuMercante = False
-            scelta = False
-            dialogo = []
-            dialogo.append("tu")
-            dialogo.append(u"Hans non è stato segnato su questo registro.")
-            partiDialogo.append(dialogo)
-    if tipo == "OggettoLibreriaRegistri":
-        partiDialogo = []
-        nome = "OggettoLibreriaRegistri"
-        oggettoDato = False
-        avanzaStoria = False
-        menuMercante = False
-        scelta = False
-        dialogo = []
-        dialogo.append("tu")
-        dialogo.append(u"Sono i registri della biblioteca. Quello di oggi è sulla scrivania.")
-        partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

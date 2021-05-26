@@ -108,7 +108,7 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                         nmos = 4
                     sposta = True
                 else:
-                    print ("Percorso nemico verso obbiettivo non trovato")
+                    print ("Percorso nemico verso obiettivo non trovato")
                     if abs(nemico.obbiettivo[1] - nemico.x) > abs(nemico.obbiettivo[2] - nemico.y):
                         if nemico.x < nemico.obbiettivo[1]:
                             nmos = 1
@@ -730,7 +730,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     dannoEffettivo = 0
                 attaccoDiColco.append(-dannoEffettivo)
                 attaccoDiColco.append("")
-            # giro Colco verso l'obbiettivo
+            # giro Colco verso l'obiettivo
             if azioneEseguita:
                 if abs(nemicoBersaglio.x - rx) > abs(nemicoBersaglio.y - ry):
                     if rx < nemicoBersaglio.x:
@@ -742,8 +742,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         nrob = 3
                     if ry > nemicoBersaglio.y:
                         nrob = 4
-                if (abs(nemicoBersaglio.x - rx) == abs(nemicoBersaglio.y - ry)) and (
-                        nemicoBersaglio.x != rx) and (nemicoBersaglio.y != ry):
+                if (abs(nemicoBersaglio.x - rx) == abs(nemicoBersaglio.y - ry)) and (nemicoBersaglio.x != rx) and (nemicoBersaglio.y != ry):
                     c = random.randint(1, 2)
                     if rx < nemicoBersaglio.x and c == 1:
                         nrob = 1
@@ -964,7 +963,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
-            # giro Colco verso l'obbiettivo
+            # giro Colco verso l'obiettivo
             if azioneEseguita:
                 if abs(nemicoBersaglio.x - rx) > abs(nemicoBersaglio.y - ry):
                     if rx < nemicoBersaglio.x:
@@ -976,8 +975,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                         nrob = 3
                     if ry > nemicoBersaglio.y:
                         nrob = 4
-                if (abs(nemicoBersaglio.x - rx) == abs(nemicoBersaglio.y - ry)) and (
-                        nemicoBersaglio.x != rx) and (nemicoBersaglio.y != ry):
+                if (abs(nemicoBersaglio.x - rx) == abs(nemicoBersaglio.y - ry)) and (nemicoBersaglio.x != rx) and (nemicoBersaglio.y != ry):
                     c = random.randint(1, 2)
                     if rx < nemicoBersaglio.x and c == 1:
                         nrob = 1
@@ -1010,7 +1008,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                     nrob = 4
                 sposta = True
             else:
-                print ("Percorso Colco verso obbiettivo 1 non trovato")
+                print ("Percorso Colco verso obiettivo 1 non trovato")
         return azioneEseguita, nemicoBersaglio, nemiciVistiDaColco, nrob, sposta, raffreddamento, ricarica1, ricarica2, listaNemiciAttaccatiADistanzaRobo, attaccoDiColco, vettoreEsche, listaNemici
     else:
         ralloAccanto = False
@@ -1121,7 +1119,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             dannoEffettivo = 0
                         attaccoDiColco.append(-dannoEffettivo)
                         attaccoDiColco.append("")
-                    # giro Colco verso l'obbiettivo
+                    # giro Colco verso l'obiettivo
                     if azioneEseguita:
                         if abs(x - rx) > abs(y - ry):
                             if rx < x:
@@ -1133,8 +1131,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                                 nrob = 3
                             if ry > y:
                                 nrob = 4
-                        if (abs(x - rx) == abs(y - ry)) and (
-                                x != rx) and (y != ry):
+                        if (abs(x - rx) == abs(y - ry)) and (x != rx) and (y != ry):
                             c = random.randint(1, 2)
                             if rx < x and c == 1:
                                 nrob = 1
@@ -1343,7 +1340,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                                 dannoEffettivo = 0
                             attaccoDiColco.append(-dannoEffettivo)
                             attaccoDiColco.append("")
-                # giro Colco verso l'obbiettivo
+                # giro Colco verso l'obiettivo
                 if azioneEseguita:
                     if abs(x - rx) > abs(y - ry):
                         if rx < x:
@@ -1355,8 +1352,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             nrob = 3
                         if ry > y:
                             nrob = 4
-                    if (abs(x - rx) == abs(y - ry)) and (
-                            x != rx) and (y != ry):
+                    if (abs(x - rx) == abs(y - ry)) and (x != rx) and (y != ry):
                         c = random.randint(1, 2)
                         if rx < x and c == 1:
                             nrob = 1
@@ -1392,7 +1388,7 @@ def eseguiAzione(rx, ry, nemicoBersaglio, azione, suAlleato, nemiciVistiDaColco,
                             nrob = 4
                         sposta = True
                     else:
-                        print ("Percorso Colco verso obbiettivo 2 non trovato")
+                        print ("Percorso Colco verso obiettivo 2 non trovato")
         if suAlleato == 2:
             if dati[10] > costoTecnicaUsata:
                 azioneEseguita = True
@@ -1717,9 +1713,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         elif not dati[5] < pvtot / float(100) * 80:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                     # pv rallo < 50
                     if dati[i] == 2:
                         if dati[5] < pvtot / float(100) * 50 and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
@@ -1730,9 +1726,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         elif not dati[5] < pvtot / float(100) * 50:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                     # pv rallo < 30
                     if dati[i] == 3:
                         if dati[5] < pvtot / float(100) * 30 and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
@@ -1743,9 +1739,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         elif not dati[5] < pvtot / float(100) * 30:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                     # rallo avvelenato
                     if dati[i] == 4:
                         if dati[121] and ((not tecnicaRavvicinata and ralloVisto) or (tecnicaRavvicinata and ralloVisto and pathToRallo)):
@@ -1756,9 +1752,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         elif not dati[121]:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                     # colco surriscaldato
                     if dati[i] == 5:
                         if dati[122] > 0:
@@ -1805,9 +1801,9 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         elif (dati[i + 10] == 12 and dati[123] > 0) or (dati[i + 10] == 13 and dati[124] > 0):
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                         elif not ralloVisto:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obbiettivo sconosciuta"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Posizione obiettivo sconosciuta"
                         else:
-                            vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                            vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                     # sempre colco
                     if dati[i] == 10:
                         if not (dati[i + 10] == 11 and dati[125] > 0) and not (dati[i + 10] == 14 and dati[126] > 0):
@@ -1823,8 +1819,10 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     # nemico a caso
                     if dati[i] == 11:
                         pathToNemico = []
-                        if obbiettivoCasualeColco:
+                        if obbiettivoCasualeColco and obbiettivoCasualeColco in nemiciVistiDaColco:
                             nemicoBersaglio = obbiettivoCasualeColco
+                            vetNemiciSoloConXeY = creaVetOstacoliPerColco(x, y, listaNemiciTotali, listaPersonaggi, nemicoBersaglio.x, nemicoBersaglio.y)
+                            pathToNemico = GenericFunc.pathFinding(rx, ry, nemicoBersaglio.x, nemicoBersaglio.y, vetNemiciSoloConXeY, caseviste)
                         elif not nemicoBersaglio and len(nemiciVistiDaColco) > 0:
                             # non uso il deepcopy perché mi serve che gli oggetti siano gli stessi
                             listaNemiciProvvisoria = nemiciVistiDaColco[:]
@@ -1897,7 +1895,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                             else:
                                 vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico lontano
@@ -1941,7 +1939,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                             else:
                                 vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico pv < 80
@@ -1985,7 +1983,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                             else:
                                 vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico pv < 50
@@ -2029,7 +2027,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                             else:
                                 vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico pv < 30
@@ -2073,7 +2071,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                             else:
                                 vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # nemico con meno pv
@@ -2122,7 +2120,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 ultimoObbiettivoColco = []
                         else:
                             if distMin and tecnicaRavvicinata and (not pathToNemico or len(pathToNemico) == 0):
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                             else:
                                 vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # numero nemici > 1
@@ -2168,7 +2166,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 else:
                                     ultimoObbiettivoColco = []
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                         else:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # numero nemici > 4
@@ -2214,7 +2212,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 else:
                                     ultimoObbiettivoColco = []
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                         else:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
                     # numero nemici > 7
@@ -2260,7 +2258,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                                 else:
                                     ultimoObbiettivoColco = []
                             else:
-                                vettorePrevisione[rigaGambitAttuale][1] = "Obbiettivo irraggiungibile"
+                                vettorePrevisione[rigaGambitAttuale][1] = "Obiettivo irraggiungibile"
                         else:
                             vettorePrevisione[rigaGambitAttuale][1] = "Condizione non rispettata"
 
@@ -2336,7 +2334,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             elif ultimoObbiettivoColco[0] == "Nemico":
                 vetNemiciSoloConXeY.append(x)
                 vetNemiciSoloConXeY.append(y)
-                for nemico in listaNemiciTotali:
+                for nemico in nemiciVistiDaColco:
                     if nemico.inCasellaVista and nemico.vita > 0 and not (ultimoObbiettivoColco[1] == nemico.x and ultimoObbiettivoColco[2] == nemico.y):
                         vetNemiciSoloConXeY.append(nemico.x)
                         vetNemiciSoloConXeY.append(nemico.y)
@@ -2389,7 +2387,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                         nrob = 4
                     sposta = True
                 else:
-                    print ("Percorso Colco verso ultimo obbiettivo non trovato")
+                    print ("Percorso Colco verso ultimo obiettivo non trovato")
             else:
                 ultimoObbiettivoColco = []
             if azioneEseguita and sposta:
@@ -2402,12 +2400,12 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 if dati[10] <= 0:
                     vettorePrevisione[11][1] = "Energia insufficiente"
                 else:
-                    vettorePrevisione[11][1] = "Obbiettivo irraggiungibile"
+                    vettorePrevisione[11][1] = "Obiettivo irraggiungibile"
         elif not azioneEseguita:
             if dati[10] <= 0:
                 vettorePrevisione[11][1] = "Energia insufficiente"
             else:
-                vettorePrevisione[11][1] = "Nessun obbiettivo in memoria"
+                vettorePrevisione[11][1] = "Nessun obiettivo in memoria"
 
     for nemico in nemiciVistiDaColco:
         listaNemici.append(nemico)
@@ -2460,7 +2458,7 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
             break
         i += 3
 
-    # aggiorno l'obbiettivo se sta cercando Rallo (potrebbe vederlo prima che si muova di nuovo nel prossimo turno)
+    # aggiorno l'obiettivo se sta cercando Rallo (potrebbe vederlo prima che si muova di nuovo nel prossimo turno)
     if len(ultimoObbiettivoColco) > 0 and ultimoObbiettivoColco[0] == "Rallo" and not ralloVisto and not (rx == vrx and ry == vry):
         # non segno caselleAttaccabiliColco come aggiornato perché si devono ancora muovere i nemici
         caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)

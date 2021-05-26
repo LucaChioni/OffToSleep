@@ -293,7 +293,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Forse non avrei dovuto prendere le sue cose, ma... non credo che gli serviranno ancora...")
+            dialogo.append(u"Forse non avrei dovuto prendere le sue cose ma... non credo che gli serviranno ancora...")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoDopoTombaSam"] and stanzaDiAppartenenza == GlobalGameVar.dictStanze["forestaCadetta8"]:
             oggettoDato = False
@@ -573,6 +573,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Il sangue sulle mie armi... non dovrei tenerle addosso.")
                 partiDialogo.append(dialogo)
+            elif y == GlobalHWVar.gpy * 6 and (x == GlobalHWVar.gpx * 18 or x == GlobalHWVar.gpx * 19):
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ok, per andare da Neil devo procedere verso sud.")
+                partiDialogo.append(dialogo)
         elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["città8"]:
             if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and y == GlobalHWVar.gpy * 1:
                 oggettoDato = False
@@ -639,7 +648,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Non c'è niente di utile in queste case.")
                 partiDialogo.append(dialogo)
-            elif x == GlobalHWVar.gpx * 1:
+            elif x == GlobalHWVar.gpx * 1 and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -647,6 +656,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo = []
                 dialogo.append("tu")
                 dialogo.append(u"Devo cercare meglio in città prima di andarmene.")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"La Selva Arida non è da questa parte.")
                 partiDialogo.append(dialogo)
     elif GlobalGameVar.dictStanze["casaDavid1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["casaDavid3"]:
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:

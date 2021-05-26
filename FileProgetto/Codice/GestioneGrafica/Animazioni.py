@@ -382,9 +382,9 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx, ry))
             GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry))
             if 7 < fineanimaz <= 10:
-                GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione1, (rx - (GlobalHWVar.gpx * 6), ry - (GlobalHWVar.gpx * 6)))
+                GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione1, (rx - (GlobalHWVar.gpx * 6), ry - (GlobalHWVar.gpy * 6)))
             if 0 < fineanimaz <= 7:
-                GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione2, (rx - (GlobalHWVar.gpx * 6), ry - (GlobalHWVar.gpx * 6)))
+                GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione2, (rx - (GlobalHWVar.gpx * 6), ry - (GlobalHWVar.gpy * 6)))
 
     return animazioneColco
 
@@ -866,15 +866,15 @@ def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRal
         elif tesoro == 70:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Portafortuna", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 71:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca energetica piccola", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica piccola", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 72:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca energetica discreta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica discreta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 73:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca energetica capiente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica capiente", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 74:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca energetica enorme", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica enorme", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 75:
-            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca energetica illimitata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
+            FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica illimitata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro >= 81 and tesoro <= 100:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro >= 101 and tesoro <= 120:
@@ -1219,7 +1219,7 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    FunzioniGraficheGeneriche.messaggio(" x" + str(dati[132]), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+    FunzioniGraficheGeneriche.messaggio(u" ×" + str(dati[132]), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
     if velenoRallo:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
     if attPRallo > 0:

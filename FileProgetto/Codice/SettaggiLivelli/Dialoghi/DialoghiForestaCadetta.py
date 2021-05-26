@@ -91,7 +91,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Probabilmente questo accampamento era stato allestito da quel soldato che ho trovato morto in questa foresta.")
+            dialogo.append(u"Probabilmente questo accampamento è stato allestito da quel soldato...")
             partiDialogo.append(dialogo)
     elif tipo == "OggettoCibo":
         partiDialogo = []
@@ -514,7 +514,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append("... forse stava cacciando... che sia stato lui ad allestire quell'accampamento?")
+            dialogo.append("... Forse stava cacciando... che sia stato lui ad allestire quell'accampamento?")
             partiDialogo.append(dialogo)
         else:
             oggettoDato = False
@@ -523,11 +523,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Hanno messo una lapide. C'è scritto solo \"Sam\"...")
+            dialogo.append(u"Hanno messo una lapide. C'è scritto \"Sam\"...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"... È il figlio di David... era...")
+            dialogo.append(u"... Il figlio di David e Sara...")
             partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

@@ -216,7 +216,7 @@ def gameloop():
                     if sottofondoAmbientaleCambiato:
                         GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
 
-                # resetto obbiettivo Colco
+                # resetto obiettivo Colco
                 if not inizio:
                     ultimoObbiettivoColco = []
                     obbiettivoCasualeColco = False
@@ -596,9 +596,9 @@ def gameloop():
                 break
 
         # gestione degli input
-        if not impossibileCliccarePulsanti and not avanzaIlTurnoSenzaMuoverti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto and turniDaSaltarePerDifesa == 0 and len(percorsoDaEseguire) == 0:
+        if not impossibileCliccarePulsanti and not avanzaIlTurnoSenzaMuoverti and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and not oggettoRicevuto and turniDaSaltarePerDifesa == 0 and len(percorsoDaEseguire) == 0 and not uscitoDaMenu > 0:
             bottoneDown, inutile = GestioneInput.getInput(bottoneDown, False)
-        elif startf or oggettoRicevuto or impossibileCliccarePulsanti or avanzaIlTurnoSenzaMuoverti:
+        elif startf or oggettoRicevuto or impossibileCliccarePulsanti or avanzaIlTurnoSenzaMuoverti or uscitoDaMenu > 0:
             bottoneDown = False
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         elif len(percorsoDaEseguire) > 0:
@@ -700,7 +700,7 @@ def gameloop():
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
                 attacco = 1
                 bottoneDown = False
-            # tolgo l'obbiettivo se presente
+            # tolgo l'obiettivo se presente
             if bottoneDown == pygame.K_q or bottoneDown == "padCerchio":
                 GlobalHWVar.canaleSoundPassiRallo.stop()
                 nx = 0
@@ -731,7 +731,7 @@ def gameloop():
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 bottoneDown = False
-            # scorro la selezione dell'obbiettivo
+            # scorro la selezione dell'obiettivo
             if bottoneDown == pygame.K_3 or bottoneDown == pygame.K_KP3 or bottoneDown == "padR1":
                 GlobalHWVar.canaleSoundPassiRallo.stop()
                 nx = 0
@@ -1529,7 +1529,7 @@ def gameloop():
                     GlobalHWVar.canaleSoundPassiRallo.stop()
             # gestione attacchi
             attaccoADistanza = False
-            # attaccoDiRallo [obbiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
+            # attaccoDiRallo [obiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
             attaccoDiRallo = []
             if attacco != 0:
                 sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, vettoreImgCaselle)
@@ -1736,7 +1736,7 @@ def gameloop():
                             personaggio.girati("s")
                         elif npers == 4:
                             personaggio.girati("w")
-                        # aggiorno lo schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obbiettivo selezionato)
+                        # aggiorno lo schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
                         EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio)
                         if personaggio.oggettoEnigma:
                             dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
@@ -1917,7 +1917,7 @@ def gameloop():
                         dati[10] = entot
                     dati[122] = 10
             listaNemiciAttaccatiADistanzaRobo = False
-            # attaccoDiColco [obbiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perché deve rimanere per più turni)]
+            # attaccoDiColco [obiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perché deve rimanere per più turni)]
             attaccoDiColco = []
             tecnicaUsata = False
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and mosseRimasteRob > 0 and not morterob and not cambiosta:
@@ -2004,7 +2004,7 @@ def gameloop():
                                     vetDatiNemici.append(nemicoTemp.x)
                                     vetDatiNemici.append(nemicoTemp.y)
                                     vetDatiNemici.append(nemicoTemp.vitaTotale)
-                            # trovo l'obbiettivo
+                            # trovo l'obiettivo
                             nemico.settaObbiettivo(x, y, rx, ry, dati, vettoreDenaro, vettoreEsche, listaPersonaggi, listaNemici, porte, caseviste)
                             nemico.vx = nemico.x
                             nemico.vy = nemico.y

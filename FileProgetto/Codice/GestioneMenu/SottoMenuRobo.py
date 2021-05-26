@@ -1953,7 +1953,7 @@ def equiprobo(dati):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoSinistra, (GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 15.5))
 
                 FunzioniGraficheGeneriche.messaggio("Setta Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
-                FunzioniGraficheGeneriche.messaggio("Sacche energetiche", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.5, GlobalHWVar.gsy // 18 * 4.7, 47, centrale=True)
+                FunzioniGraficheGeneriche.messaggio("Sacche Energetiche", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.5, GlobalHWVar.gsy // 18 * 4.7, 47, centrale=True)
                 FunzioniGraficheGeneriche.messaggio(u"Priorità", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 8.8, GlobalHWVar.gsy // 18 * 4.7, 47, centrale=True)
                 FunzioniGraficheGeneriche.messaggio("Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.9, GlobalHWVar.gsy // 18 * 4.7, 47, centrale=True)
                 FunzioniGraficheGeneriche.messaggio("Azio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 19.8, GlobalHWVar.gsy // 18 * 4.7, 47, centrale=True)
@@ -2151,7 +2151,7 @@ def equiprobo(dati):
                 if voceMarcata == 1:
                     if dati[71] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca piccola:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                        FunzioniGraficheGeneriche.messaggio(u"Sacca energetica che può contenere poca alimentazione.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica che può contenere poca alimentazione.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
@@ -2163,7 +2163,7 @@ def equiprobo(dati):
                 if voceMarcata == 2:
                     if dati[72] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca discreta:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                        FunzioniGraficheGeneriche.messaggio(u"Sacca energetica con una buona capienza e ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica con una buona capienza e ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (1 * 1 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 1:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
@@ -2179,7 +2179,7 @@ def equiprobo(dati):
                 if voceMarcata == 3:
                     if dati[73] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca capiente:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                        FunzioniGraficheGeneriche.messaggio(u"Sacca energetica con una grande capacità e un ottimo sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica con una grande capacità e un ottimo sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (2 * 2 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 2:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
@@ -2195,7 +2195,7 @@ def equiprobo(dati):
                 if voceMarcata == 4:
                     if dati[74] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca enorme:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                        FunzioniGraficheGeneriche.messaggio(u"Grande Sacca energetica che permette a Impo di utilizzare le tecniche più dispendiose.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Grande Sacca Energetica che permette a Impo di utilizzare le tecniche più dispendiose.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (3 * 3 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 3:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
@@ -2211,7 +2211,7 @@ def equiprobo(dati):
                 if voceMarcata == 5:
                     if dati[75] != 0:
                         FunzioniGraficheGeneriche.messaggio("Sacca illimitata:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                        FunzioniGraficheGeneriche.messaggio(u"Sacca energetica incredibilmente capiente. Permette un eccellente ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                        FunzioniGraficheGeneriche.messaggio(u"Sacca Energetica incredibilmente capiente. Permette un eccellente ottimizzazione del sistema difensivo.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                         diff = (4 * 4 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 4:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)

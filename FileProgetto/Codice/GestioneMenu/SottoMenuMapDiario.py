@@ -29,14 +29,14 @@ def menuMappa(avanzamentoStoria):
     # carico la mappa a seconda dell'avanzamento
     imgMappaA = GlobalImgVar.imgMappa1A
     imgMappaB = GlobalImgVar.imgMappa1B
-    postiSbloccati = {"Casa": False, "Città": False, "Avamposto di Rod": False, "Castello": False, "Palazzo di Rod": False, "Vulcano": False, "Laboratorio": False, "Foresta cadetta": False, "Selva arida": False, "Labirinto": False, "Passo montano": False, "Caverna": False, "Tunnel di Rod": False, "Tunnel subacqueo": False}
+    postiSbloccati = {"Casa": False, "Città": False, "Avamposto di Rod": False, "Castello": False, "Palazzo di Rod": False, "Vulcano": False, "Laboratorio": False, "Foresta Cadetta": False, "Selva Arida": False, "Labirinto": False, "Passo Montano": False, "Caverna": False, "Tunnel di Rod": False, "Tunnel Subacqueo": False}
     if avanzamentoStoria >= 0:
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCasa"]:
             postiSbloccati["Casa"] = True
             imgMappaA = GlobalImgVar.imgMappa1A
             imgMappaB = GlobalImgVar.imgMappa1B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaForestaCadetta"]:
-            postiSbloccati["Foresta cadetta"] = True
+            postiSbloccati["Foresta Cadetta"] = True
             imgMappaA = GlobalImgVar.imgMappa2A
             imgMappaB = GlobalImgVar.imgMappa2B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCittà"]:
@@ -44,7 +44,7 @@ def menuMappa(avanzamentoStoria):
             imgMappaA = GlobalImgVar.imgMappa3A
             imgMappaB = GlobalImgVar.imgMappa3B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaSelvaArida"]:
-            postiSbloccati["Selva arida"] = True
+            postiSbloccati["Selva Arida"] = True
             imgMappaA = GlobalImgVar.imgMappa4A
             imgMappaB = GlobalImgVar.imgMappa4B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaAvampostoDiRod"]:
@@ -60,7 +60,7 @@ def menuMappa(avanzamentoStoria):
             imgMappaA = GlobalImgVar.imgMappa7A
             imgMappaB = GlobalImgVar.imgMappa7B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPassoMontano"]:
-            postiSbloccati["Passo montano"] = True
+            postiSbloccati["Passo Montano"] = True
             imgMappaA = GlobalImgVar.imgMappa8A
             imgMappaB = GlobalImgVar.imgMappa8B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPalazzoDiRod"]:
@@ -84,7 +84,7 @@ def menuMappa(avanzamentoStoria):
             imgMappaA = GlobalImgVar.imgMappa12A
             imgMappaB = GlobalImgVar.imgMappa12B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelSubacqueo"]:
-            postiSbloccati["Tunnel subacqueo"] = True
+            postiSbloccati["Tunnel Subacqueo"] = True
             imgMappaA = GlobalImgVar.imgMappa13A
             imgMappaB = GlobalImgVar.imgMappa13B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLaboratorio"]:
@@ -244,19 +244,19 @@ def menuMappa(avanzamentoStoria):
                 if voceMarcata == 7:
                     luogoMarcato = "Laboratorio"
                 if voceMarcata == 8:
-                    luogoMarcato = "Foresta cadetta"
+                    luogoMarcato = "Foresta Cadetta"
                 if voceMarcata == 9:
-                    luogoMarcato = "Selva arida"
+                    luogoMarcato = "Selva Arida"
                 if voceMarcata == 10:
                     luogoMarcato = "Labirinto"
                 if voceMarcata == 11:
-                    luogoMarcato = "Passo montano"
+                    luogoMarcato = "Passo Montano"
                 if voceMarcata == 12:
                     luogoMarcato = "Caverna"
                 if voceMarcata == 13:
                     luogoMarcato = "Tunnel di Rod"
                 if voceMarcata == 14:
-                    luogoMarcato = "Tunnel subacqueo"
+                    luogoMarcato = "Tunnel Subacqueo"
                 if postiSbloccati[luogoMarcato]:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     voceMarcataSottoMenu = True
@@ -397,16 +397,16 @@ def menuMappa(avanzamentoStoria):
                         FunzioniGraficheGeneriche.messaggio("Laboratorio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Il laboratorio in cui Norm svolge le sue ricerche. È molto piccolo ma al suo interno è presente tutto ciò che serve, ossia un calcolatore di eventi, che si estende anche sotto il terreno, e diversi altri calcolatori che credo servano per gestire i sistemi di alimentazione e raffreddamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 8:
-                        FunzioniGraficheGeneriche.messaggio("Foresta cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio("Foresta Cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"La foresta che mi ha sempre separata dalla città... non ho mai avuto il permesso di attraversarla perché i miei genitori la ritenevano troppo pericolosa per me. Il nome deriva dal fatto che viene utilizzata come terreno di prova per selezionare, tra i giovani appartenenti alla nobiltà, i futuri ufficiali dell'esercito.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 9:
-                        FunzioniGraficheGeneriche.messaggio("Selva arida", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio("Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Denominata in questo modo perché un tempo fitta e intricata ed ora composta soltanto da secchi abusti e funghi. Le ragioni di questo suo decadimento non sono note agli abitanti locali ma, diversi libri della biblioteca in città, sostenevano che ciò fosse dovuto ad un cambiamento climatico avvenuto circa 50 anni fa... strano... <br> Rod è solito attraversarla per tornare al suo avamposto.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 10:
                         FunzioniGraficheGeneriche.messaggio("Labirinto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un enorme terreno estremamente complicato da superare a causa delle innumerevoli strade percorribili al suo interno prive di punti di riferimento. Rod mi ha fornito una mappa che mostra nel dettaglio la sua struttura sconsigliandomi di procedere: è molto probabile non riuscire ad uscirne se non si ha un buon senso dell'orientamento.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 11:
-                        FunzioniGraficheGeneriche.messaggio("Passo montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio("Passo Montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un passaggio tra le alture a ovest della città. In città nessuno sembrava sapere di questo varco apparte Rod che lo utilizza per raggiungere il proprio palazzo da più di vent'anni.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 12:
                         FunzioniGraficheGeneriche.messaggio("Caverna", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
@@ -415,7 +415,7 @@ def menuMappa(avanzamentoStoria):
                         FunzioniGraficheGeneriche.messaggio("Tunnel di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"È un passaggio sicuro e veloce tra il palazzo di Rod e il suo avamposto. Rod lo utilizzava per trasportare direttamente gli ImpoFrutti dalla caverna al castello di Norm. Adesso capisco l'importanza \"strategica\" di questi luoghi.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     if voceMarcata == 14:
-                        FunzioniGraficheGeneriche.messaggio("Tunnel subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
+                        FunzioniGraficheGeneriche.messaggio("Tunnel Subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 5, 70)
                         FunzioniGraficheGeneriche.messaggio(u"Un passaggio segreto nei sotterranei del castello di Norm che porta al suo laboratorio principale sul fondo del lago. Nonostante le pareti del tunnel siano fatte di un materiale trasparente simile al vetro, non si riesce ad osservare chiaramente il fondale del bacino a causa delle sostanze con cui questo è stato contaminato circa 50 anni fa.", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 10.5, GlobalHWVar.gsy // 18 * 6.5, grandezzaScritteDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
@@ -458,20 +458,20 @@ def menuMappa(avanzamentoStoria):
                     FunzioniGraficheGeneriche.messaggio("Laboratorio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 9.3, grandezzaScritteNormali)
-                if postiSbloccati["Foresta cadetta"]:
-                    FunzioniGraficheGeneriche.messaggio("Foresta cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.7, grandezzaScritteNormali)
+                if postiSbloccati["Foresta Cadetta"]:
+                    FunzioniGraficheGeneriche.messaggio("Foresta Cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.7, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 10.7, grandezzaScritteNormali)
-                if postiSbloccati["Selva arida"]:
-                    FunzioniGraficheGeneriche.messaggio("Selva arida", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.5, grandezzaScritteNormali)
+                if postiSbloccati["Selva Arida"]:
+                    FunzioniGraficheGeneriche.messaggio("Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.5, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 11.5, grandezzaScritteNormali)
                 if postiSbloccati["Labirinto"]:
                     FunzioniGraficheGeneriche.messaggio("Labirinto", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.3, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 12.3, grandezzaScritteNormali)
-                if postiSbloccati["Passo montano"]:
-                    FunzioniGraficheGeneriche.messaggio("Passo montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, grandezzaScritteNormali)
+                if postiSbloccati["Passo Montano"]:
+                    FunzioniGraficheGeneriche.messaggio("Passo Montano", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 13.1, grandezzaScritteNormali)
                 if postiSbloccati["Caverna"]:
@@ -482,8 +482,8 @@ def menuMappa(avanzamentoStoria):
                     FunzioniGraficheGeneriche.messaggio("Tunnel di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 14.7, grandezzaScritteNormali)
-                if postiSbloccati["Tunnel subacqueo"]:
-                    FunzioniGraficheGeneriche.messaggio("Tunnel subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.5, grandezzaScritteNormali)
+                if postiSbloccati["Tunnel Subacqueo"]:
+                    FunzioniGraficheGeneriche.messaggio("Tunnel Subacqueo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.5, grandezzaScritteNormali)
                 else:
                     FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15.5, grandezzaScritteNormali)
 

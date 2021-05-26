@@ -309,7 +309,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    FunzioniGraficheGeneriche.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+    FunzioniGraficheGeneriche.messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
     if avvele:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
     if attp > 0:
@@ -472,7 +472,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if raffredda > 0:
             messaggioDiErrore = "Raffreddamento in corso"
         elif autoRic1 > 0 or autoRic2 > 0:
-            messaggioDiErrore = "Sacca energetica in carica"
+            messaggioDiErrore = "Sacca Energetica in carica"
         elif mosseRimasteRob < 0:
             messaggioDiErrore = "Temperatura troppo elevata"
         vettorePrevisione = [["telecolco", messaggioDiErrore], [1, messaggioDiErrore], [2, messaggioDiErrore], [3, messaggioDiErrore], [4, messaggioDiErrore], [5, messaggioDiErrore], [6, messaggioDiErrore], [7, messaggioDiErrore], [8, messaggioDiErrore], [9, messaggioDiErrore], [10, messaggioDiErrore], ["ultimoObbiettivo", messaggioDiErrore]]
@@ -765,7 +765,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 20:
             FunzioniGraficheGeneriche.messaggio("Tempesta elettrica ++", GlobalHWVar.grigiochi, xListaTecniche, GlobalHWVar.gsy // 18 * c, 40)
         c += 1.1
-    FunzioniGraficheGeneriche.messaggio("Movimento verso obbiettivo salvato in memoria", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 14.9, 40)
+    FunzioniGraficheGeneriche.messaggio("Movimento verso obiettivo salvato in memoria", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 14.9, 40)
     if not azionePrevistaTrovata and vettorePrevisione[11][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 14.8))
         FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 15.5, 35, daDestra=True)
@@ -1174,7 +1174,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    FunzioniGraficheGeneriche.messaggio(" x" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
+    FunzioniGraficheGeneriche.messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
     if avvele:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
     if attp > 0:
