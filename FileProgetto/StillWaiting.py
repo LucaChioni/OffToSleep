@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # import psutil
+import os
 import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
@@ -228,8 +229,12 @@ def gameloop():
                 # stanza
                 nomeStanza = SetPosizioneAudioImpedimenti.settaNomeStanza(dati[0], dati[1])
                 imgSfondoStanza = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
-                portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                portaOriz = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                if os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png") and os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png"):
+                    portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                    portaOriz = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                else:
+                    portaVert = False
+                    portaOriz = False
 
                 if not inizio:
                     mosseRimasteRob = 0

@@ -272,11 +272,12 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                         GlobalHWVar.disegnaImmagineSuSchermo(vettoreImgCaselle[i + 2], (vettoreImgCaselle[i], vettoreImgCaselle[i + 1]))
                         break
                     i += 3
-            GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+            if personaggio.imgAttuale:
+                GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
             if not personaggio.vicinoACasellaVista:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.casellaOscurata, (personaggio.x, personaggio.y))
             personaggio.imgAggiornata = False
-        elif not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista:
+        elif personaggio.imgAttuale and not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista:
             GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
     # backbround occhio/chiave
@@ -1039,7 +1040,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
         # disegno tutti i personaggi
         for personaggio in listaPersonaggi:
-            if personaggio.mantieniSempreASchermo or personaggio.inCasellaVista:
+            if personaggio.imgAttuale and (personaggio.mantieniSempreASchermo or personaggio.inCasellaVista):
                 GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
     else:
         GlobalHWVar.listaRettangoliDaAggiornare = []

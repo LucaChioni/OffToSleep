@@ -1445,11 +1445,12 @@ def disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vettoreEsche):
 def animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz):
     if not cambiosta:
         for personaggio in listaPersonaggi:
-            if (personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and personaggio.animaSpostamento)) or (personaggio.inCasellaVista and fineanimaz == 0):
-                if personaggio.animazioneFatta:
-                    GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
-                else:
-                    GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.vx, personaggio.vy))
+            if personaggio.imgAttuale:
+                if (personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and personaggio.animaSpostamento)) or (personaggio.inCasellaVista and fineanimaz == 0):
+                    if personaggio.animazioneFatta:
+                        GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
+                    else:
+                        GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.vx, personaggio.vy))
 
 
 def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta, fineanimaz):

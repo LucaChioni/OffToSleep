@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
@@ -53,6 +52,9 @@ class PersonaggioObj(object):
                 self.mantieniSempreASchermo = False
                 self.caricaImgPersonaggio(nonCaricareImg=nonCaricareImg)
                 self.girati(direzione)
+        else:
+            self.imgAttuale = False
+            self.imgDialogo = False
 
         self.aggiornaDialogo(avanzamentoStoria)
 
@@ -175,7 +177,7 @@ class PersonaggioObj(object):
                 if disegnaImg:
                     img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Oggetti/" + self.tipo + str(i) + ".png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
                 else:
-                    img = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+                    img = False
                 self.imgOggetto.append(img)
             i += 1
         i = 0
@@ -189,7 +191,7 @@ class PersonaggioObj(object):
                 if nomeImgDialogo[i] != "Vuota":
                     img = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(self.stanzaDiAppartenenza) + "/Dialoghi/" + nomeImgDialogo[i] + ".png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
                 else:
-                    img = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+                    img = False
                 self.imgOggettoDialogo.append(img)
             i += 1
 

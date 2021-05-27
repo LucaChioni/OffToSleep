@@ -864,9 +864,12 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sfondoTriangolinoAltoSinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloAltoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     sfondoTriangolinoBassoDestra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloBassoDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     sfondoTriangolinoBassoSinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    casellaChiara = funzionePerCaricareImmagini("Risorse/Immagini/Scenari/CasellaChiara.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    casellaScura = funzionePerCaricareImmagini("Risorse/Immagini/Scenari/CasellaScura.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    casellaOscurata = funzionePerCaricareImmagini("Risorse/Immagini/Scenari/CasellaOscurata.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    casellaChiara = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+    casellaChiara.fill((0, 0, 0, 10))
+    casellaScura = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+    casellaScura.fill((0, 0, 0, 30))
+    casellaOscurata = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+    casellaOscurata.fill((0, 0, 0, 100))
 
     # status
     appiccicoso = funzionePerCaricareImmagini('Risorse/Immagini/Status/Appiccicoso.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)

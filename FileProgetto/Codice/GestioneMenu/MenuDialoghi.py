@@ -34,7 +34,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
 
     if personaggio.nome != "Tutorial":
         GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
-    if personaggio.nome != "Tutorial" and personaggio.nome != "Nessuno":
+    if personaggio.imgDialogo and personaggio.nome != "Tutorial" and personaggio.nome != "Nessuno":
         GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3))
     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=4, imgIlluminata=[GlobalImgVar.sfondoDialoghi, (0, GlobalHWVar.gsy * 2 // 3)])
@@ -162,7 +162,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
                 numeromessaggioAttuale -= 1
             GlobalHWVar.disegnaImmagineSuSchermo(background, (0, GlobalHWVar.gsy // 18 * 3.5))
             if personaggio.nome != "Tutorial":
-                if personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio" and personaggio.nome != "Nessuno":
+                if personaggio.imgDialogo and personaggio.partiDialogo[numeromessaggioAttuale][0] == "personaggio" and personaggio.nome != "Nessuno":
                     GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDialogo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 3.5))
                 if personaggio.partiDialogo[numeromessaggioAttuale][0] == "tu" or personaggio.partiDialogo[numeromessaggioAttuale][1] == "???DOMANDA???":
                     GlobalHWVar.disegnaImmagineSuSchermo(imgPersDialogo, (GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 3.5))
