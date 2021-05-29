@@ -322,16 +322,14 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["inizioViaggioVersoNeil"] = i
     i += 1
     dictAvanzamentoStoria["monologoUscitaBibliotecaDirettoVersoNeil"] = i
+    i += 1
+    dictAvanzamentoStoria["tutorialMenuPrevisioniImpo"] = i
 
-    i += 1
-    dictAvanzamentoStoria["arrivoStradaPerSelvaArida"] = i
-    i += 1
-    dictAvanzamentoStoria["tutorialUsoImpoFrutti"] = i
     i += 1
     dictAvanzamentoStoria["arrivoSelvaArida"] = i
     dictAvanzamentoStoria["mappaSelvaArida"] = i
     i += 1
-    dictAvanzamentoStoria["tutorialMenuPrevisioniImpo"] = i
+    dictAvanzamentoStoria["tutorialUsoImpoFrutti"] = i
 
     i += 100
     i += 1
@@ -480,6 +478,12 @@ def definisciStanze():
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["stradaPerSelvaArida1"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["stradaPerSelvaArida2"] = i
+    vetStanzePacifiche.append(i)
+    i += 1
+    dictStanze["selvaArida1"] = i
     vetStanzePacifiche.append(i)
 
 

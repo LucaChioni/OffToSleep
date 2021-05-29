@@ -224,15 +224,15 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
         j = GlobalHWVar.volumeEffetti
         while i > 0 or j > 0:
             GlobalHWVar.canaleSoundCanzone.set_volume(i)
-            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
             i -= GlobalHWVar.volumeCanzoni / 10
             j -= GlobalHWVar.volumeEffetti / 10
             pygame.time.wait(30)
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.canaleSoundCanzone.stop()
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-        GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
-        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+        GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
 
         GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreMorte)
         oscuraIlluminaSchermo(illumina=False, tipoOscuramento=2)

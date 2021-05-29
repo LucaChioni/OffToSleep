@@ -45,7 +45,7 @@ def gameloop():
             refreshSchermo = True
             impossibileAprirePorta = False
             canzone = False
-            sottofondoAmbientale = False
+            listaSottofondoAmbientale = []
             stanzaCambiata = False
             uscitoDaMenu = 0
             # rumore porte (dipende dalla stanza)
@@ -160,7 +160,7 @@ def gameloop():
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
                 # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
-                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown, dati[0], mantieniPosizioneImpo = SetPosizioneAudioImpedimenti.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, sottofondoAmbientale, inizio, dati[0], bottoneDown)
+                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, listaSottofondoAmbientale, bottoneDown, dati[0], mantieniPosizioneImpo = SetPosizioneAudioImpedimenti.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, listaSottofondoAmbientale, inizio, dati[0], bottoneDown)
                 if not inizio:
                     vx = x
                     vy = y
@@ -186,7 +186,7 @@ def gameloop():
                         if canzoneCambiata:
                             GlobalHWVar.canaleSoundCanzone.set_volume(i)
                         if sottofondoAmbientaleCambiato:
-                            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
                         i -= GlobalHWVar.volumeCanzoni / 10
                         j -= GlobalHWVar.volumeEffetti / 10
                         pygame.time.wait(30)
@@ -197,17 +197,17 @@ def gameloop():
                         if canzone and not stoppaMusica:
                             GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
                     if sottofondoAmbientaleCambiato:
-                        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(0)
-                        GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
-                        if sottofondoAmbientale:
-                            GlobalHWVar.canaleSoundSottofondoAmbientale.play(sottofondoAmbientale, -1)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(0)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                        if len(listaSottofondoAmbientale) > 0:
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.riproduci(listaSottofondoAmbientale)
                     i = 0
                     j = 0
                     while i < GlobalHWVar.volumeCanzoni or j < GlobalHWVar.volumeEffetti:
                         if canzoneCambiata:
                             GlobalHWVar.canaleSoundCanzone.set_volume(i)
                         if sottofondoAmbientaleCambiato:
-                            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
                         i += GlobalHWVar.volumeCanzoni / 10
                         j += GlobalHWVar.volumeEffetti / 10
                         pygame.time.wait(30)
@@ -215,7 +215,7 @@ def gameloop():
                     if canzoneCambiata:
                         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
                     if sottofondoAmbientaleCambiato:
-                        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
 
                 # resetto obiettivo Colco
                 if not inizio:
@@ -2234,15 +2234,15 @@ def gameloop():
             j = GlobalHWVar.volumeEffetti / 2
             while i > 0 or j > 0:
                 GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
                 i -= GlobalHWVar.volumeCanzoni / 10
                 j -= GlobalHWVar.volumeEffetti / 10
                 pygame.time.wait(30)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
             GlobalHWVar.canaleSoundCanzone.stop()
             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-            GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
-            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+            GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         if turniDaSaltarePerDifesa == 0:

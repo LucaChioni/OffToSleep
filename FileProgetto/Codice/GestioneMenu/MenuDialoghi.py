@@ -50,7 +50,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
     bottoneDown = False
 
     # GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 2)
     while not fineDialogo:
         voceMarcataVecchia = voceMarcata
         xMouse, yMouse = pygame.mouse.get_pos()
@@ -201,7 +201,7 @@ def dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi):
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     # GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
 
     return avanzamentoStoria, oggettoRicevuto, menuMercante, listaAvanzamentoDialoghi
 
@@ -246,7 +246,7 @@ def menuMercante(dati):
         i += 1
 
     GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 2)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -1100,7 +1100,7 @@ def menuMercante(dati):
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
     GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
     return dati
 
 
@@ -1185,7 +1185,7 @@ def menuEnigmi(avanzamentoStoria, personaggio):
     cursore, mask = pygame.cursors.compile(stringCursore, black='X', white='.', xor='o')
     cursor_sizer_cursoreInvisibile = ((24, 24), (7, 11), cursore, mask)
 
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 2)
     while not esci:
         spostandoCursore = False
         utilizzandoStrumento = False
@@ -1407,7 +1407,7 @@ def menuEnigmi(avanzamentoStoria, personaggio):
         primoframe = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockDisegno.tick(GlobalHWVar.fpsDisegno)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
     GlobalHWVar.configuraCursore(False)
 
     return avanzamentoStoria, oggettoRicevuto

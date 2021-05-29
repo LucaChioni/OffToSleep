@@ -5,6 +5,7 @@ import sys
 import gc
 import pygame
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
+import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAudioAmbiente
 
 
 sistemaOperativo = "Windows"
@@ -140,18 +141,30 @@ def quit():
 # canali audio / volume (0-1)
 volumeCanzoni = 0.5
 volumeEffetti = 0.5
-pygame.mixer.set_num_channels(11)
-canaleSoundCanzone = pygame.mixer.Channel(0)
-canaleSoundPuntatoreSposta = pygame.mixer.Channel(1)
-canaleSoundPuntatoreSeleziona = pygame.mixer.Channel(2)
-canaleSoundPassiRallo = pygame.mixer.Channel(3)
-canaleSoundPassiColco = pygame.mixer.Channel(4)
-canaleSoundPassiNemiciPersonaggi = pygame.mixer.Channel(5)
-canaleSoundMorteNemici = pygame.mixer.Channel(6)
-canaleSoundLvUp = pygame.mixer.Channel(7)
-canaleSoundInterazioni = pygame.mixer.Channel(8)
-canaleSoundAttacco = pygame.mixer.Channel(9)
-canaleSoundSottofondoAmbientale = pygame.mixer.Channel(10)
+maxCanaliAudio = 15
+pygame.mixer.set_num_channels(maxCanaliAudio)
+numCanaleAudioAttuale = 0
+canaleSoundCanzone = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundPuntatoreSposta = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundPuntatoreSeleziona = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundPassiRallo = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundPassiColco = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundPassiNemiciPersonaggi = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundMorteNemici = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundLvUp = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundInterazioni = pygame.mixer.Channel(numCanaleAudioAttuale)
+numCanaleAudioAttuale += 1
+canaleSoundAttacco = pygame.mixer.Channel(numCanaleAudioAttuale)
+canaliSoundSottofondoAmbientale = GestioneCanaliAudioAmbiente.CanaliAudioAmbiente(maxCanaliAudio, numCanaleAudioAttuale)
+
 def initVolumeSounds():
     canaleSoundCanzone.set_volume(volumeCanzoni)
     canaleSoundPuntatoreSeleziona.set_volume(volumeEffetti)
@@ -163,7 +176,7 @@ def initVolumeSounds():
     canaleSoundLvUp.set_volume(volumeEffetti)
     canaleSoundInterazioni.set_volume(volumeEffetti)
     canaleSoundAttacco.set_volume(volumeEffetti)
-    canaleSoundSottofondoAmbientale.set_volume(volumeEffetti)
+    canaliSoundSottofondoAmbientale.settaVolume(volumeEffetti)
 
 # freccetta (sized 24x24)
 global mouseBloccato

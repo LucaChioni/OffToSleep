@@ -375,15 +375,15 @@ def menu(caricaSalvataggio, gameover):
                             j = GlobalHWVar.volumeEffetti
                             while i > 0 or j > 0:
                                 GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                                GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                                GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
                                 i -= GlobalHWVar.volumeCanzoni / 10
                                 j -= GlobalHWVar.volumeEffetti / 10
                                 pygame.time.wait(30)
                                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             GlobalHWVar.canaleSoundCanzone.stop()
                             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-                            GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
-                            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
                             datiTotaliAttuali, datiTotaliGameover, errore = CaricaSalvaPartita.caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
                             dati = datiTotaliAttuali[0]
                             tuttePorte = datiTotaliAttuali[1]
@@ -526,15 +526,15 @@ def menu(caricaSalvataggio, gameover):
                             j = GlobalHWVar.volumeEffetti
                             while i > 0 or j > 0:
                                 GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                                GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(j)
+                                GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
                                 i -= GlobalHWVar.volumeCanzoni / 10
                                 j -= GlobalHWVar.volumeEffetti / 10
                                 pygame.time.wait(30)
                                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             GlobalHWVar.canaleSoundCanzone.stop()
                             GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-                            GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
-                            GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
                             dati = datiIniziali
                             xInizialie = GlobalHWVar.gsx // 32 * 15
                             yInizialie = GlobalHWVar.gsy // 18 * 7
@@ -812,7 +812,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     tastotempfps = 8
 
     GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 2)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -1111,7 +1111,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio and not caricaSalvataggio:
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
     return dati, inizio, attacco, caricaSalvataggio
 
 
@@ -1160,7 +1160,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
         oggetton += 1
 
     GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
+    GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 2)
     while not risposta:
         # rallenta per i 30 fps
         if tastotempfps != 0 and bottoneDown:
@@ -1649,5 +1649,5 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
     if not inizio:
         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti)
+        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
     return dati, attacco, sposta, animaOggetto, npers, inizio

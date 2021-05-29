@@ -12,7 +12,7 @@ import Codice.SettaggiLivelli.SetAvanzamentiStanzePorteCofanetti as SetAvanzamen
 def mostraLogo():
     effettoAvvio = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriAmbiente/EffettoAvvio.wav")
     logo = CaricaFileProgetto.loadImage("Risorse/Immagini/Icone/LogoPresentazione.png", GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 12, True)
-    GlobalHWVar.canaleSoundSottofondoAmbientale.play(effettoAvvio)
+    GlobalHWVar.canaleSoundInterazioni.play(effettoAvvio)
     GlobalHWVar.disegnaImmagineSuSchermo(logo, (GlobalHWVar.gpx * 10, GlobalHWVar.gpy * 3))
 
     rect = pygame.display.get_surface().get_rect()

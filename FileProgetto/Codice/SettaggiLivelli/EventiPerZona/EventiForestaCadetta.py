@@ -71,7 +71,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         if nemicoArrivato:
             GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
             GlobalHWVar.canaleSoundCanzone.stop()
-            GlobalHWVar.canaleSoundSottofondoAmbientale.stop()
+            GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
             GlobalHWVar.aggiornaSchermo()
             i = 0
             while i < len(tutteporte):

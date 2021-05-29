@@ -835,7 +835,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     GlobalHWVar.initVolumeSounds()
                     if dimezzaVolumeCanzone:
                         GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni / 2)
-                        GlobalHWVar.canaleSoundSottofondoAmbientale.set_volume(GlobalHWVar.volumeEffetti / 2)
+                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti / 2)
                     if GlobalHWVar.gsx != gsxTemp or GlobalHWVar.gsy != gsyTemp or GlobalHWVar.schermoIntero != schermoInteroTemp:
                         ricaricaImgs = False
                         if GlobalHWVar.gsx != gsxTemp or GlobalHWVar.gsy != gsyTemp:

@@ -138,5 +138,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"Nel menu è apparsa la voce \"Setta Impo\". Selezionala per gestire gli equipaggiamenti di Impo. <br> Attenzione: è possibile accedervi solo se Impo si trova in una casella raggiungibile da Lucy.")
         partiDialogo.append(dialogo)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaBibliotecaDirettoVersoNeil"]:
+        oggettoDato = False
+        avanzaStoria = True
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"Cliccando su Impo in modalità interazione, potrai vedere la sua prossima mossa. <br> Ma fai attenzione: il movimento di Lucy può interferire e annullare le condizioni prese in considerazione nella previsione.")
+        partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

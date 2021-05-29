@@ -8,16 +8,16 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 
 
-def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, sottofondoAmbientale, inizio, avanzamentoStoria, bottoneDown):
+def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, stanza, stanzaVecchia, canzone, listaSottofondoAmbientale, inizio, avanzamentoStoria, bottoneDown):
     mantieniPosizioneImpo = False
 
     if stanza == GlobalGameVar.dictStanze["sognoLucy1"]:
         if canzone != GlobalSndVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneSogno
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteSogno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSogno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteSogno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -31,9 +31,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneSogno
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteSogno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSogno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteSogno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -51,9 +51,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneSogno
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteSogno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSogno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteSogno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -71,9 +71,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneSogno:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneSogno
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteSogno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSogno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteSogno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSogno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -87,9 +87,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneCasa:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCasa
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaInterno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaInterno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaInterno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaInterno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCasa
@@ -115,9 +115,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneEsternoCasa:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneEsternoCasa
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaEsterno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaEsterno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaEsterno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCasa
@@ -163,9 +163,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneEsternoCasa:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneEsternoCasa
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaEsterno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaEsterno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaEsterno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCasa
@@ -189,9 +189,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneEsternoCasa:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneEsternoCasa
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaEsterno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaEsterno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaEsterno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCasa
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCasa
@@ -229,9 +229,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -253,9 +253,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -273,9 +273,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -293,9 +293,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -313,9 +313,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -326,9 +326,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gsx // 32 * 16
                 y = GlobalHWVar.gsy // 18 * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"]:
-                if sottofondoAmbientale != GlobalSndVar.audioAmbienteForestaFuoco:
+                if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForestaFuoco:
                     sottofondoAmbientaleCambiato = True
-                sottofondoAmbientale = GlobalSndVar.audioAmbienteForestaFuoco
+                listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForestaFuoco
                 canzoneCambiata = True
                 canzone = False
                 npers = "d"
@@ -346,9 +346,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -362,9 +362,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -392,9 +392,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -412,9 +412,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneForesta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneForesta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteForesta:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteForesta
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -432,13 +432,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneEsternoCitta
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteStradaPerCitta1_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta1_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteStradaPerCitta1_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerCitta1_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteStradaPerCitta1_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta1_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteStradaPerCitta1_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerCitta1_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -475,13 +475,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneEsternoCitta
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteStradaPerCitta2_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta2_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteStradaPerCitta2_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerCitta2_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteStradaPerCitta2_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta2_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteStradaPerCitta2_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerCitta2_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -518,13 +518,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneEsternoCitta
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteStradaPerCitta3_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta3_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteStradaPerCitta3_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerCitta3_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteStradaPerCitta3_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta3_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteStradaPerCitta3_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerCitta3_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -550,13 +550,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -582,13 +582,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -610,13 +610,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -643,13 +643,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -670,9 +670,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneCitta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -702,9 +702,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneCitta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -722,9 +722,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneCitta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -742,9 +742,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneCitta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -758,9 +758,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneCitta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -772,15 +772,18 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 y = GlobalHWVar.gpy * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
                 npers = "w"
-                x = GlobalHWVar.gpx * 18
+                if x == GlobalHWVar.gpx * 16 or x == GlobalHWVar.gpx * 17:
+                    x += GlobalHWVar.gpx * 3
+                else:
+                    x += GlobalHWVar.gpx * 2
                 y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["città10"]:
         if canzone != GlobalSndVar.canzoneCitta:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCitta
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteCitta_giorno:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCitta_giorno:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteCitta_giorno
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCitta_giorno
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -799,13 +802,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCasaDavid
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaDavid_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaDavid_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaDavid_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaDavid_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaDavid_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaDavid_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaDavid_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaDavid_giorno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCasaDavid
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCasaDavid
@@ -833,13 +836,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCasaDavid
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaDavid_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaDavid_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaDavid_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaDavid_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaDavid_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaDavid_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaDavid_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaDavid_giorno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCasaDavid
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCasaDavid
@@ -870,13 +873,13 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneCasaDavid
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaDavid_notte:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaDavid_notte:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaDavid_notte
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaDavid_notte
         else:
-            if sottofondoAmbientale != GlobalSndVar.audioAmbienteCasaDavid_giorno:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaDavid_giorno:
                 sottofondoAmbientaleCambiato = True
-            sottofondoAmbientale = GlobalSndVar.audioAmbienteCasaDavid_giorno
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaDavid_giorno
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteCasaDavid
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteCasaDavid
@@ -919,9 +922,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneBiblioteca:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneBiblioteca
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteBiblioteca:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteBiblioteca:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteBiblioteca
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteBiblioteca
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -938,9 +941,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneBiblioteca:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneBiblioteca
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteBiblioteca:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteBiblioteca:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteBiblioteca
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteBiblioteca
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -957,9 +960,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if canzone != GlobalSndVar.canzoneBiblioteca:
             canzoneCambiata = True
         canzone = GlobalSndVar.canzoneBiblioteca
-        if sottofondoAmbientale != GlobalSndVar.audioAmbienteBiblioteca:
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteBiblioteca:
             sottofondoAmbientaleCambiato = True
-        sottofondoAmbientale = GlobalSndVar.audioAmbienteBiblioteca
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteBiblioteca
         # rumore porte
         rumoreAperturaPorte = False
         rumoreChiusuraPorte = False
@@ -971,6 +974,28 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 y = GlobalHWVar.gsy // 18 * 9
             elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"]:
                 mantieniPosizioneImpo = True
+    if stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
+        if canzone != GlobalSndVar.canzoneEsternoCitta:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneEsternoCitta
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerSelva1:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerSelva1
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["città9"]:
+                npers = "s"
+                if x == GlobalHWVar.gpx * 19 or x == GlobalHWVar.gpx * 20:
+                    x -= GlobalHWVar.gpx * 3
+                else:
+                    x -= GlobalHWVar.gpx * 2
+                y = GlobalHWVar.gpy * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -982,7 +1007,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
     elif npers == "s":
         npers = 4
 
-    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, sottofondoAmbientale, bottoneDown, avanzamentoStoria, mantieniPosizioneImpo
+    return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, listaSottofondoAmbientale, bottoneDown, avanzamentoStoria, mantieniPosizioneImpo
 
 
 def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
@@ -1003,7 +1028,7 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
         GlobalHWVar.aggiornaSchermo()
     elif (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta9"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["città1"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà3"]):
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Strada per la città", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
+        FunzioniGraficheGeneriche.messaggio(u"Strada per Città", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
@@ -1024,6 +1049,12 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
     elif stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanza == GlobalGameVar.dictStanze["biblioteca1"]:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio(u"Biblioteca", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
+        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
+        GlobalHWVar.aggiornaSchermo()
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["città9"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]):
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        FunzioniGraficheGeneriche.messaggio(u"Strada per Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
