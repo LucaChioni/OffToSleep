@@ -82,7 +82,7 @@ gpy = gsy // 18
 schermoIntero = True
 
 # nome-icona
-titolo = "Still waiting"
+titolo = "Off to Sleep"
 pygame.display.set_caption(titolo)
 icona = pygame.image.load(gamePath + "Risorse/Immagini/Icone/Icona.png")
 pygame.display.set_icon(icona)
