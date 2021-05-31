@@ -288,7 +288,7 @@ def loadSounds(numSndCaricato):
     audioAmbienteForesta_Cicale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/ForestaCadetta/Cicale.wav")
     listaAudioAmbienteForesta = [audioAmbienteForesta_Vento1, audioAmbienteForesta_Cicale]
     audioAmbienteForesta_Fuoco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/ForestaCadetta/Fuoco.wav")
-    listaAudioAmbienteForesta = [audioAmbienteForesta_Vento1, audioAmbienteForesta_Cicale, audioAmbienteForesta_Fuoco]
+    listaAudioAmbienteForestaFuoco = [audioAmbienteForesta_Vento1, audioAmbienteForesta_Cicale, audioAmbienteForesta_Fuoco]
     audioAmbienteStradaPerCitta1_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta1/Vento1.wav")
     audioAmbienteStradaPerCitta1_Cicale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta1/Cicale.wav")
     audioAmbienteStradaPerCitta1_Fuoco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta1/Fuoco.wav")

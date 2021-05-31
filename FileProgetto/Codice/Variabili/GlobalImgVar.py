@@ -865,9 +865,9 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     sfondoTriangolinoBassoDestra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloBassoDestra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     sfondoTriangolinoBassoSinistra = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/TriangoloBassoSinistra.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     casellaChiara = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
-    casellaChiara.fill((0, 0, 0, 10))
+    casellaChiara.fill((0, 0, 0, 0))
     casellaScura = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
-    casellaScura.fill((0, 0, 0, 30))
+    casellaScura.fill((0, 0, 0, 10))
     casellaOscurata = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     casellaOscurata.fill((0, 0, 0, 100))
 

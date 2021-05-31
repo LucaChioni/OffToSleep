@@ -133,32 +133,10 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                     y = GlobalHWVar.gsy // 18 * 4
             if stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy3"]:
                 npers = "s"
-                if x == GlobalHWVar.gsx // 32 * 3:
-                    x = GlobalHWVar.gsx // 32 * 3
-                    y = GlobalHWVar.gsy // 18 * 3
-                if x == GlobalHWVar.gsx // 32 * 4:
-                    x = GlobalHWVar.gsx // 32 * 4
-                    y = GlobalHWVar.gsy // 18 * 3
-                if x == GlobalHWVar.gsx // 32 * 27:
-                    x = GlobalHWVar.gsx // 32 * 27
-                    y = GlobalHWVar.gsy // 18 * 4
-                if x == GlobalHWVar.gsx // 32 * 28:
-                    x = GlobalHWVar.gsx // 32 * 28
-                    y = GlobalHWVar.gsy // 18 * 4
+                y = GlobalHWVar.gsy // 18 * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy4"]:
                 npers = "w"
-                if x == GlobalHWVar.gsx // 32 * 14:
-                    x = GlobalHWVar.gsx // 32 * 14
-                    y = GlobalHWVar.gsy // 18 * 14
-                if x == GlobalHWVar.gsx // 32 * 15:
-                    x = GlobalHWVar.gsx // 32 * 15
-                    y = GlobalHWVar.gsy // 18 * 14
-                if x == GlobalHWVar.gsx // 32 * 16:
-                    x = GlobalHWVar.gsx // 32 * 16
-                    y = GlobalHWVar.gsy // 18 * 14
-                if x == GlobalHWVar.gsx // 32 * 17:
-                    x = GlobalHWVar.gsx // 32 * 17
-                    y = GlobalHWVar.gsy // 18 * 14
+                y = GlobalHWVar.gsy // 18 * 15
     if stanza == GlobalGameVar.dictStanze["casaHansLucy3"]:
         if canzone != GlobalSndVar.canzoneEsternoCasa:
             canzoneCambiata = True
@@ -173,18 +151,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy2"]:
                 npers = "w"
-                if x == GlobalHWVar.gsx // 32 * 3:
-                    x = GlobalHWVar.gsx // 32 * 3
-                    y = GlobalHWVar.gsy // 18 * 15
-                if x == GlobalHWVar.gsx // 32 * 4:
-                    x = GlobalHWVar.gsx // 32 * 4
-                    y = GlobalHWVar.gsy // 18 * 15
-                if x == GlobalHWVar.gsx // 32 * 27:
-                    x = GlobalHWVar.gsx // 32 * 27
-                    y = GlobalHWVar.gsy // 18 * 15
-                if x == GlobalHWVar.gsx // 32 * 28:
-                    x = GlobalHWVar.gsx // 32 * 28
-                    y = GlobalHWVar.gsy // 18 * 15
+                y = GlobalHWVar.gsy // 18 * 15
     if stanza == GlobalGameVar.dictStanze["casaHansLucy4"]:
         if canzone != GlobalSndVar.canzoneEsternoCasa:
             canzoneCambiata = True
@@ -199,24 +166,7 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy2"]:
                 npers = "s"
-                if x == GlobalHWVar.gsx // 32 * 13:
-                    x = GlobalHWVar.gsx // 32 * 14
-                    y = GlobalHWVar.gsy // 18 * 2
-                if x == GlobalHWVar.gsx // 32 * 14:
-                    x = GlobalHWVar.gsx // 32 * 14
-                    y = GlobalHWVar.gsy // 18 * 2
-                if x == GlobalHWVar.gsx // 32 * 15:
-                    x = GlobalHWVar.gsx // 32 * 15
-                    y = GlobalHWVar.gsy // 18 * 2
-                if x == GlobalHWVar.gsx // 32 * 16:
-                    x = GlobalHWVar.gsx // 32 * 16
-                    y = GlobalHWVar.gsy // 18 * 2
-                if x == GlobalHWVar.gsx // 32 * 17:
-                    x = GlobalHWVar.gsx // 32 * 17
-                    y = GlobalHWVar.gsy // 18 * 2
-                if x == GlobalHWVar.gsx // 32 * 18:
-                    x = GlobalHWVar.gsx // 32 * 17
-                    y = GlobalHWVar.gsy // 18 * 2
+                y = GlobalHWVar.gsy // 18 * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta1"]:
                 npers = "w"
                 if x == GlobalHWVar.gsx // 32 * 15:
