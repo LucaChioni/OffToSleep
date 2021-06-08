@@ -46,7 +46,7 @@ global suonoUsoBombaVeleno
 global suonoUsoEsca
 global suonoUsoBombaAppiccicosa
 global suonoUsoBombaPotenziata
-global rumoreMovimentoNemiciPersonaggi
+global rumoreMovimentoNemici
 global rumoreAttaccoNemico
 global rumoreLancioOggettoNemico
 global rumoreMorteNemico
@@ -92,6 +92,8 @@ global listaAudioAmbienteStradaPerSelva1
 global listaAudioAmbienteStradaPerSelva2
 global suonoaperturaporteSelva
 global suonochiusuraporteSelva
+global canzoneSelva
+global listaAudioAmbienteSelva
 
 
 numSndTotali = 83
@@ -150,7 +152,7 @@ def loadSounds(numSndCaricato):
     global suonoUsoEsca
     global suonoUsoBombaAppiccicosa
     global suonoUsoBombaPotenziata
-    global rumoreMovimentoNemiciPersonaggi
+    global rumoreMovimentoNemici
     global rumoreAttaccoNemico
     global rumoreLancioOggettoNemico
     global rumoreMorteNemico
@@ -196,6 +198,8 @@ def loadSounds(numSndCaricato):
     global listaAudioAmbienteStradaPerSelva2
     global suonoaperturaporteSelva
     global suonochiusuraporteSelva
+    global canzoneSelva
+    global listaAudioAmbienteSelva
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -244,7 +248,7 @@ def loadSounds(numSndCaricato):
     suonoUsoBombaPotenziata = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriOggetti/BombaPotenziata.wav")
 
     # suoni nemici
-    rumoreMovimentoNemiciPersonaggi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MovimentoNemiciPersonaggi.wav")
+    rumoreMovimentoNemici = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MovimentoNemiciPersonaggi.wav")
     rumoreAttaccoNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/AttaccoVicinoNemico.wav")
     rumoreLancioOggettoNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/AttaccoLontanoNemico.wav")
     rumoreMorteNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
@@ -322,6 +326,9 @@ def loadSounds(numSndCaricato):
     audioAmbienteStradaPerSelva_Serpenti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerSelvaArida/Serpenti.wav")
     listaAudioAmbienteStradaPerSelva1 = [audioAmbienteStradaPerSelva_Vento1, audioAmbienteStradaPerSelva_Persone]
     listaAudioAmbienteStradaPerSelva2 = [audioAmbienteStradaPerSelva_Vento1, audioAmbienteStradaPerSelva_Serpenti]
+    audioAmbienteSelva_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/Vento1.wav")
+    audioAmbienteSelva_Serpenti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/Serpenti.wav")
+    listaAudioAmbienteSelva = [audioAmbienteSelva_Vento1, audioAmbienteSelva_Serpenti]
 
     # suoni canzoni
     canzoneSogno = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/01-Sogno.wav")
@@ -332,3 +339,4 @@ def loadSounds(numSndCaricato):
     canzoneCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/05-Città.wav")
     canzoneCasaDavid = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/06-CasaUfficiale.wav")
     canzoneBiblioteca = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/07-Biblioteca.wav")
+    canzoneSelva = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/08-SelvaArida.wav")

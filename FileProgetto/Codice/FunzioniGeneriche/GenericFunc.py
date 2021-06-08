@@ -2,8 +2,10 @@
 
 import random
 import copy
+import pygame
 import GlobalHWVar
-import Codice.Variabili.GlobalSndVar as GlobalSndVar
+import GestioneInput
+import GestioneCanaliAudioAmbiente
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import CaricaFileProgetto
@@ -2031,3 +2033,41 @@ def copiaListaDiOggettiConImmagini(listaOggetti, nemici, avanzamentoStoria=0, ch
             copiaLista.append(copiaPersonaggio(oggetto, avanzamentoStoria, checkErrori=checkErrori))
 
     return copiaLista
+
+
+def cambiaVolumeCanale(canale, volumeFinale):
+    if type(canale) is GestioneCanaliAudioAmbiente.CanaliAudioAmbiente:
+        volumeIniziale = canale.volume
+        unitaVolumeIncremento = abs(volumeFinale - volumeIniziale) / 10.0
+        if volumeFinale > volumeIniziale:
+            i = volumeIniziale
+            while i < volumeFinale:
+                canale.settaVolume(i)
+                i += unitaVolumeIncremento
+                pygame.time.wait(10)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        elif volumeFinale < volumeIniziale:
+            i = volumeIniziale
+            while i > volumeFinale:
+                canale.settaVolume(i)
+                i -= unitaVolumeIncremento
+                pygame.time.wait(10)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+    else:
+        volumeIniziale = canale.get_volume()
+        unitaVolumeIncremento = abs(volumeFinale - volumeIniziale) / 10.0
+        if volumeFinale > volumeIniziale:
+            i = volumeIniziale
+            while i < volumeFinale:
+                canale.set_volume(i)
+                i += unitaVolumeIncremento
+                pygame.time.wait(10)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        elif volumeFinale < volumeIniziale:
+            i = volumeIniziale
+            while i > volumeFinale:
+                canale.set_volume(i)
+                i -= unitaVolumeIncremento
+                pygame.time.wait(10)
+                inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        canale.set_volume(volumeFinale)

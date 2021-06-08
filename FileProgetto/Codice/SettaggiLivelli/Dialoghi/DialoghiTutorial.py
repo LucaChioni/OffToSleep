@@ -147,5 +147,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"Cliccando su Impo in modalità interazione, potrai vedere la sua prossima mossa. <br> Ma fai attenzione: il movimento di Lucy può interferire e annullare le condizioni prese in considerazione nella previsione.")
         partiDialogo.append(dialogo)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoSelvaArida"]:
+        oggettoDato = False
+        avanzaStoria = True
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"Durante la battaglia puoi usare gli ImpoFrutti solo se Impo è in una casella adiacente a quella di Lucy. Per usarli fuori dal combattimento invece è sufficiente che Impo sia in una casella raggiungibile.")
+        partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

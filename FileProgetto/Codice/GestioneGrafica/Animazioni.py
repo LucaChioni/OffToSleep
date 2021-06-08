@@ -462,7 +462,7 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
         for nemico in listaNemici:
             if nemico.animaSpostamento and not nemico.morto and (nemico.x != nemico.vx or nemico.y != nemico.vy):
                 if not GlobalHWVar.canaleSoundPassiNemiciPersonaggi.get_busy() and fineanimaz > 6:
-                    GlobalHWVar.canaleSoundPassiNemiciPersonaggi.play(GlobalSndVar.rumoreMovimentoNemiciPersonaggi)
+                    GlobalHWVar.canaleSoundPassiNemiciPersonaggi.play(GlobalSndVar.rumoreMovimentoNemici)
                 nemico.animazioneFatta = True
                 animazioneNemici = True
                 # rumorecamminataNemico.play()
@@ -1459,8 +1459,6 @@ def animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta,
             if personaggio.inCasellaVista and not personaggio.mantieniSempreASchermo and personaggio.animaSpostamento and (personaggio.x != personaggio.vx or personaggio.y != personaggio.vy):
                 personaggio.animazioneFatta = True
                 animazionePersonaggi = True
-                if not GlobalHWVar.canaleSoundPassiNemiciPersonaggi.get_busy() and fineanimaz > 6:
-                    GlobalHWVar.canaleSoundPassiNemiciPersonaggi.play(GlobalSndVar.rumoreMovimentoNemiciPersonaggi)
                 if personaggio.direzione == "d":
                     if 5 < fineanimaz <= 10:
                         GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgDMov1, (personaggio.x - (GlobalHWVar.gpx * fineanimaz // 10), personaggio.y))

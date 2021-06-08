@@ -201,6 +201,7 @@ global imgDialogoLucy1
 global imgDialogoLucy2
 global imgDialogoLucyAssonnata
 global imgDialogoLucySconvolta
+global imgDialogoColco
 global imgFraMaggioreMenuOggetti
 global imgLucy1MenuOggetti
 global imgLucy2MenuOggetti
@@ -504,6 +505,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgDialogoLucy2
     global imgDialogoLucyAssonnata
     global imgDialogoLucySconvolta
+    global imgDialogoColco
     global imgFraMaggioreMenuOggetti
     global imgLucy1MenuOggetti
     global imgLucy2MenuOggetti
@@ -1083,6 +1085,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgDialogoLucy2 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/Lucy2Dialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoLucyAssonnata = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/LucyAssonnataDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgDialogoLucySconvolta = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/LucyScossaDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
+    imgDialogoColco = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Dialoghi/RobotDialogo.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, False)
     imgFraMaggioreMenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
     imgLucy1MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Lucy1Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
     imgLucy2MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Lucy2Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)

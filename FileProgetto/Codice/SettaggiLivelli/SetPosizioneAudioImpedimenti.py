@@ -932,8 +932,8 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerSelva1
         # rumore porte
-        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
-        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
         # posizione personaggio e robot al cambio stanza
         if not inizio:
             if stanzaVecchia == GlobalGameVar.dictStanze["città9"]:
@@ -946,6 +946,49 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             if stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
                 npers = "w"
                 y = GlobalHWVar.gpy * 15
+    if stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
+        if canzone != GlobalSndVar.canzoneEsternoCitta:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneEsternoCitta
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerSelva2:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerSelva2
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+    if stanza == GlobalGameVar.dictStanze["selvaArida1"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida2"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x -= GlobalHWVar.gpx * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida7"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida8"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -1005,6 +1048,12 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
     elif (stanzaVecchia == GlobalGameVar.dictStanze["città9"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]):
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio(u"Strada per Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
+        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
+        GlobalHWVar.aggiornaSchermo()
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida2"] and stanza == GlobalGameVar.dictStanze["selvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["selvaArida15"]):
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        FunzioniGraficheGeneriche.messaggio(u"Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
