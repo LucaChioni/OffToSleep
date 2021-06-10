@@ -989,6 +989,337 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida8"]:
                 npers = "d"
                 x = GlobalHWVar.gpx * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida10"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x += GlobalHWVar.gpx * 18
+    if stanza == GlobalGameVar.dictStanze["selvaArida2"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x += GlobalHWVar.gpx * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida3"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x += GlobalHWVar.gpx * 17
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida8"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x -= GlobalHWVar.gpx * 18
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida9"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y += GlobalHWVar.gpy * 12
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida10"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+    if stanza == GlobalGameVar.dictStanze["selvaArida3"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida2"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x -= GlobalHWVar.gpx * 17
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida4"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y += GlobalHWVar.gpy * 12
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida10"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x += GlobalHWVar.gpx * 16
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida12"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+                y += GlobalHWVar.gpy * 6
+    if stanza == GlobalGameVar.dictStanze["selvaArida4"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida3"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+                y -= GlobalHWVar.gpy * 12
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida5"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x += GlobalHWVar.gpx * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida9"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x -= GlobalHWVar.gpx * 17
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida13"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y += GlobalHWVar.gpy * 8
+    if stanza == GlobalGameVar.dictStanze["selvaArida5"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida4"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x -= GlobalHWVar.gpx * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida6"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y += GlobalHWVar.gpy * 8
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida14"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+                y -= GlobalHWVar.gpy * 6
+    if stanza == GlobalGameVar.dictStanze["selvaArida6"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida5"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+                y -= GlobalHWVar.gpy * 8
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida13"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x -= GlobalHWVar.gpx * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida15"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x -= GlobalHWVar.gpx * 11
+    if stanza == GlobalGameVar.dictStanze["selvaArida7"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida10"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x -= GlobalHWVar.gpx * 15
+    if stanza == GlobalGameVar.dictStanze["selvaArida8"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida2"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x += GlobalHWVar.gpx * 18
+    if stanza == GlobalGameVar.dictStanze["selvaArida9"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida2"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+                y -= GlobalHWVar.gpy * 12
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida4"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x += GlobalHWVar.gpx * 17
+    if stanza == GlobalGameVar.dictStanze["selvaArida10"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x -= GlobalHWVar.gpx * 18
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida2"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida3"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x -= GlobalHWVar.gpx * 16
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida7"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x += GlobalHWVar.gpx * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida11"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+                y += GlobalHWVar.gpy * 6
+    if stanza == GlobalGameVar.dictStanze["selvaArida11"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida10"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y -= GlobalHWVar.gpy * 6
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida12"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x -= GlobalHWVar.gpx * 16
+    if stanza == GlobalGameVar.dictStanze["selvaArida12"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida3"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y -= GlobalHWVar.gpy * 6
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida11"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x += GlobalHWVar.gpx * 16
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida14"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x -= GlobalHWVar.gpx * 18
+    if stanza == GlobalGameVar.dictStanze["selvaArida13"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida4"]:
+                npers = "a"
+                x = GlobalHWVar.gpx * 29
+                y -= GlobalHWVar.gpy * 8
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida6"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
+                x += GlobalHWVar.gpx * 15
+    if stanza == GlobalGameVar.dictStanze["selvaArida14"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida5"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 2
+                y += GlobalHWVar.gpy * 6
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida12"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x += GlobalHWVar.gpx * 18
+    if stanza == GlobalGameVar.dictStanze["selvaArida15"]:
+        if canzone != GlobalSndVar.canzoneSelva:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneSelva
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteSelva:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteSelva
+        # rumore porte
+        rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteSelva
+        rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteSelva
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida6"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x += GlobalHWVar.gpx * 11
+            if stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+                npers = "w"
+                y = GlobalHWVar.gpy * 15
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":

@@ -36,6 +36,7 @@ def gameloop():
         #     print (u"Max RAM usata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
+            GlobalGameVar.inizializzaVariabiliGlobali()
             movimentoDaCompiere = False
             percorsoDaEseguire = []
             nonMostrarePersonaggio = False
@@ -225,6 +226,22 @@ def gameloop():
                 # carico nemici e personaggi nella stanza
                 listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi = SetNemiciPersonaggiEventi.caricaNemiciEPersonaggi(dati[0], dati[1], stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi)
                 stanzaVecchia = dati[1]
+                # metto i nemici nella posizione originale se sono nella nostra stessa casella
+                for nemico in listaNemici:
+                    if nemico.x == x and nemico.y == y:
+                        nemico.x, nemico.y = nemico.posizioneOriginale
+                        # controllo se nella casella originale c'è un altro nemico
+                        nemicoAppenaSpostato = nemico
+                        nemiciSovrappostiRisolti = False
+                        while not nemiciSovrappostiRisolti:
+                            nemiciSovrappostiRisolti = True
+                            for nemicoDaControllare in listaNemici:
+                                if nemicoAppenaSpostato.id != nemicoDaControllare.id and nemicoAppenaSpostato.x == nemicoDaControllare.x and nemicoAppenaSpostato.y == nemicoDaControllare.y:
+                                    nemiciSovrappostiRisolti = False
+                                    nemicoDaControllare.x, nemicoDaControllare.y = nemicoDaControllare.posizioneOriginale
+                                    nemicoAppenaSpostato = nemicoDaControllare
+                                    break
+                        break
 
                 # stanza
                 nomeStanza = SetPosizioneAudioImpedimenti.settaNomeStanza(dati[0], dati[1])

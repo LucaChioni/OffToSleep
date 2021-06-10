@@ -2044,14 +2044,14 @@ def cambiaVolumeCanale(canale, volumeFinale):
             while i < volumeFinale:
                 canale.settaVolume(i)
                 i += unitaVolumeIncremento
-                pygame.time.wait(10)
+                pygame.time.wait(5)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         elif volumeFinale < volumeIniziale:
             i = volumeIniziale
             while i > volumeFinale:
                 canale.settaVolume(i)
                 i -= unitaVolumeIncremento
-                pygame.time.wait(10)
+                pygame.time.wait(5)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
     else:
         volumeIniziale = canale.get_volume()
@@ -2061,13 +2061,13 @@ def cambiaVolumeCanale(canale, volumeFinale):
             while i < volumeFinale:
                 canale.set_volume(i)
                 i += unitaVolumeIncremento
-                pygame.time.wait(10)
+                pygame.time.wait(5)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         elif volumeFinale < volumeIniziale:
             i = volumeIniziale
             while i > volumeFinale:
                 canale.set_volume(i)
                 i -= unitaVolumeIncremento
-                pygame.time.wait(10)
+                pygame.time.wait(5)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         canale.set_volume(volumeFinale)

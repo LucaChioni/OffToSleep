@@ -486,49 +486,34 @@ def definisciStanze():
     vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida1"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida2"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida3"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida4"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida5"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida6"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida7"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida8"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida9"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida10"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida11"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida12"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida13"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida14"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["selvaArida15"] = i
-    vetStanzePacifiche.append(i)
     i += 1
     dictStanze["avampostoDiRod1"] = i
     vetStanzePacifiche.append(i)

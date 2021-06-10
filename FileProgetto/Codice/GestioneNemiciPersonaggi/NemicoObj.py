@@ -3,13 +3,20 @@
 import random
 import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
 class NemicoObj(object):
 
-    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False, monetePossedute=-1, nonCaricareImg=False):
+    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False, monetePossedute=-1, nonCaricareImg=False, posizioneOriginale=False):
+        GlobalGameVar.idNemico += 1
+        self.id = GlobalGameVar.idNemico
+        if posizioneOriginale:
+            self.posizioneOriginale = posizioneOriginale
+        else:
+            self.posizioneOriginale = (x, y)
         self.x = x
         self.y = y
         self.vx = x
