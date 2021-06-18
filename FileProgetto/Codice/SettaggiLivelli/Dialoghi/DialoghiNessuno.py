@@ -486,7 +486,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Il cuore mi dice che sto sbagliando strada... la sinistra è dall'altra parte...")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["rimosse300Monete"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["rimosse200Monete"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -876,6 +876,20 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("tu")
                     dialogo.append(u"René mi sta aspettando. Devo prendere la marce da consegnare a Neil prima di andare.")
                     partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["selvaArida1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["selvaArida15"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida2"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Questo posto è un casino...")
+            partiDialogo.append(dialogo)
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"Però ci sono queste tracce per terra... dovrei seguirle?")
+            partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

@@ -678,21 +678,21 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 0:
             FunzioniGraficheGeneriche.messaggio("---", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 1:
-            FunzioniGraficheGeneriche.messaggio("Lucy con Pv < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Lucy con <*>#italic#Pv<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 2:
-            FunzioniGraficheGeneriche.messaggio("Lucy con Pv < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Lucy con <*>#italic#Pv<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 3:
-            FunzioniGraficheGeneriche.messaggio("Lucy con Pv < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Lucy con <*>#italic#Pv<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 4:
             FunzioniGraficheGeneriche.messaggio("Lucy con veleno", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 5:
             FunzioniGraficheGeneriche.messaggio("Impo surriscaldato", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 6:
-            FunzioniGraficheGeneriche.messaggio("Impo con Pe < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 7:
-            FunzioniGraficheGeneriche.messaggio("Impo con Pe < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 8:
-            FunzioniGraficheGeneriche.messaggio("Impo con Pe < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Impo con <*>#italic#Pe<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 9:
             FunzioniGraficheGeneriche.messaggio("Sempre a Lucy", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 10:
@@ -704,13 +704,13 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if dati[i] == 13:
             FunzioniGraficheGeneriche.messaggio("Nemico lontano", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 14:
-            FunzioniGraficheGeneriche.messaggio("Nemico con Pv < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con <*>#italic#Pv<*> < 80%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 15:
-            FunzioniGraficheGeneriche.messaggio("Nemico con Pv < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con <*>#italic#Pv<*> < 50%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 16:
-            FunzioniGraficheGeneriche.messaggio("Nemico con Pv < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con <*>#italic#Pv<*> < 30%", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 17:
-            FunzioniGraficheGeneriche.messaggio("Nemico con meno Pv", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
+            FunzioniGraficheGeneriche.messaggio("Nemico con meno <*>#italic#Pv<*>", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 18:
             FunzioniGraficheGeneriche.messaggio("Numero di nemici > 1", GlobalHWVar.grigiochi, xListaCondizioni, GlobalHWVar.gsy // 18 * c, 40)
         if dati[i] == 19:

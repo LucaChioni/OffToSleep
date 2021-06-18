@@ -877,7 +877,7 @@ def animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRal
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Sacca Energetica illimitata", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro >= 81 and tesoro <= 100:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Condizio-ImpoFoglio", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
-        elif tesoro >= 101 and tesoro <= 120:
+        elif tesoro == 1000:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: Cella di memoria", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)
         elif tesoro == 131:
             FunzioniGraficheGeneriche.messaggio("Hai trovato: 50 monete", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 1, 60)

@@ -150,8 +150,8 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 i += 2
 
         avanzamentoStoria += 1
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["date300MoneteAlMercante"] and stanza == GlobalGameVar.dictStanze["città5"]:
-        monetePossedute -= 300
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["date200MoneteAlMercante"] and stanza == GlobalGameVar.dictStanze["città5"]:
+        monetePossedute -= 200
         avanzamentoStoria += 1
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoCertificatoDalServo"] and stanza == GlobalGameVar.dictStanze["città4"]:
         GlobalHWVar.canaleSoundCanzone.set_volume(0)

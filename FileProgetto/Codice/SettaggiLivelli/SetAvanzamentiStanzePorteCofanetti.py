@@ -203,11 +203,11 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["resettatoAvanzamentoDialoghiCittadiniACuiChiediInfo"] = i
     i += 1
-    dictAvanzamentoStoria["richieste300MoneteDalMercante"] = i
+    dictAvanzamentoStoria["richieste200MoneteDalMercante"] = i
     i += 1
-    dictAvanzamentoStoria["date300MoneteAlMercante"] = i
+    dictAvanzamentoStoria["date200MoneteAlMercante"] = i
     i += 1
-    dictAvanzamentoStoria["rimosse300Monete"] = i
+    dictAvanzamentoStoria["rimosse200Monete"] = i
     i += 1
     dictAvanzamentoStoria["rifiutatoDallaBiblioteca"] = i
     i += 1
@@ -586,6 +586,41 @@ def definisciPorte(dictStanze):
     vetPorte += [stanza, 12, 8, False]
     vetPorte += [stanza, 10, 11, False]
 
+    stanza = dictStanze["selvaArida1"]
+    vetPorte += [stanza, 11, 11, False]
+
+    stanza = dictStanze["selvaArida4"]
+    vetPorte += [stanza, 9, 9, False]
+
+    stanza = dictStanze["selvaArida5"]
+    vetPorte += [stanza, 14, 12, False]
+
+    stanza = dictStanze["selvaArida7"]
+    vetPorte += [stanza, 6, 3, False]
+    vetPorte += [stanza, 20, 5, False]
+
+    stanza = dictStanze["selvaArida9"]
+    vetPorte += [stanza, 10, 5, False]
+
+    stanza = dictStanze["selvaArida12"]
+    vetPorte += [stanza, 16, 4, False]
+    vetPorte += [stanza, 28, 5, False]
+
+    stanza = dictStanze["selvaArida13"]
+    vetPorte += [stanza, 4, 11, False]
+    vetPorte += [stanza, 15, 12, False]
+
+    stanza = dictStanze["selvaArida14"]
+    vetPorte += [stanza, 14, 4, False]
+    vetPorte += [stanza, 15, 4, False]
+    vetPorte += [stanza, 16, 4, False]
+
+    stanza = dictStanze["selvaArida15"]
+    vetPorte += [stanza, 18, 10, False]
+    vetPorte += [stanza, 21, 11, False]
+    vetPorte += [stanza, 24, 3, False]
+    vetPorte += [stanza, 28, 4, False]
+
     return vetPorte
 
 
@@ -643,5 +678,61 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["forestaCadetta9"]
     vetCofanetti += [stanza, 5, 11, False]
+
+    stanza = dictStanze["selvaArida1"]
+    vetCofanetti += [stanza, 6, 5, False]
+    vetCofanetti += [stanza, 6, 12, False]
+    vetCofanetti += [stanza, 12, 11, False]
+
+    stanza = dictStanze["selvaArida2"]
+    vetCofanetti += [stanza, 16, 3, False]
+
+    stanza = dictStanze["selvaArida3"]
+    vetCofanetti += [stanza, 16, 14, False]
+    vetCofanetti += [stanza, 17, 12, False]
+
+    stanza = dictStanze["selvaArida4"]
+    vetCofanetti += [stanza, 12, 11, False]
+
+    stanza = dictStanze["selvaArida5"]
+    vetCofanetti += [stanza, 13, 10, False]
+
+    stanza = dictStanze["selvaArida7"]
+    vetCofanetti += [stanza, 4, 2, False]
+    vetCofanetti += [stanza, 13, 9, False]
+    vetCofanetti += [stanza, 24, 7, False]
+
+    stanza = dictStanze["selvaArida8"]
+    vetCofanetti += [stanza, 14, 15, False]
+
+    stanza = dictStanze["selvaArida9"]
+    vetCofanetti += [stanza, 7, 15, False]
+    vetCofanetti += [stanza, 13, 12, False]
+
+    stanza = dictStanze["selvaArida10"]
+    vetCofanetti += [stanza, 7, 3, False]
+    vetCofanetti += [stanza, 9, 2, False]
+
+    stanza = dictStanze["selvaArida11"]
+    vetCofanetti += [stanza, 3, 13, False]
+    vetCofanetti += [stanza, 7, 14, False]
+    vetCofanetti += [stanza, 25, 7, False]
+
+    stanza = dictStanze["selvaArida12"]
+    vetCofanetti += [stanza, 15, 2, False]
+    vetCofanetti += [stanza, 28, 9, False]
+
+    stanza = dictStanze["selvaArida13"]
+    vetCofanetti += [stanza, 2, 14, False]
+    vetCofanetti += [stanza, 6, 5, False]
+    vetCofanetti += [stanza, 10, 10, False]
+
+    stanza = dictStanze["selvaArida14"]
+    vetCofanetti += [stanza, 6, 11, False]
+    vetCofanetti += [stanza, 10, 13, False]
+    vetCofanetti += [stanza, 22, 11, False]
+
+    stanza = dictStanze["selvaArida15"]
+    vetCofanetti += [stanza, 20, 5, False]
 
     return vetCofanetti

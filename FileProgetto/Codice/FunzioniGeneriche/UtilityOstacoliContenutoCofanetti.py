@@ -53,9 +53,17 @@ def ottieniOggetto(dati, numOggetto, qta):
     return dati, numOggetto
 
 
-def ottieniCellaDiMemoria(dati, numCella):
-    dati[numCella] += 1
-    dati[numCella + 10] += 1
+def ottieniCellaDiMemoria(dati):
+    numCella = -1
+    i = 101
+    while i <= 110:
+        if dati[i] == -1:
+            numCella = i
+            break
+        i += 1
+    if numCella != -1:
+        dati[numCella] += 1
+        dati[numCella + 10] += 1
     return dati
 
 

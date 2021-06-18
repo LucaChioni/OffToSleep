@@ -103,7 +103,6 @@ clockFadeToBlack = pygame.time.Clock()
 clockScritturaDialogo = pygame.time.Clock()
 clockDisegno = pygame.time.Clock()
 fpsMainLoop = 60
-fpsMainLoopDifesa = 240
 fpsInterazioni = 30
 fpsMenu = 30
 fpsAnimazioni = 30
