@@ -23,7 +23,7 @@ def chiediconferma(conferma):
     schermo_temp = GlobalHWVar.schermo.copy().convert()
     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
     dark = pygame.Surface((GlobalHWVar.gsx, GlobalHWVar.gsy), flags=pygame.SRCALPHA)
-    dark.fill((0, 0, 0, 210))
+    dark.fill((0, 0, 0, 180))
     background.blit(dark, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
 

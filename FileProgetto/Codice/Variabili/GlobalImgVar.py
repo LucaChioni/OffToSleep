@@ -286,7 +286,7 @@ global imgEnigmaBibliotecarioVel5
 global cursoreMatitaEnigmaBibliotecario
 global cursoreGommaEnigmaBibliotecario
 
-numImgTotali = 1409
+numImgTotali = 1407
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)

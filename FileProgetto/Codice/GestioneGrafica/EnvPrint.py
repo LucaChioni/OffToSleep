@@ -1345,6 +1345,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     interazioneConfermata = False
     primoFrame = True
     vecchiaCasellaInquadrata = [False, 0, 0]
+    aggiornaInterfacciaPerCambioInput = False
 
     bottoneDown = 0
     while not risposta:
@@ -1356,11 +1357,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         inquadratoQualcosa = False
         xMouse, yMouse = pygame.mouse.get_pos()
         deltaXMouse, deltaYMouse = pygame.mouse.get_rel()
-        if (GlobalHWVar.mouseVisibile and (deltaXMouse != 0 or deltaYMouse != 0)) or (primoFrame and GlobalHWVar.mouseVisibile) or (analisiDiColcoEffettuata and GlobalHWVar.mouseVisibile):
+        if (GlobalHWVar.mouseVisibile and (deltaXMouse != 0 or deltaYMouse != 0)) or (primoFrame and GlobalHWVar.mouseVisibile) or (analisiDiColcoEffettuata and GlobalHWVar.mouseVisibile) or (aggiornaInterfacciaPerCambioInput and GlobalHWVar.mouseVisibile):
             casellaTrovata = False
             i = 0
             while i < len(caseviste):
-                if caseviste[i] < xMouse < caseviste[i] + GlobalHWVar.gpx and caseviste[i + 1] < yMouse < caseviste[i + 1] + GlobalHWVar.gpy and caseviste[i + 2]:
+                if caseviste[i] <= xMouse < caseviste[i] + GlobalHWVar.gpx and caseviste[i + 1] <= yMouse < caseviste[i + 1] + GlobalHWVar.gpy and caseviste[i + 2]:
                     if xp != caseviste[i] or yp != caseviste[i + 1]:
                         if not primoFrame:
                             GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
@@ -1372,7 +1373,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if not casellaTrovata:
                 i = 0
                 while i < len(cofanetti):
-                    if cofanetti[i + 1] < xMouse < cofanetti[i + 1] + GlobalHWVar.gpx and cofanetti[i + 2] < yMouse < cofanetti[i + 2] + GlobalHWVar.gpy:
+                    if cofanetti[i + 1] <= xMouse < cofanetti[i + 1] + GlobalHWVar.gpx and cofanetti[i + 2] <= yMouse < cofanetti[i + 2] + GlobalHWVar.gpy:
                         if xp != cofanetti[i + 1] or yp != cofanetti[i + 2]:
                             j = 0
                             while j < len(caseviste):
@@ -1389,7 +1390,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if not casellaTrovata:
                 i = 0
                 while i < len(porte):
-                    if porte[i + 1] < xMouse < porte[i + 1] + GlobalHWVar.gpx and porte[i + 2] < yMouse < porte[i + 2] + GlobalHWVar.gpy:
+                    if porte[i + 1] <= xMouse < porte[i + 1] + GlobalHWVar.gpx and porte[i + 2] <= yMouse < porte[i + 2] + GlobalHWVar.gpy:
                         if xp != porte[i + 1] or yp != porte[i + 2]:
                             j = 0
                             while j < len(caseviste):
@@ -1406,7 +1407,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     i += 4
             if not casellaTrovata:
                 for personaggioOggetto in listaPersonaggi:
-                    if personaggioOggetto.mantieniSempreASchermo and personaggioOggetto.x < xMouse < personaggioOggetto.x + GlobalHWVar.gpx and personaggioOggetto.y < yMouse < personaggioOggetto.y + GlobalHWVar.gpy:
+                    if personaggioOggetto.mantieniSempreASchermo and personaggioOggetto.x <= xMouse < personaggioOggetto.x + GlobalHWVar.gpx and personaggioOggetto.y <= yMouse < personaggioOggetto.y + GlobalHWVar.gpy:
                         if personaggioOggetto.vicinoACasellaVista and (xp != personaggioOggetto.x or yp != personaggioOggetto.y):
                             if not primoFrame:
                                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostaPunBattaglia)
@@ -1415,7 +1416,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         casellaTrovata = True
                         break
         if GlobalHWVar.mouseVisibile:
-            # controlle se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
+            # controlla se il cursore è sul pers in basso a sinistra / nemico in alto a sinistra / telecolco / Rallo / Colco / personaggio / porta / cofanetto / nemico / casella nel raggio (in caso di oggetto)
             if GlobalHWVar.gsy // 18 * 17 <= yMouse <= GlobalHWVar.gsy and GlobalHWVar.gsx // 32 * 0 <= xMouse <= GlobalHWVar.gsx // 32 * 6:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
@@ -1440,7 +1441,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "Rallo"
-            elif ry < yMouse < ry + GlobalHWVar.gpy and rx < xMouse < rx + GlobalHWVar.gpx:
+            elif ry < yMouse < ry + GlobalHWVar.gpy and rx < xMouse < rx + GlobalHWVar.gpx and not (nemicoInquadrato == "Colco" and attacco == 4):
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "Colco"
@@ -1460,7 +1461,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                 j = 0
                                 while j < len(caseattactot):
                                     if caseattactot[j] == nemico.x and caseattactot[j + 1] == nemico.y:
-                                        if caseattactot[j + 2] and ((abs(nemico.x - x) <= GlobalHWVar.gpx and abs(nemico.y - y) <= GlobalHWVar.gpy and not abs(nemico.x - x) == abs(nemico.y - y)) or numFrecce > 0):
+                                        if caseattactot[j + 2] and ((abs(nemico.x - x) <= GlobalHWVar.gpx and abs(nemico.y - y) <= GlobalHWVar.gpy and not abs(nemico.x - x) == abs(nemico.y - y)) or numFrecce > 0) and attacco != 4:
                                             if GlobalHWVar.mouseBloccato:
                                                 GlobalHWVar.configuraCursore(False)
                                             inquadratoQualcosa = "nemico"
@@ -1481,7 +1482,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                     j = 0
                                     while j < len(caseattactot):
                                         if caseattactot[j] == vettoreEsche[i + 2] and caseattactot[j + 1] == vettoreEsche[i + 3]:
-                                            if caseattactot[j + 2] and ((abs(vettoreEsche[i + 2] - x) <= GlobalHWVar.gpx and abs(vettoreEsche[i + 3] - y) <= GlobalHWVar.gpy and not abs(vettoreEsche[i + 2] - x) == abs(vettoreEsche[i + 3] - y)) or numFrecce > 0):
+                                            if caseattactot[j + 2] and ((abs(vettoreEsche[i + 2] - x) <= GlobalHWVar.gpx and abs(vettoreEsche[i + 3] - y) <= GlobalHWVar.gpy and not abs(vettoreEsche[i + 2] - x) == abs(vettoreEsche[i + 3] - y)) or numFrecce > 0) and attacco != 4:
                                                 if GlobalHWVar.mouseBloccato:
                                                     GlobalHWVar.configuraCursore(False)
                                                 inquadratoQualcosa = "esca"
@@ -1507,7 +1508,22 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                     if xp == personaggio.x and yp == personaggio.y:
                                         suPersonaggio = True
                                         break
-                                if not suPersonaggio:
+                                suNemico = False
+                                for nemico in listaNemici:
+                                    if xp == nemico.x and yp == nemico.y:
+                                        suNemico = True
+                                        break
+                                suEsca = False
+                                i = 0
+                                while i < len(vettoreEsche):
+                                    if xp == vettoreEsche[i + 2] and yp == vettoreEsche[i + 3]:
+                                        suEsca = True
+                                        break
+                                    i += 4
+                                suColco = False
+                                if xp == rx and yp == ry:
+                                    suColco = True
+                                if not suPersonaggio and not ((suNemico or suEsca or suColco) and attacco == 4):
                                     if GlobalHWVar.mouseBloccato:
                                         GlobalHWVar.configuraCursore(False)
                                     inquadratoQualcosa = "casellaNelRaggio"
@@ -1537,10 +1553,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if not GlobalHWVar.mouseBloccato:
                 GlobalHWVar.configuraCursore(True)
         primoFrame = False
+        aggiornaInterfacciaPerCambioInput = False
 
         # gestione degli input
         bottoneDownVecchio = bottoneDown
-        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
+        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, aggiornaInterfacciaPerCambioInput)
         if bottoneDownVecchio != bottoneDown:
             nxp = 0
             nyp = 0
@@ -1975,6 +1992,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             if nemico.x == xp and nemico.y == yp:
                                 confesca = False
                                 break
+                        if rx == xp and ry == yp:
+                            confesca = False
                         if confesca:
                             n = random.randint(1, 2)
                             if abs(xp - x) == abs(yp - y) == 0:
@@ -2393,13 +2412,15 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if attacco == 4:
             if abs(x - xp) <= GlobalHWVar.gpx * 6 and abs(y - yp) <= GlobalHWVar.gpy * 6:
                 puntat = GlobalImgVar.puntatIn
+                if xp == rx and yp == ry:
+                    puntat = GlobalImgVar.puntatOut
                 i = 0
                 while i < len(caseattactot):
                     if caseattactot[i] == xp and caseattactot[i + 1] == yp:
                         if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
                             puntat = GlobalImgVar.puntatOut
                         break
-                    i = i + 3
+                    i += 3
                 i = 0
                 while i < len(vettoreDenaro):
                     if vettoreDenaro[i + 1] == xp and vettoreDenaro[i + 2] == yp:
@@ -2410,6 +2431,16 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     if xp == personaggio.x and yp == personaggio.y:
                         puntat = GlobalImgVar.puntatOut
                         break
+                for nemico in listaNemici:
+                    if xp == nemico.x and yp == nemico.y:
+                        puntat = GlobalImgVar.puntatOut
+                        break
+                i = 0
+                while i < len(vettoreEsche):
+                    if xp == vettoreEsche[i + 2] and yp == vettoreEsche[i + 3]:
+                        puntat = GlobalImgVar.puntatOut
+                        break
+                    i += 4
             else:
                 puntat = GlobalImgVar.puntatOut
         if attacco == 5:

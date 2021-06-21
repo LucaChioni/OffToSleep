@@ -217,18 +217,6 @@ class NemicoObj(object):
             avvelenabile = True
             denaro = random.randint(0, 3)
             esp = 5
-        if self.tipo == "Scorpione":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = -2
-            raggioVisivo = GlobalHWVar.gpx * 2
-            attaccaDaLontano = False
-            velenoso = False
-            surriscaldante = False
-            avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
         if self.tipo == "RagnoNero":
             vitaTotale = 25
             attacco = 20
@@ -242,6 +230,18 @@ class NemicoObj(object):
             denaro = random.randint(0, 3)
             esp = 5
         if self.tipo == "RagnoRosso":
+            vitaTotale = 25
+            attacco = 20
+            difesa = 5
+            velocita = -2
+            raggioVisivo = GlobalHWVar.gpx * 2
+            attaccaDaLontano = False
+            velenoso = False
+            surriscaldante = False
+            avvelenabile = True
+            denaro = random.randint(0, 3)
+            esp = 5
+        if self.tipo == "Scorpione":
             vitaTotale = 25
             attacco = 20
             difesa = 5
