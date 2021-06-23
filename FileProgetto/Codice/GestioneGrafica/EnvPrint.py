@@ -13,7 +13,7 @@ import FunzioniGraficheGeneriche
 import Codice.GestioneNemiciPersonaggi.MovNemiciRob as MovNemiciRob
 
 
-def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio):
+def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, surrisc, velp, effp, vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, numFrecce, nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, primaDiAnima, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, avanzamentoStoria, nonMostrarePersonaggio, saltaTurno):
     if caricaTutto:
         GlobalHWVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
         # salvo la lista di cofanetti vicini a caselle viste per non mettergli la casella oscurata
@@ -280,20 +280,23 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
         elif personaggio.imgAttuale and not personaggio.mantieniSempreASchermo and personaggio.inCasellaVista:
             GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
-    # backbround occhio/chiave
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
+    # backbround saltaTurno/occhio/chiave
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
+    if saltaTurno:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurnoCliccato, (GlobalHWVar.gpx * 30.9, 0))
+    else:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurno, (GlobalHWVar.gpx * 30.9, 0))
     # vista nemici
     if apriocchio:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gpx * 29.8, 0))
     else:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
         if chiamarob:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gpx * 28.7, 0))
 
     # vita-status rallo
     lungvitatot = int(((GlobalHWVar.gpx * pvtot) / float(4)) // 5)
@@ -467,7 +470,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             GlobalHWVar.aggiornaSchermo()
 
 
-def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp):
+def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp, saltaTurno):
     if raffredda > 0 or autoRic1 > 0 or autoRic2 > 0 or mosseRimasteRob < 0:
         messaggioDiErrore = ""
         if raffredda > 0:
@@ -608,20 +611,23 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         if effp > 0:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
 
-    # background occhio/chiave
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
+    # background saltaTurno/occhio/chiave
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
+    if saltaTurno:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurnoCliccato, (GlobalHWVar.gpx * 30.9, 0))
+    else:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurno, (GlobalHWVar.gpx * 30.9, 0))
     # vista nemici
     if apriocchio:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gpx * 29.8, 0))
     else:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
     if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
         if chiamarob:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gpx * 28.7, 0))
 
     illuminazioneCasellaObbiettivo = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     illuminazioneCasellaObbiettivo.fill((230, 230, 180, 130))
@@ -799,7 +805,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, vettoreImgCaselle):
+def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, vettoreImgCaselle, saltaTurno):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -1185,20 +1191,23 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
     schermoOriginale = GlobalHWVar.schermo.copy().convert()
 
-    # background occhio/chiave
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
+    # background saltaTurno/occhio/chiave
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
+    if saltaTurno:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurnoCliccato, (GlobalHWVar.gpx * 30.9, 0))
+    else:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurno, (GlobalHWVar.gpx * 30.9, 0))
     # vista nemici
     if apriocchio:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gpx * 29.8, 0))
     else:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
     # chiave robo
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
         if chiamarob:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
         else:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gpx * 28.7, 0))
 
     # disegno img puntatoreInquadraNemici
     if nemicoInquadrato == "Colco":
@@ -1341,6 +1350,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     attaccato = False
     attaccoADistanza = False
     sposta = False
+    saltaTurno = False
     interagisciConPersonaggio = False
     interazioneConfermata = False
     primoFrame = True
@@ -1433,10 +1443,14 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "battaglia"
-            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1.5 and GlobalHWVar.gsx // 32 * 27.8 < xMouse <= GlobalHWVar.gsx // 32 * 30.2:
+            elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 28.6 < xMouse <= GlobalHWVar.gsx // 32 * 29.8:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 inquadratoQualcosa = "telecolco"
+            elif 0 <= yMouse <= GlobalHWVar.gsy // 18 * 1 and GlobalHWVar.gsx // 32 * 30.8 <= xMouse <= GlobalHWVar.gsx:
+                if GlobalHWVar.mouseBloccato:
+                    GlobalHWVar.configuraCursore(False)
+                inquadratoQualcosa = "saltaTurno"
             elif y < yMouse < y + GlobalHWVar.gpy and x < xMouse < x + GlobalHWVar.gpx:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
@@ -1571,6 +1585,13 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
             risposta = True
             startf = True
+            bottoneDown = False
+        # esci e salta il turno
+        if bottoneDown == pygame.K_0 or bottoneDown == pygame.K_KP0 or bottoneDown == "padSelect":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostaPunBattaglia)
+            risposta = True
+            sposta = True
+            saltaTurno = True
             bottoneDown = False
         # attiva / disattiva il gambit
         if bottoneDown == pygame.K_LSHIFT or bottoneDown == pygame.K_RSHIFT or bottoneDown == "padTriangolo":
@@ -1722,7 +1743,13 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 interazioneConfermata = True
                 bottoneDown = False
             elif bottoneDown == "mouseSinistro":
-                if inquadratoQualcosa == "start":
+                if inquadratoQualcosa == "saltaTurno":
+                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostaPunBattaglia)
+                    risposta = True
+                    sposta = True
+                    saltaTurno = True
+                    bottoneDown = False
+                elif inquadratoQualcosa == "start":
                     risposta = True
                     startf = True
                     bottoneDown = False
@@ -1844,7 +1871,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 # analizza Colco attacco = 1
                 elif attacco == 1 and (xp == rx and yp == ry) and not (rx == x and ry == y):
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    analizzaColco(copy.copy(schermoPrevisioneColco), x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemici, True), difesa, ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco), GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp)
+                    analizzaColco(copy.copy(schermoPrevisioneColco), x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemici, True), difesa, ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco), GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, pvtot, pv, numFrecce, avvele, attp, difp, entot, enrob, surrisc, velp, effp, saltaTurno)
                     analisiDiColcoEffettuata = True
                     GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
                 # apri/chiudi porta attacco = 1
@@ -2777,20 +2804,23 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if effp > 0:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
 
-        # background occhio/chiave
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx * 27.6, 0, GlobalHWVar.gsx - (GlobalHWVar.gpx * 27.2), GlobalHWVar.gpy * 1.7))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 27, 0))
+        # background saltaTurno/occhio/chiave
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
+        if saltaTurno:
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurnoCliccato, (GlobalHWVar.gpx * 30.9, 0))
+        else:
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgSaltaTurno, (GlobalHWVar.gpx * 30.9, 0))
         # vista nemici
         if apriocchio:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhioape, (GlobalHWVar.gpx * 29.8, 0))
         else:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 1.4), GlobalHWVar.gpy * 0.3))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.occhiochiu, (GlobalHWVar.gpx * 29.8, 0))
         # chiave robo
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
             if chiamarob:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaveroboacc, (GlobalHWVar.gpx * 28.7, 0))
             else:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gsx - (GlobalHWVar.gpx * 4), 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gpx * 28.7, 0))
 
         # disegno img puntatoreInquadraNemici
         if nemicoInquadrato == "Colco":
@@ -2822,4 +2852,4 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockInterazioni.tick(GlobalHWVar.fpsInterazioni)
 
-    return sposta, creaesca, xp, yp, npers, nrob, pv, avvele, enrob, difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac
+    return sposta, creaesca, xp, yp, npers, nrob, pv, avvele, enrob, difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno

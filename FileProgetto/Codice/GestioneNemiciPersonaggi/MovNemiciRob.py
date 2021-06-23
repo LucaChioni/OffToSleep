@@ -462,9 +462,8 @@ def movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetNemi
                     vetNemiciSoloConXeY.append(vetNemici[i + 2])
                 i += 4
             for personaggio in listaPersonaggi:
-                if not personaggio.mantieniSempreASchermo:
-                    vetNemiciSoloConXeY.append(personaggio.x)
-                    vetNemiciSoloConXeY.append(personaggio.y)
+                vetNemiciSoloConXeY.append(personaggio.x)
+                vetNemiciSoloConXeY.append(personaggio.y)
             percorsoTrovato = GenericFunc.pathFinding(nemico.x, nemico.y, nemico.xPosizioneUltimoBersaglio, nemico.yPosizioneUltimoBersaglio, vetNemiciSoloConXeY, caseviste)
             if percorsoTrovato and not percorsoTrovato == "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != nemico.x or percorsoTrovato[len(percorsoTrovato) - 3] != nemico.y):
                 if percorsoTrovato[len(percorsoTrovato) - 4] > nemico.x:
@@ -1544,9 +1543,8 @@ def creaVetOstacoliPerColco(x, y, rx, ry, listaNemici, listaPersonaggi, vettoreE
             vetNemiciSoloConXeY.append(nemico.x)
             vetNemiciSoloConXeY.append(nemico.y)
     for personaggio in listaPersonaggi:
-        if not personaggio.mantieniSempreASchermo:
-            vetNemiciSoloConXeY.append(personaggio.x)
-            vetNemiciSoloConXeY.append(personaggio.y)
+        vetNemiciSoloConXeY.append(personaggio.x)
+        vetNemiciSoloConXeY.append(personaggio.y)
     i = 0
     while i < len(vettoreEsche):
         if vettoreEsche[i + 1] > 0:
@@ -1606,9 +1604,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     vetNemiciSoloConXeY.append(nemico.x)
                     vetNemiciSoloConXeY.append(nemico.y)
             for personaggio in listaPersonaggi:
-                if not personaggio.mantieniSempreASchermo:
-                    vetNemiciSoloConXeY.append(personaggio.x)
-                    vetNemiciSoloConXeY.append(personaggio.y)
+                vetNemiciSoloConXeY.append(personaggio.x)
+                vetNemiciSoloConXeY.append(personaggio.y)
             i = 0
             while i < len(vettoreEsche):
                 if vettoreEsche[i + 1] > 0:
@@ -1648,9 +1645,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                 vetNemiciSoloConXeY.append(nemico.x)
                 vetNemiciSoloConXeY.append(nemico.y)
         for personaggio in listaPersonaggi:
-            if not personaggio.mantieniSempreASchermo:
-                vetNemiciSoloConXeY.append(personaggio.x)
-                vetNemiciSoloConXeY.append(personaggio.y)
+            vetNemiciSoloConXeY.append(personaggio.x)
+            vetNemiciSoloConXeY.append(personaggio.y)
         i = 0
         while i < len(vettoreEsche):
             if vettoreEsche[i + 1] > 0:
@@ -2332,9 +2328,8 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     vetNemiciSoloConXeY.append(nemico.x)
                     vetNemiciSoloConXeY.append(nemico.y)
             for personaggio in listaPersonaggi:
-                if not personaggio.mantieniSempreASchermo:
-                    vetNemiciSoloConXeY.append(personaggio.x)
-                    vetNemiciSoloConXeY.append(personaggio.y)
+                vetNemiciSoloConXeY.append(personaggio.x)
+                vetNemiciSoloConXeY.append(personaggio.y)
             i = 0
             while i < len(vettoreEsche):
                 if vettoreEsche[i + 1] > 0:

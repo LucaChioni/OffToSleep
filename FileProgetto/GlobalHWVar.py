@@ -275,11 +275,12 @@ def inizializzaPad(pad):
             configTastiPad.append(configPad[6])
             configTastiPad.append(configPad[7])
             configTastiPad.append(configPad[8])
+            configTastiPad.append(configPad[9])
 
             configPadInUso.append(configPad[0])
             configPadInUso.append(configPad[1])
             configPadInUso.append(configTastiPad)
-            configPadInUso.append(configPad[9])
+            configPadInUso.append(configPad[10])
             break
 def caricaImpostazioniController():
     impoControllerErrato = False
@@ -296,7 +297,7 @@ def caricaImpostazioniController():
         while contaGlobale < len(datiImpostazioniController):
             setteggioController = datiImpostazioniController[contaGlobale].split("_")
             setteggioController.pop(len(setteggioController) - 1)
-            if len(setteggioController) != 9:
+            if len(setteggioController) != 10:
                 impoControllerErrato = True
                 print ("File di configurazione dei controller corrotto 1")
                 break
@@ -318,13 +319,8 @@ def caricaImpostazioniController():
         scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/ImpoController.txt", "w")
         scrivi.close()
     return impoControllerErrato, datiImpostazioniController
-def inizializzaModuloJoistick():
+def assegnaConfigurazioneController():
     impoControllerErrato, datiImpostazioniController = caricaImpostazioniController()
-
-    if pygame.joystick.get_init():
-        pygame.joystick.quit()
-    pygame.joystick.init()
-
     global listaPadConnessiConfigurati
     listaPadConnessiConfigurati = []
     global listaPadConnessiSconosciuti
@@ -357,6 +353,7 @@ def inizializzaModuloJoistick():
                     configPad.append(int(setteggioController[6]))
                     configPad.append(int(setteggioController[7]))
                     configPad.append(int(setteggioController[8]))
+                    configPad.append(int(setteggioController[9]))
                     joystick.init()
                     break
                 contaGlobale += 1
@@ -372,7 +369,13 @@ def inizializzaModuloJoistick():
             configPad.append(False)
             configPad.append(False)
             configPad.append(False)
+            configPad.append(False)
         configPadConnessi.append(configPad)
+def inizializzaModuloJoistick():
+    if pygame.joystick.get_init():
+        pygame.joystick.quit()
+    pygame.joystick.init()
+    assegnaConfigurazioneController()
 inizializzaModuloJoistick()
 usandoIlController = False
 

@@ -4,7 +4,14 @@ import pygame
 import GlobalHWVar
 
 
+aggiornaInterfacciaDuranteLePause = False
+
 def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, gestioneDuranteLePause=False):
+    global aggiornaInterfacciaDuranteLePause
+    if aggiornaInterfacciaDuranteLePause:
+        aggiornaInterfaccia = True
+        aggiornaInterfacciaDuranteLePause = False
+
     if controllerDaConfigurare:
         GlobalHWVar.listaInputInSospeso = []
     if not gestioneDuranteLePause and len(GlobalHWVar.listaInputInSospeso) > 0:
@@ -18,6 +25,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
         GlobalHWVar.listaInputInSospeso = []
 
     tastoTrovato = False
+    cambioInput = False
     for event in pygame.event.get():
         # faccio apparire/sparire il cursore
         if event.type == pygame.KEYDOWN and (GlobalHWVar.mouseVisibile or GlobalHWVar.usandoIlController):
@@ -29,6 +37,9 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
             bottoneDown = False
             GlobalHWVar.setCursoreVisibile(False)
             GlobalHWVar.usandoIlController = False
+            cambioInput = True
+            if gestioneDuranteLePause:
+                aggiornaInterfacciaDuranteLePause = True
         elif event.type == pygame.MOUSEBUTTONDOWN and (not GlobalHWVar.mouseVisibile or GlobalHWVar.usandoIlController):
             GlobalHWVar.listaTastiPremuti = []
             GlobalHWVar.listaInputInSospeso = []
@@ -38,6 +49,9 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
             bottoneDown = False
             GlobalHWVar.setCursoreVisibile(True)
             GlobalHWVar.usandoIlController = False
+            cambioInput = True
+            if gestioneDuranteLePause:
+                aggiornaInterfacciaDuranteLePause = True
         elif (event.type == pygame.JOYBUTTONDOWN or event.type == pygame.JOYHATMOTION) and (GlobalHWVar.mouseVisibile or not GlobalHWVar.usandoIlController):
             padTrovato = False
             for pad in GlobalHWVar.listaPadConnessiConfigurati:
@@ -72,6 +86,9 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                 bottoneDown = False
                 GlobalHWVar.setCursoreVisibile(False)
                 GlobalHWVar.usandoIlController = True
+                cambioInput = True
+                if gestioneDuranteLePause:
+                    aggiornaInterfacciaDuranteLePause = True
 
         # esco dal gioco
         if event.type == pygame.QUIT:
@@ -80,7 +97,14 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
             GlobalHWVar.quit()
 
         # tasto tastiera
-        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+        if (event.type == pygame.KEYDOWN or event.type == pygame.KEYUP) and not cambioInput and not (GlobalHWVar.mouseVisibile or GlobalHWVar.usandoIlController):
+            if event.type == pygame.KEYDOWN and (event.key == pygame.K_0 or event.key == pygame.K_KP0):
+                GlobalHWVar.listaTastiPremuti.append(event.key)
+                if gestioneDuranteLePause:
+                    GlobalHWVar.listaInputInSospeso.append(str(event.key) + "Down")
+                elif not tastoTrovato:
+                    bottoneDown = event.key
+                tastoTrovato = True
             if event.type == pygame.KEYDOWN and event.key == pygame.K_w:
                 GlobalHWVar.listaTastiPremuti.append(event.key)
                 if gestioneDuranteLePause:
@@ -168,7 +192,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                 bottoneDown = False
 
         # tasto mouse
-        if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP:
+        if (event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP) and not cambioInput and GlobalHWVar.mouseVisibile:
             sinistroMouse, centraleMouse, destroMouse = pygame.mouse.get_pressed()
 
             if gestioneDuranteLePause:
@@ -214,7 +238,7 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                 bottoneDown = False
 
         # tasto joypad
-        if event.type == pygame.JOYBUTTONDOWN or event.type == pygame.JOYBUTTONUP:
+        if (event.type == pygame.JOYBUTTONDOWN or event.type == pygame.JOYBUTTONUP) and not cambioInput and GlobalHWVar.usandoIlController:
             padCambiato = False
             padTrovato = False
             for pad in GlobalHWVar.listaPadConnessiConfigurati:
@@ -286,6 +310,13 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                                     bottoneDown = "padStart"
                                 GlobalHWVar.listaTastiPremuti.append("padStart")
                                 tastoTrovato = True
+                            if idTasto == GlobalHWVar.configPadInUso[2][7] and not "padSelect" in GlobalHWVar.listaTastiPremuti:
+                                if gestioneDuranteLePause:
+                                    GlobalHWVar.listaInputInSospeso.append("padSelectDown")
+                                elif not tastoTrovato:
+                                    bottoneDown = "padSelect"
+                                GlobalHWVar.listaTastiPremuti.append("padSelect")
+                                tastoTrovato = True
                         else:
                             if idTasto == GlobalHWVar.configPadInUso[2][0] and "padCroce" in GlobalHWVar.listaTastiPremuti:
                                 GlobalHWVar.listaTastiPremuti.remove("padCroce")
@@ -315,10 +346,14 @@ def getInput(bottoneDown, aggiornaInterfaccia, controllerDaConfigurare=False, ge
                                 GlobalHWVar.listaTastiPremuti.remove("padStart")
                                 if gestioneDuranteLePause:
                                     GlobalHWVar.listaInputInSospeso.append("padStartUp")
+                            if idTasto == GlobalHWVar.configPadInUso[2][7] and "padSelect" in GlobalHWVar.listaTastiPremuti:
+                                GlobalHWVar.listaTastiPremuti.remove("padSelect")
+                                if gestioneDuranteLePause:
+                                    GlobalHWVar.listaInputInSospeso.append("padSelectUp")
 
             if len(GlobalHWVar.listaTastiPremuti) == 0:
                 bottoneDown = False
-        if event.type == pygame.JOYHATMOTION:
+        if (event.type == pygame.JOYHATMOTION) and not cambioInput and GlobalHWVar.usandoIlController:
             padCambiato = False
             padTrovato = False
             for pad in GlobalHWVar.listaPadConnessiConfigurati:

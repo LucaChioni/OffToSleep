@@ -197,7 +197,7 @@ class NemicoObj(object):
             vitaTotale = 25
             attacco = 20
             difesa = 5
-            velocita = -2
+            velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
@@ -209,7 +209,7 @@ class NemicoObj(object):
             vitaTotale = 25
             attacco = 20
             difesa = 5
-            velocita = -2
+            velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
@@ -221,7 +221,7 @@ class NemicoObj(object):
             vitaTotale = 25
             attacco = 20
             difesa = 5
-            velocita = -2
+            velocita = 2
             raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
@@ -233,7 +233,7 @@ class NemicoObj(object):
             vitaTotale = 25
             attacco = 20
             difesa = 5
-            velocita = -2
+            velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
@@ -245,7 +245,7 @@ class NemicoObj(object):
             vitaTotale = 25
             attacco = 20
             difesa = 5
-            velocita = -2
+            velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 2
             attaccaDaLontano = False
             velenoso = False
@@ -577,9 +577,8 @@ class NemicoObj(object):
                     vetNemiciSoloConXeY.append(nemico.x)
                     vetNemiciSoloConXeY.append(nemico.y)
             for personaggio in listaPersonaggi:
-                if not personaggio.mantieniSempreASchermo:
-                    vetNemiciSoloConXeY.append(personaggio.x)
-                    vetNemiciSoloConXeY.append(personaggio.y)
+                vetNemiciSoloConXeY.append(personaggio.x)
+                vetNemiciSoloConXeY.append(personaggio.y)
             escaTrovata = False
             i = 0
             while i < len(vettoreEsche):
@@ -638,9 +637,8 @@ class NemicoObj(object):
                 vetNemiciSoloConXeY.append(nemico.x)
                 vetNemiciSoloConXeY.append(nemico.y)
         for personaggio in listaPersonaggi:
-            if not personaggio.mantieniSempreASchermo:
-                vetNemiciSoloConXeY.append(personaggio.x)
-                vetNemiciSoloConXeY.append(personaggio.y)
+            vetNemiciSoloConXeY.append(personaggio.x)
+            vetNemiciSoloConXeY.append(personaggio.y)
 
         # se l'obiettivo precedente è un'esca che esiste ancora, che puoi ancora raggiungere me che non vedi più non cambi bersaglio a meno che non vedi un'altra esca (corregge il caso in cui il nemico vede te o colco e non più l'esca => fa avanti e indietro di continuo)
         escaVecchiaAncoraRaggiungibilie = False

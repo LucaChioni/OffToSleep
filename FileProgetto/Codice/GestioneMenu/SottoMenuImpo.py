@@ -10,7 +10,7 @@ import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGener
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
-def settaController():
+def settaController(arrivatoDaMenuPrincipale):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     xp = GlobalHWVar.gsx // 32 * 1
@@ -24,11 +24,12 @@ def settaController():
     bottoneDown = False
     tastotempfps = 8
     countdownAggiornamentoModulo = -1
+    mostraErrore = False
 
     listaIdPadConfigModificata = []
     tastiPremutiPadConfig = []
     tastoDaConfigurare = 0
-    ordineConfigTasti = ["croce", "cerchio", "quadrato", "triangolo", "l1", "r1", "start", "croceDir"]
+    ordineConfigTasti = ["croce", "cerchio", "quadrato", "triangolo", "l1", "r1", "start", "select", "croceDir"]
     configurazioneTastiFatta = []
 
     precedentementeInizializzato = True
@@ -165,7 +166,7 @@ def settaController():
                         configurazioneTastiFatta.append(tastiPremutiPadConfig[0])
                         tastoDaConfigurare += 1
                         aggiornaSchermo = True
-        if configurando and len(configurazioneTastiFatta) == 9:
+        if configurando and len(configurazioneTastiFatta) == 10:
             configurazioneSalvata = False
             i = 0
             while i < len(configTemp):
@@ -177,12 +178,13 @@ def settaController():
                     configTemp[i][5] = configurazioneTastiFatta[5]
                     configTemp[i][6] = configurazioneTastiFatta[6]
                     configTemp[i][7] = configurazioneTastiFatta[7]
-                    configTemp[i][8] = int(configurazioneTastiFatta[8].split(":")[1])
+                    configTemp[i][8] = configurazioneTastiFatta[8]
+                    configTemp[i][9] = int(configurazioneTastiFatta[9].split(":")[1])
                     configurazioneSalvata = True
                     break
                 i += 1
             if not configurazioneSalvata:
-                configurazioneTastiFatta[8] = int(configurazioneTastiFatta[8].split(":")[1])
+                configurazioneTastiFatta[9] = int(configurazioneTastiFatta[9].split(":")[1])
                 configTemp.append(configurazioneTastiFatta)
             if not precedentementeInizializzato:
                 controllerDaConfigurare.quit()
@@ -217,37 +219,44 @@ def settaController():
                     else:
                         risposta = True
                 # aggiorna lista controller
-                elif voceMarcata == 1 and countdownAggiornamentoModulo <= 0:
-                    countdownAggiornamentoModulo = 150
-                    GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    for pad in GlobalHWVar.listaPadConnessiConfigurati:
-                        pad.quit()
-                    if controllerDaConfigurare and controllerDaConfigurare.get_init():
-                        controllerDaConfigurare.quit()
-                    GlobalHWVar.inizializzaModuloJoistick()
-
-                    numPadSelezionato = 0
-                    if len(GlobalHWVar.configPadConnessi) > 0:
-                        controllerDaConfigurare = False
-                        idController = GlobalHWVar.configPadConnessi[numPadSelezionato][0]
-                        nomeController = GlobalHWVar.configPadConnessi[numPadSelezionato][1]
-                        padInizialmeteConfigurato = False
+                elif voceMarcata == 1:
+                    if arrivatoDaMenuPrincipale and countdownAggiornamentoModulo <= 0:
+                        countdownAggiornamentoModulo = 150
+                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         for pad in GlobalHWVar.listaPadConnessiConfigurati:
-                            if idController == pad.get_id():
-                                controllerDaConfigurare = pad
-                                padInizialmeteConfigurato = True
-                                break
-                        if not controllerDaConfigurare:
-                            for pad in GlobalHWVar.listaPadConnessiSconosciuti:
+                            pad.quit()
+                        if controllerDaConfigurare and controllerDaConfigurare.get_init():
+                            controllerDaConfigurare.quit()
+                        GlobalHWVar.inizializzaModuloJoistick()
+
+                        numPadSelezionato = 0
+                        if len(GlobalHWVar.configPadConnessi) > 0:
+                            controllerDaConfigurare = False
+                            idController = GlobalHWVar.configPadConnessi[numPadSelezionato][0]
+                            nomeController = GlobalHWVar.configPadConnessi[numPadSelezionato][1]
+                            padInizialmeteConfigurato = False
+                            for pad in GlobalHWVar.listaPadConnessiConfigurati:
                                 if idController == pad.get_id():
                                     controllerDaConfigurare = pad
-                                    padInizialmeteConfigurato = False
+                                    padInizialmeteConfigurato = True
                                     break
-                    else:
-                        controllerDaConfigurare = False
-                        idController = -1
-                        nomeController = "Nessun controller rilevato"
-                        padInizialmeteConfigurato = False
+                            if not controllerDaConfigurare:
+                                for pad in GlobalHWVar.listaPadConnessiSconosciuti:
+                                    if idController == pad.get_id():
+                                        controllerDaConfigurare = pad
+                                        padInizialmeteConfigurato = False
+                                        break
+                        else:
+                            controllerDaConfigurare = False
+                            idController = -1
+                            nomeController = "Nessun controller rilevato"
+                            padInizialmeteConfigurato = False
+                    elif not arrivatoDaMenuPrincipale:
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
+                        mostraErrore = "nonInMenuPrincipale"
+                    elif countdownAggiornamentoModulo > 0:
+                        GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
+                        mostraErrore = "attendiQualcheSecondo"
                 # inizia configurazione
                 elif not configurando and voceMarcata == 3:
                     if controllerDaConfigurare and not controllerDaConfigurare.get_init():
@@ -262,6 +271,8 @@ def settaController():
                         tastoDaConfigurare = 0
                         configurando = True
                         aggiornaSchermo = True
+                        if controllerDaConfigurare == GlobalHWVar.padUtilizzato:
+                            pygame.time.wait(200)
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 # canella configurazione
@@ -307,7 +318,7 @@ def settaController():
                         pad.quit()
                     if controllerDaConfigurare and controllerDaConfigurare.get_init():
                         controllerDaConfigurare.quit()
-                    GlobalHWVar.inizializzaModuloJoistick()
+                    GlobalHWVar.assegnaConfigurazioneController()
 
                     listaIdPadConfigModificata = []
                     numPadSelezionato = 0
@@ -564,6 +575,11 @@ def settaController():
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8.5, GlobalHWVar.gsy // 18 * 14.9, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 0.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 16.5, GlobalHWVar.gsy // 18 * 4, GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 12.5))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostazioniController, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                if mostraErrore == "nonInMenuPrincipale":
+                    FunzioniGraficheGeneriche.messaggio("Opzione disponibile solo accedendo da menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                if mostraErrore == "attendiQualcheSecondo":
+                    FunzioniGraficheGeneriche.messaggio("Attendi qualche secondo", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 14.5, 40, centrale=True)
+                mostraErrore = False
             if aggiornaInterfacciaPerCambioInput:
                 aggiornaInterfacciaPerCambioInput = False
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 22, 0, GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 2.5))
@@ -576,7 +592,7 @@ def settaController():
 
             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 14.5), ((GlobalHWVar.gpx * 8.5) - 1, GlobalHWVar.gpy * 15.9), 2)
 
-            if countdownAggiornamentoModulo <= 0:
+            if countdownAggiornamentoModulo <= 0 and arrivatoDaMenuPrincipale:
                 FunzioniGraficheGeneriche.messaggio("Aggiorna lista controller collegati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
             else:
                 FunzioniGraficheGeneriche.messaggio("Aggiorna lista controller collegati", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 5, 60)
@@ -610,6 +626,8 @@ def settaController():
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerR1, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                 if ordineConfigTasti[tastoDaConfigurare] == "start":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerStart, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                if ordineConfigTasti[tastoDaConfigurare] == "select":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerSelect, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                 if ordineConfigTasti[tastoDaConfigurare] == "croceDir":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
             elif testando:
@@ -623,7 +641,8 @@ def settaController():
                         configurazioneDaTestare.append(int(padConf[5]))
                         configurazioneDaTestare.append(int(padConf[6]))
                         configurazioneDaTestare.append(int(padConf[7]))
-                        configurazioneDaTestare.append("croceDir:" + str(padConf[8]))
+                        configurazioneDaTestare.append(int(padConf[8]))
+                        configurazioneDaTestare.append("croceDir:" + str(padConf[9]))
                         break
                 if len(configurazioneDaTestare) > 0:
                     if configurazioneDaTestare[0] in tastiPremutiPadConfig:
@@ -641,6 +660,8 @@ def settaController():
                     if configurazioneDaTestare[6] in tastiPremutiPadConfig:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerStart, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                     if configurazioneDaTestare[7] in tastiPremutiPadConfig:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerSelect, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
+                    if configurazioneDaTestare[8] in tastiPremutiPadConfig:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.impostaControllerCroceDirezionale, (GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 2))
                 FunzioniGraficheGeneriche.messaggio("Controlla che i tasti premuti corrispondano a quelli illuminati", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 13.5, 40, centrale=True)
             else:
@@ -678,7 +699,7 @@ def settaController():
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
+def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
     puntatore = GlobalImgVar.puntatore
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 5.1
@@ -760,7 +781,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaSinistra = True
-            elif GlobalHWVar.gsx // 32 * 21.3 <= xMouse <= GlobalHWVar.gsx // 32 * 22.2 and GlobalHWVar.gsy // 18 * 10.8 <= yMouse <= GlobalHWVar.gsy // 18 * 12:
+            elif GlobalHWVar.gsx // 32 * 20.9 <= xMouse <= GlobalHWVar.gsx // 32 * 21.8 and GlobalHWVar.gsy // 18 * 10.8 <= yMouse <= GlobalHWVar.gsy // 18 * 12:
                 if GlobalHWVar.mouseBloccato:
                     GlobalHWVar.configuraCursore(False)
                 cursoreSuFrecciaDestra = True
@@ -819,13 +840,13 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                 if bottoneDown == "mouseSinistro" and suTornaIndietro:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                     risposta = True
-                elif bottoneDown == "mouseSinistro" and cursoreSuImpoController and settaRisoluzione:
+                elif bottoneDown == "mouseSinistro" and cursoreSuImpoController:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    settaController()
+                    settaController(arrivatoDaMenuPrincipale)
                     primoFrame = True
-                elif voceMarcata == 4 and not bottoneDown == "mouseSinistro" and settaRisoluzione:
+                elif voceMarcata == 4 and not bottoneDown == "mouseSinistro":
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                    settaController()
+                    settaController(arrivatoDaMenuPrincipale)
                     primoFrame = True
                 elif voceMarcata == 7:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
@@ -859,6 +880,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
                             GlobalGameVar.numImgCaricata = 0
                             GlobalImgVar.loadImgs(GlobalGameVar.numImgCaricata, cambioRisoluzione=True)
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
                     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
                     if GlobalHWVar.linguaImpostata == "italiano":
@@ -937,7 +959,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if settaRisoluzione and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             gsxTemp = GlobalHWVar.maxGsx
@@ -1020,7 +1042,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if settaRisoluzione and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             if GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
@@ -1096,7 +1118,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if settaRisoluzione and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             gsxTemp = GlobalHWVar.maxGsx
@@ -1151,7 +1173,7 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if settaRisoluzione and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             if GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
@@ -1290,8 +1312,8 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.9))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.9))
-            if settaRisoluzione:
-                FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 9.5, 60)
+            FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 9.5, 60)
+            if arrivatoDaMenuPrincipale:
                 FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
                 if voceMarcata == 5:
                     if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
@@ -1299,17 +1321,15 @@ def menuImpostazioni(settaRisoluzione, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
                     if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.5, GlobalHWVar.gsy // 18 * 10.9))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
                     else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.5, GlobalHWVar.gsy // 18 * 10.9))
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
             else:
-                FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 9.5, 60)
-                FunzioniGraficheGeneriche.messaggio("Configurabile solo dal menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 30.3, GlobalHWVar.gsy // 18 * 9.8, 40, daDestra=True)
                 FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
                 if voceMarcata == 5:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.5, GlobalHWVar.gsy // 18 * 10.9))
-                FunzioniGraficheGeneriche.messaggio("Configurabile solo dal menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 30.3, GlobalHWVar.gsy // 18 * 11.3, 40, daDestra=True)
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
+                FunzioniGraficheGeneriche.messaggio("Configurabile solo da menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 30.3, GlobalHWVar.gsy // 18 * 11.2, 40, daDestra=True)
             if schermoInteroTemp:
                 FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 12.5, 60)
             else:

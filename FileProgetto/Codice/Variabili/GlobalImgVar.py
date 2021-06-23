@@ -93,6 +93,8 @@ global occhioape
 global occhiochiu
 global chiaveroboacc
 global chiaverobospe
+global imgSaltaTurno
+global imgSaltaTurnoCliccato
 global esche
 global sacchettoDenaroStart
 global sacchettoDenaroMercante
@@ -105,9 +107,6 @@ global imgFrecciaLanciata
 global cofaniaper
 global cofanichiu
 global sfocontcof
-global s1
-global s2
-global s3
 global campoattaccabileRallo1
 global campoattaccabileRallo2
 global campoattaccabileRallo3
@@ -183,6 +182,7 @@ global impostaControllerTriangolo
 global impostaControllerL1
 global impostaControllerR1
 global impostaControllerStart
+global impostaControllerSelect
 global impostaControllerCroceDirezionale
 global persGrafMenu
 global lucy1GrafMenu
@@ -397,6 +397,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global occhiochiu
     global chiaveroboacc
     global chiaverobospe
+    global imgSaltaTurno
+    global imgSaltaTurnoCliccato
     global esche
     global sacchettoDenaroStart
     global sacchettoDenaroMercante
@@ -409,9 +411,6 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global cofaniaper
     global cofanichiu
     global sfocontcof
-    global s1
-    global s2
-    global s3
     global campoattaccabileRallo1
     global campoattaccabileRallo2
     global campoattaccabileRallo3
@@ -487,6 +486,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global impostaControllerL1
     global impostaControllerR1
     global impostaControllerStart
+    global impostaControllerSelect
     global impostaControllerCroceDirezionale
     global persGrafMenu
     global lucy1GrafMenu
@@ -890,11 +890,13 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgNumFrecce = funzionePerCaricareImmagini('Risorse/Immagini/Status/NumFrecce.png', GlobalHWVar.gpx * 3 // 4, GlobalHWVar.gpy * 3 // 4, True)
 
     # menu alto destra
-    sfochiaveocchio = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SfondoOcchioChiave.png", GlobalHWVar.gpx * 5, GlobalHWVar.gpy * 2, False)
+    sfochiaveocchio = funzionePerCaricareImmagini("Risorse/Immagini/Oggetti/SfondoOcchioChiave.png", GlobalHWVar.gpx * 4, GlobalHWVar.gpy * 1, False)
     occhioape = funzionePerCaricareImmagini('Risorse/Immagini/Status/OcchioAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     occhiochiu = funzionePerCaricareImmagini('Risorse/Immagini/Status/OcchioChiuso.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    chiaveroboacc = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ChiaveColcoAcc.png', GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True)
-    chiaverobospe = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ChiaveColcoSpe.png', GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True)
+    chiaveroboacc = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ChiaveColcoAcc.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    chiaverobospe = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/ChiaveColcoSpe.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgSaltaTurno = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SaltaTurno.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgSaltaTurnoCliccato = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SaltaTurnoCliccato.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # oggetti sulla schermata
     esche = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/Oggetto8Ico.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
@@ -911,11 +913,6 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     cofaniaper = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/CofanettoAperto.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     cofanichiu = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/CofanettoChiuso.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     sfocontcof = funzionePerCaricareImmagini('Risorse/Immagini/Oggetti/SfondoContenutoCofanetto.png', GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 3, False)
-
-    # immagini salvataggi
-    s1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Salvataggi/S1.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, False)
-    s2 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Salvataggi/S2.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, False)
-    s3 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Salvataggi/S3.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, False)
 
     # caselle attaccabili
     campoattaccabileRallo1 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
@@ -1065,6 +1062,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     impostaControllerL1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerL1.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostaControllerR1 = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerR1.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostaControllerStart = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerStart.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
+    impostaControllerSelect = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerSelect.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
     impostaControllerCroceDirezionale = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Tutorial/ImpoControllerCroceDirezionale.png', GlobalHWVar.gpx * 14, GlobalHWVar.gpy * 14, False)
 
     # img grafiche / dialoghi

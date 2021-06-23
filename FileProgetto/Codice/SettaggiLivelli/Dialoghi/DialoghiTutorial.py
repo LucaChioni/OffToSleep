@@ -67,11 +67,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append("Se vuoi ingaggiarlo assicurati di poterlo attaccare a distanza prima che ti possa vedere.")
+        dialogo.append("Se vuoi ingaggiarlo assicurati di poterlo attaccare a distanza prima che ti possa vedere. In quel baule potrebbe esserci qualcosa che fa al caso tuo...")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append("In quel baule potrebbe esserci qualcosa che fa al caso tuo...")
+        dialogo.append("Oppure puoi semplicemente evitarlo aspettando il momento giusto per passare. Per saltare un turno premi il tasto <*>#bold#0<*> sulla tastiera, <*>#bold#Select<*> sul controller oppure clicca con il tasto <*>#bold#Sinistro<*> del mouse sulla relativa icona in alto a destra nello schermo.")
         partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy1"]:
         oggettoDato = False
