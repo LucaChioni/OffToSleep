@@ -169,6 +169,7 @@ global puntatoreImpostazioniDestra
 global puntatoreImpostazioniSinistra
 global puntatoreImpostazioniDestraBloccato
 global puntatoreImpostazioniSinistraBloccato
+global imgCasellaObbiettivoAnalizzaColco
 global tutorialTastieraInGioco
 global tutorialTastieraInMenu
 global tutorialMouse
@@ -286,7 +287,7 @@ global imgEnigmaBibliotecarioVel5
 global cursoreMatitaEnigmaBibliotecario
 global cursoreGommaEnigmaBibliotecario
 
-numImgTotali = 1407
+numImgTotali = 1408
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
@@ -473,6 +474,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global puntatoreImpostazioniSinistra
     global puntatoreImpostazioniDestraBloccato
     global puntatoreImpostazioniSinistraBloccato
+    global imgCasellaObbiettivoAnalizzaColco
     global tutorialTastieraInGioco
     global tutorialTastieraInMenu
     global tutorialMouse
@@ -620,6 +622,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     puntatoreImpostazioniSinistra = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistra.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     puntatoreImpostazioniDestraBloccato = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniDestraBloccato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
     puntatoreImpostazioniSinistraBloccato = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ScorriImpostazioniSinistraBloccato.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    imgCasellaObbiettivoAnalizzaColco = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Puntatori/ObiettivoAnalizzaColco.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
 
     # immagini personaggio
     persw = funzionePerCaricareImmagini('Risorse/Immagini/Personaggi/Lucy1/Personaggio4.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

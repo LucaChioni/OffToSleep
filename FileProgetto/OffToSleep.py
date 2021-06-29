@@ -128,6 +128,10 @@ def gameloop():
             # 1->d , 2->a , 3->s , 4->w
             nrob = dati[141]
             mosseRimasteRob = dati[139]
+            if dati[10] > 0:
+                morterob = False
+            else:
+                morterob = True
 
             listaPersonaggi = []
             listaNemici = []
@@ -1426,6 +1430,8 @@ def gameloop():
                 dati[141] = 3
             elif robot == GlobalImgVar.robow:
                 dati[141] = 4
+            elif robot == GlobalImgVar.robomo:
+                dati[141] = 0
             dati[142] = chiamarob
             dati[139] = mosseRimasteRob
             dati[136] = raffredda
@@ -1520,6 +1526,12 @@ def gameloop():
                     guantiAttacco = guantidAttacco
                     collana = collanad
                 caricaTutto = True
+
+            # se robo è morto e non lo è più quando esci dal menu rimetti le img giuste del robo
+            if morterob and dati[10] > 0:
+                robot = GlobalImgVar.robos
+                armrob = armrobs
+
             carim = True
             startf = False
 
@@ -1686,7 +1698,7 @@ def gameloop():
                 difesa = 0
             esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
             if difesa == 2 and not sposta:
-                if dati[1] in GlobalGameVar.vetStanzePacifiche:
+                if dati[1] in GlobalGameVar.vetStanzePacifiche and dati[5] < pvtot:
                     dati[5] = pvtot
                     difesa = 0
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=1)
@@ -1707,7 +1719,7 @@ def gameloop():
                     dati[5] = 1
             # effetto collana rigenerante
             if dati[130] == 1 and sposta:
-                dati[5] = dati[5] + 1
+                dati[5] += 1
                 if dati[5] > pvtot:
                     dati[5] = pvtot
             # apertura/chiusura porte
@@ -1906,6 +1918,13 @@ def gameloop():
                     statoEscheInizioTurno.append(vettoreEsche[i + 1])
                 i += 4
 
+            # cancello ultimoObbiettivoColco se il nemico è morto
+            if len(ultimoObbiettivoColco) > 0 and ultimoObbiettivoColco[0].startswith("Nemico"):
+                for nemico in listaNemici:
+                    if nemico.vita <= 0 and (int(ultimoObbiettivoColco[0].split("-")[1]) == nemico.id or (ultimoObbiettivoColco[1] == nemico.x and ultimoObbiettivoColco[2] == nemico.y)):
+                        ultimoObbiettivoColco = []
+                        break
+
             # movimento-azioni robo
             azioneRobEseguita = False
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and dati[122] > 0 and (dati[125] > 0 or dati[126] > 0):
@@ -1981,7 +2000,7 @@ def gameloop():
 
                 sovrapposto = False
                 for nemico in listaNemici:
-                    if nemico.x == rx and nemico.y == ry:
+                    if nemico.x == rx and nemico.y == ry and nemico.vita > 0:
                         sovrapposto = True
                         break
                 if sovrapposto:
@@ -2048,7 +2067,7 @@ def gameloop():
                             nemico.settaObbiettivo(x, y, rx, ry, dati, vettoreDenaro, vettoreEsche, listaPersonaggi, listaNemici, porte, caseviste)
                             nemico.vx = nemico.x
                             nemico.vy = nemico.y
-                            nemico, direzioneMostro, dati, vettoreEsche = MovNemiciRob.movmostro(x, y, rx, ry, nemico, dif, difro, par, dati, vettoreEsche, vetDatiNemici, listaPersonaggi, caseviste, dati[0])
+                            nemico, direzioneMostro, dati, vettoreEsche = MovNemiciRob.movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsche, vetDatiNemici, listaPersonaggi, caseviste, dati[0])
                             if direzioneMostro == 1:
                                 nemico.girati("d")
                             elif direzioneMostro == 2:
@@ -2089,13 +2108,11 @@ def gameloop():
                                     del vettoreEsche[i]
                                     del vettoreEsche[i - 1]
                                 i += 4
-                            if nemico.animaSpostamento:
+                            if nemico.animaSpostamento or nemico.percorso[nemico.numeroMovimento] == "":
                                 if nemico.numeroMovimento < len(nemico.percorso) - 1:
                                     nemico.numeroMovimento += 1
                                 else:
                                     nemico.numeroMovimento = 0
-                            elif len(nemico.percorso) > 0 and nemico.percorso[nemico.numeroMovimento] == "":
-                                nemico.numeroMovimento += 1
                             if nemico.vx != nemico.x or nemico.vy != nemico.y:
                                 nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
                             nemico.compiMossa()

@@ -22,15 +22,15 @@ def getStatistiche(dati, difesa=0, inMenu=False):
     if dati[129] == 3:
         attVicino += 20
         attLontano += 20
-    dif = 7 + ((dati[8] * dati[8]) * 10) + 5 + ((dati[7] * dati[7]) * 5)
+    dif = 7 + ((dati[8] * dati[8]) * 10) + 5 + ((dati[7] * dati[7]) * 2)
     if dati[129] == 2:
         dif += 30
     par = 2 + ((dati[7] * dati[7]) * 3)
     if dati[129] == 4:
         par += 10
     if difesa != 0:
-        par = par * 2
-        dif = dif + dif // 2
+        par += par // 4
+        dif += dif // 8
 
     if dati[4] >= 1:
         i = 1
@@ -65,7 +65,7 @@ def getStatistiche(dati, difesa=0, inMenu=False):
             dif += dif // 4
 
     entot = 220 + (dati[9] * dati[9] * 80)
-    difro = 20 + (dati[9] * dati[9] * 30)
+    difro = 80 + (dati[9] * dati[9] * 20)
 
     return esptot, pvtot, entot, attVicino, attLontano, dif, difro, par
 
@@ -2004,7 +2004,7 @@ def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, a
 def copiaNemico(oggettoNemico, checkErrori=False):
     copia = copy.deepcopy(oggettoNemico)
     if oggettoNemico and not checkErrori:
-        copia.caricaImg()
+        copia.copiaImgs(oggettoNemico)
         copia.girati(copia.direzione)
 
     return copia
@@ -2014,10 +2014,10 @@ def copiaPersonaggio(oggettoPersonaggio, avanzamentoStoria, checkErrori=False):
     copia = copy.deepcopy(oggettoPersonaggio)
     if copia.tipo != "Tutorial" and copia.tipo != "Nessuno" and not checkErrori:
         if copia.tipo.startswith("Oggetto"):
-            copia.caricaImgOggetto()
+            copia.copiaImgsOggetto(oggettoPersonaggio)
             copia.aggiornaImgOggetto(avanzamentoStoria, True)
         else:
-            copia.caricaImgPersonaggio()
+            copia.copiaImgsPersonaggio(oggettoPersonaggio)
             copia.girati(copia.direzione)
 
     return copia

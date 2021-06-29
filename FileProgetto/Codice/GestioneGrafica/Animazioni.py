@@ -232,7 +232,7 @@ def animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, fare
             FunzioniGraficheGeneriche.disegnaRallo(npers, vx, vy, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti)
 
 
-def animaCamminataRobo(nrob, rx, ry, vrx, vry, robot, armrob, surriscalda, cambiosta, animazioneColco, fineanimaz):
+def animaCamminataColco(nrob, rx, ry, vrx, vry, robot, armrob, surriscalda, cambiosta, animazioneColco, nemicoInquadrato, fineanimaz):
     if (rx != vrx or ry != vry) and not cambiosta and robot != GlobalImgVar.robomo:
         animazioneColco = True
         if nrob != 0 and fineanimaz == 10:
@@ -244,48 +244,64 @@ def animaCamminataRobo(nrob, rx, ry, vrx, vry, robot, armrob, surriscalda, cambi
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx - (GlobalHWVar.gpx * fineanimaz // 10), ry))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx - (GlobalHWVar.gpx * fineanimaz // 10), ry))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx - (GlobalHWVar.gpy * fineanimaz // 10), ry))
             if 0 < fineanimaz <= 5:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robodp, (rx - (GlobalHWVar.gpx * fineanimaz // 10), ry))
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx - (GlobalHWVar.gpx * fineanimaz // 10), ry))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx - (GlobalHWVar.gpx * fineanimaz // 10), ry))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx - (GlobalHWVar.gpy * fineanimaz // 10), ry))
         if nrob == 2:
             if 5 < fineanimaz <= 10:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboap, (rx + (GlobalHWVar.gpx * fineanimaz // 10), ry))
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx + (GlobalHWVar.gpx * fineanimaz // 10), ry))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx + (GlobalHWVar.gpx * fineanimaz // 10), ry))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx + (GlobalHWVar.gpy * fineanimaz // 10), ry))
             if 0 < fineanimaz <= 5:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboap, (rx + (GlobalHWVar.gpx * fineanimaz // 10), ry))
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx + (GlobalHWVar.gpx * fineanimaz // 10), ry))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx + (GlobalHWVar.gpx * fineanimaz // 10), ry))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx + (GlobalHWVar.gpy * fineanimaz // 10), ry))
         if nrob == 4:
             if 5 < fineanimaz <= 10:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robow, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
             if 0 < fineanimaz <= 5:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robow, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry + (GlobalHWVar.gpy * fineanimaz // 10)))
         if nrob == 3:
             if 5 < fineanimaz <= 10:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
             if 0 < fineanimaz <= 5:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
                 if surriscalda > 0:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
                 GlobalHWVar.disegnaImmagineSuSchermo(armrob, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
+                if nemicoInquadrato == "Colco":
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry - (GlobalHWVar.gpy * fineanimaz // 10)))
     return animazioneColco
 
 
-def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, surriscalda, fineanimaz):
+def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, surriscalda, nemicoInquadrato, fineanimaz):
     if not cambiosta and fineanimaz != 0:
         animazioneColco = True
 
@@ -369,6 +385,8 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
                     GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione2s, (rx, ry))
                 if nrob == 4:
                     GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione2w, (rx, ry - GlobalHWVar.gpy))
+            if nemicoInquadrato == "Colco":
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry))
         if tecnicaUsata.startswith("ricarica") or tecnicaUsata == "raffred" or tecnicaUsata == "velocizza" or tecnicaUsata == "efficienza":
             if tecnicaUsata.startswith("ricarica"):
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robomo, (rx, ry))
@@ -376,6 +394,8 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
                 GlobalHWVar.disegnaImmagineSuSchermo(armrobS, (rx, ry))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (rx, ry))
             GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione, (rx, ry))
+            if nemicoInquadrato == "Colco":
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry))
         if tecnicaUsata.startswith("tempesta"):
             GlobalHWVar.disegnaImmagineSuSchermo(robot, (rx, ry))
             if surriscalda > 0:
@@ -385,6 +405,8 @@ def animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambio
                 GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione1, (rx - (GlobalHWVar.gpx * 6), ry - (GlobalHWVar.gpy * 6)))
             if 0 < fineanimaz <= 7:
                 GlobalHWVar.disegnaImmagineSuSchermo(imgAnimazione2, (rx - (GlobalHWVar.gpx * 6), ry - (GlobalHWVar.gpy * 6)))
+            if nemicoInquadrato == "Colco":
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry))
 
     return animazioneColco
 
@@ -411,7 +433,7 @@ def animaDanneggiamentoColco(rx, ry, robot, armrob, surriscalda, nemicoAttaccant
     return robot, armrob, surriscalda
 
 
-def animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, surriscalda, tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, fineanimaz):
+def animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, surriscalda, tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, nemicoInquadrato, fineanimaz):
     if (not ("attaccoColco" in azioniDaEseguire and tecnicaUsata != "spostamento") and not ("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and tecnicaUsata == "spostamento")) or fineanimaz == 0:
         if animazioneColcoFatta or robot == GlobalImgVar.robomo:
             x = rx
@@ -455,9 +477,11 @@ def animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, surriscalda, tecni
             if surriscalda > 0:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.roboSurrisc, (x, y))
             GlobalHWVar.disegnaImmagineSuSchermo(armrob, (x, y))
+        if nemicoInquadrato == "Colco":
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (x, y))
 
 
-def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz):
+def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, nemicoInquadrato, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
             if nemico.animaSpostamento and not nemico.morto and (nemico.x != nemico.vx or nemico.y != nemico.vy):
@@ -479,6 +503,8 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.x - (GlobalHWVar.gpx * fineanimaz // 10), nemico.y))
                         if nemico.statoInizioTurno[2]:
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.x - (GlobalHWVar.gpx * fineanimaz // 10), nemico.y))
+                    if not type(nemicoInquadrato) is str and nemicoInquadrato == nemico:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x - (GlobalHWVar.gpx * fineanimaz // 10), nemicoInquadrato.y))
                 if nemico.direzione == "a":
                     if 5 < fineanimaz <= 10:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAMov1, (nemico.x + (GlobalHWVar.gpx * fineanimaz // 10), nemico.y))
@@ -492,6 +518,8 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.x + (GlobalHWVar.gpx * fineanimaz // 10), nemico.y))
                         if nemico.statoInizioTurno[2]:
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.x + (GlobalHWVar.gpx * fineanimaz // 10), nemico.y))
+                    if not type(nemicoInquadrato) is str and nemicoInquadrato == nemico:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x + (GlobalHWVar.gpx * fineanimaz // 10), nemicoInquadrato.y))
                 if nemico.direzione == "w":
                     if 5 < fineanimaz <= 10:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgWMov1, (nemico.x, nemico.y + (GlobalHWVar.gpy * fineanimaz // 10)))
@@ -505,6 +533,8 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.x, nemico.y + (GlobalHWVar.gpy * fineanimaz // 10)))
                         if nemico.statoInizioTurno[2]:
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.x, nemico.y + (GlobalHWVar.gpy * fineanimaz // 10)))
+                    if not type(nemicoInquadrato) is str and nemicoInquadrato == nemico:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y + (GlobalHWVar.gpy * fineanimaz // 10)))
                 if nemico.direzione == "s":
                     if 5 < fineanimaz <= 10:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgSMov1, (nemico.x, nemico.y - (GlobalHWVar.gpy * fineanimaz // 10)))
@@ -518,10 +548,12 @@ def animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.x, nemico.y - (GlobalHWVar.gpy * fineanimaz // 10)))
                         if nemico.statoInizioTurno[2]:
                             GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.x, nemico.y - (GlobalHWVar.gpy * fineanimaz // 10)))
+                    if not type(nemicoInquadrato) is str and nemicoInquadrato == nemico:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y - (GlobalHWVar.gpy * fineanimaz // 10)))
     return animazioneNemici
 
 
-def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz):
+def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, nemicoInquadrato, fineanimaz):
     if nemicoAttaccante and fineanimaz != 0:
         if nemicoAttaccante.animaAttacco and not nemicoAttaccante.animazioneFatta:
             if fineanimaz == 1:
@@ -546,10 +578,12 @@ def animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz):
                 GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.imgAvvelenamento, (nemicoAttaccante.x, nemicoAttaccante.y))
             if nemicoAttaccante.statoInizioTurno[2]:
                 GlobalHWVar.disegnaImmagineSuSchermo(nemicoAttaccante.imgAppiccicato, (nemicoAttaccante.x, nemicoAttaccante.y))
+            if not type(nemicoInquadrato) is str and nemicoInquadrato == nemicoAttaccante:
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
     return animazioneNemici
 
 
-def animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, attaccante, fineanimaz):
+def animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, attaccante, nemicoInquadrato, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
             if (len(nemico.animaDanneggiamento) > 0 and "Rallo" in nemico.animaDanneggiamento and "attaccoRallo" in azioniDaEseguire) or (len(nemico.animaDanneggiamento) > 0 and "Colco" in nemico.animaDanneggiamento and "attaccoColco" in azioniDaEseguire):
@@ -579,6 +613,8 @@ def animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, anima
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
                     if nemico.statoInizioTurno[2]:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
+                    if not type(nemicoInquadrato) is str and nemicoInquadrato == nemico:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.vx, nemicoInquadrato.vy))
 
                 if attaccante == "Rallo":
                     if attaccoADistanza or animaOggetto[0] == "bomba" or animaOggetto[0] == "bombaVeleno" or animaOggetto[0] == "esca" or animaOggetto[0] == "bombaAppiccicosa" or animaOggetto[0] == "bombaPotenziata":
@@ -591,7 +627,7 @@ def animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, anima
     return animazioneNemici
 
 
-def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, fineanimaz):
+def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, nemicoInquadrato, fineanimaz):
     if not cambiosta:
         for nemico in listaNemici:
             if nemico.inCasellaVista and ((not (("movimentoColcoNemiciPersonaggi" in azioniDaEseguire and (nemico.animaSpostamento or nemico.animaMorte)) or ("attaccoNemici" in azioniDaEseguire and nemico.animaAttacco and nemicoAttaccante == nemico) or ("attaccoRallo" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Rallo" in nemico.animaDanneggiamento) or ("attaccoColco" in azioniDaEseguire and len(nemico.animaDanneggiamento) > 0 and "Colco" in nemico.animaDanneggiamento)) and not (nemico.animaMorte and nemico.animazioneFatta)) or (fineanimaz == 0 and not nemico.animaMorte)):
@@ -601,15 +637,19 @@ def animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante,
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.x, nemico.y))
                     if nemico.statoInizioTurno[2]:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.x, nemico.y))
+                    if not type(nemicoInquadrato) is str and nemicoInquadrato == nemico:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAttuale, (nemico.vx, nemico.vy))
                     if nemico.statoInizioTurno[1]:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAvvelenamento, (nemico.vx, nemico.vy))
                     if nemico.statoInizioTurno[2]:
                         GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgAppiccicato, (nemico.vx, nemico.vy))
+                    if not type(nemicoInquadrato) is str and nemicoInquadrato == nemico:
+                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.vx, nemicoInquadrato.vy))
 
 
-def animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata):
+def animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata, nemicoInquadrato):
     if "attaccoRallo" in azioniDaEseguire and animaOggetto[0] == "esca":
         c = 0
         while c < len(vettoreImgCaselle):
@@ -645,6 +685,10 @@ def animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreI
                                         break
                                     c += 3
                                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
+                                if type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
+                                    idEscaInquadrata = int(nemicoInquadrato[4:])
+                                    if idEscaInquadrata == vettoreEsche[i]:
+                                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
                             break
                         j += 3
                     break
@@ -1430,21 +1474,6 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
     return statoRalloInizioTurno, statoColcoInizioTurno
 
 
-def disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vettoreEsche):
-    if nemicoInquadrato == "Colco":
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry))
-    elif not type(nemicoInquadrato) is str and nemicoInquadrato:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
-    elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
-        idEscaInquadrata = int(nemicoInquadrato[4:])
-        i = 0
-        while i < len(vettoreEsche):
-            if idEscaInquadrata == vettoreEsche[i]:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (vettoreEsche[i + 2], vettoreEsche[i + 3]))
-                break
-            i += 4
-
-
 def animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz):
     if not cambiosta:
         for personaggio in listaPersonaggi:
@@ -1617,7 +1646,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                     i += 3
 
             # disegno: esche e denaro
-            animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata)
+            animaEsche(vettoreEsche, caseviste, azioniDaEseguire, animaOggetto, vettoreImgCaselle, morteEscheAnimata, nemicoInquadrato)
             animaDenaro(vettoreDenaro, caseviste, vettoreImgCaselle)
 
             if fineanimaz == 10:
@@ -1630,8 +1659,8 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 GlobalHWVar.disegnaImmagineSuSchermo(quadrettoSottoRallo, (x - GlobalHWVar.gpx, y - GlobalHWVar.gpy))
 
             # disegna personaggi se ci sono animazioni ma non loro
-            animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, statoColcoInizioTurno[1], tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, fineanimaz)
-            animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, fineanimaz)
+            animaColcoFermo(rx, ry, vrx, vry, robot, armrob, armrobS, statoColcoInizioTurno[1], tecnicaUsata, azioniDaEseguire, animazioneColcoFatta, raffreddamento, ricarica1, ricarica2, raffredda, autoRic1, autoRic2, nemicoInquadrato, fineanimaz)
+            animaNemiciFermi(listaNemici, azioniDaEseguire, cambiosta, nemicoAttaccante, nemicoInquadrato, fineanimaz)
             animaPersonaggiFermi(listaPersonaggi, azioniDaEseguire, cambiosta, fineanimaz)
             if not cambiosta and not nonMostrarePersonaggio:
                 animaRalloFermo(x, y, vx, vy, npers, pers, scudo, armatura, arma, arco, faretra, guanti, collana, statoRalloInizioTurno[1], azioniDaEseguire, animazioneRalloFatta, nemicoAttaccante, difesa, fineanimaz)
@@ -1644,9 +1673,9 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
             if "movimentoColcoNemiciPersonaggi" in azioniDaEseguire:
                 # animazione camminata robo
-                animazioneColco = animaCamminataRobo(nrob, rx, ry, vrx, vry, robot, armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, fineanimaz)
+                animazioneColco = animaCamminataColco(nrob, rx, ry, vrx, vry, robot, armrob, statoColcoInizioTurno[1], cambiosta, animazioneColco, nemicoInquadrato, fineanimaz)
                 # animazione camminata mostri
-                animazioneNemici = animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, fineanimaz)
+                animazioneNemici = animaSpostamentoNemici(listaNemici, animazioneNemici, cambiosta, nemicoInquadrato, fineanimaz)
                 # animazione camminata personaggi
                 animazionePersonaggi = animaSpostamentoPersonaggi(listaPersonaggi, animazionePersonaggi, cambiosta, fineanimaz)
 
@@ -1662,7 +1691,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
                 # animazione attacco nemici
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, nemicoAttaccante, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)
-                animazioneNemici = animaAttaccoNemici(nemicoAttaccante, animazioneNemici, fineanimaz)
+                animazioneNemici = animaAttaccoNemici(nemicoAttaccante, animazioneNemici, nemicoInquadrato, fineanimaz)
 
             if "attaccoRallo" in azioniDaEseguire:
                 # animazione danneggiamento Colco
@@ -1678,7 +1707,7 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)
 
                 # animazione danneggiamento dei nemici
-                animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo", fineanimaz)
+                animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Rallo", nemicoInquadrato, fineanimaz)
 
             if "attaccoColco" in azioniDaEseguire:
                 # animazione morte esche
@@ -1686,10 +1715,10 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
 
                 # animazione attacco Colco
                 animaFrecceLanciate(x, y, attaccoADistanza, animaOggetto, rx, ry, listaNemiciAttaccatiADistanzaRobo, tecnicaUsata, listaNemici, cambiosta, azioniDaEseguire, vettoreEsche, fineanimaz)
-                animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, statoColcoInizioTurno[1], fineanimaz)
+                animazioneColco = animaTecnicaColco(rx, ry, nrob, robot, armrob, armrobS, tecnicaUsata, cambiosta, animazioneColco, statoColcoInizioTurno[1], nemicoInquadrato, fineanimaz)
 
                 # animazione danneggiamento dei nemici
-                animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", fineanimaz)
+                animazioneNemici = animaDanneggiamentoNemici(attaccoADistanza, animaOggetto, listaNemici, animazioneNemici, cambiosta, azioniDaEseguire, "Colco", nemicoInquadrato, fineanimaz)
                 # animazione danneggiamento Rallo
                 animaDanneggiamentoRallo(x, y, attaccoDiColco, attaccoDiRallo, tecnicaUsata, azioniDaEseguire, fineanimaz)
 
@@ -1703,9 +1732,6 @@ def anima(sposta, x, y, vx, vy, rx, ry, vrx, vry, pers, robot, npers, nrob, prim
             animazioneRallo = animaAperturaCofanetto(tesoro, x, y, npers, vettoreImgCaselle, animazioneRallo)
             # anima raccolta denaro
             denaroRaccolto = animaRaccoltaDenaro(x, y, vettoreDenaro, fineanimaz)
-
-            # disegno img puntatoreInquadraNemici
-            disagnaPuntatoreInquadraNemici(nemicoInquadrato, rx, ry, vettoreEsche)
 
             if animazioneRallo:
                 animazioneRalloFatta = True

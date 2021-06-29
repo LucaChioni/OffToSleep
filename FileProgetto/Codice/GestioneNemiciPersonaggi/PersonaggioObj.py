@@ -327,6 +327,27 @@ class PersonaggioObj(object):
 
             self.imgDialogo = CaricaFileProgetto.loadImage("Risorse/Immagini/Personaggi/" + self.tipo + "/" + self.tipo + "Dialogo.png", GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 12, True)
 
+    def copiaImgsPersonaggio(self, personaggioDaCopiare):
+        self.imgW = personaggioDaCopiare.imgW
+        self.imgA = personaggioDaCopiare.imgA
+        self.imgS = personaggioDaCopiare.imgS
+        self.imgD = personaggioDaCopiare.imgD
+
+        self.imgWMov1 = personaggioDaCopiare.imgWMov1
+        self.imgWMov2 = personaggioDaCopiare.imgWMov2
+        self.imgAMov1 = personaggioDaCopiare.imgAMov1
+        self.imgAMov2 = personaggioDaCopiare.imgAMov2
+        self.imgSMov1 = personaggioDaCopiare.imgSMov1
+        self.imgSMov2 = personaggioDaCopiare.imgSMov2
+        self.imgDMov1 = personaggioDaCopiare.imgDMov1
+        self.imgDMov2 = personaggioDaCopiare.imgDMov2
+
+        self.imgDialogo = personaggioDaCopiare.imgDialogo
+
+    def copiaImgsOggetto(self, oggettoDaCopiare):
+        self.imgOggetto = oggettoDaCopiare.imgOggetto
+        self.imgOggettoDialogo = oggettoDaCopiare.imgOggettoDialogo
+
     def girati(self, direzione):
         if direzione == "w":
             self.imgAttuale = self.imgW

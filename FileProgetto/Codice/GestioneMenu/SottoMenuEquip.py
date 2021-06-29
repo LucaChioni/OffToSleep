@@ -818,7 +818,7 @@ def equip(dati):
             if voceMarcata == 15:
                 if dati[55] != 0:
                     FunzioniGraficheGeneriche.messaggio("Loriquam:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Armatura incredibilmente resistente. La sua origine è ignota.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Armatura incredibilmente resistente e leggera. La sua origine è ignota.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 160 - ((dati[8] * dati[8]) * 10)
                     if dati[8] > 4:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
@@ -890,7 +890,7 @@ def equip(dati):
             if voceMarcata == 20:
                 if dati[60] != 0:
                     FunzioniGraficheGeneriche.messaggio("Clipequam:", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneTitoliY, 60)
-                    FunzioniGraficheGeneriche.messaggio(u"Scudo incredibilmente resistente. Non è nota l'origine.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
+                    FunzioniGraficheGeneriche.messaggio(u"Scudo incredibilmente resistente e leggero. Non è nota l'origine.", GlobalHWVar.grigiochi, posizioneDescrizioniX, posizioneDescrizioniY, grandezzaCarattereDescrizioni, larghezzaTestoDescrizioni, spazioTraLeRigheTestoDescrizione)
                     diff = 80 - ((dati[7] * dati[7]) * 5)
                     if dati[7] > 4:
                         FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)

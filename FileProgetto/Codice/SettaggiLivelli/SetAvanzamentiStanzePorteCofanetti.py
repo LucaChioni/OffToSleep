@@ -329,7 +329,6 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["mappaSelvaArida"] = i
     i += 1
     dictAvanzamentoStoria["tutorialUsoImpoFrutti"] = i
-
     i += 1
     dictAvanzamentoStoria["monologoDiMetaSelva"] = i
 
@@ -693,6 +692,7 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["selvaArida4"]
     vetCofanetti += [stanza, 12, 11, False]
+    vetCofanetti += [stanza, 18, 11, False]
 
     stanza = dictStanze["selvaArida5"]
     vetCofanetti += [stanza, 13, 10, False]

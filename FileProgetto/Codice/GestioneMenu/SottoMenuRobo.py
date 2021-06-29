@@ -2155,7 +2155,7 @@ def equiprobo(dati):
                         diff = (0 * 0 * 80) - (dati[9] * dati[9] * 80)
                         if dati[9] > 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 0 - (dati[9] * dati[9] * 30)
+                        diff = 0 - (dati[9] * dati[9] * 20)
                         if dati[9] > 0:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                     else:
@@ -2169,7 +2169,7 @@ def equiprobo(dati):
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 1:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 30 - (dati[9] * dati[9] * 30)
+                        diff = 20 - (dati[9] * dati[9] * 20)
                         if dati[9] > 1:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 1:
@@ -2185,7 +2185,7 @@ def equiprobo(dati):
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 2:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 120 - (dati[9] * dati[9] * 30)
+                        diff = 80 - (dati[9] * dati[9] * 20)
                         if dati[9] > 2:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 2:
@@ -2201,7 +2201,7 @@ def equiprobo(dati):
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 3:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 270 - (dati[9] * dati[9] * 30)
+                        diff = 180 - (dati[9] * dati[9] * 20)
                         if dati[9] > 3:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 3:
@@ -2217,7 +2217,7 @@ def equiprobo(dati):
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
                         elif dati[9] < 4:
                             FunzioniGraficheGeneriche.messaggio("+" + str(diff), GlobalHWVar.verde, posizioneStatisticheX, posizioneStatPeY, grandezzaCarattereStatistiche)
-                        diff = 480 - (dati[9] * dati[9] * 30)
+                        diff = 320 - (dati[9] * dati[9] * 20)
                         if dati[9] > 4:
                             FunzioniGraficheGeneriche.messaggio(str(diff), GlobalHWVar.rosso, posizioneStatisticheX, posizioneStatDifY, grandezzaCarattereStatistiche)
                         elif dati[9] < 4:

@@ -194,65 +194,65 @@ class NemicoObj(object):
             ignoraEsche = True
 
         if self.tipo == "SerpeVerde":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
+            vitaTotale = 80
+            attacco = 100
+            difesa = 10
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 2
+            raggioVisivo = GlobalHWVar.gpx * 4
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            denaro = random.randint(8, 12)
+            esp = 8
         if self.tipo == "SerpeArancio":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
+            vitaTotale = 120
+            attacco = 120
+            difesa = 12
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 2
+            raggioVisivo = GlobalHWVar.gpx * 4
             attaccaDaLontano = False
-            velenoso = False
+            velenoso = True
             surriscaldante = False
-            avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            avvelenabile = False
+            denaro = random.randint(13, 15)
+            esp = 10
         if self.tipo == "RagnoNero":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
-            velocita = 2
-            raggioVisivo = GlobalHWVar.gpx * 2
-            attaccaDaLontano = False
-            velenoso = False
-            surriscaldante = False
-            avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
-        if self.tipo == "RagnoRosso":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
+            vitaTotale = 100
+            attacco = 100
+            difesa = 16
             velocita = 1
-            raggioVisivo = GlobalHWVar.gpx * 2
+            raggioVisivo = GlobalHWVar.gpx * 6
             attaccaDaLontano = False
             velenoso = False
             surriscaldante = False
             avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
-        if self.tipo == "Scorpione":
-            vitaTotale = 25
-            attacco = 20
-            difesa = 5
+            denaro = random.randint(8, 12)
+            esp = 8
+        if self.tipo == "RagnoRosso":
+            vitaTotale = 90
+            attacco = 90
+            difesa = 18
             velocita = 0
-            raggioVisivo = GlobalHWVar.gpx * 2
-            attaccaDaLontano = False
-            velenoso = False
+            raggioVisivo = GlobalHWVar.gpx * 6
+            attaccaDaLontano = True
+            velenoso = True
             surriscaldante = False
-            avvelenabile = True
-            denaro = random.randint(0, 3)
-            esp = 5
+            avvelenabile = False
+            denaro = random.randint(13, 15)
+            esp = 10
+        if self.tipo == "Scorpione":
+            vitaTotale = 200
+            attacco = 150
+            difesa = 30
+            velocita = 1
+            raggioVisivo = GlobalHWVar.gpx * 5
+            attaccaDaLontano = False
+            velenoso = True
+            surriscaldante = False
+            avvelenabile = False
+            denaro = random.randint(25, 30)
+            esp = 30
 
         if self.tipo == "ServoSpada":
             vitaTotale = 25
@@ -482,6 +482,36 @@ class NemicoObj(object):
             self.imgCampoAttaccabile = False
         else:
             self.imgCampoAttaccabile = CaricaFileProgetto.loadImage("Risorse/Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (self.raggioVisivo * 2) + GlobalHWVar.gpx, (self.raggioVisivo * 2) + GlobalHWVar.gpy, True)
+
+    def copiaImgs(self, nemicoDaCopiare):
+        self.imgW = nemicoDaCopiare.imgW
+        self.imgA = nemicoDaCopiare.imgA
+        self.imgS = nemicoDaCopiare.imgS
+        self.imgD = nemicoDaCopiare.imgD
+
+        self.imgWMov1 = nemicoDaCopiare.imgWMov1
+        self.imgWMov2 = nemicoDaCopiare.imgWMov2
+        self.imgAMov1 = nemicoDaCopiare.imgAMov1
+        self.imgAMov2 = nemicoDaCopiare.imgAMov2
+        self.imgSMov1 = nemicoDaCopiare.imgSMov1
+        self.imgSMov2 = nemicoDaCopiare.imgSMov2
+        self.imgDMov1 = nemicoDaCopiare.imgDMov1
+        self.imgDMov2 = nemicoDaCopiare.imgDMov2
+
+        self.imgAvvelenamento = nemicoDaCopiare.imgAvvelenamento
+        self.imgAppiccicato = nemicoDaCopiare.imgAppiccicato
+
+        self.imgAttaccoW = nemicoDaCopiare.imgAttaccoW
+        self.imgAttaccoA = nemicoDaCopiare.imgAttaccoA
+        self.imgAttaccoS = nemicoDaCopiare.imgAttaccoS
+        self.imgAttaccoD = nemicoDaCopiare.imgAttaccoD
+        self.imgOggettoLanciato = nemicoDaCopiare.imgOggettoLanciato
+        self.imgDanneggiamentoOggettoLanciato = nemicoDaCopiare.imgDanneggiamentoOggettoLanciato
+
+        self.imgDanneggiamentoRallo = nemicoDaCopiare.imgDanneggiamentoRallo
+        self.imgDanneggiamentoColco = nemicoDaCopiare.imgDanneggiamentoColco
+
+        self.imgCampoAttaccabile = nemicoDaCopiare.imgCampoAttaccabile
 
     def girati(self, direzione):
         self.imgAttuale = self.imgS
@@ -745,7 +775,7 @@ class NemicoObj(object):
                                     if not self.attaccaDaLontano:
                                         pathPerEsca = GenericFunc.pathFinding(self.x, self.y, vettoreEsche[i + 2], vettoreEsche[i + 3], vetNemiciSoloConXeY, caseviste)
                                         if pathPerEsca and len(pathPerEsca) > 0:
-                                            distanzaDaEsca = len(pathPerEsca) / 2
+                                            distanzaDaEsca = len(pathPerEsca) // 2
                                     distMinXEsca = vettoreEsche[i + 2]
                                     distMinYEsca = vettoreEsche[i + 3]
                                     escabersaglio = i
@@ -758,7 +788,7 @@ class NemicoObj(object):
                                     if (pathPerEscaTemp and (len(pathPerEscaTemp) < distanzaDaEsca or distanzaDaEsca == -1)) or (((not pathPerEscaTemp and distanzaDaEsca == -1) or not self.attaccaDaLontano) and abs(vettoreEsche[i + 2] - self.x) + abs(vettoreEsche[i + 3] - self.y) < abs(distMinXEsca - self.x) + abs(distMinYEsca - self.y)):
                                         if pathPerEscaTemp and len(pathPerEscaTemp) > 0:
                                             pathPerEsca = pathPerEscaTemp
-                                            distanzaDaEsca = len(pathPerEsca) / 2
+                                            distanzaDaEsca = len(pathPerEsca) // 2
                                         distMinXEsca = vettoreEsche[i + 2]
                                         distMinYEsca = vettoreEsche[i + 3]
                                         escabersaglio = i
@@ -788,14 +818,14 @@ class NemicoObj(object):
                                 if not self.attaccaDaLontano:
                                     pathPerRallo = GenericFunc.pathFinding(self.x, self.y, x, y, vetNemiciSoloConXeY, caseviste)
                                     if pathPerRallo and len(pathPerRallo) > 0:
-                                        distanzaDaRallo = len(pathPerRallo) / 2
+                                        distanzaDaRallo = len(pathPerRallo) // 2
                                 vistoRallo = True
                         if not vistoRob and abs(rx - self.x) <= self.raggioVisivo and abs(ry - self.y) <= self.raggioVisivo and dati[10] > 0:
                             if self.caseattactot[j] == rx and self.caseattactot[j + 1] == ry and self.caseattactot[j + 2]:
                                 if not self.attaccaDaLontano:
                                     pathPerColco = GenericFunc.pathFinding(self.x, self.y, rx, ry, vetNemiciSoloConXeY, caseviste)
                                     if pathPerColco and len(pathPerColco) > 0:
-                                        distanzaDaColco = len(pathPerColco) / 2
+                                        distanzaDaColco = len(pathPerColco) // 2
                                 vistoRob = True
                         j += 3
                 if (not vistoesca or (vistoesca and distanzaDaEsca == -1 and not self.attaccaDaLontano)) and (not vistoRallo or (vistoRallo and distanzaDaRallo == -1 and not self.attaccaDaLontano)) and (not vistoRob or (vistoRob and distanzaDaColco == -1 and not self.attaccaDaLontano)):
@@ -809,7 +839,7 @@ class NemicoObj(object):
                                         if not self.attaccaDaLontano:
                                             pathPerDenaro = GenericFunc.pathFinding(self.x, self.y, vettoreDenaro[i + 1], vettoreDenaro[i + 2], vetNemiciSoloConXeY, caseviste)
                                             if pathPerDenaro and len(pathPerDenaro) > 0:
-                                                distanzaDaDenaro = len(pathPerDenaro) / 2
+                                                distanzaDaDenaro = len(pathPerDenaro) // 2
                                         distMinXDenaro = vettoreDenaro[i + 1]
                                         distMinYDenaro = vettoreDenaro[i + 2]
                                         xDenaro = distMinXDenaro
@@ -823,7 +853,7 @@ class NemicoObj(object):
                                         if (pathPerDenaroTemp and (len(pathPerDenaroTemp) < distanzaDaDenaro or distanzaDaDenaro == -1)) or (((not pathPerDenaroTemp and distanzaDaDenaro == -1) or not self.attaccaDaLontano) and abs(vettoreDenaro[i + 1] - self.x) + abs(vettoreDenaro[i + 2] - self.y) < abs(distMinXDenaro - self.x) + abs(distMinYDenaro - self.y)):
                                             if pathPerDenaroTemp and len(pathPerDenaroTemp) > 0:
                                                 pathPerDenaro = pathPerDenaroTemp
-                                                distanzaDaDenaro = len(pathPerDenaro) / 2
+                                                distanzaDaDenaro = len(pathPerDenaro) // 2
                                             distMinXDenaro = vettoreDenaro[i + 1]
                                             distMinYDenaro = vettoreDenaro[i + 2]
                                             xDenaro = distMinXDenaro
@@ -837,10 +867,14 @@ class NemicoObj(object):
                     self.obbiettivo = ["Esca", vettoreEsche[escabersaglio + 2], vettoreEsche[escabersaglio + 3], pathPerEsca]
                 elif vistoDenaro and not (vistoRallo and distanzaDaRallo != -1) and not (vistoRob and distanzaDaColco != -1):
                     self.obbiettivo = ["Monete", xDenaro, yDenaro, pathPerDenaro]
-                elif vistoRob and (not vistoRallo or distanzaDaColco <= distanzaDaRallo or distanzaDaRallo == -1):
-                    self.obbiettivo = ["Colco", rx, ry, pathPerColco]
-                elif vistoRallo:
-                    self.obbiettivo = ["Rallo", x, y, pathPerRallo]
+                elif vistoRallo or vistoRob:
+                    if self.attaccaDaLontano:
+                        distanzaDaRallo = abs(self.x - x) + abs(self.y - y)
+                        distanzaDaColco = abs(self.x - rx) + abs(self.y - ry)
+                    if vistoRob and (not vistoRallo or -1 < distanzaDaColco <= distanzaDaRallo or -1 == distanzaDaRallo < distanzaDaColco or distanzaDaColco == distanzaDaRallo):
+                        self.obbiettivo = ["Colco", rx, ry, pathPerColco]
+                    elif vistoRallo:
+                        self.obbiettivo = ["Rallo", x, y, pathPerRallo]
 
         if self.obbiettivo[0] != "":
             self.xPosizioneUltimoBersaglio = self.obbiettivo[1]
