@@ -803,7 +803,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, vettoreImgCaselle, saltaTurno):
+def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, pv, pvtot, difRallo, avvele, numCollanaIndossata, attp, difp, enrob, entot, difro, surrisc, velp, effp, stanzaa, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobS, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, numFrecce, nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, avanzamentoStoria, casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac):
     xp = x
     yp = y
     if nemicoInquadrato == "Colco":
@@ -862,62 +862,67 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
 
     # controllo caselle attaccabili tue e di Colco
     raggioDiLancio = 0
-    caseattactot = []
-    if attacco == 1:
-        caseattactot = GenericFunc.trovacasattaccabili(x, y, -1, caseviste)
+    if attacco == 1 and (posizioneRalloAggiornamentoCaseAttac[0] != x or posizioneRalloAggiornamentoCaseAttac[1] != y):
+        caseattactotRallo = GenericFunc.trovacasattaccabili(x, y, -1, caseviste)
+        posizioneRalloAggiornamentoCaseAttac = [x, y]
     if attacco == 2:
-        caseattactot = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 6, caseviste)
+        caseattactotRallo = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 6, caseviste)
         raggioDiLancio = 6
+        posizioneRalloAggiornamentoCaseAttac = [0, 0]
     if attacco == 3:
-        caseattactot = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 5, caseviste)
+        caseattactotRallo = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 5, caseviste)
         raggioDiLancio = 5
+        posizioneRalloAggiornamentoCaseAttac = [0, 0]
     if attacco == 4:
-        caseattactot = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 6, caseviste)
+        caseattactotRallo = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 6, caseviste)
         raggioDiLancio = 6
+        posizioneRalloAggiornamentoCaseAttac = [0, 0]
     if attacco == 5:
-        caseattactot = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 5, caseviste)
+        caseattactotRallo = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 5, caseviste)
         raggioDiLancio = 5
+        posizioneRalloAggiornamentoCaseAttac = [0, 0]
     if attacco == 6:
-        caseattactot = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 4, caseviste)
+        caseattactotRallo = GenericFunc.trovacasattaccabili(x, y, GlobalHWVar.gpx * 4, caseviste)
         raggioDiLancio = 4
+        posizioneRalloAggiornamentoCaseAttac = [0, 0]
     # aggiungo tutte le caselle al di fuori del raggio visivo
     if attacco != 1:
         j = 0
         while j < len(caseviste):
             casellaPresente = False
             i = 0
-            while i < len(caseattactot):
-                if caseattactot[i] == caseviste[j] and caseattactot[i + 1] == caseviste[j + 1]:
+            while i < len(caseattactotRallo):
+                if caseattactotRallo[i] == caseviste[j] and caseattactotRallo[i + 1] == caseviste[j + 1]:
                     casellaPresente = True
                     break
                 i += 3
             if not casellaPresente:
-                caseattactot.append(caseviste[j])
-                caseattactot.append(caseviste[j + 1])
-                caseattactot.append(False)
+                caseattactotRallo.append(caseviste[j])
+                caseattactotRallo.append(caseviste[j + 1])
+                caseattactotRallo.append(False)
             j += 3
         # aggiungo le caselle dei bordi
         i = 0
         while i <= 31:
             if not (abs(x - GlobalHWVar.gpx * i) <= GlobalHWVar.gpx * raggioDiLancio and abs(y - 0) <= GlobalHWVar.gpy * raggioDiLancio):
-                caseattactot.append(GlobalHWVar.gpx * i)
-                caseattactot.append(0)
-                caseattactot.append(False)
+                caseattactotRallo.append(GlobalHWVar.gpx * i)
+                caseattactotRallo.append(0)
+                caseattactotRallo.append(False)
             if not (abs(x - GlobalHWVar.gpx * i) <= GlobalHWVar.gpx * raggioDiLancio and abs(y - GlobalHWVar.gpy * 17) <= GlobalHWVar.gpy * raggioDiLancio):
-                caseattactot.append(GlobalHWVar.gpx * i)
-                caseattactot.append(GlobalHWVar.gpy * 17)
-                caseattactot.append(False)
+                caseattactotRallo.append(GlobalHWVar.gpx * i)
+                caseattactotRallo.append(GlobalHWVar.gpy * 17)
+                caseattactotRallo.append(False)
             i += 1
         i = 1
         while i <= 16:
             if not (abs(x - 0) <= GlobalHWVar.gpx * raggioDiLancio and abs(y - GlobalHWVar.gpy * i) <= GlobalHWVar.gpy * raggioDiLancio):
-                caseattactot.append(0)
-                caseattactot.append(GlobalHWVar.gpy * i)
-                caseattactot.append(False)
+                caseattactotRallo.append(0)
+                caseattactotRallo.append(GlobalHWVar.gpy * i)
+                caseattactotRallo.append(False)
             if not (abs(x - GlobalHWVar.gpx * 31) <= GlobalHWVar.gpx * raggioDiLancio and abs(y - GlobalHWVar.gpy * i) <= GlobalHWVar.gpy * raggioDiLancio):
-                caseattactot.append(GlobalHWVar.gpx * 31)
-                caseattactot.append(GlobalHWVar.gpy * i)
-                caseattactot.append(False)
+                caseattactotRallo.append(GlobalHWVar.gpx * 31)
+                caseattactotRallo.append(GlobalHWVar.gpy * i)
+                caseattactotRallo.append(False)
             i += 1
     if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
         caselleAttaccabiliColco = GenericFunc.trovacasattaccabili(rx, ry, GlobalGameVar.vistaRobo * GlobalHWVar.gpx, caseviste)
@@ -1043,39 +1048,39 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     # disegno le caselle non attaccabili (prima cerco gli oggetti che hanno accanto una casellaAttaccabile per non oscurarli)
     vetCaselleDaNonOscurare = []
     i = 0
-    while i < len(caseattactot):
-        if caseattactot[i + 2] or (caseattactot[i] == x and caseattactot[i + 1] == y):
+    while i < len(caseattactotRallo):
+        if caseattactotRallo[i + 2] or (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
             j = 0
             while j < len(porte):
                 if not porte[j + 3]:
-                    if (caseattactot[i] == porte[j + 1] - GlobalHWVar.gpx and caseattactot[i + 1] == porte[j + 2]) or (caseattactot[i] == porte[j + 1] + GlobalHWVar.gpx and caseattactot[i + 1] == porte[j + 2]) or (caseattactot[i] == porte[j + 1] and caseattactot[i + 1] == porte[j + 2] - GlobalHWVar.gpy) or (caseattactot[i] == porte[j + 1] and caseattactot[i + 1] == porte[j + 2] + GlobalHWVar.gpy):
+                    if (caseattactotRallo[i] == porte[j + 1] - GlobalHWVar.gpx and caseattactotRallo[i + 1] == porte[j + 2]) or (caseattactotRallo[i] == porte[j + 1] + GlobalHWVar.gpx and caseattactotRallo[i + 1] == porte[j + 2]) or (caseattactotRallo[i] == porte[j + 1] and caseattactotRallo[i + 1] == porte[j + 2] - GlobalHWVar.gpy) or (caseattactotRallo[i] == porte[j + 1] and caseattactotRallo[i + 1] == porte[j + 2] + GlobalHWVar.gpy):
                         vetCaselleDaNonOscurare.append(porte[j + 1])
                         vetCaselleDaNonOscurare.append(porte[j + 2])
                 j += 4
             j = 0
             while j < len(cofanetti):
-                if (caseattactot[i] == cofanetti[j + 1] - GlobalHWVar.gpx and caseattactot[i + 1] == cofanetti[j + 2]) or (caseattactot[i] == cofanetti[j + 1] + GlobalHWVar.gpx and caseattactot[i + 1] == cofanetti[j + 2]) or (caseattactot[i] == cofanetti[j + 1] and caseattactot[i + 1] == cofanetti[j + 2] - GlobalHWVar.gpy) or (caseattactot[i] == cofanetti[j + 1] and caseattactot[i + 1] == cofanetti[j + 2] + GlobalHWVar.gpy):
+                if (caseattactotRallo[i] == cofanetti[j + 1] - GlobalHWVar.gpx and caseattactotRallo[i + 1] == cofanetti[j + 2]) or (caseattactotRallo[i] == cofanetti[j + 1] + GlobalHWVar.gpx and caseattactotRallo[i + 1] == cofanetti[j + 2]) or (caseattactotRallo[i] == cofanetti[j + 1] and caseattactotRallo[i + 1] == cofanetti[j + 2] - GlobalHWVar.gpy) or (caseattactotRallo[i] == cofanetti[j + 1] and caseattactotRallo[i + 1] == cofanetti[j + 2] + GlobalHWVar.gpy):
                     vetCaselleDaNonOscurare.append(cofanetti[j + 1])
                     vetCaselleDaNonOscurare.append(cofanetti[j + 2])
                 j += 4
             for personaggio in listaPersonaggi:
                 if personaggio.mantieniSempreASchermo and personaggio.vicinoACasellaVista:
-                    if (caseattactot[i] == personaggio.x - GlobalHWVar.gpx and caseattactot[i + 1] == personaggio.y) or (caseattactot[i] == personaggio.x + GlobalHWVar.gpx and caseattactot[i + 1] == personaggio.y) or (caseattactot[i] == personaggio.x and caseattactot[i + 1] == personaggio.y - GlobalHWVar.gpy) or (caseattactot[i] == personaggio.x and caseattactot[i + 1] == personaggio.y + GlobalHWVar.gpy):
+                    if (caseattactotRallo[i] == personaggio.x - GlobalHWVar.gpx and caseattactotRallo[i + 1] == personaggio.y) or (caseattactotRallo[i] == personaggio.x + GlobalHWVar.gpx and caseattactotRallo[i + 1] == personaggio.y) or (caseattactotRallo[i] == personaggio.x and caseattactotRallo[i + 1] == personaggio.y - GlobalHWVar.gpy) or (caseattactotRallo[i] == personaggio.x and caseattactotRallo[i + 1] == personaggio.y + GlobalHWVar.gpy):
                         vetCaselleDaNonOscurare.append(personaggio.x)
                         vetCaselleDaNonOscurare.append(personaggio.y)
         i += 3
     i = 0
-    while i < len(caseattactot):
-        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+    while i < len(caseattactotRallo):
+        if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
             casellaDaOscurare = True
             j = 0
             while j < len(vetCaselleDaNonOscurare):
-                if caseattactot[i] == vetCaselleDaNonOscurare[j] and caseattactot[i + 1] == vetCaselleDaNonOscurare[j + 1]:
+                if caseattactotRallo[i] == vetCaselleDaNonOscurare[j] and caseattactotRallo[i + 1] == vetCaselleDaNonOscurare[j + 1]:
                     casellaDaOscurare = False
                     break
                 j += 2
             if casellaDaOscurare:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabili, (caseattactot[i], caseattactot[i + 1]))
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabili, (caseattactotRallo[i], caseattactotRallo[i + 1]))
         i += 3
 
     # vita-status rallo
@@ -1252,7 +1257,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     danno = 0
     creaesca = False
     ricaricaschermo = False
-    appenaCaricato = False
+    appenaCaricato = True
     suPorta = False
     suCofanetto = False
     apriChiudiPorta = [False, 0, 0]
@@ -1268,11 +1273,14 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     primoFrame = True
     vecchiaCasellaInquadrata = [False, 0, 0]
     aggiornaInterfacciaPerCambioInput = False
+    disegnateCaselleAttaccabili = False
+    vecchioNemicoInquadrato = nemicoInquadrato
 
     bottoneDown = 0
     while not risposta:
         if xp != xvp or yp != yvp:
             appenaCaricato = False
+            disegnateCaselleAttaccabili = False
         xvp = xp
         yvp = yp
 
@@ -1385,9 +1393,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         if nemico.x < xMouse < nemico.x + GlobalHWVar.gpx and nemico.y < yMouse < nemico.y + GlobalHWVar.gpy:
                             if nemicoInquadrato and type(nemicoInquadrato) is not str and nemico.x == nemicoInquadrato.x and nemico.y == nemicoInquadrato.y:
                                 j = 0
-                                while j < len(caseattactot):
-                                    if caseattactot[j] == nemico.x and caseattactot[j + 1] == nemico.y:
-                                        if caseattactot[j + 2] and ((abs(nemico.x - x) <= GlobalHWVar.gpx and abs(nemico.y - y) <= GlobalHWVar.gpy and not abs(nemico.x - x) == abs(nemico.y - y)) or numFrecce > 0) and attacco != 4:
+                                while j < len(caseattactotRallo):
+                                    if caseattactotRallo[j] == nemico.x and caseattactotRallo[j + 1] == nemico.y:
+                                        if caseattactotRallo[j + 2] and ((abs(nemico.x - x) <= GlobalHWVar.gpx and abs(nemico.y - y) <= GlobalHWVar.gpy and not abs(nemico.x - x) == abs(nemico.y - y)) or numFrecce > 0) and attacco != 4:
                                             if GlobalHWVar.mouseBloccato:
                                                 GlobalHWVar.configuraCursore(False)
                                             inquadratoQualcosa = "nemico"
@@ -1406,9 +1414,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                                 idEscaInquadrata = int(nemicoInquadrato[4:])
                                 if idEscaInquadrata == vettoreEsche[i]:
                                     j = 0
-                                    while j < len(caseattactot):
-                                        if caseattactot[j] == vettoreEsche[i + 2] and caseattactot[j + 1] == vettoreEsche[i + 3]:
-                                            if caseattactot[j + 2] and ((abs(vettoreEsche[i + 2] - x) <= GlobalHWVar.gpx and abs(vettoreEsche[i + 3] - y) <= GlobalHWVar.gpy and not abs(vettoreEsche[i + 2] - x) == abs(vettoreEsche[i + 3] - y)) or numFrecce > 0) and attacco != 4:
+                                    while j < len(caseattactotRallo):
+                                        if caseattactotRallo[j] == vettoreEsche[i + 2] and caseattactotRallo[j + 1] == vettoreEsche[i + 3]:
+                                            if caseattactotRallo[j + 2] and ((abs(vettoreEsche[i + 2] - x) <= GlobalHWVar.gpx and abs(vettoreEsche[i + 3] - y) <= GlobalHWVar.gpy and not abs(vettoreEsche[i + 2] - x) == abs(vettoreEsche[i + 3] - y)) or numFrecce > 0) and attacco != 4:
                                                 if GlobalHWVar.mouseBloccato:
                                                     GlobalHWVar.configuraCursore(False)
                                                 inquadratoQualcosa = "esca"
@@ -1427,8 +1435,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if not inquadratoQualcosa and attacco > 1:
                     if x - GlobalHWVar.gpx * raggioDiLancio <= xMouse <= x + GlobalHWVar.gpx + GlobalHWVar.gpx * raggioDiLancio and y - GlobalHWVar.gpy * raggioDiLancio <= yMouse <= y + GlobalHWVar.gpy + GlobalHWVar.gpy * raggioDiLancio:
                         i = 0
-                        while i < len(caseattactot):
-                            if caseattactot[i] <= xMouse <= caseattactot[i] + GlobalHWVar.gpx and caseattactot[i + 1] <= yMouse <= caseattactot[i + 1] + GlobalHWVar.gpy and caseattactot[i + 2]:
+                        while i < len(caseattactotRallo):
+                            if caseattactotRallo[i] <= xMouse <= caseattactotRallo[i] + GlobalHWVar.gpx and caseattactotRallo[i + 1] <= yMouse <= caseattactotRallo[i + 1] + GlobalHWVar.gpy and caseattactotRallo[i + 2]:
                                 suPersonaggio = False
                                 for personaggio in listaPersonaggi:
                                     if xp == personaggio.x and yp == personaggio.y:
@@ -1827,9 +1835,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 # attacco lontano attacco = 1
                 elif attacco == 1 and not ((xp == x + GlobalHWVar.gpx and yp == y) or (xp == x - GlobalHWVar.gpx and yp == y) or (xp == x and yp == y + GlobalHWVar.gpy) or (xp == x and yp == y - GlobalHWVar.gpy) or (xp == x and yp == y) or (xp == rx and yp == ry)) and numFrecce > 0:
                     j = 0
-                    while j < len(caseattactot):
-                        if caseattactot[j] == xp and caseattactot[j + 1] == yp:
-                            if caseattactot[j + 2]:
+                    while j < len(caseattactotRallo):
+                        if caseattactotRallo[j] == xp and caseattactotRallo[j + 1] == yp:
+                            if caseattactotRallo[j + 2]:
                                 infliggidanno = True
                                 danno = attLontano
                                 raggio = GlobalHWVar.gpx * 0
@@ -1844,9 +1852,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
-                    while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                    while i < len(caseattactotRallo):
+                        if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                            if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                                 continua = False
                             break
                         i += 3
@@ -1878,9 +1886,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
-                    while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                    while i < len(caseattactotRallo):
+                        if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                            if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                                 continua = False
                             break
                         i += 3
@@ -1913,9 +1921,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
-                    while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                    while i < len(caseattactotRallo):
+                        if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                            if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                                 continua = False
                             break
                         i += 3
@@ -1969,9 +1977,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
-                    while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                    while i < len(caseattactotRallo):
+                        if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                            if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                                 continua = False
                             break
                         i += 3
@@ -2004,9 +2012,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     # controllo caselle attaccabili
                     continua = True
                     i = 0
-                    while i < len(caseattactot):
-                        if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                            if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                    while i < len(caseattactotRallo):
+                        if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                            if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                                 continua = False
                             break
                         i += 3
@@ -2288,9 +2296,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         else:
                             puntatogg = puntatogg6
                             j = 0
-                            while j < len(caseattactot):
-                                if caseattactot[j] == nemico.x and caseattactot[j + 1] == nemico.y:
-                                    if caseattactot[j + 2]:
+                            while j < len(caseattactotRallo):
+                                if caseattactotRallo[j] == nemico.x and caseattactotRallo[j + 1] == nemico.y:
+                                    if caseattactotRallo[j + 2]:
                                         nemicoInCampoVisivoArco = True
                                     break
                                 j += 3
@@ -2305,9 +2313,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         else:
                             puntatogg = puntatogg6
                             j = 0
-                            while j < len(caseattactot):
-                                if caseattactot[j] == vettoreEsche[i + 2] and caseattactot[j + 1] == vettoreEsche[i + 3]:
-                                    if caseattactot[j + 2]:
+                            while j < len(caseattactotRallo):
+                                if caseattactotRallo[j] == vettoreEsche[i + 2] and caseattactotRallo[j + 1] == vettoreEsche[i + 3]:
+                                    if caseattactotRallo[j + 2]:
                                         nemicoInCampoVisivoArco = True
                                     break
                                 j += 3
@@ -2327,9 +2335,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if abs(x - xp) <= GlobalHWVar.gpx * 6 and abs(y - yp) <= GlobalHWVar.gpy * 6:
                 puntat = GlobalImgVar.puntatIn
                 i = 0
-                while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                while i < len(caseattactotRallo):
+                    if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                        if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                             puntat = GlobalImgVar.puntatOut
                         break
                     i = i + 3
@@ -2343,9 +2351,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if abs(x - xp) <= GlobalHWVar.gpx * 5 and abs(y - yp) <= GlobalHWVar.gpy * 5:
                 puntat = GlobalImgVar.puntatIn
                 i = 0
-                while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                while i < len(caseattactotRallo):
+                    if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                        if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                             puntat = GlobalImgVar.puntatOut
                         break
                     i = i + 3
@@ -2361,9 +2369,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if xp == rx and yp == ry:
                     puntat = GlobalImgVar.puntatOut
                 i = 0
-                while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                while i < len(caseattactotRallo):
+                    if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                        if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                             puntat = GlobalImgVar.puntatOut
                         break
                     i += 3
@@ -2393,9 +2401,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if abs(x - xp) <= GlobalHWVar.gpx * 5 and abs(y - yp) <= GlobalHWVar.gpy * 5:
                 puntat = GlobalImgVar.puntatIn
                 i = 0
-                while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                while i < len(caseattactotRallo):
+                    if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                        if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                             puntat = GlobalImgVar.puntatOut
                         break
                     i = i + 3
@@ -2409,9 +2417,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             if abs(x - xp) <= GlobalHWVar.gpx * 4 and abs(y - yp) <= GlobalHWVar.gpy * 4:
                 puntat = GlobalImgVar.puntatIn
                 i = 0
-                while i < len(caseattactot):
-                    if caseattactot[i] == xp and caseattactot[i + 1] == yp:
-                        if not caseattactot[i + 2] and not (caseattactot[i] == x and caseattactot[i + 1] == y):
+                while i < len(caseattactotRallo):
+                    if caseattactotRallo[i] == xp and caseattactotRallo[i + 1] == yp:
+                        if not caseattactotRallo[i + 2] and not (caseattactotRallo[i] == x and caseattactotRallo[i + 1] == y):
                             puntat = GlobalImgVar.puntatOut
                         break
                     i = i + 3
@@ -2426,11 +2434,16 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
             GlobalHWVar.disegnaImmagineSuSchermo(puntatogg, (xp, yp))
         GlobalHWVar.disegnaImmagineSuSchermo(puntat, (xp, yp))
 
+        evitaAggiornamentoImgs = False
         puntandoSuUnNemicoOColcoOEsca = False
         # disegna vita esche
         i = 0
         while i < len(vettoreEsche):
             if xp == vettoreEsche[i + 2] and yp == vettoreEsche[i + 3]:
+                if not disegnateCaselleAttaccabili:
+                    disegnateCaselleAttaccabili = True
+                    ricaricaschermo = True
+                    evitaAggiornamentoImgs = True
                 puntandoSuUnNemicoOColcoOEsca = True
                 lungvita = int(((GlobalHWVar.gpx * vettoreEsche[i + 1]) / float(4)) // 15)
                 if lungvita < 0:
@@ -2443,7 +2456,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
-                ricaricaschermo = True
             i += 4
         # disegna vita-status-raggio visivo nemici
         for nemico in listaNemici:
@@ -2454,16 +2466,21 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 pvm = nemico.vita
                 pvmtot = nemico.vitaTotale
                 raggiovista = nemico.raggioVisivo
-                # controllo caselle attaccabili
-                caseattactotMostri = nemico.caseattactot
-                # disegno le caselle non attaccabili
-                i = 0
-                while i < len(caseattactotMostri):
-                    if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
-                    i += 3
-                campoattaccabile3 = nemico.imgCampoAttaccabile
-                GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (mx - raggiovista, my - raggiovista))
+                if not disegnateCaselleAttaccabili:
+                    # disegno le caselle non attaccabili
+                    if not nemico.caselleAttaccabiliAggiornate:
+                        nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True, necessarioTrovareCaselleAttaccabili=True)
+                    caseattactotMostri = nemico.caseattactot
+                    i = 0
+                    while i < len(caseattactotMostri):
+                        if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
+                        i += 3
+                    campoattaccabile3 = nemico.imgCampoAttaccabile
+                    GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (mx - raggiovista, my - raggiovista))
+                    disegnateCaselleAttaccabili = True
+                    ricaricaschermo = True
+                    evitaAggiornamentoImgs = True
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
                 if nemico.avvelenato:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
@@ -2531,24 +2548,25 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitanemsucc, (GlobalHWVar.gpx, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitanem, (GlobalHWVar.gpx, 0))
-                ricaricaschermo = True
                 break
         # vita-status-campo visivo robo
         if xp == rx and yp == ry:
             puntandoSuUnNemicoOColcoOEsca = True
             if enrob > 0:
-                # controllo caselle attaccabili
-                vistaRobo = GlobalHWVar.gpx * GlobalGameVar.vistaRobo
-                caseattactotRobo = caselleAttaccabiliColco
                 # disegno le caselle non attaccabili
-                i = 0
-                while i < len(caseattactotRobo):
-                    if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
-                    i += 3
-                campoattaccabile3 = GlobalImgVar.campoattaccabileRobo
-                GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
-                ricaricaschermo = True
+                if not disegnateCaselleAttaccabili:
+                    vistaRobo = GlobalHWVar.gpx * GlobalGameVar.vistaRobo
+                    caseattactotRobo = caselleAttaccabiliColco
+                    i = 0
+                    while i < len(caseattactotRobo):
+                        if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
+                        i += 3
+                    campoattaccabile3 = GlobalImgVar.campoattaccabileRobo
+                    GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
+                    disegnateCaselleAttaccabili = True
+                    ricaricaschermo = True
+                    evitaAggiornamentoImgs = True
             lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
             lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
             if lungen < 0:
@@ -2569,18 +2587,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
         # vita colco selezionato
         if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-            if enrob > 0:
-                # controllo caselle attaccabili
-                vistaRobo = GlobalHWVar.gpx * GlobalGameVar.vistaRobo
-                caseattactotRobo = caselleAttaccabiliColco
-                # disegno le caselle non attaccabili
-                i = 0
-                while i < len(caseattactotRobo):
-                    if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
-                    i = i + 3
-                campoattaccabile3 = GlobalImgVar.campoattaccabileRobo
-                GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
             lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
             lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
             if lungen < 0:
@@ -2601,21 +2607,8 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
         # vita nemico selezionato
         elif not puntandoSuUnNemicoOColcoOEsca and not type(nemicoInquadrato) is str and nemicoInquadrato:
-            mx = nemicoInquadrato.x
-            my = nemicoInquadrato.y
             pvm = nemicoInquadrato.vita
             pvmtot = nemicoInquadrato.vitaTotale
-            raggiovista = nemicoInquadrato.raggioVisivo
-            # controllo caselle attaccabili
-            caseattactotMostri = nemicoInquadrato.caseattactot
-            # disegno le caselle non attaccabili
-            i = 0
-            while i < len(caseattactotMostri):
-                if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
-                i = i + 3
-            campoattaccabile3 = nemicoInquadrato.imgCampoAttaccabile
-            GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (mx - raggiovista, my - raggiovista))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
             if nemicoInquadrato.avvelenato:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
@@ -2747,11 +2740,23 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry))
             vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(rx, ry, GlobalHWVar.gpx, GlobalHWVar.gpy)).convert(), rx, ry]
+            if vecchioNemicoInquadrato != nemicoInquadrato:
+                ricaricaschermo = True
+                appenaCaricato = False
+                disegnateCaselleAttaccabili = False
+                vecchioNemicoInquadrato = nemicoInquadrato
+                evitaAggiornamentoImgs = True
         elif not type(nemicoInquadrato) is str and nemicoInquadrato:
             if vecchiaCasellaInquadrata[0] and (vecchiaCasellaInquadrata[1] != nemicoInquadrato.x or vecchiaCasellaInquadrata[2] != nemicoInquadrato.y):
                 GlobalHWVar.disegnaImmagineSuSchermo(vecchiaCasellaInquadrata[0], (vecchiaCasellaInquadrata[1], vecchiaCasellaInquadrata[2]))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
             vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(nemicoInquadrato.x, nemicoInquadrato.y, GlobalHWVar.gpx, GlobalHWVar.gpy)).convert(), nemicoInquadrato.x, nemicoInquadrato.y]
+            if vecchioNemicoInquadrato != nemicoInquadrato:
+                ricaricaschermo = True
+                appenaCaricato = False
+                disegnateCaselleAttaccabili = False
+                vecchioNemicoInquadrato = nemicoInquadrato
+                evitaAggiornamentoImgs = True
         elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
             idEscaInquadrata = int(nemicoInquadrato[4:])
             i = 0
@@ -2763,12 +2768,19 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     vecchiaCasellaInquadrata = [schermoOriginale.subsurface(pygame.Rect(vettoreEsche[i + 2], vettoreEsche[i + 3], GlobalHWVar.gpx, GlobalHWVar.gpy)).convert(), vettoreEsche[i + 2], vettoreEsche[i + 3]]
                     break
                 i += 4
+            if vecchioNemicoInquadrato != nemicoInquadrato:
+                ricaricaschermo = True
+                appenaCaricato = False
+                disegnateCaselleAttaccabili = False
+                vecchioNemicoInquadrato = nemicoInquadrato
+                evitaAggiornamentoImgs = True
 
         if not risposta:
-            GlobalHWVar.aggiornaSchermo()
+            if not evitaAggiornamentoImgs:
+                GlobalHWVar.aggiornaSchermo()
         elif not sposta or not attaccato:
             attacco = 0
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockInterazioni.tick(GlobalHWVar.fpsInterazioni)
 
-    return sposta, creaesca, xp, yp, npers, nrob, pv, avvele, enrob, difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno
+    return sposta, creaesca, xp, yp, npers, nrob, pv, avvele, enrob, difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac

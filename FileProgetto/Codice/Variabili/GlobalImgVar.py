@@ -287,7 +287,7 @@ global imgEnigmaBibliotecarioVel5
 global cursoreMatitaEnigmaBibliotecario
 global cursoreGommaEnigmaBibliotecario
 
-numImgTotali = 1408
+numImgTotali = 1405
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
@@ -924,9 +924,12 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     campoattaccabileRallo4 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 11, False)
     campoattaccabileRallo5 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     campoattaccabileRobo = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile3.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
-    caselleattaccabiliRobo = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/CaselleattaccabiliRobo.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    caselleattaccabilimostro = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Caselleattaccabilimostro.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-    caselleattaccabili = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Caselleattaccabili.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+    caselleattaccabiliRobo = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+    caselleattaccabiliRobo.fill((100, 100, 100, 100))
+    caselleattaccabilimostro = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+    caselleattaccabilimostro.fill((100, 0, 0, 100))
+    caselleattaccabili = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
+    caselleattaccabili.fill((0, 0, 0, 100))
 
     # aumento livello
     saliliv = funzionePerCaricareImmagini('Risorse/Immagini/Status/Levelup/Saliliv.png', GlobalHWVar.gpx, GlobalHWVar.gpy, True)

@@ -36,6 +36,8 @@ def gameloop():
         #     print (u"Max RAM usata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
+            caseattactotRallo = []
+            posizioneRalloAggiornamentoCaseAttac = [0, 0]
             saltaTurno = False
             GlobalGameVar.inizializzaVariabiliGlobali()
             movimentoDaCompiere = False
@@ -507,7 +509,7 @@ def gameloop():
                 if inizio:
                     nemico.settaObbiettivoDalSalvataggio(x, y, rx, ry, vettoreEsche, vettoreDenaro, listaNemici, listaPersonaggi, dati, caseviste)
                 if nemico.vita > 0 and nemico.inCasellaVista:
-                    nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
 
             # aggiorno dialoghi/img dei personaggi
             for personaggio in listaPersonaggi:
@@ -865,7 +867,7 @@ def gameloop():
                             # aggiorno la vista dei nemici
                             for nemico in listaNemici:
                                 if nemico.vita > 0 and nemico.inCasellaVista:
-                                    nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+                                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
                         else:
                             caricaTutto = True
                             impossibileAprirePorta = True
@@ -992,7 +994,7 @@ def gameloop():
                         # aggiorno la vista dei nemici
                         for nemico in listaNemici:
                             if nemico.vita > 0 and nemico.inCasellaVista:
-                                nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
                     else:
                         impossibileAprirePorta = True
                         caricaTutto = True
@@ -1600,7 +1602,7 @@ def gameloop():
             # attaccoDiRallo [obiettivo, danno, status(avvelena, appiccica) ... => per ogni nemico colpito]
             attaccoDiRallo = []
             if attacco != 0:
-                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, vettoreImgCaselle, saltaTurno)
+                sposta, creaesca, xesca, yesca, npers, nrob, dati[5], dati[121], dati[10], difesa, apriChiudiPorta, apriCofanetto, listaNemici, attacco, attaccoADistanza, nemicoInquadrato, attaccoDiRallo, chiamarob, ultimoObbiettivoColco, animaOggetto, interagisciConPersonaggio, startf, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac = EnvPrint.attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, pers, dati[5], pvtot, dif, dati[121], dati[130], dati[123], dati[124], dati[10], entot, difro, dati[122], dati[125], dati[126], imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, attVicino, attLontano, attacco, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, vettoreDenaro, dati[132], nemicoInquadrato, raffredda, autoRic1, autoRic2, ultimoObbiettivoColco, animaOggetto, listaPersonaggi, startf, dati[0], casellePercorribili, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, mosseRimasteRob, nonMostrarePersonaggio, saltaTurno, caseattactotRallo, posizioneRalloAggiornamentoCaseAttac)
                 refreshSchermo = True
                 caricaTutto = True
                 # cancello apertura porta se non si può aprire
@@ -1750,7 +1752,7 @@ def gameloop():
                         # aggiorno la vista dei nemici
                         for nemico in listaNemici:
                             if nemico.vita > 0 and nemico.inCasellaVista:
-                                nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
                         break
                     k = k + 4
                 apriChiudiPorta = [False, 0, 0]
@@ -2040,7 +2042,7 @@ def gameloop():
             for nemico in listaNemici:
                 if nemico.vita > 0 and nemico.inCasellaVista:
                     nemico.aggiornaBersaglioAttacchiDistanti(x, y, rx, ry, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
-                    nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, False)
+                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, False)
                     if nemico.visto:
                         apriocchio = True
                 else:
@@ -2108,13 +2110,13 @@ def gameloop():
                                     del vettoreEsche[i]
                                     del vettoreEsche[i - 1]
                                 i += 4
-                            if nemico.animaSpostamento or nemico.percorso[nemico.numeroMovimento] == "":
+                            if nemico.animaSpostamento or (len(nemico.percorso) > 0 and nemico.percorso[nemico.numeroMovimento] == ""):
                                 if nemico.numeroMovimento < len(nemico.percorso) - 1:
                                     nemico.numeroMovimento += 1
                                 else:
                                     nemico.numeroMovimento = 0
                             if nemico.vx != nemico.x or nemico.vy != nemico.y:
-                                nemico.aggiornaVista(x, y, rx, ry, dati, caseviste, True)
+                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
                             nemico.compiMossa()
                         elif sposta and nemico.mosseRimaste < 0:
                             nemico.mosseRimaste += 1

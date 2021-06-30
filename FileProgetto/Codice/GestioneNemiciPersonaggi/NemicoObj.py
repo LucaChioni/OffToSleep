@@ -41,6 +41,7 @@ class NemicoObj(object):
         # il vettore "bersaglioColpito" contiene: bersaglio, danno, statoInflitto e se l'attacco è sato mortale o no
         self.bersaglioColpito = []
         self.caseattactot = []
+        self.caselleAttaccabiliAggiornate = False
         self.direzione = direzione
         self.mosseRimaste = 0
         self.animaSpostamento = False
@@ -538,10 +539,31 @@ class NemicoObj(object):
         else:
             self.animaDanneggiamento.append(False)
 
-    def aggiornaVista(self, x, y, rx, ry, dati, caseviste, aggiornaCaselleAttaccabili):
+    def aggiornaVista(self, x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, aggiornaCaselleAttaccabili, necessarioTrovareCaselleAttaccabili=False):
         vistoRallo = False
         if aggiornaCaselleAttaccabili:
-            self.caseattactot = GenericFunc.trovacasattaccabili(self.x, self.y, self.raggioVisivo, caseviste)
+            if (abs(self.x - x) <= self.raggioVisivo and abs(self.y - y) <= self.raggioVisivo) or (abs(self.x - rx) <= self.raggioVisivo and abs(self.y - ry) <= self.raggioVisivo):
+                necessarioTrovareCaselleAttaccabili = True
+            if not necessarioTrovareCaselleAttaccabili:
+                i = 0
+                while i < len(vettoreEsche):
+                    if abs(self.x - vettoreEsche[i + 2]) <= self.raggioVisivo and abs(self.y - vettoreEsche[i + 3]) <= self.raggioVisivo:
+                        necessarioTrovareCaselleAttaccabili = True
+                        break
+                    i += 4
+            if not necessarioTrovareCaselleAttaccabili:
+                i = 0
+                while i < len(vettoreDenaro):
+                    if abs(self.x - vettoreDenaro[i + 1]) <= self.raggioVisivo and abs(self.y - vettoreDenaro[i + 2]) <= self.raggioVisivo:
+                        necessarioTrovareCaselleAttaccabili = True
+                        break
+                    i += 3
+
+            if necessarioTrovareCaselleAttaccabili:
+                self.caseattactot = GenericFunc.trovacasattaccabili(self.x, self.y, self.raggioVisivo, caseviste)
+                self.caselleAttaccabiliAggiornate = True
+            else:
+                self.caselleAttaccabiliAggiornate = False
         if abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(self.caseattactot):
