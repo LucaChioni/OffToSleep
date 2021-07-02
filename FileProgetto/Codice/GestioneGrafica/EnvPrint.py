@@ -361,11 +361,11 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                     lungvita = 0
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), GlobalHWVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
                 fineindvitamost = GlobalImgVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
                 break
             i += 4
@@ -582,11 +582,11 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
                     lungvita = 0
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), GlobalHWVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
                 fineindvitamost = GlobalImgVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
                 break
             i += 4
@@ -1222,11 +1222,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     lungvita = 0
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), GlobalHWVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
                 fineindvitamost = GlobalImgVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
                 break
             i += 4
@@ -2450,11 +2450,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     lungvita = 0
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), GlobalHWVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
                 fineindvitamost = GlobalImgVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
             i += 4
         # disegna vita-status-raggio visivo nemici
@@ -2469,7 +2469,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 if not disegnateCaselleAttaccabili:
                     # disegno le caselle non attaccabili
                     if not nemico.caselleAttaccabiliAggiornate:
-                        nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True, necessarioTrovareCaselleAttaccabili=True)
+                        nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, forzaAggiornamentoCaselleAttaccabili=True)
                     caseattactotMostri = nemico.caseattactot
                     i = 0
                     while i < len(caseattactotMostri):
@@ -2687,11 +2687,11 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         lungvita = 0
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                    indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), GlobalHWVar.gpy // 4))
+                    indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
                     fineindvitamost = GlobalImgVar.fineindvita
                     vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
                     GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), 0))
+                    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
                     GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
                     break
                 i += 4

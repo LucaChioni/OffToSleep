@@ -39,7 +39,6 @@ def gameloop():
             caseattactotRallo = []
             posizioneRalloAggiornamentoCaseAttac = [0, 0]
             saltaTurno = False
-            GlobalGameVar.inizializzaVariabiliGlobali()
             movimentoDaCompiere = False
             percorsoDaEseguire = []
             nonMostrarePersonaggio = False
@@ -159,6 +158,7 @@ def gameloop():
                 npers = 4
 
             if cambiosta:
+                posizioneRalloAggiornamentoCaseAttac = [0, 0]
                 if not inizio:
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
 
@@ -509,7 +509,7 @@ def gameloop():
                 if inizio:
                     nemico.settaObbiettivoDalSalvataggio(x, y, rx, ry, vettoreEsche, vettoreDenaro, listaNemici, listaPersonaggi, dati, caseviste)
                 if nemico.vita > 0 and nemico.inCasellaVista:
-                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
+                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, forzaAggiornamentoCaselleAttaccabili=True)
 
             # aggiorno dialoghi/img dei personaggi
             for personaggio in listaPersonaggi:
@@ -846,6 +846,7 @@ def gameloop():
                 while k < len(porte):
                     if porte[k] == dati[1] and not porte[k + 3] and ((porte[k + 1] == x + GlobalHWVar.gpx and porte[k + 2] == y and npers == 1) or (porte[k + 1] == x - GlobalHWVar.gpx and porte[k + 2] == y and npers == 2) or (porte[k + 1] == x and porte[k + 2] == y + GlobalHWVar.gpy and npers == 4) or (porte[k + 1] == x and porte[k + 2] == y - GlobalHWVar.gpy and npers == 3)):
                         if SetPosizioneAudioImpedimenti.possibileAprirePorta(dati[1], porte[k + 1], porte[k + 2], dati[0]):
+                            posizioneRalloAggiornamentoCaseAttac = [0, 0]
                             sposta = True
                             GlobalHWVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                             porte[k + 3] = True
@@ -867,7 +868,7 @@ def gameloop():
                             # aggiorno la vista dei nemici
                             for nemico in listaNemici:
                                 if nemico.vita > 0 and nemico.inCasellaVista:
-                                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
+                                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, forzaAggiornamentoCaselleAttaccabili=True)
                         else:
                             caricaTutto = True
                             impossibileAprirePorta = True
@@ -973,6 +974,7 @@ def gameloop():
                     inquadratoQualcosaList = inquadratoQualcosa.split(":")
                     posizPortaInVettore = int(inquadratoQualcosaList[1])
                     if SetPosizioneAudioImpedimenti.possibileAprirePorta(dati[1], porte[posizPortaInVettore + 1], porte[posizPortaInVettore + 2], dati[0]):
+                        posizioneRalloAggiornamentoCaseAttac = [0, 0]
                         sposta = True
                         GlobalHWVar.canaleSoundInterazioni.play(rumoreAperturaPorte)
                         porte[posizPortaInVettore + 3] = True
@@ -994,7 +996,7 @@ def gameloop():
                         # aggiorno la vista dei nemici
                         for nemico in listaNemici:
                             if nemico.vita > 0 and nemico.inCasellaVista:
-                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
+                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, forzaAggiornamentoCaselleAttaccabili=True)
                     else:
                         impossibileAprirePorta = True
                         caricaTutto = True
@@ -1288,7 +1290,7 @@ def gameloop():
             dati[121] = False
             aumentoliv = 0
 
-        if inquadratoQualcosa and inquadratoQualcosa.startswith("movimento") and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf:
+        if inquadratoQualcosa and inquadratoQualcosa.startswith("movimento") and movimentoPerMouse and mosseRimasteRob <= 0 and not nemiciInMovimento and not startf and dati[5] > 0:
             nx = 0
             ny = 0
             vetNemiciSoloConXeY = []
@@ -1415,7 +1417,7 @@ def gameloop():
                 GlobalHWVar.canaleSoundPassiRallo.stop()
 
         # menu start
-        if startf and attacco != 1:
+        if startf and attacco != 1 and dati[5] > 0:
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selsta)
             refreshSchermo = True
             dati[2] = x
@@ -1729,6 +1731,7 @@ def gameloop():
                 k = 0
                 while k < len(porte):
                     if porte[k] == dati[1] and porte[k + 1] == apriChiudiPorta[1] and porte[k + 2] == apriChiudiPorta[2]:
+                        posizioneRalloAggiornamentoCaseAttac = [0, 0]
                         if porte[k + 3]:
                             GlobalHWVar.canaleSoundInterazioni.play(rumoreChiusuraPorte)
                             porte[k + 3] = False
@@ -1752,7 +1755,7 @@ def gameloop():
                         # aggiorno la vista dei nemici
                         for nemico in listaNemici:
                             if nemico.vita > 0 and nemico.inCasellaVista:
-                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
+                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, forzaAggiornamentoCaselleAttaccabili=True)
                         break
                     k = k + 4
                 apriChiudiPorta = [False, 0, 0]
@@ -1894,7 +1897,7 @@ def gameloop():
                     contaesca = vettoreEsche[len(vettoreEsche) - 4] + 1
                 # id, vita, xesca, yesca
                 vettoreEsche.append(contaesca)
-                vettoreEsche.append(1000)
+                vettoreEsche.append(GlobalGameVar.vitaTotEsche)
                 vettoreEsche.append(xesca)
                 vettoreEsche.append(yesca)
                 creaesca = False
@@ -2042,7 +2045,7 @@ def gameloop():
             for nemico in listaNemici:
                 if nemico.vita > 0 and nemico.inCasellaVista:
                     nemico.aggiornaBersaglioAttacchiDistanti(x, y, rx, ry, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo)
-                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, False)
+                    nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste)
                     if nemico.visto:
                         apriocchio = True
                 else:
@@ -2116,7 +2119,7 @@ def gameloop():
                                 else:
                                     nemico.numeroMovimento = 0
                             if nemico.vx != nemico.x or nemico.vy != nemico.y:
-                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, True)
+                                nemico.aggiornaVista(x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste)
                             nemico.compiMossa()
                         elif sposta and nemico.mosseRimaste < 0:
                             nemico.mosseRimaste += 1

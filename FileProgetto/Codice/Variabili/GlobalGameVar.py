@@ -142,13 +142,19 @@ dictStanze, vetStanzePacifiche = SetAvanzamentiStanzePorteCofanetti.definisciSta
 initVetPorteGlobale = SetAvanzamentiStanzePorteCofanetti.definisciPorte(dictStanze)
 initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(dictStanze)
 
+# vita esche
+vitaTotEsche = 300
+
 global idNemico
+global listaIdNemiciUsati
 global datiEnigmaBibliotecario
 def inizializzaVariabiliGlobali():
     global idNemico
+    global listaIdNemiciUsati
     global datiEnigmaBibliotecario
     # id incrementale da assegare ai nemici
     idNemico = 0
+    listaIdNemiciUsati = []
     # dictionary che contiene i dati dell'enigma del bibliotecario
     datiEnigmaBibliotecario = {}
     datiEnigmaBibliotecario["reset"] = False

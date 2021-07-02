@@ -10,9 +10,18 @@ import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 class NemicoObj(object):
 
-    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False, monetePossedute=-1, nonCaricareImg=False, posizioneOriginale=False):
-        GlobalGameVar.idNemico += 1
-        self.id = GlobalGameVar.idNemico
+    def __init__(self, x, y, direzione, tipo, stanza, percorso, numeroMovimento=0, triggerato=False, monetePossedute=-1, nonCaricareImg=False, posizioneOriginale=False, id=False):
+        if id:
+            self.id = id
+            GlobalGameVar.listaIdNemiciUsati.append(id)
+        else:
+            trovatoId = False
+            while not trovatoId:
+                GlobalGameVar.idNemico += 1
+                if not GlobalGameVar.idNemico in GlobalGameVar.listaIdNemiciUsati:
+                    self.id = GlobalGameVar.idNemico
+                    GlobalGameVar.listaIdNemiciUsati.append(GlobalGameVar.idNemico)
+                    trovatoId = True
         if posizioneOriginale:
             self.posizioneOriginale = posizioneOriginale
         else:
@@ -42,6 +51,7 @@ class NemicoObj(object):
         self.bersaglioColpito = []
         self.caseattactot = []
         self.caselleAttaccabiliAggiornate = False
+        self.ultimaPosizioneConCaselleAttaccabiliAggiornate = [0, 0]
         self.direzione = direzione
         self.mosseRimaste = 0
         self.animaSpostamento = False
@@ -220,7 +230,7 @@ class NemicoObj(object):
             esp = 10
         if self.tipo == "RagnoNero":
             vitaTotale = 100
-            attacco = 100
+            attacco = 110
             difesa = 16
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 6
@@ -232,7 +242,7 @@ class NemicoObj(object):
             esp = 8
         if self.tipo == "RagnoRosso":
             vitaTotale = 90
-            attacco = 90
+            attacco = 100
             difesa = 18
             velocita = 0
             raggioVisivo = GlobalHWVar.gpx * 6
@@ -539,31 +549,35 @@ class NemicoObj(object):
         else:
             self.animaDanneggiamento.append(False)
 
-    def aggiornaVista(self, x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, aggiornaCaselleAttaccabili, necessarioTrovareCaselleAttaccabili=False):
+    def aggiornaVista(self, x, y, rx, ry, vettoreEsche, vettoreDenaro, dati, caseviste, forzaAggiornamentoCaselleAttaccabili=False):
         vistoRallo = False
-        if aggiornaCaselleAttaccabili:
-            if (abs(self.x - x) <= self.raggioVisivo and abs(self.y - y) <= self.raggioVisivo) or (abs(self.x - rx) <= self.raggioVisivo and abs(self.y - ry) <= self.raggioVisivo):
-                necessarioTrovareCaselleAttaccabili = True
-            if not necessarioTrovareCaselleAttaccabili:
-                i = 0
-                while i < len(vettoreEsche):
-                    if abs(self.x - vettoreEsche[i + 2]) <= self.raggioVisivo and abs(self.y - vettoreEsche[i + 3]) <= self.raggioVisivo:
-                        necessarioTrovareCaselleAttaccabili = True
-                        break
-                    i += 4
-            if not necessarioTrovareCaselleAttaccabili:
-                i = 0
-                while i < len(vettoreDenaro):
-                    if abs(self.x - vettoreDenaro[i + 1]) <= self.raggioVisivo and abs(self.y - vettoreDenaro[i + 2]) <= self.raggioVisivo:
-                        necessarioTrovareCaselleAttaccabili = True
-                        break
-                    i += 3
 
-            if necessarioTrovareCaselleAttaccabili:
-                self.caseattactot = GenericFunc.trovacasattaccabili(self.x, self.y, self.raggioVisivo, caseviste)
-                self.caselleAttaccabiliAggiornate = True
-            else:
-                self.caselleAttaccabiliAggiornate = False
+        necessarioTrovareCaselleAttaccabili = False
+        if (abs(self.x - x) <= self.raggioVisivo and abs(self.y - y) <= self.raggioVisivo) or (abs(self.x - rx) <= self.raggioVisivo and abs(self.y - ry) <= self.raggioVisivo):
+            necessarioTrovareCaselleAttaccabili = True
+        if not necessarioTrovareCaselleAttaccabili:
+            i = 0
+            while i < len(vettoreEsche):
+                if abs(self.x - vettoreEsche[i + 2]) <= self.raggioVisivo and abs(self.y - vettoreEsche[i + 3]) <= self.raggioVisivo:
+                    necessarioTrovareCaselleAttaccabili = True
+                    break
+                i += 4
+        if not necessarioTrovareCaselleAttaccabili:
+            i = 0
+            while i < len(vettoreDenaro):
+                if abs(self.x - vettoreDenaro[i + 1]) <= self.raggioVisivo and abs(self.y - vettoreDenaro[i + 2]) <= self.raggioVisivo:
+                    necessarioTrovareCaselleAttaccabili = True
+                    break
+                i += 3
+        if (necessarioTrovareCaselleAttaccabili and not (self.ultimaPosizioneConCaselleAttaccabiliAggiornate[0] == self.x and self.ultimaPosizioneConCaselleAttaccabiliAggiornate[1] == self.y)) or forzaAggiornamentoCaselleAttaccabili:
+            self.caseattactot = GenericFunc.trovacasattaccabili(self.x, self.y, self.raggioVisivo, caseviste)
+            self.caselleAttaccabiliAggiornate = True
+            self.ultimaPosizioneConCaselleAttaccabiliAggiornate = [self.x, self.y]
+        elif self.ultimaPosizioneConCaselleAttaccabiliAggiornate[0] == self.x and self.ultimaPosizioneConCaselleAttaccabiliAggiornate[1] == self.y:
+            self.caselleAttaccabiliAggiornate = True
+        else:
+            self.caselleAttaccabiliAggiornate = False
+
         if abs(x - self.x) <= self.raggioVisivo and abs(y - self.y) <= self.raggioVisivo and dati[5] > 0:
             j = 0
             while j < len(self.caseattactot):
@@ -807,7 +821,7 @@ class NemicoObj(object):
                                     pathPerEscaTemp = False
                                     if not self.attaccaDaLontano:
                                         pathPerEscaTemp = GenericFunc.pathFinding(self.x, self.y, vettoreEsche[i + 2], vettoreEsche[i + 3], vetNemiciSoloConXeY, caseviste)
-                                    if (pathPerEscaTemp and (len(pathPerEscaTemp) < distanzaDaEsca or distanzaDaEsca == -1)) or (((not pathPerEscaTemp and distanzaDaEsca == -1) or not self.attaccaDaLontano) and abs(vettoreEsche[i + 2] - self.x) + abs(vettoreEsche[i + 3] - self.y) < abs(distMinXEsca - self.x) + abs(distMinYEsca - self.y)):
+                                    if (pathPerEscaTemp and (len(pathPerEscaTemp) < distanzaDaEsca or distanzaDaEsca == -1)) or (((not pathPerEscaTemp and distanzaDaEsca == -1) or self.attaccaDaLontano) and abs(vettoreEsche[i + 2] - self.x) + abs(vettoreEsche[i + 3] - self.y) < abs(distMinXEsca - self.x) + abs(distMinYEsca - self.y)):
                                         if pathPerEscaTemp and len(pathPerEscaTemp) > 0:
                                             pathPerEsca = pathPerEscaTemp
                                             distanzaDaEsca = len(pathPerEsca) // 2
@@ -858,10 +872,9 @@ class NemicoObj(object):
                             if self.caseattactot[j] == vettoreDenaro[i + 1] and self.caseattactot[j + 1] == vettoreDenaro[i + 2]:
                                 if self.caseattactot[j + 2] and not (x == vettoreDenaro[i + 1] and y == vettoreDenaro[i + 2]) and not (rx == vettoreDenaro[i + 1] and ry == vettoreDenaro[i + 2]):
                                     if primoDenaro:
-                                        if not self.attaccaDaLontano:
-                                            pathPerDenaro = GenericFunc.pathFinding(self.x, self.y, vettoreDenaro[i + 1], vettoreDenaro[i + 2], vetNemiciSoloConXeY, caseviste)
-                                            if pathPerDenaro and len(pathPerDenaro) > 0:
-                                                distanzaDaDenaro = len(pathPerDenaro) // 2
+                                        pathPerDenaro = GenericFunc.pathFinding(self.x, self.y, vettoreDenaro[i + 1], vettoreDenaro[i + 2], vetNemiciSoloConXeY, caseviste)
+                                        if pathPerDenaro and len(pathPerDenaro) > 0:
+                                            distanzaDaDenaro = len(pathPerDenaro) // 2
                                         distMinXDenaro = vettoreDenaro[i + 1]
                                         distMinYDenaro = vettoreDenaro[i + 2]
                                         xDenaro = distMinXDenaro
@@ -869,10 +882,8 @@ class NemicoObj(object):
                                         vistoDenaro = True
                                         primoDenaro = False
                                     else:
-                                        pathPerDenaroTemp = False
-                                        if not self.attaccaDaLontano:
-                                            pathPerDenaroTemp = GenericFunc.pathFinding(self.x, self.y, vettoreDenaro[i + 1], vettoreDenaro[i + 2], vetNemiciSoloConXeY, caseviste)
-                                        if (pathPerDenaroTemp and (len(pathPerDenaroTemp) < distanzaDaDenaro or distanzaDaDenaro == -1)) or (((not pathPerDenaroTemp and distanzaDaDenaro == -1) or not self.attaccaDaLontano) and abs(vettoreDenaro[i + 1] - self.x) + abs(vettoreDenaro[i + 2] - self.y) < abs(distMinXDenaro - self.x) + abs(distMinYDenaro - self.y)):
+                                        pathPerDenaroTemp = GenericFunc.pathFinding(self.x, self.y, vettoreDenaro[i + 1], vettoreDenaro[i + 2], vetNemiciSoloConXeY, caseviste)
+                                        if (pathPerDenaroTemp and (len(pathPerDenaroTemp) < distanzaDaDenaro or distanzaDaDenaro == -1)) or (not pathPerDenaroTemp and distanzaDaDenaro == -1 and abs(vettoreDenaro[i + 1] - self.x) + abs(vettoreDenaro[i + 2] - self.y) < abs(distMinXDenaro - self.x) + abs(distMinYDenaro - self.y)):
                                             if pathPerDenaroTemp and len(pathPerDenaroTemp) > 0:
                                                 pathPerDenaro = pathPerDenaroTemp
                                                 distanzaDaDenaro = len(pathPerDenaro) // 2

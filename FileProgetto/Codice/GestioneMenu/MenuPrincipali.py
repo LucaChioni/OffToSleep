@@ -210,6 +210,7 @@ def menu(caricaSalvataggio, gameover):
         return dati, tuttePorte, tuttiCofanetti, listaNemiciTotali, listaEsche, listaMonete, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco
 
     if caricaSalvataggio:
+        GlobalGameVar.inizializzaVariabiliGlobali()
         datiTotaliAttuali, datiTotaliGameover, errore = CaricaSalvaPartita.caricaPartita(caricaSalvataggio, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, False)
         dati = datiTotaliAttuali[0]
         tuttePorte = datiTotaliAttuali[1]
@@ -362,6 +363,7 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     # nuova partita
                     if voceMarcata == 1:
+                        GlobalGameVar.inizializzaVariabiliGlobali()
                         menuConferma = "inizia"
 
                     # carica partita
@@ -370,6 +372,7 @@ def menu(caricaSalvataggio, gameover):
 
                         # lettura salvataggio
                         if n != -1:
+                            GlobalGameVar.inizializzaVariabiliGlobali()
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
                             i = GlobalHWVar.volumeCanzoni
                             j = GlobalHWVar.volumeEffetti

@@ -1350,11 +1350,11 @@ def animaVitaRalloNemicoInquadrato(dati, nemicoInquadrato, vettoreEsche, difesa,
                     lungvita = 0
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1000) / float(4)) // 15), GlobalHWVar.gpy // 4))
+                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
                 fineindvitamost = GlobalImgVar.fineindvita
                 vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
                 GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + (int(((GlobalHWVar.gpx * 1000) / float(4)) // 15)), 0))
+                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15)), 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
                 break
             i += 4

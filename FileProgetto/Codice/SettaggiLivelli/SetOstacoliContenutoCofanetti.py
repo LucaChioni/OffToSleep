@@ -865,6 +865,13 @@ def aperturacofanetto(stanza, cx, cy, dati):
         # ottieni caricabatterie
         if cx == GlobalHWVar.gpx * 13 and cy == GlobalHWVar.gpy * 10:
             tesoro = 32
+    if stanza == GlobalGameVar.dictStanze["selvaArida6"]:
+        # ottieni caricabatterie
+        if cx == GlobalHWVar.gpx * 4 and cy == GlobalHWVar.gpy * 10:
+            tesoro = 32
+        # ottieni caricabatterie
+        if cx == GlobalHWVar.gpx * 11 and cy == GlobalHWVar.gpy * 2:
+            tesoro = 32
     if stanza == GlobalGameVar.dictStanze["selvaArida7"]:
         # ottieni medicina
         if cx == GlobalHWVar.gpx * 4 and cy == GlobalHWVar.gpy * 2:
@@ -876,9 +883,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if cx == GlobalHWVar.gpx * 24 and cy == GlobalHWVar.gpy * 7:
             tesoro = 81
     if stanza == GlobalGameVar.dictStanze["selvaArida8"]:
-        # ottieni bomba
+        # ottieni caricabatterie
         if cx == GlobalHWVar.gpx * 14 and cy == GlobalHWVar.gpy * 15:
-            tesoro = 36
+            tesoro = 32
     if stanza == GlobalGameVar.dictStanze["selvaArida9"]:
         # ottieni medicina
         if cx == GlobalHWVar.gpx * 7 and cy == GlobalHWVar.gpy * 15:
@@ -917,9 +924,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
         # ottieni condizione (nemico vicino)
         if cx == GlobalHWVar.gpx * 6 and cy == GlobalHWVar.gpy * 5:
             tesoro = 92
-        # ottieni bomba
+        # ottieni caricabatterie
         if cx == GlobalHWVar.gpx * 10 and cy == GlobalHWVar.gpy * 10:
-            tesoro = 36
+            tesoro = 32
     if stanza == GlobalGameVar.dictStanze["selvaArida14"]:
         # ottieni medicina
         if cx == GlobalHWVar.gpx * 6 and cy == GlobalHWVar.gpy * 11:

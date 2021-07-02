@@ -110,6 +110,7 @@ def salvataggio(n, datiAttuali, datiGameover):
                 xOrig, yOrig = nemico.posizioneOriginale
                 scrivi.write("%i_" % (xOrig // GlobalHWVar.gpx))
                 scrivi.write("%i_" % (yOrig // GlobalHWVar.gpy))
+                scrivi.write("%i_" % nemico.id)
                 scrivi.write("[_")
                 for direzione in nemico.percorso:
                     scrivi.write("%s_" % direzione)
@@ -319,30 +320,30 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                     try:
                         i = 0
                         while i < len(datiNemici):
-                            j = i + 18 + 1
+                            j = i + 19 + 1
                             while j < len(datiNemici):
                                 if datiNemici[j] == "]":
                                     datiNemici.pop(j)
-                                    datiNemici.pop(i + 18)
+                                    datiNemici.pop(i + 19)
                                     percorsoNemico = []
-                                    k = i + 18
+                                    k = i + 19
                                     while k < j - 1:
-                                        percorsoNemico.append(datiNemici.pop(i + 18))
+                                        percorsoNemico.append(datiNemici.pop(i + 19))
                                         k += 1
-                                    datiNemici.insert(i + 18, percorsoNemico)
+                                    datiNemici.insert(i + 19, percorsoNemico)
                                     break
                                 j += 1
-                            i += 19
+                            i += 20
                     except:
                         errore = True
-                    if len(datiNemici) % 19 != 0:
+                    if len(datiNemici) % 20 != 0:
                         errore = True
                     else:
                         i = 0
                         while i < len(datiNemici):
                             try:
                                 posizioneOriginale = GlobalHWVar.gpx * int(datiNemici[i + 16]), GlobalHWVar.gpy * int(datiNemici[i + 17])
-                                nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * int(datiNemici[i + 2]), GlobalHWVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 18], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])), int(datiNemici[i + 15]), nonCaricareImg=checkErrori, posizioneOriginale=posizioneOriginale)
+                                nemico = NemicoObj.NemicoObj(GlobalHWVar.gsx // 32 * int(datiNemici[i + 2]), GlobalHWVar.gsy // 18 * int(datiNemici[i + 3]), datiNemici[i + 8], datiNemici[i], int(datiNemici[i + 1]), datiNemici[i + 19], int(datiNemici[i + 13]), bool(int(datiNemici[i + 14])), int(datiNemici[i + 15]), nonCaricareImg=checkErrori, posizioneOriginale=posizioneOriginale, id=int(datiNemici[i + 18]))
                                 nemico.vita = int(datiNemici[i + 4])
                                 nemico.avvelenato = bool(int(datiNemici[i + 5]))
                                 nemico.appiccicato = bool(int(datiNemici[i + 6]))
@@ -355,7 +356,7 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                             except:
                                 errore = True
                                 break
-                            i += 19
+                            i += 20
                     listaEscheStringa = datiTotali[c + 4].split("_")
                     listaEscheStringa.pop(len(listaEscheStringa) - 1)
                     if len(listaEscheStringa) % 4 != 0:

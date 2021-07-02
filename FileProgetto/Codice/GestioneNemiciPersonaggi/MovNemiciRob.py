@@ -189,7 +189,7 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                     # nmos: 1=d, 2=a, 3=s, 4=w
                     casellaDaControllarePrima = 0
                     if ralloVicino and colcoVicino:
-                        casellaTrovata = False
+                        nmosPossibili = []
                         nmxProbabile = GlobalHWVar.gpx
                         nmyProbabile = 0
                         mxProbabile = nemico.x
@@ -202,15 +202,19 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                     myProbabile = nemico.y + nmyProbabile
                                 break
                             i += 3
-                        if not ((abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy)) and not (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) and not (x == mxProbabile and y == myProbabile) and not (rx == mxProbabile and ry == myProbabile):
-                            if casellaTrovata:
-                                if random.randint(0, 1) == 0:
-                                    nmos = 1
-                                    sposta = True
-                            else:
-                                nmos = 1
-                                sposta = True
-                                casellaTrovata = True
+                        casellaOccupata = False
+                        if (abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy) or (x == mxProbabile and y == myProbabile):
+                            casellaOccupata = True
+                        if (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) or (rx == mxProbabile and ry == myProbabile):
+                            casellaOccupata = True
+                        i = 0
+                        while i < len(vetNemici):
+                            if vetNemici[i + 1] == mxProbabile and vetNemici[i + 2] == myProbabile:
+                                casellaOccupata = True
+                                break
+                            i += 4
+                        if not casellaOccupata:
+                            nmosPossibili.append(1)
                         nmxProbabile = -GlobalHWVar.gpx
                         nmyProbabile = 0
                         mxProbabile = nemico.x
@@ -223,15 +227,19 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                     myProbabile = nemico.y + nmyProbabile
                                 break
                             i += 3
-                        if not ((abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy)) and not (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) and not (x == mxProbabile and y == myProbabile) and not (rx == mxProbabile and ry == myProbabile):
-                            if casellaTrovata:
-                                if random.randint(0, 1) == 0:
-                                    nmos = 2
-                                    sposta = True
-                            else:
-                                nmos = 2
-                                sposta = True
-                                casellaTrovata = True
+                        casellaOccupata = False
+                        if (abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy) or (x == mxProbabile and y == myProbabile):
+                            casellaOccupata = True
+                        if (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) or (rx == mxProbabile and ry == myProbabile):
+                            casellaOccupata = True
+                        i = 0
+                        while i < len(vetNemici):
+                            if vetNemici[i + 1] == mxProbabile and vetNemici[i + 2] == myProbabile:
+                                casellaOccupata = True
+                                break
+                            i += 4
+                        if not casellaOccupata:
+                            nmosPossibili.append(2)
                         nmxProbabile = 0
                         nmyProbabile = GlobalHWVar.gpy
                         mxProbabile = nemico.x
@@ -244,15 +252,19 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                     myProbabile = nemico.y + nmyProbabile
                                 break
                             i += 3
-                        if not ((abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy)) and not (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) and not (x == mxProbabile and y == myProbabile) and not (rx == mxProbabile and ry == myProbabile):
-                            if casellaTrovata:
-                                if random.randint(0, 1) == 0:
-                                    nmos = 3
-                                    sposta = True
-                            else:
-                                nmos = 3
-                                sposta = True
-                                casellaTrovata = True
+                        casellaOccupata = False
+                        if (abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy) or (x == mxProbabile and y == myProbabile):
+                            casellaOccupata = True
+                        if (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) or (rx == mxProbabile and ry == myProbabile):
+                            casellaOccupata = True
+                        i = 0
+                        while i < len(vetNemici):
+                            if vetNemici[i + 1] == mxProbabile and vetNemici[i + 2] == myProbabile:
+                                casellaOccupata = True
+                                break
+                            i += 4
+                        if not casellaOccupata:
+                            nmosPossibili.append(3)
                         nmxProbabile = 0
                         nmyProbabile = -GlobalHWVar.gpy
                         mxProbabile = nemico.x
@@ -265,14 +277,24 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                     myProbabile = nemico.y + nmyProbabile
                                 break
                             i += 3
-                        if not ((abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy)) and not (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) and not (x == mxProbabile and y == myProbabile) and not (rx == mxProbabile and ry == myProbabile):
-                            if casellaTrovata:
-                                if random.randint(0, 1) == 0:
-                                    nmos = 4
-                                    sposta = True
-                            else:
-                                nmos = 4
-                                sposta = True
+                        casellaOccupata = False
+                        if (abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy) or (x == mxProbabile and y == myProbabile):
+                            casellaOccupata = True
+                        if (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) or (rx == mxProbabile and ry == myProbabile):
+                            casellaOccupata = True
+                        i = 0
+                        while i < len(vetNemici):
+                            if vetNemici[i + 1] == mxProbabile and vetNemici[i + 2] == myProbabile:
+                                casellaOccupata = True
+                                break
+                            i += 4
+                        if not casellaOccupata:
+                            nmosPossibili.append(4)
+
+                        if len(nmosPossibili) > 0:
+                            nmosScelta = random.randint(1, len(nmosPossibili)) - 1
+                            nmos = nmosPossibili[nmosScelta]
+                            sposta = True
                     else:
                         if ralloVicino:
                             if nemico.x - GlobalHWVar.gpx == x and nemico.y == y:
@@ -327,7 +349,18 @@ def movmostro(x, y, rx, ry, morterob, nemico, dif, difro, par, dati, vettoreEsch
                                         myProbabile = nemico.y + nmyProbabile
                                     break
                                 j += 3
-                            if not ((abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy)) and not (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) and not (x == mxProbabile and y == myProbabile) and not (rx == mxProbabile and ry == myProbabile):
+                            casellaOccupata = False
+                            if (abs(x - mxProbabile) == GlobalHWVar.gpx and abs(y - myProbabile) == 0) or (abs(x - mxProbabile) == 0 and abs(y - myProbabile) == GlobalHWVar.gpy) or (x == mxProbabile and y == myProbabile):
+                                casellaOccupata = True
+                            if (not morterob and ((abs(rx - mxProbabile) == GlobalHWVar.gpx and abs(ry - myProbabile) == 0) or (abs(rx - mxProbabile) == 0 and abs(ry - myProbabile) == GlobalHWVar.gpy))) or (rx == mxProbabile and ry == myProbabile):
+                                casellaOccupata = True
+                            j = 0
+                            while j < len(vetNemici):
+                                if vetNemici[j + 1] == mxProbabile and vetNemici[j + 2] == myProbabile:
+                                    casellaOccupata = True
+                                    break
+                                j += 4
+                            if not casellaOccupata:
                                 nmos = i
                                 sposta = True
                                 break
