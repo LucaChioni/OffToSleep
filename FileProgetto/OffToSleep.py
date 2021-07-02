@@ -777,6 +777,7 @@ def gameloop():
                         ultimoObbiettivoColco.append("Telecomando")
                         ultimoObbiettivoColco.append(x)
                         ultimoObbiettivoColco.append(y)
+                        ultimoObbiettivoColco.append("spostamento")
                         chiamarob = True
                 else:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -965,6 +966,7 @@ def gameloop():
                         ultimoObbiettivoColco.append("Telecomando")
                         ultimoObbiettivoColco.append(x)
                         ultimoObbiettivoColco.append(y)
+                        ultimoObbiettivoColco.append("spostamento")
                         chiamarob = True
                     bottoneDown = False
                 elif inquadratoQualcosa and inquadratoQualcosa.startswith("porta"):
@@ -1541,7 +1543,7 @@ def gameloop():
 
         # morte tua e di robo
         inizio, gameover = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], inizio, gameover)
-        morterob, dati, mosseRimasteRob = GenericFunc.controllaMorteColco(dati, mosseRimasteRob)
+        morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
 
         if not inizio:
             # setto stato personaggi all'inizio del turno
@@ -1866,6 +1868,7 @@ def gameloop():
                 ultimoObbiettivoColco.append("Telecomando")
                 ultimoObbiettivoColco.append(x)
                 ultimoObbiettivoColco.append(y)
+                ultimoObbiettivoColco.append("spostamento")
 
             # impedisce di andare avanti quando si vuole andare in una zona non ancora sbloccata
             if dati[6] != 0 or dati[128] != 0 or dati[8] != 0 or dati[7] != 0:
@@ -2261,8 +2264,10 @@ def gameloop():
                             del vettoreDenaro[i + 1]
                             del vettoreDenaro[i]
                             refreshSchermo = True
+                            denaroPreso = True
                             break
-                i += 3
+                if not denaroPreso:
+                    i += 3
 
             movimentoDaCompiere = False
             vx = x

@@ -1335,7 +1335,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma, in precedenza, è stato rilevato un obiettivo che non è più nel campo visivo. In questo caso, Impo si muoverà verso la posizione in cui ha visto per l'ultima volta quell'obiettivo...")
+                dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma è stato soddisfatto un Condizio-ImpoFoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, Impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-ImpoFoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 18:
                 oggettoDato = False

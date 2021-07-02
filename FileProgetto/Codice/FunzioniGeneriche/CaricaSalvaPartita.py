@@ -163,6 +163,7 @@ def salvataggio(n, datiAttuali, datiGameover):
                 scrivi.write("%s_" % ultimoObbiettivoColco[0])
                 scrivi.write("%i_" % (ultimoObbiettivoColco[1] // GlobalHWVar.gpx))
                 scrivi.write("%i_" % (ultimoObbiettivoColco[2] // GlobalHWVar.gpy))
+                scrivi.write("%s_" % ultimoObbiettivoColco[3])
             else:
                 scrivi.write("_")
                 scrivi.write("-1_")
@@ -458,13 +459,14 @@ def caricaPartita(n, lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti, 
                                 break
                     ultimoObbiettivoColcoStringa = datiTotali[c + 10].split("_")
                     ultimoObbiettivoColcoStringa.pop(len(ultimoObbiettivoColcoStringa) - 1)
-                    if len(ultimoObbiettivoColcoStringa) != 3:
+                    if len(ultimoObbiettivoColcoStringa) != 4:
                         errore = True
                     else:
                         if ultimoObbiettivoColcoStringa[0] != "":
                             ultimoObbiettivoColco.append(ultimoObbiettivoColcoStringa[0])
                             ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[1]) * GlobalHWVar.gpx)
-                            ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[2]) * GlobalHWVar.gpx)
+                            ultimoObbiettivoColco.append(int(ultimoObbiettivoColcoStringa[2]) * GlobalHWVar.gpy)
+                            ultimoObbiettivoColco.append(ultimoObbiettivoColcoStringa[3])
                     obbiettivoCasualeColcoStringa = datiTotali[c + 11].split("_")
                     obbiettivoCasualeColcoStringa.pop(len(obbiettivoCasualeColcoStringa) - 1)
                     if len(obbiettivoCasualeColcoStringa) != 3:

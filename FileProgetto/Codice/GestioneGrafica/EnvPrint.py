@@ -1524,6 +1524,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     ultimoObbiettivoColco.append("Telecomando")
                     ultimoObbiettivoColco.append(x)
                     ultimoObbiettivoColco.append(y)
+                    ultimoObbiettivoColco.append("spostamento")
                     chiamarob = True
             else:
                 GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
@@ -1686,6 +1687,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         ultimoObbiettivoColco.append("Telecomando")
                         ultimoObbiettivoColco.append(x)
                         ultimoObbiettivoColco.append(y)
+                        ultimoObbiettivoColco.append("spostamento")
                         chiamarob = True
                     bottoneDown = False
                 elif inquadratoQualcosa == "Rallo":
@@ -1801,6 +1803,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     analizzaColco(copy.copy(schermoPrevisioneColco), x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], listaNemiciCopiata, difesa, ultimoObbiettivoColco[:], obbiettivoCasualeColcoCopiato, GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, entot, enrob, surrisc, velp, effp, saltaTurno)
                     analisiDiColcoEffettuata = True
                     GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
+                    disegnateCaselleAttaccabili = False
                 # apri/chiudi porta attacco = 1
                 elif attacco == 1 and ((xp == x + GlobalHWVar.gpx and yp == y) or (xp == x - GlobalHWVar.gpx and yp == y) or (xp == x and yp == y + GlobalHWVar.gpy) or (xp == x and yp == y - GlobalHWVar.gpy)) and (suPorta or inquadratoQualcosa == "porta"):
                     apriChiudiPorta = [True, xp, yp]

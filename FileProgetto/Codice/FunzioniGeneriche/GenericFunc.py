@@ -1745,16 +1745,17 @@ def pathFinding(xPartenza, yPartenza, xArrivo, yArrivo, vetOstacoli, caseviste):
         return percorsoTrovato
 
 
-def controllaMorteColco(dati, mosseRimasteRob):
+def controllaMorteColco(dati, mosseRimasteRob,ultimoObbiettivoColco):
     if dati[10] <= 0:
         morterob = True
         mosseRimasteRob = 0
         dati[122] = 0
         dati[125] = 0
         dati[126] = 0
+        ultimoObbiettivoColco = []
     else:
         morterob = False
-    return morterob, dati, mosseRimasteRob
+    return morterob, dati, mosseRimasteRob, ultimoObbiettivoColco
 
 
 def cambiaProtagonista(nome):
