@@ -206,7 +206,7 @@ class NemicoObj(object):
 
         if self.tipo == "SerpeVerde":
             vitaTotale = 80
-            attacco = 100
+            attacco = 90
             difesa = 10
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 4
@@ -230,7 +230,7 @@ class NemicoObj(object):
             esp = 10
         if self.tipo == "RagnoNero":
             vitaTotale = 100
-            attacco = 110
+            attacco = 100
             difesa = 16
             velocita = 1
             raggioVisivo = GlobalHWVar.gpx * 6

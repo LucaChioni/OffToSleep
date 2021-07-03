@@ -1363,7 +1363,18 @@ def oggetti(dati, colcoInCasellaVista):
                     if (usa == 2 or usa == 5) and dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                     else:
-                        GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                        if usa == 1:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.suonoUsoPozione)
+                        elif usa == 2:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.suonoUsoCaricabatterie)
+                        elif usa == 3:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.suonoUsoMedicina)
+                        elif usa == 4:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.suonoUsoPozione)
+                        elif usa == 5:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.suonoUsoCaricabatterie)
+                        else:
+                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                         primoFrame = True
                         xp = GlobalHWVar.gsx // 32 * 1
                         voceMarcata = 0

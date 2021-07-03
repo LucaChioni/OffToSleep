@@ -524,7 +524,7 @@ def disegnaCerchioSuSchermo(schermo, colore, coordinate, raggio):
                 i += 1
         if aggiungiRettangolo:
             listaRettangoliDaAggiornare.append(rectOrig)
-def disegnaImmagineSuSchermo(img, coordinate):
+def disegnaImmagineSuSchermo(img, coordinate, superficie=False):
     global schermo
     global gsx
     global gsy
@@ -533,7 +533,10 @@ def disegnaImmagineSuSchermo(img, coordinate):
     x, y = coordinate
     x = int(x)
     y = int(y)
-    schermo.blit(img, (x, y))
+    if superficie:
+        superficie.blit(img, (x, y))
+    else:
+        schermo.blit(img, (x, y))
     dimX, dimY = img.get_rect().size
 
     if x == 0 and y == 0 and dimX == gsx and dimY == gsy and not aggiornaTuttoLoSchermo:

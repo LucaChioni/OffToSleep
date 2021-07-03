@@ -168,6 +168,7 @@ def salvataggio(n, datiAttuali, datiGameover):
                 scrivi.write("_")
                 scrivi.write("-1_")
                 scrivi.write("-1_")
+                scrivi.write("_")
             scrivi.write("\n")
             if obbiettivoCasualeColco:
                 scrivi.write("%i_" % obbiettivoCasualeColco.stanzaDiAppartenenza)

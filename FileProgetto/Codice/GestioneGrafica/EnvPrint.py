@@ -299,27 +299,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.chiaverobospe, (GlobalHWVar.gpx * 28.7, 0))
 
     # vita-status rallo
-    lungvitatot = int(((GlobalHWVar.gpx * pvtot) / float(4)) // 5)
-    lungvita = (lungvitatot * pv) // pvtot
-    if lungvita < 0:
-        lungvita = 0
-    indvitapers = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-    fineindvitapers = GlobalImgVar.fineindvita
-    vitaral = pygame.transform.smoothscale(GlobalImgVar.vitapersonaggio, (lungvita, GlobalHWVar.gpy // 4))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoRallo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(indvitapers, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitapers, ((GlobalHWVar.gsx // 32 * 1) + lungvitatot, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(vitaral, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    FunzioniGraficheGeneriche.messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
-    if avvele:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
-    if attp > 0:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
-    if difp > 0:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
+    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
 
     # disegno la vita del mostro / Colco / esca selezionato
     if nemicoInquadrato == "Colco" or (not nemicoInquadrato and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]):
@@ -470,7 +450,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             GlobalHWVar.aggiornaSchermo()
 
 
-def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, entot, enrob, surrisc, velp, effp, saltaTurno):
+def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, ultimoObbiettivoColco, obbiettivoCasualeColco, listaPersonaggi, caseviste, caselleAttaccabiliColco, posizioneColcoAggiornamentoCaseAttac, vettoreEsche, apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, entot, enrob, surrisc, velp, effp, pv, pvtot, numFrecce, avvele, attp, difp, saltaTurno):
     if raffredda > 0 or autoRic1 > 0 or autoRic2 > 0 or mosseRimasteRob < 0:
         messaggioDiErrore = ""
         if raffredda > 0:
@@ -489,6 +469,14 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     # disegno img puntatoreInquadraNemici
     if nemicoInquadrato == "Colco":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (rx, ry))
+        # mostro anche il campo attaccabile
+        vistaRobo = GlobalHWVar.gpx * GlobalGameVar.vistaRobo
+        i = 0
+        while i < len(caselleAttaccabiliColco):
+            if not caselleAttaccabiliColco[i + 2] and not (caselleAttaccabiliColco[i] == rx and caselleAttaccabiliColco[i + 1] == ry):
+                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabiliRobo, (caselleAttaccabiliColco[i], caselleAttaccabiliColco[i + 1]))
+            i += 3
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRobo, (rx - vistaRobo, ry - vistaRobo))
     elif not type(nemicoInquadrato) is str and nemicoInquadrato:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreInquadraNemici, (nemicoInquadrato.x, nemicoInquadrato.y))
     elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
@@ -610,6 +598,9 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
         if effp > 0:
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+
+    # vita-status rallo
+    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
 
     # background saltaTurno/occhio/chiave
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
@@ -1043,8 +1034,6 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         if personaggio.imgAttuale and (personaggio.mantieniSempreASchermo or personaggio.inCasellaVista):
             GlobalHWVar.disegnaImmagineSuSchermo(personaggio.imgAttuale, (personaggio.x, personaggio.y))
 
-    schermoPrevisioneColco = GlobalHWVar.schermo.copy().convert()
-
     # disegno le caselle non attaccabili (prima cerco gli oggetti che hanno accanto una casellaAttaccabile per non oscurarli)
     vetCaselleDaNonOscurare = []
     i = 0
@@ -1083,30 +1072,10 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabili, (caseattactotRallo[i], caseattactotRallo[i + 1]))
         i += 3
 
-    # vita-status rallo
-    lungvitatot = int(((GlobalHWVar.gpx * pvtot) / float(4)) // 5)
-    lungvita = (lungvitatot * pv) // pvtot
-    if lungvita < 0:
-        lungvita = 0
-    indvitapers = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-    fineindvitapers = GlobalImgVar.fineindvita
-    vitaral = pygame.transform.smoothscale(GlobalImgVar.vitapersonaggio, (lungvita, GlobalHWVar.gpy // 4))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoRallo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(indvitapers, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitapers, ((GlobalHWVar.gsx // 32 * 1) + lungvitatot, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(vitaral, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-    FunzioniGraficheGeneriche.messaggio(u" ×" + str(numFrecce), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
-    if avvele:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
-    if attp > 0:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
-    if difp > 0:
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
-
     schermoOriginale = GlobalHWVar.schermo.copy().convert()
+
+    # vita-status rallo
+    FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
 
     # background saltaTurno/occhio/chiave
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))
@@ -1800,7 +1769,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                             if obbiettivoCasualeColco.x == nemicoCopiato.x and obbiettivoCasualeColco.y == nemicoCopiato.y:
                                 obbiettivoCasualeColcoCopiato = nemicoCopiato
                                 break
-                    analizzaColco(copy.copy(schermoPrevisioneColco), x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], listaNemiciCopiata, difesa, ultimoObbiettivoColco[:], obbiettivoCasualeColcoCopiato, GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, entot, enrob, surrisc, velp, effp, saltaTurno)
+                    analizzaColco(copy.copy(schermoOriginale), x, y, vx, vy, rx, ry, chiamarob, dati[:], porte[:], listaNemiciCopiata, difesa, ultimoObbiettivoColco[:], obbiettivoCasualeColcoCopiato, GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggi, False, avanzamentoStoria), caseviste[:], caselleAttaccabiliColco[:], posizioneColcoAggiornamentoCaseAttac[:], vettoreEsche[:], apriocchio, raffredda, autoRic1, autoRic2, mosseRimasteRob, nemicoInquadrato, entot, enrob, surrisc, velp, effp, pv, pvtot, numFrecce, avvele, attp, difp, saltaTurno)
                     analisiDiColcoEffettuata = True
                     GlobalHWVar.disegnaImmagineSuSchermo(schermoOriginale, (0, 0))
                     disegnateCaselleAttaccabili = False
@@ -2183,20 +2152,15 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
         GlobalHWVar.disegnaImmagineSuSchermo(background, (xvp, yvp))
         # visualizza campo attaccabile se sto usando un oggetto
         if attacco == 2:
-            campoattaccabile3 = GlobalImgVar.campoattaccabileRallo1
-            GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (x - (GlobalHWVar.gpx * 6), y - (GlobalHWVar.gpy * 6)))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRallo1, (x - (GlobalHWVar.gpx * 6), y - (GlobalHWVar.gpy * 6)))
         if attacco == 3:
-            campoattaccabile3 = GlobalImgVar.campoattaccabileRallo2
-            GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (x - (GlobalHWVar.gpx * 5), y - (GlobalHWVar.gpy * 5)))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRallo2, (x - (GlobalHWVar.gpx * 5), y - (GlobalHWVar.gpy * 5)))
         if attacco == 4:
-            campoattaccabile3 = GlobalImgVar.campoattaccabileRallo3
-            GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (x - (GlobalHWVar.gpx * 6), y - (GlobalHWVar.gpy * 6)))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRallo3, (x - (GlobalHWVar.gpx * 6), y - (GlobalHWVar.gpy * 6)))
         if attacco == 5:
-            campoattaccabile3 = GlobalImgVar.campoattaccabileRallo4
-            GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (x - (GlobalHWVar.gpx * 5), y - (GlobalHWVar.gpy * 5)))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRallo4, (x - (GlobalHWVar.gpx * 5), y - (GlobalHWVar.gpy * 5)))
         if attacco == 6:
-            campoattaccabile3 = GlobalImgVar.campoattaccabileRallo5
-            GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (x - (GlobalHWVar.gpx * 4), y - (GlobalHWVar.gpy * 4)))
+            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRallo5, (x - (GlobalHWVar.gpx * 4), y - (GlobalHWVar.gpy * 4)))
 
         # movimenti del puntatore su porte e cofanetti quando si usa la tastiera
         if not GlobalHWVar.mouseVisibile:
@@ -2479,8 +2443,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                         if not caseattactotMostri[i + 2] and not (caseattactotMostri[i] == mx and caseattactotMostri[i + 1] == my):
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabilimostro, (caseattactotMostri[i], caseattactotMostri[i + 1]))
                         i += 3
-                    campoattaccabile3 = nemico.imgCampoAttaccabile
-                    GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (mx - raggiovista, my - raggiovista))
+                    GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgCampoAttaccabile, (mx - raggiovista, my - raggiovista))
                     disegnateCaselleAttaccabili = True
                     ricaricaschermo = True
                     evitaAggiornamentoImgs = True
@@ -2559,14 +2522,12 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 # disegno le caselle non attaccabili
                 if not disegnateCaselleAttaccabili:
                     vistaRobo = GlobalHWVar.gpx * GlobalGameVar.vistaRobo
-                    caseattactotRobo = caselleAttaccabiliColco
                     i = 0
-                    while i < len(caseattactotRobo):
-                        if not caseattactotRobo[i + 2] and not (caseattactotRobo[i] == rx and caseattactotRobo[i + 1] == ry):
-                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabiliRobo, (caseattactotRobo[i], caseattactotRobo[i + 1]))
+                    while i < len(caselleAttaccabiliColco):
+                        if not caselleAttaccabiliColco[i + 2] and not (caselleAttaccabiliColco[i] == rx and caselleAttaccabiliColco[i + 1] == ry):
+                            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.caselleattaccabiliRobo, (caselleAttaccabiliColco[i], caselleAttaccabiliColco[i + 1]))
                         i += 3
-                    campoattaccabile3 = GlobalImgVar.campoattaccabileRobo
-                    GlobalHWVar.disegnaImmagineSuSchermo(campoattaccabile3, (rx - vistaRobo, ry - vistaRobo))
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.campoattaccabileRobo, (rx - vistaRobo, ry - vistaRobo))
                     disegnateCaselleAttaccabili = True
                     ricaricaschermo = True
                     evitaAggiornamentoImgs = True
@@ -2718,6 +2679,9 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
             if effp > 0:
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+
+        # vita-status rallo
+        FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
 
         # background saltaTurno/occhio/chiave
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfochiaveocchio, (GlobalHWVar.gpx * 28.5, 0))

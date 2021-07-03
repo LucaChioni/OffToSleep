@@ -925,9 +925,9 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     campoattaccabileRallo5 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile2.png', GlobalHWVar.gpx * 9, GlobalHWVar.gpy * 9, False)
     campoattaccabileRobo = funzionePerCaricareImmagini('Risorse/Immagini/Status/Campiattaccabili/Campoattaccabile3.png', GlobalHWVar.gpx * 13, GlobalHWVar.gpy * 13, False)
     caselleattaccabiliRobo = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
-    caselleattaccabiliRobo.fill((100, 100, 100, 100))
+    caselleattaccabiliRobo.fill((130, 130, 130, 100))
     caselleattaccabilimostro = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
-    caselleattaccabilimostro.fill((100, 0, 0, 100))
+    caselleattaccabilimostro.fill((130, 0, 0, 100))
     caselleattaccabili = pygame.Surface((GlobalHWVar.gpx, GlobalHWVar.gpy), flags=pygame.SRCALPHA)
     caselleattaccabili.fill((0, 0, 0, 100))
 

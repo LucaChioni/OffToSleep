@@ -152,9 +152,5 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"Durante la battaglia puoi usare gli ImpoFrutti solo se Impo è in una casella adiacente a quella di Lucy. Per usarli fuori dal combattimento invece è sufficiente che Impo sia in una casella raggiungibile.")
         partiDialogo.append(dialogo)
-        dialogo = []
-        dialogo.append("personaggio")
-        dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma è stato soddisfatto un Condizio-ImpoFoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, Impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-ImpoFoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
-        partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

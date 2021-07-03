@@ -246,6 +246,7 @@ def menu(caricaSalvataggio, gameover):
 
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
+    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
     sreen_temp = GlobalHWVar.schermo.copy().convert()
     imgOscuraPuntatore = sreen_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 11.5)).convert()
 
@@ -497,6 +498,9 @@ def menu(caricaSalvataggio, gameover):
                     if voceMarcata == 4:
                         yp = GlobalHWVar.gsy // 18 * 12.5
                     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
+                    FunzioniGraficheGeneriche.messaggio("Off", GlobalHWVar.grigio, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 1.5, 200)
+                    FunzioniGraficheGeneriche.messaggio("To", GlobalHWVar.grigio, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 4.5, 200)
+                    FunzioniGraficheGeneriche.messaggio("Sleep", GlobalHWVar.grigio, GlobalHWVar.gsx // 32 * 1.6, GlobalHWVar.gsy // 18 * 7.5, 200)
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
                     FunzioniGraficheGeneriche.messaggio("Inizia", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 2, 90)
                     FunzioniGraficheGeneriche.messaggio("Continua", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2.5, GlobalHWVar.gsy // 18 * 4.5, 90)
@@ -754,12 +758,14 @@ def menu(caricaSalvataggio, gameover):
                 GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(vetImg[i], (0, 0))
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
+                GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
                 GlobalHWVar.aggiornaSchermo()
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                 GlobalHWVar.clockFadeToBlack.tick(GlobalHWVar.fpsFadeToBlack)
                 i += 1
             GlobalHWVar.disegnaImmagineSuSchermo(screen, (0, 0))
             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
             GlobalHWVar.aggiornaSchermo()
         else:
             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
@@ -1560,83 +1566,65 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     GlobalHWVar.disegnaImmagineSuSchermo(vettoreOggettiIco[i], (GlobalHWVar.gpx * (disegnati + 1), (GlobalHWVar.gpy * 13.8) + (GlobalHWVar.gpy // 2)))
                     disegnati += 1
                 i += 1
+            posizioneXNomiOggetti = GlobalHWVar.gpx * 3.4
             if difensivi:
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
                     if dati[31] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Pozione", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Pozione", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
                     if dati[32] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Alimentaz. 100gr", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Alimentaz. 100gr", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
                     if dati[33] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Medicina", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Medicina", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 4 or voceMarcataOggetto == 4:
                     if dati[34] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Super pozione", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Super pozione", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
                     if dati[35] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Alimentaz. 250gr", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Alimentaz. 250gr", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriGiu, (GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 14.8))
             if offensivi:
                 if voceMarcata == 1 or voceMarcataOggetto == 1:
                     if dati[36] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Bomba", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 2 or voceMarcataOggetto == 2:
                     if dati[37] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Bomba velenosa", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 3 or voceMarcataOggetto == 3:
                     if dati[38] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Esca", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Esca", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 4 or voceMarcataOggetto == 4:
                     if dati[39] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Bomba appiccicosa", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 if voceMarcata == 5 or voceMarcataOggetto == 5:
                     if dati[40] >= 0:
-                        FunzioniGraficheGeneriche.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("Bomba potenziata", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                     else:
-                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gpx // 3, int(GlobalHWVar.gpy * 8.9), 55)
+                        FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, posizioneXNomiOggetti, int(GlobalHWVar.gpy * 8.9), 55, centrale=True)
                 GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.scorriSu, (GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 13.3))
+            GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.3), int(GlobalHWVar.gpy * 9.7)), (int(GlobalHWVar.gpx * 6.5), int(GlobalHWVar.gpy * 9.7)), 1)
 
             # vita-status rallo
-            lungvitatot = int(((GlobalHWVar.gpx * pvtot) / float(4)) // 5)
-            lungvita = (lungvitatot * dati[5]) // pvtot
-            if lungvita < 0:
-                lungvita = 0
-            indvitapers = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-            fineindvitapers = GlobalImgVar.fineindvita
-            vitaral = pygame.transform.smoothscale(GlobalImgVar.vitapersonaggio, (lungvita, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoRallo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-            GlobalHWVar.disegnaImmagineSuSchermo(indvitapers, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitapers, ((GlobalHWVar.gsx // 32 * 1) + lungvitatot, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-            GlobalHWVar.disegnaImmagineSuSchermo(vitaral, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
-            FunzioniGraficheGeneriche.messaggio(u" ×" + str(dati[132]), GlobalHWVar.grigiochi, int(GlobalHWVar.gsx // 32 * 1.8), int(GlobalHWVar.gsy // 18 * 17.3), 40)
-            if dati[121]:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 17))
-            if dati[123] > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
-            if dati[124] > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
+            FunzioniGraficheGeneriche.disegnaVitaRallo(dati[5], pvtot, dati[132], dati[121], dati[123], dati[124])
 
             if menuConferma:
                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
