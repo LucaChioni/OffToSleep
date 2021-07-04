@@ -605,11 +605,13 @@ class NemicoObj(object):
     def aggiornaBersaglioAttacchiDistanti(self, x, y, rx, ry, attaccoADistanza, listaNemiciAttaccatiADistanzaRobo):
         if self.obbiettivo[0] == "":
             if attaccoADistanza and type(attaccoADistanza) is not str and self.x == attaccoADistanza.x and self.y == attaccoADistanza.y:
+                self.triggerato = True
                 self.xPosizioneUltimoBersaglio = x
                 self.yPosizioneUltimoBersaglio = y
             elif listaNemiciAttaccatiADistanzaRobo:
                 for nemico in listaNemiciAttaccatiADistanzaRobo:
                     if type(nemico) is not str and self.x == nemico.x and self.y == nemico.y:
+                        self.triggerato = True
                         self.xPosizioneUltimoBersaglio = rx
                         self.yPosizioneUltimoBersaglio = ry
                         break
@@ -917,13 +919,36 @@ class NemicoObj(object):
                 self.xPosizioneUltimoBersaglio = False
                 self.yPosizioneUltimoBersaglio = False
             elif rx == self.xPosizioneUltimoBersaglio and ry == self.yPosizioneUltimoBersaglio and dati[10] <= 0:
-                self.xPosizioneUltimoBersaglio = False
-                self.yPosizioneUltimoBersaglio = False
+                # non cancello PosizioneUltimoBersaglio finché non vede Colco
+                vistoRoboMorto = False
+                if abs(rx - self.x) <= self.raggioVisivo and abs(ry - self.y) <= self.raggioVisivo:
+                    j = 0
+                    while j < len(self.caseattactot):
+                        if self.caseattactot[j] == rx and self.caseattactot[j + 1] == ry:
+                            if self.caseattactot[j + 2]:
+                                vistoRoboMorto = True
+                            break
+                        j += 3
+                if vistoRoboMorto:
+                    self.xPosizioneUltimoBersaglio = False
+                    self.yPosizioneUltimoBersaglio = False
             else:
                 for nemico in listaNemici:
                     if not (nemico.x == self.x and nemico.y == self.y) and nemico.x == self.xPosizioneUltimoBersaglio and nemico.y == self.yPosizioneUltimoBersaglio:
-                        self.xPosizioneUltimoBersaglio = False
-                        self.yPosizioneUltimoBersaglio = False
+                        # non cancello PosizioneUltimoBersaglio finché non vede la casella
+                        vistaCasellaOccupata = False
+                        if abs(nemico.x - self.x) <= self.raggioVisivo and abs(nemico.y - self.y) <= self.raggioVisivo:
+                            j = 0
+                            while j < len(self.caseattactot):
+                                if self.caseattactot[j] == nemico.x and self.caseattactot[j + 1] == nemico.y:
+                                    if self.caseattactot[j + 2]:
+                                        vistaCasellaOccupata = True
+                                    break
+                                j += 3
+                        if vistaCasellaOccupata:
+                            self.xPosizioneUltimoBersaglio = False
+                            self.yPosizioneUltimoBersaglio = False
+                        break
                 i = 0
                 while i < len(porte):
                     if porte[i + 1] == self.xPosizioneUltimoBersaglio and porte[i + 2] == self.yPosizioneUltimoBersaglio:
