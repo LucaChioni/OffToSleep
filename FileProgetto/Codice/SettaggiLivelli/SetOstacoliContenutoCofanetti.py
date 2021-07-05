@@ -855,9 +855,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if cx == GlobalHWVar.gpx * 17 and cy == GlobalHWVar.gpy * 12:
             tesoro = 84
     if stanza == GlobalGameVar.dictStanze["selvaArida4"]:
-        # ottieni pozione
+        # ottieni caricabatterie
         if cx == GlobalHWVar.gpx * 12 and cy == GlobalHWVar.gpy * 11:
-            tesoro = 31
+            tesoro = 32
         # ottieni caricabatterie
         if cx == GlobalHWVar.gpx * 18 and cy == GlobalHWVar.gpy * 11:
             tesoro = 32
@@ -918,9 +918,9 @@ def aperturacofanetto(stanza, cx, cy, dati):
         if cx == GlobalHWVar.gpx * 28 and cy == GlobalHWVar.gpy * 9:
             tesoro = 32
     if stanza == GlobalGameVar.dictStanze["selvaArida13"]:
-        # ottieni pozione
+        # ottieni caricabatterie
         if cx == GlobalHWVar.gpx * 2 and cy == GlobalHWVar.gpy * 14:
-            tesoro = 31
+            tesoro = 32
         # ottieni condizione (nemico vicino)
         if cx == GlobalHWVar.gpx * 6 and cy == GlobalHWVar.gpy * 5:
             tesoro = 92

@@ -978,7 +978,7 @@ def sceglitecn(dati, tecnica):
                 if dati[30] > 0:
                     FunzioniGraficheGeneriche.messaggio("Tempesta elettrica ++", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
                 else:
-                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15, 40)
+                    FunzioniGraficheGeneriche.messaggio("???", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 9, GlobalHWVar.gsy // 18 * 15.2, 40)
             else:
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 11.5))
                 GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 11.5))
