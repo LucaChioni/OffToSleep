@@ -3197,7 +3197,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     avanzaColDialogo = False
                     dialogo = []
                     dialogo.append("tu")
-                    dialogo.append(u"Il Passo Montano è il posto più pericoloso in cui un essere umano può andare.")
+                    dialogo.append(u"Il Passo Montano è il posto più pericoloso in cui un essere umano possa andare.")
                     partiDialogo.append(dialogo)
                 elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
                     oggettoDato = False

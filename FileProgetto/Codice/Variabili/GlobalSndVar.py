@@ -94,6 +94,7 @@ global suonoaperturaporteSelva
 global suonochiusuraporteSelva
 global canzoneSelva
 global listaAudioAmbienteSelva
+global listaAudioAmbienteSelva_ultimaStanza
 
 
 numSndTotali = 101
@@ -200,6 +201,7 @@ def loadSounds(numSndCaricato):
     global suonochiusuraporteSelva
     global canzoneSelva
     global listaAudioAmbienteSelva
+    global listaAudioAmbienteSelva_ultimaStanza
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -327,8 +329,10 @@ def loadSounds(numSndCaricato):
     listaAudioAmbienteStradaPerSelva1 = [audioAmbienteStradaPerSelva_Vento1, audioAmbienteStradaPerSelva_Persone]
     listaAudioAmbienteStradaPerSelva2 = [audioAmbienteStradaPerSelva_Vento1, audioAmbienteStradaPerSelva_Serpenti]
     audioAmbienteSelva_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/Vento1.wav")
-    audioAmbienteSelva_Serpenti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/Serpenti.wav")
-    listaAudioAmbienteSelva = [audioAmbienteSelva_Vento1, audioAmbienteSelva_Serpenti]
+    audioAmbienteSelva_SerpentiVolAlto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/SerpentiVolAlto.wav")
+    audioAmbienteSelva_SerpentiVolBasso = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/SerpentiVolBasso.wav")
+    listaAudioAmbienteSelva = [audioAmbienteSelva_Vento1, audioAmbienteSelva_SerpentiVolAlto]
+    listaAudioAmbienteSelva_ultimaStanza = [audioAmbienteSelva_Vento1, audioAmbienteSelva_SerpentiVolBasso]
 
     # suoni canzoni
     canzoneSogno = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/01-Sogno.wav")

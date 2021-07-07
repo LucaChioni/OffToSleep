@@ -255,6 +255,8 @@ global imgMappa13A
 global imgMappa13B
 global imgMappa14A
 global imgMappa14B
+global imgMappa15A
+global imgMappa15B
 global imgOmbreggiaturaContorniMappaMenu
 global dictionaryImgNemici
 global imgDanneggiamentoCausaRallo
@@ -560,6 +562,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgMappa13B
     global imgMappa14A
     global imgMappa14B
+    global imgMappa15A
+    global imgMappa15B
     global imgOmbreggiaturaContorniMappaMenu
     global dictionaryImgNemici
     global imgDanneggiamentoCausaRallo
@@ -1148,6 +1152,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgMappa13B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
     imgMappa14A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
     imgMappa14B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa15A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
+    imgMappa15B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
     imgOmbreggiaturaContorniMappaMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/OmbreggiaturaContorniMappaMenu.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
 
     # img nemici

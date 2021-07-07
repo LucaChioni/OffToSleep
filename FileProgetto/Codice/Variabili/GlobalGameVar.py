@@ -138,9 +138,9 @@ costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1,
 dannoTecniche = [90, 30, 0, 70, 50, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
 vistaRobo = 6
 # costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
-costoOggetti = [5, 20, 20, 30, 80, 80, 40, 60, 120, 200, 200, 40, 200, 1000]
+costoOggetti = [5, 20, 100, 30, 80, 200, 50, 80, 120, 200, 300, 50, 500, 5000]
 # danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
-dannoOggetti = [100, 50, 0, 20, 500]
+dannoOggetti = [100, 50, 0, 50, 1000]
 
 # dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
 dictAvanzamentoStoria = SetAvanzamentiStanzePorteCofanetti.definisciAvanzamentiStoria()

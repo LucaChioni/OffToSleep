@@ -617,7 +617,8 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 9.8), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 9.8), 2)
                     FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 11.3, 35)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 13.2), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 13.2), 2)
-                    FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.7, 35)
+                    FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.5, 35)
+                    FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 15, 35)
                 elif GlobalHWVar.usandoIlController:
                     FunzioniGraficheGeneriche.messaggio("Comandi controller", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 1, 150)
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 0.4, GlobalHWVar.gsy // 18 * 6))
@@ -656,7 +657,7 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 15.6), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 15.6), 2)
                     FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 16.15, 35)
 
-                    FunzioniGraficheGeneriche.messaggio("Esci (dove specificato)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 8.3, 35)
+                    FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 8.3, 35)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 9.2), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 9.2), 2)
                     FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 9.85, 35)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 10.75), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 10.75), 2)
@@ -703,7 +704,7 @@ def menu(caricaSalvataggio, gameover):
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11.2, GlobalHWVar.gsy // 18 * 15.66), (GlobalHWVar.gsx // 32 * 20.7, GlobalHWVar.gsy // 18 * 15.66), 2)
                     FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 14.9, GlobalHWVar.gsy // 18 * 16.19, 35)
 
-                    FunzioniGraficheGeneriche.messaggio("Esci (dove specificato)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 8.05, 35)
+                    FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 8.05, 35)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 8.7), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 8.7), 2)
                     FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 25.4, GlobalHWVar.gsy // 18 * 9.3, 35)
                     GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 21.7, GlobalHWVar.gsy // 18 * 10.1), (GlobalHWVar.gsx // 32 * 31.2, GlobalHWVar.gsy // 18 * 10.1), 2)
@@ -923,24 +924,24 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                     primoFrame = True
                     # oggetti
                     if voceMarcata == 1:
-                        dati, attacco = SottoMenuEquip.oggetti(dati, colcoInCasellaVista)
+                        dati, attacco, risposta = SottoMenuEquip.oggetti(dati, colcoInCasellaVista)
                         if attacco != 0:
                             risposta = True
                         carim = True
                     # equip pers
                     if voceMarcata == 2:
-                        dati = SottoMenuEquip.equip(dati)
+                        dati, risposta = SottoMenuEquip.equip(dati)
                         carim = True
                     # equip robot
                     if voceMarcata == 3:
-                        dati = SottoMenuRobo.equiprobo(dati)
+                        dati, risposta = SottoMenuRobo.equiprobo(dati)
                         carim = True
                     # mappa
                     if voceMarcata == 4:
-                        SottoMenuMapDiario.menuMappa(dati[0])
+                        risposta = SottoMenuMapDiario.menuMappa(dati[0])
                     # diario
                     if voceMarcata == 5:
-                        SottoMenuMapDiario.menuDiario(dati)
+                        risposta = SottoMenuMapDiario.menuDiario(dati)
                     # salva
                     if voceMarcata == 6:
                         # azioneFatta contiene 3 se è stato fatto un salvataggio, altrimenti 1 se è stato caricato un salvataggio

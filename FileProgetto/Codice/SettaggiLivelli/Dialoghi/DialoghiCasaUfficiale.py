@@ -984,7 +984,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             avanzaColDialogo = True
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Ehi Specchio! Chi è che ha le occhiaie adesso?!")
+            dialogo.append(u"Ehi specchio! Chi è che ha le occhiaie adesso?!")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")

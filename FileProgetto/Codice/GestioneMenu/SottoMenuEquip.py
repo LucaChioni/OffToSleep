@@ -22,6 +22,7 @@ def equip(dati):
     risposta = False
     voceMarcata = 1
     aggiornaSchermo = False
+    esci = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -302,6 +303,11 @@ def equip(dati):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+            risposta = True
+            esci = True
+            bottoneDown = False
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
@@ -510,7 +516,7 @@ def equip(dati):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_s or bottoneDown == "padGiu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 5 or voceMarcata == 10 or voceMarcata == 15 or voceMarcata == 20 or voceMarcata == 25 or voceMarcata == 30:
@@ -1080,7 +1086,7 @@ def equip(dati):
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-    return dati
+    return dati, esci
 
 
 def oggetti(dati, colcoInCasellaVista):
@@ -1107,6 +1113,7 @@ def oggetti(dati, colcoInCasellaVista):
     voceMarcata = 0
     aggiornaSchermo = False
     impossibileUsareCaricaBatt = False
+    esci = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1242,6 +1249,11 @@ def oggetti(dati, colcoInCasellaVista):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+            risposta = True
+            esci = True
+            bottoneDown = False
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             voceMarcata = 0
             if usa != 0:
@@ -1492,7 +1504,7 @@ def oggetti(dati, colcoInCasellaVista):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerCambioInput:
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or oggettonVecchio != oggetton or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 0:
@@ -1798,4 +1810,4 @@ def oggetti(dati, colcoInCasellaVista):
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-    return dati, attacco
+    return dati, attacco, esci

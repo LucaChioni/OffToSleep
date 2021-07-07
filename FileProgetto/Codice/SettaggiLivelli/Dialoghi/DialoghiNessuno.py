@@ -876,7 +876,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("tu")
                     dialogo.append(u"René mi sta aspettando. Devo prendere la marce da consegnare a Neil prima di andare.")
                     partiDialogo.append(dialogo)
-    elif GlobalGameVar.dictStanze["selvaArida1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["selvaArida15"]:
+    elif GlobalGameVar.dictStanze["selvaArida1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["selvaArida16"]:
         if stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida2"]:
             oggettoDato = False
             avanzaStoria = True

@@ -672,7 +672,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Per questo diversi studiosi non accettarono quelle motivazioni ed iniziarono delle ricerche autonome per saperne di più. Io ero tra loro. Sono partito alla ricerca di spiegazioni verso ovest e sono riuscito a trovare questo piccolo Impo incastrato in una roccia. Così l'ho preso e ho iniziato a studiarlo.")
+            dialogo.append(u"Per questo diversi studiosi non accettarono quelle motivazioni ed iniziarono delle ricerche autonome per saperne di più. Io ero tra loro. Sono partito alla ricerca di spiegazioni verso ovest e sono riuscito a trovare questo piccolo impo incastrato in una roccia. Così l'ho preso e ho iniziato a studiarlo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -725,7 +725,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Gli Impo sono degli animali molto metodici. Svolgono diverse attività che ritengono assolutamente prioritarie rispetto a tutto il resto, anche rispetto alla loro stessa vita. Lo fanno finché non esauriscono le energie, a quel punto di fermano e aspettano il nutrimento. Adesso, sembrerà strano, ma la priorità di questo Impo è rimanere fermo. E ci resterà finché qualcuno non gli dirà di fare qualcos'altro.")
+            dialogo.append(u"Gli impo sono degli animali molto metodici. Svolgono diverse attività che ritengono assolutamente prioritarie rispetto a tutto il resto, anche rispetto alla loro stessa vita. Lo fanno finché non esauriscono le energie, a quel punto di fermano e aspettano il nutrimento. Adesso, sembrerà strano, ma la priorità di questo impo è rimanere fermo. E ci resterà finché qualcuno non gli dirà di fare qualcos'altro.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -753,7 +753,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Per dare un'istruzione ad Impo devi inserire un Condizio-ImpoFoglio e un Azio-ImpoFoglio nella cella di memoria. Impo, ogni volta che deve decidere cosa fare, legge la condizione e l'azione nella cella e, se valuta di trovarsi nella situazione adatta, esegue l'istruzione.")
+            dialogo.append(u"Per dare un'istruzione ad un impo devi inserire un Condizio-ImpoFoglio e un Azio-ImpoFoglio nella cella di memoria. L'impo, ogni volta che deve decidere cosa fare, legge la condizione e l'azione nella cella e, se valuta di trovarsi nella situazione adatta, esegue l'istruzione.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -769,7 +769,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Beh, ti saranno sicuramente d'aiuto se incontrerai altri stupratori o bestie durante il tragitto. Questo Condizio-ImpoFoglio individua una situazione in cui qualcuno vuole aggredirti, mentre  questo Azio-ImpoFoglio fa fare a Impo un attacco che folgora il bersaglio.")
+            dialogo.append(u"Beh, ti saranno sicuramente d'aiuto se incontrerai altri stupratori o bestie durante il tragitto. Questo Condizio-ImpoFoglio individua una situazione in cui qualcuno vuole aggredirti, mentre questo Azio-ImpoFoglio gli fa fare un attacco che folgora il bersaglio.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -777,7 +777,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Poi adesso devo tornare a lavoro. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva Arida è una zona parecchio ostile per gli umani ma con un Impo non avrai problemi.")
+            dialogo.append(u"No, non in città e soprattutto non nel mio studio. Poi adesso devo tornare a lavoro. Lo potrai vedere direttamente sul campo quando ne avrai bisogno. Ti faciliterà il viaggio, la Selva Arida è una zona parecchio ostile per gli umani ma con un impo non avrai problemi.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -793,7 +793,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Non c'è di che. Ah, dimenticavo, prendi questo... è un ImpoFrutto, un frutto che nasce nelle montagne occidentali di cui si nutre Impo. Daglielo quando vedi che sta esaurendo le energie.")
+            dialogo.append(u"Non c'è di che. Ah, dimenticavo, prendi questo... è un ImpoFrutto, un frutto che nasce nelle montagne occidentali di cui si nutrono gli impo. Daglielo quando vedi che sta esaurendo le energie.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
@@ -801,7 +801,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Già... è una creatura parecchio strana. In ogni caso, buona fortuna per il viaggio ragazza.")
+            dialogo.append(u"Già... ne avevo altri ma non li trovo più... devo averli già usati... In ogni caso, buona fortuna per il viaggio ragazza.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
             oggettoDato = False
@@ -810,7 +810,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             scelta = False
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Scusa René, hai detto che ci sono dei libri in biblioteca che parlano degli Impo?")
+            dialogo.append(u"Scusa René, hai detto che ci sono dei libri in biblioteca che parlano di Impo?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1323,19 +1323,19 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Questo libro si intitola: \"Scopo degli Impo\".")
+                dialogo.append(u"Questo libro si intitola: \"Scopo degli impo\".")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Come già spiegato in precedenza, ciò che spinge gli Impo ad agire è determinato dagli ImpoFogli. Tuttavia esistono due casi eccezionali in cui l'azione compiuta è dovuta ad altre ragioni...")
+                dialogo.append(u"... Come già spiegato in precedenza, ciò che spinge gli impo ad agire è determinato dagli ImpoFogli. Tuttavia esistono due casi eccezionali in cui l'azione compiuta è dovuta ad altre ragioni...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la PietraImpo è attiva. A quel punto, l'Impo proprietario della pietra, inizierà ad avvicinarsi ad essa...")
+                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la PietraImpo è attiva. A quel punto, l'impo proprietario della pietra, inizierà ad avvicinarsi ad essa...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma è stato soddisfatto un Condizio-ImpoFoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, Impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-ImpoFoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
+                dialogo.append(u"... Il secondo caso si presenta quando nessun ImpoFoglio può essere eseguito ma è stato soddisfatto un Condizio-ImpoFoglio in precedenza che ha un obiettivo che non è più nel campo visivo. In questo caso, l'impo memorizzerà la posizione in cui ha visto l'obiettivo e, se avrà abbastanza energia per eseguire l'Azio-ImpoFoglio, si muoverà in quella direzione finché non eseguirà l'azione o raggiungerà la posizione...")
                 partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 18:
                 oggettoDato = False
@@ -1348,7 +1348,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... L'energia degli Impo viene conservata in delle sacche dette \"Sacche Energetiche\"...")
+                dialogo.append(u"... L'energia degli impo viene conservata in delle sacche dette \"Sacche Energetiche\"...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1369,11 +1369,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... L'energia degli Impo, detta anche \"ImpoForza\", può essere gestita solo in parte dagli umani...")
+                dialogo.append(u"... L'energia degli impo, detta anche \"ImpoForza\", può essere gestita solo in parte dagli umani...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Gli Impo hanno infatti un'istinto di sopravvivenza che permette loro di difendersi dagli attacchi nemici sfruttando la propria energia. Più è violenta l'aggressione, più energia verrà consumata...")
+                dialogo.append(u"... Gli impo hanno infatti un'istinto di sopravvivenza che permette loro di difendersi dagli attacchi nemici sfruttando la propria energia. Più è violenta l'aggressione, più energia verrà consumata...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -1390,15 +1390,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Gli Impo soffrono negli ambienti troppo caldi...")
+                dialogo.append(u"... Gli impo soffrono negli ambienti troppo caldi...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Quando un Impo supera la propria temperatura massima inizia a perdere energia...")
+                dialogo.append(u"... Quando un impo supera la propria temperatura massima inizia a perdere energia...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Gli Impo sono in grado di tornare autonomamente alle loro temperature ideali. Ma per farlo rallentano i propri movimenti per un po' di tempo...")
+                dialogo.append(u"... Gli impo sono in grado di tornare autonomamente alle loro temperature ideali. Ma per farlo rallentano i propri movimenti per un po' di tempo...")
                 partiDialogo.append(dialogo)
     elif stanzaDiAppartenenza == GlobalGameVar.dictStanze["biblioteca3"]:
         if tipo == "OggettoLibreriaStudioBibliotecario":

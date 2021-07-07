@@ -19,6 +19,7 @@ def sceglicondiz(dati, condizione):
     risposta = False
     voceMarcata = 0
     aggiornaSchermo = False
+    esci = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -190,6 +191,11 @@ def sceglicondiz(dati, condizione):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+            risposta = True
+            esci = True
+            bottoneDown = False
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
@@ -225,7 +231,7 @@ def sceglicondiz(dati, condizione):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 11:
@@ -597,7 +603,7 @@ def sceglicondiz(dati, condizione):
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-    return condizione
+    return condizione, esci
 
 
 def sceglitecn(dati, tecnica):
@@ -609,6 +615,7 @@ def sceglitecn(dati, tecnica):
     risposta = False
     voceMarcata = 0
     aggiornaSchermo = False
+    esci = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -780,6 +787,11 @@ def sceglitecn(dati, tecnica):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+            risposta = True
+            esci = True
+            bottoneDown = False
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             risposta = True
@@ -817,7 +829,7 @@ def sceglitecn(dati, tecnica):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if voceMarcata == 1 or voceMarcata == 11:
@@ -1209,7 +1221,7 @@ def sceglitecn(dati, tecnica):
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-    return tecnica
+    return tecnica, esci
 
 
 def modificaOrdineGambitConMouse(dati, voceMarcata, voceMarcataVecchia, imgRigheGambit):
@@ -1260,6 +1272,7 @@ def equiprobo(dati):
     voceMarcata = 1
     voceGambitMarcata = 0
     aggiornaSchermo = False
+    esci = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1594,6 +1607,15 @@ def equiprobo(dati):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+            risposta = True
+            if riordinamento:
+                primoFrame = True
+                riordinamento = False
+                annullaRiordinamento = True
+            esci = True
+            bottoneDown = False
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             if not riordinamento:
@@ -1686,7 +1708,7 @@ def equiprobo(dati):
                             primoFrame = True
                             if dati[i] != -1:
                                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                                dati[i] = sceglicondiz(dati, dati[i])
+                                dati[i], esci = sceglicondiz(dati, dati[i])
                             else:
                                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         i += 1
@@ -1700,11 +1722,14 @@ def equiprobo(dati):
                             primoFrame = True
                             if dati[i] != -1:
                                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                                dati[i] = sceglitecn(dati, dati[i])
+                                dati[i], esci = sceglitecn(dati, dati[i])
                             else:
                                 GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                         i += 1
                         c += 1
+
+                    if esci:
+                        risposta = True
             bottoneDown = False
         elif bottoneDown == "mouseSinistro" and GlobalHWVar.mouseBloccato:
             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -1716,7 +1741,7 @@ def equiprobo(dati):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if riordinamento:
@@ -2268,7 +2293,10 @@ def equiprobo(dati):
             primoFrame = False
 
             GlobalHWVar.aggiornaSchermo()
+        elif esci and annullaRiordinamento:
+            dati = list(datiPrimaDiRiordinamento)
+            annullaRiordinamento = False
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
-    return dati
+    return dati, esci

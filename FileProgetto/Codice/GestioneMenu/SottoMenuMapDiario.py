@@ -20,6 +20,7 @@ def menuMappa(avanzamentoStoria):
     voceMarcata = 1
     voceMarcataSottoMenu = False
     aggiornaSchermo = False
+    esci = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -55,42 +56,46 @@ def menuMappa(avanzamentoStoria):
             postiSbloccati["Labirinto"] = True
             imgMappaA = GlobalImgVar.imgMappa6A
             imgMappaB = GlobalImgVar.imgMappa6B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCastello"]:
-            postiSbloccati["Castello"] = True
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLabirintoRisolto"]:
+            postiSbloccati["Labirinto"] = True
             imgMappaA = GlobalImgVar.imgMappa7A
             imgMappaB = GlobalImgVar.imgMappa7B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPassoMontano"]:
-            postiSbloccati["Passo Montano"] = True
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCastello"]:
+            postiSbloccati["Castello"] = True
             imgMappaA = GlobalImgVar.imgMappa8A
             imgMappaB = GlobalImgVar.imgMappa8B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPalazzoDiRod"]:
-            postiSbloccati["Palazzo di Rod"] = True
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaScorciatoiaLabirinto"]:
+            postiSbloccati["Castello"] = True
             imgMappaA = GlobalImgVar.imgMappa9A
             imgMappaB = GlobalImgVar.imgMappa9B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCaverna"]:
-            postiSbloccati["Caverna"] = True
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPassoMontano"]:
+            postiSbloccati["Passo Montano"] = True
             imgMappaA = GlobalImgVar.imgMappa10A
             imgMappaB = GlobalImgVar.imgMappa10B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaVulcano"]:
-            postiSbloccati["Vulcano"] = True
-            imgMappaA = GlobalImgVar.imgMappa10A
-            imgMappaB = GlobalImgVar.imgMappa10B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelDiRod1"]:
-            postiSbloccati["Tunnel di Rod"] = True# <- il tunnel di Rod è diviso in due parti
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPalazzoDiRod"]:
+            postiSbloccati["Palazzo di Rod"] = True
             imgMappaA = GlobalImgVar.imgMappa11A
             imgMappaB = GlobalImgVar.imgMappa11B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelDiRod2"]:
-            postiSbloccati["Tunnel di Rod"] = True
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCaverna"]:
+            postiSbloccati["Caverna"] = True
             imgMappaA = GlobalImgVar.imgMappa12A
             imgMappaB = GlobalImgVar.imgMappa12B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelSubacqueo"]:
-            postiSbloccati["Tunnel Subacqueo"] = True
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaVulcano"]:
+            postiSbloccati["Vulcano"] = True
+            imgMappaA = GlobalImgVar.imgMappa12A
+            imgMappaB = GlobalImgVar.imgMappa12B
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelDiRod"]:
+            postiSbloccati["Tunnel di Rod"] = True
             imgMappaA = GlobalImgVar.imgMappa13A
             imgMappaB = GlobalImgVar.imgMappa13B
-        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLaboratorio"]:
-            postiSbloccati["Laboratorio"] = True
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelSubacqueo"]:
+            postiSbloccati["Tunnel Subacqueo"] = True
             imgMappaA = GlobalImgVar.imgMappa14A
             imgMappaB = GlobalImgVar.imgMappa14B
+        if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLaboratorio"]:
+            postiSbloccati["Laboratorio"] = True
+            imgMappaA = GlobalImgVar.imgMappa15A
+            imgMappaB = GlobalImgVar.imgMappa15B
 
     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoAperturaMappa)
     while not risposta:
@@ -209,13 +214,17 @@ def menuMappa(avanzamentoStoria):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+            risposta = True
+            esci = True
+            bottoneDown = False
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             if voceMarcataSottoMenu:
-                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 voceMarcataSottoMenu = False
                 primoFrame = True
             else:
-                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 risposta = True
             bottoneDown = False
         if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
@@ -275,7 +284,7 @@ def menuMappa(avanzamentoStoria):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 if not voceMarcataSottoMenu:
@@ -496,6 +505,8 @@ def menuMappa(avanzamentoStoria):
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
+    return esci
+
 
 def menuDiario(dati):
     puntatore = GlobalImgVar.puntatore
@@ -508,6 +519,7 @@ def menuDiario(dati):
     voceMarcata = 1
     voceMarcataSottoMenu = 0
     aggiornaSchermo = False
+    esci = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -542,14 +554,18 @@ def menuDiario(dati):
         if bottoneDownVecchio != bottoneDown:
             primoMovimento = True
             tastotempfps = 8
+        if bottoneDown == pygame.K_ESCAPE or bottoneDown == "mouseCentrale" or bottoneDown == "padStart":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
+            risposta = True
+            esci = True
+            bottoneDown = False
         if bottoneDown == pygame.K_q or bottoneDown == "mouseDestro" or bottoneDown == "padCerchio":
+            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
             if voceMarcataSottoMenu != 0:
-                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 voceMarcataSottoMenu = 0
                 xp = xpv
                 yp = ypv
             else:
-                GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selind)
                 risposta = True
             bottoneDown = False
         if bottoneDown == pygame.K_SPACE or (bottoneDown == "mouseSinistro" and not GlobalHWVar.mouseBloccato) or bottoneDown == "padCroce":
@@ -581,7 +597,7 @@ def menuDiario(dati):
             GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selimp)
             bottoneDown = False
 
-        if aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput:
+        if not esci and (aggiornaSchermo or primoMovimento or (tastoMovimentoPremuto and tastotempfps == 0) or primoFrame or voceMarcataVecchia != voceMarcata or aggiornaInterfacciaPerCambioInput):
             aggiornaSchermo = False
             if (bottoneDown == pygame.K_w or bottoneDown == "padSu") and (tastotempfps == 0 or primoMovimento):
                 GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
@@ -704,7 +720,7 @@ def menuDiario(dati):
                             FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.99, 35)
                         if voceMarcataSottoMenu == 3:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialTastieraInMenu, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Esci (dove specificato)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 6.9, 35)
+                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 6.9, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 7.5), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 7.5), 2)
                             FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.1, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.9), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.9), 2)
@@ -745,7 +761,8 @@ def menuDiario(dati):
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8.6), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8.6), 2)
                             FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 10.1, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 12), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 12), 2)
-                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 13.5, 35)
+                            FunzioniGraficheGeneriche.messaggio("Cambia operazione (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 13.3, 35)
+                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 13.8, 35)
                     if voceMarcata == 6:
                         if voceMarcataSottoMenu == 1:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInGioco, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
@@ -783,7 +800,7 @@ def menuDiario(dati):
                             FunzioniGraficheGeneriche.messaggio("Attacca / Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 14.95, 35)
                         if voceMarcataSottoMenu == 3:
                             GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.tutorialControllerInMenu, (GlobalHWVar.gsx // 32 * 20.2, GlobalHWVar.gsy // 18 * 4.8))
-                            FunzioniGraficheGeneriche.messaggio("Esci (dove specificato)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 7.1, 35)
+                            FunzioniGraficheGeneriche.messaggio("Esci (se consentito)", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 7.1, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 8), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 8), 2)
                             FunzioniGraficheGeneriche.messaggio("Indietro / Esci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 24.2, GlobalHWVar.gsy // 18 * 8.65, 35)
                             GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 20.5, GlobalHWVar.gsy // 18 * 9.55), (GlobalHWVar.gsx // 32 * 30, GlobalHWVar.gsy // 18 * 9.55), 2)
@@ -800,3 +817,5 @@ def menuDiario(dati):
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+
+    return esci

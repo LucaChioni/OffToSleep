@@ -183,9 +183,12 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["inizioSecondoGiorno"] = i
     dictAvanzamentoStoria["mercantePozione"] = i
     dictAvanzamentoStoria["mercanteMedicina"] = i
+    dictAvanzamentoStoria["mercanteSuperPoz"] = i
     dictAvanzamentoStoria["mercanteBomba"] = i
     dictAvanzamentoStoria["mercanteBomVele"] = i
     dictAvanzamentoStoria["mercanteEsca"] = i
+    dictAvanzamentoStoria["mercanteBomAppi"] = i
+    dictAvanzamentoStoria["mercanteBomPote"] = i
     i += 1
     dictAvanzamentoStoria["dialogoServoRisveglioSecondoGiorno"] = i
     i += 1
@@ -311,6 +314,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["ricevutoImpo"] = i
     dictAvanzamentoStoria["mercanteAlimantaz"] = i
+    dictAvanzamentoStoria["mercanteAlimMiglio"] = i
     i += 1
     dictAvanzamentoStoria["ricevutoPietraImpo"] = i
     i += 1
@@ -345,16 +349,11 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["tempoBloccato"] = i
 
     i += 1
-    dictAvanzamentoStoria["mercanteSuperPoz"] = i
-    i += 1
-    dictAvanzamentoStoria["mercanteAlimMiglio"] = i
-    i += 1
-    dictAvanzamentoStoria["mercanteBomAppi"] = i
-    i += 1
-    dictAvanzamentoStoria["mercanteBomPote"] = i
-
+    dictAvanzamentoStoria["mappaLabirintoRisolto"] = i
     i += 1
     dictAvanzamentoStoria["mappaCastello"] = i
+    i += 1
+    dictAvanzamentoStoria["mappaScorciatoiaLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["mappaPassoMontano"] = i
     i += 1
@@ -364,9 +363,7 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["mappaVulcano"] = i
     i += 1
-    dictAvanzamentoStoria["mappaTunnelDiRod1"] = i
-    i += 1
-    dictAvanzamentoStoria["mappaTunnelDiRod2"] = i
+    dictAvanzamentoStoria["mappaTunnelDiRod"] = i
     i += 1
     dictAvanzamentoStoria["mappaTunnelSubacqueo"] = i
     i += 1
@@ -514,6 +511,8 @@ def definisciStanze():
     i += 1
     dictStanze["selvaArida15"] = i
     i += 1
+    dictStanze["selvaArida16"] = i
+    i += 1
     dictStanze["avampostoDiRod1"] = i
     vetStanzePacifiche.append(i)
 
@@ -619,6 +618,10 @@ def definisciPorte(dictStanze):
     vetPorte += [stanza, 21, 11, False]
     vetPorte += [stanza, 24, 3, False]
     vetPorte += [stanza, 28, 4, False]
+
+    stanza = dictStanze["selvaArida16"]
+    vetPorte += [stanza, 20, 4, False]
+    vetPorte += [stanza, 21, 3, False]
 
     return vetPorte
 
@@ -738,5 +741,8 @@ def definisciCofanetti(dictStanze):
 
     stanza = dictStanze["selvaArida15"]
     vetCofanetti += [stanza, 20, 5, False]
+
+    stanza = dictStanze["selvaArida16"]
+    vetCofanetti += [stanza, 20, 7, False]
 
     return vetCofanetti
