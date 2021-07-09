@@ -890,6 +890,39 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append("tu")
             dialogo.append(u"Però ci sono queste tracce per terra... dovrei seguirle?")
             partiDialogo.append(dialogo)
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["selvaArida16"]:
+            oggettoDato = False
+            avanzaStoria = True
+            menuMercante = False
+            scelta = False
+            dialogo = []
+            dialogo.append("tu")
+            dialogo.append(u"<*>#italic#Ohh...<*> l'uscita.")
+            partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoUscitaSelva"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ok, dopo la Selva devo costeggiare il lago... che non è qui. Perfetto, ho sbagliato strada.")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Ehi, ma quello è... Rod?")
+                partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 3 and y == GlobalHWVar.gpy * 6:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"È chiusa a chiave...")
+                partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

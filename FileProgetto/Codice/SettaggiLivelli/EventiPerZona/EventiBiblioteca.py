@@ -517,7 +517,7 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
         caricaTutto = True
         avanzaIlTurnoSenzaMuoverti = True
-    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoPietraImpo"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpoPietra"] and stanza == GlobalGameVar.dictStanze["biblioteca3"]:
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati)
         dati[10] = entot
         GlobalHWVar.canaleSoundAttacco.play(GlobalSndVar.suonoUsoCaricabatterie)

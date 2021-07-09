@@ -592,7 +592,7 @@ def menu(caricaSalvataggio, gameover):
 
                     FunzioniGraficheGeneriche.messaggio("Su casella libera - Movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 6.7, 35)
                     FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.2, 35)
-                    FunzioniGraficheGeneriche.messaggio("Su PietraImpo - Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.7, 35)
+                    FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 7.7, 35)
                     FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 8.2, 35)
                     FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità interazione", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 8.7, 35)
                     FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 3.2, GlobalHWVar.gsy // 18 * 9.2, 35)
@@ -604,7 +604,7 @@ def menu(caricaSalvataggio, gameover):
 
                     FunzioniGraficheGeneriche.messaggio("Su casella nemica - Inquadra / Attacca", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 6.7, 35)
                     FunzioniGraficheGeneriche.messaggio("Su casella interagibile - Interagisci", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.2, 35)
-                    FunzioniGraficheGeneriche.messaggio("Su PietraImpo - Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.7, 35)
+                    FunzioniGraficheGeneriche.messaggio("Su ImpoPietra - Attiva / Disattiva Impo", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 7.7, 35)
                     FunzioniGraficheGeneriche.messaggio("Su stato personaggio - Menu", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 8.2, 35)
                     FunzioniGraficheGeneriche.messaggio(u"Su stato nemico - Modalità movimento", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 8.7, 35)
                     FunzioniGraficheGeneriche.messaggio("Su icona \"SaltaTurno\" - Salta turno", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 13.7, GlobalHWVar.gsy // 18 * 9.2, 35)

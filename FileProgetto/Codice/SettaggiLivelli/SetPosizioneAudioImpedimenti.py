@@ -1338,7 +1338,31 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             if stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"]:
                 npers = "w"
                 y = GlobalHWVar.gpy * 15
-                x -= GlobalHWVar.gpx * 11
+                x -= GlobalHWVar.gpx * 12
+    if stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+        if canzone != GlobalSndVar.canzoneEsternoCitta:
+            canzoneCambiata = True
+        canzone = GlobalSndVar.canzoneEsternoCitta
+        if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteAvamposto:
+            sottofondoAmbientaleCambiato = True
+        listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteAvamposto
+        # rumore porte
+        rumoreAperturaPorte = False
+        rumoreChiusuraPorte = False
+        # posizione personaggio e robot al cambio stanza
+        if not inizio:
+            if stanzaVecchia == GlobalGameVar.dictStanze["selvaArida16"]:
+                npers = "s"
+                y = GlobalHWVar.gpy * 2
+                x += GlobalHWVar.gpx * 12
+            if stanzaVecchia == GlobalGameVar.dictStanze["labirinto1"]:
+                npers = "w"
+                x = GlobalHWVar.gpx * 21
+                y = GlobalHWVar.gpy * 15
+            if stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod3"]:
+                npers = "d"
+                x = GlobalHWVar.gpx * 6
+                y = GlobalHWVar.gpy * 4
 
     # npers: 1=d, 2=a, 3=w, 4=s
     if npers == "d":
@@ -1404,6 +1428,12 @@ def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida2"] and stanza == GlobalGameVar.dictStanze["selvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["selvaArida16"]):
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
         FunzioniGraficheGeneriche.messaggio(u"Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
+        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
+        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
+        GlobalHWVar.aggiornaSchermo()
+    elif (stanzaVecchia == GlobalGameVar.dictStanze["selvaArida16"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["labirinto1"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]):
+        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+        FunzioniGraficheGeneriche.messaggio(u"Avamposto di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
@@ -1473,13 +1503,15 @@ def nonPuoiProcedere(avanzamentoStoria, stanzaVecchia, stanzaDestinazione, equip
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["città5"]:
         nonProcedere = True
-    elif equipaggiamentoIndossato and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca1"]:
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and equipaggiamentoIndossato and stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca1"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["andatoNelloStudioDelBibliotecario"] and stanzaVecchia == GlobalGameVar.dictStanze["biblioteca2"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca3"]:
         nonProcedere = True
     elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"] and stanzaDestinazione == GlobalGameVar.dictStanze["biblioteca2"]:
         nonProcedere = True
     elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"] and stanzaVecchia == GlobalGameVar.dictStanze["città3"] and stanzaDestinazione == GlobalGameVar.dictStanze["città4"]:
+        nonProcedere = True
+    elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] and stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanzaDestinazione == GlobalGameVar.dictStanze["avampostoDiRod3"]:
         nonProcedere = True
 
     return nonProcedere

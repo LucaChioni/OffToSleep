@@ -638,7 +638,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             dialogo.append(u"... Ah! Trovato.")
             partiDialogo.append(dialogo)
         elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-            oggettoDato = "PietraImpo"
+            oggettoDato = "ImpoPietra"
             avanzaStoria = True
             menuMercante = False
             scelta = False
@@ -797,7 +797,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Un \"ImpoFrutto\"? Sembra più un <*>#italic#ImpoSasso...<*>")
+            dialogo.append(u"Un \"ImpoFrutto\"? Non sembra affatto un frutto...")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -1331,7 +1331,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la PietraImpo è attiva. A quel punto, l'impo proprietario della pietra, inizierà ad avvicinarsi ad essa...")
+                dialogo.append(u"... Il primo caso in cui gli ImpoFogli non vengono eseguiti si presenta quando la ImpoPietra è attiva. A quel punto, l'impo proprietario della pietra, inizierà ad avvicinarsi ad essa...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

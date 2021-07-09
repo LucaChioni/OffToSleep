@@ -3301,5 +3301,54 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
                 partiDialogo.append(dialogo)
+        elif tipo == "Ragazza1":
+            partiDialogo = []
+            nome = "Sconosciuta"
+            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and avanzamentoDialogo == 0:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = True
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"<*>#italic#Mmh...<*> queste case hanno qualcosa che non va...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Parli dei muri storti che convergono verso l'alto?")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Dei muri che <*>#italic#sembrano<*> storti! Credo si tratti della prospettiva...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Dici? A me sembrano ugualmente storti da qualunque prospettiva...")
+                partiDialogo.append(dialogo)
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"<*>#italic#Mmh...<*>")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioViaggioVersoNeil"] and avanzamentoDialogo == 1:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("personaggio")
+                dialogo.append(u"Queste case hanno qualcosa che non va...")
+                partiDialogo.append(dialogo)
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["tempoBloccato"]:
+                oggettoDato = False
+                avanzaStoria = False
+                menuMercante = False
+                scelta = False
+                avanzaColDialogo = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"(Non mi va di parlare con le altre persone adesso...)")
+                partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

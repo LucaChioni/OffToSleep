@@ -644,7 +644,7 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
 
     FunzioniGraficheGeneriche.messaggio("Previsione prossima azione", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 1.5), GlobalHWVar.gsy // 18 * 1, 65)
     azionePrevistaTrovata = False
-    FunzioniGraficheGeneriche.messaggio("Movimento verso PietraImpo", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
+    FunzioniGraficheGeneriche.messaggio("Movimento verso ImpoPietra", GlobalHWVar.grigiochi, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 0.8), GlobalHWVar.gsy // 18 * 2.6, 40)
     if vettorePrevisione[0][1] == "":
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatore, (xPartenzaPannello, GlobalHWVar.gsy // 18 * 2.5))
         FunzioniGraficheGeneriche.messaggio("Istruzione eseguita salvo interferenza di Lucy", GlobalHWVar.verde, xPartenzaPannello + (GlobalHWVar.gsx // 32 * 12.5), GlobalHWVar.gsy // 18 * 3.2, 35, daDestra=True)

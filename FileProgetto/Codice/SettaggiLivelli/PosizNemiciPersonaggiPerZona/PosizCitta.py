@@ -267,5 +267,9 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
         personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 5, "s", "Ragazzo3-6", stanza, avanzamentoStoria, percorsoPersonaggio)
         listaPersonaggi.append(personaggio)
         listaPersonaggiTotali.append(personaggio)
+        percorsoPersonaggio = ["wGira", "mantieniPosizione"]
+        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 7, "w", "Ragazza1-7", stanza, avanzamentoStoria, percorsoPersonaggio)
+        listaPersonaggi.append(personaggio)
+        listaPersonaggiTotali.append(personaggio)
 
     return listaPersonaggiTotali, listaPersonaggi

@@ -128,7 +128,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         scelta = False
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Per attivare e disattivare la PietraImpo usa il tasto <*>#bold#SHIFT<*> sulla tastiera, il <*>#bold#Triangolo<*> sul controller oppure clicca sulla sua icona in alto a destra dello schermo con il tasto <*>#bold#Sinistro<*> del mouse.")
+        dialogo.append(u"Per attivare e disattivare la ImpoPietra usa il tasto <*>#bold#SHIFT<*> sulla tastiera, il <*>#bold#Triangolo<*> sul controller oppure clicca sulla sua icona in alto a destra dello schermo con il tasto <*>#bold#Sinistro<*> del mouse.")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")

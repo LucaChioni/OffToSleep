@@ -12,6 +12,7 @@ import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliCasaUfficiale as OstacoliC
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliBiblioteca as OstacoliBiblioteca
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliStradaPerSelvaArida as OstacoliStradaPerSelvaArida
 import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliSelvaArida as OstacoliSelvaArida
+import Codice.SettaggiLivelli.OstacoliPerZona.OstacoliAvampostoDiRod as OstacoliAvampostoDiRod
 
 
 def getEntrateStanze(stanza, avanzamentoStoria):
@@ -671,6 +672,15 @@ def getEntrateStanze(stanza, avanzamentoStoria):
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod1"]])
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod1"]])
         entrateStanza.extend([GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["avampostoDiRod1"]])
+    elif stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 19, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["selvaArida16"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["selvaArida16"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["selvaArida16"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 22, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["selvaArida16"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 23, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["selvaArida16"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 24, GlobalHWVar.gsy // 18 * 2, 0, -GlobalHWVar.gpy, GlobalGameVar.dictStanze["selvaArida16"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 21, GlobalHWVar.gsy // 18 * 15, 0, +GlobalHWVar.gpy, GlobalGameVar.dictStanze["labirinto1"]])
+        entrateStanza.extend([GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 6, -GlobalHWVar.gpx, 0, GlobalGameVar.dictStanze["avampostoDiRod3"]])
 
     return entrateStanza
 
@@ -715,6 +725,8 @@ def controlloOstacoli(x, y, nx, ny, stanza, carim, porte, cofanetti, avanzamento
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliStradaPerSelvaArida.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
         elif GlobalGameVar.dictStanze["selvaArida1"] <= stanza <= GlobalGameVar.dictStanze["selvaArida16"]:
             stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliSelvaArida.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
+        elif GlobalGameVar.dictStanze["avampostoDiRod1"] <= stanza <= GlobalGameVar.dictStanze["avampostoDiRod3"]:
+            stanza, x, y, nx, ny, escludiOggettiBassi = OstacoliAvampostoDiRod.setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi)
 
         # controllo se le porte sono chiuse o aperte
         if not (nx == 0 and ny == 0):

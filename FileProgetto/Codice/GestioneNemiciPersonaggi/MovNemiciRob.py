@@ -1655,14 +1655,14 @@ def movrobo(x, y, vx, vy, rx, ry, chiamarob, dati, porte, listaNemici, difesa, u
                     nrob = 4
                 sposta = True
             else:
-                print ("Percorso Colco verso PietraImpo non trovato")
+                print ("Percorso Colco verso ImpoPietra non trovato")
         if azioneEseguita and sposta:
             tecnicaUsata = "spostamento"
             ultimoObbiettivoColco = ["Telecomando", x, y, "spostamento"]
         else:
             ultimoObbiettivoColco = []
     else:
-        vettorePrevisione[0][1] = "PietraImpo spenta"
+        vettorePrevisione[0][1] = "ImpoPietra spenta"
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
         if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and (posizioneColcoAggiornamentoCaseAttac[0] != rx or posizioneColcoAggiornamentoCaseAttac[1] != ry):
