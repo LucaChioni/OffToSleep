@@ -44,7 +44,7 @@ def gameloop():
             percorsoDaEseguire = []
             nonMostrarePersonaggio = False
             avanzaIlTurnoSenzaMuoverti = False
-            avanzaIlTurnoSenzaMuovereColco = False
+            evitaTurnoDiColco = False
             aggiornaImgEquip = True
             refreshSchermo = True
             impossibileAprirePorta = False
@@ -1942,7 +1942,7 @@ def gameloop():
                 dati[125] = 0
                 dati[126] = 0
                 refreshSchermo = True
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and sposta and mosseRimasteRob == 0 and not morterob and not avanzaIlTurnoSenzaMuovereColco:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and sposta and mosseRimasteRob == 0 and not morterob and not evitaTurnoDiColco:
                 if dati[125] > 0:
                     mosseRimasteRob = 2
                 else:
@@ -1989,7 +1989,7 @@ def gameloop():
             # attaccoDiColco [obiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perché deve rimanere per più turni)]
             attaccoDiColco = []
             tecnicaUsata = False
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and mosseRimasteRob > 0 and not morterob and not cambiosta and not avanzaIlTurnoSenzaMuovereColco:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and mosseRimasteRob > 0 and not morterob and not cambiosta and not evitaTurnoDiColco:
                 vrx = rx
                 vry = ry
 
@@ -2044,7 +2044,7 @@ def gameloop():
                 ry = GlobalHWVar.gsy
                 vrx = rx
                 vry = ry
-            avanzaIlTurnoSenzaMuovereColco = False
+            evitaTurnoDiColco = False
 
             # aggiorna vista dei mostri (per mettere l'occhio se ti vedono) e aggiorno xPosizioneUltimoBersaglio e yPosizioneUltimoBersaglio se ci sono attacchi a distanza
             apriocchio = False
@@ -2190,7 +2190,7 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, avanzaIlTurnoSenzaMuovereColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, evitaAvanzamentoTurno = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, avanzaIlTurnoSenzaMuovereColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse)
+                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, evitaAvanzamentoTurno = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse)
                 impossibileAprirePorta = False
                 if caricaTutto:
                     impossibileCliccarePulsanti = True
