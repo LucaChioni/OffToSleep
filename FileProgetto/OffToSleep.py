@@ -43,6 +43,7 @@ def gameloop():
             percorsoDaEseguire = []
             nonMostrarePersonaggio = False
             avanzaIlTurnoSenzaMuoverti = False
+            avanzaIlTurnoSenzaMuovereColco = False
             aggiornaImgEquip = True
             refreshSchermo = True
             impossibileAprirePorta = False
@@ -897,7 +898,6 @@ def gameloop():
                 for personaggio in listaPersonaggi:
                     if (personaggio.x == x + GlobalHWVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalHWVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalHWVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalHWVar.gpy and npers == 3):
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
-                        sposta = True
                         if npers == 1:
                             personaggio.girati("a")
                         elif npers == 2:
@@ -911,6 +911,7 @@ def gameloop():
                             dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
                         else:
                             dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                        sposta = False
                         caricaTutto = True
                 if not sposta:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
@@ -1175,7 +1176,6 @@ def gameloop():
                     inquadratoQualcosaList = inquadratoQualcosa.split(":")
                     posizPersonaggioInVettore = int(inquadratoQualcosaList[1])
                     personaggio = listaPersonaggi[posizPersonaggioInVettore]
-                    sposta = True
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
                     # giro Rallo verso il personaggio e viceversa
                     if personaggio.x == x + GlobalHWVar.gpx and personaggio.y == y:
@@ -1263,6 +1263,7 @@ def gameloop():
                         dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
                     else:
                         dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
+                    sposta = False
                     caricaTutto = True
                     bottoneDown = False
                 elif inquadratoQualcosa and inquadratoQualcosa.startswith("movimento"):
@@ -1801,7 +1802,7 @@ def gameloop():
                             dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
                         else:
                             dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
-                        sposta = True
+                        sposta = False
                         caricaTutto = True
                 interagisciConPersonaggio = False
             # menu mercante
@@ -1932,7 +1933,6 @@ def gameloop():
                     if nemico.vita <= 0 and (int(ultimoObbiettivoColco[0].split("-")[1]) == nemico.id or (ultimoObbiettivoColco[1] == nemico.x and ultimoObbiettivoColco[2] == nemico.y)):
                         ultimoObbiettivoColco = []
                         break
-
             # movimento-azioni robo
             azioneRobEseguita = False
             if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and dati[122] > 0 and (dati[125] > 0 or dati[126] > 0):
@@ -1940,7 +1940,7 @@ def gameloop():
                 dati[125] = 0
                 dati[126] = 0
                 refreshSchermo = True
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and sposta and mosseRimasteRob == 0 and not morterob:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and sposta and mosseRimasteRob == 0 and not morterob and not avanzaIlTurnoSenzaMuovereColco:
                 if dati[125] > 0:
                     mosseRimasteRob = 2
                 else:
@@ -1987,7 +1987,7 @@ def gameloop():
             # attaccoDiColco [obiettivo, danno, status (antidoto, attP, difP, velocizza, efficienza) ... => per ogni nemico colpito (non raffredda perché deve rimanere per più turni)]
             attaccoDiColco = []
             tecnicaUsata = False
-            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and mosseRimasteRob > 0 and not morterob and not cambiosta:
+            if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and mosseRimasteRob > 0 and not morterob and not cambiosta and not avanzaIlTurnoSenzaMuovereColco:
                 vrx = rx
                 vry = ry
 
@@ -2042,6 +2042,7 @@ def gameloop():
                 ry = GlobalHWVar.gsy
                 vrx = rx
                 vry = ry
+            avanzaIlTurnoSenzaMuovereColco = False
 
             # aggiorna vista dei mostri (per mettere l'occhio se ti vedono) e aggiorno xPosizioneUltimoBersaglio e yPosizioneUltimoBersaglio se ci sono attacchi a distanza
             apriocchio = False
@@ -2187,7 +2188,7 @@ def gameloop():
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:
-                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, dati[131], percorsoDaEseguire = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse)
+                x, y, rx, ry, nrob, dati[0], cambiosta, dati[1], npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, avanzaIlTurnoSenzaMuovereColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire = SetNemiciPersonaggiEventi.gestisciEventiStoria(dati[0], dati[1], npers, x, y, rx, ry, nrob, cambiosta, carim, caricaTutto, bottoneDown, movimentoPerMouse, impossibileAprirePorta, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, stanzeGiaVisitate, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, canzone, avanzaIlTurnoSenzaMuoverti, avanzaIlTurnoSenzaMuovereColco, nonMostrarePersonaggio, dati[131], percorsoDaEseguire, casevisteEntrateIncluse)
                 impossibileAprirePorta = False
                 if caricaTutto:
                     impossibileCliccarePulsanti = True

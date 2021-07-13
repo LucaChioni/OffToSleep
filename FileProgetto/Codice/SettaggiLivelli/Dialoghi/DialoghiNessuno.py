@@ -486,7 +486,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Il cuore mi dice che sto sbagliando strada... la sinistra è dall'altra parte...")
                 partiDialogo.append(dialogo)
-            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["rimosse200Monete"]:
+            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["rimosseMonetePerEntrareInConfraternita"]:
                 oggettoDato = False
                 avanzaStoria = False
                 menuMercante = False
@@ -923,6 +923,43 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"È chiusa a chiave...")
                 partiDialogo.append(dialogo)
+            elif x == GlobalHWVar.gpx * 21 and y == GlobalHWVar.gpy * 16:
+                if avanzamentoStoria <= GlobalGameVar.dictAvanzamentoStoria["arrivoAvampostoDiRod"]:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Non credo che questa sia la direzione giusta... forse Rod può aiurami.")
+                    partiDialogo.append(dialogo)
+                elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerMappaLabirinto"]:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Senza una mappa mi perderei di sicuro...")
+                    partiDialogo.append(dialogo)
+                elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["copiataMappaLabirinto"]:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Meglio dare un'occhiata alla mappa prima...")
+                    partiDialogo.append(dialogo)
+                elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["copiataMappaLabirinto"]:
+                    oggettoDato = False
+                    avanzaStoria = False
+                    menuMercante = False
+                    scelta = False
+                    dialogo = []
+                    dialogo.append("tu")
+                    dialogo.append(u"Se mi segnassi il percorso da seguire, sarebbe molto più facile attraversare il labirinto...")
+                    partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

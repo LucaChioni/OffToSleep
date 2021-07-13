@@ -206,11 +206,11 @@ def definisciAvanzamentiStoria():
     i += 1
     dictAvanzamentoStoria["resettatoAvanzamentoDialoghiCittadiniACuiChiediInfo"] = i
     i += 1
-    dictAvanzamentoStoria["richieste200MoneteDalMercante"] = i
+    dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"] = i
     i += 1
-    dictAvanzamentoStoria["date200MoneteAlMercante"] = i
+    dictAvanzamentoStoria["dateMonetePerEntrareInConfraternita"] = i
     i += 1
-    dictAvanzamentoStoria["rimosse200Monete"] = i
+    dictAvanzamentoStoria["rimosseMonetePerEntrareInConfraternita"] = i
     i += 1
     dictAvanzamentoStoria["rifiutatoDallaBiblioteca"] = i
     i += 1
@@ -339,7 +339,21 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoUscitaSelva"] = i
     i += 1
     dictAvanzamentoStoria["arrivoAvampostoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["richiesteMonetePerMappaLabirinto"] = i
     dictAvanzamentoStoria["mappaAvampostoDiRod"] = i
+    i += 1
+    dictAvanzamentoStoria["dateMonetePerMappaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["rimosseMonetePerMappaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["messaMappaLabirintoSulTavolo"] = i
+    i += 1
+    dictAvanzamentoStoria["arrivatoRodAllAltroTavolo"] = i
+    i += 1
+    dictAvanzamentoStoria["copiataMappaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["risoltoEnigmaMappaLabirinto"] = i
 
     i += 100
     i += 1

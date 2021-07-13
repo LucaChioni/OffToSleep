@@ -153,6 +153,11 @@ initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(
 # vita esche
 vitaTotEsche = 300
 
+# costi servizi di Rod
+monetePerEntrareNellaConfraternita = 200
+monetePerLasciareLaConfraternita = 1000
+monetePerLaMappaDelLabirinto = 500
+
 global idNemico
 global listaIdNemiciUsati
 global datiEnigmaBibliotecario

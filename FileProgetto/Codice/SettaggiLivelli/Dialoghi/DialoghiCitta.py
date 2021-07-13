@@ -241,11 +241,11 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"... Non parlerò senza compenso. Sono 200 monete.")
+            dialogo.append(u"... Non parlerò senza compenso. Sono " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Duecento monete!? Per rispondere a una domanda!?")
+            dialogo.append(str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete!? Per rispondere a una domanda!?")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
@@ -269,18 +269,18 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
-            dialogo.append(u"Certo, sono sicura che tu non te lo sia appena inventato... 200 monete per avere l'opportunità di spendere altre monete per delle \"risorse\"... Non mi sento per niente truffata, anzi sembra un'opportunità da prendere al volo.")
+            dialogo.append(u"Certo, sono sicura che tu non te lo sia appena inventato... " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete per avere l'opportunità di spendere altre monete per delle \"risorse\"... Non mi sento per niente truffata, anzi sembra un'opportunità da prendere al volo.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("personaggio")
-            dialogo.append(u"Sì, è vero. Non mi capita spesso di offrire questa opportunità. Sei stata fortunata.")
+            dialogo.append(u"Lo è. Non mi capita spesso di offrire questa opportunità. Sei stata fortunata.")
             partiDialogo.append(dialogo)
             dialogo = []
             dialogo.append("tu")
             dialogo.append(u"Certo...")
             partiDialogo.append(dialogo)
-        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["richieste200MoneteDalMercante"]:
-            if monetePossedute < 200:
+        elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["richiesteMonetePerEntrareInConfraternita"]:
+            if monetePossedute < GlobalGameVar.monetePerEntrareNellaConfraternita:
                 nome = "Sconosciuto"
                 oggettoDato = False
                 avanzaStoria = False
@@ -292,7 +292,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Certo, sono 200 monete.")
+                dialogo.append(u"Certo, sono " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
@@ -305,7 +305,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 scelta = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Tieni le 200 monete... ehm... non so ancora il tuo nome...")
+                dialogo.append(u"Tieni le " + str(GlobalGameVar.monetePerEntrareNellaConfraternita) + u" monete... ehm... non so ancora il tuo nome...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -409,7 +409,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
-                dialogo.append(u"Come vuoi. Sono 500 monete per lasciare la confraternita.")
+                dialogo.append(u"Come vuoi. Sono " + str(GlobalGameVar.monetePerLasciareLaConfraternita) + u" monete per lasciare la confraternita.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")

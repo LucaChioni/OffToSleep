@@ -821,7 +821,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         if tipo == "AssistBiblioteca" or tipo == "OggettoAssistBiblioteca":
             partiDialogo = []
             nome = "Assistente bibliotecario"
-            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosse200Monete"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["rimosseMonetePerEntrareInConfraternita"]:
                 oggettoDato = False
                 avanzaStoria = True
                 menuMercante = False

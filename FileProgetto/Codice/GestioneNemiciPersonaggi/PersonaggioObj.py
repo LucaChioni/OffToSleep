@@ -2,9 +2,9 @@
 
 import os
 import GlobalHWVar
-import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
+import Codice.SettaggiLivelli.setImgOggetti as setImgOggetti
 
 
 class PersonaggioObj(object):
@@ -61,110 +61,8 @@ class PersonaggioObj(object):
     def caricaImgOggetto(self, nonCaricareImg=False):
         self.imgOggetto = []
         self.imgOggettoDialogo = []
-        disegnaImg = False
-        numImg = 1
-        numImgDialogo = 1
-        nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoLettoLucy":
-            disegnaImg = False
-            numImg = 1
-            numImgDialogo = 3
-            nomeImgDialogo = ["LucyDormienteDialogo1", "LucyDormienteDialogo2", "Vuota"]
-        if self.tipo == "OggettoComodinoLucy":
-            disegnaImg = True
-            numImg = 4
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoSiepe":
-            disegnaImg = True
-            numImg = 3
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoFuoco":
-            disegnaImg = True
-            numImg = 3
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoCibo":
-            disegnaImg = True
-            numImg = 3
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoMucchioLegna":
-            disegnaImg = True
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo.startswith("OggettoLegna"):
-            disegnaImg = True
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoCinghiale":
-            disegnaImg = False
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["CinghialeDialogo"]
-        if self.tipo == "OggettoPersonaCadavereSam":
-            disegnaImg = True
-            numImg = 1
-            numImgDialogo = 2
-            nomeImgDialogo = ["Vuota", "FiglioUfficialeCadavereDialogo"]
-        if self.tipo == "OggettoTombaSam":
-            disegnaImg = True
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoMadreUfficialeSeduta":
-            disegnaImg = True
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoPadreUfficialeSeduto":
-            disegnaImg = True
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoPersonaCittadino3Cadavere":
-            disegnaImg = True
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["Cittadino3CadavereDialogo"]
-        if self.tipo == "OggettoPersonaCittadino1Cadavere":
-            disegnaImg = True
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["Cittadino1CadavereDialogo"]
-        if self.tipo == "OggettoAssistBiblioteca":
-            disegnaImg = False
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["AssistBibliotecaDialogo"]
-        if self.tipo == "OggettoLibreriaRegistri":
-            disegnaImg = True
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoRegistroBiblioteca":
-            disegnaImg = True
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoVomito":
-            disegnaImg = True
-            numImg = 2
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoMocio":
-            disegnaImg = True
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
-        if self.tipo == "OggettoLucySeduta":
-            disegnaImg = True
-            numImg = 1
-            numImgDialogo = 1
-            nomeImgDialogo = ["Vuota"]
+
+        disegnaImg, numImg, numImgDialogo, nomeImgDialogo = setImgOggetti.definisciImgOggetti(self.tipo)
 
         i = 1
         while i <= numImg:
@@ -198,48 +96,7 @@ class PersonaggioObj(object):
     def aggiornaImgOggetto(self, avanzamentoStoria, primoCaricamento=False):
         refreshSchermo = False
 
-        numImgAttuale = 0
-        if self.tipo == "OggettoComodinoLucy":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["dialogoCasaHansLucy2"]:
-                numImgAttuale = 1
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                numImgAttuale = 2
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoMappaDiario"]:
-                numImgAttuale = 3
-        if self.tipo == "OggettoSiepe":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                numImgAttuale = 1
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                numImgAttuale = 2
-        if self.tipo == "OggettoFuoco":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
-                numImgAttuale = 1
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                numImgAttuale = 2
-        if self.tipo == "OggettoCibo":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"]:
-                numImgAttuale = 1
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                numImgAttuale = 2
-        if self.tipo == "OggettoMucchioLegna":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["legnaDepositata"]:
-                numImgAttuale = 1
-        if self.tipo.startswith("OggettoLegna"):
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["trovatoLegna3"] or self.avanzamentoDialogo == 1:
-                numImgAttuale = 1
-        if self.tipo == "OggettoTombaSam":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
-                numImgAttuale = 1
-        if self.tipo == "OggettoLibreriaRegistri":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["toltoRegistroBibliotecaDallaLibreria"]:
-                numImgAttuale = 1
-        if self.tipo == "OggettoRegistroBiblioteca":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["messoRegistroBibliotecaSullaScrivania"]:
-                numImgAttuale = 1
-        if self.tipo == "OggettoVomito":
-            if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
-                numImgAttuale = 1
-
+        numImgAttuale = setImgOggetti.impostaImgOggettoDaUsare(self.tipo, avanzamentoStoria, self.avanzamentoDialogo)
         if primoCaricamento or self.imgAttuale != self.imgOggetto[numImgAttuale]:
             refreshSchermo = True
             self.imgAttuale = self.imgOggetto[numImgAttuale]
@@ -249,19 +106,7 @@ class PersonaggioObj(object):
             self.imgD = self.imgAttuale
             self.imgAggiornata = True
 
-        numImgAttualeDialogo = 0
-        if self.tipo == "OggettoLettoLucy":
-            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["ottenutoBicchiereAcqua"]:
-                numImgAttualeDialogo = 0
-            elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
-                numImgAttualeDialogo = 1
-            else:
-                numImgAttualeDialogo = 2
-        if self.tipo == "OggettoPersonaCadavereSam":
-            if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["cinghialeUcciso"]:
-                numImgAttualeDialogo = 0
-            else:
-                numImgAttualeDialogo = 1
+        numImgAttualeDialogo = setImgOggetti.impostaImgOggettoDialogoDaUsare(self.tipo, avanzamentoStoria, self.avanzamentoDialogo)
         self.imgDialogo = self.imgOggettoDialogo[numImgAttualeDialogo]
 
         if not primoCaricamento:
