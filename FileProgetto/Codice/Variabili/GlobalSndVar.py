@@ -47,6 +47,7 @@ global suonoUsoEsca
 global suonoUsoBombaAppiccicosa
 global suonoUsoBombaPotenziata
 global rumoreMovimentoNemici
+global rumoreMovimentoPersonaggi
 global rumoreAttaccoNemico
 global rumoreLancioOggettoNemico
 global rumoreMorteNemico
@@ -155,6 +156,7 @@ def loadSounds(numSndCaricato):
     global suonoUsoBombaAppiccicosa
     global suonoUsoBombaPotenziata
     global rumoreMovimentoNemici
+    global rumoreMovimentoPersonaggi
     global rumoreAttaccoNemico
     global rumoreLancioOggettoNemico
     global rumoreMorteNemico
@@ -251,8 +253,9 @@ def loadSounds(numSndCaricato):
     suonoUsoBombaAppiccicosa = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriOggetti/BombaAppiccicosa.wav")
     suonoUsoBombaPotenziata = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriOggetti/BombaPotenziata.wav")
 
-    # suoni nemici
-    rumoreMovimentoNemici = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MovimentoNemiciPersonaggi.wav")
+    # suoni nemici - personaggi
+    rumoreMovimentoNemici = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MovimentoNemici.wav")
+    rumoreMovimentoPersonaggi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MovimentoPersonaggi.wav")
     rumoreAttaccoNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/AttaccoVicinoNemico.wav")
     rumoreLancioOggettoNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/AttaccoLontanoNemico.wav")
     rumoreMorteNemico = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriNemiciPersonaggi/MorteNemico.wav")
