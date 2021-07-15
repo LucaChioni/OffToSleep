@@ -2,7 +2,7 @@
 
 import pygame
 import GlobalHWVar
-import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
@@ -11,6 +11,8 @@ import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGener
 
 
 def mostraEnigma(tipoPersonaggio):
+    FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
+
     if tipoPersonaggio == "OggettoEnigmaBiblioteca":
         enigmaBibliotecatio()
     elif tipoPersonaggio == "OggettoEnigmaLabirinto":
@@ -19,6 +21,8 @@ def mostraEnigma(tipoPersonaggio):
 
 def enigmaBibliotecatio():
     GlobalHWVar.canaleSoundPassiRallo.stop()
+    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
+
     primoframe = True
     esci = False
     bottoneDown = False
@@ -45,18 +49,22 @@ def enigmaBibliotecatio():
     dimensioneTrattoGomma = 12
     xMouse, yMouse = pygame.mouse.get_pos()
 
-    sfondoUsandoMatita = GlobalImgVar.schemataEnigmaBibliotecarioUsandoMatita
-    sfondoUsandoGomma = GlobalImgVar.schemataEnigmaBibliotecarioUsandoGomma
+    # carico tutte le img necessarie per questo "menu"
+    pathImgEnigma = "Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/"
+    cursoreMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "CursoreMatita.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True, True)
+    cursoreGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "CursoreGomma.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True, True)
+    sfondoUsandoMatita = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
+    sfondoUsandoGomma = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     if GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 1:
-        imgDatiVel = GlobalImgVar.imgEnigmaBibliotecarioVel1
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel1.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 2:
-        imgDatiVel = GlobalImgVar.imgEnigmaBibliotecarioVel2
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel2.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 3:
-        imgDatiVel = GlobalImgVar.imgEnigmaBibliotecarioVel3
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel3.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 4:
-        imgDatiVel = GlobalImgVar.imgEnigmaBibliotecarioVel4
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel4.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     elif GlobalGameVar.datiEnigmaBibliotecario["velocità"] == 5:
-        imgDatiVel = GlobalImgVar.imgEnigmaBibliotecarioVel5
+        imgDatiVel = CaricaFileProgetto.loadImage(pathImgEnigma + "Schermata-vel5.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, True)
     else:
         imgDatiVel = False
 
@@ -94,7 +102,6 @@ def enigmaBibliotecatio():
     cursore, mask = pygame.cursors.compile(stringCursore, black='X', white='.', xor='o')
     cursor_sizer_cursoreInvisibile = ((24, 24), (7, 11), cursore, mask)
 
-    GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti / 2)
     while not esci:
         spostandoCursore = False
         utilizzandoStrumento = False
@@ -300,18 +307,23 @@ def enigmaBibliotecatio():
                         GlobalHWVar.disegnaLineaSuSchermo(superficieDisegni, GlobalHWVar.gialloCarta, (xStrumentoVecchia, yStrumentoVecchia), (xStrumento, yStrumento), dimensioneTrattoGomma)
             GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.gialloCarta, (0, yInizioFoglio - GlobalHWVar.gpy, GlobalHWVar.gsx, GlobalHWVar.gsy - GlobalHWVar.gpy * 4))
             GlobalHWVar.disegnaImmagineSuSchermo(superficieDisegni, (0, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(imgDatiVel, (0, 0))
+            if imgDatiVel:
+                GlobalHWVar.disegnaImmagineSuSchermo(imgDatiVel, (0, 0))
             if strumentoInUso == "matita":
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cursoreMatitaEnigmaBibliotecario, (xStrumento, yStrumento - GlobalHWVar.gpy * 2))
+                GlobalHWVar.disegnaImmagineSuSchermo(cursoreMatita, (xStrumento, yStrumento - GlobalHWVar.gpy * 2))
             elif strumentoInUso == "gomma":
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.cursoreGommaEnigmaBibliotecario, (xStrumento, yStrumento - GlobalHWVar.gpy * 2))
+                GlobalHWVar.disegnaImmagineSuSchermo(cursoreGomma, (xStrumento, yStrumento - GlobalHWVar.gpy * 2))
 
             xStrumentoVecchia = xStrumento
             yStrumentoVecchia = yStrumento
             cancellaTutto = False
             cambiatoStrumento = False
+
+            if primoFrame:
+                FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=1)
+            else:
+                GlobalHWVar.aggiornaSchermo()
             primoFrame = False
-            GlobalHWVar.aggiornaSchermo()
 
         primoframe = False
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)

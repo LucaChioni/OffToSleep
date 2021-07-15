@@ -53,58 +53,29 @@ global rumoreLancioOggettoNemico
 global rumoreMorteNemico
 global suonoAperturaMappa
 global rumoreScavare
-global listaAudioAmbienteSogno
-global listaAudioAmbienteCasaInterno
-global listaAudioAmbienteCasaEsterno
-global listaAudioAmbienteForesta
-global listaAudioAmbienteForestaFuoco
-global canzoneSogno
-global canzoneCasa
-global canzoneForesta
-global listaAudioAmbienteStradaPerCitta1_notte
-global listaAudioAmbienteStradaPerCitta1_giorno
-global listaAudioAmbienteStradaPerCitta2_notte
-global listaAudioAmbienteStradaPerCitta2_giorno
-global listaAudioAmbienteStradaPerCitta3_notte
-global listaAudioAmbienteStradaPerCitta3_giorno
-global canzoneEsterniPacifici
 global rumoreBussareCitta
 global rumoreSollevamentoPortaCitta
-global canzoneCasaDavid
-global listaAudioAmbienteCasaDavid_notte
-global listaAudioAmbienteCasaDavid_giorno
 global suonoaperturaporteCasaDavid
 global suonochiusuraporteCasaDavid
 global rumoreDoccia
-global canzoneCitta
-global listaAudioAmbienteCitta_notte
-global listaAudioAmbienteCitta_giorno
 global rumoreChiusuraPortaCitta
-global listaAudioAmbienteBiblioteca
-global canzoneBiblioteca
 global rumoreLancioPallaBibliotecario
 global rumoreRitornoPallaBibliotecario
 global rumoreAppoggioStrumentoEnigmi
 global rumoreScorrimentoMatitaEnigmi
 global rumoreScorrimentoGommaEnigmi
 global rumoreCancellaTuttoEnigmi
-global listaAudioAmbienteStradaPerSelva1
-global listaAudioAmbienteStradaPerSelva2
 global suonoaperturaporteSelva
 global suonochiusuraporteSelva
-global canzoneSelva
-global listaAudioAmbienteSelva
-global listaAudioAmbienteSelva_ultimaStanza
-global listaAudioAmbienteAvamposto
 
 
-numSndTotali = 101
+numSndTotali = 62
 def caricaSuonoMostrandoAvanzamento(path):
     global numSndCaricatoTemp
     suono = CaricaFileProgetto.loadSound(path)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(GlobalHWVar.gpx * 31), GlobalHWVar.gpy * 0.5))
     numSndCaricatoTemp += 1
-    caricamentoCompiuto = (GlobalHWVar.gpx * 28) + ((GlobalHWVar.gpx * 3.0 / numSndTotali) * numSndCaricatoTemp)
+    caricamentoCompiuto = (GlobalHWVar.gpx * 30) + ((GlobalHWVar.gpx * 1.0 / numSndTotali) * numSndCaricatoTemp)
     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 0.5), GlobalHWVar.gpy * 17, int(caricamentoCompiuto), GlobalHWVar.gpy * 0.5))
     GlobalHWVar.aggiornaSchermo()
     return suono
@@ -161,49 +132,20 @@ def loadSounds(numSndCaricato):
     global rumoreMorteNemico
     global suonoAperturaMappa
     global rumoreScavare
-    global listaAudioAmbienteSogno
-    global listaAudioAmbienteCasaInterno
-    global listaAudioAmbienteCasaEsterno
-    global listaAudioAmbienteForesta
-    global listaAudioAmbienteForestaFuoco
-    global canzoneSogno
-    global canzoneCasa
-    global canzoneForesta
-    global listaAudioAmbienteStradaPerCitta1_notte
-    global listaAudioAmbienteStradaPerCitta1_giorno
-    global listaAudioAmbienteStradaPerCitta2_notte
-    global listaAudioAmbienteStradaPerCitta2_giorno
-    global listaAudioAmbienteStradaPerCitta3_notte
-    global listaAudioAmbienteStradaPerCitta3_giorno
-    global canzoneEsterniPacifici
     global rumoreBussareCitta
     global rumoreSollevamentoPortaCitta
-    global canzoneCasaDavid
-    global listaAudioAmbienteCasaDavid_notte
-    global listaAudioAmbienteCasaDavid_giorno
     global suonoaperturaporteCasaDavid
     global suonochiusuraporteCasaDavid
     global rumoreDoccia
-    global canzoneCitta
-    global listaAudioAmbienteCitta_notte
-    global listaAudioAmbienteCitta_giorno
     global rumoreChiusuraPortaCitta
-    global listaAudioAmbienteBiblioteca
-    global canzoneBiblioteca
     global rumoreLancioPallaBibliotecario
     global rumoreRitornoPallaBibliotecario
     global rumoreAppoggioStrumentoEnigmi
     global rumoreScorrimentoMatitaEnigmi
     global rumoreScorrimentoGommaEnigmi
     global rumoreCancellaTuttoEnigmi
-    global listaAudioAmbienteStradaPerSelva1
-    global listaAudioAmbienteStradaPerSelva2
     global suonoaperturaporteSelva
     global suonochiusuraporteSelva
-    global canzoneSelva
-    global listaAudioAmbienteSelva
-    global listaAudioAmbienteSelva_ultimaStanza
-    global listaAudioAmbienteAvamposto
 
     # suoni puntatore
     selsta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriPuntatore/SelSta.wav")
@@ -282,70 +224,3 @@ def loadSounds(numSndCaricato):
     suonochiusuraporteCasaDavid = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/ChiusuraPortaCasaUfficiale.wav")
     suonoaperturaporteSelva = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/AperturaPortaSelva.wav")
     suonochiusuraporteSelva = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SuoniPorte/ChiusuraPortaSelva.wav")
-
-    # suoni sottofondi ambientali
-    audioAmbienteSogno_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/Sogno/Vento1.wav")
-    audioAmbienteSogno_Vento2 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/Sogno/Vento2.wav")
-    listaAudioAmbienteSogno = [audioAmbienteSogno_Vento1, audioAmbienteSogno_Vento2]
-    audioAmbienteCasaInterno_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/CasaInterno/Vento1.wav")
-    audioAmbienteCasaInterno_Cicale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/CasaInterno/Cicale.wav")
-    listaAudioAmbienteCasaInterno = [audioAmbienteCasaInterno_Vento1, audioAmbienteCasaInterno_Cicale]
-    audioAmbienteCasaEsterno_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/CasaEsterno/Vento1.wav")
-    audioAmbienteCasaEsterno_Cicale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/CasaEsterno/Cicale.wav")
-    listaAudioAmbienteCasaEsterno = [audioAmbienteCasaEsterno_Vento1, audioAmbienteCasaEsterno_Cicale]
-    audioAmbienteForesta_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/ForestaCadetta/Vento1.wav")
-    audioAmbienteForesta_Cicale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/ForestaCadetta/Cicale.wav")
-    listaAudioAmbienteForesta = [audioAmbienteForesta_Vento1, audioAmbienteForesta_Cicale]
-    audioAmbienteForesta_Fuoco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/ForestaCadetta/Fuoco.wav")
-    listaAudioAmbienteForestaFuoco = [audioAmbienteForesta_Vento1, audioAmbienteForesta_Cicale, audioAmbienteForesta_Fuoco]
-    audioAmbienteStradaPerCitta1_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta1/Vento1.wav")
-    audioAmbienteStradaPerCitta1_Cicale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta1/Cicale.wav")
-    audioAmbienteStradaPerCitta1_Fuoco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta1/Fuoco.wav")
-    listaAudioAmbienteStradaPerCitta1_notte = [audioAmbienteStradaPerCitta1_Vento1, audioAmbienteStradaPerCitta1_Cicale, audioAmbienteStradaPerCitta1_Fuoco]
-    listaAudioAmbienteStradaPerCitta1_giorno = [audioAmbienteStradaPerCitta1_Vento1, audioAmbienteStradaPerCitta1_Cicale]
-    audioAmbienteStradaPerCitta2_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta2/Vento1.wav")
-    audioAmbienteStradaPerCitta2_Cicale = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta2/Cicale.wav")
-    audioAmbienteStradaPerCitta2_Fuoco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta2/Fuoco.wav")
-    listaAudioAmbienteStradaPerCitta2_notte = [audioAmbienteStradaPerCitta2_Vento1, audioAmbienteStradaPerCitta2_Cicale, audioAmbienteStradaPerCitta2_Fuoco]
-    listaAudioAmbienteStradaPerCitta2_giorno = [audioAmbienteStradaPerCitta2_Vento1, audioAmbienteStradaPerCitta2_Cicale]
-    audioAmbienteStradaPerCitta3_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta3/Vento1.wav")
-    audioAmbienteStradaPerCitta3_Fiume = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta3/Fiume.wav")
-    audioAmbienteStradaPerCitta3_Fuoco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta3/Fuoco.wav")
-    audioAmbienteStradaPerCitta3_Persone = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerCitta3/Persone.wav")
-    listaAudioAmbienteStradaPerCitta3_notte = [audioAmbienteStradaPerCitta3_Vento1, audioAmbienteStradaPerCitta3_Fiume, audioAmbienteStradaPerCitta3_Fuoco]
-    listaAudioAmbienteStradaPerCitta3_giorno = [audioAmbienteStradaPerCitta3_Vento1, audioAmbienteStradaPerCitta3_Fiume, audioAmbienteStradaPerCitta3_Persone]
-    audioAmbienteCitta_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/Citta/Vento1.wav")
-    audioAmbienteCitta_Fuoco = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/Citta/Fuoco.wav")
-    audioAmbienteCitta_Persone = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/Citta/Persone.wav")
-    listaAudioAmbienteCitta_notte = [audioAmbienteCitta_Vento1, audioAmbienteCitta_Fuoco]
-    listaAudioAmbienteCitta_giorno = [audioAmbienteCitta_Vento1, audioAmbienteCitta_Persone]
-    audioAmbienteCasaDavid_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/CasaUfficiale/Vento1.wav")
-    audioAmbienteCasaDavid_Persone = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/CasaUfficiale/Persone.wav")
-    listaAudioAmbienteCasaDavid_notte = [audioAmbienteCasaDavid_Vento1]
-    listaAudioAmbienteCasaDavid_giorno = [audioAmbienteCasaDavid_Vento1, audioAmbienteCasaDavid_Persone]
-    audioAmbienteBiblioteca_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/Biblioteca/Vento1.wav")
-    audioAmbienteBiblioteca_Persone = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/Biblioteca/Persone.wav")
-    listaAudioAmbienteBiblioteca = [audioAmbienteBiblioteca_Vento1, audioAmbienteBiblioteca_Persone]
-    audioAmbienteStradaPerSelva_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerSelvaArida/Vento1.wav")
-    audioAmbienteStradaPerSelva_Persone = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerSelvaArida/Persone.wav")
-    audioAmbienteStradaPerSelva_Serpenti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/StradaPerSelvaArida/Serpenti.wav")
-    listaAudioAmbienteStradaPerSelva1 = [audioAmbienteStradaPerSelva_Vento1, audioAmbienteStradaPerSelva_Persone]
-    listaAudioAmbienteStradaPerSelva2 = [audioAmbienteStradaPerSelva_Vento1, audioAmbienteStradaPerSelva_Serpenti]
-    audioAmbienteSelva_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/Vento1.wav")
-    audioAmbienteSelva_SerpentiVolAlto = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/SerpentiVolAlto.wav")
-    audioAmbienteSelva_SerpentiVolBasso = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/SelvaArida/SerpentiVolBasso.wav")
-    listaAudioAmbienteSelva = [audioAmbienteSelva_Vento1, audioAmbienteSelva_SerpentiVolAlto]
-    listaAudioAmbienteSelva_ultimaStanza = [audioAmbienteSelva_Vento1, audioAmbienteSelva_SerpentiVolBasso]
-    audioAmbienteSelva_Vento1 = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/AvampostoDiRod/Vento1.wav")
-    audioAmbienteSelva_Serpenti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SottofondoPerZona/AvampostoDiRod/Serpenti.wav")
-    listaAudioAmbienteAvamposto = [audioAmbienteSelva_Vento1, audioAmbienteSelva_Serpenti]
-
-    # suoni canzoni
-    canzoneSogno = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/01-Sogno.wav")
-    canzoneCasa = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/02-Casa.wav")
-    canzoneEsterniPacifici = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/03-EsterniPacifici.wav")
-    canzoneForesta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/04-Foresta.wav")
-    canzoneCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/05-Città.wav")
-    canzoneCasaDavid = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/06-CasaUfficiale.wav")
-    canzoneBiblioteca = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/07-Biblioteca.wav")
-    canzoneSelva = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/08-SelvaArida.wav")

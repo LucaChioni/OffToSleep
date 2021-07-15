@@ -6,6 +6,7 @@ import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
+import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaSalvaPartita as CaricaSalvaPartita
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
@@ -250,8 +251,9 @@ def menu(caricaSalvataggio, gameover):
     sreen_temp = GlobalHWVar.schermo.copy().convert()
     imgOscuraPuntatore = sreen_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 11.5)).convert()
 
-    canzone = GlobalGameVar.canzoneMenuPrincipale
-    if not GlobalHWVar.canaleSoundCanzone.get_busy():
+    if not GlobalHWVar.canaleSoundCanzone.get_busy() or GlobalGameVar.canzoneAttuale != "00-Menu":
+        GlobalGameVar.canzoneAttuale = "00-Menu"
+        canzone = CaricaFileProgetto.loadSound("Risorse/Audio/Canzoni/" + GlobalGameVar.canzoneAttuale + ".wav")
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
     if not GlobalHWVar.primoAvvio:
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
@@ -773,7 +775,7 @@ def menu(caricaSalvataggio, gameover):
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista):
+def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom):
     if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
         perssta = GlobalImgVar.lucy1GrafMenu
     elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
@@ -938,7 +940,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                         carim = True
                     # mappa
                     if voceMarcata == 4:
-                        risposta = SottoMenuMapDiario.menuMappa(dati[0])
+                        risposta = SottoMenuMapDiario.menuMappa(dati[0], imgMappa, imgMappaZoom)
                     # diario
                     if voceMarcata == 5:
                         risposta = SottoMenuMapDiario.menuDiario(dati)

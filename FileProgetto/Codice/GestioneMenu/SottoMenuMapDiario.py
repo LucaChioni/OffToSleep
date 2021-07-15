@@ -9,7 +9,7 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 
 
-def menuMappa(avanzamentoStoria):
+def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     imgOmbreggiaturaContorniMappaMenu = GlobalImgVar.imgOmbreggiaturaContorniMappaMenu
@@ -28,74 +28,42 @@ def menuMappa(avanzamentoStoria):
     tastotempfps = 8
 
     # carico la mappa a seconda dell'avanzamento
-    imgMappaA = GlobalImgVar.imgMappa1A
-    imgMappaB = GlobalImgVar.imgMappa1B
+    imgMappaA = imgMappaNormale
+    imgMappaB = imgMappaZoom
     postiSbloccati = {"Casa": False, "Città": False, "Avamposto di Rod": False, "Castello": False, "Palazzo di Rod": False, "Vulcano": False, "Laboratorio": False, "Foresta Cadetta": False, "Selva Arida": False, "Labirinto": False, "Passo Montano": False, "Caverna": False, "Tunnel di Rod": False, "Tunnel Subacqueo": False}
     if avanzamentoStoria >= 0:
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCasa"]:
             postiSbloccati["Casa"] = True
-            imgMappaA = GlobalImgVar.imgMappa1A
-            imgMappaB = GlobalImgVar.imgMappa1B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaForestaCadetta"]:
             postiSbloccati["Foresta Cadetta"] = True
-            imgMappaA = GlobalImgVar.imgMappa2A
-            imgMappaB = GlobalImgVar.imgMappa2B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCittà"]:
             postiSbloccati["Città"] = True
-            imgMappaA = GlobalImgVar.imgMappa3A
-            imgMappaB = GlobalImgVar.imgMappa3B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaSelvaArida"]:
             postiSbloccati["Selva Arida"] = True
-            imgMappaA = GlobalImgVar.imgMappa4A
-            imgMappaB = GlobalImgVar.imgMappa4B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaAvampostoDiRod"]:
             postiSbloccati["Avamposto di Rod"] = True
-            imgMappaA = GlobalImgVar.imgMappa5A
-            imgMappaB = GlobalImgVar.imgMappa5B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLabirinto"]:
             postiSbloccati["Labirinto"] = True
-            imgMappaA = GlobalImgVar.imgMappa6A
-            imgMappaB = GlobalImgVar.imgMappa6B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLabirintoRisolto"]:
             postiSbloccati["Labirinto"] = True
-            imgMappaA = GlobalImgVar.imgMappa7A
-            imgMappaB = GlobalImgVar.imgMappa7B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCastello"]:
             postiSbloccati["Castello"] = True
-            imgMappaA = GlobalImgVar.imgMappa8A
-            imgMappaB = GlobalImgVar.imgMappa8B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaScorciatoiaLabirinto"]:
             postiSbloccati["Castello"] = True
-            imgMappaA = GlobalImgVar.imgMappa9A
-            imgMappaB = GlobalImgVar.imgMappa9B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPassoMontano"]:
             postiSbloccati["Passo Montano"] = True
-            imgMappaA = GlobalImgVar.imgMappa10A
-            imgMappaB = GlobalImgVar.imgMappa10B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaPalazzoDiRod"]:
             postiSbloccati["Palazzo di Rod"] = True
-            imgMappaA = GlobalImgVar.imgMappa11A
-            imgMappaB = GlobalImgVar.imgMappa11B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaCaverna"]:
             postiSbloccati["Caverna"] = True
-            imgMappaA = GlobalImgVar.imgMappa12A
-            imgMappaB = GlobalImgVar.imgMappa12B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaVulcano"]:
             postiSbloccati["Vulcano"] = True
-            imgMappaA = GlobalImgVar.imgMappa12A
-            imgMappaB = GlobalImgVar.imgMappa12B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelDiRod"]:
             postiSbloccati["Tunnel di Rod"] = True
-            imgMappaA = GlobalImgVar.imgMappa13A
-            imgMappaB = GlobalImgVar.imgMappa13B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaTunnelSubacqueo"]:
             postiSbloccati["Tunnel Subacqueo"] = True
-            imgMappaA = GlobalImgVar.imgMappa14A
-            imgMappaB = GlobalImgVar.imgMappa14B
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["mappaLaboratorio"]:
             postiSbloccati["Laboratorio"] = True
-            imgMappaA = GlobalImgVar.imgMappa15A
-            imgMappaB = GlobalImgVar.imgMappa15B
 
     GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.suonoAperturaMappa)
     while not risposta:

@@ -10,6 +10,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
+import Codice.SettaggiLivelli.SetImgOggettiMappa as SetImgOggettiMappa
 import Codice.GestioneMenu.MenuPrincipali as MenuPrincipali
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
 import Codice.GestioneMenu.MenuEnigmi as MenuEnigmi
@@ -37,6 +38,8 @@ def gameloop():
         #     print (u"Max RAM usata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
+            imgMappa = False
+            imgMappaZoom = False
             evitaAvanzamentoTurno = False
             caseattactotRallo = []
             posizioneRalloAggiornamentoCaseAttac = [0, 0]
@@ -531,6 +534,9 @@ def gameloop():
                     imgAggiornata = personaggio.aggiornaImgOggetto(dati[0])
                     if imgAggiornata:
                         refreshSchermo = True
+
+            # aggiorna img mappa
+            imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
 
             caricaTutto = True
             cambiosta = False
@@ -1471,7 +1477,7 @@ def gameloop():
                 i += 3
             if not nemicoInCasellaVista:
                 aggiornaImgEquip = True
-                dati, inizio, attacco, caricaSalvataggio = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista)
+                dati, inizio, attacco, caricaSalvataggio = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
                 if caricaSalvataggio:
                     inizio = True
                 if attacco == 0:
@@ -2259,6 +2265,9 @@ def gameloop():
                     imgAggiornata = personaggio.aggiornaImgOggetto(dati[0])
                     if imgAggiornata:
                         refreshSchermo = True
+
+            # aggiorna img mappa
+            imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(dati[0], imgMappa, imgMappaZoom)
 
             # prendere il denaro da terra
             i = 0

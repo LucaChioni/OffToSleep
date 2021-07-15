@@ -65,11 +65,11 @@ def mostraLogo():
         i += 1
     GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
     GlobalHWVar.aggiornaSchermo()
-global canzoneMenuPrincipale
 def disegnaSchermataDiCaricamento():
-    global canzoneMenuPrincipale
-    canzoneMenuPrincipale = CaricaFileProgetto.loadSound("Risorse/Audio/Canzoni/00-Menu.wav")
-    GlobalHWVar.canaleSoundCanzone.play(canzoneMenuPrincipale, -1)
+    global canzoneAttuale
+    canzoneAttuale = "00-Menu"
+    canzone = CaricaFileProgetto.loadSound("Risorse/Audio/Canzoni/" + canzoneAttuale + ".wav")
+    GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
 
     schemataDiCaricamento = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     sfumaturaCaricamentoMenuPrincipale = CaricaFileProgetto.loadImage("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
@@ -158,13 +158,22 @@ monetePerEntrareNellaConfraternita = 200
 monetePerLasciareLaConfraternita = 1000
 monetePerLaMappaDelLabirinto = 500
 
+global imgMappaAttuale
+global canzoneAttuale
+global audioSottofondoAttuale
 global idNemico
 global listaIdNemiciUsati
 global datiEnigmaBibliotecario
 def inizializzaVariabiliGlobali():
+    global imgMappaAttuale
+    global canzoneAttuale
+    global audioSottofondoAttuale
     global idNemico
     global listaIdNemiciUsati
     global datiEnigmaBibliotecario
+    imgMappaAttuale = False
+    canzoneAttuale = False
+    audioSottofondoAttuale = False
     # id incrementale da assegare ai nemici
     idNemico = 0
     listaIdNemiciUsati = []

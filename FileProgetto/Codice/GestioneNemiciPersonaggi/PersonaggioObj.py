@@ -4,7 +4,7 @@ import os
 import GlobalHWVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetDialoghiPersonaggi as SetDialoghiPersonaggi
-import Codice.SettaggiLivelli.setImgOggetti as setImgOggetti
+import Codice.SettaggiLivelli.SetImgOggettiMappa as SetImgOggettiMappa
 
 
 class PersonaggioObj(object):
@@ -62,7 +62,7 @@ class PersonaggioObj(object):
         self.imgOggetto = []
         self.imgOggettoDialogo = []
 
-        disegnaImg, numImg, numImgDialogo, nomeImgDialogo = setImgOggetti.definisciImgOggetti(self.tipo)
+        disegnaImg, numImg, numImgDialogo, nomeImgDialogo = SetImgOggettiMappa.definisciImgOggetti(self.tipo)
 
         i = 1
         while i <= numImg:
@@ -96,7 +96,7 @@ class PersonaggioObj(object):
     def aggiornaImgOggetto(self, avanzamentoStoria, primoCaricamento=False):
         refreshSchermo = False
 
-        numImgAttuale = setImgOggetti.impostaImgOggettoDaUsare(self.tipo, avanzamentoStoria, self.avanzamentoDialogo)
+        numImgAttuale = SetImgOggettiMappa.impostaImgOggettoDaUsare(self.tipo, avanzamentoStoria, self.avanzamentoDialogo)
         if primoCaricamento or self.imgAttuale != self.imgOggetto[numImgAttuale]:
             refreshSchermo = True
             self.imgAttuale = self.imgOggetto[numImgAttuale]
@@ -106,7 +106,7 @@ class PersonaggioObj(object):
             self.imgD = self.imgAttuale
             self.imgAggiornata = True
 
-        numImgAttualeDialogo = setImgOggetti.impostaImgOggettoDialogoDaUsare(self.tipo, avanzamentoStoria, self.avanzamentoDialogo)
+        numImgAttualeDialogo = SetImgOggettiMappa.impostaImgOggettoDialogoDaUsare(self.tipo, avanzamentoStoria, self.avanzamentoDialogo)
         self.imgDialogo = self.imgOggettoDialogo[numImgAttualeDialogo]
 
         if not primoCaricamento:
