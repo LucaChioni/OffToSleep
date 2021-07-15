@@ -31,8 +31,12 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                 vetNemiciSoloConXeY.append(y)
                 vetNemiciSoloConXeY.append(rx)
                 vetNemiciSoloConXeY.append(ry)
-                xDestinazione = GlobalHWVar.gpx * 6
-                yDestinazione = GlobalHWVar.gpy * 5
+                if rx == GlobalHWVar.gpx * 6 and ry == GlobalHWVar.gpy * 5:
+                    xDestinazione = GlobalHWVar.gpx * 6
+                    yDestinazione = GlobalHWVar.gpy * 6
+                else:
+                    xDestinazione = GlobalHWVar.gpx * 6
+                    yDestinazione = GlobalHWVar.gpy * 5
                 percorsoTrovato = GenericFunc.pathFinding(personaggio.x, personaggio.y, xDestinazione, yDestinazione, vetNemiciSoloConXeY, casevisteEntrateIncluse)
                 if percorsoTrovato and percorsoTrovato != "arrivato" and len(percorsoTrovato) >= 4 and (percorsoTrovato[len(percorsoTrovato) - 4] != personaggio.x or percorsoTrovato[len(percorsoTrovato) - 3] != personaggio.y):
                     personaggio.percorso.append("sGira")
@@ -58,6 +62,13 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
                         personaggio.percorso.append("w")
                         personaggio.percorso.append("dGira")
                         personaggio.percorso.append("mantieniPosizione")
+                    elif xVirtuale == GlobalHWVar.gpx * 5 and yVirtuale == GlobalHWVar.gpy * 6:
+                        personaggio.percorso.append("d")
+                        personaggio.percorso.append("mantieniPosizione")
+                    elif xVirtuale == GlobalHWVar.gpx * 6 and yVirtuale == GlobalHWVar.gpy * 7:
+                        personaggio.percorso.append("w")
+                        personaggio.percorso.append("dGira")
+                        personaggio.percorso.append("mantieniPosizione")
                 else:
                     print ("Percorso Mercante verso altro tavolo non trovato")
                 break
@@ -78,5 +89,21 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
             avanzamentoStoria += 1
         avanzaIlTurnoSenzaMuoverti = True
         evitaTurnoDiColco = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["copiataMappaLabirinto"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod1"] and personaggio.tipo == "OggettoTavoloMappaLabirinto":
+                listaPersonaggiTotali.remove(personaggio)
+                break
+        for personaggio in listaPersonaggi:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod1"] and personaggio.tipo == "OggettoTavoloMappaLabirinto":
+                listaPersonaggi.remove(personaggio)
+                break
+        percorsoPersonaggio = []
+        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 9, "s", "OggettoEnigmaLabirinto-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+        listaPersonaggiTotali.append(personaggio)
+        listaPersonaggi.append(personaggio)
+        avanzamentoStoria += 1
+        carim = True
+        caricaTutto = True
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire

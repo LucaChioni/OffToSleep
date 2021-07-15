@@ -109,9 +109,14 @@ def definisciImgOggetti(tipo):
         numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
-    if tipo == "OggettoTavoloEnigmaLabirinto":
+    if tipo == "OggettoTavoloMappaLabirinto":
         disegnaImg = True
         numImg = 2
+        numImgDialogo = 1
+        nomeImgDialogo = ["Vuota"]
+    if tipo == "OggettoEnigmaLabirinto":
+        disegnaImg = True
+        numImg = 1
         numImgDialogo = 1
         nomeImgDialogo = ["Vuota"]
 
@@ -161,7 +166,7 @@ def impostaImgOggettoDaUsare(tipo, avanzamentoStoria, avanzamentoDialogo):
     if tipo == "OggettoVomito":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["vomitatoInBiblioteca"]:
             numImgAttuale = 1
-    if tipo == "OggettoTavoloEnigmaLabirinto":
+    if tipo == "OggettoTavoloMappaLabirinto":
         if avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["messaMappaLabirintoSulTavolo"]:
             numImgAttuale = 1
 

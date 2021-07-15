@@ -352,20 +352,23 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["arrivatoRodAllAltroTavolo"] = i
     i += 1
     dictAvanzamentoStoria["copiataMappaLabirinto"] = i
+    dictAvanzamentoStoria["mappaLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["creatoPersonaggioOggettoPerEnigmaMappaLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["risoltoEnigmaMappaLabirinto"] = i
+    dictAvanzamentoStoria["mappaLabirintoRisolto"] = i
 
     i += 100
     i += 1
     dictAvanzamentoStoria["arrivoLabirinto"] = i
-    dictAvanzamentoStoria["mappaLabirinto"] = i
     i += 1
     dictAvanzamentoStoria["inizioViaggioVersoCasaMercante"] = i
     i += 1
+    dictAvanzamentoStoria["presiStrumentiPerStudiareImpo"] = i
+    i += 1
     dictAvanzamentoStoria["tempoBloccato"] = i
 
-    i += 1
-    dictAvanzamentoStoria["mappaLabirintoRisolto"] = i
     i += 1
     dictAvanzamentoStoria["mappaCastello"] = i
     i += 1

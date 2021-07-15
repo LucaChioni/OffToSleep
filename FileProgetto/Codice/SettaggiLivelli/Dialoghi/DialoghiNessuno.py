@@ -951,7 +951,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("tu")
                     dialogo.append(u"Meglio dare un'occhiata alla mappa prima...")
                     partiDialogo.append(dialogo)
-                elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["copiataMappaLabirinto"]:
+                elif avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaMappaLabirinto"]:
                     oggettoDato = False
                     avanzaStoria = False
                     menuMercante = False

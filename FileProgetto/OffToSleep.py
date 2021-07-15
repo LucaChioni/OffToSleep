@@ -12,6 +12,7 @@ import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.GestioneMenu.MenuPrincipali as MenuPrincipali
 import Codice.GestioneMenu.MenuDialoghi as MenuDialoghi
+import Codice.GestioneMenu.MenuEnigmi as MenuEnigmi
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.GestioneGrafica.EnvPrint as EnvPrint
 import Codice.GestioneGrafica.Animazioni as Animazioni
@@ -164,7 +165,8 @@ def gameloop():
                 if not inizio:
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
 
-                stoppaMusica = SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia, dati[0])
+                SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
+                stoppaMusica = SetPosizioneAudioImpedimenti.decidiSeStoppareMusica(dati[1], dati[0])
 
                 canzoneCambiata = False
                 sottofondoAmbientaleCambiato = False
@@ -188,6 +190,15 @@ def gameloop():
                         if npers == 4:
                             nrob = 3
 
+                if stoppaMusica and GlobalHWVar.canaleSoundCanzone.get_busy():
+                    i = GlobalHWVar.volumeCanzoni
+                    while i > 0:
+                        GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                        i -= GlobalHWVar.volumeCanzoni / 10
+                        pygame.time.wait(30)
+                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                    GlobalHWVar.canaleSoundCanzone.set_volume(0)
+                    GlobalHWVar.canaleSoundCanzone.stop()
                 if canzoneCambiata or sottofondoAmbientaleCambiato:
                     i = GlobalHWVar.volumeCanzoni
                     j = GlobalHWVar.volumeEffetti
@@ -909,7 +920,7 @@ def gameloop():
                             personaggio.girati("w")
                         EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno)
                         if personaggio.oggettoEnigma:
-                            dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
+                            MenuEnigmi.mostraEnigma(personaggio.tipo)
                         else:
                             dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                         sposta = False
@@ -1261,7 +1272,7 @@ def gameloop():
                         personaggio.girati("w")
                     EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno)
                     if personaggio.oggettoEnigma:
-                        dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
+                        MenuEnigmi.mostraEnigma(personaggio.tipo)
                     else:
                         dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                     sposta = False
@@ -1801,7 +1812,7 @@ def gameloop():
                         # aggiorno lo schermo (serve per girare i pers uno verso l'altro e per togliere il campo visivo dell'obiettivo selezionato)
                         EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno)
                         if personaggio.oggettoEnigma:
-                            dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
+                            MenuEnigmi.mostraEnigma(personaggio.tipo)
                         else:
                             dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                         sposta = False
@@ -1892,7 +1903,7 @@ def gameloop():
                 EnvPrint.disegnaAmbiente(x, y, npers, statoRalloInizioTurno[0], pvtot, statoRalloInizioTurno[1], statoRalloInizioTurno[2], statoRalloInizioTurno[3], statoColcoInizioTurno[0], entot, statoColcoInizioTurno[1], statoColcoInizioTurno[2], statoColcoInizioTurno[3], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, True, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno)
                 personaggio = PersonaggioObj.PersonaggioObj(xPrimaDiCambioStanza, yPrimaDiCambioStanza, False, "Nessuno-0", dati[1], dati[0], False)
                 if personaggio.oggettoEnigma:
-                    dati[0], oggettoRicevuto = MenuDialoghi.menuEnigmi(dati[0], personaggio)
+                    MenuEnigmi.mostraEnigma(personaggio.tipo)
                 else:
                     dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
 

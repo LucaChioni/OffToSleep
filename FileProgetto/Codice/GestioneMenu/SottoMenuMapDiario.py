@@ -341,33 +341,33 @@ def menuMappa(avanzamentoStoria):
                     GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscuPiuScu, (GlobalHWVar.gsx // 32 * 20, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 16))
                     imgMappa = imgMappaB
                     if voceMarcata == 1:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-16), GlobalHWVar.gsy // 18 * 1))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-29), GlobalHWVar.gsy // 18 * (-1)))
                     if voceMarcata == 2:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-4.5), GlobalHWVar.gsy // 18 * (-1.5)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-14.1), GlobalHWVar.gsy // 18 * (-5.5)))
                     if voceMarcata == 3:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (3), GlobalHWVar.gsy // 18 * (-9.5)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-4), GlobalHWVar.gsy // 18 * (-15.5)))
                     if voceMarcata == 4:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (8.5), GlobalHWVar.gsy // 18 * (-17)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (2.6), GlobalHWVar.gsy // 18 * (-24.5)))
                     if voceMarcata == 5:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (7.5), GlobalHWVar.gsy // 18 * (-0.5)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (1.2), GlobalHWVar.gsy // 18 * (-4.5)))
                     if voceMarcata == 6:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (16), GlobalHWVar.gsy // 18 * (0)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (12.5), GlobalHWVar.gsy // 18 * (-3.5)))
                     if voceMarcata == 7:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-8), GlobalHWVar.gsy // 18 * (-17)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-18.2), GlobalHWVar.gsy // 18 * (-25)))
                     if voceMarcata == 8:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-13.5), GlobalHWVar.gsy // 18 * (-5)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-26.5), GlobalHWVar.gsy // 18 * (-10)))
                     if voceMarcata == 9:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (0.5), GlobalHWVar.gsy // 18 * (-8)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-7.5), GlobalHWVar.gsy // 18 * (-13)))
                     if voceMarcata == 10:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (4), GlobalHWVar.gsy // 18 * (-13)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-4.4), GlobalHWVar.gsy // 18 * (-19.7)))
                     if voceMarcata == 11:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (3.5), GlobalHWVar.gsy // 18 * (-1.5)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-3.5), GlobalHWVar.gsy // 18 * (-5)))
                     if voceMarcata == 12:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (11.5), GlobalHWVar.gsy // 18 * (0)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (6.5), GlobalHWVar.gsy // 18 * (-3.5)))
                     if voceMarcata == 13:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (7), GlobalHWVar.gsy // 18 * (-6)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (0.5), GlobalHWVar.gsy // 18 * (-10.5)))
                     if voceMarcata == 14:
-                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-1.5), GlobalHWVar.gsy // 18 * (-18.5)))
+                        GlobalHWVar.disegnaImmagineSuSchermo(imgMappa, (GlobalHWVar.gsx // 32 * (-11.5), GlobalHWVar.gsy // 18 * (-27)))
                     GlobalHWVar.disegnaImmagineSuSchermo(imgOmbreggiaturaContorniMappaMenu, (0, 0))
                     screen = GlobalHWVar.schermo.copy()
                     backgroundTornaIndietro = screen.subsurface(pygame.Rect(GlobalHWVar.gpx * 21, 0, GlobalHWVar.gpx * 11, GlobalHWVar.gpy * 2)).convert()

@@ -117,10 +117,6 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append("La mappa e il diario si possono aprire dal menu cliccando sulle relative voci.")
         partiDialogo.append(dialogo)
-        dialogo = []
-        dialogo.append("personaggio")
-        dialogo.append(u"È possibile accedere alla mappa anche dal menu rapido di battaglia.")
-        partiDialogo.append(dialogo)
     elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["introduzioneImpoDalBibliotecario"]:
         oggettoDato = False
         avanzaStoria = True

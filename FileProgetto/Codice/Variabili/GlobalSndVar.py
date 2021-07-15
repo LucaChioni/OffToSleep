@@ -67,8 +67,7 @@ global listaAudioAmbienteStradaPerCitta2_notte
 global listaAudioAmbienteStradaPerCitta2_giorno
 global listaAudioAmbienteStradaPerCitta3_notte
 global listaAudioAmbienteStradaPerCitta3_giorno
-global canzoneEsternoCitta
-global canzoneEsternoCasa
+global canzoneEsterniPacifici
 global rumoreBussareCitta
 global rumoreSollevamentoPortaCitta
 global canzoneCasaDavid
@@ -176,8 +175,7 @@ def loadSounds(numSndCaricato):
     global listaAudioAmbienteStradaPerCitta2_giorno
     global listaAudioAmbienteStradaPerCitta3_notte
     global listaAudioAmbienteStradaPerCitta3_giorno
-    global canzoneEsternoCitta
-    global canzoneEsternoCasa
+    global canzoneEsterniPacifici
     global rumoreBussareCitta
     global rumoreSollevamentoPortaCitta
     global canzoneCasaDavid
@@ -345,9 +343,8 @@ def loadSounds(numSndCaricato):
     # suoni canzoni
     canzoneSogno = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/01-Sogno.wav")
     canzoneCasa = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/02-Casa.wav")
-    canzoneEsternoCasa = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/03-EsternoCasaCittà.wav")
+    canzoneEsterniPacifici = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/03-EsterniPacifici.wav")
     canzoneForesta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/04-Foresta.wav")
-    canzoneEsternoCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/03-EsternoCasaCittà.wav")
     canzoneCitta = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/05-Città.wav")
     canzoneCasaDavid = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/06-CasaUfficiale.wav")
     canzoneBiblioteca = caricaSuonoMostrandoAvanzamento("Risorse/Audio/Canzoni/07-Biblioteca.wav")

@@ -259,6 +259,7 @@ global imgMappa15A
 global imgMappa15B
 global imgOmbreggiaturaContorniMappaMenu
 global dictionaryImgNemici
+global dictImgCampiVisiviNemici
 global imgDanneggiamentoCausaRallo
 global imgDanneggiamentoCausaColco
 global persoLucy1
@@ -279,6 +280,8 @@ global vetImgGuantiInGame
 global vetImgCollaneInGame
 global vetImgFaretreInGame
 global vetImgArmRobInGame
+global cursoreMatitaEnigmaBibliotecario
+global cursoreGommaEnigmaBibliotecario
 global schemataEnigmaBibliotecarioUsandoMatita
 global schemataEnigmaBibliotecarioUsandoGomma
 global imgEnigmaBibliotecarioVel1
@@ -286,8 +289,8 @@ global imgEnigmaBibliotecarioVel2
 global imgEnigmaBibliotecarioVel3
 global imgEnigmaBibliotecarioVel4
 global imgEnigmaBibliotecarioVel5
-global cursoreMatitaEnigmaBibliotecario
-global cursoreGommaEnigmaBibliotecario
+global schemataEnigmaLabirintoUsandoMatita
+global schemataEnigmaLabirintoUsandoGomma
 
 numImgTotali = 1405
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
@@ -566,6 +569,7 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgMappa15B
     global imgOmbreggiaturaContorniMappaMenu
     global dictionaryImgNemici
+    global dictImgCampiVisiviNemici
     global imgDanneggiamentoCausaRallo
     global imgDanneggiamentoCausaColco
     global persoLucy1
@@ -586,6 +590,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global vetImgCollaneInGame
     global vetImgFaretreInGame
     global vetImgArmRobInGame
+    global cursoreMatitaEnigmaBibliotecario
+    global cursoreGommaEnigmaBibliotecario
     global schemataEnigmaBibliotecarioUsandoMatita
     global schemataEnigmaBibliotecarioUsandoGomma
     global imgEnigmaBibliotecarioVel1
@@ -593,8 +599,8 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgEnigmaBibliotecarioVel3
     global imgEnigmaBibliotecarioVel4
     global imgEnigmaBibliotecarioVel5
-    global cursoreMatitaEnigmaBibliotecario
-    global cursoreGommaEnigmaBibliotecario
+    global schemataEnigmaLabirintoUsandoMatita
+    global schemataEnigmaLabirintoUsandoGomma
 
     if cambioRisoluzione:
         funzionePerCaricareImmagini = caricaImmagineCambioRisoluzione
@@ -1125,35 +1131,35 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
 
     # img mappe
     imgMappa1A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa1B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa1B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu1.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa2A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa2B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa2B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu2.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa3A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa3B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa3B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu3.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa4A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa4B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa4B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu4.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa5A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa5B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa5B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu5.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa6A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa6B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa6B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu6.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa7A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa7B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa7B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu7.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa8A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa8B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa8B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu8.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa9A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa9B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa9B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu9.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa10A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa10B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa10B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu10.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa11A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa11B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa11B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu11.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa12A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa12B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa12B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu12.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa13A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa13B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa13B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu13.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa14A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa14B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa14B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu14.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgMappa15A = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 22, GlobalHWVar.gpy * 15, False)
-    imgMappa15B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 50, GlobalHWVar.gpy * 35, False)
+    imgMappa15B = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/MappaMenu15.png", GlobalHWVar.gpx * 66, GlobalHWVar.gpy * 45, False)
     imgOmbreggiaturaContorniMappaMenu = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/Mappe/OmbreggiaturaContorniMappaMenu.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
 
     # img nemici
@@ -1208,17 +1214,24 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
         dictionaryImgPosizioni["imgDanneggiamentoColcoNemico"] = imgDanneggiamentoColcoNemico
 
         dictionaryImgNemici[nomeNemico] = dictionaryImgPosizioni
+    dictImgCampiVisiviNemici = {}
+    raggio = 2
+    while raggio <= 8:
+        dictImgCampiVisiviNemici[str(raggio)] = funzionePerCaricareImmagini("Risorse/Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (GlobalHWVar.gpx * raggio * 2) + GlobalHWVar.gpx, (GlobalHWVar.gpy * raggio * 2) + GlobalHWVar.gpy, True)
+        raggio += 1
 
     schemataDiCaricamento = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermataDiCaricamento.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     sfumaturaCaricamentoMenuPrincipale = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/OmbreggiaturaCaricamentoMenuPrincipale.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
 
     # immagini eventi
-    schemataEnigmaBibliotecarioUsandoMatita = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    schemataEnigmaBibliotecarioUsandoGomma = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    imgEnigmaBibliotecarioVel1 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel1.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    imgEnigmaBibliotecarioVel2 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel2.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    imgEnigmaBibliotecarioVel3 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel3.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    imgEnigmaBibliotecarioVel4 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel4.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
-    imgEnigmaBibliotecarioVel5 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/SchermataEnigmaBibliotecario-vel5.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
     cursoreMatitaEnigmaBibliotecario = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/CursoreMatita.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True)
     cursoreGommaEnigmaBibliotecario = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/CursoreGomma.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, True)
+    schemataEnigmaBibliotecarioUsandoMatita = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/SchermataEnigmaBibliotecario-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    schemataEnigmaBibliotecarioUsandoGomma = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/SchermataEnigmaBibliotecario-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel1 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/SchermataEnigmaBibliotecario-vel1.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel2 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/SchermataEnigmaBibliotecario-vel2.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel3 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/SchermataEnigmaBibliotecario-vel3.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel4 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/SchermataEnigmaBibliotecario-vel4.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    imgEnigmaBibliotecarioVel5 = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaBiblioteca/SchermataEnigmaBibliotecario-vel5.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    schemataEnigmaLabirintoUsandoMatita = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaLabirinto/SchermataEnigmaLabirinto-usandoMatita.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)
+    schemataEnigmaLabirintoUsandoGomma = funzionePerCaricareImmagini("Risorse/Immagini/DecorazioniMenu/SchermateEnigmi/EnigmaLabirinto/SchermataEnigmaLabirinto-usandoGomma.png", GlobalHWVar.gsx, GlobalHWVar.gsy, False)

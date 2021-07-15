@@ -112,9 +112,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gsx // 32 * 4
                 y = GlobalHWVar.gsy // 18 * 14
     if stanza == GlobalGameVar.dictStanze["casaHansLucy2"]:
-        if canzone != GlobalSndVar.canzoneEsternoCasa:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCasa
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaEsterno
@@ -138,9 +138,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = "w"
                 y = GlobalHWVar.gsy // 18 * 15
     if stanza == GlobalGameVar.dictStanze["casaHansLucy3"]:
-        if canzone != GlobalSndVar.canzoneEsternoCasa:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCasa
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaEsterno
@@ -153,9 +153,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = "w"
                 y = GlobalHWVar.gsy // 18 * 15
     if stanza == GlobalGameVar.dictStanze["casaHansLucy4"]:
-        if canzone != GlobalSndVar.canzoneEsternoCasa:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCasa
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteCasaEsterno:
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteCasaEsterno
@@ -266,6 +266,14 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
         if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
+        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForestaFuoco:
+                sottofondoAmbientaleCambiato = True
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForestaFuoco
+        else:
+            if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForesta:
+                sottofondoAmbientaleCambiato = True
+            listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForesta
         # rumore porte
         rumoreAperturaPorte = GlobalSndVar.suonoaperturaporteForesta
         rumoreChiusuraPorte = GlobalSndVar.suonochiusuraporteForesta
@@ -276,11 +284,6 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 x = GlobalHWVar.gsx // 32 * 16
                 y = GlobalHWVar.gsy // 18 * 2
             if stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"]:
-                if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteForestaFuoco:
-                    sottofondoAmbientaleCambiato = True
-                listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteForestaFuoco
-                canzoneCambiata = True
-                canzone = False
                 npers = "d"
                 x = GlobalHWVar.gsx // 32 * 16
                 y = GlobalHWVar.gsy // 18 * 9
@@ -378,9 +381,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = "w"
                 y = GlobalHWVar.gsy // 18 * 15
     if stanza == GlobalGameVar.dictStanze["stradaPerCittà1"]:
-        if canzone != GlobalSndVar.canzoneEsternoCitta:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCitta
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta1_notte:
                 sottofondoAmbientaleCambiato = True
@@ -421,9 +424,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 elif y == GlobalHWVar.gsy // 18 * 13:
                     y = GlobalHWVar.gsy // 18 * 15
     if stanza == GlobalGameVar.dictStanze["stradaPerCittà2"]:
-        if canzone != GlobalSndVar.canzoneEsternoCitta:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCitta
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta2_notte:
                 sottofondoAmbientaleCambiato = True
@@ -464,9 +467,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = "d"
                 x = GlobalHWVar.gsx // 32 * 2
     if stanza == GlobalGameVar.dictStanze["stradaPerCittà3"]:
-        if canzone != GlobalSndVar.canzoneEsternoCitta:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCitta
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
             if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerCitta3_notte:
                 sottofondoAmbientaleCambiato = True
@@ -925,9 +928,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
             elif stanzaVecchia == GlobalGameVar.dictStanze["biblioteca3"]:
                 mantieniPosizioneImpo = True
     if stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]:
-        if canzone != GlobalSndVar.canzoneEsternoCitta:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCitta
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerSelva1:
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerSelva1
@@ -947,9 +950,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 npers = "w"
                 y = GlobalHWVar.gpy * 15
     if stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]:
-        if canzone != GlobalSndVar.canzoneEsternoCitta:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCitta
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteStradaPerSelva2:
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteStradaPerSelva2
@@ -1340,9 +1343,9 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
                 y = GlobalHWVar.gpy * 15
                 x -= GlobalHWVar.gpx * 12
     if stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
-        if canzone != GlobalSndVar.canzoneEsternoCitta:
+        if canzone != GlobalSndVar.canzoneEsterniPacifici:
             canzoneCambiata = True
-        canzone = GlobalSndVar.canzoneEsternoCitta
+        canzone = GlobalSndVar.canzoneEsterniPacifici
         if listaSottofondoAmbientale != GlobalSndVar.listaAudioAmbienteAvamposto:
             sottofondoAmbientaleCambiato = True
         listaSottofondoAmbientale = GlobalSndVar.listaAudioAmbienteAvamposto
@@ -1377,76 +1380,52 @@ def settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusura
     return x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, listaSottofondoAmbientale, bottoneDown, avanzamentoStoria, mantieniPosizioneImpo
 
 
-def scriviNomeZona(stanza, stanzaVecchia, avanzamentotoria):
-    stoppaMusica = False
+def scriviNomeZona(stanza, stanzaVecchia):
+    nomeDaScrivere = False
     if (stanzaVecchia == GlobalGameVar.dictStanze["sognoLucy4"] and stanza == GlobalGameVar.dictStanze["casaHansLucy1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta1"] and stanza == GlobalGameVar.dictStanze["casaHansLucy4"]) or (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta5"] and stanza == GlobalGameVar.dictStanze["casaHansLucy1"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio("Casa", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
-        if stanzaVecchia == GlobalGameVar.dictStanze["sognoLucy4"] and stanza == GlobalGameVar.dictStanze["casaHansLucy1"]:
-            stoppaMusica = True
+        nomeDaScrivere = "Casa"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["casaHansLucy4"] and stanza == GlobalGameVar.dictStanze["forestaCadetta1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerCittà1"] and stanza == GlobalGameVar.dictStanze["forestaCadetta9"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio("Foresta Cadetta", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
+        nomeDaScrivere = "Foresta Cadetta"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["forestaCadetta9"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["città1"] and stanza == GlobalGameVar.dictStanze["stradaPerCittà3"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Strada per Città", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
+        nomeDaScrivere = u"Strada per Città"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerCittà3"] and stanza == GlobalGameVar.dictStanze["città1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["casaDavid1"] and stanza == GlobalGameVar.dictStanze["città4"]) or (stanzaVecchia == GlobalGameVar.dictStanze["biblioteca1"] and stanza == GlobalGameVar.dictStanze["città7"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida1"] and stanza == GlobalGameVar.dictStanze["città9"]) or (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerPassoMontano1"] and stanza == GlobalGameVar.dictStanze["città10"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Città", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
+        nomeDaScrivere = u"Città"
     elif stanzaVecchia == GlobalGameVar.dictStanze["città4"] and stanza == GlobalGameVar.dictStanze["casaDavid1"]:
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Casa di David", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
-        if avanzamentotoria <= GlobalGameVar.dictAvanzamentoStoria["arrivoCasaUfficiale"]:
-            stoppaMusica = True
+        nomeDaScrivere = u"Casa di David"
     elif stanzaVecchia == GlobalGameVar.dictStanze["città7"] and stanza == GlobalGameVar.dictStanze["biblioteca1"]:
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Biblioteca", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
+        nomeDaScrivere = u"Biblioteca"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["città9"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["selvaArida1"] and stanza == GlobalGameVar.dictStanze["stradaPerSelvaArida2"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Strada per Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
+        nomeDaScrivere = u"Strada per Selva Arida"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["stradaPerSelvaArida2"] and stanza == GlobalGameVar.dictStanze["selvaArida1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["avampostoDiRod1"] and stanza == GlobalGameVar.dictStanze["selvaArida16"]):
-        GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Selva Arida", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
-        GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-        GlobalHWVar.aggiornaSchermo()
+        nomeDaScrivere = u"Selva Arida"
     elif (stanzaVecchia == GlobalGameVar.dictStanze["selvaArida16"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["labirinto1"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]) or (stanzaVecchia == GlobalGameVar.dictStanze["scorciatoiaLabirinto2"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod2"]):
+        nomeDaScrivere = u"Avamposto di Rod"
+
+    if nomeDaScrivere:
         GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
-        FunzioniGraficheGeneriche.messaggio(u"Avamposto di Rod", GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
+        FunzioniGraficheGeneriche.messaggio(nomeDaScrivere, GlobalHWVar.grigiochi, GlobalHWVar.gpx * 16, GlobalHWVar.gpy * 8, 150, centrale=True)
         GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigiochi, (int(GlobalHWVar.gpx * 4), int(GlobalHWVar.gpy * 10.6)), (int(GlobalHWVar.gpx * 28) - 1, int(GlobalHWVar.gpy * 10.6)), 2)
         FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
         GlobalHWVar.aggiornaSchermo()
 
-    if GlobalGameVar.dictStanze["stradaPerCittà1"] <= stanza <= GlobalGameVar.dictStanze["stradaPerCittà3"] and avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+
+def decidiSeStoppareMusica(stanza, avanzamentoStoria):
+    stoppaMusica = False
+    if stanza == GlobalGameVar.dictStanze["casaHansLucy1"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
         stoppaMusica = True
-    elif GlobalGameVar.dictStanze["città1"] <= stanza <= GlobalGameVar.dictStanze["città4"] and avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
+    elif stanza == GlobalGameVar.dictStanze["forestaCadetta5"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["inizioUltimoDialogoHans"]:
         stoppaMusica = True
-    elif GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"]:
+    elif GlobalGameVar.dictStanze["stradaPerCittà1"] <= stanza <= GlobalGameVar.dictStanze["stradaPerCittà3"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
         stoppaMusica = True
-    elif GlobalGameVar.dictAvanzamentoStoria["vistoDalServo"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"]:
+    elif GlobalGameVar.dictStanze["città1"] <= stanza <= GlobalGameVar.dictStanze["città4"] and avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["inizioSecondoGiorno"]:
         stoppaMusica = True
-    elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentotoria < GlobalGameVar.dictAvanzamentoStoria["riavviatoMusicaPostDialogoBibliotecario"]:
+    elif stanza == GlobalGameVar.dictStanze["casaDavid1"] and avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["arrivoDavidCasaUfficiale"]:
+        stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["padreUfficialeUscitoDallaCena"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["alzatoDalLettoSecondoGiorno"]:
+        stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["vistoDalServo"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["uscitoCasaDavidDopoSuicidio"]:
+        stoppaMusica = True
+    elif GlobalGameVar.dictAvanzamentoStoria["incontratoIDueAggressori"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["riavviatoMusicaPostDialogoBibliotecario"]:
         stoppaMusica = True
 
     return stoppaMusica

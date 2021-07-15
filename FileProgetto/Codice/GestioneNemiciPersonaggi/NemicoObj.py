@@ -5,7 +5,6 @@ import GlobalHWVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
 import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GenericFunc as GenericFunc
-import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 
 
 class NemicoObj(object):
@@ -492,7 +491,7 @@ class NemicoObj(object):
         if nonCaricareImg:
             self.imgCampoAttaccabile = False
         else:
-            self.imgCampoAttaccabile = CaricaFileProgetto.loadImage("Risorse/Immagini/Status/Campiattaccabili/Campoattaccabilemostro.png", (self.raggioVisivo * 2) + GlobalHWVar.gpx, (self.raggioVisivo * 2) + GlobalHWVar.gpy, True)
+            self.imgCampoAttaccabile = GlobalImgVar.dictImgCampiVisiviNemici[str(self.raggioVisivo // GlobalHWVar.gpx)]
 
     def copiaImgs(self, nemicoDaCopiare):
         self.imgW = nemicoDaCopiare.imgW
