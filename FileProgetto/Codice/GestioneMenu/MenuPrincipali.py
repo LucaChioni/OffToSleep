@@ -245,22 +245,18 @@ def menu(caricaSalvataggio, gameover):
     # carico subito tutti i salvataggi
     SottoMenuSalva.ricaricaSalvataggi(lunghezzadati, lunghezzadatiPorte, lunghezzadatiCofanetti)
 
-    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu)
-    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.schemataDiCaricamento, (0, 0))
-    GlobalHWVar.disegnaLineaSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 1.5)), (int(GlobalHWVar.gpx * 1.5) - 1, int(GlobalHWVar.gpy * 14)), 2)
-    sreen_temp = GlobalHWVar.schermo.copy().convert()
-    imgOscuraPuntatore = sreen_temp.subsurface(pygame.Rect(GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 2, GlobalHWVar.gsx // 32 * 1.5, GlobalHWVar.gsy // 18 * 11.5)).convert()
-
     if not GlobalHWVar.canaleSoundCanzone.get_busy() or GlobalGameVar.canzoneAttuale != "00-Menu":
         GlobalGameVar.canzoneAttuale = "00-Menu"
         canzone = CaricaFileProgetto.loadSound("Risorse/Audio/Canzoni/" + GlobalGameVar.canzoneAttuale + ".wav")
         GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-    if not GlobalHWVar.primoAvvio:
-        FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
-    else:
+    illuminaScritteDopoCaricamento = False
+    illuminaTuttoLoSchermo = False
+    if GlobalHWVar.primoAvvio:
         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
         GlobalHWVar.primoAvvio = False
-    illuminaSchermoDopoVideo = True
+        illuminaScritteDopoCaricamento = True
+    else:
+        illuminaTuttoLoSchermo = True
 
     xp = GlobalHWVar.gsx // 32 * 1.5
     yp = GlobalHWVar.gsy // 18 * 2.5
@@ -268,6 +264,7 @@ def menu(caricaSalvataggio, gameover):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     mostraTutorial = False
+    imgOscuraPuntatore = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -729,11 +726,15 @@ def menu(caricaSalvataggio, gameover):
                     FunzioniGraficheGeneriche.messaggio("Start / Cerchio: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 22.3, GlobalHWVar.gsy // 18 * 1, 50)
                 else:
                     FunzioniGraficheGeneriche.messaggio("Esc / Q: torna indietro", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 23.3, GlobalHWVar.gsy // 18 * 1, 50)
-            if not illuminaSchermoDopoVideo:
-                GlobalHWVar.aggiornaSchermo()
+            if not illuminaScritteDopoCaricamento:
+                if illuminaTuttoLoSchermo:
+                    illuminaTuttoLoSchermo = False
+                    FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
+                else:
+                    GlobalHWVar.aggiornaSchermo()
 
-        if illuminaSchermoDopoVideo:
-            illuminaSchermoDopoVideo = False
+        if illuminaScritteDopoCaricamento:
+            illuminaScritteDopoCaricamento = False
 
             vetImg = []
             screen = GlobalHWVar.schermo.copy().convert()
