@@ -9,6 +9,66 @@ import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.SettaggiLivelli.SetAvanzamentiStanzePorteCofanetti as SetAvanzamentiStanzePorteCofanetti
 
 
+# vettore che conterrà tutti i dati dei salvataggi
+vetDatiSalvataggi = []
+# vettore che conterrà i dati di salvataggio del file gameover
+vetDatiSalvataggioGameOver = []
+numSalvataggioCaricato = 0
+
+# dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++]
+costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
+dannoTecniche = [90, 30, 0, 70, 50, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
+vistaRobo = 6
+# costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
+costoOggetti = [5, 20, 100, 30, 80, 200, 50, 80, 120, 200, 300, 50, 500, 5000]
+# danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
+dannoOggetti = [100, 50, 0, 50, 1000]
+
+# dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
+dictAvanzamentoStoria = SetAvanzamentiStanzePorteCofanetti.definisciAvanzamentiStoria()
+# dichiaro il dictionary che contiene le stanze associate a un nome che le descrive
+dictStanze, vetStanzePacifiche = SetAvanzamentiStanzePorteCofanetti.definisciStanze()
+# dichiaro i vettori di porte e cofanetti
+initVetPorteGlobale = SetAvanzamentiStanzePorteCofanetti.definisciPorte(dictStanze)
+initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(dictStanze)
+
+# vita esche
+vitaTotEsche = 300
+
+# costi servizi di Rod
+monetePerEntrareNellaConfraternita = 200
+monetePerLasciareLaConfraternita = 1000
+monetePerLaMappaDelLabirinto = 500
+
+global imgMappaAttuale
+global canzoneAttuale
+global audioSottofondoAttuale
+global idNemico
+global listaIdNemiciUsati
+global datiEnigmaBibliotecario
+def inizializzaVariabiliGlobali():
+    global imgMappaAttuale
+    global canzoneAttuale
+    global audioSottofondoAttuale
+    global idNemico
+    global listaIdNemiciUsati
+    global datiEnigmaBibliotecario
+    imgMappaAttuale = False
+    canzoneAttuale = False
+    audioSottofondoAttuale = False
+    # id incrementale da assegare ai nemici
+    idNemico = 0
+    listaIdNemiciUsati = []
+    # dictionary che contiene i dati dell'enigma del bibliotecario
+    datiEnigmaBibliotecario = {}
+    datiEnigmaBibliotecario["reset"] = False
+    datiEnigmaBibliotecario["velocità"] = 2
+    datiEnigmaBibliotecario["soluzione"] = 1
+    datiEnigmaBibliotecario["rispostaFalsa1"] = 1.25
+    datiEnigmaBibliotecario["rispostaFalsa2"] = 0.25
+    datiEnigmaBibliotecario["rispostaFalsa3"] = 1.5
+inizializzaVariabiliGlobali()
+
 def mostraLogo():
     effettoAvvio = CaricaFileProgetto.loadSound("Risorse/Audio/RumoriAmbiente/EffettoAvvio.wav")
     logo = CaricaFileProgetto.loadImage("Risorse/Immagini/Icone/LogoPresentazione.png", GlobalHWVar.gpx * 12, GlobalHWVar.gpy * 12, True)
@@ -126,63 +186,3 @@ numImgCaricata = 0
 GlobalImgVar.loadImgs(numImgCaricata, cambioRisoluzione=False)
 numSndCaricato = 0
 GlobalSndVar.loadSounds(numSndCaricato)
-
-# vettore che conterrà tutti i dati dei salvataggi
-vetDatiSalvataggi = []
-# vettore che conterrà i dati di salvataggio del file gameover
-vetDatiSalvataggioGameOver = []
-numSalvataggioCaricato = 0
-
-# dati tecniche di Colco [scossa, cura, antidoto, freccia, tempesta, raffred, ricarica, cura+, scossa+, freccia+, velocizza, attP, difP, efficienza, tempesta+, cura++, ricarica+, scossa++, freccia++, tempesta++]
-costoTecniche = [5, 10, 10, 5, 10, 10, 1, 20, 10, 10, 15, 20, 20, 30, 20, 30, 1, 20, 20, 40]
-dannoTecniche = [90, 30, 0, 70, 50, 0, 150, 120, 160, 130, 15, 10, 10, 15, 100, 250, 300, 320, 260, 200]
-vistaRobo = 6
-# costo oggetti => costoOggetti[frecce, pozione, caricabatterie, medicina, superpozione, caricabatterie migliorato, bomba, bomba veleno, esca, bomba appiccicosa, bomba potenziata, faretra1, faretra2, faretra3]
-costoOggetti = [5, 20, 100, 30, 80, 200, 50, 80, 120, 200, 300, 50, 500, 5000]
-# danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
-dannoOggetti = [100, 50, 0, 50, 1000]
-
-# dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
-dictAvanzamentoStoria = SetAvanzamentiStanzePorteCofanetti.definisciAvanzamentiStoria()
-# dichiaro il dictionary che contiene le stanze associate a un nome che le descrive
-dictStanze, vetStanzePacifiche = SetAvanzamentiStanzePorteCofanetti.definisciStanze()
-# dichiaro i vettori di porte e cofanetti
-initVetPorteGlobale = SetAvanzamentiStanzePorteCofanetti.definisciPorte(dictStanze)
-initVetCofanettiGlobale = SetAvanzamentiStanzePorteCofanetti.definisciCofanetti(dictStanze)
-
-# vita esche
-vitaTotEsche = 300
-
-# costi servizi di Rod
-monetePerEntrareNellaConfraternita = 200
-monetePerLasciareLaConfraternita = 1000
-monetePerLaMappaDelLabirinto = 500
-
-global imgMappaAttuale
-global canzoneAttuale
-global audioSottofondoAttuale
-global idNemico
-global listaIdNemiciUsati
-global datiEnigmaBibliotecario
-def inizializzaVariabiliGlobali():
-    global imgMappaAttuale
-    global canzoneAttuale
-    global audioSottofondoAttuale
-    global idNemico
-    global listaIdNemiciUsati
-    global datiEnigmaBibliotecario
-    imgMappaAttuale = False
-    canzoneAttuale = False
-    audioSottofondoAttuale = False
-    # id incrementale da assegare ai nemici
-    idNemico = 0
-    listaIdNemiciUsati = []
-    # dictionary che contiene i dati dell'enigma del bibliotecario
-    datiEnigmaBibliotecario = {}
-    datiEnigmaBibliotecario["reset"] = False
-    datiEnigmaBibliotecario["velocità"] = 2
-    datiEnigmaBibliotecario["soluzione"] = 1
-    datiEnigmaBibliotecario["rispostaFalsa1"] = 1.25
-    datiEnigmaBibliotecario["rispostaFalsa2"] = 0.25
-    datiEnigmaBibliotecario["rispostaFalsa3"] = 1.5
-inizializzaVariabiliGlobali()

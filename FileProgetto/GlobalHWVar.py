@@ -109,7 +109,7 @@ fpsAnimazioni = 30
 fpsVideo = 12
 fpsFadeToBlack = 30
 fpsScritturaDialogo = 30
-fpsDisegno = 120
+fpsDisegno = 60
 
 # colori
 nero = (0, 0, 0)

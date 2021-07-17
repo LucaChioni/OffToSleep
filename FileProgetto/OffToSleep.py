@@ -913,6 +913,7 @@ def gameloop():
                             j = j + 4
                     i = i + 4
                 # interazioni con altri personaggi
+                interazioneEseguita = False
                 for personaggio in listaPersonaggi:
                     if (personaggio.x == x + GlobalHWVar.gpx and personaggio.y == y and npers == 1) or (personaggio.x == x - GlobalHWVar.gpx and personaggio.y == y and npers == 2) or (personaggio.x == x and personaggio.y == y + GlobalHWVar.gpy and npers == 4) or (personaggio.x == x and personaggio.y == y - GlobalHWVar.gpy and npers == 3):
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
@@ -930,8 +931,9 @@ def gameloop():
                         else:
                             dati[0], oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(dati[0], personaggio, listaAvanzamentoDialoghi)
                         sposta = False
+                        interazioneEseguita = True
                         caricaTutto = True
-                if not sposta:
+                if not sposta and not interazioneEseguita:
                     GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 bottoneDown = False
             # apro il menu
