@@ -231,13 +231,7 @@ def menuMercante(dati):
     bottoneDown = False
     tastotempfps = 8
 
-    maxFrecce = 1
-    if dati[133] == 1:
-        maxFrecce = 5
-    elif dati[133] == 2:
-        maxFrecce = 20
-    elif dati[133] == 3:
-        maxFrecce = 60
+    maxFrecce = GlobalGameVar.frecceMaxPerFaretra[dati[133]]
 
     imgOggetti = []
     i = 1
@@ -779,13 +773,7 @@ def menuMercante(dati):
             if not primoMovimento and tastoMovimentoPremuto:
                 tastotempfps = 2
 
-            maxFrecce = 1
-            if dati[133] == 1:
-                maxFrecce = 5
-            elif dati[133] == 2:
-                maxFrecce = 20
-            elif dati[133] == 3:
-                maxFrecce = 60
+            maxFrecce = GlobalGameVar.frecceMaxPerFaretra[dati[133]]
 
             if primoFrame:
                 aggiornaInterfacciaPerCambioInput = True

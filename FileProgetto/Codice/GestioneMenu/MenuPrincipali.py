@@ -798,19 +798,15 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     efficienzapiusta = GlobalImgVar.efficienzapiuMenu
     if dati[133] == 0:
         faretraFrecceStart = GlobalImgVar.faretraFrecceStart0
-        maxFrecce = 1
     elif dati[133] == 1:
         faretraFrecceStart = GlobalImgVar.faretraFrecceStart1
-        maxFrecce = 5
     elif dati[133] == 2:
         faretraFrecceStart = GlobalImgVar.faretraFrecceStart2
-        maxFrecce = 20
     elif dati[133] == 3:
         faretraFrecceStart = GlobalImgVar.faretraFrecceStart3
-        maxFrecce = 60
     else:
         faretraFrecceStart = 0
-        maxFrecce = 0
+    maxFrecce = GlobalGameVar.frecceMaxPerFaretra[dati[133]]
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 5
     carim = True

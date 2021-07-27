@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import GlobalHWVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
 
 
 def oggetto(xInizio, yInizio, dimx, dimy, px, py, nx, ny):
@@ -22,16 +23,7 @@ def ottieniMonete(dati, moneteOttenute):
 
 
 def ottieniFrecce(dati, frecceOttenute, tesoro):
-    if dati[133] == 0:
-        maxFrecce = 1
-    elif dati[133] == 1:
-        maxFrecce = 5
-    elif dati[133] == 2:
-        maxFrecce = 10
-    elif dati[133] == 3:
-        maxFrecce = 60
-    else:
-        maxFrecce = 0
+    maxFrecce = GlobalGameVar.frecceMaxPerFaretra[dati[133]]
     if dati[132] == maxFrecce:
         tesoro = -tesoro
     frecceTot = dati[132] + frecceOttenute

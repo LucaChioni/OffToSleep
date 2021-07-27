@@ -21,7 +21,7 @@ def setPersonaggi(stanza, listaPersonaggiTotali, listaPersonaggi, avanzamentoSto
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 6, GlobalHWVar.gsy // 18 * 5, "d", "Mercante-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)
             listaPersonaggiTotali.append(personaggio)
-        if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["creatoPersonaggioOggettoPerEnigmaMappaLabirinto"]:
+        if GlobalGameVar.dictAvanzamentoStoria["creatoPersonaggioOggettoPerEnigmaMappaLabirinto"] <= avanzamentoStoria < GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaMappaLabirinto"]:
             percorsoPersonaggio = []
             personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gsx // 32 * 7, GlobalHWVar.gsy // 18 * 9, "s", "OggettoEnigmaLabirinto-0", stanza, avanzamentoStoria, percorsoPersonaggio)
             listaPersonaggi.append(personaggio)

@@ -105,5 +105,25 @@ def gestioneEventi(stanza, x, y, rx, ry, nrob, avanzamentoStoria, dati, listaAva
         avanzamentoStoria += 1
         carim = True
         caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["risoltoEnigmaMappaLabirinto"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+        for personaggio in listaPersonaggiTotali:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod1"] and personaggio.tipo == "OggettoEnigmaLabirinto":
+                listaPersonaggiTotali.remove(personaggio)
+                break
+        for personaggio in listaPersonaggi:
+            if personaggio.stanzaDiAppartenenza == GlobalGameVar.dictStanze["avampostoDiRod1"] and personaggio.tipo == "OggettoEnigmaLabirinto":
+                listaPersonaggi.remove(personaggio)
+                break
+        percorsoPersonaggio = []
+        personaggio = PersonaggioObj.PersonaggioObj(GlobalHWVar.gpx * 7, GlobalHWVar.gpy * 9, "s", "OggettoTavoloMappaLabirinto-0", stanza, avanzamentoStoria, percorsoPersonaggio)
+        listaPersonaggiTotali.append(personaggio)
+        listaPersonaggi.append(personaggio)
+        avanzamentoStoria += 1
+        carim = True
+        caricaTutto = True
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["eliminatoPersonaggioOggettoPerEnigmaMappaLabirinto"] and stanza == GlobalGameVar.dictStanze["avampostoDiRod1"]:
+        personaggio = PersonaggioObj.PersonaggioObj(x, y, False, "Nessuno-0", stanza, avanzamentoStoria, False)
+        avanzamentoStoria, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi = MenuDialoghi.dialoga(avanzamentoStoria, personaggio, listaAvanzamentoDialoghi)
+        caricaTutto = True
 
     return x, y, rx, ry, nrob, avanzamentoStoria, cambiosta, stanza, npers, carim, caricaTutto, bottoneDown, movimentoPerMouse, listaPersonaggi, listaNemici, listaPersonaggiTotali, listaNemiciTotali, dati, oggettiRimastiAHans, tutteporte, oggettoRicevuto, visualizzaMenuMercante, listaAvanzamentoDialoghi, aggiornaImgEquip, stanzeGiaVisitate, avanzaIlTurnoSenzaMuoverti, evitaTurnoDiColco, nonMostrarePersonaggio, monetePossedute, percorsoDaEseguire

@@ -914,6 +914,15 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 dialogo.append("tu")
                 dialogo.append(u"Ehi, ma quello è... Rod?")
                 partiDialogo.append(dialogo)
+            elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["eliminatoPersonaggioOggettoPerEnigmaMappaLabirinto"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Fatto! Adesso dovrei potermi orientare bene là dentro.")
+                partiDialogo.append(dialogo)
             elif x == GlobalHWVar.gpx * 3 and y == GlobalHWVar.gpy * 6:
                 oggettoDato = False
                 avanzaStoria = False

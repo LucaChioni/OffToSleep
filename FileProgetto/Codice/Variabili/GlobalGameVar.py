@@ -23,6 +23,8 @@ vistaRobo = 6
 costoOggetti = [5, 20, 100, 30, 80, 200, 50, 80, 120, 200, 300, 50, 500, 5000]
 # danno oggetti => dannoOggetti[bomba, bombaVeleno, esca, bombaAppiccicosa, bombaPotenziata]
 dannoOggetti = [100, 50, 0, 50, 1000]
+# frecce trasportabili per faretra
+frecceMaxPerFaretra = [1, 20, 50, 90]
 
 # dichiaro il dictionary che contiene gli avanzamenti della storia associati agli avvenimenti
 dictAvanzamentoStoria = SetAvanzamentiStanzePorteCofanetti.definisciAvanzamentiStoria()
