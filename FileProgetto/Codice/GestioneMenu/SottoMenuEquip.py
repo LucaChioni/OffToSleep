@@ -1433,7 +1433,7 @@ def oggetti(dati, colcoInCasellaVista):
                             usauno = True
                         else:
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
-                            if dati[35] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] or not colcoInCasellaVista):
+                            if dati[32] > 0 and (not dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] or not colcoInCasellaVista):
                                 impossibileUsareCaricaBatt = True
                     if oggetton == 3:
                         if dati[33] > 0:
@@ -1651,12 +1651,12 @@ def oggetti(dati, colcoInCasellaVista):
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 12.5))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 15.5))
-                        FunzioniGraficheGeneriche.messaggio(u"Impo irraggiungibile!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 14.15, 55, centrale=True)
+                        FunzioniGraficheGeneriche.messaggio(u"Impo è irraggiungibile!", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 14.2, 50, centrale=True)
                     elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscurino, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 12.5, GlobalHWVar.gsx // 32 * 7.5, GlobalHWVar.gsy // 18 * 4))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoAltoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 12.5))
                         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoTriangolinoBassoDestra, (GlobalHWVar.gsx // 32 * 17.5, GlobalHWVar.gsy // 18 * 15.5))
-                        FunzioniGraficheGeneriche.messaggio(u"Inutilizzabile...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 14.15, 55, centrale=True)
+                        FunzioniGraficheGeneriche.messaggio(u"Inutilizzabile...", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 14.8, GlobalHWVar.gsy // 18 * 14.2, 50, centrale=True)
                     if oggettonVecchio != oggetton:
                         impossibileUsareCaricaBatt = False
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 3, GlobalHWVar.gsx // 32 * 8, GlobalHWVar.gsy // 18 * 14))

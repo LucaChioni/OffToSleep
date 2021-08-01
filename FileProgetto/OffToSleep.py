@@ -23,6 +23,7 @@ import Codice.FunzioniGeneriche.UtilityOstacoliContenutoCofanetti as UtilityOsta
 import Codice.SettaggiLivelli.SetNemiciPersonaggiEventi as SetNemiciPersonaggiEventi
 import Codice.SettaggiLivelli.SetOstacoliContenutoCofanetti as SetOstacoliContenutoCofanetti
 import Codice.SettaggiLivelli.SetPosizioneAudioImpedimenti as SetPosizioneAudioImpedimenti
+import Codice.FunzioniGeneriche.FunzioniPerTest as FunzioniPerTest
 
 
 def gameloop():
@@ -1442,7 +1443,8 @@ def gameloop():
 
         # menu start
         if startf and attacco != 1 and dati[5] > 0:
-            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selsta)
+            if not (GlobalGameVar.dictStanze["labirinto1"] <= dati[1] <= GlobalGameVar.dictStanze["labirinto23"]):
+                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.selsta)
             refreshSchermo = True
             dati[2] = x
             dati[3] = y
@@ -2206,6 +2208,9 @@ def gameloop():
                         break
                 pvtot = GenericFunc.getVitaTotRallo(dati[4], dati[129])
                 EnvPrint.disegnaAmbiente(x, y, npers, dati[5], pvtot, dati[121], dati[123], dati[124], dati[10], entot, dati[122], dati[125], dati[126], vx, vy, rx, ry, vrx, vry, pers, imgSfondoStanza, portaVert, portaOriz, arma, armatura, scudo, arco, faretra, guanti, collana, robot, armrob, armrobs, vettoreEsche, porte, cofanetti, caseviste, apriocchio, chiamarob, listaNemici, caricaTutto, vettoreDenaro, dati[132], nemicoInquadrato, statoEscheInizioTurno, raffredda, autoRic1, autoRic2, raffreddamento, ricarica1, ricarica2, listaPersonaggi, False, stanzaCambiata, uscitoDaMenu, casellePercorribili, vettoreImgCaselle, entrateStanza, caselleNonVisibili, dati[0], nonMostrarePersonaggio, saltaTurno)
+
+            if GlobalHWVar.testOstacoliAttivi:
+                FunzioniPerTest.testOstacoli(x, y, rx, ry, dati[1], porte, cofanetti, dati[0], entrateStanza)
 
             # gestisce eventi speciali come i dialoghi del tutorial o dialoghi con nessuno
             if not carim:

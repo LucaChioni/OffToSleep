@@ -148,5 +148,14 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         dialogo.append("personaggio")
         dialogo.append(u"Durante la battaglia puoi usare gli ImpoFrutti solo se Impo è in una casella adiacente a quella di Lucy. Per usarli fuori dal combattimento invece è sufficiente che Impo sia in una casella raggiungibile.")
         partiDialogo.append(dialogo)
+    elif avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["monologoPostRisoluzioneEnigma"]:
+        oggettoDato = False
+        avanzaStoria = True
+        menuMercante = False
+        scelta = False
+        dialogo = []
+        dialogo.append("personaggio")
+        dialogo.append(u"Finché sei nel labirinto, premendo il tasto <*>#bold#Esc<*> sulla tastiera, <*>#bold#Start<*> sul controller o il tasto <*>#bold#Centrale<*> del mouse, andrai direttamente alla mappa. Da lì potrai spostarti normalmente nel menu.")
+        partiDialogo.append(dialogo)
 
     return partiDialogo, nome, oggettoDato, avanzaStoria, menuMercante, scelta, avanzaColDialogo

@@ -9,18 +9,24 @@ import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 
 
-def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom):
+def menuMappa(avanzamentoStoria, imgMappaNormale, imgMappaZoom, apriLabirinto=False):
     puntatore = GlobalImgVar.puntatore
     puntatorevecchio = GlobalImgVar.puntatorevecchio
     imgOmbreggiaturaContorniMappaMenu = GlobalImgVar.imgOmbreggiaturaContorniMappaMenu
     backgroundTornaIndietro = GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 21, 0, GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 2))
-    xp = GlobalHWVar.gsx // 32 * 1
-    yp = GlobalHWVar.gsy // 18 * 4.5
     risposta = False
-    voceMarcata = 1
-    voceMarcataSottoMenu = False
     aggiornaSchermo = False
     esci = False
+    if apriLabirinto:
+        xp = GlobalHWVar.gsx // 32 * 1
+        yp = GlobalHWVar.gsy // 18 * 12.3
+        voceMarcata = 10
+        voceMarcataSottoMenu = True
+    else:
+        xp = GlobalHWVar.gsx // 32 * 1
+        yp = GlobalHWVar.gsy // 18 * 4.5
+        voceMarcata = 1
+        voceMarcataSottoMenu = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True

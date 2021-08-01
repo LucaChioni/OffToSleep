@@ -364,6 +364,8 @@ def definisciAvanzamentiStoria():
     dictAvanzamentoStoria["monologoPostRisoluzioneEnigma"] = i
     i += 1
     dictAvanzamentoStoria["tutorialStartNelLabirinto"] = i
+    i += 1
+    dictAvanzamentoStoria["monologoUscitaLabirinto"] = i
 
     i += 100
     i += 1
@@ -590,6 +592,14 @@ def definisciStanze():
     dictStanze["labirinto22"] = i
     i += 1
     dictStanze["labirinto23"] = i
+    i += 1
+    dictStanze["esternoCastello1"] = i
+    i += 1
+    dictStanze["esternoCastello2"] = i
+    i += 1
+    dictStanze["esternoCastello3"] = i
+    i += 1
+    dictStanze["esternoCastello4"] = i
 
     i += 100
     i += 1

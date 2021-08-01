@@ -969,6 +969,17 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                     dialogo.append("tu")
                     dialogo.append(u"Se mi segnassi il percorso da seguire, sarebbe molto più facile attraversare il labirinto...")
                     partiDialogo.append(dialogo)
+    elif GlobalGameVar.dictStanze["labirinto1"] <= stanzaDiAppartenenza <= GlobalGameVar.dictStanze["labirinto23"]:
+        if stanzaDiAppartenenza == GlobalGameVar.dictStanze["labirinto20"]:
+            if avanzamentoStoria == GlobalGameVar.dictAvanzamentoStoria["tutorialStartNelLabirinto"]:
+                oggettoDato = False
+                avanzaStoria = True
+                menuMercante = False
+                scelta = False
+                dialogo = []
+                dialogo.append("tu")
+                dialogo.append(u"Sono fuori! Alla fine non è stato così complicato.")
+                partiDialogo.append(dialogo)
     else:
         oggettoDato = False
         avanzaStoria = False

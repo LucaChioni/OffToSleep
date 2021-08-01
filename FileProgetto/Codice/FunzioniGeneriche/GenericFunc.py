@@ -1366,7 +1366,10 @@ def scopriCaselleViste(x, y, rx, ry, numstanza, porte, cofanetti, avanzamentoSto
         while m <= 15:
             caseviste.append(GlobalHWVar.gpx + (GlobalHWVar.gpx * n))
             caseviste.append(GlobalHWVar.gpy + (GlobalHWVar.gpy * m))
-            caseviste.append(False)
+            if GlobalHWVar.gpx + (GlobalHWVar.gpx * n) == x and GlobalHWVar.gpy + (GlobalHWVar.gpy * m) == y:
+                caseviste.append(True)
+            else:
+                caseviste.append(False)
             m = m + 1
         n = n + 1
 
@@ -1960,7 +1963,7 @@ def creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, stanza, porte, cofanetti, a
         i += 4
 
     # casevisteEntrateIncluse include anche le entrate della stanza
-    casevisteEntrateIncluse = caseviste[:]
+    casevisteEntrateIncluse = casevisteDaRallo[:]
     vetEntrate = SetOstacoliContenutoCofanetti.getEntrateStanze(stanza, avanzamentoStoria)
     i = 0
     while i < len(vetEntrate):

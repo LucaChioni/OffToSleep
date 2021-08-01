@@ -10,6 +10,7 @@ import Codice.FunzioniGeneriche.GestioneCanaliAudioAmbiente as GestioneCanaliAud
 
 sistemaOperativo = "Windows"
 eseguibile = False
+testOstacoliAttivi = True
 
 gamePath = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 # modifico il path se sto creando l'eseguibile (su windows nascondo anche la console)
