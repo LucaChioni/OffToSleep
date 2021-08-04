@@ -93,7 +93,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")
-        dialogo.append(u"Inquadrando un nemico inoltre verranno oscurate in rosso le caselle che il nemico non riesce a vedere. Quando un nemico ti vede l'occhio in alto a destra nello schermo si aprirà. Viceversa, quando sei fuori dal campo visivo di tutti i nemici, l'occhio sarà chiuso.")
+        dialogo.append(u"Inquadrando un nemico inoltre verranno oscurate in rosso le caselle che il nemico non riesce a vedere. Quando un nemico ti vede, l'occhio in alto a destra nello schermo si aprirà. Viceversa, quando sei fuori dal campo visivo di tutti i nemici, l'occhio sarà chiuso.")
         partiDialogo.append(dialogo)
         dialogo = []
         dialogo.append("personaggio")

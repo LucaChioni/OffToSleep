@@ -104,6 +104,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
     coloreOrig = colore
     xOrig = x
 
+    intervalloSuonoDialogo = 3
     vetMsg = msg.split("<*>")
     for text in vetMsg:
         if fineDialogo:
@@ -151,7 +152,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                             fineDialogo = True
                             bottoneDown = False
                         elif bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
-                            GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selezione)
+                            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreSkipDialoghi)
                             scriviTutto = True
                             bottoneDown = False
                         if bottoneDown:
@@ -164,6 +165,9 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                         x += dimX
 
                         if not scriviTutto:
+                            if intervalloSuonoDialogo % 3 == 0:
+                                GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreDialoghi)
+                            intervalloSuonoDialogo += 1
                             GlobalHWVar.aggiornaSchermo()
                             inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                             GlobalHWVar.clockScritturaDialogo.tick(GlobalHWVar.fpsScritturaDialogo)
@@ -613,11 +617,3 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp):
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
     if difp > 0:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
-
-
-'''# linea(dove,colore,inizio,fine,spessore)
-GlobalVar.disegnaLineaSuSchermo(GlobalVarG2.schermo, verde, (0, 0), (GlobalVarG2.gsx, GlobalVarG2.gsy), 10)
-# cerchio(dove,colore,centro,raggio,spessore)
-pygame.draw.circle(GlobalVarG2.schermo, blu, (300, 100), 5)
-# rettangolo(dove,colore,(x,y,larghezza,altezza),spessore)
-GlobalVar.disegnaRettangoloSuSchermo(GlobalVarG2.schermo, rosso, (200, 100, 30, 40), 5)'''
