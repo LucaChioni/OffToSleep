@@ -206,21 +206,6 @@ global imgDialogoColco
 global imgFraMaggioreMenuOggetti
 global imgLucy1MenuOggetti
 global imgLucy2MenuOggetti
-global indvita
-global fineindvita
-global vitanemico00
-global vitanemico0
-global vitanemico1
-global vitanemico2
-global vitanemico3
-global vitanemico4
-global vitanemico5
-global vitanemico6
-global vitanemico7
-global vitanemico8
-global vitanemico9
-global vitapersonaggio
-global vitarobo
 global sfondoOggettoMenu
 global sconosciutoEquipMenu
 global sconosciutoOggettoMenu1
@@ -251,7 +236,7 @@ global vetImgCollaneInGame
 global vetImgFaretreInGame
 global vetImgArmRobInGame
 
-numImgTotali = 1375
+numImgTotali = 1360
 def caricaImmagineMostrandoAvanzamento(path, xScale, yScale, aumentaRisoluzione, canale_alpha=True):
     global numImgCaricataTemp
     immagine = CaricaFileProgetto.loadImage(path, xScale, yScale, aumentaRisoluzione, canale_alpha)
@@ -475,21 +460,6 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     global imgFraMaggioreMenuOggetti
     global imgLucy1MenuOggetti
     global imgLucy2MenuOggetti
-    global indvita
-    global fineindvita
-    global vitanemico00
-    global vitanemico0
-    global vitanemico1
-    global vitanemico2
-    global vitanemico3
-    global vitanemico4
-    global vitanemico5
-    global vitanemico6
-    global vitanemico7
-    global vitanemico8
-    global vitanemico9
-    global vitapersonaggio
-    global vitarobo
     global sfondoOggettoMenu
     global sconosciutoEquipMenu
     global sconosciutoOggettoMenu1
@@ -1021,23 +991,6 @@ def loadImgs(numImgCaricata, cambioRisoluzione=False):
     imgFraMaggioreMenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/FratelloMaggioreMenu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
     imgLucy1MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Lucy1Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
     imgLucy2MenuOggetti = funzionePerCaricareImmagini('Risorse/Immagini/DecorazioniMenu/Lucy2Menu.png', GlobalHWVar.gpx * 3, GlobalHWVar.gpy * 3, True)
-
-    # indicatori vita
-    indvita = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Indvita.png', 0, 0, True)
-    fineindvita = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/FineIndVita.png', GlobalHWVar.gpx // 12, GlobalHWVar.gpy // 4, True)
-    vitanemico00 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico00.png', 0, 0, True)
-    vitanemico0 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico0.png', 0, 0, True)
-    vitanemico1 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico1.png', 0, 0, True)
-    vitanemico2 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico2.png', 0, 0, True)
-    vitanemico3 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico3.png', 0, 0, True)
-    vitanemico4 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico4.png', 0, 0, True)
-    vitanemico5 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico5.png', 0, 0, True)
-    vitanemico6 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico6.png', 0, 0, True)
-    vitanemico7 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico7.png', 0, 0, True)
-    vitanemico8 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico8.png', 0, 0, True)
-    vitanemico9 = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitanemico9.png', 0, 0, True)
-    vitapersonaggio = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitapersonaggio.png', 0, 0, True)
-    vitarobo = funzionePerCaricareImmagini('Risorse/Immagini/Status/Barrevita/Vitarobo.png', 0, 0, True)
 
     # img equipaggiamento, condizioni, tecniche, oggetti
     sfondoOggettoMenu = funzionePerCaricareImmagini("Risorse/Immagini/EquipLucy/SfondoOggetto.png", GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, False)

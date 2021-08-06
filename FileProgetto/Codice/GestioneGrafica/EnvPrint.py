@@ -303,24 +303,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
 
     # disegno la vita del mostro / Colco / esca selezionato
     if nemicoInquadrato == "Colco" or (not nemicoInquadrato and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]):
-        lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
-        lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
-        if lungen < 0:
-            lungen = 0
-        indvitarob = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungentot, GlobalHWVar.gpy // 4))
-        fineindvitarob = GlobalImgVar.fineindvita
-        vitarob = pygame.transform.smoothscale(GlobalImgVar.vitarobo, (lungen, GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoColco, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(indvitarob, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(fineindvitarob, (GlobalHWVar.gpx + lungentot, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitarob, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (0, 0))
-        if surrisc > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.surriscaldato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if velp > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if effp > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+        FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
     elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
         idEscaInquadrata = int(nemicoInquadrato[4:])
         i = 0
@@ -336,17 +319,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
                             break
                         j += 2
                     pvEsca = statoEscheInizioTurno[idEscaInizioturno + 1]
-                lungvita = int(((GlobalHWVar.gpx * pvEsca) / float(4)) // 15)
-                if lungvita < 0:
-                    lungvita = 0
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                fineindvitamost = GlobalImgVar.fineindvita
-                vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
+                FunzioniGraficheGeneriche.disegnaVitaEsche(pvEsca)
                 break
             i += 4
     elif nemicoInquadrato and not type(nemicoInquadrato) is str:
@@ -358,73 +331,7 @@ def disegnaAmbiente(x, y, npers, pv, pvtot, avvele, attp, difp, enrob, entot, su
             nemicoAvvelenato = nemicoInquadrato.statoInizioTurno[1]
             nemicoAppiccicato = nemicoInquadrato.statoInizioTurno[2]
         pvmtot = nemicoInquadrato.vitaTotale
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
-        if nemicoAvvelenato:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if nemicoAppiccicato:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.appiccicoso, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(nemicoInquadrato.imgS, (0, 0))
-        fineindvitamost = GlobalImgVar.fineindvita
-        if pvmtot > 1500:
-            indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-            lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 15)
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-            if pvm > 15000:
-                pvm = 1500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico9
-            elif pvm > 13500:
-                pvm -= 13500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico8, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico9
-            elif pvm > 12000:
-                pvm -= 12000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico7, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico8
-            elif pvm > 10500:
-                pvm -= 10500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico6, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico7
-            elif pvm > 9000:
-                pvm -= 9000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico5, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico6
-            elif pvm > 7500:
-                pvm -= 7500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico4, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico5
-            elif pvm > 6000:
-                pvm -= 6000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico3, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico4
-            elif pvm > 4500:
-                pvm -= 4500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico2, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico3
-            elif pvm > 3000:
-                pvm -= 3000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico1, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico2
-            elif pvm > 1500:
-                pvm -= 1500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico1
-            else:
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico0
-        else:
-            lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 15)
-            indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-            vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (lungvitatot, GlobalHWVar.gpy // 4))
-            vitanemico = GlobalImgVar.vitanemico0
-        lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 15)
-        if lungvita < 0:
-            lungvita = 0
-        vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitanemsucc, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitanem, (GlobalHWVar.gpx, 0))
+        FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, nemicoInquadrato.imgS)
 
     # disegno img puntatoreInquadraNemici
     if nemicoInquadrato == "Colco":
@@ -492,112 +399,19 @@ def analizzaColco(schermoBackground, x, y, vx, vy, rx, ry, chiamarob, dati, port
     if not type(nemicoInquadrato) is str and nemicoInquadrato:
         pvm = nemicoInquadrato.vita
         pvmtot = nemicoInquadrato.vitaTotale
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
-        if nemicoInquadrato.avvelenato:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if nemicoInquadrato.appiccicato:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.appiccicoso, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(nemicoInquadrato.imgS, (0, 0))
-        fineindvitamost = GlobalImgVar.fineindvita
-        if pvmtot > 1500:
-            indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-            lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 15)
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-            if pvm > 15000:
-                pvm = 1500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico9
-            elif pvm > 13500:
-                pvm -= 13500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico8, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico9
-            elif pvm > 12000:
-                pvm -= 12000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico7, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico8
-            elif pvm > 10500:
-                pvm -= 10500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico6, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico7
-            elif pvm > 9000:
-                pvm -= 9000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico5, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico6
-            elif pvm > 7500:
-                pvm -= 7500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico4, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico5
-            elif pvm > 6000:
-                pvm -= 6000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico3, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico4
-            elif pvm > 4500:
-                pvm -= 4500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico2, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico3
-            elif pvm > 3000:
-                pvm -= 3000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico1, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico2
-            elif pvm > 1500:
-                pvm -= 1500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico1
-            else:
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico0
-        else:
-            lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 15)
-            indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-            vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (lungvitatot, GlobalHWVar.gpy // 4))
-            vitanemico = GlobalImgVar.vitanemico0
-        lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 15)
-        if lungvita < 0:
-            lungvita = 0
-        vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitanemsucc, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitanem, (GlobalHWVar.gpx, 0))
+        FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemicoInquadrato.avvelenato, nemicoInquadrato.appiccicato, nemicoInquadrato.imgS)
     # vita esca selezionata
     elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
         idEscaInquadrata = int(nemicoInquadrato[4:])
         i = 0
         while i < len(vettoreEsche):
             if idEscaInquadrata == vettoreEsche[i]:
-                lungvita = int(((GlobalHWVar.gpx * vettoreEsche[i + 1]) / float(4)) // 15)
-                if lungvita < 0:
-                    lungvita = 0
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                fineindvitamost = GlobalImgVar.fineindvita
-                vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
+                FunzioniGraficheGeneriche.disegnaVitaEsche(vettoreEsche[i + 1])
                 break
             i += 4
     # altrimenti mostro solo la vita di colco
     elif dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-        lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
-        lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
-        if lungen < 0:
-            lungen = 0
-        indvitarob = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungentot, GlobalHWVar.gpy // 4))
-        fineindvitarob = GlobalImgVar.fineindvita
-        vitarob = pygame.transform.smoothscale(GlobalImgVar.vitarobo, (lungen, GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoColco, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(indvitarob, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(fineindvitarob, (GlobalHWVar.gpx + lungentot, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitarob, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (0, 0))
-        if surrisc > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.surriscaldato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if velp > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if effp > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+        FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
     # vita-status rallo
     FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)
@@ -1113,112 +927,19 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
     if not type(nemicoInquadrato) is str and nemicoInquadrato:
         pvm = nemicoInquadrato.vita
         pvmtot = nemicoInquadrato.vitaTotale
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
-        if nemicoInquadrato.avvelenato:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if nemicoInquadrato.appiccicato:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.appiccicoso, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(nemicoInquadrato.imgS, (0, 0))
-        fineindvitamost = GlobalImgVar.fineindvita
-        if pvmtot > 1500:
-            indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-            lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 15)
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-            if pvm > 15000:
-                pvm = 1500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico9
-            elif pvm > 13500:
-                pvm -= 13500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico8, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico9
-            elif pvm > 12000:
-                pvm -= 12000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico7, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico8
-            elif pvm > 10500:
-                pvm -= 10500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico6, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico7
-            elif pvm > 9000:
-                pvm -= 9000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico5, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico6
-            elif pvm > 7500:
-                pvm -= 7500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico4, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico5
-            elif pvm > 6000:
-                pvm -= 6000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico3, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico4
-            elif pvm > 4500:
-                pvm -= 4500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico2, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico3
-            elif pvm > 3000:
-                pvm -= 3000
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico1, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico2
-            elif pvm > 1500:
-                pvm -= 1500
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico1
-            else:
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico0
-        else:
-            lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 15)
-            indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-            vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (lungvitatot, GlobalHWVar.gpy // 4))
-            vitanemico = GlobalImgVar.vitanemico0
-        lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 15)
-        if lungvita < 0:
-            lungvita = 0
-        vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitanemsucc, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitanem, (GlobalHWVar.gpx, 0))
+        FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemicoInquadrato.avvelenato, nemicoInquadrato.appiccicato, nemicoInquadrato.imgS)
     # vita esca selezionata
     elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca"):
         idEscaInquadrata = int(nemicoInquadrato[4:])
         i = 0
         while i < len(vettoreEsche):
             if idEscaInquadrata == vettoreEsche[i]:
-                lungvita = int(((GlobalHWVar.gpx * vettoreEsche[i + 1]) / float(4)) // 15)
-                if lungvita < 0:
-                    lungvita = 0
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                fineindvitamost = GlobalImgVar.fineindvita
-                vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
+                FunzioniGraficheGeneriche.disegnaVitaEsche(vettoreEsche[i + 1])
                 break
             i += 4
     # altrimenti mostro solo la vita di colco
     elif avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-        lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
-        lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
-        if lungen < 0:
-            lungen = 0
-        indvitarob = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungentot, GlobalHWVar.gpy // 4))
-        fineindvitarob = GlobalImgVar.fineindvita
-        vitarob = pygame.transform.smoothscale(GlobalImgVar.vitarobo, (lungen, GlobalHWVar.gpy // 4))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoColco, (0, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(indvitarob, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(fineindvitarob, (GlobalHWVar.gpx + lungentot, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(vitarob, (GlobalHWVar.gpx, 0))
-        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (0, 0))
-        if surrisc > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.surriscaldato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if velp > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-        if effp > 0:
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+        FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
     GlobalHWVar.aggiornaSchermo()
 
@@ -2412,17 +2133,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     ricaricaschermo = True
                     evitaAggiornamentoImgs = True
                 puntandoSuUnNemicoOColcoOEsca = True
-                lungvita = int(((GlobalHWVar.gpx * vettoreEsche[i + 1]) / float(4)) // 15)
-                if lungvita < 0:
-                    lungvita = 0
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                fineindvitamost = GlobalImgVar.fineindvita
-                vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
+                FunzioniGraficheGeneriche.disegnaVitaEsche(vettoreEsche[i + 1])
             i += 4
         # disegna vita-status-raggio visivo nemici
         for nemico in listaNemici:
@@ -2447,73 +2158,7 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     disegnateCaselleAttaccabili = True
                     ricaricaschermo = True
                     evitaAggiornamentoImgs = True
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
-                if nemico.avvelenato:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-                if nemico.appiccicato:
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.appiccicoso, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(nemico.imgS, (0, 0))
-                fineindvitamost = GlobalImgVar.fineindvita
-                if pvmtot > 1500:
-                    indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 15)
-                    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-                    if pvm > 15000:
-                        pvm = 1500
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico9
-                    elif pvm > 13500:
-                        pvm -= 13500
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico8, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico9
-                    elif pvm > 12000:
-                        pvm -= 12000
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico7, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico8
-                    elif pvm > 10500:
-                        pvm -= 10500
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico6, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico7
-                    elif pvm > 9000:
-                        pvm -= 9000
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico5, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico6
-                    elif pvm > 7500:
-                        pvm -= 7500
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico4, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico5
-                    elif pvm > 6000:
-                        pvm -= 6000
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico3, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico4
-                    elif pvm > 4500:
-                        pvm -= 4500
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico2, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico3
-                    elif pvm > 3000:
-                        pvm -= 3000
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico1, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico2
-                    elif pvm > 1500:
-                        pvm -= 1500
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico1
-                    else:
-                        vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                        vitanemico = GlobalImgVar.vitanemico0
-                else:
-                    lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 15)
-                    indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-                    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (lungvitatot, GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico0
-                lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 15)
-                if lungvita < 0:
-                    lungvita = 0
-                vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalHWVar.gpy // 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(vitanemsucc, (GlobalHWVar.gpx, 0))
-                GlobalHWVar.disegnaImmagineSuSchermo(vitanem, (GlobalHWVar.gpx, 0))
+                FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemico.avvelenato, nemico.appiccicato, nemico.imgS)
                 break
         # vita-status-campo visivo robo
         if xp == rx and yp == ry:
@@ -2531,154 +2176,27 @@ def attacca(dati, x, y, vx, vy, npers, nrob, rx, ry, obbiettivoCasualeColco, per
                     disegnateCaselleAttaccabili = True
                     ricaricaschermo = True
                     evitaAggiornamentoImgs = True
-            lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
-            lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
-            if lungen < 0:
-                lungen = 0
-            indvitarob = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungentot, GlobalHWVar.gpy // 4))
-            fineindvitarob = GlobalImgVar.fineindvita
-            vitarob = pygame.transform.smoothscale(GlobalImgVar.vitarobo, (lungen, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoColco, (0, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(indvitarob, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitarob, (GlobalHWVar.gpx + lungentot, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(vitarob, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (0, 0))
-            if surrisc > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.surriscaldato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            if velp > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            if effp > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+            FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
         # vita colco selezionato
         if nemicoInquadrato == "Colco" and not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-            lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
-            lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
-            if lungen < 0:
-                lungen = 0
-            indvitarob = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungentot, GlobalHWVar.gpy // 4))
-            fineindvitarob = GlobalImgVar.fineindvita
-            vitarob = pygame.transform.smoothscale(GlobalImgVar.vitarobo, (lungen, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoColco, (0, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(indvitarob, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitarob, (GlobalHWVar.gpx + lungentot, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(vitarob, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (0, 0))
-            if surrisc > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.surriscaldato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            if velp > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            if effp > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+            FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
         # vita nemico selezionato
         elif not puntandoSuUnNemicoOColcoOEsca and not type(nemicoInquadrato) is str and nemicoInquadrato:
             pvm = nemicoInquadrato.vita
             pvmtot = nemicoInquadrato.vitaTotale
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
-            if nemicoInquadrato.avvelenato:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            if nemicoInquadrato.appiccicato:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.appiccicoso, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(nemicoInquadrato.imgS, (0, 0))
-            fineindvitamost = GlobalImgVar.fineindvita
-            if pvmtot > 1500:
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 15)
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-                if pvm > 15000:
-                    pvm = 1500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico9
-                elif pvm > 13500:
-                    pvm -= 13500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico8, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico9
-                elif pvm > 12000:
-                    pvm -= 12000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico7, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico8
-                elif pvm > 10500:
-                    pvm -= 10500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico6, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico7
-                elif pvm > 9000:
-                    pvm -= 9000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico5, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico6
-                elif pvm > 7500:
-                    pvm -= 7500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico4, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico5
-                elif pvm > 6000:
-                    pvm -= 6000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico3, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico4
-                elif pvm > 4500:
-                    pvm -= 4500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico2, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico3
-                elif pvm > 3000:
-                    pvm -= 3000
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico1, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico2
-                elif pvm > 1500:
-                    pvm -= 1500
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico1
-                else:
-                    vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (int(((GlobalHWVar.gpx * 1500) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    vitanemico = GlobalImgVar.vitanemico0
-            else:
-                lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 15)
-                indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-                GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + lungvitatot, 0))
-                vitanemsucc = pygame.transform.smoothscale(GlobalImgVar.vitanemico00, (lungvitatot, GlobalHWVar.gpy // 4))
-                vitanemico = GlobalImgVar.vitanemico0
-            lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 15)
-            if lungvita < 0:
-                lungvita = 0
-            vitanem = pygame.transform.smoothscale(vitanemico, (lungvita, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(vitanemsucc, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(vitanem, (GlobalHWVar.gpx, 0))
+            FunzioniGraficheGeneriche.disegnaVitaNemici(pvm, pvmtot, nemicoInquadrato.avvelenato, nemicoInquadrato.appiccicato, nemicoInquadrato.imgS)
         # vita esca selezionata
         elif type(nemicoInquadrato) is str and nemicoInquadrato.startswith("Esca") and not puntandoSuUnNemicoOColcoOEsca:
             idEscaInquadrata = int(nemicoInquadrato[4:])
             i = 0
             while i < len(vettoreEsche):
                 if idEscaInquadrata == vettoreEsche[i]:
-                    lungvita = int(((GlobalHWVar.gpx * vettoreEsche[i + 1]) / float(4)) // 15)
-                    if lungvita < 0:
-                        lungvita = 0
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
-                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-                    indvitamost = pygame.transform.smoothscale(GlobalImgVar.indvita, (int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), GlobalHWVar.gpy // 4))
-                    fineindvitamost = GlobalImgVar.fineindvita
-                    vitaesche = pygame.transform.smoothscale(GlobalImgVar.vitanemico0, (lungvita, GlobalHWVar.gpy // 4))
-                    GlobalHWVar.disegnaImmagineSuSchermo(indvitamost, (GlobalHWVar.gpx, 0))
-                    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitamost, (GlobalHWVar.gpx + int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15), 0))
-                    GlobalHWVar.disegnaImmagineSuSchermo(vitaesche, (GlobalHWVar.gpx, 0))
+                    FunzioniGraficheGeneriche.disegnaVitaEsche(vettoreEsche[i + 1])
                     break
                 i += 4
         # altrimenti mostro solo la vita di colco
         elif not puntandoSuUnNemicoOColcoOEsca and avanzamentoStoria >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"]:
-            lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
-            lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
-            if lungen < 0:
-                lungen = 0
-            indvitarob = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungentot, GlobalHWVar.gpy // 4))
-            fineindvitarob = GlobalImgVar.fineindvita
-            vitarob = pygame.transform.smoothscale(GlobalImgVar.vitarobo, (lungen, GlobalHWVar.gpy // 4))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoColco, (0, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(indvitarob, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(fineindvitarob, (GlobalHWVar.gpx + lungentot, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(vitarob, (GlobalHWVar.gpx, 0))
-            GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (0, 0))
-            if surrisc > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.surriscaldato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            if velp > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-            if effp > 0:
-                GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+            FunzioniGraficheGeneriche.disegnaVitaColco(entot, enrob, surrisc, velp, effp)
 
         # vita-status rallo
         FunzioniGraficheGeneriche.disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp)

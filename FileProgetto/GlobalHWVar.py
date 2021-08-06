@@ -130,6 +130,8 @@ bluScuroPiuScuro = (70, 70, 80)
 rossoScuro = (100, 80, 80)
 rossoScuroPiuScuro = (90, 70, 70)
 gialloCarta = (200, 200, 160)
+verdeVita = (80, 180, 80)
+azzurroVitaColco = (0, 160, 230)
 
 # nascondo subito il cursore
 pygame.mouse.set_visible(False)

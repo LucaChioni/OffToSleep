@@ -5,6 +5,7 @@ import pygame
 import GlobalHWVar
 import Codice.Variabili.GlobalSndVar as GlobalSndVar
 import Codice.Variabili.GlobalImgVar as GlobalImgVar
+import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 
@@ -600,15 +601,8 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp):
     lungvita = (lungvitatot * pv) // pvtot
     if lungvita < 0:
         lungvita = 0
-    indvitapers = pygame.transform.smoothscale(GlobalImgVar.indvita, (lungvitatot, GlobalHWVar.gpy // 4))
-    fineindvitapers = GlobalImgVar.fineindvita
-    vitaral = pygame.transform.smoothscale(GlobalImgVar.vitapersonaggio, (lungvita, GlobalHWVar.gpy // 4))
 
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3), lungvitatot + (GlobalHWVar.gpx // 12), GlobalHWVar.gpy // 2))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoRallo, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaImmagineSuSchermo(indvitapers, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(fineindvitapers, ((GlobalHWVar.gsx // 32 * 1) + lungvitatot, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
-    GlobalHWVar.disegnaImmagineSuSchermo(vitaral, (GlobalHWVar.gsx // 32 * 1, (GlobalHWVar.gsy // 18 * 17) + (GlobalHWVar.gpy // 4 * 3)))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perss, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.perssb, (GlobalHWVar.gsx // 32 * 0, GlobalHWVar.gsy // 18 * 17))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.imgNumFrecce, (int(GlobalHWVar.gsx // 32 * 1.2), GlobalHWVar.gsy // 18 * 17))
@@ -619,3 +613,94 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp):
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
     if difp > 0:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.75), lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy // 2))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8), lungvitatot, GlobalHWVar.gpy * 0.15))
+    if lungvita > 0:
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8), lungvita, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8), GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+
+
+def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
+    lungentot = int(((GlobalHWVar.gpx * entot) / float(4)) // 15)
+    lungen = int(((GlobalHWVar.gpx * enrob) / float(4)) // 15)
+    if lungen < 0:
+        lungen = 0
+
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoColco, (0, 0))
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.robos, (0, 0))
+    if surrisc > 0:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.surriscaldato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+    if velp > 0:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+    if effp > 0:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, 0, lungentot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungentot, GlobalHWVar.gpy * 0.15))
+    if lungen > 0:
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.azzurroVitaColco, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungen, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungen, GlobalHWVar.gpy * 0.05, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+
+
+def disegnaVitaEsche(pvEsca):
+    lungvitatot = int(((GlobalHWVar.gpx * GlobalGameVar.vitaTotEsche) / float(4)) // 15)
+    lungvita = int(((GlobalHWVar.gpx * pvEsca) / float(4)) // 15)
+    if lungvita < 0:
+        lungvita = 0
+
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, 0, lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvitatot, GlobalHWVar.gpy * 0.15))
+    if lungvita > 0:
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvita, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, GlobalHWVar.gpy * 0.05, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+
+
+def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagineS):
+    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoMostro, (0, 0))
+    if nemicoAvvelenato:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.avvelenato, (GlobalHWVar.gpx + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+    if nemicoAppiccicato:
+        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.appiccicoso, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
+    GlobalHWVar.disegnaImmagineSuSchermo(immagineS, (0, 0))
+
+    if pvmtot > 1500:
+        lungvitatot = int(((GlobalHWVar.gpx * 1500) / float(4)) // 15)
+        if pvm > 7500:
+            pvm = 1500
+            coloreVita = (120, 50, 120)
+            coloreVitaSuccessiva = (180, 50, 70)
+        elif pvm > 6000:
+            pvm -= 6000
+            coloreVita = (120, 50, 120)
+            coloreVitaSuccessiva = (180, 50, 70)
+        elif pvm > 4500:
+            pvm -= 4500
+            coloreVita = (180, 50, 70)
+            coloreVitaSuccessiva = (170, 110, 50)
+        elif pvm > 3000:
+            pvm -= 3000
+            coloreVita = (170, 110, 50)
+            coloreVitaSuccessiva = (170, 160, 40)
+        elif pvm > 1500:
+            pvm -= 1500
+            coloreVita = (170, 160, 40)
+            coloreVitaSuccessiva = (80, 180, 80)
+        else:
+            coloreVita = (80, 180, 80)
+            coloreVitaSuccessiva = (80, 80, 80)
+    else:
+        lungvitatot = int(((GlobalHWVar.gpx * pvmtot) / float(4)) // 15)
+        coloreVita = (80, 180, 80)
+        coloreVitaSuccessiva = (80, 80, 80)
+
+    lungvita = int(((GlobalHWVar.gpx * pvm) / float(4)) // 15)
+    if lungvita < 0:
+        lungvita = 0
+
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, 0, lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvitatot, GlobalHWVar.gpy * 0.15))
+    if lungvita > 0:
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVitaSuccessiva, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvitatot, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVita, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvita, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, GlobalHWVar.gpy * 0.05, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
