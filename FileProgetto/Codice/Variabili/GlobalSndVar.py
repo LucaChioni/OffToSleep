@@ -52,7 +52,6 @@ global rumoreAttaccoNemico
 global rumoreLancioOggettoNemico
 global rumoreMorteNemico
 global rumoreDialoghi
-global rumoreSkipDialoghi
 global suonoAperturaMappa
 global rumoreScavare
 global rumoreBussareCitta
@@ -133,7 +132,6 @@ def loadSounds(numSndCaricato):
     global rumoreLancioOggettoNemico
     global rumoreMorteNemico
     global rumoreDialoghi
-    global rumoreSkipDialoghi
     global suonoAperturaMappa
     global rumoreScavare
     global rumoreBussareCitta
@@ -206,7 +204,6 @@ def loadSounds(numSndCaricato):
 
     # suono dialoghi
     rumoreDialoghi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/Dialoghi.wav")
-    rumoreSkipDialoghi = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/SkipDialoghi.wav")
 
     # effetti speciali
     suonoaperturacofanetti = caricaSuonoMostrandoAvanzamento("Risorse/Audio/RumoriAmbiente/AperturaCofanetto.wav")

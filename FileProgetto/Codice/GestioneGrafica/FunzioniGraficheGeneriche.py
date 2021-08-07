@@ -153,7 +153,7 @@ def messaggioParlato(bottoneDown, fineDialogo, msg, colore, x, y, gr, largezzaFo
                             fineDialogo = True
                             bottoneDown = False
                         elif bottoneDown == pygame.K_SPACE or bottoneDown == "mouseSinistro" or bottoneDown == "padCroce":
-                            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreSkipDialoghi)
+                            GlobalHWVar.canaleSoundInterazioni.play(GlobalSndVar.rumoreDialoghi)
                             scriviTutto = True
                             bottoneDown = False
                         if bottoneDown:
