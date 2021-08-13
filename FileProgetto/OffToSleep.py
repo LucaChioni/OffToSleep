@@ -641,7 +641,14 @@ def gameloop():
                 if not inquadratoQualcosa:
                     i = 0
                     while i < len(casevisteEntrateIncluse):
-                        if casevisteEntrateIncluse[i] <= xMouse <= casevisteEntrateIncluse[i] + GlobalHWVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse <= casevisteEntrateIncluse[i + 1] + GlobalHWVar.gpy:
+                        if xMouse < GlobalHWVar.gpx or xMouse > GlobalHWVar.gpx * 31 or yMouse < GlobalHWVar.gpy or yMouse > GlobalHWVar.gpy * 17:
+                            if casevisteEntrateIncluse[i + 2] and (casevisteEntrateIncluse[i] == GlobalHWVar.gpx or casevisteEntrateIncluse[i] == GlobalHWVar.gpx * 30 or casevisteEntrateIncluse[i + 1] == GlobalHWVar.gpy or casevisteEntrateIncluse[i + 1] == GlobalHWVar.gpy * 16):
+                                if (casevisteEntrateIncluse[i] <= xMouse + GlobalHWVar.gpx <= casevisteEntrateIncluse[i] + GlobalHWVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse <= casevisteEntrateIncluse[i + 1] + GlobalHWVar.gpy) or (casevisteEntrateIncluse[i] <= xMouse - GlobalHWVar.gpx <= casevisteEntrateIncluse[i] + GlobalHWVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse <= casevisteEntrateIncluse[i + 1] + GlobalHWVar.gpy) or (casevisteEntrateIncluse[i] <= xMouse <= casevisteEntrateIncluse[i] + GlobalHWVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse + GlobalHWVar.gpy <= casevisteEntrateIncluse[i + 1] + GlobalHWVar.gpy) or (casevisteEntrateIncluse[i] <= xMouse <= casevisteEntrateIncluse[i] + GlobalHWVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse - GlobalHWVar.gpy <= casevisteEntrateIncluse[i + 1] + GlobalHWVar.gpy):
+                                    if GlobalHWVar.mouseBloccato:
+                                        GlobalHWVar.configuraCursore(False)
+                                    inquadratoQualcosa = "movimento:" + str(casevisteEntrateIncluse[i]) + ":" + str(casevisteEntrateIncluse[i + 1])
+                                    break
+                        elif casevisteEntrateIncluse[i] <= xMouse <= casevisteEntrateIncluse[i] + GlobalHWVar.gpx and casevisteEntrateIncluse[i + 1] <= yMouse <= casevisteEntrateIncluse[i + 1] + GlobalHWVar.gpy:
                             if casevisteEntrateIncluse[i + 2]:
                                 casellaOccupata = False
                                 for personaggio in listaPersonaggi:
@@ -1318,7 +1325,7 @@ def gameloop():
         # statistiche personaggio e robo
         esptot, pvtot, entot, attVicino, attLontano, dif, difro, par = GenericFunc.getStatistiche(dati, difesa)
 
-        # resetta stati/pv al campio personaggio
+        # resetta stati/pv al cambio personaggio
         if dati[0] == GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] or dati[0] == GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
             dati[5] = pvtot
             dati[121] = False
