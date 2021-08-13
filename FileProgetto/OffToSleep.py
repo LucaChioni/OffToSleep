@@ -39,6 +39,11 @@ def gameloop():
         #     print (u"Max RAM usata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
+            if not gameover:
+                riavviaAudioMusica = False
+                riavviaAudioAmbiente = False
+                canzone = False
+                listaSottofondoAmbientale = []
             imgMappa = False
             imgMappaZoom = False
             evitaAvanzamentoTurno = False
@@ -53,8 +58,6 @@ def gameloop():
             aggiornaImgEquip = True
             refreshSchermo = True
             impossibileAprirePorta = False
-            canzone = False
-            listaSottofondoAmbientale = []
             stanzaCambiata = False
             uscitoDaMenu = 0
             # rumore porte (dipende dalla stanza)
@@ -89,6 +92,12 @@ def gameloop():
 
             dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco = MenuPrincipali.menu(caricaSalvataggio, gameover)
             print ("Salvataggio: " + str(GlobalGameVar.numSalvataggioCaricato))
+            print (dati)
+
+            # se è nuova partita => mostro schemata con citazione
+            if GlobalGameVar.numSalvataggioCaricato == 0 and not gameover:
+                FunzioniGraficheGeneriche.mostraSchermataCitazione()
+
             gameover = False
             # controlla se devi cambiare personaggio giocabile
             if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
@@ -110,7 +119,6 @@ def gameloop():
             caricaSalvataggio = False
             pers = GlobalImgVar.perss
             robot = GlobalImgVar.robos
-            print (dati)
 
             # vettore porte -> porte[stanza, x, y, True/False, ...]
             porte = []
@@ -203,6 +211,12 @@ def gameloop():
                         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                     GlobalHWVar.canaleSoundCanzone.set_volume(0)
                     GlobalHWVar.canaleSoundCanzone.stop()
+                if riavviaAudioMusica:
+                    canzoneCambiata = True
+                if riavviaAudioAmbiente:
+                    sottofondoAmbientaleCambiato = True
+                riavviaAudioMusica = False
+                riavviaAudioAmbiente = False
                 if canzoneCambiata or sottofondoAmbientaleCambiato:
                     i = GlobalHWVar.volumeCanzoni
                     j = GlobalHWVar.volumeEffetti
@@ -1566,7 +1580,7 @@ def gameloop():
             startf = False
 
         # morte tua e di robo
-        inizio, gameover = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], inizio, gameover)
+        inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente)
         morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
 
         if not inizio:

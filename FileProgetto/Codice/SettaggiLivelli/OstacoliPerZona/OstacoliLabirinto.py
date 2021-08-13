@@ -2852,10 +2852,7 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
         # controllo muri-oggetti
         # oggetto(posizione x, posizione y, dim x, dim y, px, py, nx,  ny)
         if not (nx == 0 and ny == 0):
-            if UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 2, GlobalHWVar.gsy // 18 * 15, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 2, x, y, nx, ny):
-                nx = 0
-                ny = 0
-            elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 1, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 14, x, y, nx, ny):
+            if UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 3, GlobalHWVar.gsy // 18 * 1, GlobalHWVar.gpx * 2, GlobalHWVar.gpy * 16, x, y, nx, ny):
                 nx = 0
                 ny = 0
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 13, GlobalHWVar.gpx * 8, GlobalHWVar.gpy * 2, x, y, nx, ny):
@@ -2882,6 +2879,9 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 10, GlobalHWVar.gsy // 18 * 1, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 6, x, y, nx, ny):
                 nx = 0
                 ny = 0
+            elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 11, GlobalHWVar.gsy // 18 * 15, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 1, x, y, nx, ny):
+                nx = 0
+                ny = 0
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 12, GlobalHWVar.gsy // 18 * 1, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 5, x, y, nx, ny):
                 nx = 0
                 ny = 0
@@ -2898,6 +2898,9 @@ def setOstacoli(stanza, x, y, nx, ny, escludiOggettiBassi):
                 nx = 0
                 ny = 0
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 14, GlobalHWVar.gsy // 18 * 13, GlobalHWVar.gpx * 17, GlobalHWVar.gpy * 2, x, y, nx, ny):
+                nx = 0
+                ny = 0
+            elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 15, GlobalHWVar.gsy // 18 * 15, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 1, x, y, nx, ny):
                 nx = 0
                 ny = 0
             elif UtilityOstacoliContenutoCofanetti.oggetto(GlobalHWVar.gsx // 32 * 16, GlobalHWVar.gsy // 18 * 1, GlobalHWVar.gpx * 1, GlobalHWVar.gpy * 4, x, y, nx, ny):

@@ -25,7 +25,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 avanzaColDialogo = False
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Rod.")
+                dialogo.append(u"Rod...")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -73,7 +73,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"... Sto cercando di andare da un certo Neil. Mi hanno detto che sarei arrivata al suo castello attraversando la Selva Arida e poi costeggiando il lago ma sono accidentalmente capitata in questo posto incredibile.")
+                dialogo.append(u"... Sto cercando di andare da un certo Neil. Mi hanno detto che sarei arrivata al suo castello attraversando la Selva Arida e poi costeggiando il lago ma sono accidentalmente capitata in questo incredibile \"avamposto\".")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")
@@ -89,7 +89,7 @@ def setDialogo(tipoId, x, y, avanzamentoStoria, stanzaDiAppartenenza, avanzament
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("tu")
-                dialogo.append(u"Sì, può darsi ma è l'unica pista che mi rimane. E poi potrei attirare la sua attenzione con questo.")
+                dialogo.append(u"Sì, può darsi. Ma è l'unica pista che mi rimane. E poi potrei attirare la sua attenzione con questo.")
                 partiDialogo.append(dialogo)
                 dialogo = []
                 dialogo.append("personaggio")

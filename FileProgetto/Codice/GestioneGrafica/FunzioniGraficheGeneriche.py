@@ -214,11 +214,16 @@ def guardaVideo(listaImg, audio, loop):
     # oscuraIlluminaSchermo(illumina=False)
 
 
-def controllaMorteRallo(vitaRallo, inizio, gameover):
+def controllaMorteRallo(vitaRallo, inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente):
     if vitaRallo <= 0:
         gameover = True
         if GlobalHWVar.mouseBloccato:
             GlobalHWVar.configuraCursore(False)
+
+        if GlobalHWVar.canaleSoundCanzone.get_busy():
+            riavviaAudioMusica = True
+        if GlobalHWVar.canaliSoundSottofondoAmbientale.getBusy():
+            riavviaAudioAmbiente = True
         GlobalHWVar.canaleSoundPuntatoreSposta.stop()
         GlobalHWVar.canaleSoundPuntatoreSeleziona.stop()
         GlobalHWVar.canaleSoundPassiRallo.stop()
@@ -262,7 +267,7 @@ def controllaMorteRallo(vitaRallo, inizio, gameover):
             GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
         inizio = True
 
-    return inizio, gameover
+    return inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente
 
 
 def disegnaRallo(npers, x, y, avvele, pers, arma, armatura, scudo, collana, arco, faretra, guanti, inMovimento=False, frame=False, attaccoRavvicinato=False, attaccoDaLontano=False):
@@ -704,3 +709,26 @@ def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagine
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVitaSuccessiva, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvitatot, GlobalHWVar.gpy * 0.15))
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVita, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvita, GlobalHWVar.gpy * 0.15))
         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, GlobalHWVar.gpy * 0.05, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+
+
+def mostraSchermataCitazione():
+    GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
+    messaggio(u"\"A noi uomini, nascendo, è toccato un tristo privilegio: quello di sentirci vivere, con la bella illusione di prendere come una realtà fuori di noi questo nostro interno sentimento...\"", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 7.5, 60, largezzaFoglio=GlobalHWVar.gpx * 22, spazioTraLeRighe=GlobalHWVar.gpy * 1)
+    messaggio("- Luigi Pirandello", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 27, GlobalHWVar.gsy // 18 * 12, 50, daDestra=True)
+    oscuraIlluminaSchermo(illumina=2)
+
+    if GlobalHWVar.mouseBloccato:
+        GlobalHWVar.configuraCursore(False)
+    risposta = False
+    bottoneDown = False
+    while not risposta:
+        # gestione degli input
+        bottoneDown, aggiornaInterfacciaPerCambioInput = GestioneInput.getInput(bottoneDown, False)
+        if bottoneDown:
+            risposta = True
+            bottoneDown = False
+
+        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+        GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+
+    oscuraIlluminaSchermo(illumina=False)

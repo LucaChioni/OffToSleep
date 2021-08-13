@@ -37,3 +37,13 @@ class CanaliAudioAmbiente(object):
         while i < self.numCanali:
             self.vetCanali[i].set_volume(self.volume)
             i += 1
+
+    def getBusy(self):
+        audioInEsecuzione = False
+        i = 0
+        while i < self.numCanali:
+            if self.vetCanali[i].get_busy():
+                audioInEsecuzione = True
+                break
+            i += 1
+        return audioInEsecuzione
