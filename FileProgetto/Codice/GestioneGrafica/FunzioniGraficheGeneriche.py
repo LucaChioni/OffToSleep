@@ -618,11 +618,18 @@ def disegnaVitaRallo(pv, pvtot, numFrecce, avvele, attp, difp):
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.attaccopiu, (GlobalHWVar.gsx // 32 * 4, GlobalHWVar.gsy // 18 * 17))
     if difp > 0:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.difesapiu, (GlobalHWVar.gsx // 32 * 5, GlobalHWVar.gsy // 18 * 17))
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.75), lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy // 2))
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8), lungvitatot, GlobalHWVar.gpy * 0.15))
+    yInizioBarra = int((GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.75))
+    yInizioVita = int((GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8))
+    yFineVita = int((GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8) + (GlobalHWVar.gpy * 0.15))
+    yFineBarra = GlobalHWVar.gsy
+    if abs(yInizioBarra - yInizioVita) != abs(yFineVita - yFineBarra):
+        if abs(yInizioBarra - yInizioVita) < abs(yFineVita - yFineBarra):
+            yInizioVita += 1
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, yInizioBarra, lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy // 2))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, yInizioVita, lungvitatot, GlobalHWVar.gpy * 0.15))
     if lungvita > 0:
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8), lungvita, GlobalHWVar.gpy * 0.15))
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, (GlobalHWVar.gpy * 17) + (GlobalHWVar.gpy * 0.8), GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, yInizioVita, lungvita, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
 
 
 def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
@@ -639,11 +646,18 @@ def disegnaVitaColco(entot, enrob, surrisc, velp, effp):
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.velocitapiu, ((GlobalHWVar.gpx * 2) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
     if effp > 0:
         GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.efficienzapiu, ((GlobalHWVar.gpx * 3) + (GlobalHWVar.gpx // 8), GlobalHWVar.gpy // 4))
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, 0, lungentot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungentot, GlobalHWVar.gpy * 0.15))
+    yInizioBarra = 0
+    yInizioVita = int(GlobalHWVar.gpy * 0.05)
+    yFineVita = int((GlobalHWVar.gpy * 0.05) + (GlobalHWVar.gpy * 0.15))
+    yFineBarra = int(GlobalHWVar.gpy * 0.25)
+    if abs(yInizioBarra - yInizioVita) != abs(yFineVita - yFineBarra):
+        if abs(yInizioBarra - yInizioVita) < abs(yFineVita - yFineBarra):
+            yInizioVita += 1
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, yInizioBarra, lungentot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, yInizioVita, lungentot, GlobalHWVar.gpy * 0.15))
     if lungen > 0:
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.azzurroVitaColco, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungen, GlobalHWVar.gpy * 0.15))
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungen, GlobalHWVar.gpy * 0.05, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.azzurroVitaColco, (GlobalHWVar.gpx, yInizioVita, lungen, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungen, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
 
 
 def disegnaVitaEsche(pvEsca):
@@ -654,11 +668,18 @@ def disegnaVitaEsche(pvEsca):
 
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.sfondoEsche, (0, 0))
     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.esche, (0, 0))
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, 0, lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvitatot, GlobalHWVar.gpy * 0.15))
+    yInizioBarra = 0
+    yInizioVita = int(GlobalHWVar.gpy * 0.05)
+    yFineVita = int((GlobalHWVar.gpy * 0.05) + (GlobalHWVar.gpy * 0.15))
+    yFineBarra = int(GlobalHWVar.gpy * 0.25)
+    if abs(yInizioBarra - yInizioVita) != abs(yFineVita - yFineBarra):
+        if abs(yInizioBarra - yInizioVita) < abs(yFineVita - yFineBarra):
+            yInizioVita += 1
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, yInizioBarra, lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, yInizioVita, lungvitatot, GlobalHWVar.gpy * 0.15))
     if lungvita > 0:
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvita, GlobalHWVar.gpy * 0.15))
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, GlobalHWVar.gpy * 0.05, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.verdeVita, (GlobalHWVar.gpx, yInizioVita, lungvita, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
 
 
 def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagineS):
@@ -703,12 +724,19 @@ def disegnaVitaNemici(pvm, pvmtot, nemicoAvvelenato, nemicoAppiccicato, immagine
     if lungvita < 0:
         lungvita = 0
 
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, 0, lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
-    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvitatot, GlobalHWVar.gpy * 0.15))
+    yInizioBarra = 0
+    yInizioVita = int(GlobalHWVar.gpy * 0.05)
+    yFineVita = int((GlobalHWVar.gpy * 0.05) + (GlobalHWVar.gpy * 0.15))
+    yFineBarra = int(GlobalHWVar.gpy * 0.25)
+    if abs(yInizioBarra - yInizioVita) != abs(yFineVita - yFineBarra):
+        if abs(yInizioBarra - yInizioVita) < abs(yFineVita - yFineBarra):
+            yInizioVita += 1
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx, yInizioBarra, lungvitatot + (GlobalHWVar.gpx * 0.1), GlobalHWVar.gpy * 0.25))
+    GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gpx, yInizioVita, lungvitatot, GlobalHWVar.gpy * 0.15))
     if lungvita > 0:
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVitaSuccessiva, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvitatot, GlobalHWVar.gpy * 0.15))
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVita, (GlobalHWVar.gpx, GlobalHWVar.gpy * 0.05, lungvita, GlobalHWVar.gpy * 0.15))
-        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, GlobalHWVar.gpy * 0.05, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVitaSuccessiva, (GlobalHWVar.gpx, yInizioVita, lungvitatot, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, coloreVita, (GlobalHWVar.gpx, yInizioVita, lungvita, GlobalHWVar.gpy * 0.15))
+        GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigioscu, (GlobalHWVar.gpx + lungvita, yInizioVita, GlobalHWVar.gpx * 0.05, GlobalHWVar.gpy * 0.15))
 
 
 def mostraSchermataCitazione():

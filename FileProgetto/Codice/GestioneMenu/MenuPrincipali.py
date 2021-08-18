@@ -421,7 +421,7 @@ def menu(caricaSalvataggio, gameover):
 
                     # Impostazioni
                     if voceMarcata == 3:
-                        SottoMenuImpo.menuImpostazioni(True, False)
+                        inutile, inutile, inutile = SottoMenuImpo.menuImpostazioni(True, False)
                         primoFrame = True
 
                     # esci dal gioco
@@ -817,6 +817,7 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     voceMarcata = 1
     caricaSalvataggio = False
     aperturaSettaColcoNonRiuscita = False
+    cambiatoRisoluzione = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -954,7 +955,44 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
                             risposta = True
                     # impostazioni
                     if voceMarcata == 7:
-                        SottoMenuImpo.menuImpostazioni(False, True)
+                        gpxPreCambioRisoluzione = GlobalHWVar.gpx
+                        gpyPreCambioRisoluzione = GlobalHWVar.gpy
+                        cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom)
+                        if cambiatoRisoluzione:
+                            dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco = GenericFunc.sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
+                            GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11] = GenericFunc.sistemaImgPerCambioRisoluzione(GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11], gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
+
+                            xp = GlobalHWVar.gsx // 32 * 1
+                            yp = GlobalHWVar.gsy // 18 * 14
+                            if dati[0] < GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"]:
+                                perssta = GlobalImgVar.lucy1GrafMenu
+                            elif GlobalGameVar.dictAvanzamentoStoria["primoCambioPersonaggio"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["secondoCambioPersonaggio"]:
+                                perssta = GlobalImgVar.fraMaggioreGrafMenu
+                            elif dati[0] < GlobalGameVar.dictAvanzamentoStoria["cambiataPerCenaDavid"]:
+                                perssta = GlobalImgVar.lucy1GrafMenu
+                            elif GlobalGameVar.dictAvanzamentoStoria["monologoDopoArrivoInBiblioteca"] <= dati[0] < GlobalGameVar.dictAvanzamentoStoria["alzataDallaSediaInBiblioteca"]:
+                                perssta = GlobalImgVar.lucy3GrafMenu
+                            else:
+                                perssta = GlobalImgVar.lucy2GrafMenu
+                            robosta = GlobalImgVar.robograf1b
+                            puntatore = GlobalImgVar.puntatore
+                            puntatoreVecchio = GlobalImgVar.puntatorevecchio
+                            avvelenatosta = GlobalImgVar.avvelenatoMenu
+                            surriscaldatosta = GlobalImgVar.surriscaldatoMenu
+                            attaccopiusta = GlobalImgVar.attaccopiuMenu
+                            difesapiusta = GlobalImgVar.difesapiuMenu
+                            velocitapiusta = GlobalImgVar.velocitapiuMenu
+                            efficienzapiusta = GlobalImgVar.efficienzapiuMenu
+                            if dati[133] == 0:
+                                faretraFrecceStart = GlobalImgVar.faretraFrecceStart0
+                            elif dati[133] == 1:
+                                faretraFrecceStart = GlobalImgVar.faretraFrecceStart1
+                            elif dati[133] == 2:
+                                faretraFrecceStart = GlobalImgVar.faretraFrecceStart2
+                            elif dati[133] == 3:
+                                faretraFrecceStart = GlobalImgVar.faretraFrecceStart3
+                            else:
+                                faretraFrecceStart = 0
                     # menu principale
                     if voceMarcata == 8:
                         GlobalHWVar.disegnaRettangoloSuSchermo(GlobalHWVar.schermo, GlobalHWVar.grigio, (GlobalHWVar.gsx // 32 * 1, GlobalHWVar.gsy // 18 * 4.5, GlobalHWVar.gsx // 32 * 0.5, GlobalHWVar.gsy // 18 * 11.5))
@@ -1127,10 +1165,10 @@ def start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vet
     if not inizio and not caricaSalvataggio:
         GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni)
         GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
-    return dati, inizio, attacco, caricaSalvataggio
+    return dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione
 
 
-def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
+def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, imgMappa, imgMappaZoom):
     xp = GlobalHWVar.gpx * 1
     yp = GlobalHWVar.gpy * 13.8
     puntatore = GlobalImgVar.puntatore
@@ -1152,6 +1190,7 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     risposta = False
     voceMarcata = 1
     voceMarcataOggetto = voceMarcata
+    cambiatoRisoluzione = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -1324,7 +1363,32 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
                     GlobalHWVar.disegnaImmagineSuSchermo(puntatorevecchio, (xp, yp))
                     schermo_temp = GlobalHWVar.schermo.copy().convert()
                     background = schermo_temp.subsurface(pygame.Rect(0, 0, GlobalHWVar.gsx, GlobalHWVar.gsy)).convert()
-                    SottoMenuImpo.menuImpostazioni(False, True)
+
+                    gpxPreCambioRisoluzione = GlobalHWVar.gpx
+                    gpyPreCambioRisoluzione = GlobalHWVar.gpy
+                    cambiatoRisoluzione, imgMappa, imgMappaZoom = SottoMenuImpo.menuImpostazioni(False, True, avanzamentoStoria=dati[0], imgMappa=imgMappa, imgMappaZoom=imgMappaZoom)
+                    if cambiatoRisoluzione:
+                        dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco = GenericFunc.sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
+                        GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11] = GenericFunc.sistemaImgPerCambioRisoluzione(GlobalGameVar.vetDatiSalvataggioGameOver[0], GlobalGameVar.vetDatiSalvataggioGameOver[1], GlobalGameVar.vetDatiSalvataggioGameOver[2], GlobalGameVar.vetDatiSalvataggioGameOver[3], GlobalGameVar.vetDatiSalvataggioGameOver[4], GlobalGameVar.vetDatiSalvataggioGameOver[5], GlobalGameVar.vetDatiSalvataggioGameOver[7], GlobalGameVar.vetDatiSalvataggioGameOver[10], GlobalGameVar.vetDatiSalvataggioGameOver[11], gpxPreCambioRisoluzione, gpyPreCambioRisoluzione)
+                        xp = 0
+                        yp = GlobalHWVar.gsy // 18 * 16.05
+                        puntatore = GlobalImgVar.puntatore
+                        puntatorevecchio = GlobalImgVar.puntatorevecchio
+                        sconosciutoOggetto = GlobalImgVar.sconosciutoOggettoMenu1
+                        sconosciutoOggettoIco = GlobalImgVar.sconosciutoOggettoIcoMenu
+                        oggetton = 1
+                        vettoreOggettiGraf = []
+                        vettoreOggettiIco = []
+                        while oggetton <= 10:
+                            if dati[oggetton + 30] >= 0:
+                                vettoreOggettiGraf.append(GlobalImgVar.vetImgOggettiStart[oggetton - 1])
+                                vettoreOggettiIco.append(GlobalImgVar.vetIcoOggettiMenu[oggetton - 1])
+                            else:
+                                vettoreOggettiGraf.append(sconosciutoOggetto)
+                                vettoreOggettiIco.append(sconosciutoOggettoIco)
+                            oggetton += 1
+                        background = pygame.transform.smoothscale(background, (GlobalHWVar.gsx, GlobalHWVar.gsy))
+
                     GlobalHWVar.disegnaImmagineSuSchermo(background, (0, 0))
                 elif voceMarcata == -2:
                     menuConferma = True
@@ -1647,4 +1711,4 @@ def startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio):
     if not inizio:
         GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaleSoundCanzone, GlobalHWVar.volumeCanzoni)
         GenericFunc.cambiaVolumeCanale(GlobalHWVar.canaliSoundSottofondoAmbientale, GlobalHWVar.volumeEffetti)
-    return dati, attacco, sposta, animaOggetto, npers, inizio
+    return dati, attacco, sposta, animaOggetto, npers, inizio, imgMappa, imgMappaZoom, cambiatoRisoluzione

@@ -46,7 +46,7 @@ class NemicoObj(object):
         self.quadrettoSottoArma = 0
         self.ralloParato = False
         self.statoInizioTurno = []
-        # il vettore "bersaglioColpito" contiene: bersaglio, danno, statoInflitto e se l'attacco è sato mortale o no
+        # il vettore "bersaglioColpito" contiene: bersaglio, danno, statoInflitto e se l'attacco è stato mortale o no
         self.bersaglioColpito = []
         self.caseattactot = []
         self.caselleAttaccabiliAggiornate = False

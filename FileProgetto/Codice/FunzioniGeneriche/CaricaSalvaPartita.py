@@ -8,15 +8,10 @@ import Codice.GestioneNemiciPersonaggi.PersonaggioObj as PersonaggioObj
 
 
 def salvataggio(n, datiAttuali, datiGameover):
-    backup = False
-    salvataggio = False
-    while not salvataggio or not backup:
-        if not salvataggio:
-            salvataggio = True
-        elif not backup:
-            backup = True
-
-        if not backup:
+    salvataggioFatto = False
+    backupFatto = False
+    while not salvataggioFatto or not backupFatto:
+        if not salvataggioFatto:
             scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i.txt" % n, "w")
         else:
             scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Salvataggi/Salvataggio%i-backup.txt" % n, "w")
@@ -201,6 +196,10 @@ def salvataggio(n, datiAttuali, datiGameover):
             else:
                 gameoverSalvato = True
 
+        if not salvataggioFatto:
+            salvataggioFatto = True
+        elif not backupFatto:
+            backupFatto = True
         scrivi.close()
 
     # critta il salvataggio

@@ -39,6 +39,7 @@ def gameloop():
         #     print (u"Max RAM usata: " + str(maxMemoryUsage) + " MB")
 
         if inizio:
+            cambiatoRisoluzione = False
             if not gameover:
                 riavviaAudioMusica = False
                 riavviaAudioAmbiente = False
@@ -172,129 +173,160 @@ def gameloop():
                 personaggioUsato = personaggioDaUsare
                 npers = 4
 
-            if cambiosta:
+            if cambiosta or cambiatoRisoluzione:
                 posizioneRalloAggiornamentoCaseAttac = [0, 0]
-                if not inizio:
+                if not inizio and not cambiatoRisoluzione:
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False)
 
-                SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
-                stoppaMusica = SetPosizioneAudioImpedimenti.decidiSeStoppareMusica(dati[1], dati[0])
+                if cambiosta:
+                    SetPosizioneAudioImpedimenti.scriviNomeZona(dati[1], stanzaVecchia)
+                    stoppaMusica = SetPosizioneAudioImpedimenti.decidiSeStoppareMusica(dati[1], dati[0])
 
-                canzoneCambiata = False
-                sottofondoAmbientaleCambiato = False
-                # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
-                x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, listaSottofondoAmbientale, bottoneDown, dati[0], mantieniPosizioneImpo = SetPosizioneAudioImpedimenti.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, listaSottofondoAmbientale, inizio, dati[0], bottoneDown)
-                if not inizio:
-                    vx = x
-                    vy = y
-                    if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and not mantieniPosizioneImpo:
-                        rx = x
-                        ry = y
-                        vrx = x
-                        vry = y
-                        # nrob: 1=d, 2=a, 3=s, 4=w
-                        if npers == 1:
-                            nrob = 1
-                        if npers == 2:
-                            nrob = 2
-                        if npers == 3:
-                            nrob = 4
-                        if npers == 4:
-                            nrob = 3
+                    canzoneCambiata = False
+                    sottofondoAmbientaleCambiato = False
+                    # mi posiziono e setto canzone, sottofondo ambientale e rumore porte
+                    x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, canzone, listaSottofondoAmbientale, bottoneDown, dati[0], mantieniPosizioneImpo = SetPosizioneAudioImpedimenti.settaPosizioneERumoriStanza(x, y, npers, rumoreAperturaPorte, rumoreChiusuraPorte, canzoneCambiata, sottofondoAmbientaleCambiato, dati[1], stanzaVecchia, canzone, listaSottofondoAmbientale, inizio, dati[0], bottoneDown)
+                    if not inizio:
+                        vx = x
+                        vy = y
+                        if dati[0] >= GlobalGameVar.dictAvanzamentoStoria["ricevutoImpo"] and not mantieniPosizioneImpo:
+                            rx = x
+                            ry = y
+                            vrx = x
+                            vry = y
+                            # nrob: 1=d, 2=a, 3=s, 4=w
+                            if npers == 1:
+                                nrob = 1
+                            if npers == 2:
+                                nrob = 2
+                            if npers == 3:
+                                nrob = 4
+                            if npers == 4:
+                                nrob = 3
 
-                if stoppaMusica and GlobalHWVar.canaleSoundCanzone.get_busy():
-                    i = GlobalHWVar.volumeCanzoni
-                    while i > 0:
-                        GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                        i -= GlobalHWVar.volumeCanzoni / 10
-                        pygame.time.wait(30)
-                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                    GlobalHWVar.canaleSoundCanzone.set_volume(0)
-                    GlobalHWVar.canaleSoundCanzone.stop()
-                if riavviaAudioMusica:
-                    canzoneCambiata = True
-                if riavviaAudioAmbiente:
-                    sottofondoAmbientaleCambiato = True
-                riavviaAudioMusica = False
-                riavviaAudioAmbiente = False
-                if canzoneCambiata or sottofondoAmbientaleCambiato:
-                    i = GlobalHWVar.volumeCanzoni
-                    j = GlobalHWVar.volumeEffetti
-                    while i > 0 or j > 0:
-                        if canzoneCambiata:
+                    if stoppaMusica and GlobalHWVar.canaleSoundCanzone.get_busy():
+                        i = GlobalHWVar.volumeCanzoni
+                        while i > 0:
                             GlobalHWVar.canaleSoundCanzone.set_volume(i)
-                        if sottofondoAmbientaleCambiato:
-                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
-                        i -= GlobalHWVar.volumeCanzoni / 10
-                        j -= GlobalHWVar.volumeEffetti / 10
-                        pygame.time.wait(30)
-                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                    if canzoneCambiata:
+                            i -= GlobalHWVar.volumeCanzoni / 10
+                            pygame.time.wait(30)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         GlobalHWVar.canaleSoundCanzone.set_volume(0)
                         GlobalHWVar.canaleSoundCanzone.stop()
-                        if canzone and not stoppaMusica:
-                            GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
-                    if sottofondoAmbientaleCambiato:
-                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(0)
-                        GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
-                        if len(listaSottofondoAmbientale) > 0:
-                            GlobalHWVar.canaliSoundSottofondoAmbientale.riproduci(listaSottofondoAmbientale)
-                    i = 0
-                    j = 0
-                    while i < GlobalHWVar.volumeCanzoni or j < GlobalHWVar.volumeEffetti:
+                    if riavviaAudioMusica:
+                        canzoneCambiata = True
+                    if riavviaAudioAmbiente:
+                        sottofondoAmbientaleCambiato = True
+                    riavviaAudioMusica = False
+                    riavviaAudioAmbiente = False
+                    if canzoneCambiata or sottofondoAmbientaleCambiato:
+                        i = GlobalHWVar.volumeCanzoni
+                        j = GlobalHWVar.volumeEffetti
+                        while i > 0 or j > 0:
+                            if canzoneCambiata:
+                                GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                            if sottofondoAmbientaleCambiato:
+                                GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
+                            i -= GlobalHWVar.volumeCanzoni / 10
+                            j -= GlobalHWVar.volumeEffetti / 10
+                            pygame.time.wait(30)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
                         if canzoneCambiata:
-                            GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                            GlobalHWVar.canaleSoundCanzone.set_volume(0)
+                            GlobalHWVar.canaleSoundCanzone.stop()
+                            if canzone and not stoppaMusica:
+                                GlobalHWVar.canaleSoundCanzone.play(canzone, -1)
                         if sottofondoAmbientaleCambiato:
-                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
-                        i += GlobalHWVar.volumeCanzoni / 10
-                        j += GlobalHWVar.volumeEffetti / 10
-                        pygame.time.wait(30)
-                        inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
-                    if canzoneCambiata:
-                        GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
-                    if sottofondoAmbientaleCambiato:
-                        GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(0)
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.arresta()
+                            if len(listaSottofondoAmbientale) > 0:
+                                GlobalHWVar.canaliSoundSottofondoAmbientale.riproduci(listaSottofondoAmbientale)
+                        i = 0
+                        j = 0
+                        while i < GlobalHWVar.volumeCanzoni or j < GlobalHWVar.volumeEffetti:
+                            if canzoneCambiata:
+                                GlobalHWVar.canaleSoundCanzone.set_volume(i)
+                            if sottofondoAmbientaleCambiato:
+                                GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(j)
+                            i += GlobalHWVar.volumeCanzoni / 10
+                            j += GlobalHWVar.volumeEffetti / 10
+                            pygame.time.wait(30)
+                            inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
+                        if canzoneCambiata:
+                            GlobalHWVar.canaleSoundCanzone.set_volume(GlobalHWVar.volumeCanzoni)
+                        if sottofondoAmbientaleCambiato:
+                            GlobalHWVar.canaliSoundSottofondoAmbientale.settaVolume(GlobalHWVar.volumeEffetti)
 
-                # resetto obiettivo Colco
-                if not inizio:
-                    ultimoObbiettivoColco = []
-                    obbiettivoCasualeColco = False
+                    # resetto obiettivo Colco
+                    if not inizio:
+                        ultimoObbiettivoColco = []
+                        obbiettivoCasualeColco = False
 
-                # carico nemici e personaggi nella stanza
-                listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi = SetNemiciPersonaggiEventi.caricaNemiciEPersonaggi(dati[0], dati[1], stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi)
-                stanzaVecchia = dati[1]
-                # metto i nemici nella posizione originale se sono nella nostra stessa casella
-                for nemico in listaNemici:
-                    if nemico.x == x and nemico.y == y:
-                        nemico.x, nemico.y = nemico.posizioneOriginale
-                        # controllo se nella casella originale c'è un altro nemico
-                        nemicoAppenaSpostato = nemico
-                        nemiciSovrappostiRisolti = False
-                        while not nemiciSovrappostiRisolti:
-                            nemiciSovrappostiRisolti = True
-                            for nemicoDaControllare in listaNemici:
-                                if nemicoAppenaSpostato.id != nemicoDaControllare.id and nemicoAppenaSpostato.x == nemicoDaControllare.x and nemicoAppenaSpostato.y == nemicoDaControllare.y:
-                                    nemiciSovrappostiRisolti = False
-                                    nemicoDaControllare.x, nemicoDaControllare.y = nemicoDaControllare.posizioneOriginale
-                                    nemicoAppenaSpostato = nemicoDaControllare
-                                    break
-                        break
+                    # carico nemici e personaggi nella stanza
+                    listaNemici, listaPersonaggi, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi = SetNemiciPersonaggiEventi.caricaNemiciEPersonaggi(dati[0], dati[1], stanzaVecchia, stanzeGiaVisitate, listaNemiciTotali, listaPersonaggiTotali, listaAvanzamentoDialoghi, listaPersonaggi)
+                    stanzaVecchia = dati[1]
+                    # metto i nemici nella posizione originale se sono nella nostra stessa casella
+                    for nemico in listaNemici:
+                        if nemico.x == x and nemico.y == y:
+                            nemico.x, nemico.y = nemico.posizioneOriginale
+                            # controllo se nella casella originale c'è un altro nemico
+                            nemicoAppenaSpostato = nemico
+                            nemiciSovrappostiRisolti = False
+                            while not nemiciSovrappostiRisolti:
+                                nemiciSovrappostiRisolti = True
+                                for nemicoDaControllare in listaNemici:
+                                    if nemicoAppenaSpostato.id != nemicoDaControllare.id and nemicoAppenaSpostato.x == nemicoDaControllare.x and nemicoAppenaSpostato.y == nemicoDaControllare.y:
+                                        nemiciSovrappostiRisolti = False
+                                        nemicoDaControllare.x, nemicoDaControllare.y = nemicoDaControllare.posizioneOriginale
+                                        nemicoAppenaSpostato = nemicoDaControllare
+                                        break
+                            break
 
-                # stanza
-                nomeStanza = SetPosizioneAudioImpedimenti.settaNomeStanza(dati[0], dati[1])
-                imgSfondoStanza = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
-                if os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png") and os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png"):
-                    portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                    portaOriz = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
-                else:
-                    portaVert = False
-                    portaOriz = False
+                    if not inizio:
+                        mosseRimasteRob = 0
+                    nemicoInquadrato = False
 
-                if not inizio:
-                    mosseRimasteRob = 0
-                nemicoInquadrato = False
-                # fermare la camminata dopo il cambio stanza
-                bottoneDown = False
+                    if not inizio:
+                        # eliminare tutte le esche
+                        vettoreEsche = []
+                        # elimino tutti i sacchetti di denaro
+                        vettoreDenaro = []
+
+                    stanzaCambiata = True
+
+                    if dati[1] in GlobalGameVar.vetStanzePacifiche:
+                        dati[2] = x
+                        dati[3] = y
+                        dati[140] = npers
+                        dati[134] = rx
+                        dati[135] = ry
+                        # 1->d , 2->a , 3->s , 4->w
+                        if robot == GlobalImgVar.robod:
+                            dati[141] = 1
+                        elif robot == GlobalImgVar.roboa:
+                            dati[141] = 2
+                        elif robot == GlobalImgVar.robos:
+                            dati[141] = 3
+                        elif robot == GlobalImgVar.robow:
+                            dati[141] = 4
+                        dati[142] = chiamarob
+                        dati[139] = mosseRimasteRob
+                        dati[136] = raffredda
+                        dati[137] = autoRic1
+                        dati[138] = autoRic2
+                        GlobalGameVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, dati[0]), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco)]
+
+                if cambiatoRisoluzione:
+                    for nemico in listaNemiciTotali:
+                        nemico.caricaImg()
+                        nemico.girati(nemico.direzione)
+                    for personaggio in listaPersonaggiTotali:
+                        if personaggio.tipo.startswith("Oggetto"):
+                            personaggio.caricaImgOggetto()
+                            personaggio.aggiornaImgOggetto(dati[0])
+                        else:
+                            personaggio.caricaImgPersonaggio()
+                            personaggio.girati(personaggio.direzione)
 
                 # carica i cofanetti nella stanza (svuoto e riempio il vettore)
                 i = 0
@@ -328,13 +360,23 @@ def gameloop():
                         porte.append(tutteporte[i + 3])
                     i += 4
 
+                # stanza
+                nomeStanza = SetPosizioneAudioImpedimenti.settaNomeStanza(dati[0], dati[1])
+                imgSfondoStanza = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/" + nomeStanza + ".png", GlobalHWVar.gsx, GlobalHWVar.gsy, False, canale_alpha=False)
+                if os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png") and os.path.exists(GlobalHWVar.gamePath + "Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png"):
+                    portaVert = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaVerticale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                    portaOriz = CaricaFileProgetto.loadImage("Risorse/Immagini/Scenari/Stanza" + str(dati[1]) + "/PortaOrizzontale.png", GlobalHWVar.gpx, GlobalHWVar.gpy, True)
+                else:
+                    portaVert = False
+                    portaOriz = False
+                schermoOriginale = imgSfondoStanza
+
+                # fermare la camminata dopo il cambio stanza
+                bottoneDown = False
+
                 caseviste, casevisteDaRallo, casevisteEntrateIncluse, caselleNonVisibili, casellePercorribili = GenericFunc.creaTuttiIVettoriPerLeCaselleViste(x, y, rx, ry, dati[1], porte, cofanetti, dati[0])
                 entrateStanza = SetOstacoliContenutoCofanetti.getEntrateStanze(dati[1], dati[0])
 
-                GlobalHWVar.disegnaImmagineSuSchermo(imgSfondoStanza, (0, 0))
-
-                schermoOriginale = GlobalHWVar.schermo.copy().convert()
-                GlobalHWVar.disegnaColoreSuTuttoLoSchermo(GlobalHWVar.schermo, GlobalHWVar.nero)
                 vettoreImgCaselle = []
                 i = 0
                 while i < len(caseviste):
@@ -343,38 +385,9 @@ def gameloop():
                     vettoreImgCaselle.append(schermoOriginale.subsurface(pygame.Rect(caseviste[i], caseviste[i + 1], GlobalHWVar.gpx, GlobalHWVar.gpy)).convert())
                     i += 3
 
-                if not inizio:
-                    # eliminare tutte le esche
-                    vettoreEsche = []
-                    # elimino tutti i sacchetti di denaro
-                    vettoreDenaro = []
-
-                if dati[1] in GlobalGameVar.vetStanzePacifiche:
-                    dati[2] = x
-                    dati[3] = y
-                    dati[140] = npers
-                    dati[134] = rx
-                    dati[135] = ry
-                    # 1->d , 2->a , 3->s , 4->w
-                    if robot == GlobalImgVar.robod:
-                        dati[141] = 1
-                    elif robot == GlobalImgVar.roboa:
-                        dati[141] = 2
-                    elif robot == GlobalImgVar.robos:
-                        dati[141] = 3
-                    elif robot == GlobalImgVar.robow:
-                        dati[141] = 4
-                    dati[142] = chiamarob
-                    dati[139] = mosseRimasteRob
-                    dati[136] = raffredda
-                    dati[137] = autoRic1
-                    dati[138] = autoRic2
-                    GlobalGameVar.vetDatiSalvataggioGameOver = [dati[:], tutteporte[:], tutticofanetti[:], GenericFunc.copiaListaDiOggettiConImmagini(listaNemiciTotali, True), vettoreEsche[:], vettoreDenaro[:], stanzeGiaVisitate[:], GenericFunc.copiaListaDiOggettiConImmagini(listaPersonaggiTotali, False, dati[0]), listaAvanzamentoDialoghi[:], oggettiRimastiAHans[:], ultimoObbiettivoColco[:], GenericFunc.copiaNemico(obbiettivoCasualeColco)]
-
-                stanzaCambiata = True
                 impossibileCliccarePulsanti = True
 
-            if aggiornaImgEquip:
+            if aggiornaImgEquip or cambiatoRisoluzione:
                 # arma
                 armaw = GlobalImgVar.vetImgSpadeInGame[dati[6]][0]
                 armawMov1 = GlobalImgVar.vetImgSpadeInGame[dati[6]][1]
@@ -557,6 +570,7 @@ def gameloop():
             cambiosta = False
             carim = False
             aggiornaImgEquip = False
+            cambiatoRisoluzione = False
 
         if inizio:
             if npers != 1 and npers != 2 and npers != 3 and npers != 4:
@@ -1502,7 +1516,7 @@ def gameloop():
                 i += 3
             if not nemicoInCasellaVista:
                 aggiornaImgEquip = True
-                dati, inizio, attacco, caricaSalvataggio = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
+                dati, inizio, attacco, caricaSalvataggio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.start(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, stanzeGiaVisitate, listaPersonaggiTotali, listaAvanzamentoDialoghi, oggettiRimastiAHans, ultimoObbiettivoColco, obbiettivoCasualeColco, colcoInCasellaVista, imgMappa, imgMappaZoom)
                 if caricaSalvataggio:
                     inizio = True
                 if attacco == 0:
@@ -1510,7 +1524,7 @@ def gameloop():
                 if not inizio:
                     FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=False, tipoOscuramento=3)
             else:
-                dati, attacco, sposta, animaOggetto, npers, inizio = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio)
+                dati, attacco, sposta, animaOggetto, npers, inizio, imgMappa, imgMappaZoom, cambiatoRisoluzione = MenuPrincipali.startBattaglia(dati, animaOggetto, x, y, npers, rx, ry, inizio, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, imgMappa, imgMappaZoom)
                 # cambiare posizione dopo l'uso di caricabatterie
                 if npers == 3:
                     pers = GlobalImgVar.persw
@@ -1577,6 +1591,11 @@ def gameloop():
                     guantiAttacco = guantidAttacco
                     collana = collanad
                 caricaTutto = True
+            x = dati[2]
+            y = dati[3]
+            rx = dati[134]
+            ry = dati[135]
+            nrob = dati[141]
 
             # se robo è morto e non lo è più quando esci dal menu rimetti le img giuste del robo
             if morterob and dati[10] > 0:
@@ -1590,7 +1609,7 @@ def gameloop():
         inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente = FunzioniGraficheGeneriche.controllaMorteRallo(dati[5], inizio, gameover, riavviaAudioMusica, riavviaAudioAmbiente)
         morterob, dati, mosseRimasteRob, ultimoObbiettivoColco = GenericFunc.controllaMorteColco(dati, mosseRimasteRob, ultimoObbiettivoColco)
 
-        if not inizio:
+        if not inizio and not cambiatoRisoluzione:
             # setto stato personaggi all'inizio del turno
             for nemico in listaNemici:
                 nemico.statoInizioTurno = []

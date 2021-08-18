@@ -602,8 +602,6 @@ def definisciStanze():
     dictStanze["esternoCastello4"] = i
     i += 1
     dictStanze["esternoCastello5"] = i
-    i += 1
-    dictStanze["esternoCastello6"] = i
 
     i += 100
     i += 1

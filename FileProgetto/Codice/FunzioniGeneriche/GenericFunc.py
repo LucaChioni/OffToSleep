@@ -2077,3 +2077,59 @@ def cambiaVolumeCanale(canale, volumeFinale):
                 pygame.time.wait(tempoTraCambiVolume)
                 inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         canale.set_volume(volumeFinale)
+
+
+def sistemaImgPerCambioRisoluzione(dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco, gpxPreCambioRisoluzione, gpyPreCambioRisoluzione):
+    # conversione della posizione in caselle
+    dati[2] = dati[2] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+    dati[3] = dati[3] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+    dati[134] = dati[134] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+    dati[135] = dati[135] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+    i = 0
+    while i < len(tutteporte):
+        tutteporte[i + 1] = tutteporte[i + 1] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        tutteporte[i + 2] = tutteporte[i + 2] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        i += 4
+    i = 0
+    while i < len(tutticofanetti):
+        tutticofanetti[i + 1] = tutticofanetti[i + 1] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        tutticofanetti[i + 2] = tutticofanetti[i + 2] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        i += 4
+
+    for nemico in listaNemiciTotali:
+        nemico.x = nemico.x // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        nemico.y = nemico.y // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        nemico.vx = nemico.vx // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        nemico.vy = nemico.vy // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        nemico.obbiettivo[1] = nemico.obbiettivo[1] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        nemico.obbiettivo[2] = nemico.obbiettivo[2] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        nemico.xPosizioneUltimoBersaglio = nemico.xPosizioneUltimoBersaglio // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        nemico.yPosizioneUltimoBersaglio = nemico.yPosizioneUltimoBersaglio // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        xOrig, yOrig = nemico.posizioneOriginale
+        nemico.posizioneOriginale = (xOrig // gpxPreCambioRisoluzione * GlobalHWVar.gpx, yOrig // gpyPreCambioRisoluzione * GlobalHWVar.gpy)
+        nemico.raggioVisivo = nemico.raggioVisivo // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        nemico.caselleAttaccabiliAggiornate = False
+        nemico.ultimaPosizioneConCaselleAttaccabiliAggiornate = [0, 0]
+    i = 0
+    while i < len(vettoreEsche):
+        vettoreEsche[i + 2] = vettoreEsche[i + 2] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        vettoreEsche[i + 3] = vettoreEsche[i + 3] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        i += 4
+    i = 0
+    while i < len(vettoreDenaro):
+        vettoreDenaro[i + 1] = vettoreDenaro[i + 1] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        vettoreDenaro[i + 2] = vettoreDenaro[i + 2] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        i += 3
+    for personaggio in listaPersonaggiTotali:
+        personaggio.x = personaggio.x // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        personaggio.y = personaggio.y // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+        personaggio.vx = personaggio.vx // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        personaggio.vy = personaggio.vy // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+    if len(ultimoObbiettivoColco) > 0:
+        ultimoObbiettivoColco[1] = ultimoObbiettivoColco[1] // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        ultimoObbiettivoColco[2] = ultimoObbiettivoColco[2] // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+    if obbiettivoCasualeColco:
+        obbiettivoCasualeColco.x = obbiettivoCasualeColco.x // gpxPreCambioRisoluzione * GlobalHWVar.gpx
+        obbiettivoCasualeColco.y = obbiettivoCasualeColco.y // gpyPreCambioRisoluzione * GlobalHWVar.gpy
+
+    return dati, tutteporte, tutticofanetti, listaNemiciTotali, vettoreEsche, vettoreDenaro, listaPersonaggiTotali, ultimoObbiettivoColco, obbiettivoCasualeColco

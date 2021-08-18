@@ -8,6 +8,7 @@ import Codice.Variabili.GlobalGameVar as GlobalGameVar
 import Codice.FunzioniGeneriche.GestioneInput as GestioneInput
 import Codice.GestioneGrafica.FunzioniGraficheGeneriche as FunzioniGraficheGeneriche
 import Codice.FunzioniGeneriche.CaricaFileProgetto as CaricaFileProgetto
+import Codice.SettaggiLivelli.SetImgOggettiMappa as SetImgOggettiMappa
 
 
 def settaController(arrivatoDaMenuPrincipale):
@@ -699,7 +700,7 @@ def settaController(arrivatoDaMenuPrincipale):
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
 
 
-def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
+def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone, avanzamentoStoria=False, imgMappa=False, imgMappaZoom=False):
     puntatore = GlobalImgVar.puntatore
     xp = GlobalHWVar.gsx // 32 * 1
     yp = GlobalHWVar.gsy // 18 * 5.1
@@ -713,6 +714,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
     gsxTemp = GlobalHWVar.gsx
     gsyTemp = GlobalHWVar.gsy
     schermoInteroTemp = GlobalHWVar.schermoIntero
+    cambiatoRisoluzione = False
 
     aggiornaInterfacciaPerCambioInput = True
     primoFrame = True
@@ -880,6 +882,11 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
                             FunzioniGraficheGeneriche.oscuraIlluminaSchermo(illumina=2)
                             GlobalGameVar.numImgCaricata = 0
                             GlobalImgVar.loadImgs(GlobalGameVar.numImgCaricata, cambioRisoluzione=True)
+                            if not arrivatoDaMenuPrincipale:
+                                # aggiorna img mappa
+                                GlobalGameVar.imgMappaAttuale = False
+                                imgMappa, imgMappaZoom = SetImgOggettiMappa.settaImgMappa(avanzamentoStoria, imgMappa, imgMappaZoom)
+                                cambiatoRisoluzione = True
                             GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.spostapun)
                     # salvo in un file la configurazione (ordine => lingua, volEffetti, volCanzoni, schermoIntero, gsx, gsy)
                     scrivi = CaricaFileProgetto.loadFile("DatiSalvati/Impostazioni/Impostazioni.txt", "w")
@@ -959,7 +966,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             gsxTemp = GlobalHWVar.maxGsx
@@ -1042,7 +1049,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             if GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
@@ -1118,7 +1125,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             gsxTemp = GlobalHWVar.maxGsx
@@ -1173,7 +1180,7 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
                     else:
                         GlobalHWVar.canaleSoundPuntatoreSeleziona.play(GlobalSndVar.selimp)
                 elif voceMarcata == 5:
-                    if arrivatoDaMenuPrincipale and GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
+                    if GlobalHWVar.maxGsx > 800 and GlobalHWVar.maxGsy > 450:
                         GlobalHWVar.canaleSoundPuntatoreSposta.play(GlobalSndVar.spostapun)
                         if gsxTemp == 800 and gsyTemp == 450:
                             if GlobalHWVar.maxGsx > 1024 and GlobalHWVar.maxGsy > 576:
@@ -1313,23 +1320,16 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
                 else:
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 18.2, GlobalHWVar.gsy // 18 * 7.9))
             FunzioniGraficheGeneriche.messaggio("Configura", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 9.5, 60)
-            if arrivatoDaMenuPrincipale:
-                FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
-                if voceMarcata == 5:
-                    if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
-                    else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
-                    if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
-                    else:
-                        GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
-            else:
-                FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigioscu, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
-                if voceMarcata == 5:
+            FunzioniGraficheGeneriche.messaggio(str(gsxTemp) + u"×" + str(gsyTemp), GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 11, 60)
+            if voceMarcata == 5:
+                if bottoneDown == pygame.K_a or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaSinistra) or bottoneDown == "padSinistra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistraBloccato, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniSinistra, (GlobalHWVar.gsx // 32 * 15.7, GlobalHWVar.gsy // 18 * 10.9))
+                if bottoneDown == pygame.K_d or (bottoneDown == "mouseSinistro" and cursoreSuFrecciaDestra) or bottoneDown == "padDestra":
                     GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestraBloccato, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
-                FunzioniGraficheGeneriche.messaggio("Configurabile solo da menu principale", GlobalHWVar.rosso, GlobalHWVar.gsx // 32 * 30.3, GlobalHWVar.gsy // 18 * 11.2, 40, daDestra=True)
+                else:
+                    GlobalHWVar.disegnaImmagineSuSchermo(GlobalImgVar.puntatoreImpostazioniDestra, (GlobalHWVar.gsx // 32 * 21.1, GlobalHWVar.gsy // 18 * 10.9))
             if schermoInteroTemp:
                 FunzioniGraficheGeneriche.messaggio(u"Sì", GlobalHWVar.grigiochi, GlobalHWVar.gsx // 32 * 17, GlobalHWVar.gsy // 18 * 12.5, 60)
             else:
@@ -1356,3 +1356,5 @@ def menuImpostazioni(arrivatoDaMenuPrincipale, dimezzaVolumeCanzone):
 
         inutile, inutile = GestioneInput.getInput(False, False, gestioneDuranteLePause=True)
         GlobalHWVar.clockMenu.tick(GlobalHWVar.fpsMenu)
+
+    return cambiatoRisoluzione, imgMappa, imgMappaZoom
